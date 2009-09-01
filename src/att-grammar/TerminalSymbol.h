@@ -1,11 +1,11 @@
 /**
-  * TerminalSymbol.h
-  *
-  *  Created on: 31/08/2009
-  *  Authors:
-				 Kilmurray, Gerardo Luis.
-                 Picco, Gonzalo M.
+  * \file TerminalSymbol.h
+  *		\brief Define a terminal symbol of a attribute grammar.
+  *  \date 31/08/2009
+  *  \author Kilmurray, Gerardo Luis.
+	 \author Picco, Gonzalo M.
  */
+
 
 #ifndef TERMINALSYMBOL_H_
 #define TERMINALSYMBOL_H_

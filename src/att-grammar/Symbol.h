@@ -1,10 +1,9 @@
 /**
-  * Symbol.h
-  *
-  *  Created on: 31/08/2009
-  *  Authors:
-				 Kilmurray, Gerardo Luis.
-                 Picco, Gonzalo M.
+  * \file Symbol.h
+  *		\brief Define a symbol of a attribute grammar.
+  *  \date 31/08/2009
+  *  \author Kilmurray, Gerardo Luis.
+	 \author Picco, Gonzalo M.
  */
 
 #ifndef SYMBOL_H_
