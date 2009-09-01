@@ -1,10 +1,9 @@
 /**
-  * Rule.cpp
-  *
-  *  Created on: 31/08/2009
-  *  Authors:
-				 Kilmurray, Gerardo Luis.
-				 Picco, Gonzalo M.
+  * \file Rule.cpp
+  *		\brief Implement Rule.h - The rule of a attribute grammar.
+  *  \date 31/08/2009
+  *  \author Kilmurray, Gerardo Luis.
+	 \author Picco, Gonzalo M.
  */
 
 #include "Rule.h"

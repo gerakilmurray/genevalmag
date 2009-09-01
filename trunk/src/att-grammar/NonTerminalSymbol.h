@@ -1,11 +1,10 @@
 /**
-  * NonTerminalSymbol.h
-  *
-  *  Created on: 31/08/2009
-  *  Authors:
-				 Kilmurray, Gerardo Luis.
-                 Picco, Gonzalo M.
-  */
+  * \file NonTerminalSymbol.h
+  *		\brief Define a non-terminal symbol of a attribute grammar.
+  *  \date 31/08/2009
+  *  \author Kilmurray, Gerardo Luis.
+	 \author Picco, Gonzalo M.
+ */
 
 
 #ifndef NONTERMINALSYMBOL_H_

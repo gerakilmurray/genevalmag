@@ -1,10 +1,9 @@
 /**
-  * Attribute.h
-  *
-  *  Created on: 31/08/2009
-  *  Authors:
-				 Kilmurray, Gerardo Luis.
-				 Picco, Gonzalo M.
+  * \file Attribute.h
+  *		\brief Define a attribute of a symbol of a attribute grammar.
+  *  \date 31/08/2009
+  *  \author Kilmurray, Gerardo Luis.
+  *	 \author Picco, Gonzalo M.
  */
 
 #ifndef ATTRIBUTE_H_

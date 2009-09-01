@@ -1,10 +1,9 @@
 /**
-  * NonTerminalSymbol.cpp
-  *
-  *  Created on: 31/08/2009
-  *  Authors:
-				 Kilmurray, Gerardo Luis.
-                 Picco, Gonzalo M.
+  * \file NonTerminalSymbol.cpp
+  *		\brief Implement NonTerminalSymbol.h - The non-terminal symbol of a attribute grammar.
+  *  \date 31/08/2009
+  *  \author Kilmurray, Gerardo Luis.
+	 \author Picco, Gonzalo M.
  */
 
 #include "NonTerminalSymbol.h"
