@@ -19,7 +19,7 @@
    </li>
    <li>etc...</li>
    </ul>
-   <br><img src="/home/gonza/TesisLic/Repositorio/genevalmag/recursos/chinpance.png"><br>
+   <br><img src="../../../recursos/chinpance.png"><br>
 */
 
 /** \file grammar.cpp

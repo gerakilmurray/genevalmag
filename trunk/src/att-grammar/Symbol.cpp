@@ -17,4 +17,8 @@ Symbol::Symbol() {
 	// TODO Auto-generated constructor stub
 }
 
+void addAttr(Attribute attr){}
+void removeAttr(int index){}
+
 }
+

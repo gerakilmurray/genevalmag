@@ -15,8 +15,29 @@ Rule::Rule() {
 
 }
 
-Rule::~Rule() {
+Rule::~Rule(){
 	// TODO Auto-generated destructor stub
 }
 
+NonTerminalSymbol Rule::getLeft_symbol()
+    {
+        return left_symbol;
+    }
+
+Symbol* Rule::getRight_side()
+    {
+        return right_side;
+    }
+
+void Rule::setLeft_symbol(NonTerminalSymbol left_symbol)
+{
+    this->left_symbol = left_symbol;
+}
+
+void Rule::addSymbol(Symbol s){
+
+}
+void Rule::removeSymbol(int index){
+
+}
 }
