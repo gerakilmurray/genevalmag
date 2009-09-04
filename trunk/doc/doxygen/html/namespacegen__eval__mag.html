@@ -17,6 +17,7 @@
   <div class="tabs">
     <ul>
       <li><a href="namespaces.html"><span>Namespace&nbsp;List</span></a></li>
+      <li><a href="namespacemembers.html"><span>Namespace&nbsp;Members</span></a></li>
     </ul>
   </div>
 </div>
@@ -24,6 +25,8 @@
 <h1>gen_eval_mag Namespace Reference</h1><table border="0" cellpadding="0" cellspacing="0">
 <tr><td></td></tr>
 <tr><td colspan="2"><br><h2>Classes</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgen__eval__mag_1_1AttrGrammar.html">AttrGrammar</a></td></tr>
+
 <tr><td class="memItemLeft" nowrap align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgen__eval__mag_1_1Attribute.html">Attribute</a></td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgen__eval__mag_1_1NonTerminalSymbol.html">NonTerminalSymbol</a></td></tr>
@@ -34,9 +37,84 @@
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgen__eval__mag_1_1TerminalSymbol.html">TerminalSymbol</a></td></tr>
 
+<tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">enum &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegen__eval__mag.html#ae73099500d50af483fa5cf2aa26862e">TipeAttr</a> { <a class="el" href="namespacegen__eval__mag.html#ae73099500d50af483fa5cf2aa26862eef99b3bb99f5b8806f2638612a2c72d3">inherit</a>, 
+<a class="el" href="namespacegen__eval__mag.html#ae73099500d50af483fa5cf2aa26862e3adbc3b794c0168032707921006327c1">sintetize</a>
+ }</td></tr>
+
+<tr><td colspan="2"><br><h2>Functions</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegen__eval__mag.html#a0e686d374f2f69a9a0c310deed590dd">addAttr</a> (<a class="el" href="classgen__eval__mag_1_1Attribute.html">Attribute</a> attr)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegen__eval__mag.html#dba17048dd4a714a8fe515ff1c64cb3c">removeAttr</a> (int index)</td></tr>
+
 </table>
+<hr><h2>Enumeration Type Documentation</h2>
+<a class="anchor" name="ae73099500d50af483fa5cf2aa26862e"></a><!-- doxytag: member="gen_eval_mag::TipeAttr" ref="ae73099500d50af483fa5cf2aa26862e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespacegen__eval__mag.html#ae73099500d50af483fa5cf2aa26862e">gen_eval_mag::TipeAttr</a>          </td>
+        </tr>
+      </table>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Tue Sep 1 17:51:45 2009 for GenEval by&nbsp;
+<div class="memdoc">
+
+<p>
+Define type of the attribute inherit: his value depend of the father's values. sintetize: his value depend of the children's values. <dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em><a class="anchor" name="ae73099500d50af483fa5cf2aa26862eef99b3bb99f5b8806f2638612a2c72d3"></a><!-- doxytag: member="inherit" ref="ae73099500d50af483fa5cf2aa26862eef99b3bb99f5b8806f2638612a2c72d3" args="" -->inherit</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" name="ae73099500d50af483fa5cf2aa26862e3adbc3b794c0168032707921006327c1"></a><!-- doxytag: member="sintetize" ref="ae73099500d50af483fa5cf2aa26862e3adbc3b794c0168032707921006327c1" args="" -->sintetize</em>&nbsp;</td><td>
+</td></tr>
+</table>
+</dl>
+
+</div>
+</div><p>
+<hr><h2>Function Documentation</h2>
+<a class="anchor" name="a0e686d374f2f69a9a0c310deed590dd"></a><!-- doxytag: member="gen_eval_mag::addAttr" ref="a0e686d374f2f69a9a0c310deed590dd" args="(Attribute attr)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gen_eval_mag::addAttr           </td>
+          <td>(</td>
+          <td class="paramtype">Attribute&nbsp;</td>
+          <td class="paramname"> <em>attr</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+</div>
+</div><p>
+<a class="anchor" name="dba17048dd4a714a8fe515ff1c64cb3c"></a><!-- doxytag: member="gen_eval_mag::removeAttr" ref="dba17048dd4a714a8fe515ff1c64cb3c" args="(int index)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gen_eval_mag::removeAttr           </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>index</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+</div>
+</div><p>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Generated on Fri Sep 4 15:54:42 2009 for GenEval by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>
