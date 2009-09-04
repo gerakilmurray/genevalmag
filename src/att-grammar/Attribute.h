@@ -12,7 +12,7 @@
 namespace gen_eval_mag {
 
 /**
-  * Define type of de attribute
+  * Define type of the attribute
   * inherit: his value depend of the father's values.
   * sintetize: his value depend of the children's values.
   */

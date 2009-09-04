@@ -24,19 +24,34 @@
 <a name="l00009"></a>00009 <span class="preprocessor">#ifndef RULE_H_</span>
 <a name="l00010"></a>00010 <span class="preprocessor"></span><span class="preprocessor">#define RULE_H_</span>
 <a name="l00011"></a>00011 <span class="preprocessor"></span>
-<a name="l00012"></a>00012 <span class="keyword">namespace </span>gen_eval_mag {
-<a name="l00013"></a>00013 
-<a name="l00014"></a><a class="code" href="classgen__eval__mag_1_1Rule.html">00014</a> <span class="keyword">class </span><a class="code" href="classgen__eval__mag_1_1Rule.html">Rule</a> {
-<a name="l00015"></a>00015 <span class="keyword">public</span>:
-<a name="l00016"></a>00016         <a class="code" href="classgen__eval__mag_1_1Rule.html#1e7ed16650e8ee8eec02518b0f275e2a">Rule</a>();
-<a name="l00017"></a>00017         <span class="keyword">virtual</span> <a class="code" href="classgen__eval__mag_1_1Rule.html#bebcebcf0e8b3ec86a7960876bc5808e">~Rule</a>();
-<a name="l00018"></a>00018 };
-<a name="l00019"></a>00019 
-<a name="l00020"></a>00020 }
-<a name="l00021"></a>00021 
-<a name="l00022"></a>00022 <span class="preprocessor">#endif </span><span class="comment">/* RULE_H_ */</span>
+<a name="l00012"></a>00012 <span class="preprocessor">#include "<a class="code" href="Symbol_8h.html" title="Define a symbol of a attribute grammar.">Symbol.h</a>"</span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include "<a class="code" href="NonTerminalSymbol_8h.html" title="Define a non-terminal symbol of a attribute grammar.">NonTerminalSymbol.h</a>"</span>
+<a name="l00014"></a>00014 
+<a name="l00015"></a>00015 <span class="keyword">namespace </span>gen_eval_mag {
+<a name="l00016"></a>00016 
+<a name="l00017"></a><a class="code" href="classgen__eval__mag_1_1Rule.html">00017</a> <span class="keyword">class </span><a class="code" href="classgen__eval__mag_1_1Rule.html">Rule</a> {
+<a name="l00018"></a>00018 <span class="keyword">public</span>:
+<a name="l00019"></a>00019         <a class="code" href="classgen__eval__mag_1_1Rule.html#1e7ed16650e8ee8eec02518b0f275e2a">Rule</a>();
+<a name="l00020"></a>00020         <a class="code" href="classgen__eval__mag_1_1Rule.html#1e7ed16650e8ee8eec02518b0f275e2a">Rule</a>(<a class="code" href="classgen__eval__mag_1_1NonTerminalSymbol.html">NonTerminalSymbol</a> lf, <a class="code" href="classgen__eval__mag_1_1Symbol.html">Symbol</a> rs[]);
+<a name="l00021"></a>00021     <span class="keyword">virtual</span> <a class="code" href="classgen__eval__mag_1_1Rule.html#bebcebcf0e8b3ec86a7960876bc5808e">~Rule</a>();
+<a name="l00022"></a>00022     <span class="keywordtype">void</span> <a class="code" href="classgen__eval__mag_1_1Rule.html#edab107bbeaed808823cb1e9fd179053">addSymbol</a>(<a class="code" href="classgen__eval__mag_1_1Symbol.html">Symbol</a> s);
+<a name="l00023"></a>00023     <span class="keywordtype">void</span> <a class="code" href="classgen__eval__mag_1_1Rule.html#e0052391948ad347bf321963f7a3dd15">removeSymbol</a>(<span class="keywordtype">int</span> index);
+<a name="l00024"></a>00024     <a class="code" href="classgen__eval__mag_1_1NonTerminalSymbol.html">NonTerminalSymbol</a> <a class="code" href="classgen__eval__mag_1_1Rule.html#ef6b6ef3a926c1d19ccea09dca6a6010">getLeft_symbol</a>();
+<a name="l00025"></a>00025     <a class="code" href="classgen__eval__mag_1_1Symbol.html">Symbol</a>* <a class="code" href="classgen__eval__mag_1_1Rule.html#70511c910fbbeae6f2276fb59a94673d">getRight_side</a>();
+<a name="l00026"></a>00026     <span class="keywordtype">void</span> <a class="code" href="classgen__eval__mag_1_1Rule.html#f324f2220998db21904454233ad6b6e3">setLeft_symbol</a>(<a class="code" href="classgen__eval__mag_1_1NonTerminalSymbol.html">NonTerminalSymbol</a> <a class="code" href="classgen__eval__mag_1_1Rule.html#39ef202c6264e8f262aa8a7bcb442437">left_symbol</a>);
+<a name="l00027"></a>00027     <span class="comment">//void setRight_side(Symbol right_side[]);</span>
+<a name="l00028"></a>00028 
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030 <span class="keyword">private</span>:
+<a name="l00031"></a><a class="code" href="classgen__eval__mag_1_1Rule.html#39ef202c6264e8f262aa8a7bcb442437">00031</a>     <a class="code" href="classgen__eval__mag_1_1NonTerminalSymbol.html">NonTerminalSymbol</a> left_symbol;
+<a name="l00032"></a><a class="code" href="classgen__eval__mag_1_1Rule.html#d9ea0589de0cb66fbb908f7adbdeaff8">00032</a>     <a class="code" href="classgen__eval__mag_1_1Symbol.html">Symbol</a> <a class="code" href="classgen__eval__mag_1_1Rule.html#d9ea0589de0cb66fbb908f7adbdeaff8">right_side</a>[];
+<a name="l00033"></a>00033 };
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035 }
+<a name="l00036"></a>00036 
+<a name="l00037"></a>00037 <span class="preprocessor">#endif </span><span class="comment">/* RULE_H_ */</span>
 </pre></div></div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Tue Sep 1 17:51:45 2009 for GenEval by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Fri Sep 4 15:54:42 2009 for GenEval by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>
