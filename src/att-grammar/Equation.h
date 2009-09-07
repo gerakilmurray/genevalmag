@@ -1,10 +1,10 @@
 /**
- * \file Equation.h
- *		\brief Define equation of the Attribute Grammar
- *  \date 04/09/2009
- *  \author Kilmurray, Gerardo Luis.
- *	\author Picco, Gonzalo M.
- */
+  * \file Equation.h
+  *		\brief Define equation of the Attribute Grammar
+  *  \date 04/09/2009
+  *  \author Kilmurray, Gerardo Luis.
+  *	 \author Picco, Gonzalo M.
+  */
 
 #ifndef EQUATION_H_
 #define EQUATION_H_
