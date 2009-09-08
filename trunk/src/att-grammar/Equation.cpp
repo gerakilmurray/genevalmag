@@ -10,11 +10,13 @@
 
 namespace gen_eval_mag {
 
-Equation::Equation() {
+Equation::Equation()
+{
 	// TODO Auto-generated constructor stub
 }
 
-Equation::~Equation() {
+Equation::~Equation()
+{
 	// TODO Auto-generated destructor stub
 }
 

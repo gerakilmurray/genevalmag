@@ -10,15 +10,21 @@
 
 namespace gen_eval_mag{
 
-Symbol::~Symbol() {
+Symbol::~Symbol()
+{
 	// TODO Auto-generated destructor stub
 }
-Symbol::Symbol() {
+Symbol::Symbol()
+{
 	// TODO Auto-generated constructor stub
 }
 
-void addAttr(Attribute attr){}
-void removeAttr(int index){}
+void addAttr(Attribute attr)
+{
+}
+void removeAttr(int index)
+{
+}
 
 }
 

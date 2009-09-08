@@ -15,14 +15,13 @@ namespace gen_eval_mag {
 
 class Symbol {
 private:
-	Attribute attrs[];
+	Attribute * attrs[];
 
 public:
 	virtual ~Symbol();
 	Symbol();
 	void addAttr(Attribute attr);
 	void removeAttr(int index);
-
 };
 
 }

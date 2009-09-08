@@ -10,11 +10,13 @@
 
 namespace gen_eval_mag {
 
-NonTerminalSymbol::NonTerminalSymbol() {
+NonTerminalSymbol::NonTerminalSymbol()
+{
 	// TODO Auto-generated constructor stub
 }
 
-NonTerminalSymbol::~NonTerminalSymbol() {
+NonTerminalSymbol::~NonTerminalSymbol()
+{
 	// TODO Auto-generated destructor stub
 }
 
