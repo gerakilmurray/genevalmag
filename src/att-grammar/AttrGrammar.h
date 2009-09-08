@@ -14,6 +14,14 @@
 namespace gen_eval_mag {
 
 class AttrGrammar {
+private:
+	/**
+	  * the first rule define the initial rule and
+	  * the symbol of left side is the initial symbol of the grammar.
+	  */
+	Rule * rules[];
+
+
 public:
 	AttrGrammar();
 	AttrGrammar(Rule init_rule);
@@ -21,14 +29,8 @@ public:
 	void remove_rule(int index);
 	virtual ~AttrGrammar();
 	Rule get_rule(int index);
-private:
-	/**
-	  * the first rule define the initial rule and
-	  * the symbol of left side is the initial symbol of the grammar.
-	  */
-	Rule rules[];
+
+
 };
-
 }
-
 #endif /* ATTRGRAMMAR_H_ */

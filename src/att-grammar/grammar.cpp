@@ -42,5 +42,6 @@ using namespace gen_eval_mag;
 
 int main()
 {
-
+MultiTree <int> *g;
+g=NULL;
 }

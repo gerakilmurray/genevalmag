@@ -10,19 +10,26 @@
 
 namespace gen_eval_mag {
 
-AttrGrammar::AttrGrammar() {
+AttrGrammar::AttrGrammar()
+{
 	// TODO Auto-generated constructor stub
 
 }
-AttrGrammar::AttrGrammar(Rule init_rule){
+AttrGrammar::AttrGrammar(Rule init_rule)
+{
 
 
 }
-AttrGrammar::~AttrGrammar() {
+AttrGrammar::~AttrGrammar()
+{
 	// TODO Auto-generated destructor stub
 }
 
 
-void AttrGrammar::add_rule(Rule rule){}
-void AttrGrammar::remove_rule(int index){}
+void AttrGrammar::add_rule(Rule rule)
+{
+}
+void AttrGrammar::remove_rule(int index)
+{
+}
 }

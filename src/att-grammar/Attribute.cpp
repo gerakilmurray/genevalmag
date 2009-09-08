@@ -11,13 +11,15 @@
 namespace gen_eval_mag {
 
 //template <class T> Attribute<T>::Attribute() {
-Attribute::Attribute() {
+Attribute::Attribute()
+{
 	// TODO Auto-generated constructor stub
 
 }
 
 //template <class T> Attribute<T>::~Attribute() {
-Attribute::~Attribute(){
+Attribute::~Attribute()
+{
 	// TODO Auto-generated destructor stub
 }
 

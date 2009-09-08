@@ -11,12 +11,14 @@
 
 namespace gen_eval_mag {
 
-TerminalSymbol::TerminalSymbol() {
+TerminalSymbol::TerminalSymbol()
+{
 	// TODO Auto-generated constructor stub
 }
 
 
-TerminalSymbol::~TerminalSymbol() {
+TerminalSymbol::~TerminalSymbol()
+{
 	// TODO Auto-generated destructor stub
 }
 

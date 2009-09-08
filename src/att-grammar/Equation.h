@@ -10,13 +10,20 @@
 #define EQUATION_H_
 
 #include <boost/graph/graph_as_tree.hpp>
+#include "Symbol.h"
+#include "MultiTree.h"
 
 namespace gen_eval_mag {
 
 class Equation {
+private:
+	MultiTree <Symbol> *body;
+
 public:
 	Equation();
 	virtual ~Equation();
+	Symbol * getLeftSide();
+	Symbol * getRightSide();
 };
 
 }

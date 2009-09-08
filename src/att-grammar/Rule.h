@@ -11,10 +11,16 @@
 
 #include "Symbol.h"
 #include "NonTerminalSymbol.h"
+#include "Equation.h"
 
 namespace gen_eval_mag {
 
 class Rule {
+private:
+    NonTerminalSymbol left_symbol;
+    Symbol right_side[];
+    Equation eqs[];
+
 public:
 	Rule();
 	Rule(NonTerminalSymbol lf, Symbol rs[]);
@@ -26,10 +32,6 @@ public:
     void setLeft_symbol(NonTerminalSymbol left_symbol);
     //void setRight_side(Symbol right_side[]);
 
-
-private:
-    NonTerminalSymbol left_symbol;
-    Symbol right_side[];
 };
 
 }

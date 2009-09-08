@@ -1,6 +1,6 @@
 /**
   * \file MultiTree.h
-  *		\brief EXPLICAR ALGO ACA
+  *		\brief Define the MultiTree object.
   *  \date 07/09/2009
   *  \author Kilmurray, Gerardo Luis.
   *	 \author Picco, Gonzalo M.
@@ -15,13 +15,17 @@ template <class T>
 class MultiTree{
 private:
 	T root;
-	MultiTree <T> children[];
-	int count_children;
+	MultiTree<T> *child_left;
+	MultiTree<T> *child_right;
 public:
 	MultiTree();
 	~MultiTree();
-	void addRoot (T root);
-	void addChild (MultiTree <T> chd);
+    MultiTree<T> getChild_left();
+    MultiTree<T> getChild_right();
+    T getRoot();
+    void setChild_left(MultiTree<T> child_left);
+    void setChild_right(MultiTree<T> child_right);
+    void setRoot(T root);
 
 };
 
