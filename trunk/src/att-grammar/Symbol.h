@@ -20,8 +20,8 @@ private:
 public:
 	virtual ~Symbol();
 	Symbol();
-	void addAttr(Attribute attr);
-	void removeAttr(int index);
+	void addAttr(const Attribute * attr);
+	void removeAttr(const int index);
 };
 
 }

@@ -17,20 +17,20 @@ namespace gen_eval_mag {
 
 class Rule {
 private:
-    NonTerminalSymbol left_symbol;
-    Symbol right_side[];
-    Equation eqs[];
+    NonTerminalSymbol *left_symbol;
+    Symbol *right_side[];
+    Equation *eqs[];
 
 public:
 	Rule();
-	Rule(NonTerminalSymbol lf, Symbol rs[]);
+	Rule(const NonTerminalSymbol * lf, const Symbol * rs[]);
     virtual ~Rule();
-    void addSymbol(Symbol s);
-    void removeSymbol(int index);
-    NonTerminalSymbol getLeft_symbol();
-    Symbol* getRight_side();
-    void setLeft_symbol(NonTerminalSymbol left_symbol);
-    //void setRight_side(Symbol right_side[]);
+    void addSymbol(const Symbol* s);
+    void removeSymbol(const int index);
+    NonTerminalSymbol* getLeft_symbol();
+    Symbol** getRight_side();
+    void setLeft_symbol(NonTerminalSymbol * left_symbol);
+    void setRight_side(const Symbol * right_side[]);
 
 };
 
