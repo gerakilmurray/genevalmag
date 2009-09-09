@@ -24,11 +24,11 @@ private:
 
 public:
 	AttrGrammar();
-	AttrGrammar(Rule init_rule);
-	void add_rule(Rule rule);
-	void remove_rule(int index);
+	AttrGrammar(Rule *rules[]);
+	void add_rule(const Rule *rule);
+	void remove_rule(const int index);
 	virtual ~AttrGrammar();
-	Rule get_rule(int index);
+	Rule get_rule(const int index);
 
 
 };

@@ -15,7 +15,7 @@ AttrGrammar::AttrGrammar()
 	// TODO Auto-generated constructor stub
 
 }
-AttrGrammar::AttrGrammar(Rule init_rule)
+AttrGrammar::AttrGrammar(const Rule *rules[])
 {
 
 
@@ -26,10 +26,10 @@ AttrGrammar::~AttrGrammar()
 }
 
 
-void AttrGrammar::add_rule(Rule rule)
+void AttrGrammar::add_rule(const Rule *rule)
 {
 }
-void AttrGrammar::remove_rule(int index)
+void AttrGrammar::remove_rule(const int index)
 {
 }
 }

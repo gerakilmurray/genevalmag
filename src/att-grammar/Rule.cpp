@@ -21,26 +21,26 @@ Rule::~Rule()
 	// TODO Auto-generated destructor stub
 }
 
-NonTerminalSymbol Rule::getLeft_symbol()
+NonTerminalSymbol* Rule::getLeft_symbol()
 {
-        return left_symbol;
+        return this->left_symbol;
 }
 
-Symbol* Rule::getRight_side()
+Symbol** Rule::getRight_side()
 {
-        return right_side;
+        return this->right_side;
 }
 
-void Rule::setLeft_symbol(NonTerminalSymbol left_symbol)
+void Rule::setLeft_symbol(NonTerminalSymbol * left_symbol)
 {
     this->left_symbol = left_symbol;
 }
 
-void Rule::addSymbol(Symbol s)
+void Rule::addSymbol(const Symbol * s)
 {
 
 }
-void Rule::removeSymbol(int index)
+void Rule::removeSymbol(const int index)
 {
 
 }

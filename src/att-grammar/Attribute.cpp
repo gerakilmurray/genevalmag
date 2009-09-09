@@ -23,4 +23,14 @@ Attribute::~Attribute()
 	// TODO Auto-generated destructor stub
 }
 
+TipeAttr Attribute::getTipo()
+{
+    return this->tipo;
+}
+
+void Attribute::setTipo(TipeAttr tipo)
+{
+    this->tipo = tipo;
+}
+
 }

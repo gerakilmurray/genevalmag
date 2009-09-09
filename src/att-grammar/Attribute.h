@@ -16,6 +16,7 @@ namespace gen_eval_mag {
   * inherit: his value depend of the father's values.
   * sintetize: his value depend of the children's values.
   */
+
 enum TipeAttr
 {
 	kInherit,
@@ -25,9 +26,13 @@ enum TipeAttr
 class Attribute{
 private:
 	TipeAttr tipo;
+
 public:
 	Attribute();
 	virtual ~Attribute();
+	TipeAttr getTipo();
+    void setTipo(TipeAttr tipo);
+
 };
 
 }
