@@ -21,7 +21,6 @@ private:
 	  */
 	Rule * rules[];
 
-
 public:
 	AttrGrammar();
 	AttrGrammar(Rule *rules[]);
