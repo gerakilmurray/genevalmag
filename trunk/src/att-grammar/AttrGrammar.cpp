@@ -15,7 +15,7 @@ AttrGrammar::AttrGrammar()
 	// TODO Auto-generated constructor stub
 
 }
-AttrGrammar::AttrGrammar(const Rule *rules[])
+AttrGrammar::AttrGrammar(Rule *rules[])
 {
 
 

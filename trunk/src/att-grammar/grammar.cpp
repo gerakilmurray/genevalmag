@@ -39,30 +39,22 @@ using namespace gen_eval_mag;
 
 int main()
 {
-	Attribute val_N  = new Attribute();
-	Attribute val_B  = new Attribute();
-	Attribute val_L  = new Attribute();
-	Attribute val_L0 = new Attribute();
-	Attribute val_L1 = new Attribute();
-	Attribute pos_B  = new Attribute();
-	Attribute val_L  = new Attribute();
-	Attribute val_L0 = new Attribute();
-	Attribute val_L1 = new Attribute();
+	Attribute val_N  = Attribute();
+	Attribute val_B  = Attribute();
+	Attribute val_L  = Attribute();
+	Attribute val_L0 = Attribute();
+	Attribute val_L1 = Attribute();
+	Attribute pos_B  = Attribute();
+	Attribute pos_L  = Attribute();
+	Attribute pos_L0 = Attribute();
+	Attribute pos_L1 = Attribute();
 
-
-
-
-
-
-
-	Rule * exampleGrammarRules = new Rules[5];
+	val_L.setTipo(kInherit);
+	Rule *exampleGrammarRules[5];
 	exampleGrammarRules[0] = new Rule();
 	exampleGrammarRules[1] = new Rule();
 	exampleGrammarRules[2] = new Rule();
 	exampleGrammarRules[3] = new Rule();
 	exampleGrammarRules[4] = new Rule();
-	AttrGrammar exampleGram = new AttrGrammar(exampleGrammarRules);
-
-
-
+	AttrGrammar exampleGram =  AttrGrammar(exampleGrammarRules);
 }
