@@ -36,25 +36,25 @@
 
 using namespace gen_eval_mag;
 
-int main()
-{
-	Attribute val_N  = Attribute();
-	Attribute val_B  = Attribute();
-	Attribute val_L  = Attribute();
-	Attribute val_L0 = Attribute();
-	Attribute val_L1 = Attribute();
-	Attribute pos_B  = Attribute();
-	Attribute pos_L  = Attribute();
-	Attribute pos_L0 = Attribute();
-	Attribute pos_L1 = Attribute();
-
-	val_L.setTipo(kSintetize);
-	Rule *exampleGrammarRules[5];
-	exampleGrammarRules[0] = new Rule();
-	exampleGrammarRules[1] = new Rule();
-	exampleGrammarRules[2] = new Rule();
-	exampleGrammarRules[3] = new Rule();
-	exampleGrammarRules[4] = new Rule();
-	AttrGrammar exampleGram =  AttrGrammar(exampleGrammarRules);
-	printf("Hello world %d", val_L.getTipo());
-}
+//int main()
+//{
+//	Attribute val_N  = Attribute();
+//	Attribute val_B  = Attribute();
+//	Attribute val_L  = Attribute();
+//	Attribute val_L0 = Attribute();
+//	Attribute val_L1 = Attribute();
+//	Attribute pos_B  = Attribute();
+//	Attribute pos_L  = Attribute();
+//	Attribute pos_L0 = Attribute();
+//	Attribute pos_L1 = Attribute();
+//
+//	val_L.setTipo(kSintetize);
+//	Rule *exampleGrammarRules[5];
+//	exampleGrammarRules[0] = new Rule();
+//	exampleGrammarRules[1] = new Rule();
+//	exampleGrammarRules[2] = new Rule();
+//	exampleGrammarRules[3] = new Rule();
+//	exampleGrammarRules[4] = new Rule();
+//	AttrGrammar exampleGram =  AttrGrammar(exampleGrammarRules);
+//	printf("Hello world %d", val_L.getTipo());
+//}
