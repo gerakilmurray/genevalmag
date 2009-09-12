@@ -1,10 +1,10 @@
 /**
-  * \file Attribute.h
-  *		\brief Define a attribute of a symbol of a attribute grammar.
+  *  \file Attribute.h
+  *      \brief Define a attribute of a symbol of a attribute grammar.
   *  \date 31/08/2009
   *  \author Kilmurray, Gerardo Luis.
-  *	 \author Picco, Gonzalo M.
- */
+  *	 \author Picco, Gonzalo Martín.
+  */
 
 #ifndef ATTRIBUTE_H_
 #define ATTRIBUTE_H_

@@ -1,19 +1,19 @@
 /**
    \mainpage
-   GenEval \n Generador de Evaluadores Estaticos
-   <br>Director: Marcelo Arroyo <br>
+   GenEval \n Generador de Evaluadores Estáticos
+   <br>Director: Marcelo Daniel Arroyo <br>
    <hr>
    \author Kilmurray, Gerardo Luis
-   \author Picco, Gonzalo Martin
+   \author Picco, Gonzalo Martín
    \date Agosto 2009
 
    \par Leeme:
-   Trabajo realizado en el marco de la Tesis de Licenciatura en Ciencias de la Computacion
+   Trabajo realizado en el marco de la Tesis de Licenciatura en Ciencias de la Computación
    <ul>
    <li> Enlaces principales </li>
    <li> algo
    \htmlonly
-   <strong>HTML valido</strong><br>
+   <strong>HTML válido</strong><br>
 
    \endhtmlonly
    </li>
@@ -22,15 +22,14 @@
    <br><img src="../../../recursos/chinpance.png"><br>
 */
 
-/** \file grammar.cpp
- * \brief Archivo que contiene la funcion main().
- *
- * Este codigo es el encargado de realizar la llamadas a las funciones que realizan
- * los algoritmos para ordenar los arreglos. Ademas se encarga de medir los tiempos
- * que dichos algoritmos demoran y asi realizar un histograma. Para esto emplea
- * las capacidades del utilitario &quot;GNUPLOT&quot;.
- */
-
+/**  \file grammar.cpp
+  *      \brief Archivo que contiene la función main().
+  *
+  *  Este codigo es el encargado de realizar la llamadas a las funciones que realizan
+  *  los algoritmos para ordenar los arreglos. Ademas se encarga de medir los tiempos
+  *  que dichos algoritmos demoran y asi realizar un histograma. Para esto emplea
+  *  las capacidades del utilitario &quot;GNUPLOT&quot;.
+  */
 
 #include "Attribute.h"
 #include "AttrGrammar.h"
@@ -49,7 +48,7 @@ int main()
 	Attribute pos_L0 = Attribute();
 	Attribute pos_L1 = Attribute();
 
-	val_L.setTipo(kInherit);
+	val_L.setTipo(kSintetize);
 	Rule *exampleGrammarRules[5];
 	exampleGrammarRules[0] = new Rule();
 	exampleGrammarRules[1] = new Rule();
@@ -57,4 +56,5 @@ int main()
 	exampleGrammarRules[3] = new Rule();
 	exampleGrammarRules[4] = new Rule();
 	AttrGrammar exampleGram =  AttrGrammar(exampleGrammarRules);
+	printf("Hello world %d", val_L.getTipo());
 }

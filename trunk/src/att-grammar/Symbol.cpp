@@ -1,9 +1,9 @@
 /**
-  * \file Symbol.cpp
-  *		\brief Implement Symbol.h - The symbol of a attribute grammar.
+  *  \file Symbol.cpp
+  *      \brief Implement Symbol.h - The symbol of a attribute grammar.
   *  \date 31/08/2009
   *  \author Kilmurray, Gerardo Luis.
-  *	 \author Picco, Gonzalo M.
+  *	 \author Picco, Gonzalo Martín.
   */
 
 #include "Symbol.h"
@@ -14,6 +14,7 @@ Symbol::~Symbol()
 {
 	// TODO Auto-generated destructor stub
 }
+
 Symbol::Symbol()
 {
 	// TODO Auto-generated constructor stub
@@ -21,10 +22,12 @@ Symbol::Symbol()
 
 void addAttr(Attribute attr)
 {
+
 }
+
 void removeAttr(int index)
 {
-}
 
 }
 
+}
