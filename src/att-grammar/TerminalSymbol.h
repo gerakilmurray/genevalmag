@@ -1,11 +1,10 @@
 /**
-  * \file TerminalSymbol.h
-  *		\brief Define a terminal symbol of a attribute grammar.
+  *  \file TerminalSymbol.h
+  *      \brief Define a terminal symbol of a attribute grammar.
   *  \date 31/08/2009
   *  \author Kilmurray, Gerardo Luis.
-	 \author Picco, Gonzalo M.
- */
-
+  *	 \author Picco, Gonzalo Martín.
+  */
 
 #ifndef TERMINALSYMBOL_H_
 #define TERMINALSYMBOL_H_
@@ -15,9 +14,9 @@
 namespace gen_eval_mag {
 
 class TerminalSymbol : public Symbol {
-public:
-	TerminalSymbol();
-	virtual ~TerminalSymbol();
+	public:
+		TerminalSymbol();
+		virtual ~TerminalSymbol();
 };
 
 }

@@ -1,9 +1,9 @@
 /**
-  * \file Equation.h
-  *		\brief Define equation of the Attribute Grammar
+  *  \file Equation.h
+  *      \brief Define equation of the Attribute Grammar
   *  \date 04/09/2009
   *  \author Kilmurray, Gerardo Luis.
-  *	 \author Picco, Gonzalo M.
+  *	 \author Picco, Gonzalo Martín.
   */
 
 #ifndef EQUATION_H_
@@ -16,14 +16,14 @@
 namespace gen_eval_mag {
 
 class Equation {
-private:
-	MultiTree <Symbol> *body;
+	private:
+		MultiTree <Symbol> *body;
 
-public:
-	Equation();
-	virtual ~Equation();
-	Symbol * getLeftSide();
-	Symbol * getRightSide();
+	public:
+		Equation();
+		virtual ~Equation();
+		Symbol * getLeftSide();
+		Symbol * getRightSide();
 };
 
 }

@@ -1,10 +1,10 @@
 /**
-  * \file Symbol.h
-  *		\brief Define a symbol of a attribute grammar.
+  *  \file Symbol.h
+  *      \brief Define a symbol of a attribute grammar.
   *  \date 31/08/2009
   *  \author Kilmurray, Gerardo Luis.
-	 \author Picco, Gonzalo M.
- */
+  *	 \author Picco, Gonzalo Martín.
+  */
 
 #ifndef SYMBOL_H_
 #define SYMBOL_H_
@@ -14,14 +14,14 @@
 namespace gen_eval_mag {
 
 class Symbol {
-private:
-	Attribute * attrs[];
+	private:
+		Attribute * attrs[];
 
-public:
-	virtual ~Symbol();
-	Symbol();
-	void addAttr(const Attribute * attr);
-	void removeAttr(const int index);
+	public:
+		virtual ~Symbol();
+		Symbol();
+		void addAttr(const Attribute * attr);
+		void removeAttr(const int index);
 };
 
 }

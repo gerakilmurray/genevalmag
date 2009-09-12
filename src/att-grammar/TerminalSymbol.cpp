@@ -1,10 +1,10 @@
 /**
-  * \file TerminalSymbol.cpp
-  *		\brief Implement TerminalSymbol.h - The terminal symbol of a attribute grammar.
+  *  \file TerminalSymbol.cpp
+  *      \brief Implement TerminalSymbol.h - The terminal symbol of a attribute grammar.
   *  \date 31/08/2009
   *  \author Kilmurray, Gerardo Luis.
-	 \author Picco, Gonzalo M.
- */
+  *	 \author Picco, Gonzalo Martín.
+  */
 
 
 #include "TerminalSymbol.h"
@@ -15,7 +15,6 @@ TerminalSymbol::TerminalSymbol()
 {
 	// TODO Auto-generated constructor stub
 }
-
 
 TerminalSymbol::~TerminalSymbol()
 {

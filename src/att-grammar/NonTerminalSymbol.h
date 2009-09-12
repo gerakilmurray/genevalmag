@@ -1,11 +1,10 @@
 /**
-  * \file NonTerminalSymbol.h
-  *		\brief Define a non-terminal symbol of a attribute grammar.
+  *  \file NonTerminalSymbol.h
+  *      \brief Define a non-terminal symbol of a attribute grammar.
   *  \date 31/08/2009
   *  \author Kilmurray, Gerardo Luis.
-	 \author Picco, Gonzalo M.
- */
-
+  *	 \author Picco, Gonzalo Martín.
+  */
 
 #ifndef NONTERMINALSYMBOL_H_
 #define NONTERMINALSYMBOL_H_
@@ -15,9 +14,9 @@
 namespace gen_eval_mag {
 
 class NonTerminalSymbol : public Symbol{
-public:
-	NonTerminalSymbol();
-	virtual ~NonTerminalSymbol();
+	public:
+		NonTerminalSymbol();
+		virtual ~NonTerminalSymbol();
 };
 
 }
