@@ -52,6 +52,20 @@ parse_numbers(char const* str, vector<double>& v)
         space_p).full;
 }
 
+bool
+parse_letters(char const* str, vector<string>& v)
+{
+    return parse(str,
+
+        //  Begin grammar
+        (
+        	strlit<>("attributes:")[push_back_a(v)] >> *(',' >> strlit<>("rules:")[push_back_a(v)])
+        )
+        ,
+        //  End grammar
+
+        space_p).full;
+}
 ////////////////////////////////////////////////////////////////////////////
 //
 //  Main program
@@ -64,8 +78,8 @@ main()
     cout << "\t\tA comma separated list parser for Spirit...\n\n";
     cout << "/////////////////////////////////////////////////////////\n\n";
 
-    cout << "Give me a comma separated list of numbers.\n";
-    cout << "The numbers will be inserted in a vector of numbers\n";
+    cout << "Give me a comma separated list of words.\n";
+    cout << "The  will be inserted in a vector of numbers\n";
     cout << "Type [q or Q] to quit\n\n";
 
     string str;
@@ -74,14 +88,14 @@ main()
         if (str.empty() || str[0] == 'q' || str[0] == 'Q')
             break;
 
-        vector<double> v;
-        if (parse_numbers(str.c_str(), v))
+        vector<string> v;
+        if (parse_letters(str.c_str(), v))
         {
             cout << "-------------------------\n";
             cout << "Parsing succeeded\n";
             cout << str << " Parses OK: " << endl;
 
-            for (vector<double>::size_type i = 0; i < v.size(); ++i)
+            for (vector<string>::size_type i = 0; i < v.size(); ++i)
                 cout << i << ": " << v[i] << endl;
 
             cout << "-------------------------\n";
