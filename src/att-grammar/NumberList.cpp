@@ -1,3 +1,11 @@
+/**
+  *  \file NumberList.cpp
+  *      \brief Example of Spirit Librarie.
+  *  \date 13/09/2009
+  *  \author    Kilmurray, Gerardo Luis.
+  *  \author    Picco, Gonzalo Martín.
+  */
+
 /*=============================================================================
     Copyright (c) 2002-2003 Joel de Guzman
     http://spirit.sourceforge.net/
