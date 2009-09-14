@@ -53,17 +53,43 @@ parse_numbers(char const* str, vector<double>& v)
 }
 
 bool
-parse_letters(char const* str, vector<string>& v)
+parse_extends(char const* str, vector<string>& v)
 {
+	return true;
+}
+bool
+parse_semantic(char const* str, vector<string>& v)
+{
+	return true;
+}
+bool
+parse_attributes(char const* str, vector<string>& v)
+{
+	return true;
+}
+bool
+parse_rules(char const* str, vector<string>& v)
+{
+return true;
+}
+
+bool
+parse_grammar(char const* str, vector<string>& v)
+{
+	rule<> r_ident, r_extends, r_semantics, r_rules, r_attributes, at_grammar;
+	r_ident = alnum_p >> *(alnum_p);
+	r_extends = strlit<>("extends:") >> r_ident >> *(',' >> r_ident)>> ';';
+	r_semantics = strlit<>("semantics:") >> r_ident >> *(',' >> r_ident)>> ';';
+	r_rules = strlit<>("rules:") >> r_ident >> *(',' >> r_ident)>> ';';
+	r_attributes = strlit<>("attributes:") >> r_ident >> *(',' >> r_ident) >> ';';
+	at_grammar = !(r_extends) >> r_semantics >> r_attributes >> r_rules;
     return parse(str,
 
         //  Begin grammar
-        (
-        	strlit<>("attributes:")[push_back_a(v)] >> *(',' >> strlit<>("rules:")[push_back_a(v)])
-        )
-        ,
-        //  End grammar
 
+        	at_grammar[push_back_a(v)]
+
+        ,
         space_p).full;
 }
 ////////////////////////////////////////////////////////////////////////////
@@ -85,11 +111,11 @@ main()
     string str;
     while (getline(cin, str))
     {
-        if (str.empty() || str[0] == 'q' || str[0] == 'Q')
+        if (str[0] == 'q' || str[0] == 'Q')
             break;
 
         vector<string> v;
-        if (parse_letters(str.c_str(), v))
+        if (parse_grammar(str.c_str(), v))
         {
             cout << "-------------------------\n";
             cout << "Parsing succeeded\n";
