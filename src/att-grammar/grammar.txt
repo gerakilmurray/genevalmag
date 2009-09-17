@@ -1,0 +1,8 @@
+extends: standart.h,
+	numeric,
+	vergamota;
+semantics:f,g,d,pepito, lafuncion;
+attributes: a, valor, simb, b, nose;
+rules: r1, laregla,
+	yosoynueva;
+
