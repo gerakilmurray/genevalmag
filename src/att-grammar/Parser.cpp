@@ -15,30 +15,43 @@
 using namespace std;
 using namespace BOOST_SPIRIT_CLASSIC_NS;
 
-vector<string> attributes;
+/** Vectors with each part of the attibute grammar
+  */
 vector<string> extends;
+vector<string> attributes;
 vector<string> semantics;
 vector<string> rules;
-void v_semantic (char const* str, char const* end)
-{
-    string  s(str, end);
-    semantics.push_back(s);
-}
+
 void v_extend (char const* str, char const* end)
 {
     string  s(str, end);
     extends.push_back(s);
 }
+
+void v_semantic (char const* str, char const* end)
+{
+    string  s(str, end);
+    semantics.push_back(s);
+}
+
 void v_attribute (char const* str, char const* end)
 {
     string  s(str, end);
     attributes.push_back(s);
 }
+
 void v_rule (char const* str, char const* end)
 {
     string  s(str, end);
     rules.push_back(s);
 }
+
+void add2vector (char const* str, char const* end, vector<string>* vec)
+{
+    string  s(str, end);
+    vec->push_back(s);
+}
+
 
 void imprimir(){
 	cout << "Extend\n";
@@ -88,8 +101,8 @@ bool parse_grammar(char const* str)
 ////////////////////////////////////////////////////////////////////////////
 int main()
 {
-	FILE * pFile;
-	char buffer[100];
+//	FILE * pFile;
+//	char buffer[100];
 	string texto;
 
 //	pFile = fopen ("/home/gonza/grammar.txt" , "r");
