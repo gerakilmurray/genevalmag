@@ -11,8 +11,10 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "SemDomain.h"
 
 using namespace std;
+using namespace genevalmag;
 using namespace BOOST_SPIRIT_CLASSIC_NS;
 
 /** Vectors with each part of the attibute grammar
@@ -21,6 +23,7 @@ vector<string> extends;
 vector<string> attributes;
 vector<string> semantics;
 vector<string> rules;
+SemDomain sem_domain;
 
 void v_extend (char const* str, char const* end)
 {
@@ -46,26 +49,31 @@ void v_rule (char const* str, char const* end)
     rules.push_back(s);
 }
 
-void add2vector (char const* str, char const* end, vector<string>* vec)
+void addSort (char const* str, char const* end)
 {
     string  s(str, end);
-    vec->push_back(s);
+	Sort s_new(s);
+	sem_domain.add_sort(s_new);
 }
 
 
-void imprimir(){
-	cout << "Extend\n";
-    for (vector<string>::size_type i = 0; i < extends.size(); ++i)
-        cout << i << ": " << extends[i] << endl;
-	cout << "Semantic\n";
-    for (vector<string>::size_type i = 0; i < semantics.size(); ++i)
-        cout << i << ": " << semantics[i] << endl;
-	cout << "Attribute\n";
-    for (vector<string>::size_type i = 0; i < attributes.size(); ++i)
-        cout << i << ": " << attributes[i] << endl;
-	cout << "Rule\n";
-    for (vector<string>::size_type i = 0; i < rules.size(); ++i)
-        cout << i << ": " << rules[i] << endl;
+void imprimir()
+{
+sem_domain.print_sort();
+
+
+//	cout << "Extend\n";
+//    for (vector<string>::size_type i = 0; i < extends.size(); ++i)
+//        cout << i << ": " << extends[i] << endl;
+//	cout << "Semantic\n";
+//    for (vector<string>::size_type i = 0; i < semantics.size(); ++i)
+//        cout << i << ": " << semantics[i] << endl;
+//	cout << "Attribute\n";
+//    for (vector<string>::size_type i = 0; i < attributes.size(); ++i)
+//        cout << i << ": " << attributes[i] << endl;
+//	cout << "Rule\n";
+//    for (vector<string>::size_type i = 0; i < rules.size(); ++i)
+//        cout << i << ": " << rules[i] << endl;
 }
 
 struct att_grammar: public grammar<att_grammar>
@@ -79,7 +87,7 @@ struct att_grammar: public grammar<att_grammar>
 
             	r_semantics = strlit<>("semantics domains{") >> +bloq_sem >> strlit<>("}");
             	bloq_sem = decl_op | decl_sort;
-            	decl_sort = strlit<>("sort ") >> r_ident >> *(',' >> r_ident) >> ';';
+            	decl_sort = strlit<>("sort ") >> r_ident[&addSort] >> *(',' >> r_ident[&addSort]) >> ';';
             	decl_op = strlit<>("op ") >> !(mod_op >> '(' >> int_p >> ')') >>
 						  r_ident >> ':' >> dom_op >> strlit<>(":=>") >> r_ident  >> ';';
             	dom_op = r_ident >> *(',' >> r_ident);
@@ -130,10 +138,10 @@ int main()
     {
 		cout << "-------------------------\n";
 		cout << "Parsing succeeded\n";
-		cout << texto << "\nParses OK: " << endl;
-		//imprimir();
+		cout << texto << "\nParses OK: \n" <<  endl;
 		cout << "-------------------------\n";
-	}
+		imprimir();
+    }
 	else
 	{
 		cout << "-------------------------\n";
@@ -141,6 +149,6 @@ int main()
 		cout << "-------------------------\n";
 	}
 
-cout << "Bye... :-) \n\n";
-return 0;
+    cout << "Bye... :-) \n\n";
+    return 0;
 }
