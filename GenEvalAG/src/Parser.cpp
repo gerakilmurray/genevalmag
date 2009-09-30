@@ -28,7 +28,7 @@ void addSort (char const* str, char const* end)
 	sem_domain.add_sort(sort);
 }
 
-void createOp (char const* str, char const* end)
+void addOp (char const* str, char const* end)
 {
 	Operator aux;
 	sem_domain.add_op(aux);
@@ -79,7 +79,7 @@ struct att_grammar: public grammar<att_grammar>
 
 			decl_sort = strlit<>("sort ") >> r_ident[&addSort] >> *(',' >> r_ident[&addSort]) >> ';';
 
-			decl_op = strlit<>("op ")[&createOp]>>
+			decl_op = strlit<>("op ")[&addOp]>>
 					  !(mod_op[&saveMod]) >>
 					  !('(' >> int_p[&savePred] >> ')') >>
 					  r_ident[&saveName] >> ':' >>
