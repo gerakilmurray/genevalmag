@@ -8,4 +8,6 @@ semantics domains{
 
 	sort pepe;
 	op prefix %: string :=> string;
+	op (8) %: string :=> adrian;
+	sort adrian;
 }

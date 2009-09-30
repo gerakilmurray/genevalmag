@@ -38,5 +38,9 @@ void Sort::setName(string s_name)
 {
     this->s_name = s_name;
 }
+bool Sort::equals(Sort s)
+{
+	return this->s_name.compare(s.s_name)== 0;
+}
 
 }

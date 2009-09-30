@@ -18,7 +18,7 @@ namespace genevalmag {
 
 class SemDomain {
 private:
-	vector<Sort>  v_sort;
+	vector<Sort> v_sort;
 	vector<Operator> v_op;
 
 public:
@@ -27,7 +27,15 @@ public:
 
 	void add_sort(Sort s);
 	void add_op(Operator op);
-    void print_sort();
+
+	Operator * get_last_op();
+	Sort  get_sort (string name);
+	bool search_sort (Sort sort);
+
+
+	void print_sorts();
+	void print_ops();
+	void print_sem_dom();
 };
 
 }

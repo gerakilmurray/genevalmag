@@ -26,6 +26,7 @@ public:
     string getName() const;
     void setId(int s_id);
     void setName(string s_name);
+    bool equals(Sort s);
 
 };
 
