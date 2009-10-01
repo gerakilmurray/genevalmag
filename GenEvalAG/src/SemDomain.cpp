@@ -1,6 +1,6 @@
 /**
  * \file SemDomain.cpp
- * 	\brief EXPLICAR QUE ES ESTO
+ * 	\brief Implements SemDomain.h
  *  \date 28/09/2009
  *  \author    Kilmurray, Gerardo Luis. 
  *  \author    Picco, Gonzalo M. 
@@ -12,16 +12,23 @@
 using namespace std;
 namespace genevalmag {
 
+///////////////////////////////////////////////
+// contructors
+///////////////////////////////////////////////
 SemDomain::SemDomain()
 {
 
 }
-
+///////////////////////////////////////////////
+// destructors
+///////////////////////////////////////////////
 SemDomain::~SemDomain()
 {
 	// TODO Auto-generated destructor stub
 }
-
+///////////////////////////////////////////////
+// search a sort in the vector sort
+///////////////////////////////////////////////
 bool SemDomain::search_sort(Sort sort)
 {
 	for (vector<Sort>::size_type i = 0; i < this->v_sort.size(); i++)
@@ -29,6 +36,10 @@ bool SemDomain::search_sort(Sort sort)
 			return true;
 	return false;
 }
+
+///////////////////////////////////////////////
+// search a operation in the vector operation
+///////////////////////////////////////////////
 bool SemDomain::search_op(Operator op)
 {
 	for (vector<Operator>::size_type i = 0; i < this->v_op.size(); i++)
@@ -37,14 +48,20 @@ bool SemDomain::search_op(Operator op)
 	return false;
 }
 
+///////////////////////////////////////////////
+// add sort at vector sort
+///////////////////////////////////////////////
 void SemDomain::add_sort(Sort s)
 {
 	if (!search_sort(s))
 		this->v_sort.push_back(s);
 }
 
-// devuelve true si agrega una operacion nueva.
+///////////////////////////////////////////////
+// add sort at vector sort
+///////////////////////////////////////////////
 bool SemDomain::add_op(Operator op)
+// devuelve true si agrega una operacion nueva.
 {
 	if (!search_op(op))
 	{
@@ -54,13 +71,18 @@ bool SemDomain::add_op(Operator op)
 		return false;
 }
 
+///////////////////////////////////////////////
+// return the last operation and not out of vector
+///////////////////////////////////////////////
 Operator * SemDomain::get_last_op()
 {
 	return &(this->v_op.at(v_op.size()-1));
 }
 
+///////////////////////////////////////////////
+// seach sort and return it. else create a sort and return.
+///////////////////////////////////////////////
 Sort  SemDomain::get_sort(string name)
-// seach sort and return it else create and return
 {
 	for (vector<Sort>::size_type i = 0; i < this->v_sort.size(); i++)
 		if (this->v_sort.at(i).getName().compare(name) == 0)
@@ -69,6 +91,10 @@ Sort  SemDomain::get_sort(string name)
 	this->v_sort.push_back(sort);
 	return sort;
 }
+
+///////////////////////////////////////////////
+// operation's vector to string
+///////////////////////////////////////////////
 string SemDomain::to_string_ops()
 {
 	string op;
@@ -80,6 +106,10 @@ string SemDomain::to_string_ops()
 	}
 	return op;
 }
+
+///////////////////////////////////////////////
+// sort's vector to string
+///////////////////////////////////////////////
 string SemDomain::to_string_sorts()
 {
 	string sort;
@@ -91,6 +121,10 @@ string SemDomain::to_string_sorts()
 	}
 	return sort;
 }
+
+///////////////////////////////////////////////
+// semantic block to string
+///////////////////////////////////////////////
 string SemDomain::to_string()
 {
 	string semdomain("\nsemantics domains{\n");

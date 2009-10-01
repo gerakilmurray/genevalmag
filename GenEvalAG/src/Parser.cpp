@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+
 #include "SemDomain.h"
 
 using namespace std;
@@ -19,29 +20,41 @@ using namespace genevalmag;
 
 #define MAX_INPUT_LINE 100
 
-/** Variable to represent Semantic domain
+/** /var sem_domain
+  * /brief Variable to represent Semantic domain
   */
 SemDomain sem_domain;
-Operator * new_op;
 
+Operator * new_op; // a new operator in the parser
+
+///////////////////////////////////////////////
+// Operation for Sort
+///////////////////////////////////////////////
 void addSort (char const* str, char const* end)
 {
     string  s(str, end);
 	Sort sort(s);
 	sem_domain.add_sort(sort);
 }
+
+///////////////////////////////////////////////
+// Operation for Operation
+///////////////////////////////////////////////
 void inicOp (char const* str, char const* end)
 {
 	new_op = new Operator();
 }
+
 void addOp (char const* str, char const* end)
 {
 	if (!sem_domain.add_op(*new_op))
+		// operation repeat.
 	{
-		free(new_op);
+		free(new_op); // free memory of operation repeat.
 		cout << "libero" << endl;
 	}
 }
+
 void saveMod (char const* str, char const* end)
 {
 	string  s(str, end);
@@ -71,6 +84,9 @@ void saveImg (char const* str, char const* end)
 	new_op->setImage(sem_domain.get_sort(s));
 }
 
+///////////////////////////////////////////////
+// Type attribute grammar
+///////////////////////////////////////////////
 struct att_grammar: public grammar<att_grammar>
 {
 	template <typename ScannerT>
@@ -102,6 +118,9 @@ struct att_grammar: public grammar<att_grammar>
 	};
 };
 
+///////////////////////////////////////////////
+// Parser grammar
+///////////////////////////////////////////////
 bool parse_grammar(char const* str)
 {
 	att_grammar gramatica;

@@ -1,6 +1,6 @@
 /**
  * \file Operator.cpp
- * 	\brief EXPLICAR QUE ES ESTO
+ * 	\brief Implements Operator.h
  *  \date 28/09/2009
  *  \author    Kilmurray, Gerardo Luis. 
  *  \author    Picco, Gonzalo M. 
@@ -14,6 +14,9 @@ using namespace std;
 
 namespace genevalmag {
 
+///////////////////////////////////////////////
+// contructors
+///////////////////////////////////////////////
 Operator::Operator(string name, vector <Sort> * v, Sort * img, int id)
 {
 	this->o_name = name;
@@ -28,12 +31,17 @@ Operator::Operator()
 	this->o_pred = 1000;
 
 }
-
+///////////////////////////////////////////////
+// destructors
+///////////////////////////////////////////////
 Operator::~Operator()
 {
 	// TODO Auto-generated destructor stub
 }
 
+///////////////////////////////////////////////
+// Setter and getters.
+///////////////////////////////////////////////
 vector<Sort> Operator::getDomain() const
 {
     return this->o_domain;
@@ -55,7 +63,7 @@ string Operator::getMod() const
     {
 		case k_infix: return "infix";
 		case k_prefix: return "prefix";
-		case k_sufix: return "sufix";
+		case k_suffix: return "suffix";
 		default: return "prefix";
     }
 }
@@ -91,8 +99,8 @@ void Operator::setMod(string o_mod)
 		this->o_mod = k_infix;
 	else if (o_mod.compare("prefix") == 0)
 		this->o_mod = k_prefix;
-	else if (o_mod.compare("sufix") == 0)
-		this->o_mod = k_sufix;
+	else if (o_mod.compare("suffix") == 0)
+		this->o_mod = k_suffix;
 	else
 		// default
 		this->o_mod = k_prefix;
@@ -107,6 +115,10 @@ void Operator::setPred(int o_pred)
 {
     this->o_pred = o_pred;
 }
+
+///////////////////////////////////////////////
+// Operator to string
+///////////////////////////////////////////////
 string Operator::to_string()
 {
 	string op;
@@ -130,12 +142,18 @@ string Operator::to_string()
 	op.append(";");
 	return op;
 }
+///////////////////////////////////////////////
+// add a sort in the domain of a function
+///////////////////////////////////////////////
 void Operator::add_domain(Sort s)
 {
 	this->o_domain.push_back(s);
 
 }
 
+///////////////////////////////////////////////
+// compares the operation with other.
+///////////////////////////////////////////////
 bool Operator::equals(Operator op)
 {
 	bool eq(false);
@@ -156,8 +174,5 @@ bool Operator::equals(Operator op)
 	}
 	return eq;// si llega a este punto, obvio es verdadero.
 }
-void Operator::clear()
-{
 
-}
 }

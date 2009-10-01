@@ -1,6 +1,6 @@
 /**
  * \file Operator.h
- * 	\brief EXPLICAR QUE ES ESTO
+ * 	\brief Represents a operation.
  *  \date 28/09/2009
  *  \author    Kilmurray, Gerardo Luis. 
  *  \author    Picco, Gonzalo M. 
@@ -15,10 +15,11 @@
 
 namespace genevalmag {
 
+// operation's mode.
 enum ModOp
 {
 	k_infix,
-	k_sufix,
+	k_suffix,
 	k_prefix
 };
 
@@ -53,7 +54,6 @@ public:
     void setPred(int o_pred);
     string to_string();
     bool equals(Operator op);
-    void clear();
 
 };
 

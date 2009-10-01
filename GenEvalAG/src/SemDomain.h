@@ -1,6 +1,6 @@
 /**
  * \file SemDomain.h
- * 	\brief EXPLICAR QUE ES ESTO
+ * 	\brief Represents a semantic block a AST.
  *  \date 28/09/2009
  *  \author    Kilmurray, Gerardo Luis. 
  *  \author    Picco, Gonzalo M. 
