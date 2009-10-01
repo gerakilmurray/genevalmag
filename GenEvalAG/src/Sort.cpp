@@ -42,5 +42,12 @@ bool Sort::equals(Sort s)
 {
 	return this->s_name.compare(s.s_name)== 0;
 }
+string Sort::to_string()
+{
+	string sort("sort ");
+	sort.append(this->getName());
+	sort.append(";");
+	return sort;
+}
 
 }

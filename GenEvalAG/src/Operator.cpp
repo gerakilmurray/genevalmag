@@ -135,4 +135,29 @@ void Operator::add_domain(Sort s)
 	this->o_domain.push_back(s);
 
 }
+
+bool Operator::equals(Operator op)
+{
+	bool eq(false);
+	eq = (this->o_name.compare(op.getName())== 0) &&
+		 (this->o_image.equals(op.getImage())) &&
+		 (this->o_mod == op.o_mod) &&     // esta mal esto--> op deberia usarse con get!!!!
+		 (this->o_pred == op.getPred()) &&
+		 (this->o_domain.size() == op.getDomain().size());
+
+	if (!eq) return false;
+	else
+	{
+		for (vector<Sort>::size_type i = 0; i < this->o_domain.size(); ++i)
+		{
+			eq = this->o_domain.at(i).equals(op.getDomain().at(i));
+			if (!eq) return false;
+		}
+	}
+	return eq;// si llega a este punto, obvio es verdadero.
+}
+void Operator::clear()
+{
+
+}
 }

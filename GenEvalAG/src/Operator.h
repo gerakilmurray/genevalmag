@@ -52,6 +52,8 @@ public:
     void setName(string o_name);
     void setPred(int o_pred);
     string to_string();
+    bool equals(Operator op);
+    void clear();
 
 };
 

@@ -4,10 +4,12 @@ semantics domains{
 	sort string, character;
 	
 	op infix (5) + : int , int :=> int;
+	op sqr : int :=> int;
 	op sqr : int :=> int;	
 
 	sort pepe;
 	op prefix %: string :=> string;
 	op (8) %: string :=> adrian;
 	sort adrian;
+	op infix (5) + : int , int :=> int;
 }

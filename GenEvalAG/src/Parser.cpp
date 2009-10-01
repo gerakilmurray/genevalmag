@@ -14,12 +14,15 @@
 #include "SemDomain.h"
 
 using namespace std;
-using namespace genevalmag;
 using namespace BOOST_SPIRIT_CLASSIC_NS;
+using namespace genevalmag;
+
+#define MAX_INPUT_LINE 100
 
 /** Variable to represent Semantic domain
   */
 SemDomain sem_domain;
+Operator * new_op;
 
 void addSort (char const* str, char const* end)
 {
@@ -27,40 +30,45 @@ void addSort (char const* str, char const* end)
 	Sort sort(s);
 	sem_domain.add_sort(sort);
 }
-
+void inicOp (char const* str, char const* end)
+{
+	new_op = new Operator();
+}
 void addOp (char const* str, char const* end)
 {
-	Operator aux;
-	sem_domain.add_op(aux);
+	if (!sem_domain.add_op(*new_op))
+	{
+		free(new_op);
+		cout << "libero" << endl;
+	}
 }
-
 void saveMod (char const* str, char const* end)
 {
 	string  s(str, end);
-	sem_domain.get_last_op()->setMod(s);
+	new_op->setMod(s);
 }
 
 void savePred (int const i)
 {
-	sem_domain.get_last_op()->setPred(i);
+	new_op->setPred(i);
 }
 
 void saveName (char const* str, char const* end)
 {
 	string  s(str, end);
-	sem_domain.get_last_op()->setName(s);
+	new_op->setName(s);
 }
 
 void saveDom (char const* str, char const* end)
 {
 	string  s(str, end);
-	sem_domain.get_last_op()->add_domain(sem_domain.get_sort(s));
+	new_op->add_domain(sem_domain.get_sort(s));
 }
 
 void saveImg (char const* str, char const* end)
 {
 	string  s(str, end);
-	sem_domain.get_last_op()->setImage(sem_domain.get_sort(s));
+	new_op->setImage(sem_domain.get_sort(s));
 }
 
 struct att_grammar: public grammar<att_grammar>
@@ -73,13 +81,13 @@ struct att_grammar: public grammar<att_grammar>
 			r_ident = (alpha_p | ch_opt) >> *(alnum_p | ch_opt);
 			ch_opt = ch_p ('+')|'_'|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>';
 
-			r_semantics = strlit<>("semantics domains{") >> +bloq_sem >> strlit<>("}");
+			r_semantics = strlit<>("semantics domains")>> '{' >> +bloq_sem >> '}';
 
-			bloq_sem = decl_op | decl_sort;
+			bloq_sem = decl_op[&addOp] | decl_sort;
 
 			decl_sort = strlit<>("sort ") >> r_ident[&addSort] >> *(',' >> r_ident[&addSort]) >> ';';
 
-			decl_op = strlit<>("op ")[&addOp]>>
+			decl_op = strlit<>("op ")[&inicOp] >>
 					  !(mod_op[&saveMod]) >>
 					  !('(' >> int_p[&savePred] >> ')') >>
 					  r_ident[&saveName] >> ':' >>
@@ -108,21 +116,21 @@ bool parse_grammar(char const* str)
 int main()
 {
 	FILE * pFile;
-	char buffer[100];
+	char buffer[MAX_INPUT_LINE];
 	string texto;
 
-	pFile = fopen ("/home/gera/tesisLic/genevalmag/GenEvalAG/src/grammar.txt" , "r");
-	if (pFile == NULL) perror ("Error opening file");
+	pFile = fopen ("/home/gonza/TesisLic/repositorio/genevalmag/GenEvalAG/src/grammar.txt" , "r");
+	if (pFile == NULL)
+		perror ("Error opening file");
 	else
 	{
-		while ( ! feof (pFile) )
+		while ( !feof (pFile) )
 		{
 	          fgets (buffer , 100 , pFile);
 	          texto += buffer;
 	    }
 		fclose (pFile);
 	}
-	string c;
 
     if (parse_grammar(texto.c_str()))
     {
@@ -130,7 +138,8 @@ int main()
 		cout << "Parsing succeeded\n";
 		cout << texto << "\nParses OK: \n" <<  endl;
 		cout << "-------------------------\n";
-		sem_domain.print_sem_dom();
+		cout << sem_domain.to_string();
+
     }
 	else
 	{
@@ -142,3 +151,5 @@ int main()
     cout << "Bye... :-) \n\n";
     return 0;
 }
+
+

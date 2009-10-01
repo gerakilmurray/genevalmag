@@ -29,6 +29,13 @@ bool SemDomain::search_sort(Sort sort)
 			return true;
 	return false;
 }
+bool SemDomain::search_op(Operator op)
+{
+	for (vector<Operator>::size_type i = 0; i < this->v_op.size(); i++)
+		if (this->v_op.at(i).equals(op))
+			return true;
+	return false;
+}
 
 void SemDomain::add_sort(Sort s)
 {
@@ -36,9 +43,15 @@ void SemDomain::add_sort(Sort s)
 		this->v_sort.push_back(s);
 }
 
-void SemDomain::add_op(Operator op)
+// devuelve true si agrega una operacion nueva.
+bool SemDomain::add_op(Operator op)
 {
-	this->v_op.push_back(op);
+	if (!search_op(op))
+	{
+		this->v_op.push_back(op);
+		return true;
+	}else
+		return false;
 }
 
 Operator * SemDomain::get_last_op()
@@ -56,23 +69,35 @@ Sort  SemDomain::get_sort(string name)
 	this->v_sort.push_back(sort);
 	return sort;
 }
-void SemDomain::print_ops()
+string SemDomain::to_string_ops()
 {
+	string op;
 	for (vector<Sort>::size_type i = 0; i < this->v_op.size(); ++i)
-		cout << "\t" << this->v_op[i].to_string() << endl;
-
+	{
+		op.append("\t");
+		op.append(this->v_op[i].to_string());
+		op.append("\n");
+	}
+	return op;
 }
-void SemDomain::print_sorts()
+string SemDomain::to_string_sorts()
 {
+	string sort;
 	for (vector<Sort>::size_type i = 0; i < this->v_sort.size(); ++i)
-	   cout << "\t" <<  "sort " << this->v_sort[i].getName() << endl;
+	{
+		sort.append("\t");
+		sort.append(this->v_sort[i].to_string());
+		sort.append("\n");
+	}
+	return sort;
 }
-void SemDomain::print_sem_dom()
+string SemDomain::to_string()
 {
-	cout << "\nsemantics domains {\n";
-	this->print_sorts();
-	cout << "\n";
-	this->print_ops();
-	cout << "}\n";
+	string semdomain("\nsemantics domains{\n");
+	semdomain.append(this->to_string_sorts());
+	semdomain.append("\n");
+	semdomain.append(this->to_string_ops());
+	semdomain.append("}\n");
+	return semdomain;
 }
 }

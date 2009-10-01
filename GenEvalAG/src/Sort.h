@@ -27,7 +27,7 @@ public:
     void setId(int s_id);
     void setName(string s_name);
     bool equals(Sort s);
-
+    string to_string();
 };
 
 }

@@ -26,16 +26,16 @@ public:
 	virtual ~SemDomain();
 
 	void add_sort(Sort s);
-	void add_op(Operator op);
+	bool add_op(Operator op);
 
 	Operator * get_last_op();
-	Sort  get_sort (string name);
+	Sort get_sort (string name);
 	bool search_sort (Sort sort);
+	bool search_op (Operator op);
 
-
-	void print_sorts();
-	void print_ops();
-	void print_sem_dom();
+	string to_string_sorts();
+	string to_string_ops();
+	string to_string();
 };
 
 }
