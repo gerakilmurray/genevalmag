@@ -1,0 +1,24 @@
+semantics domains{
+
+	sort int;
+	sort string, character;
+	
+	op infix (5) + : int , int :=> int;
+	op sqr : int :=> int;
+	op sqr : int :=> int;	
+
+	sort pepe;
+	op prefix %: string :=> string;
+	op (8) %: string :=> adrian;
+	sort adrian;
+	op infix (5) + : int , int :=> int;
+}
+
+attributes{
+	int valor <sintetize>: E, T, F, id;
+	
+	string lexema <sintetize>: all;
+	char type <inherit>: E, T, F;
+	
+	char grade: E, F;
+}

@@ -84,6 +84,16 @@ void saveImg (char const* str, char const* end)
 	new_op->setImage(sem_domain.get_sort(s));
 }
 
+////////////////////////////
+//// method for attribute bloq
+///////////////////////////
+
+void pepito (char const* str, char const* end)
+{
+	string  s(str, end);
+	cout << s << "," <<  endl;
+}
+
 ///////////////////////////////////////////////
 // Type attribute grammar
 ///////////////////////////////////////////////
@@ -94,8 +104,14 @@ struct att_grammar: public grammar<att_grammar>
 	{
 		definition(att_grammar const &self)
 		{
-			r_ident = (alpha_p | ch_opt) >> *(alnum_p | ch_opt);
+
+			r_id = (alpha_p | ch_opt) >> *(alnum_p | ch_opt);
+			r_ident = r_id[&pepito] >> ' ';
 			ch_opt = ch_p ('+')|'_'|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>';
+
+			////////////////////////////////////////////////////////////
+			// Grammar's Semantic Domain
+			////////////////////////////////////////////////////////////
 
 			r_semantics = strlit<>("semantics domains")>> '{' >> +bloq_sem >> '}';
 
@@ -111,10 +127,33 @@ struct att_grammar: public grammar<att_grammar>
 					  r_ident[&saveImg]  >> ';';
 			dom_op = r_ident[&saveDom] >> *(',' >> r_ident[&saveDom]);
 			mod_op = strlit<>("infix") | strlit<>("prefix") | strlit<>("sufix");
+
+			////////////////////////////////////////////////////////////
+			// Grammar's Attribute
+			////////////////////////////////////////////////////////////
+
+			r_attributes = strlit<>("attributes")>> '{' >> +decl_att >> '}';
+
+			decl_att = r_ident[&pepito] >> space_p >>// Sort membership
+					   r_ident[&pepito] >> !r_type_att[&pepito] >> *(',' >> r_ident[&pepito] >> !r_type_att[&pepito]) >>
+					   ':' >> ((r_ident[&pepito] >> *(',' >> r_ident[&pepito])) | strlit<>("all")[&pepito]) >> ';';
+
+			r_type_att =  (strlit<>("<inherit>") | strlit<>("<sintetize>"));
+
+			////////////////////////////////////////////////////////////
+			// Attribute Grammar
+			////////////////////////////////////////////////////////////
+
+			r_att_grammar = r_attributes;
 		}
 
-		rule<ScannerT> r_ident, bloq_sem, r_semantics, decl_sort, decl_op, dom_op,mod_op,ch_opt;
-		rule<ScannerT> const& start() const { return r_semantics; }
+		rule<ScannerT> r_ident, ch_opt, r_id;
+
+		rule<ScannerT> r_semantics, bloq_sem, decl_sort, decl_op, dom_op,mod_op;
+		rule<ScannerT> r_attributes, decl_att, r_type_att;
+
+		rule<ScannerT> r_att_grammar;
+		rule<ScannerT> const& start() const { return r_att_grammar; }
 	};
 };
 
@@ -138,7 +177,8 @@ int main()
 	char buffer[MAX_INPUT_LINE];
 	string texto;
 
-	pFile = fopen ("/home/gonza/TesisLic/repositorio/genevalmag/GenEvalAG/src/grammar.txt" , "r");
+//	pFile = fopen ("/home/gonza/TesisLic/repositorio/genevalmag/GenEvalAG/src/grammar.txt" , "r");
+	pFile = fopen ("/home/gera/tesisLic/genevalmag/GenEvalAG/src/grammar.txt" , "r");
 	if (pFile == NULL)
 		perror ("Error opening file");
 	else
@@ -157,13 +197,13 @@ int main()
 		cout << "Parsing succeeded\n";
 		cout << texto << "\nParses OK: \n" <<  endl;
 		cout << "-------------------------\n";
-		cout << sem_domain.to_string();
+//		cout << sem_domain.to_string();
 
     }
 	else
 	{
 		cout << "-------------------------\n";
-		cout << "Parsing failed\n";
+		cout << texto << "Parsing failed\n";
 		cout << "-------------------------\n";
 	}
 
