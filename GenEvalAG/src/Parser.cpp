@@ -91,7 +91,7 @@ void saveImg (char const* str, char const* end)
 void pepito (char const* str, char const* end)
 {
 	string  s(str, end);
-	cout << s << "," <<  endl;
+	cout << s << endl;
 }
 
 ///////////////////////////////////////////////
@@ -104,10 +104,11 @@ struct att_grammar: public grammar<att_grammar>
 	{
 		definition(att_grammar const &self)
 		{
+			r_ident = (alpha_p | '_') >> *(alnum_p | '_' | '-');
 
-			r_id = (alpha_p | ch_opt) >> *(alnum_p | ch_opt);
-			r_ident = r_id[&pepito] >> ' ';
-			ch_opt = ch_p ('+')|'_'|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>';
+			r_oper  = (alpha_p | '_' | r_id_op) >> *(alnum_p | '_' | r_id_op);
+
+			r_id_op = ch_p ('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>';
 
 			////////////////////////////////////////////////////////////
 			// Grammar's Semantic Domain
@@ -115,18 +116,18 @@ struct att_grammar: public grammar<att_grammar>
 
 			r_semantics = strlit<>("semantics domains")>> '{' >> +bloq_sem >> '}';
 
-			bloq_sem = decl_op[&addOp] | decl_sort;
+			bloq_sem    = decl_op[&addOp] | decl_sort;
 
-			decl_sort = strlit<>("sort ") >> r_ident[&addSort] >> *(',' >> r_ident[&addSort]) >> ';';
+			decl_sort   = strlit<>("sort ") >> r_ident[&addSort] >> *(',' >> r_ident[&addSort]) >> ';';
 
-			decl_op = strlit<>("op ")[&inicOp] >>
-					  !(mod_op[&saveMod]) >>
-					  !('(' >> int_p[&savePred] >> ')') >>
-					  r_ident[&saveName] >> ':' >>
-					  dom_op >> strlit<>(":=>") >>
-					  r_ident[&saveImg]  >> ';';
-			dom_op = r_ident[&saveDom] >> *(',' >> r_ident[&saveDom]);
-			mod_op = strlit<>("infix") | strlit<>("prefix") | strlit<>("sufix");
+			decl_op     = strlit<>("op ")[&inicOp] >>
+						  !(mod_op[&saveMod]) >>
+						  !('(' >> int_p[&savePred] >> ')') >>
+						  r_oper[&saveName] >> ':' >>
+						  dom_op >> strlit<>(":=>") >>
+						  r_ident[&saveImg]  >> ';';
+			dom_op      = r_ident[&saveDom] >> *(',' >> r_ident[&saveDom]);
+			mod_op      = strlit<>("infix") | strlit<>("prefix") | strlit<>("sufix");
 
 			////////////////////////////////////////////////////////////
 			// Grammar's Attribute
@@ -134,20 +135,21 @@ struct att_grammar: public grammar<att_grammar>
 
 			r_attributes = strlit<>("attributes")>> '{' >> +decl_att >> '}';
 
-			decl_att = r_ident[&pepito] >> space_p >>// Sort membership
-					   r_ident[&pepito] >> !r_type_att[&pepito] >> *(',' >> r_ident[&pepito] >> !r_type_att[&pepito]) >>
-					   ':' >> ((r_ident[&pepito] >> *(',' >> r_ident[&pepito])) | strlit<>("all")[&pepito]) >> ';';
+			decl_att     = r_ident[&pepito] >> *(',' >> r_ident[&pepito]) >> // Sort membership
+					       ':' >> !(r_type_att[&pepito]) >> '<' >> r_ident[&pepito] >> '>' >>
+					       strlit<>("of")[&pepito] >>
+					       ((r_ident[&pepito] >> *(',' >> r_ident[&pepito])) | strlit<>("all")[&pepito]) >> ';';
 
-			r_type_att =  (strlit<>("<inherit>") | strlit<>("<sintetize>"));
+			r_type_att   = (strlit<>("inh") | strlit<>("syn"));
 
 			////////////////////////////////////////////////////////////
 			// Attribute Grammar
 			////////////////////////////////////////////////////////////
 
-			r_att_grammar = r_attributes;
+			r_att_grammar = r_semantics >> r_attributes;
 		}
 
-		rule<ScannerT> r_ident, ch_opt, r_id;
+		rule<ScannerT> r_ident, r_oper, r_id_op;
 
 		rule<ScannerT> r_semantics, bloq_sem, decl_sort, decl_op, dom_op,mod_op;
 		rule<ScannerT> r_attributes, decl_att, r_type_att;
@@ -197,7 +199,7 @@ int main()
 		cout << "Parsing succeeded\n";
 		cout << texto << "\nParses OK: \n" <<  endl;
 		cout << "-------------------------\n";
-//		cout << sem_domain.to_string();
+		cout << sem_domain.to_string();
 
     }
 	else
