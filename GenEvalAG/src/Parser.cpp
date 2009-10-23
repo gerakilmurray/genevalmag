@@ -104,9 +104,9 @@ struct att_grammar: public grammar<att_grammar>
 	{
 		definition(att_grammar const &self)
 		{
-			r_ident = (alpha_p | '_') >> *(alnum_p | '_' | '-');
+			r_ident = lexeme_d[(alpha_p | '_') >> *(alnum_p | '_' )];
 
-			r_oper  = (alpha_p | '_' | r_id_op) >> *(alnum_p | '_' | r_id_op);
+			r_oper  = lexeme_d[(alpha_p | '_' | r_id_op) >> *(alnum_p | '_' | r_id_op)];
 
 			r_id_op = ch_p ('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>';
 
@@ -114,7 +114,7 @@ struct att_grammar: public grammar<att_grammar>
 			// Grammar's Semantic Domain
 			////////////////////////////////////////////////////////////
 
-			r_semantics = strlit<>("semantics domains")>> '{' >> +bloq_sem >> '}';
+			r_semantics = strlit<>("semantics domains")>> +bloq_sem;
 
 			bloq_sem    = decl_op[&addOp] | decl_sort;
 
@@ -124,7 +124,7 @@ struct att_grammar: public grammar<att_grammar>
 						  !(mod_op[&saveMod]) >>
 						  !('(' >> int_p[&savePred] >> ')') >>
 						  r_oper[&saveName] >> ':' >>
-						  dom_op >> strlit<>(":=>") >>
+						  dom_op >> strlit<>("->") >>
 						  r_ident[&saveImg]  >> ';';
 			dom_op      = r_ident[&saveDom] >> *(',' >> r_ident[&saveDom]);
 			mod_op      = strlit<>("infix") | strlit<>("prefix") | strlit<>("sufix");
@@ -133,12 +133,15 @@ struct att_grammar: public grammar<att_grammar>
 			// Grammar's Attribute
 			////////////////////////////////////////////////////////////
 
-			r_attributes = strlit<>("attributes")>> '{' >> +decl_att >> '}';
+			r_attributes = strlit<>("attributes")>> +decl_att;
 
 			decl_att     = r_ident[&pepito] >> *(',' >> r_ident[&pepito]) >> // Sort membership
 					       ':' >> !(r_type_att[&pepito]) >> '<' >> r_ident[&pepito] >> '>' >>
 					       strlit<>("of")[&pepito] >>
-					       ((r_ident[&pepito] >> *(',' >> r_ident[&pepito])) | strlit<>("all")[&pepito]) >> ';';
+					       (conj_simb[&pepito] | strlit<>("all")[&pepito]) >> ';';
+					       //>> !('-' >> conj_simb);
+
+			conj_simb 	 = '{' >> r_ident[&pepito] >> *(',' >> r_ident[&pepito]) >> '}';
 
 			r_type_att   = (strlit<>("inh") | strlit<>("syn"));
 
@@ -152,7 +155,7 @@ struct att_grammar: public grammar<att_grammar>
 		rule<ScannerT> r_ident, r_oper, r_id_op;
 
 		rule<ScannerT> r_semantics, bloq_sem, decl_sort, decl_op, dom_op,mod_op;
-		rule<ScannerT> r_attributes, decl_att, r_type_att;
+		rule<ScannerT> r_attributes, decl_att, r_type_att,conj_simb;
 
 		rule<ScannerT> r_att_grammar;
 		rule<ScannerT> const& start() const { return r_att_grammar; }
@@ -179,8 +182,8 @@ int main()
 	char buffer[MAX_INPUT_LINE];
 	string texto;
 
-//	pFile = fopen ("/home/gonza/TesisLic/repositorio/genevalmag/GenEvalAG/src/grammar.txt" , "r");
-	pFile = fopen ("/home/gera/tesisLic/genevalmag/GenEvalAG/src/grammar.txt" , "r");
+	pFile = fopen ("/home/gonza/TesisLic/repositorio/genevalmag/GenEvalAG/src/grammar.txt" , "r");
+//	pFile = fopen ("/home/gera/tesisLic/genevalmag/GenEvalAG/src/grammar.txt" , "r");
 	if (pFile == NULL)
 		perror ("Error opening file");
 	else
@@ -205,7 +208,7 @@ int main()
 	else
 	{
 		cout << "-------------------------\n";
-		cout << texto << "Parsing failed\n";
+		cout << texto << "\nParsing failed\n";
 		cout << "-------------------------\n";
 	}
 
