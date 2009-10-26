@@ -17,7 +17,7 @@ namespace genevalmag {
 ///////////////////////////////////////////////
 SemDomain::SemDomain()
 {
-
+	// TODO Auto-generated constructor stub
 }
 ///////////////////////////////////////////////
 // destructors
@@ -47,14 +47,37 @@ bool SemDomain::search_op(Operator op)
 			return true;
 	return false;
 }
+bool SemDomain::search_att(Attribute attr)
+{
+	for (vector<Attribute>::size_type i = 0; i < this->v_attr.size(); i++)
+		if (this->v_attr.at(i).equals(attr))
+			return true;
+	return false;
+}
 
 ///////////////////////////////////////////////
 // add sort at vector sort
 ///////////////////////////////////////////////
-void SemDomain::add_sort(Sort s)
+bool SemDomain::add_sort(Sort s)
 {
 	if (!search_sort(s))
+	{
 		this->v_sort.push_back(s);
+		return true;
+	}else
+		return false;
+}
+///////////////////////////////////////////////
+// add attribute at vector attribute
+///////////////////////////////////////////////
+bool SemDomain::add_att(Attribute att)
+{
+	if (!search_att(att))
+	{
+		this->v_attr.push_back(att);
+		return true;
+	}else
+		return false;
 }
 
 ///////////////////////////////////////////////
@@ -122,16 +145,34 @@ string SemDomain::to_string_sorts()
 	return sort;
 }
 
+
+///////////////////////////////////////////////
+// operation's Attribute to string
+///////////////////////////////////////////////
+string SemDomain::to_string_atts()
+{
+	string atts;
+	for (vector<Attribute>::size_type i = 0; i < this->v_attr.size(); ++i)
+	{
+		atts.append("\t");
+		atts.append(this->v_attr[i].to_string());
+		atts.append("\n");
+	}
+	return atts;
+}
 ///////////////////////////////////////////////
 // semantic block to string
 ///////////////////////////////////////////////
 string SemDomain::to_string()
 {
-	string semdomain("\nsemantics domains{\n");
+	string semdomain("\nsemantics domains\n");
 	semdomain.append(this->to_string_sorts());
 	semdomain.append("\n");
 	semdomain.append(this->to_string_ops());
-	semdomain.append("}\n");
+	semdomain.append("\n");
+	semdomain.append("attributes\n");
+	semdomain.append(this->to_string_atts());
+	semdomain.append("\n");
 	return semdomain;
 }
 }

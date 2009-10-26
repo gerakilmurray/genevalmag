@@ -9,9 +9,11 @@
 #ifndef SEMDOMAIN_H_
 #define SEMDOMAIN_H_
 
-#include "Operator.h"
-#include "Sort.h"
 #include <vector>
+
+#include "Sort.h"
+#include "Operator.h"
+#include "Attribute.h"
 
 using namespace std;
 namespace genevalmag {
@@ -20,21 +22,25 @@ class SemDomain {
 private:
 	vector<Sort> v_sort;
 	vector<Operator> v_op;
+	vector<Attribute> v_attr;
 
 public:
 	SemDomain();
 	virtual ~SemDomain();
 
-	void add_sort(Sort s);
+	bool add_sort(Sort s);
 	bool add_op(Operator op);
+	bool add_att(Attribute att);
 
 	Operator * get_last_op();
 	Sort get_sort (string name);
 	bool search_sort (Sort sort);
 	bool search_op (Operator op);
+	bool search_att (Attribute attr);
 
 	string to_string_sorts();
 	string to_string_ops();
+	string to_string_atts();
 	string to_string();
 };
 

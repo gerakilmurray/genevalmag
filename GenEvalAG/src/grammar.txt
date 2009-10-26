@@ -16,7 +16,7 @@ semantics domains
 attributes
 	valor : syn <int> of {E, T, F, id };
 	
-	lexema : syn <string> of all;
+	lexema, lexx : syn <string> of all;
 	type  : inh <char> of {E, T, F};
 	
 	grade : <int> of {E, F};

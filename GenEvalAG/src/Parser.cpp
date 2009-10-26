@@ -25,7 +25,7 @@ using namespace genevalmag;
   */
 SemDomain sem_domain;
 
-Operator * new_op; // a new operator in the parser
+Operator * new_op;   // a new operator in the parser
 
 ///////////////////////////////////////////////
 // Operation for Sort
@@ -84,15 +84,72 @@ void saveImg (char const* str, char const* end)
 	new_op->setImage(sem_domain.get_sort(s));
 }
 
-////////////////////////////
-//// method for attribute bloq
-///////////////////////////
+///////////////////////////////////////////////
+// Operation for Attributes
+///////////////////////////////////////////////
 
-void pepito (char const* str, char const* end)
+struct decl_attr
 {
-	string  s(str, end);
-	cout << s << endl;
+	vector<string> names;
+	string sort_type;
+	TipeAttr mod_type;
+	string member_symbol;
+} * new_atts;
+
+void addAttrib (char const* str, char const* end)
+{
+	string name(str, end);
+	if (new_atts == 0){
+		cout << "pepito";
+		new_atts = new decl_attr;
+		cout << "pepitoCon papas";
+	}
+	cout << "pepitoCon salsa";
+	// Save name of new attribute
+	new_atts->names.push_back(name);
+	if (new_atts->names.size() == 1){
+		new_atts->mod_type = kSyntetize; // Default value
+		new_atts->member_symbol = "\0";
+	}
 }
+
+void saveSortAtts (char const* str, char const* end)
+{
+	string sort(str, end);
+	new_atts->sort_type = sort;
+}
+
+void saveTypeAtts (char const* str, char const* end)
+{
+	string mod_type(str, end);
+	if (mod_type.compare("inh") == 0)
+		new_atts->mod_type = kInherit;
+}
+
+void saveMemberList (char const* str, char const* end)
+{
+	string members(str, end);
+	new_atts->member_symbol = members;
+}
+
+void saveDeclAtts (char const* str, char const* end)
+{
+	cout << "numero de attributos" << new_atts->names.size()<< endl;
+	for (vector<string>::size_type i = 0; i < new_atts->names.size(); i++)
+	{
+		Attribute * att= new Attribute(new_atts->names[i],new_atts->sort_type,new_atts->mod_type,new_atts->member_symbol);
+		if (!sem_domain.add_att(*att))
+			// Attribute repeat.
+		{
+			free(att); // free memory of attribute repeat.
+			cout << "libero attribute" << endl;
+		}
+	}
+	free(new_atts);
+
+	cout << "liberooooooooooooooooooo";
+}
+
 
 ///////////////////////////////////////////////
 // Type attribute grammar
@@ -133,15 +190,15 @@ struct att_grammar: public grammar<att_grammar>
 			// Grammar's Attribute
 			////////////////////////////////////////////////////////////
 
-			r_attributes = strlit<>("attributes")>> +decl_att;
+			r_attributes = strlit<>("attributes")>> +decl_att[&saveDeclAtts];
 
-			decl_att     = r_ident[&pepito] >> *(',' >> r_ident[&pepito]) >> // Sort membership
-					       ':' >> !(r_type_att[&pepito]) >> '<' >> r_ident[&pepito] >> '>' >>
-					       strlit<>("of")[&pepito] >>
-					       (conj_simb[&pepito] | strlit<>("all")[&pepito]) >> ';';
+			decl_att     = r_ident[&addAttrib] >> *(',' >> r_ident[&addAttrib]) >>
+					       ':' >> !(r_type_att[&saveTypeAtts]) >> '<' >> r_ident[&saveSortAtts] >> '>' >>
+					       strlit<>("of") >>
+					       (conj_simb[&saveMemberList] | strlit<>("all")[&saveMemberList]) >> ';';
 					       //>> !('-' >> conj_simb);
 
-			conj_simb 	 = '{' >> r_ident[&pepito] >> *(',' >> r_ident[&pepito]) >> '}';
+			conj_simb 	 = '{' >> r_ident >> *(',' >> r_ident) >> '}';
 
 			r_type_att   = (strlit<>("inh") | strlit<>("syn"));
 
@@ -182,8 +239,9 @@ int main()
 	char buffer[MAX_INPUT_LINE];
 	string texto;
 
-	pFile = fopen ("/home/gonza/TesisLic/repositorio/genevalmag/GenEvalAG/src/grammar.txt" , "r");
-//	pFile = fopen ("/home/gera/tesisLic/genevalmag/GenEvalAG/src/grammar.txt" , "r");
+//pFile = fopen ("/home/gonza/TesisLic/repositorio/genevalmag/GenEvalAG/src/grammar.txt" , "r");
+	//pFile = fopen ("./../src/grammar.txt" , "r");
+	pFile = fopen ("/home/gera/tesisLic/genevalmag/GenEvalAG/src/grammar.txt" , "r");
 	if (pFile == NULL)
 		perror ("Error opening file");
 	else
