@@ -8,6 +8,7 @@
 
 #include <boost/spirit/include/classic_core.hpp>
 #include <boost/spirit/include/classic_push_back_actor.hpp>
+#include <boost/algorithm/string/erase.hpp>
 #include <iostream>
 #include <vector>
 #include <string>
@@ -51,7 +52,6 @@ void addOp (char const* str, char const* end)
 		// operation repeat.
 	{
 		free(new_op); // free memory of operation repeat.
-		cout << "libero" << endl;
 	}
 }
 
@@ -99,12 +99,13 @@ struct decl_attr
 void addAttrib (char const* str, char const* end)
 {
 	string name(str, end);
-	if (new_atts == 0){
-		cout << "pepito";
+	if (new_atts == NULL)
+	{
+		// New declaration. Must be allocate new memory.
 		new_atts = new decl_attr;
-		cout << "pepitoCon papas";
 	}
-	cout << "pepitoCon salsa";
+	// The declaration has more of one attribute
+
 	// Save name of new attribute
 	new_atts->names.push_back(name);
 	if (new_atts->names.size() == 1){
@@ -129,27 +130,30 @@ void saveTypeAtts (char const* str, char const* end)
 void saveMemberList (char const* str, char const* end)
 {
 	string members(str, end);
+	boost::erase_all(members, " ");
 	new_atts->member_symbol = members;
 }
 
 void saveDeclAtts (char const* str, char const* end)
 {
-	cout << "numero de attributos" << new_atts->names.size()<< endl;
 	for (vector<string>::size_type i = 0; i < new_atts->names.size(); i++)
 	{
-		Attribute * att= new Attribute(new_atts->names[i],new_atts->sort_type,new_atts->mod_type,new_atts->member_symbol);
+		Attribute * att = new Attribute(
+								new_atts->names[i],
+								new_atts->sort_type,
+								new_atts->mod_type,
+								new_atts->member_symbol
+							 );
 		if (!sem_domain.add_att(*att))
-			// Attribute repeat.
 		{
+			// Attribute repeat.
 			free(att); // free memory of attribute repeat.
-			cout << "libero attribute" << endl;
 		}
 	}
+	// Free space memory and assign NULL at pointer.
 	free(new_atts);
-
-	cout << "liberooooooooooooooooooo";
+	new_atts = NULL;
 }
-
 
 ///////////////////////////////////////////////
 // Type attribute grammar
@@ -195,8 +199,8 @@ struct att_grammar: public grammar<att_grammar>
 			decl_att     = r_ident[&addAttrib] >> *(',' >> r_ident[&addAttrib]) >>
 					       ':' >> !(r_type_att[&saveTypeAtts]) >> '<' >> r_ident[&saveSortAtts] >> '>' >>
 					       strlit<>("of") >>
-					       (conj_simb[&saveMemberList] | strlit<>("all")[&saveMemberList]) >> ';';
-					       //>> !('-' >> conj_simb);
+					       (conj_simb |
+					       (strlit<>("all") >> !('-' >> conj_simb)))[&saveMemberList] >> ';';
 
 			conj_simb 	 = '{' >> r_ident >> *(',' >> r_ident) >> '}';
 
