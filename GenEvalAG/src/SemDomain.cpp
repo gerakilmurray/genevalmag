@@ -19,6 +19,7 @@ SemDomain::SemDomain()
 {
 	// TODO Auto-generated constructor stub
 }
+
 ///////////////////////////////////////////////
 // destructors
 ///////////////////////////////////////////////
@@ -26,6 +27,7 @@ SemDomain::~SemDomain()
 {
 	// TODO Auto-generated destructor stub
 }
+
 ///////////////////////////////////////////////
 // search a sort in the vector sort
 ///////////////////////////////////////////////
@@ -47,6 +49,7 @@ bool SemDomain::search_op(Operator op)
 			return true;
 	return false;
 }
+
 bool SemDomain::search_att(Attribute attr)
 {
 	for (vector<Attribute>::size_type i = 0; i < this->v_attr.size(); i++)
@@ -67,6 +70,7 @@ bool SemDomain::add_sort(Sort s)
 	}else
 		return false;
 }
+
 ///////////////////////////////////////////////
 // add attribute at vector attribute
 ///////////////////////////////////////////////
@@ -145,7 +149,6 @@ string SemDomain::to_string_sorts()
 	return sort;
 }
 
-
 ///////////////////////////////////////////////
 // operation's Attribute to string
 ///////////////////////////////////////////////
@@ -160,6 +163,7 @@ string SemDomain::to_string_atts()
 	}
 	return atts;
 }
+
 ///////////////////////////////////////////////
 // semantic block to string
 ///////////////////////////////////////////////
@@ -169,8 +173,7 @@ string SemDomain::to_string()
 	semdomain.append(this->to_string_sorts());
 	semdomain.append("\n");
 	semdomain.append(this->to_string_ops());
-	semdomain.append("\n");
-	semdomain.append("attributes\n");
+	semdomain.append("\nattributes\n");
 	semdomain.append(this->to_string_atts());
 	semdomain.append("\n");
 	return semdomain;

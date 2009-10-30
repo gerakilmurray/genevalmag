@@ -26,7 +26,8 @@ using namespace genevalmag;
   */
 SemDomain sem_domain;
 
-Operator * new_op;   // a new operator in the parser
+// a new operator in the parser
+Operator * new_op;
 
 ///////////////////////////////////////////////
 // Operation for Sort
@@ -87,7 +88,6 @@ void saveImg (char const* str, char const* end)
 ///////////////////////////////////////////////
 // Operation for Attributes
 ///////////////////////////////////////////////
-
 struct decl_attr
 {
 	vector<string> names;
@@ -156,6 +156,32 @@ void saveDeclAtts (char const* str, char const* end)
 }
 
 ///////////////////////////////////////////////
+// Operation for Attributes
+///////////////////////////////////////////////
+void pepito(char const* str, char const* end)
+{
+	string pepe(str, end);
+    cout << pepe << endl;
+}
+
+///////////////////////////////////////////////
+// Skip parser
+///////////////////////////////////////////////
+struct skip_parser: public grammar<skip_parser>
+{
+	template <typename ScannerT>
+	struct definition
+	{
+		definition(skip_parser const &self)
+		{
+			skip = space_p;
+		}
+		rule<ScannerT> skip;
+		rule<ScannerT> const& start() const { return skip; }
+	};
+};
+
+///////////////////////////////////////////////
 // Type attribute grammar
 ///////////////////////////////////////////////
 struct att_grammar: public grammar<att_grammar>
@@ -165,11 +191,14 @@ struct att_grammar: public grammar<att_grammar>
 	{
 		definition(att_grammar const &self)
 		{
+
 			r_ident = lexeme_d[(alpha_p | '_') >> *(alnum_p | '_' )];
 
 			r_oper  = lexeme_d[(alpha_p | '_' | r_id_op) >> *(alnum_p | '_' | r_id_op)];
 
 			r_id_op = ch_p ('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>';
+
+			r_char	= lexeme_d[ch_p('\'')>> (alnum_p | r_id_op) >> ch_p('\'')];
 
 			////////////////////////////////////////////////////////////
 			// Grammar's Semantic Domain
@@ -187,7 +216,9 @@ struct att_grammar: public grammar<att_grammar>
 						  r_oper[&saveName] >> ':' >>
 						  dom_op >> strlit<>("->") >>
 						  r_ident[&saveImg]  >> ';';
+
 			dom_op      = r_ident[&saveDom] >> *(',' >> r_ident[&saveDom]);
+
 			mod_op      = strlit<>("infix") | strlit<>("prefix") | strlit<>("sufix");
 
 			////////////////////////////////////////////////////////////
@@ -207,16 +238,40 @@ struct att_grammar: public grammar<att_grammar>
 			r_type_att   = (strlit<>("inh") | strlit<>("syn"));
 
 			////////////////////////////////////////////////////////////
+			// Grammar's Rule
+			////////////////////////////////////////////////////////////
+
+			r_rules		= strlit<>("rules") >> (+decl_rule);
+
+			decl_rule	= r_ident[&pepito] >> strlit<>("::=") >>
+						  r_right_rule >> *('|'>> r_right_rule) >> ';';
+
+			r_right_rule =  +(r_ident[&pepito] | r_char[&pepito]) >>
+						    !( strlit<>("<compute>") >>
+							   +(r_sem_expr[&pepito]) >>
+							   strlit<>("<end>")
+							  );
+
+			r_sem_expr	= left_side >> '=' >> right_side >> ';';
+
+			left_side	= r_att_sem;
+
+			right_side	= +(r_att_sem | r_id_op) ;
+
+			r_att_sem	= lexeme_d[ r_ident >> '[' >> int_p >> ']' >> '.' >> r_ident ];
+
+			////////////////////////////////////////////////////////////
 			// Attribute Grammar
 			////////////////////////////////////////////////////////////
 
-			r_att_grammar = r_semantics >> r_attributes;
+			r_att_grammar = r_semantics >> r_attributes >> r_rules;
 		}
 
-		rule<ScannerT> r_ident, r_oper, r_id_op;
+		rule<ScannerT> r_ident, r_oper, r_id_op, r_char;
 
 		rule<ScannerT> r_semantics, bloq_sem, decl_sort, decl_op, dom_op,mod_op;
 		rule<ScannerT> r_attributes, decl_att, r_type_att,conj_simb;
+		rule<ScannerT> r_rules, decl_rule, r_sem_expr, left_side, right_side, r_att_sem,r_right_rule;
 
 		rule<ScannerT> r_att_grammar;
 		rule<ScannerT> const& start() const { return r_att_grammar; }
@@ -229,22 +284,20 @@ struct att_grammar: public grammar<att_grammar>
 bool parse_grammar(char const* str)
 {
 	att_grammar gramatica;
+	//skip_parser skip_p;
 	return parse(str,gramatica,space_p).full;
 }
 
-////////////////////////////////////////////////////////////////////////////
-//
+///////////////////////////////////////////////
 //  Main program
-//
-////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////
 int main()
 {
 	FILE * pFile;
 	char buffer[MAX_INPUT_LINE];
 	string texto;
 
-//pFile = fopen ("/home/gonza/TesisLic/repositorio/genevalmag/GenEvalAG/src/grammar.txt" , "r");
-	//pFile = fopen ("./../src/grammar.txt" , "r");
+	//pFile = fopen ("/home/gonza/TesisLic/repositorio/genevalmag/GenEvalAG/src/grammar.txt" , "r");
 	pFile = fopen ("/home/gera/tesisLic/genevalmag/GenEvalAG/src/grammar.txt" , "r");
 	if (pFile == NULL)
 		perror ("Error opening file");
@@ -252,7 +305,7 @@ int main()
 	{
 		while ( !feof (pFile) )
 		{
-	          fgets (buffer , 100 , pFile);
+	          fgets (buffer , 128 , pFile);
 	          texto += buffer;
 	    }
 		fclose (pFile);
@@ -260,22 +313,19 @@ int main()
 
     if (parse_grammar(texto.c_str()))
     {
-		cout << "-------------------------\n";
-		cout << "Parsing succeeded\n";
-		cout << texto << "\nParses OK: \n" <<  endl;
+//		cout << texto <<  endl;
 		cout << "-------------------------\n";
 		cout << sem_domain.to_string();
-
+		cout << "-------------------------\n";
+		cout << "Parsing OK\n";
+		cout << "-------------------------\n";
     }
 	else
 	{
 		cout << "-------------------------\n";
-		cout << texto << "\nParsing failed\n";
+		cout << "Parsing failed\n";
 		cout << "-------------------------\n";
 	}
-
-    cout << "Bye... :-) \n\n";
+    cout << "Bye... :-D" << endl;
     return 0;
 }
-
-
