@@ -174,7 +174,11 @@ struct skip_parser: public grammar<skip_parser>
 	{
 		definition(skip_parser const &self)
 		{
-			skip = space_p;
+			skip = space_p
+                    |   "//" >> *(anychar_p - '\n') >> '\n'
+                    |   "/*" >> *(anychar_p - "*/") >> "*/"
+                    ;
+
 		}
 		rule<ScannerT> skip;
 		rule<ScannerT> const& start() const { return skip; }
@@ -192,7 +196,9 @@ struct att_grammar: public grammar<att_grammar>
 		definition(att_grammar const &self)
 		{
 
-			r_ident = lexeme_d[(alpha_p | '_') >> *(alnum_p | '_' )];
+			r_ident = lexeme_d[(alpha_p | '_') >> *(alnum_p | '_' )] - r_reserved_word;
+
+			r_reserved_word = strlit<>("compute")|strlit<>("COMPUTE");
 
 			r_oper  = lexeme_d[(alpha_p | '_' | r_id_op) >> *(alnum_p | '_' | r_id_op)];
 
@@ -247,9 +253,9 @@ struct att_grammar: public grammar<att_grammar>
 						  r_right_rule >> *('|'>> r_right_rule) >> ';';
 
 			r_right_rule =  +(r_ident[&pepito] | r_char[&pepito]) >>
-						    !( strlit<>("<compute>") >>
+						    !( strlit<>("compute") >>
 							   +(r_sem_expr[&pepito]) >>
-							   strlit<>("<end>")
+							   strlit<>("end")
 							  );
 
 			r_sem_expr	= left_side >> '=' >> right_side >> ';';
@@ -264,10 +270,10 @@ struct att_grammar: public grammar<att_grammar>
 			// Attribute Grammar
 			////////////////////////////////////////////////////////////
 
-			r_att_grammar = r_semantics >> r_attributes >> r_rules;
+			r_att_grammar = r_semantics >> r_attributes >> r_rules >> end_p;
 		}
 
-		rule<ScannerT> r_ident, r_oper, r_id_op, r_char;
+		rule<ScannerT> r_ident, r_oper, r_id_op, r_char,r_reserved_word;
 
 		rule<ScannerT> r_semantics, bloq_sem, decl_sort, decl_op, dom_op,mod_op;
 		rule<ScannerT> r_attributes, decl_att, r_type_att,conj_simb;
@@ -284,8 +290,8 @@ struct att_grammar: public grammar<att_grammar>
 bool parse_grammar(char const* str)
 {
 	att_grammar gramatica;
-	//skip_parser skip_p;
-	return parse(str,gramatica,space_p).full;
+	skip_parser skip_p;
+	return parse(str,gramatica,skip_p).full;
 }
 
 ///////////////////////////////////////////////

@@ -1,3 +1,8 @@
+/* 
+ * Archivo de prueba de gramatica de atributos
+ * que especifica un AST.
+ */
+
 semantics domains
 	sort int;
 	sort string, character;
@@ -6,7 +11,7 @@ semantics domains
 	op sqr : int -> int;
 	op sqr : int -> int;	
 
-	sort pepe;
+	sort pepe,comput;
 	op prefix %: string -> string;
 	op (8) %: string -> adrian;
 	sort adrian;
@@ -24,19 +29,24 @@ attributes
 rules
 
 	E ::=	E '+' T
-				<compute>
+				compute
 					E[0].valor = E[1].valor + T[0].valor;
-				<end>
+				end
 		| 	T
-			  	<compute>
+			  	compute
 			  		E[0].valor = T[0].valor;
-	  			<end>
+	  			end
 	;
 	T ::=	id '*' id
-				<compute>
+				compute
 					T[0].valor = id[0].valor * id[1].valor;
 					T[0].type = id[0].type;
-				<end>
+				end
 	;
 	
-	id ::=	'1' | '0';
+	id ::=	'1' | '0';                                                    
+	
+	
+	
+	
+	
