@@ -3,6 +3,7 @@
  * que especifica un AST.
  */
 
+//////// bloque de dominio semantico /////////////////////
 semantics domains
 	sort int;
 	sort string, character;
@@ -17,6 +18,7 @@ semantics domains
 	sort adrian;
 	op infix (5) + : int , int -> int;
 
+//////// bloque de atributos /////////////////////
 attributes
 	valor : syn <int> of {E, T, F, id };
 	
@@ -26,6 +28,7 @@ attributes
 	
 	grade : <int> of {E, F};
 	
+//////// bloque de reglas /////////////////////
 rules
 
 	E ::=	E '+' T

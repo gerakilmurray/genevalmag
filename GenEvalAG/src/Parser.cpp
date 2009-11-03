@@ -304,7 +304,8 @@ int main()
 	string texto;
 
 	//pFile = fopen ("/home/gonza/TesisLic/repositorio/genevalmag/GenEvalAG/src/grammar.txt" , "r");
-	pFile = fopen ("/home/gera/tesisLic/genevalmag/GenEvalAG/src/grammar.txt" , "r");
+	//pFile = fopen ("/home/gera/tesisLic/genevalmag/GenEvalAG/src/grammar.txt" , "r");
+	pFile = fopen ("./src/grammar.txt" , "r");
 	if (pFile == NULL)
 		perror ("Error opening file");
 	else
