@@ -8,6 +8,7 @@
 
 #include "SemDomain.h"
 #include <iostream>
+#include <boost/tokenizer.hpp>
 
 using namespace std;
 namespace genevalmag {
@@ -119,6 +120,21 @@ Sort  SemDomain::get_sort(string name)
 	return sort;
 }
 
+template <typename T>
+string to_string_vec(T vec)
+{
+	string elem;
+	for (size_t i = 0; i < vec.size(); ++i)
+	{
+		elem.append("\t");
+		elem.append(vec[i].to_string());
+		elem.append("\n");
+	}
+	return elem;
+}
+
+
+
 ///////////////////////////////////////////////
 // operation's vector to string
 ///////////////////////////////////////////////
@@ -176,6 +192,51 @@ string SemDomain::to_string()
 	semdomain.append("\nattributes\n");
 	semdomain.append(this->to_string_atts());
 	semdomain.append("\n");
+	semdomain.append("\nParametrizada\n");
+	semdomain.append(to_string_vec<vector <Attribute> >(this->v_attr));
+	semdomain.append("\n");
 	return semdomain;
+}
+
+
+
+///////////////////////////////////////////////
+// Symbol's operation
+///////////////////////////////////////////////
+
+bool belong(Symbol s, string exprAtts)
+{
+	typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> sep("{},-");
+	tokenizer tokens(exprAtts, sep);
+	tokenizer::iterator tok_iter = tokens.begin();
+	if ((*tok_iter).compare("all"))
+	{
+		for (++tok_iter;tok_iter != tokens.end(); ++tok_iter)
+		{
+			if (s.getName().compare(*tok_iter) == 0) return false;
+		}
+		return true;
+	}
+	else
+	{
+		for (;tok_iter != tokens.end(); ++tok_iter)
+		{
+			if (s.getName().compare(*tok_iter) == 0) return true;
+		}
+		return false;
+	}
+}
+
+void SemDomain::add_atts(Symbol s)
+{
+	for (vector<Attribute>::size_type i = 0; i < this->v_attr.size(); ++i)
+	{
+		if (belong(s, v_attr[i].getMember_symbol()))
+		{
+			s.addAttr(v_attr[i]);
+		}
+	}
 }
 }

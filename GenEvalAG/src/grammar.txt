@@ -23,7 +23,7 @@ attributes
 	valor : syn <int> of {E, T, F, id };
 	
 	lexema, lexx, termino, id  : syn <string> of all - {E, T                  };
-	lexx  : syn <string> of all - {E,T};
+	lexx  : syn <string> of all - {alla,T}; // Borrar el ALL
 	type  : inh <char> of {E, T, F};
 	
 	grade : <int> of {E, F};

@@ -14,6 +14,7 @@
 #include "Sort.h"
 #include "Operator.h"
 #include "Attribute.h"
+#include "Symbol.h"
 
 using namespace std;
 namespace genevalmag {
@@ -23,6 +24,8 @@ private:
 	vector<Sort> v_sort;
 	vector<Operator> v_op;
 	vector<Attribute> v_attr;
+	vector<Symbol> v_sym;
+	//vector<rule> v_rul
 
 public:
 	SemDomain();
@@ -42,6 +45,8 @@ public:
 	string to_string_ops();
 	string to_string_atts();
 	string to_string();
+
+	void add_atts(Symbol s);
 };
 
 }

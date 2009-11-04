@@ -156,13 +156,18 @@ void saveDeclAtts (char const* str, char const* end)
 }
 
 ///////////////////////////////////////////////
-// Operation for Attributes
+// Operation for rules
 ///////////////////////////////////////////////
 void pepito(char const* str, char const* end)
 {
 	string pepe(str, end);
     cout << pepe << endl;
 }
+///////////////////////////////////////////////
+// Operation for symbol
+///////////////////////////////////////////////
+
+/************add_atts(E);****************/
 
 ///////////////////////////////////////////////
 // Skip parser
@@ -198,7 +203,8 @@ struct att_grammar: public grammar<att_grammar>
 
 			r_ident = lexeme_d[(alpha_p | '_') >> *(alnum_p | '_' )] - r_reserved_word;
 
-			r_reserved_word = strlit<>("compute")|strlit<>("COMPUTE");
+			r_reserved_word = strlit<>("compute")|strlit<>("COMPUTE")|
+							  strlit<>("all")|strlit<>("ALL");
 
 			r_oper  = lexeme_d[(alpha_p | '_' | r_id_op) >> *(alnum_p | '_' | r_id_op)];
 
