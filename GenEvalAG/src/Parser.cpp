@@ -7,7 +7,7 @@
   */
 
 #include <boost/spirit/include/classic_core.hpp>
-#include <boost/spirit/include/classic_push_back_actor.hpp>
+//#include <boost/spirit/include/classic_push_back_actor.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #include <iostream>
 #include <vector>
@@ -162,6 +162,7 @@ void save_rule(char const* str, char const* end)
 {
 
 }
+
 void pepito(char const* str, char const* end)
 {
 //	string pepe(str, end);
@@ -171,9 +172,20 @@ void pepito(char const* str, char const* end)
 // Operation for symbol
 ///////////////////////////////////////////////
 
-void save_symb(char const* str, char const* end)
+void saveNonTerminal(char const* str, char const* end)
 {
+	// PELIGRO DE REFERENCIA COLGADA!! POR VARIABLE LOCAL PASADA COMO REFERENCIA.
+	string name(str, end);
+	Symbol symb(name, k_nonTerminal);
+	if (sem_domain.add_symb(symb))
+		sem_domain.load_atts(symb);
+}
 
+void saveTerminal(char const* str, char const* end)
+{
+	string name(str, end);
+	Symbol symb(name, k_terminal);
+	sem_domain.add_symb(symb);
 }
 /************add_atts(E);****************/
 
@@ -263,10 +275,10 @@ struct att_grammar: public grammar<att_grammar>
 
 			r_rules		= strlit<>("rules") >> (+decl_rule);
 
-			decl_rule	= r_ident[&pepito] >> strlit<>("::=") >>
+			decl_rule	= r_ident[&saveNonTerminal] >> strlit<>("::=") >>
 						  r_right_rule >> *('|'>> r_right_rule) >> ';';
 
-			r_right_rule =  +(r_ident[&pepito] | r_char[&pepito]) >>
+			r_right_rule =  +(r_ident[&saveNonTerminal] | r_char[&saveTerminal]) >>
 						    !( strlit<>("compute") >>
 							   +(r_sem_expr[&pepito]) >>
 							   strlit<>("end")

@@ -10,6 +10,7 @@
 #define SYMBOL_H_
 
 #include <vector>
+#include <string>
 
 #include "Attribute.h"
 
@@ -29,13 +30,15 @@ class Symbol {
 		vector<Attribute>  attrs;
 
 	public:
-		virtual ~Symbol();
 		Symbol();
+		Symbol(string name, SymbType type);
+		virtual ~Symbol();
 		void addAttr(const Attribute attr);
 		void removeAttr(const int index);
-		string getName();
+		string getName() const;
 		void setName(string name);
 	    bool equals(Symbol symb) const;
+	    string to_string() const;
 };
 }
 

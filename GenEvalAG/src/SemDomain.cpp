@@ -64,22 +64,22 @@ template <class T> string to_string_vec(const vector<T>& vec)
 ///////////////////////////////////////////////
 // Add's Operations
 ///////////////////////////////////////////////
-bool SemDomain::add_sort(Sort s)
+bool SemDomain::add_sort(const Sort& s)
 {
 	return add <Sort> (s, this->v_sort);
 }
 
-bool SemDomain::add_op(Operator op)
+bool SemDomain::add_op(const Operator& op)
 {
 	return add <Operator> (op, this->v_oper);
 }
 
-bool SemDomain::add_att(Attribute attr)
+bool SemDomain::add_att(const Attribute& attr)
 {
 	return add <Attribute> (attr, this->v_attr);
 }
 
-bool SemDomain::add_symb(Symbol symb)
+bool SemDomain::add_symb(const Symbol& symb)
 {
 	return add <Symbol> (symb, this->v_symb);
 }
@@ -87,22 +87,22 @@ bool SemDomain::add_symb(Symbol symb)
 ///////////////////////////////////////////////
 // Search's Operations
 ///////////////////////////////////////////////
-bool SemDomain::search_sort(Sort sort)
+bool SemDomain::search_sort(const Sort& sort) const
 {
 	return search <Sort> (sort, this->v_sort);
 }
 
-bool SemDomain::search_op(Operator op)
+bool SemDomain::search_op(const Operator& op) const
 {
 	return search <Operator> (op, this->v_oper);
 }
 
-bool SemDomain::search_att(Attribute attr)
+bool SemDomain::search_att(const Attribute& attr) const
 {
 	return search <Attribute> (attr, this->v_attr);
 }
 
-bool SemDomain::search_symb(Symbol symb)
+bool SemDomain::search_symb(const Symbol& symb) const
 {
 	return search <Symbol> (symb, this->v_symb);
 }
@@ -124,7 +124,7 @@ Sort  SemDomain::get_sort(string name)
 ///////////////////////////////////////////////
 // semantic block to string
 ///////////////////////////////////////////////
-string SemDomain::to_string()
+string SemDomain::to_string() const
 {
 	string semdomain("\nsemantics domains\n");
 	semdomain.append(to_string_vec<Sort>(this->v_sort));
@@ -132,6 +132,8 @@ string SemDomain::to_string()
 	semdomain.append(to_string_vec<Operator>(this->v_oper));
 	semdomain.append("\nattributes\n");
 	semdomain.append(to_string_vec<Attribute>(this->v_attr));
+	semdomain.append("\nsymbols\n");
+	semdomain.append(to_string_vec<Symbol>(this->v_symb));
 	semdomain.append("\n");
 	return semdomain;
 }
@@ -164,13 +166,13 @@ bool belong(Symbol s, string exprAtts)
 	}
 }
 
-void SemDomain::load_atts(Symbol s)
+void SemDomain::load_atts(Symbol& symb) const
 {
 	for (vector<Attribute>::size_type i = 0; i < this->v_attr.size(); ++i)
 	{
-		if (belong(s, v_attr[i].getMember_symbol()))
+		if (belong(symb, v_attr[i].getMember_symbol()))
 		{
-			s.addAttr(v_attr[i]);
+			symb.addAttr(v_attr[i]);
 		}
 	}
 }

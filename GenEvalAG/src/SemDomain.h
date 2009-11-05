@@ -31,20 +31,20 @@ public:
 	SemDomain();
 	virtual ~SemDomain();
 
-	bool add_sort (Sort s);
-	bool add_op   (Operator op);
-	bool add_att  (Attribute att);
-	bool add_symb (Symbol symb);
+	bool add_sort (const Sort& s);
+	bool add_op   (const Operator& op);
+	bool add_att  (const Attribute& att);
+	bool add_symb (const Symbol& symb);
 
-	bool search_sort (Sort sort);
-	bool search_op   (Operator op);
-	bool search_att  (Attribute attr);
-	bool search_symb (Symbol symb);
+	bool search_sort (const Sort& sort) const;
+	bool search_op   (const Operator& op) const;
+	bool search_att  (const Attribute& attr) const;
+	bool search_symb (const Symbol& symb) const;
 
 	Sort get_sort (string name);
-	void load_atts(Symbol s);
+	void load_atts(Symbol& symb) const;
 
-	string to_string();
+	string to_string() const;
 };
 
 }
