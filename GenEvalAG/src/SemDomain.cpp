@@ -30,37 +30,41 @@ SemDomain::~SemDomain()
 }
 
 ///////////////////////////////////////////////
-// search a sort in the vector sort
+// Operation Templates
 ///////////////////////////////////////////////
-bool SemDomain::search_sort(Sort sort)
+template <class T> bool search(T elem, vector <T> vec)
 {
-	for (vector<Sort>::size_type i = 0; i < this->v_sort.size(); i++)
-		if (this->v_sort.at(i).equals(sort))
+	for (size_t i = 0; i < vec.size(); i++)
+		if (vec.at(i).equals(elem))
 			return true;
 	return false;
 }
 
-///////////////////////////////////////////////
-// search a operation in the vector operation
-///////////////////////////////////////////////
-bool SemDomain::search_op(Operator op)
+template <class T> bool add(T elem, vector <T> vec)
 {
-	for (vector<Operator>::size_type i = 0; i < this->v_op.size(); i++)
-		if (this->v_op.at(i).equals(op))
-			return true;
-	return false;
+	if (!search <T>(elem, vec))
+	{
+		vec.push_back(elem);
+		return true;
+	}
+	else
+		return false;
 }
 
-bool SemDomain::search_att(Attribute attr)
+template <class T> string to_string_vec(vector <T> vec)
 {
-	for (vector<Attribute>::size_type i = 0; i < this->v_attr.size(); i++)
-		if (this->v_attr.at(i).equals(attr))
-			return true;
-	return false;
+	string elem;
+	for (size_t i = 0; i < vec.size(); ++i)
+	{
+		elem.append("\t");
+		elem.append(vec[i].to_string());
+		elem.append("\n");
+	}
+	return elem;
 }
 
 ///////////////////////////////////////////////
-// add sort at vector sort
+// Add's Operations
 ///////////////////////////////////////////////
 bool SemDomain::add_sort(Sort s)
 {
@@ -72,39 +76,42 @@ bool SemDomain::add_sort(Sort s)
 		return false;
 }
 
-///////////////////////////////////////////////
-// add attribute at vector attribute
-///////////////////////////////////////////////
-bool SemDomain::add_att(Attribute att)
-{
-	if (!search_att(att))
-	{
-		this->v_attr.push_back(att);
-		return true;
-	}else
-		return false;
-}
-
-///////////////////////////////////////////////
-// add sort at vector sort
-///////////////////////////////////////////////
 bool SemDomain::add_op(Operator op)
-// devuelve true si agrega una operacion nueva.
 {
-	if (!search_op(op))
-	{
-		this->v_op.push_back(op);
-		return true;
-	}else
-		return false;
+	return add <Operator> (op, this->v_oper);
+}
+
+bool SemDomain::add_att(Attribute attr)
+{
+	return add <Attribute> (attr, this->v_attr);
+}
+
+bool SemDomain::add_symb(Symbol symb)
+{
+	return add <Symbol> (symb, this->v_symb);
 }
 
 ///////////////////////////////////////////////
-// return the last operation and not out of vector
+// Search's Operations
 ///////////////////////////////////////////////
-Operator * SemDomain::get_last_op()
+bool SemDomain::search_sort(Sort sort)
 {
-	return &(this->v_op.at(v_op.size()-1));
+	return search <Sort> (sort, this->v_sort);
+}
+
+bool SemDomain::search_op(Operator op)
+{
+	return search <Operator> (op, this->v_oper);
+}
+
+bool SemDomain::search_att(Attribute attr)
+{
+	return search <Attribute> (attr, this->v_attr);
+}
+
+bool SemDomain::search_symb(Symbol symb)
+{
+	return search <Symbol> (symb, this->v_symb);
 }
 
 ///////////////////////////////////////////////
@@ -120,85 +127,20 @@ Sort  SemDomain::get_sort(string name)
 	return sort;
 }
 
-template <typename T>
-string to_string_vec(T vec)
-{
-	string elem;
-	for (size_t i = 0; i < vec.size(); ++i)
-	{
-		elem.append("\t");
-		elem.append(vec[i].to_string());
-		elem.append("\n");
-	}
-	return elem;
-}
-
-
-
-///////////////////////////////////////////////
-// operation's vector to string
-///////////////////////////////////////////////
-string SemDomain::to_string_ops()
-{
-	string op;
-	for (vector<Sort>::size_type i = 0; i < this->v_op.size(); ++i)
-	{
-		op.append("\t");
-		op.append(this->v_op[i].to_string());
-		op.append("\n");
-	}
-	return op;
-}
-
-///////////////////////////////////////////////
-// sort's vector to string
-///////////////////////////////////////////////
-string SemDomain::to_string_sorts()
-{
-	string sort;
-	for (vector<Sort>::size_type i = 0; i < this->v_sort.size(); ++i)
-	{
-		sort.append("\t");
-		sort.append(this->v_sort[i].to_string());
-		sort.append("\n");
-	}
-	return sort;
-}
-
-///////////////////////////////////////////////
-// operation's Attribute to string
-///////////////////////////////////////////////
-string SemDomain::to_string_atts()
-{
-	string atts;
-	for (vector<Attribute>::size_type i = 0; i < this->v_attr.size(); ++i)
-	{
-		atts.append("\t");
-		atts.append(this->v_attr[i].to_string());
-		atts.append("\n");
-	}
-	return atts;
-}
-
 ///////////////////////////////////////////////
 // semantic block to string
 ///////////////////////////////////////////////
 string SemDomain::to_string()
 {
 	string semdomain("\nsemantics domains\n");
-	semdomain.append(this->to_string_sorts());
+	semdomain.append(to_string_vec<Sort>(this->v_sort));
 	semdomain.append("\n");
-	semdomain.append(this->to_string_ops());
+	semdomain.append(to_string_vec<Operator>(this->v_oper));
 	semdomain.append("\nattributes\n");
-	semdomain.append(this->to_string_atts());
-	semdomain.append("\n");
-	semdomain.append("\nParametrizada\n");
-	semdomain.append(to_string_vec<vector <Attribute> >(this->v_attr));
+	semdomain.append(to_string_vec<Attribute>(this->v_attr));
 	semdomain.append("\n");
 	return semdomain;
 }
-
-
 
 ///////////////////////////////////////////////
 // Symbol's operation
@@ -207,7 +149,6 @@ string SemDomain::to_string()
 bool belong(Symbol s, string exprAtts)
 {
 	typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
-
 	boost::char_separator<char> sep("{},-");
 	tokenizer tokens(exprAtts, sep);
 	tokenizer::iterator tok_iter = tokens.begin();
@@ -229,7 +170,7 @@ bool belong(Symbol s, string exprAtts)
 	}
 }
 
-void SemDomain::add_atts(Symbol s)
+void SemDomain::load_atts(Symbol s)
 {
 	for (vector<Attribute>::size_type i = 0; i < this->v_attr.size(); ++i)
 	{

@@ -15,11 +15,18 @@
 
 namespace genevalmag {
 
+// Symbol's type.
+enum SymbType
+{
+	k_terminal,
+	k_nonTerminal
+};
+
 class Symbol {
 	private:
-		string name;
+		string sym_name;
+		SymbType sym_type;
 		vector<Attribute>  attrs;
-		bool terminal; // si es verdadero el simbolo es terminal, de otro modo es nonterminal.
 
 	public:
 		virtual ~Symbol();
@@ -28,8 +35,8 @@ class Symbol {
 		void removeAttr(const int index);
 		string getName();
 		void setName(string name);
+	    bool equals(Symbol symb);
 };
-
 }
 
 #endif /* SYMBOL_H_ */

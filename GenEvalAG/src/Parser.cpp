@@ -309,8 +309,6 @@ int main()
 	char buffer[MAX_INPUT_LINE];
 	string texto;
 
-	//pFile = fopen ("/home/gonza/TesisLic/repositorio/genevalmag/GenEvalAG/src/grammar.txt" , "r");
-	//pFile = fopen ("/home/gera/tesisLic/genevalmag/GenEvalAG/src/grammar.txt" , "r");
 	pFile = fopen ("./src/grammar.txt" , "r");
 	if (pFile == NULL)
 		perror ("Error opening file");
@@ -326,7 +324,6 @@ int main()
 
     if (parse_grammar(texto.c_str()))
     {
-//		cout << texto <<  endl;
 		cout << "-------------------------\n";
 		cout << sem_domain.to_string();
 		cout << "-------------------------\n";

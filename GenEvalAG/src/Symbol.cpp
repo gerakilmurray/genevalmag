@@ -12,12 +12,12 @@ namespace genevalmag {
 
 Symbol::Symbol() {
 	// TODO Auto-generated constructor stub
-
 }
 
 Symbol::~Symbol() {
 	// TODO Auto-generated destructor stub
 }
+
 void Symbol::addAttr(const Attribute attr)
 {
 	this->attrs.push_back(attr);
@@ -25,15 +25,22 @@ void Symbol::addAttr(const Attribute attr)
 
 void Symbol::removeAttr(int index)
 {
+	////////
 }
+
 string Symbol::getName()
 {
-	return this->name;
+	return this->sym_name;
 }
+
 void Symbol::setName(string name)
 {
-	this->name = name;
+	this->sym_name = name;
+}
+
+bool Symbol::equals(Symbol symb)
+{
+	return this->sym_name.compare(symb.getName()) == 0;
 }
 
 }
-

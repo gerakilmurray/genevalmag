@@ -12,7 +12,7 @@ semantics domains
 	op sqr : int -> int;
 	op sqr : int -> int;	
 
-	sort pepe,comput;
+	sort pepe;
 	op prefix %: string -> string;
 	op (8) %: string -> adrian;
 	sort adrian;
