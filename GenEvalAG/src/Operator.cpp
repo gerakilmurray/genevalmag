@@ -119,7 +119,7 @@ void Operator::setPred(int o_pred)
 ///////////////////////////////////////////////
 // Operator to string
 ///////////////////////////////////////////////
-string Operator::to_string()
+string Operator::to_string() const
 {
 	string op;
 	op.append("op ");
@@ -154,7 +154,7 @@ void Operator::add_domain(Sort s)
 ///////////////////////////////////////////////
 // compares the operation with other.
 ///////////////////////////////////////////////
-bool Operator::equals(Operator op)
+bool Operator::equals(Operator op) const
 {
 	bool eq(false);
 	eq = (this->o_name.compare(op.getName())== 0) &&

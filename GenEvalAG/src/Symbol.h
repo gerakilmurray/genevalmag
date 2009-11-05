@@ -35,7 +35,7 @@ class Symbol {
 		void removeAttr(const int index);
 		string getName();
 		void setName(string name);
-	    bool equals(Symbol symb);
+	    bool equals(Symbol symb) const;
 };
 }
 

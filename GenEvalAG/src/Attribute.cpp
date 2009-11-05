@@ -65,7 +65,7 @@ void Attribute::setType(string a_type)
     this->a_type = a_type;
 }
 
-string Attribute::to_string()
+string Attribute::to_string() const
 {
 	string att;
 	att.append(this->getName());
@@ -84,7 +84,7 @@ string Attribute::to_string()
 ///////////////////////////////////////////////
 // compares the attribute with other.
 ///////////////////////////////////////////////
-bool Attribute::equals(Attribute attr)
+bool Attribute::equals(Attribute attr) const
 // compare for name, mod_type and type.
 {
 	return	(this->a_name.compare(attr.getName())== 0) &&

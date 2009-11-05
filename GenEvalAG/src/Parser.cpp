@@ -158,15 +158,23 @@ void saveDeclAtts (char const* str, char const* end)
 ///////////////////////////////////////////////
 // Operation for rules
 ///////////////////////////////////////////////
+void save_rule(char const* str, char const* end)
+{
+
+}
 void pepito(char const* str, char const* end)
 {
-	string pepe(str, end);
-    cout << pepe << endl;
+//	string pepe(str, end);
+//    cout << pepe << endl;
 }
 ///////////////////////////////////////////////
 // Operation for symbol
 ///////////////////////////////////////////////
 
+void save_symb(char const* str, char const* end)
+{
+
+}
 /************add_atts(E);****************/
 
 ///////////////////////////////////////////////

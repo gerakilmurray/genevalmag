@@ -41,8 +41,8 @@ public:
 	void setMod_type(TipeAttr a_mod_type);
 	void setMember_symbol(string a_member_symbol);
 
-	string to_string ();
-	bool equals(Attribute attr);
+	string to_string ()const;
+	bool equals(Attribute attr) const;
 };
 }
 #endif /* ATTRIBUTE_H_ */

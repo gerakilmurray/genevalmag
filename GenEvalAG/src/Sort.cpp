@@ -52,7 +52,7 @@ void Sort::setName(string s_name)
 ///////////////////////////////////////////////
 // compares the sort with other.
 ///////////////////////////////////////////////
-bool Sort::equals(Sort s)
+bool Sort::equals(Sort s) const
 {
 	return this->s_name.compare(s.s_name)== 0;
 }
@@ -60,7 +60,7 @@ bool Sort::equals(Sort s)
 ///////////////////////////////////////////////
 // Sort to string
 ///////////////////////////////////////////////
-string Sort::to_string()
+string Sort::to_string() const
 {
 	string sort("sort ");
 	sort.append(this->getName());

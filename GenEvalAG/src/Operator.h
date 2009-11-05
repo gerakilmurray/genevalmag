@@ -52,8 +52,8 @@ public:
     void setMod(string o_mod);
     void setName(string o_name);
     void setPred(int o_pred);
-    string to_string();
-    bool equals(Operator op);
+    string to_string() const;
+    bool equals(Operator op) const;
 
 };
 

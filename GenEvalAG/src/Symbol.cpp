@@ -38,7 +38,7 @@ void Symbol::setName(string name)
 	this->sym_name = name;
 }
 
-bool Symbol::equals(Symbol symb)
+bool Symbol::equals(Symbol symb) const
 {
 	return this->sym_name.compare(symb.getName()) == 0;
 }

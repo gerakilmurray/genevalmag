@@ -32,26 +32,24 @@ SemDomain::~SemDomain()
 ///////////////////////////////////////////////
 // Operation Templates
 ///////////////////////////////////////////////
-template <class T> bool search(T elem, vector <T> vec)
+template <class T> bool search(const T& elem, const vector <T>& vec)
 {
 	for (size_t i = 0; i < vec.size(); i++)
-		if (vec.at(i).equals(elem))
+		if (vec[i].equals(elem))
 			return true;
 	return false;
 }
 
-template <class T> bool add(T elem, vector <T> vec)
+template <class T> bool add(const T& elem, vector<T>& vec)
 {
-	if (!search <T>(elem, vec))
-	{
-		vec.push_back(elem);
-		return true;
-	}
-	else
+	if (search<T>(elem, vec))
 		return false;
+
+	vec.push_back(elem);
+	return true;
 }
 
-template <class T> string to_string_vec(vector <T> vec)
+template <class T> string to_string_vec(const vector<T>& vec)
 {
 	string elem;
 	for (size_t i = 0; i < vec.size(); ++i)
@@ -68,12 +66,7 @@ template <class T> string to_string_vec(vector <T> vec)
 ///////////////////////////////////////////////
 bool SemDomain::add_sort(Sort s)
 {
-	if (!search_sort(s))
-	{
-		this->v_sort.push_back(s);
-		return true;
-	}else
-		return false;
+	return add <Sort> (s, this->v_sort);
 }
 
 bool SemDomain::add_op(Operator op)
@@ -122,6 +115,7 @@ Sort  SemDomain::get_sort(string name)
 	for (vector<Sort>::size_type i = 0; i < this->v_sort.size(); i++)
 		if (this->v_sort.at(i).getName().compare(name) == 0)
 			return v_sort.at(i);
+	// the sort not exist and so create it.
 	Sort sort(name);
 	this->v_sort.push_back(sort);
 	return sort;
