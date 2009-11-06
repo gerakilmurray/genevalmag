@@ -41,10 +41,13 @@ public:
 	bool search_att  (const Attribute& attr) const;
 	bool search_symb (const Symbol& symb) const;
 
-	Sort get_sort (string name);
-	void load_atts(Symbol& symb) const;
+	Sort return_sort (string name);
+	void load_atts(Symbol& symb);
 
 	string to_string() const;
+
+	vector<Symbol>& getSymbols();
+
 };
 
 }

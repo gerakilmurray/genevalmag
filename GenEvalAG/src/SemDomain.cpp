@@ -110,7 +110,7 @@ bool SemDomain::search_symb(const Symbol& symb) const
 ///////////////////////////////////////////////
 // seach sort and return it. else create a sort and return.
 ///////////////////////////////////////////////
-Sort  SemDomain::get_sort(string name)
+Sort SemDomain::return_sort(string name)
 {
 	for (vector<Sort>::size_type i = 0; i < this->v_sort.size(); i++)
 		if (this->v_sort.at(i).getName().compare(name) == 0)
@@ -166,14 +166,19 @@ bool belong(Symbol s, string exprAtts)
 	}
 }
 
-void SemDomain::load_atts(Symbol& symb) const
+void SemDomain::load_atts(Symbol& symb)
 {
 	for (vector<Attribute>::size_type i = 0; i < this->v_attr.size(); ++i)
 	{
-		if (belong(symb, v_attr[i].getMember_symbol()))
+		if (belong(symb, this->v_attr[i].getMember_symbol()))
 		{
-			symb.addAttr(v_attr[i]);
+			symb.addAttr(this->v_attr[i]);
 		}
 	}
+}
+
+vector<Symbol>& SemDomain::getSymbols()
+{
+	return this->v_symb;
 }
 }

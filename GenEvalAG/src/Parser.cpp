@@ -34,9 +34,10 @@ Operator * new_op;
 ///////////////////////////////////////////////
 void addSort (char const* str, char const* end)
 {
-    string  s(str, end);
-	Sort sort(s);
-	sem_domain.add_sort(sort);
+    string  name(str, end);
+	Sort* sort = new Sort(name);
+	if (!sem_domain.add_sort(*sort))
+		free (sort);
 }
 
 ///////////////////////////////////////////////
@@ -50,16 +51,16 @@ void inicOp (char const* str, char const* end)
 void addOp (char const* str, char const* end)
 {
 	if (!sem_domain.add_op(*new_op))
-		// operation repeat.
 	{
-		free(new_op); // free memory of operation repeat.
+		// free memory of operation repeat.
+		free(new_op);
 	}
 }
 
 void saveMod (char const* str, char const* end)
 {
-	string  s(str, end);
-	new_op->setMod(s);
+	string mode(str, end);
+	new_op->setMod(mode);
 }
 
 void savePred (int const i)
@@ -69,20 +70,20 @@ void savePred (int const i)
 
 void saveName (char const* str, char const* end)
 {
-	string  s(str, end);
-	new_op->setName(s);
+	string name(str, end);
+	new_op->setName(name);
 }
 
 void saveDom (char const* str, char const* end)
 {
-	string  s(str, end);
-	new_op->add_domain(sem_domain.get_sort(s));
+	string dom(str, end);
+	new_op->add_domain(sem_domain.return_sort(dom));
 }
 
 void saveImg (char const* str, char const* end)
 {
-	string  s(str, end);
-	new_op->setImage(sem_domain.get_sort(s));
+	string  img(str, end);
+	new_op->setImage(sem_domain.return_sort(img));
 }
 
 ///////////////////////////////////////////////
@@ -138,16 +139,16 @@ void saveDeclAtts (char const* str, char const* end)
 {
 	for (vector<string>::size_type i = 0; i < new_atts->names.size(); i++)
 	{
-		Attribute * att = new Attribute(
+		Attribute * attr = new Attribute(
 								new_atts->names[i],
 								new_atts->sort_type,
 								new_atts->mod_type,
 								new_atts->member_symbol
 							 );
-		if (!sem_domain.add_att(*att))
+		if (!sem_domain.add_att(*attr))
 		{
 			// Attribute repeat.
-			free(att); // free memory of attribute repeat.
+			free(attr); // free memory of attribute repeat.
 		}
 	}
 	// Free space memory and assign NULL at pointer.
@@ -176,18 +177,28 @@ void saveNonTerminal(char const* str, char const* end)
 {
 	// PELIGRO DE REFERENCIA COLGADA!! POR VARIABLE LOCAL PASADA COMO REFERENCIA.
 	string name(str, end);
-	Symbol symb(name, k_nonTerminal);
-	if (sem_domain.add_symb(symb))
-		sem_domain.load_atts(symb);
+	Symbol* symb = new Symbol(name, kNonTerminal);
+
+	if (sem_domain.add_symb(*symb))
+	{
+//		sem_domain.load_atts(*symb);
+		sem_domain.load_atts(sem_domain.getSymbols()[sem_domain.getSymbols().size()-1]);
+	}
+	else
+	{
+		free (symb);
+	}
 }
 
 void saveTerminal(char const* str, char const* end)
 {
 	string name(str, end);
-	Symbol symb(name, k_terminal);
-	sem_domain.add_symb(symb);
+	Symbol* symb = new Symbol(name, kTerminal);
+	if (!sem_domain.add_symb(*symb))
+	{
+		free (symb);
+	}
 }
-/************add_atts(E);****************/
 
 ///////////////////////////////////////////////
 // Skip parser
@@ -203,7 +214,6 @@ struct skip_parser: public grammar<skip_parser>
                     |   "//" >> *(anychar_p - '\n') >> '\n'
                     |   "/*" >> *(anychar_p - "*/") >> "*/"
                     ;
-
 		}
 		rule<ScannerT> skip;
 		rule<ScannerT> const& start() const { return skip; }
@@ -220,7 +230,6 @@ struct att_grammar: public grammar<att_grammar>
 	{
 		definition(att_grammar const &self)
 		{
-
 			r_ident = lexeme_d[(alpha_p | '_') >> *(alnum_p | '_' )] - r_reserved_word;
 
 			r_reserved_word = strlit<>("compute")|strlit<>("COMPUTE")|

@@ -89,6 +89,7 @@ void Operator::setId(int o_id)
 }
 
 void Operator::setImage(Sort o_image)
+// CONVENDRIA TOMAR REFERENCIA EN ESTE PUNTO
 {
     this->o_image = o_image;
 }
@@ -146,9 +147,9 @@ string Operator::to_string() const
 // add a sort in the domain of a function
 ///////////////////////////////////////////////
 void Operator::add_domain(Sort s)
+// CONVENDRIA TOMAR REFERENCIA EN ESTE PUNTO
 {
 	this->o_domain.push_back(s);
-
 }
 
 ///////////////////////////////////////////////

@@ -6,6 +6,8 @@
  *  \author    Picco, Gonzalo M. 
  */
 
+#include <iostream>
+
 #include "Symbol.h"
 
 namespace genevalmag {
@@ -49,20 +51,37 @@ bool Symbol::equals(Symbol symb) const
 	return this->sym_name.compare(symb.getName()) == 0;
 }
 
+vector<Attribute> Symbol::getAttrs() const
+{
+	return this->attrs;
+}
+
+
 string Symbol::to_string() const
 {
 	string symb("symbol ");
 	symb.append(this->getName());
 	switch (this->sym_type)
 	{
-		case k_nonTerminal:
+		case kNonTerminal:
 			symb.append(" NonTerminal");
+
+			symb.append("\n\t\tAttributes: ");
+			for (vector<Attribute>::size_type i = 0; i < this->attrs.size(); i++)
+			{
+				symb.append(this->attrs[i].getName());
+				if (i < this->attrs.size() - 1)
+					symb.append(",");
+			}
+
 			break;
-		case k_terminal:
+		case kTerminal:
 			symb.append(" Terminal");
 			break;
 	}
 	symb.append(";");
+
+
 	return symb;
 }
 }

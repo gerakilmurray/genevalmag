@@ -19,8 +19,8 @@ namespace genevalmag {
 // Symbol's type.
 enum SymbType
 {
-	k_terminal,
-	k_nonTerminal
+	kTerminal,
+	kNonTerminal
 };
 
 class Symbol {
@@ -39,6 +39,7 @@ class Symbol {
 		void setName(string name);
 	    bool equals(Symbol symb) const;
 	    string to_string() const;
+	    vector<Attribute> getAttrs() const;
 };
 }
 
