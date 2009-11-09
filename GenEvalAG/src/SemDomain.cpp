@@ -85,6 +85,10 @@ bool SemDomain::add_symb(Symbol& symb)
 		load_attrs(this->v_symb[this->v_symb.size()-1]);
 	return not_repeat;
 }
+bool SemDomain::add_rule(const Rule& rule)
+{
+	return add <Rule> (rule, this->v_rule);
+}
 
 ///////////////////////////////////////////////
 // Search's Operations
@@ -107,6 +111,10 @@ bool SemDomain::search_att(const Attribute& attr) const
 bool SemDomain::search_symb(const Symbol& symb) const
 {
 	return search <Symbol> (symb, this->v_symb);
+}
+bool SemDomain::search_rule(const Rule& rule) const
+{
+	return search <Rule> (rule, this->v_rule);
 }
 
 ///////////////////////////////////////////////
@@ -136,6 +144,8 @@ string SemDomain::to_string() const
 	semdomain.append(to_string_vec<Attribute>(this->v_attr));
 	semdomain.append("\nsymbols\n");
 	semdomain.append(to_string_vec<Symbol>(this->v_symb));
+	semdomain.append("\nrules\n");
+	semdomain.append(to_string_vec<Rule>(this->v_rule));
 	semdomain.append("\n");
 	return semdomain;
 }
@@ -184,6 +194,18 @@ void SemDomain::load_attrs(Symbol& symb)
 			symb.addAttr(this->v_attr[i]);
 		}
 	}
+}
+
+Symbol* SemDomain::getSymbol(string name_symbol)
+{
+	for (vector<Symbol>::size_type i = 0; i < this->v_symb.size(); ++i)
+	{
+		if (v_symb[i].getName().compare(name_symbol) == 0)
+		{
+			return &(v_symb[i]);
+		}
+	}
+	return NULL;
 }
 
 }

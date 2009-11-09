@@ -23,14 +23,15 @@ class Rule {
 
 	public:
 		Rule();
-		Rule(const Symbol lf, const vector<Symbol> rs);
 		virtual ~Rule();
-		void addSymbol(const Symbol s);
-		void removeSymbol(const int index);
-		Symbol getLeft_symbol();
-		vector <Symbol> getRight_side();
-		void setLeft_symbol(Symbol left_symbol);
-		void setRight_side(const vector <Symbol> right_side);
+
+		void setLeft_symbol(const Symbol symb);
+		void addRight_symbol(const Symbol symb);
+
+		Symbol getLeft_symbol() const;
+		vector<Symbol> getRight_side()const;
+		bool equals(Rule rule) const;
+		string to_string() const;
 };
 
 }

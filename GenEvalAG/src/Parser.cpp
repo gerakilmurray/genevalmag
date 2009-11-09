@@ -159,15 +159,49 @@ void saveDeclAtts (char const* str, char const* end)
 ///////////////////////////////////////////////
 // Operation for rules
 ///////////////////////////////////////////////
+Rule * current_rule;
+
+
 void save_rule(char const* str, char const* end)
 {
+	if (!sem_domain.add_rule(*current_rule))
+	{
+		// free memory of rule repeat.
+		free(current_rule);
+	}
+}
+void addLeftSideRule(char const* str, char const* end)
+{
+	string leftSide_symbol(str, end);
+	current_rule = new Rule();
+	Symbol* symb = sem_domain.getSymbol(leftSide_symbol);
+	if (symb != NULL)
+		current_rule->setLeft_symbol(*symb);
+	else
+		cout << "ERROR simbolo no existe";
+}
 
+void addRightSideRule(char const* str, char const* end)
+{
+	string rightSide_symbol(str, end);
+	Symbol* symb = sem_domain.getSymbol(rightSide_symbol);
+	if (symb != NULL)
+		current_rule->addRight_symbol(*symb);
+	else
+		cout << "ERROR simbolo no existe";
+}
+
+void abbreviated_rule(char const* str, char const* end)
+{
+	Symbol symb = current_rule->getLeft_symbol();
+	current_rule = new Rule();
+	current_rule->setLeft_symbol(symb);
 }
 
 void pepito(char const* str, char const* end)
 {
 //	string pepe(str, end);
-//    cout << pepe << endl;
+//	cout << pepe << endl;
 }
 ///////////////////////////////////////////////
 // Operation for symbol
@@ -175,17 +209,10 @@ void pepito(char const* str, char const* end)
 
 void saveNonTerminal(char const* str, char const* end)
 {
-	// PELIGRO DE REFERENCIA COLGADA!! POR VARIABLE LOCAL PASADA COMO REFERENCIA.
 	string name(str, end);
 	Symbol* symb = new Symbol(name, kNonTerminal);
-
 	if (!sem_domain.add_symb(*symb))
 	{
-//		sem_domain.load_attrs(*symb);
-//		sem_domain.load_attrs(sem_domain.getSymbols()[sem_domain.getSymbols().size()-1]);
-//	}
-//	else
-//	{
 		free (symb);
 	}
 }
@@ -284,10 +311,12 @@ struct att_grammar: public grammar<att_grammar>
 
 			r_rules		= strlit<>("rules") >> (+decl_rule);
 
-			decl_rule	= r_ident[&saveNonTerminal] >> strlit<>("::=") >>
-						  r_right_rule >> *('|'>> r_right_rule) >> ';';
+			decl_rule	= r_ident[&saveNonTerminal][&addLeftSideRule] >>
+						  strlit<>("::=") >> r_right_rule[&save_rule] >>
+						  *(strlit<>("|")[&abbreviated_rule] >> r_right_rule[&save_rule]) >> ';';
 
-			r_right_rule =  +(r_ident[&saveNonTerminal] | r_char[&saveTerminal]) >>
+			r_right_rule =  +( r_ident[&saveNonTerminal]
+			                 | r_char[&saveTerminal])[&addRightSideRule] >>
 						    !( strlit<>("compute") >>
 							   +(r_sem_expr[&pepito]) >>
 							   strlit<>("end")
