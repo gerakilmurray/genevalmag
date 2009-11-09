@@ -20,13 +20,13 @@ semantics domains
 
 //////// bloque de atributos /////////////////////
 attributes
-	valor : syn <int> of {E, T, F, id };
+	valor : syn <int> of all;
 	
-	lexema, lexx, termino, id  : syn <string> of all - {E, T                  };
-	lexx  : syn <string> of all - {alla,T}; // Borrar el ALL
-	type  : inh <char> of {E, T, F};
+	lexema, termino : syn <string> of all - {E, T                  };
+	lexx  : syn <string> of all - {T}; // Borrar el ALL
+	type  : inh <char> of {E, T};
 	
-	grade : <int> of {E, F};
+	grade : <int> of {E};
 	
 //////// bloque de reglas /////////////////////
 rules

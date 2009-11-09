@@ -44,7 +44,6 @@ template <class T> bool add(const T& elem, vector<T>& vec)
 {
 	if (search<T>(elem, vec))
 		return false;
-
 	vec.push_back(elem);
 	return true;
 }
@@ -79,9 +78,12 @@ bool SemDomain::add_att(const Attribute& attr)
 	return add <Attribute> (attr, this->v_attr);
 }
 
-bool SemDomain::add_symb(const Symbol& symb)
+bool SemDomain::add_symb(Symbol& symb)
 {
-	return add <Symbol> (symb, this->v_symb);
+	bool not_repeat = add <Symbol> (symb, this->v_symb);
+	if (not_repeat && (symb.getType() == kNonTerminal))
+		load_attrs(this->v_symb[this->v_symb.size()-1]);
+	return not_repeat;
 }
 
 ///////////////////////////////////////////////
@@ -148,11 +150,15 @@ bool belong(Symbol s, string exprAtts)
 	boost::char_separator<char> sep("{},-");
 	tokenizer tokens(exprAtts, sep);
 	tokenizer::iterator tok_iter = tokens.begin();
-	if ((*tok_iter).compare("all"))
+
+	if ((*tok_iter).compare("all") == 0)
 	{
 		for (++tok_iter;tok_iter != tokens.end(); ++tok_iter)
 		{
-			if (s.getName().compare(*tok_iter) == 0) return false;
+			if (s.getName().compare(*tok_iter) == 0)
+			{
+				return false;
+			}
 		}
 		return true;
 	}
@@ -160,13 +166,16 @@ bool belong(Symbol s, string exprAtts)
 	{
 		for (;tok_iter != tokens.end(); ++tok_iter)
 		{
-			if (s.getName().compare(*tok_iter) == 0) return true;
+			if (s.getName().compare(*tok_iter) == 0)
+			{
+				return true;
+			}
 		}
 		return false;
 	}
 }
 
-void SemDomain::load_atts(Symbol& symb)
+void SemDomain::load_attrs(Symbol& symb)
 {
 	for (vector<Attribute>::size_type i = 0; i < this->v_attr.size(); ++i)
 	{
@@ -177,8 +186,4 @@ void SemDomain::load_atts(Symbol& symb)
 	}
 }
 
-vector<Symbol>& SemDomain::getSymbols()
-{
-	return this->v_symb;
-}
 }

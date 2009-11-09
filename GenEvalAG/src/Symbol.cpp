@@ -46,6 +46,16 @@ void Symbol::setName(string name)
 	this->sym_name = name;
 }
 
+SymbType Symbol::getType() const
+{
+	return this->sym_type;
+}
+
+void Symbol::setType(SymbType type)
+{
+	this->sym_type = type;
+}
+
 bool Symbol::equals(Symbol symb) const
 {
 	return this->sym_name.compare(symb.getName()) == 0;
@@ -64,9 +74,9 @@ string Symbol::to_string() const
 	switch (this->sym_type)
 	{
 		case kNonTerminal:
-			symb.append(" NonTerminal");
+			symb.append("\tNonTerminal");
 
-			symb.append("\n\t\tAttributes: ");
+			symb.append("\tAttributes: ");
 			for (vector<Attribute>::size_type i = 0; i < this->attrs.size(); i++)
 			{
 				symb.append(this->attrs[i].getName());
@@ -76,7 +86,7 @@ string Symbol::to_string() const
 
 			break;
 		case kTerminal:
-			symb.append(" Terminal");
+			symb.append("\tTerminal");
 			break;
 	}
 	symb.append(";");

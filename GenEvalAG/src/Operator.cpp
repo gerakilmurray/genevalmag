@@ -123,7 +123,7 @@ void Operator::setPred(int o_pred)
 string Operator::to_string() const
 {
 	string op;
-	op.append("op ");
+	op.append("op\t");
 	op.append(this->getMod());
 	op.append(" (");
 	std::stringstream pred;

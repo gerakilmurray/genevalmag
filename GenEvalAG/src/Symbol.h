@@ -37,6 +37,8 @@ class Symbol {
 		void removeAttr(const int index);
 		string getName() const;
 		void setName(string name);
+		SymbType getType() const;
+		void setType(SymbType type);
 	    bool equals(Symbol symb) const;
 	    string to_string() const;
 	    vector<Attribute> getAttrs() const;

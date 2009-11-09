@@ -69,7 +69,7 @@ string Attribute::to_string() const
 {
 	string att;
 	att.append(this->getName());
-	att.append(": ");
+	att.append("\t: ");
 	if (this->getMod_type() == kSyntetize)
 		att.append("syn");
 	else

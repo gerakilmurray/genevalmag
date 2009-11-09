@@ -62,7 +62,7 @@ bool Sort::equals(Sort s) const
 ///////////////////////////////////////////////
 string Sort::to_string() const
 {
-	string sort("sort ");
+	string sort("sort\t");
 	sort.append(this->getName());
 	sort.append(";");
 	return sort;

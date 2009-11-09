@@ -27,6 +27,8 @@ private:
 	vector<Symbol> v_symb;
 	//vector<rule> v_rule
 
+	void load_attrs(Symbol& symb);
+
 public:
 	SemDomain();
 	virtual ~SemDomain();
@@ -34,7 +36,7 @@ public:
 	bool add_sort (const Sort& s);
 	bool add_op   (const Operator& op);
 	bool add_att  (const Attribute& att);
-	bool add_symb (const Symbol& symb);
+	bool add_symb (Symbol& symb);
 
 	bool search_sort (const Sort& sort) const;
 	bool search_op   (const Operator& op) const;
@@ -42,11 +44,8 @@ public:
 	bool search_symb (const Symbol& symb) const;
 
 	Sort return_sort (string name);
-	void load_atts(Symbol& symb);
 
 	string to_string() const;
-
-	vector<Symbol>& getSymbols();
 
 };
 

@@ -179,13 +179,13 @@ void saveNonTerminal(char const* str, char const* end)
 	string name(str, end);
 	Symbol* symb = new Symbol(name, kNonTerminal);
 
-	if (sem_domain.add_symb(*symb))
+	if (!sem_domain.add_symb(*symb))
 	{
-//		sem_domain.load_atts(*symb);
-		sem_domain.load_atts(sem_domain.getSymbols()[sem_domain.getSymbols().size()-1]);
-	}
-	else
-	{
+//		sem_domain.load_attrs(*symb);
+//		sem_domain.load_attrs(sem_domain.getSymbols()[sem_domain.getSymbols().size()-1]);
+//	}
+//	else
+//	{
 		free (symb);
 	}
 }
