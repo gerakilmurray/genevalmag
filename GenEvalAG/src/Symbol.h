@@ -17,31 +17,33 @@
 namespace genevalmag {
 
 // Symbol's type.
-enum SymbType
+enum symb_type
 {
-	kTerminal,
-	kNonTerminal
+	k_terminal,
+	k_non_terminal
 };
 
 class Symbol {
 	private:
 		string sym_name;
-		SymbType sym_type;
+		symb_type sym_type;
 		vector<Attribute>  attrs;
 
 	public:
 		Symbol();
-		Symbol(string name, SymbType type);
+		Symbol(string name, symb_type type);
 		virtual ~Symbol();
-		void addAttr(const Attribute attr);
-		void removeAttr(const int index);
-		string getName() const;
-		void setName(string name);
-		SymbType getType() const;
-		void setType(SymbType type);
+		void add_attr(const Attribute attr);
+		void remove_attr(const int index);
+		string get_name() const;
+		void set_name(string name);
+		symb_type get_type() const;
+		void set_type(symb_type type);
 	    bool equals(Symbol symb) const;
 	    string to_string() const;
-	    vector<Attribute> getAttrs() const;
+	    vector<Attribute> get_attrs() const;
+	    bool is_non_terminal() const;
+
 };
 }
 

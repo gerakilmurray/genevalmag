@@ -1,8 +1,9 @@
-/*
- * Rule.h
- *
- *  Created on: 05/11/2009
- *      Author: gera
+/**
+ * \file Rule.h
+ * 	\brief EXPLICAR QUE ES ESTO
+ *  \date 05/11/2009
+ *  \author    Kilmurray, Gerardo Luis.
+ *  \author    Picco, Gonzalo M.
  */
 
 #ifndef RULE_H_
@@ -25,11 +26,11 @@ class Rule {
 		Rule();
 		virtual ~Rule();
 
-		void setLeft_symbol(const Symbol symb);
-		void addRight_symbol(const Symbol symb);
+		void set_left_symbol(const Symbol symb);
+		void add_right_symbol(const Symbol symb);
 
-		Symbol getLeft_symbol() const;
-		vector<Symbol> getRight_side()const;
+		Symbol get_left_symbol() const;
+		vector<Symbol> get_right_side()const;
 		bool equals(Rule rule) const;
 		string to_string() const;
 };

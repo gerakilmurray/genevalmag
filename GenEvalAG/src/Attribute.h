@@ -13,36 +13,37 @@
 
 namespace genevalmag{
 
-enum TipeAttr
+enum type_attr
 {
-	kInherit,
-	kSyntetize
+	k_inherit,
+	k_syntetize
 };
 
 class Attribute {
 private:
 	string a_name;
 	string a_type;
-	TipeAttr a_mod_type;
+	type_attr a_mod_type;
 	string a_member_symbol;
 
 public:
 	Attribute();
-	Attribute(string name, string type, TipeAttr mod, string merberships);
+	Attribute(string name, string type, type_attr mod, string merberships);
 	virtual ~Attribute();
 
-	string getName() const;
-	string getType() const;
-	TipeAttr getMod_type() const;
-	string getMember_symbol() const;
+	string get_name() const;
+	string get_type() const;
+	type_attr get_mod_type() const;
+	string get_member_symbol() const;
 
-	void setName(string a_name);
-	void setType(string a_type);
-	void setMod_type(TipeAttr a_mod_type);
-	void setMember_symbol(string a_member_symbol);
+	void set_name(string a_name);
+	void set_type(string a_type);
+	void set_mod_type(type_attr a_mod_type);
+	void set_member_symbol(string a_member_symbol);
 
 	string to_string ()const;
 	bool equals(Attribute attr) const;
+	bool is_syntetize() const;
 };
 }
 #endif /* ATTRIBUTE_H_ */

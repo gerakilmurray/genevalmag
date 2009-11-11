@@ -1,8 +1,9 @@
-/*
- * Equation.h
- *
- *  Created on: 05/11/2009
- *      Author: gera
+/**
+ * \file Equation.h
+ * 	\brief EXPLICAR QUE ES ESTO
+ *  \date 05/11/2009
+ *  \author    Kilmurray, Gerardo Luis.
+ *  \author    Picco, Gonzalo M.
  */
 
 #ifndef EQUATION_H_
@@ -22,8 +23,8 @@ class Equation {
 	public:
 		Equation();
 		virtual ~Equation();
-		Symbol getLeftSide();
-		vector <Symbol> getRightSide();
+		Symbol get_left_side();
+		vector <Symbol> get_right_side();
 };
 
 }

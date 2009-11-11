@@ -13,71 +13,71 @@ namespace genevalmag {
 Attribute::Attribute() {
 	// TODO Auto-generated constructor stub
 }
-Attribute::Attribute(string name, string type, TipeAttr mod, string merberships)
+Attribute::Attribute(string name, string type, type_attr mod, string merberships)
 {
-	this->a_name = name;
-	this->a_type = type;
-	this->a_mod_type = mod;
-	this->a_member_symbol = merberships;
+	a_name = name;
+	a_type = type;
+	a_mod_type = mod;
+	a_member_symbol = merberships;
 }
 
 Attribute::~Attribute() {
 	// TODO Auto-generated destructor stub
 }
 
-string Attribute::getMember_symbol() const
+string Attribute::get_member_symbol() const
 {
     return a_member_symbol;
 }
 
-TipeAttr Attribute::getMod_type() const
+type_attr Attribute::get_mod_type() const
 {
     return a_mod_type;
 }
 
-string Attribute::getName() const
+string Attribute::get_name() const
 {
     return a_name;
 }
 
-string Attribute::getType() const
+string Attribute::get_type() const
 {
     return a_type;
 }
 
-void Attribute::setMember_symbol(string a_member_symbol)
+void Attribute::set_member_symbol(string a_member_symbol)
 {
-    this->a_member_symbol = a_member_symbol;
+    a_member_symbol = a_member_symbol;
 }
 
-void Attribute::setMod_type(TipeAttr a_mod_type)
+void Attribute::set_mod_type(type_attr a_mod_type)
 {
-    this->a_mod_type = a_mod_type;
+    a_mod_type = a_mod_type;
 }
 
-void Attribute::setName(string a_name)
+void Attribute::set_name(string a_name)
 {
-    this->a_name = a_name;
+    a_name = a_name;
 }
 
-void Attribute::setType(string a_type)
+void Attribute::set_type(string a_type)
 {
-    this->a_type = a_type;
+    a_type = a_type;
 }
 
 string Attribute::to_string() const
 {
 	string att;
-	att.append(this->getName());
+	att.append(get_name());
 	att.append("\t: ");
-	if (this->getMod_type() == kSyntetize)
+	if (is_syntetize())
 		att.append("syn");
 	else
 		att.append("inh");
 	att.append(" <");
-	att.append(this->getType());
+	att.append(get_type());
 	att.append("> of ");
-	att.append(this->getMember_symbol());
+	att.append(get_member_symbol());
 	return att;
 }
 
@@ -87,10 +87,14 @@ string Attribute::to_string() const
 bool Attribute::equals(Attribute attr) const
 // compare for name, mod_type and type.
 {
-	return	(this->a_name.compare(attr.getName())== 0) &&
-			(this->a_mod_type == attr.getMod_type()) &&
-			(this->a_type.compare(attr.getType()) == 0) &&
-			(this->a_member_symbol.compare(attr.getMember_symbol()) == 0);
+	return	(a_name.compare(attr.get_name())== 0) &&
+			(a_mod_type == attr.get_mod_type()) &&
+			(a_type.compare(attr.get_type()) == 0) &&
+			(a_member_symbol.compare(attr.get_member_symbol()) == 0);
 }
 
+bool Attribute::is_syntetize() const
+{
+	return a_mod_type == k_syntetize;
+}
 }

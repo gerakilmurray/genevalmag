@@ -1,13 +1,12 @@
 /**
   *  \file Parser.cpp
-  *      \brief Example of Spirit Librarie.
+  *      \brief Parsing module.
   *  \date 13/09/2009
   *  \author    Kilmurray, Gerardo Luis.
   *  \author    Picco, Gonzalo Martín.
   */
 
 #include <boost/spirit/include/classic_core.hpp>
-//#include <boost/spirit/include/classic_push_back_actor.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #include <iostream>
 #include <vector>
@@ -32,7 +31,7 @@ Operator * new_op;
 ///////////////////////////////////////////////
 // Operation for Sort
 ///////////////////////////////////////////////
-void addSort (char const* str, char const* end)
+void add_sort (char const* str, char const* end)
 {
     string  name(str, end);
 	Sort* sort = new Sort(name);
@@ -43,12 +42,12 @@ void addSort (char const* str, char const* end)
 ///////////////////////////////////////////////
 // Operation for Operation
 ///////////////////////////////////////////////
-void inicOp (char const* str, char const* end)
+void inic_op (char const* str, char const* end)
 {
 	new_op = new Operator();
 }
 
-void addOp (char const* str, char const* end)
+void add_op (char const* str, char const* end)
 {
 	if (!sem_domain.add_op(*new_op))
 	{
@@ -57,33 +56,33 @@ void addOp (char const* str, char const* end)
 	}
 }
 
-void saveMod (char const* str, char const* end)
+void save_mod (char const* str, char const* end)
 {
 	string mode(str, end);
-	new_op->setMod(mode);
+	new_op->set_mod(mode);
 }
 
-void savePred (int const i)
+void save_pred (int const i)
 {
-	new_op->setPred(i);
+	new_op->set_pred(i);
 }
 
-void saveName (char const* str, char const* end)
+void save_name (char const* str, char const* end)
 {
 	string name(str, end);
-	new_op->setName(name);
+	new_op->set_name(name);
 }
 
-void saveDom (char const* str, char const* end)
+void save_dom (char const* str, char const* end)
 {
 	string dom(str, end);
 	new_op->add_domain(sem_domain.return_sort(dom));
 }
 
-void saveImg (char const* str, char const* end)
+void save_img (char const* str, char const* end)
 {
 	string  img(str, end);
-	new_op->setImage(sem_domain.return_sort(img));
+	new_op->set_image(sem_domain.return_sort(img));
 }
 
 ///////////////////////////////////////////////
@@ -93,57 +92,57 @@ struct decl_attr
 {
 	vector<string> names;
 	string sort_type;
-	TipeAttr mod_type;
+	type_attr mod_type;
 	string member_symbol;
-} * new_atts;
+} * new_attrs;
 
-void addAttrib (char const* str, char const* end)
+void add_attr (char const* str, char const* end)
 {
 	string name(str, end);
-	if (new_atts == NULL)
+	if (new_attrs == NULL)
 	{
 		// New declaration. Must be allocate new memory.
-		new_atts = new decl_attr;
+		new_attrs = new decl_attr;
 	}
 	// The declaration has more of one attribute
 
 	// Save name of new attribute
-	new_atts->names.push_back(name);
-	if (new_atts->names.size() == 1){
-		new_atts->mod_type = kSyntetize; // Default value
-		new_atts->member_symbol = "\0";
+	new_attrs->names.push_back(name);
+	if (new_attrs->names.size() == 1){
+		new_attrs->mod_type = k_syntetize; // Default value
+		new_attrs->member_symbol = "\0";
 	}
 }
 
-void saveSortAtts (char const* str, char const* end)
+void save_sort_attr (char const* str, char const* end)
 {
 	string sort(str, end);
-	new_atts->sort_type = sort;
+	new_attrs->sort_type = sort;
 }
 
-void saveTypeAtts (char const* str, char const* end)
+void save_type_attr (char const* str, char const* end)
 {
 	string mod_type(str, end);
 	if (mod_type.compare("inh") == 0)
-		new_atts->mod_type = kInherit;
+		new_attrs->mod_type = k_inherit;
 }
 
-void saveMemberList (char const* str, char const* end)
+void save_member_list (char const* str, char const* end)
 {
 	string members(str, end);
 	boost::erase_all(members, " ");
-	new_atts->member_symbol = members;
+	new_attrs->member_symbol = members;
 }
 
-void saveDeclAtts (char const* str, char const* end)
+void save_decl_attrs (char const* str, char const* end)
 {
-	for (vector<string>::size_type i = 0; i < new_atts->names.size(); i++)
+	for (vector<string>::size_type i = 0; i < new_attrs->names.size(); i++)
 	{
 		Attribute * attr = new Attribute(
-								new_atts->names[i],
-								new_atts->sort_type,
-								new_atts->mod_type,
-								new_atts->member_symbol
+								new_attrs->names[i],
+								new_attrs->sort_type,
+								new_attrs->mod_type,
+								new_attrs->member_symbol
 							 );
 		if (!sem_domain.add_att(*attr))
 		{
@@ -152,8 +151,8 @@ void saveDeclAtts (char const* str, char const* end)
 		}
 	}
 	// Free space memory and assign NULL at pointer.
-	free(new_atts);
-	new_atts = NULL;
+	free(new_attrs);
+	new_attrs = NULL;
 }
 
 ///////////////////////////////////////////////
@@ -170,32 +169,32 @@ void save_rule(char const* str, char const* end)
 		free(current_rule);
 	}
 }
-void addLeftSideRule(char const* str, char const* end)
+void add_left_side_rule(char const* str, char const* end)
 {
-	string leftSide_symbol(str, end);
+	string left_side_symbol(str, end);
 	current_rule = new Rule();
-	Symbol* symb = sem_domain.getSymbol(leftSide_symbol);
+	Symbol* symb = sem_domain.get_symbol(left_side_symbol);
 	if (symb != NULL)
-		current_rule->setLeft_symbol(*symb);
+		current_rule->set_left_symbol(*symb);
 	else
 		cout << "ERROR simbolo no existe";
 }
 
-void addRightSideRule(char const* str, char const* end)
+void add_right_side_rule(char const* str, char const* end)
 {
-	string rightSide_symbol(str, end);
-	Symbol* symb = sem_domain.getSymbol(rightSide_symbol);
+	string right_side_symbol(str, end);
+	Symbol* symb = sem_domain.get_symbol(right_side_symbol);
 	if (symb != NULL)
-		current_rule->addRight_symbol(*symb);
+		current_rule->add_right_symbol(*symb);
 	else
 		cout << "ERROR simbolo no existe";
 }
 
 void abbreviated_rule(char const* str, char const* end)
 {
-	Symbol symb = current_rule->getLeft_symbol();
+	Symbol symb = current_rule->get_left_symbol();
 	current_rule = new Rule();
-	current_rule->setLeft_symbol(symb);
+	current_rule->set_left_symbol(symb);
 }
 
 void pepito(char const* str, char const* end)
@@ -207,20 +206,21 @@ void pepito(char const* str, char const* end)
 // Operation for symbol
 ///////////////////////////////////////////////
 
-void saveNonTerminal(char const* str, char const* end)
+void save_non_terminal(char const* str, char const* end)
 {
 	string name(str, end);
-	Symbol* symb = new Symbol(name, kNonTerminal);
+	Symbol* symb = new Symbol(name, k_non_terminal);
 	if (!sem_domain.add_symb(*symb))
 	{
 		free (symb);
 	}
 }
 
-void saveTerminal(char const* str, char const* end)
+void save_terminal(char const* str, char const* end)
 {
 	string name(str, end);
-	Symbol* symb = new Symbol(name, kTerminal);
+	// The string is 'char'
+	Symbol* symb = new Symbol(name, k_terminal);
 	if (!sem_domain.add_symb(*symb))
 	{
 		free (symb);
@@ -274,18 +274,18 @@ struct att_grammar: public grammar<att_grammar>
 
 			r_semantics = strlit<>("semantics domains")>> +bloq_sem;
 
-			bloq_sem    = decl_op[&addOp] | decl_sort;
+			bloq_sem    = decl_op[&add_op] | decl_sort;
 
-			decl_sort   = strlit<>("sort ") >> r_ident[&addSort] >> *(',' >> r_ident[&addSort]) >> ';';
+			decl_sort   = strlit<>("sort ") >> r_ident[&add_sort] >> *(',' >> r_ident[&add_sort]) >> ';';
 
-			decl_op     = strlit<>("op ")[&inicOp] >>
-						  !(mod_op[&saveMod]) >>
-						  !('(' >> int_p[&savePred] >> ')') >>
-						  r_oper[&saveName] >> ':' >>
+			decl_op     = strlit<>("op ")[&inic_op] >>
+						  !(mod_op[&save_mod]) >>
+						  !('(' >> int_p[&save_pred] >> ')') >>
+						  r_oper[&save_name] >> ':' >>
 						  dom_op >> strlit<>("->") >>
-						  r_ident[&saveImg]  >> ';';
+						  r_ident[&save_img]  >> ';';
 
-			dom_op      = r_ident[&saveDom] >> *(',' >> r_ident[&saveDom]);
+			dom_op      = r_ident[&save_dom] >> *(',' >> r_ident[&save_dom]);
 
 			mod_op      = strlit<>("infix") | strlit<>("prefix") | strlit<>("sufix");
 
@@ -293,13 +293,13 @@ struct att_grammar: public grammar<att_grammar>
 			// Grammar's Attribute
 			////////////////////////////////////////////////////////////
 
-			r_attributes = strlit<>("attributes")>> +decl_att[&saveDeclAtts];
+			r_attributes = strlit<>("attributes")>> +decl_att[&save_decl_attrs];
 
-			decl_att     = r_ident[&addAttrib] >> *(',' >> r_ident[&addAttrib]) >>
-					       ':' >> !(r_type_att[&saveTypeAtts]) >> '<' >> r_ident[&saveSortAtts] >> '>' >>
+			decl_att     = r_ident[&add_attr] >> *(',' >> r_ident[&add_attr]) >>
+					       ':' >> !(r_type_att[&save_type_attr]) >> '<' >> r_ident[&save_sort_attr] >> '>' >>
 					       strlit<>("of") >>
 					       (conj_simb |
-					       (strlit<>("all") >> !('-' >> conj_simb)))[&saveMemberList] >> ';';
+					       (strlit<>("all") >> !('-' >> conj_simb)))[&save_member_list] >> ';';
 
 			conj_simb 	 = '{' >> r_ident >> *(',' >> r_ident) >> '}';
 
@@ -311,12 +311,12 @@ struct att_grammar: public grammar<att_grammar>
 
 			r_rules		= strlit<>("rules") >> (+decl_rule);
 
-			decl_rule	= r_ident[&saveNonTerminal][&addLeftSideRule] >>
+			decl_rule	= r_ident[&save_non_terminal][&add_left_side_rule] >>
 						  strlit<>("::=") >> r_right_rule[&save_rule] >>
 						  *(strlit<>("|")[&abbreviated_rule] >> r_right_rule[&save_rule]) >> ';';
 
-			r_right_rule =  +( r_ident[&saveNonTerminal]
-			                 | r_char[&saveTerminal])[&addRightSideRule] >>
+			r_right_rule =  +( r_ident[&save_non_terminal]
+			                 | r_char[&save_terminal])[&add_right_side_rule] >>
 						    !( strlit<>("compute") >>
 							   +(r_sem_expr[&pepito]) >>
 							   strlit<>("end")
@@ -340,7 +340,7 @@ struct att_grammar: public grammar<att_grammar>
 		rule<ScannerT> r_ident, r_oper, r_id_op, r_char,r_reserved_word;
 
 		rule<ScannerT> r_semantics, bloq_sem, decl_sort, decl_op, dom_op,mod_op;
-		rule<ScannerT> r_attributes, decl_att, r_type_att,conj_simb;
+		rule<ScannerT> r_attributes, decl_att, r_type_att, conj_simb;
 		rule<ScannerT> r_rules, decl_rule, r_sem_expr, left_side, right_side, r_att_sem,r_right_rule;
 
 		rule<ScannerT> r_att_grammar;
@@ -355,7 +355,7 @@ bool parse_grammar(char const* str)
 {
 	att_grammar gramatica;
 	skip_parser skip_p;
-	return parse(str,gramatica,skip_p).full;
+	return parse (str,gramatica,skip_p).full;
 }
 
 ///////////////////////////////////////////////
@@ -363,21 +363,21 @@ bool parse_grammar(char const* str)
 ///////////////////////////////////////////////
 int main()
 {
-	FILE * pFile;
+	FILE * p_file;
 	char buffer[MAX_INPUT_LINE];
 	string texto;
 
-	pFile = fopen ("./src/grammar.txt" , "r");
-	if (pFile == NULL)
+	p_file = fopen ("./src/grammar.txt" , "r");
+	if (p_file == NULL)
 		perror ("Error opening file");
 	else
 	{
-		while ( !feof (pFile) )
+		while ( !feof (p_file) )
 		{
-	          fgets (buffer , 128 , pFile);
+	          fgets (buffer , 128 , p_file);
 	          texto += buffer;
 	    }
-		fclose (pFile);
+		fclose (p_file);
 	}
 
     if (parse_grammar(texto.c_str()))

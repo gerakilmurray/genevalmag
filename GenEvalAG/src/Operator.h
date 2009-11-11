@@ -16,7 +16,7 @@
 namespace genevalmag {
 
 // operation's mode.
-enum ModOp
+enum mod_op
 {
 	k_infix,
 	k_suffix,
@@ -29,7 +29,7 @@ private:
 	string 			o_name;
 	vector <Sort>	o_domain;
 	Sort			o_image;
-	ModOp			o_mod;
+	mod_op			o_mod;
 	int				o_pred;
 	int				o_id;
 
@@ -38,20 +38,20 @@ public:
 	Operator(string name, vector <Sort> * v, Sort * img, int id);
 	virtual ~Operator();
 
-	vector<Sort> getDomain() const;
-    int getId() const;
-    Sort getImage() const;
-    string getMod() const;
-    string getName() const;
-    int getPred() const;
-    void add_domain(Sort s);
+	vector<Sort> get_domain() const;
+    int get_id() const;
+    Sort get_image() const;
+    string get_mod() const;
+    string get_name() const;
+    int get_pred() const;
+    void add_domain(Sort sort);
 
-    void setDomain(vector<Sort> o_domain);
-    void setId(int o_id);
-    void setImage(Sort o_image);
-    void setMod(string o_mod);
-    void setName(string o_name);
-    void setPred(int o_pred);
+    void set_domain(vector<Sort> domain);
+    void set_id(int id);
+    void set_image(Sort image);
+    void set_mod(string mod);
+    void set_name(string name);
+    void set_pred(int pred);
     string to_string() const;
     bool equals(Operator op) const;
 

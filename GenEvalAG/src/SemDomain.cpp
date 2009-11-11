@@ -65,29 +65,30 @@ template <class T> string to_string_vec(const vector<T>& vec)
 ///////////////////////////////////////////////
 bool SemDomain::add_sort(const Sort& s)
 {
-	return add <Sort> (s, this->v_sort);
+	return add <Sort> (s, v_sort);
 }
 
 bool SemDomain::add_op(const Operator& op)
 {
-	return add <Operator> (op, this->v_oper);
+	return add <Operator> (op, v_oper);
 }
 
 bool SemDomain::add_att(const Attribute& attr)
 {
-	return add <Attribute> (attr, this->v_attr);
+	return add <Attribute> (attr, v_attr);
 }
 
 bool SemDomain::add_symb(Symbol& symb)
 {
-	bool not_repeat = add <Symbol> (symb, this->v_symb);
-	if (not_repeat && (symb.getType() == kNonTerminal))
-		load_attrs(this->v_symb[this->v_symb.size()-1]);
+	bool not_repeat = add <Symbol> (symb, v_symb);
+	if (not_repeat && symb.is_non_terminal())
+		load_attrs(v_symb[v_symb.size()-1]);
+//		load_attrs(symb);
 	return not_repeat;
 }
 bool SemDomain::add_rule(const Rule& rule)
 {
-	return add <Rule> (rule, this->v_rule);
+	return add <Rule> (rule, v_rule);
 }
 
 ///////////////////////////////////////////////
@@ -95,26 +96,26 @@ bool SemDomain::add_rule(const Rule& rule)
 ///////////////////////////////////////////////
 bool SemDomain::search_sort(const Sort& sort) const
 {
-	return search <Sort> (sort, this->v_sort);
+	return search <Sort> (sort, v_sort);
 }
 
 bool SemDomain::search_op(const Operator& op) const
 {
-	return search <Operator> (op, this->v_oper);
+	return search <Operator> (op, v_oper);
 }
 
 bool SemDomain::search_att(const Attribute& attr) const
 {
-	return search <Attribute> (attr, this->v_attr);
+	return search <Attribute> (attr, v_attr);
 }
 
 bool SemDomain::search_symb(const Symbol& symb) const
 {
-	return search <Symbol> (symb, this->v_symb);
+	return search <Symbol> (symb, v_symb);
 }
 bool SemDomain::search_rule(const Rule& rule) const
 {
-	return search <Rule> (rule, this->v_rule);
+	return search <Rule> (rule, v_rule);
 }
 
 ///////////////////////////////////////////////
@@ -122,12 +123,12 @@ bool SemDomain::search_rule(const Rule& rule) const
 ///////////////////////////////////////////////
 Sort SemDomain::return_sort(string name)
 {
-	for (vector<Sort>::size_type i = 0; i < this->v_sort.size(); i++)
-		if (this->v_sort.at(i).getName().compare(name) == 0)
+	for (vector<Sort>::size_type i = 0; i < v_sort.size(); i++)
+		if (v_sort.at(i).get_name().compare(name) == 0)
 			return v_sort.at(i);
 	// the sort not exist and so create it.
 	Sort sort(name);
-	this->v_sort.push_back(sort);
+	v_sort.push_back(sort);
 	return sort;
 }
 
@@ -137,15 +138,15 @@ Sort SemDomain::return_sort(string name)
 string SemDomain::to_string() const
 {
 	string semdomain("\nsemantics domains\n");
-	semdomain.append(to_string_vec<Sort>(this->v_sort));
+	semdomain.append(to_string_vec<Sort>(v_sort));
 	semdomain.append("\n");
-	semdomain.append(to_string_vec<Operator>(this->v_oper));
+	semdomain.append(to_string_vec<Operator>(v_oper));
 	semdomain.append("\nattributes\n");
-	semdomain.append(to_string_vec<Attribute>(this->v_attr));
+	semdomain.append(to_string_vec<Attribute>(v_attr));
 	semdomain.append("\nsymbols\n");
-	semdomain.append(to_string_vec<Symbol>(this->v_symb));
+	semdomain.append(to_string_vec<Symbol>(v_symb));
 	semdomain.append("\nrules\n");
-	semdomain.append(to_string_vec<Rule>(this->v_rule));
+	semdomain.append(to_string_vec<Rule>(v_rule));
 	semdomain.append("\n");
 	return semdomain;
 }
@@ -165,7 +166,7 @@ bool belong(Symbol s, string exprAtts)
 	{
 		for (++tok_iter;tok_iter != tokens.end(); ++tok_iter)
 		{
-			if (s.getName().compare(*tok_iter) == 0)
+			if (s.get_name().compare(*tok_iter) == 0)
 			{
 				return false;
 			}
@@ -176,7 +177,7 @@ bool belong(Symbol s, string exprAtts)
 	{
 		for (;tok_iter != tokens.end(); ++tok_iter)
 		{
-			if (s.getName().compare(*tok_iter) == 0)
+			if (s.get_name().compare(*tok_iter) == 0)
 			{
 				return true;
 			}
@@ -187,20 +188,20 @@ bool belong(Symbol s, string exprAtts)
 
 void SemDomain::load_attrs(Symbol& symb)
 {
-	for (vector<Attribute>::size_type i = 0; i < this->v_attr.size(); ++i)
+	for (vector<Attribute>::size_type i = 0; i < v_attr.size(); ++i)
 	{
-		if (belong(symb, this->v_attr[i].getMember_symbol()))
+		if (belong(symb, v_attr[i].get_member_symbol()))
 		{
-			symb.addAttr(this->v_attr[i]);
+			symb.add_attr(v_attr[i]);
 		}
 	}
 }
 
-Symbol* SemDomain::getSymbol(string name_symbol)
+Symbol* SemDomain::get_symbol(string name_symbol)
 {
-	for (vector<Symbol>::size_type i = 0; i < this->v_symb.size(); ++i)
+	for (vector<Symbol>::size_type i = 0; i < v_symb.size(); ++i)
 	{
-		if (v_symb[i].getName().compare(name_symbol) == 0)
+		if (v_symb[i].get_name().compare(name_symbol) == 0)
 		{
 			return &(v_symb[i]);
 		}

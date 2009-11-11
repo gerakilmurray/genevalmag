@@ -14,8 +14,8 @@ namespace genevalmag {
 // contructors
 ///////////////////////////////////////////////
 Sort::Sort(string name) {
-	this->s_id = 0;
-	this->s_name = name;
+	s_id = 0;
+	s_name = name;
 }
 Sort::Sort() {}
 
@@ -29,24 +29,24 @@ Sort::~Sort() {
 ///////////////////////////////////////////////
 // Setters and getters.
 ///////////////////////////////////////////////
-int Sort::getId() const
+int Sort::get_id() const
 {
-    return this->s_id;
+    return s_id;
 }
 
-string Sort::getName() const
+string Sort::get_name() const
 {
-    return this->s_name;
+    return s_name;
 }
 
-void Sort::setId(int s_id)
+void Sort::set_id(int id)
 {
-    this->s_id = s_id;
+    s_id = id;
 }
 
-void Sort::setName(string s_name)
+void Sort::set_name(string name)
 {
-    this->s_name = s_name;
+    s_name = name;
 }
 
 ///////////////////////////////////////////////
@@ -54,7 +54,7 @@ void Sort::setName(string s_name)
 ///////////////////////////////////////////////
 bool Sort::equals(Sort s) const
 {
-	return this->s_name.compare(s.s_name)== 0;
+	return s_name.compare(s.s_name)== 0;
 }
 
 ///////////////////////////////////////////////
@@ -63,7 +63,7 @@ bool Sort::equals(Sort s) const
 string Sort::to_string() const
 {
 	string sort("sort\t");
-	sort.append(this->getName());
+	sort.append(get_name());
 	sort.append(";");
 	return sort;
 }

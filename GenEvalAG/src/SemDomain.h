@@ -22,7 +22,7 @@ namespace genevalmag {
 
 class SemDomain {
 private:
-	vector<Sort>		v_sort;
+	vector<Sort>		v_sort; // map<string,Sort>
 	vector<Operator>	v_oper;
 	vector<Attribute> 	v_attr;
 	vector<Symbol>		v_symb;
@@ -50,7 +50,7 @@ public:
 
 	string to_string() const;
 
-	Symbol* getSymbol(string name_symbol);
+	Symbol* get_symbol(string name_symbol);
 
 };
 

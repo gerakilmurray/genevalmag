@@ -22,10 +22,10 @@ public:
 	Sort();
 	Sort(string name);
 	virtual ~Sort();
-    int getId() const;
-    string getName() const;
-    void setId(int s_id);
-    void setName(string s_name);
+    int get_id() const;
+    string get_name() const;
+    void set_id(int id);
+    void set_name(string name);
     bool equals(Sort s) const;
     string to_string() const;
 };

@@ -1,8 +1,9 @@
-/*
- * MultiTree.h
- *
- *  Created on: 05/11/2009
- *      Author: gera
+/**
+ * \file MultiTree.h
+ * 	\brief EXPLICAR QUE ES ESTO
+ *  \date 05/11/2009
+ *  \author    Kilmurray, Gerardo Luis.
+ *  \author    Picco, Gonzalo M.
  */
 
 #ifndef MULTITREE_H_
@@ -21,8 +22,8 @@ template <class T> class MultiTree{
 	public:
 		MultiTree();
 		~MultiTree();
-		T getRoot();
-		void setRoot(T root);
+		T get_root();
+		void set_root(T root);
 };
 
 }

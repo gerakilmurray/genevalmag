@@ -19,18 +19,18 @@ namespace genevalmag {
 ///////////////////////////////////////////////
 Operator::Operator(string name, vector <Sort> * v, Sort * img, int id)
 {
-	this->o_name = name;
-	this->o_domain = *v;
-	this->o_image = *img;
-	this->o_id = id;
+	o_name = name;
+	o_domain = *v;
+	o_image = *img;
+	o_id = id;
 }
 
 Operator::Operator()
 {
-	this->o_mod = k_prefix;
-	this->o_pred = 1000;
-
+	o_mod = k_prefix;
+	o_pred = 1000;
 }
+
 ///////////////////////////////////////////////
 // destructors
 ///////////////////////////////////////////////
@@ -42,22 +42,22 @@ Operator::~Operator()
 ///////////////////////////////////////////////
 // Setter and getters.
 ///////////////////////////////////////////////
-vector<Sort> Operator::getDomain() const
+vector<Sort> Operator::get_domain() const
 {
-    return this->o_domain;
+    return o_domain;
 }
 
-int Operator::getId() const
+int Operator::get_id() const
 {
-    return this->o_id;
+    return o_id;
 }
 
-Sort Operator::getImage() const
+Sort Operator::get_image() const
 {
-    return this->o_image;
+    return o_image;
 }
 
-string Operator::getMod() const
+string Operator::get_mod() const
 {
     switch (o_mod)
     {
@@ -68,53 +68,53 @@ string Operator::getMod() const
     }
 }
 
-string Operator::getName() const
+string Operator::get_name() const
 {
-    return this->o_name;
+    return o_name;
 }
 
-int Operator::getPred() const
+int Operator::get_pred() const
 {
-    return this->o_pred;
+    return o_pred;
 }
 
-void Operator::setDomain(vector<Sort> o_domain)
+void Operator::set_domain(vector<Sort> domain)
 {
-    this->o_domain = o_domain;
+    o_domain = domain;
 }
 
-void Operator::setId(int o_id)
+void Operator::set_id(int id)
 {
-    this->o_id = o_id;
+    o_id = id;
 }
 
-void Operator::setImage(Sort o_image)
+void Operator::set_image(Sort image)
 // CONVENDRIA TOMAR REFERENCIA EN ESTE PUNTO
 {
-    this->o_image = o_image;
+    o_image = image;
 }
 
-void Operator::setMod(string o_mod)
+void Operator::set_mod(string mod)
 {
-	if (o_mod.compare("infix") == 0)
-		this->o_mod = k_infix;
-	else if (o_mod.compare("prefix") == 0)
-		this->o_mod = k_prefix;
-	else if (o_mod.compare("suffix") == 0)
-		this->o_mod = k_suffix;
+	if (mod.compare("infix") == 0)
+		o_mod = k_infix;
+	else if (mod.compare("prefix") == 0)
+		o_mod = k_prefix;
+	else if (mod.compare("suffix") == 0)
+		o_mod = k_suffix;
 	else
 		// default
-		this->o_mod = k_prefix;
+		o_mod = k_prefix;
 }
 
-void Operator::setName(string o_name)
+void Operator::set_name(string name)
 {
-    this->o_name = o_name;
+    o_name = name;
 }
 
-void Operator::setPred(int o_pred)
+void Operator::set_pred(int pred)
 {
-    this->o_pred = o_pred;
+    o_pred = pred;
 }
 
 ///////////////////////////////////////////////
@@ -124,32 +124,32 @@ string Operator::to_string() const
 {
 	string op;
 	op.append("op\t");
-	op.append(this->getMod());
+	op.append(get_mod());
 	op.append(" (");
 	std::stringstream pred;
-	pred << this->getPred();
+	pred << get_pred();
 	op.append(pred.str());
 	op.append(") ");
-	op.append(this->getName());
+	op.append(get_name());
 	op.append(": ");
-	for (vector<Sort>::size_type i = 0; i < this->o_domain.size(); ++i)
+	for (vector<Sort>::size_type i = 0; i < o_domain.size(); ++i)
 	{
-		op.append(this->o_domain[i].getName());
-		if (i+1<this->o_domain.size())
+		op.append(o_domain[i].get_name());
+		if (i+1<o_domain.size())
 			op.append(", ");
 	}
 	op.append(" :=> ");
-	op.append(this->getImage().getName());
+	op.append(get_image().get_name());
 	op.append(";");
 	return op;
 }
 ///////////////////////////////////////////////
 // add a sort in the domain of a function
 ///////////////////////////////////////////////
-void Operator::add_domain(Sort s)
+void Operator::add_domain(Sort sort)
 // CONVENDRIA TOMAR REFERENCIA EN ESTE PUNTO
 {
-	this->o_domain.push_back(s);
+	o_domain.push_back(sort);
 }
 
 ///////////////////////////////////////////////
@@ -158,18 +158,18 @@ void Operator::add_domain(Sort s)
 bool Operator::equals(Operator op) const
 {
 	bool eq(false);
-	eq = (this->o_name.compare(op.getName())== 0) &&
-		 (this->o_image.equals(op.getImage())) &&
-		 (this->o_mod == op.o_mod) &&     // esta mal esto--> op deberia usarse con get!!!!
-		 (this->o_pred == op.getPred()) &&
-		 (this->o_domain.size() == op.getDomain().size());
+	eq = (o_name.compare(op.get_name())== 0) &&
+		 (o_image.equals(op.get_image())) &&
+		 (o_mod == op.o_mod) &&     // esta mal esto--> op deberia usarse con get!!!!
+		 (o_pred == op.get_pred()) &&
+		 (o_domain.size() == op.get_domain().size());
 
 	if (!eq) return false;
 	else
 	{
-		for (vector<Sort>::size_type i = 0; i < this->o_domain.size(); ++i)
+		for (vector<Sort>::size_type i = 0; i < o_domain.size(); ++i)
 		{
-			eq = this->o_domain.at(i).equals(op.getDomain().at(i));
+			eq = o_domain.at(i).equals(op.get_domain().at(i));
 			if (!eq) return false;
 		}
 	}

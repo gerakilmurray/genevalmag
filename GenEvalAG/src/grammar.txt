@@ -1,3 +1,11 @@
+/**
+ * \file grammar.txt
+ * 	\brief File with a grammar especification example.
+ *  \date 05/11/2009
+ *  \author    Kilmurray, Gerardo Luis.
+ *  \author    Picco, Gonzalo M.
+ */
+
 /* 
  * Archivo de prueba de gramatica de atributos
  * que especifica un AST.

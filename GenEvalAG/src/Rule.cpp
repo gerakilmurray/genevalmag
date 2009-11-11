@@ -1,8 +1,9 @@
-/*
- * Rule.cpp
- *
- *  Created on: 05/11/2009
- *      Author: gera
+/**
+ * \file Rule.cpp
+ * 	\brief EXPLICAR QUE ES ESTO
+ *  \date 05/11/2009
+ *  \author    Kilmurray, Gerardo Luis.
+ *  \author    Picco, Gonzalo M.
  */
 
 #include "Rule.h"
@@ -18,33 +19,33 @@ Rule::~Rule() {
 	// TODO Auto-generated destructor stub
 }
 
-void Rule::setLeft_symbol(const Symbol symb)
+void Rule::set_left_symbol(const Symbol symb)
 {
-	this->left_symbol = symb;
+	left_symbol = symb;
 }
 
-void Rule::addRight_symbol(const Symbol symb)
+void Rule::add_right_symbol(const Symbol symb)
 {
-	this->right_side.push_back(symb);
+	right_side.push_back(symb);
 }
 
-Symbol Rule::getLeft_symbol()const
+Symbol Rule::get_left_symbol()const
 {
-	return this->left_symbol;
+	return left_symbol;
 }
 
-vector<Symbol> Rule::getRight_side() const
+vector<Symbol> Rule::get_right_side() const
 {
-	return this->right_side;
+	return right_side;
 }
 
 bool Rule::equals(Rule rule) const
 {
-	bool result = rule.getLeft_symbol().equals(this->left_symbol);
+	bool result = rule.get_left_symbol().equals(left_symbol);
 	size_t i = 0;
-	while (result && (i < this->right_side.size()))
+	while (result && (i < right_side.size()))
 	{
-		result = this->right_side[i].equals(rule.getRight_side()[i]);
+		result = right_side[i].equals(rule.get_right_side()[i]);
 		i++;
 	}
 	return result;
@@ -54,12 +55,12 @@ string Rule::to_string() const
 {
 	string rule;
 	rule.append("rule\t");
-	rule.append((this->getLeft_symbol()).getName());
+	rule.append((get_left_symbol()).get_name());
 	rule.append("\t::= ");
-	for (vector<Symbol>::size_type i = 0; i < this->right_side.size(); ++i)
+	for (vector<Symbol>::size_type i = 0; i < right_side.size(); ++i)
 	{
-		rule.append(this->right_side[i].getName());
-		if (i+1<this->right_side.size())
+		rule.append(right_side[i].get_name());
+		if (i+1<right_side.size())
 			rule.append(" ");
 	}
 	rule.append(";");
