@@ -26,7 +26,7 @@ using namespace genevalmag;
 SemDomain sem_domain;
 
 // a new operator in the parser
-Operator * new_op;
+Operator new_op;
 
 ///////////////////////////////////////////////
 // Operation for Sort
@@ -34,55 +34,46 @@ Operator * new_op;
 void add_sort (char const* str, char const* end)
 {
     string  name(str, end);
-	Sort* sort = new Sort(name);
-	if (!sem_domain.add_sort(*sort))
-		free (sort);
+	Sort sort(name);
+	sem_domain.add_sort(sort);
 }
 
 ///////////////////////////////////////////////
 // Operation for Operation
 ///////////////////////////////////////////////
-void inic_op (char const* str, char const* end)
-{
-	new_op = new Operator();
-}
-
 void add_op (char const* str, char const* end)
 {
-	if (!sem_domain.add_op(*new_op))
-	{
-		// free memory of operation repeat.
-		free(new_op);
-	}
+	sem_domain.add_op(new_op);
+	new_op.clear();
 }
 
 void save_mod (char const* str, char const* end)
 {
 	string mode(str, end);
-	new_op->set_mod(mode);
+	new_op.set_mod(mode);
 }
 
 void save_pred (int const i)
 {
-	new_op->set_pred(i);
+	new_op.set_pred(i);
 }
 
 void save_name (char const* str, char const* end)
 {
 	string name(str, end);
-	new_op->set_name(name);
+	new_op.set_name(name);
 }
 
 void save_dom (char const* str, char const* end)
 {
 	string dom(str, end);
-	new_op->add_domain(sem_domain.return_sort(dom));
+	new_op.add_domain(sem_domain.return_sort(dom));
 }
 
 void save_img (char const* str, char const* end)
 {
 	string  img(str, end);
-	new_op->set_image(sem_domain.return_sort(img));
+	new_op.set_image(sem_domain.return_sort(img));
 }
 
 ///////////////////////////////////////////////
@@ -278,7 +269,7 @@ struct att_grammar: public grammar<att_grammar>
 
 			decl_sort   = strlit<>("sort ") >> r_ident[&add_sort] >> *(',' >> r_ident[&add_sort]) >> ';';
 
-			decl_op     = strlit<>("op ")[&inic_op] >>
+			decl_op     = strlit<>("op ") >>
 						  !(mod_op[&save_mod]) >>
 						  !('(' >> int_p[&save_pred] >> ')') >>
 						  r_oper[&save_name] >> ':' >>

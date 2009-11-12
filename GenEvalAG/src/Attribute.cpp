@@ -13,6 +13,10 @@ namespace genevalmag {
 Attribute::Attribute() {
 	// TODO Auto-generated constructor stub
 }
+Attribute::Attribute(const Attribute& other) {
+	copy(other);
+}
+
 Attribute::Attribute(string name, string type, type_attr mod, string merberships)
 {
 	a_name = name;
@@ -21,10 +25,31 @@ Attribute::Attribute(string name, string type, type_attr mod, string merberships
 	a_member_symbol = merberships;
 }
 
-Attribute::~Attribute() {
-	// TODO Auto-generated destructor stub
+Attribute::~Attribute()
+{
+	destroy();
+}
+Attribute& Attribute::operator= (Attribute const& other)
+{
+	if (this != &other)
+	{
+		destroy();
+		copy(other);
+	}
+	return *this;
 }
 
+void Attribute::copy(Attribute const& other)
+{
+	a_name			= other.get_name();
+	a_type			= other.get_type();
+	a_mod_type		= other.get_mod_type();
+	a_member_symbol	= other.get_member_symbol();
+}
+
+void Attribute::destroy()
+{
+}
 string Attribute::get_member_symbol() const
 {
     return a_member_symbol;

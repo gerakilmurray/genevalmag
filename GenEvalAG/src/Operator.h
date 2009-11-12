@@ -33,15 +33,21 @@ private:
 	int				o_pred;
 	int				o_id;
 
+	//Methods for STL C++
+	void copy(Operator const& other);
+	void destroy();
+
 public:
 	Operator();
 	Operator(string name, vector <Sort> * v, Sort * img, int id);
 	virtual ~Operator();
+	Operator(Operator const & other);
+	Operator& operator= (Operator const & other);
 
 	vector<Sort> get_domain() const;
     int get_id() const;
     Sort get_image() const;
-    string get_mod() const;
+    mod_op get_mod() const;
     string get_name() const;
     int get_pred() const;
     void add_domain(Sort sort);
@@ -54,6 +60,8 @@ public:
     void set_pred(int pred);
     string to_string() const;
     bool equals(Operator op) const;
+
+    void clear();
 
 };
 

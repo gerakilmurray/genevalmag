@@ -29,10 +29,17 @@ class Symbol {
 		symb_type sym_type;
 		vector<Attribute>  attrs;
 
+		//Methods for STL C++
+		void copy(Symbol const& other);
+		void destroy();
+
 	public:
 		Symbol();
 		Symbol(string name, symb_type type);
+		Symbol(Symbol const & other);
 		virtual ~Symbol();
+		Symbol& operator= (Symbol const & other);
+
 		void add_attr(const Attribute attr);
 		void remove_attr(const int index);
 		string get_name() const;

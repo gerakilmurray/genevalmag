@@ -16,6 +16,11 @@ Symbol::Symbol()
 {
 }
 
+Symbol::Symbol(Symbol const& other)
+{
+	copy(other);
+}
+
 Symbol::Symbol(string name, symb_type type)
 {
 	sym_name = name;
@@ -23,8 +28,30 @@ Symbol::Symbol(string name, symb_type type)
 }
 
 Symbol::~Symbol() {
-	// TODO Auto-generated destructor stub
+	destroy();
 }
+
+Symbol& Symbol::operator= (Symbol const& other)
+{
+	if (this != &other)
+	{
+		destroy();
+		copy(other);
+	}
+	return *this;
+}
+
+void Symbol::copy(Symbol const& other)
+{
+	sym_name = other.get_name();
+	sym_type = other.get_type();
+	attrs = other.get_attrs();
+}
+
+void Symbol::destroy()
+{
+}
+
 
 void Symbol::add_attr(const Attribute attr)
 {

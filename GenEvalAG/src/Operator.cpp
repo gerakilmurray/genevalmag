@@ -14,11 +14,14 @@ using namespace std;
 
 namespace genevalmag {
 
+static int ops = 0;
+
 ///////////////////////////////////////////////
 // contructors
 ///////////////////////////////////////////////
 Operator::Operator(string name, vector <Sort> * v, Sort * img, int id)
 {
+	ops++;
 	o_name = name;
 	o_domain = *v;
 	o_image = *img;
@@ -27,16 +30,26 @@ Operator::Operator(string name, vector <Sort> * v, Sort * img, int id)
 
 Operator::Operator()
 {
+	ops++;
 	o_mod = k_prefix;
 	o_pred = 1000;
 }
+
+Operator::Operator(Operator const & other)
+{
+	ops++;
+	copy(other);
+}
+void Operator::destroy(){}
 
 ///////////////////////////////////////////////
 // destructors
 ///////////////////////////////////////////////
 Operator::~Operator()
 {
-	// TODO Auto-generated destructor stub
+	ops--;
+	destroy();
+	cout << ops << " opers" << endl;
 }
 
 ///////////////////////////////////////////////
@@ -57,15 +70,9 @@ Sort Operator::get_image() const
     return o_image;
 }
 
-string Operator::get_mod() const
+mod_op Operator::get_mod() const
 {
-    switch (o_mod)
-    {
-		case k_infix: return "infix";
-		case k_prefix: return "prefix";
-		case k_suffix: return "suffix";
-		default: return "prefix";
-    }
+	return o_mod;
 }
 
 string Operator::get_name() const
@@ -117,6 +124,28 @@ void Operator::set_pred(int pred)
     o_pred = pred;
 }
 
+
+Operator& Operator::operator= (Operator const& other)
+{
+	if (this != &other)
+	{
+		destroy();
+		copy(other);
+	}
+	return *this;
+}
+
+void Operator::copy(Operator const& other)
+{
+	o_name = other.get_name();
+	o_id = other.get_id();
+	o_domain = other.get_domain();
+	o_pred = other.get_pred();
+	o_image = other.get_image();
+	o_mod = other.get_mod();
+}
+
+
 ///////////////////////////////////////////////
 // Operator to string
 ///////////////////////////////////////////////
@@ -124,7 +153,14 @@ string Operator::to_string() const
 {
 	string op;
 	op.append("op\t");
-	op.append(get_mod());
+    switch (o_mod)
+    {
+		case k_infix:   op.append("infix");break;
+		case k_prefix:  op.append("prefix");break;
+		case k_suffix:  op.append("suffix");break;
+		default: op.append("prefix");
+    }
+
 	op.append(" (");
 	std::stringstream pred;
 	pred << get_pred();
@@ -174,6 +210,11 @@ bool Operator::equals(Operator op) const
 		}
 	}
 	return eq;// si llega a este punto, obvio es verdadero.
+}
+
+void Operator::clear()
+{
+	o_domain.clear();
 }
 
 }

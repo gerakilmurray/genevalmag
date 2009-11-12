@@ -6,9 +6,13 @@
  *  \author    Picco, Gonzalo M. 
  */
 
+#include <iostream>
+
 #include "Sort.h"
 
 namespace genevalmag {
+
+static int nm= 0;
 
 ///////////////////////////////////////////////
 // contructors
@@ -16,14 +20,43 @@ namespace genevalmag {
 Sort::Sort(string name) {
 	s_id = 0;
 	s_name = name;
+	nm++;
 }
-Sort::Sort() {}
+Sort::Sort() {	nm++;}
+
+Sort::Sort(Sort const & other)
+{
+	copy(other);
+	nm++;
+}
 
 ///////////////////////////////////////////////
 // destrucors
 ///////////////////////////////////////////////
 Sort::~Sort() {
-	// TODO Auto-generated destructor stub
+	destroy();
+	nm--;
+	cout << nm << " sorts" << endl;
+}
+
+Sort& Sort::operator= (Sort const& other)
+{
+	if (this != &other)
+	{
+		destroy();
+		copy(other);
+	}
+	return *this;
+}
+
+void Sort::copy(Sort const& other)
+{
+	s_name = other.get_name();
+	s_id = other.get_id();
+}
+
+void Sort::destroy()
+{
 }
 
 ///////////////////////////////////////////////

@@ -18,10 +18,17 @@ class Sort {
 private:
 	string s_name;
 	int s_id;
+
+	//Methods for STL C++
+	void copy(Sort const& other);
+	void destroy();
 public:
 	Sort();
 	Sort(string name);
 	virtual ~Sort();
+	Sort(Sort const & other);
+	Sort& operator= (Sort const & other);
+
     int get_id() const;
     string get_name() const;
     void set_id(int id);

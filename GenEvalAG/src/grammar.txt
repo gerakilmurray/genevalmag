@@ -24,7 +24,7 @@ semantics domains
 	op prefix %: string -> string;
 	op (8) %: string -> adrian;
 	sort adrian;
-	op infix (5) + : int , int -> int;
+	op infix (5) + : int , int -> string;
 
 //////// bloque de atributos /////////////////////
 attributes

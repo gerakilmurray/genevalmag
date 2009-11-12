@@ -15,8 +15,13 @@ Rule::Rule() {
 
 }
 
+Rule::Rule(Rule const & other)
+{
+	copy(other);
+}
+
 Rule::~Rule() {
-	// TODO Auto-generated destructor stub
+	destroy();
 }
 
 void Rule::set_left_symbol(const Symbol symb)
@@ -37,6 +42,32 @@ Symbol Rule::get_left_symbol()const
 vector<Symbol> Rule::get_right_side() const
 {
 	return right_side;
+}
+
+vector <Equation> Rule::get_eqs() const
+{
+	return eqs;
+}
+
+Rule& Rule::operator= (Rule const& other)
+{
+	if (this != &other)
+	{
+		destroy();
+		copy(other);
+	}
+	return *this;
+}
+
+void Rule::copy(Rule const& other)
+{
+	left_symbol = other.get_left_symbol();
+	right_side = other.get_right_side();
+	eqs = other.get_eqs();
+}
+
+void Rule::destroy()
+{
 }
 
 bool Rule::equals(Rule rule) const

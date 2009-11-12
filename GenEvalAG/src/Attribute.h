@@ -26,10 +26,17 @@ private:
 	type_attr a_mod_type;
 	string a_member_symbol;
 
+	//Methods for STL C++
+	void copy(Attribute const& other);
+	void destroy();
+
 public:
 	Attribute();
 	Attribute(string name, string type, type_attr mod, string merberships);
+	Attribute(Attribute const & other);
 	virtual ~Attribute();
+
+	Attribute& operator= (Attribute const & other);
 
 	string get_name() const;
 	string get_type() const;

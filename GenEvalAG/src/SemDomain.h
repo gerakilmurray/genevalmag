@@ -10,6 +10,7 @@
 #define SEMDOMAIN_H_
 
 #include <vector>
+#include <map>
 
 #include "Sort.h"
 #include "Operator.h"
@@ -27,6 +28,7 @@ private:
 	vector<Attribute> 	v_attr;
 	vector<Symbol>		v_symb;
 	vector<Rule>		v_rule;
+	//map<int,Rule> 	m_rule;
 
 	void load_attrs(Symbol& symb);
 
