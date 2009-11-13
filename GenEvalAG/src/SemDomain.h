@@ -36,21 +36,21 @@ public:
 	SemDomain();
 	virtual ~SemDomain();
 
-	bool add_sort (const Sort& s);
-	bool add_op   (const Operator& op);
-	bool add_att  (const Attribute& att);
+	bool add_sort (Sort& s);
+	bool add_op   (Operator& op);
+	bool add_att  (Attribute& att);
 	bool add_symb (Symbol& symb);
-	bool add_rule (const Rule& rule);
+	bool add_rule (Rule& rule);
 
-	bool search_sort (const Sort& sort) const;
-	bool search_op   (const Operator& op) const;
-	bool search_att  (const Attribute& attr) const;
-	bool search_symb (const Symbol& symb) const;
-	bool search_rule (const Rule& rule) const;
+	bool search_sort (Sort& sort) const;
+	bool search_op   (Operator& op) const;
+	bool search_att  (Attribute& attr) const;
+	bool search_symb (Symbol& symb) const;
+	bool search_rule (Rule& rule) const;
 
-	Sort return_sort (string name);
+	Sort& return_sort (string name);
 
-	string to_string() const;
+	string to_string();
 
 	Symbol* get_symbol(string name_symbol);
 

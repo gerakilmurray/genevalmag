@@ -67,13 +67,13 @@ void save_name (char const* str, char const* end)
 void save_dom (char const* str, char const* end)
 {
 	string dom(str, end);
-	new_op.add_domain(sem_domain.return_sort(dom));
+	new_op.add_domain(&(sem_domain.return_sort(dom)));
 }
 
 void save_img (char const* str, char const* end)
 {
 	string  img(str, end);
-	new_op.set_image(sem_domain.return_sort(img));
+	new_op.set_image(&(sem_domain.return_sort(img)));
 }
 
 ///////////////////////////////////////////////

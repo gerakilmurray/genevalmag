@@ -32,7 +32,7 @@ SemDomain::~SemDomain()
 ///////////////////////////////////////////////
 // Operation Templates
 ///////////////////////////////////////////////
-template <class T> bool search(const T& elem, const vector <T>& vec)
+template <class T> bool search(T& elem, const vector <T>& vec)
 {
 	for (size_t i = 0; i < vec.size(); i++)
 		if (vec[i].equals(elem))
@@ -40,7 +40,7 @@ template <class T> bool search(const T& elem, const vector <T>& vec)
 	return false;
 }
 
-template <class T> bool add(const T& elem, vector<T>& vec)
+template <class T> bool add(T& elem, vector<T>& vec)
 {
 	if (search<T>(elem, vec))
 		return false;
@@ -48,7 +48,7 @@ template <class T> bool add(const T& elem, vector<T>& vec)
 	return true;
 }
 
-template <class T> string to_string_vec(const vector<T>& vec)
+template <class T> string to_string_vec(vector<T>& vec)
 {
 	string elem;
 	for (size_t i = 0; i < vec.size(); ++i)
@@ -63,17 +63,17 @@ template <class T> string to_string_vec(const vector<T>& vec)
 ///////////////////////////////////////////////
 // Add's Operations
 ///////////////////////////////////////////////
-bool SemDomain::add_sort(const Sort& s)
+bool SemDomain::add_sort( Sort& s)
 {
 	return add <Sort> (s, v_sort);
 }
 
-bool SemDomain::add_op(const Operator& op)
+bool SemDomain::add_op( Operator& op)
 {
 	return add <Operator> (op, v_oper);
 }
 
-bool SemDomain::add_att(const Attribute& attr)
+bool SemDomain::add_att( Attribute& attr)
 {
 	return add <Attribute> (attr, v_attr);
 }
@@ -86,7 +86,7 @@ bool SemDomain::add_symb(Symbol& symb)
 //		load_attrs(symb);
 	return not_repeat;
 }
-bool SemDomain::add_rule(const Rule& rule)
+bool SemDomain::add_rule( Rule& rule)
 {
 	return add <Rule> (rule, v_rule);
 }
@@ -94,26 +94,26 @@ bool SemDomain::add_rule(const Rule& rule)
 ///////////////////////////////////////////////
 // Search's Operations
 ///////////////////////////////////////////////
-bool SemDomain::search_sort(const Sort& sort) const
+bool SemDomain::search_sort( Sort& sort) const
 {
 	return search <Sort> (sort, v_sort);
 }
 
-bool SemDomain::search_op(const Operator& op) const
+bool SemDomain::search_op( Operator& op) const
 {
 	return search <Operator> (op, v_oper);
 }
 
-bool SemDomain::search_att(const Attribute& attr) const
+bool SemDomain::search_att( Attribute& attr) const
 {
 	return search <Attribute> (attr, v_attr);
 }
 
-bool SemDomain::search_symb(const Symbol& symb) const
+bool SemDomain::search_symb( Symbol& symb) const
 {
 	return search <Symbol> (symb, v_symb);
 }
-bool SemDomain::search_rule(const Rule& rule) const
+bool SemDomain::search_rule( Rule& rule) const
 {
 	return search <Rule> (rule, v_rule);
 }
@@ -121,21 +121,21 @@ bool SemDomain::search_rule(const Rule& rule) const
 ///////////////////////////////////////////////
 // seach sort and return it. else create a sort and return.
 ///////////////////////////////////////////////
-Sort SemDomain::return_sort(string name)
+Sort& SemDomain::return_sort(string name)
 {
 	for (vector<Sort>::size_type i = 0; i < v_sort.size(); i++)
 		if (v_sort.at(i).get_name().compare(name) == 0)
 			return v_sort.at(i);
 	// the sort not exist and so create it.
-	Sort sort(name);
-	v_sort.push_back(sort);
-	return sort;
+	cout << "ERROR: sort no existe" << endl;
+	exit(0);
+	return v_sort[0];
 }
 
 ///////////////////////////////////////////////
 // semantic block to string
 ///////////////////////////////////////////////
-string SemDomain::to_string() const
+string SemDomain::to_string()
 {
 	string semdomain("\nsemantics domains\n");
 	semdomain.append(to_string_vec<Sort>(v_sort));

@@ -7,6 +7,7 @@
  */
 
 #include <iostream>
+#include <sstream>
 
 #include "Sort.h"
 
@@ -17,12 +18,17 @@ static int nm= 0;
 ///////////////////////////////////////////////
 // contructors
 ///////////////////////////////////////////////
-Sort::Sort(string name) {
-	s_id = 0;
+Sort::Sort(string name)
+{
+	s_id = 1;
 	s_name = name;
 	nm++;
 }
-Sort::Sort() {	nm++;}
+Sort::Sort()
+{
+	s_id = 1;
+	nm++;
+}
 
 Sort::Sort(Sort const & other)
 {
@@ -52,7 +58,7 @@ Sort& Sort::operator= (Sort const& other)
 void Sort::copy(Sort const& other)
 {
 	s_name = other.get_name();
-	s_id = other.get_id();
+	s_id = other.get_id() + 1;
 }
 
 void Sort::destroy()
@@ -97,6 +103,11 @@ string Sort::to_string() const
 {
 	string sort("sort\t");
 	sort.append(get_name());
+	sort.append("(");
+	std::stringstream id;
+	id << get_id();
+	sort.append(id.str());
+	sort.append(")");
 	sort.append(";");
 	return sort;
 }

@@ -27,38 +27,38 @@ class Operator
 {
 private:
 	string 			o_name;
-	vector <Sort>	o_domain;
-	Sort			o_image;
+	vector <Sort*>	o_domain;
+	Sort*			o_image;
 	mod_op			o_mod;
 	int				o_pred;
 	int				o_id;
 
 	//Methods for STL C++
-	void copy(Operator const& other);
+	void copy(const Operator& other);
 	void destroy();
 
 public:
 	Operator();
-	Operator(string name, vector <Sort> * v, Sort * img, int id);
+	Operator(string name, vector <Sort*> * v, Sort * img, int id);
+	Operator(const Operator & other);
 	virtual ~Operator();
-	Operator(Operator const & other);
-	Operator& operator= (Operator const & other);
+	Operator& operator= (Operator & other);
 
-	vector<Sort> get_domain() const;
+	vector<Sort*> get_domain() const;
     int get_id() const;
-    Sort get_image() const;
+    Sort* get_image() const;
     mod_op get_mod() const;
     string get_name() const;
     int get_pred() const;
-    void add_domain(Sort sort);
+    void add_domain(Sort* sort);
 
-    void set_domain(vector<Sort> domain);
+    void set_domain(vector<Sort*> domain);
     void set_id(int id);
-    void set_image(Sort image);
+    void set_image(Sort* image);
     void set_mod(string mod);
     void set_name(string name);
     void set_pred(int pred);
-    string to_string() const;
+    string to_string();
     bool equals(Operator op) const;
 
     void clear();
