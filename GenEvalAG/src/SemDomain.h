@@ -9,7 +9,6 @@
 #ifndef SEMDOMAIN_H_
 #define SEMDOMAIN_H_
 
-#include <vector>
 #include <map>
 
 #include "Sort.h"
@@ -23,12 +22,11 @@ namespace genevalmag {
 
 class SemDomain {
 private:
-	vector<Sort>		v_sort; // map<string,Sort>
-	vector<Operator>	v_oper;
-	vector<Attribute> 	v_attr;
-	vector<Symbol>		v_symb;
-	vector<Rule>		v_rule;
-	//map<int,Rule> 	m_rule;
+	map<string, Sort>		v_sort;
+	map<string, Operator>	v_oper;
+	map<string, Attribute> 	v_attr;
+	map<string, Symbol>		v_symb;
+	map<string, Rule>		v_rule;
 
 	void load_attrs(Symbol& symb);
 
@@ -42,18 +40,10 @@ public:
 	bool add_symb (Symbol& symb);
 	bool add_rule (Rule& rule);
 
-	bool search_sort (Sort& sort) const;
-	bool search_op   (Operator& op) const;
-	bool search_att  (Attribute& attr) const;
-	bool search_symb (Symbol& symb) const;
-	bool search_rule (Rule& rule) const;
-
 	Sort& return_sort (string name);
+	Symbol& get_symbol(string name_symbol);
 
 	string to_string();
-
-	Symbol* get_symbol(string name_symbol);
-
 };
 
 }

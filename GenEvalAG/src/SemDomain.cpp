@@ -32,29 +32,20 @@ SemDomain::~SemDomain()
 ///////////////////////////////////////////////
 // Operation Templates
 ///////////////////////////////////////////////
-template <class T> bool search(T& elem, const vector <T>& vec)
+template <class T> bool add(T elem, string key, map<string,T >& vec)
 {
-	for (size_t i = 0; i < vec.size(); i++)
-		if (vec[i].equals(elem))
-			return true;
-	return false;
+	pair<string,T > new_p(key,elem);
+	pair<typename map<string,T >::iterator, bool > result = vec.insert(new_p);
+	return result.second;
 }
 
-template <class T> bool add(T& elem, vector<T>& vec)
-{
-	if (search<T>(elem, vec))
-		return false;
-	vec.push_back(elem);
-	return true;
-}
-
-template <class T> string to_string_vec(vector<T>& vec)
+template <class T> string to_string_vec(map<string,T >& vec)
 {
 	string elem;
-	for (size_t i = 0; i < vec.size(); ++i)
+	for (typename map<string,T >::iterator it = vec.begin(); it != vec.end(); ++it)
 	{
 		elem.append("\t");
-		elem.append(vec[i].to_string());
+		elem.append(it->second.to_string());
 		elem.append("\n");
 	}
 	return elem;
@@ -63,59 +54,35 @@ template <class T> string to_string_vec(vector<T>& vec)
 ///////////////////////////////////////////////
 // Add's Operations
 ///////////////////////////////////////////////
-bool SemDomain::add_sort( Sort& s)
+bool SemDomain::add_sort(Sort& sort)
 {
-	return add <Sort> (s, v_sort);
+	return add<Sort>(sort, sort.get_name(),v_sort);
 }
 
-bool SemDomain::add_op( Operator& op)
+bool SemDomain::add_op( Operator& oper)
 {
-	return add <Operator> (op, v_oper);
+	return add<Operator>(oper,oper.to_string(),v_oper);
 }
 
 bool SemDomain::add_att( Attribute& attr)
 {
-	return add <Attribute> (attr, v_attr);
+	return add<Attribute>(attr,attr.to_string(),v_attr);
 }
 
 bool SemDomain::add_symb(Symbol& symb)
 {
-	bool not_repeat = add <Symbol> (symb, v_symb);
+	bool not_repeat = add <Symbol> (symb,symb.get_name(), v_symb);
 	if (not_repeat && symb.is_non_terminal())
-		load_attrs(v_symb[v_symb.size()-1]);
-//		load_attrs(symb);
+	{
+		map<string, Symbol>::iterator it = v_symb.find(symb.get_name());
+		load_attrs(it->second);
+	}
 	return not_repeat;
 }
+
 bool SemDomain::add_rule( Rule& rule)
 {
-	return add <Rule> (rule, v_rule);
-}
-
-///////////////////////////////////////////////
-// Search's Operations
-///////////////////////////////////////////////
-bool SemDomain::search_sort( Sort& sort) const
-{
-	return search <Sort> (sort, v_sort);
-}
-
-bool SemDomain::search_op( Operator& op) const
-{
-	return search <Operator> (op, v_oper);
-}
-
-bool SemDomain::search_att( Attribute& attr) const
-{
-	return search <Attribute> (attr, v_attr);
-}
-
-bool SemDomain::search_symb( Symbol& symb) const
-{
-	return search <Symbol> (symb, v_symb);
-}
-bool SemDomain::search_rule( Rule& rule) const
-{
-	return search <Rule> (rule, v_rule);
+	return add <Rule> (rule,rule.to_string_not_eq(), v_rule);
 }
 
 ///////////////////////////////////////////////
@@ -123,13 +90,12 @@ bool SemDomain::search_rule( Rule& rule) const
 ///////////////////////////////////////////////
 Sort& SemDomain::return_sort(string name)
 {
-	for (vector<Sort>::size_type i = 0; i < v_sort.size(); i++)
-		if (v_sort.at(i).get_name().compare(name) == 0)
-			return v_sort.at(i);
-	// the sort not exist and so create it.
-	cout << "ERROR: sort no existe" << endl;
-	exit(0);
-	return v_sort[0];
+	Sort sort_new(name);
+	add_sort(sort_new);
+
+	map<string,Sort>::iterator it = v_sort.find(name);
+
+	return it->second;
 }
 
 ///////////////////////////////////////////////
@@ -188,25 +154,19 @@ bool belong(Symbol s, string exprAtts)
 
 void SemDomain::load_attrs(Symbol& symb)
 {
-	for (vector<Attribute>::size_type i = 0; i < v_attr.size(); ++i)
+	for (map<string,Attribute>::iterator it = v_attr.begin(); it != v_attr.end(); ++it)
 	{
-		if (belong(symb, v_attr[i].get_member_symbol()))
+		if (belong(symb, it->second.get_member_symbol()))
 		{
-			symb.add_attr(v_attr[i]);
+			symb.add_attr(it->second);
 		}
 	}
 }
 
-Symbol* SemDomain::get_symbol(string name_symbol)
+Symbol& SemDomain::get_symbol(string name_symbol)
 {
-	for (vector<Symbol>::size_type i = 0; i < v_symb.size(); ++i)
-	{
-		if (v_symb[i].get_name().compare(name_symbol) == 0)
-		{
-			return &(v_symb[i]);
-		}
-	}
-	return NULL;
+	map<string,Symbol>::iterator it = v_symb.find(name_symbol);
+	return it->second;
 }
 
 }

@@ -84,6 +84,14 @@ bool Rule::equals(Rule rule) const
 
 string Rule::to_string() const
 {
+	string rule = to_string_not_eq();
+	// for para las eqs. obvio que cada eq se sabe imprimir.
+	//rule.append(";");
+	return rule;
+}
+
+string Rule::to_string_not_eq() const
+{
 	string rule;
 	rule.append("rule\t");
 	rule.append((get_left_symbol()).get_name());
@@ -97,6 +105,5 @@ string Rule::to_string() const
 	rule.append(";");
 	return rule;
 }
-
 
 }

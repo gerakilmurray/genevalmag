@@ -39,6 +39,7 @@ class Rule {
 		vector<Symbol> get_right_side()const;
 		vector <Equation> get_eqs() const;
 		bool equals(Rule rule) const;
+		string to_string_not_eq() const;
 		string to_string() const;
 };
 

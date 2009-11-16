@@ -13,10 +13,6 @@
 
 //////// bloque de dominio semantico /////////////////////
 semantics domains
-	sort int;
-	sort string, character;
-	sort pepe;
-	sort adrian;
 	
 	op infix (5) + : int , int->int;
 	op sqr : int -> int;
@@ -25,7 +21,11 @@ semantics domains
 	op prefix %: string -> string;
 	op (8) %: string -> adrian;
 	op infix (5) + : int , int -> string;
-
+	sort int;
+	sort string, character;
+	sort pepe;
+	sort adrian;
+	
 //////// bloque de atributos /////////////////////
 attributes
 	valor : syn <int> of all;

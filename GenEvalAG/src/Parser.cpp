@@ -164,21 +164,15 @@ void add_left_side_rule(char const* str, char const* end)
 {
 	string left_side_symbol(str, end);
 	current_rule = new Rule();
-	Symbol* symb = sem_domain.get_symbol(left_side_symbol);
-	if (symb != NULL)
-		current_rule->set_left_symbol(*symb);
-	else
-		cout << "ERROR simbolo no existe";
+	Symbol& symb = sem_domain.get_symbol(left_side_symbol);
+	current_rule->set_left_symbol(symb);
 }
 
 void add_right_side_rule(char const* str, char const* end)
 {
 	string right_side_symbol(str, end);
-	Symbol* symb = sem_domain.get_symbol(right_side_symbol);
-	if (symb != NULL)
-		current_rule->add_right_symbol(*symb);
-	else
-		cout << "ERROR simbolo no existe";
+	Symbol& symb = sem_domain.get_symbol(right_side_symbol);
+	current_rule->add_right_symbol(symb);
 }
 
 void abbreviated_rule(char const* str, char const* end)
