@@ -32,9 +32,9 @@ SemDomain::~SemDomain()
 ///////////////////////////////////////////////
 // Operation Templates
 ///////////////////////////////////////////////
-template <class T> bool add(T elem, string key, map<string,T >& vec)
+template <class T> bool add(T elem, map<string,T >& vec)
 {
-	pair<string,T > new_p(key,elem);
+	pair<string,T > new_p(elem.key(),elem);
 	pair<typename map<string,T >::iterator, bool > result = vec.insert(new_p);
 	return result.second;
 }
@@ -56,25 +56,25 @@ template <class T> string to_string_vec(map<string,T >& vec)
 ///////////////////////////////////////////////
 bool SemDomain::add_sort(Sort& sort)
 {
-	return add<Sort>(sort, sort.get_name(),v_sort);
+	return add<Sort>(sort, v_sort);
 }
 
 bool SemDomain::add_op( Operator& oper)
 {
-	return add<Operator>(oper,oper.to_string(),v_oper);
+	return add<Operator>(oper, v_oper);
 }
 
 bool SemDomain::add_att( Attribute& attr)
 {
-	return add<Attribute>(attr,attr.to_string(),v_attr);
+	return add<Attribute>(attr, v_attr);
 }
 
 bool SemDomain::add_symb(Symbol& symb)
 {
-	bool not_repeat = add <Symbol> (symb,symb.get_name(), v_symb);
+	bool not_repeat = add <Symbol> (symb, v_symb);
 	if (not_repeat && symb.is_non_terminal())
 	{
-		map<string, Symbol>::iterator it = v_symb.find(symb.get_name());
+		map<string, Symbol>::iterator it = v_symb.find(symb.key());
 		load_attrs(it->second);
 	}
 	return not_repeat;
@@ -82,7 +82,7 @@ bool SemDomain::add_symb(Symbol& symb)
 
 bool SemDomain::add_rule( Rule& rule)
 {
-	return add <Rule> (rule,rule.to_string_not_eq(), v_rule);
+	return add <Rule> (rule, v_rule);
 }
 
 ///////////////////////////////////////////////
@@ -108,8 +108,12 @@ string SemDomain::to_string()
 	semdomain.append("\n");
 	semdomain.append(to_string_vec<Operator>(v_oper));
 	semdomain.append("\nattributes\n");
+//	map<string,Attribute>::iterator it1 = v_attr.find("valorsynintall");
+//	it1->second.set_name("valores");
 	semdomain.append(to_string_vec<Attribute>(v_attr));
 	semdomain.append("\nsymbols\n");
+//	map<string,Symbol>::iterator it = v_symb.find("id");
+//	it->second.set_name("ident");
 	semdomain.append(to_string_vec<Symbol>(v_symb));
 	semdomain.append("\nrules\n");
 	semdomain.append(to_string_vec<Rule>(v_rule));
@@ -158,7 +162,7 @@ void SemDomain::load_attrs(Symbol& symb)
 	{
 		if (belong(symb, it->second.get_member_symbol()))
 		{
-			symb.add_attr(it->second);
+			symb.add_attr(&(it->second));
 		}
 	}
 }

@@ -27,7 +27,7 @@ class Symbol {
 	private:
 		string sym_name;
 		symb_type sym_type;
-		vector<Attribute>  attrs;
+		vector<Attribute*> attrs;
 
 		//Methods for STL C++
 		void copy(Symbol const& other);
@@ -40,7 +40,7 @@ class Symbol {
 		virtual ~Symbol();
 		Symbol& operator= (Symbol const & other);
 
-		void add_attr(const Attribute attr);
+		void add_attr(Attribute* attr);
 		void remove_attr(const int index);
 		string get_name() const;
 		void set_name(string name);
@@ -48,8 +48,10 @@ class Symbol {
 		void set_type(symb_type type);
 	    bool equals(Symbol symb) const;
 	    string to_string() const;
-	    vector<Attribute> get_attrs() const;
+	    vector<Attribute*> get_attrs() const;
 	    bool is_non_terminal() const;
+
+	    string key() const;
 
 };
 }

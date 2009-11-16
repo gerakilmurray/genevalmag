@@ -25,9 +25,6 @@ using namespace genevalmag;
   */
 SemDomain sem_domain;
 
-// a new operator in the parser
-Operator new_op;
-
 ///////////////////////////////////////////////
 // Operation for Sort
 ///////////////////////////////////////////////
@@ -41,39 +38,48 @@ void add_sort (char const* str, char const* end)
 ///////////////////////////////////////////////
 // Operation for Operation
 ///////////////////////////////////////////////
+
+// a new operator in the parser
+Operator * new_op;
+
+void inic_op (char const* str, char const* end)
+{
+	new_op = new Operator();
+}
 void add_op (char const* str, char const* end)
 {
-	sem_domain.add_op(new_op);
-	new_op.clear();
+	sem_domain.add_op(*new_op);
+	new_op->Operator::~Operator(); // call destruction before free memory.
+	free(new_op);
 }
 
 void save_mod (char const* str, char const* end)
 {
 	string mode(str, end);
-	new_op.set_mod(mode);
+	new_op->set_mod(mode);
 }
 
 void save_pred (int const i)
 {
-	new_op.set_pred(i);
+	new_op->set_pred(i);
 }
 
 void save_name (char const* str, char const* end)
 {
 	string name(str, end);
-	new_op.set_name(name);
+	new_op->set_name(name);
 }
 
 void save_dom (char const* str, char const* end)
 {
 	string dom(str, end);
-	new_op.add_domain(&(sem_domain.return_sort(dom)));
+	new_op->add_domain(&(sem_domain.return_sort(dom)));
 }
 
 void save_img (char const* str, char const* end)
 {
 	string  img(str, end);
-	new_op.set_image(&(sem_domain.return_sort(img)));
+	new_op->set_image(&(sem_domain.return_sort(img)));
 }
 
 ///////////////////////////////////////////////
@@ -99,7 +105,8 @@ void add_attr (char const* str, char const* end)
 
 	// Save name of new attribute
 	new_attrs->names.push_back(name);
-	if (new_attrs->names.size() == 1){
+	if (new_attrs->names.size() == 1)
+	{
 		new_attrs->mod_type = k_syntetize; // Default value
 		new_attrs->member_symbol = "\0";
 	}
@@ -129,17 +136,14 @@ void save_decl_attrs (char const* str, char const* end)
 {
 	for (vector<string>::size_type i = 0; i < new_attrs->names.size(); i++)
 	{
-		Attribute * attr = new Attribute(
-								new_attrs->names[i],
-								new_attrs->sort_type,
-								new_attrs->mod_type,
-								new_attrs->member_symbol
-							 );
-		if (!sem_domain.add_att(*attr))
-		{
-			// Attribute repeat.
-			free(attr); // free memory of attribute repeat.
-		}
+		Attribute attr(
+						new_attrs->names[i],
+						new_attrs->sort_type,
+						new_attrs->mod_type,
+						new_attrs->member_symbol
+				       );
+		sem_domain.add_att(attr);
+
 	}
 	// Free space memory and assign NULL at pointer.
 	free(new_attrs);
@@ -147,39 +151,54 @@ void save_decl_attrs (char const* str, char const* end)
 }
 
 ///////////////////////////////////////////////
+// Operation for symbol
+///////////////////////////////////////////////
+
+void save_non_terminal(char const* str, char const* end)
+{
+	string name(str, end);
+	Symbol symb(name, k_non_terminal);
+	sem_domain.add_symb(symb);
+}
+
+void save_terminal(char const* str, char const* end)
+{
+	string name(str, end);
+	// The string is 'char'
+	Symbol symb(name, k_terminal);
+	sem_domain.add_symb(symb);
+}
+
+///////////////////////////////////////////////
 // Operation for rules
 ///////////////////////////////////////////////
 Rule * current_rule;
 
-
 void save_rule(char const* str, char const* end)
 {
-	if (!sem_domain.add_rule(*current_rule))
-	{
-		// free memory of rule repeat.
-		free(current_rule);
-	}
+	sem_domain.add_rule(*current_rule);
+	current_rule->Rule::~Rule(); // call destruction before free memory.
+	free(current_rule);
+
 }
+
 void add_left_side_rule(char const* str, char const* end)
 {
 	string left_side_symbol(str, end);
 	current_rule = new Rule();
-	Symbol& symb = sem_domain.get_symbol(left_side_symbol);
-	current_rule->set_left_symbol(symb);
+	current_rule->set_left_symbol(&(sem_domain.get_symbol(left_side_symbol)));
 }
 
 void add_right_side_rule(char const* str, char const* end)
 {
 	string right_side_symbol(str, end);
-	Symbol& symb = sem_domain.get_symbol(right_side_symbol);
-	current_rule->add_right_symbol(symb);
+	current_rule->add_right_symbol(&(sem_domain.get_symbol(right_side_symbol)));
 }
 
 void abbreviated_rule(char const* str, char const* end)
 {
-	Symbol symb = current_rule->get_left_symbol();
 	current_rule = new Rule();
-	current_rule->set_left_symbol(symb);
+	current_rule->set_left_symbol(current_rule->get_left_symbol());
 }
 
 void pepito(char const* str, char const* end)
@@ -187,30 +206,7 @@ void pepito(char const* str, char const* end)
 //	string pepe(str, end);
 //	cout << pepe << endl;
 }
-///////////////////////////////////////////////
-// Operation for symbol
-///////////////////////////////////////////////
 
-void save_non_terminal(char const* str, char const* end)
-{
-	string name(str, end);
-	Symbol* symb = new Symbol(name, k_non_terminal);
-	if (!sem_domain.add_symb(*symb))
-	{
-		free (symb);
-	}
-}
-
-void save_terminal(char const* str, char const* end)
-{
-	string name(str, end);
-	// The string is 'char'
-	Symbol* symb = new Symbol(name, k_terminal);
-	if (!sem_domain.add_symb(*symb))
-	{
-		free (symb);
-	}
-}
 
 ///////////////////////////////////////////////
 // Skip parser
@@ -263,7 +259,7 @@ struct att_grammar: public grammar<att_grammar>
 
 			decl_sort   = strlit<>("sort ") >> r_ident[&add_sort] >> *(',' >> r_ident[&add_sort]) >> ';';
 
-			decl_op     = strlit<>("op ") >>
+			decl_op     = strlit<>("op ")[&inic_op] >>
 						  !(mod_op[&save_mod]) >>
 						  !('(' >> int_p[&save_pred] >> ')') >>
 						  r_oper[&save_name] >> ':' >>

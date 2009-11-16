@@ -10,8 +10,9 @@
 #define OPERATOR_H_
 
 #include <string>
-#include "Sort.h"
 #include <vector>
+
+#include "Sort.h"
 
 namespace genevalmag {
 
@@ -58,10 +59,13 @@ public:
     void set_mod(string mod);
     void set_name(string name);
     void set_pred(int pred);
+
     string to_string();
     bool equals(Operator op) const;
 
-    void clear();
+    void purge();
+
+    string key() const;
 
 };
 

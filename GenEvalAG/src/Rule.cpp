@@ -6,40 +6,48 @@
  *  \author    Picco, Gonzalo M.
  */
 
+#include <iostream>
+
 #include "Rule.h"
 
 namespace genevalmag {
 
+static int rls = 0;
+
 Rule::Rule() {
+	rls++;
 	// TODO Auto-generated constructor stub
 
 }
 
 Rule::Rule(Rule const & other)
 {
+	rls++;
 	copy(other);
 }
 
 Rule::~Rule() {
+	rls--;
+	//cout <<  "rules " << rls << endl;
 	destroy();
 }
 
-void Rule::set_left_symbol(const Symbol symb)
+void Rule::set_left_symbol( Symbol* symb)
 {
 	left_symbol = symb;
 }
 
-void Rule::add_right_symbol(const Symbol symb)
+void Rule::add_right_symbol( Symbol* symb)
 {
 	right_side.push_back(symb);
 }
 
-Symbol Rule::get_left_symbol()const
+Symbol* Rule::get_left_symbol()const
 {
 	return left_symbol;
 }
 
-vector<Symbol> Rule::get_right_side() const
+vector<Symbol*> Rule::get_right_side() const
 {
 	return right_side;
 }
@@ -72,14 +80,23 @@ void Rule::destroy()
 
 bool Rule::equals(Rule rule) const
 {
-	bool result = rule.get_left_symbol().equals(left_symbol);
-	size_t i = 0;
-	while (result && (i < right_side.size()))
+	return	key().compare(rule.key()) == 0;
+}
+
+string Rule::to_string_not_eq() const
+{
+	string rule;
+	rule.append("rule\t");
+	rule.append((get_left_symbol())->get_name());
+	rule.append("\t::= ");
+	for (vector<Symbol>::size_type i = 0; i < right_side.size(); ++i)
 	{
-		result = right_side[i].equals(rule.get_right_side()[i]);
-		i++;
+		rule.append(right_side[i]->get_name());
+		if (i+1<right_side.size())
+			rule.append(" ");
 	}
-	return result;
+	rule.append(";");
+	return rule;
 }
 
 string Rule::to_string() const
@@ -90,20 +107,17 @@ string Rule::to_string() const
 	return rule;
 }
 
-string Rule::to_string_not_eq() const
+
+
+
+string Rule::key() const
 {
-	string rule;
-	rule.append("rule\t");
-	rule.append((get_left_symbol()).get_name());
-	rule.append("\t::= ");
+	string key;
+	key.append((get_left_symbol())->get_name());
 	for (vector<Symbol>::size_type i = 0; i < right_side.size(); ++i)
 	{
-		rule.append(right_side[i].get_name());
-		if (i+1<right_side.size())
-			rule.append(" ");
+		key.append(right_side[i]->get_name());
 	}
-	rule.append(";");
-	return rule;
+	return key;
 }
-
 }

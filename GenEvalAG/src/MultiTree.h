@@ -23,7 +23,7 @@ template <class T> class MultiTree{
 		MultiTree();
 		~MultiTree();
 		T get_root();
-		void set_root(T root);
+		void set_root(T new_root);
 };
 
 }

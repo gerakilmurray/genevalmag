@@ -12,12 +12,16 @@
 
 namespace genevalmag {
 
+static int symbs = 0;
+
 Symbol::Symbol()
 {
+	symbs++;
 }
 
 Symbol::Symbol(Symbol const& other)
 {
+	symbs++;
 	copy(other);
 }
 
@@ -25,9 +29,12 @@ Symbol::Symbol(string name, symb_type type)
 {
 	sym_name = name;
 	sym_type = type;
+	symbs++;
 }
 
 Symbol::~Symbol() {
+	symbs--;
+	//cout << "symbs " << symbs << endl;
 	destroy();
 }
 
@@ -53,14 +60,14 @@ void Symbol::destroy()
 }
 
 
-void Symbol::add_attr(const Attribute attr)
+void Symbol::add_attr( Attribute* attr)
 {
 	attrs.push_back(attr);
 }
 
 void Symbol::remove_attr(int index)
 {
-	////////
+	//////// ver si hace falta.
 }
 
 string Symbol::get_name() const
@@ -85,10 +92,10 @@ void Symbol::set_type(symb_type type)
 
 bool Symbol::equals(Symbol symb) const
 {
-	return sym_name.compare(symb.get_name()) == 0;
+	return key().compare(symb.key()) == 0;
 }
 
-vector<Attribute> Symbol::get_attrs() const
+vector<Attribute*> Symbol::get_attrs() const
 {
 	return attrs;
 }
@@ -106,7 +113,7 @@ string Symbol::to_string() const
 			symb.append("\tAttributes: ");
 			for (vector<Attribute>::size_type i = 0; i < attrs.size(); i++)
 			{
-				symb.append(attrs[i].get_name());
+				symb.append(attrs[i]->get_name());
 				if (i < attrs.size() - 1)
 					symb.append(",");
 			}
@@ -125,6 +132,11 @@ string Symbol::to_string() const
 bool Symbol::is_non_terminal() const
 {
 	return sym_type == k_non_terminal;
+}
+
+string Symbol::key()const
+{
+	return sym_name;
 }
 
 }

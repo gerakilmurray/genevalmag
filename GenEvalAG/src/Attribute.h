@@ -43,14 +43,16 @@ public:
 	type_attr get_mod_type() const;
 	string get_member_symbol() const;
 
-	void set_name(string a_name);
-	void set_type(string a_type);
-	void set_mod_type(type_attr a_mod_type);
-	void set_member_symbol(string a_member_symbol);
+	void set_name(string name);
+	void set_type(string type);
+	void set_mod_type(type_attr mod_type);
+	void set_member_symbol(string member_symbol);
 
 	string to_string ()const;
 	bool equals(Attribute attr) const;
 	bool is_syntetize() const;
+
+	string key() const;
 };
 }
 #endif /* ATTRIBUTE_H_ */

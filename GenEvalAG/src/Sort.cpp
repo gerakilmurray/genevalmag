@@ -39,10 +39,11 @@ Sort::Sort(Sort const & other)
 ///////////////////////////////////////////////
 // destrucors
 ///////////////////////////////////////////////
-Sort::~Sort() {
-	destroy();
+Sort::~Sort()
+{
 	nm--;
-	cout << nm << " sorts" << endl;
+	//cout << nm << " sorts" << endl;
+	destroy();
 }
 
 Sort& Sort::operator= (Sort const& other)
@@ -93,7 +94,7 @@ void Sort::set_name(string name)
 ///////////////////////////////////////////////
 bool Sort::equals(Sort s) const
 {
-	return s_name.compare(s.s_name)== 0;
+	return key().compare(s.key())==0;
 }
 
 ///////////////////////////////////////////////
@@ -110,6 +111,11 @@ string Sort::to_string() const
 	sort.append(")");
 	sort.append(";");
 	return sort;
+}
+
+string Sort::key() const
+{
+	return s_name;
 }
 
 }

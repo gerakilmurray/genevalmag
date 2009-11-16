@@ -35,6 +35,8 @@ public:
     void set_name(string name);
     bool equals(Sort s) const;
     string to_string() const;
+
+    string key() const;
 };
 
 }

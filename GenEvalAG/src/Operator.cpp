@@ -52,8 +52,8 @@ void Operator::destroy()
 Operator::~Operator()
 {
 	ops--;
+	//cout << ops << " opers" << endl;
 	destroy();
-	cout << ops << " opers" << endl;
 }
 
 ///////////////////////////////////////////////
@@ -207,28 +207,38 @@ void Operator::add_domain(Sort* sort)
 ///////////////////////////////////////////////
 bool Operator::equals(Operator op) const
 {
-	bool eq(false);
-	eq = (o_name.compare(op.get_name())== 0) &&
-		 (o_image->equals(*(op.get_image()))) &&
-		 (o_mod == op.o_mod) &&     // esta mal esto--> op deberia usarse con get!!!!
-		 (o_pred == op.get_pred()) &&
-		 (o_domain.size() == op.get_domain().size());
-
-	if (!eq) return false;
-	else
-	{
-		for (vector<Sort>::size_type i = 0; i < o_domain.size(); ++i)
-		{
-			eq = o_domain.at(i)->equals(*(op.get_domain().at(i)));
-			if (!eq) return false;
-		}
-	}
-	return eq;// si llega a este punto, obvio es verdadero.
+	return	key().compare(op.key()) == 0;
 }
 
-void Operator::clear()
+void Operator::purge()
 {
 	o_domain.clear();
+	o_image = NULL;
+	o_pred = 1000;
+	o_mod = k_prefix;
 }
 
+string Operator::key() const
+{
+	string key;
+    switch (o_mod)
+	    {
+			case k_infix:   key.append("infix");break;
+			case k_prefix:  key.append("prefix");break;
+			case k_suffix:  key.append("suffix");break;
+			default: key.append("prefix");
+	    }
+
+	std::stringstream pred;
+	pred << get_pred();
+	key.append(pred.str());
+	key.append(get_name());
+	for (vector<Sort>::size_type i = 0; i < o_domain.size(); ++i)
+	{
+		key.append(o_domain[i]->get_name());
+	}
+	key.append(get_image()->get_name());
+
+	return key;
+}
 }
