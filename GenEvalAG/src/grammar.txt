@@ -15,6 +15,7 @@
 semantics domains
 	
 	op infix (5) + : int , int->int;
+	op infix (50) * : int , int->int;
 	op sqr : int -> int;
 	op sqr : int -> int;	
 
@@ -41,7 +42,7 @@ rules
 
 	E ::=	E '+' T
 				compute
-					E[0].valor = E[1].valor + T[0].valor;
+					E[0].valor = E[1].valor + T[0].valor + %T[0].valor;
 				end
 		| 	T
 			  	compute

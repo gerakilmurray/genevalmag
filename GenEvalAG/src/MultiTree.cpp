@@ -10,24 +10,24 @@
 
 namespace genevalmag {
 
-template <class T> MultiTree<T>::MultiTree()
+MultiTree::MultiTree()
 {
-	// TODO Auto-generated constructor stub
+
 }
 
-template <class T> MultiTree<T>::~MultiTree()
+MultiTree::~MultiTree()
 {
-	// TODO Auto-generated destructor stub
+
 }
 
-template <class T> T MultiTree<T>::get_root()
+n_term MultiTree::get_root()
 {
-	return root;
+	return elem.head->data;
 }
 
-template <class T> void MultiTree<T>::set_root(T root)
+void MultiTree::set_root(n_term new_root)
 {
-	root = root;
+	elem.set_head(new_root);
 }
 
 }

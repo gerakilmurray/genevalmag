@@ -9,21 +9,30 @@
 #ifndef MULTITREE_H_
 #define MULTITREE_H_
 
-#include <vector>
+#include "tree/tree.hh"
+
+#include "Attribute.h"
+#include "Symbol.h"
 
 namespace genevalmag {
 
-template <class T> class MultiTree{
+struct n_term
+{
+	Symbol * t_symb;	// Symbol.
+	int t_ins;			// Index instance.
+	Attribute * t_attr;	// Symbol's attribute.
+};
+
+class MultiTree{
 	private:
-		T root;
-//		typedef MultiTree <T> child;
-//		vector<child> children;
+		tree<n_term> elem;
 
 	public:
 		MultiTree();
 		~MultiTree();
-		T get_root();
-		void set_root(T new_root);
+		n_term get_root();
+		void set_root(n_term new_root);
+		void addchild(n_term termino);
 };
 
 }

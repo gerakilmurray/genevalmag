@@ -9,22 +9,21 @@
 #ifndef EQUATION_H_
 #define EQUATION_H_
 
-#include <vector>
 
 #include "MultiTree.h"
-#include "Symbol.h"
 
 namespace genevalmag {
 
 class Equation {
 	private:
-		MultiTree <Symbol> *body;
+		n_term l_value;
+		MultiTree r_value;
 
 	public:
 		Equation();
 		virtual ~Equation();
-		Symbol get_left_side();
-		vector <Symbol> get_right_side();
+		Symbol get_l_value();
+		vector <Symbol> get_body();
 };
 
 }

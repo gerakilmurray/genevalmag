@@ -8,6 +8,7 @@
 
 #include <boost/spirit/include/classic_core.hpp>
 #include <boost/algorithm/string/erase.hpp>
+#include <boost/spirit/include/classic_symbols.hpp>
 #include <iostream>
 #include <vector>
 #include <string>
@@ -201,10 +202,18 @@ void abbreviated_rule(char const* str, char const* end)
 	current_rule->set_left_symbol(current_rule->get_left_symbol());
 }
 
+
+///////////////////////////////////////////////
+// Operation of section compute of rule.
+///////////////////////////////////////////////
+
+symbols<string> oper;
+
+
 void pepito(char const* str, char const* end)
 {
-//	string pepe(str, end);
-//	cout << pepe << endl;
+	string pepe(str, end);
+	cout << pepe << endl;
 }
 
 
@@ -262,7 +271,7 @@ struct att_grammar: public grammar<att_grammar>
 			decl_op     = strlit<>("op ")[&inic_op] >>
 						  !(mod_op[&save_mod]) >>
 						  !('(' >> int_p[&save_pred] >> ')') >>
-						  r_oper[&save_name] >> ':' >>
+						  r_oper[&save_name][oper.add] >> ':' >>
 						  dom_op >> strlit<>("->") >>
 						  r_ident[&save_img]  >> ';';
 
@@ -298,16 +307,16 @@ struct att_grammar: public grammar<att_grammar>
 
 			r_right_rule =  +( r_ident[&save_non_terminal]
 			                 | r_char[&save_terminal])[&add_right_side_rule] >>
-						    !( strlit<>("compute") >>
+						    !( strlit<>("compute")[&pepito] >>
 							   +(r_sem_expr[&pepito]) >>
 							   strlit<>("end")
 							  );
 
-			r_sem_expr	= left_side >> '=' >> right_side >> ';';
+			r_sem_expr	= left_side[&pepito] >> '=' >> right_side >> ';';
 
 			left_side	= r_att_sem;
 
-			right_side	= +(r_att_sem | r_id_op) ;
+			right_side	= +(r_att_sem | oper)[&pepito] ;
 
 			r_att_sem	= lexeme_d[ r_ident >> '[' >> int_p >> ']' >> '.' >> r_ident ];
 
@@ -317,6 +326,8 @@ struct att_grammar: public grammar<att_grammar>
 
 			r_att_grammar = r_semantics >> r_attributes >> r_rules >> end_p;
 		}
+
+
 
 		rule<ScannerT> r_ident, r_oper, r_id_op, r_char,r_reserved_word;
 
