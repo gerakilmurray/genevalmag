@@ -40,8 +40,9 @@ public:
 	bool add_symb (Symbol& symb);
 	bool add_rule (Rule& rule);
 
-	Sort& return_sort (string name);
+	Sort& return_sort (string name_sort);
 	Symbol& get_symbol(string name_symbol);
+	Operator& get_operation(string name_oper);
 
 	string to_string();
 };

@@ -14,10 +14,10 @@
 //////// bloque de dominio semantico /////////////////////
 semantics domains
 	
-	op infix (5) + : int , int->int;
+	op infix (5) +: int , int->int;
 	op infix (50) * : int , int->int;
-	op sqr : int -> int;
-	op sqr : int -> int;	
+	op (99) sqr : int -> int;
+	op postfix & : int -> int;	
 
 	op prefix %: string -> string;
 	op (8) %: string -> adrian;
@@ -42,11 +42,11 @@ rules
 
 	E ::=	E '+' T
 				compute
-					E[0].valor = E[1].valor + T[0].valor + %T[0].valor;
+					E[0].valor = E[1].valor + T[0].valor * T[0].valor + T[0].valor * T[0].valor * %%T[0].valor ;
 				end
 		| 	T
 			  	compute
-			  		E[0].valor = T[0].valor;
+			  		E[0].valor =  T[0].valor T[0].valor T[0].valor T[0].valor T[0].valor T[0].valor &;
 	  			end
 	;
 	T ::=	id '*' id

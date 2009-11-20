@@ -19,9 +19,10 @@ namespace genevalmag {
 // operation's mode.
 enum mod_op
 {
+	k_prefix,
 	k_infix,
-	k_suffix,
-	k_prefix
+	k_postfix
+
 };
 
 class Operator

@@ -88,12 +88,12 @@ bool SemDomain::add_rule( Rule& rule)
 ///////////////////////////////////////////////
 // seach sort and return it. else create a sort and return.
 ///////////////////////////////////////////////
-Sort& SemDomain::return_sort(string name)
+Sort& SemDomain::return_sort(string name_sort)
 {
-	Sort sort_new(name);
+	Sort sort_new(name_sort);
 	add_sort(sort_new);
 
-	map<string,Sort>::iterator it = v_sort.find(name);
+	map<string,Sort>::iterator it = v_sort.find(name_sort);
 
 	return it->second;
 }
@@ -170,6 +170,13 @@ void SemDomain::load_attrs(Symbol& symb)
 Symbol& SemDomain::get_symbol(string name_symbol)
 {
 	map<string,Symbol>::iterator it = v_symb.find(name_symbol);
+	return it->second;
+}
+
+Operator& SemDomain::get_operation(string name_oper)
+{
+	map<string,Operator>::iterator it = v_oper.begin();
+
 	return it->second;
 }
 

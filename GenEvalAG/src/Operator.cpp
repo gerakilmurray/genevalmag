@@ -111,8 +111,8 @@ void Operator::set_mod(string mod)
 		o_mod = k_infix;
 	else if (mod.compare("prefix") == 0)
 		o_mod = k_prefix;
-	else if (mod.compare("suffix") == 0)
-		o_mod = k_suffix;
+	else if (mod.compare("postfix") == 0)
+		o_mod = k_postfix;
 	else
 		// default
 		o_mod = k_prefix;
@@ -161,7 +161,7 @@ string Operator::to_string()
     {
 		case k_infix:   op.append("infix");break;
 		case k_prefix:  op.append("prefix");break;
-		case k_suffix:  op.append("suffix");break;
+		case k_postfix:  op.append("postfix");break;
 		default: op.append("prefix");
     }
 
@@ -225,13 +225,13 @@ string Operator::key() const
 	    {
 			case k_infix:   key.append("infix");break;
 			case k_prefix:  key.append("prefix");break;
-			case k_suffix:  key.append("suffix");break;
+			case k_postfix:  key.append("postfix");break;
 			default: key.append("prefix");
 	    }
 
-	std::stringstream pred;
-	pred << get_pred();
-	key.append(pred.str());
+//	std::stringstream pred;
+//	pred << get_pred();
+//	key.append(pred.str());
 	key.append(get_name());
 	for (vector<Sort>::size_type i = 0; i < o_domain.size(); ++i)
 	{

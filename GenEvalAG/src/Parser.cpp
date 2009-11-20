@@ -10,6 +10,7 @@
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/spirit/include/classic_symbols.hpp>
 #include <iostream>
+#include <stdio.h>
 #include <vector>
 #include <string>
 
@@ -19,7 +20,9 @@ using namespace std;
 using namespace BOOST_SPIRIT_CLASSIC_NS;
 using namespace genevalmag;
 
-#define MAX_INPUT_LINE 100
+#define MAX_INPUT_LINE 1000
+
+
 
 /** /var sem_domain
   * /brief Variable to represent Semantic domain
@@ -29,6 +32,7 @@ SemDomain sem_domain;
 ///////////////////////////////////////////////
 // Operation for Sort
 ///////////////////////////////////////////////
+
 void add_sort (char const* str, char const* end)
 {
     string  name(str, end);
@@ -47,6 +51,7 @@ void inic_op (char const* str, char const* end)
 {
 	new_op = new Operator();
 }
+
 void add_op (char const* str, char const* end)
 {
 	sem_domain.add_op(*new_op);
@@ -86,6 +91,7 @@ void save_img (char const* str, char const* end)
 ///////////////////////////////////////////////
 // Operation for Attributes
 ///////////////////////////////////////////////
+
 struct decl_attr
 {
 	vector<string> names;
@@ -173,6 +179,7 @@ void save_terminal(char const* str, char const* end)
 ///////////////////////////////////////////////
 // Operation for rules
 ///////////////////////////////////////////////
+
 Rule * current_rule;
 
 void save_rule(char const* str, char const* end)
@@ -202,13 +209,17 @@ void abbreviated_rule(char const* str, char const* end)
 	current_rule->set_left_symbol(current_rule->get_left_symbol());
 }
 
-
 ///////////////////////////////////////////////
 // Operation of section compute of rule.
 ///////////////////////////////////////////////
 
-symbols<string> oper;
-
+void add_op_exp(char const* str, char const* end)
+{
+	string name_op(str, end);
+	//Operator* op = &(sem_domain.get_operation(name_op));
+	//cout << op->get_name() << endl;
+	cout << "op " << name_op << endl;
+}
 
 void pepito(char const* str, char const* end)
 {
@@ -216,10 +227,16 @@ void pepito(char const* str, char const* end)
 	cout << pepe << endl;
 }
 
+void oper_table(char const* str, char const* end)
+{
+	string name_op(str, end);
+
+}
 
 ///////////////////////////////////////////////
 // Skip parser
 ///////////////////////////////////////////////
+
 struct skip_parser: public grammar<skip_parser>
 {
 	template <typename ScannerT>
@@ -240,6 +257,7 @@ struct skip_parser: public grammar<skip_parser>
 ///////////////////////////////////////////////
 // Type attribute grammar
 ///////////////////////////////////////////////
+
 struct att_grammar: public grammar<att_grammar>
 {
 	template <typename ScannerT>
@@ -269,15 +287,19 @@ struct att_grammar: public grammar<att_grammar>
 			decl_sort   = strlit<>("sort ") >> r_ident[&add_sort] >> *(',' >> r_ident[&add_sort]) >> ';';
 
 			decl_op     = strlit<>("op ")[&inic_op] >>
-						  !(mod_op[&save_mod]) >>
-						  !('(' >> int_p[&save_pred] >> ')') >>
-						  r_oper[&save_name][oper.add] >> ':' >>
+						  (op_prefix | op_infix | op_sufix | op_default) >> ':' >>
 						  dom_op >> strlit<>("->") >>
 						  r_ident[&save_img]  >> ';';
 
+			op_prefix =  strlit<>("prefix")[&save_mod] >> !oper_pred >> r_oper[&save_name][operation_prefix.add];
+			op_infix =  strlit<>("infix")[&save_mod] >> !oper_pred >> r_oper[&save_name][operation_infix.add];
+			op_sufix =  strlit<>("postfix")[&save_mod] >> !oper_pred >> r_oper[&save_name][operation_sufix.add];
+			op_default = !oper_pred >> r_oper[&save_name][operation_prefix.add];
+
+			oper_pred = '(' >> int_p[&save_pred] >> ')';
+
 			dom_op      = r_ident[&save_dom] >> *(',' >> r_ident[&save_dom]);
 
-			mod_op      = strlit<>("infix") | strlit<>("prefix") | strlit<>("sufix");
 
 			////////////////////////////////////////////////////////////
 			// Grammar's Attribute
@@ -307,16 +329,22 @@ struct att_grammar: public grammar<att_grammar>
 
 			r_right_rule =  +( r_ident[&save_non_terminal]
 			                 | r_char[&save_terminal])[&add_right_side_rule] >>
-						    !( strlit<>("compute")[&pepito] >>
-							   +(r_sem_expr[&pepito]) >>
+						    !( strlit<>("compute") >>
+							   +(r_sem_expr) >>
 							   strlit<>("end")
 							  );
 
-			r_sem_expr	= left_side[&pepito] >> '=' >> right_side >> ';';
+			r_sem_expr	= left_side >> '=' >> right_side[&pepito] >> ';';
 
 			left_side	= r_att_sem;
 
-			right_side	= +(r_att_sem | oper)[&pepito] ;
+			right_side	= r_1 >> operation_infix >> right_side | r_1;
+
+			r_1 = operation_prefix >> r_1 | r_2;
+
+			r_2 = r_3 >> operation_sufix | r_3;
+
+			r_3 = +r_att_sem;
 
 			r_att_sem	= lexeme_d[ r_ident >> '[' >> int_p >> ']' >> '.' >> r_ident ];
 
@@ -327,13 +355,17 @@ struct att_grammar: public grammar<att_grammar>
 			r_att_grammar = r_semantics >> r_attributes >> r_rules >> end_p;
 		}
 
-
+		symbols <> operation_prefix;
+		symbols <> operation_infix;
+		symbols <> operation_sufix;
 
 		rule<ScannerT> r_ident, r_oper, r_id_op, r_char,r_reserved_word;
 
-		rule<ScannerT> r_semantics, bloq_sem, decl_sort, decl_op, dom_op,mod_op;
+		rule<ScannerT> r_semantics, bloq_sem, decl_sort, decl_op, dom_op,oper_pred,op_prefix,op_infix,op_sufix,op_default;
 		rule<ScannerT> r_attributes, decl_att, r_type_att, conj_simb;
 		rule<ScannerT> r_rules, decl_rule, r_sem_expr, left_side, right_side, r_att_sem,r_right_rule;
+
+		rule<ScannerT> r_1,r_2,r_3;
 
 		rule<ScannerT> r_att_grammar;
 		rule<ScannerT> const& start() const { return r_att_grammar; }
