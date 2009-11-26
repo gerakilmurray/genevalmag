@@ -47,11 +47,11 @@ rules
 
 	E ::=	E '+' T
 				compute
-					E[0].valor = E[1].valor + T[0].valor * T[0].valor + T[0].valor * T[0].valor * %%T[0].valor ;
+					E[0].valor = "helloword" * 'a' + g(8) + T[0].valor * %T[0].valor + f(g("pepe" ) + T[0].valor);
 				end
 		| 	T
 			  	compute
-			  		E[0].valor =  T[0].valor T[0].valor T[0].valor T[0].valor T[0].valor T[0].valor &;
+			  		E[0].valor =  %T[0].valor;
 	  			end
 	;
 	T ::=	id '*' id

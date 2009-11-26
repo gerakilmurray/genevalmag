@@ -320,6 +320,8 @@ struct att_grammar: public grammar<att_grammar>
 
 			r_char	= lexeme_d[ch_p('\'')>> (alnum_p | r_id_op) >> ch_p('\'')];
 
+			r_string	= lexeme_d[ch_p('\"')>> +(alnum_p | r_id_op) >> ch_p('\"')];
+
 			////////////////////////////////////////////////////////////
 			// Grammar's Semantic Domain
 			////////////////////////////////////////////////////////////
@@ -343,7 +345,7 @@ struct att_grammar: public grammar<att_grammar>
 			op_prefix = !(strlit<>("prefix")[&save_mod]) >> !oper_pred >> r_oper[&save_name][operation_prefix.add]
 						            >> ':' >> sort[&save_dom];
 
-			oper_pred = '(' >> (int_p[&save_pred]| '_') >> ',' >> (mod_assoc[&save_mod_assoc]|'_') >> ')';
+			oper_pred = '(' >> (uint_p[&save_pred]| '_') >> ',' >> (mod_assoc[&save_mod_assoc]|'_') >> ')';
 
 			mod_assoc = strlit<>("left") | strlit<>("right") | strlit<>("non-assoc");
 
@@ -363,7 +365,7 @@ struct att_grammar: public grammar<att_grammar>
 
 			r_attributes = strlit<>("attributes")>> +decl_att[&save_decl_attrs];
 
-			decl_att     = r_ident[&add_attr] >> *(',' >> r_ident[&add_attr]) >>
+			decl_att     = r_ident[&add_attr][attributes.add] >> *(',' >> r_ident[&add_attr][attributes.add]) >>
 					       ':' >> !(r_type_att[&save_type_attr]) >> '<' >> r_ident[&save_sort_attr] >> '>' >>
 					       strlit<>("of") >>
 					       (conj_simb |
@@ -379,11 +381,11 @@ struct att_grammar: public grammar<att_grammar>
 
 			r_rules		= strlit<>("rules") >> (+decl_rule);
 
-			decl_rule	= r_ident[&save_non_terminal][&add_left_side_rule] >>
+			decl_rule	= r_ident[&save_non_terminal][&add_left_side_rule][symb.add] >>
 						  strlit<>("::=") >> r_right_rule[&save_rule] >>
 						  *(strlit<>("|")[&abbreviated_rule] >> r_right_rule[&save_rule]) >> ';';
 
-			r_right_rule =  +( r_ident[&save_non_terminal]
+			r_right_rule =  +( r_ident[&save_non_terminal][symb.add]
 			                 | r_char[&save_terminal])[&add_right_side_rule] >>
 						    !( strlit<>("compute") >>
 							   +(r_sem_expr) >>
@@ -392,17 +394,35 @@ struct att_grammar: public grammar<att_grammar>
 
 			r_sem_expr	= left_side >> '=' >> right_side[&pepito] >> ';';
 
-			left_side	= r_att_sem;
+			left_side	= r_instance;
 
-			right_side	= r_1 >> operation_infix >> right_side | r_1;
+			right_side	= r_expresion;
 
-			r_1 = operation_prefix >> r_1 | r_2;
+			r_expresion = r_t >> operation_infix >> r_expresion | r_t;
+			r_t = r_f >> operation_postfix | r_f;
+			r_f = operation_prefix >> r_expresion
+				| '('>> r_expresion >>')'
+				| r_function
+				| r_instance
+				| r_literal
+				;
 
-			r_2 = r_3 >> operation_postfix | r_3;
+//			r_expresion = operation_prefix >> r_expresion
+//						| case_base >> operation_postfix
+//						| case_base >> operation_infix >> r_expresion
+//						| '('>> r_expresion >>')'
+//						| r_function
+//						| r_instance
+//						| r_literal
+//						;
 
-			r_3 = +r_att_sem;
+//			case_base = '('>> r_expresion >>')' | r_function | r_instance | r_literal;
 
-			r_att_sem	= lexeme_d[ r_ident >> '[' >> int_p >> ']' >> '.' >> r_ident ];
+			r_function = functions >> '(' >> r_expresion >> *(',' >> r_expresion) >> ')';
+
+			r_literal = int_p | real_p | r_char | r_string;
+
+			r_instance	= lexeme_d[ symb >> '[' >> int_p >> ']' >> '.' >> attributes ];
 
 			////////////////////////////////////////////////////////////
 			// Attribute Grammar
@@ -418,14 +438,18 @@ struct att_grammar: public grammar<att_grammar>
 
 		symbols <> functions;
 
-		rule<ScannerT> r_ident, r_oper, r_id_op, r_char,r_reserved_word;
+		symbols <> attributes;
+
+		symbols <> symb;
+
+		rule<ScannerT> r_ident, r_oper, r_id_op, r_char,r_reserved_word,r_string;
 
 		rule<ScannerT> r_semantics, bloq_sem, decl_sort,decl_func, decl_op, mod_assoc,sort,
 					   dom_func,oper_pred,op_prefix,op_infix,op_postfix;
 		rule<ScannerT> r_attributes, decl_att, r_type_att, conj_simb;
-		rule<ScannerT> r_rules, decl_rule, r_sem_expr, left_side, right_side, r_att_sem,r_right_rule;
+		rule<ScannerT> r_rules, decl_rule, r_sem_expr, left_side, right_side, r_instance,r_right_rule;
 
-		rule<ScannerT> r_1,r_2,r_3;
+		rule<ScannerT> r_expresion,r_function, r_literal,case_base,r_t,r_f;
 
 		rule<ScannerT> r_att_grammar;
 		rule<ScannerT> const& start() const { return r_att_grammar; }
