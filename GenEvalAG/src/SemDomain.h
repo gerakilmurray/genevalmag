@@ -16,6 +16,7 @@
 #include "Attribute.h"
 #include "Symbol.h"
 #include "Rule.h"
+#include "Function.h"
 
 using namespace std;
 namespace genevalmag {
@@ -24,6 +25,7 @@ class SemDomain {
 private:
 	map<string, Sort>		v_sort;
 	map<string, Operator>	v_oper;
+	map<string, Function>	v_funcs;
 	map<string, Attribute> 	v_attr;
 	map<string, Symbol>		v_symb;
 	map<string, Rule>		v_rule;
@@ -36,6 +38,7 @@ public:
 
 	bool add_sort (Sort& s);
 	bool add_op   (Operator& op);
+	bool add_func   (Function& op);
 	bool add_att  (Attribute& att);
 	bool add_symb (Symbol& symb);
 	bool add_rule (Rule& rule);

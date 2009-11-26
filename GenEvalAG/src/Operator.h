@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 
+
 #include "Sort.h"
 
 namespace genevalmag {
@@ -25,6 +26,14 @@ enum mod_op
 
 };
 
+// operation associative's mode.
+enum mod_assoc
+{
+	k_left,
+	k_right,
+	k_nonassoc
+};
+
 class Operator
 {
 private:
@@ -32,8 +41,9 @@ private:
 	vector <Sort*>	o_domain;
 	Sort*			o_image;
 	mod_op			o_mod;
-	int				o_pred;
-	int				o_id;
+	unsigned int	o_pred;
+	unsigned int	o_id;
+	mod_assoc 		o_assoc;
 
 	//Methods for STL C++
 	void copy(const Operator& other);
@@ -41,7 +51,7 @@ private:
 
 public:
 	Operator();
-	Operator(string name, vector <Sort*> * v, Sort * img, int id);
+	Operator(string name, vector <Sort*> * vec, Sort * img, int id);
 	Operator(const Operator & other);
 	virtual ~Operator();
 	Operator& operator= (Operator & other);
@@ -50,6 +60,8 @@ public:
     int get_id() const;
     Sort* get_image() const;
     mod_op get_mod() const;
+
+    mod_assoc get_mod_assoc() const;
     string get_name() const;
     int get_pred() const;
     void add_domain(Sort* sort);
@@ -58,6 +70,8 @@ public:
     void set_id(int id);
     void set_image(Sort* image);
     void set_mod(string mod);
+
+    void set_mod_assoc(string mod);
     void set_name(string name);
     void set_pred(int pred);
 

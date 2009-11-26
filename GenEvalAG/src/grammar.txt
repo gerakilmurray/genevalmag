@@ -14,25 +14,30 @@
 //////// bloque de dominio semantico /////////////////////
 semantics domains
 	
-	op infix (5) +: int , int->int;
-	op infix (50) * : int , int->int;
-	op (99) sqr : int -> int;
+	sort int;
+		
+	op infix (5, left) +: int , int->int;
+	op infix (50, non-assoc) * : int , int->int;
+	op (99,_) sqr : int -> int;
 	op postfix & : int -> int;	
 
-	op prefix %: string -> string;
-	op (8) %: string -> adrian;
-	op infix (5) + : int , int -> string;
-	sort int;
 	sort string, character;
 	sort pepe;
 	sort adrian;
+
+	op prefix (_,right) %: string -> string;
+	op (8,non-assoc) %: string -> adrian;
+	op infix (5,left) + : int , int -> string;
+		
+	function f: int, int -> string;
+	function g: string -> int;
 	
 //////// bloque de atributos /////////////////////
 attributes
 	valor : syn <int> of all;
 	
-	lexema, termino : syn <string> of all - {E, T                  };
-	lexx  : syn <string> of all - {T}; // Borrar el ALL
+	lexema, termino : syn <string> of all - {E, T};
+	lexx  : syn <string> of all - {T};
 	type  : inh <char> of {E, T};
 	
 	grade : <int> of {E};

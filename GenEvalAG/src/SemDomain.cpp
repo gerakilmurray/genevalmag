@@ -63,6 +63,10 @@ bool SemDomain::add_op( Operator& oper)
 {
 	return add<Operator>(oper, v_oper);
 }
+bool SemDomain::add_func( Function& func)
+{
+	return add<Function>(func, v_funcs);
+}
 
 bool SemDomain::add_att( Attribute& attr)
 {
@@ -107,6 +111,8 @@ string SemDomain::to_string()
 	semdomain.append(to_string_vec<Sort>(v_sort));
 	semdomain.append("\n");
 	semdomain.append(to_string_vec<Operator>(v_oper));
+	semdomain.append("\n");
+	semdomain.append(to_string_vec<Function>(v_funcs));
 	semdomain.append("\nattributes\n");
 //	map<string,Attribute>::iterator it1 = v_attr.find("valorsynintall");
 //	it1->second.set_name("valores");

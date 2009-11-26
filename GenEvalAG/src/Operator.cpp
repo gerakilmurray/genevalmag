@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <climits>
 
 #include "Operator.h"
 
@@ -20,11 +21,11 @@ static int ops = 0;
 ///////////////////////////////////////////////
 // contructors
 ///////////////////////////////////////////////
-Operator::Operator(string name, vector <Sort*> * v, Sort * img, int id)
+Operator::Operator(string name, vector <Sort*> * vec, Sort * img, int id)
 {
 	ops++;
 	o_name = name;
-	o_domain = *v;
+	o_domain = *vec;
 	o_image = img;
 	o_id = id;
 }
@@ -33,7 +34,8 @@ Operator::Operator()
 {
 	ops++;
 	o_mod = k_prefix;
-	o_pred = 1000;
+	o_pred = INT_MAX;
+	o_assoc = k_left;
 }
 
 Operator::Operator(const Operator & other)
@@ -78,6 +80,10 @@ mod_op Operator::get_mod() const
 {
 	return o_mod;
 }
+mod_assoc Operator::get_mod_assoc() const
+{
+	return o_assoc;
+}
 
 string Operator::get_name() const
 {
@@ -100,7 +106,6 @@ void Operator::set_id(int id)
 }
 
 void Operator::set_image(Sort* image)
-// CONVENDRIA TOMAR REFERENCIA EN ESTE PUNTO
 {
     o_image = image;
 }
@@ -116,6 +121,19 @@ void Operator::set_mod(string mod)
 	else
 		// default
 		o_mod = k_prefix;
+}
+
+void Operator::set_mod_assoc(string mod)
+{
+	if (mod.compare("left") == 0)
+		o_assoc = k_left;
+	else if (mod.compare("right") == 0)
+		o_assoc = k_right;
+	else if (mod.compare("non-assoc") == 0)
+		o_assoc = k_nonassoc;
+	else
+		// default
+		o_assoc = k_left;
 }
 
 void Operator::set_name(string name)
@@ -147,28 +165,34 @@ void Operator::copy(const Operator& other)
 	o_pred		= other.get_pred();
 	o_image		= other.get_image();
 	o_mod		= other.get_mod();
+	o_assoc		= other.get_mod_assoc();
+
 }
-
-
 ///////////////////////////////////////////////
 // Operator to string
 ///////////////////////////////////////////////
 string Operator::to_string()
 {
 	string op;
-	op.append("op\t");
+	op.append("op\t\t");
     switch (o_mod)
     {
 		case k_infix:   op.append("infix");break;
 		case k_prefix:  op.append("prefix");break;
 		case k_postfix:  op.append("postfix");break;
-		default: op.append("prefix");
     }
 
 	op.append(" (");
 	std::stringstream pred;
 	pred << get_pred();
 	op.append(pred.str());
+	op.append(", ");
+    switch (o_assoc)
+    {
+		case k_left:   op.append("left");break;
+		case k_right:  op.append("right");break;
+		case k_nonassoc:  op.append("non-assoc");break;
+    }
 	op.append(") ");
 	op.append(get_name());
 	op.append(": ");
@@ -197,7 +221,6 @@ string Operator::to_string()
 // add a sort in the domain of a function
 ///////////////////////////////////////////////
 void Operator::add_domain(Sort* sort)
-// CONVENDRIA TOMAR REFERENCIA EN ESTE PUNTO
 {
 	o_domain.push_back(sort);
 }

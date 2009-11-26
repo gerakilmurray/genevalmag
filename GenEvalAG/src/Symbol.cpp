@@ -125,7 +125,6 @@ string Symbol::to_string() const
 	}
 	symb.append(";");
 
-
 	return symb;
 }
 

@@ -102,7 +102,7 @@ bool Sort::equals(Sort s) const
 ///////////////////////////////////////////////
 string Sort::to_string() const
 {
-	string sort("sort\t");
+	string sort("sort\t\t");
 	sort.append(get_name());
 	sort.append("(");
 	std::stringstream id;

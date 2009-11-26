@@ -65,6 +65,14 @@ void save_mod (char const* str, char const* end)
 	new_op->set_mod(mode);
 }
 
+void save_mod_assoc (char const* str, char const* end)
+{
+	string assoc(str, end);
+	new_op->set_mod_assoc(assoc);
+}
+
+
+
 void save_pred (int const i)
 {
 	new_op->set_pred(i);
@@ -86,6 +94,42 @@ void save_img (char const* str, char const* end)
 {
 	string  img(str, end);
 	new_op->set_image(&(sem_domain.return_sort(img)));
+}
+
+
+///////////////////////////////////////////////
+// Operation for Functions
+///////////////////////////////////////////////
+
+// a new function in the parser
+Function * new_function;
+
+void inic_function (char const* str, char const* end)
+{
+	new_function = new Function();
+}
+
+void add_function (char const* str, char const* end)
+{
+	sem_domain.add_func(*new_function);
+	new_function->Function::~Function(); // call destruction before free memory.
+	free(new_function);
+}
+void save_name_function (char const* str, char const* end)
+{
+	string name(str, end);
+	new_function->set_name(name);
+}
+void save_dom_function (char const* str, char const* end)
+{
+	string dom(str, end);
+	new_function->add_domain(&(sem_domain.return_sort(dom)));
+}
+
+void save_img_function (char const* str, char const* end)
+{
+	string  img(str, end);
+	new_function->set_image(&(sem_domain.return_sort(img)));
 }
 
 ///////////////////////////////////////////////
@@ -282,23 +326,35 @@ struct att_grammar: public grammar<att_grammar>
 
 			r_semantics = strlit<>("semantics domains")>> +bloq_sem;
 
-			bloq_sem    = decl_op[&add_op] | decl_sort;
+			bloq_sem    = decl_op[&add_op] | decl_sort | decl_func[&add_function];
 
-			decl_sort   = strlit<>("sort ") >> r_ident[&add_sort] >> *(',' >> r_ident[&add_sort]) >> ';';
+			decl_sort   = strlit<>("sort ") >> r_ident[&add_sort][sorts.add] >> *(',' >> r_ident[&add_sort]) >> ';';
 
 			decl_op     = strlit<>("op ")[&inic_op] >>
-						  (op_prefix | op_infix | op_sufix | op_default) >> ':' >>
-						  dom_op >> strlit<>("->") >>
-						  r_ident[&save_img]  >> ';';
+						  (op_infix | op_postfix | op_prefix) >>
+						  strlit<>("->") >>
+						  sort[&save_img]  >> ';';
 
-			op_prefix =  strlit<>("prefix")[&save_mod] >> !oper_pred >> r_oper[&save_name][operation_prefix.add];
-			op_infix =  strlit<>("infix")[&save_mod] >> !oper_pred >> r_oper[&save_name][operation_infix.add];
-			op_sufix =  strlit<>("postfix")[&save_mod] >> !oper_pred >> r_oper[&save_name][operation_sufix.add];
-			op_default = !oper_pred >> r_oper[&save_name][operation_prefix.add];
 
-			oper_pred = '(' >> int_p[&save_pred] >> ')';
+			op_infix =  strlit<>("infix")[&save_mod] >> !oper_pred >> r_oper[&save_name][operation_infix.add]
+			            >> ':' >> sort[&save_dom] >> ',' >> sort[&save_dom];
+			op_postfix =  strlit<>("postfix")[&save_mod] >> !oper_pred >> r_oper[&save_name][operation_postfix.add]
+			            >> ':' >> sort[&save_dom];
+			op_prefix = !(strlit<>("prefix")[&save_mod]) >> !oper_pred >> r_oper[&save_name][operation_prefix.add]
+						            >> ':' >> sort[&save_dom];
 
-			dom_op      = r_ident[&save_dom] >> *(',' >> r_ident[&save_dom]);
+			oper_pred = '(' >> (int_p[&save_pred]| '_') >> ',' >> (mod_assoc[&save_mod_assoc]|'_') >> ')';
+
+			mod_assoc = strlit<>("left") | strlit<>("right") | strlit<>("non-assoc");
+
+			dom_func      = sort[&save_dom_function] >> *(',' >> sort[&save_dom_function]);
+
+			sort = sorts;
+
+			decl_func = strlit<>("function ")[&inic_function]
+							>> r_oper[&save_name_function][functions.add] >> ':' >>
+					  dom_func >> strlit<>("->") >>
+					  sort[&save_img_function]  >> ';';
 
 
 			////////////////////////////////////////////////////////////
@@ -342,7 +398,7 @@ struct att_grammar: public grammar<att_grammar>
 
 			r_1 = operation_prefix >> r_1 | r_2;
 
-			r_2 = r_3 >> operation_sufix | r_3;
+			r_2 = r_3 >> operation_postfix | r_3;
 
 			r_3 = +r_att_sem;
 
@@ -354,14 +410,18 @@ struct att_grammar: public grammar<att_grammar>
 
 			r_att_grammar = r_semantics >> r_attributes >> r_rules >> end_p;
 		}
+		symbols <> sorts;
 
 		symbols <> operation_prefix;
 		symbols <> operation_infix;
-		symbols <> operation_sufix;
+		symbols <> operation_postfix;
+
+		symbols <> functions;
 
 		rule<ScannerT> r_ident, r_oper, r_id_op, r_char,r_reserved_word;
 
-		rule<ScannerT> r_semantics, bloq_sem, decl_sort, decl_op, dom_op,oper_pred,op_prefix,op_infix,op_sufix,op_default;
+		rule<ScannerT> r_semantics, bloq_sem, decl_sort,decl_func, decl_op, mod_assoc,sort,
+					   dom_func,oper_pred,op_prefix,op_infix,op_postfix;
 		rule<ScannerT> r_attributes, decl_att, r_type_att, conj_simb;
 		rule<ScannerT> r_rules, decl_rule, r_sem_expr, left_side, right_side, r_att_sem,r_right_rule;
 
