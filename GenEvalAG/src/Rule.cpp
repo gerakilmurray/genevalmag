@@ -16,8 +16,6 @@ static int rls = 0;
 
 Rule::Rule() {
 	rls++;
-	// TODO Auto-generated constructor stub
-
 }
 
 Rule::Rule(Rule const & other)
@@ -52,9 +50,22 @@ vector<Symbol*> Rule::get_right_side() const
 	return right_side;
 }
 
-vector <Equation> Rule::get_eqs() const
+map<int,Equation> Rule::get_eqs() const
 {
 	return eqs;
+}
+
+Equation* Rule::get_eq(int index)
+{
+	return &(eqs.find(index)->second);
+}
+
+bool Rule::add_eq(Equation eq)
+{
+	static int cant_eq = 0;
+	pair<int,Equation> new_eq(cant_eq++,eq);
+	pair<map<int, Equation>::iterator, bool > result = eqs.insert(new_eq);
+	return result.second;
 }
 
 Rule& Rule::operator= (Rule const& other)

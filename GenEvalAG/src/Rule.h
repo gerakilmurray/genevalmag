@@ -9,7 +9,7 @@
 #ifndef RULE_H_
 #define RULE_H_
 
-#include <vector>
+#include <map>
 
 #include "Symbol.h"
 #include "Equation.h"
@@ -20,7 +20,7 @@ class Rule {
 	private:
 		Symbol* left_symbol;
 		vector <Symbol*> right_side;
-		vector <Equation> eqs;
+		map <int,Equation> eqs;
 
 		//Methods for STL C++
 		void copy(Rule const& other);
@@ -38,7 +38,10 @@ class Rule {
 
 		Symbol* get_left_symbol() const;
 		vector<Symbol*> get_right_side()const;
-		vector <Equation> get_eqs() const;
+		map <int,Equation> get_eqs() const;
+
+		bool add_eq(Equation eq);
+		Equation* get_eq(int index);
 
 		bool equals(Rule rule) const;
 

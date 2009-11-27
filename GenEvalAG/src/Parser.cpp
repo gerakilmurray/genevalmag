@@ -20,9 +20,8 @@ using namespace std;
 using namespace BOOST_SPIRIT_CLASSIC_NS;
 using namespace genevalmag;
 
-#define MAX_INPUT_LINE 1000
-
-
+#define MAX_INPUT_FILE 1000
+#define MAX_INPUT_LINE 128
 
 /** /var sem_domain
   * /brief Variable to represent Semantic domain
@@ -71,8 +70,6 @@ void save_mod_assoc (char const* str, char const* end)
 	new_op->set_mod_assoc(assoc);
 }
 
-
-
 void save_pred (int const i)
 {
 	new_op->set_pred(i);
@@ -96,7 +93,6 @@ void save_img (char const* str, char const* end)
 	new_op->set_image(&(sem_domain.return_sort(img)));
 }
 
-
 ///////////////////////////////////////////////
 // Operation for Functions
 ///////////////////////////////////////////////
@@ -115,11 +111,13 @@ void add_function (char const* str, char const* end)
 	new_function->Function::~Function(); // call destruction before free memory.
 	free(new_function);
 }
+
 void save_name_function (char const* str, char const* end)
 {
 	string name(str, end);
 	new_function->set_name(name);
 }
+
 void save_dom_function (char const* str, char const* end)
 {
 	string dom(str, end);
@@ -309,18 +307,18 @@ struct att_grammar: public grammar<att_grammar>
 	{
 		definition(att_grammar const &self)
 		{
-			r_ident = lexeme_d[(alpha_p | '_') >> *(alnum_p | '_' )] - r_reserved_word;
+			r_ident		= lexeme_d[(alpha_p | '_') >> *(alnum_p | '_' )] - r_reserved_word;
+
+			r_oper		= lexeme_d[(alpha_p | '_' | r_id_op) >> *(alnum_p | '_' | r_id_op)];
+
+			r_id_op		= ch_p ('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>';
+
+			r_char		= lexeme_d[ch_p('\'')>> (alnum_p | r_id_op) >> ch_p('\'')];
+
+			r_string	= lexeme_d[ch_p('\"')>> +(alnum_p | r_id_op) >> ch_p('\"')];
 
 			r_reserved_word = strlit<>("compute")|strlit<>("COMPUTE")|
 							  strlit<>("all")|strlit<>("ALL");
-
-			r_oper  = lexeme_d[(alpha_p | '_' | r_id_op) >> *(alnum_p | '_' | r_id_op)];
-
-			r_id_op = ch_p ('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>';
-
-			r_char	= lexeme_d[ch_p('\'')>> (alnum_p | r_id_op) >> ch_p('\'')];
-
-			r_string	= lexeme_d[ch_p('\"')>> +(alnum_p | r_id_op) >> ch_p('\"')];
 
 			////////////////////////////////////////////////////////////
 			// Grammar's Semantic Domain
@@ -330,7 +328,7 @@ struct att_grammar: public grammar<att_grammar>
 
 			bloq_sem    = decl_op[&add_op] | decl_sort | decl_func[&add_function];
 
-			decl_sort   = strlit<>("sort ") >> r_ident[&add_sort][sorts.add] >> *(',' >> r_ident[&add_sort]) >> ';';
+			decl_sort   = strlit<>("sort ") >> r_ident[&add_sort][st_sorts.add] >> *(',' >> r_ident[&add_sort]) >> ';';
 
 			decl_op     = strlit<>("op ")[&inic_op] >>
 						  (op_infix | op_postfix | op_prefix) >>
@@ -338,26 +336,25 @@ struct att_grammar: public grammar<att_grammar>
 						  sort[&save_img]  >> ';';
 
 
-			op_infix =  strlit<>("infix")[&save_mod] >> !oper_pred >> r_oper[&save_name][operation_infix.add]
+			op_infix	=  strlit<>("infix")[&save_mod] >> !oper_mod >> r_oper[&save_name][st_op_infix.add]
 			            >> ':' >> sort[&save_dom] >> ',' >> sort[&save_dom];
-			op_postfix =  strlit<>("postfix")[&save_mod] >> !oper_pred >> r_oper[&save_name][operation_postfix.add]
+			op_postfix	=  strlit<>("postfix")[&save_mod] >> !oper_mod >> r_oper[&save_name][st_op_postfix.add]
 			            >> ':' >> sort[&save_dom];
-			op_prefix = !(strlit<>("prefix")[&save_mod]) >> !oper_pred >> r_oper[&save_name][operation_prefix.add]
-						            >> ':' >> sort[&save_dom];
+			op_prefix	= !(strlit<>("prefix")[&save_mod]) >> !oper_mod >> r_oper[&save_name][st_op_prefix.add]
+						>> ':' >> sort[&save_dom];
 
-			oper_pred = '(' >> (uint_p[&save_pred]| '_') >> ',' >> (mod_assoc[&save_mod_assoc]|'_') >> ')';
+			oper_mod	= '(' >> (uint_p[&save_pred]| '_') >> ',' >> (mod_assoc[&save_mod_assoc]|'_') >> ')';
 
-			mod_assoc = strlit<>("left") | strlit<>("right") | strlit<>("non-assoc");
+			mod_assoc	= strlit<>("left") | strlit<>("right") | strlit<>("non-assoc");
 
-			dom_func      = sort[&save_dom_function] >> *(',' >> sort[&save_dom_function]);
+			sort		= st_sorts;
 
-			sort = sorts;
+			decl_func	= strlit<>("function ")[&inic_function]
+						>> r_oper[&save_name_function][st_functions.add] >> ':' >>
+						dom_func >> strlit<>("->") >>
+						sort[&save_img_function]  >> ';';
 
-			decl_func = strlit<>("function ")[&inic_function]
-							>> r_oper[&save_name_function][functions.add] >> ':' >>
-					  dom_func >> strlit<>("->") >>
-					  sort[&save_img_function]  >> ';';
-
+			dom_func    = sort[&save_dom_function] >> *(',' >> sort[&save_dom_function]);
 
 			////////////////////////////////////////////////////////////
 			// Grammar's Attribute
@@ -365,7 +362,7 @@ struct att_grammar: public grammar<att_grammar>
 
 			r_attributes = strlit<>("attributes")>> +decl_att[&save_decl_attrs];
 
-			decl_att     = r_ident[&add_attr][attributes.add] >> *(',' >> r_ident[&add_attr][attributes.add]) >>
+			decl_att     = r_ident[&add_attr][st_attributes.add] >> *(',' >> r_ident[&add_attr][st_attributes.add]) >>
 					       ':' >> !(r_type_att[&save_type_attr]) >> '<' >> r_ident[&save_sort_attr] >> '>' >>
 					       strlit<>("of") >>
 					       (conj_simb |
@@ -379,50 +376,57 @@ struct att_grammar: public grammar<att_grammar>
 			// Grammar's Rule
 			////////////////////////////////////////////////////////////
 
-			r_rules		= strlit<>("rules") >> (+decl_rule);
+			r_rules		 = strlit<>("rules") >> (+decl_rule);
 
-			decl_rule	= r_ident[&save_non_terminal][&add_left_side_rule][symb.add] >>
-						  strlit<>("::=") >> r_right_rule[&save_rule] >>
-						  *(strlit<>("|")[&abbreviated_rule] >> r_right_rule[&save_rule]) >> ';';
+			decl_rule	 = r_ident[&save_non_terminal][&add_left_side_rule][st_symbols.add] >>
+						   strlit<>("::=") >> r_right_rule[&save_rule] >>
+						   *(strlit<>("|")[&abbreviated_rule] >> r_right_rule[&save_rule]) >> ';';
 
-			r_right_rule =  +( r_ident[&save_non_terminal][symb.add]
-			                 | r_char[&save_terminal])[&add_right_side_rule] >>
-						    !( strlit<>("compute") >>
-							   +(r_sem_expr) >>
-							   strlit<>("end")
-							  );
+			r_right_rule = +( r_ident[&save_non_terminal][st_symbols.add]
+			                | r_char[&save_terminal])[&add_right_side_rule] >>
+						   !(strlit<>("compute") >>
+						     +(r_sem_expr)[&pepito] >>
+						     strlit<>("end")
+						    );
 
-			r_sem_expr	= left_side >> '=' >> right_side[&pepito] >> ';';
+			r_sem_expr	 = left_side >> '=' >> right_side >> ';';
 
-			left_side	= r_instance;
+			left_side	 = r_instance;
 
-			right_side	= r_expresion;
+			right_side	 = r_expresion;
 
-			r_expresion = r_t >> operation_infix >> r_expresion | r_t;
-			r_t = r_f >> operation_postfix | r_f;
-			r_f = operation_prefix >> r_expresion
-				| '('>> r_expresion >>')'
-				| r_function
-				| r_instance
-				| r_literal
-				;
+			/** Expresion's Grammar non ambigua based in
+			  *
+			  * 	E = T <op_infix> E | T
+			  *		T = F <op_postfix> | F
+			  *		F = (E) | <symb_base>
+			  *
+			  */
+			r_expresion 		= r_expr_prime >> st_op_infix >> r_expresion
+								| r_expr_prime;
 
-//			r_expresion = operation_prefix >> r_expresion
-//						| case_base >> operation_postfix
-//						| case_base >> operation_infix >> r_expresion
-//						| '('>> r_expresion >>')'
-//						| r_function
-//						| r_instance
-//						| r_literal
-//						;
+			r_expr_prime		= r_expr_prime_prime >> st_op_postfix
+								| r_expr_prime_prime;
 
-//			case_base = '('>> r_expresion >>')' | r_function | r_instance | r_literal;
+			r_expr_prime_prime  = st_op_prefix >> r_expresion
+								| '('>> r_expresion >>')'
+								| r_function
+								| r_instance
+								| r_literal
+								;
 
-			r_function = functions >> '(' >> r_expresion >> *(',' >> r_expresion) >> ')';
+			r_function			= st_functions >> '(' >> r_expresion >> *(',' >> r_expresion) >> ')';
 
-			r_literal = int_p | real_p | r_char | r_string;
+			/** Literals accepted: Integer and Float numbers, characters and string,
+			  * between signs ' and " respectively.
+			  */
+			r_literal			= int_p | real_p | r_char | r_string;
 
-			r_instance	= lexeme_d[ symb >> '[' >> int_p >> ']' >> '.' >> attributes ];
+			/** An instance is, the symbol with the number of occurrences in square brackets within
+			  * the rule, with the specific attribute with which it operates.
+			  * Example: E[0].value
+			  */
+			r_instance			= lexeme_d[ st_symbols >> '[' >> int_p >> ']' >> '.' >> st_attributes ];
 
 			////////////////////////////////////////////////////////////
 			// Attribute Grammar
@@ -430,26 +434,26 @@ struct att_grammar: public grammar<att_grammar>
 
 			r_att_grammar = r_semantics >> r_attributes >> r_rules >> end_p;
 		}
-		symbols <> sorts;
+		symbols <> st_sorts;
 
-		symbols <> operation_prefix;
-		symbols <> operation_infix;
-		symbols <> operation_postfix;
+		symbols <> st_op_prefix;
+		symbols <> st_op_infix;
+		symbols <> st_op_postfix;
 
-		symbols <> functions;
+		symbols <> st_functions;
 
-		symbols <> attributes;
+		symbols <> st_attributes;
 
-		symbols <> symb;
+		symbols <> st_symbols;
 
-		rule<ScannerT> r_ident, r_oper, r_id_op, r_char,r_reserved_word,r_string;
+		rule<ScannerT> r_ident, r_oper, r_id_op, r_char,r_reserved_word, r_string;
 
-		rule<ScannerT> r_semantics, bloq_sem, decl_sort,decl_func, decl_op, mod_assoc,sort,
-					   dom_func,oper_pred,op_prefix,op_infix,op_postfix;
+		rule<ScannerT> r_semantics, bloq_sem, decl_sort,decl_func, decl_op, mod_assoc, sort,
+					   dom_func,oper_mod, op_prefix,op_infix,op_postfix;
 		rule<ScannerT> r_attributes, decl_att, r_type_att, conj_simb;
-		rule<ScannerT> r_rules, decl_rule, r_sem_expr, left_side, right_side, r_instance,r_right_rule;
+		rule<ScannerT> r_rules, decl_rule, r_sem_expr, left_side, right_side, r_instance, r_right_rule;
 
-		rule<ScannerT> r_expresion,r_function, r_literal,case_base,r_t,r_f;
+		rule<ScannerT> r_expresion,r_function, r_literal, r_expr_prime, r_expr_prime_prime;
 
 		rule<ScannerT> r_att_grammar;
 		rule<ScannerT> const& start() const { return r_att_grammar; }
@@ -472,7 +476,7 @@ bool parse_grammar(char const* str)
 int main()
 {
 	FILE * p_file;
-	char buffer[MAX_INPUT_LINE];
+	char buffer[MAX_INPUT_FILE];
 	string texto;
 
 	p_file = fopen ("./src/grammar.txt" , "r");
@@ -482,7 +486,7 @@ int main()
 	{
 		while ( !feof (p_file) )
 		{
-	          fgets (buffer , 128 , p_file);
+	          fgets (buffer , MAX_INPUT_LINE , p_file);
 	          texto += buffer;
 	    }
 		fclose (p_file);

@@ -9,15 +9,43 @@
 #ifndef EQUATION_H_
 #define EQUATION_H_
 
+#include "tree/tree.hh"
 
-#include "MultiTree.h"
+#include "Attribute.h"
+#include "Symbol.h"
 
 namespace genevalmag {
 
+// node's type.
+enum node_type
+{
+	k_intance,
+	k_function,
+	k_operator,
+	k_int,
+	k_float,
+	k_char,
+	k_string
+};
+
+struct instance
+{
+	Symbol * i_symb;	// Symbol.
+	int i_num;			// Index instance.
+	Attribute * i_attr;	// Symbol's attribute.
+};
+
+struct n_term
+{
+	void* data;
+	node_type type_node;
+	string type_syntetized;
+};
+
 class Equation {
 	private:
-		n_term l_value;
-		MultiTree r_value;
+		instance l_value;
+		tree<n_term> r_value;
 
 	public:
 		Equation();
