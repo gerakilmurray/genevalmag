@@ -15,12 +15,12 @@ namespace genevalmag
 {
 
 /**
-  * Enumeration of the attribute's type: Inherit or Syntetize.
+  * Enumeration of the attribute's type: Inherit or Synthetize.
   */
 enum type_attr
 {
 	k_inherit,
-	k_syntetize
+	k_synthetize
 };
 
 class Attribute
@@ -95,9 +95,9 @@ public:
 	void set_member_symbol (string member_symbol);
 
 	/**
-	  * Return true if the modifiers of the attribute is syntetize.
+	  * Return true if the modifiers of the attribute is synthetize.
 	  */
-	bool is_syntetize () const;
+	bool is_synthetize () const;
 
 	/**
 	  * Generate and return a string reprensentation of a attribute.

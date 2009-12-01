@@ -186,8 +186,10 @@ string SemDomain::to_string ()
 	semdomain.append (to_string_map <Function > (sd_func));
 	semdomain.append ("\nattributes\n");
 	semdomain.append (to_string_map <Attribute> (sd_attr));
+	semdomain.append ("\n/***********************************************************");
 	semdomain.append ("\nsymbols\n");
 	semdomain.append (to_string_map <Symbol   > (sd_symb));
+	semdomain.append ("***********************************************************/\n");
 	semdomain.append ("\nrules\n");
 	semdomain.append (to_string_map <Rule     > (sd_rule));
 	semdomain.append ("\n");

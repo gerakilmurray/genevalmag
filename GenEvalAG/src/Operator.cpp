@@ -233,14 +233,15 @@ string Operator::to_string () const
 		case k_postfix: op.append ("postfix"); break;
     }
 	op.append ("\t(");
-	std::stringstream prec;
-	prec << o_prec;
 	if (o_prec == UINT_MAX)
 	{
-		op.append ("MAX");
+		// Default precedence.
+		op.append ("_");
 	}
 	else
 	{
+		std::stringstream prec;
+		prec << o_prec;
 		op.append (prec.str ());
 	}
 	op.append (", ");

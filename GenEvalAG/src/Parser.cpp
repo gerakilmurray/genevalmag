@@ -171,7 +171,7 @@ void add_attr (char const* str, char const* end)
 	{
 		// First attribute name.
 		// Setting default values.
-		new_attrs->d_mod_type = k_syntetize;
+		new_attrs->d_mod_type = k_synthetize;
 		new_attrs->d_member_symbol = "\0";
 	}
 }
@@ -419,16 +419,16 @@ struct attr_grammar: public grammar<attr_grammar>
 
 			r_left_symbol = r_instance;
 
-			r_right_side  = r_expresion;
+			r_right_side  = r_expression;
 
 			/**
-			  * Expresion's Grammar non ambiguos based in
+			  * expression's Grammar non ambiguos based in
 			  *
 			  * 	E = T <op_infix> E | T
 			  *		T = F <op_postfix> | F
 			  *		F = (E) | <symb_base>
 			  */
-			r_expresion 		= r_expr_prime >> st_op_infix >> r_expresion
+			r_expression 		= r_expr_prime >> st_op_infix >> r_expression
 								| r_expr_prime
 								;
 
@@ -437,8 +437,8 @@ struct attr_grammar: public grammar<attr_grammar>
 								;
 
 
-			r_expr_prime_prime  = st_op_prefix >> r_expresion
-								| '('>> r_expresion >>')'
+			r_expr_prime_prime  = st_op_prefix >> r_expression
+								| '('>> r_expression >>')'
 								| r_function
 								| r_instance
 								| r_literal
@@ -447,7 +447,7 @@ struct attr_grammar: public grammar<attr_grammar>
 			/**
 			  * The functions accept a list of expressions.
 			  */
-			r_function			= st_functions >> '(' >> r_expresion >> *(',' >> r_expresion) >> ')';
+			r_function			= st_functions >> '(' >> r_expression >> *(',' >> r_expression) >> ')';
 
 			/**
 			  * Literals accepted: Integer and Float numbers, characters and string,
@@ -492,7 +492,7 @@ struct attr_grammar: public grammar<attr_grammar>
 
 		rule<ScannerT> r_rules, r_decl_rule, r_sem_expr, r_left_symbol, r_right_side, r_instance, r_right_rule;
 
-		rule<ScannerT> r_expresion, r_function, r_literal, r_expr_prime, r_expr_prime_prime;
+		rule<ScannerT> r_expression, r_function, r_literal, r_expr_prime, r_expr_prime_prime;
 
 		rule<ScannerT> r_att_grammar;
 

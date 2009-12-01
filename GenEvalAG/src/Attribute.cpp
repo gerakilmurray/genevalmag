@@ -151,11 +151,11 @@ void Attribute::set_member_symbol (string member_symbol)
 }
 
 /**
-  * Return true if the modifiers of the attribute is syntetize.
+  * Return true if the modifiers of the attribute is synthetized.
   */
-bool Attribute::is_syntetize () const
+bool Attribute::is_synthetize () const
 {
-	return a_mod_type == k_syntetize;
+	return a_mod_type == k_synthetize;
 }
 
 /**
@@ -168,7 +168,7 @@ string Attribute::to_string () const
 	string attr;
 	attr.append (a_name);
 	attr.append ("\t:\t");
-	if (is_syntetize ())
+	if (is_synthetize ())
 		attr.append ("syn");
 	else
 		attr.append ("inh");
@@ -185,6 +185,7 @@ string Attribute::to_string () const
 
 	attr.append ("> \tof ");
 	attr.append (a_member_symbol);
+	attr.append (";");
 	return attr;
 }
 
@@ -205,7 +206,7 @@ string Attribute::key () const
 {
 	string key;
 	key.append (a_name);
-	if (is_syntetize ())
+	if (is_synthetize ())
 		key.append ("syn");
 	else
 		key.append ("inh");

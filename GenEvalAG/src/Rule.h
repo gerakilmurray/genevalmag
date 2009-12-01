@@ -36,7 +36,7 @@ class Rule
 	    /**
 	      * Generate and return a string reprensentation of a rule.
 	      *
-	      * Result= "rule" <left_symbol> "::=" <right_side> ";"
+	      * Result= <left_symbol> "::=" <right_side> ";"
 	      *
 	      * where <right_ride> is= <symbol_1> " " ... " " <symbol_n>
 	      */
@@ -96,12 +96,12 @@ class Rule
 	    /**
 	      * Generate and return a string reprensentation of a rule.
 	      *
-	      * Result= "rule" <left_symbol> "::=" <right_side>
-	      * 											"compute"
-		  *														<eq_1>
-	      * 													...
-	      * 													<eq_n>
-	      * 											"end;"
+		  * Result= <left_symbol> "::=" <right_side>
+		  * 									"compute"
+		  *												<eq_1>
+		  * 											...
+		  * 											<eq_n>
+		  * 									"end;"
 	      *
 	      * where <right_ride> is= <symbol_1> " " ... " " <symbol_n>
 	      */

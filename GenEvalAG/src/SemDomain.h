@@ -9,8 +9,6 @@
 #ifndef SEMDOMAIN_H_
 #define SEMDOMAIN_H_
 
-//#define _DEBUG
-
 #include <map>
 
 #include "Sort.h"
@@ -76,7 +74,7 @@ public:
 	bool add_rule (Rule & rule);
 
     /**
-      * Find in the list of sort of the semantic domain and return the sort with these name.
+      * Find in the list of sort of the semantic domain and return the sort with this name.
       */
 	Sort& return_sort (string name_sort);
     /**
@@ -99,9 +97,11 @@ public:
       * 		"attributes"
       * 			<attributes>
       *
+      *		[This section is commented so that it can be parsed again.]
+      *		***********************************************************
       * 		"symbols"
       * 			<symbols>
-      *
+      *		***********************************************************
       * 		"rules"
       * 			<rules>
       *

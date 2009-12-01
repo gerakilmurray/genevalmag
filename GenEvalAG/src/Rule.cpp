@@ -145,16 +145,15 @@ bool Rule::add_eq (Equation eq)
 /**
   * Generate and return a string reprensentation of a rule.
   *
-  * Result= "rule" <left_symbol> "::=" <right_side> ";"
+  * Result= <left_symbol> "::=" <right_side> ";"
   *
   * where <right_ride> is= <symbol_1> " " ... " " <symbol_n>
   */
 string Rule::to_string_not_eqs () const
 {
 	string rule;
-	rule.append ("rule\t");
 	rule.append (r_left_symbol->get_name ());
-	rule.append ("\t::= ");
+	rule.append ("\t::=\t");
 	for (vector<Symbol>::size_type i = 0; i < r_right_side.size (); i++)
 	{
 		rule.append (r_right_side[i]->get_name ());
@@ -168,12 +167,12 @@ string Rule::to_string_not_eqs () const
 /**
   * Generate and return a string reprensentation of a rule.
   *
-  * Result= "rule" <left_symbol> "::=" <right_side>
-  * 											"compute"
-  *														<eq_1>
-  * 													...
-  * 													<eq_n>
-  * 											"end;"
+  * Result= <left_symbol> "::=" <right_side>
+  * 									"compute"
+  *												<eq_1>
+  * 											...
+  * 											<eq_n>
+  * 									"end;"
   *
   * where <right_ride> is= <symbol_1> " " ... " " <symbol_n>
   */
