@@ -1,121 +1,166 @@
 /**
- * \file Sort.cpp
- * 	\brief Implements Sort.h
- *  \date 28/09/2009
- *  \author    Kilmurray, Gerardo Luis. 
- *  \author    Picco, Gonzalo M. 
- */
+  *  \file		Sort.cpp
+  *  \brief		Implementation of the methods the Sort.h
+  *  \date		28/09/2009
+  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  */
 
 #include <iostream>
 #include <sstream>
 
 #include "Sort.h"
 
-namespace genevalmag {
-
-static int nm= 0;
-
-///////////////////////////////////////////////
-// contructors
-///////////////////////////////////////////////
-Sort::Sort(string name)
+namespace genevalmag
 {
-	s_id = 1;
-	s_name = name;
-	nm++;
-}
-Sort::Sort()
-{
-	s_id = 1;
-	nm++;
-}
 
-Sort::Sort(Sort const & other)
+#ifdef _DEBUG
+	// Numbers of sorts current in the system.
+	static int sorts= 0;
+#endif
+
+/**
+  * Contructor empty of sort.
+  */
+Sort::Sort ()
 {
-	copy(other);
-	nm++;
+	s_ins = 1;
+
+	#ifdef _DEBUG
+		sorts++;
+	#endif
 }
 
-///////////////////////////////////////////////
-// destrucors
-///////////////////////////////////////////////
-Sort::~Sort()
+/**
+  * Contructor with the name of the sort.
+  */
+Sort::Sort (string name)
 {
-	nm--;
-	//cout << nm << " sorts" << endl;
-	destroy();
+	s_ins	= 1;
+	s_name	= name;
+
+	#ifdef _DEBUG
+		sorts++;
+	#endif
 }
 
-Sort& Sort::operator= (Sort const& other)
+/**
+  * Contructor copy of sort.
+  */
+Sort::Sort (Sort const & other)
+{
+	copy (other);
+
+	#ifdef _DEBUG
+		sorts++;
+	#endif
+}
+
+/**
+  * Destructor of sort.
+  */
+Sort::~Sort ()
+{
+	destroy ();
+
+	#ifdef _DEBUG
+		sorts--;
+		cout << "Sorts: " << sorts << endl;
+	#endif
+}
+
+/**
+  * Operator assign (=) of sort.
+  */
+Sort& Sort::operator= (Sort const & other)
 {
 	if (this != &other)
 	{
-		destroy();
-		copy(other);
+		destroy ();
+		copy (other);
 	}
 	return *this;
 }
 
-void Sort::copy(Sort const& other)
+/**
+  * Method of copy the sort, STL-like C++.
+  */
+void Sort::copy (Sort const & other)
 {
-	s_name = other.get_name();
-	s_id = other.get_id() + 1;
+	s_name	= other.get_name ();
+	 // Increment the instance of sort.
+	s_ins	= other.get_ins () + 1;
 }
 
-void Sort::destroy()
+/**
+  * Method destroy sort, STL-like C++.
+  */
+void Sort::destroy ()
 {
 }
 
-///////////////////////////////////////////////
-// Setters and getters.
-///////////////////////////////////////////////
-int Sort::get_id() const
-{
-    return s_id;
-}
-
-string Sort::get_name() const
+/**
+  * Return the name of the sort.
+  */
+string Sort::get_name () const
 {
     return s_name;
 }
 
-void Sort::set_id(int id)
+/**
+  * Return the instance of the sort.
+  */
+int Sort::get_ins () const
 {
-    s_id = id;
+    return s_ins;
 }
 
-void Sort::set_name(string name)
+/**
+  * Set the name of the sort.
+  */
+void Sort::set_name (string name)
 {
     s_name = name;
 }
 
-///////////////////////////////////////////////
-// compares the sort with other.
-///////////////////////////////////////////////
-bool Sort::equals(Sort s) const
+/**
+  * Generate and return a string reprensentation of a attribute.
+  *
+  * Result= "sort" <name> [" (" <instance> ")" IF DEBUG IS ON] ";"
+  */
+string Sort::to_string () const
 {
-	return key().compare(s.key())==0;
-}
+	string sort ("sort\t\t");
+	sort.append (s_name);
 
-///////////////////////////////////////////////
-// Sort to string
-///////////////////////////////////////////////
-string Sort::to_string() const
-{
-	string sort("sort\t\t");
-	sort.append(get_name());
-	sort.append("(");
-	std::stringstream id;
-	id << get_id();
-	sort.append(id.str());
-	sort.append(")");
-	sort.append(";");
+	#ifdef _DEBUG
+		sort.append (" (");
+		std::stringstream ins;
+		ins << s_ins;
+		sort.append (ins.str ());
+		sort.append (")");
+	#endif
+
+	sort.append (";");
 	return sort;
 }
 
-string Sort::key() const
+/**
+  * Compares the sort with other.
+  */
+bool Sort::equals (Sort const & other) const
+{
+	return key ().compare (other.key ())==0;
+}
+
+/**
+  * Generate and return the string key that identifies a sort definitely.
+  *
+  * Result= <name>
+  */
+string Sort::key () const
 {
 	return s_name;
 }
 
-}
+} // end genevalmag

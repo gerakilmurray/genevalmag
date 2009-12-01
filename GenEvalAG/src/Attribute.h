@@ -1,58 +1,124 @@
 /**
- * \file Attribute.h
- * 	\brief EXPLICAR QUE ES ESTO
- *  \date 23/10/2009
- *  \author    Kilmurray, Gerardo Luis. 
- *  \author    Picco, Gonzalo M. 
- */
+  *  \file		Attribute.h
+  *  \brief		Class of the attribute of the grammar parsed.
+  *  \date		23/10/2009
+  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  */
 
 #ifndef ATTRIBUTE_H_
 #define ATTRIBUTE_H_
 
 #include "Sort.h"
 
-namespace genevalmag{
+namespace genevalmag
+{
 
+/**
+  * Enumeration of the attribute's type: Inherit or Syntetize.
+  */
 enum type_attr
 {
 	k_inherit,
 	k_syntetize
 };
 
-class Attribute {
+class Attribute
+{
 private:
-	string a_name;
-	string a_type;
-	type_attr a_mod_type;
-	string a_member_symbol;
+	string		a_name;
+	Sort*		a_sort_type;
+	type_attr	a_mod_type;
+	string		a_member_symbol;
 
-	//Methods for STL C++
-	void copy(Attribute const& other);
-	void destroy();
+	/**
+	  * Method of copy the attribute, STL-like C++.
+	  */
+	void copy (Attribute const& other);
+	/**
+	  * Method destroy attribute, STL-like C++.
+	  */
+	void destroy ();
 
 public:
-	Attribute();
-	Attribute(string name, string type, type_attr mod, string merberships);
-	Attribute(Attribute const & other);
-	virtual ~Attribute();
+	/**
+	  * Constructor empty of attribute.
+	  */
+	Attribute ();
+	/**
+	  * Constructor copy of attribute.
+	  */
+	Attribute (Attribute const & other);
 
+	/**
+	  * Destructor of attribute.
+	  */
+	virtual ~Attribute ();
+
+	/**
+	  * Operator assign (=) of attribute.
+	  */
 	Attribute& operator= (Attribute const & other);
 
-	string get_name() const;
-	string get_type() const;
-	type_attr get_mod_type() const;
-	string get_member_symbol() const;
+	/**
+	  * Return the name of the attribute.
+	  */
+	string get_name () const;
+	/**
+	  * Return the sort type of the attribute.
+	  */
+	Sort* get_sort_type () const;
+	/**
+	  * Return the modifiers of the attribute.
+	  */
+	type_attr get_mod_type () const;
+	/**
+	  * Return the membership list of the attribute.
+	  */
+	string get_member_symbol () const;
 
-	void set_name(string name);
-	void set_type(string type);
-	void set_mod_type(type_attr mod_type);
-	void set_member_symbol(string member_symbol);
+	/**
+	  * Set the name of the attribute.
+	  */
+	void set_name (string name);
+	/**
+	  * Set the sort type of the attribute.
+	  */
+	void set_sort_type (Sort* sort_type);
+	/**
+	  * Set the modifiers of the attribute.
+	  */
+	void set_mod_type (type_attr mod_type);
+	/**
+	  * Set the membership list of the attribute.
+	  */
+	void set_member_symbol (string member_symbol);
 
+	/**
+	  * Return true if the modifiers of the attribute is syntetize.
+	  */
+	bool is_syntetize () const;
+
+	/**
+	  * Generate and return a string reprensentation of a attribute.
+	  *
+	  * Result= <name> ":" <modifiers> "<" <sort_type> [" (" <instance> ")" IF DEBUG IS ON] "> of " <membership_list>
+	  */
 	string to_string ()const;
-	bool equals(Attribute attr) const;
-	bool is_syntetize() const;
 
-	string key() const;
+	/**
+	  * Compares the attribute with other.
+	  */
+	bool equals (Attribute const & other) const;
+
+	/**
+	  * Generate and return the string key that identifies a attribute definitely.
+	  *
+	  * Result= <name><modifiers><sort_type><membership_list>
+	  */
+	string key () const;
 };
-}
+
+} // end genevalmag
+
 #endif /* ATTRIBUTE_H_ */

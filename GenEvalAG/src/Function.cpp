@@ -1,173 +1,219 @@
 /**
- * \file Function.cpp
- * 	\brief EXPLICAR QUE ES ESTO
- *  \date 26/11/2009
- *  \author    Kilmurray, Gerardo Luis. 
- *  \author    Picco, Gonzalo M. 
- */
+  *  \file		Function.cpp
+  *  \brief		Implementation of the methods the Function.h
+  *  \date		26/11/2009
+  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  */
+
+#include <sstream>
+#include <iostream>
 
 #include "Function.h"
-#include <sstream>
 
-namespace genevalmag {
-
-static int funtions = 0;
-
-///////////////////////////////////////////////
-// contructors
-///////////////////////////////////////////////
-Function::Function(string name, vector <Sort*> * vec, Sort * img)
+namespace genevalmag
 {
-	funtions++;
-	f_name = name;
-	f_domain = *vec;
-	f_image = img;
+
+#ifdef _DEBUG
+	// Numbers of functions current in the system.
+	static int funtions = 0;
+#endif
+
+/**
+  * Contructor empty of function.
+  */
+Function::Function ()
+{
+	#ifdef _DEBUG
+		funtions++;
+	#endif
 }
 
-Function::Function()
+/**
+  * Contructor copy of function.
+  */
+Function::Function (Function const & other)
 {
-	funtions++;
+	copy (other);
+
+	#ifdef _DEBUG
+		funtions++;
+	#endif
 }
 
-Function::Function(const Function & other)
+/**
+  * Destructor of the function.
+  */
+Function::~Function ()
 {
-	funtions++;
-	copy(other);
+	destroy ();
+
+	#ifdef _DEBUG
+		funtions--;
+		cout << "Funtions: " << funtions << endl;
+	#endif
 }
 
-void Function::destroy()
-{
-}
-
-///////////////////////////////////////////////
-// destructors
-///////////////////////////////////////////////
-Function::~Function()
-{
-	funtions--;
-	//cout << funtions << " opers" << endl;
-	destroy();
-}
-
-///////////////////////////////////////////////
-// Setter and getters.
-///////////////////////////////////////////////
-vector<Sort*> Function::get_domain() const
-{
-    return f_domain;
-}
-
-
-Sort* Function::get_image() const
-{
-    return f_image;
-}
-
-
-string Function::get_name() const
-{
-    return f_name;
-}
-
-
-void Function::set_domain(vector<Sort*> domain)
-{
-    f_domain = domain;
-}
-
-
-void Function::set_image(Sort* image)
-{
-    f_image = image;
-}
-
-void Function::set_name(string name)
-{
-    f_name = name;
-}
-
-Function& Function::operator= (Function& other)
+/**
+  * Operator assign (=) of function.
+  */
+Function& Function::operator= (Function const & other)
 {
 	if (this != &other)
 	{
-		destroy();
-		copy(other);
+		destroy ();
+		copy (other);
 	}
 	return *this;
 }
 
-void Function::copy(const Function& other)
+/**
+  * Method of copy the function, STL-like C++.
+  */
+void Function::copy (Function const & other)
 {
-	f_name		= other.get_name();
-	f_domain	= other.get_domain();
-	f_image		= other.get_image();
-
+	f_name		= other.get_name ();
+	f_domain	= other.get_domain ();
+	f_image		= other.get_image ();
 }
 
-
-///////////////////////////////////////////////
-// Function to string
-///////////////////////////////////////////////
-string Function::to_string()
+/**
+  * Method destroy function, STL-like C++.
+  */
+void Function::destroy ()
 {
-	string op;
-	op.append("function\t");
+}
 
-	op.append(get_name());
-	op.append(": ");
-	for (vector<Sort>::size_type i = 0; i < f_domain.size(); ++i)
+/**
+  * Return the name of the function.
+  */
+string Function::get_name () const
+{
+    return f_name;
+}
+
+/**
+  * Return the domain of the function.
+  */
+vector<Sort*> Function::get_domain () const
+{
+    return f_domain;
+}
+
+/**
+  * Return the image of the function.
+  */
+Sort* Function::get_image () const
+{
+    return f_image;
+}
+
+/**
+  * Set the name of the function.
+  */
+void Function::set_name (string name)
+{
+    f_name = name;
+}
+
+/**
+  * Set the full sort domain of the function.
+  */
+void Function::set_domain (vector<Sort*> domain)
+{
+    f_domain = domain;
+}
+
+/**
+  * Set the sort image of the function.
+  */
+void Function::set_image (Sort* image)
+{
+    f_image = image;
+}
+
+/**
+  * Enqueue a sort in the domain of the function.
+  */
+void Function::add_domain (Sort* sort)
+{
+	f_domain.push_back (sort);
+}
+
+/**
+  * Generate and return a string reprensentation of a function.
+  *
+  * Result= "function" <name> ":" <domain> "->" <image> ";"
+  *
+  * where <domain> is= <sort_1> [" (" <instance> ")" IF DEBUG IS ON] "," ... "," <sort_n> [" (" <instance> ")" IF DEBUG IS ON]
+  */
+string Function::to_string () const
+{
+	string func;
+	func.append ("function\t");
+	func.append (f_name);
+	func.append (": ");
+	for (vector<Sort>::size_type i = 0; i < f_domain.size (); i++)
 	{
-		op.append(f_domain[i]->get_name());
-		op.append("(");
-		std::stringstream id;
-		id << f_domain[i]->get_id();
-		op.append(id.str());
-		op.append(")");
-		if (i+1<f_domain.size())
-			op.append(", ");
+		func.append (f_domain[i]->get_name ());
+
+		#ifdef _DEBUG
+			func.append (" (");
+			std::stringstream ins;
+			ins << f_domain[i]->get_ins ();
+			func.append (ins.str ());
+			func.append (")");
+		#endif
+
+		if (i+1 < f_domain.size ())
+			func.append (", ");
 	}
-	op.append(" :=> ");
-	op.append(get_image()->get_name());
-	op.append("(");
-	std::stringstream id;
-	id << get_image()->get_id();
-	op.append(id.str());
-	op.append(")");
-	op.append(";");
-	return op;
-}
-///////////////////////////////////////////////
-// add a sort in the domain of a function
-///////////////////////////////////////////////
-void Function::add_domain(Sort* sort)
-{
-	f_domain.push_back(sort);
+	func.append (" -> ");
+	func.append (f_image->get_name ());
+
+	#ifdef _DEBUG
+		func.append (" (");
+		std::stringstream ins;
+		ins << f_image->get_ins ();
+		func.append (ins.str ());
+		func.append (")");
+	#endif
+
+	func.append (";");
+	return func;
 }
 
-///////////////////////////////////////////////
-// compares the operation with other.
-///////////////////////////////////////////////
-bool Function::equals(Function op) const
+/**
+  * Compares the function with other.
+  */
+bool Function::equals (Function const & other) const
 {
-	return	key().compare(op.key()) == 0;
+	return	key ().compare (other.key ()) == 0;
 }
 
-void Function::purge()
-{
-	f_domain.clear();
-	f_image = NULL;
-}
-
-string Function::key() const
+/**
+  * Generate and return the string key that identifies a function definitely.
+  *
+  * Result= <name> <domain> <image>
+  *
+  * where <domain> is= <sort_1> ... <sort_n>
+  */
+string Function::key () const
 {
 	string key;
-	key.append(get_name());
-	for (vector<Sort>::size_type i = 0; i < f_domain.size(); ++i)
+	key.append (f_name);
+	for (vector<Sort>::size_type i = 0; i < f_domain.size (); i++)
 	{
-		key.append(f_domain[i]->get_name());
+		key.append (f_domain[i]->get_name ());
 	}
-	key.append(get_image()->get_name());
-
+	key.append (f_image->get_name ());
 	return key;
 }
-}
+
+//void Function::purge ()
+//{
+//	f_domain.clear ();
+//	f_image = NULL;
+//}
+
+} // end genevalmag

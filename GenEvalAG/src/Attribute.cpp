@@ -1,148 +1,217 @@
 /**
- * \file Attribute.cpp
- * 	\brief EXPLICAR QUE ES ESTO
- *  \date 23/10/2009
- *  \author    Kilmurray, Gerardo Luis. 
- *  \author    Picco, Gonzalo M. 
- */
+  *  \file		Attribute.cpp
+  *  \brief		Implementation of the methods the Attribute.h
+  *  \date		23/10/2009
+  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  */
 
 #include <iostream>
+#include <sstream>
 
 #include "Attribute.h"
 
-namespace genevalmag {
-static int atts = 0;
+namespace genevalmag
+{
 
-Attribute::Attribute()
-{
-	atts++;
-	// TODO Auto-generated constructor stub
-}
-Attribute::Attribute(const Attribute& other)
-{
-	atts++;
-	copy(other);
-}
+#ifdef _DEBUG
+	// Numbers of attributes current in the system.
+	static int attrs = 0;
+#endif
 
-Attribute::Attribute(string name, string type, type_attr mod, string merberships)
+/**
+  * Constructor empty of attribute.
+  */
+Attribute::Attribute ()
 {
-	a_name = name;
-	a_type = type;
-	a_mod_type = mod;
-	a_member_symbol = merberships;
-	atts++;
+	#ifdef _DEBUG
+		attrs++;
+	#endif
 }
 
-Attribute::~Attribute()
+/**
+  * Constructor copy of attribute.
+  */
+Attribute::Attribute (const Attribute& other)
 {
-	atts--;
-	//cout << "atts " << atts << endl;
-	destroy();
+	copy (other);
+
+	#ifdef _DEBUG
+		attrs++;
+	#endif
 }
+
+/**
+  * Destructor of attribute.
+  */
+Attribute::~Attribute ()
+{
+	destroy ();
+
+	#ifdef _DEBUG
+		attrs--;
+		cout << "Attributes: " << attrs << endl;
+	#endif
+
+}
+
+/**
+  * Operator assign (=) of attribute.
+  */
 Attribute& Attribute::operator= (Attribute const& other)
 {
 	if (this != &other)
 	{
-		destroy();
-		copy(other);
+		destroy ();
+		copy (other);
 	}
 	return *this;
 }
 
-void Attribute::copy(Attribute const& other)
+/**
+  * Method of copy the attribute, STL-like.
+  */
+void Attribute::copy (Attribute const& other)
 {
-	a_name			= other.get_name();
-	a_type			= other.get_type();
-	a_mod_type		= other.get_mod_type();
-	a_member_symbol	= other.get_member_symbol();
+	a_name			= other.get_name ();
+	a_sort_type		= other.get_sort_type ();
+	a_mod_type		= other.get_mod_type ();
+	a_member_symbol	= other.get_member_symbol ();
 }
 
-void Attribute::destroy()
+/**
+  * Method destroy the attribute, STL-like.
+  */
+void Attribute::destroy ()
 {
-}
-string Attribute::get_member_symbol() const
-{
-    return a_member_symbol;
 }
 
-type_attr Attribute::get_mod_type() const
-{
-    return a_mod_type;
-}
-
-string Attribute::get_name() const
+/**
+  * Return the name of the attribute.
+  */
+string Attribute::get_name () const
 {
     return a_name;
 }
 
-string Attribute::get_type() const
+/**
+  * Return the sort type of the attribute.
+  */
+Sort* Attribute::get_sort_type () const
 {
-    return a_type;
+    return a_sort_type;
 }
 
-void Attribute::set_member_symbol(string member_symbol)
+/**
+  * Return the modifiers of the attribute.
+  */
+type_attr Attribute::get_mod_type () const
 {
-    a_member_symbol = member_symbol;
+    return a_mod_type;
 }
 
-void Attribute::set_mod_type(type_attr mod_type)
+/**
+  * Return the membership list of the attribute.
+  */
+string Attribute::get_member_symbol () const
 {
-    a_mod_type = mod_type;
+    return a_member_symbol;
 }
 
-void Attribute::set_name(string name)
+/**
+  * Set the name of the attribute.
+  */
+void Attribute::set_name (string name)
 {
     a_name = name;
 }
 
-void Attribute::set_type(string type)
+/**
+  * Set the sort type of the attribute.
+  */
+void Attribute::set_sort_type (Sort* sort_type)
 {
-    a_type = type;
+    a_sort_type = sort_type;
 }
 
-string Attribute::to_string() const
+/**
+  * Set the modifiers of the attribute.
+  */
+void Attribute::set_mod_type (type_attr mod_type)
 {
-	string att;
-	att.append(get_name());
-	att.append("\t: ");
-	if (is_syntetize())
-		att.append("syn");
-	else
-		att.append("inh");
-	att.append(" <");
-	att.append(get_type());
-	att.append("> of ");
-	att.append(get_member_symbol());
-	return att;
+    a_mod_type = mod_type;
 }
 
-///////////////////////////////////////////////
-// compares the attribute with other.
-///////////////////////////////////////////////
-bool Attribute::equals(Attribute attr) const
-// compare for name, mod_type and type.
+/**
+  * Set the membership list of the attribute.
+  */
+void Attribute::set_member_symbol (string member_symbol)
 {
-	return	key().compare(attr.key()) == 0;
+    a_member_symbol = member_symbol;
 }
 
-bool Attribute::is_syntetize() const
+/**
+  * Return true if the modifiers of the attribute is syntetize.
+  */
+bool Attribute::is_syntetize () const
 {
 	return a_mod_type == k_syntetize;
 }
 
-///////////////////////////////////////////////
-// key identifies a attribute definitely
-///////////////////////////////////////////////
-string Attribute::key() const
+/**
+  * Generate and return a string reprensentation of a attribute.
+  *
+  * Result= <name> ":" <modifiers> "<" <sort_type> [" (" <instance> ")" IF DEBUG IS ON] "> of " <membership_list>
+  */
+string Attribute::to_string () const
+{
+	string attr;
+	attr.append (a_name);
+	attr.append ("\t:\t");
+	if (is_syntetize ())
+		attr.append ("syn");
+	else
+		attr.append ("inh");
+	attr.append (" <");
+	attr.append (a_sort_type->get_name ());
+
+	#ifdef _DEBUG
+		attr.append (" (");
+		std::stringstream ins;
+		ins << a_sort_type->get_ins ();
+		attr.append (ins.str ());
+		attr.append (")");
+	#endif
+
+	attr.append ("> \tof ");
+	attr.append (a_member_symbol);
+	return attr;
+}
+
+/**
+  * Compares the attribute with other.
+  */
+bool Attribute::equals (Attribute const & other) const
+{
+	return	key ().compare (other.key ()) == 0;
+}
+
+/**
+  * Generate and return the string key that identifies a attribute definitely.
+  *
+  * Result= <name><modifiers><sort_type><membership_list>
+  */
+string Attribute::key () const
 {
 	string key;
-	key.append(get_name());
-	if (is_syntetize())
-		key.append("syn");
+	key.append (a_name);
+	if (is_syntetize ())
+		key.append ("syn");
 	else
-		key.append("inh");
-	key.append(get_type());
-	key.append(get_member_symbol());
+		key.append ("inh");
+	key.append (a_sort_type->get_name ());
+	key.append (a_member_symbol);
 	return key;
 }
-}
+
+} // end genevalmag

@@ -1,10 +1,10 @@
 /**
- * \file Operator.h
- * 	\brief Represents a operation.
- *  \date 28/09/2009
- *  \author    Kilmurray, Gerardo Luis. 
- *  \author    Picco, Gonzalo M. 
- */
+  *  \file	 	Operator.h
+  *  \brief		Class of the operator of the grammar parsed.
+  *  \date		28/09/2009
+  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  */
 
 #ifndef OPERATOR_H_
 #define OPERATOR_H_
@@ -12,22 +12,25 @@
 #include <string>
 #include <vector>
 
-
 #include "Sort.h"
 
-namespace genevalmag {
+namespace genevalmag
+{
 
-// operation's mode.
-enum mod_op
+/**
+  * Enumeration of operation's mode.
+  */
+enum oper_mode
 {
 	k_prefix,
 	k_infix,
 	k_postfix
-
 };
 
-// operation associative's mode.
-enum mod_assoc
+/**
+  * Enumeration of operation's associative modes.
+  */
+enum oper_assoc
 {
 	k_left,
 	k_right,
@@ -38,52 +41,123 @@ class Operator
 {
 private:
 	string 			o_name;
+	oper_mode		o_mod;
+	unsigned int	o_prec;
+	oper_assoc 		o_assoc;
 	vector <Sort*>	o_domain;
 	Sort*			o_image;
-	mod_op			o_mod;
-	unsigned int	o_pred;
-	unsigned int	o_id;
-	mod_assoc 		o_assoc;
 
-	//Methods for STL C++
-	void copy(const Operator& other);
-	void destroy();
+	/**
+	  * Method of copy the operator, STL-like C++.
+	  */
+	void copy (Operator const & other);
+	/**
+	  * Method destroy operator, STL-like C++.
+	  */
+	void destroy ();
 
 public:
-	Operator();
-	Operator(string name, vector <Sort*> * vec, Sort * img, int id);
-	Operator(const Operator & other);
-	virtual ~Operator();
-	Operator& operator= (Operator & other);
+	/**
+	  * Contructor empty of operator.
+	  */
+	Operator ();
+	/**
+	  * Contructor copy of operator.
+	  */
+	Operator (Operator const & other);
 
-	vector<Sort*> get_domain() const;
-    int get_id() const;
-    Sort* get_image() const;
-    mod_op get_mod() const;
+	/**
+	  * Destructor of the operator.
+	  */
+	virtual ~Operator ();
 
-    mod_assoc get_mod_assoc() const;
-    string get_name() const;
-    int get_pred() const;
-    void add_domain(Sort* sort);
+	/**
+	  * Operator assign (=) of operator.
+	  */
+	Operator& operator= (Operator const & other);
 
-    void set_domain(vector<Sort*> domain);
-    void set_id(int id);
-    void set_image(Sort* image);
-    void set_mod(string mod);
+	/**
+	  * Return the name of the operator.
+	  */
+	string get_name () const;
+	/**
+	  * Return the name of the operator.
+	  */
+    oper_mode get_mode () const;
+    /**
+      * Return the precedence of the operator.
+      */
+    int get_prec () const;
+    /**
+      * Return the associativity of the operator.
+      */
+    oper_assoc get_oper_assoc () const;
+    /**
+      * Return the domain of the operator.
+      */
+    vector<Sort*> get_domain () const;
+    /**
+      * Return the image of the operator.
+      */
+	Sort* get_image () const;
 
-    void set_mod_assoc(string mod);
-    void set_name(string name);
-    void set_pred(int pred);
+    /**
+      * Set the name of the operator.
+      */
+    void set_name (string name);
+    /**
+      * Set the mode of the operator.
+      * @param mode: string
+      */
+    void set_mode (string mode);
+    /**
+      * Set the precedence of the operator.
+      */
+    void set_prec (int prec);
+    /**
+      * Set the associativity of the operator.
+      */
+    void set_oper_assoc (string assoc);
+    /**
+      * Set the full sort domain of the operator.
+      */
+    void set_domain (vector<Sort*> domain);
+    /**
+      * Set the sort image of the operator.
+      */
+    void set_image (Sort* image);
 
-    string to_string();
-    bool equals(Operator op) const;
+    /**
+      * Enqueue a sort in the domain of the operator.
+      */
+    void add_domain (Sort* sort);
 
-    void purge();
+    /**
+      * Generate and return a string reprensentation of a operator.
+      *
+      * Result= "op" <oper_mode> " (" <precedence> "," <associativity> ")" <name> ":" <domain> "->" <image> ";"
+      *
+      * where <domain> is= <sort_1> [" (" <instance> ")" IF DEBUG IS ON] "," ... "," <sort_n> [" (" <instance> ")" IF DEBUG IS ON]
+      */
+    string to_string () const;
 
-    string key() const;
+    /**
+      * Compares the operator with other.
+      */
+    bool equals (Operator const & other) const;
 
+    /**
+      * Generate and return the string key that identifies a operator definitely.
+      *
+      * Result= <mode> <name> <domain> <image>
+      *
+      * where <domain> is= <sort_1> ... <sort_n>
+      */
+    string key () const;
+
+//    void purge ();
 };
 
-}
+} // end genevalmag
 
 #endif /* OPERADOR_H_ */

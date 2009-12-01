@@ -1,22 +1,24 @@
 /**
- * \file Equation.cpp
- * 	\brief EXPLICAR QUE ES ESTO
- *  \date 05/11/2009
- *  \author    Kilmurray, Gerardo Luis.
- *  \author    Picco, Gonzalo M.
- */
+  *  \file		Equation.cpp
+  *  \brief		EXPLICAR QUE ES ESTO
+  *  \date		05/11/2009
+  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  */
+
+//#define _DEBUG
 
 #include "Equation.h"
 
-namespace genevalmag {
+namespace genevalmag
+{
 
-Equation::Equation() {
-	// TODO Auto-generated constructor stub
-
+Equation::Equation ()
+{
 }
 
-Equation::~Equation() {
-	// TODO Auto-generated destructor stub
+Equation::~Equation ()
+{
 }
 
-}
+} // end genevalmag

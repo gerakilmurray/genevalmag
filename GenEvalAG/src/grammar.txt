@@ -1,48 +1,54 @@
 /**
- * \file grammar.txt
- * 	\brief File with a grammar especification example.
- *  \date 05/11/2009
- *  \author    Kilmurray, Gerardo Luis.
- *  \author    Picco, Gonzalo M.
- */
+  *  \file		grammar.txt
+  *  \brief		File with a Attribute Grammar example that specific an AST.
+  *  \date		05/11/2009
+  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  */
 
-/* 
- * Archivo de prueba de gramatica de atributos
- * que especifica un AST.
- */
-
-//////// bloque de dominio semantico /////////////////////
-semantics domains
+/****************************
+ * Block of Semantic Domain *
+ ****************************/
+semantic domain
 	
+	/*****************
+	 * List of Sorts *
+	 *****************/
 	sort int;
-		
-	op infix (5, left) +: int , int->int;
-	op infix (50, non-assoc) * : int , int->int;
-	op (99,_) sqr : int -> int;
-	op postfix & : int -> int;	
-
 	sort string, character;
 	sort pepe;
 	sort adrian;
 
-	op prefix (_,right) %: string -> string;
-	op (8,non-assoc) %: string -> adrian;
-	op infix (5,left) + : int , int -> string;
+	/*********************
+	 * List of Operators *
+	 *********************/
+	op infix	(5, left)		+  : int, int	-> int;
+	op infix	(50,non-assoc)	*  : int, int	-> int;
+	op 			(99,_)			sqr: int		-> int;
+	op postfix					&  : int		-> int;	
+	op prefix	(_,right)		%  : string		-> string;
+	op 			(8,non-assoc)	%  : string		-> adrian;
+	op infix	(5,left)		+  : int, int	-> string;
 		
-	function f: int, int -> string;
-	function g: string -> int;
+	/*********************
+	 * List of Functions *
+	 *********************/
+	function	f: int, int -> string;
+	function	g: string	-> int;
 	
-//////// bloque de atributos /////////////////////
+/***********************
+ * Block of Attributes *
+ ***********************/
 attributes
-	valor : syn <int> of all;
+	valor			: syn	<int>		of all;
+	lexema, termino	: syn	<string>	of all - {E, T};
+	lexx			: syn	<string>	of all - {T};
+	type			: inh	<string>	of all;
+	grade			:		<int>		of {E};
 	
-	lexema, termino : syn <string> of all - {E, T};
-	lexx  : syn <string> of all - {T};
-	type  : inh <string> of all;
-	
-	grade : <int> of {E};
-	
-//////// bloque de reglas /////////////////////
+/******************
+ * Block of Rules *
+ ******************/
 rules
 
 	E ::=	E '+' T
@@ -51,7 +57,7 @@ rules
 				end
 		| 	T
 			  	compute
-			  		E[0].valor =  f(T[0].valor&);
+			  		E[0].valor =  f (T[0].valor&);
 	  			end
 	;
 	T ::=	id '*' id
@@ -60,7 +66,6 @@ rules
 					T[0].type = "id";
 				end
 	;
-	
 	id ::=	'1' 
 				compute
 					id[0].valor = 1; 
@@ -71,9 +76,4 @@ rules
 					id[0].valor = 0; 
 					id[0].type = "int"; 
 				end
-	;                                                    
-	
-	
-	
-	
-	
+	;

@@ -1,148 +1,215 @@
 /**
- * \file SemDomain.cpp
- * 	\brief Implements SemDomain.h
- *  \date 28/09/2009
- *  \author    Kilmurray, Gerardo Luis. 
- *  \author    Picco, Gonzalo M. 
- */
+  *  \file		SemDomain.cpp
+  *  \brief		Implementation of the methods the SemDomain.h
+  *  \date		28/09/2009
+  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  */
+
+#include <boost/tokenizer.hpp>
+#include <iostream>
 
 #include "SemDomain.h"
-#include <iostream>
-#include <boost/tokenizer.hpp>
 
 using namespace std;
-namespace genevalmag {
-
-///////////////////////////////////////////////
-// contructors
-///////////////////////////////////////////////
-SemDomain::SemDomain()
+namespace genevalmag
 {
-	// TODO Auto-generated constructor stub
+
+/**
+  * Contructor empty of semantic domain.
+  */
+SemDomain::SemDomain ()
+{
 }
 
-///////////////////////////////////////////////
-// destructors
-///////////////////////////////////////////////
-SemDomain::~SemDomain()
+/**
+  * Destructor of the semantic domain.
+  */
+SemDomain::~SemDomain ()
 {
-	// TODO Auto-generated destructor stub
 }
 
-///////////////////////////////////////////////
-// Operation Templates
-///////////////////////////////////////////////
-template <class T> bool add(T elem, map<string,T >& vec)
+/**
+  * Operation template that insert an object type T in the parameter map.
+  *
+  * Return true if insert succesfully.
+  * In other case, return false.
+  */
+template <class T> bool add (T elem, map<string,T >& map_elem)
 {
-	pair<string,T > new_p(elem.key(),elem);
-	pair<typename map<string,T >::iterator, bool > result = vec.insert(new_p);
+	pair<string,T > new_p (elem.key (), elem);
+	pair<typename map<string,T >::iterator, bool > result = map_elem.insert (new_p);
 	return result.second;
 }
 
-template <class T> string to_string_vec(map<string,T >& vec)
+/**
+  * Operation template that print each element type T of the parameter map.
+  *
+  * Return the string representation of all elements of the map.
+  */
+template <class T> string to_string_map (map<string,T >& map_elem)
 {
 	string elem;
-	for (typename map<string,T >::iterator it = vec.begin(); it != vec.end(); ++it)
+	for (typename map<string,T >::iterator it = map_elem.begin (); it != map_elem.end (); it++)
 	{
-		elem.append("\t");
-		elem.append(it->second.to_string());
-		elem.append("\n");
+		elem.append ("\t");
+		elem.append (it->second.to_string ());
+		elem.append ("\n");
 	}
 	return elem;
 }
 
-///////////////////////////////////////////////
-// Add's Operations
-///////////////////////////////////////////////
-bool SemDomain::add_sort(Sort& sort)
+/**
+  * Enqueue a sort in the list of the semantic domain.
+  */
+bool SemDomain::add_sort (Sort & sort)
 {
-	return add<Sort>(sort, v_sort);
+	return add<Sort> (sort, sd_sort);
 }
 
-bool SemDomain::add_op( Operator& oper)
+/**
+  * Enqueue a operator in the list of the semantic domain.
+  */
+bool SemDomain::add_operator (Operator & oper)
 {
-	return add<Operator>(oper, v_oper);
-}
-bool SemDomain::add_func( Function& func)
-{
-	return add<Function>(func, v_funcs);
-}
-
-bool SemDomain::add_att( Attribute& attr)
-{
-	return add<Attribute>(attr, v_attr);
+	return add<Operator> (oper, sd_oper);
 }
 
-bool SemDomain::add_symb(Symbol& symb)
+/**
+  * Enqueue a function in the list of the semantic domain.
+  */
+bool SemDomain::add_function (Function & func)
 {
-	bool not_repeat = add <Symbol> (symb, v_symb);
-	if (not_repeat && symb.is_non_terminal())
+	return add<Function> (func, sd_func);
+}
+
+/**
+  * Enqueue a attribute in the list of the semantic domain.
+  */
+bool SemDomain::add_attribute (Attribute & attr)
+{
+	return add<Attribute> (attr, sd_attr);
+}
+
+/**
+  * Enqueue a symbol in the list of the semantic domain.
+  */
+bool SemDomain::add_symbol (Symbol & symb)
+{
+	bool not_repeat = add <Symbol> (symb, sd_symb);
+	if (not_repeat && symb.is_non_terminal ())
 	{
-		map<string, Symbol>::iterator it = v_symb.find(symb.key());
-		load_attrs(it->second);
+		map<string, Symbol>::iterator it = sd_symb.find (symb.key ());
+		load_attributes (it->second);
 	}
 	return not_repeat;
 }
 
-bool SemDomain::add_rule( Rule& rule)
+/**
+  * Enqueue a rule in the list of the semantic domain.
+  */
+bool SemDomain::add_rule (Rule & rule)
 {
-	return add <Rule> (rule, v_rule);
+	return add <Rule> (rule, sd_rule);
 }
 
-///////////////////////////////////////////////
-// seach sort and return it. else create a sort and return.
-///////////////////////////////////////////////
-Sort& SemDomain::return_sort(string name_sort)
+/**
+  * Find in the list of sort of the semantic domain and return the sort with these name.
+  */
+Sort& SemDomain::return_sort (string name_sort)
 {
-	Sort sort_new(name_sort);
-	add_sort(sort_new);
+	Sort sort_new (name_sort);
+	add_sort (sort_new);
 
-	map<string,Sort>::iterator it = v_sort.find(name_sort);
+	map<string,Sort>::iterator it = sd_sort.find (name_sort);
 
 	return it->second;
 }
 
-///////////////////////////////////////////////
-// semantic block to string
-///////////////////////////////////////////////
-string SemDomain::to_string()
+/**
+  * Find in the list of symbol of the semantic domain and return the symbol with these name.
+  */
+Operator& SemDomain::get_operator (string name_oper)
 {
-	string semdomain("\nsemantics domains\n");
-	semdomain.append(to_string_vec<Sort>(v_sort));
-	semdomain.append("\n");
-	semdomain.append(to_string_vec<Operator>(v_oper));
-	semdomain.append("\n");
-	semdomain.append(to_string_vec<Function>(v_funcs));
-	semdomain.append("\nattributes\n");
-//	map<string,Attribute>::iterator it1 = v_attr.find("valorsynintall");
-//	it1->second.set_name("valores");
-	semdomain.append(to_string_vec<Attribute>(v_attr));
-	semdomain.append("\nsymbols\n");
-//	map<string,Symbol>::iterator it = v_symb.find("id");
-//	it->second.set_name("ident");
-	semdomain.append(to_string_vec<Symbol>(v_symb));
-	semdomain.append("\nrules\n");
-	semdomain.append(to_string_vec<Rule>(v_rule));
-	semdomain.append("\n");
+	map<string,Operator>::iterator it = sd_oper.begin ();
+
+	return it->second;
+}
+
+/**
+  * Find in the list of operator of the semantic domain and return the operator with these name.
+  */
+Symbol& SemDomain::get_symbol (string name_symbol)
+{
+	map<string,Symbol>::iterator it = sd_symb.find (name_symbol);
+	return it->second;
+}
+
+/**
+  * Generate and return a string reprensentation of a semantic domain.
+  *
+  * Result= "semantic domain"
+  * 			<sorts>
+  * 			<operators>
+  * 			<functions>
+  *
+  * 		"attributes"
+  * 			<attributes>
+  *
+  * 		"symbols"
+  * 			<symbols>
+  *
+  * 		"rules"
+  * 			<rules>
+  *
+  * where <sorts>, <operators>, <functions>, <attributes>, <symbols> and <rules>, are
+  * full representation of each type.
+  */
+string SemDomain::to_string ()
+{
+	#ifdef _DEBUG
+		map<string,Sort>::iterator		it1 = sd_sort.find ("int");
+		it1->second.set_name ("Integer");
+
+		map<string,Attribute>::iterator	it2 = sd_attr.find ("valorsynintall");
+		it2->second.set_name ("valores");
+
+		map<string,Symbol>::iterator	it3 = sd_symb.find ("id");
+		it3->second.set_name ("ident");
+	#endif
+
+	string semdomain ("\nsemantic domain\n");
+	semdomain.append (to_string_map <Sort     > (sd_sort));
+	semdomain.append ("\n");
+	semdomain.append (to_string_map <Operator > (sd_oper));
+	semdomain.append ("\n");
+	semdomain.append (to_string_map <Function > (sd_func));
+	semdomain.append ("\nattributes\n");
+	semdomain.append (to_string_map <Attribute> (sd_attr));
+	semdomain.append ("\nsymbols\n");
+	semdomain.append (to_string_map <Symbol   > (sd_symb));
+	semdomain.append ("\nrules\n");
+	semdomain.append (to_string_map <Rule     > (sd_rule));
+	semdomain.append ("\n");
 	return semdomain;
 }
 
-///////////////////////////////////////////////
-// Symbol's operation
-///////////////////////////////////////////////
-
-bool belong(Symbol s, string exprAtts)
+/**
+  * Interpret the expression of sets and returns true
+  * if the symbol belongs to that set.
+  */
+bool belong (Symbol symb, string expr_attrs)
 {
 	typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
-	boost::char_separator<char> sep("{},-");
-	tokenizer tokens(exprAtts, sep);
-	tokenizer::iterator tok_iter = tokens.begin();
+	boost::char_separator<char> sep ("{},-");
+	tokenizer tokens (expr_attrs, sep);
+	tokenizer::iterator tok_iter = tokens.begin ();
 
-	if ((*tok_iter).compare("all") == 0)
+	if ( (*tok_iter).compare ("all") == 0)
 	{
-		for (++tok_iter;tok_iter != tokens.end(); ++tok_iter)
+		for (tok_iter++; tok_iter != tokens.end (); tok_iter++)
 		{
-			if (s.get_name().compare(*tok_iter) == 0)
+			if (symb.get_name ().compare (*tok_iter) == 0)
 			{
 				return false;
 			}
@@ -151,9 +218,9 @@ bool belong(Symbol s, string exprAtts)
 	}
 	else
 	{
-		for (;tok_iter != tokens.end(); ++tok_iter)
+		for (; tok_iter != tokens.end (); tok_iter++)
 		{
-			if (s.get_name().compare(*tok_iter) == 0)
+			if (symb.get_name ().compare (*tok_iter) == 0)
 			{
 				return true;
 			}
@@ -162,28 +229,18 @@ bool belong(Symbol s, string exprAtts)
 	}
 }
 
-void SemDomain::load_attrs(Symbol& symb)
+/**
+  * Insert the attributes belong the symbol.
+  */
+void SemDomain::load_attributes (Symbol & symb)
 {
-	for (map<string,Attribute>::iterator it = v_attr.begin(); it != v_attr.end(); ++it)
+	for (map<string,Attribute>::iterator it = sd_attr.begin (); it != sd_attr.end (); it++)
 	{
-		if (belong(symb, it->second.get_member_symbol()))
+		if (belong (symb, it->second.get_member_symbol ()))
 		{
-			symb.add_attr(&(it->second));
+			symb.add_attr (& (it->second));
 		}
 	}
 }
 
-Symbol& SemDomain::get_symbol(string name_symbol)
-{
-	map<string,Symbol>::iterator it = v_symb.find(name_symbol);
-	return it->second;
-}
-
-Operator& SemDomain::get_operation(string name_oper)
-{
-	map<string,Operator>::iterator it = v_oper.begin();
-
-	return it->second;
-}
-
-}
+} // end genevalmag

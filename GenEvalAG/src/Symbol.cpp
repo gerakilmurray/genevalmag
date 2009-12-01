@@ -1,141 +1,206 @@
 /**
- * \file Symbol.cpp
- * 	\brief EXPLICAR QUE ES ESTO
- *  \date 04/11/2009
- *  \author    Kilmurray, Gerardo Luis. 
- *  \author    Picco, Gonzalo M. 
- */
+  *  \file		Symbol.cpp
+  *  \brief		Implementation of the methods the Symbol.h
+  *  \date		04/11/2009
+  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  */
 
 #include <iostream>
 
 #include "Symbol.h"
 
-namespace genevalmag {
-
-static int symbs = 0;
-
-Symbol::Symbol()
+namespace genevalmag
 {
-	symbs++;
-}
 
-Symbol::Symbol(Symbol const& other)
+#ifdef _DEBUG
+	// Numbers of symbols current in the system.
+	static int symbols = 0;
+#endif
+
+/**
+  * Constructor empty of symbol.
+  */
+Symbol::Symbol ()
 {
-	symbs++;
-	copy(other);
+	#ifdef _DEBUG
+		symbols++;
+	#endif
 }
 
-Symbol::Symbol(string name, symb_type type)
+/**
+  * Constructor with name and type of symbol.
+  */
+Symbol::Symbol (string name, symbol_type type)
 {
-	sym_name = name;
-	sym_type = type;
-	symbs++;
+	symb_name = name;
+	symb_type = type;
+
+	#ifdef _DEBUG
+		symbols++;
+	#endif
 }
 
-Symbol::~Symbol() {
-	symbs--;
-	//cout << "symbs " << symbs << endl;
-	destroy();
+/**
+  * Constructor copy of symbol.
+  */
+Symbol::Symbol (Symbol const & other)
+{
+	copy (other);
+
+	#ifdef _DEBUG
+		symbols++;
+	#endif
 }
 
-Symbol& Symbol::operator= (Symbol const& other)
+/**
+  * Destructor of symbol.
+  */
+Symbol::~Symbol ()
+{
+	destroy ();
+	#ifdef _DEBUG
+		symbols--;
+		cout << "Symbols: " << symbols << endl;
+	#endif
+}
+
+/**
+  * Operator assign (=) of symbol.
+  */
+Symbol& Symbol::operator= (Symbol const & other)
 {
 	if (this != &other)
 	{
-		destroy();
-		copy(other);
+		destroy ();
+		copy (other);
 	}
 	return *this;
 }
 
-void Symbol::copy(Symbol const& other)
+/**
+  * Method of copy the symbol, STL-like C++.
+  */
+void Symbol::copy (Symbol const & other)
 {
-	sym_name = other.get_name();
-	sym_type = other.get_type();
-	attrs = other.get_attrs();
+	symb_name	= other.get_name ();
+	symb_type	= other.get_type ();
+	symb_attrs	= other.get_attrs ();
 }
 
-void Symbol::destroy()
+/**
+  * Method destroy symbol, STL-like C++.
+  */
+void Symbol::destroy ()
 {
 }
 
-
-void Symbol::add_attr( Attribute* attr)
+/**
+  * Return the name of the symbol.
+  */
+string Symbol::get_name () const
 {
-	attrs.push_back(attr);
+	return symb_name;
 }
 
-void Symbol::remove_attr(int index)
+/**
+  * Return the type of the symbol.
+  */
+symbol_type Symbol::get_type () const
 {
-	//////// ver si hace falta.
+	return symb_type;
 }
 
-string Symbol::get_name() const
+/**
+  * Return the list of attributes of the symbol.
+  */
+vector<Attribute*> Symbol::get_attrs () const
 {
-	return sym_name;
+	return symb_attrs;
 }
 
-void Symbol::set_name(string name)
+/**
+  * Set the name of the symbol.
+  */
+void Symbol::set_name (string name)
 {
-	sym_name = name;
+	symb_name = name;
 }
 
-symb_type Symbol::get_type() const
+/**
+  * Set the type of the symbol.
+  */
+void Symbol::set_type (symbol_type type)
 {
-	return sym_type;
+	symb_type = type;
 }
 
-void Symbol::set_type(symb_type type)
+/**
+  * Enqueue a attribute in the list of the symbol.
+  */
+void Symbol::add_attr (Attribute* attr)
 {
-	sym_type = type;
+	symb_attrs.push_back (attr);
 }
 
-bool Symbol::equals(Symbol symb) const
+/**
+  * Return true if the symbol's type is Non Terminal.
+  */
+bool Symbol::is_non_terminal () const
 {
-	return key().compare(symb.key()) == 0;
+	return symb_type == k_non_terminal;
 }
 
-vector<Attribute*> Symbol::get_attrs() const
+/**
+  * Generate and return a string reprensentation of a symbol.
+  *
+  * Result= "symbol" <name> <type> ";"
+  *
+  * where if <type> is Non Terminal, then list the attributes of the symbol.
+  *
+  * <list>= "Attributes:" <attr_1> "," ... "," <attr_n>
+  */
+string Symbol::to_string () const
 {
-	return attrs;
-}
-
-
-string Symbol::to_string() const
-{
-	string symb("symbol ");
-	symb.append(get_name());
-	switch (sym_type)
+	string symb ("symbol ");
+	symb.append (symb_name);
+	switch (symb_type)
 	{
 		case k_non_terminal:
-			symb.append("\tNonTerminal");
+			symb.append ("\tNonTerminal");
 
-			symb.append("\tAttributes: ");
-			for (vector<Attribute>::size_type i = 0; i < attrs.size(); i++)
+			symb.append ("\tAttributes: ");
+			for (vector<Attribute>::size_type i = 0; i < symb_attrs.size (); i++)
 			{
-				symb.append(attrs[i]->get_name());
-				if (i < attrs.size() - 1)
-					symb.append(",");
+				symb.append (symb_attrs[i]->get_name ());
+				if (i+1 < symb_attrs.size ())
+					symb.append (",");
 			}
-
 			break;
 		case k_terminal:
-			symb.append("\tTerminal");
+			symb.append ("\tTerminal");
 			break;
 	}
-	symb.append(";");
-
+	symb.append (";");
 	return symb;
 }
 
-bool Symbol::is_non_terminal() const
+/**
+  * Compares the symbol with other.
+  */
+bool Symbol::equals (Symbol const & other) const
 {
-	return sym_type == k_non_terminal;
+	return key ().compare (other.key ()) == 0;
 }
 
-string Symbol::key()const
+/**
+  * Generate and return the string key that identifies a symbol definitely.
+  *
+  * Result= <name>
+  */
+string Symbol::key () const
 {
-	return sym_name;
+	return symb_name;
 }
 
-}
+} // end genevalmag

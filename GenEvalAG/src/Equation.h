@@ -1,10 +1,10 @@
 /**
- * \file Equation.h
- * 	\brief EXPLICAR QUE ES ESTO
- *  \date 05/11/2009
- *  \author    Kilmurray, Gerardo Luis.
- *  \author    Picco, Gonzalo M.
- */
+  *  \file		Equation.h
+  *  \brief		EXPLICAR QUE ES ESTO
+  *  \date		05/11/2009
+  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  */
 
 #ifndef EQUATION_H_
 #define EQUATION_H_
@@ -14,9 +14,12 @@
 #include "Attribute.h"
 #include "Symbol.h"
 
-namespace genevalmag {
+namespace genevalmag
+{
 
-// node's type.
+/**
+ * Node's type.
+ */
 enum node_type
 {
 	k_intance,
@@ -42,18 +45,19 @@ struct n_term
 	string type_syntetized;
 };
 
-class Equation {
+class Equation
+{
 	private:
 		instance l_value;
 		tree<n_term> r_value;
 
 	public:
-		Equation();
-		virtual ~Equation();
-		Symbol get_l_value();
-		vector <Symbol> get_body();
+		Equation ();
+		virtual ~Equation ();
+		Symbol get_l_value ();
+		vector <Symbol> get_body ();
 };
 
-}
+} // end genevalmag
 
 #endif /* EQUATION_H_ */

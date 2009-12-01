@@ -1,55 +1,116 @@
 /**
- * \file SemDomain.h
- * 	\brief Represents a semantic block a AST.
- *  \date 28/09/2009
- *  \author    Kilmurray, Gerardo Luis. 
- *  \author    Picco, Gonzalo M. 
- */
+  *  \file		SemDomain.h
+  *  \brief		Class that represent the full attribute grammar parsed.
+  *  \date		28/09/2009
+  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  */
 
 #ifndef SEMDOMAIN_H_
 #define SEMDOMAIN_H_
+
+//#define _DEBUG
 
 #include <map>
 
 #include "Sort.h"
 #include "Operator.h"
+#include "Function.h"
 #include "Attribute.h"
 #include "Symbol.h"
 #include "Rule.h"
-#include "Function.h"
 
 using namespace std;
-namespace genevalmag {
+namespace genevalmag
+{
 
-class SemDomain {
+class SemDomain
+{
 private:
-	map<string, Sort>		v_sort;
-	map<string, Operator>	v_oper;
-	map<string, Function>	v_funcs;
-	map<string, Attribute> 	v_attr;
-	map<string, Symbol>		v_symb;
-	map<string, Rule>		v_rule;
+	map<string, Sort>		sd_sort;
+	map<string, Operator>	sd_oper;
+	map<string, Function>	sd_func;
+	map<string, Attribute> 	sd_attr;
+	map<string, Symbol>		sd_symb;
+	map<string, Rule>		sd_rule;
 
-	void load_attrs(Symbol& symb);
+	/**
+	  * Insert the attributes belong the symbol.
+	  */
+	void load_attributes (Symbol & symb);
 
 public:
-	SemDomain();
-	virtual ~SemDomain();
+	/**
+	  * Contructor empty of semantic domain.
+	  */
+	SemDomain ();
 
-	bool add_sort (Sort& s);
-	bool add_op   (Operator& op);
-	bool add_func   (Function& op);
-	bool add_att  (Attribute& att);
-	bool add_symb (Symbol& symb);
-	bool add_rule (Rule& rule);
+	/**
+	  * Destructor of the semantic domain.
+	  */
+	virtual ~SemDomain ();
 
+    /**
+      * Enqueue a sort in the list of the semantic domain.
+      */
+	bool add_sort (Sort & sort);
+    /**
+      * Enqueue a operator in the list of the semantic domain.
+      */
+	bool add_operator (Operator & oper);
+    /**
+      * Enqueue a function in the list of the semantic domain.
+      */
+	bool add_function (Function & func);
+    /**
+      * Enqueue a attribute in the list of the semantic domain.
+      */
+	bool add_attribute (Attribute & attr);
+    /**
+      * Enqueue a symbol in the list of the semantic domain.
+      */
+	bool add_symbol (Symbol & symb);
+    /**
+      * Enqueue a rule in the list of the semantic domain.
+      */
+	bool add_rule (Rule & rule);
+
+    /**
+      * Find in the list of sort of the semantic domain and return the sort with these name.
+      */
 	Sort& return_sort (string name_sort);
-	Symbol& get_symbol(string name_symbol);
-	Operator& get_operation(string name_oper);
+    /**
+      * Find in the list of operator of the semantic domain and return the operator with these name.
+      */
+	Operator& get_operator (string name_oper);
+    /**
+      * Find in the list of symbol of the semantic domain and return the symbol with these name.
+      */
+	Symbol& get_symbol (string name_symbol);
 
-	string to_string();
+    /**
+      * Generate and return a string reprensentation of a semantic domain.
+      *
+      * Result= "semantic domain"
+      * 			<sorts>
+      * 			<operators>
+      * 			<functions>
+      *
+      * 		"attributes"
+      * 			<attributes>
+      *
+      * 		"symbols"
+      * 			<symbols>
+      *
+      * 		"rules"
+      * 			<rules>
+      *
+      * where <sorts>, <operators>, <functions>, <attributes>, <symbols> and <rules>, are
+      * full representation of each type.
+      */
+	string to_string ();
 };
 
-}
+} // end genevalmag
 
 #endif /* SEMDOMAIN_H_ */
