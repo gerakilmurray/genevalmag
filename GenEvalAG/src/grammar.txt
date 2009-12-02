@@ -10,7 +10,6 @@
  * Block of Semantic Domain *
  ****************************/
 semantic domain
-	
 	/*****************
 	 * List of Sorts *
 	 *****************/
@@ -50,22 +49,23 @@ attributes
  * Block of Rules *
  ******************/
 rules
-
 	E ::=	E '+' T
 				compute
-					E[0].valor = T[0].valor * %T[0].valor + T[0].valor;
+					E[0].valor = T[1].valor * %T[2].valor + T[3].valor;
 				end
 		| 	T
 			  	compute
-			  		E[0].valor =  f (T[0].valor&);
+			  		E[0].valor =  f (T[4].valor&);
 	  			end
-	;
+		;
+
 	T ::=	id '*' id
 				compute
-					T[0].valor = id[0].valor * id[1].valor;
+					T[0].valor = id[5].valor * id[6].valor;
 					T[0].type = "id";
 				end
-	;
+		;
+
 	id ::=	'1' 
 				compute
 					id[0].valor = 1; 
@@ -76,4 +76,4 @@ rules
 					id[0].valor = 0; 
 					id[0].type = "int"; 
 				end
-	;
+		;

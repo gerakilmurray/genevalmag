@@ -114,7 +114,7 @@ bool SemDomain::add_rule (Rule & rule)
 }
 
 /**
-  * Find in the list of sort of the semantic domain and return the sort with these name.
+  * Find in the list of sort of the semantic domain and return the sort with that name.
   */
 Sort& SemDomain::return_sort (string name_sort)
 {
@@ -127,7 +127,7 @@ Sort& SemDomain::return_sort (string name_sort)
 }
 
 /**
-  * Find in the list of symbol of the semantic domain and return the symbol with these name.
+  * Find in the list of symbol of the semantic domain and return the symbol with that name.
   */
 Operator& SemDomain::get_operator (string name_oper)
 {
@@ -137,11 +137,23 @@ Operator& SemDomain::get_operator (string name_oper)
 }
 
 /**
-  * Find in the list of operator of the semantic domain and return the operator with these name.
+  * Find in the list of operator of the semantic domain and return the operator with that name.
   */
 Symbol& SemDomain::get_symbol (string name_symbol)
 {
 	map<string,Symbol>::iterator it = sd_symb.find (name_symbol);
+	return it->second;
+}
+
+/**
+  * Find in the list of attribute of the semantic domain and return the attribute with that name
+  * and belongs to the symbol passed as parameter.
+  */
+Attribute& SemDomain::get_attribute (string name_symbol, Symbol* symb)
+{
+	map<string,Attribute>::iterator it = sd_attr.find (name_symbol);
+
+
 	return it->second;
 }
 

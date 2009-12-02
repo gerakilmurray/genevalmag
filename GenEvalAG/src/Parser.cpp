@@ -6,7 +6,7 @@
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-
+//#define BOOST_SPIRIT_DEBUG  ///$$$ DEFINE THIS BEFORE ANYTHING ELSE $$$///
 
 #include <boost/spirit/include/classic_core.hpp>
 #include <boost/spirit/include/classic_symbols.hpp>
@@ -269,6 +269,36 @@ void abbreviated_rule (char const* str, char const* end)
 /**
   * Methods and functions for parse Equation class of Rule.
   */
+
+/**
+  * Pointer to the last instance of attribute to parse successfully.
+  */
+instance_attr * current_instance;
+
+void save_symb_ins (char const* str, char const* end)
+{
+	string symb (str, end);
+//	cout << symb << endl;
+	if (current_instance == NULL)
+	{
+		current_instance = new instance_attr;
+	}
+	current_instance->i_symb = &(sem_domain.get_symbol(symb));
+}
+
+void save_index_ins (int const index)
+{
+	current_instance->i_num = index;
+//	cout << index << endl;
+}
+
+void save_attr_ins (char const* str, char const* end)
+{
+	string attr (str, end);
+//	cout << attr << endl;
+//	current_instance->i_attr = &(sem_domain.get_attribute(attr,current_instance->i_symb));
+}
+
 void add_op_exp (char const* str, char const* end)
 {
 	string name_op (str, end);
@@ -332,6 +362,19 @@ struct attr_grammar: public grammar<attr_grammar>
 
 			r_string		= lexeme_d[ ch_p ('\"') >> +(alnum_p | r_id_op) >> ch_p ('\"') ];
 
+//            string =
+//                    +( (anychar_p - chset<>("\"\\")) | escseq )
+//                ;
+//
+//            escseq =
+//                    ch_p('\\')
+//                    >>  (
+//                            oct_parser_t()
+//                        |   as_lower_d['x'] >> hex_parser_t()
+//                        |   (anychar_p - chset<>('\n'))
+//                        )
+//                ;
+
 			r_reserved_word = strlit<> ("compute") | strlit<> ("COMPUTE") |
 							  strlit<> ("all")     | strlit<> ("ALL");
 
@@ -345,41 +388,40 @@ struct attr_grammar: public grammar<attr_grammar>
 
 			// Declaration of Sorts.
 
-			r_decl_sort = lexeme_d[strlit<> ("sort")>> space_p ] >> r_ident[&add_sort][st_sorts.add] >> *(',' >> r_ident[&add_sort]) >> ';';
+			r_decl_sort		  = lexeme_d[ strlit<> ("sort") >> space_p ] >>
+								r_ident[&add_sort][st_sorts.add] >> *(',' >> r_ident[&add_sort]) >> ';';
 
 			// Declaration of Operators.
 
-			r_decl_oper    = lexeme_d[strlit<> ("op")[&inic_operator]>> space_p ] >>
-						   (r_oper_infix | r_oper_postfix | r_oper_prefix) >>
-						   strlit<> ("->") >>
-						   r_sort[&save_image_op] >> ';';
+			r_decl_oper    = lexeme_d[ strlit<> ("op")[&inic_operator] >> space_p ] >>
+						     (r_oper_infix | r_oper_postfix | r_oper_prefix) >>
+						     strlit<> ("->") >>
+						     r_sort_st[&save_image_op] >> ';';
 
-			r_oper_infix   = strlit<> ("infix")[&save_mode_op]>> !r_oper_mode
-						   >> r_oper[&save_name_op][st_op_infix.add]
-						   >> ':' >> r_sort[&save_domain_op] >> ',' >> r_sort[&save_domain_op];
+			r_oper_infix   = strlit<> ("infix")[&save_mode_op] >> !r_oper_mode >>
+							 r_oper[&save_name_op][st_op_infix.add] >> ':' >>
+							 r_sort_st[&save_domain_op] >> ',' >> r_sort_st[&save_domain_op];
 
-			r_oper_postfix = strlit<> ("postfix")[&save_mode_op]	>> !r_oper_mode
-						   >> r_oper[&save_name_op][st_op_postfix.add]
-						   >> ':' >> r_sort[&save_domain_op];
+			r_oper_postfix = strlit<> ("postfix")[&save_mode_op] >> !r_oper_mode >>
+							 r_oper[&save_name_op][st_op_postfix.add] >> ':' >>
+							 r_sort_st[&save_domain_op];
 
-			r_oper_prefix  = !(strlit<> ("prefix")[&save_mode_op]) >> !r_oper_mode
-						   >> r_oper[&save_name_op][st_op_prefix.add]
-						   >> ':' >> r_sort[&save_domain_op];
+			r_oper_prefix  = !(strlit<> ("prefix")[&save_mode_op]) >> !r_oper_mode >>
+							 r_oper[&save_name_op][st_op_prefix.add] >> ':' >>
+							 r_sort_st[&save_domain_op];
 
 			r_oper_mode	   = '(' >> (uint_p[&save_prec_op] | '_') >> ',' >> (r_oper_assoc[&save_assoc_op] | '_') >> ')';
 
 			r_oper_assoc   = strlit<> ("left") | strlit<> ("right") | strlit<> ("non-assoc");
 
-			r_sort		   = st_sorts;
-
 			// Declaration of Functions.
 
-			r_decl_func		  = lexeme_d[strlit<> ("function")[&inic_function]>> space_p ] >>
-								r_oper[&save_name_func][st_functions.add] >> ':' >>
-							    r_dom_func >> strlit<> ("->") >>
-							    r_sort[&save_image_func] >> ';';
+			r_decl_func	   = lexeme_d[strlit<> ("function")[&inic_function]>> space_p ] >>
+							 r_oper[&save_name_func][st_functions.add] >> ':' >>
+							 r_dom_func >> strlit<> ("->") >>
+							 r_sort_st[&save_image_func] >> ';';
 
-			r_dom_func		  = r_sort[&save_domain_func] >> *(',' >> r_sort[&save_domain_func]);
+			r_dom_func	   = r_sort_st[&save_domain_func] >> *(',' >> r_sort_st[&save_domain_func]);
 
 			/**
 			  * Declaration of Attributes.
@@ -387,7 +429,7 @@ struct attr_grammar: public grammar<attr_grammar>
 			r_attributes = lexeme_d[strlit<> ("attributes")>> space_p ] >> +r_decl_attr[&save_decl_attrs];
 
 			r_decl_attr  = r_ident[&add_attr][st_attributes.add] >> *(',' >> r_ident[&add_attr][st_attributes.add]) >>
-					       ':' >> !(r_type_attr[&save_type_attr]) >> '<' >> r_sort[&save_sort_attr] >> '>' >>
+					       ':' >> !(r_type_attr[&save_type_attr]) >> '<' >> r_sort_st[&save_sort_attr] >> '>' >>
 					       lexeme_d[strlit<> ("of")>> space_p ] >>
 					       (r_conj_symb |
 					       (strlit<> ("all") >> !('-' >> r_conj_symb)))[&save_member_list] >> ';';
@@ -411,11 +453,11 @@ struct attr_grammar: public grammar<attr_grammar>
 			                  | r_char[&save_terminal]
 			                 )[&add_right_side_rule] >>
 						    !(strlit<> ("compute") >>
-						        +(r_sem_expr) >>
+						        +(r_equation) >>
 						      strlit<> ("end")
 						     );
 
-			r_sem_expr	  = r_left_symbol >> '=' >> r_right_side >> ';';
+			r_equation	  = r_left_symbol >> '=' >> r_right_side >> ';';
 
 			r_left_symbol = r_instance;
 
@@ -428,26 +470,37 @@ struct attr_grammar: public grammar<attr_grammar>
 			  *		T = F <op_postfix> | F
 			  *		F = (E) | <symb_base>
 			  */
-			r_expression 		= r_expr_prime >> st_op_infix >> r_expression
+
+//			BOOST_SPIRIT_DEBUG_RULE(r_expression);
+//			BOOST_SPIRIT_DEBUG_RULE(r_expr_prime);
+//			BOOST_SPIRIT_DEBUG_RULE(r_op_infix_st);
+//			BOOST_SPIRIT_DEBUG_RULE(r_expr_prime_prime);
+//			BOOST_SPIRIT_DEBUG_RULE(r_op_postfix_st);
+//			BOOST_SPIRIT_DEBUG_RULE(r_function);
+//			BOOST_SPIRIT_DEBUG_RULE(r_literal);
+//			BOOST_SPIRIT_DEBUG_RULE(r_instance);
+//			BOOST_SPIRIT_DEBUG_RULE(r_function_st);
+
+			r_expression 		= r_expr_prime >> r_op_infix_st >> r_expression
 								| r_expr_prime
 								;
 
-			r_expr_prime		= r_expr_prime_prime >> st_op_postfix
+			r_expr_prime		= r_expr_prime_prime >> r_op_postfix_st
 								| r_expr_prime_prime
 								;
 
 
-			r_expr_prime_prime  = st_op_prefix >> r_expression
+			r_expr_prime_prime  = r_op_prefix_st >> r_expression
 								| '('>> r_expression >>')'
-								| r_function
-								| r_instance
+								| r_function[&pepito]
 								| r_literal
+								| r_instance
 								;
 
 			/**
 			  * The functions accept a list of expressions.
 			  */
-			r_function			= st_functions >> '(' >> r_expression >> *(',' >> r_expression) >> ')';
+			r_function			= r_function_st >> '(' >> r_expression >> *(',' >> r_expression) >> ')';
 
 			/**
 			  * Literals accepted: Integer and Float numbers, characters and string,
@@ -461,12 +514,26 @@ struct attr_grammar: public grammar<attr_grammar>
 			  *
 			  * Example: E[0].value
 			  */
-			r_instance			= lexeme_d[ st_symbols >> '[' >> int_p >> ']' >> '.' >> st_attributes ];
+			r_instance			= lexeme_d[ r_symbol_st[&save_symb_ins] >>
+			          			            '[' >> int_p[&save_index_ins] >> ']' >>
+			          			            '.' >> r_attribute_st[&save_attr_ins]
+			          			          ];
 
 			/**
 			  * Declaration of Attribute Grammar.
 			  */
 			r_att_grammar = r_semantic_domain >> r_attributes >> r_rules >> end_p;
+
+			/**
+			  * Parsers based in the symbol tables.
+			  */
+			r_sort_st		= st_sorts;
+			r_op_prefix_st	= st_op_prefix;
+			r_op_infix_st	= st_op_infix;
+			r_op_postfix_st	= st_op_postfix;
+			r_function_st	= st_functions;
+			r_attribute_st	= st_attributes;
+			r_symbol_st		= st_symbols;
 		}
 		/**
 		  * Table of Symbols for the elements of an Attribute Grammar.
@@ -484,17 +551,20 @@ struct attr_grammar: public grammar<attr_grammar>
 		  */
 		rule<ScannerT> r_reserved_word, r_ident, r_oper, r_id_op, r_char, r_string;
 
-		rule<ScannerT> r_semantic_domain, r_bloq_sem, r_decl_sort, r_decl_oper, r_decl_func, r_sort,
+		rule<ScannerT> r_semantic_domain, r_bloq_sem, r_decl_sort, r_decl_oper, r_decl_func,
 					   r_oper_assoc, r_oper_mode, r_oper_prefix, r_oper_infix, r_oper_postfix,
 					   r_dom_func;
 
 		rule<ScannerT> r_attributes, r_decl_attr, r_type_attr, r_conj_symb;
 
-		rule<ScannerT> r_rules, r_decl_rule, r_sem_expr, r_left_symbol, r_right_side, r_instance, r_right_rule;
+		rule<ScannerT> r_rules, r_decl_rule, r_equation, r_left_symbol, r_right_side, r_instance, r_right_rule;
 
 		rule<ScannerT> r_expression, r_function, r_literal, r_expr_prime, r_expr_prime_prime;
 
 		rule<ScannerT> r_att_grammar;
+
+		rule<ScannerT> r_sort_st, r_op_prefix_st, r_op_infix_st, r_op_postfix_st,
+					   r_function_st, r_attribute_st, r_symbol_st;
 
 		rule<ScannerT> const& start () const { return r_att_grammar; }
 	};
@@ -508,9 +578,11 @@ bool parse_grammar (char const* txt_input)
 {
 	attr_grammar attribute_grammar;
 	skip_parser skip_p;
+
 	#ifdef _DEBUG
 		cout << (parse(txt_input, attribute_grammar, skip_p)).stop << endl;
 	#endif
+
 	return (parse (txt_input, attribute_grammar, skip_p)).full;
 }
 
