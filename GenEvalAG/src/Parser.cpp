@@ -296,7 +296,11 @@ void save_attr_ins (char const* str, char const* end)
 {
 	string attr (str, end);
 //	cout << attr << endl;
-//	current_instance->i_attr = &(sem_domain.get_attribute(attr,current_instance->i_symb));
+	if ((current_instance->i_attr = current_instance->i_symb->get_attribute(attr)) == NULL)
+	{
+		cerr << "ERROR: Atribute inexistente. Verifique los atributos usados en los symbolos." << endl;
+		exit(1);
+	}
 }
 
 void add_op_exp (char const* str, char const* end)
@@ -466,33 +470,19 @@ struct attr_grammar: public grammar<attr_grammar>
 			/**
 			  * expression's Grammar non ambiguos based in
 			  *
-			  * 	E = T <op_infix> E | T
-			  *		T = F <op_postfix> | F
-			  *		F = (E) | <symb_base>
+			  * 	E = T *(<op_infix> T)
+			  *		T = F *(<op_postfix>)
+			  *		F = +(<op_prefix>) E | (E) | function | literal | instance
 			  */
-
-//			BOOST_SPIRIT_DEBUG_RULE(r_expression);
-//			BOOST_SPIRIT_DEBUG_RULE(r_expr_prime);
-//			BOOST_SPIRIT_DEBUG_RULE(r_op_infix_st);
-//			BOOST_SPIRIT_DEBUG_RULE(r_expr_prime_prime);
-//			BOOST_SPIRIT_DEBUG_RULE(r_op_postfix_st);
-//			BOOST_SPIRIT_DEBUG_RULE(r_function);
-//			BOOST_SPIRIT_DEBUG_RULE(r_literal);
-//			BOOST_SPIRIT_DEBUG_RULE(r_instance);
-//			BOOST_SPIRIT_DEBUG_RULE(r_function_st);
-
-			r_expression 		= r_expr_prime >> r_op_infix_st >> r_expression
-								| r_expr_prime
+			r_expression 		= r_expr_prime >> *(r_op_infix_st >> r_expr_prime)
 								;
 
-			r_expr_prime		= r_expr_prime_prime >> r_op_postfix_st
-								| r_expr_prime_prime
+			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st)
 								;
 
-
-			r_expr_prime_prime  = r_op_prefix_st >> r_expression
+			r_expr_prime_prime  = +(r_op_prefix_st) >> r_expression
 								| '('>> r_expression >>')'
-								| r_function[&pepito]
+								| r_function
 								| r_literal
 								| r_instance
 								;
@@ -549,7 +539,9 @@ struct attr_grammar: public grammar<attr_grammar>
 		/**
 		  * Variables using in parsing time.
 		  */
-		rule<ScannerT> r_reserved_word, r_ident, r_oper, r_id_op, r_char, r_string;
+		rule<ScannerT> r_reserved_word, r_ident, r_oper, r_char, r_string;
+
+		rule<typename lexeme_scanner<ScannerT>::type> r_id_op; // rule in lexeme_d.
 
 		rule<ScannerT> r_semantic_domain, r_bloq_sem, r_decl_sort, r_decl_oper, r_decl_func,
 					   r_oper_assoc, r_oper_mode, r_oper_prefix, r_oper_infix, r_oper_postfix,
@@ -617,7 +609,7 @@ int main ()
 	string input_grammar;
 	read_file_in(input_grammar);
 
-	cout << "-------------------------";
+	cout << "-------------------------\n";
     if (parse_grammar (input_grammar.c_str ()))
 	{
 		cout << sem_domain.to_string ();

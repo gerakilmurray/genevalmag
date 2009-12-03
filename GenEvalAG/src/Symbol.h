@@ -78,7 +78,11 @@ class Symbol
 		  * Return the list of attributes of the symbol.
 		  */
 		vector<Attribute*> get_attrs () const;
-
+		/**
+		  * Find in the list of attribute of the symbol and return the attribute with
+		  * that name passed as parameter.
+		  */
+		Attribute* get_attribute (string name_attr);
 	    /**
 	      * Set the name of the symbol.
 	      */

@@ -28,6 +28,7 @@ semantic domain
 	op prefix	(_,right)		%  : string		-> string;
 	op 			(8,non-assoc)	%  : string		-> adrian;
 	op infix	(5,left)		+  : int, int	-> string;
+	op prefix (_,left) + : int -> int;
 		
 	/*********************
 	 * List of Functions *
@@ -51,11 +52,11 @@ attributes
 rules
 	E ::=	E '+' T
 				compute
-					E[0].valor = T[1].valor * %T[2].valor + T[3].valor;
+					E[0].valor = T[1].valor * %%T[2].valor& + +T[3].valor;
 				end
 		| 	T
 			  	compute
-			  		E[0].valor =  f (T[4].valor&);
+			  		E[0].valor =  f (T[4].valor& & & & &);
 	  			end
 		;
 

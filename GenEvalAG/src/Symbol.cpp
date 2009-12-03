@@ -120,6 +120,20 @@ vector<Attribute*> Symbol::get_attrs () const
 }
 
 /**
+  * Find in the list of attribute of the symbol and return the attribute with
+  * that name passed as parameter.
+  */
+Attribute* Symbol::get_attribute (string name_attr)
+{
+	for (vector<Attribute*>::size_type i = 0; i < symb_attrs.size (); i++)
+	{
+		if (symb_attrs[i]->get_name().compare(name_attr) == 0 )
+				return symb_attrs[i];
+	}
+	return NULL;
+}
+
+/**
   * Set the name of the symbol.
   */
 void Symbol::set_name (string name)
@@ -170,7 +184,7 @@ string Symbol::to_string () const
 			symb.append ("\tNonTerminal");
 
 			symb.append ("\tAttributes: ");
-			for (vector<Attribute>::size_type i = 0; i < symb_attrs.size (); i++)
+			for (vector<Attribute*>::size_type i = 0; i < symb_attrs.size (); i++)
 			{
 				symb.append (symb_attrs[i]->get_name ());
 				if (i+1 < symb_attrs.size ())

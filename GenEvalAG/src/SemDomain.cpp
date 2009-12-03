@@ -146,18 +146,6 @@ Symbol& SemDomain::get_symbol (string name_symbol)
 }
 
 /**
-  * Find in the list of attribute of the semantic domain and return the attribute with that name
-  * and belongs to the symbol passed as parameter.
-  */
-Attribute& SemDomain::get_attribute (string name_symbol, Symbol* symb)
-{
-	map<string,Attribute>::iterator it = sd_attr.find (name_symbol);
-
-
-	return it->second;
-}
-
-/**
   * Generate and return a string reprensentation of a semantic domain.
   *
   * Result= "semantic domain"

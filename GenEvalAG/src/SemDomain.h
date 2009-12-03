@@ -85,11 +85,6 @@ public:
       * Find in the list of symbol of the semantic domain and return the symbol with that name.
       */
 	Symbol& get_symbol (string name_symbol);
-	/**
-	  * Find in the list of attribute of the semantic domain and return the attribute with that name
-	  * and belongs to the symbol passed as parameter.
-	  */
-	Attribute& get_attribute (string name_symbol, Symbol* symb);
 
     /**
       * Generate and return a string reprensentation of a semantic domain.
