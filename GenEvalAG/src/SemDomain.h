@@ -81,6 +81,10 @@ public:
       * Find in the list of operator of the semantic domain and return the operator with that name.
       */
 	Operator& get_operator (string name_oper);
+	/**
+	  * Find in the list of function of the semantic domain and return the function with that name.
+	  */
+	Function& get_function (string name_function);
     /**
       * Find in the list of symbol of the semantic domain and return the symbol with that name.
       */

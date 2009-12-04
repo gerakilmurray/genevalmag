@@ -25,6 +25,11 @@ enum node_type
 	k_intance,
 	k_function,
 	k_operator,
+	k_literal
+};
+
+enum literal_type
+{
 	k_int,
 	k_float,
 	k_char,
@@ -40,6 +45,18 @@ struct instance_attr
 	Symbol *	i_symb;	// Symbol.
 	int			i_num;	// Index instance.
 	Attribute *	i_attr; // Symbol's attribute.
+};
+
+struct literal_node
+{
+	union
+	{
+		string* str_l;
+		char ch_l;
+		float flt_l;
+		int int_l;
+	} value_lit;
+	literal_type type_lit;
 };
 
 /**

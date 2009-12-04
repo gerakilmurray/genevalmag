@@ -274,11 +274,13 @@ void abbreviated_rule (char const* str, char const* end)
   * Pointer to the last instance of attribute to parse successfully.
   */
 instance_attr * current_instance;
+literal_node * current_literal;
+Function * current_function;
+Operator * current_operator;
 
 void save_symb_ins (char const* str, char const* end)
 {
 	string symb (str, end);
-//	cout << symb << endl;
 	if (current_instance == NULL)
 	{
 		current_instance = new instance_attr;
@@ -289,19 +291,69 @@ void save_symb_ins (char const* str, char const* end)
 void save_index_ins (int const index)
 {
 	current_instance->i_num = index;
-//	cout << index << endl;
 }
 
 void save_attr_ins (char const* str, char const* end)
 {
 	string attr (str, end);
-//	cout << attr << endl;
 	if ((current_instance->i_attr = current_instance->i_symb->get_attribute(attr)) == NULL)
 	{
 		cerr << "ERROR: Atribute inexistente. Verifique los atributos usados en los symbolos." << endl;
 		exit(1);
 	}
 }
+void save_lit_int (int const int_lit)
+{
+	if (current_literal == NULL)
+	{
+		current_literal = new literal_node;
+	}
+	current_literal->type_lit = k_int;
+	current_literal->value_lit.int_l = int_lit;
+}
+void save_lit_flt (double const flt_lit)
+{
+	if (current_literal == NULL)
+	{
+		current_literal = new literal_node;
+	}
+	current_literal->type_lit = k_float;
+	current_literal->value_lit.flt_l = flt_lit;
+}
+void save_lit_ch (char const* ch, char const* end)
+{
+	if (current_literal == NULL)
+	{
+		current_literal = new literal_node;
+	}
+	string ch_l(ch,end);
+	current_literal->type_lit = k_char;
+	current_literal->value_lit.ch_l = ch_l.at(1);
+}
+void save_lit_str (char const* str, char const* end)
+{
+	if (current_literal == NULL)
+	{
+		current_literal = new literal_node;
+	}
+	string str_l (str+1, end-1); // the pointer +1 and -1 for remove the double quotes.Ex: "uno" --> uno.
+	current_literal->type_lit = k_string;
+	current_literal->value_lit.str_l = &str_l;
+}
+void save_func (char const* str, char const* end)
+{
+	string name_func (str, end);
+	//cout << "func: " << name_func << endl;
+	//current_function = sem_domain.get_function(name_func);
+}
+
+void save_operator (char const* str, char const* end)
+{
+	string name_op (str, end);
+	//cout << "op: " << name_op << endl;
+	//current_operator = &(sem_domain.get_operator(name_op));
+}
+
 
 void add_op_exp (char const* str, char const* end)
 {
@@ -474,13 +526,13 @@ struct attr_grammar: public grammar<attr_grammar>
 			  *		T = F *(<op_postfix>)
 			  *		F = +(<op_prefix>) E | (E) | function | literal | instance
 			  */
-			r_expression 		= r_expr_prime >> *(r_op_infix_st >> r_expr_prime)
+			r_expression 		= r_expr_prime >> *(r_op_infix_st[&save_operator] >> r_expr_prime)
 								;
 
-			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st)
+			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st[&save_operator])
 								;
 
-			r_expr_prime_prime  = +(r_op_prefix_st) >> r_expression
+			r_expr_prime_prime  = +(r_op_prefix_st[&save_operator]) >> r_expression
 								| '('>> r_expression >>')'
 								| r_function
 								| r_literal
@@ -490,13 +542,14 @@ struct attr_grammar: public grammar<attr_grammar>
 			/**
 			  * The functions accept a list of expressions.
 			  */
-			r_function			= r_function_st >> '(' >> r_expression >> *(',' >> r_expression) >> ')';
+			r_function			= r_function_st[&save_func] >> '(' >> r_expression >> *(',' >> r_expression) >> ')';
 
 			/**
 			  * Literals accepted: Integer and Float numbers, characters and string,
 			  * between signs ' and " respectively.
 			  */
-			r_literal			= int_p | real_p | r_char | r_string;
+			r_literal			= int_p[&save_lit_int] | real_p[&save_lit_flt]
+			         			| r_char[&save_lit_ch] | r_string[&save_lit_str];
 
 			/**
 			  * An instance is, the symbol with the number of occurrences in square brackets within

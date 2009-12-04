@@ -135,7 +135,14 @@ Operator& SemDomain::get_operator (string name_oper)
 
 	return it->second;
 }
-
+/**
+  * Find in the list of function of the semantic domain and return the function with that name.
+  */
+Function& SemDomain::get_function (string name_function)
+{
+	map<string,Function>::iterator it = sd_func.find (name_function);
+	return it->second;
+}
 /**
   * Find in the list of operator of the semantic domain and return the operator with that name.
   */
@@ -144,6 +151,7 @@ Symbol& SemDomain::get_symbol (string name_symbol)
 	map<string,Symbol>::iterator it = sd_symb.find (name_symbol);
 	return it->second;
 }
+
 
 /**
   * Generate and return a string reprensentation of a semantic domain.
