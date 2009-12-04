@@ -13,6 +13,8 @@
 
 #include "Attribute.h"
 #include "Symbol.h"
+#include "Operator.h"
+#include "Function.h"
 
 namespace genevalmag
 {
@@ -28,6 +30,9 @@ enum node_type
 	k_literal
 };
 
+/**
+  * Type of basics literals.
+  */
 enum literal_type
 {
 	k_int,
@@ -47,27 +52,39 @@ struct instance_attr
 	Attribute *	i_attr; // Symbol's attribute.
 };
 
+/**
+  *	AST node that storing a literal.
+  */
 struct literal_node
 {
 	union
 	{
-		string* str_l;
-		char ch_l;
-		float flt_l;
-		int int_l;
-	} value_lit;
-	literal_type type_lit;
+		string*		str_l;
+		char		ch_l;
+		float		flt_l;
+		int			int_l;
+	}
+					value_lit;
+	literal_type	type_lit;
 };
 
 /**
   * An AST node of the tree stores a data field type.
+  * This is a union of the 4 types as possible within the parser.
   * Also has synthesized the whole kind of tree from which it is root.
   */
 struct node_ast
 {
-	void*		n_data;
-	node_type	n_type_node;
-	string		n_type_synthetized;
+	union
+	{
+		Operator*		oper;
+		Function*		func;
+		literal_node*	literal;
+		instance_attr*	instance;
+	}
+						n_data;
+	node_type			n_type_node;
+	string				n_type_synthetized;
 };
 
 class Equation

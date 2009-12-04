@@ -53,55 +53,73 @@ void add_sort (char const* str, char const* end)
 /**
   * Pointer that reference a new operator in the grammar.
   */
-Operator * new_oper;
+Operator * current_oper;
 
 void add_operator (char const* str, char const* end)
 {
-	sem_domain.add_operator (*new_oper);
+	sem_domain.add_operator (*current_oper);
 	// Call destruction before free memory.
-	new_oper->Operator::~Operator ();
-	free (new_oper);
+	current_oper->Operator::~Operator ();
+	free (current_oper);
+	current_oper =NULL;
 }
 
-void inic_operator (char const* str, char const* end)
-{
-	// Ignore the string parsed.
-	new_oper = new Operator ();
-}
+//void inic_operator (char const* str, char const* end)
+//{
+//	// Ignore the string parsed.
+//	current_oper = new Operator ();
+//}
 
 void save_name_op (char const* str, char const* end)
 {
+	if (current_oper==NULL)
+	{
+		current_oper = new Operator ();
+	}
+	//current_oper = new Operator ();
 	string name (str, end);
-	new_oper->set_name (name);
+	current_oper->set_name (name);
 }
 
 void save_mode_op (char const* str, char const* end)
 {
+	if (current_oper==NULL)
+	{
+		current_oper = new Operator ();
+	}
 	string mode (str, end);
-	new_oper->set_mode (mode);
+	current_oper->set_mode (mode);
 }
 
 void save_prec_op (int const prec)
 {
-	new_oper->set_prec (prec);
+	if (current_oper==NULL)
+	{
+		current_oper = new Operator ();
+	}
+	current_oper->set_prec (prec);
 }
 
 void save_assoc_op (char const* str, char const* end)
 {
+	if (current_oper==NULL)
+	{
+		current_oper = new Operator ();
+	}
 	string assoc (str, end);
-	new_oper->set_oper_assoc (assoc);
+	current_oper->set_oper_assoc (assoc);
 }
 
 void save_domain_op (char const* str, char const* end)
 {
 	string domain (str, end);
-	new_oper->add_domain (&(sem_domain.return_sort (domain)));
+	current_oper->add_domain (&(sem_domain.return_sort (domain)));
 }
 
 void save_image_op (char const* str, char const* end)
 {
 	string image (str, end);
-	new_oper->set_image (&(sem_domain.return_sort (image)));
+	current_oper->set_image (&(sem_domain.return_sort (image)));
 }
 
 /**
@@ -110,37 +128,42 @@ void save_image_op (char const* str, char const* end)
 /**
   * Pointer that reference a new function in the grammar.
   */
-Function * new_func;
+Function * current_func;
 
-void inic_function (char const* str, char const* end)
-{
-	new_func = new Function ();
-}
+//void inic_function (char const* str, char const* end)
+//{
+//	current_func = new Function ();
+//}
 
 void add_function (char const* str, char const* end)
 {
-	sem_domain.add_function (*new_func);
+	sem_domain.add_function (*current_func);
 	// Call destruction before free memory.
-	new_func->Function::~Function ();
-	free (new_func);
+	current_func->Function::~Function ();
+	free (current_func);
+	current_func = NULL;
 }
 
 void save_name_func (char const* str, char const* end)
 {
+	if (current_func==NULL)
+	{
+		current_func = new Function ();
+	}
 	string name (str, end);
-	new_func->set_name (name);
+	current_func->set_name (name);
 }
 
 void save_domain_func (char const* str, char const* end)
 {
 	string domain (str, end);
-	new_func->add_domain (&(sem_domain.return_sort (domain)));
+	current_func->add_domain (&(sem_domain.return_sort (domain)));
 }
 
 void save_image_func (char const* str, char const* end)
 {
 	string image (str, end);
-	new_func->set_image (&(sem_domain.return_sort (image)));
+	current_func->set_image (&(sem_domain.return_sort (image)));
 }
 
 /**
@@ -275,8 +298,7 @@ void abbreviated_rule (char const* str, char const* end)
   */
 instance_attr * current_instance;
 literal_node * current_literal;
-Function * current_function;
-Operator * current_operator;
+
 
 void save_symb_ins (char const* str, char const* end)
 {
@@ -340,38 +362,11 @@ void save_lit_str (char const* str, char const* end)
 	current_literal->type_lit = k_string;
 	current_literal->value_lit.str_l = &str_l;
 }
-void save_func (char const* str, char const* end)
-{
-	string name_func (str, end);
-	//cout << "func: " << name_func << endl;
-	//current_function = sem_domain.get_function(name_func);
-}
-
-void save_operator (char const* str, char const* end)
-{
-	string name_op (str, end);
-	//cout << "op: " << name_op << endl;
-	//current_operator = &(sem_domain.get_operator(name_op));
-}
-
-
-void add_op_exp (char const* str, char const* end)
-{
-	string name_op (str, end);
-	// Operator* op = &(sem_domain.get_operation (name_op));
-	// cout << op->get_name () << endl;
-	cout << "op " << name_op << endl;
-}
 
 void pepito (char const* str, char const* end)
 {
 	string pepe (str, end);
 	cout << pepe << endl;
-}
-
-void oper_table (char const* str, char const* end)
-{
-	string name_op (str, end);
 }
 
 /**
@@ -449,7 +444,7 @@ struct attr_grammar: public grammar<attr_grammar>
 
 			// Declaration of Operators.
 
-			r_decl_oper    = lexeme_d[ strlit<> ("op")[&inic_operator] >> space_p ] >>
+			r_decl_oper    = lexeme_d[ strlit<> ("op") >> space_p ] >>
 						     (r_oper_infix | r_oper_postfix | r_oper_prefix) >>
 						     strlit<> ("->") >>
 						     r_sort_st[&save_image_op] >> ';';
@@ -472,7 +467,7 @@ struct attr_grammar: public grammar<attr_grammar>
 
 			// Declaration of Functions.
 
-			r_decl_func	   = lexeme_d[strlit<> ("function")[&inic_function]>> space_p ] >>
+			r_decl_func	   = lexeme_d[strlit<> ("function")>> space_p ] >>
 							 r_oper[&save_name_func][st_functions.add] >> ':' >>
 							 r_dom_func >> strlit<> ("->") >>
 							 r_sort_st[&save_image_func] >> ';';
@@ -526,13 +521,13 @@ struct attr_grammar: public grammar<attr_grammar>
 			  *		T = F *(<op_postfix>)
 			  *		F = +(<op_prefix>) E | (E) | function | literal | instance
 			  */
-			r_expression 		= r_expr_prime >> *(r_op_infix_st[&save_operator] >> r_expr_prime)
+			r_expression 		= r_expr_prime >> *(r_op_infix_st[&save_name_op] >> r_expr_prime)
 								;
 
-			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st[&save_operator])
+			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st[&save_name_op])
 								;
 
-			r_expr_prime_prime  = +(r_op_prefix_st[&save_operator]) >> r_expression
+			r_expr_prime_prime  = +(r_op_prefix_st[&save_name_op]) >> r_expression
 								| '('>> r_expression >>')'
 								| r_function
 								| r_literal
@@ -542,7 +537,7 @@ struct attr_grammar: public grammar<attr_grammar>
 			/**
 			  * The functions accept a list of expressions.
 			  */
-			r_function			= r_function_st[&save_func] >> '(' >> r_expression >> *(',' >> r_expression) >> ')';
+			r_function			= r_function_st[&save_name_func] >> '(' >> r_expression >> *(',' >> r_expression) >> ')';
 
 			/**
 			  * Literals accepted: Integer and Float numbers, characters and string,
