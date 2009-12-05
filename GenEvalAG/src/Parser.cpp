@@ -10,6 +10,7 @@
 
 #include <boost/spirit/include/classic_core.hpp>
 #include <boost/spirit/include/classic_symbols.hpp>
+#include <boost/spirit/include/classic_attribute.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #include <stdio.h>
 #include <iostream>
@@ -20,6 +21,7 @@
 using namespace std;
 using namespace BOOST_SPIRIT_CLASSIC_NS;
 using namespace genevalmag;
+using namespace phoenix;
 
 #define PATH_INPUT_FILE "./src/grammar.txt"
 /**
@@ -391,10 +393,20 @@ struct skip_parser: public grammar<skip_parser>
 };
 
 /**
+  * Declaration struct for sinthetize type expression.
+  * Use rule with context: "Closures".
+  * Reference: http://www.boost.org/doc/libs/1_33_1/libs/spirit/example/fundamental/phoenix_calc.cpp
+  */
+struct type_expression: BOOST_SPIRIT_CLASSIC_NS::closure<type_expression, string>
+{
+	member1 type;
+};
+
+/**
   * Declaration of the Attribute Grammar structure
   * with the Spirit library of Boost.
   */
-struct attr_grammar: public grammar<attr_grammar>
+struct attr_grammar: public grammar<attr_grammar, type_expression::context_t>
 {
 	template <typename ScannerT>
 	struct definition
@@ -521,17 +533,17 @@ struct attr_grammar: public grammar<attr_grammar>
 			  *		T = F *(<op_postfix>)
 			  *		F = +(<op_prefix>) E | (E) | function | literal | instance
 			  */
-			r_expression 		= r_expr_prime >> *(r_op_infix_st[&save_name_op] >> r_expr_prime)
+			r_expression 		= r_expr_prime >> *(r_op_infix_st[&save_name_op] >> r_expr_prime)[r_expression.type=arg1]
 								;
 
-			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st[&save_name_op])
+			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st[&save_name_op])[r_expr_prime.type=arg1]
 								;
 
 			r_expr_prime_prime  = +(r_op_prefix_st[&save_name_op]) >> r_expression
 								| '('>> r_expression >>')'
 								| r_function
 								| r_literal
-								| r_instance
+								| r_instance[r_expr_prime_prime.type=arg1]
 								;
 
 			/**
@@ -554,13 +566,13 @@ struct attr_grammar: public grammar<attr_grammar>
 			  */
 			r_instance			= lexeme_d[ r_symbol_st[&save_symb_ins] >>
 			          			            '[' >> int_p[&save_index_ins] >> ']' >>
-			          			            '.' >> r_attribute_st[&save_attr_ins]
+			          			            '.' >> r_attribute_st[&save_attr_ins][r_instance.type="hola"]
 			          			          ];
 
 			/**
 			  * Declaration of Attribute Grammar.
 			  */
-			r_att_grammar = r_semantic_domain >> r_attributes >> r_rules >> end_p;
+			r_att_grammar = r_semantic_domain >> r_attributes >> r_rules >> end_p ;
 
 			/**
 			  * Parsers based in the symbol tables.
@@ -584,6 +596,12 @@ struct attr_grammar: public grammar<attr_grammar>
 		symbols <> st_attributes;
 		symbols <> st_symbols;
 
+//		void pepito2 (char const* str, char const* end)
+//		{
+//			string pepe (str, end);
+//			cout << r_expression.type << endl;
+//		}
+
 		/**
 		  * Variables using in parsing time.
 		  */
@@ -591,24 +609,33 @@ struct attr_grammar: public grammar<attr_grammar>
 
 		rule<typename lexeme_scanner<ScannerT>::type> r_id_op; // rule in lexeme_d.
 
+		// Semantic domain's rule: Sort, Operator and Function.
 		rule<ScannerT> r_semantic_domain, r_bloq_sem, r_decl_sort, r_decl_oper, r_decl_func,
 					   r_oper_assoc, r_oper_mode, r_oper_prefix, r_oper_infix, r_oper_postfix,
 					   r_dom_func;
 
+		// Atribute's rule.
 		rule<ScannerT> r_attributes, r_decl_attr, r_type_attr, r_conj_symb;
 
-		rule<ScannerT> r_rules, r_decl_rule, r_equation, r_left_symbol, r_right_side, r_instance, r_right_rule;
+		// Rule's rule.
+		rule<ScannerT> r_rules, r_decl_rule, r_equation, r_left_symbol, r_right_side, r_right_rule;
 
-		rule<ScannerT> r_expression, r_function, r_literal, r_expr_prime, r_expr_prime_prime;
+		// Expresion's rule: Compute. Add context for type expresion.
+		typedef rule<ScannerT, type_expression::context_t> rule_exp;
 
+		rule_exp r_expression,  r_expr_prime, r_expr_prime_prime, r_function, r_literal, r_instance;
+
+		// Main rule.
 		rule<ScannerT> r_att_grammar;
 
+		// Translate for symbol table.
 		rule<ScannerT> r_sort_st, r_op_prefix_st, r_op_infix_st, r_op_postfix_st,
 					   r_function_st, r_attribute_st, r_symbol_st;
 
 		rule<ScannerT> const& start () const { return r_att_grammar; }
 	};
 };
+
 
 /**
   * This method invokes the method 'parse' of the library Spitir included in Boost.
@@ -622,8 +649,11 @@ bool parse_grammar (char const* txt_input)
 	#ifdef _DEBUG
 		cout << (parse(txt_input, attribute_grammar, skip_p)).stop << endl;
 	#endif
-
-	return (parse (txt_input, attribute_grammar, skip_p)).full;
+	string pepe;
+//	bool result= (parse (txt_input, attribute_grammar[var(pepe)=arg3(arg2( arg3 (arg3 (arg3 (arg1)))))], skip_p)).full;
+	bool result= (parse (txt_input, attribute_grammar, skip_p)).full;
+	cout << pepe;
+	return result;
 }
 
 /**
@@ -658,6 +688,7 @@ int main ()
 	read_file_in(input_grammar);
 
 	cout << "-------------------------\n";
+
     if (parse_grammar (input_grammar.c_str ()))
 	{
 		cout << sem_domain.to_string ();
