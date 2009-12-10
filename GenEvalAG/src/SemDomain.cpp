@@ -122,7 +122,6 @@ Sort& SemDomain::return_sort (string name_sort)
 	add_sort (sort_new);
 
 	map<string,Sort>::iterator it = sd_sort.find (name_sort);
-
 	return it->second;
 }
 
@@ -132,7 +131,6 @@ Sort& SemDomain::return_sort (string name_sort)
 Operator& SemDomain::get_operator (string name_oper)
 {
 	map<string,Operator>::iterator it = sd_oper.begin ();
-
 	return it->second;
 }
 /**

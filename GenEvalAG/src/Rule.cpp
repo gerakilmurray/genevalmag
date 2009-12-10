@@ -179,8 +179,15 @@ string Rule::to_string_not_eqs () const
 string Rule::to_string () const
 {
 	string rule = to_string_not_eqs ();
-	// for para las eqs. obvio que cada eq se sabe imprimir.
-	// rule.append (";");
+	rule.append("\n\t\t\tcompute\n");
+	for (map<int,Equation>::const_iterator it = r_eqs.begin (); it != r_eqs.end (); it++)
+	{
+		rule.append ("\t\t\t\t");
+		rule.append (it->second.to_string());
+		rule.append ("\n");
+	}
+	//rule.append("\n\t\t\t\t<eqssss>");
+	rule.append("\t\t\tend;\n");
 	return rule;
 }
 

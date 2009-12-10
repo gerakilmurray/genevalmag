@@ -96,7 +96,7 @@ class Equation
 		/**
 		  * Method of copy the equation, STL-like C++.
 		  */
-		void copy (Attribute const& other);
+		void copy (Equation const& other);
 		/**
 		  * Method destroy equation, STL-like C++.
 		  */
@@ -109,10 +109,44 @@ class Equation
 		Equation ();
 
 		/**
+		  * Contructor copy of Equation.
+		  */
+		Equation (Equation const & other);
+
+		/**
 		  * Destructor of equation.
 		  */
 		virtual ~Equation ();
+		/**
+		  * Operator assign (=) of Equation.
+		  */
+		Equation& operator= (Equation const & other);
+		/**
+		  * Return the l_value of the equation.
+		  */
+		instance_attr get_l_value () const;
+		/**
+		  * Return the r_value of the equation.
+		  */
+		tree<node_ast> get_r_value () const;
+		/**
+		  * Set the left value of the equation.
+		  */
+		void set_l_value(instance_attr lvalue);
 
+		/**
+		  * Set the rigth value of the equation: is a tree.
+		  */
+		void set_r_value(tree<node_ast> rvalue);
+		/**
+		  * Generate and return a string reprensentation of a Equation.
+		  *
+		  * Result= <l_value> "::=" <r_value> ";"
+		  *
+		  * where <l_value> = "instance_attr" and <r_value> is= "list of node_ast"
+		  */
+		string to_string () const;
+		string print_literal(literal_node lit);
 };
 
 } // end genevalmag
