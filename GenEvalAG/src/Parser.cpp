@@ -302,21 +302,26 @@ instance_attr* current_instance;
 literal_node* current_literal;
 
 Equation * current_eq;
-tree<node_ast> *current_tree;
-//tree<node_ast>::iterator it;
+tree<node_ast> current_tree;
 
 node_ast *current_node;
 
 /*********************************************************************/
-void print_tree(tree<literal_node>& tr, tree<literal_node>::pre_order_iterator it, tree<literal_node>::pre_order_iterator end)
+void print_tree(tree<node_ast>& tr, tree<node_ast>::pre_order_iterator it, tree<node_ast>::pre_order_iterator end)
    {
-   if(!tr.is_valid(it)) return;
+   //if(!tr.is_valid(it)) return;
    int rootdepth=tr.depth(it);
-   std::cout << "-----" << std::endl;
+   cout << "-----" << endl;
    while(it!=end) {
       for(int i=0; i<tr.depth(it)-rootdepth; ++i)
-         std::cout << "  ";
-      std::cout << current_eq->print_literal(*it) << std::endl << std::flush;
+         cout << "  ";
+//       std::cout << current_eq->print_literal(*it) << std::endl << std::flush;
+		  switch (it->n_type_node)
+			{
+				case k_intance: cout << current_eq->print_instance(*(it->n_data.instance)) << endl;	break;
+				case k_literal:	cout<< current_eq->print_literal(*(it->n_data.literal))<< endl;	break;
+				case k_operator:case k_function:;
+			 }
       ++it;
       }
    std::cout << "-----" << std::endl;
@@ -324,47 +329,77 @@ void print_tree(tree<literal_node>& tr, tree<literal_node>::pre_order_iterator i
 
 void prueba()
 {
-	tree<literal_node> tr9;
+	tree<node_ast> tr9;
 	literal_node node1;
 	node1.value_lit.int_l=3;
-	tr9.set_head(node1);
-	cout << current_eq->print_literal(node1)<< endl;
+	node1.type_lit = k_int;
+	node_ast n1;
+	n1.n_data.literal = new literal_node;
+	*(n1.n_data.literal) = node1;
+	n1.n_type_node = k_literal;
+	tr9.set_head(n1);
+
+	instance_attr ins1;
+	ins1.i_symb = &(sem_domain.get_symbol("E"));
+	ins1.i_num = 9;
+	ins1.i_attr = ins1.i_symb->get_attribute("valor");
+	node_ast n4;
+	n4.n_data.instance = new instance_attr;
+	n4.n_data.instance = &ins1;
+	n4.n_type_node = k_intance;
+	tr9.insert(tr9.begin().begin(), n4);
+
 	literal_node node2;
 	node2.value_lit.ch_l='A';
-	cout << current_eq->print_literal(node2)<< endl;
-	tr9.insert(tr9.begin().begin(), node2);
+	node2.type_lit = k_char;
+	node_ast n2;
+	n2.n_data.literal = new literal_node;
+	*(n2.n_data.literal) = node2;
+	n2.n_type_node = k_literal;
+	tr9.insert(tr9.begin().begin(), n2);
 	literal_node node3;
 	node3.value_lit.flt_l=3.13;
-	cout << current_eq->print_literal(node3)<< endl;
-	tr9.insert(tr9.begin().begin(), node3);
+	node3.type_lit = k_float;
+	node_ast n3;
+	n3.n_data.literal = new literal_node;
+	*(n3.n_data.literal) = node3;
+	n3.n_type_node = k_literal;
+	tr9.insert(tr9.begin().begin().begin(), n3);
+
 	print_tree(tr9, tr9.begin(), tr9.end());
+
 }
 ////////////////////////////////////////////////////////////////////////////////////////***
 
 ////////////////////////////////////////////////////////////////////////////////////////***
 void inic_tree(char const chr)
 {
-	if (current_tree == NULL)
-	{
-		current_tree = new tree<node_ast>;
-	}
+//	current_tree = new tree<node_ast>;
+	literal_node node1;
+	node1.value_lit.int_l=3;
+	node1.type_lit = k_int;
+	node_ast n1;
+	n1.n_data.literal = new literal_node;
+	*(n1.n_data.literal) = node1;
+	n1.n_type_node = k_literal;
+	current_tree.set_head(n1);
 }
 
 void save_node_tree()
 {
-	//current_tree->insert(current_tree->begin(),*current_node);
+	current_tree.insert(current_tree.begin().begin(),*current_node);
+//	current_node = NULL;
 }
+
 void save_literal_tree()
 {
-	if (current_node == NULL)
-	{
-		current_node = new node_ast;
-	}
+	current_node = new node_ast;
 	current_node->n_data.literal = current_literal;
 	current_node->n_type_node = k_literal;
+	// falta type synthetize
 	save_node_tree();
+	//cout << current_eq->print_literal(*current_literal) << endl;
 
-	free(current_node);
 	current_node = NULL;
 }
 
@@ -391,16 +426,14 @@ void save_attr_ins (char const* str, char const* end)
 		cerr << "ERROR: Atribute inexistente. Verifique los atributos usados en los symbolos." << endl;
 		exit(1);
 	}
-//	if (current_node == NULL)
-//	{
-//		current_node = new node_ast;
-//	}
-//	current_node->n_data.instance = current_instance;
-//	current_node->n_type_node = k_intance;
-//	save_node_tree();
-//	free(current_node);
-//	current_node = NULL;
+
+	current_node = new node_ast;
+	current_node->n_data.instance = current_instance;
+	current_node->n_type_node = k_intance;
+	save_node_tree();
+	current_node = NULL;
 }
+
 void save_lit_int (int const int_lit)
 {
 	if (current_literal == NULL)
@@ -411,6 +444,7 @@ void save_lit_int (int const int_lit)
 	current_literal->value_lit.int_l = int_lit;
 	save_literal_tree();
 }
+
 void save_lit_flt (double const flt_lit)
 {
 	if (current_literal == NULL)
@@ -421,6 +455,7 @@ void save_lit_flt (double const flt_lit)
 	current_literal->value_lit.flt_l = flt_lit;
 	save_literal_tree();
 }
+
 void save_lit_ch (char const* ch, char const* end)
 {
 	if (current_literal == NULL)
@@ -432,6 +467,7 @@ void save_lit_ch (char const* ch, char const* end)
 	current_literal->value_lit.ch_l = ch_l.at(1);
 	save_literal_tree();
 }
+
 void save_lit_str (char const* str, char const* end)
 {
 	if (current_literal == NULL)
@@ -440,14 +476,8 @@ void save_lit_str (char const* str, char const* end)
 	}
 	string str_l (str+1, end-1); // the pointer +1 and -1 for remove the double quotes.Ex: "uno" --> uno.
 	current_literal->type_lit = k_string;
-	current_literal->value_lit.str_l = &str_l;
+	current_literal->value_lit.str_l = new string(str_l);
 	save_literal_tree();
-}
-
-void pepito (char const* str, char const* end)
-{
-	string pepe (str, end);
-	cout << pepe << endl;
 }
 
 void save_lvalue (char const* str, char const* end)
@@ -460,11 +490,26 @@ void save_lvalue (char const* str, char const* end)
 
 void save_rvalue (char const* str, char const* end)
 {
-	current_eq->set_r_value(*current_tree);
+//	string full_exp (str, end);
+//	cout << full_exp << endl;
+
+	current_eq->set_r_value(current_tree);
+
 	current_rule->add_eq(*current_eq);
-	free(current_tree);
-	current_tree = NULL;
+
+//	free(current_tree);
+//	current_tree = NULL;
+	print_tree(current_tree,current_tree.begin(),current_tree.end());
+	current_tree.clear();
 	free(current_eq);
+
+}
+
+
+void pepito (char const* str, char const* end)
+{
+	string pepe (str, end);
+	cout << pepe << endl;
 }
 
 
@@ -779,16 +824,16 @@ int main ()
 {
 	string input_grammar;
 	read_file_in(input_grammar);
-
 	cout << "-------------------------\n";
 
-	prueba();
 
-    if (parse_grammar (input_grammar.c_str ()))
+
+	if (parse_grammar (input_grammar.c_str ()))
 	{
 		cout << sem_domain.to_string ();
 		cout << "-------------------------\n";
 		cout << "Parsing OK\n";
+		prueba();
     }
 	else
 	{

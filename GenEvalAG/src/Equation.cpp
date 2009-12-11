@@ -152,7 +152,6 @@ string to_string_literal(literal_node literal)
 {
 	string lit;
 	lit.append("'");
-	lit.append("puta");
 	switch (literal.type_lit)
 	{
 		case k_int:
@@ -192,24 +191,74 @@ string to_string_literal(literal_node literal)
 string Equation::to_string () const
 {
 	string eq;
+
 	// Save l_value.
 	eq.append (to_string_instance(l_value));
 	eq.append ("\t::=\t");
-	// save r_value.
 
-	for (tree<node_ast>::iterator it = r_value.begin(); it != r_value.end(); it++)
-	{
-	    switch (it.node->data.n_type_node)
-		{
-	    case k_intance: eq.append (to_string_instance(*(it.node->data.n_data.instance)));	break;
-	    case k_function: eq.append (it.node->data.n_data.func->to_string());				break;
-	    case k_operator: eq.append (it.node->data.n_data.oper->to_string());				break;
-	    case k_literal:	eq.append (to_string_literal(*(it.node->data.n_data.literal)));		break;
-	    }
-		cout << "print tree" << endl;
-		if (it != r_value.end ())
-			eq.append (" ");
-	}
+	// save r_value.
+	////// ESTA VERSION ESTA IGUAL QUE LA PRINT DE PARSER. EL PROBLEMA DEBE ESTAR EN EL
+	////// R_VALUE QUE TENEMOS EN ESTE MOMENTO. HAY QUE CHECK PARAMENTROS, REFERENCIAS, ETC.
+
+	   //if(!tr.is_valid(it)) return;
+	tree<node_ast>::pre_order_iterator it = r_value.begin();
+	tree<node_ast>::pre_order_iterator end = r_value.end();
+//   int rootdepth=r_value.depth(it);
+//   cout << "-----" << endl;
+   eq.append ("Estoy comentada.");
+//   while(it!=end) {
+//	  for(int i=0; i<r_value.depth(it)-rootdepth; ++i)
+//		 cout << "  ";
+//       std::cout << current_eq->print_literal(*it) << std::endl << std::flush;
+//		  switch (it->n_type_node)
+//			{
+//				case k_intance: eq.append(to_string_instance(*(it->n_data.instance)));	break;
+//				case k_literal:	eq.append(to_string_literal(*(it->n_data.literal)));	break;
+//				case k_operator:case k_function:;
+//			 }
+//	  ++it;
+//	  }
+///////////////////////////HASTA ACA. LO DE ABAJO ERAN VERSIONES MIAS DE ANTES PARECIDAS.
+
+//	tree<node_ast>::pre_order_iterator it = r_value.begin();
+//
+//	//if(!r_value.is_valid(it)) return "ERROR tree empty\n";
+//
+//	int rootdepth=r_value.depth(it);
+//
+//	std::cout << "-----" << std::endl;
+//	while(it != r_value.end())
+//	{
+//		cout<< "se clava";
+//		for(int i=0; i<r_value.depth(it)-rootdepth; ++i)
+//		{
+//			std::cout << "  ";
+//
+//			switch (it->n_type_node)
+//			{
+//				case k_intance: eq.append (to_string_instance(*(it->n_data.instance)));	break;
+//	      	    case k_function: eq.append (it->n_data.func->to_string());				break;
+//	      	    case k_operator: eq.append (it->n_data.oper->to_string());				break;
+//	      	    case k_literal:	eq.append (to_string_literal(*(it->n_data.literal)));	break;
+//			 }
+//			 ++it;
+//		}
+//	 }
+//	   std::cout << "-----" << std::endl;
+
+	//	for (tree<node_ast>::iterator it = r_value.begin(); it != r_value.end(); it++)
+//	{
+//	    switch (it.node->data.n_type_node)
+//		{
+//	    case k_intance: eq.append (to_string_instance(*(it.node->data.n_data.instance)));	break;
+//	    case k_function: eq.append (it.node->data.n_data.func->to_string());				break;
+//	    case k_operator: eq.append (it.node->data.n_data.oper->to_string());				break;
+//	    case k_literal:	eq.append (to_string_literal(*(it.node->data.n_data.literal)));		break;
+//	    }
+//		cout << "print tree" << endl;
+//		if (it != r_value.end ())
+//			eq.append (" ");
+//	}
 	eq.append (";");
 	return eq;
 }
@@ -217,6 +266,11 @@ string Equation::to_string () const
 string Equation::print_literal(literal_node lit)
 {
 	return to_string_literal(lit);
+}
+
+string Equation::print_instance(instance_attr lit)
+{
+	return to_string_instance(lit);
 }
 
 

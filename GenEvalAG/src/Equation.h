@@ -66,6 +66,40 @@ struct literal_node
 	}
 					value_lit;
 	literal_type	type_lit;
+
+	literal_node& operator= (literal_node const & other)
+	{
+		if (this != &other)
+		{
+			destroy ();
+			copy (other);
+		}
+		return *this;
+	}
+	void destroy()
+	{
+		if (type_lit==k_string)
+			free(value_lit.str_l);
+	}
+	void copy (literal_node const & other)
+	{
+		type_lit = other.type_lit;
+		switch (other.type_lit)
+		{
+			case k_int:
+				value_lit.int_l = other.value_lit.int_l;
+				break;
+			case k_float:
+				value_lit.flt_l = other.value_lit.flt_l;
+				break;
+			case k_char:
+				value_lit.ch_l = other.value_lit.ch_l;
+				break;
+			case k_string:
+				value_lit.str_l = other.value_lit.str_l;
+				break;
+		}
+	}
 };
 
 /**
@@ -85,6 +119,46 @@ struct node_ast
 						n_data;
 	node_type			n_type_node;
 	string				n_type_synthetized;
+
+	node_ast& operator= (node_ast const & other)
+	{
+		if (this != &other)
+		{
+			destroy ();
+			copy (other);
+		}
+		return *this;
+	}
+
+	void destroy()
+	{
+		if (n_type_node == k_intance)
+			free(n_data.instance);
+		if (n_type_node == k_literal)
+			free(n_data.literal);
+	}
+
+	void copy (node_ast const & other)
+	{
+		n_type_synthetized = other.n_type_synthetized;
+		n_type_node = other.n_type_node;
+		switch (other.n_type_node)
+		{
+			case k_intance:
+				n_data.instance = other.n_data.instance;
+				break;
+			case k_function:
+				n_data.func = other.n_data.func;
+				break;
+			case k_operator:
+				n_data.oper = other.n_data.oper;
+				break;
+			case k_literal:
+				n_data.literal = other.n_data.literal;
+				break;
+		}
+	}
+
 };
 
 class Equation
@@ -147,6 +221,7 @@ class Equation
 		  */
 		string to_string () const;
 		string print_literal(literal_node lit);
+		string print_instance(instance_attr lit);
 };
 
 } // end genevalmag
