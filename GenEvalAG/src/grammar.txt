@@ -33,7 +33,7 @@ semantic domain
 	/*********************
 	 * List of Functions *
 	 *********************/
-	function	f: int, int -> string;
+	function	f: int, int, character -> string;
 	function	g: string	-> int;
 	
 /***********************
@@ -41,7 +41,7 @@ semantic domain
  ***********************/
 attributes
 	valor			: syn	<int>		of all;
-	lexema, termino	: syn	<string>	of all - {E, T};
+	lexema, termino	: syn	<string>	of all - {E};
 	lexx			: syn	<string>	of all - {T};
 	type			: inh	<string>	of all;
 	grade			:		<int>		of {E};
@@ -52,7 +52,7 @@ attributes
 rules
 	E ::=	E '+' T
 				compute
-					E[0].valor = T[1].valor * %(%T[2].valor& + T[3].valor);
+					E[0].valor = T[1].termino * %(%T[2].valor& + T[3].valor);
 				end
 		| 	T
 			  	compute
@@ -74,7 +74,7 @@ rules
 				end
 	     |  '0'
 				compute
-					id[0].valor = '0'; 
+					id[0].valor = '0' + '1'; 
 					id[0].type = "int"; 
 				end
 		;

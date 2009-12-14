@@ -63,7 +63,7 @@ void add_operator (char const* str, char const* end)
 	// Call destruction before free memory.
 	current_oper->Operator::~Operator ();
 	free (current_oper);
-	current_oper =NULL;
+	current_oper = NULL;
 }
 
 //void inic_operator (char const* str, char const* end)
@@ -74,7 +74,7 @@ void add_operator (char const* str, char const* end)
 
 void save_name_op (char const* str, char const* end)
 {
-	if (current_oper==NULL)
+	if (current_oper == NULL)
 	{
 		current_oper = new Operator ();
 	}
@@ -85,7 +85,7 @@ void save_name_op (char const* str, char const* end)
 
 void save_mode_op (char const* str, char const* end)
 {
-	if (current_oper==NULL)
+	if (current_oper == NULL)
 	{
 		current_oper = new Operator ();
 	}
@@ -95,7 +95,7 @@ void save_mode_op (char const* str, char const* end)
 
 void save_prec_op (int const prec)
 {
-	if (current_oper==NULL)
+	if (current_oper == NULL)
 	{
 		current_oper = new Operator ();
 	}
@@ -104,7 +104,7 @@ void save_prec_op (int const prec)
 
 void save_assoc_op (char const* str, char const* end)
 {
-	if (current_oper==NULL)
+	if (current_oper == NULL)
 	{
 		current_oper = new Operator ();
 	}
@@ -148,7 +148,7 @@ void add_function (char const* str, char const* end)
 
 void save_name_func (char const* str, char const* end)
 {
-	if (current_func==NULL)
+	if (current_func == NULL)
 	{
 		current_func = new Function ();
 	}
@@ -269,7 +269,6 @@ void save_rule (char const* str, char const* end)
 	// Call destruction before free memory.
 	current_rule->Rule::~Rule ();
 	free (current_rule);
-
 }
 
 void add_left_symbol_rule (char const* str, char const* end)
@@ -298,13 +297,13 @@ void abbreviated_rule (char const* str, char const* end)
 /**
   * Pointer to the last instance of attribute to parse successfully.
   */
-instance_attr* current_instance;
-literal_node* current_literal;
+instance_attr*	current_instance;
+literal_node*	current_literal;
 
-Equation * current_eq;
-tree<node_ast> current_tree;
+Equation*		current_eq;
+tree<node_ast>	current_tree;
 
-node_ast *current_node;
+node_ast*		current_node;
 
 /*********************************************************************/
 void print_tree(tree<node_ast>& tr, tree<node_ast>::pre_order_iterator it, tree<node_ast>::pre_order_iterator end)
@@ -367,9 +366,7 @@ void prueba()
 	tr9.insert(tr9.begin().begin().begin(), n3);
 
 	print_tree(tr9, tr9.begin(), tr9.end());
-
 }
-////////////////////////////////////////////////////////////////////////////////////////***
 
 ////////////////////////////////////////////////////////////////////////////////////////***
 void inic_tree(char const chr)
@@ -388,26 +385,41 @@ void inic_tree(char const chr)
 void save_node_tree()
 {
 	current_tree.insert(current_tree.begin().begin(),*current_node);
-//	current_node = NULL;
+	cout << "impresion parcial  inic ...................... " << endl;
+	print_tree(current_tree, current_tree.begin(),current_tree.end());
+	cout << "impresion parcial  fin ...................... " << endl;
+	current_node = NULL;
+	current_instance = NULL;
+	current_literal = NULL;
 }
 
-void save_literal_tree()
+void save_literal_node(char const* str, char const* end)
 {
 	current_node = new node_ast;
 	current_node->n_data.literal = current_literal;
 	current_node->n_type_node = k_literal;
 	// falta type synthetize
-	save_node_tree();
-	//cout << current_eq->print_literal(*current_literal) << endl;
 
-	current_node = NULL;
+	cout << "literal" << endl;
+	save_node_tree();
 }
+
+void save_instance_node(char const* str, char const* end)
+{
+		current_node = new node_ast;
+		current_node->n_data.instance = current_instance;
+		current_node->n_type_node = k_intance;
+		cout << "instance" << endl;
+		save_node_tree();
+
+};
 
 void save_symb_ins (char const* str, char const* end)
 {
 	string symb (str, end);
 	if (current_instance == NULL)
 	{
+		cout << "damos memoria instance" << endl;
 		current_instance = new instance_attr;
 	}
 	current_instance->i_symb = &(sem_domain.get_symbol(symb));
@@ -426,64 +438,59 @@ void save_attr_ins (char const* str, char const* end)
 		cerr << "ERROR: Atribute inexistente. Verifique los atributos usados en los symbolos." << endl;
 		exit(1);
 	}
-
-	current_node = new node_ast;
-	current_node->n_data.instance = current_instance;
-	current_node->n_type_node = k_intance;
-	save_node_tree();
-	current_node = NULL;
 }
 
 void save_lit_int (int const int_lit)
 {
 	if (current_literal == NULL)
 	{
+		cout << "damos memoria literal" << endl;
 		current_literal = new literal_node;
 	}
 	current_literal->type_lit = k_int;
 	current_literal->value_lit.int_l = int_lit;
-	save_literal_tree();
 }
 
 void save_lit_flt (double const flt_lit)
 {
 	if (current_literal == NULL)
 	{
+		cout << "damos memoria literal" << endl;
 		current_literal = new literal_node;
 	}
 	current_literal->type_lit = k_float;
 	current_literal->value_lit.flt_l = flt_lit;
-	save_literal_tree();
 }
 
 void save_lit_ch (char const* ch, char const* end)
 {
 	if (current_literal == NULL)
 	{
+		cout << "damos memoria literal" << endl;
 		current_literal = new literal_node;
 	}
 	string ch_l(ch,end);
 	current_literal->type_lit = k_char;
 	current_literal->value_lit.ch_l = ch_l.at(1);
-	save_literal_tree();
 }
 
 void save_lit_str (char const* str, char const* end)
 {
 	if (current_literal == NULL)
 	{
+		cout << "damos memoria literal" << endl;
 		current_literal = new literal_node;
 	}
 	string str_l (str+1, end-1); // the pointer +1 and -1 for remove the double quotes.Ex: "uno" --> uno.
 	current_literal->type_lit = k_string;
 	current_literal->value_lit.str_l = new string(str_l);
-	save_literal_tree();
 }
 
 void save_lvalue (char const* str, char const* end)
 {
 	current_eq = new Equation();
 	current_eq->set_l_value(*current_instance);
+	cout << "guardamos l-value" << endl;
 	free(current_instance);
 	current_instance = NULL;
 }
@@ -499,10 +506,11 @@ void save_rvalue (char const* str, char const* end)
 
 //	free(current_tree);
 //	current_tree = NULL;
+	cout << "guardamos r-value" << endl;
 	print_tree(current_tree,current_tree.begin(),current_tree.end());
 	current_tree.clear();
 	free(current_eq);
-
+	current_eq = NULL;
 }
 
 
@@ -548,7 +556,7 @@ struct type_expression: BOOST_SPIRIT_CLASSIC_NS::closure<type_expression, string
   * Declaration of the Attribute Grammar structure
   * with the Spirit library of Boost.
   */
-struct attr_grammar: public grammar<attr_grammar, type_expression::context_t>
+struct attr_grammar: public grammar<attr_grammar>
 {
 	template <typename ScannerT>
 	struct definition
@@ -594,7 +602,7 @@ struct attr_grammar: public grammar<attr_grammar, type_expression::context_t>
 			// Declaration of Sorts.
 
 			r_decl_sort		  = lexeme_d[ strlit<> ("sort") >> space_p ] >>
-								r_ident[&add_sort][st_sorts.add] >> *(',' >> r_ident[&add_sort]) >> ';';
+								(r_ident[&add_sort][st_sorts.add] % ',') >> ';';
 
 			// Declaration of Operators.
 
@@ -621,25 +629,25 @@ struct attr_grammar: public grammar<attr_grammar, type_expression::context_t>
 
 			// Declaration of Functions.
 
-			r_decl_func	   = lexeme_d[strlit<> ("function")>> space_p ] >>
+			r_decl_func	= lexeme_d[strlit<> ("function")>> space_p ] >>
 							 r_oper[&save_name_func][st_functions.add] >> ':' >>
 							 r_dom_func >> strlit<> ("->") >>
 							 r_sort_st[&save_image_func] >> ';';
 
-			r_dom_func	   = r_sort_st[&save_domain_func] >> *(',' >> r_sort_st[&save_domain_func]);
+			r_dom_func	= r_sort_st[&save_domain_func] % ',';
 
 			/**
 			  * Declaration of Attributes.
 			  */
 			r_attributes = lexeme_d[strlit<> ("attributes")>> space_p ] >> +r_decl_attr[&save_decl_attrs];
 
-			r_decl_attr  = r_ident[&add_attr][st_attributes.add] >> *(',' >> r_ident[&add_attr][st_attributes.add]) >>
+			r_decl_attr  = (r_ident[&add_attr][st_attributes.add] % ',') >>
 					       ':' >> !(r_type_attr[&save_type_attr]) >> '<' >> r_sort_st[&save_sort_attr] >> '>' >>
 					       lexeme_d[strlit<> ("of")>> space_p ] >>
 					       (r_conj_symb |
 					       (strlit<> ("all") >> !('-' >> r_conj_symb)))[&save_member_list] >> ';';
 
-			r_conj_symb	 = '{' >> r_ident >> *(',' >> r_ident) >> '}';
+			r_conj_symb	 = '{' >> (r_ident % ',') >> '}';
 
 			r_type_attr  = (strlit<> ("inh") | strlit<> ("syn"));
 
@@ -675,23 +683,23 @@ struct attr_grammar: public grammar<attr_grammar, type_expression::context_t>
 			  *		T = F *(<op_postfix>)
 			  *		F = +(<op_prefix>) E | (E) | function | literal | instance
 			  */
-			r_expression 		= r_expr_prime >> *(r_op_infix_st[&save_name_op] >> r_expr_prime)[r_expression.type=arg1]
+			r_expression 		= r_expr_prime >> *(r_op_infix_st[&save_name_op] >> r_expr_prime)
 								;
 
-			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st[&save_name_op])[r_expr_prime.type=arg1]
+			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st[&save_name_op])
 								;
 
 			r_expr_prime_prime  = +(r_op_prefix_st[&save_name_op]) >> r_expression
 								| '('>> r_expression >>')'
 								| r_function
-								| r_literal
-								| r_instance[r_expr_prime_prime.type=arg1]
+								| r_literal[&save_literal_node]
+								| r_instance[&save_instance_node]
 								;
 
 			/**
 			  * The functions accept a list of expressions.
 			  */
-			r_function			= r_function_st[&save_name_func] >> '(' >> r_expression >> *(',' >> r_expression) >> ')';
+			r_function			= r_function_st[&save_name_func] >> '(' >> (r_expression % ',') >> ')';
 
 			/**
 			  * Literals accepted: Integer and Float numbers, characters and string,
@@ -708,7 +716,7 @@ struct attr_grammar: public grammar<attr_grammar, type_expression::context_t>
 			  */
 			r_instance			= lexeme_d[ r_symbol_st[&save_symb_ins] >>
 			          			            '[' >> int_p[&save_index_ins] >> ']' >>
-			          			            '.' >> r_attribute_st[&save_attr_ins][r_instance.type="hola"]
+			          			            '.' >> r_attribute_st[&save_attr_ins]
 			          			          ];
 
 			/**
@@ -726,7 +734,6 @@ struct attr_grammar: public grammar<attr_grammar, type_expression::context_t>
 			r_function_st	= st_functions;
 			r_attribute_st	= st_attributes;
 			r_symbol_st		= st_symbols;
-
 		}
 		/**
 		  * Table of Symbols for the elements of an Attribute Grammar.
@@ -763,8 +770,8 @@ struct attr_grammar: public grammar<attr_grammar, type_expression::context_t>
 		rule<ScannerT> r_rules, r_decl_rule, r_equation, r_left_symbol, r_right_side, r_right_rule;
 
 		// Expresion's rule: Compute. Add context for type expresion.
-		typedef rule<ScannerT, type_expression::context_t> rule_exp;
-
+//		typedef rule<ScannerT, type_expression::context_t> rule_exp;
+		typedef rule<ScannerT> rule_exp;
 		rule_exp r_expression,  r_expr_prime, r_expr_prime_prime, r_function, r_literal, r_instance;
 
 		// Main rule.
