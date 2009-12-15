@@ -66,48 +66,31 @@ void add_operator (char const* str, char const* end)
 	current_oper = NULL;
 }
 
-//void inic_operator (char const* str, char const* end)
-//{
-//	// Ignore the string parsed.
-//	current_oper = new Operator ();
-//}
+void inic_operator (char const* str, char const* end)
+{
+	// Ignore the string parsed.
+	current_oper = new Operator ();
+}
 
 void save_name_op (char const* str, char const* end)
 {
-	if (current_oper == NULL)
-	{
-		current_oper = new Operator ();
-	}
-	//current_oper = new Operator ();
 	string name (str, end);
 	current_oper->set_name (name);
 }
 
 void save_mode_op (char const* str, char const* end)
 {
-	if (current_oper == NULL)
-	{
-		current_oper = new Operator ();
-	}
 	string mode (str, end);
 	current_oper->set_mode (mode);
 }
 
 void save_prec_op (int const prec)
 {
-	if (current_oper == NULL)
-	{
-		current_oper = new Operator ();
-	}
 	current_oper->set_prec (prec);
 }
 
 void save_assoc_op (char const* str, char const* end)
 {
-	if (current_oper == NULL)
-	{
-		current_oper = new Operator ();
-	}
 	string assoc (str, end);
 	current_oper->set_oper_assoc (assoc);
 }
@@ -132,11 +115,6 @@ void save_image_op (char const* str, char const* end)
   */
 Function * current_func;
 
-//void inic_function (char const* str, char const* end)
-//{
-//	current_func = new Function ();
-//}
-
 void add_function (char const* str, char const* end)
 {
 	sem_domain.add_function (*current_func);
@@ -148,10 +126,7 @@ void add_function (char const* str, char const* end)
 
 void save_name_func (char const* str, char const* end)
 {
-	if (current_func == NULL)
-	{
-		current_func = new Function ();
-	}
+	current_func = new Function ();
 	string name (str, end);
 	current_func->set_name (name);
 }
@@ -305,73 +280,8 @@ tree<node_ast>	current_tree;
 
 node_ast*		current_node;
 
-/*********************************************************************/
-void print_tree(tree<node_ast>& tr, tree<node_ast>::pre_order_iterator it, tree<node_ast>::pre_order_iterator end)
-   {
-   //if(!tr.is_valid(it)) return;
-   int rootdepth=tr.depth(it);
-   cout << "-----" << endl;
-   while(it!=end) {
-      for(int i=0; i<tr.depth(it)-rootdepth; ++i)
-         cout << "  ";
-//       std::cout << current_eq->print_literal(*it) << std::endl << std::flush;
-		  switch (it->n_type_node)
-			{
-				case k_intance: cout << current_eq->print_instance(*(it->n_data.instance)) << endl;	break;
-				case k_literal:	cout<< current_eq->print_literal(*(it->n_data.literal))<< endl;	break;
-				case k_operator:case k_function:;
-			 }
-      ++it;
-      }
-   std::cout << "-----" << std::endl;
-   }
-
-void prueba()
-{
-	tree<node_ast> tr9;
-	literal_node node1;
-	node1.value_lit.int_l=3;
-	node1.type_lit = k_int;
-	node_ast n1;
-	n1.n_data.literal = new literal_node;
-	*(n1.n_data.literal) = node1;
-	n1.n_type_node = k_literal;
-	tr9.set_head(n1);
-
-	instance_attr ins1;
-	ins1.i_symb = &(sem_domain.get_symbol("E"));
-	ins1.i_num = 9;
-	ins1.i_attr = ins1.i_symb->get_attribute("valor");
-	node_ast n4;
-	n4.n_data.instance = new instance_attr;
-	n4.n_data.instance = &ins1;
-	n4.n_type_node = k_intance;
-	tr9.insert(tr9.begin().begin(), n4);
-
-	literal_node node2;
-	node2.value_lit.ch_l='A';
-	node2.type_lit = k_char;
-	node_ast n2;
-	n2.n_data.literal = new literal_node;
-	*(n2.n_data.literal) = node2;
-	n2.n_type_node = k_literal;
-	tr9.insert(tr9.begin().begin(), n2);
-	literal_node node3;
-	node3.value_lit.flt_l=3.13;
-	node3.type_lit = k_float;
-	node_ast n3;
-	n3.n_data.literal = new literal_node;
-	*(n3.n_data.literal) = node3;
-	n3.n_type_node = k_literal;
-	tr9.insert(tr9.begin().begin().begin(), n3);
-
-	print_tree(tr9, tr9.begin(), tr9.end());
-}
-
-////////////////////////////////////////////////////////////////////////////////////////***
 void inic_tree(char const chr)
 {
-//	current_tree = new tree<node_ast>;
 	literal_node node1;
 	node1.value_lit.int_l=3;
 	node1.type_lit = k_int;
@@ -385,12 +295,8 @@ void inic_tree(char const chr)
 void save_node_tree()
 {
 	current_tree.insert(current_tree.begin().begin(),*current_node);
-	cout << "impresion parcial  inic ...................... " << endl;
-	print_tree(current_tree, current_tree.begin(),current_tree.end());
-	cout << "impresion parcial  fin ...................... " << endl;
+	free(current_node);
 	current_node = NULL;
-	current_instance = NULL;
-	current_literal = NULL;
 }
 
 void save_literal_node(char const* str, char const* end)
@@ -399,19 +305,17 @@ void save_literal_node(char const* str, char const* end)
 	current_node->n_data.literal = current_literal;
 	current_node->n_type_node = k_literal;
 	// falta type synthetize
-
-	cout << "literal" << endl;
 	save_node_tree();
+	current_literal = NULL;
 }
 
 void save_instance_node(char const* str, char const* end)
 {
-		current_node = new node_ast;
-		current_node->n_data.instance = current_instance;
-		current_node->n_type_node = k_intance;
-		cout << "instance" << endl;
-		save_node_tree();
-
+	current_node = new node_ast;
+	current_node->n_data.instance = current_instance;
+	current_node->n_type_node = k_intance;
+	save_node_tree();
+	current_instance = NULL;
 };
 
 void save_symb_ins (char const* str, char const* end)
@@ -419,7 +323,6 @@ void save_symb_ins (char const* str, char const* end)
 	string symb (str, end);
 	if (current_instance == NULL)
 	{
-		cout << "damos memoria instance" << endl;
 		current_instance = new instance_attr;
 	}
 	current_instance->i_symb = &(sem_domain.get_symbol(symb));
@@ -435,7 +338,7 @@ void save_attr_ins (char const* str, char const* end)
 	string attr (str, end);
 	if ((current_instance->i_attr = current_instance->i_symb->get_attribute(attr)) == NULL)
 	{
-		cerr << "ERROR: Atribute inexistente. Verifique los atributos usados en los symbolos." << endl;
+		cerr << "ERROR:" << attr <<"Atribute inexistente. Verifique los atributos usados en los symbolos." << endl;
 		exit(1);
 	}
 }
@@ -444,7 +347,6 @@ void save_lit_int (int const int_lit)
 {
 	if (current_literal == NULL)
 	{
-		cout << "damos memoria literal" << endl;
 		current_literal = new literal_node;
 	}
 	current_literal->type_lit = k_int;
@@ -455,7 +357,6 @@ void save_lit_flt (double const flt_lit)
 {
 	if (current_literal == NULL)
 	{
-		cout << "damos memoria literal" << endl;
 		current_literal = new literal_node;
 	}
 	current_literal->type_lit = k_float;
@@ -466,7 +367,6 @@ void save_lit_ch (char const* ch, char const* end)
 {
 	if (current_literal == NULL)
 	{
-		cout << "damos memoria literal" << endl;
 		current_literal = new literal_node;
 	}
 	string ch_l(ch,end);
@@ -478,7 +378,6 @@ void save_lit_str (char const* str, char const* end)
 {
 	if (current_literal == NULL)
 	{
-		cout << "damos memoria literal" << endl;
 		current_literal = new literal_node;
 	}
 	string str_l (str+1, end-1); // the pointer +1 and -1 for remove the double quotes.Ex: "uno" --> uno.
@@ -486,29 +385,27 @@ void save_lit_str (char const* str, char const* end)
 	current_literal->value_lit.str_l = new string(str_l);
 }
 
+void save_operator (char const* str, char const* end)
+{
+	string name (str, end);
+	current_oper = new Operator();
+	current_oper->set_name (name);
+}
+
 void save_lvalue (char const* str, char const* end)
 {
 	current_eq = new Equation();
 	current_eq->set_l_value(*current_instance);
-	cout << "guardamos l-value" << endl;
 	free(current_instance);
 	current_instance = NULL;
 }
 
 void save_rvalue (char const* str, char const* end)
 {
-//	string full_exp (str, end);
-//	cout << full_exp << endl;
-
 	current_eq->set_r_value(current_tree);
-
 	current_rule->add_eq(*current_eq);
-
-//	free(current_tree);
-//	current_tree = NULL;
-	cout << "guardamos r-value" << endl;
-	print_tree(current_tree,current_tree.begin(),current_tree.end());
 	current_tree.clear();
+	current_eq->Equation::~Equation ();
 	free(current_eq);
 	current_eq = NULL;
 }
@@ -533,7 +430,7 @@ struct skip_parser: public grammar<skip_parser>
 		definition (skip_parser const &self)
 		{
 			skip = space_p
-                 | "//" >> *(anychar_p - '\n') >> '\n'
+                 | "//" >> *(anychar_p - '\n')
                  | "/*" >> *(anychar_p - "*/") >> "*/"
                  ;
 		}
@@ -606,7 +503,7 @@ struct attr_grammar: public grammar<attr_grammar>
 
 			// Declaration of Operators.
 
-			r_decl_oper    = lexeme_d[ strlit<> ("op") >> space_p ] >>
+			r_decl_oper    = lexeme_d[ strlit<> ("op") >> space_p ][&inic_operator] >>
 						     (r_oper_infix | r_oper_postfix | r_oper_prefix) >>
 						     strlit<> ("->") >>
 						     r_sort_st[&save_image_op] >> ';';
@@ -683,13 +580,13 @@ struct attr_grammar: public grammar<attr_grammar>
 			  *		T = F *(<op_postfix>)
 			  *		F = +(<op_prefix>) E | (E) | function | literal | instance
 			  */
-			r_expression 		= r_expr_prime >> *(r_op_infix_st[&save_name_op] >> r_expr_prime)
+			r_expression 		= r_expr_prime >> *(r_op_infix_st[&save_operator] >> r_expr_prime)
 								;
 
-			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st[&save_name_op])
+			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st[&save_operator])
 								;
 
-			r_expr_prime_prime  = +(r_op_prefix_st[&save_name_op]) >> r_expression
+			r_expr_prime_prime  = +(r_op_prefix_st[&save_operator]) >> r_expression
 								| '('>> r_expression >>')'
 								| r_function
 								| r_literal[&save_literal_node]
@@ -795,10 +692,12 @@ bool parse_grammar (char const* txt_input)
 	attr_grammar attribute_grammar;
 	skip_parser skip_p;
 
+	parse_info<> info =  parse(txt_input, attribute_grammar, skip_p);
+
 	#ifdef _DEBUG
-		cout << (parse(txt_input, attribute_grammar, skip_p)).stop << endl;
+		cout << info.stop << endl;
 	#endif
-	return (parse(txt_input, attribute_grammar, skip_p)).full;
+	return info.full;
 }
 
 /**
@@ -832,15 +731,11 @@ int main ()
 	string input_grammar;
 	read_file_in(input_grammar);
 	cout << "-------------------------\n";
-
-
-
 	if (parse_grammar (input_grammar.c_str ()))
 	{
 		cout << sem_domain.to_string ();
 		cout << "-------------------------\n";
 		cout << "Parsing OK\n";
-		prueba();
     }
 	else
 	{

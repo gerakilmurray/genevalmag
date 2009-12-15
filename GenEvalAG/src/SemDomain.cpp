@@ -174,14 +174,14 @@ Symbol& SemDomain::get_symbol (string name_symbol)
 string SemDomain::to_string ()
 {
 	#ifdef _DEBUG
-		map<string,Sort>::iterator		it1 = sd_sort.find ("int");
-		it1->second.set_name ("Integer");
-
-		map<string,Attribute>::iterator	it2 = sd_attr.find ("valorsynintall");
-		it2->second.set_name ("valores");
-
-		map<string,Symbol>::iterator	it3 = sd_symb.find ("id");
-		it3->second.set_name ("ident");
+//		map<string,Sort>::iterator		it1 = sd_sort.find ("int");
+//		cout << it1->second.key()<< endl;
+//
+//		map<string,Attribute>::iterator	it2 = sd_attr.find ("valorintall");
+//		it2->second.set_name ("valores");
+//
+//		map<string,Symbol>::iterator	it3 = sd_symb.find ("id");
+//		it3->second.set_name ("ident");
 	#endif
 
 	string semdomain ("\nsemantic domain\n");

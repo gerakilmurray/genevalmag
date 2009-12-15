@@ -14,7 +14,7 @@ semantic domain
 	 * List of Sorts *
 	 *****************/
 	sort int;
-	sort string, character;
+	sort string, character; // lala
 	sort pepe;
 	sort adrian;
 
@@ -78,3 +78,6 @@ rules
 					id[0].type = "int"; 
 				end
 		;
+		
+// Acordarse de cambiar las key de attributo, symbol, oper, function, sort y regla para que sean estaticas sino
+// queda inconsistente con el map.

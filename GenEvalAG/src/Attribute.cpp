@@ -206,10 +206,6 @@ string Attribute::key () const
 {
 	string key;
 	key.append (a_name);
-//	if (is_synthetize ())
-//		key.append ("syn");
-//	else
-//		key.append ("inh");
 	key.append (a_sort_type->get_name ());
 	key.append (a_member_symbol);
 	return key;
