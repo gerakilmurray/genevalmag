@@ -387,10 +387,32 @@ void save_lit_str (char const* str, char const* end)
 
 void save_operator (char const* str, char const* end)
 {
-	string name (str, end);
 	current_oper = new Operator();
-	current_oper->set_name (name);
+	save_name_op(str, end);
 }
+
+void save_function (char const* str, char const* end)
+{
+	save_name_func(str, end);
+}
+
+void save_oper_node(char const* str, char const* end)
+{
+	current_node = new node_ast;
+	current_node->n_data.oper = current_oper;
+	current_node->n_type_node = k_operator;
+	save_node_tree();
+	current_oper = NULL;
+};
+
+void save_func_node(char const* str, char const* end)
+{
+	current_node = new node_ast;
+	current_node->n_data.func = current_func;
+	current_node->n_type_node = k_function;
+	save_node_tree();
+	current_func = NULL;
+};
 
 void save_lvalue (char const* str, char const* end)
 {
@@ -410,13 +432,11 @@ void save_rvalue (char const* str, char const* end)
 	current_eq = NULL;
 }
 
-
 void pepito (char const* str, char const* end)
 {
 	string pepe (str, end);
 	cout << pepe << endl;
 }
-
 
 /**
   * Declaration of a parser for imputs that ignore within
@@ -453,7 +473,7 @@ struct type_expression: BOOST_SPIRIT_CLASSIC_NS::closure<type_expression, string
   * Declaration of the Attribute Grammar structure
   * with the Spirit library of Boost.
   */
-struct attr_grammar: public grammar<attr_grammar>
+struct attr_grammar: public grammar<attr_grammar,type_expression::context_t>
 {
 	template <typename ScannerT>
 	struct definition
@@ -580,13 +600,13 @@ struct attr_grammar: public grammar<attr_grammar>
 			  *		T = F *(<op_postfix>)
 			  *		F = +(<op_prefix>) E | (E) | function | literal | instance
 			  */
-			r_expression 		= r_expr_prime >> *(r_op_infix_st[&save_operator] >> r_expr_prime)
+			r_expression 		= r_expr_prime >> *(r_op_infix_st[&save_operator][&save_oper_node] >> r_expr_prime)
 								;
 
-			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st[&save_operator])
+			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st[&save_operator][&save_oper_node])
 								;
 
-			r_expr_prime_prime  = +(r_op_prefix_st[&save_operator]) >> r_expression
+			r_expr_prime_prime  = +(r_op_prefix_st[&save_operator][&save_oper_node]) >> r_expression
 								| '('>> r_expression >>')'
 								| r_function
 								| r_literal[&save_literal_node]
@@ -596,7 +616,7 @@ struct attr_grammar: public grammar<attr_grammar>
 			/**
 			  * The functions accept a list of expressions.
 			  */
-			r_function			= r_function_st[&save_name_func] >> '(' >> (r_expression % ',') >> ')';
+			r_function			= r_function_st[&save_function][&save_func_node] >> '(' >> (r_expression % ',') >> ')';
 
 			/**
 			  * Literals accepted: Integer and Float numbers, characters and string,
@@ -682,7 +702,6 @@ struct attr_grammar: public grammar<attr_grammar>
 	};
 };
 
-
 /**
   * This method invokes the method 'parse' of the library Spitir included in Boost.
   * Returns true if could parse all the input.
@@ -695,7 +714,7 @@ bool parse_grammar (char const* txt_input)
 	parse_info<> info =  parse(txt_input, attribute_grammar, skip_p);
 
 	#ifdef _DEBUG
-		cout << info.stop << endl;
+		cout << "STOP: " << info.stop << "fin-STOP" << endl;
 	#endif
 	return info.full;
 }
