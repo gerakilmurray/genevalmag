@@ -70,9 +70,10 @@ bool SemDomain::add_sort (Sort & sort)
 /**
   * Enqueue a operator in the list of the semantic domain.
   */
-bool SemDomain::add_operator (Operator & oper)
+bool SemDomain::add_operator (Function & oper)
 {
-	return add<Operator> (oper, sd_oper);
+	oper.set_is_operator(true);
+	return add<Function> (oper, sd_func);
 }
 
 /**
@@ -128,9 +129,9 @@ Sort& SemDomain::return_sort (string name_sort)
 /**
   * Find in the list of symbol of the semantic domain and return the symbol with that name.
   */
-Operator& SemDomain::get_operator (string name_oper)
+Function& SemDomain::get_operator (string name_oper)
 {
-	map<string,Operator>::iterator it = sd_oper.begin ();
+	map<string,Function>::iterator it = sd_func.begin ();
 	return it->second;
 }
 /**
@@ -149,7 +150,6 @@ Symbol& SemDomain::get_symbol (string name_symbol)
 	map<string,Symbol>::iterator it = sd_symb.find (name_symbol);
 	return it->second;
 }
-
 
 /**
   * Generate and return a string reprensentation of a semantic domain.
@@ -186,8 +186,6 @@ string SemDomain::to_string ()
 
 	string semdomain ("\nsemantic domain\n");
 	semdomain.append (to_string_map <Sort     > (sd_sort));
-	semdomain.append ("\n");
-	semdomain.append (to_string_map <Operator > (sd_oper));
 	semdomain.append ("\n");
 	semdomain.append (to_string_map <Function > (sd_func));
 	semdomain.append ("\nattributes\n");

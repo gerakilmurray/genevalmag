@@ -12,7 +12,6 @@
 #include <map>
 
 #include "Sort.h"
-#include "Operator.h"
 #include "Function.h"
 #include "Attribute.h"
 #include "Symbol.h"
@@ -26,7 +25,6 @@ class SemDomain
 {
 private:
 	map<string, Sort>		sd_sort;
-	map<string, Operator>	sd_oper;
 	map<string, Function>	sd_func;
 	map<string, Attribute> 	sd_attr;
 	map<string, Symbol>		sd_symb;
@@ -55,7 +53,7 @@ public:
     /**
       * Enqueue a operator in the list of the semantic domain.
       */
-	bool add_operator (Operator & oper);
+	bool add_operator (Function & oper);
     /**
       * Enqueue a function in the list of the semantic domain.
       */
@@ -80,7 +78,7 @@ public:
     /**
       * Find in the list of operator of the semantic domain and return the operator with that name.
       */
-	Operator& get_operator (string name_oper);
+	Function& get_operator (string name_oper);
 	/**
 	  * Find in the list of function of the semantic domain and return the function with that name.
 	  */

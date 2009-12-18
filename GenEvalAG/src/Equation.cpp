@@ -216,7 +216,6 @@ string Equation::to_string () const
 			{
 				case k_intance: eq.append(to_string_instance(*(it->n_data.instance)));	break;
 				case k_literal:	eq.append(to_string_literal(*(it->n_data.literal)));	break;
-				case k_operator: eq.append(it->n_data.oper->get_name()); break;
 				case k_function: eq.append(it->n_data.func->get_name()); break;
 			}
 		--it;

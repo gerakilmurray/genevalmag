@@ -11,7 +11,9 @@
 #include <boost/spirit/include/classic_core.hpp>
 #include <boost/spirit/include/classic_symbols.hpp>
 #include <boost/spirit/include/classic_attribute.hpp>
+
 #include <boost/algorithm/string/erase.hpp>
+
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -55,13 +57,13 @@ void add_sort (char const* str, char const* end)
 /**
   * Pointer that reference a new operator in the grammar.
   */
-Operator * current_oper;
+Function * current_oper;
 
 void add_operator (char const* str, char const* end)
 {
 	sem_domain.add_operator (*current_oper);
 	// Call destruction before free memory.
-	current_oper->Operator::~Operator ();
+	current_oper->Function::~Function ();
 	free (current_oper);
 	current_oper = NULL;
 }
@@ -69,7 +71,7 @@ void add_operator (char const* str, char const* end)
 void inic_operator (char const* str, char const* end)
 {
 	// Ignore the string parsed.
-	current_oper = new Operator ();
+	current_oper = new Function ();
 }
 
 void save_name_op (char const* str, char const* end)
@@ -387,7 +389,7 @@ void save_lit_str (char const* str, char const* end)
 
 void save_operator (char const* str, char const* end)
 {
-	current_oper = new Operator();
+	current_oper = new Function();
 	save_name_op(str, end);
 }
 
@@ -399,8 +401,8 @@ void save_function (char const* str, char const* end)
 void save_oper_node(char const* str, char const* end)
 {
 	current_node = new node_ast;
-	current_node->n_data.oper = current_oper;
-	current_node->n_type_node = k_operator;
+	current_node->n_data.func = current_oper;
+	current_node->n_type_node = k_function;
 	save_node_tree();
 	current_oper = NULL;
 };
@@ -460,7 +462,7 @@ struct skip_parser: public grammar<skip_parser>
 };
 
 /**
-  * Declaration struct for sinthetize type expression.
+  * Declaration struct for synthetize type expression.
   * Use rule with context: "Closures".
   * Reference: http://www.boost.org/doc/libs/1_33_1/libs/spirit/example/fundamental/phoenix_calc.cpp
   */
@@ -663,11 +665,6 @@ struct attr_grammar: public grammar<attr_grammar,type_expression::context_t>
 		symbols <> st_attributes;
 		symbols <> st_symbols;
 
-//		void pepito2()
-//		{
-//			cout << r_expression.type << endl;
-//			cout << r_instance.type << endl;
-//		}
 		/**
 		  * Variables using in parsing time.
 		  */

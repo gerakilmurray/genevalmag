@@ -11,10 +11,31 @@
 
 #include <string>
 #include <vector>
+
 #include "Sort.h"
 
 namespace genevalmag
 {
+
+/**
+  * Enumeration of operation's mode.
+  */
+enum oper_mode
+{
+	k_prefix,
+	k_infix,
+	k_postfix
+};
+
+/**
+  * Enumeration of operation's associative modes.
+  */
+enum oper_assoc
+{
+	k_left,
+	k_right,
+	k_nonassoc
+};
 
 class Function
 {
@@ -22,6 +43,14 @@ private:
 	string 			f_name;
 	vector <Sort*>	f_domain;
 	Sort*			f_image;
+	oper_mode		f_mod;
+	unsigned int	f_prec;
+	oper_assoc 		f_assoc;
+	/**
+	  * If that value is TRUE then the object function is a operator.
+	  * This can be: prefix, infix or postfix.
+	  */
+	bool			f_is_operator;
 
 	/**
 	  * Method of copy the function, STL-like C++.
@@ -63,6 +92,18 @@ public:
       * Return the image of the function.
       */
     Sort* get_image () const;
+    /**
+	  * Return the name of the operator.
+	  */
+	oper_mode get_mode () const;
+	/**
+	  * Return the precedence of the operator.
+	  */
+	int get_prec () const;
+	/**
+	  * Return the associativity of the operator.
+	  */
+	oper_assoc get_oper_assoc () const;
 
     /**
       * Set the name of the function.
@@ -76,7 +117,23 @@ public:
       * Set the sort image of the function.
       */
     void set_image (Sort* image);
-
+    /**
+      * Set the mode of the operator.
+      * @param mode: string
+      */
+    void set_mode (string mode);
+    /**
+      * Set the precedence of the operator.
+      */
+    void set_prec (int prec);
+    /**
+      * Set the associativity of the operator.
+      */
+    void set_oper_assoc (string assoc);
+    /**
+      * Set the boolean attribute with the parameter.
+      */
+    void set_is_operator(bool value);
     /**
       * Enqueue a sort in the domain of the function.
       */
@@ -91,6 +148,10 @@ public:
       */
     string to_string () const;
 
+    /**
+      * Return true if the function is a Operator.
+      */
+    bool is_operator() const;
     /**
       * Compares the function with other.
       */

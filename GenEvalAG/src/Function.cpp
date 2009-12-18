@@ -8,6 +8,7 @@
 
 #include <sstream>
 #include <iostream>
+#include <climits>
 
 #include "Function.h"
 
@@ -24,6 +25,11 @@ namespace genevalmag
   */
 Function::Function ()
 {
+	f_mod			= k_prefix;
+	f_prec			= UINT_MAX;
+	f_assoc			= k_left;
+	f_is_operator	= false;
+
 	#ifdef _DEBUG
 		funtions++;
 	#endif
@@ -72,9 +78,13 @@ Function& Function::operator= (Function const & other)
   */
 void Function::copy (Function const & other)
 {
-	f_name		= other.get_name ();
-	f_domain	= other.get_domain ();
-	f_image		= other.get_image ();
+	f_name			= other.get_name ();
+	f_domain		= other.get_domain ();
+	f_image			= other.get_image ();
+	f_mod			= other.get_mode ();
+	f_prec			= other.get_prec ();
+	f_assoc			= other.get_oper_assoc ();
+	f_is_operator	= other.is_operator();
 }
 
 /**
@@ -109,6 +119,30 @@ Sort* Function::get_image () const
 }
 
 /**
+  * Return the name of the operator.
+  */
+oper_mode Function::get_mode () const
+{
+	return f_mod;
+}
+
+/**
+  * Return the precedence of the operator.
+  */
+int Function::get_prec () const
+{
+    return f_prec;
+}
+
+/**
+  * Return the associativity of the operator.
+  */
+oper_assoc Function::get_oper_assoc () const
+{
+	return f_assoc;
+}
+
+/**
   * Set the name of the function.
   */
 void Function::set_name (string name)
@@ -133,6 +167,54 @@ void Function::set_image (Sort* image)
 }
 
 /**
+  * Set the mode of the operator.
+  * @param mode: string
+  */
+void Function::set_mode (string mode)
+{
+	if (mode.compare ("infix") == 0)
+		f_mod = k_infix;
+	else if (mode.compare ("prefix") == 0)
+		f_mod = k_prefix;
+	else if (mode.compare ("postfix") == 0)
+		f_mod = k_postfix;
+	else
+		// Default value.
+		f_mod = k_prefix;
+}
+
+/**
+  * Set the precedence of the operator.
+  */
+void Function::set_prec (int prec)
+{
+    f_prec = prec;
+}
+
+/**
+  * Set the associativity of the operator.
+  */
+void Function::set_oper_assoc (string mod)
+{
+	if (mod.compare ("left") == 0)
+		f_assoc = k_left;
+	else if (mod.compare ("right") == 0)
+		f_assoc = k_right;
+	else if (mod.compare ("non-assoc") == 0)
+		f_assoc = k_nonassoc;
+	else
+		// Default value.
+		f_assoc = k_left;
+}
+
+/**
+  * Set the boolean attribute with the parameter.
+  */
+void Function::set_is_operator(bool value)
+{
+	f_is_operator = value;
+}
+/**
   * Enqueue a sort in the domain of the function.
   */
 void Function::add_domain (Sort* sort)
@@ -150,7 +232,42 @@ void Function::add_domain (Sort* sort)
 string Function::to_string () const
 {
 	string func;
-	func.append ("function\t");
+
+	if (is_operator())
+	{
+		func.append ("op ");
+		switch (f_mod)
+		{
+			case k_infix:   func.append ("infix");   break;
+			case k_prefix:  func.append ("prefix");  break;
+			case k_postfix: func.append ("postfix"); break;
+		}
+		func.append ("\t(");
+		if (f_prec == UINT_MAX)
+		{
+			// Default precedence.
+			func.append ("_");
+		}
+		else
+		{
+			std::stringstream prec;
+			prec << f_prec;
+			func.append (prec.str ());
+		}
+		func.append (", ");
+		switch (f_assoc)
+		{
+			case k_left:	 func.append ("left");      break;
+			case k_right:	 func.append ("right");     break;
+			case k_nonassoc: func.append ("non-assoc"); break;
+		}
+		func.append (") ");
+	}
+	else
+	{
+		func.append ("function\t");
+	}
+
 	func.append (f_name);
 	func.append (": ");
 	for (vector<Sort>::size_type i = 0; i < f_domain.size (); i++)
@@ -184,6 +301,14 @@ string Function::to_string () const
 }
 
 /**
+  * Return true if the function is a Operator.
+  */
+bool Function::is_operator() const
+{
+	return f_is_operator;
+}
+
+/**
   * Compares the function with other.
   */
 bool Function::equals (Function const & other) const
@@ -201,6 +326,17 @@ bool Function::equals (Function const & other) const
 string Function::key () const
 {
 	string key;
+
+	if(is_operator())
+	{
+	   switch (f_mod)
+		{
+			case k_infix:   key.append ("infix");   break;
+			case k_prefix:  key.append ("prefix");  break;
+			case k_postfix: key.append ("postfix"); break;
+		}
+	}
+
 	key.append (f_name);
 	for (vector<Sort>::size_type i = 0; i < f_domain.size (); i++)
 	{

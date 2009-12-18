@@ -13,7 +13,6 @@
 
 #include "Attribute.h"
 #include "Symbol.h"
-#include "Operator.h"
 #include "Function.h"
 
 namespace genevalmag
@@ -26,7 +25,6 @@ enum node_type
 {
 	k_intance,
 	k_function,
-	k_operator,
 	k_literal
 };
 
@@ -111,7 +109,6 @@ struct node_ast
 {
 	union
 	{
-		Operator*		oper;
 		Function*		func;
 		literal_node*	literal;
 		instance_attr*	instance;
@@ -149,9 +146,6 @@ struct node_ast
 				break;
 			case k_function:
 				n_data.func = other.n_data.func;
-				break;
-			case k_operator:
-				n_data.oper = other.n_data.oper;
 				break;
 			case k_literal:
 				n_data.literal = other.n_data.literal;
