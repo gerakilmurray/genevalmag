@@ -104,6 +104,10 @@ public:
 	  * Return the associativity of the operator.
 	  */
 	oper_assoc get_oper_assoc () const;
+	/**
+	  * Return the arity of function.
+	  */
+	int get_arity() const;
 
     /**
       * Set the name of the function.

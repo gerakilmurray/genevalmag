@@ -6,10 +6,9 @@
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-#include <sstream>
 #include <iostream>
 #include <climits>
-
+#include <sstream>
 #include "Function.h"
 
 namespace genevalmag
@@ -141,6 +140,13 @@ oper_assoc Function::get_oper_assoc () const
 {
 	return f_assoc;
 }
+/**
+  * Return the arity of function.
+  */
+int Function::get_arity() const
+{
+	return f_domain.size();
+}
 
 /**
   * Set the name of the function.
@@ -250,7 +256,7 @@ string Function::to_string () const
 		}
 		else
 		{
-			std::stringstream prec;
+			stringstream prec;
 			prec << f_prec;
 			func.append (prec.str ());
 		}
@@ -276,7 +282,7 @@ string Function::to_string () const
 
 		#ifdef _DEBUG
 			func.append (" (");
-			std::stringstream ins;
+			stringstream ins;
 			ins << f_domain[i]->get_ins ();
 			func.append (ins.str ());
 			func.append (")");
@@ -290,7 +296,7 @@ string Function::to_string () const
 
 	#ifdef _DEBUG
 		func.append (" (");
-		std::stringstream ins;
+		stringstream ins;
 		ins << f_image->get_ins ();
 		func.append (ins.str ());
 		func.append (")");

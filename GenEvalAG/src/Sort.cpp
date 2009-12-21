@@ -135,7 +135,7 @@ string Sort::to_string () const
 
 	#ifdef _DEBUG
 		sort.append (" (");
-		std::stringstream ins;
+		stringstream ins;
 		ins << s_ins;
 		sort.append (ins.str ());
 		sort.append (")");

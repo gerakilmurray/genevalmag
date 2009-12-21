@@ -177,7 +177,7 @@ string Attribute::to_string () const
 
 	#ifdef _DEBUG
 		attr.append (" (");
-		std::stringstream ins;
+		stringstream ins;
 		ins << a_sort_type->get_ins ();
 		attr.append (ins.str ());
 		attr.append (")");

@@ -16,9 +16,13 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <sstream>
 #include <string>
 
 #include "SemDomain.h"
+#include "ast/Ast_instance.h"
+#include "ast/Ast_literal.h"
+#include "ast/Ast_function.h"
 
 using namespace std;
 using namespace BOOST_SPIRIT_CLASSIC_NS;
@@ -274,24 +278,24 @@ void abbreviated_rule (char const* str, char const* end)
 /**
   * Pointer to the last instance of attribute to parse successfully.
   */
-instance_attr*	current_instance;
-literal_node*	current_literal;
+Ast_instance*	current_instance;
+Ast_literal*	current_literal;
 
 Equation*		current_eq;
-tree<node_ast>	current_tree;
+tree<Ast_node>	current_tree;
 
-node_ast*		current_node;
+Ast_node*		current_node;
 
 void inic_tree(char const chr)
 {
-	literal_node node1;
-	node1.value_lit.int_l=3;
-	node1.type_lit = k_int;
-	node_ast n1;
-	n1.n_data.literal = new literal_node;
-	*(n1.n_data.literal) = node1;
-	n1.n_type_node = k_literal;
-	current_tree.set_head(n1);
+	current_node = new Ast_literal();
+	current_node->set_node_type(k_literal);
+	// falta current_node->set_type_synthetized()
+
+	((Ast_literal*)current_node)->set_value("3");
+	((Ast_literal*)current_node)->set_type(k_int);
+
+	current_tree.set_head(*current_node);
 }
 
 void save_node_tree()
@@ -303,19 +307,22 @@ void save_node_tree()
 
 void save_literal_node(char const* str, char const* end)
 {
-	current_node = new node_ast;
-	current_node->n_data.literal = current_literal;
-	current_node->n_type_node = k_literal;
-	// falta type synthetize
+	current_node = current_literal;
+
+	current_node->set_node_type(k_literal);
+	// falta current_node->set_type_synthetized()
+
 	save_node_tree();
 	current_literal = NULL;
 }
 
 void save_instance_node(char const* str, char const* end)
 {
-	current_node = new node_ast;
-	current_node->n_data.instance = current_instance;
-	current_node->n_type_node = k_intance;
+	current_node = current_instance;
+
+	current_node->set_node_type(k_intance);
+	// falta current_node->set_type_synthetized()
+
 	save_node_tree();
 	current_instance = NULL;
 };
@@ -325,20 +332,21 @@ void save_symb_ins (char const* str, char const* end)
 	string symb (str, end);
 	if (current_instance == NULL)
 	{
-		current_instance = new instance_attr;
+		current_instance = new Ast_instance();
 	}
-	current_instance->i_symb = &(sem_domain.get_symbol(symb));
+	current_instance->set_symb(&(sem_domain.get_symbol(symb)));
 }
 
 void save_index_ins (int const index)
 {
-	current_instance->i_num = index;
+	current_instance->set_num(index);
 }
 
 void save_attr_ins (char const* str, char const* end)
 {
 	string attr (str, end);
-	if ((current_instance->i_attr = current_instance->i_symb->get_attribute(attr)) == NULL)
+	current_instance->set_attr(current_instance->get_symb()->get_attribute(attr));
+	if (current_instance->get_attr() == NULL)
 	{
 		cerr << "ERROR:" << attr <<"Atribute inexistente. Verifique los atributos usados en los symbolos." << endl;
 		exit(1);
@@ -349,42 +357,46 @@ void save_lit_int (int const int_lit)
 {
 	if (current_literal == NULL)
 	{
-		current_literal = new literal_node;
+		current_literal = new Ast_literal;
 	}
-	current_literal->type_lit = k_int;
-	current_literal->value_lit.int_l = int_lit;
+	current_literal->set_type(k_int);
+	stringstream literal_int;
+	literal_int << int_lit;
+	current_literal->set_value(literal_int.str());
 }
 
 void save_lit_flt (double const flt_lit)
 {
 	if (current_literal == NULL)
 	{
-		current_literal = new literal_node;
+		current_literal = new Ast_literal;
 	}
-	current_literal->type_lit = k_float;
-	current_literal->value_lit.flt_l = flt_lit;
+	current_literal->set_type(k_float);
+	stringstream literal_float;
+	literal_float << flt_lit;
+	current_literal->set_value(literal_float.str());
 }
 
 void save_lit_ch (char const* ch, char const* end)
 {
 	if (current_literal == NULL)
 	{
-		current_literal = new literal_node;
+		current_literal = new Ast_literal;
 	}
-	string ch_l(ch,end);
-	current_literal->type_lit = k_char;
-	current_literal->value_lit.ch_l = ch_l.at(1);
+	string ch_l(ch+1,end-1);
+	current_literal->set_type(k_char);
+	current_literal->set_value(ch_l);
 }
 
 void save_lit_str (char const* str, char const* end)
 {
 	if (current_literal == NULL)
 	{
-		current_literal = new literal_node;
+		current_literal = new Ast_literal;
 	}
 	string str_l (str+1, end-1); // the pointer +1 and -1 for remove the double quotes.Ex: "uno" --> uno.
-	current_literal->type_lit = k_string;
-	current_literal->value_lit.str_l = new string(str_l);
+	current_literal->set_type(k_string);
+	current_literal->set_value(str_l);
 }
 
 void save_operator (char const* str, char const* end)
@@ -400,18 +412,24 @@ void save_function (char const* str, char const* end)
 
 void save_oper_node(char const* str, char const* end)
 {
-	current_node = new node_ast;
-	current_node->n_data.func = current_oper;
-	current_node->n_type_node = k_function;
+	current_node = new Ast_function();
+	((Ast_function*)current_node)->set_function(current_oper);
+
+	current_node->set_node_type(k_function);
+	// falta current_node->set_type_synthetized()
+
 	save_node_tree();
 	current_oper = NULL;
 };
 
 void save_func_node(char const* str, char const* end)
 {
-	current_node = new node_ast;
-	current_node->n_data.func = current_func;
-	current_node->n_type_node = k_function;
+	current_node = new Ast_function();
+	((Ast_function*)current_node)->set_function(current_func);
+
+	current_node->set_node_type(k_function);
+	// falta current_node->set_type_synthetized()
+
 	save_node_tree();
 	current_func = NULL;
 };
@@ -429,6 +447,8 @@ void save_rvalue (char const* str, char const* end)
 	current_eq->set_r_value(current_tree);
 	current_rule->add_eq(*current_eq);
 	current_tree.clear();
+	cout << "eq" << endl;
+	cout << current_eq->to_string() << endl;
 	current_eq->Equation::~Equation ();
 	free(current_eq);
 	current_eq = NULL;

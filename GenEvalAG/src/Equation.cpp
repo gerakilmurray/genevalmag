@@ -6,9 +6,12 @@
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-#include "Equation.h"
+
 #include <sstream>
 #include <iostream>
+
+#include "Equation.h"
+#include "ast/Ast_literal.h"
 
 namespace genevalmag
 {
@@ -88,7 +91,7 @@ void Equation::destroy ()
 /**
   * Return the l_value of the equation.
   */
-instance_attr Equation::get_l_value () const
+Ast_instance Equation::get_l_value () const
 {
 	return l_value;
 }
@@ -96,7 +99,7 @@ instance_attr Equation::get_l_value () const
 /**
   * Return the r_value of the equation.
   */
-tree<node_ast> Equation::get_r_value () const
+tree<Ast_node> Equation::get_r_value () const
 {
 	return r_value;
 }
@@ -104,7 +107,7 @@ tree<node_ast> Equation::get_r_value () const
 /**
   * Set the left value of the equation.
   */
-void Equation::set_l_value(instance_attr lvalue)
+void Equation::set_l_value(Ast_instance lvalue)
 {
 	l_value = lvalue;
 }
@@ -112,80 +115,9 @@ void Equation::set_l_value(instance_attr lvalue)
 /**
   * Set the left value of the equation.
   */
-void Equation::set_r_value(tree<node_ast> rvalue)
+void Equation::set_r_value(tree<Ast_node> rvalue)
 {
 	r_value = rvalue;
-}
-
-
-/**
-  * Generate and return a string reprensentation of a instance.
-  *
-  * Result= <symbol>[number].<attribute>
-  *
-  * Ex: E[0].valor
-  */
-string to_string_instance(instance_attr instance)
-{
-	string inst;
-	// Save symbol's name.
-	inst.append (instance.i_symb->get_name());
-	// Save instance number.
-	inst.append("[");
-	std::stringstream ins;
-	ins << instance.i_num;
-	inst.append (ins.str ());
-	inst.append("]");
-	inst.append(".");
-	// Save attribute's name.
-	inst.append (instance.i_attr->get_name());
-	return inst;
-}
-/**
-  * Generate and return a string reprensentation of a function
-  *
-  * Result= <symbol>[number].<attribute>
-  *
-  * Ex: E[0].valor
-  */
-string to_string_literal(literal_node literal)
-{
-	string lit;
-
-	switch (literal.type_lit)
-	{
-		case k_int:
-		{
-			std::stringstream lit_int;
-			lit_int << literal.value_lit.int_l;
-			lit.append (lit_int.str ());
-			break;
-		}
-		case k_float:
-		{
-			std::stringstream lit_float;
-			lit_float << literal.value_lit.flt_l;
-			lit.append (lit_float.str ());
-			break;
-		}
-		case k_char:
-		{
-			lit.append("'");
-			std::stringstream lit_char;
-			lit_char << literal.value_lit.ch_l;
-			lit.append (lit_char.str ());
-			lit.append("'");
-			break;
-		}
-		case k_string:
-		{
-			lit.append("\"");
-			lit.append(*(literal.value_lit.str_l));
-			lit.append("\"");
-			break;
-		}
-	}
-	return lit;
 }
 
 /**
@@ -200,40 +132,26 @@ string Equation::to_string () const
 	string eq;
 
 	// Save l_value.
-	eq.append (to_string_instance(l_value));
+	eq.append (l_value.to_string());
 	eq.append ("\t::=\t");
 
 	// save r_value.
 
 	//if(!tr.is_valid(it)) return;
-	tree<node_ast>::pre_order_iterator it = r_value.end();
-	tree<node_ast>::pre_order_iterator end = r_value.begin();
+	tree<Ast_node>::pre_order_iterator it = r_value.end();
+	tree<Ast_node>::pre_order_iterator end = r_value.begin();
 	int rootdepth=r_value.depth(it);
 	while(it!=end)
 	{
 		for(int i=0; i<r_value.depth(it)-rootdepth; ++i)
-			switch (it->n_type_node)
-			{
-				case k_intance: eq.append(to_string_instance(*(it->n_data.instance)));	break;
-				case k_literal:	eq.append(to_string_literal(*(it->n_data.literal)));	break;
-				case k_function: eq.append(it->n_data.func->get_name()); break;
-			}
-		--it;
-		eq.append (" ");
+		{
+			it->to_string();
+			--it;
+			if (it!=end) eq.append (" ");
+		}
 	}
 	eq.append (";");
 	return eq;
 }
-
-string Equation::print_literal(literal_node lit)
-{
-	return to_string_literal(lit);
-}
-
-string Equation::print_instance(instance_attr lit)
-{
-	return to_string_instance(lit);
-}
-
 
 } // end genevalmag
