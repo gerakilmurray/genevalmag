@@ -16,6 +16,9 @@ namespace genevalmag
 
 class Ast_leaf: public Ast_node
 {
+public:
+	virtual ~Ast_leaf(){ cout << "Destroy Leaf" << endl;};
+	virtual string to_string () const = 0;
 };
 
 } // end genevalmag

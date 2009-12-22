@@ -91,7 +91,7 @@ void Equation::destroy ()
 /**
   * Return the l_value of the equation.
   */
-Ast_instance Equation::get_l_value () const
+Ast_instance* Equation::get_l_value () const
 {
 	return l_value;
 }
@@ -99,7 +99,7 @@ Ast_instance Equation::get_l_value () const
 /**
   * Return the r_value of the equation.
   */
-tree<Ast_node> Equation::get_r_value () const
+tree<Ast_node*> Equation::get_r_value () const
 {
 	return r_value;
 }
@@ -107,7 +107,7 @@ tree<Ast_node> Equation::get_r_value () const
 /**
   * Set the left value of the equation.
   */
-void Equation::set_l_value(Ast_instance lvalue)
+void Equation::set_l_value(Ast_instance* lvalue)
 {
 	l_value = lvalue;
 }
@@ -115,7 +115,7 @@ void Equation::set_l_value(Ast_instance lvalue)
 /**
   * Set the left value of the equation.
   */
-void Equation::set_r_value(tree<Ast_node> rvalue)
+void Equation::set_r_value(tree<Ast_node*> rvalue)
 {
 	r_value = rvalue;
 }
@@ -132,23 +132,29 @@ string Equation::to_string () const
 	string eq;
 
 	// Save l_value.
-	eq.append (l_value.to_string());
+	eq.append (l_value->to_string());
 	eq.append ("\t::=\t");
 
 	// save r_value.
 
-	//if(!tr.is_valid(it)) return;
-	tree<Ast_node>::pre_order_iterator it = r_value.end();
-	tree<Ast_node>::pre_order_iterator end = r_value.begin();
-	int rootdepth=r_value.depth(it);
-	while(it!=end)
+	tree<Ast_node*>::pre_order_iterator it = r_value.end();
+	tree<Ast_node*>::pre_order_iterator begin = r_value.begin();
+
+	if(!r_value.is_valid(begin))
+	{
+		cerr << "todo mal" << endl;
+		return "todo mal";
+	}
+
+	int rootdepth = r_value.depth(it);
+
+	while(it != begin)
 	{
 		for(int i=0; i<r_value.depth(it)-rootdepth; ++i)
 		{
-			it->to_string();
-			--it;
-			if (it!=end) eq.append (" ");
+			eq.append((*it)->to_string());
 		}
+		if (--it != begin) eq.append (" ");
 	}
 	eq.append (";");
 	return eq;

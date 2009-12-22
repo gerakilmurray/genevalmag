@@ -5,23 +5,41 @@
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
-
+#include <iostream>
 #include "Ast_literal.h"
 
 namespace genevalmag
 {
+#ifdef _DEBUG
+	// Numbers of literals current in the system.
+	static int ast_literals = 0;
+#endif
 
 Ast_literal::Ast_literal()
 {
+	#ifdef _DEBUG
+		ast_literals++;
+	#endif
 }
 
 Ast_literal::Ast_literal(Ast_literal const & other)
 {
 	copy(other);
+
+	#ifdef _DEBUG
+		ast_literals++;
+	#endif
 }
 
 Ast_literal::~Ast_literal()
 {
+	cout << "Destroy literal" << endl;
+	destroy ();
+
+	#ifdef _DEBUG
+		ast_functions--;
+		cout << "AST Literals: " << ast_literals << endl;
+	#endif
 }
 
 Ast_literal& Ast_literal::operator= (Ast_literal const & other)
@@ -39,7 +57,6 @@ void Ast_literal::copy (Ast_literal const & other)
 	value				= other.get_value();
 	type				= other.get_type();
 	parent				= other.get_parent();
-	type_node			= other.get_node_type();
 	type_synthetized	= other.get_type_synthetized();
 }
 

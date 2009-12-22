@@ -6,23 +6,42 @@
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 #include <sstream>
+#include <iostream>
 
 #include "Ast_instance.h"
 
 namespace genevalmag
 {
+#ifdef _DEBUG
+	// Numbers of instances current in the system.
+	static int ast_instances = 0;
+#endif
 
 Ast_instance::Ast_instance()
 {
+#ifdef _DEBUG
+	ast_instances++;
+#endif
 }
 
 Ast_instance::Ast_instance(Ast_instance const & other)
 {
 	copy(other);
+
+	#ifdef _DEBUG
+		ast_instances++;
+	#endif
 }
 
 Ast_instance::~Ast_instance()
 {
+	cout << "Destroy Instance" << endl;
+	destroy ();
+
+	#ifdef _DEBUG
+		ast_instances--;
+		cout << "AST Instances: " << ast_instances << endl;
+	#endif
 }
 
 Ast_instance& Ast_instance::operator= (Ast_instance const & other)
@@ -37,6 +56,8 @@ Ast_instance& Ast_instance::operator= (Ast_instance const & other)
 
 void Ast_instance::destroy()
 {
+	i_symb = NULL;
+	i_attr = NULL;
 }
 
 void Ast_instance::copy (Ast_instance const & other)
@@ -45,7 +66,6 @@ void Ast_instance::copy (Ast_instance const & other)
 	i_num				= other.get_num();
 	i_attr				= other.get_attr();
 	parent				= other.get_parent();
-	type_node			= other.get_node_type();
 	type_synthetized	= other.get_type_synthetized();
 }
 

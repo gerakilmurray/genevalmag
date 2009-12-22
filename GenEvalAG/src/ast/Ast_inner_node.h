@@ -22,7 +22,9 @@ protected:
 	vector <Ast_node*> childs;
 
 public:
-    vector<Ast_node*> get_childs() const
+	virtual ~Ast_inner_node(){cout << "Destroy Inner node" << endl;};
+
+	vector<Ast_node*> get_childs() const
     {
         return childs;
     }
@@ -31,6 +33,7 @@ public:
     {
         childs = new_childs;
     }
+    virtual string to_string () const = 0;
 };
 
 } // end genevalmag

@@ -280,50 +280,40 @@ void abbreviated_rule (char const* str, char const* end)
   */
 Ast_instance*	current_instance;
 Ast_literal*	current_literal;
+Ast_function*   current_koperation;
+Ast_function*   current_kfunction;
 
 Equation*		current_eq;
-tree<Ast_node>	current_tree;
-
-Ast_node*		current_node;
+tree<Ast_node*>	current_tree;
 
 void inic_tree(char const chr)
 {
-	current_node = new Ast_literal();
-	current_node->set_node_type(k_literal);
+	current_literal = new Ast_literal();
 	// falta current_node->set_type_synthetized()
 
-	((Ast_literal*)current_node)->set_value("3");
-	((Ast_literal*)current_node)->set_type(k_int);
+	(current_literal)->set_value("3");
+	(current_literal)->set_type(k_int);
 
-	current_tree.set_head(*current_node);
-}
-
-void save_node_tree()
-{
-	current_tree.insert(current_tree.begin().begin(),*current_node);
-	free(current_node);
-	current_node = NULL;
+	current_tree.set_head(current_literal);
 }
 
 void save_literal_node(char const* str, char const* end)
 {
-	current_node = current_literal;
-
-	current_node->set_node_type(k_literal);
 	// falta current_node->set_type_synthetized()
 
-	save_node_tree();
+	current_tree.insert(current_tree.begin().begin(),current_literal);
+//	save_node_tree(&current_literal);
+//	free(current_literal);
 	current_literal = NULL;
 }
 
 void save_instance_node(char const* str, char const* end)
 {
-	current_node = current_instance;
-
-	current_node->set_node_type(k_intance);
 	// falta current_node->set_type_synthetized()
 
-	save_node_tree();
+	current_tree.insert(current_tree.begin().begin(),current_instance);
+//	save_node_tree(&current_instance);
+//	free(current_instance);
 	current_instance = NULL;
 };
 
@@ -357,7 +347,7 @@ void save_lit_int (int const int_lit)
 {
 	if (current_literal == NULL)
 	{
-		current_literal = new Ast_literal;
+		current_literal = new Ast_literal();
 	}
 	current_literal->set_type(k_int);
 	stringstream literal_int;
@@ -369,7 +359,7 @@ void save_lit_flt (double const flt_lit)
 {
 	if (current_literal == NULL)
 	{
-		current_literal = new Ast_literal;
+		current_literal = new Ast_literal();
 	}
 	current_literal->set_type(k_float);
 	stringstream literal_float;
@@ -381,9 +371,9 @@ void save_lit_ch (char const* ch, char const* end)
 {
 	if (current_literal == NULL)
 	{
-		current_literal = new Ast_literal;
+		current_literal = new Ast_literal();
 	}
-	string ch_l(ch+1,end-1);
+	string ch_l(ch+1,end-1);// the pointer +1 and -1 for remove the double quotes.Ex: 'u' --> u.
 	current_literal->set_type(k_char);
 	current_literal->set_value(ch_l);
 }
@@ -392,7 +382,7 @@ void save_lit_str (char const* str, char const* end)
 {
 	if (current_literal == NULL)
 	{
-		current_literal = new Ast_literal;
+		current_literal = new Ast_literal();
 	}
 	string str_l (str+1, end-1); // the pointer +1 and -1 for remove the double quotes.Ex: "uno" --> uno.
 	current_literal->set_type(k_string);
@@ -412,33 +402,35 @@ void save_function (char const* str, char const* end)
 
 void save_oper_node(char const* str, char const* end)
 {
-	current_node = new Ast_function();
-	((Ast_function*)current_node)->set_function(current_oper);
+	current_koperation = new Ast_function();
+	current_koperation->set_function(current_oper);
 
-	current_node->set_node_type(k_function);
 	// falta current_node->set_type_synthetized()
 
-	save_node_tree();
+	current_tree.insert(current_tree.begin().begin(),current_koperation);
+//	free(current_koperation);
 	current_oper = NULL;
+	current_koperation = NULL;
 };
 
 void save_func_node(char const* str, char const* end)
 {
-	current_node = new Ast_function();
-	((Ast_function*)current_node)->set_function(current_func);
+	current_kfunction = new Ast_function();
+	current_kfunction->set_function(current_func);
 
-	current_node->set_node_type(k_function);
 	// falta current_node->set_type_synthetized()
 
-	save_node_tree();
+	current_tree.insert(current_tree.begin().begin(),current_kfunction);
+//	free(current_kfunction);
 	current_func = NULL;
+	current_kfunction = NULL;
 };
 
 void save_lvalue (char const* str, char const* end)
 {
 	current_eq = new Equation();
-	current_eq->set_l_value(*current_instance);
-	free(current_instance);
+	current_eq->set_l_value(current_instance);
+//	free(current_instance);
 	current_instance = NULL;
 }
 
@@ -447,9 +439,7 @@ void save_rvalue (char const* str, char const* end)
 	current_eq->set_r_value(current_tree);
 	current_rule->add_eq(*current_eq);
 	current_tree.clear();
-	cout << "eq" << endl;
-	cout << current_eq->to_string() << endl;
-	current_eq->Equation::~Equation ();
+
 	free(current_eq);
 	current_eq = NULL;
 }
@@ -731,7 +721,7 @@ bool parse_grammar (char const* txt_input)
 	parse_info<> info =  parse(txt_input, attribute_grammar, skip_p);
 
 	#ifdef _DEBUG
-		cout << "STOP: " << info.stop << "fin-STOP" << endl;
+		//cout << "STOP: " << info.stop << "fin-STOP" << endl;
 	#endif
 	return info.full;
 }

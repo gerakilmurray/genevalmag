@@ -19,8 +19,8 @@ namespace genevalmag
 class Equation
 {
 	private:
-		Ast_instance	l_value;
-		tree<Ast_node>	r_value;
+		Ast_instance*	l_value;
+		tree<Ast_node*>	r_value;
 
 		/**
 		  * Method of copy the equation, STL-like C++.
@@ -53,20 +53,20 @@ class Equation
 		/**
 		  * Return the l_value of the equation.
 		  */
-		Ast_instance get_l_value () const;
+		Ast_instance* get_l_value () const;
 		/**
 		  * Return the r_value of the equation.
 		  */
-		tree<Ast_node> get_r_value () const;
+		tree<Ast_node*> get_r_value () const;
 		/**
 		  * Set the left value of the equation.
 		  */
-		void set_l_value(Ast_instance lvalue);
+		void set_l_value(Ast_instance* lvalue);
 
 		/**
 		  * Set the rigth value of the equation: is a tree.
 		  */
-		void set_r_value(tree<Ast_node> rvalue);
+		void set_r_value(tree<Ast_node*> rvalue);
 		/**
 		  * Generate and return a string reprensentation of a Equation.
 		  *
