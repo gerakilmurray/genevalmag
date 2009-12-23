@@ -22,7 +22,7 @@ class Rule
 	private:
 		Symbol*				r_left_symbol;
 		vector <Symbol*>	r_right_side;
-		map <int,Equation>	r_eqs;
+		map <int,Equation*>	r_eqs;
 
 		/**
 		  * Method of copy the rule, STL-like C++.
@@ -73,7 +73,7 @@ class Rule
 		/**
 		  * Return the equations of the rule.
 		  */
-		map <int,Equation> get_eqs () const;
+		map <int,Equation*> get_eqs () const;
 		/**
 		  * Return the i-equation of the rule.
 		  */
@@ -91,7 +91,7 @@ class Rule
 		/**
 		  * Enqueue a equation in the list of the rule.
 		  */
-		bool add_eq (Equation eq);
+		bool add_eq (Equation* eq);
 
 	    /**
 	      * Generate and return a string reprensentation of a rule.

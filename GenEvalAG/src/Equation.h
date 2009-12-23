@@ -66,7 +66,7 @@ class Equation
 		/**
 		  * Set the rigth value of the equation: is a tree.
 		  */
-		void set_r_value(tree<Ast_node*> rvalue);
+		void set_r_value(const tree<Ast_node*>& rvalue);
 		/**
 		  * Generate and return a string reprensentation of a Equation.
 		  *

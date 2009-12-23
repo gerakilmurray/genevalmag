@@ -28,6 +28,7 @@ Equation::Equation ()
 {
 	#ifdef _DEBUG
 		eqs++;
+		cout << "new Equations: " << eqs << endl;
 	#endif
 }
 
@@ -40,6 +41,7 @@ Equation::Equation (Equation const & other)
 
 	#ifdef _DEBUG
 		eqs++;
+		cout << "copy Equations: " << eqs << endl;
 	#endif
 }
 
@@ -49,6 +51,8 @@ Equation::Equation (Equation const & other)
 Equation::~Equation ()
 {
 	destroy ();
+
+	delete (l_value);
 
 	#ifdef _DEBUG
 		eqs--;
@@ -115,7 +119,7 @@ void Equation::set_l_value(Ast_instance* lvalue)
 /**
   * Set the left value of the equation.
   */
-void Equation::set_r_value(tree<Ast_node*> rvalue)
+void Equation::set_r_value(const tree<Ast_node*>& rvalue)
 {
 	r_value = rvalue;
 }

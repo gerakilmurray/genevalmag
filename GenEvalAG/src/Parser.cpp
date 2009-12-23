@@ -67,8 +67,7 @@ void add_operator (char const* str, char const* end)
 {
 	sem_domain.add_operator (*current_oper);
 	// Call destruction before free memory.
-	current_oper->Function::~Function ();
-	free (current_oper);
+	delete (current_oper);
 	current_oper = NULL;
 }
 
@@ -125,8 +124,7 @@ void add_function (char const* str, char const* end)
 {
 	sem_domain.add_function (*current_func);
 	// Call destruction before free memory.
-	current_func->Function::~Function ();
-	free (current_func);
+	delete (current_func);
 	current_func = NULL;
 }
 
@@ -214,7 +212,7 @@ void save_decl_attrs (char const* str, char const* end)
 		sem_domain.add_attribute (attr);
 	}
 	// Free space memory and assign NULL at pointer.
-	free (new_attrs);
+	delete (new_attrs);
 	new_attrs = NULL;
 }
 
@@ -248,8 +246,7 @@ void save_rule (char const* str, char const* end)
 {
 	sem_domain.add_rule (*current_rule);
 	// Call destruction before free memory.
-	current_rule->Rule::~Rule ();
-	free (current_rule);
+	delete (current_rule);
 }
 
 void add_left_symbol_rule (char const* str, char const* end)
@@ -278,12 +275,12 @@ void abbreviated_rule (char const* str, char const* end)
 /**
   * Pointer to the last instance of attribute to parse successfully.
   */
-Ast_instance*	current_instance;
-Ast_literal*	current_literal;
-Ast_function*   current_koperation;
-Ast_function*   current_kfunction;
+Ast_instance*	current_instance = NULL;
+Ast_literal*	current_literal = NULL;
+Ast_function*   current_koperation = NULL;
+Ast_function*   current_kfunction = NULL;
 
-Equation*		current_eq;
+Equation*		current_eq = NULL;
 tree<Ast_node*>	current_tree;
 
 void inic_tree(char const chr)
@@ -291,10 +288,11 @@ void inic_tree(char const chr)
 	current_literal = new Ast_literal();
 	// falta current_node->set_type_synthetized()
 
-	(current_literal)->set_value("3");
-	(current_literal)->set_type(k_int);
+	current_literal->set_value("3");
+	current_literal->set_type(k_int);
 
 	current_tree.set_head(current_literal);
+	current_literal = NULL;
 }
 
 void save_literal_node(char const* str, char const* end)
@@ -302,8 +300,6 @@ void save_literal_node(char const* str, char const* end)
 	// falta current_node->set_type_synthetized()
 
 	current_tree.insert(current_tree.begin().begin(),current_literal);
-//	save_node_tree(&current_literal);
-//	free(current_literal);
 	current_literal = NULL;
 }
 
@@ -312,8 +308,6 @@ void save_instance_node(char const* str, char const* end)
 	// falta current_node->set_type_synthetized()
 
 	current_tree.insert(current_tree.begin().begin(),current_instance);
-//	save_node_tree(&current_instance);
-//	free(current_instance);
 	current_instance = NULL;
 };
 
@@ -404,12 +398,11 @@ void save_oper_node(char const* str, char const* end)
 {
 	current_koperation = new Ast_function();
 	current_koperation->set_function(current_oper);
-
+	current_oper = NULL;
 	// falta current_node->set_type_synthetized()
 
 	current_tree.insert(current_tree.begin().begin(),current_koperation);
-//	free(current_koperation);
-	current_oper = NULL;
+
 	current_koperation = NULL;
 };
 
@@ -417,12 +410,11 @@ void save_func_node(char const* str, char const* end)
 {
 	current_kfunction = new Ast_function();
 	current_kfunction->set_function(current_func);
-
+	current_func = NULL;
 	// falta current_node->set_type_synthetized()
 
 	current_tree.insert(current_tree.begin().begin(),current_kfunction);
-//	free(current_kfunction);
-	current_func = NULL;
+
 	current_kfunction = NULL;
 };
 
@@ -430,17 +422,15 @@ void save_lvalue (char const* str, char const* end)
 {
 	current_eq = new Equation();
 	current_eq->set_l_value(current_instance);
-//	free(current_instance);
 	current_instance = NULL;
 }
 
 void save_rvalue (char const* str, char const* end)
 {
 	current_eq->set_r_value(current_tree);
-	current_rule->add_eq(*current_eq);
-	current_tree.clear();
+	current_rule->add_eq(current_eq);
 
-	free(current_eq);
+	current_tree.clear();
 	current_eq = NULL;
 }
 
