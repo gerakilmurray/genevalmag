@@ -5,6 +5,7 @@
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
+  
 #include <sstream>
 #include <iostream>
 
@@ -35,21 +36,21 @@ Ast_instance::Ast_instance(Ast_instance const & other)
 
 Ast_instance::~Ast_instance()
 {
-	destroy ();
+	destroy();
 
 	#ifdef _DEBUG
 		ast_instances--;
-		if (ast_instances == 0)
+		if(ast_instances == 0)
 			cout << ast_instances << " -> AST Instances" << endl;
 	#endif
 }
 
-Ast_instance& Ast_instance::operator= (Ast_instance const & other)
+Ast_instance& Ast_instance::operator=(Ast_instance const & other)
 {
-	if (this != &other)
+	if(this != &other)
 	{
-		destroy ();
-		copy (other);
+		destroy();
+		copy(other);
 	}
 	return *this;
 }
@@ -60,7 +61,7 @@ void Ast_instance::destroy()
 	i_attr = NULL;
 }
 
-void Ast_instance::copy (Ast_instance const & other)
+void Ast_instance::copy(Ast_instance const & other)
 {
 	i_symb				= other.get_symb();
 	i_num				= other.get_num();
@@ -71,17 +72,17 @@ void Ast_instance::copy (Ast_instance const & other)
 
 Attribute* Ast_instance::get_attr() const
 {
-    return i_attr;
+	return i_attr;
 }
 
 int Ast_instance::get_num() const
 {
-    return i_num;
+	return i_num;
 }
 
 Symbol* Ast_instance::get_symb() const
 {
-    return i_symb;
+	return i_symb;
 }
 
 void Ast_instance::set_attr(Attribute* attr)
@@ -91,12 +92,12 @@ void Ast_instance::set_attr(Attribute* attr)
 
 void Ast_instance::set_num(int num)
 {
-    i_num = num;
+	i_num = num;
 }
 
 void Ast_instance::set_symb(Symbol* symb)
 {
-    i_symb = symb;
+	i_symb = symb;
 }
 
 /**
@@ -110,16 +111,16 @@ string Ast_instance::to_string() const
 {
 	string inst;
 	// Save symbol's name.
-	inst.append (i_symb->get_name());
+	inst.append(i_symb->get_name());
 	// Save instance number.
 	inst.append("[");
 	stringstream ins;
 	ins << i_num;
-	inst.append (ins.str ());
+	inst.append(ins.str());
 	inst.append("]");
 	inst.append(".");
 	// Save attribute's name.
-	inst.append (i_attr->get_name());
+	inst.append(i_attr->get_name());
 	return inst;
 }
 

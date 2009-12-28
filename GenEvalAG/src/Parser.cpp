@@ -48,11 +48,11 @@ SemDomain sem_domain;
 /**
   * Methods and functions for parse Sort class.
   */
-void add_sort (char const* str, char const* end)
+void add_sort(char const* str, char const* end)
 {
-    string  name (str, end);
-	Sort sort (name);
-	sem_domain.add_sort (sort);
+	string  name(str, end);
+	Sort sort(name);
+	sem_domain.add_sort(sort);
 }
 
 /**
@@ -63,52 +63,52 @@ void add_sort (char const* str, char const* end)
   */
 Function * current_oper;
 
-void add_operator (char const* str, char const* end)
+void add_operator(char const* str, char const* end)
 {
-	sem_domain.add_operator (*current_oper);
-	delete (current_oper);
+	sem_domain.add_operator(*current_oper);
+	delete(current_oper);
 	current_oper = NULL;
 }
 
-void inic_operator (char const* str, char const* end)
+void inic_operator(char const* str, char const* end)
 {
 	// Ignore the string parsed.
-	current_oper = new Function ();
+	current_oper = new Function();
 }
 
-void save_name_op (char const* str, char const* end)
+void save_name_op(char const* str, char const* end)
 {
-	string name (str, end);
-	current_oper->set_name (name);
+	string name(str, end);
+	current_oper->set_name(name);
 }
 
-void save_mode_op (char const* str, char const* end)
+void save_mode_op(char const* str, char const* end)
 {
-	string mode (str, end);
-	current_oper->set_mode (mode);
+	string mode(str, end);
+	current_oper->set_mode(mode);
 }
 
-void save_prec_op (int const prec)
+void save_prec_op(int const prec)
 {
-	current_oper->set_prec (prec);
+	current_oper->set_prec(prec);
 }
 
-void save_assoc_op (char const* str, char const* end)
+void save_assoc_op(char const* str, char const* end)
 {
-	string assoc (str, end);
-	current_oper->set_oper_assoc (assoc);
+	string assoc(str, end);
+	current_oper->set_oper_assoc(assoc);
 }
 
-void save_domain_op (char const* str, char const* end)
+void save_domain_op(char const* str, char const* end)
 {
-	string domain (str, end);
-	current_oper->add_domain (&(sem_domain.return_sort (domain)));
+	string domain(str, end);
+	current_oper->add_domain(&(sem_domain.return_sort(domain)));
 }
 
-void save_image_op (char const* str, char const* end)
+void save_image_op(char const* str, char const* end)
 {
-	string image (str, end);
-	current_oper->set_image (&(sem_domain.return_sort (image)));
+	string image(str, end);
+	current_oper->set_image(&(sem_domain.return_sort(image)));
 }
 
 /**
@@ -119,30 +119,30 @@ void save_image_op (char const* str, char const* end)
   */
 Function * current_func;
 
-void add_function (char const* str, char const* end)
+void add_function(char const* str, char const* end)
 {
-	sem_domain.add_function (*current_func);
-	delete (current_func);
+	sem_domain.add_function(*current_func);
+	delete(current_func);
 	current_func = NULL;
 }
 
-void save_name_func (char const* str, char const* end)
+void save_name_func(char const* str, char const* end)
 {
-	current_func = new Function ();
-	string name (str, end);
-	current_func->set_name (name);
+	current_func = new Function();
+	string name(str, end);
+	current_func->set_name(name);
 }
 
-void save_domain_func (char const* str, char const* end)
+void save_domain_func(char const* str, char const* end)
 {
-	string domain (str, end);
-	current_func->add_domain (&(sem_domain.return_sort (domain)));
+	string domain(str, end);
+	current_func->add_domain(&(sem_domain.return_sort(domain)));
 }
 
-void save_image_func (char const* str, char const* end)
+void save_image_func(char const* str, char const* end)
 {
-	string image (str, end);
-	current_func->set_image (&(sem_domain.return_sort (image)));
+	string image(str, end);
+	current_func->set_image(&(sem_domain.return_sort(image)));
 }
 
 /**
@@ -159,17 +159,17 @@ struct decl_attribute
 	string			d_member_symbol;
 } * new_attrs;
 
-void add_attr (char const* str, char const* end)
+void add_attr(char const* str, char const* end)
 {
-	string name (str, end);
-	if (new_attrs == NULL)
+	string name(str, end);
+	if(new_attrs == NULL)
 	{
 		// New declaration. Must be allocate new memory.
 		new_attrs = new decl_attribute;
 	}
 	// Enqueue the name of new attribute.
-	new_attrs->d_names.push_back (name);
-	if (new_attrs->d_names.size () == 1)
+	new_attrs->d_names.push_back(name);
+	if(new_attrs->d_names.size() == 1)
 	{
 		// First attribute name.
 		// Setting default values.
@@ -178,58 +178,58 @@ void add_attr (char const* str, char const* end)
 	}
 }
 
-void save_sort_attr (char const* str, char const* end)
+void save_sort_attr(char const* str, char const* end)
 {
-	string sort (str, end);
+	string sort(str, end);
 	new_attrs->d_sort_type = sort;
 }
 
-void save_type_attr (char const* str, char const* end)
+void save_type_attr(char const* str, char const* end)
 {
-	string mod_type (str, end);
-	if (mod_type.compare ("inh") == 0)
+	string mod_type(str, end);
+	if(mod_type.compare("inh") == 0)
 		new_attrs->d_mod_type = k_inherit;
 }
 
-void save_member_list (char const* str, char const* end)
+void save_member_list(char const* str, char const* end)
 {
-	string members (str, end);
-	boost::erase_all (members, " ");
+	string members(str, end);
+	boost::erase_all(members, " ");
 	new_attrs->d_member_symbol = members;
 }
 
-void save_decl_attrs (char const* str, char const* end)
+void save_decl_attrs(char const* str, char const* end)
 {
-	for (vector<string>::size_type i = 0; i < new_attrs->d_names.size (); i++)
+	for(vector<string>::size_type i = 0; i < new_attrs->d_names.size(); i++)
 	{
 		Attribute attr;
-		attr.set_name (new_attrs->d_names[i]);
-		attr.set_sort_type (&(sem_domain.return_sort (new_attrs->d_sort_type)));
-		attr.set_mod_type (new_attrs->d_mod_type);
-		attr.set_member_symbol (new_attrs->d_member_symbol);
-		sem_domain.add_attribute (attr);
+		attr.set_name(new_attrs->d_names[i]);
+		attr.set_sort_type(&(sem_domain.return_sort(new_attrs->d_sort_type)));
+		attr.set_mod_type(new_attrs->d_mod_type);
+		attr.set_member_symbol(new_attrs->d_member_symbol);
+		sem_domain.add_attribute(attr);
 	}
 	// Free space memory and assign NULL at pointer.
-	delete (new_attrs);
+	delete(new_attrs);
 	new_attrs = NULL;
 }
 
 /**
   * Methods and functions for parse Symbol class.
   */
-void save_non_terminal (char const* str, char const* end)
+void save_non_terminal(char const* str, char const* end)
 {
-	string name (str, end);
-	Symbol symb (name, k_non_terminal);
-	sem_domain.add_symbol (symb);
+	string name(str, end);
+	Symbol symb(name, k_non_terminal);
+	sem_domain.add_symbol(symb);
 }
 
-void save_terminal (char const* str, char const* end)
+void save_terminal(char const* str, char const* end)
 {
-	string name (str, end);
+	string name(str, end);
 	// The string is 'char'
-	Symbol symb (name, k_terminal);
-	sem_domain.add_symbol (symb);
+	Symbol symb(name, k_terminal);
+	sem_domain.add_symbol(symb);
 }
 
 /**
@@ -240,29 +240,29 @@ void save_terminal (char const* str, char const* end)
   */
 Rule * current_rule;
 
-void save_rule (char const* str, char const* end)
+void save_rule(char const* str, char const* end)
 {
-	sem_domain.add_rule (*current_rule);
-	delete (current_rule);
+	sem_domain.add_rule(*current_rule);
+	delete(current_rule);
 }
 
-void add_left_symbol_rule (char const* str, char const* end)
+void add_left_symbol_rule(char const* str, char const* end)
 {
-	string left_side_symbol (str, end);
-	current_rule = new Rule ();
-	current_rule->set_left_symbol (&(sem_domain.get_symbol (left_side_symbol)));
+	string left_side_symbol(str, end);
+	current_rule = new Rule();
+	current_rule->set_left_symbol(&(sem_domain.get_symbol(left_side_symbol)));
 }
 
-void add_right_side_rule (char const* str, char const* end)
+void add_right_side_rule(char const* str, char const* end)
 {
-	string right_side_symbol (str, end);
-	current_rule->add_right_symbol (&(sem_domain.get_symbol (right_side_symbol)));
+	string right_side_symbol(str, end);
+	current_rule->add_right_symbol(&(sem_domain.get_symbol(right_side_symbol)));
 }
 
-void abbreviated_rule (char const* str, char const* end)
+void abbreviated_rule(char const* str, char const* end)
 {
-	current_rule = new Rule ();
-	current_rule->set_left_symbol (current_rule->get_left_symbol ());
+	current_rule = new Rule();
+	current_rule->set_left_symbol(current_rule->get_left_symbol());
 }
 
 /**
@@ -308,35 +308,35 @@ void save_instance_node(char const* str, char const* end)
 	current_instance = NULL;
 };
 
-void save_symb_ins (char const* str, char const* end)
+void save_symb_ins(char const* str, char const* end)
 {
-	string symb (str, end);
-	if (current_instance == NULL)
+	string symb(str, end);
+	if(current_instance == NULL)
 	{
 		current_instance = new Ast_instance();
 	}
 	current_instance->set_symb(&(sem_domain.get_symbol(symb)));
 }
 
-void save_index_ins (int const index)
+void save_index_ins(int const index)
 {
 	current_instance->set_num(index);
 }
 
-void save_attr_ins (char const* str, char const* end)
+void save_attr_ins(char const* str, char const* end)
 {
-	string attr (str, end);
+	string attr(str, end);
 	current_instance->set_attr(current_instance->get_symb()->get_attribute(attr));
-	if (current_instance->get_attr() == NULL)
+	if(current_instance->get_attr() == NULL)
 	{
 		cerr << "ERROR:" << attr <<"Atribute inexistente. Verifique los atributos usados en los symbolos." << endl;
 		exit(1);
 	}
 }
 
-void save_lit_int (int const int_lit)
+void save_lit_int(int const int_lit)
 {
-	if (current_literal == NULL)
+	if(current_literal == NULL)
 	{
 		current_literal = new Ast_literal();
 	}
@@ -346,9 +346,9 @@ void save_lit_int (int const int_lit)
 	current_literal->set_value(literal_int.str());
 }
 
-void save_lit_flt (double const flt_lit)
+void save_lit_flt(double const flt_lit)
 {
-	if (current_literal == NULL)
+	if(current_literal == NULL)
 	{
 		current_literal = new Ast_literal();
 	}
@@ -358,9 +358,9 @@ void save_lit_flt (double const flt_lit)
 	current_literal->set_value(literal_float.str());
 }
 
-void save_lit_ch (char const* ch, char const* end)
+void save_lit_ch(char const* ch, char const* end)
 {
-	if (current_literal == NULL)
+	if(current_literal == NULL)
 	{
 		current_literal = new Ast_literal();
 	}
@@ -369,25 +369,25 @@ void save_lit_ch (char const* ch, char const* end)
 	current_literal->set_value(ch_l);
 }
 
-void save_lit_str (char const* str, char const* end)
+void save_lit_str(char const* str, char const* end)
 {
-	if (current_literal == NULL)
+	if(current_literal == NULL)
 	{
 		current_literal = new Ast_literal();
 	}
-	string str_l (str+1, end-1); // the pointer +1 and -1 for remove the double quotes.Ex: "uno" --> uno.
+	string str_l(str+1, end-1); // the pointer +1 and -1 for remove the double quotes.Ex: "uno" --> uno.
 	current_literal->set_type(k_string);
 	current_literal->set_value(str_l);
 }
 
-void save_operator (char const* str, char const* end)
+void save_operator(char const* str, char const* end)
 {
 	current_oper = new Function();
 	save_name_op(str, end);
 	current_oper->set_is_operator(IS_OPERATOR);
 }
 
-void save_function (char const* str, char const* end)
+void save_function(char const* str, char const* end)
 {
 	save_name_func(str, end);
 }
@@ -416,7 +416,7 @@ void save_func_node(char const* str, char const* end)
 	current_kfunction = NULL;
 };
 
-void save_lvalue (char const* str, char const* end)
+void save_lvalue(char const* str, char const* end)
 {
 	current_eq = new Equation();
 	current_eq->set_l_value(*current_instance);
@@ -424,7 +424,7 @@ void save_lvalue (char const* str, char const* end)
 	current_instance = NULL;
 }
 
-void save_rvalue (char const* str, char const* end)
+void save_rvalue(char const* str, char const* end)
 {
 	current_eq->set_r_value(current_tree);
 	current_rule->add_eq(*current_eq);
@@ -433,9 +433,9 @@ void save_rvalue (char const* str, char const* end)
 	current_eq = NULL;
 }
 
-void pepito (char const* str, char const* end)
+void pepito(char const* str, char const* end)
 {
-	string pepe (str, end);
+	string pepe(str, end);
 	cout << pepe << endl;
 }
 
@@ -448,15 +448,15 @@ struct skip_parser: public grammar<skip_parser>
 	template <typename ScannerT>
 	struct definition
 	{
-		definition (skip_parser const &self)
+		definition(skip_parser const &self)
 		{
 			skip = space_p
-                 | "//" >> *(anychar_p - '\n')
-                 | "/*" >> *(anychar_p - "*/") >> "*/"
-                 ;
+				 | "//" >> *(anychar_p - '\n')
+				 | "/*" >> *(anychar_p - "*/") >> "*/"
+				 ;
 		}
 		rule<ScannerT> skip;
-		rule<ScannerT> const& start () const { return skip; }
+		rule<ScannerT> const& start() const { return skip; }
 	};
 };
 
@@ -479,77 +479,77 @@ struct attr_grammar: public grammar<attr_grammar,type_expression::context_t>
 	template <typename ScannerT>
 	struct definition
 	{
-		definition (attr_grammar const &self)
+		definition(attr_grammar const &self)
 		{
 			// Common declarations.
 
-			r_ident			= lexeme_d[ (alpha_p | '_') >> *(alnum_p | '_' ) ] - r_reserved_word;
+			r_ident			= lexeme_d[ (alpha_p | '_') >> *(alnum_p | '_') ] - r_reserved_word;
 
 			r_oper			= lexeme_d[ (alpha_p | '_' | r_id_op) >> *(alnum_p | '_' | r_id_op) ];
 
-			r_id_op			= ch_p ('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>';
+			r_id_op			= ch_p('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>';
 
-			r_char			= lexeme_d[ ch_p ('\'') >>  (alnum_p | r_id_op) >> ch_p ('\'') ];
+			r_char			= lexeme_d[ ch_p('\'') >> (alnum_p | r_id_op) >> ch_p('\'') ];
 
-			r_string		= lexeme_d[ ch_p ('\"') >> +(alnum_p | r_id_op) >> ch_p ('\"') ];
+			r_string		= lexeme_d[ ch_p('\"') >> +(alnum_p | r_id_op) >> ch_p('\"') ];
 
-//            string =
-//                    +( (anychar_p - chset<>("\"\\")) | escseq )
-//                ;
+//			string =
+//					+((anychar_p - chset<>("\"\\")) | escseq)
+//				;
 //
-//            escseq =
-//                    ch_p('\\')
-//                    >>  (
-//                            oct_parser_t()
-//                        |   as_lower_d['x'] >> hex_parser_t()
-//                        |   (anychar_p - chset<>('\n'))
-//                        )
-//                ;
+//			escseq =
+//					ch_p('\\')
+//					>> (
+//							oct_parser_t()
+//						|   as_lower_d['x'] >> hex_parser_t()
+//						|  (anychar_p - chset<>('\n'))
+//						)
+//				;
 
-			r_reserved_word = strlit<> ("compute") | strlit<> ("COMPUTE") |
-							  strlit<> ("all")     | strlit<> ("ALL");
+			r_reserved_word = strlit<>("compute") | strlit<>("COMPUTE") |
+							  strlit<>("all")	 | strlit<>("ALL");
 
 			/**
 			  * Declaration of Semantic Domain.
 			  */
 
-			r_semantic_domain = lexeme_d[ strlit<> ("semantic domain") >> space_p ] >> +r_bloq_sem;
+			r_semantic_domain = lexeme_d[ strlit<>("semantic domain") >> space_p ] >> +r_bloq_sem;
 
 			r_bloq_sem		  = r_decl_sort | r_decl_oper[&add_operator] | r_decl_func[&add_function];
 
 			// Declaration of Sorts.
 
-			r_decl_sort		  = lexeme_d[ strlit<> ("sort") >> space_p ] >>
+			r_decl_sort		  = lexeme_d[ strlit<>("sort") >> space_p ] >>
 								(r_ident[&add_sort][st_sorts.add] % ',') >> ';';
 
 			// Declaration of Operators.
 
-			r_decl_oper    = lexeme_d[ strlit<> ("op") >> space_p ][&inic_operator] >>
-						     (r_oper_infix | r_oper_postfix | r_oper_prefix) >>
-						     strlit<> ("->") >>
-						     r_sort_st[&save_image_op] >> ';';
+			r_decl_oper	= lexeme_d[ strlit<>("op") >> space_p ][&inic_operator] >>
+							(r_oper_infix | r_oper_postfix | r_oper_prefix) >>
+							 strlit<>("->") >>
+							 r_sort_st[&save_image_op] >> ';';
 
-			r_oper_infix   = strlit<> ("infix")[&save_mode_op] >> !r_oper_mode >>
+			r_oper_infix   = strlit<>("infix")[&save_mode_op] >> !r_oper_mode >>
 							 r_oper[&save_name_op][st_op_infix.add] >> ':' >>
 							 r_sort_st[&save_domain_op] >> ',' >> r_sort_st[&save_domain_op];
 
-			r_oper_postfix = strlit<> ("postfix")[&save_mode_op] >> !r_oper_mode >>
+			r_oper_postfix = strlit<>("postfix")[&save_mode_op] >> !r_oper_mode >>
 							 r_oper[&save_name_op][st_op_postfix.add] >> ':' >>
 							 r_sort_st[&save_domain_op];
 
-			r_oper_prefix  = !(strlit<> ("prefix")[&save_mode_op]) >> !r_oper_mode >>
+			r_oper_prefix  = !(strlit<>("prefix")[&save_mode_op]) >> !r_oper_mode >>
 							 r_oper[&save_name_op][st_op_prefix.add] >> ':' >>
 							 r_sort_st[&save_domain_op];
 
-			r_oper_mode	   = '(' >> (uint_p[&save_prec_op] | '_') >> ',' >> (r_oper_assoc[&save_assoc_op] | '_') >> ')';
+			r_oper_mode	   = '(' >>(uint_p[&save_prec_op] | '_') >> ',' >>(r_oper_assoc[&save_assoc_op] | '_') >> ')';
 
-			r_oper_assoc   = strlit<> ("left") | strlit<> ("right") | strlit<> ("non-assoc");
+			r_oper_assoc   = strlit<>("left") | strlit<>("right") | strlit<>("non-assoc");
 
 			// Declaration of Functions.
 
-			r_decl_func	= lexeme_d[strlit<> ("function")>> space_p ] >>
+			r_decl_func	= lexeme_d[ strlit<>("function")>> space_p ] >>
 							 r_oper[&save_name_func][st_functions.add] >> ':' >>
-							 r_dom_func >> strlit<> ("->") >>
+							 r_dom_func >> strlit<>("->") >>
 							 r_sort_st[&save_image_func] >> ';';
 
 			r_dom_func	= r_sort_st[&save_domain_func] % ',';
@@ -557,36 +557,36 @@ struct attr_grammar: public grammar<attr_grammar,type_expression::context_t>
 			/**
 			  * Declaration of Attributes.
 			  */
-			r_attributes = lexeme_d[strlit<> ("attributes")>> space_p ] >> +r_decl_attr[&save_decl_attrs];
+			r_attributes = lexeme_d[ strlit<>("attributes")>> space_p ] >> +r_decl_attr[&save_decl_attrs];
 
-			r_decl_attr  = (r_ident[&add_attr][st_attributes.add] % ',') >>
-					       ':' >> !(r_type_attr[&save_type_attr]) >> '<' >> r_sort_st[&save_sort_attr] >> '>' >>
-					       lexeme_d[strlit<> ("of")>> space_p ] >>
-					       (r_conj_symb |
-					       (strlit<> ("all") >> !('-' >> r_conj_symb)))[&save_member_list] >> ';';
+			r_decl_attr  =(r_ident[&add_attr][st_attributes.add] % ',') >>
+						   ':' >> !(r_type_attr[&save_type_attr]) >> '<' >> r_sort_st[&save_sort_attr] >> '>' >>
+						   lexeme_d[ strlit<>("of")>> space_p ] >>
+						  (r_conj_symb |
+						  (strlit<>("all") >> !('-' >> r_conj_symb)))[&save_member_list] >> ';';
 
-			r_conj_symb	 = '{' >> (r_ident % ',') >> '}';
+			r_conj_symb	 = '{' >>(r_ident % ',') >> '}';
 
-			r_type_attr  = (strlit<> ("inh") | strlit<> ("syn"));
+			r_type_attr  =(strlit<>("inh") | strlit<>("syn"));
 
 			/**
 			  * Declaration of Rules.
 			  */
 
-			r_rules		  = lexeme_d[strlit<> ("rules")>> space_p ] >> +r_decl_rule;
+			r_rules		  = lexeme_d[ strlit<>("rules")>> space_p ] >> +r_decl_rule;
 
 			r_decl_rule	  = r_ident[&save_non_terminal][&add_left_symbol_rule][st_symbols.add] >>
-						    strlit<> ("::=") >>
-						    r_right_rule[&save_rule] >>
-						    *(strlit<> ("|")[&abbreviated_rule] >> r_right_rule[&save_rule]) >> ';';
+							strlit<>("::=") >>
+							r_right_rule[&save_rule] >>
+							*(strlit<>("|")[&abbreviated_rule] >> r_right_rule[&save_rule]) >> ';';
 
 			r_right_rule  = +(  r_ident[&save_non_terminal][st_symbols.add]
-			                  | r_char[&save_terminal]
-			                 )[&add_right_side_rule] >>
-						    !(strlit<> ("compute") >>
-						        +(r_equation) >>
-						      strlit<> ("end")
-						     );
+							  | r_char[&save_terminal]
+							 )[&add_right_side_rule] >>
+							!(strlit<>("compute") >>
+								+(r_equation) >>
+							  strlit<>("end")
+							 );
 
 			r_equation	  = r_left_symbol[&save_lvalue] >> ch_p('=')[&inic_tree] >> r_right_side[&save_rvalue] >> ';';
 
@@ -599,7 +599,7 @@ struct attr_grammar: public grammar<attr_grammar,type_expression::context_t>
 			  *
 			  * 	E = T *(<op_infix> T)
 			  *		T = F *(<op_postfix>)
-			  *		F = +(<op_prefix>) E | (E) | function | literal | instance
+			  *		F = +(<op_prefix>) E |(E) | function | literal | instance
 			  */
 			r_expression 		= r_expr_prime >> *(r_op_infix_st[&save_operator][&save_oper_node] >> r_expr_prime)
 								;
@@ -617,14 +617,14 @@ struct attr_grammar: public grammar<attr_grammar,type_expression::context_t>
 			/**
 			  * The functions accept a list of expressions.
 			  */
-			r_function			= r_function_st[&save_function][&save_func_node] >> '(' >> (r_expression % ',') >> ')';
+			r_function			= r_function_st[&save_function][&save_func_node] >> '(' >>(r_expression % ',') >> ')';
 
 			/**
 			  * Literals accepted: Integer and Float numbers, characters and string,
 			  * between signs ' and " respectively.
 			  */
 			r_literal			= int_p[&save_lit_int] | real_p[&save_lit_flt]
-			         			| r_char[&save_lit_ch] | r_string[&save_lit_str];
+					 			| r_char[&save_lit_ch] | r_string[&save_lit_str];
 
 			/**
 			  * An instance is, the symbol with the number of occurrences in square brackets within
@@ -633,9 +633,9 @@ struct attr_grammar: public grammar<attr_grammar,type_expression::context_t>
 			  * Example: E[0].value
 			  */
 			r_instance			= lexeme_d[ r_symbol_st[&save_symb_ins] >>
-			          			            '[' >> int_p[&save_index_ins] >> ']' >>
-			          			            '.' >> r_attribute_st[&save_attr_ins]
-			          			          ];
+					  						'[' >> int_p[&save_index_ins] >> ']' >>
+					  						'.' >> r_attribute_st[&save_attr_ins]
+					  					  ];
 
 			/**
 			  * Declaration of Attribute Grammar.
@@ -694,7 +694,7 @@ struct attr_grammar: public grammar<attr_grammar,type_expression::context_t>
 		rule<ScannerT> r_sort_st, r_op_prefix_st, r_op_infix_st, r_op_postfix_st,
 					   r_function_st, r_attribute_st, r_symbol_st;
 
-		rule<ScannerT> const& start () const { return r_att_grammar; }
+		rule<ScannerT> const& start() const { return r_att_grammar; }
 	};
 };
 
@@ -702,7 +702,7 @@ struct attr_grammar: public grammar<attr_grammar,type_expression::context_t>
   * This method invokes the method 'parse' of the library Spitir included in Boost.
   * Returns true if could parse all the input.
   */
-bool parse_grammar (char const* txt_input)
+bool parse_grammar(char const* txt_input)
 {
 	attr_grammar attribute_grammar;
 	skip_parser skip_p;
@@ -724,39 +724,39 @@ void read_file_in(string & txt_output)
 	FILE * p_file;
 	char buffer[MAX_INPUT_FILE];
 
-	p_file = fopen (PATH_INPUT_FILE , "r");
-	if (p_file == NULL)
-		perror ("Error opening file");
+	p_file = fopen(PATH_INPUT_FILE , "r");
+	if(p_file == NULL)
+		perror("Error opening file");
 	else
 	{
-		while ( !feof (p_file) )
+		while(!feof(p_file))
 		{
-	          fgets (buffer , MAX_INPUT_LINE , p_file);
-	          txt_output += buffer;
-	    }
-		fclose (p_file);
+			  fgets(buffer , MAX_INPUT_LINE , p_file);
+			  txt_output += buffer;
+		}
+		fclose(p_file);
 	}
 }
 
 /**
   * Main method of the parsing.
   */
-int main ()
+int main()
 {
 	string input_grammar;
 	read_file_in(input_grammar);
 	cout << "-------------------------\n";
-	if (parse_grammar (input_grammar.c_str ()))
+	if(parse_grammar(input_grammar.c_str()))
 	{
-		cout << sem_domain.to_string ();
+		cout << sem_domain.to_string();
 		cout << "-------------------------\n";
 		cout << "Parsing OK\n";
-    }
+	}
 	else
 	{
 		cout << "Parsing failed\n";
 	}
 	cout << "-------------------------\n";
-    cout << "Bye... :-D" << endl;
-    return 0;
+	cout << "Bye... :-D" << endl;
+	return 0;
 }

@@ -25,15 +25,21 @@ public:
 	virtual ~Ast_inner_node(){};
 
 	vector<Ast_node*> get_childs() const
-    {
-        return childs;
-    }
+	{
+		return childs;
+	}
 
-    void set_childs(vector<Ast_node*> new_childs)
-    {
-        childs = new_childs;
-    }
-    virtual string to_string () const = 0;
+	void set_childs(vector<Ast_node*> new_childs)
+	{
+		childs = new_childs;
+	}
+
+	void add_child(Ast_node* new_child)
+	{
+		childs.push_back(new_child);
+	}
+
+	virtual string to_string() const = 0;
 };
 
 } // end genevalmag

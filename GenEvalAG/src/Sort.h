@@ -30,68 +30,68 @@ private:
 	/**
 	  * Method of copy the sort, STL-like C++.
 	  */
-	void copy (Sort const& other);
+	void copy(Sort const& other);
 	/**
 	  * Method destroy sort, STL-like C++.
 	  */
-	void destroy ();
+	void destroy();
 
 public:
 	/**
 	  * Contructor empty of sort.
 	  */
-	Sort ();
+	Sort();
 	/**
 	  * Contructor with the name of the sort.
 	  */
-	Sort (string name);
+	Sort(string name);
 	/**
 	  * Contructor copy of sort.
 	  */
-	Sort (Sort const & other);
+	Sort(Sort const & other);
 
 	/**
 	  * Destructor of sort.
 	  */
-	virtual ~Sort ();
+	virtual ~Sort();
 
 	/**
-	  * Operator assign (=) of sort.
+	  * Operator assign(=) of sort.
 	  */
-	Sort& operator= (Sort const & other);
+	Sort& operator=(Sort const & other);
 
 	/**
 	  * Return the name of the sort.
 	  */
-    string get_name () const;
-    /**
-      * Return the instance of the sort.
-      */
-	int get_ins () const;
+	string get_name() const;
+	/**
+	  * Return the instance of the sort.
+	  */
+	int get_ins() const;
 
-    /**
-      * Set the name of the sort.
-      */
-    void set_name (string name);
+	/**
+	  * Set the name of the sort.
+	  */
+	void set_name(string name);
 
-    /**
-      * Generate and return a string reprensentation of a attribute.
-      *
-      * Result= "sort" <name> [" (" <instance> ")" IF DEBUG IS ON] ";"
-      */
-    string to_string () const;
+	/**
+	  * Generate and return a string reprensentation of a attribute.
+	  *
+	  * Result= "sort" <name> ["(" <instance> ")" IF DEBUG IS ON] ";"
+	  */
+	string to_string() const;
 
-    /**
-      * Compares the sort with other.
-      */
-    bool equals (Sort const & other) const;
+	/**
+	  * Compares the sort with other.
+	  */
+	bool equals(Sort const & other) const;
 
-    /**
-      * Generate and return the string key that identifies a sort definitely.
-      *
-      * Result= <name>
-      */
-    string key () const;
+	/**
+	  * Generate and return the string key that identifies a sort definitely.
+	  *
+	  * Result= <name>
+	  */
+	string key() const;
 };
 
 } // end genevalmag

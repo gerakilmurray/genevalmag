@@ -28,7 +28,7 @@ semantic domain
 	op prefix	(_,right)		%  : string		-> string;
 	op 			(8,non-assoc)	%  : string		-> adrian;
 	op infix	(5,left)		+  : int, int	-> string;
-	op prefix (_,left) + : int -> int;
+	op prefix(_,left) + : int -> int;
 		
 	/*********************
 	 * List of Functions *
@@ -56,7 +56,7 @@ rules
 				end
 		| 	T
 			  	compute
-			  		E[0].valor =  f (T[0].valor& & & & &);
+			  		E[0].valor =  f(T[0].valor& & & & &);
 	  			end
 		;
 
@@ -72,7 +72,7 @@ rules
 					id[0].valor = 1; 
 					id[0].type = "int"; 
 				end
-	     |  '0'
+		 |  '0'
 				compute
 					id[0].valor = '0' + '1'; 
 					id[0].type = "int"; 

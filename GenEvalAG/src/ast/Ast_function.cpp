@@ -5,6 +5,7 @@
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
+  
 #include <iostream>
 #include "Ast_function.h"
 
@@ -33,21 +34,21 @@ Ast_function::Ast_function(Ast_function const & other)
 
 Ast_function::~Ast_function()
 {
-	destroy ();
+	destroy();
 
 	#ifdef _DEBUG
 		ast_functions--;
-		if (ast_functions == 0)
-			cout << ast_functions <<" -> AST Functions" <<  endl;
+		if(ast_functions == 0)
+			cout << ast_functions <<" -> AST Functions" << endl;
 	#endif
 }
 
-Ast_function& Ast_function::operator= (Ast_function const & other)
+Ast_function& Ast_function::operator=(Ast_function const & other)
 {
-	if (this != &other)
+	if(this != &other)
 	{
-		destroy ();
-		copy (other);
+		destroy();
+		copy(other);
 	}
 	return *this;
 }
@@ -66,17 +67,17 @@ void Ast_function::destroy()
 
 Function* Ast_function::get_function() const
 {
-    return func;
+	return func;
 }
 
 void Ast_function::set_function(Function* function)
 {
-    func = function;
+	func = function;
 }
 
 string Ast_function::to_string() const
 {
-	if (func->is_operator())
+	if(func->is_operator())
 		return func->get_name();
 	else
 		return func->get_name().append("(");

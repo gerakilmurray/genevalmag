@@ -23,7 +23,7 @@ namespace genevalmag
 /**
   * Constructor empty of equation.
   */
-Equation::Equation ()
+Equation::Equation()
 {
 	// Initialize the counter.
 	count_ref = new unsigned int(1);
@@ -36,9 +36,9 @@ Equation::Equation ()
 /**
   * Contructor copy of Equation.
   */
-Equation::Equation (Equation const & other)
+Equation::Equation(Equation const & other)
 {
-	copy (other);
+	copy(other);
 
 	#ifdef _DEBUG
 		eqs++;
@@ -48,16 +48,16 @@ Equation::Equation (Equation const & other)
 /**
   * Destructor of equation.
   */
-Equation::~Equation ()
+Equation::~Equation()
 {
 	// Decrement the counter.
 	(*count_ref)--;
 
-	destroy ();
+	destroy();
 
 	#ifdef _DEBUG
 		eqs--;
-		if (eqs == 0)
+		if(eqs == 0)
 			cout << eqs << " -> Equations" << endl;
 	#endif
 }
@@ -70,7 +70,7 @@ unsigned int* Equation::_get_count_ref() const
 /**
   * Method of copy the equation, STL-like C++.
   */
-void Equation::copy (Equation const & other)
+void Equation::copy(Equation const & other)
 {
 	l_value = other.get_l_value();
 	r_value = other.get_r_value();
@@ -81,14 +81,14 @@ void Equation::copy (Equation const & other)
 }
 
 /**
-  * Operator assign (=) of Equation.
+  * Operator assign(=) of Equation.
   */
-Equation& Equation::operator= (Equation const & other)
+Equation& Equation::operator=(Equation const & other)
 {
-	if (this != &other)
+	if(this != &other)
 	{
-		destroy ();
-		copy (other);
+		destroy();
+		copy(other);
 	}
 	return *this;
 }
@@ -96,10 +96,10 @@ Equation& Equation::operator= (Equation const & other)
 /**
   * Method destroy equation, STL-like C++.
   */
-void Equation::destroy ()
+void Equation::destroy()
 {
 	// Check if is the last reference.
-	if (*count_ref == 0)
+	if(*count_ref == 0)
 	{
 		// Free all memory of the equation.
 		delete(count_ref);
@@ -122,7 +122,7 @@ void Equation::destroy ()
 /**
   * Return the l_value of the equation.
   */
-Ast_instance Equation::get_l_value () const
+Ast_instance Equation::get_l_value() const
 {
 	return l_value;
 }
@@ -130,7 +130,7 @@ Ast_instance Equation::get_l_value () const
 /**
   * Return the r_value of the equation.
   */
-tree<Ast_node*> Equation::get_r_value () const
+tree<Ast_node*> Equation::get_r_value() const
 {
 	return r_value;
 }
@@ -158,13 +158,13 @@ void Equation::set_r_value(const tree<Ast_node*>& rvalue)
   *
   * where <l_value> = "instance_attr" and <r_value> is= "list of node_ast"
   */
-string Equation::to_string () const
+string Equation::to_string() const
 {
 	string eq;
 
 	// Save l_value.
-	eq.append (l_value.to_string());
-	eq.append ("\t=\t");
+	eq.append(l_value.to_string());
+	eq.append("\t=\t");
 
 	// save r_value.
 
@@ -185,9 +185,9 @@ string Equation::to_string () const
 		{
 			eq.append((*it)->to_string());
 		}
-		if (--it != begin) eq.append (" ");
+		if(--it != begin) eq.append(" ");
 	}
-	eq.append (";");
+	eq.append(";");
 	return eq;
 }
 

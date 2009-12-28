@@ -18,7 +18,7 @@ class Ast_leaf: public Ast_node
 {
 public:
 	virtual ~Ast_leaf(){};
-	virtual string to_string () const = 0;
+	virtual string to_string() const = 0;
 };
 
 } // end genevalmag

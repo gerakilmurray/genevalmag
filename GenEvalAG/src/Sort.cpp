@@ -22,7 +22,7 @@ namespace genevalmag
 /**
   * Contructor empty of sort.
   */
-Sort::Sort ()
+Sort::Sort()
 {
 	s_ins = 1;
 
@@ -34,7 +34,7 @@ Sort::Sort ()
 /**
   * Contructor with the name of the sort.
   */
-Sort::Sort (string name)
+Sort::Sort(string name)
 {
 	s_ins	= 1;
 	s_name	= name;
@@ -47,9 +47,9 @@ Sort::Sort (string name)
 /**
   * Contructor copy of sort.
   */
-Sort::Sort (Sort const & other)
+Sort::Sort(Sort const & other)
 {
-	copy (other);
+	copy(other);
 
 	#ifdef _DEBUG
 		sorts++;
@@ -59,26 +59,26 @@ Sort::Sort (Sort const & other)
 /**
   * Destructor of sort.
   */
-Sort::~Sort ()
+Sort::~Sort()
 {
-	destroy ();
+	destroy();
 
 	#ifdef _DEBUG
 		sorts--;
-		if (sorts == 0)
+		if(sorts == 0)
 			cout << sorts << " -> Sorts" << endl;
 	#endif
 }
 
 /**
-  * Operator assign (=) of sort.
+  * Operator assign(=) of sort.
   */
-Sort& Sort::operator= (Sort const & other)
+Sort& Sort::operator=(Sort const & other)
 {
-	if (this != &other)
+	if(this != &other)
 	{
-		destroy ();
-		copy (other);
+		destroy();
+		copy(other);
 	}
 	return *this;
 }
@@ -86,72 +86,72 @@ Sort& Sort::operator= (Sort const & other)
 /**
   * Method of copy the sort, STL-like C++.
   */
-void Sort::copy (Sort const & other)
+void Sort::copy(Sort const & other)
 {
-	s_name	= other.get_name ();
+	s_name	= other.get_name();
 	 // Increment the instance of sort.
-	s_ins	= other.get_ins () + 1;
+	s_ins	= other.get_ins() + 1;
 }
 
 /**
   * Method destroy sort, STL-like C++.
   */
-void Sort::destroy ()
+void Sort::destroy()
 {
 }
 
 /**
   * Return the name of the sort.
   */
-string Sort::get_name () const
+string Sort::get_name() const
 {
-    return s_name;
+	return s_name;
 }
 
 /**
   * Return the instance of the sort.
   */
-int Sort::get_ins () const
+int Sort::get_ins() const
 {
-    return s_ins;
+	return s_ins;
 }
 
 /**
   * Set the name of the sort.
   */
-void Sort::set_name (string name)
+void Sort::set_name(string name)
 {
-    s_name = name;
+	s_name = name;
 }
 
 /**
   * Generate and return a string reprensentation of a attribute.
   *
-  * Result= "sort" <name> [" (" <instance> ")" IF DEBUG IS ON] ";"
+  * Result= "sort" <name> ["(" <instance> ")" IF DEBUG IS ON] ";"
   */
-string Sort::to_string () const
+string Sort::to_string() const
 {
-	string sort ("sort\t\t");
-	sort.append (s_name);
+	string sort("sort\t\t");
+	sort.append(s_name);
 
 	#ifdef _DEBUG
-		sort.append (" (");
+		sort.append("(");
 		stringstream ins;
 		ins << s_ins;
-		sort.append (ins.str ());
-		sort.append (")");
+		sort.append(ins.str());
+		sort.append(")");
 	#endif
 
-	sort.append (";");
+	sort.append(";");
 	return sort;
 }
 
 /**
   * Compares the sort with other.
   */
-bool Sort::equals (Sort const & other) const
+bool Sort::equals(Sort const & other) const
 {
-	return key ().compare (other.key ())==0;
+	return key().compare(other.key())==0;
 }
 
 /**
@@ -159,7 +159,7 @@ bool Sort::equals (Sort const & other) const
   *
   * Result= <name>
   */
-string Sort::key () const
+string Sort::key() const
 {
 	return s_name;
 }

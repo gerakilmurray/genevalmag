@@ -26,28 +26,30 @@ public:
 	virtual ~Ast_node(){};
 
 	Ast_node* get_parent() const
-    {
-        return parent;
-    }
+	{
+		return parent;
+	}
 
 	string get_type_synthetized() const
-    {
-        return type_synthetized;
-    }
+	{
+		return type_synthetized;
+	}
 
-    void set_parent(Ast_node* new_parent)
-    {
-        parent = new_parent;
-    }
+	void set_parent(Ast_node* new_parent)
+	{
+		parent = new_parent;
+	}
 
-    void set_type_synthetized(string new_type_synthetized)
-    {
-        type_synthetized = new_type_synthetized;
-    }
+	void set_type_synthetized(string new_type_synthetized)
+	{
+		type_synthetized = new_type_synthetized;
+	}
 
-    virtual string to_string () const = 0;
+	virtual string to_string() const = 0;
 };
 
 } // end genevalmag
 
 #endif /* AST_NODE_H_ */
+
+

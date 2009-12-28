@@ -16,6 +16,7 @@
 
 namespace genevalmag
 {
+
 class Equation
 {
 	private:
@@ -31,11 +32,11 @@ class Equation
 		/**
 		  * Method of copy the equation, STL-like C++.
 		  */
-		void copy (Equation const& other);
+		void copy(Equation const& other);
 		/**
 		  * Method destroy equation, STL-like C++.
 		  */
-		void destroy ();
+		void destroy();
 
 		/**
 		  * Return the count reference.
@@ -46,29 +47,29 @@ class Equation
 		/**
 		  * Constructor empty of equation.
 		  */
-		Equation ();
+		Equation();
 
 		/**
 		  * Contructor copy of Equation.
 		  */
-		Equation (Equation const & other);
+		Equation(Equation const & other);
 
 		/**
 		  * Destructor of equation.
 		  */
-		virtual ~Equation ();
+		virtual ~Equation();
 		/**
-		  * Operator assign (=) of Equation.
+		  * Operator assign(=) of Equation.
 		  */
-		Equation& operator= (Equation const & other);
+		Equation& operator=(Equation const & other);
 		/**
 		  * Return the l_value of the equation.
 		  */
-		Ast_instance get_l_value () const;
+		Ast_instance get_l_value() const;
 		/**
 		  * Return the r_value of the equation.
 		  */
-		tree<Ast_node*> get_r_value () const;
+		tree<Ast_node*> get_r_value() const;
 		/**
 		  * Set the left value of the equation.
 		  */
@@ -85,7 +86,7 @@ class Equation
 		  *
 		  * where <l_value> = "instance_attr" and <r_value> is= "list of node_ast"
 		  */
-		string to_string () const;
+		string to_string() const;
 };
 
 } // end genevalmag

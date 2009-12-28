@@ -23,24 +23,24 @@ private:
 	/**
 	  * Method of copy the Ast_function, STL-like C++.
 	  */
-	void copy (Ast_function const& other);
+	void copy(Ast_function const& other);
 	/**
 	  * Method destroy Ast_function, STL-like C++.
 	  */
-	void destroy ();
+	void destroy();
 
 public:
 	Ast_function();
-	Ast_function (Ast_function const & other);
+	Ast_function(Ast_function const & other);
 	virtual ~Ast_function();
 
-	Ast_function& operator= (Ast_function const & other);
+	Ast_function& operator=(Ast_function const & other);
 
-    Function *get_function() const;
+	Function *get_function() const;
 
-    void set_function(Function *func);
+	void set_function(Function *func);
 
-    string to_string() const;
+	string to_string() const;
 };
 
 } // end genevalmag

@@ -5,6 +5,7 @@
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
+  
 #include <iostream>
 #include "../Sort.h"
 #include "Ast_literal.h"
@@ -35,26 +36,26 @@ Ast_literal::Ast_literal(Ast_literal const & other)
 
 Ast_literal::~Ast_literal()
 {
-	destroy ();
+	destroy();
 
 	#ifdef _DEBUG
 		ast_literals--;
-		if (ast_literals == 0)
+		if(ast_literals == 0)
 			cout << ast_literals << " -> AST Literals" << endl;
 	#endif
 }
 
-Ast_literal& Ast_literal::operator= (Ast_literal const & other)
+Ast_literal& Ast_literal::operator=(Ast_literal const & other)
 {
-	if (this != &other)
+	if(this != &other)
 	{
-		destroy ();
-		copy (other);
+		destroy();
+		copy(other);
 	}
 	return *this;
 }
 
-void Ast_literal::copy (Ast_literal const & other)
+void Ast_literal::copy(Ast_literal const & other)
 {
 	value				= other.get_value();
 	type				= other.get_type();
@@ -100,7 +101,7 @@ string Ast_literal::to_string() const
 {
 	string lit;
 
-	switch (type)
+	switch(type)
 	{
 		case k_int:
 		case k_float:

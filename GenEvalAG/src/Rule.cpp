@@ -21,7 +21,7 @@ namespace genevalmag
 /**
   * Constructor empty of rule.
   */
-Rule::Rule ()
+Rule::Rule()
 {
 	#ifdef _DEBUG
 		rules++;
@@ -31,9 +31,9 @@ Rule::Rule ()
 /**
   * Constructor copy of rule.
   */
-Rule::Rule (Rule const & other)
+Rule::Rule(Rule const & other)
 {
-	copy (other);
+	copy(other);
 
 	#ifdef _DEBUG
 		rules++;
@@ -43,26 +43,26 @@ Rule::Rule (Rule const & other)
 /**
   * Destructor of rule.
   */
-Rule::~Rule ()
+Rule::~Rule()
 {
-	destroy ();
+	destroy();
 
 	#ifdef _DEBUG
 		rules--;
-		if (rules == 0)
+		if(rules == 0)
 			cout << rules << " -> Rules" << endl;
 	#endif
 }
 
 /**
-  * Operator assign (=) of rule.
+  * Operator assign(=) of rule.
   */
-Rule& Rule::operator= (Rule const& other)
+Rule& Rule::operator=(Rule const& other)
 {
-	if (this != &other)
+	if(this != &other)
 	{
-		destroy ();
-		copy (other);
+		destroy();
+		copy(other);
 	}
 	return *this;
 }
@@ -70,24 +70,24 @@ Rule& Rule::operator= (Rule const& other)
 /**
   * Method of copy the rule, STL-like C++.
   */
-void Rule::copy (Rule const& other)
+void Rule::copy(Rule const& other)
 {
-	r_left_symbol	= other.get_left_symbol ();
-	r_right_side	= other.get_right_side ();
-	r_eqs			= other.get_eqs ();
+	r_left_symbol	= other.get_left_symbol();
+	r_right_side	= other.get_right_side();
+	r_eqs			= other.get_eqs();
 }
 
 /**
   * Method destroy rule, STL-like C++.
   */
-void Rule::destroy ()
+void Rule::destroy()
 {
 }
 
 /**
   * Return the left symbol of the rule.
   */
-Symbol* Rule::get_left_symbol () const
+Symbol* Rule::get_left_symbol() const
 {
 	return r_left_symbol;
 }
@@ -95,7 +95,7 @@ Symbol* Rule::get_left_symbol () const
 /**
   * Return the right side of the rule.
   */
-vector<Symbol*> Rule::get_right_side () const
+vector<Symbol*> Rule::get_right_side() const
 {
 	return r_right_side;
 }
@@ -103,7 +103,7 @@ vector<Symbol*> Rule::get_right_side () const
 /**
   * Return the equations of the rule.
   */
-map<int,Equation> Rule::get_eqs () const
+map<int,Equation> Rule::get_eqs() const
 {
 	return r_eqs;
 }
@@ -111,15 +111,15 @@ map<int,Equation> Rule::get_eqs () const
 /**
   * Return the i-equation of the rule.
   */
-Equation* Rule::get_eq (int index)
+Equation* Rule::get_eq(int index)
 {
-	return &(r_eqs.find (index)->second);
+	return &(r_eqs.find(index)->second);
 }
 
 /**
   * Set the left symbol of the rule.
   */
-void Rule::set_left_symbol (Symbol* left_symb)
+void Rule::set_left_symbol(Symbol* left_symb)
 {
 	r_left_symbol = left_symb;
 }
@@ -127,19 +127,19 @@ void Rule::set_left_symbol (Symbol* left_symb)
 /**
   * Enqueue a symbol in the right side of the rule.
   */
-void Rule::add_right_symbol (Symbol* right_symb)
+void Rule::add_right_symbol(Symbol* right_symb)
 {
-	r_right_side.push_back (right_symb);
+	r_right_side.push_back(right_symb);
 }
 
 /**
   * Enqueue a equation in the list of the rule.
   */
-bool Rule::add_eq (const Equation& eq)
+bool Rule::add_eq(const Equation& eq)
 {
 	static int cant_eq = 0;
-	pair<int,Equation> new_eq (cant_eq++,eq);
-	pair<map<int, Equation>::iterator, bool > result = r_eqs.insert (new_eq);
+	pair<int,Equation> new_eq(cant_eq++,eq);
+	pair<map<int, Equation>::iterator, bool > result = r_eqs.insert(new_eq);
 	return result.second;
 }
 
@@ -150,18 +150,18 @@ bool Rule::add_eq (const Equation& eq)
   *
   * where <right_ride> is= <symbol_1> " " ... " " <symbol_n>
   */
-string Rule::to_string_not_eqs () const
+string Rule::to_string_not_eqs() const
 {
 	string rule;
-	rule.append (r_left_symbol->get_name ());
-	rule.append ("\t::=\t");
-	for (vector<Symbol>::size_type i = 0; i < r_right_side.size (); i++)
+	rule.append(r_left_symbol->get_name());
+	rule.append("\t::=\t");
+	for(vector<Symbol>::size_type i = 0; i < r_right_side.size(); i++)
 	{
-		rule.append (r_right_side[i]->get_name ());
-		if (i+1 < r_right_side.size ())
-			rule.append (" ");
+		rule.append(r_right_side[i]->get_name());
+		if(i+1 < r_right_side.size())
+			rule.append(" ");
 	}
-//	rule.append (";");
+//	rule.append(";");
 	return rule;
 }
 
@@ -177,18 +177,18 @@ string Rule::to_string_not_eqs () const
   *
   * where <right_ride> is= <symbol_1> " " ... " " <symbol_n>
   */
-string Rule::to_string () const
+string Rule::to_string() const
 {
-	string rule = to_string_not_eqs ();
-	if (!r_eqs.empty())
+	string rule = to_string_not_eqs();
+	if(!r_eqs.empty())
 	// if r_eqs is empty not show it the compute's block.
 	{
 		rule.append("\n\t\t\tcompute\n");
-		for (map<int,Equation>::const_iterator it = r_eqs.begin (); it != r_eqs.end (); it++)
+		for(map<int,Equation>::const_iterator it = r_eqs.begin(); it != r_eqs.end(); it++)
 		{
-			rule.append ("\t\t\t\t");
-			rule.append (it->second.to_string());
-			rule.append ("\n");
+			rule.append("\t\t\t\t");
+			rule.append(it->second.to_string());
+			rule.append("\n");
 		}
 		rule.append("\t\t\tend");
 	}
@@ -199,9 +199,9 @@ string Rule::to_string () const
 /**
   * Compares the rule with other.
   */
-bool Rule::equals (Rule const & other) const
+bool Rule::equals(Rule const & other) const
 {
-	return	key ().compare (other.key ()) == 0;
+	return	key().compare(other.key()) == 0;
 }
 
 /**
@@ -211,13 +211,13 @@ bool Rule::equals (Rule const & other) const
   *
   * where <right_ride> is= <symbol_1> ... <symbol_n>
   */
-string Rule::key () const
+string Rule::key() const
 {
 	string key;
-	key.append (r_left_symbol->get_name ());
-	for (vector<Symbol>::size_type i = 0; i < r_right_side.size (); i++)
+	key.append(r_left_symbol->get_name());
+	for(vector<Symbol>::size_type i = 0; i < r_right_side.size(); i++)
 	{
-		key.append (r_right_side[i]->get_name ());
+		key.append(r_right_side[i]->get_name());
 	}
 	return key;
 }

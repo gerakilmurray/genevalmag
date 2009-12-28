@@ -12,20 +12,21 @@
 #include "SemDomain.h"
 
 using namespace std;
+
 namespace genevalmag
 {
 
 /**
   * Contructor empty of semantic domain.
   */
-SemDomain::SemDomain ()
+SemDomain::SemDomain()
 {
 }
 
 /**
   * Destructor of the semantic domain.
   */
-SemDomain::~SemDomain ()
+SemDomain::~SemDomain()
 {
 }
 
@@ -35,10 +36,10 @@ SemDomain::~SemDomain ()
   * Return true if insert succesfully.
   * In other case, return false.
   */
-template <class T> bool add (T elem, map<string,T >& map_elem)
+template <class T> bool add(T elem, map<string,T >& map_elem)
 {
-	pair<string,T > new_p (elem.key (), elem);
-	pair<typename map<string,T >::iterator, bool > result = map_elem.insert (new_p);
+	pair<string,T > new_p(elem.key(), elem);
+	pair<typename map<string,T >::iterator, bool > result = map_elem.insert(new_p);
 	return result.second;
 }
 
@@ -47,14 +48,14 @@ template <class T> bool add (T elem, map<string,T >& map_elem)
   *
   * Return the string representation of all elements of the map.
   */
-template <class T> string to_string_map (map<string,T >& map_elem)
+template <class T> string to_string_map(map<string,T >& map_elem)
 {
 	string elem;
-	for (typename map<string,T >::iterator it = map_elem.begin (); it != map_elem.end (); it++)
+	for(typename map<string,T >::iterator it = map_elem.begin(); it != map_elem.end(); it++)
 	{
-		elem.append ("\t");
-		elem.append (it->second.to_string ());
-		elem.append ("\n");
+		elem.append("\t");
+		elem.append(it->second.to_string());
+		elem.append("\n");
 	}
 	return elem;
 }
@@ -62,46 +63,46 @@ template <class T> string to_string_map (map<string,T >& map_elem)
 /**
   * Enqueue a sort in the list of the semantic domain.
   */
-bool SemDomain::add_sort (Sort & sort)
+bool SemDomain::add_sort(Sort & sort)
 {
-	return add<Sort> (sort, sd_sort);
+	return add<Sort>(sort, sd_sort);
 }
 
 /**
   * Enqueue a operator in the list of the semantic domain.
   */
-bool SemDomain::add_operator (Function & oper)
+bool SemDomain::add_operator(Function & oper)
 {
 	oper.set_is_operator(IS_OPERATOR);
-	return add<Function> (oper, sd_func);
+	return add<Function>(oper, sd_func);
 }
 
 /**
   * Enqueue a function in the list of the semantic domain.
   */
-bool SemDomain::add_function (Function & func)
+bool SemDomain::add_function(Function & func)
 {
-	return add<Function> (func, sd_func);
+	return add<Function>(func, sd_func);
 }
 
 /**
   * Enqueue a attribute in the list of the semantic domain.
   */
-bool SemDomain::add_attribute (Attribute & attr)
+bool SemDomain::add_attribute(Attribute & attr)
 {
-	return add<Attribute> (attr, sd_attr);
+	return add<Attribute>(attr, sd_attr);
 }
 
 /**
   * Enqueue a symbol in the list of the semantic domain.
   */
-bool SemDomain::add_symbol (Symbol & symb)
+bool SemDomain::add_symbol(Symbol & symb)
 {
-	bool not_repeat = add <Symbol> (symb, sd_symb);
-	if (not_repeat && symb.is_non_terminal ())
+	bool not_repeat = add <Symbol>(symb, sd_symb);
+	if(not_repeat && symb.is_non_terminal())
 	{
-		map<string, Symbol>::iterator it = sd_symb.find (symb.key ());
-		load_attributes (it->second);
+		map<string, Symbol>::iterator it = sd_symb.find(symb.key());
+		load_attributes(it->second);
 	}
 	return not_repeat;
 }
@@ -109,45 +110,45 @@ bool SemDomain::add_symbol (Symbol & symb)
 /**
   * Enqueue a rule in the list of the semantic domain.
   */
-bool SemDomain::add_rule (Rule & rule)
+bool SemDomain::add_rule(Rule & rule)
 {
-	return add <Rule> (rule, sd_rule);
+	return add <Rule>(rule, sd_rule);
 }
 
 /**
   * Find in the list of sort of the semantic domain and return the sort with that name.
   */
-Sort& SemDomain::return_sort (string name_sort)
+Sort& SemDomain::return_sort(string name_sort)
 {
-	Sort sort_new (name_sort);
-	add_sort (sort_new);
+	Sort sort_new(name_sort);
+	add_sort(sort_new);
 
-	map<string,Sort>::iterator it = sd_sort.find (name_sort);
+	map<string,Sort>::iterator it = sd_sort.find(name_sort);
 	return it->second;
 }
 
 /**
   * Find in the list of symbol of the semantic domain and return the symbol with that name.
   */
-Function& SemDomain::get_operator (string name_oper)
+Function& SemDomain::get_operator(string name_oper)
 {
-	map<string,Function>::iterator it = sd_func.begin ();
+	map<string,Function>::iterator it = sd_func.begin();
 	return it->second;
 }
 /**
   * Find in the list of function of the semantic domain and return the function with that name.
   */
-Function& SemDomain::get_function (string name_function)
+Function& SemDomain::get_function(string name_function)
 {
-	map<string,Function>::iterator it = sd_func.find (name_function);
+	map<string,Function>::iterator it = sd_func.find(name_function);
 	return it->second;
 }
 /**
   * Find in the list of operator of the semantic domain and return the operator with that name.
   */
-Symbol& SemDomain::get_symbol (string name_symbol)
+Symbol& SemDomain::get_symbol(string name_symbol)
 {
-	map<string,Symbol>::iterator it = sd_symb.find (name_symbol);
+	map<string,Symbol>::iterator it = sd_symb.find(name_symbol);
 	return it->second;
 }
 
@@ -171,32 +172,32 @@ Symbol& SemDomain::get_symbol (string name_symbol)
   * where <sorts>, <operators>, <functions>, <attributes>, <symbols> and <rules>, are
   * full representation of each type.
   */
-string SemDomain::to_string ()
+string SemDomain::to_string()
 {
 	#ifdef _DEBUG
-//		map<string,Sort>::iterator		it1 = sd_sort.find ("int");
+//		map<string,Sort>::iterator		it1 = sd_sort.find("int");
 //		cout << it1->second.key()<< endl;
 //
-//		map<string,Attribute>::iterator	it2 = sd_attr.find ("valorintall");
-//		it2->second.set_name ("valores");
+//		map<string,Attribute>::iterator	it2 = sd_attr.find("valorintall");
+//		it2->second.set_name("valores");
 //
-//		map<string,Symbol>::iterator	it3 = sd_symb.find ("id");
-//		it3->second.set_name ("ident");
+//		map<string,Symbol>::iterator	it3 = sd_symb.find("id");
+//		it3->second.set_name("ident");
 	#endif
 
-	string semdomain ("\nsemantic domain\n");
-	semdomain.append (to_string_map <Sort     > (sd_sort));
-	semdomain.append ("\n");
-	semdomain.append (to_string_map <Function > (sd_func));
-	semdomain.append ("\nattributes\n");
-	semdomain.append (to_string_map <Attribute> (sd_attr));
-	semdomain.append ("\n/***********************************************************");
-	semdomain.append ("\nsymbols\n");
-	semdomain.append (to_string_map <Symbol   > (sd_symb));
-	semdomain.append ("***********************************************************/\n");
-	semdomain.append ("\nrules\n");
-	semdomain.append (to_string_map <Rule     > (sd_rule));
-	semdomain.append ("\n");
+	string semdomain("\nsemantic domain\n");
+	semdomain.append(to_string_map <Sort	 >(sd_sort));
+	semdomain.append("\n");
+	semdomain.append(to_string_map <Function >(sd_func));
+	semdomain.append("\nattributes\n");
+	semdomain.append(to_string_map <Attribute>(sd_attr));
+	semdomain.append("\n/***********************************************************");
+	semdomain.append("\nsymbols\n");
+	semdomain.append(to_string_map <Symbol   >(sd_symb));
+	semdomain.append("***********************************************************/\n");
+	semdomain.append("\nrules\n");
+	semdomain.append(to_string_map <Rule	 >(sd_rule));
+	semdomain.append("\n");
 	return semdomain;
 }
 
@@ -204,18 +205,18 @@ string SemDomain::to_string ()
   * Interpret the expression of sets and returns true
   * if the symbol belongs to that set.
   */
-bool belong (Symbol symb, string expr_attrs)
+bool belong(Symbol symb, string expr_attrs)
 {
 	typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
-	boost::char_separator<char> sep ("{},-");
-	tokenizer tokens (expr_attrs, sep);
-	tokenizer::iterator tok_iter = tokens.begin ();
+	boost::char_separator<char> sep("{},-");
+	tokenizer tokens(expr_attrs, sep);
+	tokenizer::iterator tok_iter = tokens.begin();
 
-	if ( (*tok_iter).compare ("all") == 0)
+	if((*tok_iter).compare("all") == 0)
 	{
-		for (tok_iter++; tok_iter != tokens.end (); tok_iter++)
+		for(tok_iter++; tok_iter != tokens.end(); tok_iter++)
 		{
-			if (symb.get_name ().compare (*tok_iter) == 0)
+			if(symb.get_name().compare(*tok_iter) == 0)
 			{
 				return false;
 			}
@@ -224,9 +225,9 @@ bool belong (Symbol symb, string expr_attrs)
 	}
 	else
 	{
-		for (; tok_iter != tokens.end (); tok_iter++)
+		for(; tok_iter != tokens.end(); tok_iter++)
 		{
-			if (symb.get_name ().compare (*tok_iter) == 0)
+			if(symb.get_name().compare(*tok_iter) == 0)
 			{
 				return true;
 			}
@@ -238,13 +239,13 @@ bool belong (Symbol symb, string expr_attrs)
 /**
   * Insert the attributes belong the symbol.
   */
-void SemDomain::load_attributes (Symbol & symb)
+void SemDomain::load_attributes(Symbol & symb)
 {
-	for (map<string,Attribute>::iterator it = sd_attr.begin (); it != sd_attr.end (); it++)
+	for(map<string,Attribute>::iterator it = sd_attr.begin(); it != sd_attr.end(); it++)
 	{
-		if (belong (symb, it->second.get_member_symbol ()))
+		if(belong(symb, it->second.get_member_symbol()))
 		{
-			symb.add_attr (& (it->second));
+			symb.add_attr(&(it->second));
 		}
 	}
 }
