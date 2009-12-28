@@ -6,10 +6,12 @@
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 #include <iostream>
+#include "../Sort.h"
 #include "Ast_literal.h"
 
 namespace genevalmag
 {
+
 #ifdef _DEBUG
 	// Numbers of literals current in the system.
 	static int ast_literals = 0;
@@ -33,12 +35,12 @@ Ast_literal::Ast_literal(Ast_literal const & other)
 
 Ast_literal::~Ast_literal()
 {
-	cout << "Destroy literal" << endl;
 	destroy ();
 
 	#ifdef _DEBUG
-		ast_functions--;
-		cout << "AST Literals: " << ast_literals << endl;
+		ast_literals--;
+		if (ast_literals == 0)
+			cout << ast_literals << " -> AST Literals" << endl;
 	#endif
 }
 

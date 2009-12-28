@@ -50,7 +50,8 @@ Attribute::~Attribute ()
 
 	#ifdef _DEBUG
 		attrs--;
-		cout << "Attributes: " << attrs << endl;
+		if (attrs == 0)
+			cout << attrs << " -> Attributes" << endl;
 	#endif
 
 }

@@ -21,6 +21,8 @@ using namespace std;
 namespace genevalmag
 {
 
+#define IS_OPERATOR true
+
 class SemDomain
 {
 private:

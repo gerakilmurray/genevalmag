@@ -66,7 +66,6 @@ Function * current_oper;
 void add_operator (char const* str, char const* end)
 {
 	sem_domain.add_operator (*current_oper);
-	// Call destruction before free memory.
 	delete (current_oper);
 	current_oper = NULL;
 }
@@ -123,7 +122,6 @@ Function * current_func;
 void add_function (char const* str, char const* end)
 {
 	sem_domain.add_function (*current_func);
-	// Call destruction before free memory.
 	delete (current_func);
 	current_func = NULL;
 }
@@ -245,7 +243,6 @@ Rule * current_rule;
 void save_rule (char const* str, char const* end)
 {
 	sem_domain.add_rule (*current_rule);
-	// Call destruction before free memory.
 	delete (current_rule);
 }
 
@@ -275,12 +272,12 @@ void abbreviated_rule (char const* str, char const* end)
 /**
   * Pointer to the last instance of attribute to parse successfully.
   */
-Ast_instance*	current_instance = NULL;
-Ast_literal*	current_literal = NULL;
-Ast_function*   current_koperation = NULL;
-Ast_function*   current_kfunction = NULL;
+Ast_instance*	current_instance;
+Ast_literal*	current_literal;
+Ast_function*   current_koperation;
+Ast_function*   current_kfunction;
 
-Equation*		current_eq = NULL;
+Equation*		current_eq;
 tree<Ast_node*>	current_tree;
 
 void inic_tree(char const chr)
@@ -387,6 +384,7 @@ void save_operator (char const* str, char const* end)
 {
 	current_oper = new Function();
 	save_name_op(str, end);
+	current_oper->set_is_operator(IS_OPERATOR);
 }
 
 void save_function (char const* str, char const* end)
@@ -421,15 +419,16 @@ void save_func_node(char const* str, char const* end)
 void save_lvalue (char const* str, char const* end)
 {
 	current_eq = new Equation();
-	current_eq->set_l_value(current_instance);
+	current_eq->set_l_value(*current_instance);
+	delete(current_instance);
 	current_instance = NULL;
 }
 
 void save_rvalue (char const* str, char const* end)
 {
 	current_eq->set_r_value(current_tree);
-	current_rule->add_eq(current_eq);
-
+	current_rule->add_eq(*current_eq);
+	delete(current_eq);
 	current_tree.clear();
 	current_eq = NULL;
 }
@@ -711,7 +710,7 @@ bool parse_grammar (char const* txt_input)
 	parse_info<> info =  parse(txt_input, attribute_grammar, skip_p);
 
 	#ifdef _DEBUG
-		//cout << "STOP: " << info.stop << "fin-STOP" << endl;
+		cout << "STOP: " << info.stop << "fin-STOP" << endl;
 	#endif
 	return info.full;
 }

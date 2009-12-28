@@ -19,9 +19,9 @@ namespace genevalmag
 
 Ast_instance::Ast_instance()
 {
-#ifdef _DEBUG
-	ast_instances++;
-#endif
+	#ifdef _DEBUG
+		ast_instances++;
+	#endif
 }
 
 Ast_instance::Ast_instance(Ast_instance const & other)
@@ -35,12 +35,12 @@ Ast_instance::Ast_instance(Ast_instance const & other)
 
 Ast_instance::~Ast_instance()
 {
-	cout << "Destroy Instance" << endl;
 	destroy ();
 
 	#ifdef _DEBUG
 		ast_instances--;
-		cout << "AST Instances: " << ast_instances << endl;
+		if (ast_instances == 0)
+			cout << ast_instances << " -> AST Instances" << endl;
 	#endif
 }
 

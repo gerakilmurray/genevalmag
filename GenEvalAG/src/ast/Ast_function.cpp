@@ -8,7 +8,6 @@
 #include <iostream>
 #include "Ast_function.h"
 
-
 namespace genevalmag
 {
 #ifdef _DEBUG
@@ -32,15 +31,14 @@ Ast_function::Ast_function(Ast_function const & other)
 	#endif
 }
 
-
 Ast_function::~Ast_function()
 {
-	cout << "Destroy Function node" << endl;
 	destroy ();
 
 	#ifdef _DEBUG
 		ast_functions--;
-		cout << "AST Functions: " << ast_functions << endl;
+		if (ast_functions == 0)
+			cout << ast_functions <<" -> AST Functions" <<  endl;
 	#endif
 }
 
@@ -78,7 +76,10 @@ void Ast_function::set_function(Function* function)
 
 string Ast_function::to_string() const
 {
-	return func->get_name();
+	if (func->is_operator())
+		return func->get_name();
+	else
+		return func->get_name().append("(");
 }
 
 } // end genevalmag

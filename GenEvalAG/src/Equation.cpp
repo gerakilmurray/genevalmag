@@ -6,7 +6,6 @@
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-
 #include <sstream>
 #include <iostream>
 
@@ -26,9 +25,11 @@ namespace genevalmag
   */
 Equation::Equation ()
 {
+	// Initialize the counter.
+	count_ref = new unsigned int(1);
+
 	#ifdef _DEBUG
 		eqs++;
-		cout << "new Equations: " << eqs << endl;
 	#endif
 }
 
@@ -41,7 +42,6 @@ Equation::Equation (Equation const & other)
 
 	#ifdef _DEBUG
 		eqs++;
-		cout << "copy Equations: " << eqs << endl;
 	#endif
 }
 
@@ -50,14 +50,21 @@ Equation::Equation (Equation const & other)
   */
 Equation::~Equation ()
 {
-	destroy ();
+	// Decrement the counter.
+	(*count_ref)--;
 
-	delete (l_value);
+	destroy ();
 
 	#ifdef _DEBUG
 		eqs--;
-		cout << "Equations: " << eqs << endl;
+		if (eqs == 0)
+			cout << eqs << " -> Equations" << endl;
 	#endif
+}
+
+unsigned int* Equation::_get_count_ref() const
+{
+	return count_ref;
 }
 
 /**
@@ -67,6 +74,10 @@ void Equation::copy (Equation const & other)
 {
 	l_value = other.get_l_value();
 	r_value = other.get_r_value();
+	count_ref = other._get_count_ref();
+
+	// Increment the counter.
+	(*count_ref)++;
 }
 
 /**
@@ -87,15 +98,31 @@ Equation& Equation::operator= (Equation const & other)
   */
 void Equation::destroy ()
 {
-// ANALIZAR ACA, PERO CREO QUE NO DEBERIAMOS HACER NADA PORQUE LOS PUNTEROS SE DESTRUYEN SOLOS Y LA MEMORIA
-// APUNTADA NO SE DEBE BORRAR YA QUE ES PROPIEDAD DE LOS MAP.
-}
+	// Check if is the last reference.
+	if (*count_ref == 0)
+	{
+		// Free all memory of the equation.
+		delete(count_ref);
 
+		tree<Ast_node*>::pre_order_iterator it	= r_value.begin();
+		tree<Ast_node*>::pre_order_iterator end	= r_value.end();
+		int rootdepth = r_value.depth(it);
+		delete(it.node->data);
+		while(it != end)
+		{
+			for(int i=0; i<r_value.depth(it)-rootdepth; ++i)
+			{
+				delete(*it);
+			}
+			it++;
+		}
+	}
+}
 
 /**
   * Return the l_value of the equation.
   */
-Ast_instance* Equation::get_l_value () const
+Ast_instance Equation::get_l_value () const
 {
 	return l_value;
 }
@@ -111,7 +138,7 @@ tree<Ast_node*> Equation::get_r_value () const
 /**
   * Set the left value of the equation.
   */
-void Equation::set_l_value(Ast_instance* lvalue)
+void Equation::set_l_value(const Ast_instance& lvalue)
 {
 	l_value = lvalue;
 }
@@ -136,8 +163,8 @@ string Equation::to_string () const
 	string eq;
 
 	// Save l_value.
-	eq.append (l_value->to_string());
-	eq.append ("\t::=\t");
+	eq.append (l_value.to_string());
+	eq.append ("\t=\t");
 
 	// save r_value.
 

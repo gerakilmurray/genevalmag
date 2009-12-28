@@ -72,7 +72,7 @@ bool SemDomain::add_sort (Sort & sort)
   */
 bool SemDomain::add_operator (Function & oper)
 {
-	oper.set_is_operator(true);
+	oper.set_is_operator(IS_OPERATOR);
 	return add<Function> (oper, sd_func);
 }
 

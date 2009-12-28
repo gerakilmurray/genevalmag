@@ -46,14 +46,11 @@ Rule::Rule (Rule const & other)
 Rule::~Rule ()
 {
 	destroy ();
-	for (map<int,Equation*>::const_iterator it = r_eqs.begin (); it != r_eqs.end (); it++)
-	{
-		delete(it->second);
-	}
 
 	#ifdef _DEBUG
 		rules--;
-		cout <<  "Rules: " << rules << endl;
+		if (rules == 0)
+			cout << rules << " -> Rules" << endl;
 	#endif
 }
 
@@ -75,7 +72,6 @@ Rule& Rule::operator= (Rule const& other)
   */
 void Rule::copy (Rule const& other)
 {
-	cout << "copie Eq" << endl;
 	r_left_symbol	= other.get_left_symbol ();
 	r_right_side	= other.get_right_side ();
 	r_eqs			= other.get_eqs ();
@@ -107,7 +103,7 @@ vector<Symbol*> Rule::get_right_side () const
 /**
   * Return the equations of the rule.
   */
-map<int,Equation*> Rule::get_eqs () const
+map<int,Equation> Rule::get_eqs () const
 {
 	return r_eqs;
 }
@@ -117,7 +113,7 @@ map<int,Equation*> Rule::get_eqs () const
   */
 Equation* Rule::get_eq (int index)
 {
-	return (r_eqs.find (index)->second);
+	return &(r_eqs.find (index)->second);
 }
 
 /**
@@ -139,11 +135,11 @@ void Rule::add_right_symbol (Symbol* right_symb)
 /**
   * Enqueue a equation in the list of the rule.
   */
-bool Rule::add_eq (Equation* eq)
+bool Rule::add_eq (const Equation& eq)
 {
 	static int cant_eq = 0;
-	pair<int,Equation*> new_eq (cant_eq++,eq);
-	pair<map<int, Equation*>::iterator, bool > result = r_eqs.insert (new_eq);
+	pair<int,Equation> new_eq (cant_eq++,eq);
+	pair<map<int, Equation>::iterator, bool > result = r_eqs.insert (new_eq);
 	return result.second;
 }
 
@@ -165,7 +161,7 @@ string Rule::to_string_not_eqs () const
 		if (i+1 < r_right_side.size ())
 			rule.append (" ");
 	}
-	rule.append (";");
+//	rule.append (";");
 	return rule;
 }
 
@@ -184,15 +180,19 @@ string Rule::to_string_not_eqs () const
 string Rule::to_string () const
 {
 	string rule = to_string_not_eqs ();
-	rule.append("\n\t\t\tcompute\n");
-	for (map<int,Equation*>::const_iterator it = r_eqs.begin (); it != r_eqs.end (); it++)
+	if (!r_eqs.empty())
+	// if r_eqs is empty not show it the compute's block.
 	{
-		rule.append ("\t\t\t\t");
-		rule.append (it->second->to_string());
-		rule.append ("\n");
+		rule.append("\n\t\t\tcompute\n");
+		for (map<int,Equation>::const_iterator it = r_eqs.begin (); it != r_eqs.end (); it++)
+		{
+			rule.append ("\t\t\t\t");
+			rule.append (it->second.to_string());
+			rule.append ("\n");
+		}
+		rule.append("\t\t\tend");
 	}
-	//rule.append("\n\t\t\t\t<eqssss>");
-	rule.append("\t\t\tend;\n");
+	rule.append(";\n");
 	return rule;
 }
 

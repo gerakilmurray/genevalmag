@@ -22,7 +22,7 @@ protected:
 	vector <Ast_node*> childs;
 
 public:
-	virtual ~Ast_inner_node(){cout << "Destroy Inner node" << endl;};
+	virtual ~Ast_inner_node(){};
 
 	vector<Ast_node*> get_childs() const
     {

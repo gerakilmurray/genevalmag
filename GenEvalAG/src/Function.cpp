@@ -55,7 +55,8 @@ Function::~Function ()
 
 	#ifdef _DEBUG
 		funtions--;
-		cout << "Funtions: " << funtions << endl;
+		if (funtions == 0)
+		cout << funtions << " -> Funtions" << endl;
 	#endif
 }
 

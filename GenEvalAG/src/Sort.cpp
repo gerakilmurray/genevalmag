@@ -65,7 +65,8 @@ Sort::~Sort ()
 
 	#ifdef _DEBUG
 		sorts--;
-		cout << "Sorts: " << sorts << endl;
+		if (sorts == 0)
+			cout << sorts << " -> Sorts" << endl;
 	#endif
 }
 

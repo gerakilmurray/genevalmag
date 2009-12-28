@@ -19,8 +19,14 @@ namespace genevalmag
 class Equation
 {
 	private:
-		Ast_instance*	l_value;
+		Ast_instance	l_value;
 		tree<Ast_node*>	r_value;
+
+		/**
+		  * Similar to a Smart Pointer to manage the release of the memory tree.
+		  * When this is 0, all memory is freed from the tree.
+		  */
+		unsigned int*	count_ref;
 
 		/**
 		  * Method of copy the equation, STL-like C++.
@@ -30,6 +36,11 @@ class Equation
 		  * Method destroy equation, STL-like C++.
 		  */
 		void destroy ();
+
+		/**
+		  * Return the count reference.
+		  */
+		unsigned int* _get_count_ref() const;
 
 	public:
 		/**
@@ -53,7 +64,7 @@ class Equation
 		/**
 		  * Return the l_value of the equation.
 		  */
-		Ast_instance* get_l_value () const;
+		Ast_instance get_l_value () const;
 		/**
 		  * Return the r_value of the equation.
 		  */
@@ -61,7 +72,7 @@ class Equation
 		/**
 		  * Set the left value of the equation.
 		  */
-		void set_l_value(Ast_instance* lvalue);
+		void set_l_value(const Ast_instance& lvalue);
 
 		/**
 		  * Set the rigth value of the equation: is a tree.

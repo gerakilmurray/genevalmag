@@ -61,7 +61,8 @@ Symbol::~Symbol ()
 	destroy ();
 	#ifdef _DEBUG
 		symbols--;
-		cout << "Symbols: " << symbols << endl;
+		if (symbols == 0)
+			cout << symbols << " -> Symbols" << endl;
 	#endif
 }
 

@@ -16,25 +16,14 @@ using namespace std;
 namespace genevalmag
 {
 
-/**
-  * Node's type.
-  */
-//enum node_type
-//{
-//	k_intance,
-//	k_function,
-//	k_literal
-//};
-
 class Ast_node
 {
 protected:
 	Ast_node* 	parent;
-//	node_type	type_node;
 	string		type_synthetized;
 
 public:
-	virtual ~Ast_node(){cout << "Destroy node" << endl;};
+	virtual ~Ast_node(){};
 
 	Ast_node* get_parent() const
     {
