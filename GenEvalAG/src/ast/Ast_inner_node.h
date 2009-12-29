@@ -36,7 +36,7 @@ public:
 
 	void add_child(Ast_node* new_child)
 	{
-		childs.push_back(new_child);
+		childs.insert(childs.begin(),new_child);
 	}
 
 	virtual string to_string() const = 0;

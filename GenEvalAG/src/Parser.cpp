@@ -27,7 +27,6 @@
 using namespace std;
 using namespace BOOST_SPIRIT_CLASSIC_NS;
 using namespace genevalmag;
-using namespace phoenix;
 
 #define PATH_INPUT_FILE "./src/grammar.txt"
 /**
@@ -56,7 +55,7 @@ void add_sort(char const* str, char const* end)
 }
 
 /**
-  * Methods and functions for parse Operator class.
+  * Methods and functions for parse Operator.
   */
 /**
   * Pointer that reference a new operator in the grammar.
@@ -112,7 +111,7 @@ void save_image_op(char const* str, char const* end)
 }
 
 /**
-  * Methods and functions for parse Function class.
+  * Methods and functions for parse Function.
   */
 /**
   * Pointer that reference a new function in the grammar.
@@ -278,33 +277,32 @@ Ast_function*   current_koperation;
 Ast_function*   current_kfunction;
 
 Equation*		current_eq;
-tree<Ast_node*>	current_tree;
+//Ast_node*		current_tree;
+
+/**** stack for expresion *******/
+vector<Ast_node*> 			stack_node;
+vector<Ast_inner_node*> 	stack_inner_node;
 
 void inic_tree(char const chr)
 {
-	current_literal = new Ast_literal();
+//	current_literal = new Ast_literal();
 	// falta current_node->set_type_synthetized()
-
-	current_literal->set_value("3");
-	current_literal->set_type(k_int);
-
-	current_tree.set_head(current_literal);
-	current_literal = NULL;
+//	current_literal->set_value("3");
+//	current_literal->set_type(k_int);
+//	current_tree.set_head(current_literal);
+//	current_literal = NULL;
 }
 
 void save_literal_node(char const* str, char const* end)
 {
-	// falta current_node->set_type_synthetized()
-
-	current_tree.insert(current_tree.begin().begin(),current_literal);
+	stack_node.push_back(current_literal);
 	current_literal = NULL;
 }
 
 void save_instance_node(char const* str, char const* end)
 {
-	// falta current_node->set_type_synthetized()
-
-	current_tree.insert(current_tree.begin().begin(),current_instance);
+	current_instance->set_type_synthetized(current_instance->get_attr()->get_sort_type()->get_name());
+	stack_node.push_back(current_instance);
 	current_instance = NULL;
 };
 
@@ -341,6 +339,7 @@ void save_lit_int(int const int_lit)
 		current_literal = new Ast_literal();
 	}
 	current_literal->set_type(k_int);
+	current_literal->set_type_synthetized("int");
 	stringstream literal_int;
 	literal_int << int_lit;
 	current_literal->set_value(literal_int.str());
@@ -353,6 +352,7 @@ void save_lit_flt(double const flt_lit)
 		current_literal = new Ast_literal();
 	}
 	current_literal->set_type(k_float);
+	current_literal->set_type_synthetized("float");
 	stringstream literal_float;
 	literal_float << flt_lit;
 	current_literal->set_value(literal_float.str());
@@ -364,8 +364,10 @@ void save_lit_ch(char const* ch, char const* end)
 	{
 		current_literal = new Ast_literal();
 	}
-	string ch_l(ch+1,end-1);// the pointer +1 and -1 for remove the double quotes.Ex: 'u' --> u.
+	// The pointer +1 and -1 for remove the single quotes. Ex: 'u' --> u.
+	string ch_l(ch+1,end-1);
 	current_literal->set_type(k_char);
+	current_literal->set_type_synthetized("char");
 	current_literal->set_value(ch_l);
 }
 
@@ -375,8 +377,10 @@ void save_lit_str(char const* str, char const* end)
 	{
 		current_literal = new Ast_literal();
 	}
-	string str_l(str+1, end-1); // the pointer +1 and -1 for remove the double quotes.Ex: "uno" --> uno.
+	// The pointer +1 and -1 for remove the double quotes. Ex: "uno" --> uno.
+	string str_l(str+1, end-1);
 	current_literal->set_type(k_string);
+	current_literal->set_type_synthetized("string");
 	current_literal->set_value(str_l);
 }
 
@@ -399,8 +403,7 @@ void save_oper_node(char const* str, char const* end)
 	current_oper = NULL;
 	// falta current_node->set_type_synthetized()
 
-	current_tree.insert(current_tree.begin().begin(),current_koperation);
-
+	stack_inner_node.push_back(current_koperation);
 	current_koperation = NULL;
 };
 
@@ -411,8 +414,7 @@ void save_func_node(char const* str, char const* end)
 	current_func = NULL;
 	// falta current_node->set_type_synthetized()
 
-	current_tree.insert(current_tree.begin().begin(),current_kfunction);
-
+	stack_inner_node.push_back(current_kfunction);
 	current_kfunction = NULL;
 };
 
@@ -426,11 +428,175 @@ void save_lvalue(char const* str, char const* end)
 
 void save_rvalue(char const* str, char const* end)
 {
-	current_eq->set_r_value(current_tree);
+	// CHECK QUE EL TIPO DEL L_VALUE SEA EL ESPERADO PARA EL R_VALUE.
+	if (current_eq->get_l_value().get_attr()->get_sort_type()->get_name().compare(stack_node.back()->get_type_synthetized()))
+	{
+		cerr << "Type no esperado para l_value." << endl;
+		exit(-1);
+	}
+	current_eq->set_r_value(stack_node.back());
 	current_rule->add_eq(*current_eq);
-	delete(current_eq);
-	current_tree.clear();
+//	delete(current_eq);
+//	current_tree.clear();
 	current_eq = NULL;
+}
+
+/**
+  * Section of AST creation.
+  */
+void create_root_infix_node(char const* str, char const* end)
+{
+	Ast_inner_node* root = stack_inner_node.back();
+	stack_inner_node.pop_back();
+
+	Ast_node *l_child, *r_child;
+	r_child = stack_node.back();
+	stack_node.pop_back();
+	l_child = stack_node.back();
+	stack_node.pop_back();
+
+	string key = "infix";
+	key.append(((Ast_function*)root)->get_function()->get_name());
+	key.append(l_child->get_type_synthetized());
+	key.append(r_child->get_type_synthetized());
+
+	Function * func = sem_domain.get_function(key);
+
+	if (func == NULL)
+	{
+		cerr << "Operador no existe" << key << endl;
+		exit(-1);
+	}
+
+	Function * old = ((Ast_function*)root)->get_function();
+	((Ast_function*)root)->set_function(func);
+	delete(old);
+
+	root->set_type_synthetized(((Ast_function*)root)->get_function()->get_image()->get_name());
+	l_child->set_parent(root);
+	r_child->set_parent(root);
+
+	root->add_child(r_child);
+	root->add_child(l_child);
+
+	stack_node.push_back(root);
+}
+
+void create_root_function_node(char const* str, char const* end)
+{
+	Ast_inner_node* root = stack_inner_node.back();
+	stack_inner_node.pop_back();
+
+	Ast_node * child;
+	string key;
+	unsigned int pos,i;
+	i = stack_node.size()-1;
+	while (i > 0)
+	{
+		child = stack_node[i];
+		if (child->get_type_synthetized().compare("#") == 0) {pos = i; break;delete(child);}
+		child->set_parent(root);
+		root->add_child(child);
+
+		key = child->get_type_synthetized().append(key);
+		i--;
+	}
+	key = ((Ast_function*)root)->get_function()->get_name().append(key);
+	stack_node.resize(pos);
+
+	Function * func = sem_domain.get_function(key);
+
+	if (func == NULL)
+	{
+		cerr << "Function no existe" << key << endl;
+		exit(-1);
+	}
+
+	Function * old = ((Ast_function*)root)->get_function();
+	((Ast_function*)root)->set_function(func);
+	delete(old);
+
+	root->set_type_synthetized(((Ast_function*)root)->get_function()->get_image()->get_name());
+
+	stack_node.push_back(root);
+
+}
+
+void create_root_postfix_node(char const* str, char const* end)
+{
+	Ast_inner_node* root = stack_inner_node.back();
+	stack_inner_node.pop_back();
+
+	Ast_node *child;
+	child = stack_node.back();
+	stack_node.pop_back();
+
+	string key = "postfix";
+	key.append(((Ast_function*)root)->get_function()->get_name());
+	key.append(child->get_type_synthetized());
+
+	Function * func = sem_domain.get_function(key);
+
+	if (func == NULL)
+	{
+		cerr << "Operador no existe" << key << endl;
+		exit(-1);
+	}
+
+	Function * old = ((Ast_function*)root)->get_function();
+	((Ast_function*)root)->set_function(func);
+	delete(old);
+
+	root->set_type_synthetized(((Ast_function*)root)->get_function()->get_image()->get_name());
+	child->set_parent(root);
+
+	root->add_child(child);
+
+	stack_node.push_back(root);
+}
+
+void create_root_prefix_node(char const* str, char const* end)
+{
+	while (!stack_inner_node.empty())
+	{
+		Ast_inner_node* root = stack_inner_node.back();
+		stack_inner_node.pop_back();
+
+		Ast_node *child;
+		child = stack_node.back();
+		stack_node.pop_back();
+
+		string key = "prefix";
+		key.append(((Ast_function*)root)->get_function()->get_name());
+		key.append(child->get_type_synthetized());
+
+		Function * func = sem_domain.get_function(key);
+
+		if (func == NULL)
+		{
+			cerr << "Operador no existe" << key << endl;
+			exit(-1);
+		}
+
+		Function * old = ((Ast_function*)root)->get_function();
+		((Ast_function*)root)->set_function(func);
+		delete(old);
+
+		root->set_type_synthetized(((Ast_function*)root)->get_function()->get_image()->get_name());
+		child->set_parent(root);
+
+		root->add_child(child);
+
+		stack_node.push_back(root);
+	}
+}
+
+void push_stack(char name)
+{
+	current_literal = new Ast_literal();
+	current_literal->set_type_synthetized("#"); // marca
+	stack_node.push_back(current_literal);
+	current_literal = NULL;
 }
 
 void pepito(char const* str, char const* end)
@@ -455,26 +621,21 @@ struct skip_parser: public grammar<skip_parser>
 				 | "/*" >> *(anychar_p - "*/") >> "*/"
 				 ;
 		}
-		rule<ScannerT> skip;
-		rule<ScannerT> const& start() const { return skip; }
-	};
-};
 
-/**
-  * Declaration struct for synthetize type expression.
-  * Use rule with context: "Closures".
-  * Reference: http://www.boost.org/doc/libs/1_33_1/libs/spirit/example/fundamental/phoenix_calc.cpp
-  */
-struct type_expression: BOOST_SPIRIT_CLASSIC_NS::closure<type_expression, string>
-{
-	member1 type;
+		rule<ScannerT> skip;
+
+		rule<ScannerT> const& start() const
+		{
+			return skip;
+		}
+	};
 };
 
 /**
   * Declaration of the Attribute Grammar structure
   * with the Spirit library of Boost.
   */
-struct attr_grammar: public grammar<attr_grammar,type_expression::context_t>
+struct attr_grammar: public grammar<attr_grammar>
 {
 	template <typename ScannerT>
 	struct definition
@@ -506,8 +667,13 @@ struct attr_grammar: public grammar<attr_grammar,type_expression::context_t>
 //						)
 //				;
 
-			r_reserved_word = strlit<>("compute") | strlit<>("COMPUTE") |
-							  strlit<>("all")	 | strlit<>("ALL");
+			r_reserved_word = strlit<>("compute") 	|
+							  strlit<>("all")	  	|
+							  strlit<>("int") 		|
+							  strlit<>("string") 	|
+							  strlit<>("float") 	|
+							  strlit<>("char")
+							  ;
 
 			/**
 			  * Declaration of Semantic Domain.
@@ -588,11 +754,7 @@ struct attr_grammar: public grammar<attr_grammar,type_expression::context_t>
 							  strlit<>("end")
 							 );
 
-			r_equation	  = r_left_symbol[&save_lvalue] >> ch_p('=')[&inic_tree] >> r_right_side[&save_rvalue] >> ';';
-
-			r_left_symbol = r_instance;
-
-			r_right_side  = r_expression;
+			r_equation	  = r_instance[&save_lvalue] >> '=' >> r_expression[&save_rvalue] >> ';';
 
 			/**
 			  * expression's Grammar non ambiguos based in
@@ -601,15 +763,15 @@ struct attr_grammar: public grammar<attr_grammar,type_expression::context_t>
 			  *		T = F *(<op_postfix>)
 			  *		F = +(<op_prefix>) E |(E) | function | literal | instance
 			  */
-			r_expression 		= r_expr_prime >> *(r_op_infix_st[&save_operator][&save_oper_node] >> r_expr_prime)
+			r_expression 		= r_expr_prime >> *(r_op_infix_st[&save_operator][&save_oper_node] >> r_expr_prime[&create_root_infix_node])
 								;
 
-			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st[&save_operator][&save_oper_node])
+			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st[&save_operator][&save_oper_node][&create_root_postfix_node])
 								;
 
-			r_expr_prime_prime  = +(r_op_prefix_st[&save_operator][&save_oper_node]) >> r_expression
-								| '('>> r_expression >>')'
-								| r_function
+			r_expr_prime_prime  = +(r_op_prefix_st[&save_operator][&save_oper_node]) >> r_expression[&create_root_prefix_node]
+								| ch_p('(')[&push_stack]>> r_expression >>')'
+								| r_function[&save_func_node][&create_root_function_node]
 								| r_literal[&save_literal_node]
 								| r_instance[&save_instance_node]
 								;
@@ -617,7 +779,7 @@ struct attr_grammar: public grammar<attr_grammar,type_expression::context_t>
 			/**
 			  * The functions accept a list of expressions.
 			  */
-			r_function			= r_function_st[&save_function][&save_func_node] >> '(' >>(r_expression % ',') >> ')';
+			r_function			= r_function_st[&save_function] >> ch_p('(')[&push_stack] >>(r_expression % ',') >> ')';
 
 			/**
 			  * Literals accepted: Integer and Float numbers, characters and string,
@@ -640,22 +802,33 @@ struct attr_grammar: public grammar<attr_grammar,type_expression::context_t>
 			/**
 			  * Declaration of Attribute Grammar.
 			  */
-			r_att_grammar = r_semantic_domain >> r_attributes >> r_rules >> end_p ;
+			r_att_grammar		= r_semantic_domain >> r_attributes >> r_rules >> end_p ;
 
 			/**
 			  * Parsers based in the symbol tables.
 			  */
-			r_sort_st		= st_sorts;
-			r_op_prefix_st	= st_op_prefix;
-			r_op_infix_st	= st_op_infix;
-			r_op_postfix_st	= st_op_postfix;
-			r_function_st	= st_functions;
-			r_attribute_st	= st_attributes;
-			r_symbol_st		= st_symbols;
+
+
+			r_sort_st		= st_sorts|"int"|"float"|"string"|"char";
+			r_op_prefix_st		= st_op_prefix;
+			r_op_infix_st		= st_op_infix;
+			r_op_postfix_st		= st_op_postfix;
+			r_function_st		= st_functions;
+			r_attribute_st		= st_attributes;
+			r_symbol_st			= st_symbols;
 		}
 		/**
 		  * Table of Symbols for the elements of an Attribute Grammar.
 		  */
+//		struct sort_basic : symbols <>
+//		{
+//			sort_basic()
+//			{
+//				add
+//					("int")
+//				;
+//			}
+//		}st_sorts;
 		symbols <> st_sorts;
 		symbols <> st_op_prefix;
 		symbols <> st_op_infix;
@@ -667,34 +840,44 @@ struct attr_grammar: public grammar<attr_grammar,type_expression::context_t>
 		/**
 		  * Variables using in parsing time.
 		  */
-		rule<ScannerT> r_reserved_word, r_ident, r_oper, r_char, r_string;
+		typedef rule<ScannerT> rule_exp;
 
-		rule<typename lexeme_scanner<ScannerT>::type> r_id_op; // rule in lexeme_d.
+		 // Rule in lexeme_d.
+		rule<typename lexeme_scanner<ScannerT>::type> r_id_op;
+
+		// Basic rules: characters, strings and identifiers.
+		rule_exp r_reserved_word, r_ident, r_oper, r_char, r_string;
 
 		// Semantic domain's rule: Sort, Operator and Function.
-		rule<ScannerT> r_semantic_domain, r_bloq_sem, r_decl_sort, r_decl_oper, r_decl_func,
-					   r_oper_assoc, r_oper_mode, r_oper_prefix, r_oper_infix, r_oper_postfix,
-					   r_dom_func;
+		rule_exp r_semantic_domain, r_bloq_sem, r_decl_sort, r_decl_oper, r_decl_func,
+				 r_oper_assoc, r_oper_mode, r_oper_prefix, r_oper_infix, r_oper_postfix,
+				 r_dom_func;
 
 		// Atribute's rule.
-		rule<ScannerT> r_attributes, r_decl_attr, r_type_attr, r_conj_symb;
+		rule_exp r_attributes, r_decl_attr, r_type_attr, r_conj_symb;
 
 		// Rule's rule.
-		rule<ScannerT> r_rules, r_decl_rule, r_equation, r_left_symbol, r_right_side, r_right_rule;
+		rule_exp r_rules, r_decl_rule, r_equation, r_right_rule;
 
 		// Expresion's rule: Compute. Add context for type expresion.
-//		typedef rule<ScannerT, type_expression::context_t> rule_exp;
-		typedef rule<ScannerT> rule_exp;
 		rule_exp r_expression,  r_expr_prime, r_expr_prime_prime, r_function, r_literal, r_instance;
 
-		// Main rule.
-		rule<ScannerT> r_att_grammar;
-
 		// Translate for symbol table.
-		rule<ScannerT> r_sort_st, r_op_prefix_st, r_op_infix_st, r_op_postfix_st,
-					   r_function_st, r_attribute_st, r_symbol_st;
+		rule_exp r_sort_st, r_op_prefix_st, r_op_infix_st, r_op_postfix_st,
+				 r_function_st, r_attribute_st, r_symbol_st, r_sort_stable;
 
-		rule<ScannerT> const& start() const { return r_att_grammar; }
+		// Main rule.
+		rule_exp r_att_grammar;
+
+		rule_exp const& start() const
+		{
+//			st_sorts.add("int");
+//			st_sorts.add("float");
+//			st_sorts.add("string");
+//			st_sorts.add("char");
+
+			return r_att_grammar;
+		}
 	};
 };
 
@@ -704,8 +887,8 @@ struct attr_grammar: public grammar<attr_grammar,type_expression::context_t>
   */
 bool parse_grammar(char const* txt_input)
 {
-	attr_grammar attribute_grammar;
-	skip_parser skip_p;
+	attr_grammar	attribute_grammar;
+	skip_parser		skip_p;
 
 	parse_info<> info =  parse(txt_input, attribute_grammar, skip_p);
 
@@ -721,17 +904,17 @@ bool parse_grammar(char const* txt_input)
   */
 void read_file_in(string & txt_output)
 {
-	FILE * p_file;
-	char buffer[MAX_INPUT_FILE];
+	FILE*	p_file;
+	char	buffer[MAX_INPUT_FILE];
 
-	p_file = fopen(PATH_INPUT_FILE , "r");
+	p_file = fopen(PATH_INPUT_FILE, "r");
 	if(p_file == NULL)
 		perror("Error opening file");
 	else
 	{
 		while(!feof(p_file))
 		{
-			  fgets(buffer , MAX_INPUT_LINE , p_file);
+			  fgets(buffer, MAX_INPUT_LINE, p_file);
 			  txt_output += buffer;
 		}
 		fclose(p_file);
@@ -754,7 +937,7 @@ int main()
 	}
 	else
 	{
-		cout << "Parsing failed\n";
+		cout << "Parsing FAILED\n";
 	}
 	cout << "-------------------------\n";
 	cout << "Bye... :-D" << endl;

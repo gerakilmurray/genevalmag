@@ -62,24 +62,6 @@ Equation::~Equation()
 	#endif
 }
 
-unsigned int* Equation::_get_count_ref() const
-{
-	return count_ref;
-}
-
-/**
-  * Method of copy the equation, STL-like C++.
-  */
-void Equation::copy(Equation const & other)
-{
-	l_value = other.get_l_value();
-	r_value = other.get_r_value();
-	count_ref = other._get_count_ref();
-
-	// Increment the counter.
-	(*count_ref)++;
-}
-
 /**
   * Operator assign(=) of Equation.
   */
@@ -94,6 +76,19 @@ Equation& Equation::operator=(Equation const & other)
 }
 
 /**
+  * Method of copy the equation, STL-like C++.
+  */
+void Equation::copy(Equation const & other)
+{
+	l_value		= other.get_l_value();
+	r_value		= other.get_r_value();
+	count_ref	= other._get_count_ref();
+
+	// Increment the counter.
+	(*count_ref)++;
+}
+
+/**
   * Method destroy equation, STL-like C++.
   */
 void Equation::destroy()
@@ -104,19 +99,16 @@ void Equation::destroy()
 		// Free all memory of the equation.
 		delete(count_ref);
 
-		tree<Ast_node*>::pre_order_iterator it	= r_value.begin();
-		tree<Ast_node*>::pre_order_iterator end	= r_value.end();
-		int rootdepth = r_value.depth(it);
-		delete(it.node->data);
-		while(it != end)
-		{
-			for(int i=0; i<r_value.depth(it)-rootdepth; ++i)
-			{
-				delete(*it);
-			}
-			it++;
-		}
+		//FALTA BORRAR EL NUEVO ARBOL!!
 	}
+}
+
+/**
+  * Return the count reference.
+  */
+unsigned int* Equation::_get_count_ref() const
+{
+	return count_ref;
 }
 
 /**
@@ -130,7 +122,7 @@ Ast_instance Equation::get_l_value() const
 /**
   * Return the r_value of the equation.
   */
-tree<Ast_node*> Equation::get_r_value() const
+Ast_node* Equation::get_r_value() const
 {
 	return r_value;
 }
@@ -146,7 +138,7 @@ void Equation::set_l_value(const Ast_instance& lvalue)
 /**
   * Set the left value of the equation.
   */
-void Equation::set_r_value(const tree<Ast_node*>& rvalue)
+void Equation::set_r_value(Ast_node* rvalue)
 {
 	r_value = rvalue;
 }
@@ -166,27 +158,9 @@ string Equation::to_string() const
 	eq.append(l_value.to_string());
 	eq.append("\t=\t");
 
-	// save r_value.
+	// FALTA MOSTRAR EL NUEVO ARBOL.
+	eq.append(r_value->to_string());
 
-	tree<Ast_node*>::pre_order_iterator it = r_value.end();
-	tree<Ast_node*>::pre_order_iterator begin = r_value.begin();
-
-	if(!r_value.is_valid(begin))
-	{
-		cerr << "todo mal" << endl;
-		return "todo mal";
-	}
-
-	int rootdepth = r_value.depth(it);
-
-	while(it != begin)
-	{
-		for(int i=0; i<r_value.depth(it)-rootdepth; ++i)
-		{
-			eq.append((*it)->to_string());
-		}
-		if(--it != begin) eq.append(" ");
-	}
 	eq.append(";");
 	return eq;
 }

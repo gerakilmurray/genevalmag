@@ -349,7 +349,9 @@ string Function::key() const
 	{
 		key.append(f_domain[i]->get_name());
 	}
-	key.append(f_image->get_name());
+
+	// ALERTA: HACE FALTA? A MISMO NOMBRE MODO Y ARIDA (DOMINIO), LA IMAGEN DISTINTA NO TE SOLUCIONA CUAL FUNCION USAR.
+	//key.append(f_image->get_name());
 	return key;
 }
 

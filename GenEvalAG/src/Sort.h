@@ -26,72 +26,75 @@ class Sort
 private:
 	string			s_name;
 	unsigned int	s_ins;
+	bool			s_type_basic;
 
 	/**
 	  * Method of copy the sort, STL-like C++.
 	  */
-	void copy(Sort const& other);
-	/**
+	void copy(const Sort & other);
+    /**
 	  * Method destroy sort, STL-like C++.
 	  */
-	void destroy();
-
+    void destroy();
 public:
-	/**
+    /**
 	  * Contructor empty of sort.
 	  */
-	Sort();
-	/**
+    Sort();
+    /**
 	  * Contructor with the name of the sort.
 	  */
-	Sort(string name);
-	/**
+    Sort(string name);
+    /**
 	  * Contructor copy of sort.
 	  */
-	Sort(Sort const & other);
-
-	/**
+    Sort(const Sort & other);
+    /**
 	  * Destructor of sort.
 	  */
-	virtual ~Sort();
-
-	/**
+    virtual ~Sort();
+    /**
 	  * Operator assign(=) of sort.
 	  */
-	Sort& operator=(Sort const & other);
-
-	/**
+    Sort & operator =(const Sort & other);
+    /**
 	  * Return the name of the sort.
 	  */
-	string get_name() const;
-	/**
+    string get_name() const;
+    /**
 	  * Return the instance of the sort.
 	  */
-	int get_ins() const;
-
-	/**
+    int get_ins() const;
+    /**
 	  * Set the name of the sort.
 	  */
-	void set_name(string name);
+    void set_name(string name);
+    /**
+      * Set if the sort is basic.
+      */
+    void set_type_basic(bool type_basic);
 
-	/**
+    /**
 	  * Generate and return a string reprensentation of a attribute.
 	  *
 	  * Result= "sort" <name> ["(" <instance> ")" IF DEBUG IS ON] ";"
 	  */
-	string to_string() const;
-
-	/**
+    string to_string() const;
+    /**
 	  * Compares the sort with other.
 	  */
-	bool equals(Sort const & other) const;
+    bool equals(const Sort & other) const;
+    /**
+      * Return if the sort is basic.
+      */
+    bool is_type_basic() const;
 
-	/**
+    /**
 	  * Generate and return the string key that identifies a sort definitely.
 	  *
 	  * Result= <name>
 	  */
-	string key() const;
+    string key() const;
 };
 
 } // end genevalmag

@@ -20,6 +20,8 @@ namespace genevalmag
 
 Ast_instance::Ast_instance()
 {
+	parent = NULL;
+
 	#ifdef _DEBUG
 		ast_instances++;
 	#endif

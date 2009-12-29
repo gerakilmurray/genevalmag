@@ -9,8 +9,6 @@
 #ifndef EQUATION_H_
 #define EQUATION_H_
 
-#include "tree/tree.hh"
-
 #include "ast/Ast_node.h"
 #include "ast/Ast_instance.h"
 
@@ -21,7 +19,7 @@ class Equation
 {
 	private:
 		Ast_instance	l_value;
-		tree<Ast_node*>	r_value;
+		Ast_node*		r_value;
 
 		/**
 		  * Similar to a Smart Pointer to manage the release of the memory tree.
@@ -48,7 +46,6 @@ class Equation
 		  * Constructor empty of equation.
 		  */
 		Equation();
-
 		/**
 		  * Contructor copy of Equation.
 		  */
@@ -58,10 +55,12 @@ class Equation
 		  * Destructor of equation.
 		  */
 		virtual ~Equation();
+
 		/**
 		  * Operator assign(=) of Equation.
 		  */
 		Equation& operator=(Equation const & other);
+
 		/**
 		  * Return the l_value of the equation.
 		  */
@@ -69,16 +68,17 @@ class Equation
 		/**
 		  * Return the r_value of the equation.
 		  */
-		tree<Ast_node*> get_r_value() const;
+		Ast_node* get_r_value() const;
+
 		/**
 		  * Set the left value of the equation.
 		  */
 		void set_l_value(const Ast_instance& lvalue);
-
 		/**
 		  * Set the rigth value of the equation: is a tree.
 		  */
-		void set_r_value(const tree<Ast_node*>& rvalue);
+		void set_r_value(Ast_node* rvalue);
+
 		/**
 		  * Generate and return a string reprensentation of a Equation.
 		  *

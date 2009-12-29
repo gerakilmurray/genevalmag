@@ -121,27 +121,22 @@ bool SemDomain::add_rule(Rule & rule)
 Sort& SemDomain::return_sort(string name_sort)
 {
 	Sort sort_new(name_sort);
+	// becouse is a type basic. if not the sort belong map. the map not have repeat.
+	sort_new.set_type_basic(true);
 	add_sort(sort_new);
 
 	map<string,Sort>::iterator it = sd_sort.find(name_sort);
 	return it->second;
 }
-
-/**
-  * Find in the list of symbol of the semantic domain and return the symbol with that name.
-  */
-Function& SemDomain::get_operator(string name_oper)
-{
-	map<string,Function>::iterator it = sd_func.begin();
-	return it->second;
-}
 /**
   * Find in the list of function of the semantic domain and return the function with that name.
   */
-Function& SemDomain::get_function(string name_function)
+Function* SemDomain::get_function(string key_function)
 {
-	map<string,Function>::iterator it = sd_func.find(name_function);
-	return it->second;
+	map<string,Function>::iterator it = sd_func.find(key_function);
+	if (it == sd_func.end())
+		return NULL;
+	return &(it->second);
 }
 /**
   * Find in the list of operator of the semantic domain and return the operator with that name.

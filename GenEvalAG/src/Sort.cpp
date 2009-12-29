@@ -36,8 +36,9 @@ Sort::Sort()
   */
 Sort::Sort(string name)
 {
-	s_ins	= 1;
-	s_name	= name;
+	s_ins			= 1;
+	s_name			= name;
+	s_type_basic 	= false;
 
 	#ifdef _DEBUG
 		sorts++;
@@ -88,9 +89,10 @@ Sort& Sort::operator=(Sort const & other)
   */
 void Sort::copy(Sort const & other)
 {
-	s_name	= other.get_name();
+	s_name			= other.get_name();
 	 // Increment the instance of sort.
-	s_ins	= other.get_ins() + 1;
+	s_ins			= other.get_ins() + 1;
+	s_type_basic	= other.is_type_basic();
 }
 
 /**
@@ -123,7 +125,13 @@ void Sort::set_name(string name)
 {
 	s_name = name;
 }
-
+/**
+  * Set if the sort is basic.
+  */
+void Sort::set_type_basic(bool type_basic)
+{
+    s_type_basic = type_basic;
+}
 /**
   * Generate and return a string reprensentation of a attribute.
   *
@@ -131,7 +139,12 @@ void Sort::set_name(string name)
   */
 string Sort::to_string() const
 {
-	string sort("sort\t\t");
+	string sort;
+	if (is_type_basic())
+	{
+		sort.append("// Type Basic: ");
+	}
+	sort.append("sort\t\t");
 	sort.append(s_name);
 
 	#ifdef _DEBUG
@@ -152,6 +165,14 @@ string Sort::to_string() const
 bool Sort::equals(Sort const & other) const
 {
 	return key().compare(other.key())==0;
+}
+
+/**
+  * Return if the sort is basic.
+  */
+bool Sort::is_type_basic() const
+{
+    return s_type_basic;
 }
 
 /**

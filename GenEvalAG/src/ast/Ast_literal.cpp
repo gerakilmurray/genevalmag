@@ -20,6 +20,8 @@ namespace genevalmag
 
 Ast_literal::Ast_literal()
 {
+	parent = NULL;
+
 	#ifdef _DEBUG
 		ast_literals++;
 	#endif

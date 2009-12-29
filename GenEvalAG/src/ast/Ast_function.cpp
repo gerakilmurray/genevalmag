@@ -18,9 +18,11 @@ namespace genevalmag
 
 Ast_function::Ast_function()
 {
-#ifdef _DEBUG
-	ast_functions++;
-#endif
+	parent = NULL;
+
+	#ifdef _DEBUG
+		ast_functions++;
+	#endif
 }
 
 Ast_function::Ast_function(Ast_function const & other)
@@ -78,9 +80,41 @@ void Ast_function::set_function(Function* function)
 string Ast_function::to_string() const
 {
 	if(func->is_operator())
-		return func->get_name();
-	else
-		return func->get_name().append("(");
+	{
+		string op;
+		switch(func->get_mode())
+		{
+			case k_infix:
+				op.append(childs[0]->to_string());
+				op.append(" ");
+				op.append(func->get_name());
+				op.append(" ");
+				op.append(childs[1]->to_string());
+				break;
+			case k_prefix:
+				op.append(func->get_name());
+				op.append("(");
+				op.append(childs[0]->to_string());
+				op.append(")");
+				break;
+			case k_postfix:
+				op.append("(");
+				op.append(childs[0]->to_string());
+				op.append(")");
+				op.append(func->get_name());
+				break;
+		}
+		return op;
+	}
+	string fun(func->get_name());
+	fun.append("(");
+	for (unsigned int i=0; i < childs.size() ;i++)
+	{
+		fun.append(childs[i]->to_string());
+		if (i < childs.size()-1) fun.append(", ");
+	}
+	fun.append(")");
+	return fun;
 }
 
 } // end genevalmag
