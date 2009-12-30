@@ -36,7 +36,7 @@ private:
 	/**
 	  * Insert the attributes belong the symbol.
 	  */
-	void load_attributes(Symbol & symb);
+	void load_attributes(Symbol &symb);
 
 public:
 	/**
@@ -52,40 +52,40 @@ public:
 	/**
 	  * Enqueue a sort in the list of the semantic domain.
 	  */
-	bool add_sort(Sort & sort);
+	bool add_sort(Sort &sort);
 	/**
 	  * Enqueue a operator in the list of the semantic domain.
 	  */
-	bool add_operator(Function & oper);
+	bool add_operator(Function &oper);
 	/**
 	  * Enqueue a function in the list of the semantic domain.
 	  */
-	bool add_function(Function & func);
+	bool add_function(Function &func);
 	/**
 	  * Enqueue a attribute in the list of the semantic domain.
 	  */
-	bool add_attribute(Attribute & attr);
+	bool add_attribute(Attribute &attr);
 	/**
 	  * Enqueue a symbol in the list of the semantic domain.
 	  */
-	bool add_symbol(Symbol & symb);
+	bool add_symbol(Symbol &symb);
 	/**
 	  * Enqueue a rule in the list of the semantic domain.
 	  */
-	bool add_rule(Rule & rule);
+	bool add_rule(Rule &rule);
 
 	/**
 	  * Find in the list of sort of the semantic domain and return the sort with that name.
 	  */
-	Sort& return_sort(string name_sort);
+	Sort &return_sort(string name_sort);
 	/**
 	  * Find in the list of function of the semantic domain and return the function with that name.
 	  */
-	Function* get_function(string name_function);
+	Function *get_function(string name_function);
 	/**
 	  * Find in the list of symbol of the semantic domain and return the symbol with that name.
 	  */
-	Symbol& get_symbol(string name_symbol);
+	Symbol &get_symbol(string name_symbol);
 
 	/**
 	  * Generate and return a string reprensentation of a semantic domain.

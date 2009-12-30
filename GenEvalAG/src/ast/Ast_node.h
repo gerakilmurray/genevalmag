@@ -11,6 +11,8 @@
 
 #include <string>
 
+#include "../Sort.h"
+
 using namespace std;
 
 namespace genevalmag
@@ -19,13 +21,13 @@ namespace genevalmag
 class Ast_node
 {
 protected:
-	Ast_node* 	parent;
+	Ast_node    *parent;
 	string		type_synthetized;
 
 public:
 	virtual ~Ast_node(){};
 
-	Ast_node* get_parent() const
+	Ast_node *get_parent() const
 	{
 		return parent;
 	}
@@ -35,7 +37,7 @@ public:
 		return type_synthetized;
 	}
 
-	void set_parent(Ast_node* new_parent)
+	void set_parent(Ast_node *new_parent)
 	{
 		parent = new_parent;
 	}

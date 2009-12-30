@@ -32,7 +32,7 @@ Attribute::Attribute()
 /**
   * Constructor copy of attribute.
   */
-Attribute::Attribute(const Attribute& other)
+Attribute::Attribute(const Attribute &other)
 {
 	copy(other);
 
@@ -59,7 +59,7 @@ Attribute::~Attribute()
 /**
   * Operator assign(=) of attribute.
   */
-Attribute& Attribute::operator=(Attribute const& other)
+Attribute &Attribute::operator=(Attribute const &other)
 {
 	if(this != &other)
 	{
@@ -72,7 +72,7 @@ Attribute& Attribute::operator=(Attribute const& other)
 /**
   * Method of copy the attribute, STL-like.
   */
-void Attribute::copy(Attribute const& other)
+void Attribute::copy(Attribute const &other)
 {
 	a_name			= other.get_name();
 	a_sort_type		= other.get_sort_type();
@@ -98,7 +98,7 @@ string Attribute::get_name() const
 /**
   * Return the sort type of the attribute.
   */
-Sort* Attribute::get_sort_type() const
+Sort *Attribute::get_sort_type() const
 {
 	return a_sort_type;
 }
@@ -130,7 +130,7 @@ void Attribute::set_name(string name)
 /**
   * Set the sort type of the attribute.
   */
-void Attribute::set_sort_type(Sort* sort_type)
+void Attribute::set_sort_type(Sort *sort_type)
 {
 	a_sort_type = sort_type;
 }
@@ -193,7 +193,7 @@ string Attribute::to_string() const
 /**
   * Compares the attribute with other.
   */
-bool Attribute::equals(Attribute const & other) const
+bool Attribute::equals(Attribute const &other) const
 {
 	return	key().compare(other.key()) == 0;
 }

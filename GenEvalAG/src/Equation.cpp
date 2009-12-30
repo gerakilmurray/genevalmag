@@ -36,7 +36,7 @@ Equation::Equation()
 /**
   * Contructor copy of Equation.
   */
-Equation::Equation(Equation const & other)
+Equation::Equation(Equation const &other)
 {
 	copy(other);
 
@@ -65,7 +65,7 @@ Equation::~Equation()
 /**
   * Operator assign(=) of Equation.
   */
-Equation& Equation::operator=(Equation const & other)
+Equation &Equation::operator=(Equation const &other)
 {
 	if(this != &other)
 	{
@@ -78,7 +78,7 @@ Equation& Equation::operator=(Equation const & other)
 /**
   * Method of copy the equation, STL-like C++.
   */
-void Equation::copy(Equation const & other)
+void Equation::copy(Equation const &other)
 {
 	l_value		= other.get_l_value();
 	r_value		= other.get_r_value();
@@ -99,14 +99,14 @@ void Equation::destroy()
 		// Free all memory of the equation.
 		delete(count_ref);
 
-		//FALTA BORRAR EL NUEVO ARBOL!!
+		delete(r_value);
 	}
 }
 
 /**
   * Return the count reference.
   */
-unsigned int* Equation::_get_count_ref() const
+unsigned int *Equation::_get_count_ref() const
 {
 	return count_ref;
 }
@@ -122,7 +122,7 @@ Ast_instance Equation::get_l_value() const
 /**
   * Return the r_value of the equation.
   */
-Ast_node* Equation::get_r_value() const
+Ast_node *Equation::get_r_value() const
 {
 	return r_value;
 }
@@ -130,7 +130,7 @@ Ast_node* Equation::get_r_value() const
 /**
   * Set the left value of the equation.
   */
-void Equation::set_l_value(const Ast_instance& lvalue)
+void Equation::set_l_value(const Ast_instance &lvalue)
 {
 	l_value = lvalue;
 }
@@ -138,7 +138,7 @@ void Equation::set_l_value(const Ast_instance& lvalue)
 /**
   * Set the left value of the equation.
   */
-void Equation::set_r_value(Ast_node* rvalue)
+void Equation::set_r_value(Ast_node *rvalue)
 {
 	r_value = rvalue;
 }

@@ -20,14 +20,14 @@ namespace genevalmag
 class Rule
 {
 	private:
-		Symbol*				r_left_symbol;
+		Symbol              *r_left_symbol;
 		vector <Symbol*>	r_right_side;
 		map <int,Equation>	r_eqs;
 
 		/**
 		  * Method of copy the rule, STL-like C++.
 		  */
-		void copy(Rule const & other);
+		void copy(Rule const &other);
 		/**
 		  * Method destroy rule, STL-like C++.
 		  */
@@ -50,7 +50,7 @@ class Rule
 		/**
 		  * Constructor copy of rule.
 		  */
-		Rule(Rule const & other);
+		Rule(Rule const &other);
 
 		/**
 		  * Destructor of rule.
@@ -60,12 +60,12 @@ class Rule
 		/**
 		  * Operator assign(=) of rule.
 		  */
-		Rule& operator=(Rule const & other);
+		Rule &operator=(Rule const &other);
 
 		/**
 		  * Return the left symbol of the rule.
 		  */
-		Symbol* get_left_symbol() const;
+		Symbol *get_left_symbol() const;
 		/**
 		  * Return the right side of the rule.
 		  */
@@ -77,21 +77,21 @@ class Rule
 		/**
 		  * Return the i-equation of the rule.
 		  */
-		Equation* get_eq(int index);
+		Equation *get_eq(int index);
 
 		/**
 		  * Set the left symbol of the rule.
 		  */
-		void set_left_symbol(Symbol* left_symb);
+		void set_left_symbol(Symbol *left_symb);
 
 		/**
 		  * Enqueue a symbol in the right side of the rule.
 		  */
-		void add_right_symbol(Symbol* rigth_symb);
+		void add_right_symbol(Symbol *rigth_symb);
 		/**
 		  * Enqueue a equation in the list of the rule.
 		  */
-		bool add_eq(const Equation& eq);
+		bool add_eq(const Equation &eq);
 
 		/**
 		  * Generate and return a string reprensentation of a rule.
@@ -110,7 +110,7 @@ class Rule
 		/**
 		  * Compares the rule with other.
 		  */
-		bool equals(Rule const & other) const;
+		bool equals(Rule const &other) const;
 
 		/**
 		  * Generate and return the string key that identifies a rule definitely.

@@ -55,7 +55,7 @@ private:
 	/**
 	  * Method of copy the function, STL-like C++.
 	  */
-	void copy(const Function& other);
+	void copy(const Function &other);
 	/**
 	  * Method destroy function, STL-like C++.
 	  */
@@ -68,7 +68,7 @@ public:
 	/**
 	  * Contructor copy of function.
 	  */
-	Function(Function const & other);
+	Function(Function const &other);
 
 	/**
 	  * Destructor of the function.
@@ -78,7 +78,7 @@ public:
 	/**
 	  * Operator assign(=) of function.
 	  */
-	Function& operator=(Function const & other);
+	Function &operator=(Function const &other);
 
 	/**
 	  * Return the name of the function.
@@ -91,7 +91,7 @@ public:
 	/**
 	  * Return the image of the function.
 	  */
-	Sort* get_image() const;
+	Sort *get_image() const;
 	/**
 	  * Return the name of the operator.
 	  */
@@ -120,7 +120,7 @@ public:
 	/**
 	  * Set the sort image of the function.
 	  */
-	void set_image(Sort* image);
+	void set_image(Sort *image);
 	/**
 	  * Set the mode of the operator.
 	  * @param mode: string
@@ -141,7 +141,7 @@ public:
 	/**
 	  * Enqueue a sort in the domain of the function.
 	  */
-	void add_domain(Sort* sort);
+	void add_domain(Sort *sort);
 
 	/**
 	  * Generate and return a string reprensentation of a function.
@@ -159,7 +159,7 @@ public:
 	/**
 	  * Compares the function with other.
 	  */
-	bool equals(Function const & other) const;
+	bool equals(Function const &other) const;
 
 	/**
 	  * Generate and return the string key that identifies a function definitely.

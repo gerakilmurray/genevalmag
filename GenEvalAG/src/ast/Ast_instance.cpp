@@ -27,7 +27,7 @@ Ast_instance::Ast_instance()
 	#endif
 }
 
-Ast_instance::Ast_instance(Ast_instance const & other)
+Ast_instance::Ast_instance(Ast_instance const &other)
 {
 	copy(other);
 
@@ -47,7 +47,7 @@ Ast_instance::~Ast_instance()
 	#endif
 }
 
-Ast_instance& Ast_instance::operator=(Ast_instance const & other)
+Ast_instance &Ast_instance::operator=(Ast_instance const &other)
 {
 	if(this != &other)
 	{
@@ -63,7 +63,7 @@ void Ast_instance::destroy()
 	i_attr = NULL;
 }
 
-void Ast_instance::copy(Ast_instance const & other)
+void Ast_instance::copy(Ast_instance const &other)
 {
 	i_symb				= other.get_symb();
 	i_num				= other.get_num();
@@ -72,7 +72,7 @@ void Ast_instance::copy(Ast_instance const & other)
 	type_synthetized	= other.get_type_synthetized();
 }
 
-Attribute* Ast_instance::get_attr() const
+Attribute *Ast_instance::get_attr() const
 {
 	return i_attr;
 }
@@ -82,12 +82,12 @@ int Ast_instance::get_num() const
 	return i_num;
 }
 
-Symbol* Ast_instance::get_symb() const
+Symbol *Ast_instance::get_symb() const
 {
 	return i_symb;
 }
 
-void Ast_instance::set_attr(Attribute* attr)
+void Ast_instance::set_attr(Attribute *attr)
 {
 	i_attr = attr;
 }
@@ -97,7 +97,7 @@ void Ast_instance::set_num(int num)
 	i_num = num;
 }
 
-void Ast_instance::set_symb(Symbol* symb)
+void Ast_instance::set_symb(Symbol *symb)
 {
 	i_symb = symb;
 }

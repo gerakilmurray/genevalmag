@@ -22,7 +22,13 @@ protected:
 	vector <Ast_node*> childs;
 
 public:
-	virtual ~Ast_inner_node(){};
+	virtual ~Ast_inner_node()
+	{
+		for (unsigned int i=0; i < childs.size() ;i++)
+		{
+			delete(childs[i]);
+		}
+	};
 
 	vector<Ast_node*> get_childs() const
 	{
@@ -34,7 +40,7 @@ public:
 		childs = new_childs;
 	}
 
-	void add_child(Ast_node* new_child)
+	void add_child(Ast_node *new_child)
 	{
 		childs.insert(childs.begin(),new_child);
 	}

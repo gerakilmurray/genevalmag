@@ -7,7 +7,6 @@
   */
   
 #include <iostream>
-#include "../Sort.h"
 #include "Ast_literal.h"
 
 namespace genevalmag
@@ -27,7 +26,7 @@ Ast_literal::Ast_literal()
 	#endif
 }
 
-Ast_literal::Ast_literal(Ast_literal const & other)
+Ast_literal::Ast_literal(Ast_literal const &other)
 {
 	copy(other);
 
@@ -47,7 +46,7 @@ Ast_literal::~Ast_literal()
 	#endif
 }
 
-Ast_literal& Ast_literal::operator=(Ast_literal const & other)
+Ast_literal &Ast_literal::operator=(Ast_literal const &other)
 {
 	if(this != &other)
 	{
@@ -57,7 +56,7 @@ Ast_literal& Ast_literal::operator=(Ast_literal const & other)
 	return *this;
 }
 
-void Ast_literal::copy(Ast_literal const & other)
+void Ast_literal::copy(Ast_literal const &other)
 {
 	value				= other.get_value();
 	type				= other.get_type();

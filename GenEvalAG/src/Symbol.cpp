@@ -44,7 +44,7 @@ Symbol::Symbol(string name, symbol_type type)
 /**
   * Constructor copy of symbol.
   */
-Symbol::Symbol(Symbol const & other)
+Symbol::Symbol(Symbol const &other)
 {
 	copy(other);
 
@@ -69,7 +69,7 @@ Symbol::~Symbol()
 /**
   * Operator assign(=) of symbol.
   */
-Symbol& Symbol::operator=(Symbol const & other)
+Symbol &Symbol::operator=(Symbol const &other)
 {
 	if(this != &other)
 	{
@@ -82,7 +82,7 @@ Symbol& Symbol::operator=(Symbol const & other)
 /**
   * Method of copy the symbol, STL-like C++.
   */
-void Symbol::copy(Symbol const & other)
+void Symbol::copy(Symbol const &other)
 {
 	symb_name	= other.get_name();
 	symb_type	= other.get_type();
@@ -124,7 +124,7 @@ vector<Attribute*> Symbol::get_attrs() const
   * Find in the list of attribute of the symbol and return the attribute with
   * that name passed as parameter.
   */
-Attribute* Symbol::get_attribute(string name_attr)
+Attribute *Symbol::get_attribute(string name_attr)
 {
 	for(vector<Attribute*>::size_type i = 0; i < symb_attrs.size(); i++)
 	{
@@ -153,7 +153,7 @@ void Symbol::set_type(symbol_type type)
 /**
   * Enqueue a attribute in the list of the symbol.
   */
-void Symbol::add_attr(Attribute* attr)
+void Symbol::add_attr(Attribute *attr)
 {
 	symb_attrs.push_back(attr);
 }
@@ -203,7 +203,7 @@ string Symbol::to_string() const
 /**
   * Compares the symbol with other.
   */
-bool Symbol::equals(Symbol const & other) const
+bool Symbol::equals(Symbol const &other) const
 {
 	return key().compare(other.key()) == 0;
 }

@@ -31,7 +31,7 @@ private:
 	/**
 	  * Method of copy the sort, STL-like C++.
 	  */
-	void copy(const Sort & other);
+	void copy(const Sort &other);
     /**
 	  * Method destroy sort, STL-like C++.
 	  */
@@ -48,7 +48,7 @@ public:
     /**
 	  * Contructor copy of sort.
 	  */
-    Sort(const Sort & other);
+    Sort(const Sort &other);
     /**
 	  * Destructor of sort.
 	  */
@@ -56,7 +56,7 @@ public:
     /**
 	  * Operator assign(=) of sort.
 	  */
-    Sort & operator =(const Sort & other);
+    Sort &operator =(const Sort &other);
     /**
 	  * Return the name of the sort.
 	  */
@@ -83,7 +83,7 @@ public:
     /**
 	  * Compares the sort with other.
 	  */
-    bool equals(const Sort & other) const;
+    bool equals(const Sort &other) const;
     /**
       * Return if the sort is basic.
       */

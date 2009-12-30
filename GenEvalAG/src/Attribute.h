@@ -34,7 +34,7 @@ private:
 	/**
 	  * Method of copy the attribute, STL-like C++.
 	  */
-	void copy(Attribute const& other);
+	void copy(Attribute const &other);
 	/**
 	  * Method destroy attribute, STL-like C++.
 	  */
@@ -48,7 +48,7 @@ public:
 	/**
 	  * Constructor copy of attribute.
 	  */
-	Attribute(Attribute const & other);
+	Attribute(Attribute const &other);
 
 	/**
 	  * Destructor of attribute.
@@ -58,7 +58,7 @@ public:
 	/**
 	  * Operator assign(=) of attribute.
 	  */
-	Attribute& operator=(Attribute const & other);
+	Attribute &operator=(Attribute const &other);
 
 	/**
 	  * Return the name of the attribute.
@@ -67,7 +67,7 @@ public:
 	/**
 	  * Return the sort type of the attribute.
 	  */
-	Sort* get_sort_type() const;
+	Sort *get_sort_type() const;
 	/**
 	  * Return the modifiers of the attribute.
 	  */
@@ -84,7 +84,7 @@ public:
 	/**
 	  * Set the sort type of the attribute.
 	  */
-	void set_sort_type(Sort* sort_type);
+	void set_sort_type(Sort *sort_type);
 	/**
 	  * Set the modifiers of the attribute.
 	  */
@@ -109,7 +109,7 @@ public:
 	/**
 	  * Compares the attribute with other.
 	  */
-	bool equals(Attribute const & other) const;
+	bool equals(Attribute const &other) const;
 
 	/**
 	  * Generate and return the string key that identifies a attribute definitely.

@@ -20,14 +20,14 @@ namespace genevalmag
 class Ast_instance: public Ast_leaf
 {
 private:
-	Symbol*		i_symb;
+	Symbol      *i_symb;
 	int			i_num;
-	Attribute*	i_attr;
+	Attribute   *i_attr;
 
 	/**
 	  * Method of copy the Ast_instance, STL-like C++.
 	  */
-	void copy(Ast_instance const& other);
+	void copy(Ast_instance const &other);
 	/**
 	  * Method destroy Ast_instance, STL-like C++.
 	  */
@@ -35,22 +35,22 @@ private:
 
 public:
 	Ast_instance();
-	Ast_instance(Ast_instance const& other);
+	Ast_instance(Ast_instance const &other);
 	virtual ~Ast_instance();
 
-	Ast_instance & operator =(const Ast_instance & other);
+	Ast_instance &operator =(const Ast_instance &other);
 
-	Attribute* get_attr() const;
+	Attribute *get_attr() const;
 
 	int get_num() const;
 
-	Symbol* get_symb() const;
+	Symbol *get_symb() const;
 
-	void set_attr(Attribute* attr);
+	void set_attr(Attribute *attr);
 
 	void set_num(int num);
 
-	void set_symb(Symbol* symb);
+	void set_symb(Symbol *symb);
 
 	string to_string() const;
 };

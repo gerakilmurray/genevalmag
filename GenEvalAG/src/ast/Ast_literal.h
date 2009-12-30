@@ -37,7 +37,7 @@ private:
 	/**
 	  * Method of copy the Ast_literal, STL-like C++.
 	  */
-	void copy(Ast_literal const& other);
+	void copy(Ast_literal const &other);
 	/**
 	  * Method destroy Ast_literal, STL-like C++.
 	  */
@@ -45,10 +45,10 @@ private:
 
 public:
 	Ast_literal();
-	Ast_literal(Ast_literal const & other);
+	Ast_literal(Ast_literal const &other);
 	virtual ~Ast_literal();
 
-	Ast_literal& operator=(Ast_literal const & other);
+	Ast_literal &operator=(Ast_literal const &other);
 
 	literal_type get_type() const;
 

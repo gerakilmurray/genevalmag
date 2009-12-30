@@ -48,7 +48,7 @@ Sort::Sort(string name)
 /**
   * Contructor copy of sort.
   */
-Sort::Sort(Sort const & other)
+Sort::Sort(Sort const &other)
 {
 	copy(other);
 
@@ -74,7 +74,7 @@ Sort::~Sort()
 /**
   * Operator assign(=) of sort.
   */
-Sort& Sort::operator=(Sort const & other)
+Sort &Sort::operator=(Sort const &other)
 {
 	if(this != &other)
 	{
@@ -87,7 +87,7 @@ Sort& Sort::operator=(Sort const & other)
 /**
   * Method of copy the sort, STL-like C++.
   */
-void Sort::copy(Sort const & other)
+void Sort::copy(Sort const &other)
 {
 	s_name			= other.get_name();
 	 // Increment the instance of sort.
@@ -142,7 +142,7 @@ string Sort::to_string() const
 	string sort;
 	if (is_type_basic())
 	{
-		sort.append("// Type Basic: ");
+		sort.append("//");
 	}
 	sort.append("sort\t\t");
 	sort.append(s_name);
@@ -156,13 +156,18 @@ string Sort::to_string() const
 	#endif
 
 	sort.append(";");
+
+	if (is_type_basic())
+	{
+		sort.append("\t-> Type Basic");
+	}
 	return sort;
 }
 
 /**
   * Compares the sort with other.
   */
-bool Sort::equals(Sort const & other) const
+bool Sort::equals(Sort const &other) const
 {
 	return key().compare(other.key())==0;
 }

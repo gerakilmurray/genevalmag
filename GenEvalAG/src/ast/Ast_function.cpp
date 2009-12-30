@@ -25,7 +25,7 @@ Ast_function::Ast_function()
 	#endif
 }
 
-Ast_function::Ast_function(Ast_function const & other)
+Ast_function::Ast_function(Ast_function const &other)
 {
 	copy(other);
 
@@ -41,11 +41,11 @@ Ast_function::~Ast_function()
 	#ifdef _DEBUG
 		ast_functions--;
 		if(ast_functions == 0)
-			cout << ast_functions <<" -> AST Functions" << endl;
+			cout << ast_functions << " -> AST Functions" << endl;
 	#endif
 }
 
-Ast_function& Ast_function::operator=(Ast_function const & other)
+Ast_function &Ast_function::operator=(Ast_function const &other)
 {
 	if(this != &other)
 	{
@@ -55,7 +55,7 @@ Ast_function& Ast_function::operator=(Ast_function const & other)
 	return *this;
 }
 
-void Ast_function::copy(Ast_function const & other)
+void Ast_function::copy(Ast_function const &other)
 {
 	func				= other.get_function();
 	childs				= other.get_childs();
@@ -67,12 +67,12 @@ void Ast_function::destroy()
 {
 }
 
-Function* Ast_function::get_function() const
+Function *Ast_function::get_function() const
 {
 	return func;
 }
 
-void Ast_function::set_function(Function* function)
+void Ast_function::set_function(Function *function)
 {
 	func = function;
 }
@@ -82,14 +82,17 @@ string Ast_function::to_string() const
 	if(func->is_operator())
 	{
 		string op;
+
 		switch(func->get_mode())
 		{
 			case k_infix:
+				op.append("(");
 				op.append(childs[0]->to_string());
 				op.append(" ");
 				op.append(func->get_name());
 				op.append(" ");
 				op.append(childs[1]->to_string());
+				op.append(")");
 				break;
 			case k_prefix:
 				op.append(func->get_name());

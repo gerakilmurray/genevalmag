@@ -36,7 +36,7 @@ class Symbol
 		/**
 		  * Method of copy the symbol, STL-like C++.
 		  */
-		void copy(Symbol const& other);
+		void copy(Symbol const &other);
 		/**
 		  * Method destroy symbol, STL-like C++.
 		  */
@@ -54,7 +54,7 @@ class Symbol
 		/**
 		  * Constructor copy of symbol.
 		  */
-		Symbol(Symbol const & other);
+		Symbol(Symbol const &other);
 
 		/**
 		  * Destructor of symbol.
@@ -64,7 +64,7 @@ class Symbol
 		/**
 		  * Operator assign(=) of symbol.
 		  */
-		Symbol& operator=(Symbol const & other);
+		Symbol &operator=(Symbol const &other);
 
 		/**
 		  * Return the name of the symbol.
@@ -82,7 +82,7 @@ class Symbol
 		  * Find in the list of attribute of the symbol and return the attribute with
 		  * that name passed as parameter.
 		  */
-		Attribute* get_attribute(string name_attr);
+		Attribute *get_attribute(string name_attr);
 		/**
 		  * Set the name of the symbol.
 		  */
@@ -95,7 +95,7 @@ class Symbol
 		/**
 		  * Enqueue a attribute in the list of the symbol.
 		  */
-		void add_attr(Attribute* attr);
+		void add_attr(Attribute *attr);
 
 		/**
 		  * Return true if the symbol's type is Non Terminal.
@@ -116,7 +116,7 @@ class Symbol
 		/**
 		  * Compares the symbol with other.
 		  */
-		bool equals(Symbol const & other) const;
+		bool equals(Symbol const &other) const;
 
 		/**
 		  * Generate and return the string key that identifies a symbol definitely.

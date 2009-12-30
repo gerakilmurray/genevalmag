@@ -37,7 +37,7 @@ Function::Function()
 /**
   * Contructor copy of function.
   */
-Function::Function(Function const & other)
+Function::Function(Function const &other)
 {
 	copy(other);
 
@@ -63,7 +63,7 @@ Function::~Function()
 /**
   * Operator assign(=) of function.
   */
-Function& Function::operator=(Function const & other)
+Function &Function::operator=(Function const &other)
 {
 	if(this != &other)
 	{
@@ -76,7 +76,7 @@ Function& Function::operator=(Function const & other)
 /**
   * Method of copy the function, STL-like C++.
   */
-void Function::copy(Function const & other)
+void Function::copy(Function const &other)
 {
 	f_name			= other.get_name();
 	f_domain		= other.get_domain();
@@ -113,7 +113,7 @@ vector<Sort*> Function::get_domain() const
 /**
   * Return the image of the function.
   */
-Sort* Function::get_image() const
+Sort *Function::get_image() const
 {
 	return f_image;
 }
@@ -168,7 +168,7 @@ void Function::set_domain(vector<Sort*> domain)
 /**
   * Set the sort image of the function.
   */
-void Function::set_image(Sort* image)
+void Function::set_image(Sort *image)
 {
 	f_image = image;
 }
@@ -224,7 +224,7 @@ void Function::set_is_operator(bool value)
 /**
   * Enqueue a sort in the domain of the function.
   */
-void Function::add_domain(Sort* sort)
+void Function::add_domain(Sort *sort)
 {
 	f_domain.push_back(sort);
 }
@@ -318,7 +318,7 @@ bool Function::is_operator() const
 /**
   * Compares the function with other.
   */
-bool Function::equals(Function const & other) const
+bool Function::equals(Function const &other) const
 {
 	return	key().compare(other.key()) == 0;
 }

@@ -31,7 +31,7 @@ Rule::Rule()
 /**
   * Constructor copy of rule.
   */
-Rule::Rule(Rule const & other)
+Rule::Rule(Rule const &other)
 {
 	copy(other);
 
@@ -57,7 +57,7 @@ Rule::~Rule()
 /**
   * Operator assign(=) of rule.
   */
-Rule& Rule::operator=(Rule const& other)
+Rule &Rule::operator=(Rule const &other)
 {
 	if(this != &other)
 	{
@@ -70,7 +70,7 @@ Rule& Rule::operator=(Rule const& other)
 /**
   * Method of copy the rule, STL-like C++.
   */
-void Rule::copy(Rule const& other)
+void Rule::copy(Rule const &other)
 {
 	r_left_symbol	= other.get_left_symbol();
 	r_right_side	= other.get_right_side();
@@ -82,12 +82,13 @@ void Rule::copy(Rule const& other)
   */
 void Rule::destroy()
 {
+
 }
 
 /**
   * Return the left symbol of the rule.
   */
-Symbol* Rule::get_left_symbol() const
+Symbol *Rule::get_left_symbol() const
 {
 	return r_left_symbol;
 }
@@ -111,7 +112,7 @@ map<int,Equation> Rule::get_eqs() const
 /**
   * Return the i-equation of the rule.
   */
-Equation* Rule::get_eq(int index)
+Equation *Rule::get_eq(int index)
 {
 	return &(r_eqs.find(index)->second);
 }
@@ -119,7 +120,7 @@ Equation* Rule::get_eq(int index)
 /**
   * Set the left symbol of the rule.
   */
-void Rule::set_left_symbol(Symbol* left_symb)
+void Rule::set_left_symbol(Symbol *left_symb)
 {
 	r_left_symbol = left_symb;
 }
@@ -127,7 +128,7 @@ void Rule::set_left_symbol(Symbol* left_symb)
 /**
   * Enqueue a symbol in the right side of the rule.
   */
-void Rule::add_right_symbol(Symbol* right_symb)
+void Rule::add_right_symbol(Symbol *right_symb)
 {
 	r_right_side.push_back(right_symb);
 }
@@ -135,7 +136,7 @@ void Rule::add_right_symbol(Symbol* right_symb)
 /**
   * Enqueue a equation in the list of the rule.
   */
-bool Rule::add_eq(const Equation& eq)
+bool Rule::add_eq(const Equation &eq)
 {
 	static int cant_eq = 0;
 	pair<int,Equation> new_eq(cant_eq++,eq);
@@ -199,7 +200,7 @@ string Rule::to_string() const
 /**
   * Compares the rule with other.
   */
-bool Rule::equals(Rule const & other) const
+bool Rule::equals(Rule const &other) const
 {
 	return	key().compare(other.key()) == 0;
 }

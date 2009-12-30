@@ -18,12 +18,12 @@ namespace genevalmag
 class Ast_function: public Ast_inner_node
 {
 private:
-	Function* func;
+	Function *func;
 
 	/**
 	  * Method of copy the Ast_function, STL-like C++.
 	  */
-	void copy(Ast_function const& other);
+	void copy(Ast_function const &other);
 	/**
 	  * Method destroy Ast_function, STL-like C++.
 	  */
@@ -31,10 +31,10 @@ private:
 
 public:
 	Ast_function();
-	Ast_function(Ast_function const & other);
+	Ast_function(Ast_function const &other);
 	virtual ~Ast_function();
 
-	Ast_function& operator=(Ast_function const & other);
+	Ast_function &operator=(Ast_function const &other);
 
 	Function *get_function() const;
 

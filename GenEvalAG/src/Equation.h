@@ -30,7 +30,7 @@ class Equation
 		/**
 		  * Method of copy the equation, STL-like C++.
 		  */
-		void copy(Equation const& other);
+		void copy(Equation const &other);
 		/**
 		  * Method destroy equation, STL-like C++.
 		  */
@@ -39,7 +39,7 @@ class Equation
 		/**
 		  * Return the count reference.
 		  */
-		unsigned int* _get_count_ref() const;
+		unsigned int *_get_count_ref() const;
 
 	public:
 		/**
@@ -49,7 +49,7 @@ class Equation
 		/**
 		  * Contructor copy of Equation.
 		  */
-		Equation(Equation const & other);
+		Equation(Equation const &other);
 
 		/**
 		  * Destructor of equation.
@@ -59,7 +59,7 @@ class Equation
 		/**
 		  * Operator assign(=) of Equation.
 		  */
-		Equation& operator=(Equation const & other);
+		Equation &operator=(Equation const &other);
 
 		/**
 		  * Return the l_value of the equation.
@@ -68,16 +68,16 @@ class Equation
 		/**
 		  * Return the r_value of the equation.
 		  */
-		Ast_node* get_r_value() const;
+		Ast_node *get_r_value() const;
 
 		/**
 		  * Set the left value of the equation.
 		  */
-		void set_l_value(const Ast_instance& lvalue);
+		void set_l_value(const Ast_instance &lvalue);
 		/**
 		  * Set the rigth value of the equation: is a tree.
 		  */
-		void set_r_value(Ast_node* rvalue);
+		void set_r_value(Ast_node *rvalue);
 
 		/**
 		  * Generate and return a string reprensentation of a Equation.

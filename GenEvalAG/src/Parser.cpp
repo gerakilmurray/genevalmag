@@ -47,7 +47,7 @@ SemDomain sem_domain;
 /**
   * Methods and functions for parse Sort class.
   */
-void add_sort(char const* str, char const* end)
+void add_sort(char const *str, char const *end)
 {
 	string  name(str, end);
 	Sort sort(name);
@@ -60,28 +60,28 @@ void add_sort(char const* str, char const* end)
 /**
   * Pointer that reference a new operator in the grammar.
   */
-Function * current_oper;
+Function  *current_oper;
 
-void add_operator(char const* str, char const* end)
+void add_operator(char const *str, char const *end)
 {
 	sem_domain.add_operator(*current_oper);
 	delete(current_oper);
 	current_oper = NULL;
 }
 
-void inic_operator(char const* str, char const* end)
+void inic_operator(char const *str, char const *end)
 {
 	// Ignore the string parsed.
 	current_oper = new Function();
 }
 
-void save_name_op(char const* str, char const* end)
+void save_name_op(char const *str, char const *end)
 {
 	string name(str, end);
 	current_oper->set_name(name);
 }
 
-void save_mode_op(char const* str, char const* end)
+void save_mode_op(char const *str, char const *end)
 {
 	string mode(str, end);
 	current_oper->set_mode(mode);
@@ -92,19 +92,19 @@ void save_prec_op(int const prec)
 	current_oper->set_prec(prec);
 }
 
-void save_assoc_op(char const* str, char const* end)
+void save_assoc_op(char const *str, char const *end)
 {
 	string assoc(str, end);
 	current_oper->set_oper_assoc(assoc);
 }
 
-void save_domain_op(char const* str, char const* end)
+void save_domain_op(char const *str, char const *end)
 {
 	string domain(str, end);
 	current_oper->add_domain(&(sem_domain.return_sort(domain)));
 }
 
-void save_image_op(char const* str, char const* end)
+void save_image_op(char const *str, char const *end)
 {
 	string image(str, end);
 	current_oper->set_image(&(sem_domain.return_sort(image)));
@@ -116,29 +116,29 @@ void save_image_op(char const* str, char const* end)
 /**
   * Pointer that reference a new function in the grammar.
   */
-Function * current_func;
+Function  *current_func;
 
-void add_function(char const* str, char const* end)
+void add_function(char const *str, char const *end)
 {
 	sem_domain.add_function(*current_func);
 	delete(current_func);
 	current_func = NULL;
 }
 
-void save_name_func(char const* str, char const* end)
+void save_name_func(char const *str, char const *end)
 {
 	current_func = new Function();
 	string name(str, end);
 	current_func->set_name(name);
 }
 
-void save_domain_func(char const* str, char const* end)
+void save_domain_func(char const *str, char const *end)
 {
 	string domain(str, end);
 	current_func->add_domain(&(sem_domain.return_sort(domain)));
 }
 
-void save_image_func(char const* str, char const* end)
+void save_image_func(char const *str, char const *end)
 {
 	string image(str, end);
 	current_func->set_image(&(sem_domain.return_sort(image)));
@@ -156,9 +156,9 @@ struct decl_attribute
 	string			d_sort_type;
 	type_attr		d_mod_type;
 	string			d_member_symbol;
-} * new_attrs;
+} *new_attrs;
 
-void add_attr(char const* str, char const* end)
+void add_attr(char const *str, char const *end)
 {
 	string name(str, end);
 	if(new_attrs == NULL)
@@ -177,27 +177,27 @@ void add_attr(char const* str, char const* end)
 	}
 }
 
-void save_sort_attr(char const* str, char const* end)
+void save_sort_attr(char const *str, char const *end)
 {
 	string sort(str, end);
 	new_attrs->d_sort_type = sort;
 }
 
-void save_type_attr(char const* str, char const* end)
+void save_type_attr(char const *str, char const *end)
 {
 	string mod_type(str, end);
 	if(mod_type.compare("inh") == 0)
 		new_attrs->d_mod_type = k_inherit;
 }
 
-void save_member_list(char const* str, char const* end)
+void save_member_list(char const *str, char const *end)
 {
 	string members(str, end);
 	boost::erase_all(members, " ");
 	new_attrs->d_member_symbol = members;
 }
 
-void save_decl_attrs(char const* str, char const* end)
+void save_decl_attrs(char const *str, char const *end)
 {
 	for(vector<string>::size_type i = 0; i < new_attrs->d_names.size(); i++)
 	{
@@ -216,14 +216,14 @@ void save_decl_attrs(char const* str, char const* end)
 /**
   * Methods and functions for parse Symbol class.
   */
-void save_non_terminal(char const* str, char const* end)
+void save_non_terminal(char const *str, char const *end)
 {
 	string name(str, end);
 	Symbol symb(name, k_non_terminal);
 	sem_domain.add_symbol(symb);
 }
 
-void save_terminal(char const* str, char const* end)
+void save_terminal(char const *str, char const *end)
 {
 	string name(str, end);
 	// The string is 'char'
@@ -237,28 +237,28 @@ void save_terminal(char const* str, char const* end)
 /**
   * Pointer that reference a current rule parsed in the grammar.
   */
-Rule * current_rule;
+Rule  *current_rule;
 
-void save_rule(char const* str, char const* end)
+void save_rule(char const *str, char const *end)
 {
 	sem_domain.add_rule(*current_rule);
 	delete(current_rule);
 }
 
-void add_left_symbol_rule(char const* str, char const* end)
+void add_left_symbol_rule(char const *str, char const *end)
 {
 	string left_side_symbol(str, end);
 	current_rule = new Rule();
 	current_rule->set_left_symbol(&(sem_domain.get_symbol(left_side_symbol)));
 }
 
-void add_right_side_rule(char const* str, char const* end)
+void add_right_side_rule(char const *str, char const *end)
 {
 	string right_side_symbol(str, end);
 	current_rule->add_right_symbol(&(sem_domain.get_symbol(right_side_symbol)));
 }
 
-void abbreviated_rule(char const* str, char const* end)
+void abbreviated_rule(char const *str, char const *end)
 {
 	current_rule = new Rule();
 	current_rule->set_left_symbol(current_rule->get_left_symbol());
@@ -271,42 +271,31 @@ void abbreviated_rule(char const* str, char const* end)
 /**
   * Pointer to the last instance of attribute to parse successfully.
   */
-Ast_instance*	current_instance;
-Ast_literal*	current_literal;
-Ast_function*   current_koperation;
-Ast_function*   current_kfunction;
+Ast_instance    *current_instance;
+Ast_literal     *current_literal;
+Ast_function    *current_koperation;
+Ast_function    *current_kfunction;
 
-Equation*		current_eq;
-//Ast_node*		current_tree;
+Equation        *current_eq;
 
-/**** stack for expresion *******/
+/****** Stack for expresion *******/
 vector<Ast_node*> 			stack_node;
 vector<Ast_inner_node*> 	stack_inner_node;
 
-void inic_tree(char const chr)
-{
-//	current_literal = new Ast_literal();
-	// falta current_node->set_type_synthetized()
-//	current_literal->set_value("3");
-//	current_literal->set_type(k_int);
-//	current_tree.set_head(current_literal);
-//	current_literal = NULL;
-}
-
-void save_literal_node(char const* str, char const* end)
+void save_literal_node(char const *str, char const *end)
 {
 	stack_node.push_back(current_literal);
 	current_literal = NULL;
 }
 
-void save_instance_node(char const* str, char const* end)
+void save_instance_node(char const *str, char const *end)
 {
 	current_instance->set_type_synthetized(current_instance->get_attr()->get_sort_type()->get_name());
 	stack_node.push_back(current_instance);
 	current_instance = NULL;
 };
 
-void save_symb_ins(char const* str, char const* end)
+void save_symb_ins(char const *str, char const *end)
 {
 	string symb(str, end);
 	if(current_instance == NULL)
@@ -321,7 +310,7 @@ void save_index_ins(int const index)
 	current_instance->set_num(index);
 }
 
-void save_attr_ins(char const* str, char const* end)
+void save_attr_ins(char const *str, char const *end)
 {
 	string attr(str, end);
 	current_instance->set_attr(current_instance->get_symb()->get_attribute(attr));
@@ -358,7 +347,7 @@ void save_lit_flt(double const flt_lit)
 	current_literal->set_value(literal_float.str());
 }
 
-void save_lit_ch(char const* ch, char const* end)
+void save_lit_ch(char const *ch, char const *end)
 {
 	if(current_literal == NULL)
 	{
@@ -371,7 +360,7 @@ void save_lit_ch(char const* ch, char const* end)
 	current_literal->set_value(ch_l);
 }
 
-void save_lit_str(char const* str, char const* end)
+void save_lit_str(char const *str, char const *end)
 {
 	if(current_literal == NULL)
 	{
@@ -384,41 +373,39 @@ void save_lit_str(char const* str, char const* end)
 	current_literal->set_value(str_l);
 }
 
-void save_operator(char const* str, char const* end)
+void save_operator(char const *str, char const *end)
 {
 	current_oper = new Function();
 	save_name_op(str, end);
 	current_oper->set_is_operator(IS_OPERATOR);
 }
 
-void save_function(char const* str, char const* end)
+void save_function(char const *str, char const *end)
 {
 	save_name_func(str, end);
 }
 
-void save_oper_node(char const* str, char const* end)
+void save_oper_node(char const *str, char const *end)
 {
 	current_koperation = new Ast_function();
 	current_koperation->set_function(current_oper);
 	current_oper = NULL;
-	// falta current_node->set_type_synthetized()
 
 	stack_inner_node.push_back(current_koperation);
 	current_koperation = NULL;
 };
 
-void save_func_node(char const* str, char const* end)
+void save_func_node(char const *str, char const *end)
 {
 	current_kfunction = new Ast_function();
 	current_kfunction->set_function(current_func);
 	current_func = NULL;
-	// falta current_node->set_type_synthetized()
 
 	stack_inner_node.push_back(current_kfunction);
 	current_kfunction = NULL;
 };
 
-void save_lvalue(char const* str, char const* end)
+void save_lvalue(char const *str, char const *end)
 {
 	current_eq = new Equation();
 	current_eq->set_l_value(*current_instance);
@@ -426,7 +413,7 @@ void save_lvalue(char const* str, char const* end)
 	current_instance = NULL;
 }
 
-void save_rvalue(char const* str, char const* end)
+void save_rvalue(char const *str, char const *end)
 {
 	// CHECK QUE EL TIPO DEL L_VALUE SEA EL ESPERADO PARA EL R_VALUE.
 	if (current_eq->get_l_value().get_attr()->get_sort_type()->get_name().compare(stack_node.back()->get_type_synthetized()))
@@ -435,40 +422,65 @@ void save_rvalue(char const* str, char const* end)
 		exit(-1);
 	}
 	current_eq->set_r_value(stack_node.back());
+	//Limpieza del resultado y la basura.
+	stack_node.pop_back();
+	while(!stack_node.empty())
+	{
+		Ast_literal* aux = (Ast_literal*)stack_node.back();
+		stack_node.pop_back();
+		delete(aux);
+	}
 	current_rule->add_eq(*current_eq);
-//	delete(current_eq);
-//	current_tree.clear();
+	delete(current_eq);
 	current_eq = NULL;
 }
 
 /**
   * Section of AST creation.
   */
-void create_root_infix_node(char const* str, char const* end)
+void create_root_infix_node(char const *str, char const *end)
 {
-	Ast_inner_node* root = stack_inner_node.back();
+	Ast_inner_node *root = stack_inner_node.back();
 	stack_inner_node.pop_back();
 
 	Ast_node *l_child, *r_child;
-	r_child = stack_node.back();
-	stack_node.pop_back();
-	l_child = stack_node.back();
-	stack_node.pop_back();
+
+	bool is_mark = false;
+	do
+	{
+		r_child = stack_node.back();
+		stack_node.pop_back();
+		is_mark = r_child->get_type_synthetized().compare("#") == 0;
+		if (is_mark)
+		{
+			delete(r_child);
+		}
+	} while (is_mark);
+	do
+	{
+		l_child = stack_node.back();
+		stack_node.pop_back();
+		is_mark = l_child->get_type_synthetized().compare("#") == 0;
+		if (is_mark)
+		{
+			delete(l_child);
+		}
+	} while (is_mark);
 
 	string key = "infix";
 	key.append(((Ast_function*)root)->get_function()->get_name());
 	key.append(l_child->get_type_synthetized());
 	key.append(r_child->get_type_synthetized());
 
-	Function * func = sem_domain.get_function(key);
+	Function  *func = sem_domain.get_function(key);
 
 	if (func == NULL)
 	{
-		cerr << "Operador no existe" << key << endl;
+		cerr << "Operador no existe: " << key << endl;
 		exit(-1);
 	}
 
-	Function * old = ((Ast_function*)root)->get_function();
+	Function  *old = ((Ast_function*)root)->get_function();
 	((Ast_function*)root)->set_function(func);
 	delete(old);
 
@@ -482,19 +494,24 @@ void create_root_infix_node(char const* str, char const* end)
 	stack_node.push_back(root);
 }
 
-void create_root_function_node(char const* str, char const* end)
+void create_root_function_node(char const *str, char const *end)
 {
-	Ast_inner_node* root = stack_inner_node.back();
+	Ast_inner_node *root = stack_inner_node.back();
 	stack_inner_node.pop_back();
 
-	Ast_node * child;
+	Ast_node *child;
 	string key;
-	unsigned int pos,i;
+	unsigned int i;
 	i = stack_node.size()-1;
 	while (i > 0)
 	{
-		child = stack_node[i];
-		if (child->get_type_synthetized().compare("#") == 0) {pos = i; break;delete(child);}
+		child = stack_node.back();
+		stack_node.pop_back();
+		if (child->get_type_synthetized().compare("#") == 0)
+		{
+			delete(child);
+			break;
+		}
 		child->set_parent(root);
 		root->add_child(child);
 
@@ -502,17 +519,16 @@ void create_root_function_node(char const* str, char const* end)
 		i--;
 	}
 	key = ((Ast_function*)root)->get_function()->get_name().append(key);
-	stack_node.resize(pos);
 
-	Function * func = sem_domain.get_function(key);
+	Function *func = sem_domain.get_function(key);
 
 	if (func == NULL)
 	{
-		cerr << "Function no existe" << key << endl;
+		cerr << "Function no existe: " << key << endl;
 		exit(-1);
 	}
 
-	Function * old = ((Ast_function*)root)->get_function();
+	Function *old = ((Ast_function*)root)->get_function();
 	((Ast_function*)root)->set_function(func);
 	delete(old);
 
@@ -522,28 +538,37 @@ void create_root_function_node(char const* str, char const* end)
 
 }
 
-void create_root_postfix_node(char const* str, char const* end)
+void create_root_postfix_node(char const *str, char const *end)
 {
-	Ast_inner_node* root = stack_inner_node.back();
+	Ast_inner_node *root = stack_inner_node.back();
 	stack_inner_node.pop_back();
 
 	Ast_node *child;
-	child = stack_node.back();
-	stack_node.pop_back();
+	bool is_mark = false;
+	do
+	{
+		child = stack_node.back();
+		stack_node.pop_back();
+		is_mark = child->get_type_synthetized().compare("#") == 0;
+		if (is_mark)
+		{
+			delete(child);
+		}
+	} while (is_mark);
 
 	string key = "postfix";
 	key.append(((Ast_function*)root)->get_function()->get_name());
 	key.append(child->get_type_synthetized());
 
-	Function * func = sem_domain.get_function(key);
+	Function  *func = sem_domain.get_function(key);
 
 	if (func == NULL)
 	{
-		cerr << "Operador no existe" << key << endl;
+		cerr << "Operador no existe: " << key << endl;
 		exit(-1);
 	}
 
-	Function * old = ((Ast_function*)root)->get_function();
+	Function  *old = ((Ast_function*)root)->get_function();
 	((Ast_function*)root)->set_function(func);
 	delete(old);
 
@@ -555,30 +580,39 @@ void create_root_postfix_node(char const* str, char const* end)
 	stack_node.push_back(root);
 }
 
-void create_root_prefix_node(char const* str, char const* end)
+void create_root_prefix_node(char const *str, char const *end)
 {
 	while (!stack_inner_node.empty())
 	{
-		Ast_inner_node* root = stack_inner_node.back();
+		Ast_inner_node *root = stack_inner_node.back();
 		stack_inner_node.pop_back();
 
 		Ast_node *child;
-		child = stack_node.back();
-		stack_node.pop_back();
+		bool is_mark = false;
+		do
+		{
+			child = stack_node.back();
+			stack_node.pop_back();
+			is_mark = child->get_type_synthetized().compare("#") == 0;
+			if (is_mark)
+			{
+				delete(child);
+			}
+		} while (is_mark);
 
 		string key = "prefix";
 		key.append(((Ast_function*)root)->get_function()->get_name());
 		key.append(child->get_type_synthetized());
 
-		Function * func = sem_domain.get_function(key);
+		Function  *func = sem_domain.get_function(key);
 
 		if (func == NULL)
 		{
-			cerr << "Operador no existe" << key << endl;
+			cerr << "Operador no existe: " << key << endl;
 			exit(-1);
 		}
 
-		Function * old = ((Ast_function*)root)->get_function();
+		Function  *old = ((Ast_function*)root)->get_function();
 		((Ast_function*)root)->set_function(func);
 		delete(old);
 
@@ -591,15 +625,18 @@ void create_root_prefix_node(char const* str, char const* end)
 	}
 }
 
-void push_stack(char name)
+void push_mark(char name)
 {
 	current_literal = new Ast_literal();
-	current_literal->set_type_synthetized("#"); // marca
+	// Mark for parameter of function.
+	current_literal->set_type_synthetized("#");
+	current_literal->set_value("#");
 	stack_node.push_back(current_literal);
 	current_literal = NULL;
+
 }
 
-void pepito(char const* str, char const* end)
+void pepito(char const *str, char const *end)
 {
 	string pepe(str, end);
 	cout << pepe << endl;
@@ -624,7 +661,7 @@ struct skip_parser: public grammar<skip_parser>
 
 		rule<ScannerT> skip;
 
-		rule<ScannerT> const& start() const
+		rule<ScannerT> const &start() const
 		{
 			return skip;
 		}
@@ -652,28 +689,26 @@ struct attr_grammar: public grammar<attr_grammar>
 
 			r_char			= lexeme_d[ ch_p('\'') >> (alnum_p | r_id_op) >> ch_p('\'') ];
 
-			r_string		= lexeme_d[ ch_p('\"') >> +(alnum_p | r_id_op) >> ch_p('\"') ];
+			r_string		= lexeme_d[ ch_p('\"') >> r_string_lit >> ch_p('\"') ];
 
-//			string =
-//					+((anychar_p - chset<>("\"\\")) | escseq)
-//				;
-//
-//			escseq =
-//					ch_p('\\')
-//					>> (
-//							oct_parser_t()
-//						|   as_lower_d['x'] >> hex_parser_t()
-//						|  (anychar_p - chset<>('\n'))
-//						)
-//				;
+			r_string_lit	= +((anychar_p - (ch_p('\"') | "\\")) | r_esc_seq);
+
+			r_esc_seq		= ch_p('\\') >>
+							  ( oct_p |
+								as_lower_d['x'] >> hex_p |
+								(anychar_p - ch_p('\n'))
+							  )
+				;
 
 			r_reserved_word = strlit<>("compute") 	|
-							  strlit<>("all")	  	|
-							  strlit<>("int") 		|
-							  strlit<>("string") 	|
-							  strlit<>("float") 	|
-							  strlit<>("char")
+									   "all"	  	|
+									   "int" 		|
+									   "string" 	|
+									   "float"	 	|
+									   "char"
 							  ;
+
+			r_basic_types	= strlit<>("int") | "float" | "string" | "char";
 
 			/**
 			  * Declaration of Semantic Domain.
@@ -715,7 +750,7 @@ struct attr_grammar: public grammar<attr_grammar>
 
 			r_decl_func	= lexeme_d[ strlit<>("function")>> space_p ] >>
 							 r_oper[&save_name_func][st_functions.add] >> ':' >>
-							 r_dom_func >> strlit<>("->") >>
+							 !r_dom_func >> strlit<>("->") >>
 							 r_sort_st[&save_image_func] >> ';';
 
 			r_dom_func	= r_sort_st[&save_domain_func] % ',';
@@ -770,8 +805,8 @@ struct attr_grammar: public grammar<attr_grammar>
 								;
 
 			r_expr_prime_prime  = +(r_op_prefix_st[&save_operator][&save_oper_node]) >> r_expression[&create_root_prefix_node]
-								| ch_p('(')[&push_stack]>> r_expression >>')'
-								| r_function[&save_func_node][&create_root_function_node]
+								| ch_p('(')[&push_mark] >> r_expression >> ')'
+								| r_function[&create_root_function_node]
 								| r_literal[&save_literal_node]
 								| r_instance[&save_instance_node]
 								;
@@ -779,7 +814,7 @@ struct attr_grammar: public grammar<attr_grammar>
 			/**
 			  * The functions accept a list of expressions.
 			  */
-			r_function			= r_function_st[&save_function] >> ch_p('(')[&push_stack] >>(r_expression % ',') >> ')';
+			r_function			= r_function_st[&save_function][&save_func_node] >> ch_p('(')[&push_mark] >>!(r_expression % ',') >> ')';
 
 			/**
 			  * Literals accepted: Integer and Float numbers, characters and string,
@@ -807,9 +842,7 @@ struct attr_grammar: public grammar<attr_grammar>
 			/**
 			  * Parsers based in the symbol tables.
 			  */
-
-
-			r_sort_st		= st_sorts|"int"|"float"|"string"|"char";
+			r_sort_st			= st_sorts | r_basic_types;
 			r_op_prefix_st		= st_op_prefix;
 			r_op_infix_st		= st_op_infix;
 			r_op_postfix_st		= st_op_postfix;
@@ -820,15 +853,6 @@ struct attr_grammar: public grammar<attr_grammar>
 		/**
 		  * Table of Symbols for the elements of an Attribute Grammar.
 		  */
-//		struct sort_basic : symbols <>
-//		{
-//			sort_basic()
-//			{
-//				add
-//					("int")
-//				;
-//			}
-//		}st_sorts;
 		symbols <> st_sorts;
 		symbols <> st_op_prefix;
 		symbols <> st_op_infix;
@@ -843,10 +867,12 @@ struct attr_grammar: public grammar<attr_grammar>
 		typedef rule<ScannerT> rule_exp;
 
 		 // Rule in lexeme_d.
-		rule<typename lexeme_scanner<ScannerT>::type> r_id_op;
+		typedef rule<typename lexeme_scanner<ScannerT>::type> rule_lexeme;
 
 		// Basic rules: characters, strings and identifiers.
-		rule_exp r_reserved_word, r_ident, r_oper, r_char, r_string;
+		rule_exp r_reserved_word, r_ident, r_oper, r_char, r_string, r_basic_types;
+
+		rule_lexeme r_id_op, r_string_lit, r_esc_seq;
 
 		// Semantic domain's rule: Sort, Operator and Function.
 		rule_exp r_semantic_domain, r_bloq_sem, r_decl_sort, r_decl_oper, r_decl_func,
@@ -869,13 +895,8 @@ struct attr_grammar: public grammar<attr_grammar>
 		// Main rule.
 		rule_exp r_att_grammar;
 
-		rule_exp const& start() const
+		rule_exp const &start() const
 		{
-//			st_sorts.add("int");
-//			st_sorts.add("float");
-//			st_sorts.add("string");
-//			st_sorts.add("char");
-
 			return r_att_grammar;
 		}
 	};
@@ -885,7 +906,7 @@ struct attr_grammar: public grammar<attr_grammar>
   * This method invokes the method 'parse' of the library Spitir included in Boost.
   * Returns true if could parse all the input.
   */
-bool parse_grammar(char const* txt_input)
+bool parse_grammar(char const *txt_input)
 {
 	attr_grammar	attribute_grammar;
 	skip_parser		skip_p;
@@ -902,7 +923,7 @@ bool parse_grammar(char const* txt_input)
   * Reads the contents of the file and save it in the
   * string passed as parameter.
   */
-void read_file_in(string & txt_output)
+void read_file_in(string &txt_output)
 {
 	FILE*	p_file;
 	char	buffer[MAX_INPUT_FILE];
