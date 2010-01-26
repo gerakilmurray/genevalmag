@@ -35,14 +35,26 @@ public:
 		return childs;
 	}
 
+	Ast_node* get_child(int index) const
+	{
+		return childs[index];
+	}
+
 	void set_childs(vector<Ast_node*> new_childs)
 	{
 		childs = new_childs;
 	}
 
+	void replace_child(int index,Ast_node * new_child)
+	{
+		childs[index] = new_child;
+		new_child->set_parent(this);
+	}
+
 	void add_child(Ast_node *new_child)
 	{
 		childs.insert(childs.begin(),new_child);
+		new_child->set_parent(this);
 	}
 
 	virtual string to_string() const = 0;

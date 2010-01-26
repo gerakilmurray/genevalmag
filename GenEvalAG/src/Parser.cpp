@@ -440,7 +440,38 @@ void save_rvalue(char const *str, char const *end)
   */
 void check_precedence(Ast_function ** root_tree)
 {
+	cout << (*root_tree)->to_string() << "adentro" << endl;
+
 	int i_child = 0;
+	bool recursive = false;
+
+	static int precedence_case_op_prefix = -1;
+
+	if ((*root_tree)->get_function()->get_mode() == k_infix && precedence_case_op_prefix > -1)
+	{
+
+		if (precedence_case_op_prefix < (*root_tree)->get_function()->get_prec())
+		{
+			Ast_function * new_root = (Ast_function *)(*root_tree)->get_child(0);
+			new_root->set_parent((*root_tree)->get_parent());
+			int index_swap = -1;
+			if (new_root->get_function()->get_mode()!= k_infix)
+				index_swap = 0;
+			else
+				index_swap = 1;
+			Ast_function * swap = (Ast_function *) new_root->get_child(index_swap);
+			Ast_node * grandson = swap->get_child(0);
+			(*root_tree)->replace_child(0, grandson);
+			swap->replace_child(0, *root_tree);
+			new_root->replace_child(index_swap, swap);
+
+
+			*root_tree = new_root;
+		}
+		precedence_case_op_prefix = -1;
+		return;
+	}
+
 	while (i_child < (*root_tree)->get_function()->get_arity())
 	{
 		Ast_function* node = NULL;
@@ -451,9 +482,68 @@ void check_precedence(Ast_function ** root_tree)
 			// Cast succeeded. Is a function.
 			if ((*root_tree)->get_function()->get_prec() > node->get_function()->get_prec())
 			{
-				cout << "tenemos que cambiar" << endl;
+				if ((*root_tree)->get_function()->get_mode() == k_infix &&
+					node->get_function()->get_mode() == k_postfix &&
+					i_child == 0)
+				{
+					cout << "omite infix postfix" << endl;
+					i_child++;
+					continue;
+				}
+				if (node->get_function()->get_mode() == k_prefix)
+				{
+					if ((*root_tree)->get_function()->get_mode() == k_infix)
+					{
+						if (i_child == 1)
+						{
+							cout << "omite infix prefix OJO" << endl;
+							precedence_case_op_prefix = node->get_function()->get_prec();
+							i_child++;
+							continue;
+						}
+						if (i_child == 0)
+						{
+							// caso de hijo izq menor prec
+							recursive = true;
+						}
+					}
+					if ((*root_tree)->get_function()->get_mode() == k_prefix)
+					{
+						cout << "omite prefix prefix" << endl;
+						precedence_case_op_prefix = node->get_function()->get_prec();
+						i_child++;
+						continue;
+					}
+				}
+
+				cout << "tenemos que cambiar" << (*root_tree)->to_string() << endl;
+
+				int child_child = -1;
+				if (node->get_function()->get_mode() == k_infix)
+					child_child = 1;
+				else
+					child_child = 0;
+
+				Ast_node * aux = node->get_child(child_child);
+				node->set_parent((*root_tree)->get_parent());
+				(*root_tree)->replace_child(i_child,aux);
+				node->replace_child(child_child,*root_tree);
+				*root_tree = node;
+
+				Ast_function * aux1 = (Ast_function*)(*root_tree)->get_child(child_child);
+				check_precedence(&aux1);
+				(*root_tree)->replace_child(i_child,aux1);
+
+				if(recursive)
+				{
+					Ast_function * rec = (Ast_function*)node->get_child(0);
+					check_precedence(&rec);
+					(*root_tree)->replace_child(i_child,rec);
+					// sabemos que a lo sumo el cambio esta entre la nueva raiz y sus hijos.
+					check_precedence(root_tree);
+					recursive = false;
+				}
 			}
-			cout << "si si" << endl;
 		}
 		i_child++;
 	}
@@ -464,7 +554,6 @@ void check_precedence(Ast_function ** root_tree)
   */
 void create_root_infix_node(char const *str, char const *end)
 {
-	cout << "infix" << endl;
 	Ast_inner_node *root = stack_inner_node.back();
 	stack_inner_node.pop_back();
 
@@ -510,8 +599,6 @@ void create_root_infix_node(char const *str, char const *end)
 	delete(old);
 
 	root->set_type_synthetized(((Ast_function*)root)->get_function()->get_image()->get_name());
-	l_child->set_parent(root);
-	r_child->set_parent(root);
 
 	root->add_child(r_child);
 	root->add_child(l_child);
@@ -540,7 +627,6 @@ void create_root_function_node(char const *str, char const *end)
 			delete(child);
 			break;
 		}
-		child->set_parent(root);
 		root->add_child(child);
 
 		key = child->get_type_synthetized().append(key);
@@ -552,7 +638,7 @@ void create_root_function_node(char const *str, char const *end)
 
 	if (func == NULL)
 	{
-		cerr << "Function no existe: " << key << endl;
+		cerr << "Function no existe3: " << key << endl;
 		exit(-1);
 	}
 
@@ -568,8 +654,6 @@ void create_root_function_node(char const *str, char const *end)
 
 void create_root_postfix_node(char const *str, char const *end)
 {
-	cout << "postfix" << endl;
-
 	Ast_inner_node *root = stack_inner_node.back();
 	stack_inner_node.pop_back();
 
@@ -603,7 +687,6 @@ void create_root_postfix_node(char const *str, char const *end)
 	delete(old);
 
 	root->set_type_synthetized(((Ast_function*)root)->get_function()->get_image()->get_name());
-	child->set_parent(root);
 
 	root->add_child(child);
 
@@ -615,58 +698,46 @@ void create_root_postfix_node(char const *str, char const *end)
 
 void create_root_prefix_node(char const *str, char const *end)
 {
-	cout << "prefix" << endl;
+	Ast_inner_node *root = stack_inner_node.back();
+	stack_inner_node.pop_back();
 
-//	int i = 1;
-//
-//	while (!stack_inner_node.empty())
-//	{
-//		cout << "Vez " << i << endl;
-
-		Ast_inner_node *root = stack_inner_node.back();
-		stack_inner_node.pop_back();
-
-		Ast_node *child;
-		bool is_mark = false;
-		do
+	Ast_node *child;
+	bool is_mark = false;
+	do
+	{
+		child = stack_node.back();
+		stack_node.pop_back();
+		is_mark = child->get_type_synthetized().compare("#") == 0;
+		if (is_mark)
 		{
-			child = stack_node.back();
-			stack_node.pop_back();
-			is_mark = child->get_type_synthetized().compare("#") == 0;
-			if (is_mark)
-			{
-				delete(child);
-			}
-		} while (is_mark);
-
-		string key = "prefix";
-		key.append(((Ast_function*)root)->get_function()->get_name());
-		key.append(child->get_type_synthetized());
-
-		Function  *func = sem_domain.get_function(key);
-
-		if (func == NULL)
-		{
-			cerr << "Operador prefix no existe: " << key << endl;
-			exit(-1);
+			delete(child);
 		}
+	} while (is_mark);
 
-		Function  *old = ((Ast_function*)root)->get_function();
-		((Ast_function*)root)->set_function(func);
-		delete(old);
+	string key = "prefix";
+	key.append(((Ast_function*)root)->get_function()->get_name());
+	key.append(child->get_type_synthetized());
 
-		root->set_type_synthetized(((Ast_function*)root)->get_function()->get_image()->get_name());
-		child->set_parent(root);
+	Function  *func = sem_domain.get_function(key);
 
-		root->add_child(child);
+	if (func == NULL)
+	{
+		cerr << "Operador prefix no existe: " << key << endl;
+		exit(-1);
+	}
 
-		// Check the state of precedence of operators.
-		check_precedence((Ast_function**)&root);
+	Function  *old = ((Ast_function*)root)->get_function();
+	((Ast_function*)root)->set_function(func);
+	delete(old);
 
-		stack_node.push_back(root);
+	root->set_type_synthetized(((Ast_function*)root)->get_function()->get_image()->get_name());
 
-//		i++;
-//	}
+	root->add_child(child);
+
+	// Check the state of precedence of operators.
+	check_precedence((Ast_function**)&root);
+
+	stack_node.push_back(root);
 }
 
 void push_mark(char name)

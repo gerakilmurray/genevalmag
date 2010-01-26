@@ -44,7 +44,7 @@ private:
 	vector <Sort*>	f_domain;
 	Sort*			f_image;
 	oper_mode		f_mod;
-	unsigned int	f_prec;
+	unsigned short 	f_prec;
 	oper_assoc 		f_assoc;
 	/**
 	  * If that value is TRUE then the object function is a operator.
@@ -99,7 +99,7 @@ public:
 	/**
 	  * Return the precedence of the operator.
 	  */
-	unsigned int get_prec() const;
+	unsigned short get_prec() const;
 	/**
 	  * Return the associativity of the operator.
 	  */
@@ -129,7 +129,7 @@ public:
 	/**
 	  * Set the precedence of the operator.
 	  */
-	void set_prec(int prec);
+	void set_prec(unsigned short prec);
 	/**
 	  * Set the associativity of the operator.
 	  */

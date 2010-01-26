@@ -41,6 +41,10 @@ public:
 	{
 		parent = new_parent;
 	}
+	void delete_parent()
+	{
+		parent = NULL;
+	}
 
 	void set_type_synthetized(string new_type_synthetized)
 	{

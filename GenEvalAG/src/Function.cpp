@@ -25,7 +25,7 @@ namespace genevalmag
 Function::Function()
 {
 	f_mod			= k_prefix;
-	f_prec			= UINT_MAX;
+	f_prec			= USHRT_MAX;
 	f_assoc			= k_left;
 	f_is_operator	= false;
 
@@ -129,7 +129,7 @@ oper_mode Function::get_mode() const
 /**
   * Return the precedence of the operator.
   */
-unsigned int Function::get_prec() const
+unsigned short Function::get_prec() const
 {
 	return f_prec;
 }
@@ -193,7 +193,7 @@ void Function::set_mode(string mode)
 /**
   * Set the precedence of the operator.
   */
-void Function::set_prec(int prec)
+void Function::set_prec(unsigned short prec)
 {
 	f_prec = prec;
 }

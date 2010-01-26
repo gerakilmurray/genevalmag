@@ -19,14 +19,16 @@ semantic domain
 	/*********************
 	 * List of Operators *
 	 *********************/
-	op infix	(5, left)		+  : int, int	 -> int;
-	op infix	(50,non-assoc)	*  : int, string -> int;
+	op infix	(40, left)		+  : int, int	 -> int;
+	op infix	(50,non-assoc)	*  : int, int -> int;
+	op infix	(1,non-assoc)	=  : int, int -> int;
 	op 			(99,_)			sqr: int		 -> int;
-	op postfix	(98,_)			&  : int		 -> int;	
-	op prefix	(_,right)		%  : string		 -> string;
+	op postfix	(5,_)			&  : int		 -> int;	
+	op prefix	(4,right)		%  : int		 -> int;
 	op 			(8,non-assoc)	rq : string		 -> adrian;
 	op infix	(5,left)		+  : int, int	 -> string;
-	op prefix	(_,left)		+  : int		 -> int;
+	op prefix	(2,left)		if  : int		 -> int;
+	op postfix	(2,left)		pos  : int		 -> int;
 		
 	/*********************
 	 * List of Functions *
@@ -51,48 +53,50 @@ attributes
 rules
 	E ::=	E '+' T
 				compute
-					E[0].valor = g(g(g((g(((((sqr9))))+ h()))))) * f(T[0].termino * E[1].type, 4, 'z');
-					E[0].lexx = "E";
-					E[0].grade = 1 + sqr4;
+					//E[0].valor = g(g(g((g(((((9))))+ h()))))) * f(T[0].termino * E[1].type, 4, 'z');
+					//E[0].lexx = "E";
+					//E[0].grade = 1 + 4;
 					
-					T[0].type = "Hola \n";
-					E[1].type = E[0].type;
+					E[0].grade = 3+4&pos;
+					
+					//T[0].type = "Hola \n";
+					//E[1].type = E[0].type;
 				end
 		| 	T
-			  	compute
-			  		E[0].valor = T[0].termino * E[1].lexx + T[0].lexema;
-					E[0].lexx = "E";
-					E[0].grade = sqr46&;
+			  	//compute
+			  		//E[0].valor = T[0].termino * E[1].lexx + T[0].lexema;
+					//E[0].lexx = "E";
+					//E[0].grade = 46;
 					
-			  		T[0].type = "Tipo";
-			  	end
+			  		//T[0].type = "Tipo";
+			  	//end
 		;
 
 	T ::=	id '*' id
-				compute
-					T[0].valor =  id[0].valor& + ((id[0].valor + (id[1].valor)));
-					T[0].lexema = 1024;
-					T[0].termino = T[0].valor;
+				//compute
+					//T[0].valor =  id[0].valor + ((id[0].valor + (id[1].valor)));
+					//T[0].lexema = 1024;
+					//T[0].termino = T[0].valor;
 					
-					id[0].type = "ident     \t ";
-					id[1].type = "ident";
-				end
+					//id[0].type = "ident     \t ";
+					//id[1].type = "ident";
+				//end
 		;
 	
 	id ::=	'1' 
-				compute
-					id[0].valor = 1024;
-					id[0].lexema = 2048; 
-					id[0].termino = 100;
-					id[0].lexx = "int_1";
-				end
+				//compute
+					//id[0].valor = 1024;
+					//id[0].lexema = 2048; 
+					//id[0].termino = 100;
+					//id[0].lexx = "int_1";
+				//end
 		 |  '0'
-				compute
-					id[0].valor = 1024;
-					id[0].lexema = 2048; 
-					id[0].termino = 100; 
-					id[0].lexx = "int0";
-				end
+				//compute
+					//id[0].valor = 1024;
+					//id[0].lexema = 2048; 
+					//id[0].termino = 100; 
+					//id[0].lexx = "int0";
+				//end
 		;
 	
 // Acordarse de cambiar las key de attributo, symbol, oper, function, sort y regla para que sean estaticas sino
