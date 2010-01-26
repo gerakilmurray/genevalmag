@@ -53,5 +53,3 @@ public:
 } // end genevalmag
 
 #endif /* AST_NODE_H_ */
-
-

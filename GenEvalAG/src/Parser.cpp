@@ -436,10 +436,35 @@ void save_rvalue(char const *str, char const *end)
 }
 
 /**
+  *
+  */
+void check_precedence(Ast_function ** root_tree)
+{
+	int i_child = 0;
+	while (i_child < (*root_tree)->get_function()->get_arity())
+	{
+		Ast_function* node = NULL;
+		node = dynamic_cast<Ast_function*>((*root_tree)->get_childs()[i_child]);
+
+		if (node)
+		{
+			// Cast succeeded. Is a function.
+			if ((*root_tree)->get_function()->get_prec() > node->get_function()->get_prec())
+			{
+				cout << "tenemos que cambiar" << endl;
+			}
+			cout << "si si" << endl;
+		}
+		i_child++;
+	}
+}
+
+/**
   * Section of AST creation.
   */
 void create_root_infix_node(char const *str, char const *end)
 {
+	cout << "infix" << endl;
 	Ast_inner_node *root = stack_inner_node.back();
 	stack_inner_node.pop_back();
 
@@ -476,7 +501,7 @@ void create_root_infix_node(char const *str, char const *end)
 
 	if (func == NULL)
 	{
-		cerr << "Operador no existe: " << key << endl;
+		cerr << "Operador infix no existe: " << key << endl;
 		exit(-1);
 	}
 
@@ -490,6 +515,9 @@ void create_root_infix_node(char const *str, char const *end)
 
 	root->add_child(r_child);
 	root->add_child(l_child);
+
+	// Check the state of precedence of operators.
+	check_precedence((Ast_function**)&root);
 
 	stack_node.push_back(root);
 }
@@ -540,6 +568,8 @@ void create_root_function_node(char const *str, char const *end)
 
 void create_root_postfix_node(char const *str, char const *end)
 {
+	cout << "postfix" << endl;
+
 	Ast_inner_node *root = stack_inner_node.back();
 	stack_inner_node.pop_back();
 
@@ -564,7 +594,7 @@ void create_root_postfix_node(char const *str, char const *end)
 
 	if (func == NULL)
 	{
-		cerr << "Operador no existe: " << key << endl;
+		cerr << "Operador postfix no existe: " << key << endl;
 		exit(-1);
 	}
 
@@ -577,13 +607,22 @@ void create_root_postfix_node(char const *str, char const *end)
 
 	root->add_child(child);
 
+	// Check the state of precedence of operators.
+	check_precedence((Ast_function**)&root);
+
 	stack_node.push_back(root);
 }
 
 void create_root_prefix_node(char const *str, char const *end)
 {
-	while (!stack_inner_node.empty())
-	{
+	cout << "prefix" << endl;
+
+//	int i = 1;
+//
+//	while (!stack_inner_node.empty())
+//	{
+//		cout << "Vez " << i << endl;
+
 		Ast_inner_node *root = stack_inner_node.back();
 		stack_inner_node.pop_back();
 
@@ -608,7 +647,7 @@ void create_root_prefix_node(char const *str, char const *end)
 
 		if (func == NULL)
 		{
-			cerr << "Operador no existe: " << key << endl;
+			cerr << "Operador prefix no existe: " << key << endl;
 			exit(-1);
 		}
 
@@ -621,8 +660,13 @@ void create_root_prefix_node(char const *str, char const *end)
 
 		root->add_child(child);
 
+		// Check the state of precedence of operators.
+		check_precedence((Ast_function**)&root);
+
 		stack_node.push_back(root);
-	}
+
+//		i++;
+//	}
 }
 
 void push_mark(char name)
@@ -795,17 +839,17 @@ struct attr_grammar: public grammar<attr_grammar>
 			  * expression's Grammar non ambiguos based in
 			  *
 			  * 	E = T *(<op_infix> T)
-			  *		T = F *(<op_postfix>)
-			  *		F = +(<op_prefix>) E |(E) | function | literal | instance
+			  *		T = F *(<op_postfix>) | (<op_prefix>) T
+			  *		F = (E) | function | literal | instance
 			  */
 			r_expression 		= r_expr_prime >> *(r_op_infix_st[&save_operator][&save_oper_node] >> r_expr_prime[&create_root_infix_node])
 								;
 
 			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st[&save_operator][&save_oper_node][&create_root_postfix_node])
+								| (r_op_prefix_st[&save_operator][&save_oper_node]) >> r_expr_prime[&create_root_prefix_node]
 								;
 
-			r_expr_prime_prime  = +(r_op_prefix_st[&save_operator][&save_oper_node]) >> r_expression[&create_root_prefix_node]
-								| ch_p('(')[&push_mark] >> r_expression >> ')'
+			r_expr_prime_prime  = ch_p('(')[&push_mark] >> r_expression >> ')'
 								| r_function[&create_root_function_node]
 								| r_literal[&save_literal_node]
 								| r_instance[&save_instance_node]

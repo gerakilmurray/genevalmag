@@ -93,13 +93,13 @@ public:
 	  */
 	Sort *get_image() const;
 	/**
-	  * Return the name of the operator.
+	  * Return the mode of the operator.
 	  */
 	oper_mode get_mode() const;
 	/**
 	  * Return the precedence of the operator.
 	  */
-	int get_prec() const;
+	unsigned int get_prec() const;
 	/**
 	  * Return the associativity of the operator.
 	  */

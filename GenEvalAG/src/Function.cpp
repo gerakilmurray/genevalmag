@@ -119,7 +119,7 @@ Sort *Function::get_image() const
 }
 
 /**
-  * Return the name of the operator.
+  * Return the mode of the operator.
   */
 oper_mode Function::get_mode() const
 {
@@ -129,7 +129,7 @@ oper_mode Function::get_mode() const
 /**
   * Return the precedence of the operator.
   */
-int Function::get_prec() const
+unsigned int Function::get_prec() const
 {
 	return f_prec;
 }
