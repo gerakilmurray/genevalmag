@@ -19,6 +19,7 @@ namespace genevalmag
 Ast_function::Ast_function()
 {
 	parent				= NULL;
+	conflict			= -1;
 	precedence_level	= 0;
 	syntax_order		= 0;
 
@@ -64,6 +65,7 @@ void Ast_function::copy(Ast_function const &other)
 	syntax_order		= other.get_syntax_order();
 	childs				= other.get_childs();
 	parent				= other.get_parent();
+	conflict			= other.get_conflict();
 	type_synthetized	= other.get_type_synthetized();
 }
 

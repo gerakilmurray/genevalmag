@@ -19,7 +19,8 @@ namespace genevalmag
 
 Ast_literal::Ast_literal()
 {
-	parent = NULL;
+	parent		= NULL;
+	conflict	= -1;
 
 	#ifdef _DEBUG
 		ast_literals++;
@@ -61,6 +62,7 @@ void Ast_literal::copy(Ast_literal const &other)
 	value				= other.get_value();
 	type				= other.get_type();
 	parent				= other.get_parent();
+	conflict			= other.get_conflict();
 	type_synthetized	= other.get_type_synthetized();
 }
 

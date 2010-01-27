@@ -23,12 +23,12 @@ semantic domain
 	op infix	(50,non-assoc)	*  : int, int -> int;
 	op infix	(1,non-assoc)	=  : int, int -> int;
 	op 			(99,_)			sqr: int		 -> int;
-	op postfix	(5,_)			&  : int		 -> int;	
-	op prefix	(4,right)		%  : int		 -> int;
+	op postfix	(14,_)			&  : int		 -> int;	
+	op prefix	(5,right)		%  : int		 -> int;
 	op 			(8,non-assoc)	rq : string		 -> adrian;
-	op infix	(5,left)		+  : int, int	 -> string;
-	op prefix	(2,left)		if  : int		 -> int;
-	op postfix	(2,left)		pos  : int		 -> int;
+	op infix	(6,left)		+  : int, int	 -> string;
+	op prefix	(3,left)		if  : int		 -> int;
+	op postfix	(200,left)		pos  : int		 -> int;
 		
 	/*********************
 	 * List of Functions *
@@ -57,7 +57,13 @@ rules
 					//E[0].lexx = "E";
 					//E[0].grade = 1 + 4;
 					
-					E[0].grade = 5 + %2 + 6;
+					E[0].grade = if4 + %5&pos + g( 1 + g(3 * (%2) * 7));
+					E[0].grade = 8 + 6 * 7&;
+					E[0].grade = 8 + %if%if%if6& * 6;
+					E[0].grade = 1 + %%%% 6 & + 7pos;
+					E[0].grade = 1 + %7 * %9;
+					
+					E[0].grade = 1 + %%%% 6 & + (7 + %3 * 4)pos;
 					
 					//T[0].type = "Hola \n";
 					//E[1].type = E[0].type;

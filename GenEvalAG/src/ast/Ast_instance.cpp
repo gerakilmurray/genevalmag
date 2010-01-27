@@ -20,7 +20,8 @@ namespace genevalmag
 
 Ast_instance::Ast_instance()
 {
-	parent = NULL;
+	parent		= NULL;
+	conflict	= -1;
 
 	#ifdef _DEBUG
 		ast_instances++;
@@ -69,6 +70,7 @@ void Ast_instance::copy(Ast_instance const &other)
 	i_num				= other.get_num();
 	i_attr				= other.get_attr();
 	parent				= other.get_parent();
+	conflict			= other.get_conflict();
 	type_synthetized	= other.get_type_synthetized();
 }
 

@@ -23,6 +23,7 @@ class Ast_node
 protected:
 	Ast_node    *parent;
 	string		type_synthetized;
+	int			conflict;
 
 public:
 	virtual ~Ast_node(){};
@@ -41,6 +42,22 @@ public:
 	{
 		parent = new_parent;
 	}
+
+	void active_conflict(int prec_conflict)
+	{
+		conflict = prec_conflict;
+	}
+
+	void desactive_conflict()
+	{
+		conflict = -1;
+	}
+
+	int get_conflict() const
+	{
+		return conflict;
+	}
+
 	void delete_parent()
 	{
 		parent = NULL;
