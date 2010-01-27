@@ -45,6 +45,17 @@ using namespace genevalmag;
 SemDomain sem_domain;
 
 /**
+  * /var current_precedence_level
+  * /brief Level current of precedence.
+  */
+unsigned short current_precedence_level = 0;
+
+/**
+  * /var index_syntax_order
+  * /brief Counter of syntax order.
+  */
+unsigned short index_syntax_order = 0;
+/**
   * Methods and functions for parse Sort class.
   */
 void add_sort(char const *str, char const *end)
@@ -388,7 +399,11 @@ void save_function(char const *str, char const *end)
 void save_oper_node(char const *str, char const *end)
 {
 	current_koperation = new Ast_function();
+
 	current_koperation->set_function(current_oper);
+	current_koperation->set_precedence_level(current_precedence_level);
+	current_koperation->set_syntax_order(++index_syntax_order);
+
 	current_oper = NULL;
 
 	stack_inner_node.push_back(current_koperation);
@@ -398,7 +413,11 @@ void save_oper_node(char const *str, char const *end)
 void save_func_node(char const *str, char const *end)
 {
 	current_kfunction = new Ast_function();
+
 	current_kfunction->set_function(current_func);
+	current_kfunction->set_precedence_level(current_precedence_level);
+	current_kfunction->set_syntax_order(++index_syntax_order);
+
 	current_func = NULL;
 
 	stack_inner_node.push_back(current_kfunction);
@@ -436,9 +455,147 @@ void save_rvalue(char const *str, char const *end)
 }
 
 /**
+  * PRECEDENCE SECTION
+  */
+
+/**
+  *
+  */
+int swap_root_child(Ast_function** old_root,Ast_function** new_root, int item_child)
+{
+	int child_child = -1;
+
+	if ((*new_root)->get_function()->get_mode() == k_infix)
+		child_child = (item_child == 0)? 1: 0;
+	else
+		child_child = 0;
+
+	/**    A                 	 B
+	 *    / \                	/ \
+	 *   B   C  -------->      D   A
+	 *  / \						  / \
+	 * D   E                     E   C
+	 *
+	 **    A                 	 C
+	 *    / \                	/ \
+	 *   B   C  -------->      A   E
+	 *      / \				  / \
+	 *     D   E             B   D
+	 */
+	Ast_node * aux = (*new_root)->get_child(child_child); // E  // D
+	(*new_root)->set_parent((*old_root)->get_parent());
+
+	(*old_root)->replace_child(item_child,aux); // set a A hijo E // set A hijo D
+	(*new_root)->replace_child(child_child,(*old_root)); // set B hijo A // set C hijo A
+	(*old_root) = (*new_root); // the new root. // B // C
+
+	return child_child;
+}
+
+/**
   *
   */
 void check_precedence(Ast_function ** root_tree)
+{
+	int i_child = 0;
+	// caso normal
+	while (i_child < (*root_tree)->get_function()->get_arity())
+	{
+		Ast_function* node = NULL;
+		node = dynamic_cast<Ast_function*>((*root_tree)->get_childs()[i_child]); // interes en los nodos de tipo funcion.
+
+		if (node)
+		{
+			if (((*root_tree)->compare_precedence(node) > 0) && ((*root_tree)->is_comparable(node)))
+			/**
+			  * Same level precedence and detection of posible swap.
+			  */
+			{
+				cout << "mayor y comp" << endl;
+				cout << "acaaaaaaaaaaaaaaaaa" << (*root_tree)->to_string() << endl;
+
+				if (((*root_tree)->get_function()->get_mode() == k_prefix) &&
+					(node->get_function()->get_mode() == k_prefix)
+					)
+				{
+					cout << "omite pre" << endl;
+					i_child++;
+					continue;
+				}
+
+				if (((*root_tree)->get_function()->get_mode() == k_postfix) &&
+					(node->get_function()->get_mode() == k_postfix)
+					)
+				{
+					cout << "omite post" << endl;
+					i_child++;
+					continue;
+				}
+
+				if ((((*root_tree)->compare_order(node) < 0) && (node->get_function()->get_mode() == k_prefix)) ||
+					(((*root_tree)->compare_order(node) > 0) && (node->get_function()->get_mode() == k_postfix)))
+				/**
+				  * Discart swap because affect the syntax order.
+				  */
+				{
+
+					cout << "omite gral" << endl;
+					i_child++;
+					continue;
+				}
+				cout << "order ok" << endl;
+				int index_child = swap_root_child(root_tree,&node,i_child);
+//				int child_child = -1;
+//
+//				if (node->get_function()->get_mode() == k_infix)
+//					child_child = (i_child == 0)? 1: 0;
+//				else
+//					child_child = 0;
+//
+				/**    A                 	 B
+				 *    / \                	/ \
+				 *   B   C  -------->      D   A
+				 *  / \						  / \
+				 * D   E                     E   C
+				 *
+				 **    A                 	 C
+				 *    / \                	/ \
+				 *   B   C  -------->      A   E
+				 *      / \				  / \
+				 *     D   E             B   D
+				 */
+//				Ast_node * aux = node->get_child(child_child); // E  // D
+//				node->set_parent((*root_tree)->get_parent());
+//
+//				(*root_tree)->replace_child(i_child,aux); // set a A hijo E // set A hijo D
+//				node->replace_child(child_child,*root_tree); // set B hijo A // set C hijo A
+//				*root_tree = node; // the new root. // B // C
+
+				Ast_function * aux = (Ast_function*)(*root_tree)->get_child(index_child);
+				check_precedence(&aux);
+				(*root_tree)->replace_child(index_child,aux);
+
+				if (((*root_tree)->compare_precedence(aux) > 0) && ((*root_tree)->is_comparable(aux)))
+				{
+					if ((((*root_tree)->compare_order(aux) > 0) && (aux->get_function()->get_mode() == k_prefix)) ||
+						(((*root_tree)->compare_order(aux) < 0) && (aux->get_function()->get_mode() == k_postfix)))
+					{
+						cout << "swap rec" << (*root_tree)->to_string() << " por " << aux->to_string() << endl;
+						swap_root_child(root_tree,&aux,index_child);
+					}
+				}
+
+			}
+		}
+		i_child++;
+	}// fin while.
+}
+///////////////////////////////////
+
+/**
+  *
+  */
+void check_precedence5(Ast_function ** root_tree)
 {
 	cout << (*root_tree)->to_string() << "adentro" << endl;
 
@@ -448,6 +605,7 @@ void check_precedence(Ast_function ** root_tree)
 	static int precedence_case_op_prefix = -1;
 
 	if ((*root_tree)->get_function()->get_mode() == k_infix && precedence_case_op_prefix > -1)
+		// Caso excepcional de operacion infija. Necesitamos informacion del paso anterior.
 	{
 
 		if (precedence_case_op_prefix < (*root_tree)->get_function()->get_prec())
@@ -472,10 +630,11 @@ void check_precedence(Ast_function ** root_tree)
 		return;
 	}
 
+	// caso normal
 	while (i_child < (*root_tree)->get_function()->get_arity())
 	{
 		Ast_function* node = NULL;
-		node = dynamic_cast<Ast_function*>((*root_tree)->get_childs()[i_child]);
+		node = dynamic_cast<Ast_function*>((*root_tree)->get_childs()[i_child]); // interes en los nodos de tipo funcion.
 
 		if (node)
 		{
@@ -518,17 +677,22 @@ void check_precedence(Ast_function ** root_tree)
 
 				cout << "tenemos que cambiar" << (*root_tree)->to_string() << endl;
 
-				int child_child = -1;
-				if (node->get_function()->get_mode() == k_infix)
-					child_child = 1;
-				else
-					child_child = 0;
 
-				Ast_node * aux = node->get_child(child_child);
-				node->set_parent((*root_tree)->get_parent());
-				(*root_tree)->replace_child(i_child,aux);
-				node->replace_child(child_child,*root_tree);
-				*root_tree = node;
+				int child_child = swap_root_child(root_tree,&node,i_child);
+
+
+
+//				int child_child = -1;
+//				if (node->get_function()->get_mode() == k_infix)
+//					child_child = 1;
+//				else
+//					child_child = 0;
+//
+//				Ast_node * aux = node->get_child(child_child);
+//				node->set_parent((*root_tree)->get_parent());
+//				(*root_tree)->replace_child(i_child,aux);
+//				node->replace_child(child_child,*root_tree);
+//				*root_tree = node;
 
 				Ast_function * aux1 = (Ast_function*)(*root_tree)->get_child(child_child);
 				check_precedence(&aux1);
@@ -552,6 +716,7 @@ void check_precedence(Ast_function ** root_tree)
 /**
   * Section of AST creation.
   */
+
 void create_root_infix_node(char const *str, char const *end)
 {
 	Ast_inner_node *root = stack_inner_node.back();
@@ -567,6 +732,7 @@ void create_root_infix_node(char const *str, char const *end)
 		is_mark = r_child->get_type_synthetized().compare("#") == 0;
 		if (is_mark)
 		{
+			cout << "toque marca R" << endl;
 			delete(r_child);
 		}
 	} while (is_mark);
@@ -577,6 +743,7 @@ void create_root_infix_node(char const *str, char const *end)
 		is_mark = l_child->get_type_synthetized().compare("#") == 0;
 		if (is_mark)
 		{
+			cout << "toque marca L" << endl;
 			delete(l_child);
 		}
 	} while (is_mark);
@@ -624,6 +791,7 @@ void create_root_function_node(char const *str, char const *end)
 		stack_node.pop_back();
 		if (child->get_type_synthetized().compare("#") == 0)
 		{
+			cout << "toque marca func" << endl;
 			delete(child);
 			break;
 		}
@@ -638,7 +806,7 @@ void create_root_function_node(char const *str, char const *end)
 
 	if (func == NULL)
 	{
-		cerr << "Function no existe3: " << key << endl;
+		cerr << "Function no existe: " << key << endl;
 		exit(-1);
 	}
 
@@ -666,6 +834,7 @@ void create_root_postfix_node(char const *str, char const *end)
 		is_mark = child->get_type_synthetized().compare("#") == 0;
 		if (is_mark)
 		{
+			cout << "toque marca post" << endl;
 			delete(child);
 		}
 	} while (is_mark);
@@ -691,7 +860,7 @@ void create_root_postfix_node(char const *str, char const *end)
 	root->add_child(child);
 
 	// Check the state of precedence of operators.
-	check_precedence((Ast_function**)&root);
+	//check_precedence((Ast_function**)&root);
 
 	stack_node.push_back(root);
 }
@@ -710,6 +879,7 @@ void create_root_prefix_node(char const *str, char const *end)
 		is_mark = child->get_type_synthetized().compare("#") == 0;
 		if (is_mark)
 		{
+			cout << "toque marca pre" << endl;
 			delete(child);
 		}
 	} while (is_mark);
@@ -735,9 +905,21 @@ void create_root_prefix_node(char const *str, char const *end)
 	root->add_child(child);
 
 	// Check the state of precedence of operators.
-	check_precedence((Ast_function**)&root);
+	//check_precedence((Ast_function**)&root);
 
 	stack_node.push_back(root);
+}
+
+void increment_level(char name)
+{
+	// Increment the level because a new parenthesis opening.
+	current_precedence_level++;
+}
+
+void decrement_level(char name)
+{
+	// Decrement the level because a parenthesis closing.
+	current_precedence_level--;
 }
 
 void push_mark(char name)
@@ -748,7 +930,6 @@ void push_mark(char name)
 	current_literal->set_value("#");
 	stack_node.push_back(current_literal);
 	current_literal = NULL;
-
 }
 
 void pepito(char const *str, char const *end)
@@ -917,10 +1098,10 @@ struct attr_grammar: public grammar<attr_grammar>
 								;
 
 			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st[&save_operator][&save_oper_node][&create_root_postfix_node])
-								| (r_op_prefix_st[&save_operator][&save_oper_node]) >> r_expr_prime[&create_root_prefix_node]
+								| r_op_prefix_st[&save_operator][&save_oper_node] >> r_expr_prime[&create_root_prefix_node]
 								;
 
-			r_expr_prime_prime  = ch_p('(')[&push_mark] >> r_expression >> ')'
+			r_expr_prime_prime  = ch_p('(')[&increment_level] >> r_expression >> ch_p(')')[&decrement_level]
 								| r_function[&create_root_function_node]
 								| r_literal[&save_literal_node]
 								| r_instance[&save_instance_node]
@@ -929,7 +1110,7 @@ struct attr_grammar: public grammar<attr_grammar>
 			/**
 			  * The functions accept a list of expressions.
 			  */
-			r_function			= r_function_st[&save_function][&save_func_node] >> ch_p('(')[&push_mark] >>!(r_expression % ',') >> ')';
+			r_function			= r_function_st[&save_function][&save_func_node] >> ch_p('(')[&push_mark][&increment_level] >>!(r_expression % ',') >> ch_p(')')[&decrement_level];
 
 			/**
 			  * Literals accepted: Integer and Float numbers, characters and string,

@@ -19,6 +19,8 @@ class Ast_function: public Ast_inner_node
 {
 private:
 	Function *func;
+	unsigned short precedence_level;
+	unsigned short syntax_order;
 
 	/**
 	  * Method of copy the Ast_function, STL-like C++.
@@ -37,8 +39,17 @@ public:
 	Ast_function &operator=(Ast_function const &other);
 
 	Function *get_function() const;
+	unsigned short get_precedence_level() const;
+	unsigned short get_syntax_order() const;
 
 	void set_function(Function *func);
+	void set_precedence_level(unsigned short p_level);
+	void set_syntax_order(unsigned short s_order);
+
+	bool is_comparable(Ast_function * other) const;
+	int compare_precedence(Ast_function * other) const;
+	int compare_order(Ast_function * other) const;
+
 
 	string to_string() const;
 };

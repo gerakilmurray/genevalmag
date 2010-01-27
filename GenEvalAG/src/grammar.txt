@@ -57,7 +57,7 @@ rules
 					//E[0].lexx = "E";
 					//E[0].grade = 1 + 4;
 					
-					E[0].grade = 3+4&pos;
+					E[0].grade = 5 + %2 + 6;
 					
 					//T[0].type = "Hola \n";
 					//E[1].type = E[0].type;

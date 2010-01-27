@@ -18,7 +18,9 @@ namespace genevalmag
 
 Ast_function::Ast_function()
 {
-	parent = NULL;
+	parent				= NULL;
+	precedence_level	= 0;
+	syntax_order		= 0;
 
 	#ifdef _DEBUG
 		ast_functions++;
@@ -58,6 +60,8 @@ Ast_function &Ast_function::operator=(Ast_function const &other)
 void Ast_function::copy(Ast_function const &other)
 {
 	func				= other.get_function();
+	precedence_level	= other.get_precedence_level();
+	syntax_order		= other.get_syntax_order();
 	childs				= other.get_childs();
 	parent				= other.get_parent();
 	type_synthetized	= other.get_type_synthetized();
@@ -72,9 +76,56 @@ Function *Ast_function::get_function() const
 	return func;
 }
 
+unsigned short Ast_function::get_precedence_level() const
+{
+	return precedence_level;
+}
+
+unsigned short Ast_function::get_syntax_order() const
+{
+	return syntax_order;
+}
+
 void Ast_function::set_function(Function *function)
 {
 	func = function;
+}
+
+void Ast_function::set_precedence_level(unsigned short p_level)
+{
+	precedence_level = p_level;
+}
+
+void Ast_function::set_syntax_order(unsigned short s_order)
+{
+	syntax_order = s_order;
+}
+
+bool Ast_function::is_comparable(Ast_function * other) const
+{
+	return (precedence_level == other->get_precedence_level());
+}
+
+/**
+  * Return:
+  * 	= O		when is same precedence
+  *		< 0		when other have great precedence
+  *		> 0		when other have small precedence
+  */
+int Ast_function::compare_precedence(Ast_function * other) const
+{
+	return (func->get_prec() - other->get_function()->get_prec());
+}
+
+/**
+  * Return:
+  * 	= O		when is same order
+  *		< 0		when other have great order
+  *		> 0		when other have small order
+  */
+int Ast_function::compare_order(Ast_function * other) const
+{
+	return (syntax_order - other->get_syntax_order());
 }
 
 string Ast_function::to_string() const
