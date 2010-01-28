@@ -103,6 +103,21 @@ void Ast_function::set_syntax_order(unsigned short s_order)
 	syntax_order = s_order;
 }
 
+bool Ast_function::is_prefix() const
+{
+	return (func->get_mode() == k_prefix);
+}
+
+bool Ast_function::is_infix() const
+{
+	return (func->get_mode() == k_infix);
+}
+
+bool Ast_function::is_postfix() const
+{
+	return (func->get_mode() == k_postfix);
+}
+
 bool Ast_function::is_comparable(Ast_function * other) const
 {
 	return (precedence_level == other->get_precedence_level());

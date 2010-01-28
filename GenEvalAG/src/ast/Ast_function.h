@@ -46,6 +46,10 @@ public:
 	void set_precedence_level(unsigned short p_level);
 	void set_syntax_order(unsigned short s_order);
 
+	bool is_prefix() const;
+	bool is_infix() const;
+	bool is_postfix() const;
+
 	bool is_comparable(Ast_function * other) const;
 	int compare_precedence(Ast_function * other) const;
 	int compare_order(Ast_function * other) const;

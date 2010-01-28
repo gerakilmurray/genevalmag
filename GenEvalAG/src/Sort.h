@@ -12,7 +12,7 @@
 /**
   * Enable/disable all output debuger in all class
   */
-#define _DEBUG
+//#define _DEBUG
 
 #include <string>
 

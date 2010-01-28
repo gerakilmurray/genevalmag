@@ -23,12 +23,11 @@ semantic domain
 	op infix	(50,non-assoc)	*  : int, int -> int;
 	op infix	(1,non-assoc)	=  : int, int -> int;
 	op 			(99,_)			sqr: int		 -> int;
-	op postfix	(14,_)			&  : int		 -> int;	
-	op prefix	(5,right)		%  : int		 -> int;
-	op 			(8,non-assoc)	rq : string		 -> adrian;
-	op infix	(6,left)		+  : int, int	 -> string;
-	op prefix	(3,left)		if  : int		 -> int;
-	op postfix	(200,left)		pos  : int		 -> int;
+	op postfix	(4,_)			&  : int		 -> int;	
+	op prefix	(7,right)		%  : int		 -> int;
+	op 			(18,non-assoc)	rq : string		 -> adrian;
+	op prefix	(90,left)		if  : int		 -> int;
+	op postfix	(2,left)		pos  : int		 -> int;
 		
 	/*********************
 	 * List of Functions *
@@ -58,12 +57,20 @@ rules
 					//E[0].grade = 1 + 4;
 					
 					E[0].grade = if4 + %5&pos + g( 1 + g(3 * (%2) * 7));
-					E[0].grade = 8 + 6 * 7&;
+					E[0].grade = if4 + %5&pos + g( 1 + g(3 * %2 * 7));
+					E[0].grade = ((((8 + 6))) * 7&);
 					E[0].grade = 8 + %if%if%if6& * 6;
 					E[0].grade = 1 + %%%% 6 & + 7pos;
 					E[0].grade = 1 + %7 * %9;
-					
 					E[0].grade = 1 + %%%% 6 & + (7 + %3 * 4)pos;
+					E[0].grade = % if 6 + 9 &; 
+					E[0].grade = 1 + %(2 + 3 * T[0].valor) * if3pos;
+					E[0].grade = 1 + %if2 * 3pos;
+					E[0].grade = 8pos&pos&pos&pos& + %if%if6&;
+					
+					
+					
+					E[0].grade = 1 + %if2 * 3pos;
 					
 					//T[0].type = "Hola \n";
 					//E[1].type = E[0].type;
@@ -105,5 +112,5 @@ rules
 				//end
 		;
 	
-// Acordarse de cambiar las key de attributo, symbol, oper, function, sort y regla para que sean estaticas sino
-// queda inconsistente con el map.
+// ACORDARSE DE VER EL TEMA DEL CODIGO PARA CHEK MARCA EN LAS OPERACIONES. CREEMOS QUE ESTA AL PEDO.
+// ACORDARSE DE TRATAR EL TEMA DE EQUACIONES REPETIDAS.

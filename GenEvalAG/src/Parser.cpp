@@ -45,6 +45,46 @@ using namespace genevalmag;
 SemDomain sem_domain;
 
 /**
+  * Pointer that reference a new operator in the grammar.
+  */
+Function  *current_oper;
+
+/**
+  * Pointer that reference a new function in the grammar.
+  */
+Function  *current_func;
+
+/**
+  * Type that represent the structure of a full declaration of one Attribute.
+  */
+struct decl_attribute
+{
+	vector<string>	d_names;
+	string			d_sort_type;
+	type_attr		d_mod_type;
+	string			d_member_symbol;
+} *new_attrs;
+
+/**
+  * Pointer that reference a current rule parsed in the grammar.
+  */
+Rule  *current_rule;
+
+/**
+  * Pointer to the last instance of attribute to parse successfully.
+  */
+Ast_instance    *current_instance;
+Ast_literal     *current_literal;
+Ast_function    *current_koperation;
+Ast_function    *current_kfunction;
+
+Equation        *current_eq;
+
+/****** Stack for expresion *******/
+vector<Ast_node*> 			stack_node;
+vector<Ast_inner_node*> 	stack_inner_node;
+
+/**
   * /var current_precedence_level
   * /brief Level current of precedence.
   */
@@ -55,6 +95,7 @@ unsigned short current_precedence_level = 0;
   * /brief Counter of syntax order.
   */
 unsigned short index_syntax_order = 0;
+
 /**
   * Methods and functions for parse Sort class.
   */
@@ -68,10 +109,6 @@ void add_sort(char const *str, char const *end)
 /**
   * Methods and functions for parse Operator.
   */
-/**
-  * Pointer that reference a new operator in the grammar.
-  */
-Function  *current_oper;
 
 void add_operator(char const *str, char const *end)
 {
@@ -124,10 +161,6 @@ void save_image_op(char const *str, char const *end)
 /**
   * Methods and functions for parse Function.
   */
-/**
-  * Pointer that reference a new function in the grammar.
-  */
-Function  *current_func;
 
 void add_function(char const *str, char const *end)
 {
@@ -158,16 +191,6 @@ void save_image_func(char const *str, char const *end)
 /**
   * Methods and functions for parse Attribute class.
   */
-/**
-  * Type that represent the structure of a full declaration of one Attribute.
-  */
-struct decl_attribute
-{
-	vector<string>	d_names;
-	string			d_sort_type;
-	type_attr		d_mod_type;
-	string			d_member_symbol;
-} *new_attrs;
 
 void add_attr(char const *str, char const *end)
 {
@@ -245,10 +268,6 @@ void save_terminal(char const *str, char const *end)
 /**
   * Methods and functions for parse Rule class.
   */
-/**
-  * Pointer that reference a current rule parsed in the grammar.
-  */
-Rule  *current_rule;
 
 void save_rule(char const *str, char const *end)
 {
@@ -278,20 +297,6 @@ void abbreviated_rule(char const *str, char const *end)
 /**
   * Methods and functions for parse Equation class of Rule.
   */
-
-/**
-  * Pointer to the last instance of attribute to parse successfully.
-  */
-Ast_instance    *current_instance;
-Ast_literal     *current_literal;
-Ast_function    *current_koperation;
-Ast_function    *current_kfunction;
-
-Equation        *current_eq;
-
-/****** Stack for expresion *******/
-vector<Ast_node*> 			stack_node;
-vector<Ast_inner_node*> 	stack_inner_node;
 
 void save_literal_node(char const *str, char const *end)
 {
@@ -327,7 +332,7 @@ void save_attr_ins(char const *str, char const *end)
 	current_instance->set_attr(current_instance->get_symb()->get_attribute(attr));
 	if(current_instance->get_attr() == NULL)
 	{
-		cerr << "ERROR:" << attr <<"Atribute inexistente. Verifique los atributos usados en los symbolos." << endl;
+		cerr << "ERROR:" << attr <<"Attribute non-existent. Check the attributes used in the symbols." << endl;
 		exit(1);
 	}
 }
@@ -434,311 +439,205 @@ void save_lvalue(char const *str, char const *end)
 
 void save_rvalue(char const *str, char const *end)
 {
-	// CHECK QUE EL TIPO DEL L_VALUE SEA EL ESPERADO PARA EL R_VALUE.
+	// Check that the type of r_value be expected from l_value.
 	if (current_eq->get_l_value().get_attr()->get_sort_type()->get_name().compare(stack_node.back()->get_type_synthetized()))
 	{
-		cerr << "Type no esperado para l_value." << endl;
+		cerr << "Type not expected from l_value." << endl;
 		exit(-1);
 	}
+	// OObtaining the result.
 	current_eq->set_r_value(stack_node.back());
-	//Limpieza del resultado y la basura.
 	stack_node.pop_back();
-	while(!stack_node.empty())
-	{
-		Ast_literal* aux = (Ast_literal*)stack_node.back();
-		stack_node.pop_back();
-		delete(aux);
-	}
 	current_rule->add_eq(*current_eq);
+
 	delete(current_eq);
 	current_eq = NULL;
 }
 
 /**
-  * PRECEDENCE SECTION
+  * Precedence Section.
   */
 
 /**
-  *	    A                 	 B
-  *    / \                	/ \
-  *   B   C    -------->   D   A
-  *  / \					  / \
-  * D   E                    E   C
+  *	    A(op)                	 B(op)
+  *    / \                	    / \
+  *   B   C    -------->       D   A
+  *  / \					      / \
+  * D   E                        E   C
   *
-  *     A                 	 C
-  *    / \                	/ \
-  *   B   C    -------->   A   E
-  *      / \			  / \
-  *     D   E            B   D
+  *     A(op)                 	 C(op)
+  *    / \                	    / \
+  *   B   C    -------->       A   E
+  *      / \			      / \
+  *     D   E                B   D
   */
-int swap_root_child(Ast_function** old_root, int item_child)
+int swap_root_child(Ast_function** old_root, int i_new_root)
 {
-	int index_swap = -1;
-
-	Ast_function* new_root = (Ast_function*)(*old_root)->get_child(item_child);
+	Ast_function *new_root = (Ast_function*)(*old_root)->get_child(i_new_root);
 	new_root->set_parent((*old_root)->get_parent());
 
-	if (new_root->get_function()->get_mode() == k_infix)
-		index_swap = (item_child == 0)? 1: 0;
+	int index_swap = -1;
+	if (new_root->is_infix())
+		index_swap = (i_new_root == 0)? 1: 0;
 	else
 		index_swap = 0;
 
-	Ast_node * aux = new_root->get_child(index_swap); // E  // D
-	(*old_root)->replace_child(item_child,aux); // set a A hijo E // set A hijo D
-	new_root->replace_child(index_swap,(*old_root)); // set B hijo A // set C hijo A
-	(*old_root) = new_root; // the new root. // B // C
+	// Get E.  // Get D.
+	Ast_node * aux = new_root->get_child(index_swap);
+	// Set child E to A // Set child D to A.
+	(*old_root)->replace_child(i_new_root, aux);
+	// Set child A to B // Set child A to C.
+	new_root->replace_child(index_swap, (*old_root));
+	// Set new root B or C.
+	(*old_root) = new_root;
 
 	return index_swap;
 }
 
-void swap_root_grandson(Ast_function** old_root)
+/**
+  *     A (op)                	 B(op)
+  *    / \                	    / \
+  *   B   C    -------->       D   E
+  *  / \			                \
+  * D   E(op)                        A
+  *      \                          / \
+  *       F                        F   C
+  */
+int swap_root_grandson(Ast_function** old_root)
 {
+	Ast_function *new_root = (Ast_function *)(*old_root)->get_child(0);
+
 	int index_swap = -1;
-
-	Ast_function * new_root = (Ast_function *)(*old_root)->get_child(0);
-
-	if (new_root->get_function()->get_mode() == k_infix)
+	if (new_root->is_infix())
 		index_swap = 1;
 	else
+		// VER CASO DE PREFIJA.
 		index_swap = 0;
 
-	Ast_function * swap = (Ast_function *) new_root->get_child(index_swap);
+	Ast_function *swap = (Ast_function *)new_root->get_child(index_swap);
+	new_root->set_parent((*old_root)->get_parent());
+	Ast_node *grandson = swap->get_child(0);
+	(*old_root)->replace_child(0, grandson);
+	swap->replace_child(0, (*old_root));
+	(*old_root) = new_root;
+	return index_swap;
+}
 
-	if((*old_root)->is_comparable(swap))
+void check_precedence(Ast_function ** root_tree);
+
+void check_subtree(Ast_function** subtree, int index_root_subtree)
+{
+
+	Ast_function * aux = (Ast_function*)(*subtree)->get_child(index_root_subtree);
+	check_precedence(&aux);
+
+	// Update new son by the result of recursion.
+	(*subtree)->replace_child(index_root_subtree,aux);
+
+	if (((*subtree)->compare_precedence(aux) > 0) && ((*subtree)->is_comparable(aux)))
+	// The root and the child are at the same level of precedence.
+	// The root should be applied first.
 	{
-		new_root->set_parent((*old_root)->get_parent());
-		Ast_node * grandson = swap->get_child(0);
-		(*old_root)->replace_child(0, grandson);
-		swap->replace_child(0, (*old_root));
-		(*old_root) = new_root;
+		if ((((*subtree)->compare_order(aux) > 0) && aux->is_prefix()) ||
+			(((*subtree)->compare_order(aux) < 0) && aux->is_postfix()))
+		// It makes the change only if does not change the syntactic order.
+		// An operation should be introduced within a prefix or postfix.
+		{
+			swap_root_child(subtree, index_root_subtree);
+		}
 	}
 }
 
+
 /**
+  * Checking the precedence of the operators of the parcial tree.
+  * If is necesary modifies the struct of tree.
+  *
+  * Obs: Se realizan controles sobre casos que se deben
+  *
+  * Solamente se realizan cambios en la estructura del arbol, si se cumplen las siguientes 3 condiciones:
+  *   - Las operaciones a cambiar estan en el mismo nivel de precedencia (con respecto a los parentesis).
+  *   - No se rompe el orden sintactico de la expresion.
+  *   - La operacion con mayor precedencia se aplica primero.
+  *
+  *
   *
   */
 void check_precedence(Ast_function ** root_tree)
 {
-	cout << "check_precedence" << endl;
-	//static int precedence_case_op_prefix = -1;
-
-	if (((*root_tree)->get_function()->get_mode() != k_prefix) && ((*root_tree)->get_child(0)->get_conflict() > -1))
-	// Caso excepcional de operacion infija. Necesitamos informacion del paso anterior.
+	if (!(*root_tree)->is_prefix() && ((*root_tree)->get_child(0)->get_conflict() > -1))
+	// Special case which must complete a check of some sub-level of the tree.
 	{
-		cout << "excepsional " << (*root_tree)->to_string() << endl;
-
-		if ((*root_tree)->get_child(0)->get_conflict() < (*root_tree)->get_function()->get_prec())
+		if (((*root_tree)->get_function()->get_prec() > (*root_tree)->get_child(0)->get_conflict()) &&
+			((*root_tree)->is_comparable((Ast_function*)(*root_tree)->get_child(0))))
+		// Same level precedence and change is needed to correct conflict of precedence.
 		{
-			cout << "conflict" << endl;
-			swap_root_grandson(root_tree);
+			int i_subtree = swap_root_grandson(root_tree);
+
+			// Checks that the subtree with the older root is well formed.
+			Ast_function * subtree = (Ast_function*)(*root_tree)->get_child(i_subtree);
+			check_subtree(&subtree,0);
+
+			// Updates the main tree, with the new root of subtree.
+			(*root_tree)->replace_child(i_subtree,subtree);
+
+			// Only requires checking the main tree root with his new son.
+			check_precedence(root_tree);
 		}
+		// Turn off the flag.
 		(*root_tree)->get_child(0)->desactive_conflict();
-	}
-
-	int i_child = 0;
-	// caso normal
-	while (i_child < (*root_tree)->get_function()->get_arity())
-	{
-		Ast_function* node = NULL;
-		node = dynamic_cast<Ast_function*>((*root_tree)->get_childs()[i_child]); // interes en los nodos de tipo funcion.
-
-		if (node)
-		{
-			if (((*root_tree)->compare_precedence(node) > 0) && ((*root_tree)->is_comparable(node)))
-			/**
-			  * Same level precedence and detection of posible swap.
-			  */
-			{
-				cout << "meti IF" << (*root_tree)->to_string() << endl;
-				if (((*root_tree)->get_function()->get_mode() == k_prefix) &&
-					(node->get_function()->get_mode() == k_prefix)
-					)
-				{
-					cout << "omite pre" << endl;
-					i_child++;
-					continue;
-				}
-
-				if (((*root_tree)->get_function()->get_mode() == k_postfix) &&
-					(node->get_function()->get_mode() == k_postfix)
-					)
-				{
-					cout << "omite post" << endl;
-					i_child++;
-					continue;
-				}
-
-				if (((*root_tree)->compare_order(node) < 0) && (node->get_function()->get_mode() == k_prefix))
-				/**
-				  * Discart swap because affect the syntax order.
-				  */
-				{
-					(*root_tree)->active_conflict(node->get_function()->get_prec());
-					//precedence_case_op_prefix = node->get_function()->get_prec();
-					cout << "omite infix pre" << endl;
-					i_child++;
-					continue;
-				}
-
-				if (((*root_tree)->compare_order(node) > 0) && (node->get_function()->get_mode() == k_postfix))
-				/**
-				  * Discart swap because affect the syntax order.
-				  */
-				{
-					cout << "omite infix post" << endl;
-					i_child++;
-					continue;
-				}
-
-				cout << "order ok" << endl;
-				int index_child = swap_root_child(root_tree, i_child);
-
-				Ast_function * aux = (Ast_function*)(*root_tree)->get_child(index_child);
-				check_precedence(&aux);
-				(*root_tree)->replace_child(index_child,aux);
-
-				if (((*root_tree)->compare_precedence(aux) > 0) && ((*root_tree)->is_comparable(aux)))
-				{
-					if ((((*root_tree)->compare_order(aux) > 0) && (aux->get_function()->get_mode() == k_prefix)) ||
-						(((*root_tree)->compare_order(aux) < 0) && (aux->get_function()->get_mode() == k_postfix)))
-					{
-						cout << "swap rec" << (*root_tree)->to_string() << " por " << aux->to_string() << endl;
-						swap_root_child(root_tree, index_child);
-					}
-				}
-			}
-		}
-		i_child++;
-	}// fin while.
-}
-
-/**
-  *
-  */
-void check_precedence5(Ast_function ** root_tree)
-{
-	cout << (*root_tree)->to_string() << "adentro" << endl;
-
-	int i_child = 0;Ast_function * new_root = (Ast_function *)(*root_tree)->get_child(0);
-	new_root->set_parent((*root_tree)->get_parent());
-	int index_swap = -1;
-	if (new_root->get_function()->get_mode()!= k_infix)
-		index_swap = 0;
-	else
-		index_swap = 1;
-	Ast_function * swap = (Ast_function *) new_root->get_child(index_swap);
-	Ast_node * grandson = swap->get_child(0);
-	(*root_tree)->replace_child(0, grandson);
-	swap->replace_child(0, *root_tree);
-	new_root->replace_child(index_swap, swap);
-	bool recursive = false;
-
-	static int precedence_case_op_prefix = -1;
-
-	if ((*root_tree)->get_function()->get_mode() == k_infix && precedence_case_op_prefix > -1)
-		// Caso excepcional de operacion infija. Necesitamos informacion del paso anterior.
-	{
-
-		if (precedence_case_op_prefix < (*root_tree)->get_function()->get_prec())
-		{
-			Ast_function * new_root = (Ast_function *)(*root_tree)->get_child(0);
-			new_root->set_parent((*root_tree)->get_parent());
-			int index_swap = -1;
-			if (new_root->get_function()->get_mode()!= k_infix)
-				index_swap = 0;
-			else
-				index_swap = 1;
-			Ast_function * swap = (Ast_function *) new_root->get_child(index_swap);
-			Ast_node * grandson = swap->get_child(0);
-			(*root_tree)->replace_child(0, grandson);
-			swap->replace_child(0, *root_tree);
-			new_root->replace_child(index_swap, swap);
-
-
-			*root_tree = new_root;
-		}
-		precedence_case_op_prefix = -1;
+		// Don't necesary continue with normal behavior, because the special case performs all change.
 		return;
 	}
 
-	// caso normal
+	// Normal behavior.
+	int i_child = 0;
 	while (i_child < (*root_tree)->get_function()->get_arity())
+	// It covers all children.
 	{
 		Ast_function* node = NULL;
-		node = dynamic_cast<Ast_function*>((*root_tree)->get_childs()[i_child]); // interes en los nodos de tipo funcion.
+		// Detecting if the child is of Ast_function type.
+		node = dynamic_cast<Ast_function*>((*root_tree)->get_childs()[i_child]);
 
 		if (node)
+		// The node is the Ast_function because the dynamic cast was successfully.
 		{
-			// Cast succeeded. Is a function.
-			if ((*root_tree)->get_function()->get_prec() > node->get_function()->get_prec())
+			if (((*root_tree)->compare_precedence(node) > 0) && ((*root_tree)->is_comparable(node)))
+			// Same level precedence and detection of posible swap.
 			{
-				if ((*root_tree)->get_function()->get_mode() == k_infix &&
-					node->get_function()->get_mode() == k_postfix &&
-					i_child == 0)
+				if (((*root_tree)->is_prefix() && node->is_prefix()) ||
+					((*root_tree)->is_postfix() && node->is_postfix()))
+				// Case of nested prefix or postfix operations.
 				{
-					cout << "omite infix postfix" << endl;
 					i_child++;
 					continue;
 				}
-				if (node->get_function()->get_mode() == k_prefix)
+
+				if (((*root_tree)->compare_order(node) < 0) && node->is_prefix())
+				// Discart swap because affect the syntax order.
 				{
-					if ((*root_tree)->get_function()->get_mode() == k_infix)
-					{
-						if (i_child == 1)
-						{
-							cout << "omite infix prefix OJO" << endl;
-							precedence_case_op_prefix = node->get_function()->get_prec();
-							i_child++;
-							continue;
-						}
-						if (i_child == 0)
-						{
-							// caso de hijo izq menor prec
-							recursive = true;
-						}
-					}
-					if ((*root_tree)->get_function()->get_mode() == k_prefix)
-					{
-						cout << "omite prefix prefix" << endl;
-						precedence_case_op_prefix = node->get_function()->get_prec();
-						i_child++;
-						continue;
-					}
+					// It turns on the flag of conflict to check into special case.
+					(*root_tree)->active_conflict(node->get_function()->get_prec());
+					i_child++;
+					continue;
 				}
 
-				cout << "tenemos que cambiar" << (*root_tree)->to_string() << endl;
-
-				int child_child = swap_root_child(root_tree, i_child);
-
-//				int child_child = -1;
-//				if (node->get_function()->get_mode() == k_infix)
-//					child_child = 1;
-//				else
-//					child_child = 0;
-//
-//				Ast_node * aux = node->get_child(child_child);
-//				node->set_parent((*root_tree)->get_parent());
-//				(*root_tree)->replace_child(i_child,aux);
-//				node->replace_child(child_child,*root_tree);
-//				*root_tree = node;
-
-				Ast_function * aux1 = (Ast_function*)(*root_tree)->get_child(child_child);
-				check_precedence(&aux1);
-				(*root_tree)->replace_child(i_child,aux1);
-
-				if(recursive)
+				if (((*root_tree)->compare_order(node) > 0) && node->is_postfix())
+				// Discart swap because affect the syntax order.
 				{
-					Ast_function * rec = (Ast_function*)node->get_child(0);
-					check_precedence(&rec);
-					(*root_tree)->replace_child(i_child,rec);
-					// sabemos que a lo sumo el cambio esta entre la nueva raiz y sus hijos.
-					check_precedence(root_tree);
-					recursive = false;
+					i_child++;
+					continue;
 				}
+
+				// Performs the swap in normal conditions.
+				int index_child = swap_root_child(root_tree, i_child);
+
+				// Recursion is sent for organize the tree with the new root.
+				check_subtree(root_tree,index_child);
 			}
 		}
 		i_child++;
-	}
+	}// end while.
 }
 
 /**
@@ -760,7 +659,6 @@ void create_root_infix_node(char const *str, char const *end)
 		is_mark = r_child->get_type_synthetized().compare("#") == 0;
 		if (is_mark)
 		{
-			cout << "toque marca R" << endl;
 			delete(r_child);
 		}
 	} while (is_mark);
@@ -771,7 +669,6 @@ void create_root_infix_node(char const *str, char const *end)
 		is_mark = l_child->get_type_synthetized().compare("#") == 0;
 		if (is_mark)
 		{
-			cout << "toque marca L" << endl;
 			delete(l_child);
 		}
 	} while (is_mark);
@@ -819,7 +716,6 @@ void create_root_function_node(char const *str, char const *end)
 		stack_node.pop_back();
 		if (child->get_type_synthetized().compare("#") == 0)
 		{
-			cout << "toque marca func" << endl;
 			delete(child);
 			break;
 		}
@@ -862,7 +758,6 @@ void create_root_postfix_node(char const *str, char const *end)
 		is_mark = child->get_type_synthetized().compare("#") == 0;
 		if (is_mark)
 		{
-			cout << "toque marca post" << endl;
 			delete(child);
 		}
 	} while (is_mark);
@@ -907,7 +802,6 @@ void create_root_prefix_node(char const *str, char const *end)
 		is_mark = child->get_type_synthetized().compare("#") == 0;
 		if (is_mark)
 		{
-			cout << "toque marca pre" << endl;
 			delete(child);
 		}
 	} while (is_mark);
