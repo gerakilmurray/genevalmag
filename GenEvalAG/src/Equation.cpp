@@ -146,23 +146,41 @@ void Equation::set_r_value(Ast_node *rvalue)
 /**
   * Generate and return a string reprensentation of a Equation.
   *
-  * Result= <l_value> "::=" <r_value> ";"
+  * Result= <l_value> "=" <r_value> ";"
   *
   * where <l_value> = "instance_attr" and <r_value> is= "list of node_ast"
   */
 string Equation::to_string() const
 {
 	string eq;
-
-	// Save l_value.
 	eq.append(l_value.to_string());
 	eq.append("\t=\t");
-
-	// FALTA MOSTRAR EL NUEVO ARBOL.
 	eq.append(r_value->to_string());
-
 	eq.append(";");
 	return eq;
+}
+
+/**
+  * Compares the equation with other.
+  */
+bool Equation::equals(Equation const &other) const
+{
+	return	key().compare(other.key()) == 0;
+}
+
+/**
+  * Generate and return the string key that identifies a equation definitely.
+  *
+  * Result= <l_value><r_value>
+  *
+  * where <l_value> = "instance_attr" and <r_value> is= "list of node_ast"
+  */
+string Equation::key() const
+{
+	string key;
+	key.append(l_value.to_string());
+	key.append(r_value->to_string());
+	return key;
 }
 
 } // end genevalmag

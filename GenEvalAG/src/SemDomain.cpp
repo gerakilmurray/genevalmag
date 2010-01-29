@@ -71,11 +71,11 @@ bool SemDomain::add_sort(Sort &sort)
 /**
   * Enqueue a operator in the list of the semantic domain.
   */
-bool SemDomain::add_operator(Function &oper)
-{
-	oper.set_is_operator(IS_OPERATOR);
-	return add<Function>(oper, sd_func);
-}
+//bool SemDomain::add_operator(Function &oper)
+//{
+//	oper.set_is_operator(IS_OPERATOR);
+//	return add<Function>(oper, sd_func);
+//}
 
 /**
   * Enqueue a function in the list of the semantic domain.
@@ -124,7 +124,6 @@ Sort &SemDomain::return_sort(string name_sort)
 	// becouse is a type basic. if not the sort belong map. the map not have repeat.
 	sort_new.set_type_basic(true);
 	add_sort(sort_new);
-
 	map<string,Sort>::iterator it = sd_sort.find(name_sort);
 	return it->second;
 }

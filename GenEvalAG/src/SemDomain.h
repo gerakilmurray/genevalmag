@@ -56,7 +56,7 @@ public:
 	/**
 	  * Enqueue a operator in the list of the semantic domain.
 	  */
-	bool add_operator(Function &oper);
+//	bool add_operator(Function &oper);
 	/**
 	  * Enqueue a function in the list of the semantic domain.
 	  */

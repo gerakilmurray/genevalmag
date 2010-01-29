@@ -33,14 +33,7 @@ class Rule
 		  */
 		void destroy();
 
-		/**
-		  * Generate and return a string reprensentation of a rule.
-		  *
-		  * Result= <left_symbol> "::=" <right_side> ";"
-		  *
-		  * where <right_ride> is= <symbol_1> " " ... " " <symbol_n>
-		  */
-		string to_string_not_eqs() const;
+		bool belong(const Equation &eq) const;
 
 	public:
 		/**
@@ -106,6 +99,15 @@ class Rule
 		  * where <right_ride> is= <symbol_1> " " ... " " <symbol_n>
 		  */
 		string to_string() const;
+
+		/**
+		  * Generate and return a string reprensentation of a rule.
+		  *
+		  * Result= <left_symbol> "::=" <right_side> ";"
+		  *
+		  * where <right_ride> is= <symbol_1> " " ... " " <symbol_n>
+		  */
+		string to_string_not_eqs() const;
 
 		/**
 		  * Compares the rule with other.

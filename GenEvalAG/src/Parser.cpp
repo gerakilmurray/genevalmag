@@ -24,6 +24,8 @@
 #include "ast/Ast_literal.h"
 #include "ast/Ast_function.h"
 
+#include "Semantic_check.h"
+
 using namespace std;
 using namespace BOOST_SPIRIT_CLASSIC_NS;
 using namespace genevalmag;
@@ -43,11 +45,6 @@ using namespace genevalmag;
   * /brief Variable to represent Semantic domain.
   */
 SemDomain sem_domain;
-
-/**
-  * Pointer that reference a new operator in the grammar.
-  */
-Function  *current_oper;
 
 /**
   * Pointer that reference a new function in the grammar.
@@ -73,28 +70,16 @@ Rule  *current_rule;
 /**
   * Pointer to the last instance of attribute to parse successfully.
   */
-Ast_instance    *current_instance;
-Ast_literal     *current_literal;
-Ast_function    *current_koperation;
-Ast_function    *current_kfunction;
+Ast_instance	*current_instance;
+Ast_literal		*current_literal;
+Ast_function	*current_ast_function;
+Equation		*current_eq;
 
-Equation        *current_eq;
-
-/****** Stack for expresion *******/
+/**
+  * Stacks for expression precedence manager.
+  */
 vector<Ast_node*> 			stack_node;
 vector<Ast_inner_node*> 	stack_inner_node;
-
-/**
-  * /var current_precedence_level
-  * /brief Level current of precedence.
-  */
-unsigned short current_precedence_level = 0;
-
-/**
-  * /var index_syntax_order
-  * /brief Counter of syntax order.
-  */
-unsigned short index_syntax_order = 0;
 
 /**
   * Methods and functions for parse Sort class.
@@ -103,75 +88,33 @@ void add_sort(char const *str, char const *end)
 {
 	string  name(str, end);
 	Sort sort(name);
-	sem_domain.add_sort(sort);
-}
-
-/**
-  * Methods and functions for parse Operator.
-  */
-
-void add_operator(char const *str, char const *end)
-{
-	sem_domain.add_operator(*current_oper);
-	delete(current_oper);
-	current_oper = NULL;
-}
-
-void inic_operator(char const *str, char const *end)
-{
-	// Ignore the string parsed.
-	current_oper = new Function();
-}
-
-void save_name_op(char const *str, char const *end)
-{
-	string name(str, end);
-	current_oper->set_name(name);
-}
-
-void save_mode_op(char const *str, char const *end)
-{
-	string mode(str, end);
-	current_oper->set_mode(mode);
-}
-
-void save_prec_op(int const prec)
-{
-	current_oper->set_prec(prec);
-}
-
-void save_assoc_op(char const *str, char const *end)
-{
-	string assoc(str, end);
-	current_oper->set_oper_assoc(assoc);
-}
-
-void save_domain_op(char const *str, char const *end)
-{
-	string domain(str, end);
-	current_oper->add_domain(&(sem_domain.return_sort(domain)));
-}
-
-void save_image_op(char const *str, char const *end)
-{
-	string image(str, end);
-	current_oper->set_image(&(sem_domain.return_sort(image)));
+	if(!sem_domain.add_sort(sort))
+	{
+		cerr << "WARNING: Sort duplicate was ignored: --> " << sort.to_string() << endl;
+	}
 }
 
 /**
   * Methods and functions for parse Function.
   */
+void inic_func(char const *str, char const *end)
+{
+	// Ignore the string parsed.
+	current_func = new Function();
+}
 
 void add_function(char const *str, char const *end)
 {
-	sem_domain.add_function(*current_func);
+	if(!sem_domain.add_function(*current_func))
+	{
+		cerr << "WARNING: Declaration duplicate was ignored: --> " << current_func->to_string() << endl;
+	}
 	delete(current_func);
 	current_func = NULL;
 }
 
 void save_name_func(char const *str, char const *end)
 {
-	current_func = new Function();
 	string name(str, end);
 	current_func->set_name(name);
 }
@@ -189,9 +132,34 @@ void save_image_func(char const *str, char const *end)
 }
 
 /**
+  * Methods and functions for parse Operator.
+  */
+void add_operator(char const *str, char const *end)
+{
+	current_func->set_is_operator(IS_OPERATOR);
+	add_function(str, end);
+}
+
+void save_mode_op(char const *str, char const *end)
+{
+	string mode(str, end);
+	current_func->set_mode(mode);
+}
+
+void save_prec_op(int const prec)
+{
+	current_func->set_prec(prec);
+}
+
+void save_assoc_op(char const *str, char const *end)
+{
+	string assoc(str, end);
+	current_func->set_oper_assoc(assoc);
+}
+
+/**
   * Methods and functions for parse Attribute class.
   */
-
 void add_attr(char const *str, char const *end)
 {
 	string name(str, end);
@@ -203,8 +171,8 @@ void add_attr(char const *str, char const *end)
 	// Enqueue the name of new attribute.
 	new_attrs->d_names.push_back(name);
 	if(new_attrs->d_names.size() == 1)
+	// First attribute name.
 	{
-		// First attribute name.
 		// Setting default values.
 		new_attrs->d_mod_type = k_synthetize;
 		new_attrs->d_member_symbol = "\0";
@@ -221,13 +189,17 @@ void save_type_attr(char const *str, char const *end)
 {
 	string mod_type(str, end);
 	if(mod_type.compare("inh") == 0)
+	{
 		new_attrs->d_mod_type = k_inherit;
+	}
 }
 
-void save_member_list(char const *str, char const *end)
+void save_member_list_attr(char const *str, char const *end)
 {
 	string members(str, end);
 	boost::erase_all(members, " ");
+	boost::erase_all(members, "\t");
+	boost::erase_all(members, "\n");
 	new_attrs->d_member_symbol = members;
 }
 
@@ -268,7 +240,6 @@ void save_terminal(char const *str, char const *end)
 /**
   * Methods and functions for parse Rule class.
   */
-
 void save_rule(char const *str, char const *end)
 {
 	sem_domain.add_rule(*current_rule);
@@ -297,20 +268,6 @@ void abbreviated_rule(char const *str, char const *end)
 /**
   * Methods and functions for parse Equation class of Rule.
   */
-
-void save_literal_node(char const *str, char const *end)
-{
-	stack_node.push_back(current_literal);
-	current_literal = NULL;
-}
-
-void save_instance_node(char const *str, char const *end)
-{
-	current_instance->set_type_synthetized(current_instance->get_attr()->get_sort_type()->get_name());
-	stack_node.push_back(current_instance);
-	current_instance = NULL;
-};
-
 void save_symb_ins(char const *str, char const *end)
 {
 	string symb(str, end);
@@ -389,45 +346,17 @@ void save_lit_str(char const *str, char const *end)
 	current_literal->set_value(str_l);
 }
 
-void save_operator(char const *str, char const *end)
-{
-	current_oper = new Function();
-	save_name_op(str, end);
-	current_oper->set_is_operator(IS_OPERATOR);
-}
-
 void save_function(char const *str, char const *end)
 {
+	current_func = new Function();
 	save_name_func(str, end);
 }
 
-void save_oper_node(char const *str, char const *end)
+void save_operator(char const *str, char const *end)
 {
-	current_koperation = new Ast_function();
-
-	current_koperation->set_function(current_oper);
-	current_koperation->set_precedence_level(current_precedence_level);
-	current_koperation->set_syntax_order(++index_syntax_order);
-
-	current_oper = NULL;
-
-	stack_inner_node.push_back(current_koperation);
-	current_koperation = NULL;
-};
-
-void save_func_node(char const *str, char const *end)
-{
-	current_kfunction = new Ast_function();
-
-	current_kfunction->set_function(current_func);
-	current_kfunction->set_precedence_level(current_precedence_level);
-	current_kfunction->set_syntax_order(++index_syntax_order);
-
-	current_func = NULL;
-
-	stack_inner_node.push_back(current_kfunction);
-	current_kfunction = NULL;
-};
+	save_function(str,end);
+	current_func->set_is_operator(IS_OPERATOR);
+}
 
 void save_lvalue(char const *str, char const *end)
 {
@@ -445,233 +374,85 @@ void save_rvalue(char const *str, char const *end)
 		cerr << "Type not expected from l_value." << endl;
 		exit(-1);
 	}
-	// OObtaining the result.
-	current_eq->set_r_value(stack_node.back());
-	stack_node.pop_back();
-	current_rule->add_eq(*current_eq);
 
+	Ast_node * root_tree = stack_node.back();
+	stack_node.pop_back();
+
+	// Check and solve conflicts of associativity
+	Ast_function * root_func = dynamic_cast<Ast_function*>(root_tree);
+	if (root_func)
+	{
+		check_associativity(&root_func);
+		root_tree = root_func;
+	}
+
+	// Obtaining the result.
+	current_eq->set_r_value(root_tree);
+
+	if (!current_rule->add_eq(*current_eq))
+	{
+		cerr << "WARNING: Equation duplicate: --> \"" << current_eq->to_string() << "\" in rule: --> \"" << current_rule->to_string_not_eqs() << "\"" << endl;
+	}
 	delete(current_eq);
 	current_eq = NULL;
+
+	reset_semantic_context();
 }
 
-/**
-  * Precedence Section.
-  */
-
-/**
-  *	    A(op)                	 B(op)
-  *    / \                	    / \
-  *   B   C    -------->       D   A
-  *  / \					      / \
-  * D   E                        E   C
-  *
-  *     A(op)                 	 C(op)
-  *    / \                	    / \
-  *   B   C    -------->       A   E
-  *      / \			      / \
-  *     D   E                B   D
-  */
-int swap_root_child(Ast_function** old_root, int i_new_root)
+void push_mark(char name)
 {
-	Ast_function *new_root = (Ast_function*)(*old_root)->get_child(i_new_root);
-	new_root->set_parent((*old_root)->get_parent());
-
-	int index_swap = -1;
-	if (new_root->is_infix())
-		index_swap = (i_new_root == 0)? 1: 0;
-	else
-		index_swap = 0;
-
-	// Get E.  // Get D.
-	Ast_node * aux = new_root->get_child(index_swap);
-	// Set child E to A // Set child D to A.
-	(*old_root)->replace_child(i_new_root, aux);
-	// Set child A to B // Set child A to C.
-	new_root->replace_child(index_swap, (*old_root));
-	// Set new root B or C.
-	(*old_root) = new_root;
-
-	return index_swap;
+	current_literal = new Ast_literal();
+	// Mark for parameter of function.
+	current_literal->set_type_synthetized("#");
+	current_literal->set_value("#");
+	stack_node.push_back(current_literal);
+	current_literal = NULL;
 }
 
 /**
-  *     A (op)                	 B(op)
-  *    / \                	    / \
-  *   B   C    -------->       D   E
-  *  / \			                \
-  * D   E(op)                        A
-  *      \                          / \
-  *       F                        F   C
+  * Creation AST nodes.
   */
-int swap_root_grandson(Ast_function** old_root)
+
+void create_literal_node(char const *str, char const *end)
 {
-	Ast_function *new_root = (Ast_function *)(*old_root)->get_child(0);
-
-	int index_swap = -1;
-	if (new_root->is_infix())
-		index_swap = 1;
-	else
-		// VER CASO DE PREFIJA.
-		index_swap = 0;
-
-	Ast_function *swap = (Ast_function *)new_root->get_child(index_swap);
-	new_root->set_parent((*old_root)->get_parent());
-	Ast_node *grandson = swap->get_child(0);
-	(*old_root)->replace_child(0, grandson);
-	swap->replace_child(0, (*old_root));
-	(*old_root) = new_root;
-	return index_swap;
+	stack_node.push_back(current_literal);
+	current_literal = NULL;
 }
 
-void check_precedence(Ast_function ** root_tree);
-
-void check_subtree(Ast_function** subtree, int index_root_subtree)
+void create_instance_node(char const *str, char const *end)
 {
+	current_instance->set_type_synthetized(current_instance->get_attr()->get_sort_type()->get_name());
+	stack_node.push_back(current_instance);
+	current_instance = NULL;
+};
 
-	Ast_function * aux = (Ast_function*)(*subtree)->get_child(index_root_subtree);
-	check_precedence(&aux);
-
-	// Update new son by the result of recursion.
-	(*subtree)->replace_child(index_root_subtree,aux);
-
-	if (((*subtree)->compare_precedence(aux) > 0) && ((*subtree)->is_comparable(aux)))
-	// The root and the child are at the same level of precedence.
-	// The root should be applied first.
-	{
-		if ((((*subtree)->compare_order(aux) > 0) && aux->is_prefix()) ||
-			(((*subtree)->compare_order(aux) < 0) && aux->is_postfix()))
-		// It makes the change only if does not change the syntactic order.
-		// An operation should be introduced within a prefix or postfix.
-		{
-			swap_root_child(subtree, index_root_subtree);
-		}
-	}
-}
-
-
-/**
-  * Checking the precedence of the operators of the parcial tree.
-  * If is necesary modifies the struct of tree.
-  *
-  * Obs: Se realizan controles sobre casos que se deben
-  *
-  * Solamente se realizan cambios en la estructura del arbol, si se cumplen las siguientes 3 condiciones:
-  *   - Las operaciones a cambiar estan en el mismo nivel de precedencia (con respecto a los parentesis).
-  *   - No se rompe el orden sintactico de la expresion.
-  *   - La operacion con mayor precedencia se aplica primero.
-  *
-  *
-  *
-  */
-void check_precedence(Ast_function ** root_tree)
+void create_func_node(char const *str, char const *end)
 {
-	if (!(*root_tree)->is_prefix() && ((*root_tree)->get_child(0)->get_conflict() > -1))
-	// Special case which must complete a check of some sub-level of the tree.
-	{
-		if (((*root_tree)->get_function()->get_prec() > (*root_tree)->get_child(0)->get_conflict()) &&
-			((*root_tree)->is_comparable((Ast_function*)(*root_tree)->get_child(0))))
-		// Same level precedence and change is needed to correct conflict of precedence.
-		{
-			int i_subtree = swap_root_grandson(root_tree);
+	current_ast_function = new Ast_function();
 
-			// Checks that the subtree with the older root is well formed.
-			Ast_function * subtree = (Ast_function*)(*root_tree)->get_child(i_subtree);
-			check_subtree(&subtree,0);
+	extern unsigned short current_precedence_level;
+	extern unsigned short index_syntax_order;
 
-			// Updates the main tree, with the new root of subtree.
-			(*root_tree)->replace_child(i_subtree,subtree);
+	current_ast_function->set_function(current_func);
+	current_ast_function->set_precedence_level(current_precedence_level);
+	current_ast_function->set_syntax_order(++index_syntax_order);
 
-			// Only requires checking the main tree root with his new son.
-			check_precedence(root_tree);
-		}
-		// Turn off the flag.
-		(*root_tree)->get_child(0)->desactive_conflict();
-		// Don't necesary continue with normal behavior, because the special case performs all change.
-		return;
-	}
+	current_func = NULL;
 
-	// Normal behavior.
-	int i_child = 0;
-	while (i_child < (*root_tree)->get_function()->get_arity())
-	// It covers all children.
-	{
-		Ast_function* node = NULL;
-		// Detecting if the child is of Ast_function type.
-		node = dynamic_cast<Ast_function*>((*root_tree)->get_childs()[i_child]);
-
-		if (node)
-		// The node is the Ast_function because the dynamic cast was successfully.
-		{
-			if (((*root_tree)->compare_precedence(node) > 0) && ((*root_tree)->is_comparable(node)))
-			// Same level precedence and detection of posible swap.
-			{
-				if (((*root_tree)->is_prefix() && node->is_prefix()) ||
-					((*root_tree)->is_postfix() && node->is_postfix()))
-				// Case of nested prefix or postfix operations.
-				{
-					i_child++;
-					continue;
-				}
-
-				if (((*root_tree)->compare_order(node) < 0) && node->is_prefix())
-				// Discart swap because affect the syntax order.
-				{
-					// It turns on the flag of conflict to check into special case.
-					(*root_tree)->active_conflict(node->get_function()->get_prec());
-					i_child++;
-					continue;
-				}
-
-				if (((*root_tree)->compare_order(node) > 0) && node->is_postfix())
-				// Discart swap because affect the syntax order.
-				{
-					i_child++;
-					continue;
-				}
-
-				// Performs the swap in normal conditions.
-				int index_child = swap_root_child(root_tree, i_child);
-
-				// Recursion is sent for organize the tree with the new root.
-				check_subtree(root_tree,index_child);
-			}
-		}
-		i_child++;
-	}// end while.
-}
-
-/**
-  * Section of AST creation.
-  */
+	stack_inner_node.push_back(current_ast_function);
+	current_ast_function = NULL;
+};
 
 void create_root_infix_node(char const *str, char const *end)
 {
 	Ast_inner_node *root = stack_inner_node.back();
 	stack_inner_node.pop_back();
 
-	Ast_node *l_child, *r_child;
+	Ast_node *r_child = stack_node.back();
+	stack_node.pop_back();
 
-	bool is_mark = false;
-	do
-	{
-		r_child = stack_node.back();
-		stack_node.pop_back();
-		is_mark = r_child->get_type_synthetized().compare("#") == 0;
-		if (is_mark)
-		{
-			delete(r_child);
-		}
-	} while (is_mark);
-	do
-	{
-		l_child = stack_node.back();
-		stack_node.pop_back();
-		is_mark = l_child->get_type_synthetized().compare("#") == 0;
-		if (is_mark)
-		{
-			delete(l_child);
-		}
-	} while (is_mark);
+	Ast_node *l_child = stack_node.back();
+	stack_node.pop_back();
 
 	string key = "infix";
 	key.append(((Ast_function*)root)->get_function()->get_name());
@@ -708,8 +489,7 @@ void create_root_function_node(char const *str, char const *end)
 
 	Ast_node *child;
 	string key;
-	unsigned int i;
-	i = stack_node.size()-1;
+	unsigned int i = stack_node.size()-1;
 	while (i > 0)
 	{
 		child = stack_node.back();
@@ -741,7 +521,6 @@ void create_root_function_node(char const *str, char const *end)
 	root->set_type_synthetized(((Ast_function*)root)->get_function()->get_image()->get_name());
 
 	stack_node.push_back(root);
-
 }
 
 void create_root_postfix_node(char const *str, char const *end)
@@ -749,18 +528,8 @@ void create_root_postfix_node(char const *str, char const *end)
 	Ast_inner_node *root = stack_inner_node.back();
 	stack_inner_node.pop_back();
 
-	Ast_node *child;
-	bool is_mark = false;
-	do
-	{
-		child = stack_node.back();
-		stack_node.pop_back();
-		is_mark = child->get_type_synthetized().compare("#") == 0;
-		if (is_mark)
-		{
-			delete(child);
-		}
-	} while (is_mark);
+	Ast_node *child = stack_node.back();
+	stack_node.pop_back();
 
 	string key = "postfix";
 	key.append(((Ast_function*)root)->get_function()->get_name());
@@ -793,18 +562,8 @@ void create_root_prefix_node(char const *str, char const *end)
 	Ast_inner_node *root = stack_inner_node.back();
 	stack_inner_node.pop_back();
 
-	Ast_node *child;
-	bool is_mark = false;
-	do
-	{
-		child = stack_node.back();
-		stack_node.pop_back();
-		is_mark = child->get_type_synthetized().compare("#") == 0;
-		if (is_mark)
-		{
-			delete(child);
-		}
-	} while (is_mark);
+	Ast_node *child = stack_node.back();
+	stack_node.pop_back();
 
 	string key = "prefix";
 	key.append(((Ast_function*)root)->get_function()->get_name());
@@ -830,34 +589,6 @@ void create_root_prefix_node(char const *str, char const *end)
 	check_precedence((Ast_function**)&root);
 
 	stack_node.push_back(root);
-}
-
-void increment_level(char name)
-{
-	// Increment the level because a new parenthesis opening.
-	current_precedence_level++;
-}
-
-void decrement_level(char name)
-{
-	// Decrement the level because a parenthesis closing.
-	current_precedence_level--;
-}
-
-void push_mark(char name)
-{
-	current_literal = new Ast_literal();
-	// Mark for parameter of function.
-	current_literal->set_type_synthetized("#");
-	current_literal->set_value("#");
-	stack_node.push_back(current_literal);
-	current_literal = NULL;
-}
-
-void pepito(char const *str, char const *end)
-{
-	string pepe(str, end);
-	cout << pepe << endl;
 }
 
 /**
@@ -943,22 +674,22 @@ struct attr_grammar: public grammar<attr_grammar>
 
 			// Declaration of Operators.
 
-			r_decl_oper	= lexeme_d[ strlit<>("op") >> space_p ][&inic_operator] >>
+			r_decl_oper	= lexeme_d[ strlit<>("op") >> space_p ][&inic_func] >>
 							(r_oper_infix | r_oper_postfix | r_oper_prefix) >>
 							 strlit<>("->") >>
-							 r_sort_st[&save_image_op] >> ';';
+							 r_sort_st[&save_image_func] >> ';';
 
 			r_oper_infix   = strlit<>("infix")[&save_mode_op] >> !r_oper_mode >>
-							 r_oper[&save_name_op][st_op_infix.add] >> ':' >>
-							 r_sort_st[&save_domain_op] >> ',' >> r_sort_st[&save_domain_op];
+							 r_oper[&save_name_func][st_op_infix.add] >> ':' >>
+							 r_sort_st[&save_domain_func] >> ',' >> r_sort_st[&save_domain_func];
 
 			r_oper_postfix = strlit<>("postfix")[&save_mode_op] >> !r_oper_mode >>
-							 r_oper[&save_name_op][st_op_postfix.add] >> ':' >>
-							 r_sort_st[&save_domain_op];
+							 r_oper[&save_name_func][st_op_postfix.add] >> ':' >>
+							 r_sort_st[&save_domain_func];
 
 			r_oper_prefix  = !(strlit<>("prefix")[&save_mode_op]) >> !r_oper_mode >>
-							 r_oper[&save_name_op][st_op_prefix.add] >> ':' >>
-							 r_sort_st[&save_domain_op];
+							 r_oper[&save_name_func][st_op_prefix.add] >> ':' >>
+							 r_sort_st[&save_domain_func];
 
 			r_oper_mode	   = '(' >>(uint_p[&save_prec_op] | '_') >> ',' >>(r_oper_assoc[&save_assoc_op] | '_') >> ')';
 
@@ -967,7 +698,7 @@ struct attr_grammar: public grammar<attr_grammar>
 			// Declaration of Functions.
 
 			r_decl_func	= lexeme_d[ strlit<>("function")>> space_p ] >>
-							 r_oper[&save_name_func][st_functions.add] >> ':' >>
+							 r_oper[&inic_func][&save_name_func][st_functions.add] >> ':' >>
 							 !r_dom_func >> strlit<>("->") >>
 							 r_sort_st[&save_image_func] >> ';';
 
@@ -982,7 +713,7 @@ struct attr_grammar: public grammar<attr_grammar>
 						   ':' >> !(r_type_attr[&save_type_attr]) >> '<' >> r_sort_st[&save_sort_attr] >> '>' >>
 						   lexeme_d[ strlit<>("of")>> space_p ] >>
 						  (r_conj_symb |
-						  (strlit<>("all") >> !('-' >> r_conj_symb)))[&save_member_list] >> ';';
+						  (strlit<>("all") >> !('-' >> r_conj_symb)))[&save_member_list_attr] >> ';';
 
 			r_conj_symb	 = '{' >>(r_ident % ',') >> '}';
 
@@ -1016,23 +747,23 @@ struct attr_grammar: public grammar<attr_grammar>
 			  *		T = F *(<op_postfix>) | (<op_prefix>) T
 			  *		F = (E) | function | literal | instance
 			  */
-			r_expression 		= r_expr_prime >> *(r_op_infix_st[&save_operator][&save_oper_node] >> r_expr_prime[&create_root_infix_node])
+			r_expression 		= r_expr_prime >> *(r_op_infix_st[&save_operator][&create_func_node] >> r_expr_prime[&create_root_infix_node])
 								;
 
-			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st[&save_operator][&save_oper_node][&create_root_postfix_node])
-								| r_op_prefix_st[&save_operator][&save_oper_node] >> r_expr_prime[&create_root_prefix_node]
+			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st[&save_operator][&create_func_node][&create_root_postfix_node])
+								| r_op_prefix_st[&save_operator][&create_func_node] >> r_expr_prime[&create_root_prefix_node]
 								;
 
 			r_expr_prime_prime  = ch_p('(')[&increment_level] >> r_expression >> ch_p(')')[&decrement_level]
 								| r_function[&create_root_function_node]
-								| r_literal[&save_literal_node]
-								| r_instance[&save_instance_node]
+								| r_literal[&create_literal_node]
+								| r_instance[&create_instance_node]
 								;
 
 			/**
 			  * The functions accept a list of expressions.
 			  */
-			r_function			= r_function_st[&save_function][&save_func_node] >> ch_p('(')[&push_mark][&increment_level] >>!(r_expression % ',') >> ch_p(')')[&decrement_level];
+			r_function			= r_function_st[&save_function][&create_func_node] >> ch_p('(')[&push_mark][&increment_level] >>!(r_expression % ',') >> ch_p(')')[&decrement_level];
 
 			/**
 			  * Literals accepted: Integer and Float numbers, characters and string,

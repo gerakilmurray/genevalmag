@@ -13,6 +13,8 @@
 namespace genevalmag
 {
 
+vector<Equation*> index_access_eq;
+
 #ifdef _DEBUG
 	// Numbers of symbols current in the system.
 	static int rules = 0;
@@ -82,7 +84,6 @@ void Rule::copy(Rule const &other)
   */
 void Rule::destroy()
 {
-
 }
 
 /**
@@ -133,37 +134,29 @@ void Rule::add_right_symbol(Symbol *right_symb)
 	r_right_side.push_back(right_symb);
 }
 
+bool Rule::belong(const Equation &eq) const
+{
+	for(map<int,Equation>::const_iterator it = r_eqs.begin(); it != r_eqs.end(); it++)
+	{
+		if (it->second.equals(eq))
+			return true;
+	}
+	return false;
+}
+
 /**
   * Enqueue a equation in the list of the rule.
   */
 bool Rule::add_eq(const Equation &eq)
 {
 	static int cant_eq = 0;
+	if (belong(eq))
+		// Equation belongs to the map then it is not inserted. The map not acceps repeat elements.
+		return false;
+
 	pair<int,Equation> new_eq(cant_eq++,eq);
 	pair<map<int, Equation>::iterator, bool > result = r_eqs.insert(new_eq);
 	return result.second;
-}
-
-/**
-  * Generate and return a string reprensentation of a rule.
-  *
-  * Result= <left_symbol> "::=" <right_side> ";"
-  *
-  * where <right_ride> is= <symbol_1> " " ... " " <symbol_n>
-  */
-string Rule::to_string_not_eqs() const
-{
-	string rule;
-	rule.append(r_left_symbol->get_name());
-	rule.append("\t::=\t");
-	for(vector<Symbol>::size_type i = 0; i < r_right_side.size(); i++)
-	{
-		rule.append(r_right_side[i]->get_name());
-		if(i+1 < r_right_side.size())
-			rule.append(" ");
-	}
-//	rule.append(";");
-	return rule;
 }
 
 /**
@@ -194,6 +187,27 @@ string Rule::to_string() const
 		rule.append("\t\t\tend");
 	}
 	rule.append(";\n");
+	return rule;
+}
+
+/**
+  * Generate and return a string reprensentation of a rule.
+  *
+  * Result= <left_symbol> "::=" <right_side> ";"
+  *
+  * where <right_ride> is= <symbol_1> " " ... " " <symbol_n>
+  */
+string Rule::to_string_not_eqs() const
+{
+	string rule;
+	rule.append(r_left_symbol->get_name());
+	rule.append("\t::=\t");
+	for(vector<Symbol>::size_type i = 0; i < r_right_side.size(); i++)
+	{
+		rule.append(r_right_side[i]->get_name());
+		if(i+1 < r_right_side.size())
+			rule.append(" ");
+	}
 	return rule;
 }
 
