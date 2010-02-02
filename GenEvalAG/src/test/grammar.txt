@@ -57,7 +57,7 @@ rules
 					//E[0].grade = 1 + 4;
 					
 					
-					E[0].grade = if4 + %5&pos + g( 1 + g(3 * (%2) * 7));
+					/*E[0].grade = if4 + %5&pos + g( 1 + g(3 * (%2) * 7));
 					E[0].grade = if4 + %5&pos + g( 1 + g(3 * %2 * 7));
 					E[0].grade = ((((8 + 6))) * 7&);
 					T[0].grade = 8 + %if%if%if6& * 6;
@@ -67,11 +67,13 @@ rules
 					E[0].grade = % if 6 + 9 &; 
 					E[0].grade = 1 + %(2 + 3 * T[0].valor) * if3pos;
 					E[0].grade = 1 + %if2 * 3pos;
-					E[0].grade = 8pos&pos&pos&pos& + %if%if6&;
+					E[0].grade = 8pos&pos&pos&pos& + %if%if6&;*/
 					
 
-					E[0].grade = 2 * (3 + %5 + 6 )& * 14;
-					E[0].grade = 1 + 2 + 3 + 4 + 5 + 6;
+					//E[0].grade = 2 * (3 + %5 + 6 )& * 14;
+					//E[0].grade = 1 + 2 + 3 + 4 + 5 + 6;
+					
+					E[0].grade = 1 + 2 + 3 + 4 + 5 + 6 + 2.3;
 					
 					//T[0].type = "Hola \n";
 					//E[1].type = E[0].type;
@@ -97,7 +99,7 @@ rules
 				//end
 		;
 	
-	id ::=	'1' 
+	id ::=	12.6
 				//compute
 					//id[0].valor = 1024;
 					//id[0].lexema = 2048; 

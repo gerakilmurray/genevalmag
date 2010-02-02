@@ -30,7 +30,7 @@ using namespace std;
 using namespace BOOST_SPIRIT_CLASSIC_NS;
 using namespace genevalmag;
 
-#define PATH_INPUT_FILE "./src/grammar.txt"
+#define PATH_INPUT_FILE "./src/test/grammar.txt"
 /**
   * Constant that represent the maximum size of the file buffer.
   */
@@ -232,8 +232,29 @@ void save_non_terminal(char const *str, char const *end)
 void save_terminal(char const *str, char const *end)
 {
 	string name(str, end);
-	// The string is 'char'
+	cout << name << endl;
+	// The string is 'char' or "string" (with quote and double quotes)
 	Symbol symb(name, k_terminal);
+	sem_domain.add_symbol(symb);
+}
+
+void save_terminal_int(int const num)
+{
+	stringstream literal_int;
+	cout << num << endl;
+	literal_int << num;
+	// The string is int
+	Symbol symb(literal_int.str(), k_terminal);
+	sem_domain.add_symbol(symb);
+}
+
+void save_terminal_real(double const num)
+{
+	cout << num << endl;
+	ostringstream literal_real;
+	literal_real << num;
+	// The string is real
+	Symbol symb(literal_real.str(), k_terminal);
 	sem_domain.add_symbol(symb);
 }
 
@@ -415,14 +436,15 @@ void push_mark(char name)
 
 void create_literal_node(char const *str, char const *end)
 {
-	stack_node.push_back(current_literal);
+	stack_node.push_back(current_literal); // Push literal in stack.
 	current_literal = NULL;
 }
 
 void create_instance_node(char const *str, char const *end)
 {
+	// Syntetize type instance.
 	current_instance->set_type_synthetized(current_instance->get_attr()->get_sort_type()->get_name());
-	stack_node.push_back(current_instance);
+	stack_node.push_back(current_instance); // Push instance in stack.
 	current_instance = NULL;
 };
 
@@ -433,67 +455,71 @@ void create_func_node(char const *str, char const *end)
 	extern unsigned short current_precedence_level;
 	extern unsigned short index_syntax_order;
 
-	current_ast_function->set_function(current_func);
+	current_ast_function->set_function(current_func);// Set aux function.
+
+	// Set variables for check precedence and asociativity.
 	current_ast_function->set_precedence_level(current_precedence_level);
 	current_ast_function->set_syntax_order(++index_syntax_order);
 
 	current_func = NULL;
 
-	stack_inner_node.push_back(current_ast_function);
+	stack_inner_node.push_back(current_ast_function); // Push Ast_function in stack.
 	current_ast_function = NULL;
 };
 
 void create_root_infix_node(char const *str, char const *end)
 {
-	Ast_inner_node *root = stack_inner_node.back();
-	stack_inner_node.pop_back();
+	Ast_function *root = (Ast_function*)stack_inner_node.back();
+	stack_inner_node.pop_back(); // Pop the infix operator.
 
 	Ast_node *r_child = stack_node.back();
-	stack_node.pop_back();
+	stack_node.pop_back(); // First parameter of operator
 
 	Ast_node *l_child = stack_node.back();
-	stack_node.pop_back();
+	stack_node.pop_back(); // Second parameter of operator
 
 	string key = "infix";
-	key.append(((Ast_function*)root)->get_function()->get_name());
+	key.append(root->get_function()->get_name());
 	key.append(l_child->get_type_synthetized());
 	key.append(r_child->get_type_synthetized());
 
-	Function  *func = sem_domain.get_function(key);
+	Function  *func = sem_domain.get_function(key); // Searches of infix operator.
+
+	Function  *old = root->get_function();
+	delete(old); // Free aux function.
 
 	if (func == NULL)
 	{
-		cerr << "Operador infix no existe: " << key << endl;
+		cerr << "ERROR: infix operator non-exist: " << key << endl;
 		exit(-1);
 	}
 
-	Function  *old = ((Ast_function*)root)->get_function();
-	((Ast_function*)root)->set_function(func);
-	delete(old);
+	root->set_function(func);
 
-	root->set_type_synthetized(((Ast_function*)root)->get_function()->get_image()->get_name());
+	root->set_type_synthetized(root->get_function()->get_image()->get_name());// Syntetize type infix operator.
 
 	root->add_child(r_child);
 	root->add_child(l_child);
 
 	// Check the state of precedence of operators.
-	check_precedence((Ast_function**)&root);
+	check_precedence(&root);
 
-	stack_node.push_back(root);
+	stack_node.push_back(root); // Push infix operator in stack.
 }
 
 void create_root_function_node(char const *str, char const *end)
 {
-	Ast_inner_node *root = stack_inner_node.back();
-	stack_inner_node.pop_back();
+	Ast_function *root = (Ast_function*)stack_inner_node.back();
+	stack_inner_node.pop_back(); // Pop the function.
 
 	Ast_node *child;
 	string key;
 	unsigned int i = stack_node.size()-1;
 	while (i > 0)
+		// The cicle searches the parameters until that finds the mark.
 	{
 		child = stack_node.back();
-		stack_node.pop_back();
+		stack_node.pop_back(); // Parameter of function
 		if (child->get_type_synthetized().compare("#") == 0)
 		{
 			delete(child);
@@ -504,91 +530,91 @@ void create_root_function_node(char const *str, char const *end)
 		key = child->get_type_synthetized().append(key);
 		i--;
 	}
-	key = ((Ast_function*)root)->get_function()->get_name().append(key);
+	key = root->get_function()->get_name().append(key);
 
-	Function *func = sem_domain.get_function(key);
+	Function *func = sem_domain.get_function(key); // Searches function.
 
 	if (func == NULL)
 	{
-		cerr << "Function no existe: " << key << endl;
+		cerr << "ERROR: Function non-exist: " << key << endl;
 		exit(-1);
 	}
 
-	Function *old = ((Ast_function*)root)->get_function();
-	((Ast_function*)root)->set_function(func);
-	delete(old);
+	Function *old = root->get_function();
+	root->set_function(func);
+	delete(old); // Free aux function.
 
-	root->set_type_synthetized(((Ast_function*)root)->get_function()->get_image()->get_name());
+	root->set_type_synthetized(root->get_function()->get_image()->get_name()); // Syntetize type function.
 
-	stack_node.push_back(root);
+	stack_node.push_back(root); // Push function in stack.
 }
 
 void create_root_postfix_node(char const *str, char const *end)
 {
-	Ast_inner_node *root = stack_inner_node.back();
-	stack_inner_node.pop_back();
+	Ast_function *root = (Ast_function*)stack_inner_node.back();
+	stack_inner_node.pop_back(); // Pop the postfix operator.
 
 	Ast_node *child = stack_node.back();
-	stack_node.pop_back();
+	stack_node.pop_back(); // Parameters of operator.
 
 	string key = "postfix";
-	key.append(((Ast_function*)root)->get_function()->get_name());
+	key.append(root->get_function()->get_name());
 	key.append(child->get_type_synthetized());
 
-	Function  *func = sem_domain.get_function(key);
+	Function  *func = sem_domain.get_function(key); // Searches posfix operator.
 
 	if (func == NULL)
 	{
-		cerr << "Operador postfix no existe: " << key << endl;
+		cerr << "ERROR: postfix operator non-exist: " << key << endl;
 		exit(-1);
 	}
 
-	Function  *old = ((Ast_function*)root)->get_function();
-	((Ast_function*)root)->set_function(func);
-	delete(old);
+	Function  *old = root->get_function();
+	root->set_function(func);
+	delete(old); // Free aux function.
 
-	root->set_type_synthetized(((Ast_function*)root)->get_function()->get_image()->get_name());
+	root->set_type_synthetized(root->get_function()->get_image()->get_name()); // Syntetize type postfix operator.
 
 	root->add_child(child);
 
 	// Check the state of precedence of operators.
-	check_precedence((Ast_function**)&root);
+	check_precedence(&root);
 
-	stack_node.push_back(root);
+	stack_node.push_back(root);// Push postfix operator in stack.
 }
 
 void create_root_prefix_node(char const *str, char const *end)
 {
-	Ast_inner_node *root = stack_inner_node.back();
-	stack_inner_node.pop_back();
+	Ast_function *root = (Ast_function*)stack_inner_node.back();
+	stack_inner_node.pop_back(); // Pop the prefix operator.
 
 	Ast_node *child = stack_node.back();
-	stack_node.pop_back();
+	stack_node.pop_back(); // Parameter of operator.
 
 	string key = "prefix";
-	key.append(((Ast_function*)root)->get_function()->get_name());
+	key.append(root->get_function()->get_name());
 	key.append(child->get_type_synthetized());
 
-	Function  *func = sem_domain.get_function(key);
+	Function  *func = sem_domain.get_function(key); // Searches prefix operator
 
 	if (func == NULL)
 	{
-		cerr << "Operador prefix no existe: " << key << endl;
+		cerr << "ERROR: prefix operator non-exist: " << key << endl;
 		exit(-1);
 	}
 
-	Function  *old = ((Ast_function*)root)->get_function();
-	((Ast_function*)root)->set_function(func);
-	delete(old);
+	Function  *old = root->get_function();
+	root->set_function(func);
+	delete(old); // Free aux function.
 
-	root->set_type_synthetized(((Ast_function*)root)->get_function()->get_image()->get_name());
+	root->set_type_synthetized(root->get_function()->get_image()->get_name()); // Syntetize type prefix operator.
 
 	root->add_child(child);
 
 	// Check the state of precedence of operators.
-	check_precedence((Ast_function**)&root);
+	check_precedence(&root);
 
-	stack_node.push_back(root);
+	stack_node.push_back(root); // Push prefix operator in stack.
 }
 
 /**
@@ -637,6 +663,8 @@ struct attr_grammar: public grammar<attr_grammar>
 			r_id_op			= ch_p('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>';
 
 			r_char			= lexeme_d[ ch_p('\'') >> (alnum_p | r_id_op) >> ch_p('\'') ];
+
+			char_pp			= lexeme_d[ ch_p('\'') >> (anychar_p) >> ch_p('\'') ];
 
 			r_string		= lexeme_d[ ch_p('\"') >> r_string_lit >> ch_p('\"') ];
 
@@ -731,7 +759,12 @@ struct attr_grammar: public grammar<attr_grammar>
 							*(strlit<>("|")[&abbreviated_rule] >> r_right_rule[&save_rule]) >> ';';
 
 			r_right_rule  = +(  r_ident[&save_non_terminal][st_symbols.add]
-							  | r_char[&save_terminal]
+							  | char_pp[&save_terminal]
+							  | r_string[&save_terminal]
+							  //| lexeme_d[ int_p[&save_terminal_int] ]
+							   //| longest_d[ int_p[&save_terminal_int] | real_p[&save_terminal_real] ]
+							  | longest_d[ int_p | real_p ][&save_terminal]
+//							  | lexeme_d[ real_p[&save_terminal_real] ]
 							 )[&add_right_side_rule] >>
 							!(strlit<>("compute") >>
 								+(r_equation) >>
@@ -769,8 +802,10 @@ struct attr_grammar: public grammar<attr_grammar>
 			  * Literals accepted: Integer and Float numbers, characters and string,
 			  * between signs ' and " respectively.
 			  */
-			r_literal			= int_p[&save_lit_int] | real_p[&save_lit_flt]
-					 			| r_char[&save_lit_ch] | r_string[&save_lit_str];
+			r_literal			= longest_d[ real_p[&save_lit_flt] | int_p[&save_lit_int] ]
+					 			| r_char[&save_lit_ch]
+								| r_string[&save_lit_str]
+							    ;
 
 			/**
 			  * An instance is, the symbol with the number of occurrences in square brackets within
@@ -819,7 +854,7 @@ struct attr_grammar: public grammar<attr_grammar>
 		typedef rule<typename lexeme_scanner<ScannerT>::type> rule_lexeme;
 
 		// Basic rules: characters, strings and identifiers.
-		rule_exp r_reserved_word, r_ident, r_oper, r_char, r_string, r_basic_types;
+		rule_exp r_reserved_word, r_ident, r_oper, r_char, r_string, r_basic_types, char_pp;
 
 		rule_lexeme r_id_op, r_string_lit, r_esc_seq;
 

@@ -1,0 +1,53 @@
+/**
+  *  \file		aritmetic.txt
+  *  \brief		Attribute Grammar example for aritmetic declarations.
+  *  \date		02/02/2010
+  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  */
+
+/****************************
+ * Block of Semantic Domain *
+ ****************************/
+semantic domain
+
+    /*********************
+     * List of Operators *
+     *********************/
+    op infix    (10, left) +: int, int -> int;
+    op infix    (10, left) -: int, int -> int;
+    op infix    (50, left) *: int, int -> int;
+    op prefix   (75, _)    -: int      -> int;
+    
+/***********************
+ * Block of Attributes *
+ ***********************/
+attributes
+	valor : syn <int>    of all;
+	tipo  : syn	<string> of all;
+	
+/******************
+ * Block of Rules *
+ ******************/
+rules
+    E ::= E '+' E
+       |  E '-' E
+       |  E '*' E
+       |  '(' E ')'
+       |  '-'E
+       | num
+       ;
+       
+    num ::= digit num
+    	 |  real num
+         |  digit
+         |  real
+         ;
+         
+    digit ::= 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 ;
+    
+    real ::= digit '.' digit;
+    
+    
+
+    
