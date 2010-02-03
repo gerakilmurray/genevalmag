@@ -14,7 +14,7 @@ semantic domain
     /*********************
      * List of Operators *
      *********************/
-    op infix    (10, left) +: int, int -> int;
+    op infix    (10, non-assoc) +: int, int -> int;
     op infix    (10, left) -: int, int -> int;
     op infix    (50, left) *: int, int -> int;
     op prefix   (75, _)    -: int      -> int;
@@ -31,6 +31,9 @@ attributes
  ******************/
 rules
     E ::= E '+' E
+    		compute
+    			E[0].valor = 1 + 2;
+    		end
        |  E '-' E
        |  E '*' E
        |  '(' E ')'
@@ -44,10 +47,7 @@ rules
          |  real
          ;
          
-    digit ::= 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 ;
+   digit ::= '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '0' ;
     
-    real ::= digit '.' digit;
-    
-    
-
+   real ::= digit '.' digit;
     

@@ -208,7 +208,7 @@ void Function::set_oper_assoc(string mod)
 	else if(mod.compare("right") == 0)
 		f_assoc = k_right;
 	else if(mod.compare("non-assoc") == 0)
-		f_assoc = k_nonassoc;
+		f_assoc = k_non_assoc;
 	else
 		// Default value.
 		f_assoc = k_left;
@@ -266,7 +266,7 @@ string Function::to_string() const
 		{
 			case k_left:	 func.append("left");	  break;
 			case k_right:	 func.append("right");	 break;
-			case k_nonassoc: func.append("non-assoc"); break;
+			case k_non_assoc: func.append("non-assoc"); break;
 		}
 		func.append(") ");
 	}

@@ -21,6 +21,7 @@ namespace genevalmag
   */
 SemDomain::SemDomain()
 {
+	initial_symbol.clear();
 }
 
 /**
@@ -69,15 +70,6 @@ bool SemDomain::add_sort(Sort &sort)
 }
 
 /**
-  * Enqueue a operator in the list of the semantic domain.
-  */
-//bool SemDomain::add_operator(Function &oper)
-//{
-//	oper.set_is_operator(IS_OPERATOR);
-//	return add<Function>(oper, sd_func);
-//}
-
-/**
   * Enqueue a function in the list of the semantic domain.
   */
 bool SemDomain::add_function(Function &func)
@@ -112,6 +104,10 @@ bool SemDomain::add_symbol(Symbol &symb)
   */
 bool SemDomain::add_rule(Rule &rule)
 {
+	if (initial_symbol.empty())
+		// Set initial symbol of grammar.
+		initial_symbol = rule.key();
+
 	return add <Rule>(rule, sd_rule);
 }
 
@@ -145,6 +141,33 @@ Symbol &SemDomain::get_symbol(string name_symbol)
 	map<string,Symbol>::iterator it = sd_symb.find(name_symbol);
 	return it->second;
 }
+
+/**
+  *  Return the map with all rules.
+  */
+map<string, Rule> SemDomain::get_rules() const
+{
+	return sd_rule;
+}
+
+/**
+  *  Return the map with all Symbols.
+  */
+map<string, Symbol> SemDomain::get_symbols() const
+{
+	return sd_symb;
+}
+
+string SemDomain::get_initial_symbol() const
+{
+    return initial_symbol;
+}
+
+void  SemDomain::set_initial_symbol(string init_symbol)
+{
+    initial_symbol = init_symbol;
+}
+
 
 /**
   * Generate and return a string reprensentation of a semantic domain.

@@ -7,9 +7,14 @@
   */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <iostream>
+#include <map>
 
 #include "Semantic_check.h"
+
+using namespace std;
+using namespace genevalmag;
 
 /**
   * Precedence Section.
@@ -94,10 +99,10 @@ int swap_root_grandson(Ast_function** old_root)
 
 void check_precedence(Ast_function ** root_tree);
 
-void check_subtree(Ast_function** subtree, int index_root_subtree)
+void correct_subtree(Ast_function** subtree, int index_root_subtree)
 {
 	Ast_function * aux = (Ast_function*)(*subtree)->get_child(index_root_subtree);
-	check_precedence(&aux);
+	correct_precedence(&aux);
 
 	// Update new son by the result of recursion.
 	(*subtree)->replace_child(index_root_subtree,aux);
@@ -127,7 +132,7 @@ void check_subtree(Ast_function** subtree, int index_root_subtree)
   *   - No se rompe el orden sintactico de la expresion.
   *   - La operacion con mayor precedencia se aplica primero.
   */
-void check_precedence(Ast_function ** root_tree)
+void correct_precedence(Ast_function ** root_tree)
 {
 	if (!(*root_tree)->is_prefix() && ((*root_tree)->get_child(0)->get_conflict() > -1))
 	// Special case which must complete a check of some sub-level of the tree.
@@ -140,13 +145,13 @@ void check_precedence(Ast_function ** root_tree)
 
 			// Checks that the subtree with the older root is well formed.
 			Ast_function * subtree = (Ast_function*)(*root_tree)->get_child(i_subtree);
-			check_subtree(&subtree,0);
+			correct_subtree(&subtree,0);
 
 			// Updates the main tree, with the new root of subtree.
 			(*root_tree)->replace_child(i_subtree,subtree);
 
 			// Only requires checking the main tree root with his new son.
-			check_precedence(root_tree);
+			correct_precedence(root_tree);
 		}
 		// Turn off the flag.
 		(*root_tree)->get_child(0)->desactive_conflict();
@@ -196,7 +201,7 @@ void check_precedence(Ast_function ** root_tree)
 				int index_child = swap_root_child(root_tree, i_child);
 
 				// Recursion is sent for organize the tree with the new root.
-				check_subtree(root_tree,index_child);
+				correct_subtree(root_tree,index_child);
 			}
 		}
 		i_child++;
@@ -224,7 +229,7 @@ void reset_semantic_context()
 /**
   * Asociative Section.
   */
-void check_associativity(Ast_function ** root_tree)
+void correct_associativity(Ast_function ** root_tree)
 {
 	// Detecting if the child is of Ast_function type.
 	Ast_function* child = dynamic_cast<Ast_function*>((*root_tree)->get_child(0));
@@ -233,16 +238,23 @@ void check_associativity(Ast_function ** root_tree)
 		if((*root_tree)->get_function()->equals(*(child->get_function())))
 		{
 			if((*root_tree)->is_comparable(child) &&
-			   (*root_tree)->is_infix() &&
-			   (*root_tree)->get_function()->get_oper_assoc() == k_right)
+			   (*root_tree)->is_infix())
 			{
-				swap_root_child(root_tree,0);
-				check_associativity(root_tree);
+				if ((*root_tree)->get_function()->get_oper_assoc() == k_right)
+				{
+					swap_root_child(root_tree,0);
+					correct_associativity(root_tree);
+				}
+				else if ((*root_tree)->get_function()->get_oper_assoc() == k_non_assoc)
+				{
+					cerr << "ERROR: operator non-associtive using wrong use: " << (*root_tree)->get_function()->get_name() << endl;
+					exit(-1);
+				}
 			}
 		}
 		else
 		{
-			check_associativity(&child);
+			correct_associativity(&child);
 			(*root_tree)->replace_child(0,child);
 		}
 	}
@@ -251,9 +263,60 @@ void check_associativity(Ast_function ** root_tree)
 		Ast_function *child_rec = dynamic_cast<Ast_function*>((*root_tree)->get_child(1));
 		if (child_rec)
 		{
-			check_associativity(&child_rec);
+			correct_associativity(&child_rec);
 			(*root_tree)->replace_child(1,child_rec);
 		}
 	}
 }
 
+
+bool check_all_defined_non_terminal(const map <string, Rule> rules, const map <string, Symbol> symbols)
+{
+	bool left_symbol_defined;
+	bool symbol_used;
+
+	map<string,Symbol >::const_iterator it_s = symbols.begin();
+	while (it_s != symbols.end())
+	{
+		left_symbol_defined = false;
+		symbol_used = false;
+
+		if (it_s->second.is_non_terminal())
+		{
+			map<string,Rule >::const_iterator it_r =rules.begin();
+			while (!(left_symbol_defined && symbol_used) && it_r != rules.end())
+			{
+				if (!left_symbol_defined && it_s->second.equals(*(it_r->second.get_left_symbol())))
+				{
+					left_symbol_defined = true;
+				}
+
+				vector<Symbol*> right_side = it_r->second.get_right_side();
+				for(size_t i = 0; i < right_side.size(); i++)
+				{
+					if (right_side[i]->is_non_terminal())
+					{
+						if (it_s->second.equals(*(right_side[i])))
+						{
+							symbol_used = true;
+							break;
+						}
+					}
+				}
+				it_r++;
+			}
+
+			if (!left_symbol_defined)
+			{
+				cerr << "ERROR: Symbol Non-Teminal "<< it_s->second.get_name() << " uses in the right part without rule." << endl;
+				return false;
+			}
+			if (!symbol_used)
+			{
+				cerr << "WARNING: Symbol Non-Teminal "<< it_s->second.get_name() << " not used in the right side of any rule." << endl;
+			}
+		}
+		it_s++;
+	}
+	return true;
+}

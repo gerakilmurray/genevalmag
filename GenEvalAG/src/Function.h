@@ -34,7 +34,7 @@ enum oper_assoc
 {
 	k_left,
 	k_right,
-	k_nonassoc
+	k_non_assoc
 };
 
 class Function

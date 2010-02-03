@@ -30,7 +30,7 @@ using namespace std;
 using namespace BOOST_SPIRIT_CLASSIC_NS;
 using namespace genevalmag;
 
-#define PATH_INPUT_FILE "./src/test/grammar.txt"
+#define PATH_INPUT_FILE "./src/test/aritmetic.txt"
 /**
   * Constant that represent the maximum size of the file buffer.
   */
@@ -84,7 +84,7 @@ vector<Ast_inner_node*> 	stack_inner_node;
 /**
   * Methods and functions for parse Sort class.
   */
-void add_sort(char const *str, char const *end)
+void create_sort(char const *str, char const *end)
 {
 	string  name(str, end);
 	Sort sort(name);
@@ -160,7 +160,7 @@ void save_assoc_op(char const *str, char const *end)
 /**
   * Methods and functions for parse Attribute class.
   */
-void add_attr(char const *str, char const *end)
+void add_attribute(char const *str, char const *end)
 {
 	string name(str, end);
 	if(new_attrs == NULL)
@@ -203,7 +203,7 @@ void save_member_list_attr(char const *str, char const *end)
 	new_attrs->d_member_symbol = members;
 }
 
-void save_decl_attrs(char const *str, char const *end)
+void create_attributes(char const *str, char const *end)
 {
 	for(vector<string>::size_type i = 0; i < new_attrs->d_names.size(); i++)
 	{
@@ -222,74 +222,52 @@ void save_decl_attrs(char const *str, char const *end)
 /**
   * Methods and functions for parse Symbol class.
   */
-void save_non_terminal(char const *str, char const *end)
+void create_new_non_terminal(char const *str, char const *end)
 {
 	string name(str, end);
 	Symbol symb(name, k_non_terminal);
 	sem_domain.add_symbol(symb);
 }
 
-void save_terminal(char const *str, char const *end)
+void create_new_terminal(char const *str, char const *end)
 {
 	string name(str, end);
-	cout << name << endl;
-	// The string is 'char' or "string" (with quote and double quotes)
 	Symbol symb(name, k_terminal);
-	sem_domain.add_symbol(symb);
-}
-
-void save_terminal_int(int const num)
-{
-	stringstream literal_int;
-	cout << num << endl;
-	literal_int << num;
-	// The string is int
-	Symbol symb(literal_int.str(), k_terminal);
-	sem_domain.add_symbol(symb);
-}
-
-void save_terminal_real(double const num)
-{
-	cout << num << endl;
-	ostringstream literal_real;
-	literal_real << num;
-	// The string is real
-	Symbol symb(literal_real.str(), k_terminal);
 	sem_domain.add_symbol(symb);
 }
 
 /**
   * Methods and functions for parse Rule class.
   */
-void save_rule(char const *str, char const *end)
-{
-	sem_domain.add_rule(*current_rule);
-	delete(current_rule);
-}
-
-void add_left_symbol_rule(char const *str, char const *end)
+void create_rule(char const *str, char const *end)
 {
 	string left_side_symbol(str, end);
 	current_rule = new Rule();
 	current_rule->set_left_symbol(&(sem_domain.get_symbol(left_side_symbol)));
 }
 
-void add_right_side_rule(char const *str, char const *end)
+void save_right_side_rule(char const *str, char const *end)
 {
 	string right_side_symbol(str, end);
 	current_rule->add_right_symbol(&(sem_domain.get_symbol(right_side_symbol)));
 }
 
-void abbreviated_rule(char const *str, char const *end)
+void create_abbreviated_rule(char const *str, char const *end)
 {
 	current_rule = new Rule();
 	current_rule->set_left_symbol(current_rule->get_left_symbol());
 }
 
+void save_rule(char const *str, char const *end)
+{
+	sem_domain.add_rule(*current_rule);
+	delete(current_rule);
+}
+
 /**
   * Methods and functions for parse Equation class of Rule.
   */
-void save_symb_ins(char const *str, char const *end)
+void create_instance(char const *str, char const *end)
 {
 	string symb(str, end);
 	if(current_instance == NULL)
@@ -310,38 +288,36 @@ void save_attr_ins(char const *str, char const *end)
 	current_instance->set_attr(current_instance->get_symb()->get_attribute(attr));
 	if(current_instance->get_attr() == NULL)
 	{
-		cerr << "ERROR:" << attr <<"Attribute non-existent. Check the attributes used in the symbols." << endl;
+		cerr << "ERROR:" << attr << "Attribute non-existent. Check the attributes used in the symbols." << endl;
 		exit(1);
 	}
 }
 
-void save_lit_int(int const int_lit)
+void create_lit_number(char const *str, char const *end)
 {
+	string num(str, end);
+
 	if(current_literal == NULL)
 	{
 		current_literal = new Ast_literal();
 	}
-	current_literal->set_type(k_int);
-	current_literal->set_type_synthetized("int");
-	stringstream literal_int;
-	literal_int << int_lit;
-	current_literal->set_value(literal_int.str());
-}
 
-void save_lit_flt(double const flt_lit)
-{
-	if(current_literal == NULL)
+	size_t pos = num.find('.',0);
+	if (pos > num.length())
 	{
-		current_literal = new Ast_literal();
+		current_literal->set_type(k_int);
+		current_literal->set_type_synthetized("int");
+		current_literal->set_value(num);
 	}
-	current_literal->set_type(k_float);
-	current_literal->set_type_synthetized("float");
-	stringstream literal_float;
-	literal_float << flt_lit;
-	current_literal->set_value(literal_float.str());
+	else
+	{
+		current_literal->set_type(k_float);
+		current_literal->set_type_synthetized("float");
+		current_literal->set_value(num);
+	}
 }
 
-void save_lit_ch(char const *ch, char const *end)
+void create_lit_ch(char const *ch, char const *end)
 {
 	if(current_literal == NULL)
 	{
@@ -354,7 +330,7 @@ void save_lit_ch(char const *ch, char const *end)
 	current_literal->set_value(ch_l);
 }
 
-void save_lit_str(char const *str, char const *end)
+void create_lit_str(char const *str, char const *end)
 {
 	if(current_literal == NULL)
 	{
@@ -367,19 +343,19 @@ void save_lit_str(char const *str, char const *end)
 	current_literal->set_value(str_l);
 }
 
-void save_function(char const *str, char const *end)
+void create_function(char const *str, char const *end)
 {
 	current_func = new Function();
 	save_name_func(str, end);
 }
 
-void save_operator(char const *str, char const *end)
+void create_operator(char const *str, char const *end)
 {
-	save_function(str,end);
+	create_function(str,end);
 	current_func->set_is_operator(IS_OPERATOR);
 }
 
-void save_lvalue(char const *str, char const *end)
+void create_equation(char const *str, char const *end)
 {
 	current_eq = new Equation();
 	current_eq->set_l_value(*current_instance);
@@ -403,7 +379,7 @@ void save_rvalue(char const *str, char const *end)
 	Ast_function * root_func = dynamic_cast<Ast_function*>(root_tree);
 	if (root_func)
 	{
-		check_associativity(&root_func);
+		correct_associativity(&root_func);
 		root_tree = root_func;
 	}
 
@@ -502,7 +478,7 @@ void create_root_infix_node(char const *str, char const *end)
 	root->add_child(l_child);
 
 	// Check the state of precedence of operators.
-	check_precedence(&root);
+	correct_precedence(&root);
 
 	stack_node.push_back(root); // Push infix operator in stack.
 }
@@ -578,7 +554,7 @@ void create_root_postfix_node(char const *str, char const *end)
 	root->add_child(child);
 
 	// Check the state of precedence of operators.
-	check_precedence(&root);
+	correct_precedence(&root);
 
 	stack_node.push_back(root);// Push postfix operator in stack.
 }
@@ -612,9 +588,22 @@ void create_root_prefix_node(char const *str, char const *end)
 	root->add_child(child);
 
 	// Check the state of precedence of operators.
-	check_precedence(&root);
+	correct_precedence(&root);
 
 	stack_node.push_back(root); // Push prefix operator in stack.
+}
+
+void check_well_defined(char const *str, char const *end)
+{
+	// Checks if all non-terminals is defined in the Attribute grammar.
+	// That is, they appear on the left side of some rule.
+	check_all_defined_non_terminal(sem_domain.get_rules(), sem_domain.get_symbols());
+
+	//
+//	check_well_attribute_grammar();
+
+
+
 }
 
 /**
@@ -668,7 +657,7 @@ struct attr_grammar: public grammar<attr_grammar>
 
 			r_string		= lexeme_d[ ch_p('\"') >> r_string_lit >> ch_p('\"') ];
 
-			r_string_lit	= +((anychar_p - (ch_p('\"') | "\\")) | r_esc_seq);
+			r_string_lit	= +((anychar_p - (ch_p('\"') | "\\" | '\'' )) | r_esc_seq);
 
 			r_esc_seq		= ch_p('\\') >>
 							  ( oct_p |
@@ -698,7 +687,7 @@ struct attr_grammar: public grammar<attr_grammar>
 			// Declaration of Sorts.
 
 			r_decl_sort		  = lexeme_d[ strlit<>("sort") >> space_p ] >>
-								(r_ident[&add_sort][st_sorts.add] % ',') >> ';';
+								(r_ident[&create_sort][st_sorts.add] % ',') >> ';';
 
 			// Declaration of Operators.
 
@@ -735,9 +724,9 @@ struct attr_grammar: public grammar<attr_grammar>
 			/**
 			  * Declaration of Attributes.
 			  */
-			r_attributes = lexeme_d[ strlit<>("attributes")>> space_p ] >> +r_decl_attr[&save_decl_attrs];
+			r_attributes = lexeme_d[ strlit<>("attributes")>> space_p ] >> +r_decl_attr[&create_attributes];
 
-			r_decl_attr  =(r_ident[&add_attr][st_attributes.add] % ',') >>
+			r_decl_attr  =(r_ident[&add_attribute][st_attributes.add] % ',') >>
 						   ':' >> !(r_type_attr[&save_type_attr]) >> '<' >> r_sort_st[&save_sort_attr] >> '>' >>
 						   lexeme_d[ strlit<>("of")>> space_p ] >>
 						  (r_conj_symb |
@@ -751,27 +740,24 @@ struct attr_grammar: public grammar<attr_grammar>
 			  * Declaration of Rules.
 			  */
 
-			r_rules		  = lexeme_d[ strlit<>("rules")>> space_p ] >> +r_decl_rule;
+			r_rules		  = lexeme_d[ strlit<>("rules")>> space_p ] >> (+r_decl_rule)[&check_well_defined];
 
-			r_decl_rule	  = r_ident[&save_non_terminal][&add_left_symbol_rule][st_symbols.add] >>
+			r_decl_rule	  = r_ident[&create_new_non_terminal][&create_rule][st_non_terminal.add] >>
 							strlit<>("::=") >>
 							r_right_rule[&save_rule] >>
-							*(strlit<>("|")[&abbreviated_rule] >> r_right_rule[&save_rule]) >> ';';
+							*(strlit<>("|")[&create_abbreviated_rule] >> r_right_rule[&save_rule]) >> ';';
 
-			r_right_rule  = +(  r_ident[&save_non_terminal][st_symbols.add]
-							  | char_pp[&save_terminal]
-							  | r_string[&save_terminal]
-							  //| lexeme_d[ int_p[&save_terminal_int] ]
-							   //| longest_d[ int_p[&save_terminal_int] | real_p[&save_terminal_real] ]
-							  | longest_d[ int_p | real_p ][&save_terminal]
-//							  | lexeme_d[ real_p[&save_terminal_real] ]
-							 )[&add_right_side_rule] >>
+			r_right_rule  = +( r_ident[&create_new_non_terminal][st_non_terminal.add]
+			                 | r_terminal[&create_new_terminal]
+							 )[&save_right_side_rule] >>
 							!(strlit<>("compute") >>
 								+(r_equation) >>
 							  strlit<>("end")
 							 );
 
-			r_equation	  = r_instance[&save_lvalue] >> '=' >> r_expression[&save_rvalue] >> ';';
+			r_terminal	  = lexeme_d[ ch_p('\'') >> r_string_lit >> ch_p('\'') ];
+
+			r_equation	  = r_instance[&create_equation] >> '=' >> r_expression[&save_rvalue] >> ';';
 
 			/**
 			  * expression's Grammar non ambiguos based in
@@ -780,11 +766,11 @@ struct attr_grammar: public grammar<attr_grammar>
 			  *		T = F *(<op_postfix>) | (<op_prefix>) T
 			  *		F = (E) | function | literal | instance
 			  */
-			r_expression 		= r_expr_prime >> *(r_op_infix_st[&save_operator][&create_func_node] >> r_expr_prime[&create_root_infix_node])
+			r_expression 		= r_expr_prime >> *(r_op_infix_st[&create_operator][&create_func_node] >> r_expr_prime[&create_root_infix_node])
 								;
 
-			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st[&save_operator][&create_func_node][&create_root_postfix_node])
-								| r_op_prefix_st[&save_operator][&create_func_node] >> r_expr_prime[&create_root_prefix_node]
+			r_expr_prime		= r_expr_prime_prime >> *(r_op_postfix_st[&create_operator][&create_func_node][&create_root_postfix_node])
+								| r_op_prefix_st[&create_operator][&create_func_node] >> r_expr_prime[&create_root_prefix_node]
 								;
 
 			r_expr_prime_prime  = ch_p('(')[&increment_level] >> r_expression >> ch_p(')')[&decrement_level]
@@ -796,15 +782,15 @@ struct attr_grammar: public grammar<attr_grammar>
 			/**
 			  * The functions accept a list of expressions.
 			  */
-			r_function			= r_function_st[&save_function][&create_func_node] >> ch_p('(')[&push_mark][&increment_level] >>!(r_expression % ',') >> ch_p(')')[&decrement_level];
+			r_function			= r_function_st[&create_function][&create_func_node] >> ch_p('(')[&push_mark][&increment_level] >>!(r_expression % ',') >> ch_p(')')[&decrement_level];
 
 			/**
 			  * Literals accepted: Integer and Float numbers, characters and string,
 			  * between signs ' and " respectively.
 			  */
-			r_literal			= longest_d[ real_p[&save_lit_flt] | int_p[&save_lit_int] ]
-					 			| r_char[&save_lit_ch]
-								| r_string[&save_lit_str]
+			r_literal			= longest_d[ real_p | int_p ][&create_lit_number]
+					 			| r_char[&create_lit_ch]
+								| r_string[&create_lit_str]
 							    ;
 
 			/**
@@ -813,7 +799,7 @@ struct attr_grammar: public grammar<attr_grammar>
 			  *
 			  * Example: E[0].value
 			  */
-			r_instance			= lexeme_d[ r_symbol_st[&save_symb_ins] >>
+			r_instance			= lexeme_d[ r_non_term_st[&create_instance] >>
 					  						'[' >> int_p[&save_index_ins] >> ']' >>
 					  						'.' >> r_attribute_st[&save_attr_ins]
 					  					  ];
@@ -832,10 +818,10 @@ struct attr_grammar: public grammar<attr_grammar>
 			r_op_postfix_st		= st_op_postfix;
 			r_function_st		= st_functions;
 			r_attribute_st		= st_attributes;
-			r_symbol_st			= st_symbols;
+			r_non_term_st		= st_non_terminal;
 		}
 		/**
-		  * Table of Symbols for the elements of an Attribute Grammar.
+		  * Symbols's Table for the elements of an Attribute Grammar.
 		  */
 		symbols <> st_sorts;
 		symbols <> st_op_prefix;
@@ -843,7 +829,7 @@ struct attr_grammar: public grammar<attr_grammar>
 		symbols <> st_op_postfix;
 		symbols <> st_functions;
 		symbols <> st_attributes;
-		symbols <> st_symbols;
+		symbols <> st_non_terminal;
 
 		/**
 		  * Variables using in parsing time.
@@ -867,14 +853,14 @@ struct attr_grammar: public grammar<attr_grammar>
 		rule_exp r_attributes, r_decl_attr, r_type_attr, r_conj_symb;
 
 		// Rule's rule.
-		rule_exp r_rules, r_decl_rule, r_equation, r_right_rule;
+		rule_exp r_rules, r_decl_rule, r_equation, r_right_rule, r_terminal;
 
 		// Expresion's rule: Compute. Add context for type expresion.
 		rule_exp r_expression,  r_expr_prime, r_expr_prime_prime, r_function, r_literal, r_instance;
 
 		// Translate for symbol table.
 		rule_exp r_sort_st, r_op_prefix_st, r_op_infix_st, r_op_postfix_st,
-				 r_function_st, r_attribute_st, r_symbol_st, r_sort_stable;
+				 r_function_st, r_attribute_st, r_non_term_st, r_sort_stable;
 
 		// Main rule.
 		rule_exp r_att_grammar;

@@ -32,6 +32,7 @@ private:
 	map<string, Attribute> 	sd_attr;
 	map<string, Symbol>		sd_symb;
 	map<string, Rule>		sd_rule;
+	string					initial_symbol;
 
 	/**
 	  * Insert the attributes belong the symbol.
@@ -53,10 +54,6 @@ public:
 	  * Enqueue a sort in the list of the semantic domain.
 	  */
 	bool add_sort(Sort &sort);
-	/**
-	  * Enqueue a operator in the list of the semantic domain.
-	  */
-//	bool add_operator(Function &oper);
 	/**
 	  * Enqueue a function in the list of the semantic domain.
 	  */
@@ -86,6 +83,18 @@ public:
 	  * Find in the list of symbol of the semantic domain and return the symbol with that name.
 	  */
 	Symbol &get_symbol(string name_symbol);
+	/**
+	  *  Return the map with all rules.
+	  */
+	map<string, Rule>  get_rules()const;
+	/**
+	  *  Return the map with all Symbols.
+	  */
+	map<string, Symbol> get_symbols() const;
+
+	string get_initial_symbol() const;
+
+	void set_initial_symbol(string init_symbol);
 
 	/**
 	  * Generate and return a string reprensentation of a semantic domain.

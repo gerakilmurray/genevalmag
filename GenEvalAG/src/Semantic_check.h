@@ -9,12 +9,15 @@
 #define SEMCKECK_H_
 
 #include "ast/Ast_function.h"
+#include "Rule.h"
 
 using namespace genevalmag;
 
-void check_precedence(Ast_function ** root_tree);
+void correct_precedence(Ast_function ** root_tree);
 
-void check_associativity(Ast_function ** root_tree);
+void correct_associativity(Ast_function ** root_tree);
+
+bool check_all_defined_non_terminal(const map <string, Rule> rules, const map <string, Symbol> symbols);
 
 void increment_level(char name);
 
