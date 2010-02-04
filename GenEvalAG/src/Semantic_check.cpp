@@ -97,6 +97,12 @@ int swap_root_grandson(Ast_function** old_root)
 	return index_swap;
 }
 
+/*
+ * Checking from the root of the expression tree to the leaves, which all
+ * operators are applies according to their precedence.
+ * If there are conflicts resolves them doing rotations, leaving the operator
+ * with lower precedence, as the new root.
+ */
 void check_precedence(Ast_function ** root_tree);
 
 void correct_subtree(Ast_function** subtree, int index_root_subtree)
@@ -121,16 +127,19 @@ void correct_subtree(Ast_function** subtree, int index_root_subtree)
 	}
 }
 
+
 /**
-  * Checking the precedence of the operators of the parcial tree.
-  * If is necesary modifies the struct of tree.
+  * Checking from the root of the expression tree to the leaves, which all
+  * operators are applies according to their precedence.
+  * If there are conflicts resolves them doing rotations, leaving the operator
+  * with lower precedence, as the new root.
   *
-  * Obs: Se realizan controles sobre casos que se deben
+  * Obs: The following checks are performed and only make changes in the
+  *      structure of the tree, if it fulfills the following three conditions:
   *
-  * Solamente se realizan cambios en la estructura del arbol, si se cumplen las siguientes 3 condiciones:
-  *   - Las operaciones a cambiar estan en el mismo nivel de precedencia (con respecto a los parentesis).
-  *   - No se rompe el orden sintactico de la expresion.
-  *   - La operacion con mayor precedencia se aplica primero.
+  *   - Operations that are changed are at the same level of precedence (with respect wiht parentheses).
+  *   - The syntactic order of the expression is not altered.
+  *   - The operation with higher precedence apply first.
   */
 void correct_precedence(Ast_function ** root_tree)
 {
@@ -210,13 +219,11 @@ void correct_precedence(Ast_function ** root_tree)
 
 void increment_level(char name)
 {
-	// Increment the level because a new parenthesis opening.
 	current_precedence_level++;
 }
 
 void decrement_level(char name)
 {
-	// Decrement the level because a parenthesis closing.
 	current_precedence_level--;
 }
 
@@ -270,53 +277,121 @@ void correct_associativity(Ast_function ** root_tree)
 }
 
 
-bool check_all_defined_non_terminal(const map <string, Rule> rules, const map <string, Symbol> symbols)
+bool check_all_defined_non_terminal(const map <string, Rule> rules, const map <string, Symbol> non_terminals)
 {
 	bool left_symbol_defined;
-	bool symbol_used;
 
-	map<string,Symbol >::const_iterator it_s = symbols.begin();
-	while (it_s != symbols.end())
+	for (map<string,Symbol >::const_iterator it_s = non_terminals.begin(); it_s != non_terminals.end(); it_s++)
 	{
 		left_symbol_defined = false;
-		symbol_used = false;
 
-		if (it_s->second.is_non_terminal())
+		map<string,Rule >::const_iterator it_r =rules.begin();
+		while (it_r != rules.end())
 		{
-			map<string,Rule >::const_iterator it_r =rules.begin();
-			while (!(left_symbol_defined && symbol_used) && it_r != rules.end())
+			if (it_s->second.equals(*(it_r->second.get_left_symbol())))
 			{
-				if (!left_symbol_defined && it_s->second.equals(*(it_r->second.get_left_symbol())))
-				{
-					left_symbol_defined = true;
-				}
-
-				vector<Symbol*> right_side = it_r->second.get_right_side();
-				for(size_t i = 0; i < right_side.size(); i++)
-				{
-					if (right_side[i]->is_non_terminal())
-					{
-						if (it_s->second.equals(*(right_side[i])))
-						{
-							symbol_used = true;
-							break;
-						}
-					}
-				}
-				it_r++;
+				left_symbol_defined = true;
+				break;
 			}
 
-			if (!left_symbol_defined)
+			it_r++;
+		}
+
+		if (!left_symbol_defined)
+		{
+			cerr << "ERROR: Symbol Non-Teminal \""<< it_s->second.get_name() << "\" uses in the right part without rule." << endl;
+			return false;
+		}
+	}
+	return true;
+}
+
+void warshall_algorithm(const unsigned int size, bool *matrix_plain)
+{
+	for (size_t k = 0; k < size; k++)
+	{
+		for (size_t i = 0; i < size; i++)
+		{
+			for (size_t j=0; j < size; j++)
 			{
-				cerr << "ERROR: Symbol Non-Teminal "<< it_s->second.get_name() << " uses in the right part without rule." << endl;
-				return false;
-			}
-			if (!symbol_used)
-			{
-				cerr << "WARNING: Symbol Non-Teminal "<< it_s->second.get_name() << " not used in the right side of any rule." << endl;
+				// Assign new value from: M[i][j] = M[i][j] OR (M[i][k] AND M[k][j])
+				(matrix_plain + (size*i))[j] =
+						(matrix_plain + (size*i))[j] ||
+						((matrix_plain + (size*i))[k] && (matrix_plain + (size*k))[j]);
 			}
 		}
-		it_s++;
 	}
+}
+
+int get_index(string name_symb,vector<string> non_term)
+{
+	for (size_t i=0; i< non_term.size();i++)
+	{
+		if (name_symb.compare(non_term[i]) == 0)
+		{
+			// Elem found. Return index of elem.
+			return i;
+		}
+	}
+	// The elem isn't in the vector.
+	return -1;
+}
+
+bool check_reachability(const map <string, Rule> rules, const map <string, Symbol> non_terminals, string init_symb)
+{
+	vector<string> non_term;
+	// Obtain all non_terminals name.
+	for (map<string,Symbol >::const_iterator it_s = non_terminals.begin(); it_s != non_terminals.end(); it_s++)
+	{
+		non_term.push_back(it_s->second.get_name());
+	}
+
+	int cant_non_terminal = non_term.size();
+
+	bool matrix_reachability[cant_non_terminal][cant_non_terminal];
+
+	// Inicializer matriz.
+	for (int i=0; i<cant_non_terminal; i++)
+	{
+		for (int j=0;j<cant_non_terminal;j++)
+		{
+			matrix_reachability[i][j] = false;
+		}
+	}
+
+	// Matrix W0 in Warshall Algorithm.
+
+	// For each rule, set the adjacency relations of the non-terminals.
+	for (map<string,Rule >::const_iterator it_r = rules.begin(); it_r != rules.end(); it_r++)
+	{
+		string symbol = it_r->second.get_left_symbol()->get_name();
+		int index_i = get_index(symbol,non_term);
+
+		// For each non-terminal in the right side, set true cell in the matrix.
+		for(size_t k=0;k < it_r->second.get_right_side().size();k++)
+		{
+			if (it_r->second.get_right_side().at(k)->is_non_terminal())
+			{
+				symbol = it_r->second.get_right_side().at(k)->get_name();
+				int index_j = get_index(symbol,non_term);
+				matrix_reachability[index_i][index_j] = true;
+			}
+		}
+	}
+
+	bool * first = &matrix_reachability[0][0];
+	warshall_algorithm(cant_non_terminal, first);
+
+	// Index of initial symbol of AG.
+	int index_init = get_index(init_symb,non_term);
+
+	for(int j=0; j<cant_non_terminal; j++)
+	{
+		if(!matrix_reachability[index_init][j])
+		{
+			cerr << "WARNING: Symbol Non-Teminal \""<< non_term[j] << "\" unreachable." << endl;
+		}
+	}
+
 	return true;
 }

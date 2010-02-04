@@ -9,7 +9,7 @@
 #include <boost/tokenizer.hpp>
 #include <iostream>
 
-#include "SemDomain.h"
+#include "Attr_grammar.h"
 
 using namespace std;
 
@@ -17,17 +17,18 @@ namespace genevalmag
 {
 
 /**
-  * Contructor empty of semantic domain.
+  * Contructor empty of attribute grammar.
   */
-SemDomain::SemDomain()
+Attr_grammar::Attr_grammar()
 {
-	initial_symbol.clear();
+	// Remove garbage.
+	sd_initial_symb.clear();
 }
 
 /**
-  * Destructor of the semantic domain.
+  * Destructor of the attribute grammar.
   */
-SemDomain::~SemDomain()
+Attr_grammar::~Attr_grammar()
 {
 }
 
@@ -62,59 +63,66 @@ template <class T> string to_string_map(map<string,T > &map_elem)
 }
 
 /**
-  * Enqueue a sort in the list of the semantic domain.
+  * Enqueue a sort in the list of the attribute grammar.
   */
-bool SemDomain::add_sort(Sort &sort)
+bool Attr_grammar::add_sort(Sort &sort)
 {
 	return add<Sort>(sort, sd_sort);
 }
 
 /**
-  * Enqueue a function in the list of the semantic domain.
+  * Enqueue a function in the list of the attribute grammar.
   */
-bool SemDomain::add_function(Function &func)
+bool Attr_grammar::add_function(Function &func)
 {
 	return add<Function>(func, sd_func);
 }
 
 /**
-  * Enqueue a attribute in the list of the semantic domain.
+  * Enqueue a attribute in the list of the attribute grammar.
   */
-bool SemDomain::add_attribute(Attribute &attr)
+bool Attr_grammar::add_attribute(Attribute &attr)
 {
 	return add<Attribute>(attr, sd_attr);
 }
 
 /**
-  * Enqueue a symbol in the list of the semantic domain.
+  * Enqueue a symbol in the list of the attribute grammar.
   */
-bool SemDomain::add_symbol(Symbol &symb)
+bool Attr_grammar::add_symbol(Symbol &symb)
 {
-	bool not_repeat = add <Symbol>(symb, sd_symb);
+	map<string, Symbol>	*map_symb;
+	if (symb.is_non_terminal())
+		map_symb = &sd_symb_non_terminals;
+	else
+		map_symb = &sd_symb_terminals;
+
+	bool not_repeat = add <Symbol>(symb, *map_symb);
 	if(not_repeat &&symb.is_non_terminal())
 	{
-		map<string, Symbol>::iterator it = sd_symb.find(symb.key());
+		map<string, Symbol>::iterator it = map_symb->find(symb.key());
 		load_attributes(it->second);
 	}
 	return not_repeat;
 }
 
 /**
-  * Enqueue a rule in the list of the semantic domain.
+  * Enqueue a rule in the list of the attribute grammar.
   */
-bool SemDomain::add_rule(Rule &rule)
+bool Attr_grammar::add_rule(Rule &rule)
 {
-	if (initial_symbol.empty())
+	if (sd_initial_symb.empty())
+	{
 		// Set initial symbol of grammar.
-		initial_symbol = rule.key();
-
+		sd_initial_symb = rule.get_left_symbol()->get_name();
+	}
 	return add <Rule>(rule, sd_rule);
 }
 
 /**
-  * Find in the list of sort of the semantic domain and return the sort with that name.
+  * Find in the list of sort of the attribute grammar and return the sort with that name.
   */
-Sort &SemDomain::return_sort(string name_sort)
+Sort &Attr_grammar::return_sort(string name_sort)
 {
 	Sort sort_new(name_sort);
 	// becouse is a type basic. if not the sort belong map. the map not have repeat.
@@ -124,9 +132,9 @@ Sort &SemDomain::return_sort(string name_sort)
 	return it->second;
 }
 /**
-  * Find in the list of function of the semantic domain and return the function with that name.
+  * Find in the list of function of the attribute grammar and return the function with that name.
   */
-Function *SemDomain::get_function(string key_function)
+Function *Attr_grammar::get_function(string key_function)
 {
 	map<string,Function>::iterator it = sd_func.find(key_function);
 	if (it == sd_func.end())
@@ -134,43 +142,49 @@ Function *SemDomain::get_function(string key_function)
 	return &(it->second);
 }
 /**
-  * Find in the list of operator of the semantic domain and return the operator with that name.
+  * Find in the list of operator of the attribute grammar and return the operator with that name.
   */
-Symbol &SemDomain::get_symbol(string name_symbol)
+Symbol &Attr_grammar::get_symbol(string name_symbol)
 {
-	map<string,Symbol>::iterator it = sd_symb.find(name_symbol);
+	map<string,Symbol>::iterator it = sd_symb_non_terminals.find(name_symbol);
+	if (it == sd_symb_non_terminals.end())
+		it = sd_symb_terminals.find(name_symbol);
 	return it->second;
 }
 
 /**
   *  Return the map with all rules.
   */
-map<string, Rule> SemDomain::get_rules() const
+map<string, Rule> Attr_grammar::get_rules() const
 {
 	return sd_rule;
 }
 
 /**
-  *  Return the map with all Symbols.
+  *  Return the map with all symbols.
   */
-map<string, Symbol> SemDomain::get_symbols() const
+map<string, Symbol> Attr_grammar::get_non_terminal_symbols() const
 {
-	return sd_symb;
+	return sd_symb_non_terminals;
 }
-
-string SemDomain::get_initial_symbol() const
+/**
+  *  Return the initial rule.
+  */
+string Attr_grammar::get_initial_symb() const
 {
-    return initial_symbol;
+    return sd_initial_symb;
 }
-
-void  SemDomain::set_initial_symbol(string init_symbol)
-{
-    initial_symbol = init_symbol;
-}
-
 
 /**
-  * Generate and return a string reprensentation of a semantic domain.
+  *  Set the initial rule.
+  */
+void  Attr_grammar::set_initial_symb(string init_symb)
+{
+	sd_initial_symb = init_symb;
+}
+
+/**
+  * Generate and return a string reprensentation of a attribute grammar.
   *
   * Result= "semantic domain"
   * 			<sorts>
@@ -189,7 +203,7 @@ void  SemDomain::set_initial_symbol(string init_symbol)
   * where <sorts>, <operators>, <functions>, <attributes>, <symbols> and <rules>, are
   * full representation of each type.
   */
-string SemDomain::to_string()
+string Attr_grammar::to_string()
 {
 	#ifdef _DEBUG
 //		map<string,Sort>::iterator		it1 = sd_sort.find("pepe");
@@ -210,8 +224,13 @@ string SemDomain::to_string()
 	semdomain.append(to_string_map <Attribute>(sd_attr));
 	semdomain.append("\n/***********************************************************");
 	semdomain.append("\nsymbols\n");
-	semdomain.append(to_string_map <Symbol   >(sd_symb));
-	semdomain.append("***********************************************************/\n");
+	semdomain.append(to_string_map <Symbol   >(sd_symb_non_terminals));
+	semdomain.append(to_string_map <Symbol   >(sd_symb_terminals));
+	semdomain.append("\n***********************************************************/\n");
+	semdomain.append("/*  >>>>>>>>>> Initial Symbol of Grammar is ");
+	semdomain.append(sd_initial_symb);
+	semdomain.append(" <<<<<<<<<<  */\n");
+	semdomain.append("/**********************************************************/\n");
 	semdomain.append("\nrules\n");
 	semdomain.append(to_string_map <Rule	 >(sd_rule));
 	semdomain.append("\n");
@@ -256,7 +275,7 @@ bool belong(Symbol symb, string expr_attrs)
 /**
   * Insert the attributes belong the symbol.
   */
-void SemDomain::load_attributes(Symbol &symb)
+void Attr_grammar::load_attributes(Symbol &symb)
 {
 	for(map<string,Attribute>::iterator it = sd_attr.begin(); it != sd_attr.end(); it++)
 	{

@@ -24,15 +24,23 @@ namespace genevalmag
 
 #define IS_OPERATOR true
 
-class SemDomain
+class Attr_grammar
 {
 private:
+	/*
+	 *  Saves each element kind of the grammar's attribute.
+	 */
 	map<string, Sort>		sd_sort;
 	map<string, Function>	sd_func;
 	map<string, Attribute> 	sd_attr;
-	map<string, Symbol>		sd_symb;
+	map<string, Symbol>		sd_symb_terminals;
+	map<string, Symbol>		sd_symb_non_terminals;
 	map<string, Rule>		sd_rule;
-	string					initial_symbol;
+
+	/*
+	 * Saves the name of the initial symbol of the grammar's attribute.
+	 */
+	string					sd_initial_symb;
 
 	/**
 	  * Insert the attributes belong the symbol.
@@ -43,12 +51,12 @@ public:
 	/**
 	  * Contructor empty of semantic domain.
 	  */
-	SemDomain();
+	Attr_grammar();
 
 	/**
 	  * Destructor of the semantic domain.
 	  */
-	virtual ~SemDomain();
+	virtual ~Attr_grammar();
 
 	/**
 	  * Enqueue a sort in the list of the semantic domain.
@@ -88,13 +96,18 @@ public:
 	  */
 	map<string, Rule>  get_rules()const;
 	/**
-	  *  Return the map with all Symbols.
+	  *  Return the map with all symbols.
 	  */
-	map<string, Symbol> get_symbols() const;
+	map<string, Symbol> get_non_terminal_symbols() const;
+	/**
+	  *  Return the initial rule.
+	  */
+	string get_initial_symb() const;
 
-	string get_initial_symbol() const;
-
-	void set_initial_symbol(string init_symbol);
+	/**
+	  *  Set the initial rule.
+	  */
+	void set_initial_symb(string init_symbol);
 
 	/**
 	  * Generate and return a string reprensentation of a semantic domain.

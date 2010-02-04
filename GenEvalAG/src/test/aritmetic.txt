@@ -40,7 +40,7 @@ rules
        |  '-'E
        | num
        ;
-       
+
     num ::= digit num
     	 |  real num
          |  digit
