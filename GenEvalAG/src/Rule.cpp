@@ -237,4 +237,21 @@ string Rule::key() const
 	return key;
 }
 
+int Rule::count_non_terminal_right_side() const
+{
+	static int count = 0;
+	static bool calc = false;
+
+	if (!calc)
+	{
+		for(vector<Symbol>::size_type i = 0; i < r_right_side.size(); i++)
+		{
+			if (r_right_side[i]->is_non_terminal())
+				count++;
+		}
+		calc = true;
+	}
+	return count;
+}
+
 } // end genevalmag

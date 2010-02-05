@@ -40,7 +40,7 @@ private:
 	/*
 	 * Saves the name of the initial symbol of the grammar's attribute.
 	 */
-	string					sd_initial_symb;
+	Symbol					*sd_initial_symb;
 
 	/**
 	  * Insert the attributes belong the symbol.
@@ -102,12 +102,12 @@ public:
 	/**
 	  *  Return the initial rule.
 	  */
-	string get_initial_symb() const;
+	Symbol *get_initial_symb() const;
 
 	/**
 	  *  Set the initial rule.
 	  */
-	void set_initial_symb(string init_symbol);
+	void set_initial_symb(Symbol *init_symbol);
 
 	/**
 	  * Generate and return a string reprensentation of a semantic domain.

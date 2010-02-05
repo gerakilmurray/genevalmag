@@ -100,6 +100,11 @@ public:
 	bool is_synthetize() const;
 
 	/**
+	  * Return true if the modifiers of the attribute is inherit.
+	  */
+	bool is_inherit() const;
+
+	/**
 	  * Generate and return a string reprensentation of a attribute.
 	  *
 	  * Result= <name> ":" <modifiers> "<" <sort_type> ["(" <instance> ")" IF DEBUG IS ON] "> of " <membership_list>

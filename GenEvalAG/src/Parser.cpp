@@ -279,6 +279,8 @@ void create_instance(char const *str, char const *end)
 
 void save_index_ins(int const index)
 {
+	if (index > current_rule->count_non_terminal_right_side())
+		cerr << "ERROR: Index of symbol incorrect."<< index << endl;
 	current_instance->set_num(index);
 }
 
@@ -602,7 +604,7 @@ void check_well_defined(char const *str, char const *end)
 
 	check_reachability(attr_grammar.get_rules(), attr_grammar.get_non_terminal_symbols(), attr_grammar.get_initial_symb());
 
-//	check_well_attribute_grammar();
+	check_well_defined_AG(attr_grammar.get_rules());
 }
 
 /**

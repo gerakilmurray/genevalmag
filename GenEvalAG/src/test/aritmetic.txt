@@ -24,7 +24,8 @@ semantic domain
  ***********************/
 attributes
 	valor : syn <int>    of all;
-	tipo  : syn	<string> of all;
+	tipo  : syn	<int> of all;
+	pepe  : inh<int> of all;
 	
 /******************
  * Block of Rules *
@@ -33,8 +34,14 @@ rules
     E ::= E '+' E
     		compute
     			E[0].valor = 1 + 2;
-    		end
-       |  E '-' E
+    			//E[1].tipo = "gonza  jk\n \j j";
+    			E[0].tipo = 3;
+    			//E[0].pepe = 1 + 2;
+    			E[2].pepe = 1 + 2;
+    			E[1].pepe = E[2].tipo;
+    			E[1].pepe = 1 + 2;
+    		end;
+/*       |  E '-' E
        |  E '*' E
        |  '(' E ')'
        |  '-'E
@@ -49,5 +56,5 @@ rules
          
    digit ::= '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '0' ;
     
-   real ::= digit '.' digit;
+   real ::= digit '.' digit;*/
     

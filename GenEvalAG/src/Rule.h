@@ -122,6 +122,8 @@ class Rule
 		  * where <right_ride> is= <symbol_1> ... <symbol_n>
 		  */
 		string key() const;
+
+		int count_non_terminal_right_side() const;
 };
 
 } // end genevalmag

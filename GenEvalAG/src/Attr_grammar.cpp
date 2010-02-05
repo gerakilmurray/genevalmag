@@ -22,7 +22,7 @@ namespace genevalmag
 Attr_grammar::Attr_grammar()
 {
 	// Remove garbage.
-	sd_initial_symb.clear();
+	sd_initial_symb = NULL;
 }
 
 /**
@@ -111,12 +111,14 @@ bool Attr_grammar::add_symbol(Symbol &symb)
   */
 bool Attr_grammar::add_rule(Rule &rule)
 {
-	if (sd_initial_symb.empty())
+	bool result = add <Rule>(rule, sd_rule);
+	if ( result && sd_initial_symb == NULL)
 	{
 		// Set initial symbol of grammar.
-		sd_initial_symb = rule.get_left_symbol()->get_name();
+		map<string,Rule>::iterator	init_symb = sd_rule.find(rule.key());
+		sd_initial_symb = init_symb->second.get_left_symbol();
 	}
-	return add <Rule>(rule, sd_rule);
+	return result;
 }
 
 /**
@@ -170,7 +172,7 @@ map<string, Symbol> Attr_grammar::get_non_terminal_symbols() const
 /**
   *  Return the initial rule.
   */
-string Attr_grammar::get_initial_symb() const
+Symbol *Attr_grammar::get_initial_symb() const
 {
     return sd_initial_symb;
 }
@@ -178,7 +180,7 @@ string Attr_grammar::get_initial_symb() const
 /**
   *  Set the initial rule.
   */
-void  Attr_grammar::set_initial_symb(string init_symb)
+void  Attr_grammar::set_initial_symb(Symbol *init_symb)
 {
 	sd_initial_symb = init_symb;
 }
@@ -214,6 +216,9 @@ string Attr_grammar::to_string()
 //
 //		map<string,Symbol>::iterator	it3 = sd_symb.find("id");
 //		it3->second.set_name("ident");
+
+//		map<string,Rule>::iterator	rule = sd_rule.find("EE'+'E");
+//		rule->second.get_left_symbol()->set_name("Elem");
 	#endif
 
 	string semdomain("\nsemantic domain\n");
@@ -228,7 +233,7 @@ string Attr_grammar::to_string()
 	semdomain.append(to_string_map <Symbol   >(sd_symb_terminals));
 	semdomain.append("\n***********************************************************/\n");
 	semdomain.append("/*  >>>>>>>>>> Initial Symbol of Grammar is ");
-	semdomain.append(sd_initial_symb);
+	semdomain.append(sd_initial_symb->get_name());
 	semdomain.append(" <<<<<<<<<<  */\n");
 	semdomain.append("/**********************************************************/\n");
 	semdomain.append("\nrules\n");
