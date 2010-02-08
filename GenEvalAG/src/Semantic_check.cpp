@@ -395,8 +395,6 @@ bool check_reachability(const map <string, Rule> rules, const map <string, Symbo
 
 	return true;
 }
-int eq_satisfaced = 0;
-
 bool check_eq_defindes_it(const Symbol *symb, const int index, const Attribute *attr, const map<int,Equation> eqs)
 {
 	// For each eq.
@@ -406,7 +404,6 @@ bool check_eq_defindes_it(const Symbol *symb, const int index, const Attribute *
 			index == it_eq->second.get_l_value().get_num() &&
 			attr->equals(*it_eq->second.get_l_value().get_attr()))
 		{
-			eq_satisfaced++;
 			return true;
 		}
 	}
@@ -468,8 +465,5 @@ bool check_well_defined_AG(const map <string, Rule> rules)
 			}
 		}
 	}
-
-	cout << "cant rules " << eq_satisfaced << endl;
-	// ACA HACER UN FOR PARA RECONOCER REGLAS AL PEDO.
 	return true;
 }

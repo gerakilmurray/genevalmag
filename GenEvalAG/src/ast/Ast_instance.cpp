@@ -128,4 +128,26 @@ string Ast_instance::to_string() const
 	return inst;
 }
 
+/**
+  * Compares the Ast_instance with other.
+  */
+bool Ast_instance::equals(Ast_instance const &other) const
+{
+	return	key().compare(other.key()) == 0;
+}
+
+string Ast_instance::key() const
+{
+	string inst;
+	// Save symbol's name.
+	inst.append(i_symb->get_name());
+	// Save instance number.
+	stringstream ins;
+	ins << i_num;
+	inst.append(ins.str());
+	// Save attribute's name.
+	inst.append(i_attr->get_name());
+	return inst;
+}
+
 } // end genevalmag

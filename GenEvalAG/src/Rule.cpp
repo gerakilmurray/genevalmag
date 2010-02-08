@@ -138,7 +138,7 @@ bool Rule::belong(const Equation &eq) const
 {
 	for(map<int,Equation>::const_iterator it = r_eqs.begin(); it != r_eqs.end(); it++)
 	{
-		if (it->second.equals(eq))
+		if (it->second.get_l_value().equals(eq.get_l_value()))
 			return true;
 	}
 	return false;

@@ -53,6 +53,10 @@ public:
 	void set_symb(Symbol *symb);
 
 	string to_string() const;
+
+	bool equals(Ast_instance const &other) const;
+
+	string key() const;
 };
 
 } // end genevalmag

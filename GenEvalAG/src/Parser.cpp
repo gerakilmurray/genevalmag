@@ -390,7 +390,9 @@ void save_rvalue(char const *str, char const *end)
 
 	if (!current_rule->add_eq(*current_eq))
 	{
-		cerr << "WARNING: Equation duplicate: --> \"" << current_eq->to_string() << "\" in rule: --> \"" << current_rule->to_string_not_eqs() << "\"" << endl;
+		cerr << "WARNING: Ignores the eq \"" << current_eq->to_string() << "\" duplicate definition for \""
+				<< current_eq->get_l_value().to_string() << "\" in rule: --> \""
+				<< current_rule->to_string_not_eqs() << "\"" << endl;
 	}
 	delete(current_eq);
 	current_eq = NULL;
