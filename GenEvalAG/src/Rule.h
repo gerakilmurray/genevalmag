@@ -33,7 +33,7 @@ class Rule
 		  */
 		void destroy();
 
-		bool belong(const Equation &eq) const;
+		bool defined_equation(const Equation &eq) const;
 
 	public:
 		/**
@@ -123,7 +123,10 @@ class Rule
 		  */
 		string key() const;
 
-		int count_non_terminal_right_side() const;
+		int count_non_terminal(const Symbol *symb) const;
+
+		bool belongs_non_terminal(const Symbol &non_term) const;
+
 };
 
 } // end genevalmag

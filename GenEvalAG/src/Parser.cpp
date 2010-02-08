@@ -81,6 +81,16 @@ Equation		*current_eq;
 vector<Ast_node*> 			stack_node;
 vector<Ast_inner_node*> 	stack_inner_node;
 
+string cleaning_tabs(const string str)
+{
+	string aux = "";
+	for(int i=0; str[i] != '\0'; i++)
+	{
+		aux.push_back((str[i] == '\t')? ' ': str[i]);
+	}
+	return aux;
+}
+
 /**
   * Methods and functions for parse Sort class.
   */
@@ -269,18 +279,30 @@ void save_rule(char const *str, char const *end)
   */
 void create_instance(char const *str, char const *end)
 {
-	string symb(str, end);
+	string name(str, end);
+
+	Symbol *symb = &(attr_grammar.get_symbol(name));
+
+	if (!current_rule->belongs_non_terminal(*symb))
+	{
+		cerr << "ERROR: non-terminal symbol \"" << name << "\" used does not belong to the rule: \"" << cleaning_tabs(current_rule->to_string_not_eqs())<< "\"."<< endl;
+		exit(-1);
+	}
+
 	if(current_instance == NULL)
 	{
 		current_instance = new Ast_instance();
 	}
-	current_instance->set_symb(&(attr_grammar.get_symbol(symb)));
+	current_instance->set_symb(symb);
 }
 
 void save_index_ins(int const index)
 {
-	if (index > current_rule->count_non_terminal_right_side())
-		cerr << "ERROR: Index of symbol incorrect."<< index << endl;
+	if (index >= current_rule->count_non_terminal(current_instance->get_symb()))
+	{
+		cerr << "ERROR: Index of symbol incorrect."<< index << current_instance->get_symb()->get_name() << endl;
+		exit(-1);
+	}
 	current_instance->set_num(index);
 }
 
@@ -390,11 +412,12 @@ void save_rvalue(char const *str, char const *end)
 
 	if (!current_rule->add_eq(*current_eq))
 	{
-		cerr << "WARNING: Ignores the eq \"" << current_eq->to_string() << "\" duplicate definition for \""
-				<< current_eq->get_l_value().to_string() << "\" in rule: --> \""
-				<< current_rule->to_string_not_eqs() << "\"" << endl;
+		cerr << "WARNING: Ignores the eq \"" << cleaning_tabs(current_eq->to_string()) << "\" duplicate definition for \""
+				<< cleaning_tabs(current_eq->get_l_value().to_string()) << "\" in rule: --> \""
+				<< cleaning_tabs(current_rule->to_string_not_eqs()) << "\"" << endl;
 	}
 	delete(current_eq);
+
 	current_eq = NULL;
 
 	reset_semantic_context();

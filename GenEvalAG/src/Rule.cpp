@@ -134,7 +134,7 @@ void Rule::add_right_symbol(Symbol *right_symb)
 	r_right_side.push_back(right_symb);
 }
 
-bool Rule::belong(const Equation &eq) const
+bool Rule::defined_equation(const Equation &eq) const
 {
 	for(map<int,Equation>::const_iterator it = r_eqs.begin(); it != r_eqs.end(); it++)
 	{
@@ -144,14 +144,32 @@ bool Rule::belong(const Equation &eq) const
 	return false;
 }
 
+bool Rule::belongs_non_terminal(const Symbol &non_term) const
+{
+	if(non_term.equals(*r_left_symbol))
+	{
+		return true;
+	}
+	for(vector<Symbol*>::size_type i = 0; i < r_right_side.size(); i++)
+	{
+		if (non_term.equals(*r_right_side.at(i)))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+
 /**
   * Enqueue a equation in the list of the rule.
   */
 bool Rule::add_eq(const Equation &eq)
 {
 	static int cant_eq = 0;
-	if (belong(eq))
-		// Equation belongs to the map then it is not inserted. The map not acceps repeat elements.
+	if (defined_equation(eq))
+		// The equation is already defined then it isn't inserted.
+		// The map does not accept the overhead of the equations.
 		return false;
 
 	pair<int,Equation> new_eq(cant_eq++,eq);
@@ -202,7 +220,7 @@ string Rule::to_string_not_eqs() const
 	string rule;
 	rule.append(r_left_symbol->get_name());
 	rule.append("\t::=\t");
-	for(vector<Symbol>::size_type i = 0; i < r_right_side.size(); i++)
+	for(vector<Symbol*>::size_type i = 0; i < r_right_side.size(); i++)
 	{
 		rule.append(r_right_side[i]->get_name());
 		if(i+1 < r_right_side.size())
@@ -237,19 +255,19 @@ string Rule::key() const
 	return key;
 }
 
-int Rule::count_non_terminal_right_side() const
+int Rule::count_non_terminal(const Symbol *symb) const
 {
-	static int count = 0;
-	static bool calc = false;
-
-	if (!calc)
+	int count = 0;
+	if(symb->equals(*r_left_symbol))
 	{
-		for(vector<Symbol>::size_type i = 0; i < r_right_side.size(); i++)
+		count++;
+	}
+	for(vector<Symbol>::size_type i = 0; i < r_right_side.size(); i++)
+	{
+		if (r_right_side[i]->is_non_terminal() && symb->equals(*r_right_side[i]))
 		{
-			if (r_right_side[i]->is_non_terminal())
-				count++;
+			count++;
 		}
-		calc = true;
 	}
 	return count;
 }

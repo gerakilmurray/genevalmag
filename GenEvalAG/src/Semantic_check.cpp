@@ -395,10 +395,9 @@ bool check_reachability(const map <string, Rule> rules, const map <string, Symbo
 
 	return true;
 }
-bool check_eq_defindes_it(const Symbol *symb, const int index, const Attribute *attr, const map<int,Equation> eqs)
+bool check_eq_defines_it(const Symbol *symb, const int index, const Attribute *attr, const map<int,Equation> eqs)
 {
-	// For each eq.
-	for (map<int,Equation >::const_iterator it_eq = eqs.begin(); it_eq != eqs.end(); it_eq++)
+	for (map<int,Equation>::const_iterator it_eq = eqs.begin(); it_eq != eqs.end(); it_eq++)
 	{
 		if (symb->equals(*it_eq->second.get_l_value().get_symb()) &&
 			index == it_eq->second.get_l_value().get_num() &&
@@ -417,49 +416,68 @@ bool check_well_defined_AG(const map <string, Rule> rules)
 		// Get left Symbol.
 		Symbol *symb = it_r->second.get_left_symbol();
 
-		for(size_t i=0;i< symb->get_attrs().size();i++)
+		for(size_t i = 0; i < symb->get_attrs().size(); i++)
 		{
 			Attribute * attr_syn = symb->get_attrs()[i];
 
-			bool result = check_eq_defindes_it(symb, 0, attr_syn, it_r->second.get_eqs());
+			bool defined = check_eq_defines_it(symb, 0, attr_syn, it_r->second.get_eqs());
 
-			if (attr_syn->is_synthetize() && !result)
-			// The attribute is synthetized. Must be checked if defined.
+			if (attr_syn->is_synthetize() && !defined)
+			// The attribute is synthetized. Must be defined.
 			{
 				cerr << "ERROR: \"" << symb->get_name() << "["<< 0 << "]."<< attr_syn->get_name() << "\" tipo syntetize, no tiene una Eq que lo defina." << endl;
 				return false;
 			}
 
-			if (attr_syn->is_inherit() && result)
-			// The attribute is synthetized. Must be checked if defined.
+			if (attr_syn->is_inherit() && defined)
+			// The attribute is inherit. Mustn't be defined.
 			{
 				cerr << "ERROR: \"" << symb->get_name() << "["<< 0 << "]."<< attr_syn->get_name() << "\" tipo inherit, esta definido fuera de su scope." << endl;
 				return false;
 			}
-
 		}
-		int index_non_terminal = 0;
+
+		// Contains the symbols marked.s
+		map<string,Symbol*> marked_symbols;
+
 		// Cover the right symbols.
-		for (size_t j=0;j<it_r->second.get_right_side().size();j++)
+		for (size_t i = 0; i < it_r->second.get_right_side().size(); i++)
 		{
-			symb = it_r->second.get_right_side()[j];
+			symb = it_r->second.get_right_side()[i];
 			if (symb->is_non_terminal())
 			{
-				index_non_terminal++;
-				for(size_t k=0;k< symb->get_attrs().size();k++)
-				{
-					Attribute * attr_inh = symb->get_attrs()[k];
-					bool result = check_eq_defindes_it(symb, index_non_terminal, attr_inh, it_r->second.get_eqs());
-					if (attr_inh->is_inherit() && !result)
-					{
-						cerr << "ERROR: \"" << symb->get_name() << "["<< index_non_terminal << "]."<< attr_inh->get_name() << "\" tipo inherit, no tiene una Eq que lo defina." << endl;
-						return false;
-					}
+				pair<string,Symbol*> new_p(symb->get_name(), symb);
+				pair<map<string,Symbol*>::iterator, bool> not_cheched = marked_symbols.insert(new_p);
 
-					if (attr_inh->is_synthetize() && result)
+				if(not_cheched.second)
+				{
+					int max_instance = it_r->second.count_non_terminal(symb);
+
+					for(int j = 0; j < max_instance; j++)
 					{
-						cerr << "ERROR: \"" << symb->get_name() << "["<< index_non_terminal << "]."<< attr_inh->get_name() << "\" tipo syntetize, esta definido fuera de su scope." << endl;
-						return false;
+						for(size_t k = 0; k < symb->get_attrs().size(); k++)
+						{
+							if(symb->equals(*it_r->second.get_left_symbol()))
+							{
+								continue;
+							}
+
+							Attribute * attr = symb->get_attrs()[k];
+
+							bool defined = check_eq_defines_it(symb, j, attr, it_r->second.get_eqs());
+
+							if (attr->is_inherit() && !defined)
+							{
+								cerr << "ERROR: \"" << symb->get_name() << "["<< j << "]."<< attr->get_name() << "\" 99tipo inherit, no tiene una Eq que lo defina." << endl;
+								return false;
+							}
+
+							if (attr->is_synthetize() && defined)
+							{
+								cerr << "ERROR: \"" << symb->get_name() << "["<< j << "]."<< attr->get_name() << "\" 88tipo syntetize, esta definido fuera de su scope." << endl;
+								return false;
+							}
+						}
 					}
 				}
 			}

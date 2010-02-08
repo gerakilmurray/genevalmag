@@ -38,9 +38,22 @@ rules
     			E[0].tipo = 3;
     			//E[0].pepe = 1 + 2;
     			E[2].pepe = 1 + 2;
-    			E[1].pepe = E[2].tipo;
-    			E[1].pepe = 1 + 2;
+    			E[1].pepe = E[0].tipo;
     		end;
+    		
+    E ::= T
+    		compute
+    			E[0].valor = 5;
+    			E[0].tipo = 55 + T[0].valor;
+    			T[0].pepe = 60;
+    		end;
+    		
+    T ::= 'hola'
+            compute
+                T[0].valor = 9;
+                T[0].tipo = 8;
+            end;
+            
 /*       |  E '-' E
        |  E '*' E
        |  '(' E ')'
