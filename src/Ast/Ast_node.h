@@ -11,7 +11,7 @@
 
 #include <string>
 
-#include "../Sort.h"
+#include "../Attr_grammar/Sort.h"
 
 using namespace std;
 

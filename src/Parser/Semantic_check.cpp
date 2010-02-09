@@ -13,7 +13,6 @@
 
 #include "Semantic_check.h"
 
-
 using namespace std;
 using namespace genevalmag;
 

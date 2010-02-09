@@ -9,8 +9,8 @@
 #ifndef EQUATION_H_
 #define EQUATION_H_
 
-#include "ast/Ast_node.h"
-#include "ast/Ast_instance.h"
+#include "../Ast/Ast_node.h"
+#include "../Ast/Ast_instance.h"
 
 namespace genevalmag
 {
