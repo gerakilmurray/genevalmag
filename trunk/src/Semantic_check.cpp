@@ -1,7 +1,7 @@
 /**
   *  \file		Semantic_check.cpp
   *  \brief		Implementation of the methods the Semantic_check.h
-  *  \date		28/09/2009
+  *  \date
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
@@ -12,6 +12,7 @@
 #include <map>
 
 #include "Semantic_check.h"
+
 
 using namespace std;
 using namespace genevalmag;

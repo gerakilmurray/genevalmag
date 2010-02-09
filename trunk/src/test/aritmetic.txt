@@ -44,7 +44,7 @@ rules
     E ::= T
     		compute
     			E[0].valor = 5;
-    			E[0].tipo = 55 + T[0].valor;
+    			E[0].tipo = 55 + E[0].valor;
     			T[0].pepe = 60;
     		end;
     		

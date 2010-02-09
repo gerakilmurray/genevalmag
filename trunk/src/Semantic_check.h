@@ -1,12 +1,12 @@
 /**
   *  \file		Semantic_check.h
   *  \brief		Header method semantic check of Attribute grammar.
-  *  \date		28/09/2009
+  *  \date
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
-#ifndef SEMCKECK_H_
-#define SEMCKECK_H_
+#ifndef SEMANTIC_CKECK_H_
+#define SEMANTIC_CKECK_H_
 
 #include "ast/Ast_function.h"
 #include "Rule.h"
