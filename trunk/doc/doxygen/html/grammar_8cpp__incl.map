@@ -1,7 +1,0 @@
-<area shape="rect" id="node3" href="$Attribute_8h.html" title="Define a attribute of a symbol of a attribute grammar." alt="" coords="51,393,131,421">
-<area shape="rect" id="node5" href="$AttrGrammar_8h.html" title="Define a attribute grammar." alt="" coords="92,83,199,111">
-<area shape="rect" id="node7" href="$Rule_8h.html" title="Define a rule of a attribute grammar." alt="" coords="151,161,209,189">
-<area shape="rect" id="node9" href="$Symbol_8h.html" title="Define a symbol of a attribute grammar." alt="" coords="107,315,181,343">
-<area shape="rect" id="node12" href="$NonTerminalSymbol_8h.html" title="Define a non&#45;terminal symbol of a attribute grammar." alt="" coords="125,238,272,266">
-<area shape="rect" id="node15" href="$Equation_8h.html" title="Define equation of the Attribute Grammar." alt="" coords="296,238,379,266">
-<area shape="rect" id="node20" href="$MultiTree_8h.html" title="Define the MultiTree object." alt="" coords="445,315,531,343">
