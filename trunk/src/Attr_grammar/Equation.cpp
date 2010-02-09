@@ -10,7 +10,7 @@
 #include <iostream>
 
 #include "Equation.h"
-#include "ast/Ast_literal.h"
+#include "../Ast/Ast_literal.h"
 
 namespace genevalmag
 {

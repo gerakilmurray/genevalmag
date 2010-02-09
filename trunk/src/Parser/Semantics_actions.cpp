@@ -1,24 +1,22 @@
 /**
   *  \file		Semantics_actions.cpp
   *  \brief		Implementation of the methods the Semantics_actions.h
-  *  \date
+  *  \date		09/02/2010
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
-
-#include "Semantics_actions.h"
 
 #include <boost/algorithm/string/erase.hpp>
 
 #include <iostream>
 #include <sstream>
 
-#include "Attr_grammar.h"
-#include "ast/Ast_instance.h"
-#include "ast/Ast_literal.h"
-#include "ast/Ast_function.h"
-
+#include "../Attr_grammar/Attr_grammar.h"
+#include "../Ast/Ast_instance.h"
+#include "../Ast/Ast_literal.h"
+#include "../Ast/Ast_function.h"
 #include "Semantic_check.h"
+#include "Semantics_actions.h"
 
 using namespace std;
 using namespace genevalmag;

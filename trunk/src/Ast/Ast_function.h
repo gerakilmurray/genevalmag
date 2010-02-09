@@ -10,7 +10,7 @@
 #define AST_FUNCTION_H_
 
 #include "Ast_inner_node.h"
-#include "../Function.h"
+#include "../Attr_grammar/Function.h"
 
 namespace genevalmag
 {

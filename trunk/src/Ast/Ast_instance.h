@@ -11,8 +11,8 @@
 
 #include "Ast_leaf.h"
 
-#include "../Symbol.h"
-#include "../Attribute.h"
+#include "../Attr_grammar/Symbol.h"
+#include "../Attr_grammar/Attribute.h"
 
 namespace genevalmag
 {

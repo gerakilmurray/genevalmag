@@ -8,8 +8,8 @@
 #ifndef SEMANTIC_CKECK_H_
 #define SEMANTIC_CKECK_H_
 
-#include "ast/Ast_function.h"
-#include "Rule.h"
+#include "../Ast/Ast_function.h"
+#include "../Attr_grammar/Rule.h"
 
 using namespace genevalmag;
 
