@@ -10,6 +10,7 @@
 
 #include "../Ast/Ast_function.h"
 #include "../Attr_grammar/Rule.h"
+#include "../Attr_grammar/Symbol.h"
 
 using namespace genevalmag;
 
@@ -47,7 +48,7 @@ bool check_all_defined_non_terminal(const map <string, Rule> rules, const map <s
   * then computes the Warshall algorithm for transitive closure and thus can identify
   * from the initial symbol all symbols reachable.
   */
-bool check_reachability(const map <string, Rule> rules, const map <string, Symbol> symbols, Symbol *init_rule);
+bool check_reachability(const map <string, Rule> rules, const map <string, Symbol> symbols, Symbol *init_symbol);
 
 bool check_well_defined_AG(const map <string, Rule> rules);
 

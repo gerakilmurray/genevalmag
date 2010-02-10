@@ -22,7 +22,7 @@ namespace genevalmag
 Attr_grammar::Attr_grammar()
 {
 	// Remove garbage.
-	sd_initial_symb = NULL;
+	ag_initial_symb = NULL;
 }
 
 /**
@@ -67,7 +67,7 @@ template <class T> string to_string_map(map<string,T > &map_elem)
   */
 bool Attr_grammar::add_sort(Sort &sort)
 {
-	return add<Sort>(sort, sd_sort);
+	return add<Sort>(sort, ag_sort);
 }
 
 /**
@@ -75,7 +75,7 @@ bool Attr_grammar::add_sort(Sort &sort)
   */
 bool Attr_grammar::add_function(Function &func)
 {
-	return add<Function>(func, sd_func);
+	return add<Function>(func, ag_func);
 }
 
 /**
@@ -83,7 +83,7 @@ bool Attr_grammar::add_function(Function &func)
   */
 bool Attr_grammar::add_attribute(Attribute &attr)
 {
-	return add<Attribute>(attr, sd_attr);
+	return add<Attribute>(attr, ag_attr);
 }
 
 /**
@@ -93,9 +93,9 @@ bool Attr_grammar::add_symbol(Symbol &symb)
 {
 	map<string, Symbol>	*map_symb;
 	if (symb.is_non_terminal())
-		map_symb = &sd_symb_non_terminals;
+		map_symb = &ag_symb_non_terminals;
 	else
-		map_symb = &sd_symb_terminals;
+		map_symb = &ag_symb_terminals;
 
 	bool not_repeat = add <Symbol>(symb, *map_symb);
 	if(not_repeat &&symb.is_non_terminal())
@@ -111,12 +111,12 @@ bool Attr_grammar::add_symbol(Symbol &symb)
   */
 bool Attr_grammar::add_rule(Rule &rule)
 {
-	bool result = add <Rule>(rule, sd_rule);
-	if ( result && sd_initial_symb == NULL)
+	bool result = add <Rule>(rule, ag_rule);
+	if ( result && ag_initial_symb == NULL)
 	{
 		// Set initial symbol of grammar.
-		map<string,Rule>::iterator	init_symb = sd_rule.find(rule.key());
-		sd_initial_symb = init_symb->second.get_left_symbol();
+		map<string,Rule>::iterator	init_symb = ag_rule.find(rule.key());
+		ag_initial_symb = init_symb->second.get_left_symbol();
 	}
 	return result;
 }
@@ -130,7 +130,7 @@ Sort &Attr_grammar::return_sort(string name_sort)
 	// becouse is a type basic. if not the sort belong map. the map not have repeat.
 	sort_new.set_type_basic(true);
 	add_sort(sort_new);
-	map<string,Sort>::iterator it = sd_sort.find(name_sort);
+	map<string,Sort>::iterator it = ag_sort.find(name_sort);
 	return it->second;
 }
 /**
@@ -138,8 +138,8 @@ Sort &Attr_grammar::return_sort(string name_sort)
   */
 Function *Attr_grammar::get_function(string key_function)
 {
-	map<string,Function>::iterator it = sd_func.find(key_function);
-	if (it == sd_func.end())
+	map<string,Function>::iterator it = ag_func.find(key_function);
+	if (it == ag_func.end())
 		return NULL;
 	return &(it->second);
 }
@@ -148,9 +148,9 @@ Function *Attr_grammar::get_function(string key_function)
   */
 Symbol &Attr_grammar::get_symbol(string name_symbol)
 {
-	map<string,Symbol>::iterator it = sd_symb_non_terminals.find(name_symbol);
-	if (it == sd_symb_non_terminals.end())
-		it = sd_symb_terminals.find(name_symbol);
+	map<string,Symbol>::iterator it = ag_symb_non_terminals.find(name_symbol);
+	if (it == ag_symb_non_terminals.end())
+		it = ag_symb_terminals.find(name_symbol);
 	return it->second;
 }
 
@@ -159,7 +159,7 @@ Symbol &Attr_grammar::get_symbol(string name_symbol)
   */
 map<string, Rule> Attr_grammar::get_rules() const
 {
-	return sd_rule;
+	return ag_rule;
 }
 
 /**
@@ -167,14 +167,14 @@ map<string, Rule> Attr_grammar::get_rules() const
   */
 map<string, Symbol> Attr_grammar::get_non_terminal_symbols() const
 {
-	return sd_symb_non_terminals;
+	return ag_symb_non_terminals;
 }
 /**
   *  Return the initial rule.
   */
 Symbol *Attr_grammar::get_initial_symb() const
 {
-    return sd_initial_symb;
+    return ag_initial_symb;
 }
 
 /**
@@ -182,7 +182,7 @@ Symbol *Attr_grammar::get_initial_symb() const
   */
 void  Attr_grammar::set_initial_symb(Symbol *init_symb)
 {
-	sd_initial_symb = init_symb;
+	ag_initial_symb = init_symb;
 }
 
 /**
@@ -208,36 +208,36 @@ void  Attr_grammar::set_initial_symb(Symbol *init_symb)
 string Attr_grammar::to_string()
 {
 	#ifdef _DEBUG
-//		map<string,Sort>::iterator		it1 = sd_sort.find("pepe");
+//		map<string,Sort>::iterator		it1 = ag_sort.find("pepe");
 //		it1->second.set_name("Pupi_Zanetti");
 //
-//		map<string,Attribute>::iterator	it2 = sd_attr.find("valorintall");
+//		map<string,Attribute>::iterator	it2 = ag_attr.find("valorintall");
 //		it2->second.set_name("valores");
 //
-//		map<string,Symbol>::iterator	it3 = sd_symb.find("id");
+//		map<string,Symbol>::iterator	it3 = ag_symb.find("id");
 //		it3->second.set_name("ident");
 
-//		map<string,Rule>::iterator	rule = sd_rule.find("EE'+'E");
+//		map<string,Rule>::iterator	rule = ag_rule.find("EE'+'E");
 //		rule->second.get_left_symbol()->set_name("Elem");
 	#endif
 
 	string semdomain("\nsemantic domain\n");
-	semdomain.append(to_string_map <Sort	 >(sd_sort));
+	semdomain.append(to_string_map <Sort	 >(ag_sort));
 	semdomain.append("\n");
-	semdomain.append(to_string_map <Function >(sd_func));
+	semdomain.append(to_string_map <Function >(ag_func));
 	semdomain.append("\nattributes\n");
-	semdomain.append(to_string_map <Attribute>(sd_attr));
+	semdomain.append(to_string_map <Attribute>(ag_attr));
 	semdomain.append("\n/***********************************************************");
 	semdomain.append("\nsymbols\n");
-	semdomain.append(to_string_map <Symbol   >(sd_symb_non_terminals));
-	semdomain.append(to_string_map <Symbol   >(sd_symb_terminals));
+	semdomain.append(to_string_map <Symbol   >(ag_symb_non_terminals));
+	semdomain.append(to_string_map <Symbol   >(ag_symb_terminals));
 	semdomain.append("\n***********************************************************/\n");
 	semdomain.append("/*  >>>>>>>>>> Initial Symbol of Grammar is ");
-	semdomain.append(sd_initial_symb->get_name());
+	semdomain.append(ag_initial_symb->get_name());
 	semdomain.append(" <<<<<<<<<<  */\n");
 	semdomain.append("/**********************************************************/\n");
 	semdomain.append("\nrules\n");
-	semdomain.append(to_string_map <Rule	 >(sd_rule));
+	semdomain.append(to_string_map <Rule	 >(ag_rule));
 	semdomain.append("\n");
 	return semdomain;
 }
@@ -282,7 +282,7 @@ bool belong(Symbol symb, string expr_attrs)
   */
 void Attr_grammar::load_attributes(Symbol &symb)
 {
-	for(map<string,Attribute>::iterator it = sd_attr.begin(); it != sd_attr.end(); it++)
+	for(map<string,Attribute>::iterator it = ag_attr.begin(); it != ag_attr.end(); it++)
 	{
 		if(belong(symb, it->second.get_member_symbol()))
 		{

@@ -26,7 +26,7 @@ using namespace genevalmag;
 extern Attr_grammar attr_grammar;
 
 /**
-  * Declaration of a parser for imputs that ignore within
+  * Declaration of a parser for inputs that ignore within
   * an Attribute Grammar file, with the Spirit library of Boost.
   */
 struct skip_parser: public grammar<skip_parser>

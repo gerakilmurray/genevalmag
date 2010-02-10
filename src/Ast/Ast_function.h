@@ -18,9 +18,9 @@ namespace genevalmag
 class Ast_function: public Ast_inner_node
 {
 private:
-	Function *func;
-	unsigned short precedence_level;
-	unsigned short syntax_order;
+	Function		*func;
+	unsigned short	precedence_level;
+	unsigned short	syntax_order;
 
 	/**
 	  * Method of copy the Ast_function, STL-like C++.

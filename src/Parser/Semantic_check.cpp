@@ -337,7 +337,7 @@ int get_index(string name_symb,vector<string> non_term)
 	return -1;
 }
 
-bool check_reachability(const map <string, Rule> rules, const map <string, Symbol> non_terminals, Symbol *init_symb)
+bool check_reachability(const map <string, Rule> rules, const map <string, Symbol> non_terminals, Symbol *init_symbol)
 {
 	vector<string> non_term;
 	// Obtain all non_terminals name.
@@ -383,7 +383,7 @@ bool check_reachability(const map <string, Rule> rules, const map <string, Symbo
 	warshall_algorithm(cant_non_terminal, first);
 
 	// Index of initial symbol of AG.
-	int index_init = get_index(init_symb->get_name(),non_term);
+	int index_init = get_index(init_symbol->get_name(),non_term);
 
 	for(int j=0; j<cant_non_terminal; j++)
 	{
