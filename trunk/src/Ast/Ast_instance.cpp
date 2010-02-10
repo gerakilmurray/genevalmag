@@ -79,7 +79,7 @@ Attribute *Ast_instance::get_attr() const
 	return i_attr;
 }
 
-int Ast_instance::get_num() const
+unsigned short Ast_instance::get_num() const
 {
 	return i_num;
 }
@@ -94,7 +94,7 @@ void Ast_instance::set_attr(Attribute *attr)
 	i_attr = attr;
 }
 
-void Ast_instance::set_num(int num)
+void Ast_instance::set_num(unsigned short num)
 {
 	i_num = num;
 }

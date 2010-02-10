@@ -10,7 +10,7 @@
 #define PARSER_AG_H_
 
 /**
-  * This method invokes the method 'parse' of the library Spitir included in Boost.
+  * This method invokes the method 'parse' of the library Spirit included in Boost.
   * Returns true if could parse all the input.
   */
 bool parse_grammar(char const *txt_input);

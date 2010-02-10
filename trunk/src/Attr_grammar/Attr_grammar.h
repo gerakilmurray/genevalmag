@@ -30,17 +30,17 @@ private:
 	/*
 	 *  Saves each element kind of the grammar's attribute.
 	 */
-	map<string, Sort>		sd_sort;
-	map<string, Function>	sd_func;
-	map<string, Attribute> 	sd_attr;
-	map<string, Symbol>		sd_symb_terminals;
-	map<string, Symbol>		sd_symb_non_terminals;
-	map<string, Rule>		sd_rule;
+	map<string, Sort>		ag_sort;
+	map<string, Function>	ag_func;
+	map<string, Attribute> 	ag_attr;
+	map<string, Symbol>		ag_symb_terminals;
+	map<string, Symbol>		ag_symb_non_terminals;
+	map<string, Rule>		ag_rule;
 
 	/*
 	 * Saves the name of the initial symbol of the grammar's attribute.
 	 */
-	Symbol					*sd_initial_symb;
+	Symbol					*ag_initial_symb;
 
 	/**
 	  * Insert the attributes belong the symbol.
