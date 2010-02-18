@@ -10,8 +10,9 @@
 #include <iostream>
 #include <string>
 
-#include "Parser/Parser_AG.h"
 #include "Attr_grammar/Attr_grammar.h"
+#include "Parser/Parser_AG.h"
+#include "Evaluation/Builder_plan.h"
 
 using namespace std;
 using namespace genevalmag;
@@ -25,7 +26,7 @@ Attr_grammar attr_grammar;
 /**
   *	Path of the input file with the specification of AG.
   */
-#define PATH_INPUT_FILE "./src/Test/aritmetic.txt"
+#define PATH_INPUT_FILE "./src/Test/mag.txt"
 
 /**
   * Constant that represent the maximum size of the file buffer.
@@ -53,8 +54,9 @@ void read_file_in(string &txt_output)
 	{
 		while(!feof(p_file))
 		{
-			  fgets(buffer, MAX_INPUT_LINE, p_file);
-			  txt_output += buffer;
+			  char * result = fgets(buffer, MAX_INPUT_LINE, p_file);
+			  if (result)
+				  txt_output += buffer;
 		}
 		fclose(p_file);
 	}
@@ -67,18 +69,12 @@ int main()
 {
 	string input_grammar;
 	read_file_in(input_grammar);
-	cout << "-------------------------\n";
-	if(parse_grammar(input_grammar.c_str()))
+
+	if (parse_grammar(input_grammar.c_str()))
 	{
-		cout << attr_grammar.to_string();
-		cout << "-------------------------\n";
-		cout << "Parsing OK\n";
+		build_plans(attr_grammar);
 	}
-	else
-	{
-		cout << "Parsing FAILED\n";
-	}
-	cout << "-------------------------\n";
+
 	cout << "Bye... :-D" << endl;
 	return 0;
 }

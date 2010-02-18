@@ -305,5 +305,19 @@ bool parse_grammar(char const *txt_input)
 	#ifdef _DEBUG
 		cout << "STOP: " << info.stop << "fin-STOP" << endl;
 	#endif
+
+	cout << "-------------------------\n";
+	if(info.full)
+	{
+		cout << attr_grammar.to_string();
+		cout << "-------------------------\n";
+		cout << "Parsing OK\n";
+	}
+	else
+	{
+		cout << "Parsing FAILED\n";
+	}
+	cout << "-------------------------\n";
+
 	return info.full;
 }

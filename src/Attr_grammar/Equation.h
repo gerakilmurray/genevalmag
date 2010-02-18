@@ -64,7 +64,7 @@ class Equation
 		/**
 		  * Return the l_value of the equation.
 		  */
-		Ast_instance get_l_value() const;
+		const Ast_instance *get_l_value() const;
 		/**
 		  * Return the r_value of the equation.
 		  */

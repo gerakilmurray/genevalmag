@@ -105,7 +105,7 @@ string Function::get_name() const
 /**
   * Return the domain of the function.
   */
-vector<Sort*> Function::get_domain() const
+const vector<const Sort*> &Function::get_domain() const
 {
 	return f_domain;
 }
@@ -113,7 +113,7 @@ vector<Sort*> Function::get_domain() const
 /**
   * Return the image of the function.
   */
-Sort *Function::get_image() const
+const Sort *Function::get_image() const
 {
 	return f_image;
 }
@@ -160,7 +160,7 @@ void Function::set_name(string name)
 /**
   * Set the full sort domain of the function.
   */
-void Function::set_domain(vector<Sort*> domain)
+void Function::set_domain(vector<const Sort*> domain)
 {
 	f_domain = domain;
 }
@@ -168,7 +168,7 @@ void Function::set_domain(vector<Sort*> domain)
 /**
   * Set the sort image of the function.
   */
-void Function::set_image(Sort *image)
+void Function::set_image(const Sort *image)
 {
 	f_image = image;
 }
@@ -224,7 +224,7 @@ void Function::set_is_operator(bool value)
 /**
   * Enqueue a sort in the domain of the function.
   */
-void Function::add_domain(Sort *sort)
+void Function::add_domain(const Sort *sort)
 {
 	f_domain.push_back(sort);
 }

@@ -74,7 +74,7 @@ void Ast_instance::copy(Ast_instance const &other)
 	type_synthetized	= other.get_type_synthetized();
 }
 
-Attribute *Ast_instance::get_attr() const
+const Attribute *Ast_instance::get_attr() const
 {
 	return i_attr;
 }
@@ -84,12 +84,12 @@ unsigned short Ast_instance::get_num() const
 	return i_num;
 }
 
-Symbol *Ast_instance::get_symb() const
+const Symbol *Ast_instance::get_symb() const
 {
 	return i_symb;
 }
 
-void Ast_instance::set_attr(Attribute *attr)
+void Ast_instance::set_attr(const Attribute *attr)
 {
 	i_attr = attr;
 }
@@ -99,7 +99,7 @@ void Ast_instance::set_num(unsigned short num)
 	i_num = num;
 }
 
-void Ast_instance::set_symb(Symbol *symb)
+void Ast_instance::set_symb(const Symbol *symb)
 {
 	i_symb = symb;
 }

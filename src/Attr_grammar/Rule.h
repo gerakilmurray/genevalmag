@@ -20,8 +20,8 @@ namespace genevalmag
 class Rule
 {
 	private:
-		Symbol              *r_left_symbol;
-		vector <Symbol*>	r_right_side;
+		const Symbol              *r_left_symbol;
+		vector <const Symbol*>	r_right_side;
 		map <int,Equation>	r_eqs;
 
 		/**
@@ -58,29 +58,29 @@ class Rule
 		/**
 		  * Return the left symbol of the rule.
 		  */
-		Symbol *get_left_symbol() const;
+		const Symbol *get_left_symbol() const;
 		/**
 		  * Return the right side of the rule.
 		  */
-		vector<Symbol*> get_right_side()const;
+		const vector<const Symbol*> &get_right_side()const;
 		/**
 		  * Return the equations of the rule.
 		  */
-		map <int,Equation> get_eqs() const;
+		const map <int,Equation> &get_eqs() const;
 		/**
 		  * Return the i-equation of the rule.
 		  */
-		Equation *get_eq(int index);
+		const Equation *get_eq(int index) const;
 
 		/**
 		  * Set the left symbol of the rule.
 		  */
-		void set_left_symbol(Symbol *left_symb);
+		void set_left_symbol(const Symbol *left_symb);
 
 		/**
 		  * Enqueue a symbol in the right side of the rule.
 		  */
-		void add_right_symbol(Symbol *rigth_symb);
+		void add_right_symbol(const Symbol *rigth_symb);
 		/**
 		  * Enqueue a equation in the list of the rule.
 		  */

@@ -73,7 +73,7 @@ void Ast_function::destroy()
 {
 }
 
-Function *Ast_function::get_function() const
+const Function *Ast_function::get_function() const
 {
 	return func;
 }
@@ -88,7 +88,7 @@ unsigned short Ast_function::get_syntax_order() const
 	return syntax_order;
 }
 
-void Ast_function::set_function(Function *function)
+void Ast_function::set_function(const Function *function)
 {
 	func = function;
 }

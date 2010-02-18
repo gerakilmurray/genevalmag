@@ -98,7 +98,7 @@ string Attribute::get_name() const
 /**
   * Return the sort type of the attribute.
   */
-Sort *Attribute::get_sort_type() const
+const Sort *Attribute::get_sort_type() const
 {
 	return a_sort_type;
 }
@@ -130,7 +130,7 @@ void Attribute::set_name(string name)
 /**
   * Set the sort type of the attribute.
   */
-void Attribute::set_sort_type(Sort *sort_type)
+void Attribute::set_sort_type(const Sort *sort_type)
 {
 	a_sort_type = sort_type;
 }
