@@ -89,7 +89,7 @@ void Rule::destroy()
 /**
   * Return the left symbol of the rule.
   */
-Symbol *Rule::get_left_symbol() const
+const Symbol *Rule::get_left_symbol() const
 {
 	return r_left_symbol;
 }
@@ -97,7 +97,7 @@ Symbol *Rule::get_left_symbol() const
 /**
   * Return the right side of the rule.
   */
-vector<Symbol*> Rule::get_right_side() const
+const vector<const Symbol*> &Rule::get_right_side() const
 {
 	return r_right_side;
 }
@@ -105,7 +105,7 @@ vector<Symbol*> Rule::get_right_side() const
 /**
   * Return the equations of the rule.
   */
-map<int,Equation> Rule::get_eqs() const
+const map<int,Equation> &Rule::get_eqs() const
 {
 	return r_eqs;
 }
@@ -113,7 +113,7 @@ map<int,Equation> Rule::get_eqs() const
 /**
   * Return the i-equation of the rule.
   */
-Equation *Rule::get_eq(int index)
+const Equation *Rule::get_eq(int index) const
 {
 	return &(r_eqs.find(index)->second);
 }
@@ -121,7 +121,7 @@ Equation *Rule::get_eq(int index)
 /**
   * Set the left symbol of the rule.
   */
-void Rule::set_left_symbol(Symbol *left_symb)
+void Rule::set_left_symbol(const Symbol *left_symb)
 {
 	r_left_symbol = left_symb;
 }
@@ -129,7 +129,7 @@ void Rule::set_left_symbol(Symbol *left_symb)
 /**
   * Enqueue a symbol in the right side of the rule.
   */
-void Rule::add_right_symbol(Symbol *right_symb)
+void Rule::add_right_symbol(const Symbol *right_symb)
 {
 	r_right_side.push_back(right_symb);
 }
@@ -138,7 +138,7 @@ bool Rule::defined_equation(const Equation &eq) const
 {
 	for(map<int,Equation>::const_iterator it = r_eqs.begin(); it != r_eqs.end(); it++)
 	{
-		if (it->second.get_l_value().equals(eq.get_l_value()))
+		if (it->second.get_l_value()->equals(*eq.get_l_value()))
 			return true;
 	}
 	return false;
@@ -150,7 +150,7 @@ bool Rule::belongs_non_terminal(const Symbol &non_term) const
 	{
 		return true;
 	}
-	for(vector<Symbol*>::size_type i = 0; i < r_right_side.size(); i++)
+	for(vector<const Symbol*>::size_type i = 0; i < r_right_side.size(); i++)
 	{
 		if (non_term.equals(*r_right_side.at(i)))
 		{
@@ -220,7 +220,7 @@ string Rule::to_string_not_eqs() const
 	string rule;
 	rule.append(r_left_symbol->get_name());
 	rule.append("\t::=\t");
-	for(vector<Symbol*>::size_type i = 0; i < r_right_side.size(); i++)
+	for(vector<const Symbol*>::size_type i = 0; i < r_right_side.size(); i++)
 	{
 		rule.append(r_right_side[i]->get_name());
 		if(i+1 < r_right_side.size())
@@ -248,7 +248,7 @@ string Rule::key() const
 {
 	string key;
 	key.append(r_left_symbol->get_name());
-	for(vector<Symbol>::size_type i = 0; i < r_right_side.size(); i++)
+	for(vector<const Symbol*>::size_type i = 0; i < r_right_side.size(); i++)
 	{
 		key.append(r_right_side[i]->get_name());
 	}
@@ -262,7 +262,7 @@ int Rule::count_non_terminal(const Symbol *symb) const
 	{
 		count++;
 	}
-	for(vector<Symbol>::size_type i = 0; i < r_right_side.size(); i++)
+	for(vector<const Symbol*>::size_type i = 0; i < r_right_side.size(); i++)
 	{
 		if (r_right_side[i]->is_non_terminal() && symb->equals(*r_right_side[i]))
 		{

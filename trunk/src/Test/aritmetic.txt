@@ -39,6 +39,7 @@ rules
     			//E[0].pepe = 1 + 2;
     			E[2].pepe = 1 + 2;
     			E[1].pepe = E[0].tipo;
+    			E[1].pepe = E[0].tipo;
     		end;
     		
     E ::= T

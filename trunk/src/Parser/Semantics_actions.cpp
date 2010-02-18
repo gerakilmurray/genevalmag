@@ -248,7 +248,7 @@ void create_instance(char const *str, char const *end)
 {
 	string name(str, end);
 
-	Symbol *symb = &(attr_grammar.get_symbol(name));
+	const Symbol *symb = &(attr_grammar.get_symbol(name));
 
 	if (!current_rule->belongs_non_terminal(*symb))
 	{
@@ -357,7 +357,7 @@ void create_equation(char const *str, char const *end)
 void save_rvalue(char const *str, char const *end)
 {
 	// Check that the type of r_value be expected from l_value.
-	if (current_eq->get_l_value().get_attr()->get_sort_type()->get_name().compare(stack_node.back()->get_type_synthetized()))
+	if (current_eq->get_l_value()->get_attr()->get_sort_type()->get_name().compare(stack_node.back()->get_type_synthetized()))
 	{
 		cerr << "Type not expected from l_value." << endl;
 		exit(-1);
@@ -380,7 +380,7 @@ void save_rvalue(char const *str, char const *end)
 	if (!current_rule->add_eq(*current_eq))
 	{
 		cerr << "WARNING: Ignores the eq \"" << cleaning_tabs(current_eq->to_string()) << "\" duplicate definition for \""
-				<< cleaning_tabs(current_eq->get_l_value().to_string()) << "\" in rule: --> \""
+				<< cleaning_tabs(current_eq->get_l_value()->to_string()) << "\" in rule: --> \""
 				<< cleaning_tabs(current_rule->to_string_not_eqs()) << "\"" << endl;
 	}
 	delete(current_eq);
@@ -453,9 +453,9 @@ void create_root_infix_node(char const *str, char const *end)
 	key.append(l_child->get_type_synthetized());
 	key.append(r_child->get_type_synthetized());
 
-	Function  *func = attr_grammar.get_function(key); // Searches of infix operator.
+	const Function  *func = attr_grammar.get_function(key); // Searches of infix operator.
 
-	Function  *old = root->get_function();
+	const Function  *old = root->get_function();
 	delete(old); // Free aux function.
 
 	if (func == NULL)
@@ -502,7 +502,7 @@ void create_root_function_node(char const *str, char const *end)
 	}
 	key = root->get_function()->get_name().append(key);
 
-	Function *func = attr_grammar.get_function(key); // Searches function.
+	const Function *func = attr_grammar.get_function(key); // Searches function.
 
 	if (func == NULL)
 	{
@@ -510,7 +510,7 @@ void create_root_function_node(char const *str, char const *end)
 		exit(-1);
 	}
 
-	Function *old = root->get_function();
+	const Function *old = root->get_function();
 	root->set_function(func);
 	delete(old); // Free aux function.
 
@@ -531,7 +531,7 @@ void create_root_postfix_node(char const *str, char const *end)
 	key.append(root->get_function()->get_name());
 	key.append(child->get_type_synthetized());
 
-	Function  *func = attr_grammar.get_function(key); // Searches posfix operator.
+	const Function  *func = attr_grammar.get_function(key); // Searches posfix operator.
 
 	if (func == NULL)
 	{
@@ -539,7 +539,7 @@ void create_root_postfix_node(char const *str, char const *end)
 		exit(-1);
 	}
 
-	Function  *old = root->get_function();
+	const Function  *old = root->get_function();
 	root->set_function(func);
 	delete(old); // Free aux function.
 
@@ -566,7 +566,7 @@ void create_root_prefix_node(char const *str, char const *end)
 	key.append(child->get_type_synthetized());
 
 	// Searches prefix operator
-	Function  *func = attr_grammar.get_function(key);
+	const Function  *func = attr_grammar.get_function(key);
 
 	if (func == NULL)
 	{
@@ -574,7 +574,7 @@ void create_root_prefix_node(char const *str, char const *end)
 		exit(-1);
 	}
 
-	Function  *old = root->get_function();
+	const Function  *old = root->get_function();
 	root->set_function(func);
 	delete(old); // Free aux function.
 

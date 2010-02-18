@@ -337,7 +337,7 @@ int get_index(string name_symb,vector<string> non_term)
 	return -1;
 }
 
-bool check_reachability(const map <string, Rule> rules, const map <string, Symbol> non_terminals, Symbol *init_symbol)
+bool check_reachability(const map <string, Rule> &rules, const map <string, Symbol> &non_terminals, const Symbol *init_symbol)
 {
 	vector<string> non_term;
 	// Obtain all non_terminals name.
@@ -385,6 +385,8 @@ bool check_reachability(const map <string, Rule> rules, const map <string, Symbo
 	// Index of initial symbol of AG.
 	int index_init = get_index(init_symbol->get_name(),non_term);
 
+	// Initialization the initial symbol.
+	matrix_reachability[index_init][index_init] = true;
 	for(int j=0; j<cant_non_terminal; j++)
 	{
 		if(!matrix_reachability[index_init][j])
@@ -399,9 +401,9 @@ bool check_eq_defines_it(const Symbol *symb, const int index, const Attribute *a
 {
 	for (map<int,Equation>::const_iterator it_eq = eqs.begin(); it_eq != eqs.end(); it_eq++)
 	{
-		if (symb->equals(*it_eq->second.get_l_value().get_symb()) &&
-			index == it_eq->second.get_l_value().get_num() &&
-			attr->equals(*it_eq->second.get_l_value().get_attr()))
+		if (symb->equals(*it_eq->second.get_l_value()->get_symb()) &&
+			index == it_eq->second.get_l_value()->get_num() &&
+			attr->equals(*it_eq->second.get_l_value()->get_attr()))
 		{
 			return true;
 		}
@@ -414,11 +416,11 @@ bool check_well_defined_AG(const map <string, Rule> rules)
 	for (map<string,Rule >::const_iterator it_r = rules.begin(); it_r != rules.end(); it_r++)
 	{
 		// Get left Symbol.
-		Symbol *symb = it_r->second.get_left_symbol();
+		const Symbol *symb = it_r->second.get_left_symbol();
 
 		for(size_t i = 0; i < symb->get_attrs().size(); i++)
 		{
-			Attribute * attr_syn = symb->get_attrs()[i];
+			const Attribute * attr_syn = symb->get_attrs()[i];
 
 			bool defined = check_eq_defines_it(symb, 0, attr_syn, it_r->second.get_eqs());
 
@@ -438,7 +440,7 @@ bool check_well_defined_AG(const map <string, Rule> rules)
 		}
 
 		// Contains the symbols marked.s
-		map<string,Symbol*> marked_symbols;
+		map<string,const Symbol*> marked_symbols;
 
 		// Cover the right symbols.
 		for (size_t i = 0; i < it_r->second.get_right_side().size(); i++)
@@ -446,8 +448,8 @@ bool check_well_defined_AG(const map <string, Rule> rules)
 			symb = it_r->second.get_right_side()[i];
 			if (symb->is_non_terminal())
 			{
-				pair<string,Symbol*> new_p(symb->get_name(), symb);
-				pair<map<string,Symbol*>::iterator, bool> not_cheched = marked_symbols.insert(new_p);
+				pair<string,const Symbol*> new_p(symb->get_name(), symb);
+				pair<map<string,const Symbol*>::iterator, bool> not_cheched = marked_symbols.insert(new_p);
 
 				if(not_cheched.second)
 				{
@@ -462,7 +464,7 @@ bool check_well_defined_AG(const map <string, Rule> rules)
 								continue;
 							}
 
-							Attribute * attr = symb->get_attrs()[k];
+							const Attribute * attr = symb->get_attrs()[k];
 
 							bool defined = check_eq_defines_it(symb, j, attr, it_r->second.get_eqs());
 

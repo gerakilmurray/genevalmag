@@ -124,7 +124,7 @@ bool Attr_grammar::add_rule(Rule &rule)
 /**
   * Find in the list of sort of the attribute grammar and return the sort with that name.
   */
-Sort &Attr_grammar::return_sort(string name_sort)
+const Sort &Attr_grammar::return_sort(string name_sort)
 {
 	Sort sort_new(name_sort);
 	// becouse is a type basic. if not the sort belong map. the map not have repeat.
@@ -136,7 +136,7 @@ Sort &Attr_grammar::return_sort(string name_sort)
 /**
   * Find in the list of function of the attribute grammar and return the function with that name.
   */
-Function *Attr_grammar::get_function(string key_function)
+const Function *Attr_grammar::get_function(string key_function)
 {
 	map<string,Function>::iterator it = ag_func.find(key_function);
 	if (it == ag_func.end())
@@ -146,7 +146,7 @@ Function *Attr_grammar::get_function(string key_function)
 /**
   * Find in the list of operator of the attribute grammar and return the operator with that name.
   */
-Symbol &Attr_grammar::get_symbol(string name_symbol)
+const Symbol &Attr_grammar::get_symbol(string name_symbol)
 {
 	map<string,Symbol>::iterator it = ag_symb_non_terminals.find(name_symbol);
 	if (it == ag_symb_non_terminals.end())
@@ -157,7 +157,7 @@ Symbol &Attr_grammar::get_symbol(string name_symbol)
 /**
   *  Return the map with all rules.
   */
-map<string, Rule> Attr_grammar::get_rules() const
+const map<string, Rule> &Attr_grammar::get_rules() const
 {
 	return ag_rule;
 }
@@ -165,16 +165,34 @@ map<string, Rule> Attr_grammar::get_rules() const
 /**
   *  Return the map with all symbols.
   */
-map<string, Symbol> Attr_grammar::get_non_terminal_symbols() const
+const map<string, Symbol> &Attr_grammar::get_non_terminal_symbols() const
 {
 	return ag_symb_non_terminals;
 }
 /**
   *  Return the initial rule.
   */
-Symbol *Attr_grammar::get_initial_symb() const
+const Symbol *Attr_grammar::get_initial_symb() const
 {
     return ag_initial_symb;
+}
+
+/**
+  * Return vector with all rules with the left symbol equal that parameter.
+  */
+vector<const Rule*> Attr_grammar::get_rules_with_left_symbol(const Symbol *symb) const
+{
+	vector<const Rule *> result;
+
+	for(map<string, Rule>::const_iterator it = ag_rule.begin(); it != ag_rule.end(); it++)
+	{
+		if(it->second.get_left_symbol()->equals(*symb))
+		{
+			result.push_back(&(it->second));
+		}
+	}
+
+	return result;
 }
 
 /**

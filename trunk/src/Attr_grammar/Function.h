@@ -41,8 +41,8 @@ class Function
 {
 private:
 	string 			f_name;
-	vector <Sort*>	f_domain;
-	Sort*			f_image;
+	vector <const Sort*>	f_domain;
+	const Sort*			f_image;
 	oper_mode		f_mod;
 	unsigned short 	f_prec;
 	oper_assoc 		f_assoc;
@@ -87,11 +87,11 @@ public:
 	/**
 	  * Return the domain of the function.
 	  */
-	vector<Sort*> get_domain() const;
+	const vector<const Sort*> &get_domain() const;
 	/**
 	  * Return the image of the function.
 	  */
-	Sort *get_image() const;
+	const Sort *get_image() const;
 	/**
 	  * Return the mode of the operator.
 	  */
@@ -116,11 +116,11 @@ public:
 	/**
 	  * Set the full sort domain of the function.
 	  */
-	void set_domain(vector<Sort*> domain);
+	void set_domain(vector<const Sort*> domain);
 	/**
 	  * Set the sort image of the function.
 	  */
-	void set_image(Sort *image);
+	void set_image(const Sort *image);
 	/**
 	  * Set the mode of the operator.
 	  * @param mode: string
@@ -141,7 +141,7 @@ public:
 	/**
 	  * Enqueue a sort in the domain of the function.
 	  */
-	void add_domain(Sort *sort);
+	void add_domain(const Sort *sort);
 
 	/**
 	  * Generate and return a string reprensentation of a function.

@@ -40,7 +40,7 @@ private:
 	/*
 	 * Saves the name of the initial symbol of the grammar's attribute.
 	 */
-	Symbol					*ag_initial_symb;
+	const Symbol					*ag_initial_symb;
 
 	/**
 	  * Insert the attributes belong the symbol.
@@ -82,27 +82,32 @@ public:
 	/**
 	  * Find in the list of sort of the semantic domain and return the sort with that name.
 	  */
-	Sort &return_sort(string name_sort);
+	const Sort &return_sort(string name_sort);
 	/**
 	  * Find in the list of function of the semantic domain and return the function with that name.
 	  */
-	Function *get_function(string name_function);
+	const Function *get_function(string name_function);
 	/**
 	  * Find in the list of symbol of the semantic domain and return the symbol with that name.
 	  */
-	Symbol &get_symbol(string name_symbol);
+	const Symbol &get_symbol(string name_symbol);
 	/**
 	  *  Return the map with all rules.
 	  */
-	map<string, Rule>  get_rules()const;
+	const map<string, Rule>  &get_rules()const;
 	/**
 	  *  Return the map with all symbols.
 	  */
-	map<string, Symbol> get_non_terminal_symbols() const;
+	const map<string, Symbol> &get_non_terminal_symbols() const;
 	/**
 	  *  Return the initial rule.
 	  */
-	Symbol *get_initial_symb() const;
+	const Symbol *get_initial_symb() const;
+
+	/**
+	  * Return vector with all rules with the left symbol equal that parameter.
+	  */
+	vector<const Rule*> get_rules_with_left_symbol(const Symbol *symb) const;
 
 	/**
 	  *  Set the initial rule.

@@ -115,7 +115,7 @@ symbol_type Symbol::get_type() const
 /**
   * Return the list of attributes of the symbol.
   */
-vector<Attribute*> Symbol::get_attrs() const
+const vector<const Attribute*> &Symbol::get_attrs() const
 {
 	return symb_attrs;
 }
@@ -124,7 +124,7 @@ vector<Attribute*> Symbol::get_attrs() const
   * Find in the list of attribute of the symbol and return the attribute with
   * that name passed as parameter.
   */
-Attribute *Symbol::get_attribute(string name_attr)
+const Attribute *Symbol::get_attribute(string name_attr) const
 {
 	for(vector<Attribute*>::size_type i = 0; i < symb_attrs.size(); i++)
 	{
@@ -153,7 +153,7 @@ void Symbol::set_type(symbol_type type)
 /**
   * Enqueue a attribute in the list of the symbol.
   */
-void Symbol::add_attr(Attribute *attr)
+void Symbol::add_attr(const Attribute *attr)
 {
 	symb_attrs.push_back(attr);
 }

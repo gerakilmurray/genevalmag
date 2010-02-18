@@ -27,7 +27,7 @@ class Attribute
 {
 private:
 	string		a_name;
-	Sort*		a_sort_type;
+	const Sort*		a_sort_type;
 	type_attr	a_mod_type;
 	string		a_member_symbol;
 
@@ -67,7 +67,7 @@ public:
 	/**
 	  * Return the sort type of the attribute.
 	  */
-	Sort *get_sort_type() const;
+	const Sort *get_sort_type() const;
 	/**
 	  * Return the modifiers of the attribute.
 	  */
@@ -84,7 +84,7 @@ public:
 	/**
 	  * Set the sort type of the attribute.
 	  */
-	void set_sort_type(Sort *sort_type);
+	void set_sort_type(const Sort *sort_type);
 	/**
 	  * Set the modifiers of the attribute.
 	  */

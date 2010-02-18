@@ -80,7 +80,7 @@ Equation &Equation::operator=(Equation const &other)
   */
 void Equation::copy(Equation const &other)
 {
-	l_value		= other.get_l_value();
+	l_value		= *other.get_l_value();
 	r_value		= other.get_r_value();
 	count_ref	= other._get_count_ref();
 
@@ -114,9 +114,9 @@ unsigned int *Equation::_get_count_ref() const
 /**
   * Return the l_value of the equation.
   */
-Ast_instance Equation::get_l_value() const
+const Ast_instance *Equation::get_l_value() const
 {
-	return l_value;
+	return &l_value;
 }
 
 /**

@@ -31,7 +31,7 @@ class Symbol
 	private:
 		string				symb_name;
 		symbol_type			symb_type;
-		vector<Attribute*>	symb_attrs;
+		vector<const Attribute*>	symb_attrs;
 
 		/**
 		  * Method of copy the symbol, STL-like C++.
@@ -77,12 +77,12 @@ class Symbol
 		/**
 		  * Return the list of attributes of the symbol.
 		  */
-		vector<Attribute*> get_attrs() const;
+		const vector<const Attribute*> &get_attrs() const;
 		/**
 		  * Find in the list of attribute of the symbol and return the attribute with
 		  * that name passed as parameter.
 		  */
-		Attribute *get_attribute(string name_attr);
+		const Attribute *get_attribute(string name_attr) const;
 		/**
 		  * Set the name of the symbol.
 		  */
@@ -95,7 +95,7 @@ class Symbol
 		/**
 		  * Enqueue a attribute in the list of the symbol.
 		  */
-		void add_attr(Attribute *attr);
+		void add_attr(const Attribute *attr);
 
 		/**
 		  * Return true if the symbol's type is Non Terminal.
