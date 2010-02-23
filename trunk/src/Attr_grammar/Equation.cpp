@@ -122,7 +122,7 @@ const Ast_instance *Equation::get_l_value() const
 /**
   * Return the r_value of the equation.
   */
-Ast_node *Equation::get_r_value() const
+const Ast_node *Equation::get_r_value() const
 {
 	return r_value;
 }
@@ -181,6 +181,35 @@ string Equation::key() const
 	key.append(l_value.to_string());
 	key.append(r_value->to_string());
 	return key;
+}
+
+void Equation::inner_order_only_leaf(const Ast_node* head, vector<const Ast_leaf*> &result) const
+{
+
+	const Ast_inner_node* root = dynamic_cast<const Ast_inner_node*>(head);
+
+	if(root)
+	{
+		for(size_t i = 0;i < root->get_childs().size();i++)
+		{
+			Ast_inner_node* child = dynamic_cast<Ast_inner_node*>(root->get_child(i));
+
+			if (child)
+			{
+				inner_order_only_leaf(child,result);
+			}
+			else
+			{
+				Ast_leaf* child_leaf = (Ast_leaf*)root->get_child(i);
+				result.push_back(child_leaf);
+			}
+		}
+	}
+	else
+	{
+		Ast_leaf* root_leaf = (Ast_leaf*)head;
+		result.push_back(root_leaf);
+	}
 }
 
 } // end genevalmag

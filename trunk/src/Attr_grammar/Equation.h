@@ -10,6 +10,7 @@
 #define EQUATION_H_
 
 #include "../Ast/Ast_node.h"
+#include "../Ast/Ast_inner_node.h"
 #include "../Ast/Ast_instance.h"
 
 namespace genevalmag
@@ -19,7 +20,7 @@ class Equation
 {
 	private:
 		Ast_instance	l_value;
-		Ast_node*		r_value;
+		const Ast_node*		r_value;
 
 		/**
 		  * Similar to a Smart Pointer to manage the release of the memory tree.
@@ -68,7 +69,7 @@ class Equation
 		/**
 		  * Return the r_value of the equation.
 		  */
-		Ast_node *get_r_value() const;
+		const Ast_node *get_r_value() const;
 
 		/**
 		  * Set the left value of the equation.
@@ -101,6 +102,8 @@ class Equation
 		  * where <l_value> = "instance_attr" and <r_value> is= "list of node_ast"
 		  */
 		string key() const;
+
+		void inner_order_only_leaf(const Ast_node *head, vector<const Ast_leaf*> &result) const;
 };
 
 } // end genevalmag

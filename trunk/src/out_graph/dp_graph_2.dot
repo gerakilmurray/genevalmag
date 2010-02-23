@@ -1,0 +1,5 @@
+digraph G {
+0[label="X[0].s1"];
+1[label="X[0].i1"];
+1->0 ;
+}

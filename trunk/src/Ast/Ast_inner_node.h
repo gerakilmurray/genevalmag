@@ -58,6 +58,7 @@ public:
 	}
 
 	virtual string to_string() const = 0;
+
 };
 
 } // end genevalmag
