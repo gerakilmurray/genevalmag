@@ -1,8 +1,0 @@
-digraph G {
-graph [
-label="X", rankdir="LR", ratio="compress"];
-node [
-color="black", fillcolor="gray", shape="ellipse", style="filled"];
-0[label="X.s1"];
-1[label="X.i1"];
-}

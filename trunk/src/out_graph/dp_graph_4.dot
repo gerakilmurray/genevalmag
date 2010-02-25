@@ -1,6 +1,6 @@
 digraph G {
 graph [
-label="Y	::=	'n'", rankdir="LR", ratio="compress"];
+label="Dependency Graph of rule Y ::= 'n'", rankdir="LR", ratio="compress"];
 node [
 color="black", fillcolor="gray", shape="ellipse", style="filled"];
 0[label="Y.s2"];

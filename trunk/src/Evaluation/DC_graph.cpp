@@ -9,14 +9,13 @@
 #include <iostream>                  // for std::cout
 #include <fstream>
 #include <utility>                   // for std::pair
-#include <algorithm>                 // for std::for_each
-//#include <boost/graph/graph_traits.hpp>
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/graphviz.hpp>
 
 #include "DC_graph.h"
 #include "../Attr_grammar/Symbol.h"
 #include "../Attr_grammar/Attr_grammar.h"
+#include "../Parser/Semantics_actions.h"
 
 using namespace boost;
 using namespace std;
@@ -34,15 +33,11 @@ struct vertex_data_t
 typedef property <vertex_data_t, const genevalmag::Ast_leaf*> property_vertex_dp;
 typedef adjacency_list<hash_setS, vecS, directedS, property_vertex_dp > Dp_graph;
 
-//typedef property <vertex_data_t, const genevalmag::Attribute*> property_vertex_down;
-//typedef adjacency_list<hash_setS, vecS, directedS, property_vertex_down > Ds_graph;
-
 // Store the DP graphs. The key corresponds to the key Rule.
 map <string, Dp_graph> p_Dp_graphs;
 
 // Store the down graphs. The key corresponds to the key Symbol.
 map <string, Dp_graph> p_Down_graphs;
-
 
 template <class Type_graph>
 void print_graph(Type_graph &graph, string name_file,string name_graph)
@@ -60,7 +55,10 @@ void print_graph(Type_graph &graph, string name_file,string name_graph)
 	// Create folder
 	string command_folder = "mkdir -p ";
 	command_folder.append(PATH_OUTPUT_FILE);
-	system ( command_folder.c_str());
+	if (system (command_folder.c_str()) != 0)
+	{
+		cerr << "ERROR: the filesystem denies folder's creation." << endl;
+	}
 
 	// Create file dot.
 	string n_f = PATH_OUTPUT_FILE;
@@ -90,10 +88,10 @@ void print_graph(Type_graph &graph, string name_file,string name_graph)
 	command.append( " -Tpng -o ");
 	command.append(n_f);
 	command.append(".png");
-	if (system ( command.c_str() ) == 0 )
-		cout << "OK, creado los archivos de salida" << endl;
-	else
-		cout << "<<<<Fail>>>> Archivos mal creados" << endl;
+	if (system (command.c_str()) != 0 )
+	{
+		cerr << "ERROR: DOT program can not generate the PNG image." << endl;
+	}
 }
 
 Dp_graph::vertex_descriptor return_vertex(Dp_graph graph,const Ast_leaf * node)
@@ -107,12 +105,9 @@ Dp_graph::vertex_descriptor return_vertex(Dp_graph graph,const Ast_leaf * node)
 	return USHRT_MAX;
 }
 
-
 // Algorithm DP
 void compute_dependency_graphs(const map<string, Rule> &rules)
 {
-
-
 	Dp_graph current_p_Dp_graph;
 	property_map<Dp_graph, vertex_data_t>::type leafs = get(vertex_data_t(), current_p_Dp_graph);
 
@@ -134,7 +129,6 @@ void compute_dependency_graphs(const map<string, Rule> &rules)
 			{
 				// The vertex is new in the graph.
 				l_v = add_vertex(current_p_Dp_graph);
-				//property_map<Dp_graph, vertex_data_t>::type leafs = get(vertex_data_t(), *current_p_Dp_graph);
 
 				put(leafs, l_v, eq->second.get_l_value());
 			}
@@ -147,8 +141,6 @@ void compute_dependency_graphs(const map<string, Rule> &rules)
 				{
 					// The vertex is new in the graph.
 					r_v = add_vertex(current_p_Dp_graph);
-					//property_map<Dp_graph, vertex_data_t>::type leafs = get(vertex_data_t(), *current_p_Dp_graph);
-
 					put(leafs,r_v,elem_leaf_tree[i]);
 
 				}
@@ -161,21 +153,14 @@ void compute_dependency_graphs(const map<string, Rule> &rules)
 		//print_graph<Dp_graph>(current_p_Dp_graph,FILE_DP_GRAPH,rule->to_string_not_eqs());
 
 		// Insert current graph in map of denpendency graph.
-		pair<string, Dp_graph > new_p(rule->to_string_not_eqs(), current_p_Dp_graph);
+		pair<string, Dp_graph > new_p(rule->key(), current_p_Dp_graph);
 		pair<map<string, Dp_graph >::iterator, bool > result = p_Dp_graphs.insert(new_p);
 		current_p_Dp_graph.clear();
-//		current_p_Dp_graph = NULL;
-
 	}
-//		for(map <string,Dp_graph>::iterator it = p_Dp_graphs.begin(); it != p_Dp_graphs.end(); it++)
-//		{
-//			print_graph<Dp_graph>(it->second,FILE_DP_GRAPH,it->first);
-//		}
-
 }
 
 // Algorithm Down
-void compute_down_graph(const map<string,Symbol> symbols)
+void compute_down_graph(const map<string,Symbol> &symbols, const map<string,Rule> &rules)
 {
 	Dp_graph current_p_Down_graph;
 	// for the dp_graph
@@ -186,6 +171,7 @@ void compute_down_graph(const map<string,Symbol> symbols)
 		for(map<string,Dp_graph >::iterator dp = p_Dp_graphs.begin(); dp != p_Dp_graphs.end(); dp++)
 		{
 			property_map<Dp_graph, vertex_data_t>::type props = get(vertex_data_t(), dp->second);
+
 			for(size_t i = 0; i < num_vertices(dp->second); i++)
 			{
 				const Ast_instance * instance = dynamic_cast<const Ast_instance*>(props[i]);
@@ -205,25 +191,37 @@ void compute_down_graph(const map<string,Symbol> symbols)
 				}
 			}
 
-			graph_traits<Dp_graph>::edge_iterator ei, ei_end;
-			for (tie(ei,ei_end) = edges(dp->second); ei != ei_end; ++ei)
+			//OBS: Grafo down del simbolo tiene todos los atributos que participan en las aristas.
+
+			// Filtrado de reglas en la que el simbolo no es el principal.
+			const Rule *current_rule = &(rules.find(dp->first)->second);
+			if(current_rule->get_left_symbol()->equals(*symb))
 			{
-				Dp_graph::vertex_descriptor s = source(*ei, dp->second);
-				Dp_graph::vertex_descriptor t = target(*ei, dp->second);
-				const Ast_instance * ins_source = dynamic_cast<const Ast_instance*>(props[s]);
-				const Ast_instance * ins_target = dynamic_cast<const Ast_instance*>(props[t]);
-				if (ins_source && ins_target)
+				graph_traits<Dp_graph>::edge_iterator ei, ei_end;
+				for (tie(ei,ei_end) = edges(dp->second); ei != ei_end; ++ei)
 				{
-					if(ins_source->get_symb()->equals(*ins_target->get_symb()))
+					Dp_graph::vertex_descriptor source_vertex = source(*ei, dp->second);
+					Dp_graph::vertex_descriptor target_vertex = target(*ei, dp->second);
+					const Ast_instance * ins_source = dynamic_cast<const Ast_instance*>(props[source_vertex]);
+					const Ast_instance * ins_target = dynamic_cast<const Ast_instance*>(props[target_vertex]);
+					if (ins_source && ins_target)
 					{
-						if(!ins_source->get_attr()->equals(*ins_target->get_attr()))
+						if(symb->equals(*ins_source->get_symb()) &&
+						   ins_source->get_symb()->equals(*ins_target->get_symb()))
 						{
-							cout << "rule" << dp->first << endl;
-							cout << ins_source->to_string() << ins_target->to_string() << "aca ta" << endl;
-						}
-						else
-						{
-							cout << "CICLOOOOOOOO" << endl;
+							if(!ins_source->get_attr()->equals(*ins_target->get_attr()))
+							{
+								property_map<Dp_graph, vertex_data_t>::type nodes = get(vertex_data_t(), current_p_Down_graph);
+
+								Dp_graph::vertex_descriptor desc_source = return_vertex(current_p_Down_graph, ins_source);
+								Dp_graph::vertex_descriptor desc_target = return_vertex(current_p_Down_graph, ins_target);
+
+								add_edge(desc_source,desc_target,current_p_Down_graph);
+							}
+							else
+							{
+								cout << "CICLOOOOOOOO" << endl;
+							}
 						}
 					}
 				}
@@ -236,30 +234,31 @@ void compute_down_graph(const map<string,Symbol> symbols)
 		pair<map<string, Dp_graph >::iterator, bool > result = p_Down_graphs.insert(new_p);
 		current_p_Down_graph.clear();
 	}
-
-
 }
 
 // Algorithm DCG
-void compute_dcg()
+void compute_dcg(const map<string, Rule> &rules)
 {
 	for(map <string,Dp_graph>::iterator it = p_Dp_graphs.begin(); it != p_Dp_graphs.end(); it++)
 	{
-		print_graph<Dp_graph>(it->second,FILE_DP_GRAPH,it->first);
+		const Rule *current_rule = &(rules.find(it->first)->second);
+		string name_graph = "Dependency Graph of rule ";
+		name_graph.append(cleaning_tabs(current_rule->to_string_not_eqs()));
+		print_graph<Dp_graph>(it->second,FILE_DP_GRAPH,name_graph);
 
 	}
 
 	for(map <string,Dp_graph>::iterator it = p_Down_graphs.begin(); it != p_Down_graphs.end(); it++)
 	{
-		print_graph<Dp_graph>(it->second,FILE_DOWN_GRAPH,it->first);
+		string name_graph = "Graph Down(";
+		name_graph.append(it->first);
+		name_graph.append(")");
+		print_graph<Dp_graph>(it->second,FILE_DOWN_GRAPH,name_graph);
 	}
-
-
 }
 
 // Algorithm ADP
 void compute_adp_graph(Rule *rule)
 {
-
 
 }

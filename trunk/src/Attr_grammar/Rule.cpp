@@ -248,6 +248,7 @@ string Rule::key() const
 {
 	string key;
 	key.append(r_left_symbol->get_name());
+	key.append(".");
 	for(vector<const Symbol*>::size_type i = 0; i < r_right_side.size(); i++)
 	{
 		key.append(r_right_side[i]->get_name());
