@@ -16,8 +16,8 @@ using namespace genevalmag;
 
 void compute_dependency_graphs(const map<string, Rule> &rules);
 
-void compute_down_graph(const map<string, Symbol> symbols);
+void compute_down_graph(const map<string, Symbol> &symbols, const map<string, Rule> &rules);
 
-void compute_dcg();
+void compute_dcg(const map<string, Rule> &rules);
 
 #endif /* DC_GRAPH_H_ */

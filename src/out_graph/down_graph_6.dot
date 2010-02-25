@@ -1,6 +1,6 @@
 digraph G {
 graph [
-label="S", rankdir="LR", ratio="compress"];
+label="Graph Down(S)", rankdir="LR", ratio="compress"];
 node [
 color="black", fillcolor="gray", shape="ellipse", style="filled"];
 0[label="S.s0"];
