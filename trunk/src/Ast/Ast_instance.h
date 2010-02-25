@@ -54,7 +54,11 @@ public:
 
 	string to_string() const;
 
-	bool equals(Ast_instance const &other) const;
+	string value_s() const;
+
+	bool equals(const Ast_leaf * other) const;
+
+	bool equals_with_index(const Ast_instance * other) const;
 
 	string key() const;
 };

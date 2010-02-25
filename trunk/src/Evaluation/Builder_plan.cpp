@@ -12,4 +12,6 @@
 void build_plans(const Attr_grammar &attr_grammar)
 {
 	compute_dependency_graphs(attr_grammar.get_rules());
+	compute_down_graph(attr_grammar.get_non_terminal_symbols());
+	compute_dcg();
 }

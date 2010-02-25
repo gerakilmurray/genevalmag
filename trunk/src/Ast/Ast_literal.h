@@ -59,6 +59,10 @@ public:
 	void set_value(string new_value);
 
 	string to_string() const;
+
+	string value_s() const;
+
+	bool equals(const Ast_leaf * other) const;
 };
 
 } // end genevalmag

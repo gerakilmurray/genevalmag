@@ -30,7 +30,7 @@ public:
 		}
 	};
 
-	vector<Ast_node*> get_childs() const
+	const vector<Ast_node*> &get_childs() const
 	{
 		return childs;
 	}
@@ -58,6 +58,8 @@ public:
 	}
 
 	virtual string to_string() const = 0;
+
+//	virtual bool equals(const Ast_node * node) const = 0;
 
 };
 

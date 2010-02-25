@@ -130,4 +130,15 @@ string Ast_literal::to_string() const
 	return lit;
 }
 
+
+bool Ast_literal::equals(const Ast_leaf * other) const
+{
+	return	value_s().compare(other->value_s()) == 0;
+}
+
+string Ast_literal::value_s() const
+{
+	return to_string();
+}
+
 } // end genevalmag

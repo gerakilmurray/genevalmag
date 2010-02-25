@@ -70,10 +70,7 @@ public:
 
 	virtual string to_string() const = 0;
 
-	virtual bool equals( const Ast_node * node) const
-	{
-		return to_string().compare(node->to_string()) == 0;
-	}
+//	virtual bool equals(const Ast_node * node) const = 0;
 };
 
 } // end genevalmag

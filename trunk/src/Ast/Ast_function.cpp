@@ -188,4 +188,9 @@ string Ast_function::to_string() const
 	return fun;
 }
 
+//bool Ast_function::equals(const Ast_node * other) const
+//{
+//	return to_string().compare(other->to_string()) == 0;
+//}
+
 } // end genevalmag
