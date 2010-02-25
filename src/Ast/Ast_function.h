@@ -56,6 +56,8 @@ public:
 
 
 	string to_string() const;
+
+//	bool equals(const Ast_node * other) const;
 };
 
 } // end genevalmag

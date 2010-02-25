@@ -129,11 +129,40 @@ string Ast_instance::to_string() const
 }
 
 /**
+  * Generate and return a string reprensentation of a instance.
+  *
+  * Result= <symbol>.<attribute>
+  *
+  * Ex: E.valor
+  */
+
+string Ast_instance::value_s() const
+{
+	string inst;
+	// Save symbol's name.
+	inst.append(i_symb->get_name());
+
+	inst.append(".");
+	// Save attribute's name.
+	inst.append(i_attr->get_name());
+	return inst;
+}
+
+
+/**
   * Compares the Ast_instance with other.
   */
-bool Ast_instance::equals(Ast_instance const &other) const
+bool Ast_instance::equals(const Ast_leaf *other) const
 {
-	return	key().compare(other.key()) == 0;
+	return	value_s().compare(other->value_s()) == 0;
+}
+
+/**
+  * Compares the Ast_instance with other.
+  */
+bool Ast_instance::equals_with_index(const Ast_instance *other) const
+{
+	return key().compare(other->key()) == 0;
 }
 
 string Ast_instance::key() const

@@ -1,9 +1,7 @@
 digraph G {
 graph [
-label="X	::=	'm'", rankdir="LR", ratio="compress"];
+label="S", rankdir="LR", ratio="compress"];
 node [
 color="black", fillcolor="gray", shape="ellipse", style="filled"];
-0[label="X.s1"];
-1[label="X.i1"];
-1->0 ;
+0[label="S.s0"];
 }

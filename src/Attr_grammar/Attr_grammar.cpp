@@ -161,7 +161,6 @@ const map<string, Rule> &Attr_grammar::get_rules() const
 {
 	return ag_rule;
 }
-
 /**
   *  Return the map with all symbols.
   */
