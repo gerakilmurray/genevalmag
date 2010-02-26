@@ -11,6 +11,7 @@
 #include <utility>                   // for std::pair
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/graphviz.hpp>
+#include <boost/graph/transitive_closure.hpp>
 
 #include "DC_graph.h"
 #include "../Attr_grammar/Symbol.h"
@@ -94,6 +95,28 @@ void print_graph(Type_graph &graph, string name_file,string name_graph)
 	}
 }
 
+void print_graph_txt(Dp_graph &graph)
+{
+	size_t count_vertex = num_vertices(graph);
+	cout << "<< Vertex >> " << num_vertices(graph) << endl;
+	// Arrays of node's name.
+	property_map<Dp_graph, vertex_data_t>::type props = get(vertex_data_t(), graph);
+	for(size_t i = 0; i < count_vertex; i++)
+	{
+		cout << props[i]->value_s() << endl;;
+	}
+	cout << "<< Edges >> " << num_edges(graph) << endl;
+	graph_traits<Dp_graph>::edge_iterator ei, ei_end;
+	for (tie(ei,ei_end) = edges(graph); ei != ei_end; ++ei)
+	{
+		Dp_graph::vertex_descriptor source_vertex = source(*ei, graph);
+		Dp_graph::vertex_descriptor target_vertex = target(*ei, graph);
+
+		cout << props[source_vertex]->value_s() << "---->" << props[target_vertex]->value_s() << endl;
+	}
+}
+
+
 Dp_graph::vertex_descriptor return_vertex(Dp_graph graph,const Ast_leaf * node)
 {
 	property_map<Dp_graph, vertex_data_t>::type props = get(vertex_data_t(), graph);
@@ -150,7 +173,8 @@ void compute_dependency_graphs(const map<string, Rule> &rules)
 		}
 
 		// Print current graph
-		//print_graph<Dp_graph>(current_p_Dp_graph,FILE_DP_GRAPH,rule->to_string_not_eqs());
+//		print_graph_txt(current_p_Dp_graph);
+//		print_graph<Dp_graph>(current_p_Dp_graph,FILE_DP_GRAPH,rule->to_string_not_eqs());
 
 		// Insert current graph in map of denpendency graph.
 		pair<string, Dp_graph > new_p(rule->key(), current_p_Dp_graph);
@@ -159,80 +183,89 @@ void compute_dependency_graphs(const map<string, Rule> &rules)
 	}
 }
 
+void merge_graph(Dp_graph &graph1, Dp_graph &graph2, Dp_graph &graph_merged)
+{
+	graph_merged.clear();
+	graph_merged = graph1;
+
+	property_map<Dp_graph, vertex_data_t>::type props = get(vertex_data_t(), graph2);
+	property_map<Dp_graph, vertex_data_t>::type props_merged = get(vertex_data_t(), graph_merged);
+	for(size_t i = 0; i < num_vertices(graph2); i++)
+	{
+		Dp_graph::vertex_descriptor vertex = return_vertex(graph_merged,props[i]);
+		if (vertex == USHRT_MAX)
+		{
+			// The vertex is new in the graph.
+			vertex = add_vertex(graph_merged);
+			put(props_merged,vertex,props[i]);
+		}
+	}
+
+	graph_traits<Dp_graph>::edge_iterator ei, ei_end;
+	for (tie(ei,ei_end) = edges(graph2); ei != ei_end; ++ei)
+	{
+		Dp_graph::vertex_descriptor source_vertex = source(*ei, graph2);
+		Dp_graph::vertex_descriptor target_vertex = target(*ei, graph2);
+
+		Dp_graph::vertex_descriptor desc_source = return_vertex(graph_merged,props[source_vertex]);
+		Dp_graph::vertex_descriptor desc_target = return_vertex(graph_merged,props[target_vertex]);
+
+		add_edge(desc_source,desc_target,graph_merged);
+	}
+}
+
+void project_graph(const Symbol * symb, Dp_graph &graph)
+{
+
+//	transitive_closure(graph,graph_projected,vertex_index_map(identity_property_map()));
+
+	property_map<Dp_graph, vertex_data_t>::type props = get(vertex_data_t(), graph);
+	for (size_t i = num_vertices(graph); i > 0; i--)
+	{
+		const Ast_instance *ins = dynamic_cast<const Ast_instance*>(props[i-1]);
+		if (ins)
+		{
+			if (!ins->get_symb()->equals(*symb))
+			{
+				clear_vertex(i-1, graph);
+				remove_vertex(i-1, graph);
+			}
+		}
+		else
+		{
+			clear_vertex(i-1, graph);
+			remove_vertex(i-1, graph);
+		}
+	}
+	warshall_transitive_closure(graph);
+}
+
 // Algorithm Down
 void compute_down_graph(const map<string,Symbol> &symbols, const map<string,Rule> &rules)
 {
 	Dp_graph current_p_Down_graph;
 	// for the dp_graph
+	for(map<string,Dp_graph >::iterator dp = p_Dp_graphs.begin(); dp != p_Dp_graphs.end(); dp++)
+	{
+		Dp_graph merged_g;
+		merge_graph(dp->second, current_p_Down_graph, merged_g);
+		current_p_Down_graph.clear();
+		current_p_Down_graph = merged_g;
+	}
+
 	for(map<string,Symbol >::const_iterator it = symbols.begin(); it != symbols.end(); it++)
 	{
-		const Symbol * symb = &it->second;
+		Dp_graph copy_down_g;
 
-		for(map<string,Dp_graph >::iterator dp = p_Dp_graphs.begin(); dp != p_Dp_graphs.end(); dp++)
-		{
-			property_map<Dp_graph, vertex_data_t>::type props = get(vertex_data_t(), dp->second);
+		copy_down_g = current_p_Down_graph;
 
-			for(size_t i = 0; i < num_vertices(dp->second); i++)
-			{
-				const Ast_instance * instance = dynamic_cast<const Ast_instance*>(props[i]);
-				if (instance)
-				{
-					if (instance->get_symb()->equals(*symb))
-					{
-						Dp_graph::vertex_descriptor ins = return_vertex(current_p_Down_graph,instance);
-						if (ins == USHRT_MAX)
-						{
-							// The vertex is new in the graph.
-							ins = add_vertex(current_p_Down_graph);
-							property_map<Dp_graph, vertex_data_t>::type nodes = get(vertex_data_t(), current_p_Down_graph);
-							put(nodes,ins,props[i]);
-						}
-					}
-				}
-			}
+		const Symbol *symb = &it->second;
 
-			//OBS: Grafo down del simbolo tiene todos los atributos que participan en las aristas.
+		project_graph(symb, copy_down_g);
 
-			// Filtrado de reglas en la que el simbolo no es el principal.
-			const Rule *current_rule = &(rules.find(dp->first)->second);
-			if(current_rule->get_left_symbol()->equals(*symb))
-			{
-				graph_traits<Dp_graph>::edge_iterator ei, ei_end;
-				for (tie(ei,ei_end) = edges(dp->second); ei != ei_end; ++ei)
-				{
-					Dp_graph::vertex_descriptor source_vertex = source(*ei, dp->second);
-					Dp_graph::vertex_descriptor target_vertex = target(*ei, dp->second);
-					const Ast_instance * ins_source = dynamic_cast<const Ast_instance*>(props[source_vertex]);
-					const Ast_instance * ins_target = dynamic_cast<const Ast_instance*>(props[target_vertex]);
-					if (ins_source && ins_target)
-					{
-						if(symb->equals(*ins_source->get_symb()) &&
-						   ins_source->get_symb()->equals(*ins_target->get_symb()))
-						{
-							if(!ins_source->get_attr()->equals(*ins_target->get_attr()))
-							{
-								property_map<Dp_graph, vertex_data_t>::type nodes = get(vertex_data_t(), current_p_Down_graph);
-
-								Dp_graph::vertex_descriptor desc_source = return_vertex(current_p_Down_graph, ins_source);
-								Dp_graph::vertex_descriptor desc_target = return_vertex(current_p_Down_graph, ins_target);
-
-								add_edge(desc_source,desc_target,current_p_Down_graph);
-							}
-							else
-							{
-								cout << "CICLOOOOOOOO" << endl;
-							}
-						}
-					}
-				}
-			}
-		}
-
-//		print_graph<Dp_graph>(current_p_Down_graph,FILE_DOWN_GRAPH,symb->get_name());
 		// Insert current graph in map of down graph
-		pair<string, Dp_graph > new_p(symb->key(), current_p_Down_graph);
+		pair<string, Dp_graph > new_p(symb->key(), copy_down_g);
 		pair<map<string, Dp_graph >::iterator, bool > result = p_Down_graphs.insert(new_p);
-		current_p_Down_graph.clear();
 	}
 }
 
@@ -245,7 +278,6 @@ void compute_dcg(const map<string, Rule> &rules)
 		string name_graph = "Dependency Graph of rule ";
 		name_graph.append(cleaning_tabs(current_rule->to_string_not_eqs()));
 		print_graph<Dp_graph>(it->second,FILE_DP_GRAPH,name_graph);
-
 	}
 
 	for(map <string,Dp_graph>::iterator it = p_Down_graphs.begin(); it != p_Down_graphs.end(); it++)
