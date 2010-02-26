@@ -8,10 +8,14 @@
 
 #include "Builder_plan.h"
 #include "DC_graph.h"
+#include <iostream>
 
 void build_plans(const Attr_grammar &attr_grammar)
 {
 	compute_dependency_graphs(attr_grammar.get_rules());
+	cout << "DP" << endl;
 	compute_down_graph(attr_grammar.get_non_terminal_symbols(), attr_grammar.get_rules());
+	cout << "Down" << endl;
 	compute_dcg(attr_grammar.get_rules());
+	cout << "DCG" << endl;
 }
