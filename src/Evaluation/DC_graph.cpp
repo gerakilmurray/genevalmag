@@ -216,22 +216,13 @@ void merge_graph(Dp_graph &graph1, Dp_graph &graph2, Dp_graph &graph_merged)
 
 void project_graph(const Symbol * symb, Dp_graph &graph)
 {
-
 //	transitive_closure(graph,graph_projected,vertex_index_map(identity_property_map()));
 
 	property_map<Dp_graph, vertex_data_t>::type props = get(vertex_data_t(), graph);
 	for (size_t i = num_vertices(graph); i > 0; i--)
 	{
 		const Ast_instance *ins = dynamic_cast<const Ast_instance*>(props[i-1]);
-		if (ins)
-		{
-			if (!ins->get_symb()->equals(*symb))
-			{
-				clear_vertex(i-1, graph);
-				remove_vertex(i-1, graph);
-			}
-		}
-		else
+		if (!ins || !ins->get_symb()->equals(*symb))
 		{
 			clear_vertex(i-1, graph);
 			remove_vertex(i-1, graph);
