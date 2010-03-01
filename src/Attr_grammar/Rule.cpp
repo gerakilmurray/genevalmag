@@ -272,5 +272,20 @@ int Rule::count_non_terminal(const Symbol *symb) const
 	}
 	return count;
 }
+/**
+  * Return the non-terminals symbols the right side of the rule.
+  */
+vector<const Symbol*> Rule::get_non_terminals_right_side() const
+{
+	vector<const Symbol*> result;
+	for(vector<const Symbol*>::size_type i = 0; i < r_right_side.size(); i++)
+	{
+		if (r_right_side[i]->is_non_terminal())
+		{
+			result.push_back(r_right_side[i]);
+		}
+	}
+	return result;
+}
 
 } // end genevalmag
