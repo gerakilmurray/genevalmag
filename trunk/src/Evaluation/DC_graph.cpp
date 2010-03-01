@@ -25,6 +25,8 @@ using namespace genevalmag;
 #define PATH_OUTPUT_FILE "./src/out_graph"
 #define FILE_DP_GRAPH "/dp_graph_"
 #define FILE_DOWN_GRAPH "/down_graph_"
+#define FILE_DCG_GRAPH "/dcg_graph_"
+#define FILE_ADP_GRAPH "/adp_graph_"
 
 struct vertex_data_t
 {
@@ -38,7 +40,16 @@ typedef adjacency_list<hash_setS, vecS, directedS, property_vertex_dp > Dp_graph
 map <string, Dp_graph> p_Dp_graphs;
 
 // Store the down graphs. The key corresponds to the key Symbol.
+map <string, Dp_graph> attr_vertex_graphs;
+
+// Store the down graphs. The key corresponds to the key Symbol.
 map <string, Dp_graph> p_Down_graphs;
+
+// Store the down graphs. The key corresponds to the key Rule.
+map <string, Dp_graph> p_dcg_graphs;
+
+// Store the down graphs. The key corresponds to the key Rule.
+map <string, Dp_graph> p_adp_graphs;
 
 template <class Type_graph>
 void print_graph(Type_graph &graph, string name_file,string name_graph)
@@ -72,7 +83,7 @@ void print_graph(Type_graph &graph, string name_file,string name_graph)
 	// Obtain of file of graphviz.
 	ofstream salida(n_f.c_str());
 	std::map<std::string,std::string> graph_attr, vertex_attr, edge_attr;
-	//graph_attr["size"] = "5,5";
+	//graph_attr["size"] = "5,3";
 	graph_attr["label"] = name_graph;
 	graph_attr["rankdir"] = "LR";
 	graph_attr["ratio"] = "compress";
@@ -185,11 +196,16 @@ void compute_dependency_graphs(const map<string, Rule> &rules)
 
 void merge_graph(Dp_graph &graph1, Dp_graph &graph2, Dp_graph &graph_merged)
 {
+	// Cleans the result graph.
 	graph_merged.clear();
+
+	// Copies the graph1 to result graph.
 	graph_merged = graph1;
 
+	// Join the graph2 to result graph.
 	property_map<Dp_graph, vertex_data_t>::type props = get(vertex_data_t(), graph2);
 	property_map<Dp_graph, vertex_data_t>::type props_merged = get(vertex_data_t(), graph_merged);
+	// Circle for vertices.
 	for(size_t i = 0; i < num_vertices(graph2); i++)
 	{
 		Dp_graph::vertex_descriptor vertex = return_vertex(graph_merged,props[i]);
@@ -200,7 +216,7 @@ void merge_graph(Dp_graph &graph1, Dp_graph &graph2, Dp_graph &graph_merged)
 			put(props_merged,vertex,props[i]);
 		}
 	}
-
+	// Cicle for edges.
 	graph_traits<Dp_graph>::edge_iterator ei, ei_end;
 	for (tie(ei,ei_end) = edges(graph2); ei != ei_end; ++ei)
 	{
@@ -216,52 +232,177 @@ void merge_graph(Dp_graph &graph1, Dp_graph &graph2, Dp_graph &graph_merged)
 
 void project_graph(const Symbol * symb, Dp_graph &graph)
 {
-//	transitive_closure(graph,graph_projected,vertex_index_map(identity_property_map()));
+	// Applies transitivity to graph with only nodes of symb.
+	warshall_transitive_closure(graph);
 
 	property_map<Dp_graph, vertex_data_t>::type props = get(vertex_data_t(), graph);
+	// Reduces the graph for symbol "symb".
 	for (size_t i = num_vertices(graph); i > 0; i--)
 	{
 		const Ast_instance *ins = dynamic_cast<const Ast_instance*>(props[i-1]);
 		if (!ins || !ins->get_symb()->equals(*symb))
+		// The node is a literal-node or is a node with symbol diferent that symb.
 		{
 			clear_vertex(i-1, graph);
 			remove_vertex(i-1, graph);
 		}
 	}
-	warshall_transitive_closure(graph);
+	Dp_graph attr_symb = attr_vertex_graphs.find(symb->key())->second;
+	Dp_graph new_with_attr_symb;
+	merge_graph(graph,attr_symb,new_with_attr_symb);
+	graph = new_with_attr_symb;
+}
+
+// Algorithm attr_vertex.
+void compute_attr_vertex(const map<string,Symbol> &symbols)
+{
+	Dp_graph current_graph;
+	for(map<string,Symbol >::const_iterator s_it = symbols.begin(); s_it != symbols.end(); s_it++)
+	{
+		property_map<Dp_graph, vertex_data_t>::type props_down = get(vertex_data_t(), current_graph);
+		Ast_instance ins;
+		ins.set_symb(&s_it->second);
+		for (size_t i = 0; i < s_it->second.get_attrs().size();i++)
+		{
+			ins.set_attr(s_it->second.get_attrs()[i]);
+			for(map<string,Dp_graph >::iterator dp = p_Dp_graphs.begin(); dp != p_Dp_graphs.end(); dp++)
+			{
+				Dp_graph::vertex_descriptor node = return_vertex(dp->second, &ins);
+				if (node != USHRT_MAX)
+				{
+					Dp_graph::vertex_descriptor node_down = add_vertex(current_graph);
+					property_map<Dp_graph, vertex_data_t>::type props_dp = get(vertex_data_t(), dp->second);
+					put(props_down, node_down, props_dp[node]);
+					break;
+				}
+			}
+		}
+
+		// Insert current graph in map of down graph
+		pair<string, Dp_graph > new_p(s_it->second.key(), current_graph);
+		pair<map<string, Dp_graph >::iterator, bool > result = attr_vertex_graphs.insert(new_p);
+
+		current_graph.clear();
+	}
 }
 
 // Algorithm Down
 void compute_down_graph(const map<string,Symbol> &symbols, const map<string,Rule> &rules)
 {
-	Dp_graph current_p_Down_graph;
-	// for the dp_graph
-	for(map<string,Dp_graph >::iterator dp = p_Dp_graphs.begin(); dp != p_Dp_graphs.end(); dp++)
+	// Insert current graph in map of down graph
+	for(map<string,Dp_graph >::iterator attr_it = attr_vertex_graphs.begin(); attr_it != attr_vertex_graphs.end(); attr_it++)
 	{
-		Dp_graph merged_g;
-		merge_graph(dp->second, current_p_Down_graph, merged_g);
-		current_p_Down_graph.clear();
-		current_p_Down_graph = merged_g;
+		pair<string, Dp_graph > new_p(attr_it->first, attr_it->second);
+		pair<map<string, Dp_graph >::iterator, bool > result = p_Down_graphs.insert(new_p);
 	}
 
-	for(map<string,Symbol >::const_iterator it = symbols.begin(); it != symbols.end(); it++)
+	// In this point obtains the all initialiced downs.
+
+	Dp_graph current_graph;
+	// Circle Dp graph.
+	for(map<string,Dp_graph >::iterator dp = p_Dp_graphs.begin(); dp != p_Dp_graphs.end(); dp++)
 	{
-		Dp_graph copy_down_g;
+		// Obtain rule of graph.
+		const Rule *current_rule = &(rules.find(dp->first)->second);
+		// Obtain all non-terminals symbols of the right-side of the rule.
+		vector<const Symbol*> r_non_terminals = current_rule->get_non_terminals_right_side();
 
-		copy_down_g = current_p_Down_graph;
+		// curren_graph = Dp(rule).
+		current_graph = dp->second;
 
-		const Symbol *symb = &it->second;
+		// Circle for join all Down of the symbol right-side.
+		for (size_t i = 0; i < r_non_terminals.size();i++)
+		{
+			Dp_graph &down_graph = p_Down_graphs.find(r_non_terminals[i]->key())->second;
+			Dp_graph merged;
+			merge_graph(current_graph,down_graph,merged);
+			current_graph.clear();
+			current_graph = merged;
+		}
 
-		project_graph(symb, copy_down_g);
+		// In this point: current_graph = Dp(Rule) U down(X1) U....U down(Xn).
 
-		// Insert current graph in map of down graph
-		pair<string, Dp_graph > new_p(symb->key(), copy_down_g);
-		pair<map<string, Dp_graph >::iterator, bool > result = p_Down_graphs.insert(new_p);
+		// Project for left symbol of current_rule.
+		project_graph(current_rule->get_left_symbol(),current_graph);
+
+		// Modifies the down graph of symbol.
+		Dp_graph &old_down_graph = p_Down_graphs.find(current_rule->get_left_symbol()->key())->second;
+		Dp_graph new_down_graph;
+		merge_graph(current_graph,old_down_graph,new_down_graph);
+		old_down_graph = new_down_graph;
+		new_down_graph.clear();
+		current_graph.clear();
 	}
 }
 
 // Algorithm DCG
 void compute_dcg(const map<string, Rule> &rules)
+{
+	Dp_graph current_graph;
+	// Circle Dp graph.
+	for(map <string,Dp_graph>::iterator it = p_Dp_graphs.begin(); it != p_Dp_graphs.end(); it++)
+	{
+		// Obtain rule of graph.
+		const Rule *current_rule = &(rules.find(it->first)->second);
+		// Obtain all non-terminals symbols of the right-side of the rule.
+		vector<const Symbol*> r_non_terminals = current_rule->get_non_terminals_right_side();
+		// curren_graph = Dp(rule).
+		current_graph = it->second;
+
+		// Circle for join all Down of the symbol right-side.
+		for (size_t i = 0; i < r_non_terminals.size();i++)
+		{
+			Dp_graph &down_graph = p_Down_graphs.find(r_non_terminals[i]->key())->second;
+			Dp_graph merged;
+			merge_graph(current_graph,down_graph,merged);
+			current_graph.clear();
+			current_graph = merged;
+		}
+		// In this point: current_graph = Dp(Rule) U down(X1) U....U down(Xn)
+		project_graph(current_rule->get_left_symbol(),current_graph);
+
+		// Insert current graph in map of down graph
+		pair<string, Dp_graph > new_p(current_rule->key(), current_graph);
+		pair<map<string, Dp_graph >::iterator, bool > result = p_dcg_graphs.insert(new_p);
+	}
+}
+// Algorithm ADP
+void compute_adp_graph(const Attr_grammar &grammar)
+{
+	Dp_graph current_graph;
+	// Circle Dp graph.
+	for(map <string,Dp_graph>::iterator it = p_Dp_graphs.begin(); it != p_Dp_graphs.end(); it++)
+	{
+		// Obtain rule of graph.
+		const Rule *current_rule = &(grammar.get_rules().find(it->first)->second);
+		// Obtain all non-terminals symbols of the right-side of the rule.
+		vector<const Symbol*> r_non_terminals = current_rule->get_non_terminals_right_side();
+		// curren_graph = Dp(rule).
+		current_graph = it->second;
+		for (size_t i = 0; i < r_non_terminals.size();i++)
+		{
+			// Obtain all rule with the left-symbol of the current_rule.
+			vector<const Rule*> rule_left_symbol = grammar.get_rules_with_left_symbol(r_non_terminals[i]);
+
+			// Circle for join all DCG of the symbol right-side.
+			for(size_t j = 0; j< rule_left_symbol.size();j++)
+			{
+				Dp_graph &dcg_graph = p_dcg_graphs.find(rule_left_symbol[j]->key())->second;
+				Dp_graph merged;
+				merge_graph(current_graph,dcg_graph,merged);
+				current_graph.clear();
+				current_graph = merged;
+			}
+		}
+		// In this point: current_graph = Dp(Rule) U dcg(X1) U....U dcg(Xn)
+
+		// Insert current graph in map of adp graph
+		pair<string, Dp_graph > new_p(current_rule->key(), current_graph);
+		pair<map<string, Dp_graph >::iterator, bool > result = p_adp_graphs.insert(new_p);
+	}
+}
+// Algorithm ADP
+void print_all_graphs(const map<string, Rule> &rules)
 {
 	for(map <string,Dp_graph>::iterator it = p_Dp_graphs.begin(); it != p_Dp_graphs.end(); it++)
 	{
@@ -278,10 +419,22 @@ void compute_dcg(const map<string, Rule> &rules)
 		name_graph.append(")");
 		print_graph<Dp_graph>(it->second,FILE_DOWN_GRAPH,name_graph);
 	}
-}
 
-// Algorithm ADP
-void compute_adp_graph(Rule *rule)
-{
+	for(map <string,Dp_graph>::iterator it = p_dcg_graphs.begin(); it != p_dcg_graphs.end(); it++)
+	{
+		const Rule *current_rule = &(rules.find(it->first)->second);
+		string name_graph = "DCG Graph of rule ";
+		name_graph.append(cleaning_tabs(current_rule->to_string_not_eqs()));
+		name_graph.append(" with symbol ");
+		name_graph.append(current_rule->get_left_symbol()->get_name());
+		print_graph<Dp_graph>(it->second,FILE_DCG_GRAPH,name_graph);
+	}
+	for(map <string,Dp_graph>::iterator it = p_adp_graphs.begin(); it != p_adp_graphs.end(); it++)
+	{
+		const Rule *current_rule = &(rules.find(it->first)->second);
+		string name_graph = "ADP Graph of rule ";
+		name_graph.append(cleaning_tabs(current_rule->to_string_not_eqs()));
+		print_graph<Dp_graph>(it->second,FILE_ADP_GRAPH,name_graph);
+	}
 
 }

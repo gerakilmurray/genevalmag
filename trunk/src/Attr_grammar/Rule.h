@@ -126,6 +126,10 @@ class Rule
 		int count_non_terminal(const Symbol *symb) const;
 
 		bool belongs_non_terminal(const Symbol &non_term) const;
+		/**
+		  * Return the non-terminals symbols the right side of the rule.
+		  */
+		vector<const Symbol*> get_non_terminals_right_side() const;
 
 };
 
