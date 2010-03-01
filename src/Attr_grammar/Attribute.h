@@ -107,7 +107,7 @@ public:
 	/**
 	  * Generate and return a string reprensentation of a attribute.
 	  *
-	  * Result= <name> ":" <modifiers> "<" <sort_type> ["(" <instance> ")" IF DEBUG IS ON] "> of " <membership_list>
+	  * Result= name ":" modifiers "<" sort_type ["(" instance ")" IF DEBUG IS ON] "> of " membership_list
 	  */
 	string to_string()const;
 
@@ -119,7 +119,7 @@ public:
 	/**
 	  * Generate and return the string key that identifies a attribute definitely.
 	  *
-	  * Result= <name><modifiers><sort_type><membership_list>
+	  * Result= name modifiers sort_type membership_list
 	  */
 	string key() const;
 };

@@ -1,6 +1,6 @@
 /**
-  *  \file		SemDomain.cpp
-  *  \brief		Implementation of the methods the SemDomain.h
+  *  \file		Attr_grammar.cpp
+  *  \brief		Implementation of the methods the Attr_grammar.h
   *  \date		28/09/2009
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
@@ -204,40 +204,11 @@ void  Attr_grammar::set_initial_symb(Symbol *init_symb)
 
 /**
   * Generate and return a string reprensentation of a attribute grammar.
-  *
-  * Result= "semantic domain"
-  * 			<sorts>
-  * 			<operators>
-  * 			<functions>
-  *
-  * 		"attributes"
-  * 			<attributes>
-  *
-  * 		"symbols"
-  * 			<symbols>
-  *
-  * 		"rules"
-  * 			<rules>
-  *
-  * where <sorts>, <operators>, <functions>, <attributes>, <symbols> and <rules>, are
+  * where sorts, operators, functions, attributes, symbols and rules, are
   * full representation of each type.
   */
 string Attr_grammar::to_string()
 {
-	#ifdef _DEBUG
-//		map<string,Sort>::iterator		it1 = ag_sort.find("pepe");
-//		it1->second.set_name("Pupi_Zanetti");
-//
-//		map<string,Attribute>::iterator	it2 = ag_attr.find("valorintall");
-//		it2->second.set_name("valores");
-//
-//		map<string,Symbol>::iterator	it3 = ag_symb.find("id");
-//		it3->second.set_name("ident");
-
-//		map<string,Rule>::iterator	rule = ag_rule.find("EE'+'E");
-//		rule->second.get_left_symbol()->set_name("Elem");
-	#endif
-
 	string semdomain("\nsemantic domain\n");
 	semdomain.append(to_string_map <Sort	 >(ag_sort));
 	semdomain.append("\n");

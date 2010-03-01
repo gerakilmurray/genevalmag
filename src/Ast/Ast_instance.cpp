@@ -1,6 +1,6 @@
 /**
   *  \file		Ast_instance.cpp
-  *  \brief
+  *  \brief		Implementation of a instance element of an Attribute Syntax Tree (AST).
   *  \date		21/12/2009
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
@@ -13,6 +13,7 @@
 
 namespace genevalmag
 {
+
 #ifdef _DEBUG
 	// Numbers of instances current in the system.
 	static int ast_instances = 0;
@@ -107,7 +108,7 @@ void Ast_instance::set_symb(const Symbol *symb)
 /**
   * Generate and return a string reprensentation of a instance.
   *
-  * Result= <symbol>[number].<attribute>
+  * Result= symbol[number].attribute
   *
   * Ex: E[0].valor
   */
@@ -131,7 +132,7 @@ string Ast_instance::to_string() const
 /**
   * Generate and return a string reprensentation of a instance.
   *
-  * Result= <symbol>.<attribute>
+  * Result= symbol.attribute
   *
   * Ex: E.valor
   */

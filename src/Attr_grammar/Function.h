@@ -146,9 +146,9 @@ public:
 	/**
 	  * Generate and return a string reprensentation of a function.
 	  *
-	  * Result= "function" <name> ":" <domain> "->" <image> ";"
+	  * Result= "function" name ":" domain "->" image ";"
 	  *
-	  * where <domain> is= <sort_1> ["(" <instance> ")" IF DEBUG IS ON] "," ... "," <sort_n> ["(" <instance> ")" IF DEBUG IS ON]
+	  * where domain is= sort_1 ["(" instance ")" IF DEBUG IS ON] "," ... "," sort_n ["(" instance ")" IF DEBUG IS ON]
 	  */
 	string to_string() const;
 
@@ -164,9 +164,9 @@ public:
 	/**
 	  * Generate and return the string key that identifies a function definitely.
 	  *
-	  * Result= <name> <domain> <image>
+	  * Result= name domain image
 	  *
-	  * where <domain> is= <sort_1> ... <sort_n>
+	  * where domain is= sort_1 ... sort_n
 	  */
 	string key() const;
 

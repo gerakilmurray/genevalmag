@@ -1,6 +1,6 @@
 /**
   *  \file		Ast_literal.cpp
-  *  \brief
+  *  \brief		Implementation of a literal element of an Attribute Syntax Tree (AST).
   *  \date		21/12/2009
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
@@ -93,7 +93,7 @@ void Ast_literal::set_value(string new_value)
 /**
   * Generate and return a string reprensentation of a literal
   *
-  * Result= <literal>
+  * Result= literal
   *
   * Ex: 1		- int
   * 	1		- float

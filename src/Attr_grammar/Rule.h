@@ -89,23 +89,23 @@ class Rule
 		/**
 		  * Generate and return a string reprensentation of a rule.
 		  *
-		  * Result= <left_symbol> "::=" <right_side>
+		  * Result= left_symbol "::=" right_side
 		  * 									"compute"
-		  *												<eq_1>
+		  *												eq_1
 		  * 											...
-		  * 											<eq_n>
+		  * 											eq_n
 		  * 									"end;"
 		  *
-		  * where <right_ride> is= <symbol_1> " " ... " " <symbol_n>
+		  * where right_ride is= symbol_1 " " ... " " symbol_n
 		  */
 		string to_string() const;
 
 		/**
 		  * Generate and return a string reprensentation of a rule.
 		  *
-		  * Result= <left_symbol> "::=" <right_side> ";"
+		  * Result= left_symbol "::=" right_side ";"
 		  *
-		  * where <right_ride> is= <symbol_1> " " ... " " <symbol_n>
+		  * where right_ride is= symbol_1 " " ... " " symbol_n
 		  */
 		string to_string_not_eqs() const;
 
@@ -117,9 +117,9 @@ class Rule
 		/**
 		  * Generate and return the string key that identifies a rule definitely.
 		  *
-		  * Result= <left_symbol> <right_side>
+		  * Result= left_symbol right_side
 		  *
-		  * where <right_ride> is= <symbol_1> ... <symbol_n>
+		  * where right_ride is= symbol_1 ... symbol_n
 		  */
 		string key() const;
 

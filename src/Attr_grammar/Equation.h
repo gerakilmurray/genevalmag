@@ -83,9 +83,9 @@ class Equation
 		/**
 		  * Generate and return a string reprensentation of a Equation.
 		  *
-		  * Result= <l_value> "=" <r_value> ";"
+		  * Result= l_value "=" r_value ";"
 		  *
-		  * where <l_value> = "instance_attr" and <r_value> is= "list of node_ast"
+		  * where l_value = "instance_attr" and r_value is= "list of node_ast"
 		  */
 		string to_string() const;
 
@@ -97,9 +97,9 @@ class Equation
 		/**
 		  * Generate and return the string key that identifies a equation definitely.
 		  *
-		  * Result= <l_value><r_value>
+		  * Result= l_value r_value
 		  *
-		  * where <l_value> = "instance_attr" and <r_value> is= "list of node_ast"
+		  * where l_value = "instance_attr" and r_value is= "list of node_ast"
 		  */
 		string key() const;
 

@@ -1,6 +1,6 @@
 /**
   *  \file		Ast_node.h
-  *  \brief
+  *  \brief		Abstract element of an Attribute Syntax Tree (AST).
   *  \date		21/12/2009
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
@@ -21,14 +21,14 @@ namespace genevalmag
 class Ast_node
 {
 protected:
-	Ast_node    *parent;
-	string		type_synthetized;
-	int			conflict;
+	const Ast_node	*parent;
+	string			type_synthetized;
+	int				conflict;
 
 public:
 	virtual ~Ast_node(){};
 
-	Ast_node *get_parent() const
+	const Ast_node *get_parent() const
 	{
 		return parent;
 	}
@@ -38,7 +38,7 @@ public:
 		return type_synthetized;
 	}
 
-	void set_parent(Ast_node *new_parent)
+	void set_parent(const Ast_node *new_parent)
 	{
 		parent = new_parent;
 	}
@@ -69,8 +69,6 @@ public:
 	}
 
 	virtual string to_string() const = 0;
-
-//	virtual bool equals(const Ast_node * node) const = 0;
 };
 
 } // end genevalmag

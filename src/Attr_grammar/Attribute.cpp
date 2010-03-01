@@ -168,7 +168,7 @@ bool Attribute::is_inherit() const
 /**
   * Generate and return a string reprensentation of a attribute.
   *
-  * Result= <name> ":" <modifiers> "<" <sort_type> ["(" <instance> ")" IF DEBUG IS ON] "> of " <membership_list>
+  * Result= name ":" modifiers "<" sort_type ["(" instance ")" IF DEBUG IS ON] "> of " membership_list
   */
 string Attribute::to_string() const
 {
@@ -207,7 +207,7 @@ bool Attribute::equals(Attribute const &other) const
 /**
   * Generate and return the string key that identifies a attribute definitely.
   *
-  * Result= <name><modifiers><sort_type><membership_list>
+  * Result= name modifiers sort_type membership_list
   */
 string Attribute::key() const
 {

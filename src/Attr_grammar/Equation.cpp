@@ -146,9 +146,9 @@ void Equation::set_r_value(Ast_node *rvalue)
 /**
   * Generate and return a string reprensentation of a Equation.
   *
-  * Result= <l_value> "=" <r_value> ";"
+  * Result= l_value "=" r_value ";"
   *
-  * where <l_value> = "instance_attr" and <r_value> is= "list of node_ast"
+  * where l_value = "instance_attr" and r_value is= "list of node_ast"
   */
 string Equation::to_string() const
 {
@@ -171,9 +171,9 @@ bool Equation::equals(Equation const &other) const
 /**
   * Generate and return the string key that identifies a equation definitely.
   *
-  * Result= <l_value><r_value>
+  * Result= l_value r_value
   *
-  * where <l_value> = "instance_attr" and <r_value> is= "list of node_ast"
+  * where l_value = "instance_attr" and r_value is= "list of node_ast"
   */
 string Equation::key() const
 {

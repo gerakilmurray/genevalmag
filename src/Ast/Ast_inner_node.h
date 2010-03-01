@@ -1,6 +1,6 @@
 /**
-  *  \file		Ast_iner_node.h
-  *  \brief
+  *  \file		Ast_inner_node.h
+  *  \brief		Abstract recursive element of an Attribute Syntax Tree (AST).
   *  \date		21/12/2009
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
@@ -58,9 +58,6 @@ public:
 	}
 
 	virtual string to_string() const = 0;
-
-//	virtual bool equals(const Ast_node * node) const = 0;
-
 };
 
 } // end genevalmag
