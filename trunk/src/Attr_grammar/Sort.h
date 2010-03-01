@@ -77,7 +77,7 @@ public:
     /**
 	  * Generate and return a string reprensentation of a attribute.
 	  *
-	  * Result= "sort" <name> ["(" <instance> ")" IF DEBUG IS ON] ";"
+	  * Result= "sort" name ["(" instance ")" IF DEBUG IS ON] ";"
 	  */
     string to_string() const;
     /**
@@ -92,7 +92,7 @@ public:
     /**
 	  * Generate and return the string key that identifies a sort definitely.
 	  *
-	  * Result= <name>
+	  * Result= name
 	  */
     string key() const;
 };

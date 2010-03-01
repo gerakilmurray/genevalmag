@@ -1,6 +1,6 @@
 /**
   *  \file		Ast_instance.h
-  *  \brief
+  *  \brief		Instance element of an Attribute Syntax Tree (AST).
   *  \date		21/12/2009
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>

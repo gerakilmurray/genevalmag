@@ -1,5 +1,5 @@
 /**
-  *  \file		SemDomain.h
+  *  \file		Attr_grammar.h
   *  \brief		Class that represent the full attribute grammar parsed.
   *  \date		28/09/2009
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>

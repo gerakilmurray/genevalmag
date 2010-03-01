@@ -1,6 +1,6 @@
 /**
   *  \file		Ast_function.cpp
-  *  \brief
+  *  \brief		Implementation of a function element of an Attribute Syntax Tree (AST).
   *  \date		21/12/2009
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
@@ -11,6 +11,7 @@
 
 namespace genevalmag
 {
+
 #ifdef _DEBUG
 	// Numbers of functions current in the system.
 	static int ast_functions = 0;
@@ -187,10 +188,5 @@ string Ast_function::to_string() const
 	fun.append(")");
 	return fun;
 }
-
-//bool Ast_function::equals(const Ast_node * other) const
-//{
-//	return to_string().compare(other->to_string()) == 0;
-//}
 
 } // end genevalmag

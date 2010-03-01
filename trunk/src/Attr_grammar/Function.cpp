@@ -232,9 +232,9 @@ void Function::add_domain(const Sort *sort)
 /**
   * Generate and return a string reprensentation of a function.
   *
-  * Result= "function" <name> ":" <domain> "->" <image> ";"
+  * Result= "function" name ":" domain "->" image ";"
   *
-  * where <domain> is= <sort_1> ["(" <instance> ")" IF DEBUG IS ON] "," ... "," <sort_n> ["(" <instance> ")" IF DEBUG IS ON]
+  * where domain is= sort_1 ["(" instance ")" IF DEBUG IS ON] "," ... "," sort_n ["(" instance ")" IF DEBUG IS ON]
   */
 string Function::to_string() const
 {
@@ -326,9 +326,9 @@ bool Function::equals(Function const &other) const
 /**
   * Generate and return the string key that identifies a function definitely.
   *
-  * Result= <name> <domain> <image>
+  * Result= name domain image
   *
-  * where <domain> is= <sort_1> ... <sort_n>
+  * where domain is= sort_1 ... sort_n
   */
 string Function::key() const
 {

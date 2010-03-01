@@ -180,14 +180,14 @@ bool Rule::add_eq(const Equation &eq)
 /**
   * Generate and return a string reprensentation of a rule.
   *
-  * Result= <left_symbol> "::=" <right_side>
+  * Result= left_symbol "::=" right_side
   * 									"compute"
-  *												<eq_1>
+  *												eq_1
   * 											...
-  * 											<eq_n>
+  * 											eq_n
   * 									"end;"
   *
-  * where <right_ride> is= <symbol_1> " " ... " " <symbol_n>
+  * where right_ride is= symbol_1 " " ... " " symbol_n
   */
 string Rule::to_string() const
 {
@@ -211,9 +211,9 @@ string Rule::to_string() const
 /**
   * Generate and return a string reprensentation of a rule.
   *
-  * Result= <left_symbol> "::=" <right_side> ";"
+  * Result= left_symbol "::=" right_side ";"
   *
-  * where <right_ride> is= <symbol_1> " " ... " " <symbol_n>
+  * where right_ride is= symbol_1 " " ... " " symbol_n
   */
 string Rule::to_string_not_eqs() const
 {
@@ -240,9 +240,9 @@ bool Rule::equals(Rule const &other) const
 /**
   * Generate and return the string key that identifies a rule definitely.
   *
-  * Result= <left_symbol> <right_side>
+  * Result= left_symbol right_side
   *
-  * where <right_ride> is= <symbol_1> ... <symbol_n>
+  * where right_ride is= symbol_1> ... symbol_n
   */
 string Rule::key() const
 {

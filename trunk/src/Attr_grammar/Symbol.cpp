@@ -169,11 +169,11 @@ bool Symbol::is_non_terminal() const
 /**
   * Generate and return a string reprensentation of a symbol.
   *
-  * Result= "symbol" <name> <type> ";"
+  * Result= "symbol" name type ";"
   *
-  * where if <type> is Non Terminal, then list the attributes of the symbol.
+  * where if 'type' is Non Terminal, then list the attributes of the symbol.
   *
-  * <list>= "Attributes:" <attr_1> "," ... "," <attr_n>
+  * list= "Attributes:" attr_1 "," ... "," attr_n
   */
 string Symbol::to_string() const
 {
@@ -211,7 +211,7 @@ bool Symbol::equals(Symbol const &other) const
 /**
   * Generate and return the string key that identifies a symbol definitely.
   *
-  * Result= <name>
+  * Result= name
   */
 string Symbol::key() const
 {
