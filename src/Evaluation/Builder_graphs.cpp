@@ -19,7 +19,6 @@
   *  http://www.cis.nctu.edu.tw/~wuuyang/papers/magAPSEC.ps
   */
 
-
 #include <iostream>                  // for std::cout
 #include <fstream>
 #include <utility>                   // for std::pair
@@ -34,49 +33,31 @@
 
 using namespace boost;
 using namespace std;
-using namespace genevalmag;
 
-#define PATH_OUTPUT_FILE "./src/out_graph"
-#define FILE_DP_GRAPH "/dp_graph_"
-#define FILE_DOWN_GRAPH "/down_graph_"
-#define FILE_DCG_GRAPH "/dcg_graph_"
-#define FILE_ADP_GRAPH "/adp_graph_"
-
-struct vertex_data_t
+namespace genevalmag
 {
-    typedef vertex_property_tag kind;
-};
 
-typedef property <vertex_data_t, const genevalmag::Ast_leaf*> property_vertex_dp;
-typedef adjacency_list<hash_setS, vecS, directedS, property_vertex_dp > Dp_graph;
+const string PATH_OUTPUT_FILE ("./src/out_graph/");
+const string FILE_DP_GRAPH ("dp_graph_");
+const string FILE_DOWN_GRAPH ("down_graph_");
+const string FILE_DCG_GRAPH ("dcg_graph_");
+const string FILE_ADP_GRAPH ("adp_graph_");
 
-// Store the DP graphs. The key corresponds to the key Rule.
-map <string, Dp_graph> p_Dp_graphs;
 
-// Store the vertex-attr graphs. The key corresponds to the key Symbol.
-map <string, Dp_graph> attr_vertex_graphs;
+Builder_graphs::Builder_graphs(){}
 
-// Store the down graphs. The key corresponds to the key Symbol.
-map <string, Dp_graph> p_Down_graphs;
-
-// Store the dcg graphs. The key corresponds to the key Rule.
-map <string, Dp_graph> p_dcg_graphs;
-
-// Store the adp graphs. The key corresponds to the key Rule.
-map <string, Dp_graph> p_adp_graphs;
-
+Builder_graphs::~Builder_graphs(){}
 
 /**
   * Prints a graph in a file dot for generate image png.
   */
-template <class Type_graph>
-void print_graph(Type_graph &graph, string name_file,string name_graph)
+void print_graph(Dp_graph &graph, const string name_file,const string name_graph)
 {
 	static int num_file = 0; // For name of file png
 	size_t count_vertex = num_vertices(graph);
 	// Arrays of node's name.
 	string datas[count_vertex];
-	typename property_map<Type_graph, vertex_data_t>::type props = get(vertex_data_t(), graph);
+	property_map<Dp_graph, vertex_data_t>::type props = get(vertex_data_t(), graph);
 	for(size_t i = 0; i < count_vertex; i++)
 	{
 		datas[i] = props[i]->value_s();
@@ -123,7 +104,6 @@ void print_graph(Type_graph &graph, string name_file,string name_graph)
 		cerr << "ERROR: DOT program can not generate the PNG image." << endl;
 	}
 }
-
 
 /**
   * Prints a graph in the standart out (std:cout).
@@ -172,7 +152,7 @@ Dp_graph::vertex_descriptor return_vertex(Dp_graph graph,const Ast_leaf * node)
   * 			Edges: 	E --> E
   * 					T---> E
   */
-void compute_dependency_graphs(const map<string, Rule> &rules)
+void Builder_graphs::compute_dependency_graphs(const map<string, Rule> &rules)
 {
 	Dp_graph current_p_Dp_graph;
 	property_map<Dp_graph, vertex_data_t>::type leafs = get(vertex_data_t(), current_p_Dp_graph);
@@ -195,7 +175,6 @@ void compute_dependency_graphs(const map<string, Rule> &rules)
 			{
 				// The vertex is new in the graph.
 				l_v = add_vertex(current_p_Dp_graph);
-
 				put(leafs, l_v, eq->second.get_l_value());
 			}
 			// for the right side of equation.
@@ -208,7 +187,6 @@ void compute_dependency_graphs(const map<string, Rule> &rules)
 					// The vertex is new in the graph.
 					r_v = add_vertex(current_p_Dp_graph);
 					put(leafs,r_v,elem_leaf_tree[i]);
-
 				}
 				// Add edge between left instance and right instance. r_v --> l_v.
 				add_edge(r_v,l_v,current_p_Dp_graph);
@@ -264,7 +242,7 @@ void merge_graph(Dp_graph &graph1, Dp_graph &graph2, Dp_graph &graph_merged)
   * Projects a graph with only vertex that belongs to symbol "symb".
   * Modifies the parameter "graph".
   */
-void project_graph(const Symbol * symb, Dp_graph &graph)
+void Builder_graphs::project_graph(const Symbol * symb, Dp_graph &graph)
 {
 	// Applies transitivity to graph with only nodes of symb.
 	warshall_transitive_closure(graph);
@@ -293,7 +271,7 @@ void project_graph(const Symbol * symb, Dp_graph &graph)
   * Ex: Symbol E ; attributes: s,i
   * 	graph: 	vertex: E.s, E.i
   */
-void compute_attr_vertex(const map<string,Symbol> &symbols)
+void Builder_graphs::compute_attr_vertex(const map<string,Symbol> &symbols)
 {
 	Dp_graph current_graph;
 	for(map<string,Symbol >::const_iterator s_it = symbols.begin(); s_it != symbols.end(); s_it++)
@@ -316,7 +294,6 @@ void compute_attr_vertex(const map<string,Symbol> &symbols)
 				}
 			}
 		}
-
 		// Insert current graph in map of down graph
 		pair<string, Dp_graph > new_p(s_it->second.key(), current_graph);
 		pair<map<string, Dp_graph >::iterator, bool > result = attr_vertex_graphs.insert(new_p);
@@ -333,7 +310,7 @@ void compute_attr_vertex(const map<string,Symbol> &symbols)
   * 	graph G: DP(1) U Down(E) U Down(T)
   * 	Project(G,{attributes of E})
   */
-void compute_down_graph(const map<string,Symbol> &symbols, const map<string,Rule> &rules)
+void Builder_graphs::compute_down_graph(const map<string,Symbol> &symbols, const map<string,Rule> &rules)
 {
 	compute_attr_vertex(symbols);
 
@@ -367,7 +344,6 @@ void compute_down_graph(const map<string,Symbol> &symbols, const map<string,Rule
 			current_graph.clear();
 			current_graph = merged;
 		}
-
 		// In this point: current_graph = Dp(Rule) U down(X1) U....U down(Xn).
 
 		// Project for left symbol of current_rule.
@@ -391,7 +367,7 @@ void compute_down_graph(const map<string,Symbol> &symbols, const map<string,Rule
   * 	graph G: DP(1) U Down(E) U Down(T)
   * 	Project(G,{attributes of E})
   */
-void compute_dcg(const map<string, Rule> &rules)
+void Builder_graphs::compute_dcg(const map<string, Rule> &rules)
 {
 	Dp_graph current_graph;
 	// Circle Dp graph.
@@ -430,7 +406,7 @@ void compute_dcg(const map<string, Rule> &rules)
   * 	graph G: DP(1) U Dcg E (J1..JN) U Dcg T (K1..KM)
   * 	Where Ji y ki are rule with left-symbol E and T respectly.
   */
-void compute_adp_graph(const Attr_grammar &grammar)
+void Builder_graphs::compute_adp_graph(const Attr_grammar &grammar)
 {
 	Dp_graph current_graph;
 	// Circle Dp graph.
@@ -466,14 +442,14 @@ void compute_adp_graph(const Attr_grammar &grammar)
 }
 
 // Prints all graph.
-void print_all_graphs(const map<string, Rule> &rules)
+void Builder_graphs::print_all_graphs(const map<string, Rule> &rules)
 {
 	for(map <string,Dp_graph>::iterator it = p_Dp_graphs.begin(); it != p_Dp_graphs.end(); it++)
 	{
 		const Rule *current_rule = &(rules.find(it->first)->second);
 		string name_graph = "Dependency Graph of rule ";
 		name_graph.append(cleaning_tabs(current_rule->to_string_not_eqs()));
-		print_graph<Dp_graph>(it->second,FILE_DP_GRAPH,name_graph);
+		print_graph(it->second,FILE_DP_GRAPH,name_graph);
 	}
 
 	for(map <string,Dp_graph>::iterator it = p_Down_graphs.begin(); it != p_Down_graphs.end(); it++)
@@ -481,7 +457,7 @@ void print_all_graphs(const map<string, Rule> &rules)
 		string name_graph = "Graph Down(";
 		name_graph.append(it->first);
 		name_graph.append(")");
-		print_graph<Dp_graph>(it->second,FILE_DOWN_GRAPH,name_graph);
+		print_graph(it->second,FILE_DOWN_GRAPH,name_graph);
 	}
 
 	for(map <string,Dp_graph>::iterator it = p_dcg_graphs.begin(); it != p_dcg_graphs.end(); it++)
@@ -491,14 +467,15 @@ void print_all_graphs(const map<string, Rule> &rules)
 		name_graph.append(cleaning_tabs(current_rule->to_string_not_eqs()));
 		name_graph.append(" with symbol ");
 		name_graph.append(current_rule->get_left_symbol()->get_name());
-		print_graph<Dp_graph>(it->second,FILE_DCG_GRAPH,name_graph);
+		print_graph(it->second,FILE_DCG_GRAPH,name_graph);
 	}
 	for(map <string,Dp_graph>::iterator it = p_adp_graphs.begin(); it != p_adp_graphs.end(); it++)
 	{
 		const Rule *current_rule = &(rules.find(it->first)->second);
 		string name_graph = "ADP Graph of rule ";
 		name_graph.append(cleaning_tabs(current_rule->to_string_not_eqs()));
-		print_graph<Dp_graph>(it->second,FILE_ADP_GRAPH,name_graph);
+		print_graph(it->second,FILE_ADP_GRAPH,name_graph);
 	}
-
 }
+
+} // end genevalmag

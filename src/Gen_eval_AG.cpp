@@ -14,8 +14,28 @@
 #include "Parser/Parser_AG.h"
 #include "Evaluation/Builder_plan.h"
 
+namespace genevalmag
+{
+
+/**
+  *	Path of the input file with the specification of AG.
+  */
+const string PATH_INPUT_FILE ("./src/Test/mag.txt");
+
+/**
+  * Constant that represent the maximum size of the file buffer.
+  */
+const unsigned short  MAX_INPUT_FILE (32000);
+
+/**
+  * Constant that represent the maximum size of the line read.
+  */
+const unsigned short MAX_INPUT_LINE (256);
+
+}
 using namespace std;
 using namespace genevalmag;
+
 
 /**
   * /var attr_grammar
@@ -23,20 +43,6 @@ using namespace genevalmag;
   */
 Attr_grammar attr_grammar;
 
-/**
-  *	Path of the input file with the specification of AG.
-  */
-#define PATH_INPUT_FILE "./src/Test/mag.txt"
-
-/**
-  * Constant that represent the maximum size of the file buffer.
-  */
-#define MAX_INPUT_FILE 32000
-
-/**
-  * Constant that represent the maximum size of the line read.
-  */
-#define MAX_INPUT_LINE 256
 
 /**
   * Reads the contents of the file and save it in the
@@ -47,7 +53,7 @@ void read_file_in(string &txt_output)
 	FILE*	p_file;
 	char	buffer[MAX_INPUT_FILE];
 
-	p_file = fopen(PATH_INPUT_FILE, "r");
+	p_file = fopen(PATH_INPUT_FILE.c_str(), "r");
 	if(p_file == NULL)
 		perror("Error opening file");
 	else
@@ -72,7 +78,8 @@ int main()
 
 	if (parse_grammar(input_grammar.c_str()))
 	{
-		build_plans(attr_grammar);
+		Builder_plan b_plans;
+		b_plans.build_plans(attr_grammar);
 	}
 
 	cout << "Bye... :-D" << endl;
