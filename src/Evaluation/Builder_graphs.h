@@ -1,5 +1,5 @@
 /**
-  *  \file		DC_graph.h
+  *  \file		Builder_graphs.h
   *  \brief		Header with the functions for evaluation of AG.
   *  \date		17/02/2010
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
@@ -18,7 +18,7 @@ using namespace genevalmag;
 
 void compute_dependency_graphs(const map<string, Rule> &rules);
 
-void compute_attr_vertex(const map<string,Symbol> &symbols);
+//void compute_attr_vertex(const map<string,Symbol> &symbols);
 
 void compute_down_graph(const map<string, Symbol> &symbols, const map<string, Rule> &rules);
 

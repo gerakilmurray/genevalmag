@@ -118,22 +118,22 @@ public:
 	  * Generate and return a string reprensentation of a semantic domain.
 	  *
 	  * Result= "semantic domain"
-	  * 			<sorts>
-	  * 			<operators>
-	  * 			<functions>
+	  * 			\<sorts\>
+	  * 			\<operators\>
+	  * 			\<functions\>
 	  *
 	  * 		"attributes"
-	  * 			<attributes>
+	  * 			\<attributes\>
 	  *
 	  *		[This section is commented so that it can be parsed again.]
 	  *		***********************************************************
 	  * 		"symbols"
-	  * 			<symbols>
+	  * 			\<symbols\>
 	  *		***********************************************************
 	  * 		"rules"
-	  * 			<rules>
+	  * 			\<rules\>
 	  *
-	  * where <sorts>, <operators>, <functions>, <attributes>, <symbols> and <rules>, are
+	  * where \<sorts\>, \<operators\>, \<functions\>, \<attributes\>, \<symbols\> and \<rules\>, are
 	  * full representation of each type.
 	  */
 	string to_string();
