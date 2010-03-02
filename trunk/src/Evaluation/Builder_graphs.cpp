@@ -1,10 +1,24 @@
 /**
-  *  \file		DC_graph.cpp
+  *  \file		Builder_graphs.cpp
   *  \brief		Implementation of the methods the DC_graph.h
   *  \date		17/02/2010
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
+
+/**
+  * The main bibliography:
+  *
+  * 	"Multi-plan Attribute grammar".
+  * 		Author: WUU YANG.
+  * 	W. Yang (1997), Multi-plan attribute grammars,
+  *  Proceedings of the Joint 1997 Asia Pacific Software Engineering Conference
+  *  and International Computer Science Conference, (Hong Kong, December 2-5), 62-71, 1997.
+  *  (NSC 86-2213-E-009-079)
+  *
+  *  http://www.cis.nctu.edu.tw/~wuuyang/papers/magAPSEC.ps
+  */
+
 
 #include <iostream>                  // for std::cout
 #include <fstream>
@@ -13,7 +27,7 @@
 #include <boost/graph/graphviz.hpp>
 #include <boost/graph/transitive_closure.hpp>
 
-#include "DC_graph.h"
+#include "Builder_graphs.h"
 #include "../Attr_grammar/Symbol.h"
 #include "../Attr_grammar/Attr_grammar.h"
 #include "../Parser/Semantics_actions.h"
@@ -39,18 +53,22 @@ typedef adjacency_list<hash_setS, vecS, directedS, property_vertex_dp > Dp_graph
 // Store the DP graphs. The key corresponds to the key Rule.
 map <string, Dp_graph> p_Dp_graphs;
 
-// Store the down graphs. The key corresponds to the key Symbol.
+// Store the vertex-attr graphs. The key corresponds to the key Symbol.
 map <string, Dp_graph> attr_vertex_graphs;
 
 // Store the down graphs. The key corresponds to the key Symbol.
 map <string, Dp_graph> p_Down_graphs;
 
-// Store the down graphs. The key corresponds to the key Rule.
+// Store the dcg graphs. The key corresponds to the key Rule.
 map <string, Dp_graph> p_dcg_graphs;
 
-// Store the down graphs. The key corresponds to the key Rule.
+// Store the adp graphs. The key corresponds to the key Rule.
 map <string, Dp_graph> p_adp_graphs;
 
+
+/**
+  * Prints a graph in a file dot for generate image png.
+  */
 template <class Type_graph>
 void print_graph(Type_graph &graph, string name_file,string name_graph)
 {
@@ -106,6 +124,10 @@ void print_graph(Type_graph &graph, string name_file,string name_graph)
 	}
 }
 
+
+/**
+  * Prints a graph in the standart out (std:cout).
+  */
 void print_graph_txt(Dp_graph &graph)
 {
 	size_t count_vertex = num_vertices(graph);
@@ -127,7 +149,10 @@ void print_graph_txt(Dp_graph &graph)
 	}
 }
 
-
+/**
+  * Given a graph and node,  returns vertex descriptor of node in the graph.
+  * If not search it, so returns USHRT_MAX.
+  */
 Dp_graph::vertex_descriptor return_vertex(Dp_graph graph,const Ast_leaf * node)
 {
 	property_map<Dp_graph, vertex_data_t>::type props = get(vertex_data_t(), graph);
@@ -139,7 +164,14 @@ Dp_graph::vertex_descriptor return_vertex(Dp_graph graph,const Ast_leaf * node)
 	return USHRT_MAX;
 }
 
-// Algorithm DP
+/**
+  * Algorithm DP
+  * Builds a graph dp for each rule of the grammar.
+  * Ex: E:= E + T
+  * 	graph: 	vertex: E,T
+  * 			Edges: 	E --> E
+  * 					T---> E
+  */
 void compute_dependency_graphs(const map<string, Rule> &rules)
 {
 	Dp_graph current_p_Dp_graph;
@@ -182,11 +214,6 @@ void compute_dependency_graphs(const map<string, Rule> &rules)
 				add_edge(r_v,l_v,current_p_Dp_graph);
 			}
 		}
-
-		// Print current graph
-//		print_graph_txt(current_p_Dp_graph);
-//		print_graph<Dp_graph>(current_p_Dp_graph,FILE_DP_GRAPH,rule->to_string_not_eqs());
-
 		// Insert current graph in map of denpendency graph.
 		pair<string, Dp_graph > new_p(rule->key(), current_p_Dp_graph);
 		pair<map<string, Dp_graph >::iterator, bool > result = p_Dp_graphs.insert(new_p);
@@ -194,6 +221,9 @@ void compute_dependency_graphs(const map<string, Rule> &rules)
 	}
 }
 
+/**
+  * Joins graph1 and graph2 in graph_merged.
+  */
 void merge_graph(Dp_graph &graph1, Dp_graph &graph2, Dp_graph &graph_merged)
 {
 	// Cleans the result graph.
@@ -230,6 +260,10 @@ void merge_graph(Dp_graph &graph1, Dp_graph &graph2, Dp_graph &graph_merged)
 	}
 }
 
+/**
+  * Projects a graph with only vertex that belongs to symbol "symb".
+  * Modifies the parameter "graph".
+  */
 void project_graph(const Symbol * symb, Dp_graph &graph)
 {
 	// Applies transitivity to graph with only nodes of symb.
@@ -253,7 +287,12 @@ void project_graph(const Symbol * symb, Dp_graph &graph)
 	graph = new_with_attr_symb;
 }
 
-// Algorithm attr_vertex.
+/**
+  * Builds a graph for each symbol of the grammar with all atributes.
+  * The graph only has vertexs. It hasn't edges.
+  * Ex: Symbol E ; attributes: s,i
+  * 	graph: 	vertex: E.s, E.i
+  */
 void compute_attr_vertex(const map<string,Symbol> &symbols)
 {
 	Dp_graph current_graph;
@@ -286,9 +325,18 @@ void compute_attr_vertex(const map<string,Symbol> &symbols)
 	}
 }
 
-// Algorithm Down
+/**
+  * Algorithm Down
+  * Builds the graphs down for each symbol of the grammar.
+  * Ex: Down(E) :
+  * 	(1) E:= E + T.
+  * 	graph G: DP(1) U Down(E) U Down(T)
+  * 	Project(G,{attributes of E})
+  */
 void compute_down_graph(const map<string,Symbol> &symbols, const map<string,Rule> &rules)
 {
+	compute_attr_vertex(symbols);
+
 	// Insert current graph in map of down graph
 	for(map<string,Dp_graph >::iterator attr_it = attr_vertex_graphs.begin(); attr_it != attr_vertex_graphs.end(); attr_it++)
 	{
@@ -335,7 +383,14 @@ void compute_down_graph(const map<string,Symbol> &symbols, const map<string,Rule
 	}
 }
 
-// Algorithm DCG
+/**
+  * Algorithm DCG
+  * Builds the graph Dcg for each rule of the grammar.
+  * Ex: Dcg E(1) :
+  * 	(1) E:= E + T.
+  * 	graph G: DP(1) U Down(E) U Down(T)
+  * 	Project(G,{attributes of E})
+  */
 void compute_dcg(const map<string, Rule> &rules)
 {
 	Dp_graph current_graph;
@@ -366,7 +421,15 @@ void compute_dcg(const map<string, Rule> &rules)
 		pair<map<string, Dp_graph >::iterator, bool > result = p_dcg_graphs.insert(new_p);
 	}
 }
-// Algorithm ADP
+
+/**
+  * Algorithm ADP
+  * Builds the graphs ADP for each rule of the grammar.
+  * Ex: ADP(1):
+  * 	(1) E:= E + T.
+  * 	graph G: DP(1) U Dcg E (J1..JN) U Dcg T (K1..KM)
+  * 	Where Ji y ki are rule with left-symbol E and T respectly.
+  */
 void compute_adp_graph(const Attr_grammar &grammar)
 {
 	Dp_graph current_graph;
@@ -401,7 +464,8 @@ void compute_adp_graph(const Attr_grammar &grammar)
 		pair<map<string, Dp_graph >::iterator, bool > result = p_adp_graphs.insert(new_p);
 	}
 }
-// Algorithm ADP
+
+// Prints all graph.
 void print_all_graphs(const map<string, Rule> &rules)
 {
 	for(map <string,Dp_graph>::iterator it = p_Dp_graphs.begin(); it != p_Dp_graphs.end(); it++)

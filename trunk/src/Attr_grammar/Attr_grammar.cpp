@@ -210,22 +210,22 @@ void  Attr_grammar::set_initial_symb(Symbol *init_symb)
 string Attr_grammar::to_string()
 {
 	string semdomain("\nsemantic domain\n");
-	semdomain.append(to_string_map <Sort	 >(ag_sort));
+	semdomain.append(to_string_map<Sort>(ag_sort));
 	semdomain.append("\n");
-	semdomain.append(to_string_map <Function >(ag_func));
+	semdomain.append(to_string_map<Function>(ag_func));
 	semdomain.append("\nattributes\n");
-	semdomain.append(to_string_map <Attribute>(ag_attr));
+	semdomain.append(to_string_map<Attribute>(ag_attr));
 	semdomain.append("\n/***********************************************************");
 	semdomain.append("\nsymbols\n");
-	semdomain.append(to_string_map <Symbol   >(ag_symb_non_terminals));
-	semdomain.append(to_string_map <Symbol   >(ag_symb_terminals));
+	semdomain.append(to_string_map<Symbol>(ag_symb_non_terminals));
+	semdomain.append(to_string_map<Symbol>(ag_symb_terminals));
 	semdomain.append("\n***********************************************************/\n");
 	semdomain.append("/*  >>>>>>>>>> Initial Symbol of Grammar is ");
 	semdomain.append(ag_initial_symb->get_name());
 	semdomain.append(" <<<<<<<<<<  */\n");
 	semdomain.append("/**********************************************************/\n");
 	semdomain.append("\nrules\n");
-	semdomain.append(to_string_map <Rule	 >(ag_rule));
+	semdomain.append(to_string_map<Rule>(ag_rule));
 	semdomain.append("\n");
 	return semdomain;
 }
