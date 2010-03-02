@@ -11,8 +11,19 @@
 
 #include "../Attr_grammar/Attr_grammar.h"
 
-using namespace genevalmag;
+namespace genevalmag
+{
 
-void build_plans(const Attr_grammar &attr_grammar);
+class Builder_plan
+{
+	private:
+	//	map <int,plam> plans;
+	public:
+		Builder_plan();
+		~Builder_plan();
+		void build_plans(const Attr_grammar &attr_grammar);
+
+};
+} // end genevalmag
 
 #endif /* BUILDER_PLAN_H_ */

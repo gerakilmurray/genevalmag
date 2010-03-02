@@ -22,7 +22,7 @@ using namespace std;
 namespace genevalmag
 {
 
-#define IS_OPERATOR true
+const bool IS_OPERATOR (true);
 
 class Attr_grammar
 {
