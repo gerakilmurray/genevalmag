@@ -33,16 +33,9 @@ const unsigned short  MAX_INPUT_FILE (32000);
 const unsigned short MAX_INPUT_LINE (256);
 
 }
+
 using namespace std;
 using namespace genevalmag;
-
-
-/**
-  * /var attr_grammar
-  * /brief Variable to represent Semantic domain.
-  */
-Attr_grammar attr_grammar;
-
 
 /**
   * Reads the contents of the file and save it in the
@@ -76,10 +69,12 @@ int main()
 	string input_grammar;
 	read_file_in(input_grammar);
 
-	if (parse_grammar(input_grammar.c_str()))
+	Parser_AG p_mag;
+
+	if (p_mag.parse_grammar(input_grammar.c_str()))
 	{
 		Builder_plan b_plans;
-		b_plans.build_plans(attr_grammar);
+		b_plans.build_plans(p_mag.get_attr_grammar());
 	}
 
 	cout << "Bye... :-D" << endl;

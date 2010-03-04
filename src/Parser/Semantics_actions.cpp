@@ -11,17 +11,29 @@
 #include <iostream>
 #include <sstream>
 
-#include "../Attr_grammar/Attr_grammar.h"
+#include "Semantics_actions.h"
 #include "../Ast/Ast_instance.h"
 #include "../Ast/Ast_literal.h"
 #include "../Ast/Ast_function.h"
-#include "Semantic_check.h"
-#include "Semantics_actions.h"
 
 using namespace std;
-using namespace genevalmag;
 
-extern Attr_grammar attr_grammar;
+namespace genevalmag
+{
+
+Attr_grammar *attr_grammar;
+
+void set_at(Attr_grammar *at_grammar)
+{
+	attr_grammar = at_grammar;
+}
+
+Semantic_check *sem_check;
+
+void set_s_check(Semantic_check *s_check)
+{
+	sem_check = s_check;
+}
 
 /**
   * Pointer that reference a new function in the grammar.
@@ -65,7 +77,7 @@ void create_sort(char const *str, char const *end)
 {
 	string  name(str, end);
 	Sort sort(name);
-	if(!attr_grammar.add_sort(sort))
+	if(!attr_grammar->add_sort(sort))
 	{
 		cerr << "WARNING: Sort duplicate was ignored: --> " << sort.to_string() << endl;
 	}
@@ -82,7 +94,7 @@ void inic_func(char const *str, char const *end)
 
 void add_function(char const *str, char const *end)
 {
-	if(!attr_grammar.add_function(*current_func))
+	if(!attr_grammar->add_function(*current_func))
 	{
 		cerr << "WARNING: Declaration duplicate was ignored: --> " << current_func->to_string() << endl;
 	}
@@ -99,13 +111,13 @@ void save_name_func(char const *str, char const *end)
 void save_domain_func(char const *str, char const *end)
 {
 	string domain(str, end);
-	current_func->add_domain(&(attr_grammar.return_sort(domain)));
+	current_func->add_domain(&(attr_grammar->return_sort(domain)));
 }
 
 void save_image_func(char const *str, char const *end)
 {
 	string image(str, end);
-	current_func->set_image(&(attr_grammar.return_sort(image)));
+	current_func->set_image(&(attr_grammar->return_sort(image)));
 }
 
 /**
@@ -186,10 +198,10 @@ void create_attributes(char const *str, char const *end)
 	{
 		Attribute attr;
 		attr.set_name(new_attrs->d_names[i]);
-		attr.set_sort_type(&(attr_grammar.return_sort(new_attrs->d_sort_type)));
+		attr.set_sort_type(&(attr_grammar->return_sort(new_attrs->d_sort_type)));
 		attr.set_mod_type(new_attrs->d_mod_type);
 		attr.set_member_symbol(new_attrs->d_member_symbol);
-		attr_grammar.add_attribute(attr);
+		attr_grammar->add_attribute(attr);
 	}
 	// Free space memory and assign NULL at pointer.
 	delete(new_attrs);
@@ -203,14 +215,14 @@ void create_new_non_terminal(char const *str, char const *end)
 {
 	string name(str, end);
 	Symbol symb(name, k_non_terminal);
-	attr_grammar.add_symbol(symb);
+	attr_grammar->add_symbol(symb);
 }
 
 void create_new_terminal(char const *str, char const *end)
 {
 	string name(str, end);
 	Symbol symb(name, k_terminal);
-	attr_grammar.add_symbol(symb);
+	attr_grammar->add_symbol(symb);
 }
 
 /**
@@ -220,13 +232,13 @@ void create_rule(char const *str, char const *end)
 {
 	string left_side_symbol(str, end);
 	current_rule = new Rule();
-	current_rule->set_left_symbol(&(attr_grammar.get_symbol(left_side_symbol)));
+	current_rule->set_left_symbol(&(attr_grammar->get_symbol(left_side_symbol)));
 }
 
 void save_right_side_rule(char const *str, char const *end)
 {
 	string right_side_symbol(str, end);
-	current_rule->add_right_symbol(&(attr_grammar.get_symbol(right_side_symbol)));
+	current_rule->add_right_symbol(&(attr_grammar->get_symbol(right_side_symbol)));
 }
 
 void create_abbreviated_rule(char const *str, char const *end)
@@ -237,7 +249,7 @@ void create_abbreviated_rule(char const *str, char const *end)
 
 void save_rule(char const *str, char const *end)
 {
-	attr_grammar.add_rule(*current_rule);
+	attr_grammar->add_rule(*current_rule);
 	delete(current_rule);
 }
 
@@ -248,7 +260,7 @@ void create_instance(char const *str, char const *end)
 {
 	string name(str, end);
 
-	const Symbol *symb = &(attr_grammar.get_symbol(name));
+	const Symbol *symb = &(attr_grammar->get_symbol(name));
 
 	if (!current_rule->belongs_non_terminal(*symb))
 	{
@@ -370,7 +382,7 @@ void save_rvalue(char const *str, char const *end)
 	Ast_function * root_func = dynamic_cast<Ast_function*>(root_tree);
 	if (root_func)
 	{
-		correct_associativity(&root_func);
+		sem_check->correct_associativity(&root_func);
 		root_tree = root_func;
 	}
 
@@ -387,7 +399,7 @@ void save_rvalue(char const *str, char const *end)
 
 	current_eq = NULL;
 
-	reset_semantic_context();
+	sem_check->reset_semantic_context();
 }
 
 void push_mark(char name)
@@ -422,14 +434,12 @@ void create_func_node(char const *str, char const *end)
 {
 	current_ast_function = new Ast_function();
 
-	extern unsigned short current_precedence_level;
-	extern unsigned short index_syntax_order;
-
 	current_ast_function->set_function(current_func);// Set aux function.
 
 	// Set variables for check precedence and asociativity.
-	current_ast_function->set_precedence_level(current_precedence_level);
-	current_ast_function->set_syntax_order(++index_syntax_order);
+	current_ast_function->set_precedence_level(sem_check->get_precedence_level());
+	sem_check->increment_index_syntax_order();
+	current_ast_function->set_syntax_order(sem_check->get_index_syntax_order());
 
 	current_func = NULL;
 
@@ -453,7 +463,7 @@ void create_root_infix_node(char const *str, char const *end)
 	key.append(l_child->get_type_synthetized());
 	key.append(r_child->get_type_synthetized());
 
-	const Function  *func = attr_grammar.get_function(key); // Searches of infix operator.
+	const Function  *func = attr_grammar->get_function(key); // Searches of infix operator.
 
 	const Function  *old = root->get_function();
 	delete(old); // Free aux function.
@@ -472,7 +482,7 @@ void create_root_infix_node(char const *str, char const *end)
 	root->add_child(l_child);
 
 	// Check the state of precedence of operators.
-	correct_precedence(&root);
+	sem_check->correct_precedence(&root);
 
 	stack_node.push_back(root); // Push infix operator in stack.
 }
@@ -502,7 +512,7 @@ void create_root_function_node(char const *str, char const *end)
 	}
 	key = root->get_function()->get_name().append(key);
 
-	const Function *func = attr_grammar.get_function(key); // Searches function.
+	const Function *func = attr_grammar->get_function(key); // Searches function.
 
 	if (func == NULL)
 	{
@@ -531,7 +541,7 @@ void create_root_postfix_node(char const *str, char const *end)
 	key.append(root->get_function()->get_name());
 	key.append(child->get_type_synthetized());
 
-	const Function  *func = attr_grammar.get_function(key); // Searches posfix operator.
+	const Function  *func = attr_grammar->get_function(key); // Searches posfix operator.
 
 	if (func == NULL)
 	{
@@ -548,7 +558,7 @@ void create_root_postfix_node(char const *str, char const *end)
 	root->add_child(child);
 
 	// Check the state of precedence of operators.
-	correct_precedence(&root);
+	sem_check->correct_precedence(&root);
 
 	stack_node.push_back(root);// Push postfix operator in stack.
 }
@@ -566,7 +576,7 @@ void create_root_prefix_node(char const *str, char const *end)
 	key.append(child->get_type_synthetized());
 
 	// Searches prefix operator
-	const Function  *func = attr_grammar.get_function(key);
+	const Function  *func = attr_grammar->get_function(key);
 
 	if (func == NULL)
 	{
@@ -584,7 +594,7 @@ void create_root_prefix_node(char const *str, char const *end)
 	root->add_child(child);
 
 	// Correct the state of precedence of operators.
-	correct_precedence(&root);
+	sem_check->correct_precedence(&root);
 
 	// Push prefix operator in stack.
 	stack_node.push_back(root);
@@ -592,11 +602,11 @@ void create_root_prefix_node(char const *str, char const *end)
 
 void check_well_defined(char const *str, char const *end)
 {
-	check_all_defined_non_terminal(attr_grammar.get_rules(), attr_grammar.get_non_terminal_symbols());
+	sem_check->check_all_defined_non_terminal(attr_grammar->get_rules(), attr_grammar->get_non_terminal_symbols());
 
-	check_reachability(attr_grammar.get_rules(), attr_grammar.get_non_terminal_symbols(), attr_grammar.get_initial_symb());
+	sem_check->check_reachability(attr_grammar->get_rules(), attr_grammar->get_non_terminal_symbols(), attr_grammar->get_initial_symb());
 
-	check_well_defined_AG(attr_grammar.get_rules());
+	sem_check->check_well_defined_AG(attr_grammar->get_rules());
 }
 
 /**
@@ -611,3 +621,15 @@ string cleaning_tabs(const string str)
 	}
 	return aux;
 }
+
+void increment_level(char name)
+{
+	sem_check->increment_precedence_level();
+}
+
+void decrement_level(char name)
+{
+	sem_check->decrement_precedence_level();
+}
+
+} // namespace

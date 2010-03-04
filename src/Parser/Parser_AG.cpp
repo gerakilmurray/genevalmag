@@ -15,15 +15,28 @@
 #include <iostream>
 #include <string>
 
-#include "../Attr_grammar/Attr_grammar.h"
+#include "Parser_AG.h"
 #include "Semantic_check.h"
 #include "Semantics_actions.h"
 
 using namespace std;
 using namespace BOOST_SPIRIT_CLASSIC_NS;
-using namespace genevalmag;
 
-extern Attr_grammar attr_grammar;
+namespace genevalmag
+{
+
+Parser_AG::Parser_AG()
+{
+}
+
+Parser_AG::~Parser_AG()
+{
+}
+
+const Attr_grammar &Parser_AG::get_attr_grammar()
+{
+	return attr_grammar;
+}
 
 /**
   * Declaration of a parser for inputs that ignore within
@@ -295,10 +308,13 @@ struct attritute_grammar: public grammar<attritute_grammar>
   * This method invokes the method 'parse' of the library Spitir included in Boost.
   * Returns true if could parse all the input.
   */
-bool parse_grammar(char const *txt_input)
+bool Parser_AG::parse_grammar(char const *txt_input)
 {
 	attritute_grammar	attr_grammar_decl;
 	skip_parser			skip_p;
+
+	set_at(&attr_grammar);
+	set_s_check(&sem_check);
 
 	parse_info<> info =  parse(txt_input, attr_grammar_decl, skip_p);
 
@@ -321,3 +337,5 @@ bool parse_grammar(char const *txt_input)
 
 	return info.full;
 }
+
+} // namespace

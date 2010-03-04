@@ -14,23 +14,54 @@
 #include "Semantic_check.h"
 
 using namespace std;
-using namespace genevalmag;
+
+namespace genevalmag
+{
+
+Semantic_check::Semantic_check()
+{
+	precedence_level = 0;
+	index_syntax_order = 0;
+}
+
+Semantic_check::~Semantic_check()
+{
+}
+
+unsigned short Semantic_check::get_index_syntax_order() const
+{
+    return index_syntax_order;
+}
+
+unsigned short Semantic_check::get_precedence_level() const
+{
+    return precedence_level;
+}
+
+void Semantic_check::increment_precedence_level()
+{
+	precedence_level++;
+}
+
+void Semantic_check::decrement_precedence_level()
+{
+	precedence_level--;
+}
+
+void Semantic_check::increment_index_syntax_order()
+{
+	index_syntax_order++;
+}
+
+void Semantic_check::reset_semantic_context()
+{
+	precedence_level = 0;
+	index_syntax_order = 0;
+}
 
 /**
   * Precedence Section.
   */
-
-/**
-  * /var current_precedence_level
-  * /brief Level current of precedence.
-  */
-unsigned short current_precedence_level = 0;
-
-/**
-  * /var index_syntax_order
-  * /brief Counter of syntax order.
-  */
-unsigned short index_syntax_order = 0;
 
 /**
   *	    A(op)                	 B(op)
@@ -97,15 +128,7 @@ int swap_root_grandson(Ast_function** old_root)
 	return index_swap;
 }
 
-/*
- * Checking from the root of the expression tree to the leaves, which all
- * operators are applies according to their precedence.
- * If there are conflicts resolves them doing rotations, leaving the operator
- * with lower precedence, as the new root.
- */
-void check_precedence(Ast_function ** root_tree);
-
-void correct_subtree(Ast_function** subtree, int index_root_subtree)
+void Semantic_check::correct_subtree(Ast_function** subtree, int index_root_subtree)
 {
 	Ast_function * aux = (Ast_function*)(*subtree)->get_child(index_root_subtree);
 	correct_precedence(&aux);
@@ -127,7 +150,6 @@ void correct_subtree(Ast_function** subtree, int index_root_subtree)
 	}
 }
 
-
 /**
   * Checking from the root of the expression tree to the leaves, which all
   * operators are applies according to their precedence.
@@ -141,7 +163,7 @@ void correct_subtree(Ast_function** subtree, int index_root_subtree)
   *   - The syntactic order of the expression is not altered.
   *   - The operation with higher precedence apply first.
   */
-void correct_precedence(Ast_function ** root_tree)
+void Semantic_check::correct_precedence(Ast_function ** root_tree)
 {
 	if (!(*root_tree)->is_prefix() && ((*root_tree)->get_child(0)->get_conflict() > -1))
 	// Special case which must complete a check of some sub-level of the tree.
@@ -217,26 +239,13 @@ void correct_precedence(Ast_function ** root_tree)
 	} // end while.
 }
 
-void increment_level(char name)
-{
-	current_precedence_level++;
-}
-
-void decrement_level(char name)
-{
-	current_precedence_level--;
-}
-
-void reset_semantic_context()
-{
-	current_precedence_level = 0;
-	index_syntax_order = 0;
-}
-
 /**
-  * Asociative Section.
+  * Controls around the tree, that any operator who applies more than once on
+  * the same level is associated according to the signature.
+  * If it detects conflicts modifying the expression tree with rotations and
+  * resources to continue controlling.
   */
-void correct_associativity(Ast_function ** root_tree)
+void Semantic_check::correct_associativity(Ast_function ** root_tree)
 {
 	// Detecting if the child is of Ast_function type.
 	Ast_function* child = dynamic_cast<Ast_function*>((*root_tree)->get_child(0));
@@ -276,8 +285,11 @@ void correct_associativity(Ast_function ** root_tree)
 	}
 }
 
-
-bool check_all_defined_non_terminal(const map <string, Rule> rules, const map <string, Symbol> non_terminals)
+/**
+  * Verifies that all non-terminals in the grammar has defines in a rule.
+  * That is, it is the left value of some rule of grammar.
+  */
+bool Semantic_check::check_all_defined_non_terminal(const map <string, Rule> rules, const map <string, Symbol> non_terminals)
 {
 	bool left_symbol_defined;
 
@@ -293,7 +305,6 @@ bool check_all_defined_non_terminal(const map <string, Rule> rules, const map <s
 				left_symbol_defined = true;
 				break;
 			}
-
 			it_r++;
 		}
 
@@ -306,6 +317,9 @@ bool check_all_defined_non_terminal(const map <string, Rule> rules, const map <s
 	return true;
 }
 
+/**
+  * Computes the closure transitive with the Warshall algorithm.
+  */
 void warshall_algorithm(const unsigned int size, bool *matrix_plain)
 {
 	for (size_t k = 0; k < size; k++)
@@ -337,7 +351,12 @@ int get_index(string name_symb,vector<string> non_term)
 	return -1;
 }
 
-bool check_reachability(const map <string, Rule> &rules, const map <string, Symbol> &non_terminals, const Symbol *init_symbol)
+/**
+  * Computes the boolean adjacency matrix of all the rules of the attributes grammar,
+  * then computes the Warshall algorithm for transitive closure and thus can identify
+  * from the initial symbol all symbols reachable.
+  */
+bool Semantic_check::check_reachability(const map <string, Rule> &rules, const map <string, Symbol> &non_terminals, const Symbol *init_symbol)
 {
 	vector<string> non_term;
 	// Obtain all non_terminals name.
@@ -397,6 +416,7 @@ bool check_reachability(const map <string, Rule> &rules, const map <string, Symb
 
 	return true;
 }
+
 bool check_eq_defines_it(const Symbol *symb, const int index, const Attribute *attr, const map<int,Equation> eqs)
 {
 	for (map<int,Equation>::const_iterator it_eq = eqs.begin(); it_eq != eqs.end(); it_eq++)
@@ -411,7 +431,7 @@ bool check_eq_defines_it(const Symbol *symb, const int index, const Attribute *a
 	return false;
 }
 
-bool check_well_defined_AG(const map <string, Rule> rules)
+bool Semantic_check::check_well_defined_AG(const map <string, Rule> rules)
 {
 	for (map<string,Rule >::const_iterator it_r = rules.begin(); it_r != rules.end(); it_r++)
 	{
@@ -487,3 +507,4 @@ bool check_well_defined_AG(const map <string, Rule> rules)
 	}
 	return true;
 }
+}// namespace.

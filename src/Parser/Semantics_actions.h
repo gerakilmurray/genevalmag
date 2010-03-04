@@ -10,7 +10,17 @@
 
 #include <string>
 
+#include "../Attr_grammar/Attr_grammar.h"
+#include "Semantic_check.h"
+
 using namespace std;
+
+namespace genevalmag
+{
+
+void set_at(Attr_grammar *at_grammar);
+
+void set_s_check(Semantic_check *s_check);
 
 /**
   * Methods and functions for parse Sort class.
@@ -118,5 +128,11 @@ void create_root_prefix_node(char const *str, char const *end);
 void check_well_defined(char const *str, char const *end);
 
 string cleaning_tabs(const string str);
+
+void increment_level(char name);
+
+void decrement_level(char name);
+
+} // namespace
 
 #endif
