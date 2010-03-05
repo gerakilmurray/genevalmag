@@ -38,10 +38,10 @@ Attr_grammar::~Attr_grammar()
   * Return true if insert succesfully.
   * In other case, return false.
   */
-template <class T> bool add(T elem, map<string,T > &map_elem)
+template <class K, class T> bool add(T elem, map< K ,T > &map_elem)
 {
-	pair<string,T > new_p(elem.key(), elem);
-	pair<typename map<string,T >::iterator, bool > result = map_elem.insert(new_p);
+	pair< K, T > new_p(elem.key(), elem);
+	pair<typename map< K, T  >::iterator, bool > result = map_elem.insert(new_p);
 	return result.second;
 }
 
@@ -50,10 +50,10 @@ template <class T> bool add(T elem, map<string,T > &map_elem)
   *
   * Return the string representation of all elements of the map.
   */
-template <class T> string to_string_map(map<string,T > &map_elem)
+template <class K, class T> string to_string_map(map< K ,T > &map_elem)
 {
 	string elem;
-	for(typename map<string,T >::iterator it = map_elem.begin(); it != map_elem.end(); it++)
+	for(typename map< K, T >::iterator it = map_elem.begin(); it != map_elem.end(); it++)
 	{
 		elem.append("\t");
 		elem.append(it->second.to_string());
@@ -67,7 +67,7 @@ template <class T> string to_string_map(map<string,T > &map_elem)
   */
 bool Attr_grammar::add_sort(Sort &sort)
 {
-	return add<Sort>(sort, ag_sort);
+	return add<string, Sort>(sort, ag_sort);
 }
 
 /**
@@ -75,7 +75,7 @@ bool Attr_grammar::add_sort(Sort &sort)
   */
 bool Attr_grammar::add_function(Function &func)
 {
-	return add<Function>(func, ag_func);
+	return add<string, Function>(func, ag_func);
 }
 
 /**
@@ -83,7 +83,7 @@ bool Attr_grammar::add_function(Function &func)
   */
 bool Attr_grammar::add_attribute(Attribute &attr)
 {
-	return add<Attribute>(attr, ag_attr);
+	return add<string, Attribute>(attr, ag_attr);
 }
 
 /**
@@ -93,12 +93,16 @@ bool Attr_grammar::add_symbol(Symbol &symb)
 {
 	map<string, Symbol>	*map_symb;
 	if (symb.is_non_terminal())
+	{
 		map_symb = &ag_symb_non_terminals;
+	}
 	else
+	{
 		map_symb = &ag_symb_terminals;
+	}
 
-	bool not_repeat = add <Symbol>(symb, *map_symb);
-	if(not_repeat &&symb.is_non_terminal())
+	bool not_repeat = add <string, Symbol>(symb, *map_symb);
+	if(not_repeat && symb.is_non_terminal())
 	{
 		map<string, Symbol>::iterator it = map_symb->find(symb.key());
 		load_attributes(it->second);
@@ -106,16 +110,38 @@ bool Attr_grammar::add_symbol(Symbol &symb)
 	return not_repeat;
 }
 
+bool Attr_grammar::defined_rule(const Rule &rule) const
+{
+	for(map<unsigned short, Rule>::const_iterator it = ag_rule.begin(); it != ag_rule.end(); it++)
+	{
+		if (it->second.equals(rule))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 /**
   * Enqueue a rule in the list of the attribute grammar.
   */
 bool Attr_grammar::add_rule(Rule &rule)
 {
-	bool result = add <Rule>(rule, ag_rule);
+	static unsigned short cant_rules = 1;
+
+	if (defined_rule(rule))
+	{
+		// The rule is already defined then it isn't inserted.
+		return false;
+	}
+
+	rule.set_id(cant_rules++);
+
+	bool result = add <unsigned short, Rule>(rule, ag_rule);
 	if ( result && ag_initial_symb == NULL)
 	{
 		// Set initial symbol of grammar.
-		map<string,Rule>::iterator	init_symb = ag_rule.find(rule.key());
+		map<unsigned short, Rule>::iterator	init_symb = ag_rule.find(rule.key());
 		ag_initial_symb = init_symb->second.get_left_symbol();
 	}
 	return result;
@@ -157,7 +183,7 @@ const Symbol &Attr_grammar::get_symbol(string name_symbol)
 /**
   *  Return the map with all rules.
   */
-const map<string, Rule> &Attr_grammar::get_rules() const
+const map<unsigned short, Rule> &Attr_grammar::get_rules() const
 {
 	return ag_rule;
 }
@@ -183,7 +209,7 @@ vector<const Rule*> Attr_grammar::get_rules_with_left_symbol(const Symbol *symb)
 {
 	vector<const Rule *> result;
 
-	for(map<string, Rule>::const_iterator it = ag_rule.begin(); it != ag_rule.end(); it++)
+	for(map<unsigned short, Rule>::const_iterator it = ag_rule.begin(); it != ag_rule.end(); it++)
 	{
 		if(it->second.get_left_symbol()->equals(*symb))
 		{
@@ -210,22 +236,22 @@ void  Attr_grammar::set_initial_symb(Symbol *init_symb)
 string Attr_grammar::to_string()
 {
 	string semdomain("\nsemantic domain\n");
-	semdomain.append(to_string_map<Sort>(ag_sort));
+	semdomain.append(to_string_map<string, Sort>(ag_sort));
 	semdomain.append("\n");
-	semdomain.append(to_string_map<Function>(ag_func));
+	semdomain.append(to_string_map<string, Function>(ag_func));
 	semdomain.append("\nattributes\n");
-	semdomain.append(to_string_map<Attribute>(ag_attr));
+	semdomain.append(to_string_map<string, Attribute>(ag_attr));
 	semdomain.append("\n/***********************************************************");
 	semdomain.append("\nsymbols\n");
-	semdomain.append(to_string_map<Symbol>(ag_symb_non_terminals));
-	semdomain.append(to_string_map<Symbol>(ag_symb_terminals));
+	semdomain.append(to_string_map<string, Symbol>(ag_symb_non_terminals));
+	semdomain.append(to_string_map<string, Symbol>(ag_symb_terminals));
 	semdomain.append("\n***********************************************************/\n");
 	semdomain.append("/*  >>>>>>>>>> Initial Symbol of Grammar is ");
 	semdomain.append(ag_initial_symb->get_name());
 	semdomain.append(" <<<<<<<<<<  */\n");
 	semdomain.append("/**********************************************************/\n");
 	semdomain.append("\nrules\n");
-	semdomain.append(to_string_map<Rule>(ag_rule));
+	semdomain.append(to_string_map<unsigned short, Rule>(ag_rule));
 	semdomain.append("\n");
 	return semdomain;
 }

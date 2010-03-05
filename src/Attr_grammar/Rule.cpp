@@ -7,6 +7,7 @@
   */
 
 #include <iostream>
+#include <sstream>
 
 #include "Rule.h"
 
@@ -74,6 +75,7 @@ Rule &Rule::operator=(Rule const &other)
   */
 void Rule::copy(Rule const &other)
 {
+	r_id			= other.key();
 	r_left_symbol	= other.get_left_symbol();
 	r_right_side	= other.get_right_side();
 	r_eqs			= other.get_eqs();
@@ -105,7 +107,7 @@ const vector<const Symbol*> &Rule::get_right_side() const
 /**
   * Return the equations of the rule.
   */
-const map<int,Equation> &Rule::get_eqs() const
+const map<unsigned short,Equation> &Rule::get_eqs() const
 {
 	return r_eqs;
 }
@@ -113,9 +115,17 @@ const map<int,Equation> &Rule::get_eqs() const
 /**
   * Return the i-equation of the rule.
   */
-const Equation *Rule::get_eq(int index) const
+const Equation *Rule::get_eq(unsigned short index) const
 {
 	return &(r_eqs.find(index)->second);
+}
+
+/**
+  * Sets the identificator of the rule.
+  */
+void Rule::set_id(unsigned short id)
+{
+    r_id = id;
 }
 
 /**
@@ -136,7 +146,7 @@ void Rule::add_right_symbol(const Symbol *right_symb)
 
 bool Rule::defined_equation(const Equation &eq) const
 {
-	for(map<int,Equation>::const_iterator it = r_eqs.begin(); it != r_eqs.end(); it++)
+	for(map<unsigned short,Equation>::const_iterator it = r_eqs.begin(); it != r_eqs.end(); it++)
 	{
 		if (it->second.get_l_value()->equals_with_index(eq.get_l_value()))
 			return true;
@@ -160,20 +170,24 @@ bool Rule::belongs_non_terminal(const Symbol &non_term) const
 	return false;
 }
 
-
 /**
   * Enqueue a equation in the list of the rule.
   */
-bool Rule::add_eq(const Equation &eq)
+bool Rule::add_eq(Equation &eq)
 {
-	static int cant_eq = 0;
+	static unsigned short cant_eq = 1;
+
 	if (defined_equation(eq))
+	{
 		// The equation is already defined then it isn't inserted.
 		// The map does not accept the overhead of the equations.
 		return false;
+	}
 
-	pair<int,Equation> new_eq(cant_eq++,eq);
-	pair<map<int, Equation>::iterator, bool > result = r_eqs.insert(new_eq);
+	eq.set_id(cant_eq++);
+
+	pair<unsigned short,Equation> new_eq(eq.get_id(), eq);
+	pair<map<unsigned short, Equation>::iterator, bool > result = r_eqs.insert(new_eq);
 	return result.second;
 }
 
@@ -191,12 +205,12 @@ bool Rule::add_eq(const Equation &eq)
   */
 string Rule::to_string() const
 {
-	string rule = to_string_not_eqs();
+	string rule(to_string_not_eqs());
 	if(!r_eqs.empty())
 	// if r_eqs is empty not show it the compute's block.
 	{
 		rule.append("\n\t\t\tcompute\n");
-		for(map<int,Equation>::const_iterator it = r_eqs.begin(); it != r_eqs.end(); it++)
+		for(map<unsigned short,Equation>::const_iterator it = r_eqs.begin(); it != r_eqs.end(); it++)
 		{
 			rule.append("\t\t\t\t");
 			rule.append(it->second.to_string());
@@ -217,7 +231,14 @@ string Rule::to_string() const
   */
 string Rule::to_string_not_eqs() const
 {
-	string rule;
+	string rule("R");
+
+	stringstream key_rule;
+	key_rule << r_id;
+	rule.append(key_rule.str());
+
+	rule.append(": ");
+
 	rule.append(r_left_symbol->get_name());
 	rule.append("\t::=\t");
 	for(vector<const Symbol*>::size_type i = 0; i < r_right_side.size(); i++)
@@ -234,7 +255,21 @@ string Rule::to_string_not_eqs() const
   */
 bool Rule::equals(Rule const &other) const
 {
-	return	key().compare(other.key()) == 0;
+	if(r_left_symbol->equals(*(other.get_left_symbol())))
+	{
+		for(vector<const Symbol*>::size_type i = 0; i < r_right_side.size(); i++)
+		{
+			if (!r_right_side[i]->equals(*(other.get_right_side()[i])))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 /**
@@ -244,16 +279,9 @@ bool Rule::equals(Rule const &other) const
   *
   * where right_ride is= symbol_1> ... symbol_n
   */
-string Rule::key() const
+unsigned short Rule::key() const
 {
-	string key;
-	key.append(r_left_symbol->get_name());
-	key.append(".");
-	for(vector<const Symbol*>::size_type i = 0; i < r_right_side.size(); i++)
-	{
-		key.append(r_right_side[i]->get_name());
-	}
-	return key;
+	return r_id;
 }
 
 int Rule::count_non_terminal(const Symbol *symb) const
@@ -272,6 +300,7 @@ int Rule::count_non_terminal(const Symbol *symb) const
 	}
 	return count;
 }
+
 /**
   * Return the non-terminals symbols the right side of the rule.
   */

@@ -19,7 +19,8 @@ namespace genevalmag
 class Equation
 {
 	private:
-		Ast_instance	l_value;
+		unsigned short		eq_id;
+		Ast_instance		l_value;
 		const Ast_node*		r_value;
 
 		/**
@@ -70,6 +71,10 @@ class Equation
 		  * Return the r_value of the equation.
 		  */
 		const Ast_node *get_r_value() const;
+
+		unsigned short get_id() const;
+
+		void set_id(unsigned short id);
 
 		/**
 		  * Set the left value of the equation.

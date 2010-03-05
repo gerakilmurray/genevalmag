@@ -20,9 +20,10 @@ namespace genevalmag
 class Rule
 {
 	private:
-		const Symbol              *r_left_symbol;
-		vector <const Symbol*>	r_right_side;
-		map <int,Equation>	r_eqs;
+		unsigned short					r_id;
+		const Symbol					*r_left_symbol;
+		vector <const Symbol*>			r_right_side;
+		map <unsigned short,Equation>	r_eqs;
 
 		/**
 		  * Method of copy the rule, STL-like C++.
@@ -66,12 +67,16 @@ class Rule
 		/**
 		  * Return the equations of the rule.
 		  */
-		const map <int,Equation> &get_eqs() const;
+		const map <unsigned short,Equation> &get_eqs() const;
 		/**
 		  * Return the i-equation of the rule.
 		  */
-		const Equation *get_eq(int index) const;
+		const Equation *get_eq(unsigned short index) const;
 
+		/**
+		  * Sets the identificator of the rule.
+		  */
+	    void set_id(unsigned short id);
 		/**
 		  * Set the left symbol of the rule.
 		  */
@@ -84,7 +89,7 @@ class Rule
 		/**
 		  * Enqueue a equation in the list of the rule.
 		  */
-		bool add_eq(const Equation &eq);
+		bool add_eq(Equation &eq);
 
 		/**
 		  * Generate and return a string reprensentation of a rule.
@@ -121,7 +126,7 @@ class Rule
 		  *
 		  * where right_ride is= symbol_1 ... symbol_n
 		  */
-		string key() const;
+		unsigned short key() const;
 
 		int count_non_terminal(const Symbol *symb) const;
 
@@ -130,7 +135,6 @@ class Rule
 		  * Return the non-terminals symbols the right side of the rule.
 		  */
 		vector<const Symbol*> get_non_terminals_right_side() const;
-
 };
 
 } // end genevalmag

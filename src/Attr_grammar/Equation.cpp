@@ -80,6 +80,7 @@ Equation &Equation::operator=(Equation const &other)
   */
 void Equation::copy(Equation const &other)
 {
+	eq_id		= other.get_id();
 	l_value		= *other.get_l_value();
 	r_value		= other.get_r_value();
 	count_ref	= other._get_count_ref();
@@ -126,7 +127,15 @@ const Ast_node *Equation::get_r_value() const
 {
 	return r_value;
 }
+unsigned short Equation::get_id() const
+{
+	return eq_id;
+}
 
+void Equation::set_id(unsigned short id)
+{
+	eq_id = id;
+}
 /**
   * Set the left value of the equation.
   */
@@ -152,7 +161,12 @@ void Equation::set_r_value(Ast_node *rvalue)
   */
 string Equation::to_string() const
 {
-	string eq;
+	string eq("(");
+	stringstream id_eq;
+	id_eq << eq_id;
+	eq.append(id_eq.str());
+	eq.append(") ");
+
 	eq.append(l_value.to_string());
 	eq.append("\t=\t");
 	eq.append(r_value->to_string());

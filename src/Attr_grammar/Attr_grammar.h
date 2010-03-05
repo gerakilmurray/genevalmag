@@ -30,12 +30,12 @@ private:
 	/*
 	 *  Saves each element kind of the grammar's attribute.
 	 */
-	map<string, Sort>		ag_sort;
-	map<string, Function>	ag_func;
-	map<string, Attribute> 	ag_attr;
-	map<string, Symbol>		ag_symb_terminals;
-	map<string, Symbol>		ag_symb_non_terminals;
-	map<string, Rule>		ag_rule;
+	map<string, Sort>			ag_sort;
+	map<string, Function>		ag_func;
+	map<string, Attribute> 		ag_attr;
+	map<string, Symbol>			ag_symb_terminals;
+	map<string, Symbol>			ag_symb_non_terminals;
+	map<unsigned short, Rule>	ag_rule;
 
 	/*
 	 * Saves the name of the initial symbol of the grammar's attribute.
@@ -46,6 +46,8 @@ private:
 	  * Insert the attributes belong the symbol.
 	  */
 	void load_attributes(Symbol &symb);
+
+	bool defined_rule(const Rule &rule) const;
 
 public:
 	/**
@@ -94,7 +96,7 @@ public:
 	/**
 	  *  Return the map with all rules.
 	  */
-	const map<string, Rule>  &get_rules()const;
+	const map<unsigned short, Rule>  &get_rules()const;
 	/**
 	  *  Return the map with all symbols.
 	  */

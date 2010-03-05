@@ -289,7 +289,7 @@ void Semantic_check::correct_associativity(Ast_function ** root_tree)
   * Verifies that all non-terminals in the grammar has defines in a rule.
   * That is, it is the left value of some rule of grammar.
   */
-bool Semantic_check::check_all_defined_non_terminal(const map <string, Rule> rules, const map <string, Symbol> non_terminals)
+bool Semantic_check::check_all_defined_non_terminal(const map <unsigned short, Rule> rules, const map <string, Symbol> non_terminals)
 {
 	bool left_symbol_defined;
 
@@ -297,7 +297,7 @@ bool Semantic_check::check_all_defined_non_terminal(const map <string, Rule> rul
 	{
 		left_symbol_defined = false;
 
-		map<string,Rule >::const_iterator it_r =rules.begin();
+		map<unsigned short,Rule >::const_iterator it_r =rules.begin();
 		while (it_r != rules.end())
 		{
 			if (it_s->second.equals(*(it_r->second.get_left_symbol())))
@@ -356,7 +356,7 @@ int get_index(string name_symb,vector<string> non_term)
   * then computes the Warshall algorithm for transitive closure and thus can identify
   * from the initial symbol all symbols reachable.
   */
-bool Semantic_check::check_reachability(const map <string, Rule> &rules, const map <string, Symbol> &non_terminals, const Symbol *init_symbol)
+bool Semantic_check::check_reachability(const map <unsigned short, Rule> &rules, const map <string, Symbol> &non_terminals, const Symbol *init_symbol)
 {
 	vector<string> non_term;
 	// Obtain all non_terminals name.
@@ -381,7 +381,7 @@ bool Semantic_check::check_reachability(const map <string, Rule> &rules, const m
 	// Matrix W0 in Warshall Algorithm.
 
 	// For each rule, set the adjacency relations of the non-terminals.
-	for (map<string,Rule >::const_iterator it_r = rules.begin(); it_r != rules.end(); it_r++)
+	for (map<unsigned short,Rule >::const_iterator it_r = rules.begin(); it_r != rules.end(); it_r++)
 	{
 		string symbol = it_r->second.get_left_symbol()->get_name();
 		int index_i = get_index(symbol,non_term);
@@ -417,9 +417,9 @@ bool Semantic_check::check_reachability(const map <string, Rule> &rules, const m
 	return true;
 }
 
-bool check_eq_defines_it(const Symbol *symb, const int index, const Attribute *attr, const map<int,Equation> eqs)
+bool check_eq_defines_it(const Symbol *symb, const int index, const Attribute *attr, const map<unsigned short,Equation> eqs)
 {
-	for (map<int,Equation>::const_iterator it_eq = eqs.begin(); it_eq != eqs.end(); it_eq++)
+	for (map<unsigned short,Equation>::const_iterator it_eq = eqs.begin(); it_eq != eqs.end(); it_eq++)
 	{
 		if (symb->equals(*it_eq->second.get_l_value()->get_symb()) &&
 			index == it_eq->second.get_l_value()->get_num() &&
@@ -431,9 +431,9 @@ bool check_eq_defines_it(const Symbol *symb, const int index, const Attribute *a
 	return false;
 }
 
-bool Semantic_check::check_well_defined_AG(const map <string, Rule> rules)
+bool Semantic_check::check_well_defined_AG(const map <unsigned short, Rule> rules)
 {
-	for (map<string,Rule >::const_iterator it_r = rules.begin(); it_r != rules.end(); it_r++)
+	for (map<unsigned short, Rule>::const_iterator it_r = rules.begin(); it_r != rules.end(); it_r++)
 	{
 		// Get left Symbol.
 		const Symbol *symb = it_r->second.get_left_symbol();
