@@ -66,16 +66,16 @@ class Semantic_check
 		  * Verifies that all non-terminals in the grammar has defines in a rule.
 		  * That is, it is the left value of some rule of grammar.
 		  */
-		bool check_all_defined_non_terminal(const map <string, Rule> rules, const map <string, Symbol> symbols);
+		bool check_all_defined_non_terminal(const map <unsigned short, Rule> rules, const map <string, Symbol> symbols);
 
 		/**
 		  * Computes the boolean adjacency matrix of all the rules of the attributes grammar,
 		  * then computes the Warshall algorithm for transitive closure and thus can identify
 		  * from the initial symbol all symbols reachable.
 		  */
-		bool check_reachability(const map <string, Rule> &rules, const map <string, Symbol> &non_terminals, const Symbol *init_symbol);
+		bool check_reachability(const map <unsigned short, Rule> &rules, const map <string, Symbol> &non_terminals, const Symbol *init_symbol);
 
-		bool check_well_defined_AG(const map <string, Rule> rules);
+		bool check_well_defined_AG(const map <unsigned short, Rule> rules);
 
 		/**
 		  * Increment the level because a new parenthesis opening.

@@ -19,9 +19,10 @@
   *  http://www.cis.nctu.edu.tw/~wuuyang/papers/magAPSEC.ps
   */
 
-#include <iostream>                  // for std::cout
+#include <iostream>
+#include <sstream>
 #include <fstream>
-#include <utility>                   // for std::pair
+#include <utility>
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/graphviz.hpp>
 #include <boost/graph/transitive_closure.hpp>
@@ -38,10 +39,10 @@ namespace genevalmag
 {
 
 const string PATH_OUTPUT_FILE ("./src/out_graph/");
-const string FILE_DP_GRAPH ("dp_graph_");
-const string FILE_DOWN_GRAPH ("down_graph_");
-const string FILE_DCG_GRAPH ("dcg_graph_");
-const string FILE_ADP_GRAPH ("adp_graph_");
+const string FILE_DP_GRAPH ("_dp_graph");
+const string FILE_DOWN_GRAPH ("_down_graph");
+const string FILE_DCG_GRAPH ("_dcg_graph");
+const string FILE_ADP_GRAPH ("_adp_graph");
 
 
 Builder_graphs::Builder_graphs(){}
@@ -72,11 +73,14 @@ void print_graph(Dp_graph &graph, const string name_file,const string name_graph
 	}
 
 	// Create file dot.
-	string n_f = PATH_OUTPUT_FILE;
-	n_f.append(name_file);
+	string n_f(PATH_OUTPUT_FILE);
+
 	stringstream ins;
 	ins << ++num_file;
 	n_f.append(ins.str());
+
+	n_f.append(name_file);
+
 	n_f.append(".dot");
 
 	// Obtain of file of graphviz.
@@ -152,17 +156,17 @@ Dp_graph::vertex_descriptor return_vertex(Dp_graph graph,const Ast_leaf * node)
   * 			Edges: 	E --> E
   * 					T---> E
   */
-void Builder_graphs::compute_dependency_graphs(const map<string, Rule> &rules)
+void Builder_graphs::compute_dependency_graphs(const map<unsigned short, Rule> &rules)
 {
 	Dp_graph current_p_Dp_graph;
 	property_map<Dp_graph, vertex_data_t>::type leafs = get(vertex_data_t(), current_p_Dp_graph);
 
 	// for the rules.
-	for(map<string,Rule>::const_iterator it = rules.begin(); it != rules.end(); it++)
+	for(map<unsigned short,Rule>::const_iterator it = rules.begin(); it != rules.end(); it++)
 	{
 		const Rule * rule = &it->second;
 		// for the eqs
-		for(map<int,Equation>::const_iterator eq = rule->get_eqs().begin(); eq != rule->get_eqs().end(); eq++)
+		for(map<unsigned short,Equation>::const_iterator eq = rule->get_eqs().begin(); eq != rule->get_eqs().end(); eq++)
 		// For each instance build a new edge entre left instance and rigth instance.
 		{
 			// Insert left instance.
@@ -193,8 +197,8 @@ void Builder_graphs::compute_dependency_graphs(const map<string, Rule> &rules)
 			}
 		}
 		// Insert current graph in map of denpendency graph.
-		pair<string, Dp_graph > new_p(rule->key(), current_p_Dp_graph);
-		pair<map<string, Dp_graph >::iterator, bool > result = p_Dp_graphs.insert(new_p);
+		pair<unsigned short, Dp_graph > new_p(rule->key(), current_p_Dp_graph);
+		pair<map<unsigned short, Dp_graph >::iterator, bool > result = p_Dp_graphs.insert(new_p);
 		current_p_Dp_graph.clear();
 	}
 }
@@ -282,7 +286,7 @@ void Builder_graphs::compute_attr_vertex(const map<string,Symbol> &symbols)
 		for (size_t i = 0; i < s_it->second.get_attrs().size();i++)
 		{
 			ins.set_attr(s_it->second.get_attrs()[i]);
-			for(map<string,Dp_graph >::iterator dp = p_Dp_graphs.begin(); dp != p_Dp_graphs.end(); dp++)
+			for(map<unsigned short,Dp_graph >::iterator dp = p_Dp_graphs.begin(); dp != p_Dp_graphs.end(); dp++)
 			{
 				Dp_graph::vertex_descriptor node = return_vertex(dp->second, &ins);
 				if (node != USHRT_MAX)
@@ -310,7 +314,7 @@ void Builder_graphs::compute_attr_vertex(const map<string,Symbol> &symbols)
   * 	graph G: DP(1) U Down(E) U Down(T)
   * 	Project(G,{attributes of E})
   */
-void Builder_graphs::compute_down_graph(const map<string,Symbol> &symbols, const map<string,Rule> &rules)
+void Builder_graphs::compute_down_graph(const map<string,Symbol> &symbols, const map<unsigned short,Rule> &rules)
 {
 	compute_attr_vertex(symbols);
 
@@ -325,7 +329,7 @@ void Builder_graphs::compute_down_graph(const map<string,Symbol> &symbols, const
 
 	Dp_graph current_graph;
 	// Circle Dp graph.
-	for(map<string,Dp_graph >::iterator dp = p_Dp_graphs.begin(); dp != p_Dp_graphs.end(); dp++)
+	for(map<unsigned short, Dp_graph >::iterator dp = p_Dp_graphs.begin(); dp != p_Dp_graphs.end(); dp++)
 	{
 		// Obtain rule of graph.
 		const Rule *current_rule = &(rules.find(dp->first)->second);
@@ -367,11 +371,11 @@ void Builder_graphs::compute_down_graph(const map<string,Symbol> &symbols, const
   * 	graph G: DP(1) U Down(E) U Down(T)
   * 	Project(G,{attributes of E})
   */
-void Builder_graphs::compute_dcg(const map<string, Rule> &rules)
+void Builder_graphs::compute_dcg(const map<unsigned short, Rule> &rules)
 {
 	Dp_graph current_graph;
 	// Circle Dp graph.
-	for(map <string,Dp_graph>::iterator it = p_Dp_graphs.begin(); it != p_Dp_graphs.end(); it++)
+	for(map <unsigned short, Dp_graph>::iterator it = p_Dp_graphs.begin(); it != p_Dp_graphs.end(); it++)
 	{
 		// Obtain rule of graph.
 		const Rule *current_rule = &(rules.find(it->first)->second);
@@ -393,8 +397,60 @@ void Builder_graphs::compute_dcg(const map<string, Rule> &rules)
 		project_graph(current_rule->get_left_symbol(),current_graph);
 
 		// Insert current graph in map of down graph
-		pair<string, Dp_graph > new_p(current_rule->key(), current_graph);
-		pair<map<string, Dp_graph >::iterator, bool > result = p_dcg_graphs.insert(new_p);
+		pair<unsigned short, Dp_graph > new_p(current_rule->key(), current_graph);
+		pair<map<unsigned short, Dp_graph >::iterator, bool > result = p_Dcg_graphs.insert(new_p);
+	}
+}
+
+void Builder_graphs::combined_inf_contexts(const Rule* rule, Dp_graph &graph, vector< vector<const Rule*> > &inf_context, size_t index_to_combine)
+{
+	static vector<const Rule*> adp_plan;
+
+	if(index_to_combine == inf_context.size())
+	{
+		Dp_graph current_graph = graph;
+
+		vector<unsigned short> name_adp;
+
+		// Adds DP graph's key.
+		name_adp.push_back(rule->key());
+
+		// Circle for join all DCG of the symbol right-side.
+		for(size_t i = 0; i < adp_plan.size(); i++)
+		{
+			Dp_graph &dcg_graph = p_Dcg_graphs.find(adp_plan[i]->key())->second;
+			Dp_graph merged;
+			merge_graph(current_graph, dcg_graph, merged);
+			current_graph.clear();
+			current_graph = merged;
+
+			// Adds DCG graph's key.
+			name_adp.push_back(adp_plan[i]->key());
+		}
+		// In this point: current_graph = Dp(Rule) U dcg(X1) U....U dcg(Xn)
+
+		// Saving the ADP complete in the map.
+
+		pair<vector<unsigned short>, Dp_graph> new_p(name_adp, current_graph);
+		pair<map<vector<unsigned short>, Dp_graph>::iterator, bool > result = p_Adp_graphs.insert(new_p);
+	}
+	else
+	{
+		if (index_to_combine < inf_context.size())
+		{
+			for(size_t i = 0; i < inf_context[index_to_combine].size(); i++)
+			{
+				adp_plan.push_back(inf_context[index_to_combine][i]);
+
+				combined_inf_contexts(rule, graph, inf_context, index_to_combine + 1);
+
+				adp_plan.pop_back();
+			}
+		}
+		else
+		{
+			cerr << "Index out bounds: combined ADP graphs.";
+		}
 	}
 }
 
@@ -410,41 +466,34 @@ void Builder_graphs::compute_adp_graph(const Attr_grammar &grammar)
 {
 	Dp_graph current_graph;
 	// Circle Dp graph.
-	for(map <string,Dp_graph>::iterator it = p_Dp_graphs.begin(); it != p_Dp_graphs.end(); it++)
+	for(map <unsigned short,Dp_graph>::iterator it = p_Dp_graphs.begin(); it != p_Dp_graphs.end(); it++)
 	{
 		// Obtain rule of graph.
 		const Rule *current_rule = &(grammar.get_rules().find(it->first)->second);
+
 		// Obtain all non-terminals symbols of the right-side of the rule.
 		vector<const Symbol*> r_non_terminals = current_rule->get_non_terminals_right_side();
+
 		// curren_graph = Dp(rule).
 		current_graph = it->second;
+
+		// Inicializacion del vector de no terminales con todas las reglas en donde son left symbol.
+		vector< vector<const Rule*> > inf_contexts;
 		for (size_t i = 0; i < r_non_terminals.size();i++)
 		{
-			// Obtain all rule with the left-symbol of the current_rule.
-			vector<const Rule*> rule_left_symbol = grammar.get_rules_with_left_symbol(r_non_terminals[i]);
-
-			// Circle for join all DCG of the symbol right-side.
-			for(size_t j = 0; j< rule_left_symbol.size();j++)
-			{
-				Dp_graph &dcg_graph = p_dcg_graphs.find(rule_left_symbol[j]->key())->second;
-				Dp_graph merged;
-				merge_graph(current_graph,dcg_graph,merged);
-				current_graph.clear();
-				current_graph = merged;
-			}
+			// Obtain all rule with the left-symbol one right symbol of the current_rule.
+			inf_contexts.push_back(grammar.get_rules_with_left_symbol(r_non_terminals[i]));
 		}
-		// In this point: current_graph = Dp(Rule) U dcg(X1) U....U dcg(Xn)
 
-		// Insert current graph in map of adp graph
-		pair<string, Dp_graph > new_p(current_rule->key(), current_graph);
-		pair<map<string, Dp_graph >::iterator, bool > result = p_adp_graphs.insert(new_p);
+//		vector<const Rule*> current_plan;
+		combined_inf_contexts(current_rule, current_graph, inf_contexts, 0);
 	}
 }
 
 // Prints all graph.
-void Builder_graphs::print_all_graphs(const map<string, Rule> &rules)
+void Builder_graphs::print_all_graphs(const map<unsigned short, Rule> &rules)
 {
-	for(map <string,Dp_graph>::iterator it = p_Dp_graphs.begin(); it != p_Dp_graphs.end(); it++)
+	for(map <unsigned short,Dp_graph>::iterator it = p_Dp_graphs.begin(); it != p_Dp_graphs.end(); it++)
 	{
 		const Rule *current_rule = &(rules.find(it->first)->second);
 		string name_graph = "Dependency Graph of rule ";
@@ -460,7 +509,7 @@ void Builder_graphs::print_all_graphs(const map<string, Rule> &rules)
 		print_graph(it->second,FILE_DOWN_GRAPH,name_graph);
 	}
 
-	for(map <string,Dp_graph>::iterator it = p_dcg_graphs.begin(); it != p_dcg_graphs.end(); it++)
+	for(map <unsigned short,Dp_graph>::iterator it = p_Dcg_graphs.begin(); it != p_Dcg_graphs.end(); it++)
 	{
 		const Rule *current_rule = &(rules.find(it->first)->second);
 		string name_graph = "DCG Graph of rule ";
@@ -469,11 +518,32 @@ void Builder_graphs::print_all_graphs(const map<string, Rule> &rules)
 		name_graph.append(current_rule->get_left_symbol()->get_name());
 		print_graph(it->second,FILE_DCG_GRAPH,name_graph);
 	}
-	for(map <string,Dp_graph>::iterator it = p_adp_graphs.begin(); it != p_adp_graphs.end(); it++)
+	for(map <vector<unsigned short>,Dp_graph>::iterator it = p_Adp_graphs.begin(); it != p_Adp_graphs.end(); it++)
 	{
-		const Rule *current_rule = &(rules.find(it->first)->second);
 		string name_graph = "ADP Graph of rule ";
-		name_graph.append(cleaning_tabs(current_rule->to_string_not_eqs()));
+		const Rule *rule = &(rules.find(it->first[0])->second);
+		name_graph.append(cleaning_tabs(rule->to_string_not_eqs()));
+
+		if (it->first.size() == 1)
+		{
+			name_graph.append(" hasn't an inferior context");
+		}
+		else
+		{
+			name_graph.append(" with inferior context: ");
+			for(size_t i = 1; i < it->first.size(); i++)
+			{
+				name_graph.append(" R");
+				stringstream key_rule;
+				key_rule << it->first[i];
+				name_graph.append(key_rule.str());
+				if(i < it->first.size() - 1)
+				{
+					name_graph.append(" ,");
+				}
+			}
+		}
+		name_graph.append(".");
 		print_graph(it->second,FILE_ADP_GRAPH,name_graph);
 	}
 }
