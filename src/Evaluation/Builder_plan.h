@@ -17,7 +17,7 @@ namespace genevalmag
 class Builder_plan
 {
 	private:
-	//	map <int,plam> plans;
+//		map <int,plam> plans;
 	public:
 		Builder_plan();
 		~Builder_plan();

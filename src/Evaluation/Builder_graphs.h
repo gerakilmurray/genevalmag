@@ -72,6 +72,8 @@ class Builder_graphs
 
 		~Builder_graphs();
 
+		map<vector<unsigned short>, Dp_graph> &get_adp_graphs();
+
 		void compute_dependency_graphs(const map<unsigned short, Rule> &rules);
 
 		void compute_down_graph(const map<string, Symbol> &symbols, const map<unsigned short, Rule> &rules);

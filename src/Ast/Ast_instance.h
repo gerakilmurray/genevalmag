@@ -21,7 +21,7 @@ class Ast_instance: public Ast_leaf
 {
 private:
 	const Symbol      	*i_symb;
-	unsigned short	i_num;
+	unsigned short		i_num;
 	const Attribute   	*i_attr;
 
 	/**
@@ -53,10 +53,6 @@ public:
 	void set_symb(const Symbol *symb);
 
 	string to_string() const;
-
-	string value_s() const;
-
-	bool equals(const Ast_leaf * other) const;
 
 	bool equals_with_index(const Ast_instance * other) const;
 

@@ -9,9 +9,7 @@
 /**
   * The main bibliography:
   *
-  * 	"Multi-plan Attribute grammar".
-  * 		Author: WUU YANG.
-  * 	W. Yang (1997), Multi-plan attribute grammars,
+  *  Wuu Yang (1997), "Multi-plan attribute grammars",
   *  Proceedings of the Joint 1997 Asia Pacific Software Engineering Conference
   *  and International Computer Science Conference, (Hong Kong, December 2-5), 62-71, 1997.
   *  (NSC 86-2213-E-009-079)
@@ -44,10 +42,33 @@ const string FILE_DOWN_GRAPH ("_down_graph");
 const string FILE_DCG_GRAPH ("_dcg_graph");
 const string FILE_ADP_GRAPH ("_adp_graph");
 
-
 Builder_graphs::Builder_graphs(){}
 
 Builder_graphs::~Builder_graphs(){}
+
+map<vector<unsigned short>, Dp_graph> & Builder_graphs::get_adp_graphs()
+{
+	return p_Adp_graphs;
+}
+
+void clean_output_folder()
+{
+	// Remove the folder.
+	string command_rm_folder("rm -f -r ");
+	command_rm_folder.append(PATH_OUTPUT_FILE);
+	if (system (command_rm_folder.c_str()) != 0)
+	{
+		cerr << "ERROR: the filesystem denies folder's remove." << endl;
+	}
+
+	// Create folder.
+	string command_mkdir_folder("mkdir -p ");
+	command_mkdir_folder.append(PATH_OUTPUT_FILE);
+	if (system (command_mkdir_folder.c_str()) != 0)
+	{
+		cerr << "ERROR: the filesystem denies folder's creation." << endl;
+	}
+}
 
 /**
   * Prints a graph in a file dot for generate image png.
@@ -55,21 +76,23 @@ Builder_graphs::~Builder_graphs(){}
 void print_graph(Dp_graph &graph, const string name_file,const string name_graph)
 {
 	static int num_file = 0; // For name of file png
-	size_t count_vertex = num_vertices(graph);
+	size_t count_vertex(num_vertices(graph));
+
 	// Arrays of node's name.
 	string datas[count_vertex];
-	property_map<Dp_graph, vertex_data_t>::type props = get(vertex_data_t(), graph);
-	for(size_t i = 0; i < count_vertex; i++)
-	{
-		datas[i] = props[i]->value_s();
-	}
+	property_map<Dp_graph, vertex_data_t>::type props(get(vertex_data_t(), graph));
 
-	// Create folder
-	string command_folder = "mkdir -p ";
-	command_folder.append(PATH_OUTPUT_FILE);
-	if (system (command_folder.c_str()) != 0)
+	for(size_t i(0); i < count_vertex; i++)
 	{
-		cerr << "ERROR: the filesystem denies folder's creation." << endl;
+		if(name_file.compare(FILE_DOWN_GRAPH) == 0)
+		{
+			// The vertexs in a Down graph are ONLY Ast_instance.
+			datas[i] = ((Ast_instance*)props[i])->get_attr()->get_name();
+		}
+		else
+		{
+			datas[i] = props[i]->to_string();
+		}
 	}
 
 	// Create file dot.
@@ -120,7 +143,7 @@ void print_graph_txt(Dp_graph &graph)
 	property_map<Dp_graph, vertex_data_t>::type props = get(vertex_data_t(), graph);
 	for(size_t i = 0; i < count_vertex; i++)
 	{
-		cout << props[i]->value_s() << endl;;
+		cout << props[i]->to_string() << endl;;
 	}
 	cout << "<< Edges >> " << num_edges(graph) << endl;
 	graph_traits<Dp_graph>::edge_iterator ei, ei_end;
@@ -129,7 +152,7 @@ void print_graph_txt(Dp_graph &graph)
 		Dp_graph::vertex_descriptor source_vertex = source(*ei, graph);
 		Dp_graph::vertex_descriptor target_vertex = target(*ei, graph);
 
-		cout << props[source_vertex]->value_s() << "---->" << props[target_vertex]->value_s() << endl;
+		cout << props[source_vertex]->to_string() << "---->" << props[target_vertex]->to_string() << endl;
 	}
 }
 
@@ -283,8 +306,9 @@ void Builder_graphs::compute_attr_vertex(const map<string,Symbol> &symbols)
 		property_map<Dp_graph, vertex_data_t>::type props_down = get(vertex_data_t(), current_graph);
 		Ast_instance ins;
 		ins.set_symb(&s_it->second);
-		for (size_t i = 0; i < s_it->second.get_attrs().size();i++)
+		for (size_t i(0); i < s_it->second.get_attrs().size(); i++)
 		{
+			ins.set_num(0);
 			ins.set_attr(s_it->second.get_attrs()[i]);
 			for(map<unsigned short,Dp_graph >::iterator dp = p_Dp_graphs.begin(); dp != p_Dp_graphs.end(); dp++)
 			{
@@ -430,7 +454,6 @@ void Builder_graphs::combined_inf_contexts(const Rule* rule, Dp_graph &graph, ve
 		// In this point: current_graph = Dp(Rule) U dcg(X1) U....U dcg(Xn)
 
 		// Saving the ADP complete in the map.
-
 		pair<vector<unsigned short>, Dp_graph> new_p(name_adp, current_graph);
 		pair<map<vector<unsigned short>, Dp_graph>::iterator, bool > result = p_Adp_graphs.insert(new_p);
 	}
@@ -485,7 +508,7 @@ void Builder_graphs::compute_adp_graph(const Attr_grammar &grammar)
 			inf_contexts.push_back(grammar.get_rules_with_left_symbol(r_non_terminals[i]));
 		}
 
-//		vector<const Rule*> current_plan;
+		// Generates and saves all combinatios of context with these rules.
 		combined_inf_contexts(current_rule, current_graph, inf_contexts, 0);
 	}
 }
@@ -493,6 +516,8 @@ void Builder_graphs::compute_adp_graph(const Attr_grammar &grammar)
 // Prints all graph.
 void Builder_graphs::print_all_graphs(const map<unsigned short, Rule> &rules)
 {
+	clean_output_folder();
+
 	for(map <unsigned short,Dp_graph>::iterator it = p_Dp_graphs.begin(); it != p_Dp_graphs.end(); it++)
 	{
 		const Rule *current_rule = &(rules.find(it->first)->second);
@@ -518,6 +543,7 @@ void Builder_graphs::print_all_graphs(const map<unsigned short, Rule> &rules)
 		name_graph.append(current_rule->get_left_symbol()->get_name());
 		print_graph(it->second,FILE_DCG_GRAPH,name_graph);
 	}
+
 	for(map <vector<unsigned short>,Dp_graph>::iterator it = p_Adp_graphs.begin(); it != p_Adp_graphs.end(); it++)
 	{
 		string name_graph = "ADP Graph of rule ";

@@ -16,11 +16,14 @@ namespace genevalmag
 
 class Ast_leaf: public Ast_node
 {
-public:
-	virtual ~Ast_leaf(){};
-	virtual string to_string() const = 0;
-	virtual string value_s() const = 0;
-	virtual bool equals(const Ast_leaf * node) const = 0;
+	public:
+		virtual ~Ast_leaf(){};
+		virtual string to_string() const = 0;
+
+		bool equals(const Ast_leaf *other) const
+		{
+			return (to_string().compare(other->to_string()) == 0);
+		}
 };
 
 } // end genevalmag
