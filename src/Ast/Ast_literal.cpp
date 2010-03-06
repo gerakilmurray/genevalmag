@@ -13,8 +13,8 @@ namespace genevalmag
 {
 
 #ifdef _DEBUG
-	// Numbers of literals current in the system.
-	static int ast_literals = 0;
+	/* Numbers of literals current in the system. */
+	static int ast_literals(0);
 #endif
 
 Ast_literal::Ast_literal()
@@ -130,4 +130,4 @@ string Ast_literal::to_string() const
 	return lit;
 }
 
-} // end genevalmag
+} /* end genevalmag */

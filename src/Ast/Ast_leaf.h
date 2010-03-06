@@ -26,6 +26,6 @@ class Ast_leaf: public Ast_node
 		}
 };
 
-} // end genevalmag
+} /* end genevalmag */
 
 #endif /* AST_LEAF_H_ */

@@ -7,16 +7,20 @@
   */
   
 #include <iostream>
+
 #include "Ast_function.h"
 
 namespace genevalmag
 {
 
 #ifdef _DEBUG
-	// Numbers of functions current in the system.
-	static int ast_functions = 0;
+	/* Numbers of functions current in the system. */
+	static int ast_functions(0);
 #endif
 
+/**
+  * Constructor empty of Ast_function.
+  */
 Ast_function::Ast_function()
 {
 	parent				= NULL;
@@ -29,6 +33,9 @@ Ast_function::Ast_function()
 	#endif
 }
 
+/**
+  * Constructor copy of Ast_function.
+  */
 Ast_function::Ast_function(Ast_function const &other)
 {
 	copy(other);
@@ -38,6 +45,9 @@ Ast_function::Ast_function(Ast_function const &other)
 	#endif
 }
 
+/**
+  * Destructor of Ast_function.
+  */
 Ast_function::~Ast_function()
 {
 	destroy();
@@ -45,10 +55,15 @@ Ast_function::~Ast_function()
 	#ifdef _DEBUG
 		ast_functions--;
 		if(ast_functions == 0)
+		{
 			cout << ast_functions << " -> AST Functions" << endl;
+		}
 	#endif
 }
 
+/**
+  * Operator assign(=) of Ast_function.
+  */
 Ast_function &Ast_function::operator=(Ast_function const &other)
 {
 	if(this != &other)
@@ -59,6 +74,9 @@ Ast_function &Ast_function::operator=(Ast_function const &other)
 	return *this;
 }
 
+/**
+  * Method of copy the Ast_function, STL-like C++.
+  */
 void Ast_function::copy(Ast_function const &other)
 {
 	func				= other.get_function();
@@ -70,55 +88,88 @@ void Ast_function::copy(Ast_function const &other)
 	type_synthetized	= other.get_type_synthetized();
 }
 
+/**
+  * Method destroy Ast_function, STL-like C++.
+  */
 void Ast_function::destroy()
 {
 }
 
+/**
+  * Returns the function pointer of the Ast_function.
+  */
 const Function *Ast_function::get_function() const
 {
 	return func;
 }
 
+/**
+  * Returns the precedence level of the Ast_function.
+  */
 unsigned short Ast_function::get_precedence_level() const
 {
 	return precedence_level;
 }
 
+/**
+  * Returns the syntax order of the Ast_function.
+  */
 unsigned short Ast_function::get_syntax_order() const
 {
 	return syntax_order;
 }
 
+/**
+  * Sets the function pointer of the Ast_function.
+  */
 void Ast_function::set_function(const Function *function)
 {
 	func = function;
 }
 
+/**
+  * Sets the precedence level of the Ast_function.
+  */
 void Ast_function::set_precedence_level(unsigned short p_level)
 {
 	precedence_level = p_level;
 }
 
+/**
+  * Sets the syntax order of the Ast_function.
+  */
 void Ast_function::set_syntax_order(unsigned short s_order)
 {
 	syntax_order = s_order;
 }
 
+/**
+  * Returns if the function of Ast_function is prefix.
+  */
 bool Ast_function::is_prefix() const
 {
 	return (func->get_mode() == k_prefix);
 }
 
+/**
+  * Returns if the function of Ast_function is infix.
+  */
 bool Ast_function::is_infix() const
 {
 	return (func->get_mode() == k_infix);
 }
 
+/**
+  * Returns if the function of Ast_function is postfix.
+  */
 bool Ast_function::is_postfix() const
 {
 	return (func->get_mode() == k_postfix);
 }
 
+/**
+  * Returns if both Ast_functions are in the same precedence level.
+  */
 bool Ast_function::is_comparable(Ast_function * other) const
 {
 	return (precedence_level == other->get_precedence_level());
@@ -146,6 +197,21 @@ int Ast_function::compare_order(Ast_function * other) const
 	return (syntax_order - other->get_syntax_order());
 }
 
+/**
+  * Generate and return a string reprensentation of a Ast_function.
+  *
+  *	If is a pure function:
+  * 	Result= \<func_name\> "(" child[0], ... , child[n] ")"
+  *
+  * If is an infix binary operator:
+  * 	Result= "(" child[0] \<op_name\> child[1] ")"
+  *
+  * If is an prefix unary operator:
+  * 	Result= \<op_name\> "(" child[0] ")"
+  *
+  * If is an postfix unary operator:
+  * 	Result= "(" child[0] ")" \<op_name\>
+  */
 string Ast_function::to_string() const
 {
 	if(func->is_operator())
@@ -189,4 +255,4 @@ string Ast_function::to_string() const
 	return fun;
 }
 
-} // end genevalmag
+} /* end genevalmag */

@@ -83,6 +83,8 @@ class Builder_graphs
 		void compute_adp_graph(const Attr_grammar &grammar);
 
 		void print_all_graphs(const map<unsigned short, Rule> &rules);
+
+		void check_cyclic_adp_dependencies();
 };
 
 } // end genevalmag

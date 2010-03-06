@@ -22,8 +22,8 @@ class Builder_plan
 		Builder_plan();
 		~Builder_plan();
 		void build_plans(const Attr_grammar &attr_grammar);
-
 };
+
 } // end genevalmag
 
 #endif /* BUILDER_PLAN_H_ */

@@ -15,8 +15,8 @@ namespace genevalmag
 {
 
 #ifdef _DEBUG
-	// Numbers of instances current in the system.
-	static int ast_instances = 0;
+	/* Numbers of instances current in the system. */
+	static int ast_instances(0);
 #endif
 
 Ast_instance::Ast_instance()
@@ -45,7 +45,9 @@ Ast_instance::~Ast_instance()
 	#ifdef _DEBUG
 		ast_instances--;
 		if(ast_instances == 0)
+		{
 			cout << ast_instances << " -> AST Instances" << endl;
+		}
 	#endif
 }
 
@@ -108,23 +110,24 @@ void Ast_instance::set_symb(const Symbol *symb)
 /**
   * Generate and return a string reprensentation of a instance.
   *
-  * Result= symbol[number].attribute
+  * Result= \<symbol\>"["\<number\>"]."\<attribute\>
   *
   * Ex: E[0].valor
   */
 string Ast_instance::to_string() const
 {
-	string inst;
-	// Save symbol's name.
-	inst.append(i_symb->get_name());
-	// Save instance number.
+	/* Save symbol's name. */
+	string inst(i_symb->get_name());
+
+	/* Save instance number. */
 	inst.append("[");
 	stringstream ins;
 	ins << i_num;
 	inst.append(ins.str());
 	inst.append("]");
 	inst.append(".");
-	// Save attribute's name.
+
+	/* Save attribute's name. */
 	inst.append(i_attr->get_name());
 	return inst;
 }
@@ -134,21 +137,29 @@ string Ast_instance::to_string() const
   */
 bool Ast_instance::equals_with_index(const Ast_instance *other) const
 {
-	return key().compare(other->key()) == 0;
+	return (key().compare(other->key()) == 0);
 }
 
+/**
+  * Generate and return the string key that identifies an Ast_instance definitely.
+  *
+  * Result= \<symbol\>\<number\>\<attribute\>
+  *
+  * Ex: E0valor
+  */
 string Ast_instance::key() const
 {
-	string inst;
-	// Save symbol's name.
-	inst.append(i_symb->get_name());
-	// Save instance number.
+	/* Save symbol's name. */
+	string inst(i_symb->get_name());
+
+	/* Save instance number. */
 	stringstream ins;
 	ins << i_num;
 	inst.append(ins.str());
-	// Save attribute's name.
+
+	/* Save attribute's name. */
 	inst.append(i_attr->get_name());
 	return inst;
 }
 
-} // end genevalmag
+} /* end genevalmag */

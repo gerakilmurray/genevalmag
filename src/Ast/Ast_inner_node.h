@@ -18,48 +18,71 @@ namespace genevalmag
 
 class Ast_inner_node: public Ast_node
 {
-protected:
-	vector <Ast_node*> childs;
+	protected:
+		vector <Ast_node*> childs;
 
-public:
-	virtual ~Ast_inner_node()
-	{
-		for (unsigned int i=0; i < childs.size() ;i++)
+	public:
+		/**
+		  * Destructor of Ast_inner_node.
+		  */
+		virtual ~Ast_inner_node()
 		{
-			delete(childs[i]);
+			for (unsigned int i(0); i < childs.size(); i++)
+			{
+				delete(childs[i]);
+			}
+		};
+
+		/**
+		  * Returns the vector with all children of the Ast_function.
+		  */
+		const vector<Ast_node*> &get_childs() const
+		{
+			return childs;
 		}
-	};
 
-	const vector<Ast_node*> &get_childs() const
-	{
-		return childs;
-	}
+		/**
+		  * Returns the index-child of the Ast_function.
+		  */
+		Ast_node* get_child(int index) const
+		{
+			return childs[index];
+		}
 
-	Ast_node* get_child(int index) const
-	{
-		return childs[index];
-	}
+		/**
+		  * Sets the vector with all children of the Ast_function.
+		  */
+		void set_childs(vector<Ast_node*> new_childs)
+		{
+			childs = new_childs;
+		}
 
-	void set_childs(vector<Ast_node*> new_childs)
-	{
-		childs = new_childs;
-	}
+		/**
+		  * Replaces index-child of the Ast_function with other.
+		  * Updates the parent of the child.
+		  */
+		void replace_child(int index, Ast_node *other)
+		{
+			childs[index] = other;
+			other->set_parent(this);
+		}
 
-	void replace_child(int index,Ast_node * new_child)
-	{
-		childs[index] = new_child;
-		new_child->set_parent(this);
-	}
+		/**
+		  * Adds a child in Ast_function.
+		  * Updates the parent of the child.
+		  */
+		void add_child(Ast_node *new_child)
+		{
+			childs.insert(childs.begin(), new_child);
+			new_child->set_parent(this);
+		}
 
-	void add_child(Ast_node *new_child)
-	{
-		childs.insert(childs.begin(),new_child);
-		new_child->set_parent(this);
-	}
-
-	virtual string to_string() const = 0;
+		/**
+		  * Generate and return a string reprensentation of an Ast_inner_node.
+		  */
+		virtual string to_string() const = 0;
 };
 
-} // end genevalmag
+} /* end genevalmag */
 
 #endif /* AST_INNER_NODE_H_ */

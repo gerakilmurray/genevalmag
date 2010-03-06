@@ -71,6 +71,6 @@ public:
 	virtual string to_string() const = 0;
 };
 
-} // end genevalmag
+} /* end genevalmag */
 
 #endif /* AST_NODE_H_ */
