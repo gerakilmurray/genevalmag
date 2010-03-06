@@ -64,33 +64,42 @@ class Equation
 		Equation &operator=(Equation const &other);
 
 		/**
-		  * Return the l_value of the equation.
+		  * Returns the l_value of the equation.
 		  */
 		const Ast_instance *get_l_value() const;
 		/**
-		  * Return the r_value of the equation.
+		  * Returns the r_value of the equation.
 		  */
 		const Ast_node *get_r_value() const;
-
+		/**
+		  * Returns the id of the equation.
+		  */
 		unsigned short get_id() const;
 
-		void set_id(unsigned short id);
-
 		/**
-		  * Set the left value of the equation.
+		  * Sets the id of the equation.
+		  */
+		void set_id(unsigned short id);
+		/**
+		  * Sets the left value of the equation.
 		  */
 		void set_l_value(const Ast_instance &lvalue);
 		/**
-		  * Set the rigth value of the equation: is a tree.
+		  * Sets the rigth value of the equation: is a tree.
 		  */
 		void set_r_value(Ast_node *rvalue);
 
 		/**
-		  * Generate and return a string reprensentation of a Equation.
+		  * Traverse the equation tree while saves only the Ast_leaf nodes in the vector result.
+		  */
+		void inorder_only_leaf(const Ast_node *head, vector<const Ast_leaf*> &result) const;
+
+		/**
+		  * Generate and return a string reprensentation of an Equation.
 		  *
-		  * Result= l_value "=" r_value ";"
+		  * Result= \<l_value\> "=" \<r_value\> ";"
 		  *
-		  * where l_value = "instance_attr" and r_value is= "list of node_ast"
+		  * where \<l_value\> = "instance_attr" and \<r_value\> is= "list of node_ast"
 		  */
 		string to_string() const;
 
@@ -100,17 +109,15 @@ class Equation
 		bool equals(Equation const &other) const;
 
 		/**
-		  * Generate and return the string key that identifies a equation definitely.
+		  * Generate and return the string key that identifies an Equation definitely.
 		  *
-		  * Result= l_value r_value
+		  * Result= \<l_value\>\<r_value\>
 		  *
-		  * where l_value = "instance_attr" and r_value is= "list of node_ast"
+		  * where \<l_value\> = "instance_attr" and \<r_value\> is= "list of node_ast"
 		  */
 		string key() const;
-
-		void inner_order_only_leaf(const Ast_node *head, vector<const Ast_leaf*> &result) const;
 };
 
-} // end genevalmag
+} /* end genevalmag */
 
 #endif /* EQUATION_H_ */

@@ -61,6 +61,6 @@ public:
 	string to_string() const;
 };
 
-} // end genevalmag
+} /* end genevalmag */
 
 #endif /* AST_LITERAL_H_ */

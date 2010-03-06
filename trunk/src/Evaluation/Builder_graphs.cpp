@@ -24,6 +24,8 @@
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/graphviz.hpp>
 #include <boost/graph/transitive_closure.hpp>
+#include <boost/graph/depth_first_search.hpp>
+#include <boost/graph/visitors.hpp>
 
 #include "Builder_graphs.h"
 #include "../Attr_grammar/Symbol.h"
@@ -73,7 +75,7 @@ void clean_output_folder()
 /**
   * Prints a graph in a file dot for generate image png.
   */
-void print_graph(Dp_graph &graph, const string name_file,const string name_graph)
+void print_graph(Dp_graph &graph, const string name_file, const string name_graph)
 {
 	static int num_file = 0; // For name of file png
 	size_t count_vertex(num_vertices(graph));
@@ -194,7 +196,7 @@ void Builder_graphs::compute_dependency_graphs(const map<unsigned short, Rule> &
 		{
 			// Insert left instance.
 			vector<const Ast_leaf*> elem_leaf_tree;
-			eq->second.inner_order_only_leaf(eq->second.get_r_value(), elem_leaf_tree);
+			eq->second.inorder_only_leaf(eq->second.get_r_value(), elem_leaf_tree);
 
 			// Verify if vertex belong at graph.
 			Dp_graph::vertex_descriptor l_v = return_vertex(current_p_Dp_graph, eq->second.get_l_value());
@@ -571,6 +573,97 @@ void Builder_graphs::print_all_graphs(const map<unsigned short, Rule> &rules)
 		}
 		name_graph.append(".");
 		print_graph(it->second,FILE_ADP_GRAPH,name_graph);
+	}
+}
+
+struct cycle_detector: public dfs_visitor<>
+{
+	public:
+		cycle_detector(bool& has_cycle): _has_cycle(has_cycle){}
+
+		void set_path(vector<unsigned short> *path)
+		{
+			_path = path;
+		}
+
+	    template <class Vertex, class Graph>
+	    void discover_vertex(Vertex u, const Graph& g)
+	    {
+	    	if(!_has_cycle)
+	    	{
+	    		_path->push_back(u);
+	    	}
+	    }
+
+	    template <class Edge, class Graph>
+	    void back_edge(Edge u, const Graph& g)
+		{
+			_has_cycle = true;
+		}
+
+	protected:
+		vector<unsigned short>	*_path;
+		bool&					_has_cycle;
+};
+
+void Builder_graphs::check_cyclic_adp_dependencies()
+{
+	for(map <vector<unsigned short>,Dp_graph>::iterator adp_it = p_Adp_graphs.begin(); adp_it != p_Adp_graphs.end(); adp_it++)
+	{
+		bool has_cycle = false;
+		vector<unsigned short> path;
+		cycle_detector vis(has_cycle);
+		vis.set_path(&path);
+		boost::depth_first_search(adp_it->second, visitor(vis));
+		if(has_cycle)
+		{
+			cout << "Grafo con ciclo: " << endl;
+
+			property_map<Dp_graph, vertex_data_t>::type props(get(vertex_data_t(), adp_it->second));
+
+			Dp_graph subgraph_circle;
+
+			property_map<Dp_graph, vertex_data_t>::type prop_subgraph(get(vertex_data_t(), subgraph_circle));
+
+			graph_traits<Dp_graph>::edge_iterator ei, ei_end;
+			for (tie(ei,ei_end) = edges(adp_it->second); ei != ei_end; ++ei)
+			{
+				Dp_graph::vertex_descriptor source_vertex = source(*ei, adp_it->second);
+				Dp_graph::vertex_descriptor target_vertex = target(*ei, adp_it->second);
+
+				for(size_t i(0); i < path.size(); i++)
+				{
+					if(source_vertex == path[i])
+					{
+						for(size_t j(0); j < path.size(); j++)
+						{
+							if(target_vertex == path[j])
+							{
+								Dp_graph::vertex_descriptor source = return_vertex(subgraph_circle,props[source_vertex]);
+								if (source == USHRT_MAX)
+								{
+									// The vertex is new in the graph.
+									source = add_vertex(subgraph_circle);
+									put(prop_subgraph,source,props[source_vertex]);
+								}
+
+								Dp_graph::vertex_descriptor target = return_vertex(subgraph_circle,props[target_vertex]);
+								if (target == USHRT_MAX)
+								{
+									// The vertex is new in the graph.
+									target = add_vertex(subgraph_circle);
+									put(prop_subgraph,target,props[target_vertex]);
+								}
+
+								add_edge(source,target,subgraph_circle);
+							}
+						}
+					}
+				}
+			}
+
+			print_graph(subgraph_circle,"_adpWITHcircle","chupame la pija");
+		}
 	}
 }
 

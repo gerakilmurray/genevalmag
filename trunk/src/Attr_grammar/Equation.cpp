@@ -16,8 +16,8 @@ namespace genevalmag
 {
 
 #ifdef _DEBUG
-	// Numbers of operators current in the system.
-	static int eqs = 0;
+	/* Numbers of operators current in the system. */
+	static int eqs(0);
 #endif
 
 /**
@@ -58,7 +58,9 @@ Equation::~Equation()
 	#ifdef _DEBUG
 		eqs--;
 		if(eqs == 0)
+		{
 			cout << eqs << " -> Equations" << endl;
+		}
 	#endif
 }
 
@@ -127,15 +129,23 @@ const Ast_node *Equation::get_r_value() const
 {
 	return r_value;
 }
+
+/**
+  * Returns the id of the equation.
+  */
 unsigned short Equation::get_id() const
 {
 	return eq_id;
 }
 
+/**
+  * Sets the id of the equation.
+  */
 void Equation::set_id(unsigned short id)
 {
 	eq_id = id;
 }
+
 /**
   * Set the left value of the equation.
   */
@@ -153,11 +163,42 @@ void Equation::set_r_value(Ast_node *rvalue)
 }
 
 /**
-  * Generate and return a string reprensentation of a Equation.
+  * Traverse the equation tree while saves only the Ast_leaf nodes in the vector result.
+  */
+void Equation::inorder_only_leaf(const Ast_node* head, vector<const Ast_leaf*> &result) const
+{
+	const Ast_inner_node* root(dynamic_cast<const Ast_inner_node*>(head));
+
+	if(root)
+	{
+		for(size_t i(0); i < root->get_childs().size(); i++)
+		{
+			Ast_inner_node* child(dynamic_cast<Ast_inner_node*>(root->get_child(i)));
+
+			if (child)
+			{
+				inorder_only_leaf(child,result);
+			}
+			else
+			{
+				Ast_leaf* child_leaf((Ast_leaf*)root->get_child(i));
+				result.push_back(child_leaf);
+			}
+		}
+	}
+	else
+	{
+		Ast_leaf* root_leaf((Ast_leaf*)head);
+		result.push_back(root_leaf);
+	}
+}
+
+/**
+  * Generate and return a string reprensentation of an Equation.
   *
-  * Result= l_value "=" r_value ";"
+  * Result= \<l_value\> "=" \<r_value\> ";"
   *
-  * where l_value = "instance_attr" and r_value is= "list of node_ast"
+  * where \<l_value\> = "instance_attr" and \<r_value\> is= "list of node_ast"
   */
 string Equation::to_string() const
 {
@@ -183,47 +224,17 @@ bool Equation::equals(Equation const &other) const
 }
 
 /**
-  * Generate and return the string key that identifies a equation definitely.
+  * Generate and return the string key that identifies an Equation definitely.
   *
-  * Result= l_value r_value
+  * Result= \<l_value\>\<r_value\>
   *
-  * where l_value = "instance_attr" and r_value is= "list of node_ast"
+  * where \<l_value\> = "instance_attr" and \<r_value\> is= "list of node_ast"
   */
 string Equation::key() const
 {
-	string key;
-	key.append(l_value.to_string());
+	string key(l_value.to_string());
 	key.append(r_value->to_string());
 	return key;
 }
 
-void Equation::inner_order_only_leaf(const Ast_node* head, vector<const Ast_leaf*> &result) const
-{
-
-	const Ast_inner_node* root = dynamic_cast<const Ast_inner_node*>(head);
-
-	if(root)
-	{
-		for(size_t i = 0;i < root->get_childs().size();i++)
-		{
-			Ast_inner_node* child = dynamic_cast<Ast_inner_node*>(root->get_child(i));
-
-			if (child)
-			{
-				inner_order_only_leaf(child,result);
-			}
-			else
-			{
-				Ast_leaf* child_leaf = (Ast_leaf*)root->get_child(i);
-				result.push_back(child_leaf);
-			}
-		}
-	}
-	else
-	{
-		Ast_leaf* root_leaf = (Ast_leaf*)head;
-		result.push_back(root_leaf);
-	}
-}
-
-} // end genevalmag
+} /* end genevalmag */

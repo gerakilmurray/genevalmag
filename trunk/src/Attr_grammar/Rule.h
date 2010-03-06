@@ -57,19 +57,19 @@ class Rule
 		Rule &operator=(Rule const &other);
 
 		/**
-		  * Return the left symbol of the rule.
+		  * Returns the left symbol of the rule.
 		  */
 		const Symbol *get_left_symbol() const;
 		/**
-		  * Return the right side of the rule.
+		  * Returns the right side of the rule.
 		  */
 		const vector<const Symbol*> &get_right_side()const;
 		/**
-		  * Return the equations of the rule.
+		  * Returns the equations of the rule.
 		  */
 		const map <unsigned short,Equation> &get_eqs() const;
 		/**
-		  * Return the i-equation of the rule.
+		  * Returns the i-equation of the rule.
 		  */
 		const Equation *get_eq(unsigned short index) const;
 
@@ -78,7 +78,7 @@ class Rule
 		  */
 	    void set_id(unsigned short id);
 		/**
-		  * Set the left symbol of the rule.
+		  * Sets the left symbol of the rule.
 		  */
 		void set_left_symbol(const Symbol *left_symb);
 

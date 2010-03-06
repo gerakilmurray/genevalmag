@@ -59,6 +59,6 @@ public:
 	string key() const;
 };
 
-} // end genevalmag
+} /* end genevalmag */
 
 #endif /* AST_INSTANCE_H_ */
