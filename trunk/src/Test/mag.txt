@@ -37,7 +37,7 @@ rules
 	// P1
     S ::= X Y Z
     		compute				
-				X[0].i1 = Y[0].s3;
+  				X[0].i1 = Y[0].s3;
 				S[0].s0 = X[0].s1 + Y[0].s2 + Y[0].s3 + Z[0].s4;
 				Y[0].i2 = X[0].s1;
 				Y[0].i3 = Y[0].s2;
@@ -59,6 +59,7 @@ rules
 			compute
 				X[0].s1 = X[0].i1;
 			end;
+			
 	// P5
 	Z ::= Y
 			compute
