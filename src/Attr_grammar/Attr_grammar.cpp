@@ -205,18 +205,17 @@ const Symbol *Attr_grammar::get_initial_symb() const
 /**
   * Return vector with all rules with the left symbol equal that parameter.
   */
-vector<const Rule*> Attr_grammar::get_rules_with_left_symbol(const Symbol *symb) const
+vector<unsigned short> Attr_grammar::get_rules_with_left_symbol(const Symbol *symb) const
 {
-	vector<const Rule *> result;
+	vector<unsigned short> result;
 
 	for(map<unsigned short, Rule>::const_iterator it = ag_rule.begin(); it != ag_rule.end(); it++)
 	{
 		if(it->second.get_left_symbol()->equals(*symb))
 		{
-			result.push_back(&(it->second));
+			result.push_back(it->second.key());
 		}
 	}
-
 	return result;
 }
 

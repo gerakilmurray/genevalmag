@@ -9,7 +9,13 @@
 #ifndef BUILDER_PLAN_H_
 #define BUILDER_PLAN_H_
 
+#include <map>
+
 #include "../Attr_grammar/Attr_grammar.h"
+#include "../Attr_grammar/Rule.h"
+#include "Builder_graphs.h"
+
+using namespace std;
 
 namespace genevalmag
 {
@@ -17,10 +23,21 @@ namespace genevalmag
 class Builder_plan
 {
 	private:
-/*		map <int,plam> plans; */
+
 	public:
+		/**
+		  * Constructor empty of Builder plan.
+		  */
 		Builder_plan();
+
+		/**
+		  * Destructor of Builder plan.
+		  */
 		~Builder_plan();
+
+		/**
+		  * Generates and saves all evaluation's plans for the Attribute Grammar.
+		  */
 		void build_plans(const Attr_grammar &attr_grammar);
 };
 
