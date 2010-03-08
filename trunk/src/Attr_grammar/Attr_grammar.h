@@ -109,7 +109,7 @@ public:
 	/**
 	  * Return vector with all rules with the left symbol equal that parameter.
 	  */
-	vector<const Rule*> get_rules_with_left_symbol(const Symbol *symb) const;
+	vector<unsigned short> get_rules_with_left_symbol(const Symbol *symb) const;
 
 	/**
 	  *  Set the initial rule.

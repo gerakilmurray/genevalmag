@@ -6,6 +6,16 @@
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
+#ifndef UTILITIES_GRAPH_HPP_
+#define UTILITIES_GRAPH_HPP_
+
+#include <fstream>
+
+#include <boost/graph/graphviz.hpp>
+
+using namespace std;
+using namespace boost;
+
 namespace genevalmag
 {
 
@@ -38,29 +48,39 @@ void clean_output_folder()
 }
 
 /**
-  * Prints a graph in a file .dot for generate image .spng.
+  * Generates the names of vertex. (The vertex's name is an instance).
   */
-void print_graph(const Dp_graph &graph, const string name_file, const string name_graph)
+void generate_names_instance(const Dp_graph &graph, string datas[], size_t size_d)
 {
-	static int num_file(0); /* For name of file png. */
-	size_t count_vertex(num_vertices(graph));
-
-	/* Arrays of node's name. */
-	string datas[count_vertex];
 	property_map<Dp_graph, vertex_data_t>::const_type props(get(vertex_data_t(), graph));
 
-	for(size_t i(0); i < count_vertex; i++)
+	for(size_t i(0); i < size_d; i++)
 	{
-		if(name_file.compare(FILE_DOWN_GRAPH) == 0)
-		{
-			/* The vertexs in a Down graph are ONLY Ast_instance. */
-			datas[i] = ((Ast_instance*)props[i])->get_attr()->get_name();
-		}
-		else
-		{
-			datas[i] = props[i]->to_string();
-		}
+		datas[i] = props[i]->to_string();
 	}
+}
+
+/**
+  * Generates the names of vertex for down graph. (The vertex's name is an attribute).
+  */
+void generate_names_attr(const Dp_graph &graph, string datas[], size_t size_d)
+{
+	property_map<Dp_graph, vertex_data_t>::const_type props(get(vertex_data_t(), graph));
+
+	for(size_t i(0); i < size_d; i++)
+	{
+		/* The vertexs in a Down graph are ONLY Ast_instance. */
+		datas[i] = ((Ast_instance*)props[i])->get_attr()->get_name();
+
+	}
+}
+
+/**
+  * Prints a graph in a file .dot for generate image .spng.
+  */
+void print_graph(const Dp_graph &graph, const string name_file, const string name_graph, const string names[])
+{
+	static int num_file(0); /* For name of file png. */
 
 	/* Create file dot. */
 	string n_f(PATH_OUTPUT_FILE);
@@ -74,7 +94,7 @@ void print_graph(const Dp_graph &graph, const string name_file, const string nam
 	n_f.append(".dot");
 
 	/* Obtain of file of graphviz. */
-	ofstream salida(n_f.c_str());
+	std::ofstream salida(n_f.c_str());
 	std::map<std::string,std::string> graph_attr, vertex_attr, edge_attr;
 	/*graph_attr["size"]		= "5,3"; */
 	graph_attr["label"]			= name_graph;
@@ -85,7 +105,7 @@ void print_graph(const Dp_graph &graph, const string name_file, const string nam
 	vertex_attr["style"] 		= "filled";
 	vertex_attr["fillcolor"]	= "gray";
 
-	write_graphviz(salida, graph, make_label_writer(datas),default_writer(),make_graph_attributes_writer(graph_attr, vertex_attr,edge_attr));
+	write_graphviz(salida, graph, make_label_writer(names),default_writer(),make_graph_attributes_writer(graph_attr, vertex_attr,edge_attr));
 
 	/* Convert file to png. */
 	string command("dot ");
@@ -98,14 +118,13 @@ void print_graph(const Dp_graph &graph, const string name_file, const string nam
 		cerr << "ERROR: DOT program can not generate the PNG image." << endl;
 	}
 }
-
 /**
   * Prints a graph in the standart output (std:cout).
   */
 void print_graph_txt(const Dp_graph &graph)
 {
 	size_t count_vertex(num_vertices(graph));
-	cout << "<< Vertex >> " << num_vertices(graph) << endl;
+	cout << "<< Vertex >> " << count_vertex << endl;
 	/* Arrays of node's name. */
 	property_map<Dp_graph, vertex_data_t>::const_type props(get(vertex_data_t(), graph));
 	for(size_t i(0); i < count_vertex; i++)
@@ -137,4 +156,7 @@ Dp_graph::vertex_descriptor return_vertex(const Dp_graph &graph,const Ast_leaf *
 	}
 	return USHRT_MAX;
 }
+
 } /* end genevalmag */
+
+#endif

@@ -70,7 +70,7 @@ class Builder_graphs
 		/**
 		  * Generate all combinations of the rules and saves a graph ADP for each of them.
 		  */
-		void combined_inf_contexts(const Rule* rule, Dp_graph &graph, vector< vector<const Rule*> > &inf_context, size_t index_to_combine);
+		void combined_inf_contexts(const Rule* rule, Dp_graph &graph, vector< vector<unsigned short> > &inf_context, size_t index_to_combine);
 
 	public:
 
@@ -88,6 +88,16 @@ class Builder_graphs
 		  * Returns the map with all ADP graphs creates.
 		  */
 		map<vector<unsigned short>, Dp_graph> &get_adp_graphs();
+
+		/**
+		  * Returns the map with all ADP with cycle graphs creates.
+		  */
+		map<vector<unsigned short>, Dp_graph> &get_cyclic_graphs();
+
+		/**
+		  * Returns the down graph of the symbol.
+		  */
+		const Dp_graph &get_down_graph(const Symbol * symb) const;
 
 		/**
 		  * Algorithm DP
@@ -129,12 +139,17 @@ class Builder_graphs
 		  */
 		void compute_adp_graph(const Attr_grammar &grammar);
 
-		void check_cyclic_adp_dependencies();
+		bool check_cyclic_adp_dependencies();
 
 		/**
 		  * Prints all graphs generates: DP, Down, DCG and ADP.
 		  */
-		void print_all_graphs(const map<unsigned short, Rule> &rules);
+		void print_all_graphs(const map<unsigned short, Rule> &rules) const;
+
+		/**
+		  * Prints all graphs graph cycles.
+		  */
+		void print_graphs_cyclic(const map<unsigned short, Rule> &rules) const;
 };
 
 } /* end genevalmag */
