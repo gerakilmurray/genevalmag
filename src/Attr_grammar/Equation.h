@@ -32,7 +32,7 @@ class Equation
 		/**
 		  * Method of copy the equation, STL-like C++.
 		  */
-		void copy(Equation const &other);
+		void copy(const Equation &other);
 		/**
 		  * Method destroy equation, STL-like C++.
 		  */
@@ -51,7 +51,7 @@ class Equation
 		/**
 		  * Contructor copy of Equation.
 		  */
-		Equation(Equation const &other);
+		Equation(const Equation &other);
 
 		/**
 		  * Destructor of equation.
@@ -61,7 +61,7 @@ class Equation
 		/**
 		  * Operator assign(=) of Equation.
 		  */
-		Equation &operator=(Equation const &other);
+		Equation &operator=(const Equation &other);
 
 		/**
 		  * Returns the l_value of the equation.
@@ -106,7 +106,7 @@ class Equation
 		/**
 		  * Compares the equation with other.
 		  */
-		bool equals(Equation const &other) const;
+		bool equals(const Equation &other) const;
 
 		/**
 		  * Generate and return the string key that identifies an Equation definitely.

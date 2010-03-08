@@ -14,12 +14,12 @@ namespace genevalmag
 {
 
 #ifdef _DEBUG
-	// Numbers of symbols current in the system.
-	static int symbols = 0;
+	/* Numbers of Symbols current in the system. */
+	static int symbols(0);
 #endif
 
 /**
-  * Constructor empty of symbol.
+  * Constructor empty of Symbol.
   */
 Symbol::Symbol()
 {
@@ -29,9 +29,9 @@ Symbol::Symbol()
 }
 
 /**
-  * Constructor with name and type of symbol.
+  * Constructor with name and type of Symbol.
   */
-Symbol::Symbol(string name, symbol_type type)
+Symbol::Symbol(string &name, symbol_type type)
 {
 	symb_name = name;
 	symb_type = type;
@@ -42,9 +42,9 @@ Symbol::Symbol(string name, symbol_type type)
 }
 
 /**
-  * Constructor copy of symbol.
+  * Constructor copy of Symbol.
   */
-Symbol::Symbol(Symbol const &other)
+Symbol::Symbol(const Symbol &other)
 {
 	copy(other);
 
@@ -54,7 +54,7 @@ Symbol::Symbol(Symbol const &other)
 }
 
 /**
-  * Destructor of symbol.
+  * Destructor of Symbol.
   */
 Symbol::~Symbol()
 {
@@ -62,14 +62,16 @@ Symbol::~Symbol()
 	#ifdef _DEBUG
 		symbols--;
 		if(symbols == 0)
+		{
 			cout << symbols << " -> Symbols" << endl;
+		}
 	#endif
 }
 
 /**
-  * Operator assign(=) of symbol.
+  * Operator assign(=) of Symbol.
   */
-Symbol &Symbol::operator=(Symbol const &other)
+Symbol &Symbol::operator=(const Symbol &other)
 {
 	if(this != &other)
 	{
@@ -80,9 +82,9 @@ Symbol &Symbol::operator=(Symbol const &other)
 }
 
 /**
-  * Method of copy the symbol, STL-like C++.
+  * Method of copy the Symbol, STL-like C++.
   */
-void Symbol::copy(Symbol const &other)
+void Symbol::copy(const Symbol &other)
 {
 	symb_name	= other.get_name();
 	symb_type	= other.get_type();
@@ -124,7 +126,7 @@ const vector<const Attribute*> &Symbol::get_attrs() const
   * Find in the list of attribute of the symbol and return the attribute with
   * that name passed as parameter.
   */
-const Attribute *Symbol::get_attribute(string name_attr) const
+const Attribute *Symbol::get_attribute(const string &name_attr) const
 {
 	for(vector<Attribute*>::size_type i = 0; i < symb_attrs.size(); i++)
 	{
@@ -203,7 +205,7 @@ string Symbol::to_string() const
 /**
   * Compares the symbol with other.
   */
-bool Symbol::equals(Symbol const &other) const
+bool Symbol::equals(const Symbol &other) const
 {
 	return key().compare(other.key()) == 0;
 }
@@ -218,4 +220,4 @@ string Symbol::key() const
 	return symb_name;
 }
 
-} // end genevalmag
+} /* end genevalmag */

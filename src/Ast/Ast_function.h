@@ -25,7 +25,7 @@ class Ast_function: public Ast_inner_node
 		/**
 		  * Method of copy the Ast_function, STL-like C++.
 		  */
-		void copy(Ast_function const &other);
+		void copy(const Ast_function &other);
 		/**
 		  * Method destroy Ast_function, STL-like C++.
 		  */
@@ -39,7 +39,7 @@ class Ast_function: public Ast_inner_node
 		/**
 		  * Constructor copy of Ast_function.
 		  */
-		Ast_function(Ast_function const &other);
+		Ast_function(const Ast_function &other);
 
 		/**
 		  * Destructor of Ast_function.
@@ -49,7 +49,7 @@ class Ast_function: public Ast_inner_node
 		/**
 		  * Operator assign(=) of Ast_function.
 		  */
-		Ast_function &operator=(Ast_function const &other);
+		Ast_function &operator=(const Ast_function &other);
 
 		/**
 		  * Returns the function pointer of the Ast_function.
@@ -93,21 +93,21 @@ class Ast_function: public Ast_inner_node
 		/**
 		  * Returns if both Ast_functions are in the same precedence level.
 		  */
-		bool is_comparable(Ast_function * other) const;
+		bool is_comparable(const Ast_function *other) const;
 		/**
 		  * Return:
 		  * 	= O		when is same precedence
 		  *		< 0		when other have great precedence
 		  *		> 0		when other have small precedence
 		  */
-		int compare_precedence(Ast_function * other) const;
+		int compare_precedence(const Ast_function *other) const;
 		/**
 		  * Return:
 		  * 	= O		when is same order
 		  *		< 0		when other have great order
 		  *		> 0		when other have small order
 		  */
-		int compare_order(Ast_function * other) const;
+		int compare_order(const Ast_function *other) const;
 
 		/**
 		  * Generate and return a string reprensentation of a Ast_function.

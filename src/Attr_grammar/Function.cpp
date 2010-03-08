@@ -9,18 +9,19 @@
 #include <iostream>
 #include <climits>
 #include <sstream>
+
 #include "Function.h"
 
 namespace genevalmag
 {
 
 #ifdef _DEBUG
-	// Numbers of functions current in the system.
-	static int funtions = 0;
+	/* Numbers of Functions current in the system. */
+	static int funtions(0);
 #endif
 
 /**
-  * Contructor empty of function.
+  * Contructor empty of Function.
   */
 Function::Function()
 {
@@ -35,9 +36,9 @@ Function::Function()
 }
 
 /**
-  * Contructor copy of function.
+  * Contructor copy of Function.
   */
-Function::Function(Function const &other)
+Function::Function(const Function &other)
 {
 	copy(other);
 
@@ -47,7 +48,7 @@ Function::Function(Function const &other)
 }
 
 /**
-  * Destructor of the function.
+  * Destructor of the Function.
   */
 Function::~Function()
 {
@@ -56,14 +57,16 @@ Function::~Function()
 	#ifdef _DEBUG
 		funtions--;
 		if(funtions == 0)
-		cout << funtions << " -> Funtions" << endl;
+		{
+			cout << funtions << " -> Funtions" << endl;
+		}
 	#endif
 }
 
 /**
-  * Operator assign(=) of function.
+  * Operator assign(=) of Function.
   */
-Function &Function::operator=(Function const &other)
+Function &Function::operator=(const Function &other)
 {
 	if(this != &other)
 	{
@@ -74,9 +77,9 @@ Function &Function::operator=(Function const &other)
 }
 
 /**
-  * Method of copy the function, STL-like C++.
+  * Method of copy the Function, STL-like C++.
   */
-void Function::copy(Function const &other)
+void Function::copy(const Function &other)
 {
 	f_name			= other.get_name();
 	f_domain		= other.get_domain();
@@ -88,14 +91,14 @@ void Function::copy(Function const &other)
 }
 
 /**
-  * Method destroy function, STL-like C++.
+  * Method destroy Function, STL-like C++.
   */
 void Function::destroy()
 {
 }
 
 /**
-  * Return the name of the function.
+  * Returns the name of the Function.
   */
 string Function::get_name() const
 {
@@ -103,7 +106,7 @@ string Function::get_name() const
 }
 
 /**
-  * Return the domain of the function.
+  * Returns the domain of the Function.
   */
 const vector<const Sort*> &Function::get_domain() const
 {
@@ -111,7 +114,7 @@ const vector<const Sort*> &Function::get_domain() const
 }
 
 /**
-  * Return the image of the function.
+  * Returns the image of the Function.
   */
 const Sort *Function::get_image() const
 {
@@ -119,7 +122,7 @@ const Sort *Function::get_image() const
 }
 
 /**
-  * Return the mode of the operator.
+  * Returns the mode of the operator.
   */
 oper_mode Function::get_mode() const
 {
@@ -127,7 +130,7 @@ oper_mode Function::get_mode() const
 }
 
 /**
-  * Return the precedence of the operator.
+  * Returns the precedence of the operator.
   */
 unsigned short Function::get_prec() const
 {
@@ -135,14 +138,14 @@ unsigned short Function::get_prec() const
 }
 
 /**
-  * Return the associativity of the operator.
+  * Returns the associativity of the operator.
   */
 oper_assoc Function::get_oper_assoc() const
 {
 	return f_assoc;
 }
 /**
-  * Return the arity of function.
+  * Returns the arity of Function.
   */
 int Function::get_arity() const
 {
@@ -150,7 +153,7 @@ int Function::get_arity() const
 }
 
 /**
-  * Set the name of the function.
+  * Sets the name of the Function.
   */
 void Function::set_name(string name)
 {
@@ -158,15 +161,7 @@ void Function::set_name(string name)
 }
 
 /**
-  * Set the full sort domain of the function.
-  */
-void Function::set_domain(vector<const Sort*> domain)
-{
-	f_domain = domain;
-}
-
-/**
-  * Set the sort image of the function.
+  * Sets the sort image of the Function.
   */
 void Function::set_image(const Sort *image)
 {
@@ -174,24 +169,38 @@ void Function::set_image(const Sort *image)
 }
 
 /**
-  * Set the mode of the operator.
+  * Sets the mode of the operator.
   * @param mode: string
   */
 void Function::set_mode(string mode)
 {
 	if(mode.compare("infix") == 0)
+	{
 		f_mod = k_infix;
-	else if(mode.compare("prefix") == 0)
-		f_mod = k_prefix;
-	else if(mode.compare("postfix") == 0)
-		f_mod = k_postfix;
+	}
 	else
-		// Default value.
-		f_mod = k_prefix;
+	{
+		if(mode.compare("prefix") == 0)
+		{
+			f_mod = k_prefix;
+		}
+		else
+		{
+			if(mode.compare("postfix") == 0)
+			{
+				f_mod = k_postfix;
+			}
+			else
+			{
+				/* Default value. */
+				f_mod = k_prefix;
+			}
+		}
+	}
 }
 
 /**
-  * Set the precedence of the operator.
+  * Sets the precedence of the operator.
   */
 void Function::set_prec(unsigned short prec)
 {
@@ -199,30 +208,44 @@ void Function::set_prec(unsigned short prec)
 }
 
 /**
-  * Set the associativity of the operator.
+  * Sets the associativity of the operator.
   */
 void Function::set_oper_assoc(string mod)
 {
 	if(mod.compare("left") == 0)
+	{
 		f_assoc = k_left;
-	else if(mod.compare("right") == 0)
-		f_assoc = k_right;
-	else if(mod.compare("non-assoc") == 0)
-		f_assoc = k_non_assoc;
+	}
 	else
-		// Default value.
-		f_assoc = k_left;
+	{
+		if(mod.compare("right") == 0)
+		{
+			f_assoc = k_right;
+		}
+		else
+		{
+			if(mod.compare("non-assoc") == 0)
+			{
+				f_assoc = k_non_assoc;
+			}
+			else
+			{
+				/* Default value. */
+				f_assoc = k_left;
+			}
+		}
+	}
 }
 
 /**
-  * Set the boolean attribute with the parameter.
+  * Sets the boolean attribute with the parameter.
   */
 void Function::set_is_operator(bool value)
 {
 	f_is_operator = value;
 }
 /**
-  * Enqueue a sort in the domain of the function.
+  * Enqueue a sort in the domain of the Function.
   */
 void Function::add_domain(const Sort *sort)
 {
@@ -230,11 +253,11 @@ void Function::add_domain(const Sort *sort)
 }
 
 /**
-  * Generate and return a string reprensentation of a function.
+  * Generates and returns a string reprensentation of a Function.
   *
-  * Result= "function" name ":" domain "->" image ";"
+  * Result= "function" \<name\> ":" \<domain\> "->" \<image\> ";"
   *
-  * where domain is= sort_1 ["(" instance ")" IF DEBUG IS ON] "," ... "," sort_n ["(" instance ")" IF DEBUG IS ON]
+  * where \<domain\> is= sort_1 ["(" \<instance\> ")" IF DEBUG IS ON] "," ... "," sort_n ["(" \<instance\> ")" IF DEBUG IS ON]
   */
 string Function::to_string() const
 {
@@ -252,7 +275,7 @@ string Function::to_string() const
 		func.append("\t(");
 		if(f_prec == UINT_MAX)
 		{
-			// Default precedence.
+			/* Default precedence. */
 			func.append("_");
 		}
 		else
@@ -274,7 +297,6 @@ string Function::to_string() const
 	{
 		func.append("function\t");
 	}
-
 	func.append(f_name);
 	func.append(": ");
 	for(vector<Sort>::size_type i = 0; i < f_domain.size(); i++)
@@ -290,7 +312,9 @@ string Function::to_string() const
 		#endif
 
 		if(i+1 < f_domain.size())
+		{
 			func.append(", ");
+		}
 	}
 	func.append(" -> ");
 	func.append(f_image->get_name());
@@ -308,7 +332,7 @@ string Function::to_string() const
 }
 
 /**
-  * Return true if the function is a Operator.
+  * Returns true if the Function is a Operator.
   */
 bool Function::is_operator() const
 {
@@ -316,24 +340,23 @@ bool Function::is_operator() const
 }
 
 /**
-  * Compares the function with other.
+  * Compares the Function with other.
   */
-bool Function::equals(Function const &other) const
+bool Function::equals(const Function &other) const
 {
-	return	key().compare(other.key()) == 0;
+	return (key().compare(other.key()) == 0);
 }
 
 /**
-  * Generate and return the string key that identifies a function definitely.
+  * Generates and returns the string key that identifies a Function definitely.
   *
-  * Result= name domain image
+  * Result= \<name\> \<domain\> \<image\>
   *
-  * where domain is= sort_1 ... sort_n
+  * where \<domain\> is = sort_1 ... sort_n
   */
 string Function::key() const
 {
 	string key;
-
 	if(is_operator())
 	{
 	   switch(f_mod)
@@ -343,22 +366,12 @@ string Function::key() const
 			case k_postfix: key.append("postfix"); break;
 		}
 	}
-
 	key.append(f_name);
-	for(vector<Sort>::size_type i = 0; i < f_domain.size(); i++)
+	for(vector<Sort>::size_type i(0); i < f_domain.size(); i++)
 	{
 		key.append(f_domain[i]->get_name());
 	}
-
-	// ALERTA: HACE FALTA? A MISMO NOMBRE MODO Y ARIDA (DOMINIO), LA IMAGEN DISTINTA NO TE SOLUCIONA CUAL FUNCION USAR.
-	//key.append(f_image->get_name());
 	return key;
 }
 
-//void Function::purge()
-//{
-//	f_domain.clear();
-//	f_image = NULL;
-//}
-
-} // end genevalmag
+} /* end genevalmag */

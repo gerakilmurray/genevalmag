@@ -50,14 +50,6 @@ class Ast_inner_node: public Ast_node
 		}
 
 		/**
-		  * Sets the vector with all children of the Ast_function.
-		  */
-		void set_childs(vector<Ast_node*> new_childs)
-		{
-			childs = new_childs;
-		}
-
-		/**
 		  * Replaces index-child of the Ast_function with other.
 		  * Updates the parent of the child.
 		  */

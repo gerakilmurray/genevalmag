@@ -28,7 +28,7 @@ class Rule
 		/**
 		  * Method of copy the rule, STL-like C++.
 		  */
-		void copy(Rule const &other);
+		void copy(const Rule &other);
 		/**
 		  * Method destroy rule, STL-like C++.
 		  */
@@ -44,7 +44,7 @@ class Rule
 		/**
 		  * Constructor copy of rule.
 		  */
-		Rule(Rule const &other);
+		Rule(const Rule &other);
 
 		/**
 		  * Destructor of rule.
@@ -54,7 +54,7 @@ class Rule
 		/**
 		  * Operator assign(=) of rule.
 		  */
-		Rule &operator=(Rule const &other);
+		Rule &operator=(const Rule &other);
 
 		/**
 		  * Returns the left symbol of the rule.
@@ -117,7 +117,7 @@ class Rule
 		/**
 		  * Compares the rule with other.
 		  */
-		bool equals(Rule const &other) const;
+		bool equals(const Rule &other) const;
 
 		/**
 		  * Generate and return the string key that identifies a rule definitely.
@@ -137,6 +137,6 @@ class Rule
 		vector<const Symbol*> get_non_terminals_right_side() const;
 };
 
-} // end genevalmag
+} /* end genevalmag */
 
 #endif /* RULE_H_ */

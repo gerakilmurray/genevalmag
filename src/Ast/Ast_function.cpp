@@ -36,7 +36,7 @@ Ast_function::Ast_function()
 /**
   * Constructor copy of Ast_function.
   */
-Ast_function::Ast_function(Ast_function const &other)
+Ast_function::Ast_function(const Ast_function &other)
 {
 	copy(other);
 
@@ -64,7 +64,7 @@ Ast_function::~Ast_function()
 /**
   * Operator assign(=) of Ast_function.
   */
-Ast_function &Ast_function::operator=(Ast_function const &other)
+Ast_function &Ast_function::operator=(const Ast_function &other)
 {
 	if(this != &other)
 	{
@@ -77,7 +77,7 @@ Ast_function &Ast_function::operator=(Ast_function const &other)
 /**
   * Method of copy the Ast_function, STL-like C++.
   */
-void Ast_function::copy(Ast_function const &other)
+void Ast_function::copy(const Ast_function &other)
 {
 	func				= other.get_function();
 	precedence_level	= other.get_precedence_level();
@@ -170,7 +170,7 @@ bool Ast_function::is_postfix() const
 /**
   * Returns if both Ast_functions are in the same precedence level.
   */
-bool Ast_function::is_comparable(Ast_function * other) const
+bool Ast_function::is_comparable(const Ast_function *other) const
 {
 	return (precedence_level == other->get_precedence_level());
 }
@@ -181,7 +181,7 @@ bool Ast_function::is_comparable(Ast_function * other) const
   *		< 0		when other have great precedence
   *		> 0		when other have small precedence
   */
-int Ast_function::compare_precedence(Ast_function * other) const
+int Ast_function::compare_precedence(const Ast_function *other) const
 {
 	return (func->get_prec() - other->get_function()->get_prec());
 }
@@ -192,7 +192,7 @@ int Ast_function::compare_precedence(Ast_function * other) const
   *		< 0		when other have great order
   *		> 0		when other have small order
   */
-int Ast_function::compare_order(Ast_function * other) const
+int Ast_function::compare_order(const Ast_function *other) const
 {
 	return (syntax_order - other->get_syntax_order());
 }
@@ -246,7 +246,7 @@ string Ast_function::to_string() const
 	}
 	string fun(func->get_name());
 	fun.append("(");
-	for (unsigned int i=0; i < childs.size() ;i++)
+	for (unsigned int i(0); i < childs.size() ;i++)
 	{
 		fun.append(childs[i]->to_string());
 		if (i < childs.size()-1) fun.append(", ");

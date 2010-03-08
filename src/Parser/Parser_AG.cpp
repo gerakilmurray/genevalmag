@@ -6,7 +6,7 @@
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-//#define BOOST_SPIRIT_DEBUG  ///$$$ DEFINE THIS BEFORE ANYTHING ELSE $$$///
+/*#define BOOST_SPIRIT_DEBUG */
 
 #include <boost/spirit/include/classic_core.hpp>
 #include <boost/spirit/include/classic_symbols.hpp>
@@ -75,7 +75,7 @@ struct attritute_grammar: public grammar<attritute_grammar>
 	{
 		definition(attritute_grammar const &self)
 		{
-			// Common declarations.
+			/* Common declarations. */
 
 			r_ident			= lexeme_d[ (alpha_p | '_') >> *(alnum_p | '_') ] - r_reserved_word;
 
@@ -116,12 +116,12 @@ struct attritute_grammar: public grammar<attritute_grammar>
 
 			r_bloq_sem		  = r_decl_sort | r_decl_oper[&add_operator] | r_decl_func[&add_function];
 
-			// Declaration of Sorts.
+			/* Declaration of Sorts. */
 
 			r_decl_sort		  = lexeme_d[ strlit<>("sort") >> space_p ] >>
 								(r_ident[&create_sort][st_sorts.add] % ',') >> ';';
 
-			// Declaration of Operators.
+			/* Declaration of Operators. */
 
 			r_decl_oper	= lexeme_d[ strlit<>("op") >> space_p ][&inic_func] >>
 							(r_oper_infix | r_oper_postfix | r_oper_prefix) >>
@@ -144,7 +144,7 @@ struct attritute_grammar: public grammar<attritute_grammar>
 
 			r_oper_assoc   = strlit<>("left") | strlit<>("right") | strlit<>("non-assoc");
 
-			// Declaration of Functions.
+			/* Declaration of Functions. */
 
 			r_decl_func	= lexeme_d[ strlit<>("function")>> space_p ] >>
 							 r_oper[&inic_func][&save_name_func][st_functions.add] >> ':' >>
@@ -268,33 +268,33 @@ struct attritute_grammar: public grammar<attritute_grammar>
 		  */
 		typedef rule<ScannerT> rule_exp;
 
-		 // Rule in lexeme_d.
+		 /* Rule in lexeme_d. */
 		typedef rule<typename lexeme_scanner<ScannerT>::type> rule_lexeme;
 
-		// Basic rules: characters, strings and identifiers.
+		/* Basic rules: characters, strings and identifiers. */
 		rule_exp r_reserved_word, r_ident, r_oper, r_char, r_string, r_basic_types, char_pp;
 
 		rule_lexeme r_id_op, r_string_lit, r_esc_seq;
 
-		// Semantic domain's rule: Sort, Operator and Function.
+		/* Semantic domain's rule: Sort, Operator and Function. */
 		rule_exp r_semantic_domain, r_bloq_sem, r_decl_sort, r_decl_oper, r_decl_func,
 				 r_oper_assoc, r_oper_mode, r_oper_prefix, r_oper_infix, r_oper_postfix,
 				 r_dom_func;
 
-		// Atribute's rule.
+		/* Atribute's rule. */
 		rule_exp r_attributes, r_decl_attr, r_type_attr, r_conj_symb;
 
-		// Rule's rule.
+		/* Rule's rule. */
 		rule_exp r_rules, r_decl_rule, r_equation, r_right_rule, r_terminal;
 
-		// Expresion's rule: Compute. Add context for type expresion.
+		/* Expresion's rule: Compute. Add context for type expresion. */
 		rule_exp r_expression,  r_expr_prime, r_expr_prime_prime, r_function, r_literal, r_instance;
 
-		// Translate for symbol table.
+		/* Translate for symbol table. */
 		rule_exp r_sort_st, r_op_prefix_st, r_op_infix_st, r_op_postfix_st,
 				 r_function_st, r_attribute_st, r_non_term_st, r_sort_stable;
 
-		// Main rule.
+		/* Main rule. */
 		rule_exp r_att_grammar;
 
 		rule_exp const &start() const
@@ -338,4 +338,4 @@ bool Parser_AG::parse_grammar(char const *txt_input)
 	return info.full;
 }
 
-} // namespace
+} /* end genevalmag */

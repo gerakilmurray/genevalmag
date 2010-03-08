@@ -15,12 +15,12 @@ namespace genevalmag
 {
 
 #ifdef _DEBUG
-	// Numbers of sorts current in the system.
-	static int sorts= 0;
+	/* Numbers of sorts current in the system. */
+	static int sorts(0);
 #endif
 
 /**
-  * Contructor empty of sort.
+  * Contructor empty of Sort.
   */
 Sort::Sort()
 {
@@ -32,7 +32,7 @@ Sort::Sort()
 }
 
 /**
-  * Contructor with the name of the sort.
+  * Contructor with the name of the Sosrt.
   */
 Sort::Sort(string name)
 {
@@ -46,9 +46,9 @@ Sort::Sort(string name)
 }
 
 /**
-  * Contructor copy of sort.
+  * Contructor copy of Sort.
   */
-Sort::Sort(Sort const &other)
+Sort::Sort(const Sort &other)
 {
 	copy(other);
 
@@ -58,7 +58,7 @@ Sort::Sort(Sort const &other)
 }
 
 /**
-  * Destructor of sort.
+  * Destructor of Sort.
   */
 Sort::~Sort()
 {
@@ -67,14 +67,16 @@ Sort::~Sort()
 	#ifdef _DEBUG
 		sorts--;
 		if(sorts == 0)
+		{
 			cout << sorts << " -> Sorts" << endl;
+		}
 	#endif
 }
 
 /**
-  * Operator assign(=) of sort.
+  * Operator assign(=) of Sort.
   */
-Sort &Sort::operator=(Sort const &other)
+Sort &Sort::operator=(const Sort &other)
 {
 	if(this != &other)
 	{
@@ -85,25 +87,26 @@ Sort &Sort::operator=(Sort const &other)
 }
 
 /**
-  * Method of copy the sort, STL-like C++.
+  * Method of copy the Sort, STL-like C++.
   */
-void Sort::copy(Sort const &other)
+void Sort::copy(const Sort &other)
 {
 	s_name			= other.get_name();
-	 // Increment the instance of sort.
+
+	/* Increment the instance of sort. */
 	s_ins			= other.get_ins() + 1;
 	s_type_basic	= other.is_type_basic();
 }
 
 /**
-  * Method destroy sort, STL-like C++.
+  * Method destroy Sort, STL-like C++.
   */
 void Sort::destroy()
 {
 }
 
 /**
-  * Return the name of the sort.
+  * Return the name of the Sort.
   */
 string Sort::get_name() const
 {
@@ -111,7 +114,7 @@ string Sort::get_name() const
 }
 
 /**
-  * Return the instance of the sort.
+  * Return the instance of the Sort.
   */
 int Sort::get_ins() const
 {
@@ -119,23 +122,23 @@ int Sort::get_ins() const
 }
 
 /**
-  * Set the name of the sort.
+  * Set the name of the Sort.
   */
 void Sort::set_name(string name)
 {
 	s_name = name;
 }
 /**
-  * Set if the sort is basic.
+  * Set if the Sort is basic.
   */
 void Sort::set_type_basic(bool type_basic)
 {
     s_type_basic = type_basic;
 }
 /**
-  * Generate and return a string reprensentation of a attribute.
+  * Generates and returns a string reprensentation of a Sort.
   *
-  * Result= "sort" name ["(" instance ")" IF DEBUG IS ON] ";"
+  * Result= "sort" \<name\> ["(" \<instance\> ")" IF DEBUG IS ON] ";"
   */
 string Sort::to_string() const
 {
@@ -165,15 +168,15 @@ string Sort::to_string() const
 }
 
 /**
-  * Compares the sort with other.
+  * Compares the Sort with other.
   */
-bool Sort::equals(Sort const &other) const
+bool Sort::equals(const Sort &other) const
 {
 	return key().compare(other.key())==0;
 }
 
 /**
-  * Return if the sort is basic.
+  * Return if the Sort is basic.
   */
 bool Sort::is_type_basic() const
 {
@@ -181,13 +184,13 @@ bool Sort::is_type_basic() const
 }
 
 /**
-  * Generate and return the string key that identifies a sort definitely.
+  * Generate and return the string key that identifies a Sort definitely.
   *
-  * Result= name
+  * Result= \<name\>
   */
 string Sort::key() const
 {
 	return s_name;
 }
 
-} // end genevalmag
+} /* end genevalmag */

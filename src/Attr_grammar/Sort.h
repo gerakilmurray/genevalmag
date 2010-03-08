@@ -23,80 +23,87 @@ namespace genevalmag
 
 class Sort
 {
-private:
-	string			s_name;
-	unsigned int	s_ins;
-	bool			s_type_basic;
+	private:
+		string			s_name;
+		unsigned int	s_ins;
+		bool			s_type_basic;
 
-	/**
-	  * Method of copy the sort, STL-like C++.
-	  */
-	void copy(const Sort &other);
-    /**
-	  * Method destroy sort, STL-like C++.
-	  */
-    void destroy();
-public:
-    /**
-	  * Contructor empty of sort.
-	  */
-    Sort();
-    /**
-	  * Contructor with the name of the sort.
-	  */
-    Sort(string name);
-    /**
-	  * Contructor copy of sort.
-	  */
-    Sort(const Sort &other);
-    /**
-	  * Destructor of sort.
-	  */
-    virtual ~Sort();
-    /**
-	  * Operator assign(=) of sort.
-	  */
-    Sort &operator =(const Sort &other);
-    /**
-	  * Return the name of the sort.
-	  */
-    string get_name() const;
-    /**
-	  * Return the instance of the sort.
-	  */
-    int get_ins() const;
-    /**
-	  * Set the name of the sort.
-	  */
-    void set_name(string name);
-    /**
-      * Set if the sort is basic.
-      */
-    void set_type_basic(bool type_basic);
+		/**
+		  * Method of copy the Sort, STL-like C++.
+		  */
+		void copy(const Sort &other);
+		/**
+		  * Method destroy Sort, STL-like C++.
+		  */
+		void destroy();
 
-    /**
-	  * Generate and return a string reprensentation of a attribute.
-	  *
-	  * Result= "sort" name ["(" instance ")" IF DEBUG IS ON] ";"
-	  */
-    string to_string() const;
-    /**
-	  * Compares the sort with other.
-	  */
-    bool equals(const Sort &other) const;
-    /**
-      * Return if the sort is basic.
-      */
-    bool is_type_basic() const;
+	public:
+		/**
+		  * Contructor empty of Sort.
+		  */
+		Sort();
+		/**
+		  * Contructor with the name of the Sort.
+		  */
+		Sort(string name);
+		/**
+		  * Contructor copy of Sort.
+		  */
+		Sort(const Sort &other);
 
-    /**
-	  * Generate and return the string key that identifies a sort definitely.
-	  *
-	  * Result= name
-	  */
-    string key() const;
+		/**
+		  * Destructor of Sort.
+		  */
+		virtual ~Sort();
+
+		/**
+		  * Operator assign(=) of Sort.
+		  */
+		Sort &operator =(const Sort &other);
+
+		/**
+		  * Returns the name of the Sort.
+		  */
+		string get_name() const;
+		/**
+		  * Returns the instance of the Sort.
+		  */
+		int get_ins() const;
+
+		/**
+		  * Sets the name of the Sort.
+		  */
+		void set_name(string name);
+		/**
+		  * Sets if the Sort is basic.
+		  */
+		void set_type_basic(bool type_basic);
+
+		/**
+		  * Generate and return a string reprensentation of a Sort.
+		  *
+		  * Result= "sort" \<name\> ["(" \<instance\> ")" IF DEBUG IS ON] ";"
+		  */
+		string to_string() const;
+
+		/**
+		  * Compares the Sort with other.
+		  */
+		bool equals(const Sort &other) const;
+
+		/**
+		  * Return if the Sort is basic.
+		  */
+		bool is_type_basic() const;
+
+		/**
+		  * Generates and returns the string key that identifies a Sort definitely.
+		  *
+		  * Result= \<name\>
+		  */
+		string key() const;
 };
 
-} // end genevalmag
+} /* end genevalmag */
 
 #endif /* SORT_H_ */

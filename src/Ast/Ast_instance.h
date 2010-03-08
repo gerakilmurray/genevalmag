@@ -19,44 +19,93 @@ namespace genevalmag
 
 class Ast_instance: public Ast_leaf
 {
-private:
-	const Symbol      	*i_symb;
-	unsigned short		i_num;
-	const Attribute   	*i_attr;
+	private:
+		const Symbol      	*i_symb;
+		unsigned short		i_num;
+		const Attribute   	*i_attr;
 
-	/**
-	  * Method of copy the Ast_instance, STL-like C++.
-	  */
-	void copy(Ast_instance const &other);
-	/**
-	  * Method destroy Ast_instance, STL-like C++.
-	  */
-	void destroy();
+		/**
+		  * Method of copy the Ast_instance, STL-like C++.
+		  */
+		void copy(const Ast_instance &other);
+		/**
+		  * Method destroy Ast_instance, STL-like C++.
+		  */
+		void destroy();
 
-public:
-	Ast_instance();
-	Ast_instance(Ast_instance const &other);
-	virtual ~Ast_instance();
+	public:
+		/**
+		  * Constructor empty of Ast_instance.
+		  */
+		Ast_instance();
+		/**
+		  * Constructor copy of Ast_instance.
+		  */
+		Ast_instance(const Ast_instance &other);
 
-	Ast_instance &operator =(const Ast_instance &other);
+		/**
+		  * Destructor of Ast_instance.
+		  */
+		virtual ~Ast_instance();
 
-	const Attribute *get_attr() const;
+		/**
+		  * Operator assign(=) of Ast_instance.
+		  */
+		Ast_instance &operator=(const Ast_instance &other);
 
-	unsigned short get_num() const;
+		/**
+		  * Returns the attribute pointer of the Ast_instance.
+		  */
+		const Attribute *get_attr() const;
 
-	const Symbol *get_symb() const;
+		/**
+		  * Returns the number of the Ast_instance.
+		  */
+		unsigned short get_num() const;
 
-	void set_attr(const Attribute *attr);
+		/**
+		  * Returns the symbol pointer of the Ast_instance.
+		  */
+		const Symbol *get_symb() const;
 
-	void set_num(unsigned short num);
+		/**
+		  * Sets the attribute pointer of the Ast_instance.
+		  */
+		void set_attr(const Attribute *attr);
 
-	void set_symb(const Symbol *symb);
+		/**
+		  * Sets the number of the Ast_instance.
+		  */
+		void set_num(unsigned short num);
 
-	string to_string() const;
+		/**
+		  * Sets the symbol pointer of the Ast_instance.
+		  */
+		void set_symb(const Symbol *symb);
 
-	bool equals_with_index(const Ast_instance * other) const;
+		/**
+		  * Generate and return a string reprensentation of a Ast_instance.
+		  *
+		  * Result= \<symbol\>"["\<number\>"]."\<attribute\>
+		  *
+		  * Ex: E[0].valor
+		  */
+		string to_string() const;
 
-	string key() const;
+		/**
+		  * Compares the Ast_instance with other.
+		  * Respects Symbol, attribute and number.
+		  */
+		bool equals_with_index(const Ast_instance *other) const;
+
+		/**
+		  * Generate and return the string key that identifies an Ast_instance definitely.
+		  *
+		  * Result= \<symbol\>\<number\>\<attribute\>
+		  *
+		  * Ex: E0valor
+		  */
+		string key() const;
 };
 
 } /* end genevalmag */

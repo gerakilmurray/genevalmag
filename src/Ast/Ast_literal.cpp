@@ -17,6 +17,9 @@ namespace genevalmag
 	static int ast_literals(0);
 #endif
 
+/**
+  * Constructor empty of Ast_literal.
+  */
 Ast_literal::Ast_literal()
 {
 	parent		= NULL;
@@ -27,7 +30,10 @@ Ast_literal::Ast_literal()
 	#endif
 }
 
-Ast_literal::Ast_literal(Ast_literal const &other)
+/**
+  * Constructor copy of Ast_literal.
+  */
+Ast_literal::Ast_literal(const Ast_literal &other)
 {
 	copy(other);
 
@@ -36,6 +42,9 @@ Ast_literal::Ast_literal(Ast_literal const &other)
 	#endif
 }
 
+/**
+  * Destructor of Ast_literal.
+  */
 Ast_literal::~Ast_literal()
 {
 	destroy();
@@ -43,11 +52,16 @@ Ast_literal::~Ast_literal()
 	#ifdef _DEBUG
 		ast_literals--;
 		if(ast_literals == 0)
+		{
 			cout << ast_literals << " -> AST Literals" << endl;
+		}
 	#endif
 }
 
-Ast_literal &Ast_literal::operator=(Ast_literal const &other)
+/**
+  * Operator assign(=) of Ast_literal.
+  */
+Ast_literal &Ast_literal::operator=(const Ast_literal &other)
 {
 	if(this != &other)
 	{
@@ -57,7 +71,10 @@ Ast_literal &Ast_literal::operator=(Ast_literal const &other)
 	return *this;
 }
 
-void Ast_literal::copy(Ast_literal const &other)
+/**
+  * Method of copy the Ast_literal, STL-like C++.
+  */
+void Ast_literal::copy(const Ast_literal &other)
 {
 	value				= other.get_value();
 	type				= other.get_type();
@@ -66,39 +83,54 @@ void Ast_literal::copy(Ast_literal const &other)
 	type_synthetized	= other.get_type_synthetized();
 }
 
+/**
+  * Method destroy Ast_literal, STL-like C++.
+  */
 void Ast_literal::destroy()
 {
 }
 
+/**
+  * Returns the type of the Ast_literal.
+  */
 literal_type Ast_literal::get_type() const
 {
 	return type;
 }
 
+/**
+  * Returns the value of the Ast_literal.
+  */
 string Ast_literal::get_value() const
 {
 	return value;
 }
 
+/**
+  * Sets the type of the Ast_literal.
+  */
 void Ast_literal::set_type(literal_type new_type)
 {
 	type = new_type;
 }
 
+/**
+  * Sets the value of the Ast_literal.
+  */
 void Ast_literal::set_value(string new_value)
 {
 	value = new_value;
 }
 
 /**
-  * Generate and return a string reprensentation of a literal
+  * Generate and return a string reprensentation of a Ast_literal.
   *
   * Result= literal
   *
-  * Ex: 1		- int
-  * 	1		- float
-  * 	'1'		- char
-  * 	"1"		- string
+  * Ex: 1	-> int
+  * 	1.0	-> float
+  * 	'1'	-> char
+  * 	"1"	-> string
   */
 string Ast_literal::to_string() const
 {

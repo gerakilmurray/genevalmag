@@ -141,6 +141,6 @@ public:
 	string to_string();
 };
 
-} // end genevalmag
+} /* end genevalmag */
 
 #endif /* SEMDOMAIN_H_ */
