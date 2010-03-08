@@ -27,38 +27,73 @@ enum literal_type
 
 class Ast_literal: public Ast_leaf
 {
-private:
-	/**
-	  *	This represent a literal.
-	  */
-	string			value;
-	literal_type	type;
+	private:
+		/**
+		  *	This represent a literal.
+		  */
+		string			value;
+		literal_type	type;
 
-	/**
-	  * Method of copy the Ast_literal, STL-like C++.
-	  */
-	void copy(Ast_literal const &other);
-	/**
-	  * Method destroy Ast_literal, STL-like C++.
-	  */
-	void destroy();
+		/**
+		  * Method of copy the Ast_literal, STL-like C++.
+		  */
+		void copy(const Ast_literal &other);
+		/**
+		  * Method destroy Ast_literal, STL-like C++.
+		  */
+		void destroy();
 
-public:
-	Ast_literal();
-	Ast_literal(Ast_literal const &other);
-	virtual ~Ast_literal();
+	public:
+		/**
+		  * Constructor empty of Ast_literal.
+		  */
+		Ast_literal();
+		/**
+		  * Constructor copy of Ast_literal.
+		  */
+		Ast_literal(const Ast_literal &other);
 
-	Ast_literal &operator=(Ast_literal const &other);
+		/**
+		  * Destructor of Ast_literal.
+		  */
+		virtual ~Ast_literal();
 
-	literal_type get_type() const;
+		/**
+		  * Operator assign(=) of Ast_literal.
+		  */
+		Ast_literal &operator=(const Ast_literal &other);
 
-	string get_value() const;
+		/**
+		  * Returns the type of the Ast_literal.
+		  */
+		literal_type get_type() const;
 
-	void set_type(literal_type new_type);
+		/**
+		  * Returns the value of the Ast_literal.
+		  */
+		string get_value() const;
 
-	void set_value(string new_value);
+		/**
+		  * Sets the type of the Ast_literal.
+		  */
+		void set_type(literal_type new_type);
 
-	string to_string() const;
+		/**
+		  * Sets the value of the Ast_literal.
+		  */
+		void set_value(string new_value);
+
+		/**
+		  * Generate and return a string reprensentation of a Ast_literal.
+		  *
+		  * Result= literal
+		  *
+		  * Ex: 1	-> int
+		  * 	1.0	-> float
+		  * 	'1'	-> char
+		  * 	"1"	-> string
+		  */
+		string to_string() const;
 };
 
 } /* end genevalmag */

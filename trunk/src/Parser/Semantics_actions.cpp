@@ -6,10 +6,10 @@
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-#include <boost/algorithm/string/erase.hpp>
-
 #include <iostream>
 #include <sstream>
+
+#include <boost/algorithm/string/erase.hpp>
 
 #include "Semantics_actions.h"
 #include "../Ast/Ast_instance.h"
@@ -38,7 +38,7 @@ void set_s_check(Semantic_check *s_check)
 /**
   * Pointer that reference a new function in the grammar.
   */
-Function  *current_func;
+Function *current_func;
 
 /**
   * Type that represent the structure of a full declaration of one Attribute.
@@ -54,7 +54,7 @@ struct decl_attribute
 /**
   * Pointer that reference a current rule parsed in the grammar.
   */
-Rule  *current_rule;
+Rule *current_rule;
 
 /**
   * Pointer to the last instance of attribute to parse successfully.
@@ -75,7 +75,7 @@ vector<Ast_inner_node*> 	stack_inner_node;
   */
 void create_sort(char const *str, char const *end)
 {
-	string  name(str, end);
+	string name(str, end);
 	Sort sort(name);
 	if(!attr_grammar->add_sort(sort))
 	{
@@ -88,7 +88,7 @@ void create_sort(char const *str, char const *end)
   */
 void inic_func(char const *str, char const *end)
 {
-	// Ignore the string parsed.
+	/* Ignore the string parsed. */
 	current_func = new Function();
 }
 
@@ -154,15 +154,15 @@ void add_attribute(char const *str, char const *end)
 	string name(str, end);
 	if(new_attrs == NULL)
 	{
-		// New declaration. Must be allocate new memory.
+		/* New declaration. Must be allocate new memory. */
 		new_attrs = new decl_attribute;
 	}
-	// Enqueue the name of new attribute.
+	/* Enqueue the name of new attribute. */
 	new_attrs->d_names.push_back(name);
 	if(new_attrs->d_names.size() == 1)
-	// First attribute name.
+	/* First attribute name. */
 	{
-		// Setting default values.
+		/* Setting default values. */
 		new_attrs->d_mod_type = k_synthetize;
 		new_attrs->d_member_symbol = "\0";
 	}
@@ -203,7 +203,7 @@ void create_attributes(char const *str, char const *end)
 		attr.set_member_symbol(new_attrs->d_member_symbol);
 		attr_grammar->add_attribute(attr);
 	}
-	// Free space memory and assign NULL at pointer.
+	/* Free space memory and assign NULL at pointer. */
 	delete(new_attrs);
 	new_attrs = NULL;
 }
@@ -260,7 +260,7 @@ void create_instance(char const *str, char const *end)
 {
 	string name(str, end);
 
-	const Symbol *symb = &(attr_grammar->get_symbol(name));
+	const Symbol *symb(&(attr_grammar->get_symbol(name)));
 
 	if (!current_rule->belongs_non_terminal(*symb))
 	{
@@ -326,7 +326,7 @@ void create_lit_ch(char const *ch, char const *end)
 	{
 		current_literal = new Ast_literal();
 	}
-	// The pointer +1 and -1 for remove the single quotes. Ex: 'u' --> u.
+	/* The pointer +1 and -1 for remove the single quotes. Ex: 'u' --> u. */
 	string ch_l(ch+1,end-1);
 	current_literal->set_type(k_char);
 	current_literal->set_type_synthetized("char");
@@ -339,7 +339,7 @@ void create_lit_str(char const *str, char const *end)
 	{
 		current_literal = new Ast_literal();
 	}
-	// The pointer +1 and -1 for remove the double quotes. Ex: "uno" --> uno.
+	/* The pointer +1 and -1 for remove the double quotes. Ex: "uno" --> uno. */
 	string str_l(str+1, end-1);
 	current_literal->set_type(k_string);
 	current_literal->set_type_synthetized("string");
@@ -368,25 +368,25 @@ void create_equation(char const *str, char const *end)
 
 void save_rvalue(char const *str, char const *end)
 {
-	// Check that the type of r_value be expected from l_value.
+	/* Check that the type of r_value be expected from l_value. */
 	if (current_eq->get_l_value()->get_attr()->get_sort_type()->get_name().compare(stack_node.back()->get_type_synthetized()))
 	{
 		cerr << "Type not expected from l_value." << endl;
 		exit(-1);
 	}
 
-	Ast_node * root_tree = stack_node.back();
+	Ast_node * root_tree(stack_node.back());
 	stack_node.pop_back();
 
-	// Check and solve conflicts of associativity
-	Ast_function * root_func = dynamic_cast<Ast_function*>(root_tree);
+	/* Check and solve conflicts of associativity. */
+	Ast_function * root_func(dynamic_cast<Ast_function*>(root_tree));
 	if (root_func)
 	{
 		sem_check->correct_associativity(&root_func);
 		root_tree = root_func;
 	}
 
-	// Obtaining the result.
+	/* Obtaining the result. */
 	current_eq->set_r_value(root_tree);
 
 	if (!current_rule->add_eq(*current_eq))
@@ -405,7 +405,7 @@ void save_rvalue(char const *str, char const *end)
 void push_mark(char name)
 {
 	current_literal = new Ast_literal();
-	// Mark for parameter of function.
+	/* Mark for parameter of function. */
 	current_literal->set_type_synthetized("#");
 	current_literal->set_value("#");
 	stack_node.push_back(current_literal);
@@ -418,55 +418,63 @@ void push_mark(char name)
 
 void create_literal_node(char const *str, char const *end)
 {
-	stack_node.push_back(current_literal); // Push literal in stack.
+	/* Push literal in stack. */
+	stack_node.push_back(current_literal);
 	current_literal = NULL;
 }
 
 void create_instance_node(char const *str, char const *end)
 {
-	// Syntetize type instance.
+	/* Syntetize type instance. */
 	current_instance->set_type_synthetized(current_instance->get_attr()->get_sort_type()->get_name());
-	stack_node.push_back(current_instance); // Push instance in stack.
+	/* Push instance in stack. */
+	stack_node.push_back(current_instance);
 	current_instance = NULL;
 };
 
 void create_func_node(char const *str, char const *end)
 {
 	current_ast_function = new Ast_function();
+	/* Set aux function. */
+	current_ast_function->set_function(current_func);
 
-	current_ast_function->set_function(current_func);// Set aux function.
-
-	// Set variables for check precedence and asociativity.
+	/* Set variables for check precedence and asociativity. */
 	current_ast_function->set_precedence_level(sem_check->get_precedence_level());
 	sem_check->increment_index_syntax_order();
 	current_ast_function->set_syntax_order(sem_check->get_index_syntax_order());
 
 	current_func = NULL;
 
-	stack_inner_node.push_back(current_ast_function); // Push Ast_function in stack.
+	/* Push Ast_function in stack. */
+	stack_inner_node.push_back(current_ast_function);
 	current_ast_function = NULL;
 };
 
 void create_root_infix_node(char const *str, char const *end)
 {
-	Ast_function *root = (Ast_function*)stack_inner_node.back();
-	stack_inner_node.pop_back(); // Pop the infix operator.
+	/* Pop the infix operator. */
+	Ast_function *root((Ast_function*)stack_inner_node.back());
+	stack_inner_node.pop_back();
 
-	Ast_node *r_child = stack_node.back();
-	stack_node.pop_back(); // First parameter of operator
+	/* Pop first parameter of operator. */
+	Ast_node *r_child(stack_node.back());
+	stack_node.pop_back();
 
-	Ast_node *l_child = stack_node.back();
-	stack_node.pop_back(); // Second parameter of operator
+	/* Pop second parameter of operator. */
+	Ast_node *l_child(stack_node.back());
+	stack_node.pop_back();
 
-	string key = "infix";
+	string key("infix");
 	key.append(root->get_function()->get_name());
 	key.append(l_child->get_type_synthetized());
 	key.append(r_child->get_type_synthetized());
 
-	const Function  *func = attr_grammar->get_function(key); // Searches of infix operator.
+	/* Searches of infix operator. */
+	const Function *func(attr_grammar->get_function(key));
+	const Function *old(root->get_function());
 
-	const Function  *old = root->get_function();
-	delete(old); // Free aux function.
+	/* Free aux function. */
+	delete(old);
 
 	if (func == NULL)
 	{
@@ -476,30 +484,34 @@ void create_root_infix_node(char const *str, char const *end)
 
 	root->set_function(func);
 
-	root->set_type_synthetized(root->get_function()->get_image()->get_name());// Syntetize type infix operator.
+	/* Syntetize type infix operator. */
+	root->set_type_synthetized(root->get_function()->get_image()->get_name());
 
 	root->add_child(r_child);
 	root->add_child(l_child);
 
-	// Check the state of precedence of operators.
+	/* Check the state of precedence of operators. */
 	sem_check->correct_precedence(&root);
 
-	stack_node.push_back(root); // Push infix operator in stack.
+	/* Push infix operator in stack. */
+	stack_node.push_back(root);
 }
 
 void create_root_function_node(char const *str, char const *end)
 {
-	Ast_function *root = (Ast_function*)stack_inner_node.back();
-	stack_inner_node.pop_back(); // Pop the function.
+	/* Pop the function. */
+	Ast_function *root((Ast_function*)stack_inner_node.back());
+	stack_inner_node.pop_back();
 
-	Ast_node *child;
 	string key;
-	unsigned int i = stack_node.size()-1;
+	unsigned int i(stack_node.size() - 1);
 	while (i > 0)
-		// The cicle searches the parameters until that finds the mark.
+	/* The cycle searches the parameters until that finds the mark. */
 	{
-		child = stack_node.back();
-		stack_node.pop_back(); // Parameter of function
+		/* Parameter of function. */
+		Ast_node *child(stack_node.back());
+		stack_node.pop_back();
+
 		if (child->get_type_synthetized().compare("#") == 0)
 		{
 			delete(child);
@@ -512,7 +524,8 @@ void create_root_function_node(char const *str, char const *end)
 	}
 	key = root->get_function()->get_name().append(key);
 
-	const Function *func = attr_grammar->get_function(key); // Searches function.
+	/* Searches function. */
+	const Function *func(attr_grammar->get_function(key));
 
 	if (func == NULL)
 	{
@@ -520,28 +533,34 @@ void create_root_function_node(char const *str, char const *end)
 		exit(-1);
 	}
 
-	const Function *old = root->get_function();
+	const Function *old(root->get_function());
 	root->set_function(func);
-	delete(old); // Free aux function.
+	/* Free aux function. */
+	delete(old);
 
-	root->set_type_synthetized(root->get_function()->get_image()->get_name()); // Syntetize type function.
+	/* Syntetize type function. */
+	root->set_type_synthetized(root->get_function()->get_image()->get_name());
 
-	stack_node.push_back(root); // Push function in stack.
+	/* Push function in stack. */
+	stack_node.push_back(root);
 }
 
 void create_root_postfix_node(char const *str, char const *end)
 {
-	Ast_function *root = (Ast_function*)stack_inner_node.back();
-	stack_inner_node.pop_back(); // Pop the postfix operator.
+	/* Pop the postfix operator. */
+	Ast_function *root((Ast_function*)stack_inner_node.back());
+	stack_inner_node.pop_back();
 
-	Ast_node *child = stack_node.back();
-	stack_node.pop_back(); // Parameters of operator.
+	/* Parameters of operator. */
+	Ast_node *child(stack_node.back());
+	stack_node.pop_back();
 
-	string key = "postfix";
+	string key("postfix");
 	key.append(root->get_function()->get_name());
 	key.append(child->get_type_synthetized());
 
-	const Function  *func = attr_grammar->get_function(key); // Searches posfix operator.
+	/* Searches posfix operator. */
+	const Function *func(attr_grammar->get_function(key));
 
 	if (func == NULL)
 	{
@@ -549,34 +568,39 @@ void create_root_postfix_node(char const *str, char const *end)
 		exit(-1);
 	}
 
-	const Function  *old = root->get_function();
+	const Function *old(root->get_function());
 	root->set_function(func);
-	delete(old); // Free aux function.
+	/* Free aux function. */
+	delete(old);
 
-	root->set_type_synthetized(root->get_function()->get_image()->get_name()); // Syntetize type postfix operator.
+	/* Syntetize type postfix operator. */
+	root->set_type_synthetized(root->get_function()->get_image()->get_name());
 
 	root->add_child(child);
 
-	// Check the state of precedence of operators.
+	/* Check the state of precedence of operators. */
 	sem_check->correct_precedence(&root);
 
-	stack_node.push_back(root);// Push postfix operator in stack.
+	/* Push postfix operator in stack. */
+	stack_node.push_back(root);
 }
 
 void create_root_prefix_node(char const *str, char const *end)
 {
-	Ast_function *root = (Ast_function*)stack_inner_node.back();
-	stack_inner_node.pop_back(); // Pop the prefix operator.
+	/* Pop the prefix operator. */
+	Ast_function *root((Ast_function*)stack_inner_node.back());
+	stack_inner_node.pop_back();
 
-	Ast_node *child = stack_node.back();
-	stack_node.pop_back(); // Parameter of operator.
+	/* Parameter of operator. */
+	Ast_node *child(stack_node.back());
+	stack_node.pop_back();
 
-	string key = "prefix";
+	string key("prefix");
 	key.append(root->get_function()->get_name());
 	key.append(child->get_type_synthetized());
 
-	// Searches prefix operator
-	const Function  *func = attr_grammar->get_function(key);
+	/* Searches prefix operator. */
+	const Function *func(attr_grammar->get_function(key));
 
 	if (func == NULL)
 	{
@@ -584,19 +608,20 @@ void create_root_prefix_node(char const *str, char const *end)
 		exit(-1);
 	}
 
-	const Function  *old = root->get_function();
+	const Function  *old(root->get_function());
 	root->set_function(func);
-	delete(old); // Free aux function.
+	/* Free aux function. */
+	delete(old);
 
-	// Syntetize type prefix operator.
+	/* Syntetize type prefix operator. */
 	root->set_type_synthetized(root->get_function()->get_image()->get_name());
 
 	root->add_child(child);
 
-	// Correct the state of precedence of operators.
+	/* Correct the state of precedence of operators. */
 	sem_check->correct_precedence(&root);
 
-	// Push prefix operator in stack.
+	/* Push prefix operator in stack. */
 	stack_node.push_back(root);
 }
 
@@ -614,7 +639,7 @@ void check_well_defined(char const *str, char const *end)
   */
 string cleaning_tabs(const string str)
 {
-	string aux = "";
+	string aux("");
 	for(int i=0; str[i] != '\0'; i++)
 	{
 		aux.push_back((str[i] == '\t')? ' ': str[i]);
@@ -632,4 +657,4 @@ void decrement_level(char name)
 	sem_check->decrement_precedence_level();
 }
 
-} // namespace
+} /* end genevalmag */

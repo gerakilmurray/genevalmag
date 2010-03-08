@@ -17,13 +17,13 @@ namespace genevalmag
 class Builder_plan
 {
 	private:
-//		map <int,plam> plans;
+/*		map <int,plam> plans; */
 	public:
 		Builder_plan();
 		~Builder_plan();
 		void build_plans(const Attr_grammar &attr_grammar);
 };
 
-} // end genevalmag
+} /* end genevalmag */
 
 #endif /* BUILDER_PLAN_H_ */

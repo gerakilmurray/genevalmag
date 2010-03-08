@@ -25,7 +25,7 @@ namespace genevalmag
   */
 Equation::Equation()
 {
-	// Initialize the counter.
+	/* Initialize the counter. */
 	count_ref = new unsigned int(1);
 
 	#ifdef _DEBUG
@@ -36,7 +36,7 @@ Equation::Equation()
 /**
   * Contructor copy of Equation.
   */
-Equation::Equation(Equation const &other)
+Equation::Equation(const Equation &other)
 {
 	copy(other);
 
@@ -50,7 +50,7 @@ Equation::Equation(Equation const &other)
   */
 Equation::~Equation()
 {
-	// Decrement the counter.
+	/* Decrement the counter. */
 	(*count_ref)--;
 
 	destroy();
@@ -67,7 +67,7 @@ Equation::~Equation()
 /**
   * Operator assign(=) of Equation.
   */
-Equation &Equation::operator=(Equation const &other)
+Equation &Equation::operator=(const Equation &other)
 {
 	if(this != &other)
 	{
@@ -80,14 +80,14 @@ Equation &Equation::operator=(Equation const &other)
 /**
   * Method of copy the equation, STL-like C++.
   */
-void Equation::copy(Equation const &other)
+void Equation::copy(const Equation &other)
 {
 	eq_id		= other.get_id();
 	l_value		= *other.get_l_value();
 	r_value		= other.get_r_value();
 	count_ref	= other._get_count_ref();
 
-	// Increment the counter.
+	/* Increment the counter. */
 	(*count_ref)++;
 }
 
@@ -96,10 +96,10 @@ void Equation::copy(Equation const &other)
   */
 void Equation::destroy()
 {
-	// Check if is the last reference.
+	/* Check if is the last reference. */
 	if(*count_ref == 0)
 	{
-		// Free all memory of the equation.
+		/* Free all memory of the equation. */
 		delete(count_ref);
 
 		delete(r_value);
@@ -218,7 +218,7 @@ string Equation::to_string() const
 /**
   * Compares the equation with other.
   */
-bool Equation::equals(Equation const &other) const
+bool Equation::equals(const Equation &other) const
 {
 	return	key().compare(other.key()) == 0;
 }

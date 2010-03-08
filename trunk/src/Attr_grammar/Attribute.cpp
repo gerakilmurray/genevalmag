@@ -15,8 +15,8 @@ namespace genevalmag
 {
 
 #ifdef _DEBUG
-	// Numbers of attributes current in the system.
-	static int attrs = 0;
+	/* Numbers of attributes current in the system. */
+	static int attrs(0);
 #endif
 
 /**
@@ -51,15 +51,16 @@ Attribute::~Attribute()
 	#ifdef _DEBUG
 		attrs--;
 		if(attrs == 0)
+		{
 			cout << attrs << " -> Attributes" << endl;
+		}
 	#endif
-
 }
 
 /**
   * Operator assign(=) of attribute.
   */
-Attribute &Attribute::operator=(Attribute const &other)
+Attribute &Attribute::operator=(const Attribute &other)
 {
 	if(this != &other)
 	{
@@ -72,7 +73,7 @@ Attribute &Attribute::operator=(Attribute const &other)
 /**
   * Method of copy the attribute, STL-like.
   */
-void Attribute::copy(Attribute const &other)
+void Attribute::copy(const Attribute &other)
 {
 	a_name			= other.get_name();
 	a_sort_type		= other.get_sort_type();
@@ -199,7 +200,7 @@ string Attribute::to_string() const
 /**
   * Compares the attribute with other.
   */
-bool Attribute::equals(Attribute const &other) const
+bool Attribute::equals(const Attribute &other) const
 {
 	return	key().compare(other.key()) == 0;
 }
@@ -218,4 +219,4 @@ string Attribute::key() const
 	return key;
 }
 
-} // end genevalmag
+} /* end genevalmag */

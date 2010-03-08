@@ -21,7 +21,7 @@ namespace genevalmag
   */
 Attr_grammar::Attr_grammar()
 {
-	// Remove garbage.
+	/* Remove garbage. */
 	ag_initial_symb = NULL;
 }
 
@@ -131,7 +131,7 @@ bool Attr_grammar::add_rule(Rule &rule)
 
 	if (defined_rule(rule))
 	{
-		// The rule is already defined then it isn't inserted.
+		/* The rule is already defined then it isn't inserted. */
 		return false;
 	}
 
@@ -140,7 +140,7 @@ bool Attr_grammar::add_rule(Rule &rule)
 	bool result = add <unsigned short, Rule>(rule, ag_rule);
 	if ( result && ag_initial_symb == NULL)
 	{
-		// Set initial symbol of grammar.
+		/* Set initial symbol of grammar. */
 		map<unsigned short, Rule>::iterator	init_symb = ag_rule.find(rule.key());
 		ag_initial_symb = init_symb->second.get_left_symbol();
 	}
@@ -153,7 +153,7 @@ bool Attr_grammar::add_rule(Rule &rule)
 const Sort &Attr_grammar::return_sort(string name_sort)
 {
 	Sort sort_new(name_sort);
-	// becouse is a type basic. if not the sort belong map. the map not have repeat.
+	/* Becouse is a type basic. if not the sort belong map. the map not have repeat. */
 	sort_new.set_type_basic(true);
 	add_sort(sort_new);
 	map<string,Sort>::iterator it = ag_sort.find(name_sort);
@@ -305,4 +305,4 @@ void Attr_grammar::load_attributes(Symbol &symb)
 	}
 }
 
-} // end genevalmag
+} /* end genevalmag */

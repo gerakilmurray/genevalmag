@@ -33,11 +33,48 @@ class Semantic_check
 		  */
 		unsigned short index_syntax_order;
 
-		void correct_subtree(Ast_function** subtree, int index_root_subtree);
+		/**
+		  * Check and correct the precendence of the operator in a subtree.
+		  */
+		void correct_subtree(Ast_function **subtree, int index_root_subtree);
 
 	public:
+		/**
+		  * Contructor empty of Semantic check.
+		  */
 		Semantic_check();
+
+		/**
+		  * Destructor of Semantic check.
+		  */
 		~Semantic_check();
+
+		/**
+		  * Returns the precedence level.
+		  */
+		unsigned short get_precedence_level() const;
+		/**
+		  * Returns the current index of the syntax order.
+		  */
+	    unsigned short get_index_syntax_order() const;
+
+	    /**
+		  * Increment the level because a new parenthesis opening.
+		  */
+		void increment_precedence_level();
+		/**
+		  * Decrement the level because a parenthesis closing.
+		  */
+		void decrement_precedence_level();
+		/**
+		  * Increment the syntax order global.
+		  */
+		void increment_index_syntax_order();
+
+	    /**
+		  * Resets all variables that affect in the precedence analisys.
+		  */
+		void reset_semantic_context();
 
 		/**
 		  * Checking from the root of the expression tree to the leaves, which all
@@ -52,7 +89,7 @@ class Semantic_check
 		  *   - The syntactic order of the expression is not altered.
 		  *   - The operation with higher precedence apply first.
 		  */
-		void correct_precedence(Ast_function ** root_tree);
+		void correct_precedence(Ast_function **root_tree);
 
 		/**
 		  * Controls around the tree, that any operator who applies more than once on
@@ -60,13 +97,13 @@ class Semantic_check
 		  * If it detects conflicts modifying the expression tree with rotations and
 		  * resources to continue controlling.
 		  */
-		void correct_associativity(Ast_function ** root_tree);
+		void correct_associativity(Ast_function **root_tree);
 
 		/**
 		  * Verifies that all non-terminals in the grammar has defines in a rule.
 		  * That is, it is the left value of some rule of grammar.
 		  */
-		bool check_all_defined_non_terminal(const map <unsigned short, Rule> rules, const map <string, Symbol> symbols);
+		bool check_all_defined_non_terminal(const map <unsigned short, Rule> &rules, const map <string, Symbol> &non_terminals);
 
 		/**
 		  * Computes the boolean adjacency matrix of all the rules of the attributes grammar,
@@ -75,30 +112,13 @@ class Semantic_check
 		  */
 		bool check_reachability(const map <unsigned short, Rule> &rules, const map <string, Symbol> &non_terminals, const Symbol *init_symbol);
 
-		bool check_well_defined_AG(const map <unsigned short, Rule> rules);
-
 		/**
-		  * Increment the level because a new parenthesis opening.
+		  * Checks that all synthetized attributes of the left symbols of all rule are defined with an equation.
+		  * And all inherit attributes of all right symbol too.
 		  */
-		void increment_precedence_level();
-
-		/**
-		  * Decrement the level because a parenthesis closing.
-		  */
-		void decrement_precedence_level();
-
-		void increment_index_syntax_order();
-
-		/**
-		  * Resets all variables that affect in the precedence analisys.
-		  */
-		void reset_semantic_context();
-
-	    unsigned short get_precedence_level() const;
-
-	    unsigned short get_index_syntax_order() const;
+		bool check_well_defined_AG(const map <unsigned short, Rule> &rules);
 };
 
-}// namespace.
+} /* end genevalmag */
 
 #endif

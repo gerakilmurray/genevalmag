@@ -133,6 +133,6 @@ void increment_level(char name);
 
 void decrement_level(char name);
 
-} // namespace
+} /* end genevalmag */
 
 #endif

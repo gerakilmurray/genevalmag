@@ -6,9 +6,6 @@
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-//#include <boost/graph/depth_first_search.hpp>
-//#include <boost/graph/visitors.hpp>
-
 #include <iostream>
 
 #include "Builder_plan.h"
@@ -39,9 +36,12 @@ void Builder_plan::build_plans(const Attr_grammar &attr_grammar)
 	cout << "DCG" << endl;
 	b_graphs.compute_adp_graph(attr_grammar);
 	cout << "ADP" << endl;
-	b_graphs.print_all_graphs(attr_grammar.get_rules());
-	cout << "PRINT" << endl;
+
 	b_graphs.check_cyclic_adp_dependencies();
 	cout << "CHECK CYCLES" << endl;
+
+	b_graphs.print_all_graphs(attr_grammar.get_rules());
+	cout << "PRINT" << endl;
 }
-} // end genevalmag
+
+} /* end genevalmag */

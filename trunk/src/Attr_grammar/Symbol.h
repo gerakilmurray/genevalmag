@@ -29,14 +29,14 @@ enum symbol_type
 class Symbol
 {
 	private:
-		string				symb_name;
-		symbol_type			symb_type;
+		string						symb_name;
+		symbol_type					symb_type;
 		vector<const Attribute*>	symb_attrs;
 
 		/**
 		  * Method of copy the symbol, STL-like C++.
 		  */
-		void copy(Symbol const &other);
+		void copy(const Symbol &other);
 		/**
 		  * Method destroy symbol, STL-like C++.
 		  */
@@ -44,89 +44,89 @@ class Symbol
 
 	public:
 		/**
-		  * Constructor empty of symbol.
+		  * Constructor empty of Symbol.
 		  */
 		Symbol();
 		/**
-		  * Constructor with name and type of symbol.
+		  * Constructor with name and type of Symbol.
 		  */
-		Symbol(string name, symbol_type type);
+		Symbol(string &name, symbol_type type);
 		/**
-		  * Constructor copy of symbol.
+		  * Constructor copy of Symbol.
 		  */
-		Symbol(Symbol const &other);
+		Symbol(const Symbol &other);
 
 		/**
-		  * Destructor of symbol.
+		  * Destructor of Symbol.
 		  */
 		virtual ~Symbol();
 
 		/**
-		  * Operator assign(=) of symbol.
+		  * Operator assign(=) of Symbol.
 		  */
-		Symbol &operator=(Symbol const &other);
+		Symbol &operator=(const Symbol &other);
 
 		/**
-		  * Return the name of the symbol.
+		  * Returns the name of the Symbol.
 		  */
 		string get_name() const;
 		/**
-		  * Return the type of the symbol.
+		  * Returns the type of the Symbol.
 		  */
 		symbol_type get_type() const;
 		/**
-		  * Return the list of attributes of the symbol.
+		  * Returns the list of attributes of the Symbol.
 		  */
 		const vector<const Attribute*> &get_attrs() const;
 		/**
-		  * Find in the list of attribute of the symbol and return the attribute with
-		  * that name passed as parameter.
+		  * Find in the list of attribute of the Symbol and
+		  * returns the attribute with that name passed as parameter.
 		  */
-		const Attribute *get_attribute(string name_attr) const;
+		const Attribute *get_attribute(const string &name_attr) const;
+
 		/**
-		  * Set the name of the symbol.
+		  * Sets the name of the Symbol.
 		  */
 		void set_name(string name);
 		/**
-		  * Set the type of the symbol.
+		  * Sets the type of the Symbol.
 		  */
 		void set_type(symbol_type type);
 
 		/**
-		  * Enqueue a attribute in the list of the symbol.
+		  * Enqueue a attribute in the list of the Symbol.
 		  */
 		void add_attr(const Attribute *attr);
 
 		/**
-		  * Return true if the symbol's type is Non Terminal.
+		  * Returns true if the Symbol's type is Non Terminal.
 		  */
 		bool is_non_terminal() const;
 
 		/**
-		  * Generate and return a string reprensentation of a symbol.
+		  * Generates and returns a string reprensentation of a Symbol.
 		  *
-		  * Result= "symbol" name type ";"
+		  * Result= "symbol" \<name\> \<type\> ";"
 		  *
-		  * where if 'type' is Non Terminal, then list the attributes of the symbol.
+		  * where if \<type\> is Non Terminal, then list the attributes of the symbol.
 		  *
 		  * list = "Attributes:" attr_1 "," ... "," attr_n
 		  */
 		string to_string() const;
 
 		/**
-		  * Compares the symbol with other.
+		  * Compares the Symbol with other.
 		  */
-		bool equals(Symbol const &other) const;
+		bool equals(const Symbol &other) const;
 
 		/**
-		  * Generate and return the string key that identifies a symbol definitely.
+		  * Generates and returns the string key that identifies a Symbol definitely.
 		  *
-		  * Result= name
+		  * Result= \<name\>
 		  */
 		string key() const;
-
 };
 
-} // end genevalmag
+} /* end genevalmag */
 
 #endif /* SYMBOL_H_ */

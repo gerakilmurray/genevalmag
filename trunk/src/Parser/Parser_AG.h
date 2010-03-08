@@ -35,6 +35,6 @@ class Parser_AG
 	bool parse_grammar(char const *txt_input);
 };
 
-} // namespace
+} /* end genevalmag */
 
 #endif /* PARSER_AG_H_ */

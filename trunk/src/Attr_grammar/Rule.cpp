@@ -17,8 +17,8 @@ namespace genevalmag
 vector<Equation*> index_access_eq;
 
 #ifdef _DEBUG
-	// Numbers of symbols current in the system.
-	static int rules = 0;
+	/* Numbers of symbols current in the system. */
+	static int rules(0);
 #endif
 
 /**
@@ -34,7 +34,7 @@ Rule::Rule()
 /**
   * Constructor copy of rule.
   */
-Rule::Rule(Rule const &other)
+Rule::Rule(const Rule &other)
 {
 	copy(other);
 
@@ -53,14 +53,16 @@ Rule::~Rule()
 	#ifdef _DEBUG
 		rules--;
 		if(rules == 0)
+		{
 			cout << rules << " -> Rules" << endl;
+		}
 	#endif
 }
 
 /**
   * Operator assign(=) of rule.
   */
-Rule &Rule::operator=(Rule const &other)
+Rule &Rule::operator=(const Rule &other)
 {
 	if(this != &other)
 	{
@@ -73,7 +75,7 @@ Rule &Rule::operator=(Rule const &other)
 /**
   * Method of copy the rule, STL-like C++.
   */
-void Rule::copy(Rule const &other)
+void Rule::copy(const Rule &other)
 {
 	r_id			= other.key();
 	r_left_symbol	= other.get_left_symbol();
@@ -146,7 +148,7 @@ void Rule::add_right_symbol(const Symbol *right_symb)
 
 bool Rule::defined_equation(const Equation &eq) const
 {
-	for(map<unsigned short,Equation>::const_iterator it = r_eqs.begin(); it != r_eqs.end(); it++)
+	for(map<unsigned short,Equation>::const_iterator it(r_eqs.begin()); it != r_eqs.end(); it++)
 	{
 		if (it->second.get_l_value()->equals_with_index(eq.get_l_value()))
 			return true;
@@ -160,7 +162,7 @@ bool Rule::belongs_non_terminal(const Symbol &non_term) const
 	{
 		return true;
 	}
-	for(vector<const Symbol*>::size_type i = 0; i < r_right_side.size(); i++)
+	for(vector<const Symbol*>::size_type i(0); i < r_right_side.size(); i++)
 	{
 		if (non_term.equals(*r_right_side.at(i)))
 		{
@@ -179,8 +181,9 @@ bool Rule::add_eq(Equation &eq)
 
 	if (defined_equation(eq))
 	{
-		// The equation is already defined then it isn't inserted.
-		// The map does not accept the overhead of the equations.
+		/* The equation is already defined then it isn't inserted.
+		 * The map does not accept the overhead of the equations.
+		 */
 		return false;
 	}
 
@@ -192,22 +195,22 @@ bool Rule::add_eq(Equation &eq)
 }
 
 /**
-  * Generate and return a string reprensentation of a rule.
+  * Generate and return a string reprensentation of a Rule.
   *
-  * Result= left_symbol "::=" right_side
+  * Result= \<left_symbol\> "::=" \<right_side\>
   * 									"compute"
   *												eq_1
   * 											...
   * 											eq_n
   * 									"end;"
   *
-  * where right_ride is= symbol_1 " " ... " " symbol_n
+  * where \<right_ride\> is= symbol_1 " " ... " " symbol_n
   */
 string Rule::to_string() const
 {
 	string rule(to_string_not_eqs());
 	if(!r_eqs.empty())
-	// if r_eqs is empty not show it the compute's block.
+	/* If r_eqs is empty not show it the compute's block. */
 	{
 		rule.append("\n\t\t\tcompute\n");
 		for(map<unsigned short,Equation>::const_iterator it = r_eqs.begin(); it != r_eqs.end(); it++)
@@ -253,7 +256,7 @@ string Rule::to_string_not_eqs() const
 /**
   * Compares the rule with other.
   */
-bool Rule::equals(Rule const &other) const
+bool Rule::equals(const Rule &other) const
 {
 	if(r_left_symbol->equals(*(other.get_left_symbol())))
 	{
@@ -286,7 +289,7 @@ unsigned short Rule::key() const
 
 int Rule::count_non_terminal(const Symbol *symb) const
 {
-	int count = 0;
+	int count(0);
 	if(symb->equals(*r_left_symbol))
 	{
 		count++;
@@ -317,4 +320,4 @@ vector<const Symbol*> Rule::get_non_terminals_right_side() const
 	return result;
 }
 
-} // end genevalmag
+} /* end genevalmag */

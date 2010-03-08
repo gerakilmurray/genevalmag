@@ -39,141 +39,136 @@ enum oper_assoc
 
 class Function
 {
-private:
-	string 			f_name;
-	vector <const Sort*>	f_domain;
-	const Sort*			f_image;
-	oper_mode		f_mod;
-	unsigned short 	f_prec;
-	oper_assoc 		f_assoc;
-	/**
-	  * If that value is TRUE then the object function is a operator.
-	  * This can be: prefix, infix or postfix.
-	  */
-	bool			f_is_operator;
+	private:
+		string 					f_name;
+		vector <const Sort*>	f_domain;
+		const Sort*				f_image;
+		oper_mode				f_mod;
+		unsigned short 			f_prec;
+		oper_assoc 				f_assoc;
+		/**
+		  * If that value is TRUE then the object function is a operator.
+		  * This can be: prefix, infix or postfix.
+		  */
+		bool			f_is_operator;
 
-	/**
-	  * Method of copy the function, STL-like C++.
-	  */
-	void copy(const Function &other);
-	/**
-	  * Method destroy function, STL-like C++.
-	  */
-	void destroy();
-public:
-	/**
-	  * Contructor empty of function.
-	  */
-	Function();
-	/**
-	  * Contructor copy of function.
-	  */
-	Function(Function const &other);
+		/**
+		  * Method of copy the function, STL-like C++.
+		  */
+		void copy(const Function &other);
+		/**
+		  * Method destroy function, STL-like C++.
+		  */
+		void destroy();
+	public:
+		/**
+		  * Contructor empty of function.
+		  */
+		Function();
+		/**
+		  * Contructor copy of function.
+		  */
+		Function(const Function &other);
 
-	/**
-	  * Destructor of the function.
-	  */
-	virtual ~Function();
+		/**
+		  * Destructor of the function.
+		  */
+		virtual ~Function();
 
-	/**
-	  * Operator assign(=) of function.
-	  */
-	Function &operator=(Function const &other);
+		/**
+		  * Operator assign(=) of function.
+		  */
+		Function &operator=(const Function &other);
 
-	/**
-	  * Return the name of the function.
-	  */
-	string get_name() const;
-	/**
-	  * Return the domain of the function.
-	  */
-	const vector<const Sort*> &get_domain() const;
-	/**
-	  * Return the image of the function.
-	  */
-	const Sort *get_image() const;
-	/**
-	  * Return the mode of the operator.
-	  */
-	oper_mode get_mode() const;
-	/**
-	  * Return the precedence of the operator.
-	  */
-	unsigned short get_prec() const;
-	/**
-	  * Return the associativity of the operator.
-	  */
-	oper_assoc get_oper_assoc() const;
-	/**
-	  * Return the arity of function.
-	  */
-	int get_arity() const;
+		/**
+		  * Returns the name of the Function.
+		  */
+		string get_name() const;
+		/**
+		  * Returns the domain of the Function.
+		  */
+		const vector<const Sort*> &get_domain() const;
+		/**
+		  * Returns the image of the Function.
+		  */
+		const Sort *get_image() const;
+		/**
+		  * Returns the mode of the operator.
+		  */
+		oper_mode get_mode() const;
+		/**
+		  * Returns the precedence of the operator.
+		  */
+		unsigned short get_prec() const;
+		/**
+		  * Returns the associativity of the operator.
+		  */
+		oper_assoc get_oper_assoc() const;
+		/**
+		  * Returns the arity of Function.
+		  */
+		int get_arity() const;
 
-	/**
-	  * Set the name of the function.
-	  */
-	void set_name(string name);
-	/**
-	  * Set the full sort domain of the function.
-	  */
-	void set_domain(vector<const Sort*> domain);
-	/**
-	  * Set the sort image of the function.
-	  */
-	void set_image(const Sort *image);
-	/**
-	  * Set the mode of the operator.
-	  * @param mode: string
-	  */
-	void set_mode(string mode);
-	/**
-	  * Set the precedence of the operator.
-	  */
-	void set_prec(unsigned short prec);
-	/**
-	  * Set the associativity of the operator.
-	  */
-	void set_oper_assoc(string assoc);
-	/**
-	  * Set the boolean attribute with the parameter.
-	  */
-	void set_is_operator(bool value);
-	/**
-	  * Enqueue a sort in the domain of the function.
-	  */
-	void add_domain(const Sort *sort);
+		/**
+		  * Sets the name of the Function.
+		  */
+		void set_name(string name);
+		/**
+		  * Sets the sort image of the Function.
+		  */
+		void set_image(const Sort *image);
+		/**
+		  * Sets the mode of the operator.
+		  * @param mode: string
+		  */
+		void set_mode(string mode);
+		/**
+		  * Sets the precedence of the operator.
+		  */
+		void set_prec(unsigned short prec);
+		/**
+		  * Sets the associativity of the operator.
+		  */
+		void set_oper_assoc(string assoc);
+		/**
+		  * Sets the boolean attribute with the parameter.
+		  */
+		void set_is_operator(bool value);
 
-	/**
-	  * Generate and return a string reprensentation of a function.
-	  *
-	  * Result= "function" name ":" domain "->" image ";"
-	  *
-	  * where domain is= sort_1 ["(" instance ")" IF DEBUG IS ON] "," ... "," sort_n ["(" instance ")" IF DEBUG IS ON]
-	  */
-	string to_string() const;
+		/**
+		  * Enqueue a sort in the domain of the Function.
+		  */
+		void add_domain(const Sort *sort);
 
-	/**
-	  * Return true if the function is a Operator.
-	  */
-	bool is_operator() const;
-	/**
-	  * Compares the function with other.
-	  */
-	bool equals(Function const &other) const;
+		/**
+		  * Generates and returns a string reprensentation of a Function.
+		  *
+		  * Result= "function" \<name\> ":" \<domain\> "->" \<image\> ";"
+		  *
+		  * where \<domain\> is= sort_1 ["(" \<instance\> ")" IF DEBUG IS ON] "," ... "," sort_n ["(" \<instance\> ")" IF DEBUG IS ON]
+		  */
+		string to_string() const;
 
-	/**
-	  * Generate and return the string key that identifies a function definitely.
-	  *
-	  * Result= name domain image
-	  *
-	  * where domain is= sort_1 ... sort_n
-	  */
-	string key() const;
+		/**
+		  * Returns true if the Function is a Operator.
+		  */
+		bool is_operator() const;
 
-//	void purge();
+		/**
+		  * Compares the Function with other.
+		  */
+		bool equals(const Function &other) const;
 
+		/**
+		  * Generates and returns the string key that identifies a Function definitely.
+		  *
+		  * Result= \<name\> \<domain\> \<image\>
+		  *
+		  * where \<domain\> is = sort_1 ... sort_n
+		  */
+		string key() const;
 };
 
-} // end genevalmag
+} /* end genevalmag */
 
 #endif /* FUNCTION_H_ */

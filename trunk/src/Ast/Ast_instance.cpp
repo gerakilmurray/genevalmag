@@ -19,6 +19,9 @@ namespace genevalmag
 	static int ast_instances(0);
 #endif
 
+/**
+  * Constructor empty of Ast_instance.
+  */
 Ast_instance::Ast_instance()
 {
 	parent		= NULL;
@@ -29,7 +32,10 @@ Ast_instance::Ast_instance()
 	#endif
 }
 
-Ast_instance::Ast_instance(Ast_instance const &other)
+/**
+  * Constructor copy of Ast_instance.
+  */
+Ast_instance::Ast_instance(const Ast_instance &other)
 {
 	copy(other);
 
@@ -38,6 +44,9 @@ Ast_instance::Ast_instance(Ast_instance const &other)
 	#endif
 }
 
+/**
+  * Destructor of Ast_instance.
+  */
 Ast_instance::~Ast_instance()
 {
 	destroy();
@@ -51,7 +60,10 @@ Ast_instance::~Ast_instance()
 	#endif
 }
 
-Ast_instance &Ast_instance::operator=(Ast_instance const &other)
+/**
+  * Operator assign(=) of Ast_instance.
+  */
+Ast_instance &Ast_instance::operator=(const Ast_instance &other)
 {
 	if(this != &other)
 	{
@@ -61,13 +73,10 @@ Ast_instance &Ast_instance::operator=(Ast_instance const &other)
 	return *this;
 }
 
-void Ast_instance::destroy()
-{
-	i_symb = NULL;
-	i_attr = NULL;
-}
-
-void Ast_instance::copy(Ast_instance const &other)
+/**
+  * Method of copy the Ast_instance, STL-like C++.
+  */
+void Ast_instance::copy(const Ast_instance &other)
 {
 	i_symb				= other.get_symb();
 	i_num				= other.get_num();
@@ -77,38 +86,65 @@ void Ast_instance::copy(Ast_instance const &other)
 	type_synthetized	= other.get_type_synthetized();
 }
 
+/**
+  * Method destroy Ast_instance, STL-like C++.
+  */
+void Ast_instance::destroy()
+{
+	i_symb = NULL;
+	i_attr = NULL;
+}
+
+/**
+  * Returns the attribute pointer of the Ast_instance.
+  */
 const Attribute *Ast_instance::get_attr() const
 {
 	return i_attr;
 }
 
+/**
+  * Returns the number of the Ast_instance.
+  */
 unsigned short Ast_instance::get_num() const
 {
 	return i_num;
 }
 
+/**
+  * Returns the symbol pointer of the Ast_instance.
+  */
 const Symbol *Ast_instance::get_symb() const
 {
 	return i_symb;
 }
 
+/**
+  * Sets the attribute pointer of the Ast_instance.
+  */
 void Ast_instance::set_attr(const Attribute *attr)
 {
 	i_attr = attr;
 }
 
+/**
+  * Sets the number of the Ast_instance.
+  */
 void Ast_instance::set_num(unsigned short num)
 {
 	i_num = num;
 }
 
+/**
+  * Sets the symbol pointer of the Ast_instance.
+  */
 void Ast_instance::set_symb(const Symbol *symb)
 {
 	i_symb = symb;
 }
 
 /**
-  * Generate and return a string reprensentation of a instance.
+  * Generate and return a string reprensentation of a Ast_instance.
   *
   * Result= \<symbol\>"["\<number\>"]."\<attribute\>
   *
@@ -134,6 +170,7 @@ string Ast_instance::to_string() const
 
 /**
   * Compares the Ast_instance with other.
+  * Respects Symbol, attribute and number.
   */
 bool Ast_instance::equals_with_index(const Ast_instance *other) const
 {

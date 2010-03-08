@@ -19,6 +19,7 @@
 #include "../Attr_grammar/Attr_grammar.h"
 
 using namespace boost;
+
 namespace genevalmag
 {
 
@@ -34,27 +35,29 @@ typedef adjacency_list<hash_setS, vecS, directedS, property_vertex_dp > Dp_graph
 class Builder_graphs
 {
 	private:
-		// Store the DP graphs. The key corresponds to the key Rule.
+		/* Store the DP graphs. The key corresponds to the key Rule. */
 		map <unsigned short, Dp_graph> p_Dp_graphs;
 
-		// Store the vertex-attr graphs. The key corresponds to the key Symbol.
+		/* Store the vertex-attr graphs. The key corresponds to the key Symbol. */
 		map <string, Dp_graph> attr_vertex_graphs;
 
-		// Store the down graphs. The key corresponds to the key Symbol.
+		/* Store the down graphs. The key corresponds to the key Symbol. */
 		map <string, Dp_graph> p_Down_graphs;
 
-		// Store the dcg graphs. The key corresponds to the key Rule.
+		/* Store the dcg graphs. The key corresponds to the key Rule. */
 		map <unsigned short, Dp_graph> p_Dcg_graphs;
 
-		// Store the adp graphs. The key corresponds to the key Rule.
+		/* Store the adp graphs. The key corresponds to the key Rule with the inferior context*/
 		map <vector<unsigned short>, Dp_graph> p_Adp_graphs;
 
+		/* Store the adp graphs. The key corresponds to the key Rule with the inferior context*/
+		map <vector<unsigned short>, Dp_graph> p_Adp_subgraphs_cyclics;
 
 		/**
 		  * Projects a graph with only vertex that belongs to symbol "symb".
 		  * Modifies the parameter "graph".
 		  */
-		void project_graph(const Symbol * symb, Dp_graph &graph);
+		void project_graph(const Symbol *symb, Dp_graph &graph);
 
 		/**
 		  * Builds a graph for each symbol of the grammar with all atributes.
@@ -64,29 +67,76 @@ class Builder_graphs
 		  */
 		void compute_attr_vertex(const map<string,Symbol> &symbols);
 
+		/**
+		  * Generate all combinations of the rules and saves a graph ADP for each of them.
+		  */
 		void combined_inf_contexts(const Rule* rule, Dp_graph &graph, vector< vector<const Rule*> > &inf_context, size_t index_to_combine);
 
 	public:
 
+		/**
+		  * Constructor empty of Builder graphs.
+		  */
 		Builder_graphs();
 
+		/**
+		  * Destructor empty of Builder graphs.
+		  */
 		~Builder_graphs();
 
+		/**
+		  * Returns the map with all ADP graphs creates.
+		  */
 		map<vector<unsigned short>, Dp_graph> &get_adp_graphs();
 
+		/**
+		  * Algorithm DP
+		  * Builds a graph dp for each rule of the grammar.
+		  * Ex: E:= E + T
+		  * 	graph: 	vertex: E,T
+		  * 			Edges: 	E --> E
+		  * 					T---> E
+		  */
 		void compute_dependency_graphs(const map<unsigned short, Rule> &rules);
 
+		/**
+		  * Algorithm Down
+		  * Builds the graphs down for each symbol of the grammar.
+		  * Ex: Down(E) :
+		  * 	(1) E:= E + T.
+		  * 	graph G: DP(1) U Down(E) U Down(T)
+		  * 	Project(G,{attributes of E})
+		  */
 		void compute_down_graph(const map<string, Symbol> &symbols, const map<unsigned short, Rule> &rules);
 
+		/**
+		  * Algorithm DCG
+		  * Builds the graph Dcg for each rule of the grammar.
+		  * Ex: Dcg E(1) :
+		  * 	(1) E:= E + T.
+		  * 	graph G: DP(1) U Down(E) U Down(T)
+		  * 	Project(G,{attributes of E})
+		  */
 		void compute_dcg(const map<unsigned short, Rule> &rules);
 
+		/**
+		  * Algorithm ADP
+		  * Builds the graphs ADP for each rule of the grammar.
+		  * Ex: ADP(1):
+		  * 	(1) E:= E + T.
+		  * 	graph G: DP(1) U Dcg E (J1..JN) U Dcg T (K1..KM)
+		  * 	Where Ji y ki are rule with left-symbol E and T respectly.
+		  */
 		void compute_adp_graph(const Attr_grammar &grammar);
 
-		void print_all_graphs(const map<unsigned short, Rule> &rules);
-
 		void check_cyclic_adp_dependencies();
+
+		/**
+		  * Prints all graphs generates: DP, Down, DCG and ADP.
+		  */
+		void print_all_graphs(const map<unsigned short, Rule> &rules);
 };
 
-} // end genevalmag
+} /* end genevalmag */
 
 #endif /* BUILDER_GRAPHS_H_ */
