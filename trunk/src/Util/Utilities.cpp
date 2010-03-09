@@ -1,30 +1,25 @@
 /**
-  *  \file		Utilities_graph.hpp
+  *  \file		Utilities.hpp
   *  \brief
   *  \date		08/03/2010
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-#ifndef UTILITIES_GRAPH_HPP_
-#define UTILITIES_GRAPH_HPP_
-
 #include <fstream>
 
 #include <boost/graph/graphviz.hpp>
+#include <boost/graph/transitive_closure.hpp>
 
-using namespace std;
+#include "Utilities.h"
+
 using namespace boost;
+using namespace genevalmag;
 
-namespace genevalmag
+namespace utilities
 {
 
 const string PATH_OUTPUT_FILE ("./src/out_graph/");
-const string FILE_DP_GRAPH ("_dp_graph");
-const string FILE_DOWN_GRAPH ("_down_graph");
-const string FILE_DCG_GRAPH ("_dcg_graph");
-const string FILE_ADP_GRAPH ("_adp_graph");
-const string FILE_ADP_SUBGRAPH_CYCLIC ("_adp_subgraph_with_cyclic");
 
 /**
   * Remove and create the output folder of files .dot and .png.
@@ -118,6 +113,7 @@ void print_graph(const Dp_graph &graph, const string name_file, const string nam
 		cerr << "ERROR: DOT program can not generate the PNG image." << endl;
 	}
 }
+
 /**
   * Prints a graph in the standart output (std:cout).
   */
@@ -146,7 +142,7 @@ void print_graph_txt(const Dp_graph &graph)
   * Given a graph and node, returns the vertex descriptor of node in the graph.
   * If not search it, so returns USHRT_MAX.
   */
-Dp_graph::vertex_descriptor return_vertex(const Dp_graph &graph,const Ast_leaf *node)
+Dp_graph::vertex_descriptor return_vertex(const Dp_graph &graph, const Ast_leaf *node)
 {
 	property_map<Dp_graph, vertex_data_t>::const_type props(get(vertex_data_t(), graph));
 	for(size_t i(0); i < num_vertices(graph); i++)
@@ -157,6 +153,80 @@ Dp_graph::vertex_descriptor return_vertex(const Dp_graph &graph,const Ast_leaf *
 	return USHRT_MAX;
 }
 
-} /* end genevalmag */
+/**
+  * Joins graph1 and graph2 in graph_merged.
+  */
+void merge_graph(const Dp_graph &graph1, const Dp_graph &graph2, Dp_graph &graph_merged)
+{
+	/* Cleans the result graph. */
+	graph_merged.clear();
 
-#endif
+	/* Copies the graph1 to result graph. */
+	graph_merged = graph1;
+
+	/* Join the graph2 to result graph. */
+	property_map<Dp_graph, vertex_data_t>::const_type props(get(vertex_data_t(), graph2));
+	property_map<Dp_graph, vertex_data_t>::type props_merged(get(vertex_data_t(), graph_merged));
+	/* Circle for vertices. */
+	for(size_t i(0); i < num_vertices(graph2); i++)
+	{
+		Dp_graph::vertex_descriptor vertex(return_vertex(graph_merged,props[i]));
+		if (vertex == USHRT_MAX)
+		{
+			/* The vertex is new in the graph. */
+			vertex = add_vertex(graph_merged);
+			put(props_merged,vertex,props[i]);
+		}
+	}
+	/* Cicle for edges. */
+	graph_traits<Dp_graph>::edge_iterator ei, ei_end;
+	for (tie(ei,ei_end) = edges(graph2); ei != ei_end; ++ei)
+	{
+		Dp_graph::vertex_descriptor source_vertex(source(*ei, graph2));
+		Dp_graph::vertex_descriptor target_vertex(target(*ei, graph2));
+
+		Dp_graph::vertex_descriptor desc_source(return_vertex(graph_merged,props[source_vertex]));
+		Dp_graph::vertex_descriptor desc_target(return_vertex(graph_merged,props[target_vertex]));
+
+		add_edge(desc_source,desc_target,graph_merged);
+	}
+}
+
+/**
+  * Projects a graph with only vertex that belongs to symbol "symb".
+  * Modifies the parameter "graph".
+  */
+void project_graph(const Symbol *symb, Dp_graph &graph)
+{
+	/* Applies transitivity to graph with only nodes of symb. */
+	warshall_transitive_closure(graph);
+
+	property_map<Dp_graph, vertex_data_t>::type props(get(vertex_data_t(), graph));
+	/* Reduces the graph for symbol "symb". */
+	for (size_t i(num_vertices(graph)); i > 0; i--)
+	{
+		const Ast_instance *ins(dynamic_cast<const Ast_instance*>(props[i-1]));
+		if (!ins || !ins->get_symb()->equals(*symb))
+		/* The node is a literal-node or is a node with symbol diferent that symb. */
+		{
+			clear_vertex(i-1, graph);
+			remove_vertex(i-1, graph);
+		}
+	}
+}
+
+
+/**
+  * Remove tabs and replace for spaces.
+  */
+string cleaning_tabs(const string str)
+{
+	string aux("");
+	for(int i=0; str[i] != '\0'; i++)
+	{
+		aux.push_back((str[i] == '\t')? ' ': str[i]);
+	}
+	return aux;
+}
+
+} /* end utilities */

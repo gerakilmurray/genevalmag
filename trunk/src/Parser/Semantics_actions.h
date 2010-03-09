@@ -127,8 +127,6 @@ void create_root_prefix_node(char const *str, char const *end);
 
 void check_well_defined(char const *str, char const *end);
 
-string cleaning_tabs(const string str);
-
 void increment_level(char name);
 
 void decrement_level(char name);

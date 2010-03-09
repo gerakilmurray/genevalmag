@@ -98,6 +98,10 @@ public:
 	  */
 	const map<unsigned short, Rule>  &get_rules()const;
 	/**
+	  *  Return the rule on paramenter.
+	  */
+	const Rule  &get_rule(unsigned short index)const;
+	/**
 	  *  Return the map with all symbols.
 	  */
 	const map<string, Symbol> &get_non_terminal_symbols() const;

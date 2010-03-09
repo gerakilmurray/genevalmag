@@ -8,8 +8,11 @@
 
 #include <iostream>
 #include <sstream>
+#include <assert.h>
 
 #include "Rule.h"
+
+using namespace std;
 
 namespace genevalmag
 {
@@ -177,7 +180,7 @@ bool Rule::belongs_non_terminal(const Symbol &non_term) const
   */
 bool Rule::add_eq(Equation &eq)
 {
-	static unsigned short cant_eq = 1;
+	static unsigned short cant_eq(1);
 
 	if (defined_equation(eq))
 	{
@@ -190,7 +193,7 @@ bool Rule::add_eq(Equation &eq)
 	eq.set_id(cant_eq++);
 
 	pair<unsigned short,Equation> new_eq(eq.get_id(), eq);
-	pair<map<unsigned short, Equation>::iterator, bool > result = r_eqs.insert(new_eq);
+	pair<map<unsigned short, Equation>::iterator, bool > result(r_eqs.insert(new_eq));
 	return result.second;
 }
 
@@ -213,7 +216,7 @@ string Rule::to_string() const
 	/* If r_eqs is empty not show it the compute's block. */
 	{
 		rule.append("\n\t\t\tcompute\n");
-		for(map<unsigned short,Equation>::const_iterator it = r_eqs.begin(); it != r_eqs.end(); it++)
+		for(map<unsigned short,Equation>::const_iterator it(r_eqs.begin()); it != r_eqs.end(); it++)
 		{
 			rule.append("\t\t\t\t");
 			rule.append(it->second.to_string());
@@ -244,7 +247,7 @@ string Rule::to_string_not_eqs() const
 
 	rule.append(r_left_symbol->get_name());
 	rule.append("\t::=\t");
-	for(vector<const Symbol*>::size_type i = 0; i < r_right_side.size(); i++)
+	for(vector<const Symbol*>::size_type i(0); i < r_right_side.size(); i++)
 	{
 		rule.append(r_right_side[i]->get_name());
 		if(i+1 < r_right_side.size())
@@ -260,7 +263,7 @@ bool Rule::equals(const Rule &other) const
 {
 	if(r_left_symbol->equals(*(other.get_left_symbol())))
 	{
-		for(vector<const Symbol*>::size_type i = 0; i < r_right_side.size(); i++)
+		for(vector<const Symbol*>::size_type i(0); i < r_right_side.size(); i++)
 		{
 			if (!r_right_side[i]->equals(*(other.get_right_side()[i])))
 			{
@@ -294,7 +297,7 @@ int Rule::count_non_terminal(const Symbol *symb) const
 	{
 		count++;
 	}
-	for(vector<const Symbol*>::size_type i = 0; i < r_right_side.size(); i++)
+	for(vector<const Symbol*>::size_type i(0); i < r_right_side.size(); i++)
 	{
 		if (r_right_side[i]->is_non_terminal() && symb->equals(*r_right_side[i]))
 		{
@@ -310,7 +313,7 @@ int Rule::count_non_terminal(const Symbol *symb) const
 vector<const Symbol*> Rule::get_non_terminals_right_side() const
 {
 	vector<const Symbol*> result;
-	for(vector<const Symbol*>::size_type i = 0; i < r_right_side.size(); i++)
+	for(vector<const Symbol*>::size_type i(0); i < r_right_side.size(); i++)
 	{
 		if (r_right_side[i]->is_non_terminal())
 		{
@@ -319,5 +322,24 @@ vector<const Symbol*> Rule::get_non_terminals_right_side() const
 	}
 	return result;
 }
+
+unsigned short Rule::get_index_eq(const Ast_instance *ins) const
+{
+	for(map<unsigned short,Equation>::const_iterator it(r_eqs.begin()); it != r_eqs.end(); it++)
+	{
+		if (it->second.get_l_value()->equals(ins))
+		{
+			return it->first;
+		}
+	}
+	return 0;
+}
+
+const Ast_instance *Rule::get_eq_l_value(unsigned short index) const
+{
+	assert(index > 1 && index < r_eqs.size() +1);
+	return r_eqs.find(index)->second.get_l_value();
+}
+
 
 } /* end genevalmag */

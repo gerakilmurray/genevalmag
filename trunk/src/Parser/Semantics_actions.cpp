@@ -15,6 +15,7 @@
 #include "../Ast/Ast_instance.h"
 #include "../Ast/Ast_literal.h"
 #include "../Ast/Ast_function.h"
+#include "../Util/Utilities.h"
 
 using namespace std;
 
@@ -264,7 +265,7 @@ void create_instance(char const *str, char const *end)
 
 	if (!current_rule->belongs_non_terminal(*symb))
 	{
-		cerr << "ERROR: non-terminal symbol \"" << name << "\" used does not belong to the rule: \"" << cleaning_tabs(current_rule->to_string_not_eqs())<< "\"."<< endl;
+		cerr << "ERROR: non-terminal symbol \"" << name << "\" used does not belong to the rule: \"" << utilities::cleaning_tabs(current_rule->to_string_not_eqs())<< "\"."<< endl;
 		exit(-1);
 	}
 
@@ -391,9 +392,9 @@ void save_rvalue(char const *str, char const *end)
 
 	if (!current_rule->add_eq(*current_eq))
 	{
-		cerr << "WARNING: Ignores the eq \"" << cleaning_tabs(current_eq->to_string()) << "\" duplicate definition for \""
-				<< cleaning_tabs(current_eq->get_l_value()->to_string()) << "\" in rule: --> \""
-				<< cleaning_tabs(current_rule->to_string_not_eqs()) << "\"" << endl;
+		cerr << "WARNING: Ignores the eq \"" << utilities::cleaning_tabs(current_eq->to_string()) << "\" duplicate definition for \""
+				<< utilities::cleaning_tabs(current_eq->get_l_value()->to_string()) << "\" in rule: --> \""
+				<< utilities::cleaning_tabs(current_rule->to_string_not_eqs()) << "\"" << endl;
 	}
 	delete(current_eq);
 
@@ -632,19 +633,6 @@ void check_well_defined(char const *str, char const *end)
 	sem_check->check_reachability(attr_grammar->get_rules(), attr_grammar->get_non_terminal_symbols(), attr_grammar->get_initial_symb());
 
 	sem_check->check_well_defined_AG(attr_grammar->get_rules());
-}
-
-/**
-  * Remove tabs and replace for spaces.
-  */
-string cleaning_tabs(const string str)
-{
-	string aux("");
-	for(int i=0; str[i] != '\0'; i++)
-	{
-		aux.push_back((str[i] == '\t')? ' ': str[i]);
-	}
-	return aux;
 }
 
 void increment_level(char name)

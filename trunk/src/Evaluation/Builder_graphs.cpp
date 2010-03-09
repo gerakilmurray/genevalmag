@@ -23,22 +23,24 @@
 #include <utility>
 
 #include <boost/graph/graphviz.hpp>
-#include <boost/graph/transitive_closure.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include <boost/graph/visitors.hpp>
 
 #include "Builder_graphs.h"
-#include "Utilities_graph.hpp"
-#include "../Attr_grammar/Symbol.h"
-#include "../Attr_grammar/Attr_grammar.h"
-#include "../Parser/Semantics_actions.h"
+#include "../Util/Utilities.h"
 
-
-using namespace boost;
 using namespace std;
+using namespace boost;
+using namespace utilities;
 
 namespace genevalmag
 {
+
+const string FILE_DP_GRAPH ("_dp_graph");
+const string FILE_DOWN_GRAPH ("_down_graph");
+const string FILE_DCG_GRAPH ("_dcg_graph");
+const string FILE_ADP_GRAPH ("_adp_graph");
+const string FILE_ADP_SUBGRAPH_CYCLIC ("_adp_subgraph_with_cyclic");
 
 /**
   * Constructor empty of Builder graphs.
@@ -53,7 +55,7 @@ Builder_graphs::~Builder_graphs(){}
 /**
   * Returns the map with all ADP graphs creates.
   */
-map<vector<unsigned short>, Dp_graph> & Builder_graphs::get_adp_graphs()
+const map<vector<unsigned short>, Dp_graph> &Builder_graphs::get_adp_graphs() const
 {
 	return p_Adp_graphs;
 }
@@ -61,7 +63,7 @@ map<vector<unsigned short>, Dp_graph> & Builder_graphs::get_adp_graphs()
 /**
   * Returns the map with all ADP graphs creates.
   */
-map<vector<unsigned short>, Dp_graph> & Builder_graphs::get_cyclic_graphs()
+const map<vector<unsigned short>, Dp_graph> &Builder_graphs::get_cyclic_graphs() const
 {
 	return p_Adp_subgraphs_cyclics;
 }
@@ -69,9 +71,9 @@ map<vector<unsigned short>, Dp_graph> & Builder_graphs::get_cyclic_graphs()
 /**
   * Returns the down graph of the symbol.
   */
-const Dp_graph &Builder_graphs::get_down_graph(const Symbol * symb) const
+const Dp_graph &Builder_graphs::get_dcg_graph(unsigned short index_rule) const
 {
-	return p_Down_graphs.find(symb->key())->second;
+	return p_Dcg_graphs.find(index_rule)->second;
 }
 
 /**
@@ -127,72 +129,6 @@ void Builder_graphs::compute_dependency_graphs(const map<unsigned short, Rule> &
 		p_Dp_graphs.insert(new_p);
 		current_p_Dp_graph.clear();
 	}
-}
-
-/**
-  * Joins graph1 and graph2 in graph_merged.
-  */
-void merge_graph(const Dp_graph &graph1, const Dp_graph &graph2, Dp_graph &graph_merged)
-{
-	/* Cleans the result graph. */
-	graph_merged.clear();
-
-	/* Copies the graph1 to result graph. */
-	graph_merged = graph1;
-
-	/* Join the graph2 to result graph. */
-	property_map<Dp_graph, vertex_data_t>::const_type props(get(vertex_data_t(), graph2));
-	property_map<Dp_graph, vertex_data_t>::type props_merged(get(vertex_data_t(), graph_merged));
-	/* Circle for vertices. */
-	for(size_t i(0); i < num_vertices(graph2); i++)
-	{
-		Dp_graph::vertex_descriptor vertex(return_vertex(graph_merged,props[i]));
-		if (vertex == USHRT_MAX)
-		{
-			/* The vertex is new in the graph. */
-			vertex = add_vertex(graph_merged);
-			put(props_merged,vertex,props[i]);
-		}
-	}
-	/* Cicle for edges. */
-	graph_traits<Dp_graph>::edge_iterator ei, ei_end;
-	for (tie(ei,ei_end) = edges(graph2); ei != ei_end; ++ei)
-	{
-		Dp_graph::vertex_descriptor source_vertex(source(*ei, graph2));
-		Dp_graph::vertex_descriptor target_vertex(target(*ei, graph2));
-
-		Dp_graph::vertex_descriptor desc_source(return_vertex(graph_merged,props[source_vertex]));
-		Dp_graph::vertex_descriptor desc_target(return_vertex(graph_merged,props[target_vertex]));
-
-		add_edge(desc_source,desc_target,graph_merged);
-	}
-}
-
-/**
-  * Projects a graph with only vertex that belongs to symbol "symb".
-  * Modifies the parameter "graph".
-  */
-void Builder_graphs::project_graph(const Symbol *symb, Dp_graph &graph)
-{
-	/* Applies transitivity to graph with only nodes of symb. */
-	warshall_transitive_closure(graph);
-
-	property_map<Dp_graph, vertex_data_t>::type props(get(vertex_data_t(), graph));
-	/* Reduces the graph for symbol "symb". */
-	for (size_t i(num_vertices(graph)); i > 0; i--)
-	{
-		const Ast_instance *ins(dynamic_cast<const Ast_instance*>(props[i-1]));
-		if (!ins || !ins->get_symb()->equals(*symb))
-		/* The node is a literal-node or is a node with symbol diferent that symb. */
-		{
-			clear_vertex(i-1, graph);
-			remove_vertex(i-1, graph);
-		}
-	}
-	Dp_graph attr_symb(attr_vertex_graphs.find(symb->key())->second);
-	Dp_graph new_with_attr_symb;
-	merge_graph(graph,attr_symb,new_with_attr_symb);
-	graph = new_with_attr_symb;
 }
 
 /**
@@ -278,6 +214,10 @@ void Builder_graphs::compute_down_graph(const map<string,Symbol> &symbols, const
 		/* In this point: current_graph = Dp(Rule) U down(X1) U....U down(Xn). */
 
 		/* Project for left symbol of current_rule. */
+		Dp_graph attr_symb(attr_vertex_graphs.find(current_rule->get_left_symbol()->key())->second);
+		Dp_graph new_with_attr_symb;
+		merge_graph(current_graph, attr_symb, new_with_attr_symb);
+		current_graph = new_with_attr_symb;
 		project_graph(current_rule->get_left_symbol(),current_graph);
 
 		/* Modifies the down graph of symbol. */
@@ -321,6 +261,10 @@ void Builder_graphs::compute_dcg(const map<unsigned short, Rule> &rules)
 			current_graph = merged;
 		}
 		/* In this point: current_graph = Dp(Rule) U down(X1) U....U down(Xn). */
+		Dp_graph attr_symb(attr_vertex_graphs.find(current_rule->get_left_symbol()->key())->second);
+		Dp_graph new_with_attr_symb;
+		merge_graph(current_graph, attr_symb, new_with_attr_symb);
+		current_graph = new_with_attr_symb;
 		project_graph(current_rule->get_left_symbol(),current_graph);
 
 		/* Insert current graph in map of down graph. */
@@ -599,6 +543,5 @@ void Builder_graphs::print_graphs_cyclic(const map<unsigned short, Rule> &rules)
 		print_graph(it->second, FILE_ADP_SUBGRAPH_CYCLIC, name_graph,names);
 	}
 }
-
 
 } /* end genevalmag */
