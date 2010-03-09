@@ -11,13 +11,16 @@
 
 #include <map>
 #include <string>
+#include <vector>
 
 #include <boost/graph/adjacency_list.hpp>
 
 #include "../Attr_grammar/Rule.h"
 #include "../Attr_grammar/Symbol.h"
 #include "../Attr_grammar/Attr_grammar.h"
+#include "../Ast/Ast_leaf.h"
 
+using namespace std;
 using namespace boost;
 
 namespace genevalmag
@@ -57,7 +60,7 @@ class Builder_graphs
 		  * Projects a graph with only vertex that belongs to symbol "symb".
 		  * Modifies the parameter "graph".
 		  */
-		void project_graph(const Symbol *symb, Dp_graph &graph);
+		//void project_graph(const Symbol *symb, Dp_graph &graph);
 
 		/**
 		  * Builds a graph for each symbol of the grammar with all atributes.
@@ -70,7 +73,7 @@ class Builder_graphs
 		/**
 		  * Generate all combinations of the rules and saves a graph ADP for each of them.
 		  */
-		void combined_inf_contexts(const Rule* rule, Dp_graph &graph, vector< vector<unsigned short> > &inf_context, size_t index_to_combine);
+		void combined_inf_contexts(const Rule *rule, Dp_graph &graph, vector< vector<unsigned short> > &inf_context, size_t index_to_combine);
 
 	public:
 
@@ -87,17 +90,17 @@ class Builder_graphs
 		/**
 		  * Returns the map with all ADP graphs creates.
 		  */
-		map<vector<unsigned short>, Dp_graph> &get_adp_graphs();
+		const map<vector<unsigned short>, Dp_graph> &get_adp_graphs() const;
 
 		/**
 		  * Returns the map with all ADP with cycle graphs creates.
 		  */
-		map<vector<unsigned short>, Dp_graph> &get_cyclic_graphs();
+		const map<vector<unsigned short>, Dp_graph> &get_cyclic_graphs() const;
 
 		/**
 		  * Returns the down graph of the symbol.
 		  */
-		const Dp_graph &get_down_graph(const Symbol * symb) const;
+		const Dp_graph &get_dcg_graph(unsigned short index_rule) const;
 
 		/**
 		  * Algorithm DP

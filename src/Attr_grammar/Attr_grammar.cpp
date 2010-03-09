@@ -188,6 +188,13 @@ const map<unsigned short, Rule> &Attr_grammar::get_rules() const
 	return ag_rule;
 }
 /**
+  *  Return the rule on paramenter.
+  */
+const Rule  &Attr_grammar::get_rule(unsigned short index)const
+{
+	return ag_rule.find(index)->second;
+}
+/**
   *  Return the map with all symbols.
   */
 const map<string, Symbol> &Attr_grammar::get_non_terminal_symbols() const
