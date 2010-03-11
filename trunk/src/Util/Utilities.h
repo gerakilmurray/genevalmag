@@ -40,7 +40,7 @@ void generate_names_attr(const Dp_graph &graph, string datas[], size_t size_d);
 /**
   * Prints a graph in a file .dot for generate image .spng.
   */
-void print_graph(const Dp_graph &graph, const string name_file, const string name_graph, const string names[]);
+void print_graph(const Dp_graph &graph, const string name_file, const string name_graph, const string names[], string shape_vertex);
 /**
   * Prints a graph in the standart output (std:cout).
   */

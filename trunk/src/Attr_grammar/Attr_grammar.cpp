@@ -311,4 +311,50 @@ void Attr_grammar::load_attributes(Symbol &symb)
 	}
 }
 
+unsigned short Attr_grammar::get_index_eq_with_context(const Ast_instance *ins, const vector<unsigned short> &context_rule) const
+{
+	for(size_t i(0); i < context_rule.size(); i++)
+	{
+		const Rule &rule(ag_rule.find(context_rule[i])->second);
+		for(map<unsigned short,Equation>::const_iterator it(rule.get_eqs().begin()); it != rule.get_eqs().end(); it++)
+		{
+			if (it->second.get_l_value()->equals(ins))
+			{
+				return it->first;
+			}
+		}
+	}
+	return 0;
+}
+
+const Ast_instance *Attr_grammar::get_eq_l_value(unsigned short index) const
+{
+	const Equation *eq(get_eq(index));
+	assert(eq!=NULL);
+	return eq->get_l_value();
+}
+
+const Equation *Attr_grammar::get_eq(unsigned short index) const
+{
+	map<unsigned short,Rule>::const_iterator     last_rule(ag_rule.end());
+	last_rule--;
+	map<unsigned short,Equation>::const_iterator last_eq(last_rule->second.get_eqs().end());
+	last_eq--;
+	assert(index >= 1);
+	assert(index <= last_eq->second.get_id());
+	// The index is valid
+
+	for(map<unsigned short,Rule>::const_iterator it_r(ag_rule.begin()); it_r != ag_rule.end(); it_r++)
+	{
+		for(map<unsigned short,Equation>::const_iterator it_e(it_r->second.get_eqs().begin()); it_e != it_r->second.get_eqs().end(); it_e++)
+		{
+			if (it_e->second.get_id() == index)
+			{
+				return &it_e->second;
+			}
+		}
+	}
+	return NULL;
+}
+
 } /* end genevalmag */
