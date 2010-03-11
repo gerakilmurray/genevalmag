@@ -57,18 +57,14 @@ class Builder_graphs
 		map <vector<unsigned short>, Dp_graph> p_Adp_subgraphs_cyclics;
 
 		/**
-		  * Projects a graph with only vertex that belongs to symbol "symb".
-		  * Modifies the parameter "graph".
-		  */
-		//void project_graph(const Symbol *symb, Dp_graph &graph);
-
-		/**
 		  * Builds a graph for each symbol of the grammar with all atributes.
 		  * The graph only has vertexs. It hasn't edges.
 		  * Ex: Symbol E ; attributes: s,i
 		  * 	graph: 	vertex: E.s, E.i
 		  */
 		void compute_attr_vertex(const map<string,Symbol> &symbols);
+
+		void complete_dp_graphs(const map<unsigned short, Rule> &rules);
 
 		/**
 		  * Generate all combinations of the rules and saves a graph ADP for each of them.
@@ -110,7 +106,7 @@ class Builder_graphs
 		  * 			Edges: 	E --> E
 		  * 					T---> E
 		  */
-		void compute_dependency_graphs(const map<unsigned short, Rule> &rules);
+		void compute_dependency_graphs(const map<unsigned short,Rule> &rules);
 
 		/**
 		  * Algorithm Down

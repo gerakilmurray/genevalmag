@@ -135,10 +135,6 @@ class Rule
 		  * Return the non-terminals symbols the right side of the rule.
 		  */
 		vector<const Symbol*> get_non_terminals_right_side() const;
-
-		unsigned short get_index_eq(const Ast_instance *ins) const;
-
-		const Ast_instance *get_eq_l_value(unsigned short index)const;
 };
 
 } /* end genevalmag */

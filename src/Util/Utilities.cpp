@@ -73,7 +73,7 @@ void generate_names_attr(const Dp_graph &graph, string datas[], size_t size_d)
 /**
   * Prints a graph in a file .dot for generate image .spng.
   */
-void print_graph(const Dp_graph &graph, const string name_file, const string name_graph, const string names[])
+void print_graph(const Dp_graph &graph, const string name_file, const string name_graph, const string names[], string shape_vertex)
 {
 	static int num_file(0); /* For name of file png. */
 
@@ -93,11 +93,11 @@ void print_graph(const Dp_graph &graph, const string name_file, const string nam
 	std::map<std::string,std::string> graph_attr, vertex_attr, edge_attr;
 	/*graph_attr["size"]		= "5,3"; */
 	graph_attr["label"]			= name_graph;
-	graph_attr["rankdir"]		= "LR";
+	graph_attr["rankdir"]		= "TD";
 	graph_attr["ratio"]			= "compress";
-	vertex_attr["shape"]		= "ellipse";
+	vertex_attr["shape"]		= shape_vertex;
 	vertex_attr["color"] 		= "black";
-	vertex_attr["style"] 		= "filled";
+	vertex_attr["style"] 		= "rounded,filled";
 	vertex_attr["fillcolor"]	= "gray";
 
 	write_graphviz(salida, graph, make_label_writer(names),default_writer(),make_graph_attributes_writer(graph_attr, vertex_attr,edge_attr));

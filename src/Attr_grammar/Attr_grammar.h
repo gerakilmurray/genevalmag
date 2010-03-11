@@ -143,6 +143,12 @@ public:
 	  * full representation of each type.
 	  */
 	string to_string();
+
+	unsigned short get_index_eq_with_context(const Ast_instance *ins, const vector<unsigned short> &context_rule) const;
+
+	const Ast_instance *get_eq_l_value(unsigned short index) const;
+
+	const Equation *get_eq(unsigned short index) const;
 };
 
 } /* end genevalmag */

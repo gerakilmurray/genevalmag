@@ -84,7 +84,7 @@ const Dp_graph &Builder_graphs::get_dcg_graph(unsigned short index_rule) const
   * 			Edges: 	E --> E
   * 					T---> E
   */
-void Builder_graphs::compute_dependency_graphs(const map<unsigned short, Rule> &rules)
+void Builder_graphs::compute_dependency_graphs(const map<unsigned short,Rule> &rules)
 {
 	Dp_graph current_p_Dp_graph;
 	property_map<Dp_graph, vertex_data_t>::type leafs(get(vertex_data_t(), current_p_Dp_graph));
@@ -180,6 +180,8 @@ void Builder_graphs::compute_attr_vertex(const map<string,Symbol> &symbols)
 void Builder_graphs::compute_down_graph(const map<string,Symbol> &symbols, const map<unsigned short,Rule> &rules)
 {
 	compute_attr_vertex(symbols);
+
+	complete_dp_graphs(rules);
 
 	/* Insert current graph in map of down graph. */
 	for(map<string,Dp_graph >::iterator attr_it(attr_vertex_graphs.begin()); attr_it != attr_vertex_graphs.end(); attr_it++)
@@ -428,6 +430,19 @@ bool Builder_graphs::check_cyclic_adp_dependencies()
 	return cycles_detect;
 }
 
+
+void Builder_graphs::complete_dp_graphs(const map<unsigned short, Rule> &rules)
+{
+	for(map<unsigned short,Dp_graph >::iterator dp(p_Dp_graphs.begin()); dp != p_Dp_graphs.end(); dp++)
+	{
+		const Rule &rule(rules.find(dp->first)->second);
+		Dp_graph attr_symb(attr_vertex_graphs.find(rule.get_left_symbol()->key())->second);
+		Dp_graph new_with_attr_symb;
+		merge_graph(dp->second, attr_symb, new_with_attr_symb);
+		dp->second = new_with_attr_symb;
+	}
+}
+
 /**
   * Prints all graphs generates: DP, Down, DCG and ADP.
   */
@@ -435,43 +450,43 @@ void Builder_graphs::print_all_graphs(const map<unsigned short, Rule> &rules) co
 {
 	clean_output_folder();
 
-	for(map <unsigned short,Dp_graph>::const_iterator it(p_Dp_graphs.begin()); it != p_Dp_graphs.end(); it++)
-	{
-		string name_graph("Dependency Graph of rule ");
-		const Rule *current_rule(&(rules.find(it->first)->second));
-		name_graph.append(cleaning_tabs(current_rule->to_string_not_eqs()));
+//	for(map <unsigned short,Dp_graph>::const_iterator it(p_Dp_graphs.begin()); it != p_Dp_graphs.end(); it++)
+//	{
+//		string name_graph("Dependency Graph of rule ");
+//		const Rule *current_rule(&(rules.find(it->first)->second));
+//		name_graph.append(cleaning_tabs(current_rule->to_string_not_eqs()));
+//
+//		size_t count_vertex(num_vertices(it->second));
+//		string names[count_vertex];
+//		generate_names_instance(it->second,names,count_vertex);
+//		print_graph(it->second, FILE_DP_GRAPH, name_graph,names,"ellipse");
+//	}
 
-		size_t count_vertex(num_vertices(it->second));
-		string names[count_vertex];
-		generate_names_instance(it->second,names,count_vertex);
-		print_graph(it->second, FILE_DP_GRAPH, name_graph,names);
-	}
+//	for(map <string,Dp_graph>::const_iterator it(p_Down_graphs.begin()); it != p_Down_graphs.end(); it++)
+//	{
+//		string name_graph("Graph Down(");
+//		name_graph.append(it->first);
+//		name_graph.append(")");
+//
+//		size_t count_vertex(num_vertices(it->second));
+//		string names[count_vertex];
+//		generate_names_attr(it->second,names,count_vertex);
+//		print_graph(it->second,FILE_DOWN_GRAPH,name_graph,names,"ellipse");
+//	}
 
-	for(map <string,Dp_graph>::const_iterator it(p_Down_graphs.begin()); it != p_Down_graphs.end(); it++)
-	{
-		string name_graph("Graph Down(");
-		name_graph.append(it->first);
-		name_graph.append(")");
-
-		size_t count_vertex(num_vertices(it->second));
-		string names[count_vertex];
-		generate_names_attr(it->second,names,count_vertex);
-		print_graph(it->second,FILE_DOWN_GRAPH,name_graph,names);
-	}
-
-	for(map <unsigned short,Dp_graph>::const_iterator it(p_Dcg_graphs.begin()); it != p_Dcg_graphs.end(); it++)
-	{
-		string name_graph("DCG Graph of rule ");
-		const Rule *current_rule(&(rules.find(it->first)->second));
-		name_graph.append(cleaning_tabs(current_rule->to_string_not_eqs()));
-		name_graph.append(" with symbol ");
-		name_graph.append(current_rule->get_left_symbol()->get_name());
-
-		size_t count_vertex(num_vertices(it->second));
-		string names[count_vertex];
-		generate_names_instance(it->second,names,count_vertex);
-		print_graph(it->second,FILE_DCG_GRAPH,name_graph,names);
-	}
+//	for(map <unsigned short,Dp_graph>::const_iterator it(p_Dcg_graphs.begin()); it != p_Dcg_graphs.end(); it++)
+//	{
+//		string name_graph("DCG Graph of rule ");
+//		const Rule *current_rule(&(rules.find(it->first)->second));
+//		name_graph.append(cleaning_tabs(current_rule->to_string_not_eqs()));
+//		name_graph.append(" with symbol ");
+//		name_graph.append(current_rule->get_left_symbol()->get_name());
+//
+//		size_t count_vertex(num_vertices(it->second));
+//		string names[count_vertex];
+//		generate_names_instance(it->second,names,count_vertex);
+//		print_graph(it->second,FILE_DCG_GRAPH,name_graph,names,"ellipse");
+//	}
 
 	for(map <vector<unsigned short>,Dp_graph>::const_iterator it(p_Adp_graphs.begin()); it != p_Adp_graphs.end(); it++)
 	{
@@ -503,7 +518,7 @@ void Builder_graphs::print_all_graphs(const map<unsigned short, Rule> &rules) co
 		size_t count_vertex(num_vertices(it->second));
 		string names[count_vertex];
 		generate_names_instance(it->second,names,count_vertex);
-		print_graph(it->second, FILE_ADP_GRAPH, name_graph,names);
+		print_graph(it->second, FILE_ADP_GRAPH, name_graph,names,"ellipse");
 	}
 }
 
@@ -540,7 +555,7 @@ void Builder_graphs::print_graphs_cyclic(const map<unsigned short, Rule> &rules)
 		size_t count_vertex(num_vertices(it->second));
 		string names[count_vertex];
 		generate_names_instance(it->second,names,count_vertex);
-		print_graph(it->second, FILE_ADP_SUBGRAPH_CYCLIC, name_graph,names);
+		print_graph(it->second, FILE_ADP_SUBGRAPH_CYCLIC, name_graph,names,"ellipse");
 	}
 }
 

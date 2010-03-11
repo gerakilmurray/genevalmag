@@ -323,23 +323,4 @@ vector<const Symbol*> Rule::get_non_terminals_right_side() const
 	return result;
 }
 
-unsigned short Rule::get_index_eq(const Ast_instance *ins) const
-{
-	for(map<unsigned short,Equation>::const_iterator it(r_eqs.begin()); it != r_eqs.end(); it++)
-	{
-		if (it->second.get_l_value()->equals(ins))
-		{
-			return it->first;
-		}
-	}
-	return 0;
-}
-
-const Ast_instance *Rule::get_eq_l_value(unsigned short index) const
-{
-	assert(index > 1 && index < r_eqs.size() +1);
-	return r_eqs.find(index)->second.get_l_value();
-}
-
-
 } /* end genevalmag */
