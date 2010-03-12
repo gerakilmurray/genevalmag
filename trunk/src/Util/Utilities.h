@@ -69,6 +69,8 @@ void project_graph(const Symbol *symb, Dp_graph &graph);
   */
 string cleaning_tabs(const string str);
 
+string write_inf_context(const vector<unsigned short> &context_vec);
+
 } /* end utilities */
 
 #endif /* UTILITIES_H_ */

@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
+#include <time.h>
+#include <sys/time.h>
 
 #include "Attr_grammar/Attr_grammar.h"
 #include "Parser/Parser_AG.h"
@@ -61,11 +63,24 @@ void read_file_in(string &txt_output)
 	}
 }
 
+/* retorna "a - b" en segundos */
+double timeval_diff(struct timeval *a, struct timeval *b)
+{
+  return
+    (double)(a->tv_sec + (double)a->tv_usec/1000000) -
+    (double)(b->tv_sec + (double)b->tv_usec/1000000);
+}
+
 /**
   * Main method of the parsing.
   */
 int main()
 {
+	struct timeval t_ini, t_fin;
+	double secs;
+
+	gettimeofday(&t_ini, NULL);
+
 	string input_grammar;
 	read_file_in(input_grammar);
 
@@ -78,5 +93,10 @@ int main()
 	}
 
 	cout << "Bye... :-D" << endl;
+
+	gettimeofday(&t_fin, NULL);
+
+	secs = timeval_diff(&t_fin, &t_ini);
+	printf("Generation complete in: %.6g seconds.\n", secs);
 	return 0;
 }

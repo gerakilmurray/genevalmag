@@ -229,4 +229,29 @@ string cleaning_tabs(const string str)
 	return aux;
 }
 
+string write_inf_context(const vector<unsigned short> &context_vec)
+{
+	string context;
+	if (context_vec.size() == 1)
+	{
+		context.append(" hasn't an inferior context");
+	}
+	else
+	{
+		context.append(" with inferior context: ");
+		for(size_t i(1); i < context_vec.size(); i++)
+		{
+			context.append(" R");
+			stringstream key_rule;
+			key_rule << context_vec[i];
+			context.append(key_rule.str());
+			if(i < context_vec.size() - 1)
+			{
+				context.append(" ,");
+			}
+		}
+	}
+	return context;
+}
+
 } /* end utilities */

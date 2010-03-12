@@ -28,27 +28,127 @@ typedef vector< unsigned short > Order_eval_eq;
 typedef vector< unsigned short > Order_rule;
 
 // el padre de la regla con su contexto.
-typedef pair < unsigned short, Order_rule > Context_rule;
+typedef struct c_rule
+{
+	unsigned short	father;
+	Order_rule		context;
+
+	bool operator< (const c_rule &other) const
+	{
+		return (context < other.context) ||
+			   (father < other.father);
+	}
+
+	c_rule &operator= (const c_rule &other)
+	{
+		if(this != &other)
+		{
+			father = other.father;
+			context = other.context;
+		}
+		return *this;
+	}
+} Context_rule;
 
 // el padre y la regla
-typedef pair < unsigned short, unsigned short > Key_work_list;
+typedef struct k_w
+{
+	unsigned short	father;
+	unsigned short	id_rule;
+
+	bool operator< (const k_w &other) const
+	{
+		return (id_rule < other.id_rule) ||
+			   (father < other.father);
+	}
+
+	k_w &operator= (const k_w &other)
+	{
+		if(this != &other)
+		{
+			father = other.father;
+			id_rule = other.id_rule;
+		}
+		return *this;
+	}
+} Key_work_list;
 
 // key_work_list con el oden de esa regla aplicada al contexto que marca Key_work_list
-typedef pair < Key_work_list, Order_eval_eq > Item_work;
+typedef struct i_w
+{
+	Key_work_list	item;
+	Order_eval_eq	order_attr;
+
+	bool operator< (const i_w &other) const
+	{
+		return (order_attr < other.order_attr) ||
+			   (item < other.item);
+	}
+
+	i_w &operator= (const i_w &other)
+	{
+		if(this != &other)
+		{
+			item = other.item;
+			order_attr = other.order_attr;
+		}
+		return *this;
+	}
+} Item_work;
 
 // clave que almacena el contexto para el guadado del plan
-typedef pair < Context_rule, Order_eval_eq > Key_plan;
+typedef struct k_plan
+{
+	Context_rule	id_plan;
+	Order_eval_eq	plan;
+
+	bool operator< (const k_plan &other) const
+	{
+		return (plan < other.plan) ||
+			   (id_plan < other.id_plan);
+	}
+
+	k_plan &operator= (const k_plan &other)
+	{
+		if(this != &other)
+		{
+			id_plan = other.id_plan;
+			plan = other.plan;
+		}
+		return *this;
+	}
+} Key_plan;
 
 // clave que almacena el contexto para el guadado del plan, proyectado al symbolo.
-typedef pair < Key_plan, const Symbol* > Key_plan_project;
+typedef struct k_p_project
+{
+	Key_plan		id_plan_project;
+	const Symbol	*symbol_project;
 
+	bool operator< (const k_p_project &other) const
+	{
+		return (symbol_project->get_name() < other.symbol_project->get_name()) ||
+			   (id_plan_project < other.id_plan_project);
+	}
+
+	k_p_project &operator= (const k_p_project &other)
+	{
+		if(this != &other)
+		{
+			id_plan_project = other.id_plan_project;
+			symbol_project = other.symbol_project;
+		}
+		return *this;
+	}
+} Key_plan_project;
 
 class Builder_plan
 {
 	private:
-		map<Key_plan, Order_eval_eq> eval_plans; // Function of Selection
+		map< Key_plan, Order_eval_eq > eval_plans; // Function of Selection
 
-		map <Key_plan_project, Order_eval_eq> plans_project; // Function TITA.
+		map < Key_plan_project, Order_eval_eq > plans_project; // Function TITA.
+
 		void generates_topological_order(const Dp_graph &graph, Order_eval_eq &eq_order, const Attr_grammar &grammar, const Context_rule &context_rule) const;
 
 		Order_eval_eq compute_order(const Dp_graph &graph_adp, const Order_eval_eq &eq_order, const Attr_grammar &grammar, const Context_rule &context_rule);
@@ -72,6 +172,8 @@ class Builder_plan
 		void build_plans(const Attr_grammar &attr_grammar);
 
 		void print_all_plans(const Attr_grammar &grammar) const;
+
+		void print_all_plans_project(const Attr_grammar &grammar) const;
 };
 
 } /* end genevalmag */
