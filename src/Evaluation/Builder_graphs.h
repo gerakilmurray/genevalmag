@@ -149,6 +149,12 @@ class Builder_graphs
 		  * Prints all graphs graph cycles.
 		  */
 		void print_graphs_cyclic(const map<unsigned short, Rule> &rules) const;
+
+		void print_dp_graphs(const map<unsigned short, Rule> &rules) const;
+
+		void print_down_graphs() const;
+		void print_dcg_graphs(const map<unsigned short, Rule> &rules) const;
+		void print_adp_graphs(const map<unsigned short, Rule> &rules) const;
 };
 
 } /* end genevalmag */
