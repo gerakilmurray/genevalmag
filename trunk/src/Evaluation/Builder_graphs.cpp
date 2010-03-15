@@ -1,6 +1,6 @@
 /**
   *  \file		Builder_graphs.cpp
-  *  \brief		Implementation of the methods the DC_graph.h
+  *  \brief		Implementation of the methods the Builder_graph.h
   *  \date		17/02/2010
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
@@ -102,7 +102,7 @@ void Builder_graphs::compute_dependency_graphs(const map<unsigned short,Rule> &r
 			eq->second.inorder_only_leaf(eq->second.get_r_value(), elem_leaf_tree);
 
 			/* Verify if vertex belong at graph. */
-			Dp_graph::vertex_descriptor l_v(return_vertex(current_p_Dp_graph, eq->second.get_l_value()));
+			Vertex l_v(return_vertex(current_p_Dp_graph, eq->second.get_l_value()));
 			if (l_v == USHRT_MAX)
 			{
 				/* The vertex is new in the graph. */
@@ -113,7 +113,7 @@ void Builder_graphs::compute_dependency_graphs(const map<unsigned short,Rule> &r
 			for(size_t i(0); i< elem_leaf_tree.size(); i++)
 			{
 				/* Verify if vertex belong at graph. */
-				Dp_graph::vertex_descriptor r_v(return_vertex(current_p_Dp_graph,elem_leaf_tree[i]));
+				Vertex r_v(return_vertex(current_p_Dp_graph,elem_leaf_tree[i]));
 				if (r_v == USHRT_MAX)
 				{
 					/* The vertex is new in the graph. */
@@ -151,10 +151,10 @@ void Builder_graphs::compute_attr_vertex(const map<string,Symbol> &symbols)
 			ins.set_attr(s_it->second.get_attrs()[i]);
 			for(map<unsigned short,Dp_graph >::const_iterator dp(p_Dp_graphs.begin()); dp != p_Dp_graphs.end(); dp++)
 			{
-				Dp_graph::vertex_descriptor node(return_vertex(dp->second, &ins));
+				Vertex node(return_vertex(dp->second, &ins));
 				if (node != USHRT_MAX)
 				{
-					Dp_graph::vertex_descriptor node_down(add_vertex(current_graph));
+					Vertex node_down(add_vertex(current_graph));
 					property_map<Dp_graph, vertex_data_t>::const_type props_dp(get(vertex_data_t(), dp->second));
 					put(props_down, node_down, props_dp[node]);
 					break;
@@ -379,14 +379,14 @@ struct cycle_detector: public dfs_visitor<>
 	    		typename property_map<Graph, vertex_data_t>::const_type props(get(vertex_data_t(), g));
 	    		property_map<Dp_graph, vertex_data_t>::type prop_cycle(get(vertex_data_t(), graph_cycle));
 
-	    		Dp_graph::vertex_descriptor v1_path(return_vertex(graph_cycle, props[v1]));
+	    		Vertex v1_path(return_vertex(graph_cycle, props[v1]));
 	    		if (v1_path == USHRT_MAX)
 	    		{
 	    			v1_path = add_vertex(graph_cycle);
 					put(prop_cycle,v1_path,props[v1]);
 	    		}
 
-	    		Dp_graph::vertex_descriptor v2_path(return_vertex(graph_cycle, props[v2]));
+	    		Vertex v2_path(return_vertex(graph_cycle, props[v2]));
 				if (v2_path == USHRT_MAX)
 				{
 					v2_path = add_vertex(graph_cycle);
@@ -408,6 +408,10 @@ struct cycle_detector: public dfs_visitor<>
 	    Dp_graph	&graph_cycle;
 };
 
+/**
+  * Checks if the graph "contiene" cycle.
+  * Utilities a deph-firts-seach for "recorrer" the graphs.
+  */
 bool Builder_graphs::check_cyclic_adp_dependencies()
 {
 	bool cycles_detect(false);
@@ -430,7 +434,9 @@ bool Builder_graphs::check_cyclic_adp_dependencies()
 	return cycles_detect;
 }
 
-
+/**
+  * Completes dp-graph with the vertex of low on instances.
+  */
 void Builder_graphs::complete_dp_graphs(const map<unsigned short, Rule> &rules)
 {
 	for(map<unsigned short,Dp_graph >::iterator dp(p_Dp_graphs.begin()); dp != p_Dp_graphs.end(); dp++)
@@ -443,7 +449,9 @@ void Builder_graphs::complete_dp_graphs(const map<unsigned short, Rule> &rules)
 	}
 }
 
-
+/**
+  * Prints all dp-graphs generates
+  */
 void Builder_graphs::print_dp_graphs(const map<unsigned short, Rule> &rules) const
 {
 	for(map <unsigned short,Dp_graph>::const_iterator it(p_Dp_graphs.begin()); it != p_Dp_graphs.end(); it++)
@@ -458,7 +466,9 @@ void Builder_graphs::print_dp_graphs(const map<unsigned short, Rule> &rules) con
 		print_graph(it->second, FILE_DP_GRAPH, name_graph,names,"ellipse");
 	}
 }
-
+/**
+  * Prints all down-graphs generates.
+  */
 void Builder_graphs::print_down_graphs() const
 {
 	for(map <string,Dp_graph>::const_iterator it(p_Down_graphs.begin()); it != p_Down_graphs.end(); it++)
@@ -473,7 +483,9 @@ void Builder_graphs::print_down_graphs() const
 		print_graph(it->second,FILE_DOWN_GRAPH,name_graph,names,"ellipse");
 	}
 }
-
+/**
+  * Prints all dcg-graphs generates.
+  */
 void Builder_graphs::print_dcg_graphs(const map<unsigned short, Rule> &rules) const
 {
 	for(map <unsigned short,Dp_graph>::const_iterator it(p_Dcg_graphs.begin()); it != p_Dcg_graphs.end(); it++)
@@ -490,7 +502,9 @@ void Builder_graphs::print_dcg_graphs(const map<unsigned short, Rule> &rules) co
 		print_graph(it->second,FILE_DCG_GRAPH,name_graph,names,"ellipse");
 	}
 }
-
+/**
+  * Prints all adp-graphs generates.
+  */
 void Builder_graphs::print_adp_graphs(const map<unsigned short, Rule> &rules) const
 {
 	for(map <vector<unsigned short>,Dp_graph>::const_iterator it(p_Adp_graphs.begin()); it != p_Adp_graphs.end(); it++)

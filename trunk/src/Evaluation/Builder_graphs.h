@@ -1,6 +1,6 @@
 /**
   *  \file		Builder_graphs.h
-  *  \brief		Header with the functions for evaluation of AG.
+  *  \brief		Header with the functions for build graph of grammar.
   *  \date		17/02/2010
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
@@ -35,6 +35,8 @@ typedef property <vertex_data_t, const genevalmag::Ast_leaf*> property_vertex_dp
 
 typedef adjacency_list<hash_setS, vecS, directedS, property_vertex_dp > Dp_graph;
 
+typedef Dp_graph::vertex_descriptor Vertex;
+
 class Builder_graphs
 {
 	private:
@@ -64,6 +66,9 @@ class Builder_graphs
 		  */
 		void compute_attr_vertex(const map<string,Symbol> &symbols);
 
+		/**
+		  * Completes dp-graph with the vertex of low on instances.
+		  */
 		void complete_dp_graphs(const map<unsigned short, Rule> &rules);
 
 		/**
@@ -138,6 +143,10 @@ class Builder_graphs
 		  */
 		void compute_adp_graph(const Attr_grammar &grammar);
 
+		/**
+		  * Checks if the graph contains cycle.
+		  * Utilities a deph-firts-seach for traverse the graphs.
+		  */
 		bool check_cyclic_adp_dependencies();
 
 		/**
@@ -150,10 +159,24 @@ class Builder_graphs
 		  */
 		void print_graphs_cyclic(const map<unsigned short, Rule> &rules) const;
 
+		/**
+		  * Prints all dp-graphs generates
+		  */
 		void print_dp_graphs(const map<unsigned short, Rule> &rules) const;
 
+		/**
+		  * Prints all down-graphs generates
+		  */
 		void print_down_graphs() const;
+
+		/**
+		  * Prints all dcg-graphs generates
+		  */
 		void print_dcg_graphs(const map<unsigned short, Rule> &rules) const;
+
+		/**
+		  * Prints all adp-graphs generates
+		  */
 		void print_adp_graphs(const map<unsigned short, Rule> &rules) const;
 };
 
