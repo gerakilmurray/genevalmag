@@ -20,14 +20,13 @@ using namespace std;
 
 namespace genevalmag
 {
-
-// vector que almacena orden de equaciones
+/* Vector for order of equation. */
 typedef vector< unsigned short > Order_eval_eq;
 
-// vector que alamcena contexto inferior de la regla.
+/* Vector that represents the inferior context of rule. */
 typedef vector< unsigned short > Order_rule;
 
-// el padre de la regla con su contexto.
+/* Father and conext of rule. */
 typedef struct c_rule
 {
 	unsigned short	father;
@@ -50,7 +49,7 @@ typedef struct c_rule
 	}
 } Context_rule;
 
-// el padre y la regla
+/* Father and id-rule of rule. */
 typedef struct k_w
 {
 	unsigned short	father;
@@ -73,7 +72,7 @@ typedef struct k_w
 	}
 } Key_work_list;
 
-// key_work_list con el oden de esa regla aplicada al contexto que marca Key_work_list
+/* Struct that represents an item in the list of work. */
 typedef struct i_w
 {
 	Key_work_list	item;
@@ -96,7 +95,7 @@ typedef struct i_w
 	}
 } Item_work;
 
-// clave que almacena el contexto para el guadado del plan
+/* Key for map of plans. */
 typedef struct k_plan
 {
 	Context_rule	id_plan;
@@ -119,7 +118,7 @@ typedef struct k_plan
 	}
 } Key_plan;
 
-// clave que almacena el contexto para el guadado del plan, proyectado al symbolo.
+/* Key for map of plans_project. Is a the same key plan that map of plan with the projected symbol. */
 typedef struct k_p_project
 {
 	Key_plan		id_plan_project;
@@ -145,14 +144,25 @@ typedef struct k_p_project
 class Builder_plan
 {
 	private:
-		map< Key_plan, Order_eval_eq > eval_plans; // Function of Selection
+		map< Key_plan, Order_eval_eq > eval_plans; /* "ro" function. Wuu yank's paper. */
 
-		map < Key_plan_project, Order_eval_eq > plans_project; // Function TITA.
+		map < Key_plan_project, Order_eval_eq > plans_project; /* "tita" function. Wuu yank's paper. */
 
+		/**
+		  * Applies a topological order at graph.
+		  * The changes are applies about paramenter "result_order".
+		  */
 		void generates_topological_order(const Dp_graph &graph, Order_eval_eq &eq_order, const Attr_grammar &grammar, const Context_rule &context_rule) const;
 
+		/**
+		  * Compute the rule's order.
+		  * The changes are applies about paramenter "result_order".
+		  */
 		Order_eval_eq compute_order(const Dp_graph &graph_adp, const Order_eval_eq &eq_order, const Attr_grammar &grammar, const Context_rule &context_rule);
 
+		/**
+		  * Generates and saves all evaluation's plans for the Attribute Grammar.
+		  */
 		void generate_plans(const Attr_grammar &grammar, const Builder_graphs &build_graphs);
 
 	public:
@@ -171,8 +181,13 @@ class Builder_plan
 		  */
 		void build_plans(const Attr_grammar &attr_grammar);
 
+		/**
+		  * Prints all plans. Creates a graph that represents the plan and uses print_graph with dot.
+		  */
 		void print_all_plans(const Attr_grammar &grammar) const;
-
+		/**
+		  * Prints all proyected's plans. Creates a graph that represents the plan and uses print_graph with dot.
+		  */
 		void print_all_plans_project(const Attr_grammar &grammar) const;
 };
 

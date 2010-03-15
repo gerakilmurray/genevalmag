@@ -131,8 +131,8 @@ void print_graph_txt(const Dp_graph &graph)
 	graph_traits<Dp_graph>::edge_iterator ei, ei_end;
 	for(tie(ei,ei_end) = edges(graph); ei != ei_end; ++ei)
 	{
-		Dp_graph::vertex_descriptor source_vertex(source(*ei, graph));
-		Dp_graph::vertex_descriptor target_vertex(target(*ei, graph));
+		Vertex source_vertex(source(*ei, graph));
+		Vertex target_vertex(target(*ei, graph));
 
 		cout << props[source_vertex]->to_string() << "---->" << props[target_vertex]->to_string() << endl;
 	}
@@ -142,7 +142,7 @@ void print_graph_txt(const Dp_graph &graph)
   * Given a graph and node, returns the vertex descriptor of node in the graph.
   * If not search it, so returns USHRT_MAX.
   */
-Dp_graph::vertex_descriptor return_vertex(const Dp_graph &graph, const Ast_leaf *node)
+Vertex return_vertex(const Dp_graph &graph, const Ast_leaf *node)
 {
 	property_map<Dp_graph, vertex_data_t>::const_type props(get(vertex_data_t(), graph));
 	for(size_t i(0); i < num_vertices(graph); i++)
@@ -170,7 +170,7 @@ void merge_graph(const Dp_graph &graph1, const Dp_graph &graph2, Dp_graph &graph
 	/* Circle for vertices. */
 	for(size_t i(0); i < num_vertices(graph2); i++)
 	{
-		Dp_graph::vertex_descriptor vertex(return_vertex(graph_merged,props[i]));
+		Vertex vertex(return_vertex(graph_merged,props[i]));
 		if (vertex == USHRT_MAX)
 		{
 			/* The vertex is new in the graph. */
@@ -182,11 +182,11 @@ void merge_graph(const Dp_graph &graph1, const Dp_graph &graph2, Dp_graph &graph
 	graph_traits<Dp_graph>::edge_iterator ei, ei_end;
 	for (tie(ei,ei_end) = edges(graph2); ei != ei_end; ++ei)
 	{
-		Dp_graph::vertex_descriptor source_vertex(source(*ei, graph2));
-		Dp_graph::vertex_descriptor target_vertex(target(*ei, graph2));
+		Vertex source_vertex(source(*ei, graph2));
+		Vertex target_vertex(target(*ei, graph2));
 
-		Dp_graph::vertex_descriptor desc_source(return_vertex(graph_merged,props[source_vertex]));
-		Dp_graph::vertex_descriptor desc_target(return_vertex(graph_merged,props[target_vertex]));
+		Vertex desc_source(return_vertex(graph_merged,props[source_vertex]));
+		Vertex desc_target(return_vertex(graph_merged,props[target_vertex]));
 
 		add_edge(desc_source,desc_target,graph_merged);
 	}

@@ -50,7 +50,7 @@ void print_graph_txt(const Dp_graph &graph);
   * Given a graph and node, returns the vertex descriptor of node in the graph.
   * If not search it, so returns USHRT_MAX.
   */
-Dp_graph::vertex_descriptor return_vertex(const Dp_graph &graph,const Ast_leaf *node);
+Vertex return_vertex(const Dp_graph &graph,const Ast_leaf *node);
 
 /**
   * Joins graph1 and graph2 in graph_merged.
