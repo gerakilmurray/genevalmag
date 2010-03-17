@@ -34,8 +34,7 @@ typedef struct c_rule
 
 	bool operator< (const c_rule &other) const
 	{
-		return (context < other.context) ||
-			   (father < other.father);
+		return (father < other.father) || (context < other.context);
 	}
 
 	c_rule &operator= (const c_rule &other)
@@ -55,10 +54,9 @@ typedef struct k_w
 	unsigned short	father;
 	unsigned short	id_rule;
 
-	bool operator< (const k_w &other) const
+	bool operator== (const k_w &other) const
 	{
-		return (id_rule < other.id_rule) ||
-			   (father < other.father);
+		return (father == other.father) && (id_rule == other.id_rule);
 	}
 
 	k_w &operator= (const k_w &other)
@@ -78,10 +76,9 @@ typedef struct i_w
 	Key_work_list	item;
 	Order_eval_eq	order_attr;
 
-	bool operator< (const i_w &other) const
+	bool operator== (const i_w &other) const
 	{
-		return (order_attr < other.order_attr) ||
-			   (item < other.item);
+		return (item == other.item) && (order_attr == other.order_attr);
 	}
 
 	i_w &operator= (const i_w &other)
@@ -103,8 +100,7 @@ typedef struct k_plan
 
 	bool operator< (const k_plan &other) const
 	{
-		return (plan < other.plan) ||
-			   (id_plan < other.id_plan);
+		return (id_plan < other.id_plan) || (plan < other.plan);
 	}
 
 	k_plan &operator= (const k_plan &other)
@@ -126,8 +122,7 @@ typedef struct k_p_project
 
 	bool operator< (const k_p_project &other) const
 	{
-		return (symbol_project->get_name() < other.symbol_project->get_name()) ||
-			   (id_plan_project < other.id_plan_project);
+		return (id_plan_project < other.id_plan_project) || (symbol_project->get_name() < other.symbol_project->get_name());
 	}
 
 	k_p_project &operator= (const k_p_project &other)
@@ -144,7 +139,7 @@ typedef struct k_p_project
 class Builder_plan
 {
 	private:
-		map< Key_plan, Order_eval_eq > eval_plans; /* "ro" function. Wuu yank's paper. */
+		map < Key_plan, Order_eval_eq > eval_plans; /* "ro" function. Wuu yank's paper. */
 
 		map < Key_plan_project, Order_eval_eq > plans_project; /* "tita" function. Wuu yank's paper. */
 

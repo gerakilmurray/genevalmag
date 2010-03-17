@@ -24,6 +24,8 @@ class Rule
 		const Symbol					*r_left_symbol;
 		vector <const Symbol*>			r_right_side;
 		map <unsigned short,Equation>	r_eqs;
+		unsigned short					r_offset;
+
 
 		/**
 		  * Method of copy the rule, STL-like C++.
@@ -69,9 +71,17 @@ class Rule
 		  */
 		const map <unsigned short,Equation> &get_eqs() const;
 		/**
+		  * Returns the number of equations of the rule.
+		  */
+		size_t get_number_eqs() const;
+		/**
 		  * Returns the i-equation of the rule.
 		  */
 		const Equation *get_eq(unsigned short index) const;
+		/**
+		  * Returns the offset of all equation of the rule.
+		  */
+		unsigned short get_offset() const;
 
 		/**
 		  * Sets the identificator of the rule.
@@ -120,11 +130,9 @@ class Rule
 		bool equals(const Rule &other) const;
 
 		/**
-		  * Generate and return the string key that identifies a rule definitely.
+		  * Return the number key that identifies a rule definitely.
 		  *
-		  * Result= left_symbol right_side
-		  *
-		  * where right_ride is= symbol_1 ... symbol_n
+		  * Result= \<id_rule\>
 		  */
 		unsigned short key() const;
 

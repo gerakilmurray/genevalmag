@@ -299,7 +299,7 @@ string Function::to_string() const
 	}
 	func.append(f_name);
 	func.append(": ");
-	for(vector<Sort>::size_type i = 0; i < f_domain.size(); i++)
+	for(vector<Sort>::size_type i(0); i < f_domain.size(); i++)
 	{
 		func.append(f_domain[i]->get_name());
 

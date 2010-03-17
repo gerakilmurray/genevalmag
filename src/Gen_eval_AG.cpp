@@ -27,12 +27,12 @@ const string PATH_INPUT_FILE ("./src/Test/mag.txt");
 /**
   * Constant that represent the maximum size of the file buffer.
   */
-const unsigned short  MAX_INPUT_FILE (32000);
+//const unsigned short  MAX_INPUT_FILE (32000);
 
 /**
   * Constant that represent the maximum size of the line read.
   */
-const unsigned short MAX_INPUT_LINE (256);
+//const unsigned short MAX_INPUT_LINE (256);
 
 }
 
@@ -43,25 +43,31 @@ using namespace genevalmag;
   * Reads the contents of the file and save it in the
   * string passed as parameter.
   */
-void read_file_in(string &txt_output)
-{
-	FILE*	p_file;
-	char	buffer[MAX_INPUT_FILE];
-
-	p_file = fopen(PATH_INPUT_FILE.c_str(), "r");
-	if(p_file == NULL)
-		perror("Error opening file");
-	else
-	{
-		while(!feof(p_file))
-		{
-			  char * result = fgets(buffer, MAX_INPUT_LINE, p_file);
-			  if (result)
-				  txt_output += buffer;
-		}
-		fclose(p_file);
-	}
-}
+//bool read_file_in(string &txt_output)
+//{
+//	FILE*	p_file;
+//	char	buffer[MAX_INPUT_FILE];
+//
+//	p_file = fopen(PATH_INPUT_FILE.c_str(), "r");
+//	if(p_file == NULL)
+//	{
+//		cerr << "ERROR: the file input non-exist." << endl;
+//		return false;
+//	}
+//	else
+//	{
+//		while(!feof(p_file))
+//		{
+//			char * result = fgets(buffer, MAX_INPUT_LINE, p_file);
+//			if (result)
+//			{
+//				txt_output += buffer;
+//			}
+//		}
+//		fclose(p_file);
+//	}
+//	return true;
+//}
 
 /* retorna "a - b" en segundos */
 double timeval_diff(struct timeval *a, struct timeval *b)
@@ -81,17 +87,18 @@ int main()
 
 	gettimeofday(&t_ini, NULL);
 
-	string input_grammar;
-	read_file_in(input_grammar);
+//	string input_grammar;
+//	if(read_file_in(input_grammar))
+//	{
+		Parser_AG p_mag;
 
-	Parser_AG p_mag;
-
-	if (p_mag.parse_grammar(input_grammar.c_str()))
-	{
-		Builder_plan b_plans;
-		b_plans.build_plans(p_mag.get_attr_grammar());
-	}
-
+//		if (p_mag.parse_grammar(input_grammar.c_str()))
+		if (p_mag.parse_grammar(PATH_INPUT_FILE))
+		{
+			Builder_plan b_plans;
+			b_plans.build_plans(p_mag.get_attr_grammar());
+		}
+//	}
 	cout << "Bye... :-D" << endl;
 
 	gettimeofday(&t_fin, NULL);

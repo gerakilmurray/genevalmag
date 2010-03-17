@@ -29,6 +29,7 @@ vector<Equation*> index_access_eq;
   */
 Rule::Rule()
 {
+	r_offset = 0;
 	#ifdef _DEBUG
 		rules++;
 	#endif
@@ -84,6 +85,7 @@ void Rule::copy(const Rule &other)
 	r_left_symbol	= other.get_left_symbol();
 	r_right_side	= other.get_right_side();
 	r_eqs			= other.get_eqs();
+	r_offset		= other.get_offset();
 }
 
 /**
@@ -118,11 +120,35 @@ const map<unsigned short,Equation> &Rule::get_eqs() const
 }
 
 /**
+  * Returns the number of equations of the rule.
+  */
+size_t Rule::get_number_eqs() const
+{
+	return r_eqs.size();
+}
+
+/**
+  * Returns the offset of all equation of the rule.
+  */
+unsigned short Rule::get_offset() const
+{
+	return r_offset;
+}
+
+/**
   * Return the i-equation of the rule.
   */
 const Equation *Rule::get_eq(unsigned short index) const
 {
-	return &(r_eqs.find(index)->second);
+	map<unsigned short, Equation>::const_iterator it(r_eqs.find(index));
+	if(it == r_eqs.end())
+	{
+		return NULL;
+	}
+	else
+	{
+		return &(it->second);
+	}
 }
 
 /**
@@ -194,7 +220,11 @@ bool Rule::add_eq(Equation &eq)
 
 	pair<unsigned short,Equation> new_eq(eq.get_id(), eq);
 	pair<map<unsigned short, Equation>::iterator, bool > result(r_eqs.insert(new_eq));
-	return result.second;
+
+	/* Update de offset of the rule */
+	r_offset = cant_eq - get_number_eqs();
+	assert(result.second);
+	return true;
 }
 
 /**
@@ -224,7 +254,11 @@ string Rule::to_string() const
 		}
 		rule.append("\t\t\tend");
 	}
-	rule.append(";\n");
+	rule.append("; offset: ");
+	stringstream offs;
+	offs << r_offset;
+	rule.append(offs.str());
+	rule.append("\n");
 	return rule;
 }
 
@@ -279,11 +313,9 @@ bool Rule::equals(const Rule &other) const
 }
 
 /**
-  * Generate and return the string key that identifies a rule definitely.
+  * Return the number key that identifies a rule definitely.
   *
-  * Result= left_symbol right_side
-  *
-  * where right_ride is= symbol_1> ... symbol_n
+  * Result= \<id_rule\>
   */
 unsigned short Rule::key() const
 {

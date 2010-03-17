@@ -354,7 +354,7 @@ bool Semantic_check::check_all_defined_non_terminal(const map <unsigned short, R
 		}
 		if (!left_symbol_defined)
 		{
-			cerr << "ERROR: Symbol Non-Teminal \""<< it_s->second.get_name() << "\" uses in the right part without rule." << endl;
+			cerr << "ERROR: Symbol Non-Teminal \"" << it_s->second.get_name() << "\" uses in the right part without rule." << endl;
 			return false;
 		}
 	}
