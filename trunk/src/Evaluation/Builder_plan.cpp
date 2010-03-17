@@ -421,7 +421,7 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 	print_all_plans_project(grammar);
 }
 
-void Builder_plan::build_plans(const Attr_grammar &attr_grammar)
+bool Builder_plan::build_plans(const Attr_grammar &attr_grammar)
 {
 	Builder_graphs build_graphs;
 	generate_graphs(attr_grammar, build_graphs);
@@ -430,11 +430,18 @@ void Builder_plan::build_plans(const Attr_grammar &attr_grammar)
 	{
 		cerr << "ERROR: One o more graph ADP has an cycle in its dependencies. Look the folder /out_graph for more details." << endl;
 		build_graphs.print_graphs_cyclic(attr_grammar.get_rules());
+		return false;
 	}
 	else
 	{
 		generate_plans(attr_grammar, build_graphs);
+		return true;
 	}
+}
+
+const map < Key_plan, Order_eval_eq > &Builder_plan::get_plans() const
+{
+	return eval_plans;
 }
 
 } /* end genevalmag */

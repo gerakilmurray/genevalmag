@@ -15,6 +15,7 @@
 #include "Attr_grammar/Attr_grammar.h"
 #include "Parser/Parser_AG.h"
 #include "Evaluation/Builder_plan.h"
+#include "Visit_Seq/Build_visit_sequence.h"
 
 namespace genevalmag
 {
@@ -24,50 +25,11 @@ namespace genevalmag
   */
 const string PATH_INPUT_FILE ("./src/Test/mag.txt");
 
-/**
-  * Constant that represent the maximum size of the file buffer.
-  */
-//const unsigned short  MAX_INPUT_FILE (32000);
-
-/**
-  * Constant that represent the maximum size of the line read.
-  */
-//const unsigned short MAX_INPUT_LINE (256);
-
 }
 
 using namespace std;
 using namespace genevalmag;
-
-/**
-  * Reads the contents of the file and save it in the
-  * string passed as parameter.
-  */
-//bool read_file_in(string &txt_output)
-//{
-//	FILE*	p_file;
-//	char	buffer[MAX_INPUT_FILE];
-//
-//	p_file = fopen(PATH_INPUT_FILE.c_str(), "r");
-//	if(p_file == NULL)
-//	{
-//		cerr << "ERROR: the file input non-exist." << endl;
-//		return false;
-//	}
-//	else
-//	{
-//		while(!feof(p_file))
-//		{
-//			char * result = fgets(buffer, MAX_INPUT_LINE, p_file);
-//			if (result)
-//			{
-//				txt_output += buffer;
-//			}
-//		}
-//		fclose(p_file);
-//	}
-//	return true;
-//}
+using namespace visit_seq;
 
 /* retorna "a - b" en segundos */
 double timeval_diff(struct timeval *a, struct timeval *b)
@@ -86,19 +48,19 @@ int main()
 	double secs;
 
 	gettimeofday(&t_ini, NULL);
+	Parser_AG p_mag;
 
-//	string input_grammar;
-//	if(read_file_in(input_grammar))
-//	{
-		Parser_AG p_mag;
-
-//		if (p_mag.parse_grammar(input_grammar.c_str()))
-		if (p_mag.parse_grammar(PATH_INPUT_FILE))
+	if (p_mag.parse_grammar(PATH_INPUT_FILE))
+	{
+		Builder_plan b_plans;
+		if (b_plans.build_plans(p_mag.get_attr_grammar()))
 		{
-			Builder_plan b_plans;
-			b_plans.build_plans(p_mag.get_attr_grammar());
+			Build_visit_sequence b_visit_seq;
+			b_visit_seq.generate_seq_visit(p_mag.get_attr_grammar(),b_plans.get_plans());
+			b_visit_seq.print_all_visit_sequences();
 		}
-//	}
+	}
+
 	cout << "Bye... :-D" << endl;
 
 	gettimeofday(&t_fin, NULL);

@@ -254,11 +254,12 @@ string Rule::to_string() const
 		}
 		rule.append("\t\t\tend");
 	}
-	rule.append("; offset: ");
-	stringstream offs;
-	offs << r_offset;
-	rule.append(offs.str());
-	rule.append("\n");
+//	rule.append("; offset: ");
+//	stringstream offs;
+//	offs << r_offset;
+//	rule.append(offs.str());
+//	rule.append("\n");
+	rule.append(";\n");
 	return rule;
 }
 

@@ -95,6 +95,11 @@ class Equation
 		void inorder_only_leaf(const Ast_node *head, vector<const Ast_leaf*> &result) const;
 
 		/**
+		  * Traverse the equation tree while saves only the Ast_instance nodes in the vector result.
+		  */
+		void inorder_only_instance(const Ast_node *head, vector<const Ast_instance*> &result) const;
+
+		/**
 		  * Generate and return a string reprensentation of an Equation.
 		  *
 		  * Result= \<l_value\> "=" \<r_value\> ";"

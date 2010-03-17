@@ -194,6 +194,44 @@ void Equation::inorder_only_leaf(const Ast_node* head, vector<const Ast_leaf*> &
 }
 
 /**
+  * Traverse the equation tree while saves only the Ast_instace nodes in the vector result.
+  */
+void Equation::inorder_only_instance(const Ast_node *head, vector<const Ast_instance*> &result) const
+{
+	const Ast_inner_node* root(dynamic_cast<const Ast_inner_node*>(head));
+
+	if(root)
+	{
+		for(size_t i(0); i < root->get_childs().size(); i++)
+		{
+			Ast_inner_node* child(dynamic_cast<Ast_inner_node*>(root->get_child(i)));
+
+			if (child)
+			{
+				inorder_only_instance(child,result);
+			}
+			else
+			{
+				Ast_instance *child_instace(dynamic_cast<Ast_instance*>(root->get_child(i)));
+				if (child_instace)
+				{
+					result.push_back(child_instace);
+				}
+			}
+		}
+	}
+	else
+	{
+		Ast_instance *child_instace(dynamic_cast<Ast_instance*>((Ast_leaf*)head));
+		if (child_instace)
+		{
+			result.push_back(child_instace);
+		}
+	}
+}
+
+
+/**
   * Generate and return a string reprensentation of an Equation.
   *
   * Result= \<l_value\> "=" \<r_value\> ";"
