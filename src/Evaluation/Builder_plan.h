@@ -174,7 +174,7 @@ class Builder_plan
 		/**
 		  * Generates and saves all evaluation's plans for the Attribute Grammar.
 		  */
-		void build_plans(const Attr_grammar &attr_grammar);
+		bool build_plans(const Attr_grammar &attr_grammar);
 
 		/**
 		  * Prints all plans. Creates a graph that represents the plan and uses print_graph with dot.
@@ -184,6 +184,8 @@ class Builder_plan
 		  * Prints all proyected's plans. Creates a graph that represents the plan and uses print_graph with dot.
 		  */
 		void print_all_plans_project(const Attr_grammar &grammar) const;
+
+		const map < Key_plan, Order_eval_eq > &get_plans() const;
 };
 
 } /* end genevalmag */
