@@ -9,11 +9,18 @@
 #ifndef PARSER_AG_H_
 #define PARSER_AG_H_
 
+#include <boost/spirit/include/classic_file_iterator.hpp>
+
 #include "../Attr_grammar/Attr_grammar.h"
 #include "Semantic_check.h"
 
+using namespace BOOST_SPIRIT_CLASSIC_NS;
+
 namespace genevalmag
 {
+
+typedef char                    char_t;
+typedef file_iterator<char_t>   iterator_t;
 
 class Parser_AG
 {
@@ -32,7 +39,7 @@ class Parser_AG
 	  * This method invokes the method 'parse' of the library Spirit included in Boost.
 	  * Returns true if could parse all the input.
 	  */
-	bool parse_grammar(char const *txt_input);
+	bool parse_grammar(const string path_file_input);
 };
 
 } /* end genevalmag */

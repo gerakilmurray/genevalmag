@@ -308,19 +308,30 @@ struct attritute_grammar: public grammar<attritute_grammar>
   * This method invokes the method 'parse' of the library Spitir included in Boost.
   * Returns true if could parse all the input.
   */
-bool Parser_AG::parse_grammar(char const *txt_input)
+bool Parser_AG::parse_grammar(const string path_file_input)
 {
+	/* File open */
+    /* Create a file iterator for this file */
+    iterator_t first(path_file_input);
+
+    if (!first)
+    {
+    	cerr << "ERROR: the file input non-exist." << endl;
+        return false;
+    }
+
+    /* Create an EOF iterator */
+    iterator_t last = first.make_end();
+
+	/* */
+
 	attritute_grammar	attr_grammar_decl;
 	skip_parser			skip_p;
 
 	set_at(&attr_grammar);
 	set_s_check(&sem_check);
 
-	parse_info<> info =  parse(txt_input, attr_grammar_decl, skip_p);
-
-	#ifdef _DEBUG
-		cout << "STOP: " << info.stop << "fin-STOP" << endl;
-	#endif
+	parse_info<iterator_t> info(parse(first, last, attr_grammar_decl, skip_p));
 
 	cout << "-------------------------\n";
 	if(info.full)
@@ -331,7 +342,9 @@ bool Parser_AG::parse_grammar(char const *txt_input)
 	}
 	else
 	{
-		cout << "Parsing FAILED\n";
+		cerr << "ERROR: The following text will not be able to parse:" << endl;
+		cerr << "\"" << info.stop << "\"" << endl;
+		cerr << "ERROR: Parsing Failed." << endl;
 	}
 	cout << "-------------------------\n";
 

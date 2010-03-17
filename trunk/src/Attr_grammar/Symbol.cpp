@@ -128,10 +128,12 @@ const vector<const Attribute*> &Symbol::get_attrs() const
   */
 const Attribute *Symbol::get_attribute(const string &name_attr) const
 {
-	for(vector<Attribute*>::size_type i = 0; i < symb_attrs.size(); i++)
+	for(vector<Attribute*>::size_type i(0); i < symb_attrs.size(); i++)
 	{
 		if(symb_attrs[i]->get_name().compare(name_attr) == 0)
+		{
 				return symb_attrs[i];
+		}
 	}
 	return NULL;
 }
@@ -187,11 +189,13 @@ string Symbol::to_string() const
 			symb.append("\tNonTerminal");
 
 			symb.append("\tAttributes: ");
-			for(vector<Attribute*>::size_type i = 0; i < symb_attrs.size(); i++)
+			for(vector<Attribute*>::size_type i(0); i < symb_attrs.size(); i++)
 			{
 				symb.append(symb_attrs[i]->get_name());
 				if(i+1 < symb_attrs.size())
+				{
 					symb.append(",");
+				}
 			}
 			break;
 		case k_terminal:

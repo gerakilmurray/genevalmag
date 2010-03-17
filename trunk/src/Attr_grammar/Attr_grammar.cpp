@@ -41,7 +41,7 @@ Attr_grammar::~Attr_grammar()
 template <class K, class T> bool add(T elem, map< K ,T > &map_elem)
 {
 	pair< K, T > new_p(elem.key(), elem);
-	pair<typename map< K, T  >::iterator, bool > result = map_elem.insert(new_p);
+	pair<typename map< K, T  >::iterator, bool > result(map_elem.insert(new_p));
 	return result.second;
 }
 
@@ -53,7 +53,7 @@ template <class K, class T> bool add(T elem, map< K ,T > &map_elem)
 template <class K, class T> string to_string_map(map< K ,T > &map_elem)
 {
 	string elem;
-	for(typename map< K, T >::iterator it = map_elem.begin(); it != map_elem.end(); it++)
+	for(typename map< K, T >::iterator it(map_elem.begin()); it != map_elem.end(); it++)
 	{
 		elem.append("\t");
 		elem.append(it->second.to_string());
@@ -104,7 +104,7 @@ bool Attr_grammar::add_symbol(Symbol &symb)
 	bool not_repeat = add <string, Symbol>(symb, *map_symb);
 	if(not_repeat && symb.is_non_terminal())
 	{
-		map<string, Symbol>::iterator it = map_symb->find(symb.key());
+		map<string, Symbol>::iterator it(map_symb->find(symb.key()));
 		load_attributes(it->second);
 	}
 	return not_repeat;
@@ -112,7 +112,7 @@ bool Attr_grammar::add_symbol(Symbol &symb)
 
 bool Attr_grammar::defined_rule(const Rule &rule) const
 {
-	for(map<unsigned short, Rule>::const_iterator it = ag_rule.begin(); it != ag_rule.end(); it++)
+	for(map<unsigned short, Rule>::const_iterator it(ag_rule.begin()); it != ag_rule.end(); it++)
 	{
 		if (it->second.equals(rule))
 		{
@@ -127,7 +127,7 @@ bool Attr_grammar::defined_rule(const Rule &rule) const
   */
 bool Attr_grammar::add_rule(Rule &rule)
 {
-	static unsigned short cant_rules = 1;
+	static unsigned short cant_rules(1);
 
 	if (defined_rule(rule))
 	{
@@ -137,11 +137,11 @@ bool Attr_grammar::add_rule(Rule &rule)
 
 	rule.set_id(cant_rules++);
 
-	bool result = add <unsigned short, Rule>(rule, ag_rule);
+	bool result(add <unsigned short, Rule>(rule, ag_rule));
 	if ( result && ag_initial_symb == NULL)
 	{
 		/* Set initial symbol of grammar. */
-		map<unsigned short, Rule>::iterator	init_symb = ag_rule.find(rule.key());
+		map<unsigned short, Rule>::iterator	init_symb(ag_rule.find(rule.key()));
 		ag_initial_symb = init_symb->second.get_left_symbol();
 	}
 	return result;
@@ -156,7 +156,7 @@ const Sort &Attr_grammar::return_sort(string name_sort)
 	/* Becouse is a type basic. if not the sort belong map. the map not have repeat. */
 	sort_new.set_type_basic(true);
 	add_sort(sort_new);
-	map<string,Sort>::iterator it = ag_sort.find(name_sort);
+	map<string,Sort>::iterator it(ag_sort.find(name_sort));
 	return it->second;
 }
 /**
@@ -164,7 +164,7 @@ const Sort &Attr_grammar::return_sort(string name_sort)
   */
 const Function *Attr_grammar::get_function(string key_function)
 {
-	map<string,Function>::iterator it = ag_func.find(key_function);
+	map<string,Function>::iterator it(ag_func.find(key_function));
 	if (it == ag_func.end())
 		return NULL;
 	return &(it->second);
@@ -174,7 +174,7 @@ const Function *Attr_grammar::get_function(string key_function)
   */
 const Symbol &Attr_grammar::get_symbol(string name_symbol)
 {
-	map<string,Symbol>::iterator it = ag_symb_non_terminals.find(name_symbol);
+	map<string,Symbol>::iterator it(ag_symb_non_terminals.find(name_symbol));
 	if (it == ag_symb_non_terminals.end())
 		it = ag_symb_terminals.find(name_symbol);
 	return it->second;
@@ -216,7 +216,7 @@ vector<unsigned short> Attr_grammar::get_rules_with_left_symbol(const Symbol *sy
 {
 	vector<unsigned short> result;
 
-	for(map<unsigned short, Rule>::const_iterator it = ag_rule.begin(); it != ag_rule.end(); it++)
+	for(map<unsigned short, Rule>::const_iterator it(ag_rule.begin()); it != ag_rule.end(); it++)
 	{
 		if(it->second.get_left_symbol()->equals(*symb))
 		{
@@ -271,7 +271,7 @@ bool belong(Symbol symb, string expr_attrs)
 	typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
 	boost::char_separator<char> sep("{},-");
 	tokenizer tokens(expr_attrs, sep);
-	tokenizer::iterator tok_iter = tokens.begin();
+	tokenizer::iterator tok_iter(tokens.begin());
 
 	if((*tok_iter).compare("all") == 0)
 	{
@@ -302,7 +302,7 @@ bool belong(Symbol symb, string expr_attrs)
   */
 void Attr_grammar::load_attributes(Symbol &symb)
 {
-	for(map<string,Attribute>::iterator it = ag_attr.begin(); it != ag_attr.end(); it++)
+	for(map<string,Attribute>::iterator it(ag_attr.begin()); it != ag_attr.end(); it++)
 	{
 		if(belong(symb, it->second.get_member_symbol()))
 		{
@@ -336,22 +336,20 @@ const Ast_instance *Attr_grammar::get_eq_l_value(unsigned short index) const
 
 const Equation *Attr_grammar::get_eq(unsigned short index) const
 {
-	map<unsigned short,Rule>::const_iterator     last_rule(ag_rule.end());
+	map<unsigned short,Rule>::const_iterator last_rule(ag_rule.end());
 	last_rule--;
 	map<unsigned short,Equation>::const_iterator last_eq(last_rule->second.get_eqs().end());
 	last_eq--;
 	assert(index >= 1);
 	assert(index <= last_eq->second.get_id());
-	// The index is valid
+	/* The index is valid. */
 
-	for(map<unsigned short,Rule>::const_iterator it_r(ag_rule.begin()); it_r != ag_rule.end(); it_r++)
+	for(map<unsigned short,Rule>::const_reverse_iterator it_r(ag_rule.rbegin()); it_r != ag_rule.rend(); it_r++)
 	{
-		for(map<unsigned short,Equation>::const_iterator it_e(it_r->second.get_eqs().begin()); it_e != it_r->second.get_eqs().end(); it_e++)
+		if(it_r->second.get_offset() <= index)
+		/* The equation must belong to this rule. */
 		{
-			if (it_e->second.get_id() == index)
-			{
-				return &it_e->second;
-			}
+			return it_r->second.get_eq(index);
 		}
 	}
 	return NULL;

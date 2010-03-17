@@ -74,7 +74,7 @@ vector<Ast_inner_node*> 	stack_inner_node;
 /**
   * Methods and functions for parse Sort class.
   */
-void create_sort(char const *str, char const *end)
+void create_sort(const iterator_t str, const iterator_t end)
 {
 	string name(str, end);
 	Sort sort(name);
@@ -87,13 +87,13 @@ void create_sort(char const *str, char const *end)
 /**
   * Methods and functions for parse Function.
   */
-void inic_func(char const *str, char const *end)
+void inic_func(const iterator_t str, const iterator_t end)
 {
 	/* Ignore the string parsed. */
 	current_func = new Function();
 }
 
-void add_function(char const *str, char const *end)
+void add_function(const iterator_t str, const iterator_t end)
 {
 	if(!attr_grammar->add_function(*current_func))
 	{
@@ -103,19 +103,19 @@ void add_function(char const *str, char const *end)
 	current_func = NULL;
 }
 
-void save_name_func(char const *str, char const *end)
+void save_name_func(const iterator_t str, const iterator_t end)
 {
 	string name(str, end);
 	current_func->set_name(name);
 }
 
-void save_domain_func(char const *str, char const *end)
+void save_domain_func(const iterator_t str, const iterator_t end)
 {
 	string domain(str, end);
 	current_func->add_domain(&(attr_grammar->return_sort(domain)));
 }
 
-void save_image_func(char const *str, char const *end)
+void save_image_func(const iterator_t str, const iterator_t end)
 {
 	string image(str, end);
 	current_func->set_image(&(attr_grammar->return_sort(image)));
@@ -124,13 +124,13 @@ void save_image_func(char const *str, char const *end)
 /**
   * Methods and functions for parse Operator.
   */
-void add_operator(char const *str, char const *end)
+void add_operator(const iterator_t str, const iterator_t end)
 {
 	current_func->set_is_operator(IS_OPERATOR);
 	add_function(str, end);
 }
 
-void save_mode_op(char const *str, char const *end)
+void save_mode_op(const iterator_t str, const iterator_t end)
 {
 	string mode(str, end);
 	current_func->set_mode(mode);
@@ -141,7 +141,7 @@ void save_prec_op(int const prec)
 	current_func->set_prec(prec);
 }
 
-void save_assoc_op(char const *str, char const *end)
+void save_assoc_op(const iterator_t str, const iterator_t end)
 {
 	string assoc(str, end);
 	current_func->set_oper_assoc(assoc);
@@ -150,7 +150,7 @@ void save_assoc_op(char const *str, char const *end)
 /**
   * Methods and functions for parse Attribute class.
   */
-void add_attribute(char const *str, char const *end)
+void add_attribute(const iterator_t str, const iterator_t end)
 {
 	string name(str, end);
 	if(new_attrs == NULL)
@@ -169,13 +169,13 @@ void add_attribute(char const *str, char const *end)
 	}
 }
 
-void save_sort_attr(char const *str, char const *end)
+void save_sort_attr(const iterator_t str, const iterator_t end)
 {
 	string sort(str, end);
 	new_attrs->d_sort_type = sort;
 }
 
-void save_type_attr(char const *str, char const *end)
+void save_type_attr(const iterator_t str, const iterator_t end)
 {
 	string mod_type(str, end);
 	if(mod_type.compare("inh") == 0)
@@ -184,7 +184,7 @@ void save_type_attr(char const *str, char const *end)
 	}
 }
 
-void save_member_list_attr(char const *str, char const *end)
+void save_member_list_attr(const iterator_t str, const iterator_t end)
 {
 	string members(str, end);
 	boost::erase_all(members, " ");
@@ -193,9 +193,9 @@ void save_member_list_attr(char const *str, char const *end)
 	new_attrs->d_member_symbol = members;
 }
 
-void create_attributes(char const *str, char const *end)
+void create_attributes(const iterator_t str, const iterator_t end)
 {
-	for(vector<string>::size_type i = 0; i < new_attrs->d_names.size(); i++)
+	for(vector<string>::size_type i(0); i < new_attrs->d_names.size(); i++)
 	{
 		Attribute attr;
 		attr.set_name(new_attrs->d_names[i]);
@@ -212,14 +212,14 @@ void create_attributes(char const *str, char const *end)
 /**
   * Methods and functions for parse Symbol class.
   */
-void create_new_non_terminal(char const *str, char const *end)
+void create_new_non_terminal(const iterator_t str, const iterator_t end)
 {
 	string name(str, end);
 	Symbol symb(name, k_non_terminal);
 	attr_grammar->add_symbol(symb);
 }
 
-void create_new_terminal(char const *str, char const *end)
+void create_new_terminal(const iterator_t str, const iterator_t end)
 {
 	string name(str, end);
 	Symbol symb(name, k_terminal);
@@ -229,26 +229,26 @@ void create_new_terminal(char const *str, char const *end)
 /**
   * Methods and functions for parse Rule class.
   */
-void create_rule(char const *str, char const *end)
+void create_rule(const iterator_t str, const iterator_t end)
 {
 	string left_side_symbol(str, end);
 	current_rule = new Rule();
 	current_rule->set_left_symbol(&(attr_grammar->get_symbol(left_side_symbol)));
 }
 
-void save_right_side_rule(char const *str, char const *end)
+void save_right_side_rule(const iterator_t str, const iterator_t end)
 {
 	string right_side_symbol(str, end);
 	current_rule->add_right_symbol(&(attr_grammar->get_symbol(right_side_symbol)));
 }
 
-void create_abbreviated_rule(char const *str, char const *end)
+void create_abbreviated_rule(const iterator_t str, const iterator_t end)
 {
 	current_rule = new Rule();
 	current_rule->set_left_symbol(current_rule->get_left_symbol());
 }
 
-void save_rule(char const *str, char const *end)
+void save_rule(const iterator_t str, const iterator_t end)
 {
 	attr_grammar->add_rule(*current_rule);
 	delete(current_rule);
@@ -257,7 +257,7 @@ void save_rule(char const *str, char const *end)
 /**
   * Methods and functions for parse Equation class of Rule.
   */
-void create_instance(char const *str, char const *end)
+void create_instance(const iterator_t str, const iterator_t end)
 {
 	string name(str, end);
 
@@ -265,7 +265,7 @@ void create_instance(char const *str, char const *end)
 
 	if (!current_rule->belongs_non_terminal(*symb))
 	{
-		cerr << "ERROR: non-terminal symbol \"" << name << "\" used does not belong to the rule: \"" << utilities::cleaning_tabs(current_rule->to_string_not_eqs())<< "\"."<< endl;
+		cerr << "ERROR: non-terminal symbol \"" << name << "\" used does not belong to the rule: \""  << utilities::cleaning_tabs(current_rule->to_string_not_eqs())<< "\"."<< endl;
 		exit(-1);
 	}
 
@@ -280,13 +280,13 @@ void save_index_ins(int const index)
 {
 	if (index >= current_rule->count_non_terminal(current_instance->get_symb()))
 	{
-		cerr << "ERROR: Index of symbol incorrect."<< index << current_instance->get_symb()->get_name() << endl;
+		cerr << "ERROR: Index of symbol incorrect." << index << current_instance->get_symb()->get_name() << endl;
 		exit(-1);
 	}
 	current_instance->set_num(index);
 }
 
-void save_attr_ins(char const *str, char const *end)
+void save_attr_ins(const iterator_t str, const iterator_t end)
 {
 	string attr(str, end);
 	current_instance->set_attr(current_instance->get_symb()->get_attribute(attr));
@@ -297,7 +297,7 @@ void save_attr_ins(char const *str, char const *end)
 	}
 }
 
-void create_lit_number(char const *str, char const *end)
+void create_lit_number(const iterator_t str, const iterator_t end)
 {
 	string num(str, end);
 
@@ -306,7 +306,7 @@ void create_lit_number(char const *str, char const *end)
 		current_literal = new Ast_literal();
 	}
 
-	size_t pos = num.find('.',0);
+	size_t pos(num.find('.',0));
 	if (pos > num.length())
 	{
 		current_literal->set_type(k_int);
@@ -321,7 +321,7 @@ void create_lit_number(char const *str, char const *end)
 	}
 }
 
-void create_lit_ch(char const *ch, char const *end)
+void create_lit_ch(const iterator_t ch, const iterator_t end)
 {
 	if(current_literal == NULL)
 	{
@@ -334,7 +334,7 @@ void create_lit_ch(char const *ch, char const *end)
 	current_literal->set_value(ch_l);
 }
 
-void create_lit_str(char const *str, char const *end)
+void create_lit_str(const iterator_t str, const iterator_t end)
 {
 	if(current_literal == NULL)
 	{
@@ -347,19 +347,19 @@ void create_lit_str(char const *str, char const *end)
 	current_literal->set_value(str_l);
 }
 
-void create_function(char const *str, char const *end)
+void create_function(const iterator_t str, const iterator_t end)
 {
 	current_func = new Function();
 	save_name_func(str, end);
 }
 
-void create_operator(char const *str, char const *end)
+void create_operator(const iterator_t str, const iterator_t end)
 {
 	create_function(str,end);
 	current_func->set_is_operator(IS_OPERATOR);
 }
 
-void create_equation(char const *str, char const *end)
+void create_equation(const iterator_t str, const iterator_t end)
 {
 	current_eq = new Equation();
 	current_eq->set_l_value(*current_instance);
@@ -367,7 +367,7 @@ void create_equation(char const *str, char const *end)
 	current_instance = NULL;
 }
 
-void save_rvalue(char const *str, char const *end)
+void save_rvalue(const iterator_t str, const iterator_t end)
 {
 	/* Check that the type of r_value be expected from l_value. */
 	if (current_eq->get_l_value()->get_attr()->get_sort_type()->get_name().compare(stack_node.back()->get_type_synthetized()))
@@ -417,14 +417,14 @@ void push_mark(char name)
   * Creation AST nodes.
   */
 
-void create_literal_node(char const *str, char const *end)
+void create_literal_node(const iterator_t str, const iterator_t end)
 {
 	/* Push literal in stack. */
 	stack_node.push_back(current_literal);
 	current_literal = NULL;
 }
 
-void create_instance_node(char const *str, char const *end)
+void create_instance_node(const iterator_t str, const iterator_t end)
 {
 	/* Syntetize type instance. */
 	current_instance->set_type_synthetized(current_instance->get_attr()->get_sort_type()->get_name());
@@ -433,7 +433,7 @@ void create_instance_node(char const *str, char const *end)
 	current_instance = NULL;
 };
 
-void create_func_node(char const *str, char const *end)
+void create_func_node(const iterator_t str, const iterator_t end)
 {
 	current_ast_function = new Ast_function();
 	/* Set aux function. */
@@ -451,7 +451,7 @@ void create_func_node(char const *str, char const *end)
 	current_ast_function = NULL;
 };
 
-void create_root_infix_node(char const *str, char const *end)
+void create_root_infix_node(const iterator_t str, const iterator_t end)
 {
 	/* Pop the infix operator. */
 	Ast_function *root((Ast_function*)stack_inner_node.back());
@@ -498,7 +498,7 @@ void create_root_infix_node(char const *str, char const *end)
 	stack_node.push_back(root);
 }
 
-void create_root_function_node(char const *str, char const *end)
+void create_root_function_node(const iterator_t str, const iterator_t end)
 {
 	/* Pop the function. */
 	Ast_function *root((Ast_function*)stack_inner_node.back());
@@ -546,7 +546,7 @@ void create_root_function_node(char const *str, char const *end)
 	stack_node.push_back(root);
 }
 
-void create_root_postfix_node(char const *str, char const *end)
+void create_root_postfix_node(const iterator_t str, const iterator_t end)
 {
 	/* Pop the postfix operator. */
 	Ast_function *root((Ast_function*)stack_inner_node.back());
@@ -586,7 +586,7 @@ void create_root_postfix_node(char const *str, char const *end)
 	stack_node.push_back(root);
 }
 
-void create_root_prefix_node(char const *str, char const *end)
+void create_root_prefix_node(const iterator_t str, const iterator_t end)
 {
 	/* Pop the prefix operator. */
 	Ast_function *root((Ast_function*)stack_inner_node.back());
@@ -626,7 +626,7 @@ void create_root_prefix_node(char const *str, char const *end)
 	stack_node.push_back(root);
 }
 
-void check_well_defined(char const *str, char const *end)
+void check_well_defined(const iterator_t str, const iterator_t end)
 {
 	sem_check->check_all_defined_non_terminal(attr_grammar->get_rules(), attr_grammar->get_non_terminal_symbols());
 
