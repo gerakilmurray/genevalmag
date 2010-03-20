@@ -12,12 +12,11 @@
 #include <map>
 
 #include "../Attr_grammar/Attr_grammar.h"
-#include "../Evaluation/Builder_plan.h"
+#include "Builder_plan.h"
 
 using namespace std;
-using namespace genevalmag;
 
-namespace visit_seq
+namespace genevalmag
 {
 
 /*
@@ -27,19 +26,26 @@ namespace visit_seq
  */
 typedef vector <int> Visit_seq;
 
-class Build_visit_sequence {
-private:
-	vector<Visit_seq> all_visit_seqs;
+class Build_visit_sequence
+{
+	private:
+		vector<Visit_seq> all_visit_seqs;
 
-public:
-	Build_visit_sequence();
-	virtual ~Build_visit_sequence();
+	public:
+		Build_visit_sequence();
+		virtual ~Build_visit_sequence();
 
-	void generate_seq_visit(const Attr_grammar &attr_grammar, const map < Key_plan, Order_eval_eq > &plans);
+		bool generate_seq_visit(const Attr_grammar &attr_grammar, const map < Key_plan, Order_eval_eq > &plans);
 
-	void print_all_visit_sequences() const;
+		bool gen_seq_visit(const Attr_grammar &attr_grammar, const vector < pair < Key_plan, Order_eval_eq > > &plans, size_t i_plan, vector<const Ast_instance*> &computed);
+
+		void print_all_visit_sequences() const;
+
+		const vector<Visit_seq> &get_visit_seq() const;
 };
+
+} /* end namespace */
 
 #endif /* BUILD_VISIT_SEQUENCE_H_ */
 
-} /* end namespace */
+

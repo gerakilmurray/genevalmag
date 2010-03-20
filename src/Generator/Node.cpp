@@ -8,7 +8,7 @@
 
 #include "Node.h"
 
-namespace visit_seq
+namespace genevalmag
 {
 
 Node::Node() {

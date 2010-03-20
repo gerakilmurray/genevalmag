@@ -109,7 +109,7 @@ class Attribute
 		  *
 		  * Result= name ":" modifiers "<" sort_type ["(" instance ")" IF DEBUG IS ON] "> of " membership_list
 		  */
-		string to_string()const;
+		string to_string() const;
 
 		/**
 		  * Compares the attribute with other.

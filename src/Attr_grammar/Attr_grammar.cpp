@@ -50,10 +50,10 @@ template <class K, class T> bool add(T elem, map< K ,T > &map_elem)
   *
   * Return the string representation of all elements of the map.
   */
-template <class K, class T> string to_string_map(map< K ,T > &map_elem)
+template <class K, class T> string Attr_grammar::to_string_map(const map< K ,T > &map_elem) const
 {
 	string elem;
-	for(typename map< K, T >::iterator it(map_elem.begin()); it != map_elem.end(); it++)
+	for(typename map< K, T >::const_iterator it(map_elem.begin()); it != map_elem.end(); it++)
 	{
 		elem.append("\t");
 		elem.append(it->second.to_string());
@@ -159,6 +159,15 @@ const Sort &Attr_grammar::return_sort(string name_sort)
 	map<string,Sort>::iterator it(ag_sort.find(name_sort));
 	return it->second;
 }
+
+/**
+  * Return the map with all sorts.
+  */
+const map<string, Sort> &Attr_grammar::get_sorts() const
+{
+	return ag_sort;
+}
+
 /**
   * Find in the list of function of the attribute grammar and return the function with that name.
   */
@@ -169,6 +178,15 @@ const Function *Attr_grammar::get_function(string key_function)
 		return NULL;
 	return &(it->second);
 }
+
+/**
+  * Return the map with all functions.
+  */
+const map<string, Function> &Attr_grammar::get_functions() const
+{
+	return ag_func;
+}
+
 /**
   * Find in the list of operator of the attribute grammar and return the operator with that name.
   */
@@ -239,7 +257,7 @@ void  Attr_grammar::set_initial_symb(Symbol *init_symb)
   * where sorts, operators, functions, attributes, symbols and rules, are
   * full representation of each type.
   */
-string Attr_grammar::to_string()
+string Attr_grammar::to_string() const
 {
 	string semdomain("\nsemantic domain\n");
 	semdomain.append(to_string_map<string, Sort>(ag_sort));
