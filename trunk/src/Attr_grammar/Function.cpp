@@ -332,6 +332,44 @@ string Function::to_string() const
 }
 
 /**
+  * Generates and returns a string with the signature of a Function.
+  *
+  * Result= \<image\> \<name\> "(" \<domain\> ");"
+  *
+  * or if is an operator:
+  *
+  * Result= \<image\> "operator"\<name\> "(" \<domain\> ");"
+  *
+  * where \<domain\> is= sort_1 P1"," ... "," sort_n Pn
+  */
+string Function::signature() const
+{
+	string func;
+	func.append(f_image->get_name());
+	func.append(" ");
+	if(is_operator())
+	{
+		func.append("operator");
+	}
+	func.append(f_name);
+	func.append(" (");
+	for(vector<Sort>::size_type i(0); i < f_domain.size(); i++)
+	{
+		func.append(f_domain[i]->get_name());
+		func.append(" p");
+		stringstream num;
+		num << i;
+		func.append(num.str());
+		if(i+1 < f_domain.size())
+		{
+			func.append(", ");
+		}
+	}
+	func.append(");");
+	return func;
+}
+
+/**
   * Returns true if the Function is a Operator.
   */
 bool Function::is_operator() const

@@ -29,6 +29,7 @@ attributes
 	i1  : inh <int> of {X};
 	i2  : inh <int> of {Y};
 	i3  : inh <int> of {Y};
+    s5  : syn <int> of {X};
 	
 /******************
  * Block of Rules *
@@ -57,7 +58,8 @@ rules
 	// P4
 	X ::= 'm'
 			compute
-				X[0].s1 = X[0].i1;
+			    X[0].s5 = 6;
+				X[0].s1 = X[0].s5 + X[0].i1;
 			end;
 			
 	// P5

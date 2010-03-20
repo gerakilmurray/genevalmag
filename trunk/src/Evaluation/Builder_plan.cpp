@@ -287,10 +287,8 @@ void project_order(const Symbol *symb, const Attr_grammar &grammar, const Order_
 	}
 }
 
-void purge_plan_with(const Rule &rule, Order_eval_eq &order_eq)
+void purge_plan_with(const Rule &rule, const Order_eval_eq &order_eq, Order_eval_eq &purged_order)
 {
-	Order_eval_eq purged_order;
-
 	for(size_t i(0); i < order_eq.size(); i++)
 	{
 		if(rule.get_eq(order_eq[i]) != NULL)
@@ -298,7 +296,6 @@ void purge_plan_with(const Rule &rule, Order_eval_eq &order_eq)
 			purged_order.push_back(order_eq[i]);
 		}
 	}
-	order_eq = purged_order;
 }
 
 bool defined_work (const vector < Item_work > &list, const Item_work &item_work)
@@ -371,13 +368,29 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 
 					Order_eval_eq total_order(compute_order(adp->second, i_work.order_attr, grammar, context));
 
-					purge_plan_with(rule, total_order);
+//					cout << " Antes ";
+//					for(size_t i(0); i < total_order.size(); i++)
+//					{
+//						cout << total_order[i] << ", ";
+//
+//					}
+//					cout << endl;
+					Order_eval_eq order_purged;
+					purge_plan_with(rule, total_order,order_purged);
+//
+//					cout << " Despues ";
+//					for(size_t i(0); i < order_purged.size(); i++)
+//					{
+//						cout << order_purged[i] << ", ";
+//
+//					}
+//					cout << endl;
 
 					/* Saves the new_plan in the map. */
 					Key_plan key_plan;
 					key_plan.id_plan = context;
 					key_plan.plan = i_work.order_attr;
-					pair < Key_plan, Order_eval_eq > new_p(key_plan, total_order);
+					pair < Key_plan, Order_eval_eq > new_p(key_plan, order_purged);
 					eval_plans.insert(new_p);
 
 					vector<const Symbol*> right_side(rule.get_non_terminals_right_side());
@@ -418,7 +431,7 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 	clean_output_folder();
 	//build_graphs.print_adp_graphs(grammar.get_rules());
 	print_all_plans(grammar);
-	print_all_plans_project(grammar);
+	//print_all_plans_project(grammar);
 }
 
 bool Builder_plan::build_plans(const Attr_grammar &attr_grammar)

@@ -49,6 +49,8 @@ private:
 
 	bool defined_rule(const Rule &rule) const;
 
+	template <class K, class T> string to_string_map(const map< K ,T > &map_elem) const;
+
 public:
 	/**
 	  * Contructor empty of semantic domain.
@@ -86,9 +88,17 @@ public:
 	  */
 	const Sort &return_sort(string name_sort);
 	/**
+	  * Return the map with all sorts.
+	  */
+	const map<string, Sort> &get_sorts() const;
+	/**
 	  * Find in the list of function of the semantic domain and return the function with that name.
 	  */
 	const Function *get_function(string name_function);
+	/**
+	  * Return the map with all functions.
+	  */
+	const map<string, Function> &get_functions() const;
 	/**
 	  * Find in the list of symbol of the semantic domain and return the symbol with that name.
 	  */
@@ -142,7 +152,7 @@ public:
 	  * where \<sorts\>, \<operators\>, \<functions\>, \<attributes\>, \<symbols\> and \<rules\>, are
 	  * full representation of each type.
 	  */
-	string to_string();
+	string to_string() const;
 
 	unsigned short get_index_eq_with_context(const Ast_instance *ins, const vector<unsigned short> &context_rule) const;
 

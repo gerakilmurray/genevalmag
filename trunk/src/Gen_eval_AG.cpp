@@ -15,7 +15,8 @@
 #include "Attr_grammar/Attr_grammar.h"
 #include "Parser/Parser_AG.h"
 #include "Evaluation/Builder_plan.h"
-#include "Visit_Seq/Build_visit_sequence.h"
+#include "Evaluation/Build_visit_sequence.h"
+#include "Generator/Gen_code.h"
 
 namespace genevalmag
 {
@@ -29,7 +30,6 @@ const string PATH_INPUT_FILE ("./src/Test/mag.txt");
 
 using namespace std;
 using namespace genevalmag;
-using namespace visit_seq;
 
 /* retorna "a - b" en segundos */
 double timeval_diff(struct timeval *a, struct timeval *b)
@@ -56,8 +56,13 @@ int main()
 		if (b_plans.build_plans(p_mag.get_attr_grammar()))
 		{
 			Build_visit_sequence b_visit_seq;
-			b_visit_seq.generate_seq_visit(p_mag.get_attr_grammar(),b_plans.get_plans());
-			b_visit_seq.print_all_visit_sequences();
+			if (b_visit_seq.generate_seq_visit(p_mag.get_attr_grammar(),b_plans.get_plans()))
+			{
+				//b_visit_seq.print_all_visit_sequences();
+				Gen_code gen;
+				gen.generate_code(p_mag.get_attr_grammar(), b_visit_seq.get_visit_seq());
+			}
+
 		}
 	}
 

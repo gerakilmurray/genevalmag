@@ -150,6 +150,19 @@ class Function
 		string to_string() const;
 
 		/**
+		  * Generates and returns a string with the signature of a Function.
+		  *
+		  * Result= \<image\> \<name\> "(" \<domain\> ");"
+		  *
+		  * or if is an operator:
+		  *
+		  * Result= \<image\> "operator"\<name\> "(" \<domain\> ");"
+		  *
+		  * where \<domain\> is= sort_1 P1"," ... "," sort_n Pn
+		  */
+		string signature() const;
+
+		/**
 		  * Returns true if the Function is a Operator.
 		  */
 		bool is_operator() const;
