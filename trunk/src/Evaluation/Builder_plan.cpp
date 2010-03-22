@@ -368,23 +368,8 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 
 					Order_eval_eq total_order(compute_order(adp->second, i_work.order_attr, grammar, context));
 
-//					cout << " Antes ";
-//					for(size_t i(0); i < total_order.size(); i++)
-//					{
-//						cout << total_order[i] << ", ";
-//
-//					}
-//					cout << endl;
 					Order_eval_eq order_purged;
 					purge_plan_with(rule, total_order,order_purged);
-//
-//					cout << " Despues ";
-//					for(size_t i(0); i < order_purged.size(); i++)
-//					{
-//						cout << order_purged[i] << ", ";
-//
-//					}
-//					cout << endl;
 
 					/* Saves the new_plan in the map. */
 					Key_plan key_plan;
@@ -399,7 +384,9 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 					{
 						Order_eval_eq proj_order;
 
-						project_order(right_side[i], grammar, total_order, proj_order);
+						const Rule& rule_proj(grammar.get_rule(adp->first[i+1]));
+						purge_plan_with(rule_proj, total_order, proj_order);
+						//project_order(right_side[i], grammar, order_purged, proj_order);
 
 						/* Saves the new_plan_projected in the projected map. */
 						Key_plan_project key_project;
@@ -429,9 +416,10 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 	}
 
 	clean_output_folder();
-	//build_graphs.print_adp_graphs(grammar.get_rules());
+//	build_graphs.print_all_graphs(grammar.get_rules());
+//	build_graphs.print_adp_graphs(grammar.get_rules());
 	print_all_plans(grammar);
-	//print_all_plans_project(grammar);
+//	print_all_plans_project(grammar);
 }
 
 bool Builder_plan::build_plans(const Attr_grammar &attr_grammar)

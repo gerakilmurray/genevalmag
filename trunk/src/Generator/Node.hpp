@@ -13,21 +13,16 @@
 
 using namespace std;
 
-namespace genevalmag
+namespace node_tree
 {
 
-class Node
+struct Node
 {
-	private:
-		Node *parent;
-		vector<Node*> childs;
-		unsigned short rule_id;
-		unsigned short index_v_seq; //index of vector de visit sequence.
-		unsigned short num_v_seq;   // donde quede.
-
-	public:
-		Node();
-		virtual ~Node();
+	Node *parent;
+	vector<Node*> childs;
+	unsigned short rule_id;
+	unsigned short index_v_seq; //index of vector de visit sequence.
+	unsigned short num_v_seq;   // donde quede.
 };
 
 }/* end namespace */
