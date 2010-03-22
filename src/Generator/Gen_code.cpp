@@ -91,9 +91,11 @@ void Gen_code::generate_header_file()
 	header.append("#define EVAL_MAG_CPP_\n\n");
 
 	header.append("#include <iostream>\n");
-	header.append("#include <vector>\n\n");
+	header.append("#include <vector>\n");
+	header.append("#include \"GenEvalAG/src/Generator/Node.hpp\"\n\n");
 
-	header.append("using namespace std;\n\n");
+	header.append("using namespace std;\n");
+	header.append("using namespace node_tree;\n\n");
 
 	std::ofstream file_output(full_path.c_str());
 	file_output.write(header.c_str(),header.size());
@@ -331,7 +333,7 @@ void Gen_code::generate_structs(const Attr_grammar &attr_grammar)
 	{
 		structs.append("typedef struct Symbol_");
 		structs.append(it_symb->second.get_name());
-		structs.append("\n{\n");
+		structs.append(": Node\n{\n");
 		const vector<const Attribute*> &attrs(it_symb->second.get_attrs());
 		for(size_t j(0);j< attrs.size();j++)
 		{
