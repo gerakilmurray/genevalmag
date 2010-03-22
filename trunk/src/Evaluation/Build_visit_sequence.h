@@ -20,9 +20,9 @@ namespace genevalmag
 {
 
 /*
- * Where 	item > 0 represent to visit to this rule number.
+ * Where 	item  > 0 represent to visit to this rule number.
  * 			item == 0 represent to leave;
- * 			item < 0  represent to compute this equation number.
+ * 			item  < 0 represent to compute this equation number.
  */
 typedef vector <int> Visit_seq;
 
@@ -31,13 +31,16 @@ class Build_visit_sequence
 	private:
 		vector<Visit_seq> all_visit_seqs;
 
+		bool gen_seq_visit(const Attr_grammar &attr_grammar, const vector < pair < Key_plan, Order_eval_eq > > &plans, size_t i_plan, vector<const Ast_instance*> &computed);
+
+		void save_visit_sequence(const Visit_seq &sequence, const size_t i_plan);
+
 	public:
 		Build_visit_sequence();
+
 		virtual ~Build_visit_sequence();
 
 		bool generate_seq_visit(const Attr_grammar &attr_grammar, const map < Key_plan, Order_eval_eq > &plans);
-
-		bool gen_seq_visit(const Attr_grammar &attr_grammar, const vector < pair < Key_plan, Order_eval_eq > > &plans, size_t i_plan, vector<const Ast_instance*> &computed);
 
 		void print_all_visit_sequences() const;
 
