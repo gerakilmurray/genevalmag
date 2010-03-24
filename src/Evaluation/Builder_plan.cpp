@@ -322,16 +322,19 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 	vector< unsigned short > initial_rules(grammar.get_rules_with_left_symbol(grammar.get_initial_symb()));
 
 	/* Initializes the work list with the rules with the initial symbol grammar. */
+
+	Order_eval_eq init_order;
+	Context_rule context;
+	context.father = 0; /* Initial rule hasn't father. */
+	vector < unsigned short > invoque_context;
+	invoque_context.push_back(initial_rules[0]);
+	context.context = invoque_context;
+	generates_topological_order(build_graphs.get_dcg_graph(initial_rules[0]), init_order, grammar, context);
+
+	init_order_ag = init_order;
+
 	for(size_t i(0); i < initial_rules.size(); i++)
 	{
-		Order_eval_eq init_order;
-		Context_rule context;
-		context.father = 0; /* Initial rule hasn't father. */
-		vector < unsigned short > invoque_context;
-		invoque_context.push_back(initial_rules[i]);
-		context.context = invoque_context;
-		generates_topological_order(build_graphs.get_dcg_graph(initial_rules[i]), init_order, grammar, context);
-
 		Key_work_list key;
 		key.father = 0;/* Initial rule hasn't father. */
 		key.id_rule = initial_rules[i];
@@ -443,6 +446,16 @@ bool Builder_plan::build_plans(const Attr_grammar &attr_grammar)
 const map < Key_plan, Order_eval_eq > &Builder_plan::get_plans() const
 {
 	return eval_plans;
+}
+
+const map < Key_plan_project, Order_eval_eq > &Builder_plan::get_plans_project() const
+{
+	return plans_project;
+}
+
+const Order_eval_eq &Builder_plan::get_init_order() const
+{
+	return init_order_ag;
 }
 
 } /* end genevalmag */

@@ -11,6 +11,7 @@
 #include <time.h>
 
 #include "Gen_code.h"
+#include "../Evaluation/Builder_plan.h"
 
 namespace genevalmag
 {
@@ -92,11 +93,11 @@ void Gen_code::generate_header_file()
 
 	header.append("#include <iostream>\n");
 	header.append("#include <vector>\n");
-	header.append("#include \"GenEvalAG/src/Generator/Node.hpp\"\n\n");
+	header.append("#include \"GenEvalAG/src/Generator/Node.hpp\"\n");
+	header.append("#include \"GenEvalAG/src/Generator/Plan.hpp\"\n\n");
 
 	header.append("using namespace std;\n");
-	header.append("using namespace node_tree;\n\n");
-
+	header.append("using namespace util_ag;\n");
 	std::ofstream file_output(full_path.c_str());
 	file_output.write(header.c_str(),header.size());
 	file_output.close();
@@ -108,7 +109,13 @@ void Gen_code::generate_header_class()
 	header.append("namespace evalmag\n");
 	header.append("{\n\n");
 
-	header.append("typedef vector<int> Visit_sequence;\n\n");
+	header.append("typedef vector<int> Visit_sequence;\n");
+
+	header.append("typedef vector<string> Rule;\n");
+
+	header.append("typedef pair< Key_plan,Order_eval_eq> Plan;\n");
+
+	header.append("typedef pair< Key_plan_project,Order_eval_eq> Plan_project;\n\n");
 
 	header.append("class Eval_mag\n");
 	header.append("{\n");
@@ -130,68 +137,262 @@ void Gen_code::generate_footer()
 	file_output.close();
 }
 
-void generate_initialize(string &text, const vector<Visit_seq> & v_seq)
+template <class T>
+string write_vector_with_inic(string &text_buffer, string name_vec, size_t index, const vector<T> &vec, string type_vec, const string type_array)
+{
+	text_buffer.append("            ");
+	text_buffer.append(type_array);
+	text_buffer.append(" __");
+	string name (name_vec);
+
+	stringstream index_array;
+	index_array << index;
+	name.append(index_array.str());
+
+	text_buffer.append(name);
+	text_buffer.append("[] = ");
+
+	text_buffer.append("{");
+	for(size_t i(0); i < vec.size(); i++)
+	{
+		stringstream item;
+		item << vec[i];
+		text_buffer.append(item.str());
+		if(i < vec.size() - 1)
+		{
+			text_buffer.append(",");
+		}
+	}
+	text_buffer.append("};\n");
+
+	text_buffer.append("            ");
+	text_buffer.append(type_vec);
+	text_buffer.append(" ");
+	text_buffer.append(name);
+	text_buffer.append("(__");
+	text_buffer.append(name);
+	text_buffer.append(", __");
+	text_buffer.append(name);
+	text_buffer.append(" + sizeof(__");
+	text_buffer.append(name);
+	text_buffer.append(") / sizeof(");
+	text_buffer.append(type_array);
+	text_buffer.append("));\n");
+
+	return name;
+}
+
+
+void generate_initialize_v_seq(string &text, const vector<Visit_seq> & v_seq)
 {
 	for(size_t i(0); i < v_seq.size(); i++)
 	{
-		text.append("            int ");
-		string name ("order");
+		string name_vec(write_vector_with_inic<int>(text, "order",i,v_seq[i],"Visit_sequence","int"));
 
-		stringstream index;
-		index << i;
-		name.append(index.str());
-
-		text.append(name);
-		text.append("[] = ");
-
-		text.append("{");
-		for(size_t j(0); j < v_seq[i].size(); j++)
-		{
-			stringstream i_seq_visit;
-			i_seq_visit << v_seq[i][j];
-			text.append(i_seq_visit.str());
-			if(j < v_seq[i].size() - 1)
-			{
-				text.append(",");
-			}
-		}
-		text.append("};\n");
-		text.append("            Visit_sequence vec_");
-		text.append(name);
-		text.append("(");
-		text.append(name);
-		text.append(", ");
-		text.append(name);
-		text.append(" + sizeof(");
-		text.append(name);
-		text.append(") / sizeof(int));\n");
-
-		text.append("            v_seq.push_back(vec_");
-		text.append(name);
+		text.append("            v_seq.push_back(");
+		text.append(name_vec);
 		text.append(");\n");
 	}
 }
 
+string generate_key_plan(string &text,const string n_key,int num_key, Key_plan k_p )
+{
+	/* generate key_plan */
+
+		/* it->first.id_plan */
+	text.append("            Key_plan ");
+	string name_key(n_key);
+	stringstream str_index;
+	str_index << num_key;
+	name_key.append(str_index.str());
+	text.append(name_key);
+	text.append(";\n            ");
+
+	text.append(name_key);
+	text.append(".id_plan.father = ");
+	stringstream father;
+	father << k_p.id_plan.father;
+	text.append(father.str());
+	text.append(";\n");
+
+	string context_key ("context_");
+	context_key.append(n_key);
+	string name_o_rule(write_vector_with_inic<unsigned short>(text, context_key,num_key,k_p.id_plan.context,"Order_rule","unsigned short"));
+
+	text.append("            ");
+	text.append(name_key);
+	text.append(".id_plan.context = ");
+	text.append(name_o_rule);
+	text.append(";\n");
+
+		/* it->first.plan */
+	string key_order ("key_order_eq_");
+	key_order.append(n_key);
+	string name_order_eval(write_vector_with_inic<unsigned short>(text, key_order,num_key,k_p.plan,"Order_eval_eq","unsigned short"));
+
+	text.append("            ");
+	text.append(name_key);
+	text.append(".plan = ");
+	text.append(name_order_eval);
+	text.append(";\n\n");
+	return name_key;
+}
+
+void generate_initialize_plans(string &text, const map < Key_plan, Order_eval_eq > &plans_p)
+{
+	int num_key = 0;
+	for(map < Key_plan, Order_eval_eq >::const_iterator it(plans_p.begin()); it != plans_p.end(); it++)
+	{
+		/* generate key_plan */
+
+			/* it->first.id_plan */
+
+		string name_key(generate_key_plan(text,"key",num_key, it->first));
+
+		stringstream str_index;
+		str_index << num_key;
+
+		/* generate key_Oder_eval_eq */
+
+		string name_order(write_vector_with_inic<unsigned short>(text, "order_eq",num_key,it->second,"Order_eval_eq","unsigned short"));
+
+		/* generate insert in map */
+		text.append("            Plan ");
+		string name_new_p("new_p");
+		name_new_p.append(str_index.str());
+		text.append(name_new_p);
+		text.append("(");
+		text.append(name_key);
+		text.append(" , ");
+		text.append(name_order);
+		text.append(");\n");
+		text.append("            eval_plans.push_back(");
+		text.append(name_new_p);
+		text.append(");\n\n");
+
+		num_key++;
+	}
+}
+
+void generate_initialize_plan_proj(string &text, const map < Key_plan_project, Order_eval_eq > &plans_p)
+{
+	int num_key = 0;
+	for(map < Key_plan_project, Order_eval_eq >::const_iterator it(plans_p.begin()); it != plans_p.end(); it++)
+	{
+		/* generate key_plan */
+
+			/* it->first.id_plan */
+		string name_key_plan(generate_key_plan(text,"key_plan_proj",num_key, it->first.id_plan_project));
+
+		stringstream str_index;
+		str_index << num_key;
+
+		text.append("            Key_plan_project ");
+		string name_key("key_proj");
+		name_key.append(str_index.str());
+		text.append(name_key);
+
+		text.append(";\n            ");
+
+		text.append(name_key);
+		text.append(".id_plan_project = ");
+		text.append(name_key_plan);
+		text.append(";\n");
+
+			/* it->second */
+
+		text.append("            ");
+		text.append(name_key);
+		text.append(".node_project = \"");
+		text.append(it->first.symbol_project->get_name());
+		text.append("\";\n");
+
+		/* generate key_Oder_eval_eq */
+
+		string name_order(write_vector_with_inic<unsigned short>(text, "order_eq_proj",num_key,it->second,"Order_eval_eq","unsigned short"));
+
+		/* generate insert in map */
+		text.append("            Plan_project ");
+		string name_new_p("new_p_proj");
+		name_new_p.append(str_index.str());
+		text.append(name_new_p);
+		text.append("(");
+		text.append(name_key);
+		text.append(" , ");
+		text.append(name_order);
+		text.append(");\n");
+		text.append("            eval_plans_project.push_back(");
+		text.append(name_new_p);
+		text.append(");\n\n");
+
+		num_key++;
+	}
+}
 void Gen_code::generate_private()
 {
 	string private_t;
 	private_t.append("    private:\n");
-	private_t.append("        vector<Visit_sequence> v_seq;\n");
+	private_t.append("        vector < Visit_sequence >    v_seq;\n");
+	private_t.append("        /* \"ro\" function. Wuu yank's paper. */\n");
+	private_t.append("        vector < Plan >              eval_plans;\n");
+	private_t.append("        /* \"tita\" function. Wuu yank's paper. */\n");
+	private_t.append("        vector < Plan_project >      eval_plans_project;\n");
+	private_t.append("        vector < Rule >              rules;\n");
 
 	std::ofstream file_output(full_path.c_str(),ofstream::app);
 	file_output.write(private_t.c_str(),private_t.size());
 	file_output.close();
 }
 
+void generate_initialize_rules(string &text, const Attr_grammar &grammar)
+{
+	const map<unsigned short, Rule> &rules = grammar.get_rules();
+	int index = 0;
+	for (map < unsigned short, Rule >::const_iterator r_it (rules.begin()); r_it != rules.end();r_it++)
+	{
+		stringstream str_index;
+		str_index << index;
 
-void Gen_code::generate_public(const vector<Visit_seq> & v_seq)
+		vector<const Symbol*> right_side_non_terminals(r_it->second.get_non_terminals_right_side());
+		vector<string> name_symbol_rule;
+
+		string name_aux("\"");
+		name_aux.append(r_it->second.get_left_symbol()->get_name());
+		name_aux.append("\"");
+		name_symbol_rule.push_back(name_aux);
+		for (size_t i(0); i< right_side_non_terminals.size();i++)
+		{
+			name_aux =  "\"";
+			name_aux.append(right_side_non_terminals[i]->get_name());
+			name_aux.append("\"");
+			name_symbol_rule.push_back(name_aux);
+		}
+
+		string name_vec(write_vector_with_inic<string>(text, "rule_non_terminal_",index,name_symbol_rule,"Rule","string"));
+
+		text.append("            rules.push_back(");
+		text.append(name_vec);
+		text.append(");\n\n");
+
+		index++;
+	}
+}
+
+
+void Gen_code::generate_public(const vector<Visit_seq> & v_seq, const Builder_plan &b_plan, const Attr_grammar &grammar)
 {
 	string public_t;
 	public_t.append("    public:\n");
 	public_t.append("        Eval_mag()\n");
 	public_t.append("        {\n");
 
-	generate_initialize(public_t, v_seq);
+	generate_initialize_plans(public_t, b_plan.get_plans());
+
+	generate_initialize_plan_proj(public_t, b_plan.get_plans_project());
+
+	generate_initialize_v_seq(public_t, v_seq);
+
+	generate_initialize_rules(public_t, grammar);
 
 	public_t.append("        }\n\n");
 
@@ -221,9 +422,9 @@ void generate_print(string &text)
 }
 
 
-void generate_evaluator(string &text)
+void generate_translate(string &text)
 {
-	text.append("        void evaluator_mag(int v_s)\n        {\n");
+	text.append("        void translate_mag(int v_s)\n        {\n");
 	text.append("            for(size_t i(0); i < v_seq[v_s].size(); i++)\n");
 	text.append("            {\n");
 	text.append("            	if(v_seq[v_s][i] > 0)\n            	{\n");
@@ -240,24 +441,77 @@ void generate_evaluator(string &text)
 	text.append("            	}\n");
 	text.append("            }\n");
 	text.append("            cout << \".\" << endl;\n");
-	text.append("        }\n");
+	text.append("        }\n\n");
 }
 
 
-void Gen_code::generate_methods()
+void generate_traverse(string &text)
 {
-	std::ofstream file_output(full_path.c_str(),ofstream::app);
+	text.append("        void traverse(struct Node * node, Order_eval_eq order, unsigned short father)\n");
+	text.append("        {\n");
+	text.append("            Key_plan k_plan;\n");
+	text.append("            k_plan.id_plan.context.push_back(node->rule_id);\n");
+	text.append("            for(size_t i(0); i< node->childs.size();i++ )\n");
+	text.append("            {\n");
+	text.append("                k_plan.id_plan.context.push_back(node->childs[i]->rule_id);\n");
+	text.append("            }\n");
+	text.append("            k_plan.id_plan.father = father;\n");
+	text.append("            k_plan.plan = order;\n");
+	text.append("            for(size_t i(0); i < eval_plans.size(); i++)\n");
+	text.append("            {\n");
+	text.append("                if (eval_plans[i].first == k_plan)\n");
+	text.append("                {\n");
+	text.append("                    node->index_plan_v_seq = i;\n");
+	text.append("                }\n");
+	text.append("            }\n");
+	text.append("            Rule &rule = rules[node->rule_id];\n");
+	text.append("            for(size_t i(0); i < node->childs.size(); i++)\n");
+	text.append("            {\n");
+	text.append("                Key_plan_project k_plan_proj;\n");
+	text.append("                k_plan_proj.id_plan_project = k_plan;\n");
+	text.append("                k_plan_proj.node_project = rule[i+1];\n");
+	text.append("                for(size_t j(0); j < eval_plans_project.size(); j++)\n");
+	text.append("                {\n");
+	text.append("                    if (eval_plans_project[j].first == k_plan_proj)\n");
+	text.append("                    {\n");
+	text.append("                        traverse(node->childs[i], eval_plans_project[j].second, node->rule_id);\n");
+	text.append("                        break;\n");
+	text.append("                    }\n");
+	text.append("                }\n");
+	text.append("            }\n");
+	text.append("        }\n\n");
+}
 
+void generate_evaluator(string &text, const Builder_plan &b_plan)
+{
+	const Order_eval_eq &init_order = b_plan.get_init_order();
+
+	text.append("        void evaluator_mag(struct Node *root)\n");
+	text.append("        {\n");
+
+	string init_order_name (write_vector_with_inic<unsigned short>(text, "order_root", 0, init_order, "Order_eval_eq", "unsigned short"));
+
+	text.append("        	traverse(root, order_root0, 0);\n");
+	text.append("        	//eval_visiter(root);\n");
+	text.append("        }\n");
+}
+
+void Gen_code::generate_methods(const Builder_plan &b_plan)
+{
 	string methods_t;
 
 	generate_print(methods_t);
 
-	generate_evaluator(methods_t);
+	generate_traverse(methods_t);
 
+	generate_translate(methods_t);
+
+	generate_evaluator(methods_t, b_plan);
+
+	std::ofstream file_output(full_path.c_str(),ofstream::app);
 	file_output.write(methods_t.c_str(),methods_t.size());
 	file_output.close();
 }
-
 
 void Gen_code::generate_main()
 {
@@ -270,15 +524,16 @@ void Gen_code::generate_main()
 	main_text.append("{\n");
 	main_text.append("    Eval_mag eval_mag;\n");
 	main_text.append("    eval_mag.print_v_seq();\n");
-	main_text.append("    eval_mag.evaluator_mag(0);\n");
-	main_text.append("    eval_mag.evaluator_mag(1);\n");
-	main_text.append("    eval_mag.evaluator_mag(2);\n");
-	main_text.append("    eval_mag.evaluator_mag(3);\n");
-	main_text.append("    eval_mag.evaluator_mag(4);\n");
-	main_text.append("    eval_mag.evaluator_mag(5);\n");
-	main_text.append("    eval_mag.evaluator_mag(6);\n");
-	main_text.append("    eval_mag.evaluator_mag(7);\n");
-	main_text.append("    eval_mag.evaluator_mag(8);\n");
+	main_text.append("    eval_mag.translate_mag(0);\n");
+	main_text.append("    eval_mag.translate_mag(1);\n");
+	main_text.append("    eval_mag.translate_mag(2);\n");
+	main_text.append("    eval_mag.translate_mag(3);\n");
+	main_text.append("    eval_mag.translate_mag(4);\n");
+	main_text.append("    eval_mag.translate_mag(5);\n");
+	main_text.append("    eval_mag.translate_mag(6);\n");
+	main_text.append("    eval_mag.translate_mag(7);\n");
+	main_text.append("    eval_mag.translate_mag(8);\n\n");
+	main_text.append("    eval_mag.evaluator_mag();\n");
 	main_text.append("    return 0;\n");
 	main_text.append("}\n");
 
@@ -348,13 +603,13 @@ void Gen_code::generate_structs(const Attr_grammar &attr_grammar)
 		structs.append(it_symb->second.get_name());
 		structs.append(" ;\n\n");
 	}
+
 	std::ofstream file_output(full_path.c_str(),ofstream::app);
 	file_output.write(structs.c_str(),structs.size());
 	file_output.close();
 }
 
-
-void Gen_code::generate_code(const Attr_grammar &attr_grammar, const vector<Visit_seq> & v_seq)
+void Gen_code::generate_code(const Attr_grammar &attr_grammar, const Builder_plan &b_plan, const vector<Visit_seq> & v_seq)
 {
 	generate_grammar_file(attr_grammar);
 	generate_header_file();
@@ -364,8 +619,8 @@ void Gen_code::generate_code(const Attr_grammar &attr_grammar, const vector<Visi
 
 	generate_header_class();
 	generate_private();
-	generate_public(v_seq);
-	generate_methods();
+	generate_public(v_seq,b_plan, attr_grammar);
+	generate_methods(b_plan);
 	generate_footer();
 	generate_main();
 }

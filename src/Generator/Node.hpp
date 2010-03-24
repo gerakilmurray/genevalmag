@@ -13,7 +13,7 @@
 
 using namespace std;
 
-namespace node_tree
+namespace util_ag
 {
 
 struct Node
@@ -21,7 +21,7 @@ struct Node
 	Node *parent;
 	vector<Node*> childs;
 	unsigned short rule_id;
-	unsigned short index_v_seq; //index of vector de visit sequence.
+	unsigned short index_plan_v_seq; //index of vector de visit sequence.
 	unsigned short num_v_seq;   // donde quede.
 };
 

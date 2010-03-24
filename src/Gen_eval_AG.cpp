@@ -60,7 +60,7 @@ int main()
 			{
 				//b_visit_seq.print_all_visit_sequences();
 				Gen_code gen;
-				gen.generate_code(p_mag.get_attr_grammar(), b_visit_seq.get_visit_seq());
+				gen.generate_code(p_mag.get_attr_grammar(), b_plans, b_visit_seq.get_visit_seq());
 			}
 
 		}

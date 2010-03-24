@@ -143,6 +143,8 @@ class Builder_plan
 
 		map < Key_plan_project, Order_eval_eq > plans_project; /* "tita" function. Wuu yank's paper. */
 
+		Order_eval_eq init_order_ag;
+
 		/**
 		  * Applies a topological order at graph.
 		  * The changes are applies about paramenter "result_order".
@@ -186,6 +188,10 @@ class Builder_plan
 		void print_all_plans_project(const Attr_grammar &grammar) const;
 
 		const map < Key_plan, Order_eval_eq > &get_plans() const;
+
+		const map < Key_plan_project, Order_eval_eq > &get_plans_project() const;
+
+		const Order_eval_eq &get_init_order() const;
 };
 
 } /* end genevalmag */
