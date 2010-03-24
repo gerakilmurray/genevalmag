@@ -34,9 +34,9 @@ class Gen_code
 
 		void generate_private();
 
-		void generate_public(const vector<Visit_seq> & v_seq);
+		void generate_public(const vector<Visit_seq> & v_seq, const Builder_plan &b_plan, const Attr_grammar &grammar);
 
-		void generate_methods();
+		void generate_methods(const Builder_plan &b_plan);
 
 		void generate_externs(const Attr_grammar &attr_grammar);
 
@@ -48,7 +48,7 @@ class Gen_code
 
 		virtual ~Gen_code();
 
-		void generate_code(const Attr_grammar &attr_grammar, const vector<Visit_seq> & v_seq);
+		void generate_code(const Attr_grammar &attr_grammar,const Builder_plan &b_plan ,const vector<Visit_seq> & v_seq);
 };
 
 }

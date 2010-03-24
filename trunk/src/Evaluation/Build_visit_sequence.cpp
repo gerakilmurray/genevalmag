@@ -71,15 +71,6 @@ void purge_computed(const Symbol &symb, const vector<const Ast_instance*> &compu
 
 void Build_visit_sequence::save_visit_sequence(const Visit_seq &sequence, const size_t i_plan)
 {
-//	cout << "seq ";
-//	for(size_t i(0); i < sequence.size(); i++)
-//		cout << sequence[i] << "";
-//	cout << endl;
-//	cout << "seq all";
-//	for(size_t i(0); i < all_visit_seqs[i_plan].size(); i++)
-//		cout << all_visit_seqs[i_plan][i] << "";
-//	cout << endl;
-
 	size_t i(0);
 	size_t j(0);
 	while(i < sequence.size() && j < all_visit_seqs[i_plan].size())
@@ -111,10 +102,6 @@ void Build_visit_sequence::save_visit_sequence(const Visit_seq &sequence, const 
 		}
 		all_visit_seqs[i_plan].push_back(sequence[index]);
 	}
-//	cout << "seq all merge";
-//	for(size_t i(0); i < all_visit_seqs[i_plan].size(); i++)
-//		cout << all_visit_seqs[i_plan][i] << "";
-//	cout << "---------------\n"<< endl;
 }
 
 bool Build_visit_sequence::gen_seq_visit(const Attr_grammar &attr_grammar, const vector < pair < Key_plan, Order_eval_eq > > &plans, size_t i_plan, vector<const Ast_instance*> &computed)
