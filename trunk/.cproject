@@ -47,6 +47,9 @@
 </tool>
 </toolChain>
 </folderInfo>
+<sourceEntries>
+<entry excluding="src/Util/Utilities.h|Out_Gen_Mag/Eval_mag.hpp|Out_Gen_Mag/Eval_mag_proof.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+</sourceEntries>
 </configuration>
 </storageModule>
 <storageModule moduleId="scannerConfiguration">
@@ -508,6 +511,9 @@
 </tool>
 </toolChain>
 </folderInfo>
+<sourceEntries>
+<entry excluding="src/Util/Utilities.h|Out_Gen_Mag/Eval_mag.hpp|Out_Gen_Mag/Eval_mag_proof.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+</sourceEntries>
 </configuration>
 </storageModule>
 <storageModule moduleId="scannerConfiguration">

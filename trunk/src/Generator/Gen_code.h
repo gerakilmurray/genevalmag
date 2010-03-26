@@ -28,8 +28,6 @@ class Gen_code
 
 		void generate_header_class();
 
-		void generate_main();
-
 		void generate_footer();
 
 		void generate_private();
