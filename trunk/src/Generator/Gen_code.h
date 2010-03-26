@@ -1,10 +1,10 @@
 /**
- * \file Gen_code.h
- * 	\brief EXPLICAR QUE ES ESTO
- *  \date 18/03/2010
- *  \author    Kilmurray, Gerardo Luis. 
- *  \author    Picco, Gonzalo M. 
- */
+  *  \file		Gen_code.h
+  *  \brief
+  *  \date		18/03/2010
+  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  */
 
 #ifndef GEN_CODE_H_
 #define GEN_CODE_H_
@@ -34,9 +34,9 @@ class Gen_code
 
 		void generate_private();
 
-		void generate_public(const vector<Visit_seq> & v_seq, const Builder_plan &b_plan, const Attr_grammar &grammar);
+		void generate_public(const vector<Visit_seq> & v_seq, const Builder_plan &b_plan, const Attr_grammar &attr_grammar);
 
-		void generate_methods(const Builder_plan &b_plan);
+		void generate_methods(const Builder_plan &b_plan, const Attr_grammar &attr_grammar);
 
 		void generate_externs(const Attr_grammar &attr_grammar);
 

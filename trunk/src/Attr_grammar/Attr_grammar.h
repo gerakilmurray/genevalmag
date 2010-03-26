@@ -36,6 +36,7 @@ private:
 	map<string, Symbol>			ag_symb_terminals;
 	map<string, Symbol>			ag_symb_non_terminals;
 	map<unsigned short, Rule>	ag_rule;
+	unsigned short				count_eqs;
 
 	/*
 	 * Saves the name of the initial symbol of the grammar's attribute.
@@ -159,6 +160,8 @@ public:
 	const Ast_instance *get_eq_l_value(unsigned short index) const;
 
 	const Equation *get_eq(unsigned short index) const;
+
+	unsigned short get_count_eqs() const;
 };
 
 } /* end genevalmag */
