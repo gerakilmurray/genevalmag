@@ -11,7 +11,7 @@
 #include <boost/spirit/include/classic_core.hpp>
 #include <boost/spirit/include/classic_symbols.hpp>
 #include <boost/spirit/include/classic_attribute.hpp>
-
+#include <boost/spirit/include/classic_functor_parser.hpp>
 #include <iostream>
 #include <string>
 
@@ -37,6 +37,59 @@ const Attr_grammar &Parser_AG::get_attr_grammar()
 {
 	return attr_grammar;
 }
+
+/*
+ * 		REP0RTES DE ERRORES.
+ */
+///////////////////////////////////////////////////////////////////////////////
+//
+//  Our error reporting parsers
+//
+///////////////////////////////////////////////////////////////////////////////
+std::ostream& operator<<(std::ostream& out, file_position const& lc)
+{
+    return out <<
+            "\nFile:\t" << lc.file <<
+            "\nLine:\t" << lc.line <<
+            "\nCol:\t" << lc.column << endl;
+}
+
+struct err_parser {
+    char const* eol_msg;
+    char const* msg;
+
+    err_parser(char const* eol_msg_, char const* msg_):eol_msg(eol_msg_),msg    (msg_){}
+
+    typedef nil_t result_t;
+
+    template <typename ScannerT>
+    int
+    operator()(ScannerT const& scan, result_t& /*result*/) const
+    {
+        if (scan.at_end()) {
+            if (eol_msg) {
+                file_position fpos = scan.first.get_position();
+                cerr << fpos << eol_msg << endl;
+            }
+        } else {
+            if (msg) {
+                file_position fpos = scan.first.get_position();
+                cerr << fpos << msg << endl;
+            }
+        }
+
+        return -1; // Fail.
+    }
+
+};
+typedef functor_parser<err_parser> error_report_p;
+
+error_report_p error_parser = err_parser( "ERROR QUE NO SE QUE HACE.","arreglate como puedas" );
+
+/*
+ *     FIN REPORTES DE ERRORES.
+ */
+
 
 /**
   * Declaration of a parser for inputs that ignore within
@@ -112,13 +165,13 @@ struct attritute_grammar: public grammar<attritute_grammar>
 			  * Declaration of Semantic Domain.
 			  */
 
-			r_semantic_domain = lexeme_d[ strlit<>("semantic domain") >> space_p ] >> +r_bloq_sem;
+			r_semantic_domain = lexeme_d[ strlit<>("semantic domain")  >> space_p ] >> +r_bloq_sem;
 
 			r_bloq_sem		  = r_decl_sort | r_decl_oper[&add_operator] | r_decl_func[&add_function];
 
 			/* Declaration of Sorts. */
 
-			r_decl_sort		  = lexeme_d[ strlit<>("sort") >> space_p ] >>
+			r_decl_sort		  = lexeme_d[ strlit<>("sort")  >> space_p ] >>
 								(r_ident[&create_sort][st_sorts.add] % ',') >> ';';
 
 			/* Declaration of Operators. */
@@ -304,6 +357,7 @@ struct attritute_grammar: public grammar<attritute_grammar>
 	};
 };
 
+
 /**
   * This method invokes the method 'parse' of the library Spitir included in Boost.
   * Returns true if could parse all the input.
@@ -312,7 +366,7 @@ bool Parser_AG::parse_grammar(const string path_file_input)
 {
 	/* File open */
     /* Create a file iterator for this file */
-    iterator_t first(path_file_input);
+    iterator_f first(path_file_input);
 
     if (!first)
     {
@@ -321,9 +375,10 @@ bool Parser_AG::parse_grammar(const string path_file_input)
     }
 
     /* Create an EOF iterator */
-    iterator_t last = first.make_end();
+    iterator_f last = first.make_end();
 
-	/* */
+    iterator_t begin(first, last, path_file_input);
+    iterator_t end;
 
 	attritute_grammar	attr_grammar_decl;
 	skip_parser			skip_p;
@@ -331,7 +386,7 @@ bool Parser_AG::parse_grammar(const string path_file_input)
 	set_at(&attr_grammar);
 	set_s_check(&sem_check);
 
-	parse_info<iterator_t> info(parse(first, last, attr_grammar_decl, skip_p));
+	parse_info<iterator_t> info(parse<iterator_t>(begin, end, attr_grammar_decl, skip_p));
 
 	cout << "-------------------------\n";
 	if(info.full)
@@ -342,9 +397,19 @@ bool Parser_AG::parse_grammar(const string path_file_input)
 	}
 	else
 	{
-		cerr << "ERROR: The following text will not be able to parse:" << endl;
-		cerr << "\"" << info.stop << "\"" << endl;
-		cerr << "ERROR: Parsing Failed." << endl;
+	    const file_position fp = info.stop.get_position();
+	    cerr << "ERROR: Parsing Failed." << endl;
+	    cerr << "ERROR: The following text will not be able to parse:" << endl;
+	    cerr << fp << endl;
+//	    cerr << "Parsing of file '" << fp.file
+//             << "' failed at line " << fp.line
+//	         << ", column " << fp.column << ".\n";
+
+
+
+//		const boost::spirit::file_position fp = info.stop.get_position();
+//		cerr << "\"" << info.stop << "\"" << endl;
+
 	}
 	cout << "-------------------------\n";
 

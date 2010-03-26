@@ -72,6 +72,7 @@ Equation		*current_eq;
 vector<Ast_node*> 			stack_node;
 vector<Ast_inner_node*> 	stack_inner_node;
 
+
 /**
   * Methods and functions for parse Sort class.
   */
@@ -329,10 +330,11 @@ void create_lit_ch(const iterator_t ch, const iterator_t end)
 		current_literal = new Ast_literal();
 	}
 	/* The pointer +1 and -1 for remove the single quotes. Ex: 'u' --> u. */
-	string ch_l(ch+1,end-1);
+	string ch_l(ch,end);
+	string ch_l_without_cuotes(ch_l.begin()+1, ch_l.end()-2);
 	current_literal->set_type(k_char);
 	current_literal->set_type_synthetized("char");
-	current_literal->set_value(ch_l);
+	current_literal->set_value(ch_l_without_cuotes);
 }
 
 void create_lit_str(const iterator_t str, const iterator_t end)
@@ -342,10 +344,11 @@ void create_lit_str(const iterator_t str, const iterator_t end)
 		current_literal = new Ast_literal();
 	}
 	/* The pointer +1 and -1 for remove the double quotes. Ex: "uno" --> uno. */
-	string str_l(str+1, end-1);
+	string str_l(str, end);
+	string str_l_without_cuotes(str_l.begin()+1, str_l.end()-2);
 	current_literal->set_type(k_string);
 	current_literal->set_type_synthetized("string");
-	current_literal->set_value(str_l);
+	current_literal->set_value(str_l_without_cuotes);
 }
 
 void create_function(const iterator_t str, const iterator_t end)

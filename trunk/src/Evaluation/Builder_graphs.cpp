@@ -415,8 +415,8 @@ struct cycle_detector: public dfs_visitor<>
 };
 
 /**
-  * Checks if the graph "contiene" cycle.
-  * Utilities a deph-firts-seach for "recorrer" the graphs.
+  * Checks if the graph contains cycle.
+  * Utilities a deph-firts-seach for traverse the graphs.
   */
 bool Builder_graphs::check_cyclic_adp_dependencies()
 {
