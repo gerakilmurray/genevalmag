@@ -22,6 +22,9 @@ using namespace utilities;
 namespace genevalmag
 {
 
+const string PATH_OUT_PLAN("./Out_Gen_Mag/ALL_plan/");
+const string PATH_OUT_PLAN_PROJECT("./Out_Gen_Mag/ALL_plan_project/");
+
 /**
   * Constructor empty of Builder plan.
   */
@@ -136,6 +139,8 @@ Order_eval_eq Builder_plan::compute_order(const Dp_graph &graph_adp, const Order
   */
 void Builder_plan::print_all_plans(const Attr_grammar &grammar) const
 {
+	string path_out(PATH_OUT_PLAN);
+	clean_output_folder(path_out);
 	for(map < Key_plan, Order_eval_eq >::const_iterator it(eval_plans.begin()); it != eval_plans.end(); it++)
 	{
 		Dp_graph graph_plan;
@@ -195,7 +200,7 @@ void Builder_plan::print_all_plans(const Attr_grammar &grammar) const
 		}
 		name_graph.append(".");
 
-		print_graph(graph_plan,"_plan_graph", name_graph, names,"box");
+		print_graph(graph_plan,path_out.c_str(),"_plan_graph", name_graph, names,"box");
 	}
 }
 
@@ -204,6 +209,8 @@ void Builder_plan::print_all_plans(const Attr_grammar &grammar) const
   */
 void Builder_plan::print_all_plans_project(const Attr_grammar &grammar) const
 {
+	string path_out(PATH_OUT_PLAN_PROJECT);
+	clean_output_folder(path_out);
 	for(map < Key_plan_project, Order_eval_eq >::const_iterator it(plans_project.begin()); it != plans_project.end(); it++)
 	{
 		Dp_graph graph_plan;
@@ -268,7 +275,7 @@ void Builder_plan::print_all_plans_project(const Attr_grammar &grammar) const
 		name_graph.append(it->first.symbol_project->get_name());
 		name_graph.append(".");
 
-		print_graph(graph_plan,"_plan_project_graph", name_graph, names,"box");
+		print_graph(graph_plan,path_out.c_str(),"_plan_project_graph", name_graph, names,"box");
 	}
 }
 
@@ -418,11 +425,11 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 		}
 	}
 
-	clean_output_folder();
-//	build_graphs.print_all_graphs(grammar.get_rules());
+	//clean_output_folder();
+	build_graphs.print_all_graphs(grammar.get_rules());
 //	build_graphs.print_adp_graphs(grammar.get_rules());
 	print_all_plans(grammar);
-//	print_all_plans_project(grammar);
+	print_all_plans_project(grammar);
 }
 
 bool Builder_plan::build_plans(const Attr_grammar &attr_grammar)
@@ -432,7 +439,7 @@ bool Builder_plan::build_plans(const Attr_grammar &attr_grammar)
 
 	if (build_graphs.check_cyclic_adp_dependencies())
 	{
-		cerr << "ERROR: One o more graph ADP has an cycle in its dependencies. Look the folder /out_graph for more details." << endl;
+		cerr << "ERROR: One o more graph ADP has an cycle in its dependencies. Look the folder GenEvalAG/Out_Gen_Mag for more details." << endl;
 		build_graphs.print_graphs_cyclic(attr_grammar.get_rules());
 		return false;
 	}

@@ -23,9 +23,14 @@ namespace utilities
 {
 
 /**
+  * Create the folder passed as parameter.
+  */
+void create_folder(const string path);
+
+/**
   * Remove and create the output folder of files .dot and .png.
   */
-void clean_output_folder();
+void clean_output_folder(const string path);
 
 /**
   * Generates the names of vertex. (The vertex's name is an instance).
@@ -40,7 +45,7 @@ void generate_names_attr(const Dp_graph &graph, string datas[], size_t size_d);
 /**
   * Prints a graph in a file .dot for generate image .spng.
   */
-void print_graph(const Dp_graph &graph, const string name_file, const string name_graph, const string names[], string shape_vertex);
+void print_graph(const Dp_graph &graph,const string path ,const string name_file, const string name_graph, const string names[], string shape_vertex);
 /**
   * Prints a graph in the standart output (std:cout).
   */

@@ -36,6 +36,12 @@ using namespace utilities;
 namespace genevalmag
 {
 
+const string PATH_OUTPUT_ADP ("./Out_Gen_Mag/out_graph/4_ADP_graphs/");
+const string PATH_OUTPUT_DP ("./Out_Gen_Mag/out_graph/1_DP_graphs/");
+const string PATH_OUTPUT_DOWN ("./Out_Gen_Mag/out_graph/2_DOWN_graphs/");
+const string PATH_OUTPUT_DCG ("./Out_Gen_Mag/out_graph/3_DCG_graphs/");
+const string PATH_OUTPUT_CYCLIC ("./Out_Gen_Mag/out_graph/CYCLIC_graphs/");
+
 const string FILE_DP_GRAPH ("_dp_graph");
 const string FILE_DOWN_GRAPH ("_down_graph");
 const string FILE_DCG_GRAPH ("_dcg_graph");
@@ -454,6 +460,8 @@ void Builder_graphs::complete_dp_graphs(const map<unsigned short, Rule> &rules)
   */
 void Builder_graphs::print_dp_graphs(const map<unsigned short, Rule> &rules) const
 {
+	string path_out(PATH_OUTPUT_DP);
+	clean_output_folder(path_out);
 	for(map <unsigned short,Dp_graph>::const_iterator it(p_Dp_graphs.begin()); it != p_Dp_graphs.end(); it++)
 	{
 		string name_graph("Dependency Graph of rule ");
@@ -463,7 +471,7 @@ void Builder_graphs::print_dp_graphs(const map<unsigned short, Rule> &rules) con
 		size_t count_vertex(num_vertices(it->second));
 		string names[count_vertex];
 		generate_names_instance(it->second,names,count_vertex);
-		print_graph(it->second, FILE_DP_GRAPH, name_graph,names,"ellipse");
+		print_graph(it->second,path_out ,FILE_DP_GRAPH, name_graph,names,"ellipse");
 	}
 }
 /**
@@ -471,6 +479,8 @@ void Builder_graphs::print_dp_graphs(const map<unsigned short, Rule> &rules) con
   */
 void Builder_graphs::print_down_graphs() const
 {
+	string path_out(PATH_OUTPUT_DOWN);
+	clean_output_folder(path_out);
 	for(map <string,Dp_graph>::const_iterator it(p_Down_graphs.begin()); it != p_Down_graphs.end(); it++)
 	{
 		string name_graph("Graph Down(");
@@ -480,7 +490,7 @@ void Builder_graphs::print_down_graphs() const
 		size_t count_vertex(num_vertices(it->second));
 		string names[count_vertex];
 		generate_names_attr(it->second,names,count_vertex);
-		print_graph(it->second,FILE_DOWN_GRAPH,name_graph,names,"ellipse");
+		print_graph(it->second,path_out.c_str(),FILE_DOWN_GRAPH,name_graph,names,"ellipse");
 	}
 }
 /**
@@ -488,6 +498,8 @@ void Builder_graphs::print_down_graphs() const
   */
 void Builder_graphs::print_dcg_graphs(const map<unsigned short, Rule> &rules) const
 {
+	string path_out(PATH_OUTPUT_DCG);
+	clean_output_folder(path_out);
 	for(map <unsigned short,Dp_graph>::const_iterator it(p_Dcg_graphs.begin()); it != p_Dcg_graphs.end(); it++)
 	{
 		string name_graph("DCG Graph of rule ");
@@ -499,7 +511,7 @@ void Builder_graphs::print_dcg_graphs(const map<unsigned short, Rule> &rules) co
 		size_t count_vertex(num_vertices(it->second));
 		string names[count_vertex];
 		generate_names_instance(it->second,names,count_vertex);
-		print_graph(it->second,FILE_DCG_GRAPH,name_graph,names,"ellipse");
+		print_graph(it->second,path_out.c_str(),FILE_DCG_GRAPH,name_graph,names,"ellipse");
 	}
 }
 /**
@@ -507,6 +519,8 @@ void Builder_graphs::print_dcg_graphs(const map<unsigned short, Rule> &rules) co
   */
 void Builder_graphs::print_adp_graphs(const map<unsigned short, Rule> &rules) const
 {
+	string path_out(PATH_OUTPUT_ADP);
+	clean_output_folder(path_out);
 	for(map <vector<unsigned short>,Dp_graph>::const_iterator it(p_Adp_graphs.begin()); it != p_Adp_graphs.end(); it++)
 	{
 		string name_graph("ADP Graph of rule ");
@@ -519,7 +533,7 @@ void Builder_graphs::print_adp_graphs(const map<unsigned short, Rule> &rules) co
 		size_t count_vertex(num_vertices(it->second));
 		string names[count_vertex];
 		generate_names_instance(it->second,names,count_vertex);
-		print_graph(it->second, FILE_ADP_GRAPH, name_graph,names,"ellipse");
+		print_graph(it->second,path_out.c_str(), FILE_ADP_GRAPH, name_graph,names,"ellipse");
 	}
 }
 
@@ -528,7 +542,7 @@ void Builder_graphs::print_adp_graphs(const map<unsigned short, Rule> &rules) co
   */
 void Builder_graphs::print_all_graphs(const map<unsigned short, Rule> &rules) const
 {
-	clean_output_folder();
+	clean_output_folder("./Out_Gen_Mag/out_graph/");
 
 	print_dp_graphs(rules);
 	print_down_graphs();
@@ -538,7 +552,9 @@ void Builder_graphs::print_all_graphs(const map<unsigned short, Rule> &rules) co
 
 void Builder_graphs::print_graphs_cyclic(const map<unsigned short, Rule> &rules) const
 {
-	clean_output_folder();
+	string path_out(PATH_OUTPUT_CYCLIC);
+	clean_output_folder("./Out_Gen_Mag/out_graph/");
+	clean_output_folder(path_out);
 	for(map <vector<unsigned short>,Dp_graph>::const_iterator it(p_Adp_subgraphs_cyclics.begin()); it != p_Adp_subgraphs_cyclics.end(); it++)
 	{
 		string name_graph("ADP Subgraph cyclic of rule ");
@@ -551,7 +567,7 @@ void Builder_graphs::print_graphs_cyclic(const map<unsigned short, Rule> &rules)
 		size_t count_vertex(num_vertices(it->second));
 		string names[count_vertex];
 		generate_names_instance(it->second,names,count_vertex);
-		print_graph(it->second, FILE_ADP_SUBGRAPH_CYCLIC, name_graph,names,"ellipse");
+		print_graph(it->second,path_out.c_str(), FILE_ADP_SUBGRAPH_CYCLIC, name_graph,names,"ellipse");
 	}
 }
 

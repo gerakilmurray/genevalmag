@@ -25,19 +25,26 @@ namespace genevalmag
 {
 
 const string FILE_GRAMMAR("Grammar_mag.log");
-const string FILE_NAME("Eval_mag.cpp");
-const string DEFAULT_PATH("../");
+const string FILE_NAME("Eval_mag.hpp");
+const string DEFAULT_PATH("../GenEvalAG/");
+const string DEFAULT_FOLDER("Out_Gen_Mag/");
 
 Gen_code::Gen_code()
 {
-	path_output_code = DEFAULT_PATH;
+	string path(DEFAULT_PATH);
+	path.append(DEFAULT_FOLDER);
+	create_folder(path);
+	path_output_code = path;
 	full_path = path_output_code;
 	full_path.append(FILE_NAME);
 }
 
 Gen_code::Gen_code(string path)
 {
-	path_output_code = path;
+	string _path(path);
+	_path.append(DEFAULT_FOLDER);
+	create_folder(_path);
+	path_output_code = _path;
 	full_path = path_output_code;
 	full_path.append(FILE_NAME);
 }
@@ -96,17 +103,21 @@ void Gen_code::generate_header_file()
 	header.append("  *  \\author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>\n");
 	header.append("*/\n\n");
 
-	header.append("#ifndef EVAL_MAG_CPP_\n");
-	header.append("#define EVAL_MAG_CPP_\n\n");
+	header.append("#ifndef EVAL_MAG_HPP_\n");
+	header.append("#define EVAL_MAG_HPP_\n\n");
 
 	header.append("#include <iostream>\n");
 	header.append("#include <sstream>\n");
 	header.append("#include <vector>\n");
-	header.append("#include \"GenEvalAG/src/Generator/Node.hpp\"\n");
-	header.append("#include \"GenEvalAG/src/Generator/Plan.hpp\"\n\n");
+	header.append("#include \"Node.hpp\"\n");
+	header.append("#include \"Plan.hpp\"\n\n");
 
 	header.append("using namespace std;\n");
 	header.append("using namespace util_ag;\n\n");
+
+	header.append("namespace evalmag\n");
+	header.append("{\n\n");
+
 	std::ofstream file_output(full_path.c_str());
 	file_output.write(header.c_str(),header.size());
 	file_output.close();
@@ -115,9 +126,6 @@ void Gen_code::generate_header_file()
 void Gen_code::generate_header_class()
 {
 	string header;
-	header.append("namespace evalmag\n");
-	header.append("{\n\n");
-
 	header.append("/**\n * Types for manage of plans.\n */\n\n");
 
 	header.append("typedef vector< int >                            Visit_sequence;\n");
@@ -141,7 +149,7 @@ void Gen_code::generate_footer()
 	string footer;
 	footer.append("};\n\n");
 	footer.append("} /* end namespace */\n\n");
-	footer.append("#endif /* EVAL_MAG_CPP_ */\n\n");
+	footer.append("#endif /* EVAL_MAG_HPP_ */\n\n");
 
 	std::ofstream file_output(full_path.c_str(),ofstream::app);
 	file_output.write(footer.c_str(),footer.size());
@@ -734,40 +742,6 @@ void Gen_code::generate_methods(const Builder_plan &b_plan, const Attr_grammar &
 	file_output.close();
 }
 
-void Gen_code::generate_main()
-{
-	string main_text;
-	main_text.append("using namespace evalmag;\n\n");
-	main_text.append("/**\n");
-	main_text.append("  * Main method of the Eval_mag.\n");
-	main_text.append("  */\n");
-	main_text.append("int main()\n");
-	main_text.append("{\n");
-	main_text.append("    Eval_mag eval_mag;\n");
-	main_text.append("    eval_mag.print_v_seq();\n");
-	main_text.append("    eval_mag.translate_mag(0);\n");
-	main_text.append("    eval_mag.translate_mag(1);\n");
-	main_text.append("    eval_mag.translate_mag(2);\n");
-	main_text.append("    eval_mag.translate_mag(3);\n");
-	main_text.append("    eval_mag.translate_mag(4);\n");
-	main_text.append("    eval_mag.translate_mag(5);\n");
-	main_text.append("    eval_mag.translate_mag(6);\n");
-	main_text.append("    eval_mag.translate_mag(7);\n");
-	main_text.append("    eval_mag.translate_mag(8);\n\n");
-
-	main_text.append("    eval_mag.evaluator_mag();\n\n");
-
-	main_text.append("    cout << \" After evaluation.\" << endl;\n");
-	main_text.append("    cout << node_s1.to_string() << endl;\n\n");
-
-	main_text.append("    return 0;\n");
-	main_text.append("}\n");
-
-	std::ofstream file_output(full_path.c_str(),ofstream::app);
-	file_output.write(main_text.c_str(),main_text.size());
-	file_output.close();
-}
-
 void Gen_code::generate_externs(const Attr_grammar &attr_grammar)
 {
 	string externs;
@@ -899,7 +873,6 @@ void Gen_code::generate_code(const Attr_grammar &attr_grammar, const Builder_pla
 	generate_public(v_seq,b_plan, attr_grammar);
 	generate_methods(b_plan, attr_grammar);
 	generate_footer();
-	generate_main();
 }
 
 } /* end namespace */

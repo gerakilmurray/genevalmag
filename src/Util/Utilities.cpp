@@ -5,7 +5,6 @@
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
-
 #include <fstream>
 
 #include <boost/graph/graphviz.hpp>
@@ -19,27 +18,34 @@ using namespace genevalmag;
 namespace utilities
 {
 
-const string PATH_OUTPUT_FILE ("./src/out_graph/");
+/**
+  * Create the folder passed as parameter.
+  */
+void create_folder(const string path)
+{
+	/* Create folder. */
+	string command_mkdir_folder("mkdir -p ");
+	command_mkdir_folder.append(path);
+	if (system (command_mkdir_folder.c_str()) != 0)
+	{
+		cerr << "ERROR: the filesystem denies folder's creation." << endl;
+	}
+}
 
 /**
   * Remove and create the output folder of files .dot and .png.
   */
-void clean_output_folder()
+void clean_output_folder(const string path)
 {
 	/* Remove the folder. */
 	string command_rm_folder("rm -f -r ");
-	command_rm_folder.append(PATH_OUTPUT_FILE);
+	command_rm_folder.append(path);
 	if (system (command_rm_folder.c_str()) != 0)
 	{
 		cerr << "ERROR: the filesystem denies folder's remove." << endl;
 	}
 	/* Create folder. */
-	string command_mkdir_folder("mkdir -p ");
-	command_mkdir_folder.append(PATH_OUTPUT_FILE);
-	if (system (command_mkdir_folder.c_str()) != 0)
-	{
-		cerr << "ERROR: the filesystem denies folder's creation." << endl;
-	}
+	create_folder(path);
 }
 
 /**
@@ -66,20 +72,18 @@ void generate_names_attr(const Dp_graph &graph, string datas[], size_t size_d)
 	{
 		/* The vertexs in a Down graph are ONLY Ast_instance. */
 		datas[i] = ((Ast_instance*)props[i])->get_attr()->get_name();
-
 	}
 }
 
 /**
   * Prints a graph in a file .dot for generate image .spng.
   */
-void print_graph(const Dp_graph &graph, const string name_file, const string name_graph, const string names[], string shape_vertex)
+void print_graph(const Dp_graph &graph, const string path, const string name_file, const string name_graph, const string names[], string shape_vertex)
 {
 	static int num_file(0); /* For name of file png. */
 
 	/* Create file dot. */
-	string n_f(PATH_OUTPUT_FILE);
-
+	string n_f(path);
 	stringstream ins;
 	ins << ++num_file;
 	n_f.append(ins.str());
@@ -214,7 +218,6 @@ void project_graph(const Symbol *symb, Dp_graph &graph)
 		}
 	}
 }
-
 
 /**
   * Remove tabs and replace for spaces.

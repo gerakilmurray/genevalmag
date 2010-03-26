@@ -18,6 +18,7 @@
 #include "../Util/Utilities.h"
 
 using namespace std;
+using namespace utilities;
 
 namespace genevalmag
 {
@@ -265,7 +266,7 @@ void create_instance(const iterator_t str, const iterator_t end)
 
 	if (!current_rule->belongs_non_terminal(*symb))
 	{
-		cerr << "ERROR: non-terminal symbol \"" << name << "\" used does not belong to the rule: \""  << utilities::cleaning_tabs(current_rule->to_string_not_eqs())<< "\"."<< endl;
+		cerr << "ERROR: non-terminal symbol \"" << name << "\" used does not belong to the rule: \""  << cleaning_tabs(current_rule->to_string_not_eqs())<< "\"."<< endl;
 		exit(-1);
 	}
 
@@ -392,9 +393,9 @@ void save_rvalue(const iterator_t str, const iterator_t end)
 
 	if (!current_rule->add_eq(*current_eq))
 	{
-		cerr << "WARNING: Ignores the eq \"" << utilities::cleaning_tabs(current_eq->to_string()) << "\" duplicate definition for \""
-				<< utilities::cleaning_tabs(current_eq->get_l_value()->to_string()) << "\" in rule: --> \""
-				<< utilities::cleaning_tabs(current_rule->to_string_not_eqs()) << "\"" << endl;
+		cerr << "WARNING: Ignores the eq \"" << cleaning_tabs(current_eq->to_string()) << "\" duplicate definition for \""
+				<< cleaning_tabs(current_eq->get_l_value()->to_string()) << "\" in rule: --> \""
+				<< cleaning_tabs(current_rule->to_string_not_eqs()) << "\"" << endl;
 	}
 	delete(current_eq);
 
