@@ -1,9 +1,9 @@
 /**
-  *  \file		Sort.cpp
-  *  \brief		Implementation of the methods the Sort.h
-  *  \date		28/09/2009
-  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
-  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  *  \file      Sort.cpp
+  *  \brief     Implementation of the methods the Sort.h
+  *  \date      28/09/2009
+  *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
 #include <iostream>
@@ -15,8 +15,8 @@ namespace genevalmag
 {
 
 #ifdef _DEBUG
-	/* Numbers of sorts current in the system. */
-	static int sorts(0);
+    /* Numbers of sorts current in the system. */
+    static int sorts(0);
 #endif
 
 /**
@@ -24,11 +24,11 @@ namespace genevalmag
   */
 Sort::Sort()
 {
-	s_ins = 1;
+    s_ins = 1;
 
-	#ifdef _DEBUG
-		sorts++;
-	#endif
+    #ifdef _DEBUG
+        sorts++;
+    #endif
 }
 
 /**
@@ -36,13 +36,13 @@ Sort::Sort()
   */
 Sort::Sort(string name)
 {
-	s_ins			= 1;
-	s_name			= name;
-	s_type_basic 	= false;
+    s_ins            = 1;
+    s_name           = name;
+    s_type_basic     = false;
 
-	#ifdef _DEBUG
-		sorts++;
-	#endif
+    #ifdef _DEBUG
+        sorts++;
+    #endif
 }
 
 /**
@@ -50,11 +50,11 @@ Sort::Sort(string name)
   */
 Sort::Sort(const Sort &other)
 {
-	copy(other);
+    copy(other);
 
-	#ifdef _DEBUG
-		sorts++;
-	#endif
+    #ifdef _DEBUG
+        sorts++;
+    #endif
 }
 
 /**
@@ -62,15 +62,15 @@ Sort::Sort(const Sort &other)
   */
 Sort::~Sort()
 {
-	destroy();
+    destroy();
 
-	#ifdef _DEBUG
-		sorts--;
-		if(sorts == 0)
-		{
-			cout << sorts << " -> Sorts" << endl;
-		}
-	#endif
+    #ifdef _DEBUG
+        sorts--;
+        if(sorts == 0)
+        {
+            cout << sorts << " -> Sorts" << endl;
+        }
+    #endif
 }
 
 /**
@@ -78,12 +78,12 @@ Sort::~Sort()
   */
 Sort &Sort::operator=(const Sort &other)
 {
-	if(this != &other)
-	{
-		destroy();
-		copy(other);
-	}
-	return *this;
+    if(this != &other)
+    {
+        destroy();
+        copy(other);
+    }
+    return *this;
 }
 
 /**
@@ -91,11 +91,11 @@ Sort &Sort::operator=(const Sort &other)
   */
 void Sort::copy(const Sort &other)
 {
-	s_name			= other.get_name();
+    s_name          = other.get_name();
 
-	/* Increment the instance of sort. */
-	s_ins			= other.get_ins() + 1;
-	s_type_basic	= other.is_type_basic();
+    /* Increment the instance of sort. */
+    s_ins           = other.get_ins() + 1;
+    s_type_basic    = other.is_type_basic();
 }
 
 /**
@@ -110,7 +110,7 @@ void Sort::destroy()
   */
 string Sort::get_name() const
 {
-	return s_name;
+    return s_name;
 }
 
 /**
@@ -118,7 +118,7 @@ string Sort::get_name() const
   */
 int Sort::get_ins() const
 {
-	return s_ins;
+    return s_ins;
 }
 
 /**
@@ -126,7 +126,7 @@ int Sort::get_ins() const
   */
 void Sort::set_name(string name)
 {
-	s_name = name;
+    s_name = name;
 }
 /**
   * Set if the Sort is basic.
@@ -138,33 +138,33 @@ void Sort::set_type_basic(bool type_basic)
 /**
   * Generates and returns a string reprensentation of a Sort.
   *
-  * Result= "sort" \<name\> ["(" \<instance\> ")" IF DEBUG IS ON] ";"
+  * Result = "sort" \<name\> ["(" \<instance\> ")" IF DEBUG IS ON] ";"
   */
 string Sort::to_string() const
 {
-	string sort;
-	if (is_type_basic())
-	{
-		sort.append("//");
-	}
-	sort.append("sort\t\t");
-	sort.append(s_name);
+    string sort;
+    if (is_type_basic())
+    {
+        sort.append("//");
+    }
+    sort.append("sort\t\t");
+    sort.append(s_name);
 
-	#ifdef _DEBUG
-		sort.append("(");
-		stringstream ins;
-		ins << s_ins;
-		sort.append(ins.str());
-		sort.append(")");
-	#endif
+    #ifdef _DEBUG
+        sort.append("(");
+        stringstream ins;
+        ins << s_ins;
+        sort.append(ins.str());
+        sort.append(")");
+    #endif
 
-	sort.append(";");
+    sort.append(";");
 
-	if (is_type_basic())
-	{
-		sort.append("\t-> Type Basic");
-	}
-	return sort;
+    if (is_type_basic())
+    {
+        sort.append("\t-> Type Basic");
+    }
+    return sort;
 }
 
 /**
@@ -172,7 +172,7 @@ string Sort::to_string() const
   */
 bool Sort::equals(const Sort &other) const
 {
-	return key().compare(other.key())==0;
+    return key().compare(other.key())==0;
 }
 
 /**
@@ -186,11 +186,11 @@ bool Sort::is_type_basic() const
 /**
   * Generate and return the string key that identifies a Sort definitely.
   *
-  * Result= \<name\>
+  * Result = \<name\>
   */
 string Sort::key() const
 {
-	return s_name;
+    return s_name;
 }
 
 } /* end genevalmag */

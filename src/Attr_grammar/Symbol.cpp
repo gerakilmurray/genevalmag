@@ -1,9 +1,9 @@
 /**
-  *  \file		Symbol.cpp
-  *  \brief		Implementation of the methods the Symbol.h
-  *  \date		04/11/2009
-  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
-  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  *  \file      Symbol.cpp
+  *  \brief     Implementation of the methods the Symbol.h
+  *  \date      04/11/2009
+  *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
 #include <iostream>
@@ -14,8 +14,8 @@ namespace genevalmag
 {
 
 #ifdef _DEBUG
-	/* Numbers of Symbols current in the system. */
-	static int symbols(0);
+    /* Numbers of Symbols current in the system. */
+    static int symbols(0);
 #endif
 
 /**
@@ -23,9 +23,9 @@ namespace genevalmag
   */
 Symbol::Symbol()
 {
-	#ifdef _DEBUG
-		symbols++;
-	#endif
+    #ifdef _DEBUG
+        symbols++;
+    #endif
 }
 
 /**
@@ -33,12 +33,12 @@ Symbol::Symbol()
   */
 Symbol::Symbol(string &name, symbol_type type)
 {
-	symb_name = name;
-	symb_type = type;
+    symb_name = name;
+    symb_type = type;
 
-	#ifdef _DEBUG
-		symbols++;
-	#endif
+    #ifdef _DEBUG
+        symbols++;
+    #endif
 }
 
 /**
@@ -46,11 +46,11 @@ Symbol::Symbol(string &name, symbol_type type)
   */
 Symbol::Symbol(const Symbol &other)
 {
-	copy(other);
+    copy(other);
 
-	#ifdef _DEBUG
-		symbols++;
-	#endif
+    #ifdef _DEBUG
+        symbols++;
+    #endif
 }
 
 /**
@@ -58,14 +58,14 @@ Symbol::Symbol(const Symbol &other)
   */
 Symbol::~Symbol()
 {
-	destroy();
-	#ifdef _DEBUG
-		symbols--;
-		if(symbols == 0)
-		{
-			cout << symbols << " -> Symbols" << endl;
-		}
-	#endif
+    destroy();
+    #ifdef _DEBUG
+        symbols--;
+        if(symbols == 0)
+        {
+            cout << symbols << " -> Symbols" << endl;
+        }
+    #endif
 }
 
 /**
@@ -73,12 +73,12 @@ Symbol::~Symbol()
   */
 Symbol &Symbol::operator=(const Symbol &other)
 {
-	if(this != &other)
-	{
-		destroy();
-		copy(other);
-	}
-	return *this;
+    if(this != &other)
+    {
+        destroy();
+        copy(other);
+    }
+    return *this;
 }
 
 /**
@@ -86,9 +86,9 @@ Symbol &Symbol::operator=(const Symbol &other)
   */
 void Symbol::copy(const Symbol &other)
 {
-	symb_name	= other.get_name();
-	symb_type	= other.get_type();
-	symb_attrs	= other.get_attrs();
+    symb_name     = other.get_name();
+    symb_type     = other.get_type();
+    symb_attrs    = other.get_attrs();
 }
 
 /**
@@ -99,43 +99,43 @@ void Symbol::destroy()
 }
 
 /**
-  * Return the name of the symbol.
+  * Returns the name of the symbol.
   */
 string Symbol::get_name() const
 {
-	return symb_name;
+    return symb_name;
 }
 
 /**
-  * Return the type of the symbol.
+  * Returns the type of the symbol.
   */
 symbol_type Symbol::get_type() const
 {
-	return symb_type;
+    return symb_type;
 }
 
 /**
-  * Return the list of attributes of the symbol.
+  * Returns the list of attributes of the symbol.
   */
 const vector<const Attribute*> &Symbol::get_attrs() const
 {
-	return symb_attrs;
+    return symb_attrs;
 }
 
 /**
-  * Find in the list of attribute of the symbol and return the attribute with
-  * that name passed as parameter.
+  * Finds in the list of attribute of the symbol and
+  * returns the attribute with that name passed as parameter.
   */
 const Attribute *Symbol::get_attribute(const string &name_attr) const
 {
-	for(vector<Attribute*>::size_type i(0); i < symb_attrs.size(); i++)
-	{
-		if(symb_attrs[i]->get_name().compare(name_attr) == 0)
-		{
-				return symb_attrs[i];
-		}
-	}
-	return NULL;
+    for(vector<Attribute*>::size_type i(0); i < symb_attrs.size(); i++)
+    {
+        if(symb_attrs[i]->get_name().compare(name_attr) == 0)
+        {
+            return symb_attrs[i];
+        }
+    }
+    return NULL;
 }
 
 /**
@@ -143,67 +143,67 @@ const Attribute *Symbol::get_attribute(const string &name_attr) const
   */
 void Symbol::set_name(string name)
 {
-	symb_name = name;
+    symb_name = name;
 }
 
 /**
-  * Set the type of the symbol.
+  * Sets the type of the symbol.
   */
 void Symbol::set_type(symbol_type type)
 {
-	symb_type = type;
+    symb_type = type;
 }
 
 /**
-  * Enqueue a attribute in the list of the symbol.
+  * Enqueues a attribute in the list of the symbol.
   */
 void Symbol::add_attr(const Attribute *attr)
 {
-	symb_attrs.push_back(attr);
+    symb_attrs.push_back(attr);
 }
 
 /**
-  * Return true if the symbol's type is Non Terminal.
+  * Returns true if the symbol's type is non-terminal.
   */
 bool Symbol::is_non_terminal() const
 {
-	return symb_type == k_non_terminal;
+    return symb_type == k_non_terminal;
 }
 
 /**
-  * Generate and return a string reprensentation of a symbol.
+  * Generates and returns a string reprensentation of a symbol.
   *
-  * Result= "symbol" name type ";"
+  * Result = "symbol" name type ";"
   *
   * where if 'type' is Non Terminal, then list the attributes of the symbol.
   *
-  * list= "Attributes:" attr_1 "," ... "," attr_n
+  * list = "Attributes:" attr_1 "," ... "," attr_n
   */
 string Symbol::to_string() const
 {
-	string symb("symbol ");
-	symb.append(symb_name);
-	switch(symb_type)
-	{
-		case k_non_terminal:
-			symb.append("\tNonTerminal");
+    string symb("symbol ");
+    symb.append(symb_name);
+    switch(symb_type)
+    {
+        case k_non_terminal:
+            symb.append("\tNonTerminal");
 
-			symb.append("\tAttributes: ");
-			for(vector<Attribute*>::size_type i(0); i < symb_attrs.size(); i++)
-			{
-				symb.append(symb_attrs[i]->get_name());
-				if(i+1 < symb_attrs.size())
-				{
-					symb.append(",");
-				}
-			}
-			break;
-		case k_terminal:
-			symb.append("\tTerminal");
-			break;
-	}
-	symb.append(";");
-	return symb;
+            symb.append("\tAttributes: ");
+            for(vector<Attribute*>::size_type i(0); i < symb_attrs.size(); i++)
+            {
+                symb.append(symb_attrs[i]->get_name());
+                if(i+1 < symb_attrs.size())
+                {
+                    symb.append(",");
+                }
+            }
+            break;
+        case k_terminal:
+            symb.append("\tTerminal");
+            break;
+    }
+    symb.append(";");
+    return symb;
 }
 
 /**
@@ -211,17 +211,17 @@ string Symbol::to_string() const
   */
 bool Symbol::equals(const Symbol &other) const
 {
-	return key().compare(other.key()) == 0;
+    return key().compare(other.key()) == 0;
 }
 
 /**
   * Generate and return the string key that identifies a symbol definitely.
   *
-  * Result= name
+  * Result = name
   */
 string Symbol::key() const
 {
-	return symb_name;
+    return symb_name;
 }
 
 } /* end genevalmag */
