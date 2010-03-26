@@ -1,9 +1,9 @@
 /**
-  *  \file		Ast_literal.cpp
-  *  \brief		Implementation of a literal element of an Attribute Syntax Tree (AST).
-  *  \date		21/12/2009
-  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
-  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  *  \file      Ast_literal.cpp
+  *  \brief     Implementation of a literal element of an Attribute Syntax Tree (AST).
+  *  \date      21/12/2009
+  *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
   
 #include <iostream>
@@ -13,8 +13,8 @@ namespace genevalmag
 {
 
 #ifdef _DEBUG
-	/* Numbers of literals current in the system. */
-	static int ast_literals(0);
+    /* Numbers of literals current in the system. */
+    static int ast_literals(0);
 #endif
 
 /**
@@ -22,12 +22,12 @@ namespace genevalmag
   */
 Ast_literal::Ast_literal()
 {
-	parent		= NULL;
-	conflict	= -1;
+    parent      = NULL;
+    conflict    = -1;
 
-	#ifdef _DEBUG
-		ast_literals++;
-	#endif
+    #ifdef _DEBUG
+        ast_literals++;
+    #endif
 }
 
 /**
@@ -35,11 +35,11 @@ Ast_literal::Ast_literal()
   */
 Ast_literal::Ast_literal(const Ast_literal &other)
 {
-	copy(other);
+    copy(other);
 
-	#ifdef _DEBUG
-		ast_literals++;
-	#endif
+    #ifdef _DEBUG
+        ast_literals++;
+    #endif
 }
 
 /**
@@ -47,15 +47,15 @@ Ast_literal::Ast_literal(const Ast_literal &other)
   */
 Ast_literal::~Ast_literal()
 {
-	destroy();
+    destroy();
 
-	#ifdef _DEBUG
-		ast_literals--;
-		if(ast_literals == 0)
-		{
-			cout << ast_literals << " -> AST Literals" << endl;
-		}
-	#endif
+    #ifdef _DEBUG
+        ast_literals--;
+        if(ast_literals == 0)
+        {
+            cout << ast_literals << " -> AST Literals" << endl;
+        }
+    #endif
 }
 
 /**
@@ -63,12 +63,12 @@ Ast_literal::~Ast_literal()
   */
 Ast_literal &Ast_literal::operator=(const Ast_literal &other)
 {
-	if(this != &other)
-	{
-		destroy();
-		copy(other);
-	}
-	return *this;
+    if(this != &other)
+    {
+        destroy();
+        copy(other);
+    }
+    return *this;
 }
 
 /**
@@ -76,11 +76,11 @@ Ast_literal &Ast_literal::operator=(const Ast_literal &other)
   */
 void Ast_literal::copy(const Ast_literal &other)
 {
-	value				= other.get_value();
-	type				= other.get_type();
-	parent				= other.get_parent();
-	conflict			= other.get_conflict();
-	type_synthetized	= other.get_type_synthetized();
+    value               = other.get_value();
+    type                = other.get_type();
+    parent              = other.get_parent();
+    conflict            = other.get_conflict();
+    type_synthetized    = other.get_type_synthetized();
 }
 
 /**
@@ -95,7 +95,7 @@ void Ast_literal::destroy()
   */
 literal_type Ast_literal::get_type() const
 {
-	return type;
+    return type;
 }
 
 /**
@@ -103,7 +103,7 @@ literal_type Ast_literal::get_type() const
   */
 string Ast_literal::get_value() const
 {
-	return value;
+    return value;
 }
 
 /**
@@ -111,7 +111,7 @@ string Ast_literal::get_value() const
   */
 void Ast_literal::set_type(literal_type new_type)
 {
-	type = new_type;
+    type = new_type;
 }
 
 /**
@@ -119,7 +119,7 @@ void Ast_literal::set_type(literal_type new_type)
   */
 void Ast_literal::set_value(string new_value)
 {
-	value = new_value;
+    value = new_value;
 }
 
 /**
@@ -127,39 +127,39 @@ void Ast_literal::set_value(string new_value)
   *
   * Result= literal
   *
-  * Ex: 1	-> int
-  * 	1.0	-> float
-  * 	'1'	-> char
-  * 	"1"	-> string
+  * Ex: 1      -> int
+  *     1.0    -> float
+  *     '1'    -> char
+  *     "1"    -> string
   */
 string Ast_literal::to_string() const
 {
-	string lit;
+    string lit;
 
-	switch(type)
-	{
-		case k_int:
-		case k_float:
-		{
-			lit.append(value);
-			break;
-		}
-		case k_char:
-		{
-			lit.append("'");
-			lit.append(value);
-			lit.append("'");
-			break;
-		}
-		case k_string:
-		{
-			lit.append("\"");
-			lit.append(value);
-			lit.append("\"");
-			break;
-		}
-	}
-	return lit;
+    switch(type)
+    {
+        case k_int:
+        case k_float:
+        {
+            lit.append(value);
+            break;
+        }
+        case k_char:
+        {
+            lit.append("'");
+            lit.append(value);
+            lit.append("'");
+            break;
+        }
+        case k_string:
+        {
+            lit.append("\"");
+            lit.append(value);
+            lit.append("\"");
+            break;
+        }
+    }
+    return lit;
 }
 
 } /* end genevalmag */

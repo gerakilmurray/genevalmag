@@ -1,9 +1,9 @@
 /**
-  *  \file		Ast_instance.cpp
-  *  \brief		Implementation of a instance element of an Attribute Syntax Tree (AST).
-  *  \date		21/12/2009
-  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
-  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  *  \file      Ast_instance.cpp
+  *  \brief     Implementation of a instance element of an Attribute Syntax Tree (AST).
+  *  \date      21/12/2009
+  *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
   
 #include <sstream>
@@ -15,8 +15,8 @@ namespace genevalmag
 {
 
 #ifdef _DEBUG
-	/* Numbers of instances current in the system. */
-	static int ast_instances(0);
+    /* Numbers of instances current in the system. */
+    static int ast_instances(0);
 #endif
 
 /**
@@ -24,12 +24,12 @@ namespace genevalmag
   */
 Ast_instance::Ast_instance()
 {
-	parent		= NULL;
-	conflict	= -1;
+    parent      = NULL;
+    conflict    = -1;
 
-	#ifdef _DEBUG
-		ast_instances++;
-	#endif
+    #ifdef _DEBUG
+        ast_instances++;
+    #endif
 }
 
 /**
@@ -37,11 +37,11 @@ Ast_instance::Ast_instance()
   */
 Ast_instance::Ast_instance(const Ast_instance &other)
 {
-	copy(other);
+    copy(other);
 
-	#ifdef _DEBUG
-		ast_instances++;
-	#endif
+    #ifdef _DEBUG
+        ast_instances++;
+    #endif
 }
 
 /**
@@ -49,15 +49,15 @@ Ast_instance::Ast_instance(const Ast_instance &other)
   */
 Ast_instance::~Ast_instance()
 {
-	destroy();
+    destroy();
 
-	#ifdef _DEBUG
-		ast_instances--;
-		if(ast_instances == 0)
-		{
-			cout << ast_instances << " -> AST Instances" << endl;
-		}
-	#endif
+    #ifdef _DEBUG
+        ast_instances--;
+        if(ast_instances == 0)
+        {
+            cout << ast_instances << " -> AST Instances" << endl;
+        }
+    #endif
 }
 
 /**
@@ -65,12 +65,12 @@ Ast_instance::~Ast_instance()
   */
 Ast_instance &Ast_instance::operator=(const Ast_instance &other)
 {
-	if(this != &other)
-	{
-		destroy();
-		copy(other);
-	}
-	return *this;
+    if(this != &other)
+    {
+        destroy();
+        copy(other);
+    }
+    return *this;
 }
 
 /**
@@ -78,12 +78,12 @@ Ast_instance &Ast_instance::operator=(const Ast_instance &other)
   */
 void Ast_instance::copy(const Ast_instance &other)
 {
-	i_symb				= other.get_symb();
-	i_num				= other.get_num();
-	i_attr				= other.get_attr();
-	parent				= other.get_parent();
-	conflict			= other.get_conflict();
-	type_synthetized	= other.get_type_synthetized();
+    i_symb              = other.get_symb();
+    i_num               = other.get_num();
+    i_attr              = other.get_attr();
+    parent              = other.get_parent();
+    conflict            = other.get_conflict();
+    type_synthetized    = other.get_type_synthetized();
 }
 
 /**
@@ -91,8 +91,8 @@ void Ast_instance::copy(const Ast_instance &other)
   */
 void Ast_instance::destroy()
 {
-	i_symb = NULL;
-	i_attr = NULL;
+    i_symb = NULL;
+    i_attr = NULL;
 }
 
 /**
@@ -100,7 +100,7 @@ void Ast_instance::destroy()
   */
 const Attribute *Ast_instance::get_attr() const
 {
-	return i_attr;
+    return i_attr;
 }
 
 /**
@@ -108,7 +108,7 @@ const Attribute *Ast_instance::get_attr() const
   */
 unsigned short Ast_instance::get_num() const
 {
-	return i_num;
+    return i_num;
 }
 
 /**
@@ -116,7 +116,7 @@ unsigned short Ast_instance::get_num() const
   */
 const Symbol *Ast_instance::get_symb() const
 {
-	return i_symb;
+    return i_symb;
 }
 
 /**
@@ -124,7 +124,7 @@ const Symbol *Ast_instance::get_symb() const
   */
 void Ast_instance::set_attr(const Attribute *attr)
 {
-	i_attr = attr;
+    i_attr = attr;
 }
 
 /**
@@ -132,7 +132,7 @@ void Ast_instance::set_attr(const Attribute *attr)
   */
 void Ast_instance::set_num(unsigned short num)
 {
-	i_num = num;
+    i_num = num;
 }
 
 /**
@@ -140,7 +140,7 @@ void Ast_instance::set_num(unsigned short num)
   */
 void Ast_instance::set_symb(const Symbol *symb)
 {
-	i_symb = symb;
+    i_symb = symb;
 }
 
 /**
@@ -152,20 +152,20 @@ void Ast_instance::set_symb(const Symbol *symb)
   */
 string Ast_instance::to_string() const
 {
-	/* Save symbol's name. */
-	string inst(i_symb->get_name());
+    /* Save symbol's name. */
+    string inst(i_symb->get_name());
 
-	/* Save instance number. */
-	inst.append("[");
-	stringstream ins;
-	ins << i_num;
-	inst.append(ins.str());
-	inst.append("]");
-	inst.append(".");
+    /* Save instance number. */
+    inst.append("[");
+    stringstream ins;
+    ins << i_num;
+    inst.append(ins.str());
+    inst.append("]");
+    inst.append(".");
 
-	/* Save attribute's name. */
-	inst.append(i_attr->get_name());
-	return inst;
+    /* Save attribute's name. */
+    inst.append(i_attr->get_name());
+    return inst;
 }
 
 /**
@@ -174,7 +174,7 @@ string Ast_instance::to_string() const
   */
 bool Ast_instance::equals_with_index(const Ast_instance *other) const
 {
-	return (key().compare(other->key()) == 0);
+    return (key().compare(other->key()) == 0);
 }
 
 /**
@@ -186,17 +186,17 @@ bool Ast_instance::equals_with_index(const Ast_instance *other) const
   */
 string Ast_instance::key() const
 {
-	/* Save symbol's name. */
-	string inst(i_symb->get_name());
+    /* Save symbol's name. */
+    string inst(i_symb->get_name());
 
-	/* Save instance number. */
-	stringstream ins;
-	ins << i_num;
-	inst.append(ins.str());
+    /* Save instance number. */
+    stringstream ins;
+    ins << i_num;
+    inst.append(ins.str());
 
-	/* Save attribute's name. */
-	inst.append(i_attr->get_name());
-	return inst;
+    /* Save attribute's name. */
+    inst.append(i_attr->get_name());
+    return inst;
 }
 
 } /* end genevalmag */

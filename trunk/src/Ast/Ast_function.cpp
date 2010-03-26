@@ -1,9 +1,9 @@
 /**
-  *  \file		Ast_function.cpp
-  *  \brief		Implementation of a function element of an Attribute Syntax Tree (AST).
-  *  \date		21/12/2009
-  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
-  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  *  \file      Ast_function.cpp
+  *  \brief     Implementation of a function element of an Attribute Syntax Tree (AST).
+  *  \date      21/12/2009
+  *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
   
 #include <iostream>
@@ -14,8 +14,8 @@ namespace genevalmag
 {
 
 #ifdef _DEBUG
-	/* Numbers of functions current in the system. */
-	static int ast_functions(0);
+    /* Numbers of functions current in the system. */
+    static int ast_functions(0);
 #endif
 
 /**
@@ -23,14 +23,14 @@ namespace genevalmag
   */
 Ast_function::Ast_function()
 {
-	parent				= NULL;
-	conflict			= -1;
-	precedence_level	= 0;
-	syntax_order		= 0;
+    parent              = NULL;
+    conflict            = -1;
+    precedence_level    = 0;
+    syntax_order        = 0;
 
-	#ifdef _DEBUG
-		ast_functions++;
-	#endif
+    #ifdef _DEBUG
+        ast_functions++;
+    #endif
 }
 
 /**
@@ -38,11 +38,11 @@ Ast_function::Ast_function()
   */
 Ast_function::Ast_function(const Ast_function &other)
 {
-	copy(other);
+    copy(other);
 
-	#ifdef _DEBUG
-		ast_functions++;
-	#endif
+    #ifdef _DEBUG
+        ast_functions++;
+    #endif
 }
 
 /**
@@ -50,15 +50,15 @@ Ast_function::Ast_function(const Ast_function &other)
   */
 Ast_function::~Ast_function()
 {
-	destroy();
+    destroy();
 
-	#ifdef _DEBUG
-		ast_functions--;
-		if(ast_functions == 0)
-		{
-			cout << ast_functions << " -> AST Functions" << endl;
-		}
-	#endif
+    #ifdef _DEBUG
+        ast_functions--;
+        if(ast_functions == 0)
+        {
+            cout << ast_functions << " -> AST Functions" << endl;
+        }
+    #endif
 }
 
 /**
@@ -66,12 +66,12 @@ Ast_function::~Ast_function()
   */
 Ast_function &Ast_function::operator=(const Ast_function &other)
 {
-	if(this != &other)
-	{
-		destroy();
-		copy(other);
-	}
-	return *this;
+    if(this != &other)
+    {
+        destroy();
+        copy(other);
+    }
+    return *this;
 }
 
 /**
@@ -79,13 +79,13 @@ Ast_function &Ast_function::operator=(const Ast_function &other)
   */
 void Ast_function::copy(const Ast_function &other)
 {
-	func				= other.get_function();
-	precedence_level	= other.get_precedence_level();
-	syntax_order		= other.get_syntax_order();
-	childs				= other.get_childs();
-	parent				= other.get_parent();
-	conflict			= other.get_conflict();
-	type_synthetized	= other.get_type_synthetized();
+    func                = other.get_function();
+    precedence_level    = other.get_precedence_level();
+    syntax_order        = other.get_syntax_order();
+    childs              = other.get_childs();
+    parent              = other.get_parent();
+    conflict            = other.get_conflict();
+    type_synthetized    = other.get_type_synthetized();
 }
 
 /**
@@ -100,7 +100,7 @@ void Ast_function::destroy()
   */
 const Function *Ast_function::get_function() const
 {
-	return func;
+    return func;
 }
 
 /**
@@ -108,7 +108,7 @@ const Function *Ast_function::get_function() const
   */
 unsigned short Ast_function::get_precedence_level() const
 {
-	return precedence_level;
+    return precedence_level;
 }
 
 /**
@@ -116,7 +116,7 @@ unsigned short Ast_function::get_precedence_level() const
   */
 unsigned short Ast_function::get_syntax_order() const
 {
-	return syntax_order;
+    return syntax_order;
 }
 
 /**
@@ -124,7 +124,7 @@ unsigned short Ast_function::get_syntax_order() const
   */
 void Ast_function::set_function(const Function *function)
 {
-	func = function;
+    func = function;
 }
 
 /**
@@ -132,7 +132,7 @@ void Ast_function::set_function(const Function *function)
   */
 void Ast_function::set_precedence_level(unsigned short p_level)
 {
-	precedence_level = p_level;
+    precedence_level = p_level;
 }
 
 /**
@@ -140,7 +140,7 @@ void Ast_function::set_precedence_level(unsigned short p_level)
   */
 void Ast_function::set_syntax_order(unsigned short s_order)
 {
-	syntax_order = s_order;
+    syntax_order = s_order;
 }
 
 /**
@@ -148,7 +148,7 @@ void Ast_function::set_syntax_order(unsigned short s_order)
   */
 bool Ast_function::is_prefix() const
 {
-	return (func->get_mode() == k_prefix);
+    return (func->get_mode() == k_prefix);
 }
 
 /**
@@ -156,7 +156,7 @@ bool Ast_function::is_prefix() const
   */
 bool Ast_function::is_infix() const
 {
-	return (func->get_mode() == k_infix);
+    return (func->get_mode() == k_infix);
 }
 
 /**
@@ -164,7 +164,7 @@ bool Ast_function::is_infix() const
   */
 bool Ast_function::is_postfix() const
 {
-	return (func->get_mode() == k_postfix);
+    return (func->get_mode() == k_postfix);
 }
 
 /**
@@ -172,87 +172,87 @@ bool Ast_function::is_postfix() const
   */
 bool Ast_function::is_comparable(const Ast_function *other) const
 {
-	return (precedence_level == other->get_precedence_level());
+    return (precedence_level == other->get_precedence_level());
 }
 
 /**
   * Return:
-  * 	= O		when is same precedence
-  *		< 0		when other have great precedence
-  *		> 0		when other have small precedence
+  *        = O        when is same precedence
+  *        < 0        when other have great precedence
+  *        > 0        when other have small precedence
   */
 int Ast_function::compare_precedence(const Ast_function *other) const
 {
-	return (func->get_prec() - other->get_function()->get_prec());
+    return (func->get_prec() - other->get_function()->get_prec());
 }
 
 /**
   * Return:
-  * 	= O		when is same order
-  *		< 0		when other have great order
-  *		> 0		when other have small order
+  *        = O        when is same order
+  *        < 0        when other have great order
+  *        > 0        when other have small order
   */
 int Ast_function::compare_order(const Ast_function *other) const
 {
-	return (syntax_order - other->get_syntax_order());
+    return (syntax_order - other->get_syntax_order());
 }
 
 /**
   * Generate and return a string reprensentation of a Ast_function.
   *
-  *	If is a pure function:
-  * 	Result= \<func_name\> "(" child[0], ... , child[n] ")"
+  * If is a pure function:
+  *     Result= \<func_name\> "(" child[0], ... , child[n] ")"
   *
   * If is an infix binary operator:
-  * 	Result= "(" child[0] \<op_name\> child[1] ")"
+  *     Result= "(" child[0] \<op_name\> child[1] ")"
   *
   * If is an prefix unary operator:
-  * 	Result= \<op_name\> "(" child[0] ")"
+  *     Result= \<op_name\> "(" child[0] ")"
   *
   * If is an postfix unary operator:
-  * 	Result= "(" child[0] ")" \<op_name\>
+  *     Result= "(" child[0] ")" \<op_name\>
   */
 string Ast_function::to_string() const
 {
-	if(func->is_operator())
-	{
-		string op;
+    if(func->is_operator())
+    {
+        string op;
 
-		switch(func->get_mode())
-		{
-			case k_infix:
-				op.append("(");
-				op.append(childs[0]->to_string());
-				op.append(" ");
-				op.append(func->get_name());
-				op.append(" ");
-				op.append(childs[1]->to_string());
-				op.append(")");
-				break;
-			case k_prefix:
-				op.append(func->get_name());
-				op.append("(");
-				op.append(childs[0]->to_string());
-				op.append(")");
-				break;
-			case k_postfix:
-				op.append("(");
-				op.append(childs[0]->to_string());
-				op.append(")");
-				op.append(func->get_name());
-				break;
-		}
-		return op;
-	}
-	string fun(func->get_name());
-	fun.append("(");
-	for (unsigned int i(0); i < childs.size() ;i++)
-	{
-		fun.append(childs[i]->to_string());
-		if (i < childs.size()-1) fun.append(", ");
-	}
-	fun.append(")");
-	return fun;
+        switch(func->get_mode())
+        {
+            case k_infix:
+                op.append("(");
+                op.append(childs[0]->to_string());
+                op.append(" ");
+                op.append(func->get_name());
+                op.append(" ");
+                op.append(childs[1]->to_string());
+                op.append(")");
+                break;
+            case k_prefix:
+                op.append(func->get_name());
+                op.append("(");
+                op.append(childs[0]->to_string());
+                op.append(")");
+                break;
+            case k_postfix:
+                op.append("(");
+                op.append(childs[0]->to_string());
+                op.append(")");
+                op.append(func->get_name());
+                break;
+        }
+        return op;
+    }
+    string fun(func->get_name());
+    fun.append("(");
+    for (unsigned int i(0); i < childs.size() ;i++)
+    {
+        fun.append(childs[i]->to_string());
+        if (i < childs.size()-1) fun.append(", ");
+    }
+    fun.append(")");
+    return fun;
 }
 
 } /* end genevalmag */
