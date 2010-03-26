@@ -1,9 +1,9 @@
 /**
-  * \file Plan.hpp
-  * 	\brief EXPLICAR QUE ES ESTO
-  *  \date 23/03/2010
-  *  \author    Kilmurray, Gerardo Luis. 
-  *  \author    Picco, Gonzalo M. 
+  *  \file		Plan.hpp
+  *  \brief
+  *  \date		23/03/2010
+  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
 #include "Node.hpp"
@@ -24,11 +24,6 @@ typedef struct c_rule
 {
 	unsigned short	father;
 	Order_rule		context;
-
-//	bool operator< (const c_rule &other) const
-//	{
-//		return (father < other.father) || (context < other.context);
-//	}
 
 	bool operator== (const c_rule &other) const
 	{
@@ -96,11 +91,6 @@ typedef struct k_plan
 	Context_rule	id_plan;
 	Order_eval_eq	plan;
 
-//	bool operator< (const k_plan &other) const
-//	{
-//		return (id_plan < other.id_plan) || (plan < other.plan);
-//	}
-
 	bool operator== (const k_plan &other) const
 	{
 		return (id_plan == other.id_plan) && (plan == other.plan);
@@ -122,11 +112,6 @@ typedef struct k_p_project
 {
 	Key_plan		id_plan_project;
 	string			node_project;
-
-//	bool operator< (const k_p_project &other) const
-//	{
-//		return (id_plan_project < other.id_plan_project) || (node_project < other.node_project);
-//	}
 
 	bool operator== (const k_p_project &other) const
 	{

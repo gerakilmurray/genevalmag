@@ -138,11 +138,19 @@ bool Attr_grammar::add_rule(Rule &rule)
 	rule.set_id(cant_rules++);
 
 	bool result(add <unsigned short, Rule>(rule, ag_rule));
-	if ( result && ag_initial_symb == NULL)
+	if ( result )
 	{
-		/* Set initial symbol of grammar. */
-		map<unsigned short, Rule>::iterator	init_symb(ag_rule.find(rule.key()));
-		ag_initial_symb = init_symb->second.get_left_symbol();
+		if( ag_initial_symb == NULL)
+		{
+			/* Set initial symbol of grammar. */
+			map<unsigned short, Rule>::iterator	init_symb(ag_rule.find(rule.key()));
+			ag_initial_symb = init_symb->second.get_left_symbol();
+		}
+		map<unsigned short,Rule>::const_iterator last_rule(ag_rule.end());
+		last_rule--;
+		map<unsigned short,Equation>::const_iterator last_eq(last_rule->second.get_eqs().end());
+		last_eq--;
+		count_eqs = last_eq->second.get_id();
 	}
 	return result;
 }
@@ -354,12 +362,12 @@ const Ast_instance *Attr_grammar::get_eq_l_value(unsigned short index) const
 
 const Equation *Attr_grammar::get_eq(unsigned short index) const
 {
-	map<unsigned short,Rule>::const_iterator last_rule(ag_rule.end());
-	last_rule--;
-	map<unsigned short,Equation>::const_iterator last_eq(last_rule->second.get_eqs().end());
-	last_eq--;
+//	map<unsigned short,Rule>::const_iterator last_rule(ag_rule.end());
+//	last_rule--;
+//	map<unsigned short,Equation>::const_iterator last_eq(last_rule->second.get_eqs().end());
+//	last_eq--;
 	assert(index >= 1);
-	assert(index <= last_eq->second.get_id());
+	assert(index <= count_eqs);
 	/* The index is valid. */
 
 	for(map<unsigned short,Rule>::const_reverse_iterator it_r(ag_rule.rbegin()); it_r != ag_rule.rend(); it_r++)
@@ -371,6 +379,11 @@ const Equation *Attr_grammar::get_eq(unsigned short index) const
 		}
 	}
 	return NULL;
+}
+
+unsigned short Attr_grammar::get_count_eqs() const
+{
+	return count_eqs;
 }
 
 } /* end genevalmag */
