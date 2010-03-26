@@ -11,6 +11,8 @@
 
 #include <boost/spirit/include/classic_file_iterator.hpp>
 
+#include <boost/spirit/include/classic_position_iterator.hpp>
+
 #include "../Attr_grammar/Attr_grammar.h"
 #include "Semantic_check.h"
 
@@ -19,8 +21,10 @@ using namespace BOOST_SPIRIT_CLASSIC_NS;
 namespace genevalmag
 {
 
-typedef char                    char_t;
-typedef file_iterator<char_t>   iterator_t;
+typedef char                  		 	char_t;
+typedef file_iterator <char_t>   		iterator_f;
+typedef position_iterator<iterator_f> 	iterator_t;
+
 
 class Parser_AG
 {
