@@ -210,7 +210,7 @@ void project_graph(const Symbol *symb, Dp_graph &graph)
 	for (size_t i(num_vertices(graph)); i > 0; i--)
 	{
 		const Ast_instance *ins(dynamic_cast<const Ast_instance*>(props[i-1]));
-		if (!ins || !ins->get_symb()->equals(*symb))
+		if (!ins || !ins->get_symb()->equals(*symb) || ins->get_num()>0)
 		/* The node is a literal-node or is a node with symbol diferent that symb. */
 		{
 			clear_vertex(i-1, graph);

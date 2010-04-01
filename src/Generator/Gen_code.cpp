@@ -116,9 +116,6 @@ void Gen_code::generate_header_file()
 	header.append("using namespace std;\n");
 	header.append("using namespace util_ag;\n\n");
 
-	header.append("namespace evalmag\n");
-	header.append("{\n\n");
-
 	std::ofstream file_output(full_path.c_str());
 	file_output.write(header.c_str(),header.size());
 	file_output.close();
@@ -854,6 +851,8 @@ void Gen_code::generate_externs(const Attr_grammar &attr_grammar)
 void Gen_code::generate_structs(const Attr_grammar &attr_grammar)
 {
 	string structs;
+	structs.append("namespace evalmag\n");
+	structs.append("{\n\n");
 
 	structs.append("/**\n  * Structs of the symbols.\n  */\n\n");
 
