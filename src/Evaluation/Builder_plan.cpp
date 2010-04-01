@@ -53,6 +53,18 @@ void generate_graphs(const Attr_grammar &grammar, Builder_graphs &b_graphs)
 	b_graphs.compute_adp_graph(grammar);
 }
 
+bool belong_index(unsigned short index, Order_eval_eq order)
+{
+	for(size_t i(0); i < order.size(); i++)
+	{
+		if(index == order[i])
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 /**
   * Applies a topological order at graph.
   * The changes are applies about paramenter "result_order".
@@ -92,7 +104,10 @@ void Builder_plan::generates_topological_order(const Dp_graph &graph, Order_eval
 				index = (grammar.get_index_eq_with_context(ins, context_rule.context));
 			}
 			assert (index > 0);
-			result_order.push_back(index);
+			if(!belong_index(index, result_order))
+			{
+				result_order.push_back(index);
+			}
 		}
 	}
 }
@@ -160,10 +175,10 @@ void Builder_plan::print_all_plans(const Attr_grammar &grammar) const
 		}
 		/* Obtains the rule. */
 		string name_graph("Evaluation Plan of rule ");
-		const Rule *rule(&(grammar.get_rules().find(it->first.id_plan.context[0])->second));
+		const Rule *rule(&(grammar.get_rules().find(it->first.id_plan[0])->second));
 		name_graph.append(cleaning_tabs(rule->to_string_not_eqs()));
 
-		name_graph.append(write_inf_context(it->first.id_plan.context));
+		name_graph.append(write_inf_context(it->first.id_plan));
 
 		/* Obtains the rule's context. */
 		if (it->first.plan.size() == 0)
@@ -187,17 +202,17 @@ void Builder_plan::print_all_plans(const Attr_grammar &grammar) const
 		}
 
 		/* Obtains the rule's superior context. */
-		if (it->first.id_plan.father == 0)
-		{
-			name_graph.append(" without a father");
-		}
-		else
-		{
-			name_graph.append(" and father: R");
-			stringstream father;
-			father << it->first.id_plan.father;
-			name_graph.append(father.str());
-		}
+//		if (it->first.id_plan.father == 0)
+//		{
+//			name_graph.append(" without a father");
+//		}
+//		else
+//		{
+//			name_graph.append(" and father: R");
+//			stringstream father;
+//			father << it->first.id_plan.father;
+//			name_graph.append(father.str());
+//		}
 		name_graph.append(".");
 
 		print_graph(graph_plan,path_out.c_str(),"_plan_graph", name_graph, names,"box");
@@ -231,10 +246,10 @@ void Builder_plan::print_all_plans_project(const Attr_grammar &grammar) const
 
 		/* Obtains the rule. */
 		string name_graph("Evaluation Plan Project of rule ");
-		const Rule *rule(&(grammar.get_rules().find(it->first.id_plan_project.id_plan.context[0])->second));
+		const Rule *rule(&(grammar.get_rules().find(it->first.id_plan_project.id_plan[0])->second));
 		name_graph.append(cleaning_tabs(rule->to_string_not_eqs()));
 
-		name_graph.append(write_inf_context(it->first.id_plan_project.id_plan.context));
+		name_graph.append(write_inf_context(it->first.id_plan_project.id_plan));
 
 		/* Obtains the rule's context. */
 		if (it->first.id_plan_project.plan.size() == 0)
@@ -258,17 +273,17 @@ void Builder_plan::print_all_plans_project(const Attr_grammar &grammar) const
 		}
 
 		/* Obtains the rule's superior context. */
-		if (it->first.id_plan_project.id_plan.father == 0)
-		{
-			name_graph.append(", without a father");
-		}
-		else
-		{
-			name_graph.append(", father: R");
-			stringstream father;
-			father << it->first.id_plan_project.id_plan.father;
-			name_graph.append(father.str());
-		}
+//		if (it->first.id_plan_project.id_plan.father == 0)
+//		{
+//			name_graph.append(", without a father");
+//		}
+//		else
+//		{
+//			name_graph.append(", father: R");
+//			stringstream father;
+//			father << it->first.id_plan_project.id_plan.father;
+//			name_graph.append(father.str());
+//		}
 
 		/* Obtains the symbol projected. */
 		name_graph.append(" and Symbol: ");
@@ -329,19 +344,18 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 	vector< unsigned short > initial_rules(grammar.get_rules_with_left_symbol(grammar.get_initial_symb()));
 
 	/* Initializes the work list with the rules with the initial symbol grammar. */
-
-	Order_eval_eq init_order;
-	Context_rule context;
-	context.father = 0; /* Initial rule hasn't father. */
-	vector < unsigned short > invoque_context;
-	invoque_context.push_back(initial_rules[0]);
-	context.context = invoque_context;
-	generates_topological_order(build_graphs.get_dcg_graph(initial_rules[0]), init_order, grammar, context);
-
-	init_order_ag = init_order;
-
 	for(size_t i(0); i < initial_rules.size(); i++)
 	{
+		Order_eval_eq init_order;
+		Context_rule context;
+		context.father = 0; /* Initial rule hasn't father. */
+		vector < unsigned short > invoque_context;
+		invoque_context.push_back(initial_rules[i]);
+		context.context = invoque_context;
+		generates_topological_order(build_graphs.get_dcg_graph(initial_rules[i]), init_order, grammar, context);
+
+		init_order_ag.push_back(init_order);
+
 		Key_work_list key;
 		key.father = 0;/* Initial rule hasn't father. */
 		key.id_rule = initial_rules[i];
@@ -352,7 +366,6 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 	}
 
 	const map<vector<unsigned short>,Dp_graph> &adp_graph(build_graphs.get_adp_graphs());
-
 	while(work_list.size() > 0)
 	{
 		Item_work i_work(work_list.back());
@@ -383,7 +396,7 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 
 					/* Saves the new_plan in the map. */
 					Key_plan key_plan;
-					key_plan.id_plan = context;
+					key_plan.id_plan = context.context;
 					key_plan.plan = i_work.order_attr;
 					pair < Key_plan, Order_eval_eq > new_p(key_plan, order_purged);
 					eval_plans.insert(new_p);
@@ -395,6 +408,7 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 						Order_eval_eq proj_order;
 
 						const Rule& rule_proj(grammar.get_rule(adp->first[i+1]));
+
 						purge_plan_with(rule_proj, total_order, proj_order);
 						//project_order(right_side[i], grammar, order_purged, proj_order);
 
@@ -414,7 +428,6 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 						Item_work i_work_new;
 						i_work_new.item = key;
 						i_work_new.order_attr = proj_order;
-
 						if (!defined_work(defined_item_work, i_work_new))
 						{
 							work_list.push_back(i_work_new);
@@ -460,7 +473,7 @@ const map < Key_plan_project, Order_eval_eq > &Builder_plan::get_plans_project()
 	return plans_project;
 }
 
-const Order_eval_eq &Builder_plan::get_init_order() const
+const vector < Order_eval_eq > &Builder_plan::get_init_orders() const
 {
 	return init_order_ag;
 }

@@ -94,9 +94,9 @@ class Ast_instance: public Ast_leaf
 
         /**
           * Compares the Ast_instance with other.
-          * Respects Symbol, attribute and number.
+          * Respects Symbol and attribute.
           */
-        bool equals_with_index(const Ast_instance *other) const;
+        bool equals_without_index(const Ast_instance *other) const;
 
         /**
           * Generate and return the string key that identifies an Ast_instance definitely.

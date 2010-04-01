@@ -48,7 +48,7 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry excluding="src/Util/Utilities.h|Out_Gen_Mag/Eval_mag.hpp|Out_Gen_Mag/Eval_mag_proof.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry excluding="Out_Gen_Mag/proof_longitud_T2.cpp|Out_Gen_Mag/proof_longitud.cpp|src/Util/Utilities.h|Out_Gen_Mag/Eval_mag.hpp|Out_Gen_Mag/Eval_mag_proof.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 </sourceEntries>
 </configuration>
 </storageModule>
@@ -512,7 +512,7 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry excluding="src/Util/Utilities.h|Out_Gen_Mag/Eval_mag.hpp|Out_Gen_Mag/Eval_mag_proof.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry excluding="Out_Gen_Mag/proof_longitud_T2.cpp|Out_Gen_Mag/proof_longitud.cpp|src/Util/Utilities.h|Out_Gen_Mag/Eval_mag.hpp|Out_Gen_Mag/Eval_mag_proof.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 </sourceEntries>
 </configuration>
 </storageModule>

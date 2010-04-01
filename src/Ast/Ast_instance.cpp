@@ -170,11 +170,19 @@ string Ast_instance::to_string() const
 
 /**
   * Compares the Ast_instance with other.
-  * Respects Symbol, attribute and number.
+  * Respects Symbol and attribute.
   */
-bool Ast_instance::equals_with_index(const Ast_instance *other) const
+bool Ast_instance::equals_without_index(const Ast_instance *other) const
 {
-    return (key().compare(other->key()) == 0);
+    /* Save ins 1 */
+    string inst1(i_symb->get_name());
+    inst1.append(i_attr->get_name());
+
+    /* Save ins 2 */
+    string inst2(other->get_symb()->get_name());
+    inst2.append(other->get_attr()->get_name());
+
+    return inst1.compare(inst2) == 0;
 }
 
 /**

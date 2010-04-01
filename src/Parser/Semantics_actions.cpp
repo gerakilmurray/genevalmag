@@ -282,7 +282,7 @@ void save_index_ins(int const index)
 {
 	if (index >= current_rule->count_non_terminal(current_instance->get_symb()))
 	{
-		cerr << "ERROR: Index of symbol incorrect." << index << current_instance->get_symb()->get_name() << endl;
+		cerr << "ERROR: Index " << index << " of symbol " << current_instance->get_symb()->get_name() << " incorrect." << endl;
 		exit(-1);
 	}
 	current_instance->set_num(index);

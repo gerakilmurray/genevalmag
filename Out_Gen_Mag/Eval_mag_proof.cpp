@@ -25,7 +25,7 @@ int main()
     eval_mag.translate_mag(5);
     eval_mag.translate_mag(6);
     eval_mag.translate_mag(7);
-    eval_mag.translate_mag(8);
+
 
     S node_s1;
 	node_s1.rule_id = 1;
