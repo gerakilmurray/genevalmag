@@ -73,9 +73,7 @@ bool Build_visit_sequence::gen_seq_visit(const Attr_grammar &attr_grammar, const
     for(size_t i(0); i < plans[i_plan].second.size(); i++)
     {
         const Equation *eq(rule.get_eq(plans[i_plan].second[i]));
-
         vector<const Ast_instance*> instances_right_side;
-
         eq->inorder_only_instance(eq->get_r_value(), instances_right_side);
 
         for(size_t j(0); j < instances_right_side.size(); j++)
@@ -101,9 +99,7 @@ bool Build_visit_sequence::gen_seq_visit(const Attr_grammar &attr_grammar, const
                 {
                     if(!ins_attr_computed(ins, computed_own))
                     {
-
                         vector<const Symbol*> non_term(rule.get_non_terminals_right_side());
-
                         short index_ins(ins->get_num());
 
                         if(ins->get_symb()->equals(*rule.get_left_symbol()))
@@ -123,17 +119,17 @@ bool Build_visit_sequence::gen_seq_visit(const Attr_grammar &attr_grammar, const
 
 									for(size_t p(0); p < plans.size(); p++)
 									{
-
 										Ast_instance ins_eq(*ins);
 										ins_eq.set_num(0);
 										vector<unsigned short> v;
 										v.push_back(plans[i_plan].first.id_plan[k+1]);
 										unsigned short index_num(attr_grammar.get_index_eq_with_context(&ins_eq,v));
-
+										cout << "aca "<< endl;
 										if ((plans[p].first.id_plan[0] == plans[i_plan].first.id_plan[k+1]) &&
 											(p != i_plan) && plans[p].first.plan.size() > 0 &&
 											(plans[p].first.plan[0] == index_num))
 										{
+											cout << "entro " << p << i_plan << endl;
 											vector<Ast_instance> rec_child;
 											get_inherits_of(*ins->get_symb(), computed_own, rec_child);
 											gen_seq_visit(attr_grammar, plans, p, rec_child);

@@ -10,6 +10,13 @@
 
 using namespace evalmag;
 
+
+int  f(int j)
+{
+	return j*5;
+}
+
+
 /**
   * Main method of the Eval_mag.
   */

@@ -101,6 +101,12 @@ void Builder_plan::generates_topological_order(const Dp_graph &graph, Order_eval
 			/* The instance is a inherit of right-symbol rule or syntetize of left-symbol.
 			 *  The instance searchs in the context of rule. */
 			{
+				cout << "context ";
+				for (size_t l(0);l<context_rule.context.size();l++)
+				{
+					cout << context_rule.context[l] << " ";
+				}
+				cout << endl;
 				index = (grammar.get_index_eq_with_context(ins, context_rule.context));
 			}
 			assert (index > 0);
@@ -409,6 +415,12 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 
 						const Rule& rule_proj(grammar.get_rule(adp->first[i+1]));
 
+						cout << "total_order";
+						for(size_t b(0); b< total_order.size();b++)
+						{
+							cout << total_order[b]<< "  , ";
+						}
+						cout << endl;
 						purge_plan_with(rule_proj, total_order, proj_order);
 						//project_order(right_side[i], grammar, order_purged, proj_order);
 
@@ -428,6 +440,7 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 						Item_work i_work_new;
 						i_work_new.item = key;
 						i_work_new.order_attr = proj_order;
+						cout << rule_proj.key()<< "hijo " <<proj_order.size() << endl;
 						if (!defined_work(defined_item_work, i_work_new))
 						{
 							work_list.push_back(i_work_new);

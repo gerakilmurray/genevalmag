@@ -16,6 +16,8 @@ semantic domain
      *********************/
     op infix    (10, left) +: int, int -> int;
     
+    function    f: int   -> int;
+    
 /***********************
  * Block of Attributes *
  ***********************/
@@ -27,14 +29,14 @@ attributes
  ******************/
 rules
     // P1
-    T ::= '0' T2 T2 T2 T2 T
+    T ::= '0' T2 T2 T2 T2 T T
             compute             
                 T[0].longi = T2[3].longi + T2[1].longi + T2[2].longi + T2[0].longi + T[1].longi + 1;
             end;
             
     T2 ::= '1'
             compute
-                T2[0].longi = 1;
+                T2[0].longi = f(1);
             end;
             
     T ::= '#'

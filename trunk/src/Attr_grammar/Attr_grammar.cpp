@@ -322,6 +322,10 @@ unsigned short Attr_grammar::get_index_eq_with_context(const Ast_instance *ins, 
     {
     	inic_contex = 1;
     }
+//    else
+//    {
+//    	cout << ins->to_string() << endl;
+//    }
 	for(size_t i(inic_contex); i < context_rule.size(); i++)
     {
         const Rule &rule(ag_rule.find(context_rule[i])->second);

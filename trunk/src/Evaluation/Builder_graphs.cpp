@@ -213,6 +213,7 @@ void Builder_graphs::compute_down_graph(const map<string,Symbol> &symbols, const
 		/* Circle for join all Down of the symbol right-side. */
 		for (size_t i(0); i < r_non_terminals.size(); i++)
 		{
+
 			Dp_graph &down_graph(p_Down_graphs.find(r_non_terminals[i]->key())->second);
 			Dp_graph merged;
 			merge_graph(current_graph,down_graph,merged);
