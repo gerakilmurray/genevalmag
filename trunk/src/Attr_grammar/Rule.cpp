@@ -182,7 +182,7 @@ bool Rule::defined_equation(const Equation &eq) const
 {
     for(map<unsigned short,Equation>::const_iterator it(r_eqs.begin()); it != r_eqs.end(); it++)
     {
-        if (it->second.get_l_value()->equals_with_index(eq.get_l_value()))
+        if (it->second.get_l_value()->equals(eq.get_l_value()))
         {
             return true;
         }

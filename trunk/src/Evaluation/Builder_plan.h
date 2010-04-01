@@ -95,7 +95,7 @@ typedef struct i_w
 /* Key for map of plans. */
 typedef struct k_plan
 {
-	Context_rule	id_plan;
+	Order_rule      id_plan;
 	Order_eval_eq	plan;
 
 	bool operator< (const k_plan &other) const
@@ -143,7 +143,7 @@ class Builder_plan
 
 		map < Key_plan_project, Order_eval_eq > plans_project; /* "tita" function. Wuu yank's paper. */
 
-		Order_eval_eq init_order_ag;
+		vector < Order_eval_eq > init_order_ag;
 
 		/**
 		  * Applies a topological order at graph.
@@ -191,7 +191,7 @@ class Builder_plan
 
 		const map < Key_plan_project, Order_eval_eq > &get_plans_project() const;
 
-		const Order_eval_eq &get_init_order() const;
+		const vector < Order_eval_eq > &get_init_orders() const;
 };
 
 } /* end genevalmag */
