@@ -316,19 +316,12 @@ vector<unsigned short> Attr_grammar::get_rules_with_left_symbol(const Symbol *sy
   */
 unsigned short Attr_grammar::get_index_eq_with_context(const Ast_instance *ins, const vector<unsigned short> &context_rule) const
 {
-    short index(ins->get_num());
-    size_t inic_contex(0);
-    if (context_rule.size() > 1 && index > 0)
-    {
-    	inic_contex = 1;
-    }
-//    else
-//    {
-//    	cout << ins->to_string() << endl;
-//    }
-	for(size_t i(inic_contex); i < context_rule.size(); i++)
+    short index_ins(ins->get_num());
+
+	for(size_t i(0); i < context_rule.size(); i++)
     {
         const Rule &rule(ag_rule.find(context_rule[i])->second);
+
         for(map<unsigned short,Equation>::const_iterator it(rule.get_eqs().begin()); it != rule.get_eqs().end(); it++)
         {
             if (ins->get_attr()->is_synthetize())
@@ -336,7 +329,11 @@ unsigned short Attr_grammar::get_index_eq_with_context(const Ast_instance *ins, 
             	/* Only interesting compare symbol and attribute because left_symbol always has index 0. */
 				if (it->second.get_l_value()->equals_without_index(ins))
 				{
-					return it->first;
+					if (index_ins == 0)
+					{
+						return it->first;
+					}
+					index_ins--;
 				}
             }
             else

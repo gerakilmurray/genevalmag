@@ -74,11 +74,13 @@ int main()
 	node_1.childs.push_back(&node_4);
 	node_1.childs.push_back(&node_5);
 	node_1.childs.push_back(&node_21);
+	node_1.childs.push_back(&node_21);
 
 	node_21.childs.push_back(&node_6);
 	node_21.childs.push_back(&node_7);
 	node_21.childs.push_back(&node_8);
 	node_21.childs.push_back(&node_9);
+	node_21.childs.push_back(&node_22);
 	node_21.childs.push_back(&node_22);
 
 

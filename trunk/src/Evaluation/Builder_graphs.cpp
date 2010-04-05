@@ -61,7 +61,7 @@ Builder_graphs::~Builder_graphs(){}
 /**
   * Returns the map with all ADP graphs creates.
   */
-const map<vector<unsigned short>, Dp_graph> &Builder_graphs::get_adp_graphs() const
+const map<vector<unsigned short>, Graph> &Builder_graphs::get_adp_graphs() const
 {
 	return p_Adp_graphs;
 }
@@ -69,7 +69,7 @@ const map<vector<unsigned short>, Dp_graph> &Builder_graphs::get_adp_graphs() co
 /**
   * Returns the map with all ADP graphs creates.
   */
-const map<vector<unsigned short>, Dp_graph> &Builder_graphs::get_cyclic_graphs() const
+const map<vector<unsigned short>, Graph> &Builder_graphs::get_cyclic_graphs() const
 {
 	return p_Adp_subgraphs_cyclics;
 }
@@ -77,7 +77,7 @@ const map<vector<unsigned short>, Dp_graph> &Builder_graphs::get_cyclic_graphs()
 /**
   * Returns the down graph of the symbol.
   */
-const Dp_graph &Builder_graphs::get_dcg_graph(unsigned short index_rule) const
+const Graph &Builder_graphs::get_dcg_graph(unsigned short index_rule) const
 {
 	return p_Dcg_graphs.find(index_rule)->second;
 }
@@ -92,8 +92,8 @@ const Dp_graph &Builder_graphs::get_dcg_graph(unsigned short index_rule) const
   */
 void Builder_graphs::compute_dependency_graphs(const map<unsigned short,Rule> &rules)
 {
-	Dp_graph current_p_Dp_graph;
-	property_map<Dp_graph, vertex_data_t>::type leafs(get(vertex_data_t(), current_p_Dp_graph));
+	Graph current_p_Dp_graph;
+	property_map<Graph, vertex_data_t>::type leafs(get(vertex_data_t(), current_p_Dp_graph));
 
 	/* For the rules. */
 	for(map<unsigned short,Rule>::const_iterator it(rules.begin()); it != rules.end(); it++)
@@ -131,7 +131,7 @@ void Builder_graphs::compute_dependency_graphs(const map<unsigned short,Rule> &r
 			}
 		}
 		/* Insert current graph in map of denpendency graph. */
-		pair<unsigned short, Dp_graph > new_p(rule->key(), current_p_Dp_graph);
+		pair<unsigned short, Graph > new_p(rule->key(), current_p_Dp_graph);
 		p_Dp_graphs.insert(new_p);
 		current_p_Dp_graph.clear();
 	}
@@ -145,30 +145,30 @@ void Builder_graphs::compute_dependency_graphs(const map<unsigned short,Rule> &r
   */
 void Builder_graphs::compute_attr_vertex(const map<string,Symbol> &symbols)
 {
-	Dp_graph current_graph;
+	Graph current_graph;
 	for(map<string,Symbol >::const_iterator s_it(symbols.begin()); s_it != symbols.end(); s_it++)
 	{
-		property_map<Dp_graph, vertex_data_t>::type props_down(get(vertex_data_t(), current_graph));
+		property_map<Graph, vertex_data_t>::type props_down(get(vertex_data_t(), current_graph));
 		Ast_instance ins;
 		ins.set_symb(&s_it->second);
 		for (size_t i(0); i < s_it->second.get_attrs().size(); i++)
 		{
 			ins.set_num(0);
 			ins.set_attr(s_it->second.get_attrs()[i]);
-			for(map<unsigned short,Dp_graph >::const_iterator dp(p_Dp_graphs.begin()); dp != p_Dp_graphs.end(); dp++)
+			for(map<unsigned short,Graph >::const_iterator dp(p_Dp_graphs.begin()); dp != p_Dp_graphs.end(); dp++)
 			{
 				Vertex node(return_vertex(dp->second, &ins));
 				if (node != USHRT_MAX)
 				{
 					Vertex node_down(add_vertex(current_graph));
-					property_map<Dp_graph, vertex_data_t>::const_type props_dp(get(vertex_data_t(), dp->second));
+					property_map<Graph, vertex_data_t>::const_type props_dp(get(vertex_data_t(), dp->second));
 					put(props_down, node_down, props_dp[node]);
 					break;
 				}
 			}
 		}
 		/* Insert current graph in map of down graph. */
-		pair<string, Dp_graph > new_p(s_it->second.key(), current_graph);
+		pair<string, Graph > new_p(s_it->second.key(), current_graph);
 		attr_vertex_graphs.insert(new_p);
 
 		current_graph.clear();
@@ -190,17 +190,17 @@ void Builder_graphs::compute_down_graph(const map<string,Symbol> &symbols, const
 	complete_dp_graphs(rules);
 
 	/* Insert current graph in map of down graph. */
-	for(map<string,Dp_graph >::iterator attr_it(attr_vertex_graphs.begin()); attr_it != attr_vertex_graphs.end(); attr_it++)
+	for(map<string,Graph >::iterator attr_it(attr_vertex_graphs.begin()); attr_it != attr_vertex_graphs.end(); attr_it++)
 	{
-		pair<string, Dp_graph > new_p(attr_it->first, attr_it->second);
+		pair<string, Graph > new_p(attr_it->first, attr_it->second);
 		p_Down_graphs.insert(new_p);
 	}
 
 	/* In this point obtains the all initialiced downs. */
 
-	Dp_graph current_graph;
+	Graph current_graph;
 	/* Circle Dp graph. */
-	for(map<unsigned short, Dp_graph >::iterator dp(p_Dp_graphs.begin()); dp != p_Dp_graphs.end(); dp++)
+	for(map<unsigned short, Graph >::iterator dp(p_Dp_graphs.begin()); dp != p_Dp_graphs.end(); dp++)
 	{
 		/* Obtain rule of graph. */
 		const Rule *current_rule(&(rules.find(dp->first)->second));
@@ -213,25 +213,20 @@ void Builder_graphs::compute_down_graph(const map<string,Symbol> &symbols, const
 		/* Circle for join all Down of the symbol right-side. */
 		for (size_t i(0); i < r_non_terminals.size(); i++)
 		{
-
-			Dp_graph &down_graph(p_Down_graphs.find(r_non_terminals[i]->key())->second);
-			Dp_graph merged;
-			merge_graph(current_graph,down_graph,merged);
+			Graph &down_graph(p_Down_graphs.find(r_non_terminals[i]->key())->second);
+			Graph merged;
+			merge_graph(current_graph, down_graph, merged);
 			current_graph.clear();
 			current_graph = merged;
 		}
 		/* In this point: current_graph = Dp(Rule) U down(X1) U....U down(Xn). */
 
 		/* Project for left symbol of current_rule. */
-		Dp_graph attr_symb(attr_vertex_graphs.find(current_rule->get_left_symbol()->key())->second);
-		Dp_graph new_with_attr_symb;
-		merge_graph(current_graph, attr_symb, new_with_attr_symb);
-		current_graph = new_with_attr_symb;
-		project_graph(current_rule->get_left_symbol(),current_graph);
+		project_graph(current_rule->get_left_symbol(), current_graph);
 
 		/* Modifies the down graph of symbol. */
-		Dp_graph &old_down_graph(p_Down_graphs.find(current_rule->get_left_symbol()->key())->second);
-		Dp_graph new_down_graph;
+		Graph &old_down_graph(p_Down_graphs.find(current_rule->get_left_symbol()->key())->second);
+		Graph new_down_graph;
 		merge_graph(current_graph,old_down_graph,new_down_graph);
 		old_down_graph = new_down_graph;
 		new_down_graph.clear();
@@ -249,9 +244,9 @@ void Builder_graphs::compute_down_graph(const map<string,Symbol> &symbols, const
   */
 void Builder_graphs::compute_dcg(const map<unsigned short, Rule> &rules)
 {
-	Dp_graph current_graph;
+	Graph current_graph;
 	/* Circle Dp graph. */
-	for(map <unsigned short, Dp_graph>::iterator it(p_Dp_graphs.begin()); it != p_Dp_graphs.end(); it++)
+	for(map <unsigned short, Graph>::iterator it(p_Dp_graphs.begin()); it != p_Dp_graphs.end(); it++)
 	{
 		/* Obtain rule of graph. */
 		const Rule *current_rule(&(rules.find(it->first)->second));
@@ -263,21 +258,19 @@ void Builder_graphs::compute_dcg(const map<unsigned short, Rule> &rules)
 		/* Circle for join all Down of the symbol right-side. */
 		for (size_t i(0); i < r_non_terminals.size(); i++)
 		{
-			Dp_graph &down_graph(p_Down_graphs.find(r_non_terminals[i]->key())->second);
-			Dp_graph merged;
+			Graph &down_graph(p_Down_graphs.find(r_non_terminals[i]->key())->second);
+			Graph merged;
 			merge_graph(current_graph,down_graph,merged);
 			current_graph.clear();
 			current_graph = merged;
 		}
 		/* In this point: current_graph = Dp(Rule) U down(X1) U....U down(Xn). */
-		Dp_graph attr_symb(attr_vertex_graphs.find(current_rule->get_left_symbol()->key())->second);
-		Dp_graph new_with_attr_symb;
-		merge_graph(current_graph, attr_symb, new_with_attr_symb);
-		current_graph = new_with_attr_symb;
-		project_graph(current_rule->get_left_symbol(),current_graph);
+
+		/* Project for left symbol of current_rule. */
+		project_graph(current_rule->get_left_symbol(), current_graph);
 
 		/* Insert current graph in map of down graph. */
-		pair<unsigned short, Dp_graph > new_p(current_rule->key(), current_graph);
+		pair<unsigned short, Graph > new_p(current_rule->key(), current_graph);
 		p_Dcg_graphs.insert(new_p);
 	}
 }
@@ -285,13 +278,13 @@ void Builder_graphs::compute_dcg(const map<unsigned short, Rule> &rules)
 /**
   * Generate all combinations of the rules and saves a graph ADP for each of them.
   */
-void Builder_graphs::combined_inf_contexts(const Rule *rule, Dp_graph &graph, vector< vector<unsigned short> > &inf_context, size_t index_to_combine)
+void Builder_graphs::combined_inf_contexts(const Rule *rule, Graph &graph, vector< vector<unsigned short> > &inf_context, size_t index_to_combine)
 {
 	static vector<unsigned short> adp_plan;
 
 	if(index_to_combine == inf_context.size())
 	{
-		Dp_graph current_graph(graph);
+		Graph current_graph(graph);
 
 		vector<unsigned short> name_adp;
 
@@ -301,8 +294,8 @@ void Builder_graphs::combined_inf_contexts(const Rule *rule, Dp_graph &graph, ve
 		/* Circle for join all DCG of the symbol right-side. */
 		for(size_t i(0); i < adp_plan.size(); i++)
 		{
-			Dp_graph &dcg_graph(p_Dcg_graphs.find(adp_plan[i])->second);
-			Dp_graph merged;
+			Graph &dcg_graph(p_Dcg_graphs.find(adp_plan[i])->second);
+			Graph merged;
 			merge_graph(current_graph, dcg_graph, merged);
 			current_graph.clear();
 			current_graph = merged;
@@ -313,7 +306,7 @@ void Builder_graphs::combined_inf_contexts(const Rule *rule, Dp_graph &graph, ve
 		/* In this point: current_graph = Dp(Rule) U dcg(X1) U....U dcg(Xn). */
 
 		/* Saving the ADP complete in the map. */
-		pair<vector<unsigned short>, Dp_graph> new_p(name_adp, current_graph);
+		pair<vector<unsigned short>, Graph> new_p(name_adp, current_graph);
 		p_Adp_graphs.insert(new_p);
 	}
 	else
@@ -329,7 +322,7 @@ void Builder_graphs::combined_inf_contexts(const Rule *rule, Dp_graph &graph, ve
 		}
 		else
 		{
-			cerr << "Index out bounds: combined ADP graphs.";
+			cerr << "ERROR: Index out bounds: combined ADP graphs." << endl;
 		}
 	}
 }
@@ -344,9 +337,9 @@ void Builder_graphs::combined_inf_contexts(const Rule *rule, Dp_graph &graph, ve
   */
 void Builder_graphs::compute_adp_graph(const Attr_grammar &grammar)
 {
-	Dp_graph current_graph;
+	Graph current_graph;
 	/* Circle Dp graph. */
-	for(map <unsigned short,Dp_graph>::iterator it(p_Dp_graphs.begin()); it != p_Dp_graphs.end(); it++)
+	for(map <unsigned short,Graph>::iterator it(p_Dp_graphs.begin()); it != p_Dp_graphs.end(); it++)
 	{
 		/* Obtain rule of graph. */
 		const Rule *current_rule(&(grammar.get_rules().find(it->first)->second));
@@ -373,46 +366,46 @@ void Builder_graphs::compute_adp_graph(const Attr_grammar &grammar)
 struct cycle_detector: public dfs_visitor<>
 {
 	public:
-		cycle_detector(bool& has_cycle, Dp_graph& graph): _has_cycle(has_cycle), graph_cycle(graph){}
+		cycle_detector(bool& has_cycle, Graph &graph): _has_cycle(has_cycle), graph_cycle(graph){}
 
-	    template <class Edge, class Graph>
-		void examine_edge(Edge u, const Graph &g)
+	    template <class Edge, class G>
+		void examine_edge(Edge u, const G &g)
 	    {
 	    	if(!_has_cycle)
 	    	{
-	    		typename Graph::vertex_descriptor v1(source(u, g));
-	    		typename Graph::vertex_descriptor v2(target(u, g));
+	    		typename G::vertex_descriptor v1(source(u, g));
+	    		typename G::vertex_descriptor v2(target(u, g));
 
-	    		typename property_map<Graph, vertex_data_t>::const_type props(get(vertex_data_t(), g));
-	    		property_map<Dp_graph, vertex_data_t>::type prop_cycle(get(vertex_data_t(), graph_cycle));
+	    		typename property_map<G, vertex_data_t>::const_type props(get(vertex_data_t(), g));
+	    		property_map<Graph, vertex_data_t>::type prop_cycle(get(vertex_data_t(), graph_cycle));
 
 	    		Vertex v1_path(return_vertex(graph_cycle, props[v1]));
 	    		if (v1_path == USHRT_MAX)
 	    		{
 	    			v1_path = add_vertex(graph_cycle);
-					put(prop_cycle,v1_path,props[v1]);
+					put(prop_cycle, v1_path, props[v1]);
 	    		}
 
 	    		Vertex v2_path(return_vertex(graph_cycle, props[v2]));
 				if (v2_path == USHRT_MAX)
 				{
 					v2_path = add_vertex(graph_cycle);
-					put(prop_cycle,v2_path,props[v2]);
+					put(prop_cycle, v2_path, props[v2]);
 				}
 
 	    		add_edge(v1_path, v2_path, graph_cycle);
 	    	}
 	    }
 
-	    template <class Edge, class Graph>
-	    void back_edge(Edge u, const Graph& g)
+	    template <class Edge, class G>
+	    void back_edge(Edge u, const G& g)
 		{
 			_has_cycle = true;
 		}
 
 	protected:
 		bool		&_has_cycle;
-	    Dp_graph	&graph_cycle;
+	    Graph	    &graph_cycle;
 };
 
 /**
@@ -422,10 +415,10 @@ struct cycle_detector: public dfs_visitor<>
 bool Builder_graphs::check_cyclic_adp_dependencies()
 {
 	bool cycles_detect(false);
-	for(map <vector<unsigned short>,Dp_graph>::iterator adp_it(p_Adp_graphs.begin()); adp_it != p_Adp_graphs.end(); adp_it++)
+	for(map <vector<unsigned short>,Graph>::iterator adp_it(p_Adp_graphs.begin()); adp_it != p_Adp_graphs.end(); adp_it++)
 	{
 		bool has_cycle(false);
-		Dp_graph g_cycle;
+		Graph g_cycle;
 		cycle_detector vis(has_cycle, g_cycle);
 		boost::depth_first_search(adp_it->second, visitor(vis));
 
@@ -434,7 +427,7 @@ bool Builder_graphs::check_cyclic_adp_dependencies()
 		if(has_cycle)
 		{
 			/* Saving the ADP subgraph with cycle in the map. */
-			pair<vector<unsigned short>, Dp_graph> new_p(adp_it->first, g_cycle);
+			pair<vector<unsigned short>, Graph> new_p(adp_it->first, g_cycle);
 			p_Adp_subgraphs_cyclics.insert(new_p);
 		}
 	}
@@ -446,11 +439,11 @@ bool Builder_graphs::check_cyclic_adp_dependencies()
   */
 void Builder_graphs::complete_dp_graphs(const map<unsigned short, Rule> &rules)
 {
-	for(map<unsigned short,Dp_graph >::iterator dp(p_Dp_graphs.begin()); dp != p_Dp_graphs.end(); dp++)
+	for(map<unsigned short,Graph >::iterator dp(p_Dp_graphs.begin()); dp != p_Dp_graphs.end(); dp++)
 	{
 		const Rule &rule(rules.find(dp->first)->second);
-		Dp_graph attr_symb(attr_vertex_graphs.find(rule.get_left_symbol()->key())->second);
-		Dp_graph new_with_attr_symb;
+		Graph attr_symb(attr_vertex_graphs.find(rule.get_left_symbol()->key())->second);
+		Graph new_with_attr_symb;
 		merge_graph(dp->second, attr_symb, new_with_attr_symb);
 		dp->second = new_with_attr_symb;
 	}
@@ -463,7 +456,7 @@ void Builder_graphs::print_dp_graphs(const map<unsigned short, Rule> &rules) con
 {
 	string path_out(PATH_OUTPUT_DP);
 	clean_output_folder(path_out);
-	for(map <unsigned short,Dp_graph>::const_iterator it(p_Dp_graphs.begin()); it != p_Dp_graphs.end(); it++)
+	for(map <unsigned short,Graph>::const_iterator it(p_Dp_graphs.begin()); it != p_Dp_graphs.end(); it++)
 	{
 		string name_graph("Dependency Graph of rule ");
 		const Rule *current_rule(&(rules.find(it->first)->second));
@@ -482,7 +475,7 @@ void Builder_graphs::print_down_graphs() const
 {
 	string path_out(PATH_OUTPUT_DOWN);
 	clean_output_folder(path_out);
-	for(map <string,Dp_graph>::const_iterator it(p_Down_graphs.begin()); it != p_Down_graphs.end(); it++)
+	for(map <string,Graph>::const_iterator it(p_Down_graphs.begin()); it != p_Down_graphs.end(); it++)
 	{
 		string name_graph("Graph Down(");
 		name_graph.append(it->first);
@@ -501,7 +494,7 @@ void Builder_graphs::print_dcg_graphs(const map<unsigned short, Rule> &rules) co
 {
 	string path_out(PATH_OUTPUT_DCG);
 	clean_output_folder(path_out);
-	for(map <unsigned short,Dp_graph>::const_iterator it(p_Dcg_graphs.begin()); it != p_Dcg_graphs.end(); it++)
+	for(map <unsigned short,Graph>::const_iterator it(p_Dcg_graphs.begin()); it != p_Dcg_graphs.end(); it++)
 	{
 		string name_graph("DCG Graph of rule ");
 		const Rule *current_rule(&(rules.find(it->first)->second));
@@ -522,7 +515,7 @@ void Builder_graphs::print_adp_graphs(const map<unsigned short, Rule> &rules) co
 {
 	string path_out(PATH_OUTPUT_ADP);
 	clean_output_folder(path_out);
-	for(map <vector<unsigned short>,Dp_graph>::const_iterator it(p_Adp_graphs.begin()); it != p_Adp_graphs.end(); it++)
+	for(map <vector<unsigned short>,Graph>::const_iterator it(p_Adp_graphs.begin()); it != p_Adp_graphs.end(); it++)
 	{
 		string name_graph("ADP Graph of rule ");
 		const Rule *rule(&(rules.find(it->first[0])->second));
@@ -556,7 +549,7 @@ void Builder_graphs::print_graphs_cyclic(const map<unsigned short, Rule> &rules)
 	string path_out(PATH_OUTPUT_CYCLIC);
 	clean_output_folder("./Out_Gen_Mag/out_graph/");
 	clean_output_folder(path_out);
-	for(map <vector<unsigned short>,Dp_graph>::const_iterator it(p_Adp_subgraphs_cyclics.begin()); it != p_Adp_subgraphs_cyclics.end(); it++)
+	for(map <vector<unsigned short>,Graph>::const_iterator it(p_Adp_subgraphs_cyclics.begin()); it != p_Adp_subgraphs_cyclics.end(); it++)
 	{
 		string name_graph("ADP Subgraph cyclic of rule ");
 		const Rule *rule(&(rules.find(it->first[0])->second));
