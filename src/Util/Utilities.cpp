@@ -51,9 +51,9 @@ void clean_output_folder(const string path)
 /**
   * Generates the names of vertex. (The vertex's name is an instance).
   */
-void generate_names_instance(const Dp_graph &graph, string datas[], size_t size_d)
+void generate_names_instance(const Graph &graph, string datas[], size_t size_d)
 {
-	property_map<Dp_graph, vertex_data_t>::const_type props(get(vertex_data_t(), graph));
+	property_map<Graph, vertex_data_t>::const_type props(get(vertex_data_t(), graph));
 
 	for(size_t i(0); i < size_d; i++)
 	{
@@ -64,9 +64,9 @@ void generate_names_instance(const Dp_graph &graph, string datas[], size_t size_
 /**
   * Generates the names of vertex for down graph. (The vertex's name is an attribute).
   */
-void generate_names_attr(const Dp_graph &graph, string datas[], size_t size_d)
+void generate_names_attr(const Graph &graph, string datas[], size_t size_d)
 {
-	property_map<Dp_graph, vertex_data_t>::const_type props(get(vertex_data_t(), graph));
+	property_map<Graph, vertex_data_t>::const_type props(get(vertex_data_t(), graph));
 
 	for(size_t i(0); i < size_d; i++)
 	{
@@ -78,7 +78,7 @@ void generate_names_attr(const Dp_graph &graph, string datas[], size_t size_d)
 /**
   * Prints a graph in a file .dot for generate image .spng.
   */
-void print_graph(const Dp_graph &graph, const string path, const string name_file, const string name_graph, const string names[], string shape_vertex)
+void print_graph(const Graph &graph, const string path, const string name_file, const string name_graph, const string names[], string shape_vertex)
 {
 	static int num_file(0); /* For name of file png. */
 
@@ -121,18 +121,18 @@ void print_graph(const Dp_graph &graph, const string path, const string name_fil
 /**
   * Prints a graph in the standart output (std:cout).
   */
-void print_graph_txt(const Dp_graph &graph)
+void print_graph_txt(const Graph &graph)
 {
 	size_t count_vertex(num_vertices(graph));
 	cout << "<< Vertex >> " << count_vertex << endl;
 	/* Arrays of node's name. */
-	property_map<Dp_graph, vertex_data_t>::const_type props(get(vertex_data_t(), graph));
+	property_map<Graph, vertex_data_t>::const_type props(get(vertex_data_t(), graph));
 	for(size_t i(0); i < count_vertex; i++)
 	{
 		cout << props[i]->to_string() << endl;;
 	}
 	cout << "<< Edges >> " << num_edges(graph) << endl;
-	graph_traits<Dp_graph>::edge_iterator ei, ei_end;
+	graph_traits<Graph>::edge_iterator ei, ei_end;
 	for(tie(ei,ei_end) = edges(graph); ei != ei_end; ++ei)
 	{
 		Vertex source_vertex(source(*ei, graph));
@@ -146,9 +146,9 @@ void print_graph_txt(const Dp_graph &graph)
   * Given a graph and node, returns the vertex descriptor of node in the graph.
   * If not search it, so returns USHRT_MAX.
   */
-Vertex return_vertex(const Dp_graph &graph, const Ast_leaf *node)
+Vertex return_vertex(const Graph &graph, const Ast_leaf *node)
 {
-	property_map<Dp_graph, vertex_data_t>::const_type props(get(vertex_data_t(), graph));
+	property_map<Graph, vertex_data_t>::const_type props(get(vertex_data_t(), graph));
 	for(size_t i(0); i < num_vertices(graph); i++)
 	{
 		if (node->equals(props[i]))
@@ -160,7 +160,7 @@ Vertex return_vertex(const Dp_graph &graph, const Ast_leaf *node)
 /**
   * Joins graph1 and graph2 in graph_merged.
   */
-void merge_graph(const Dp_graph &graph1, const Dp_graph &graph2, Dp_graph &graph_merged)
+void merge_graph(const Graph &graph1, const Graph &graph2, Graph &graph_merged)
 {
 	/* Cleans the result graph. */
 	graph_merged.clear();
@@ -169,8 +169,8 @@ void merge_graph(const Dp_graph &graph1, const Dp_graph &graph2, Dp_graph &graph
 	graph_merged = graph1;
 
 	/* Join the graph2 to result graph. */
-	property_map<Dp_graph, vertex_data_t>::const_type props(get(vertex_data_t(), graph2));
-	property_map<Dp_graph, vertex_data_t>::type props_merged(get(vertex_data_t(), graph_merged));
+	property_map<Graph, vertex_data_t>::const_type props(get(vertex_data_t(), graph2));
+	property_map<Graph, vertex_data_t>::type props_merged(get(vertex_data_t(), graph_merged));
 	/* Circle for vertices. */
 	for(size_t i(0); i < num_vertices(graph2); i++)
 	{
@@ -183,7 +183,7 @@ void merge_graph(const Dp_graph &graph1, const Dp_graph &graph2, Dp_graph &graph
 		}
 	}
 	/* Cicle for edges. */
-	graph_traits<Dp_graph>::edge_iterator ei, ei_end;
+	graph_traits<Graph>::edge_iterator ei, ei_end;
 	for (tie(ei,ei_end) = edges(graph2); ei != ei_end; ++ei)
 	{
 		Vertex source_vertex(source(*ei, graph2));
@@ -200,17 +200,17 @@ void merge_graph(const Dp_graph &graph1, const Dp_graph &graph2, Dp_graph &graph
   * Projects a graph with only vertex that belongs to symbol "symb".
   * Modifies the parameter "graph".
   */
-void project_graph(const Symbol *symb, Dp_graph &graph)
+void project_graph(const Symbol *symb, Graph &graph)
 {
 	/* Applies transitivity to graph with only nodes of symb. */
 	warshall_transitive_closure(graph);
 
-	property_map<Dp_graph, vertex_data_t>::type props(get(vertex_data_t(), graph));
+	property_map<Graph, vertex_data_t>::type props(get(vertex_data_t(), graph));
 	/* Reduces the graph for symbol "symb". */
 	for (size_t i(num_vertices(graph)); i > 0; i--)
 	{
 		const Ast_instance *ins(dynamic_cast<const Ast_instance*>(props[i-1]));
-		if (!ins || !ins->get_symb()->equals(*symb) || ins->get_num()>0)
+		if (!(ins) || !(ins->get_symb()->equals(*symb)) || !(ins->get_num() == 0))
 		/* The node is a literal-node or is a node with symbol diferent that symb. */
 		{
 			clear_vertex(i-1, graph);
@@ -218,6 +218,44 @@ void project_graph(const Symbol *symb, Dp_graph &graph)
 		}
 	}
 }
+
+//template < class T > void print_info(string name_info, const vector < T > &info)
+//{
+//	cout << name_info;
+//	for (size_t i(0); i < info.size(); i++)
+//	{
+//		cout << info[i];
+//		if(i < info.size() - 1)
+//		{
+//			cout << ", ";
+//		}
+//	}
+//	cout << endl;
+//}
+
+bool belong_index(const unsigned short &index, const vector<unsigned short> &vec)
+{
+	for(size_t i(0); i < vec.size(); i++)
+	{
+		if(index == vec[i])
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+//template < class T, class V > bool belong_elem(const T &elem, const V &vec)
+//{
+//	for(size_t i(0); i < vec.size(); i++)
+//	{
+//		if(elem == vec[i])
+//		{
+//			return true;
+//		}
+//	}
+//	return false;
+//}
 
 /**
   * Remove tabs and replace for spaces.

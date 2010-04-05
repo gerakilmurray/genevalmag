@@ -8,10 +8,16 @@
 
 #include <iostream>
 
+#include "../Util/Utilities.h"
+
 #include "Build_visit_sequence.h"
+
+using namespace utilities;
 
 namespace genevalmag
 {
+
+const unsigned short LEAVE(0);
 
 /**
   * Contructor empty of Build_visit_sequence.
@@ -53,6 +59,7 @@ void get_inherits_of(const Symbol &symb, const vector<Ast_instance> &computed, v
         if (computed[i].get_symb()->equals(symb) && computed[i].get_attr()->is_inherit())
         {
             rec_child.push_back(computed[i]);
+            rec_child.back().set_num(0);
         }
     }
 }
@@ -62,84 +69,93 @@ void get_inherits_of(const Symbol &symb, const vector<Ast_instance> &computed, v
   * indicated by the plans, visiting the children, returning to the
   * parent or generating a compute attribute.
   */
-bool Build_visit_sequence::gen_seq_visit(const Attr_grammar &attr_grammar, const vector < pair < Key_plan, Order_eval_eq > > &plans, size_t i_plan, vector<Ast_instance> &computed)
+bool Build_visit_sequence::gen_seq_visit(const Attr_grammar &attr_grammar, const vector < pair < Key_plan, Order_eval_eq > > &plans, size_t i_plan, vector<Ast_instance> &computed, vector<unsigned short> &plans_computed)
 {
     bool leaves(false);
     Visit_seq sequence;
     vector<Ast_instance> computed_own;
 
+    unsigned short plan_num((i_plan+1) * 100);
+    if(!belong_index(plan_num,plans_computed))
+    {
+    	plans_computed.push_back(plan_num);
+    }
     const Rule& rule(attr_grammar.get_rule(plans[i_plan].first.id_plan[0]));
 
     for(size_t i(0); i < plans[i_plan].second.size(); i++)
     {
         const Equation *eq(rule.get_eq(plans[i_plan].second[i]));
+
         vector<const Ast_instance*> instances_right_side;
         eq->inorder_only_instance(eq->get_r_value(), instances_right_side);
 
         for(size_t j(0); j < instances_right_side.size(); j++)
         {
-            const Ast_instance* ins(instances_right_side[j]);
+            const Ast_instance *ins(instances_right_side[j]);
 
             if((ins->get_symb()->equals(*rule.get_left_symbol())) &&
-               (ins->get_num() == 0))
-            {
-                if(ins->get_attr()->is_inherit())
-                {
-                    if(!ins_attr_computed(ins, computed))
-                    {
-                        sequence.push_back(0);
-                        leaves = true;
-                    }
-                }
-            }
+               (ins->get_num() == 0) &&
+               (ins->get_attr()->is_inherit()) &&
+			   (!ins_attr_computed(ins, computed)))
+			/* Non computed in superior context, need leave to computed. */
+			{
+				sequence.push_back(LEAVE);
+				leaves = true;
+			}
             else
             {
-                /* The attr symbols belong to right side of the rule */
+                /* The attr symbols belongs to some right side symbol of the rule. */
                 if(ins->get_attr()->is_synthetize())
                 {
                     if(!ins_attr_computed(ins, computed_own))
+                    /* Non computed in this context, proceed to compute. */
                     {
-                        vector<const Symbol*> non_term(rule.get_non_terminals_right_side());
-                        short index_ins(ins->get_num());
+                        vector<const Symbol*> non_terminals(rule.get_non_terminals_right_side());
 
+                        short index_ins(ins->get_num());
                         if(ins->get_symb()->equals(*rule.get_left_symbol()))
 						{
 							/* It should consider that the left instance has zero index. */
                         	index_ins--;
 						}
 
-                        for(size_t k(0); k < non_term.size(); k++)
+                        for(size_t k(0); k < non_terminals.size(); k++)
                         {
-                        	if(non_term[k]->equals(*ins->get_symb()))
+                        	if(non_terminals[k]->equals(*ins->get_symb()))
                             {
                         		if (index_ins == 0)
                         		{
 									/* Visit this child with these rule */
 									sequence.push_back(k+1);
-
-									for(size_t p(0); p < plans.size(); p++)
+									for(size_t index_p(0); index_p < plans.size(); index_p++)
 									{
-										Ast_instance ins_eq(*ins);
-										ins_eq.set_num(0);
-										vector<unsigned short> v;
-										v.push_back(plans[i_plan].first.id_plan[k+1]);
-										unsigned short index_num(attr_grammar.get_index_eq_with_context(&ins_eq,v));
-										cout << "aca "<< endl;
-										if ((plans[p].first.id_plan[0] == plans[i_plan].first.id_plan[k+1]) &&
-											(p != i_plan) && plans[p].first.plan.size() > 0 &&
-											(plans[p].first.plan[0] == index_num))
+										unsigned short plan_num_child(((i_plan+1) * 100) + (index_p+1));
+										if(!belong_index(plan_num_child, plans_computed))
 										{
-											cout << "entro " << p << i_plan << endl;
-											vector<Ast_instance> rec_child;
-											get_inherits_of(*ins->get_symb(), computed_own, rec_child);
-											gen_seq_visit(attr_grammar, plans, p, rec_child);
+											Ast_instance ins_eq(*ins);
+											ins_eq.set_num(0);
+											vector<unsigned short> context_visit;
+											context_visit.push_back(plans[i_plan].first.id_plan[k+1]);
+											unsigned short index_num(attr_grammar.get_index_eq_with_context(&ins_eq, context_visit));
 
-											for(size_t i(0); i < rec_child.size(); i++)
+											if ((plans[index_p].first.id_plan[0] == plans[i_plan].first.id_plan[k+1]) &&
+												//(index_p != i_plan) &&
+												//(belong_index(index_num, plans[index_p].first.plan)))
+												(plans[index_p].first.plan[0] == index_num))
 											{
-												if(rec_child[i].get_attr()->is_synthetize())
+												plans_computed.push_back(plan_num_child);
+												cout << "entro " << plan_num_child << endl;
+												vector<Ast_instance> rec_child;
+												get_inherits_of(*ins->get_symb(), computed_own, rec_child);
+												gen_seq_visit(attr_grammar, plans, index_p, rec_child, plans_computed);
+
+												for(size_t i_rec(0); i_rec < rec_child.size(); i_rec++)
 												{
-													rec_child[i].set_num(ins->get_num());
-													computed_own.push_back(rec_child[i]);
+													if(rec_child[i_rec].get_attr()->is_synthetize())
+													{
+														rec_child[i_rec].set_num(ins->get_num());
+														computed_own.push_back(rec_child[i_rec]);
+													}
 												}
 											}
 										}
@@ -157,7 +173,6 @@ bool Build_visit_sequence::gen_seq_visit(const Attr_grammar &attr_grammar, const
         /* Compute this equation */
         sequence.push_back(eq->get_id()*(-1));
 
-
         /* Mark the instance */
         const Ast_instance * l_v(eq->get_l_value());
         if (l_v->get_attr()->is_synthetize() && !leaves)
@@ -165,8 +180,9 @@ bool Build_visit_sequence::gen_seq_visit(const Attr_grammar &attr_grammar, const
         	computed.push_back(*l_v);
         }
         computed_own.push_back(*l_v);
-    }
 
+    	cout << "computed  "<< l_v->to_string() << endl;
+    }
     save_visit_sequence(sequence, i_plan);
     return true;
 }
@@ -227,11 +243,12 @@ bool Build_visit_sequence::generate_seq_visit(const Attr_grammar &attr_grammar, 
 
     for(size_t i(0); i < planes.size(); i++)
     {
-        const Rule& rule(attr_grammar.get_rule(planes[i].first.id_plan[0]));
+        const Rule &rule(attr_grammar.get_rule(planes[i].first.id_plan[0]));
         if (rule.get_left_symbol()->equals(*attr_grammar.get_initial_symb()))
         {
             vector<Ast_instance> ins_computed;
-            gen_seq_visit(attr_grammar, planes, i, ins_computed);
+            vector<unsigned short> plans_computed;
+            gen_seq_visit(attr_grammar, planes, i, ins_computed, plans_computed);
         }
     }
     return true;

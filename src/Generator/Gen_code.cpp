@@ -716,13 +716,11 @@ void generate_all_compute_eq(string &text, const Attr_grammar &attr_grammar)
 		str_i << i+1;
 		text.append("    		  case ");
 		text.append(str_i.str());
-		text.append(" :\n");
-		text.append("    			compute_eq_");
+		text.append(": compute_eq_");
 		text.append(str_i.str());
 		text.append("(root); break;\n\n");
 	}
-	text.append("     		  default :\n");
-	text.append("     			cout << \"ERROR: Fatal action.\" << endl;\n");
+	text.append("     		  default: cout << \"ERROR: Fatal action.\" << endl;\n");
 	text.append("    		}\n");
 	text.append("     	}\n\n");
 }

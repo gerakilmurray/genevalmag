@@ -149,13 +149,13 @@ class Builder_plan
 		  * Applies a topological order at graph.
 		  * The changes are applies about paramenter "result_order".
 		  */
-		void generates_topological_order(const Dp_graph &graph, Order_eval_eq &eq_order, const Attr_grammar &grammar, const Context_rule &context_rule) const;
+		void generates_topological_order(const Graph &graph, Order_eval_eq &eq_order, const Attr_grammar &grammar, const Context_rule &context_rule) const;
 
 		/**
 		  * Compute the rule's order.
 		  * The changes are applies about paramenter "result_order".
 		  */
-		Order_eval_eq compute_order(const Dp_graph &graph_adp, const Order_eval_eq &eq_order, const Attr_grammar &grammar, const Context_rule &context_rule);
+		Order_eval_eq compute_order(const Graph &graph_adp, const Order_eval_eq &eq_order, const Attr_grammar &grammar, const Context_rule &context_rule);
 
 		/**
 		  * Generates and saves all evaluation's plans for the Attribute Grammar.

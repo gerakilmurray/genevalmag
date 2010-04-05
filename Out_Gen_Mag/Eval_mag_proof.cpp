@@ -42,14 +42,19 @@ int main()
 	Z node_s1_z;
 	node_s1_z.rule_id = 5;
 	node_s1_z.parent = &node_s1;
+	
+	X node_s1_x1;
+	node_s1_x1.rule_id = 4;
+	node_s1_x1.parent = &node_s1;
 
 	Y node_s1_z_y3;
-	node_s1_z_y3.rule_id = 3;
+	node_s1_z_y3.rule_id = 2;
 	node_s1_z_y3.parent = &node_s1_z;
 
 	node_s1.childs.push_back(&node_s1_x);
 	node_s1.childs.push_back(&node_s1_y2);
 	node_s1.childs.push_back(&node_s1_z);
+	node_s1.childs.push_back(&node_s1_x1);
 
 	node_s1_z.childs.push_back(&node_s1_z_y3);
     

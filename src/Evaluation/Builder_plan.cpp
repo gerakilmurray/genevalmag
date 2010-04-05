@@ -53,23 +53,11 @@ void generate_graphs(const Attr_grammar &grammar, Builder_graphs &b_graphs)
 	b_graphs.compute_adp_graph(grammar);
 }
 
-bool belong_index(unsigned short index, Order_eval_eq order)
-{
-	for(size_t i(0); i < order.size(); i++)
-	{
-		if(index == order[i])
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
 /**
   * Applies a topological order at graph.
   * The changes are applies about paramenter "result_order".
   */
-void Builder_plan::generates_topological_order(const Dp_graph &graph, Order_eval_eq &result_order, const Attr_grammar &grammar, const Context_rule &context_rule) const
+void Builder_plan::generates_topological_order(const Graph &graph, Order_eval_eq &result_order, const Attr_grammar &grammar, const Context_rule &context_rule) const
 {
 	typedef std::list<Vertex> MakeOrder;
 	MakeOrder make_order;
@@ -78,10 +66,9 @@ void Builder_plan::generates_topological_order(const Dp_graph &graph, Order_eval
 	topological_sort(graph, std::front_inserter(make_order));
 
 	/* Creates result_order with "make_order" */
+	property_map<Graph, vertex_data_t>::const_type prop(get(vertex_data_t(), graph));
 
-	property_map<Dp_graph, vertex_data_t>::const_type prop(get(vertex_data_t(), graph));
-
-	/* Cycle over make_oder for save the id_equation in result_order. */
+	/* Cycles over make_oder for save the id_equation in result_order. */
 	for (MakeOrder::iterator i(make_order.begin()); i != make_order.end(); ++i)
 	{
 		const Ast_instance* ins(dynamic_cast<const Ast_instance*>(prop[*i]));
@@ -99,14 +86,8 @@ void Builder_plan::generates_topological_order(const Dp_graph &graph, Order_eval
 			}
 			else
 			/* The instance is a inherit of right-symbol rule or syntetize of left-symbol.
-			 *  The instance searchs in the context of rule. */
+			 * The instance searchs in the context of rule. */
 			{
-				cout << "context ";
-				for (size_t l(0);l<context_rule.context.size();l++)
-				{
-					cout << context_rule.context[l] << " ";
-				}
-				cout << endl;
 				index = (grammar.get_index_eq_with_context(ins, context_rule.context));
 			}
 			assert (index > 0);
@@ -122,15 +103,15 @@ void Builder_plan::generates_topological_order(const Dp_graph &graph, Order_eval
   * Compute the rule's order.
   * The changes are applies about paramenter "result_order".
   */
-Order_eval_eq Builder_plan::compute_order(const Dp_graph &graph_adp, const Order_eval_eq &order_eq, const Attr_grammar &grammar, const Context_rule &context_rule)
+Order_eval_eq Builder_plan::compute_order(const Graph &graph_adp, const Order_eval_eq &order_eq, const Attr_grammar &grammar, const Context_rule &context_rule)
 {
-	Dp_graph graph(graph_adp);
+	Graph graph(graph_adp);
 	/* Creates edges with the elem of order_eq
 	 * Ex: Order_eq = 2, 5, 6.
 	 *  Edges : (2,5), (5,6) */
 	for (size_t i(1); i < order_eq.size(); i++)
 	{
-		property_map<Dp_graph, vertex_data_t>::type prop(get(vertex_data_t(), graph));
+		property_map<Graph, vertex_data_t>::type prop(get(vertex_data_t(), graph));
 		/* Obtain v1 */
 		const Ast_instance *ins1(grammar.get_eq_l_value(order_eq[i-1]));
 		assert(ins1 != NULL);
@@ -164,14 +145,14 @@ void Builder_plan::print_all_plans(const Attr_grammar &grammar) const
 	clean_output_folder(path_out);
 	for(map < Key_plan, Order_eval_eq >::const_iterator it(eval_plans.begin()); it != eval_plans.end(); it++)
 	{
-		Dp_graph graph_plan;
+		Graph graph_plan;
 		string names[it->second.size()];
 		Vertex ant(0);
 		/* creates graph. */
-		for(size_t i(0); i<it->second.size(); i++)
+		for(size_t i(0); i < it->second.size(); i++)
 		{
 			Vertex current(add_vertex(graph_plan));
-			if (i>0)
+			if (i > 0)
 			{
 				add_edge(ant,current,graph_plan);
 			}
@@ -206,19 +187,6 @@ void Builder_plan::print_all_plans(const Attr_grammar &grammar) const
 				}
 			}
 		}
-
-		/* Obtains the rule's superior context. */
-//		if (it->first.id_plan.father == 0)
-//		{
-//			name_graph.append(" without a father");
-//		}
-//		else
-//		{
-//			name_graph.append(" and father: R");
-//			stringstream father;
-//			father << it->first.id_plan.father;
-//			name_graph.append(father.str());
-//		}
 		name_graph.append(".");
 
 		print_graph(graph_plan,path_out.c_str(),"_plan_graph", name_graph, names,"box");
@@ -234,14 +202,14 @@ void Builder_plan::print_all_plans_project(const Attr_grammar &grammar) const
 	clean_output_folder(path_out);
 	for(map < Key_plan_project, Order_eval_eq >::const_iterator it(plans_project.begin()); it != plans_project.end(); it++)
 	{
-		Dp_graph graph_plan;
+		Graph graph_plan;
 		string names[it->second.size()];
 		Vertex ant(0);
 		/* creates graph. */
-		for(size_t i(0); i<it->second.size(); i++)
+		for(size_t i(0); i < it->second.size(); i++)
 		{
 			Vertex current(add_vertex(graph_plan));
-			if (i>0)
+			if (i > 0)
 			{
 				add_edge(ant,current,graph_plan);
 			}
@@ -277,20 +245,6 @@ void Builder_plan::print_all_plans_project(const Attr_grammar &grammar) const
 				}
 			}
 		}
-
-		/* Obtains the rule's superior context. */
-//		if (it->first.id_plan_project.id_plan.father == 0)
-//		{
-//			name_graph.append(", without a father");
-//		}
-//		else
-//		{
-//			name_graph.append(", father: R");
-//			stringstream father;
-//			father << it->first.id_plan_project.id_plan.father;
-//			name_graph.append(father.str());
-//		}
-
 		/* Obtains the symbol projected. */
 		name_graph.append(" and Symbol: ");
 		name_graph.append(it->first.symbol_project->get_name());
@@ -303,14 +257,17 @@ void Builder_plan::print_all_plans_project(const Attr_grammar &grammar) const
 /**
   * Projects a order over a symbol.
   */
-void project_order(const Symbol *symb, const Attr_grammar &grammar, const Order_eval_eq &total_order, Order_eval_eq &p_order)
+void project_order(const Rule &rule, const Attr_grammar &grammar, const Order_eval_eq &total_order, Order_eval_eq &p_order)
 {
 	for(size_t i(0); i < total_order.size(); i++)
 	{
 		const Ast_instance *ins(grammar.get_eq_l_value(total_order[i]));
-		if (symb->equals(*ins->get_symb()))
+		if(rule.get_left_symbol()->equals(*ins->get_symb()))
 		{
-			p_order.push_back(total_order[i]);
+			if(rule.get_left_symbol()->get_attrs().size() > p_order.size())
+			{
+				p_order.push_back(total_order[i]);
+			}
 		}
 	}
 }
@@ -321,7 +278,10 @@ void purge_plan_with(const Rule &rule, const Order_eval_eq &order_eq, Order_eval
 	{
 		if(rule.get_eq(order_eq[i]) != NULL)
 		{
-			purged_order.push_back(order_eq[i]);
+			if (!belong_index(order_eq[i],purged_order))
+			{
+				purged_order.push_back(order_eq[i]);
+			}
 		}
 	}
 }
@@ -344,9 +304,7 @@ bool defined_work (const vector < Item_work > &list, const Item_work &item_work)
 void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_graphs &build_graphs)
 {
 	vector < Item_work > work_list;
-
 	vector < Item_work > defined_item_work;
-
 	vector< unsigned short > initial_rules(grammar.get_rules_with_left_symbol(grammar.get_initial_symb()));
 
 	/* Initializes the work list with the rules with the initial symbol grammar. */
@@ -363,7 +321,7 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 		init_order_ag.push_back(init_order);
 
 		Key_work_list key;
-		key.father = 0;/* Initial rule hasn't father. */
+		key.father = 0; /* Initial rule hasn't father. */
 		key.id_rule = initial_rules[i];
 		Item_work i_eval;
 		i_eval.item = key;
@@ -371,7 +329,8 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 		work_list.push_back(i_eval);
 	}
 
-	const map<vector<unsigned short>,Dp_graph> &adp_graph(build_graphs.get_adp_graphs());
+	const map<vector<unsigned short>,Graph> &adp_graphs(build_graphs.get_adp_graphs());
+
 	while(work_list.size() > 0)
 	{
 		Item_work i_work(work_list.back());
@@ -382,7 +341,7 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 		{
 			defined_item_work.push_back(i_work);
 
-			for(map<vector<unsigned short>,Dp_graph >::const_iterator adp(adp_graph.begin()); adp != adp_graph.end(); adp++)
+			for(map<vector<unsigned short>,Graph>::const_iterator adp(adp_graphs.begin()); adp != adp_graphs.end(); adp++)
 			{
 				/* Current rule that defines the ADP. */
 				const Rule& rule(grammar.get_rule(adp->first[0]));
@@ -398,11 +357,11 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 					Order_eval_eq total_order(compute_order(adp->second, i_work.order_attr, grammar, context));
 
 					Order_eval_eq order_purged;
-					purge_plan_with(rule, total_order,order_purged);
+					purge_plan_with(rule, total_order, order_purged);
 
 					/* Saves the new_plan in the map. */
 					Key_plan key_plan;
-					key_plan.id_plan = context.context;
+					key_plan.id_plan = adp->first;
 					key_plan.plan = i_work.order_attr;
 					pair < Key_plan, Order_eval_eq > new_p(key_plan, order_purged);
 					eval_plans.insert(new_p);
@@ -415,35 +374,39 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 
 						const Rule& rule_proj(grammar.get_rule(adp->first[i+1]));
 
-						cout << "total_order";
-						for(size_t b(0); b< total_order.size();b++)
-						{
-							cout << total_order[b]<< "  , ";
-						}
-						cout << endl;
 						purge_plan_with(rule_proj, total_order, proj_order);
-						//project_order(right_side[i], grammar, order_purged, proj_order);
+						//project_order(rule_proj, grammar, total_order, proj_order);
 
-						/* Saves the new_plan_projected in the projected map. */
-						Key_plan_project key_project;
-						key_project.id_plan_project = key_plan;
-						key_project.symbol_project = right_side[i];
-						pair < Key_plan_project, Order_eval_eq > new_p(key_project, proj_order);
-						plans_project.insert(new_p);
-
-						/* Creates new plans for the work-list with the rule's right symbol.  */
-						Key_work_list key;
-						/* adp->firts[0] is the id-rule. */
-						key.father = rule.key();
-						/* adp->firts[i+1] is the id_rule of rule for the i-esimo non-termials.*/
-						key.id_rule = adp->first[i+1];
-						Item_work i_work_new;
-						i_work_new.item = key;
-						i_work_new.order_attr = proj_order;
-						cout << rule_proj.key()<< "hijo " <<proj_order.size() << endl;
-						if (!defined_work(defined_item_work, i_work_new))
+						if (proj_order.size() > 0)
+						// if size == 0 this plan not interesting on this project.
 						{
-							work_list.push_back(i_work_new);
+							/* Saves the new_plan_projected in the projected map. */
+							Key_plan_project key_project;
+							key_project.id_plan_project = key_plan;
+							key_project.symbol_project = right_side[i];
+							pair < Key_plan_project, Order_eval_eq > new_p(key_project, proj_order);
+							pair<map<Key_plan_project, Order_eval_eq>::iterator, bool > r = plans_project.insert(new_p);
+							if(!r.second)
+							{
+								cout<< "NOOOOOOOOO" << endl;
+							}
+
+							/* Creates new plans for the work-list with the rule's right symbol.  */
+							Key_work_list key;
+							/* adp->firts[0] is the id-rule. */
+							key.father = rule.key();
+							/* adp->firts[i+1] is the id_rule of rule for the i-esimo non-termials.*/
+							key.id_rule = adp->first[i+1];
+							Item_work i_work_new;
+							i_work_new.item = key;
+							i_work_new.order_attr = proj_order;
+							if (!defined_work(defined_item_work, i_work_new))
+							{
+								if(!defined_work(work_list, i_work_new))
+								{
+									work_list.push_back(i_work_new);
+								}
+							}
 						}
 					}
 				}
@@ -451,7 +414,7 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 		}
 	}
 
-	//clean_output_folder();
+//	clean_output_folder();
 	build_graphs.print_all_graphs(grammar.get_rules());
 //	build_graphs.print_adp_graphs(grammar.get_rules());
 	print_all_plans(grammar);

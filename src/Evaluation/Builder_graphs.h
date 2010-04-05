@@ -33,30 +33,30 @@ struct vertex_data_t
 
 typedef property <vertex_data_t, const genevalmag::Ast_leaf*> property_vertex_dp;
 
-typedef adjacency_list<hash_setS, vecS, directedS, property_vertex_dp > Dp_graph;
+typedef adjacency_list<hash_setS, vecS, directedS, property_vertex_dp > Graph;
 
-typedef Dp_graph::vertex_descriptor Vertex;
+typedef Graph::vertex_descriptor Vertex;
 
 class Builder_graphs
 {
 	private:
 		/* Store the DP graphs. The key corresponds to the key Rule. */
-		map <unsigned short, Dp_graph> p_Dp_graphs;
+		map <unsigned short, Graph> p_Dp_graphs;
 
 		/* Store the vertex-attr graphs. The key corresponds to the key Symbol. */
-		map <string, Dp_graph> attr_vertex_graphs;
+		map <string, Graph> attr_vertex_graphs;
 
 		/* Store the down graphs. The key corresponds to the key Symbol. */
-		map <string, Dp_graph> p_Down_graphs;
+		map <string, Graph> p_Down_graphs;
 
 		/* Store the dcg graphs. The key corresponds to the key Rule. */
-		map <unsigned short, Dp_graph> p_Dcg_graphs;
+		map <unsigned short, Graph> p_Dcg_graphs;
 
 		/* Store the adp graphs. The key corresponds to the key Rule with the inferior context*/
-		map <vector<unsigned short>, Dp_graph> p_Adp_graphs;
+		map <vector<unsigned short>, Graph> p_Adp_graphs;
 
 		/* Store the adp graphs. The key corresponds to the key Rule with the inferior context*/
-		map <vector<unsigned short>, Dp_graph> p_Adp_subgraphs_cyclics;
+		map <vector<unsigned short>, Graph> p_Adp_subgraphs_cyclics;
 
 		/**
 		  * Builds a graph for each symbol of the grammar with all atributes.
@@ -74,7 +74,7 @@ class Builder_graphs
 		/**
 		  * Generate all combinations of the rules and saves a graph ADP for each of them.
 		  */
-		void combined_inf_contexts(const Rule *rule, Dp_graph &graph, vector< vector<unsigned short> > &inf_context, size_t index_to_combine);
+		void combined_inf_contexts(const Rule *rule, Graph &graph, vector< vector<unsigned short> > &inf_context, size_t index_to_combine);
 
 	public:
 
@@ -91,17 +91,17 @@ class Builder_graphs
 		/**
 		  * Returns the map with all ADP graphs creates.
 		  */
-		const map<vector<unsigned short>, Dp_graph> &get_adp_graphs() const;
+		const map<vector<unsigned short>, Graph> &get_adp_graphs() const;
 
 		/**
 		  * Returns the map with all ADP with cycle graphs creates.
 		  */
-		const map<vector<unsigned short>, Dp_graph> &get_cyclic_graphs() const;
+		const map<vector<unsigned short>, Graph> &get_cyclic_graphs() const;
 
 		/**
 		  * Returns the down graph of the symbol.
 		  */
-		const Dp_graph &get_dcg_graph(unsigned short index_rule) const;
+		const Graph &get_dcg_graph(unsigned short index_rule) const;
 
 		/**
 		  * Algorithm DP

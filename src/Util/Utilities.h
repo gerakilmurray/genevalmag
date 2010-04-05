@@ -35,38 +35,38 @@ void clean_output_folder(const string path);
 /**
   * Generates the names of vertex. (The vertex's name is an instance).
   */
-void generate_names_instance(const Dp_graph &graph, string datas[], size_t size_d);
+void generate_names_instance(const Graph &graph, string datas[], size_t size_d);
 
 /**
   * Generates the names of vertex for down graph. (The vertex's name is an attribute).
   */
-void generate_names_attr(const Dp_graph &graph, string datas[], size_t size_d);
+void generate_names_attr(const Graph &graph, string datas[], size_t size_d);
 
 /**
   * Prints a graph in a file .dot for generate image .spng.
   */
-void print_graph(const Dp_graph &graph,const string path ,const string name_file, const string name_graph, const string names[], string shape_vertex);
+void print_graph(const Graph &graph,const string path ,const string name_file, const string name_graph, const string names[], string shape_vertex);
 /**
   * Prints a graph in the standart output (std:cout).
   */
-void print_graph_txt(const Dp_graph &graph);
+void print_graph_txt(const Graph &graph);
 
 /**
   * Given a graph and node, returns the vertex descriptor of node in the graph.
   * If not search it, so returns USHRT_MAX.
   */
-Vertex return_vertex(const Dp_graph &graph,const Ast_leaf *node);
+Vertex return_vertex(const Graph &graph,const Ast_leaf *node);
 
 /**
   * Joins graph1 and graph2 in graph_merged.
   */
-void merge_graph(const Dp_graph &graph1, const Dp_graph &graph2, Dp_graph &graph_merged);
+void merge_graph(const Graph &graph1, const Graph &graph2, Graph &graph_merged);
 
 /**
   * Projects a graph with only vertex that belongs to symbol "symb".
   * Modifies the parameter "graph".
   */
-void project_graph(const Symbol *symb, Dp_graph &graph);
+void project_graph(const Symbol *symb, Graph &graph);
 
 
 /**
@@ -75,6 +75,13 @@ void project_graph(const Symbol *symb, Dp_graph &graph);
 string cleaning_tabs(const string str);
 
 string write_inf_context(const vector<unsigned short> &context_vec);
+
+bool belong_index(const unsigned short &index, const vector<unsigned short> &vec);
+
+//template < class T > void print_info(string name_info, const vector < T > &info);
+
+template < class T > bool belong_elem(const T &elem, const vector<T> &vec);
+
 
 } /* end utilities */
 

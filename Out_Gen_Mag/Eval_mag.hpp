@@ -1,7 +1,7 @@
 /**
   *  \file      Eval_mag.hpp
   *  \brief     Class generator from static evaluator generator: GENEVALMAG 
-  *  \date      Thu Apr  1 17:32:20 2010
+  *  \date      Mon Apr  5 17:07:16 2010
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
 */
@@ -96,7 +96,7 @@ class Eval_mag
               */
 
             Key_plan key_0;
-            unsigned short __context_key_0[] = {1,2,2,2,2,1};
+            unsigned short __context_key_0[] = {1,2,2,2,2,1,1};
             Order_rule context_key_0(__context_key_0, __context_key_0 + sizeof(__context_key_0) / sizeof(unsigned short));
             key_0.id_plan = context_key_0;
             unsigned short __key_order_eq_key_0[] = {1};
@@ -109,7 +109,7 @@ class Eval_mag
             eval_plans.push_back(__plan_0);
 
             Key_plan key_1;
-            unsigned short __context_key_1[] = {1,2,2,2,2,3};
+            unsigned short __context_key_1[] = {1,2,2,2,2,1,3};
             Order_rule context_key_1(__context_key_1, __context_key_1 + sizeof(__context_key_1) / sizeof(unsigned short));
             key_1.id_plan = context_key_1;
             unsigned short __key_order_eq_key_1[] = {1};
@@ -122,37 +122,63 @@ class Eval_mag
             eval_plans.push_back(__plan_1);
 
             Key_plan key_2;
-            unsigned short __context_key_2[] = {2};
+            unsigned short __context_key_2[] = {1,2,2,2,2,3,1};
             Order_rule context_key_2(__context_key_2, __context_key_2 + sizeof(__context_key_2) / sizeof(unsigned short));
             key_2.id_plan = context_key_2;
-            unsigned short __key_order_eq_key_2[] = {2};
+            unsigned short __key_order_eq_key_2[] = {1};
             Order_eval_eq key_order_eq_key_2(__key_order_eq_key_2, __key_order_eq_key_2 + sizeof(__key_order_eq_key_2) / sizeof(unsigned short));
             key_2.plan = key_order_eq_key_2;
 
-            unsigned short __order_eq_2[] = {2};
+            unsigned short __order_eq_2[] = {1};
             Order_eval_eq order_eq_2(__order_eq_2, __order_eq_2 + sizeof(__order_eq_2) / sizeof(unsigned short));
             Plan __plan_2(key_2 , order_eq_2);
             eval_plans.push_back(__plan_2);
 
             Key_plan key_3;
-            unsigned short __context_key_3[] = {3};
+            unsigned short __context_key_3[] = {1,2,2,2,2,3,3};
             Order_rule context_key_3(__context_key_3, __context_key_3 + sizeof(__context_key_3) / sizeof(unsigned short));
             key_3.id_plan = context_key_3;
-            unsigned short __key_order_eq_key_3[] = {3};
+            unsigned short __key_order_eq_key_3[] = {1};
             Order_eval_eq key_order_eq_key_3(__key_order_eq_key_3, __key_order_eq_key_3 + sizeof(__key_order_eq_key_3) / sizeof(unsigned short));
             key_3.plan = key_order_eq_key_3;
 
-            unsigned short __order_eq_3[] = {3};
+            unsigned short __order_eq_3[] = {1};
             Order_eval_eq order_eq_3(__order_eq_3, __order_eq_3 + sizeof(__order_eq_3) / sizeof(unsigned short));
             Plan __plan_3(key_3 , order_eq_3);
             eval_plans.push_back(__plan_3);
+
+            Key_plan key_4;
+            unsigned short __context_key_4[] = {2};
+            Order_rule context_key_4(__context_key_4, __context_key_4 + sizeof(__context_key_4) / sizeof(unsigned short));
+            key_4.id_plan = context_key_4;
+            unsigned short __key_order_eq_key_4[] = {2};
+            Order_eval_eq key_order_eq_key_4(__key_order_eq_key_4, __key_order_eq_key_4 + sizeof(__key_order_eq_key_4) / sizeof(unsigned short));
+            key_4.plan = key_order_eq_key_4;
+
+            unsigned short __order_eq_4[] = {2};
+            Order_eval_eq order_eq_4(__order_eq_4, __order_eq_4 + sizeof(__order_eq_4) / sizeof(unsigned short));
+            Plan __plan_4(key_4 , order_eq_4);
+            eval_plans.push_back(__plan_4);
+
+            Key_plan key_5;
+            unsigned short __context_key_5[] = {3};
+            Order_rule context_key_5(__context_key_5, __context_key_5 + sizeof(__context_key_5) / sizeof(unsigned short));
+            key_5.id_plan = context_key_5;
+            unsigned short __key_order_eq_key_5[] = {3};
+            Order_eval_eq key_order_eq_key_5(__key_order_eq_key_5, __key_order_eq_key_5 + sizeof(__key_order_eq_key_5) / sizeof(unsigned short));
+            key_5.plan = key_order_eq_key_5;
+
+            unsigned short __order_eq_5[] = {3};
+            Order_eval_eq order_eq_5(__order_eq_5, __order_eq_5 + sizeof(__order_eq_5) / sizeof(unsigned short));
+            Plan __plan_5(key_5 , order_eq_5);
+            eval_plans.push_back(__plan_5);
 
             /**
               * Initialize of Evaluation Plans Project.
               */
 
             Key_plan key_plan_proj_0;
-            unsigned short __context_key_plan_proj_0[] = {1,2,2,2,2,1};
+            unsigned short __context_key_plan_proj_0[] = {1,2,2,2,2,1,1};
             Order_rule context_key_plan_proj_0(__context_key_plan_proj_0, __context_key_plan_proj_0 + sizeof(__context_key_plan_proj_0) / sizeof(unsigned short));
             key_plan_proj_0.id_plan = context_key_plan_proj_0;
             unsigned short __key_order_eq_key_plan_proj_0[] = {1};
@@ -168,7 +194,7 @@ class Eval_mag
             eval_plans_project.push_back(__plan_proj_0);
 
             Key_plan key_plan_proj_1;
-            unsigned short __context_key_plan_proj_1[] = {1,2,2,2,2,3};
+            unsigned short __context_key_plan_proj_1[] = {1,2,2,2,2,1,3};
             Order_rule context_key_plan_proj_1(__context_key_plan_proj_1, __context_key_plan_proj_1 + sizeof(__context_key_plan_proj_1) / sizeof(unsigned short));
             key_plan_proj_1.id_plan = context_key_plan_proj_1;
             unsigned short __key_order_eq_key_plan_proj_1[] = {1};
@@ -178,13 +204,13 @@ class Eval_mag
             Key_plan_project key_proj_1;
             key_proj_1.id_plan_project = key_plan_proj_1;
             key_proj_1.node_project = "T";
-            unsigned short __order_eq_proj_1[] = {3};
+            unsigned short __order_eq_proj_1[] = {1};
             Order_eval_eq order_eq_proj_1(__order_eq_proj_1, __order_eq_proj_1 + sizeof(__order_eq_proj_1) / sizeof(unsigned short));
             Plan_project __plan_proj_1(key_proj_1 , order_eq_proj_1);
             eval_plans_project.push_back(__plan_proj_1);
 
             Key_plan key_plan_proj_2;
-            unsigned short __context_key_plan_proj_2[] = {1,2,2,2,2,1};
+            unsigned short __context_key_plan_proj_2[] = {1,2,2,2,2,3,1};
             Order_rule context_key_plan_proj_2(__context_key_plan_proj_2, __context_key_plan_proj_2 + sizeof(__context_key_plan_proj_2) / sizeof(unsigned short));
             key_plan_proj_2.id_plan = context_key_plan_proj_2;
             unsigned short __key_order_eq_key_plan_proj_2[] = {1};
@@ -193,14 +219,14 @@ class Eval_mag
 
             Key_plan_project key_proj_2;
             key_proj_2.id_plan_project = key_plan_proj_2;
-            key_proj_2.node_project = "T2";
-            unsigned short __order_eq_proj_2[] = {2};
+            key_proj_2.node_project = "T";
+            unsigned short __order_eq_proj_2[] = {3};
             Order_eval_eq order_eq_proj_2(__order_eq_proj_2, __order_eq_proj_2 + sizeof(__order_eq_proj_2) / sizeof(unsigned short));
             Plan_project __plan_proj_2(key_proj_2 , order_eq_proj_2);
             eval_plans_project.push_back(__plan_proj_2);
 
             Key_plan key_plan_proj_3;
-            unsigned short __context_key_plan_proj_3[] = {1,2,2,2,2,3};
+            unsigned short __context_key_plan_proj_3[] = {1,2,2,2,2,3,3};
             Order_rule context_key_plan_proj_3(__context_key_plan_proj_3, __context_key_plan_proj_3 + sizeof(__context_key_plan_proj_3) / sizeof(unsigned short));
             key_plan_proj_3.id_plan = context_key_plan_proj_3;
             unsigned short __key_order_eq_key_plan_proj_3[] = {1};
@@ -209,37 +235,109 @@ class Eval_mag
 
             Key_plan_project key_proj_3;
             key_proj_3.id_plan_project = key_plan_proj_3;
-            key_proj_3.node_project = "T2";
-            unsigned short __order_eq_proj_3[] = {2};
+            key_proj_3.node_project = "T";
+            unsigned short __order_eq_proj_3[] = {3};
             Order_eval_eq order_eq_proj_3(__order_eq_proj_3, __order_eq_proj_3 + sizeof(__order_eq_proj_3) / sizeof(unsigned short));
             Plan_project __plan_proj_3(key_proj_3 , order_eq_proj_3);
             eval_plans_project.push_back(__plan_proj_3);
+
+            Key_plan key_plan_proj_4;
+            unsigned short __context_key_plan_proj_4[] = {1,2,2,2,2,1,1};
+            Order_rule context_key_plan_proj_4(__context_key_plan_proj_4, __context_key_plan_proj_4 + sizeof(__context_key_plan_proj_4) / sizeof(unsigned short));
+            key_plan_proj_4.id_plan = context_key_plan_proj_4;
+            unsigned short __key_order_eq_key_plan_proj_4[] = {1};
+            Order_eval_eq key_order_eq_key_plan_proj_4(__key_order_eq_key_plan_proj_4, __key_order_eq_key_plan_proj_4 + sizeof(__key_order_eq_key_plan_proj_4) / sizeof(unsigned short));
+            key_plan_proj_4.plan = key_order_eq_key_plan_proj_4;
+
+            Key_plan_project key_proj_4;
+            key_proj_4.id_plan_project = key_plan_proj_4;
+            key_proj_4.node_project = "T2";
+            unsigned short __order_eq_proj_4[] = {2};
+            Order_eval_eq order_eq_proj_4(__order_eq_proj_4, __order_eq_proj_4 + sizeof(__order_eq_proj_4) / sizeof(unsigned short));
+            Plan_project __plan_proj_4(key_proj_4 , order_eq_proj_4);
+            eval_plans_project.push_back(__plan_proj_4);
+
+            Key_plan key_plan_proj_5;
+            unsigned short __context_key_plan_proj_5[] = {1,2,2,2,2,1,3};
+            Order_rule context_key_plan_proj_5(__context_key_plan_proj_5, __context_key_plan_proj_5 + sizeof(__context_key_plan_proj_5) / sizeof(unsigned short));
+            key_plan_proj_5.id_plan = context_key_plan_proj_5;
+            unsigned short __key_order_eq_key_plan_proj_5[] = {1};
+            Order_eval_eq key_order_eq_key_plan_proj_5(__key_order_eq_key_plan_proj_5, __key_order_eq_key_plan_proj_5 + sizeof(__key_order_eq_key_plan_proj_5) / sizeof(unsigned short));
+            key_plan_proj_5.plan = key_order_eq_key_plan_proj_5;
+
+            Key_plan_project key_proj_5;
+            key_proj_5.id_plan_project = key_plan_proj_5;
+            key_proj_5.node_project = "T2";
+            unsigned short __order_eq_proj_5[] = {2};
+            Order_eval_eq order_eq_proj_5(__order_eq_proj_5, __order_eq_proj_5 + sizeof(__order_eq_proj_5) / sizeof(unsigned short));
+            Plan_project __plan_proj_5(key_proj_5 , order_eq_proj_5);
+            eval_plans_project.push_back(__plan_proj_5);
+
+            Key_plan key_plan_proj_6;
+            unsigned short __context_key_plan_proj_6[] = {1,2,2,2,2,3,1};
+            Order_rule context_key_plan_proj_6(__context_key_plan_proj_6, __context_key_plan_proj_6 + sizeof(__context_key_plan_proj_6) / sizeof(unsigned short));
+            key_plan_proj_6.id_plan = context_key_plan_proj_6;
+            unsigned short __key_order_eq_key_plan_proj_6[] = {1};
+            Order_eval_eq key_order_eq_key_plan_proj_6(__key_order_eq_key_plan_proj_6, __key_order_eq_key_plan_proj_6 + sizeof(__key_order_eq_key_plan_proj_6) / sizeof(unsigned short));
+            key_plan_proj_6.plan = key_order_eq_key_plan_proj_6;
+
+            Key_plan_project key_proj_6;
+            key_proj_6.id_plan_project = key_plan_proj_6;
+            key_proj_6.node_project = "T2";
+            unsigned short __order_eq_proj_6[] = {2};
+            Order_eval_eq order_eq_proj_6(__order_eq_proj_6, __order_eq_proj_6 + sizeof(__order_eq_proj_6) / sizeof(unsigned short));
+            Plan_project __plan_proj_6(key_proj_6 , order_eq_proj_6);
+            eval_plans_project.push_back(__plan_proj_6);
+
+            Key_plan key_plan_proj_7;
+            unsigned short __context_key_plan_proj_7[] = {1,2,2,2,2,3,3};
+            Order_rule context_key_plan_proj_7(__context_key_plan_proj_7, __context_key_plan_proj_7 + sizeof(__context_key_plan_proj_7) / sizeof(unsigned short));
+            key_plan_proj_7.id_plan = context_key_plan_proj_7;
+            unsigned short __key_order_eq_key_plan_proj_7[] = {1};
+            Order_eval_eq key_order_eq_key_plan_proj_7(__key_order_eq_key_plan_proj_7, __key_order_eq_key_plan_proj_7 + sizeof(__key_order_eq_key_plan_proj_7) / sizeof(unsigned short));
+            key_plan_proj_7.plan = key_order_eq_key_plan_proj_7;
+
+            Key_plan_project key_proj_7;
+            key_proj_7.id_plan_project = key_plan_proj_7;
+            key_proj_7.node_project = "T2";
+            unsigned short __order_eq_proj_7[] = {2};
+            Order_eval_eq order_eq_proj_7(__order_eq_proj_7, __order_eq_proj_7 + sizeof(__order_eq_proj_7) / sizeof(unsigned short));
+            Plan_project __plan_proj_7(key_proj_7 , order_eq_proj_7);
+            eval_plans_project.push_back(__plan_proj_7);
 
             /**
               * Initialize of Visit Sequences.
               */
 
-            int __order_0[] = {4,2,3,1,5,-1};
+            int __order_0[] = {4,2,3,1,5,6,-1};
             Visit_sequence order_0(__order_0, __order_0 + sizeof(__order_0) / sizeof(int));
             v_seq.push_back(order_0);
 
-            int __order_1[] = {4,2,3,1,5,-1};
+            int __order_1[] = {4,2,3,1,5,6,-1};
             Visit_sequence order_1(__order_1, __order_1 + sizeof(__order_1) / sizeof(int));
             v_seq.push_back(order_1);
 
-            int __order_2[] = {-2};
+            int __order_2[] = {4,2,3,1,5,6,-1};
             Visit_sequence order_2(__order_2, __order_2 + sizeof(__order_2) / sizeof(int));
             v_seq.push_back(order_2);
 
-            int __order_3[] = {-3};
+            int __order_3[] = {4,2,3,1,5,6,-1};
             Visit_sequence order_3(__order_3, __order_3 + sizeof(__order_3) / sizeof(int));
             v_seq.push_back(order_3);
+
+            int __order_4[] = {-2};
+            Visit_sequence order_4(__order_4, __order_4 + sizeof(__order_4) / sizeof(int));
+            v_seq.push_back(order_4);
+
+            int __order_5[] = {-3};
+            Visit_sequence order_5(__order_5, __order_5 + sizeof(__order_5) / sizeof(int));
+            v_seq.push_back(order_5);
 
             /**
               * Initialize of Rules of grammar.
               */
 
-            string __rule_non_terminal_0[] = {"T","T2","T2","T2","T2","T"};
+            string __rule_non_terminal_0[] = {"T","T2","T2","T2","T2","T","T"};
             Rule rule_non_terminal_0(__rule_non_terminal_0, __rule_non_terminal_0 + sizeof(__rule_non_terminal_0) / sizeof(string));
             rules.push_back(rule_non_terminal_0);
 
@@ -336,18 +434,18 @@ class Eval_mag
             cout << "." << endl;
         }
 
-        // Eq (1) T[0].longi = (((((T2[3].longi + T2[1].longi) + T2[2].longi) + T2[0].longi) + T[1].longi) + 1);
+        // Eq (1) T[0].longi = ((((((T2[3].longi + T2[1].longi) + T2[2].longi) + T2[0].longi) + T[1].longi) + T[2].longi) + 1);
         void compute_eq_1(struct Node *root)
         {
             T *node((T*) root);
-            node->longi = (((((((T2*)node->childs[3])->longi + ((T2*)node->childs[1])->longi) + ((T2*)node->childs[2])->longi) + ((T2*)node->childs[0])->longi) + ((T*)node->childs[4])->longi) + 1);
+            node->longi = ((((((((T2*)node->childs[3])->longi + ((T2*)node->childs[1])->longi) + ((T2*)node->childs[2])->longi) + ((T2*)node->childs[0])->longi) + ((T*)node->childs[4])->longi) + ((T*)node->childs[5])->longi) + 1);
         }
 
-        // Eq (2) T2[0].longi = f(1);
+        // Eq (2) T2[0].longi = 1;
         void compute_eq_2(struct Node *root)
         {
             T2 *node((T2*) root);
-            node->longi = f(1);
+            node->longi = 1;
         }
 
         // Eq (3) T[0].longi = 0;
@@ -360,17 +458,13 @@ class Eval_mag
     	void compute_eq(int num_eq, struct Node *root)
      	{
     		switch ( num_eq ) {
-    		  case 1 :
-    			compute_eq_1(root); break;
+    		  case 1: compute_eq_1(root); break;
 
-    		  case 2 :
-    			compute_eq_2(root); break;
+    		  case 2: compute_eq_2(root); break;
 
-    		  case 3 :
-    			compute_eq_3(root); break;
+    		  case 3: compute_eq_3(root); break;
 
-     		  default :
-     			cout << "ERROR: Fatal action." << endl;
+     		  default: cout << "ERROR: Fatal action." << endl;
     		}
      	}
 
