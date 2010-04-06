@@ -39,7 +39,7 @@ class Build_visit_sequence
           * indicated by the plans, visiting the children, returning to the
           * parent or generating a compute attribute.
           */
-        bool gen_seq_visit(const Attr_grammar &attr_grammar, const vector < pair < Key_plan, Order_eval_eq > > &plans, size_t i_plan, vector<Ast_instance> &computed, vector<unsigned short> &plans_computed);
+        bool gen_seq_visit(const Attr_grammar &attr_grammar, const vector < pair < Key_plan, Order_eval_eq > > &plans, size_t i_plan, vector<Ast_instance> &computed, vector<unsigned short> &plans_computed, const vector<unsigned short> &v_seq);
 
         /**
           * Saves the visit sequence generate, mixing with pre-generated
