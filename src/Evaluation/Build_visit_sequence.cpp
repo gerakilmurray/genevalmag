@@ -59,7 +59,7 @@ void get_inherits_of(const Symbol &symb, const vector<Ast_instance> &computed, v
         if (computed[i].get_symb()->equals(symb) && computed[i].get_attr()->is_inherit())
         {
             rec_child.push_back(computed[i]);
-            rec_child.back().set_num(0);
+            //rec_child.back().set_num(0);
         }
     }
 }
@@ -69,26 +69,35 @@ void get_inherits_of(const Symbol &symb, const vector<Ast_instance> &computed, v
   * indicated by the plans, visiting the children, returning to the
   * parent or generating a compute attribute.
   */
-bool Build_visit_sequence::gen_seq_visit(const Attr_grammar &attr_grammar, const vector < pair < Key_plan, Order_eval_eq > > &plans, size_t i_plan, vector<Ast_instance> &computed, vector<unsigned short> &plans_computed)
+bool Build_visit_sequence::gen_seq_visit(const Attr_grammar &attr_grammar, const vector < pair < Key_plan, Order_eval_eq > > &plans, size_t i_plan, vector<Ast_instance> &computed, vector<unsigned short> &plans_computed, const vector<unsigned short> & v_seq_computed)
 {
+	cout << "plan  ";
+	for (size_t k(0);k<plans_computed.size();k++)
+	{
+		cout << plans_computed[k] << ", ";
+	}
+	cout << endl;
+
     bool leaves(false);
     Visit_seq sequence;
     vector<Ast_instance> computed_own;
 
-    unsigned short plan_num((i_plan+1) * 100);
-    if(!belong_index(plan_num,plans_computed))
-    {
+//    unsigned short plan_num((i_plan+1) * 100);
+    unsigned short plan_num(i_plan+1);
+//    if(!belong_index(plan_num,plans_computed))
+//    {
     	plans_computed.push_back(plan_num);
-    }
+    	cout << "current_plan ------->  "<< plan_num;
+//    }
     const Rule& rule(attr_grammar.get_rule(plans[i_plan].first.id_plan[0]));
 
     for(size_t i(0); i < plans[i_plan].second.size(); i++)
     {
         const Equation *eq(rule.get_eq(plans[i_plan].second[i]));
 
+
         vector<const Ast_instance*> instances_right_side;
         eq->inorder_only_instance(eq->get_r_value(), instances_right_side);
-
         for(size_t j(0); j < instances_right_side.size(); j++)
         {
             const Ast_instance *ins(instances_right_side[j]);
@@ -104,6 +113,8 @@ bool Build_visit_sequence::gen_seq_visit(const Attr_grammar &attr_grammar, const
 			}
             else
             {
+                cout << "  buscando esta instancia " << eq->get_l_value()->to_string() << endl;
+                cout << ins->to_string() << endl;
                 /* The attr symbols belongs to some right side symbol of the rule. */
                 if(ins->get_attr()->is_synthetize())
                 {
@@ -129,7 +140,8 @@ bool Build_visit_sequence::gen_seq_visit(const Attr_grammar &attr_grammar, const
 									sequence.push_back(k+1);
 									for(size_t index_p(0); index_p < plans.size(); index_p++)
 									{
-										unsigned short plan_num_child(((i_plan+1) * 100) + (index_p+1));
+//										unsigned short plan_num_child(((i_plan+1) * 100) + (index_p+1));
+										unsigned short plan_num_child(index_p+1);
 										if(!belong_index(plan_num_child, plans_computed))
 										{
 											Ast_instance ins_eq(*ins);
@@ -139,15 +151,24 @@ bool Build_visit_sequence::gen_seq_visit(const Attr_grammar &attr_grammar, const
 											unsigned short index_num(attr_grammar.get_index_eq_with_context(&ins_eq, context_visit));
 
 											if ((plans[index_p].first.id_plan[0] == plans[i_plan].first.id_plan[k+1]) &&
-												//(index_p != i_plan) &&
-												//(belong_index(index_num, plans[index_p].first.plan)))
 												(plans[index_p].first.plan[0] == index_num))
 											{
-												plans_computed.push_back(plan_num_child);
-												cout << "entro " << plan_num_child << endl;
+//												plans_computed.push_back(plan_num_child);
+												//cout << "entro " << plan_num_child << endl;
 												vector<Ast_instance> rec_child;
 												get_inherits_of(*ins->get_symb(), computed_own, rec_child);
-												gen_seq_visit(attr_grammar, plans, index_p, rec_child, plans_computed);
+
+												gen_seq_visit(attr_grammar, plans, index_p, rec_child, plans_computed, v_seq_computed);
+
+												if(ins->get_symb()->get_name().compare("Y")==0)
+												{
+													cout<<"\n---------------------------------------rec_Y ";
+													for(size_t i_rec(0); i_rec < rec_child.size(); i_rec++)
+													{
+														cout<< rec_child[i_rec].to_string() <<",";
+													}
+													cout<<endl;
+												}
 
 												for(size_t i_rec(0); i_rec < rec_child.size(); i_rec++)
 												{
@@ -181,9 +202,13 @@ bool Build_visit_sequence::gen_seq_visit(const Attr_grammar &attr_grammar, const
         }
         computed_own.push_back(*l_v);
 
-    	cout << "computed  "<< l_v->to_string() << endl;
+//    	cout << "computed  "<< l_v->to_string() << endl;
     }
-    save_visit_sequence(sequence, i_plan);
+
+    if (!belong_index(i_plan+1,v_seq_computed))
+    {
+    	save_visit_sequence(sequence, i_plan);
+    }
     return true;
 }
 
@@ -193,6 +218,12 @@ bool Build_visit_sequence::gen_seq_visit(const Attr_grammar &attr_grammar, const
   */
 void Build_visit_sequence::save_visit_sequence(const Visit_seq &sequence, const size_t i_plan)
 {
+//	cout<<"plan"<<i_plan<<endl;
+//	for (size_t k(0); k<sequence.size();k++)
+//	{
+//		cout << "seq  " << sequence[k] << endl;
+//	}
+
     size_t i(0);
     size_t j(0);
     while(i < sequence.size() && j < all_visit_seqs[i_plan].size())
@@ -241,6 +272,7 @@ bool Build_visit_sequence::generate_seq_visit(const Attr_grammar &attr_grammar, 
         all_visit_seqs.push_back(v_s);
     }
 
+    vector <unsigned short> visit_seq_computed;
     for(size_t i(0); i < planes.size(); i++)
     {
         const Rule &rule(attr_grammar.get_rule(planes[i].first.id_plan[0]));
@@ -248,7 +280,13 @@ bool Build_visit_sequence::generate_seq_visit(const Attr_grammar &attr_grammar, 
         {
             vector<Ast_instance> ins_computed;
             vector<unsigned short> plans_computed;
-            gen_seq_visit(attr_grammar, planes, i, ins_computed, plans_computed);
+            gen_seq_visit(attr_grammar, planes, i, ins_computed, plans_computed, visit_seq_computed);
+//            for (size_t k(0);k<plans_computed.size();k++)
+//            {
+//            	cout << "plan  " << plans_computed[k] << endl;
+//            }
+            visit_seq_computed = plans_computed;
+
         }
     }
     return true;

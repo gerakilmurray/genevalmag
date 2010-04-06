@@ -482,23 +482,27 @@ void generate_print(string &text)
 
 void generate_translate(string &text)
 {
-	text.append("        void translate_mag(int v_s)\n        {\n");
-	text.append("            for(size_t i(0); i < v_seq[v_s].size(); i++)\n");
+	text.append("        void translate_mag()\n        {\n");
+
+	text.append("            for(size_t v_s(0); v_s < v_seq.size(); v_s++)\n");
 	text.append("            {\n");
-	text.append("            	if(v_seq[v_s][i] > 0)\n            	{\n");
-	text.append("            	    cout << \"Visit child \" << v_seq[v_s][i];\n");
-	text.append("            	}\n");
-	text.append("            	if(v_seq[v_s][i] == 0)\n            	{\n");
-	text.append("            	    cout << \"Leave\";\n");
-	text.append("            	}\n");
-	text.append("            	if(v_seq[v_s][i] < 0)\n            	{\n");
-	text.append("            	    cout << \"Compute \" << v_seq[v_s][i]*(-1);\n");
-	text.append("            	}\n");
-	text.append("            	if(i < v_seq[v_s].size() - 1)\n            	{\n");
-	text.append("            	    cout << \", \";\n");
-	text.append("            	}\n");
+	text.append("                for(size_t i(0); i < v_seq[v_s].size(); i++)\n");
+	text.append("                {\n");
+	text.append("                    if(v_seq[v_s][i] > 0)\n                    {\n");
+	text.append("                        cout << \"Visit child \" << v_seq[v_s][i];\n");
+	text.append("                    }\n");
+	text.append("                    if(v_seq[v_s][i] == 0)\n                    {\n");
+	text.append("                        cout << \"Leave\";\n");
+	text.append("                    }\n");
+	text.append("                    if(v_seq[v_s][i] < 0)\n                    {\n");
+	text.append("                        cout << \"Compute \" << v_seq[v_s][i]*(-1);\n");
+	text.append("                	}\n");
+	text.append("                    if(i < v_seq[v_s].size() - 1)\n                    {\n");
+	text.append("                        cout << \", \";\n");
+	text.append("                    }\n");
+	text.append("                }\n");
+	text.append("                cout << \".\" << endl;\n");
 	text.append("            }\n");
-	text.append("            cout << \".\" << endl;\n");
 	text.append("        }\n\n");
 }
 

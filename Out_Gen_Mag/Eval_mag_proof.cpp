@@ -6,6 +6,8 @@
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
 */
 
+#include <vector>
+
 #include "Eval_mag.hpp"
 
 using namespace evalmag;
@@ -17,14 +19,7 @@ int main()
 {
     Eval_mag eval_mag;
     eval_mag.print_v_seq();
-    eval_mag.translate_mag(0);
-    eval_mag.translate_mag(1);
-    eval_mag.translate_mag(2);
-    eval_mag.translate_mag(3);
-    eval_mag.translate_mag(4);
-    eval_mag.translate_mag(5);
-    eval_mag.translate_mag(6);
-    eval_mag.translate_mag(7);
+	eval_mag.translate_mag();
 
 
     S node_s1;
@@ -36,16 +31,16 @@ int main()
 	node_s1_x.parent = &node_s1;
 
 	Y node_s1_y2;
-	node_s1_y2.rule_id = 3;
+	node_s1_y2.rule_id = 2;
 	node_s1_y2.parent = &node_s1;
 
 	Z node_s1_z;
 	node_s1_z.rule_id = 5;
 	node_s1_z.parent = &node_s1;
 	
-	X node_s1_x1;
-	node_s1_x1.rule_id = 4;
-	node_s1_x1.parent = &node_s1;
+	//X node_s1_x1;
+	//node_s1_x1.rule_id = 4;
+	//node_s1_x1.parent = &node_s1;
 
 	Y node_s1_z_y3;
 	node_s1_z_y3.rule_id = 2;
@@ -54,7 +49,7 @@ int main()
 	node_s1.childs.push_back(&node_s1_x);
 	node_s1.childs.push_back(&node_s1_y2);
 	node_s1.childs.push_back(&node_s1_z);
-	node_s1.childs.push_back(&node_s1_x1);
+	//node_s1.childs.push_back(&node_s1_x1);
 
 	node_s1_z.childs.push_back(&node_s1_z_y3);
     
