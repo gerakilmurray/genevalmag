@@ -1,7 +1,7 @@
 /**
   *  \file      Eval_mag.hpp
   *  \brief     Class generator from static evaluator generator: GENEVALMAG 
-  *  \date      Tue Apr  6 13:01:50 2010
+  *  \date      Tue Apr  6 21:44:48 2010
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
 */
@@ -397,35 +397,35 @@ class Eval_mag
               * Initialize of Visit Sequences.
               */
 
-            int __order_0[] = {2,-2,1,-3,2,-4,3,-1};
+            int __order_0[] = {-2,-3,-4,-1};
             Visit_sequence order_0(__order_0, __order_0 + sizeof(__order_0) / sizeof(int));
             v_seq.push_back(order_0);
 
-            int __order_1[] = {2,-4,2,-2,1,-3,3,-1};
+            int __order_1[] = {-4,-2,-3,-1};
             Visit_sequence order_1(__order_1, __order_1 + sizeof(__order_1) / sizeof(int));
             v_seq.push_back(order_1);
 
-            int __order_2[] = {-5,-6};
+            int __order_2[] = {};
             Visit_sequence order_2(__order_2, __order_2 + sizeof(__order_2) / sizeof(int));
             v_seq.push_back(order_2);
 
-            int __order_3[] = {-6,0,-5};
+            int __order_3[] = {};
             Visit_sequence order_3(__order_3, __order_3 + sizeof(__order_3) / sizeof(int));
             v_seq.push_back(order_3);
 
-            int __order_4[] = {-7,0,-8};
+            int __order_4[] = {};
             Visit_sequence order_4(__order_4, __order_4 + sizeof(__order_4) / sizeof(int));
             v_seq.push_back(order_4);
 
-            int __order_5[] = {-9};
+            int __order_5[] = {};
             Visit_sequence order_5(__order_5, __order_5 + sizeof(__order_5) / sizeof(int));
             v_seq.push_back(order_5);
 
-            int __order_6[] = {-11,1,-12,1,-10};
+            int __order_6[] = {};
             Visit_sequence order_6(__order_6, __order_6 + sizeof(__order_6) / sizeof(int));
             v_seq.push_back(order_6);
 
-            int __order_7[] = {1,-12,-11,1,-10};
+            int __order_7[] = {};
             Visit_sequence order_7(__order_7, __order_7 + sizeof(__order_7) / sizeof(int));
             v_seq.push_back(order_7);
 
@@ -658,9 +658,7 @@ class Eval_mag
 
         void eval_visiter(struct Node *root)
         {
-	        cout << "Regla "<< root->rule_id << "  Entre con "<< root->num_v_seq << endl;
-	        size_t i(root->num_v_seq);
-        	for(; i < v_seq[root->index_plan_v_seq].size(); i++)
+        	for(size_t i(root->num_v_seq); i < v_seq[root->index_plan_v_seq].size(); i++)
         	{
         		int item_visit(v_seq[root->index_plan_v_seq][i]);
         		if (item_visit > 0)
@@ -674,12 +672,9 @@ class Eval_mag
         		else
         		{
         			root->num_v_seq = i+1; // donde quede
-        			cout << "Regla "<< root->rule_id << "   Sali return con "<< root->num_v_seq<< endl;
         			return;
         		}
         	}
-        	root->num_v_seq = i; // termine
-			cout << "Regla "<< root->rule_id << "   Sali por end for con "<< root->num_v_seq<<  endl;
         }
 
         void evaluator_mag(struct Node *root)
