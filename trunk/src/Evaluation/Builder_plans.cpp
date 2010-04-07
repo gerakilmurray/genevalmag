@@ -1,6 +1,6 @@
 /**
-  *  \file		Builder_plan.cpp
-  *  \brief		Implementation of the methods the Builder_plan.h
+  *  \file		Builder_plans.cpp
+  *  \brief		Implementation of the methods the Builder_plans.h
   *  \date		18/02/2010
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
@@ -11,7 +11,7 @@
 #include <boost/graph/topological_sort.hpp>
 #include <boost/graph/transitive_closure.hpp>
 
-#include "Builder_plan.h"
+#include "Builder_plans.h"
 
 #include "../Util/Utilities.h"
 
@@ -28,14 +28,14 @@ const string PATH_OUT_PLAN_PROJECT("./Out_Gen_Mag/ALL_plan_project/");
 /**
   * Constructor empty of Builder plan.
   */
-Builder_plan::Builder_plan()
+Builder_plans::Builder_plans()
 {
 }
 
 /**
   * Destructor of Builder plan.
   */
-Builder_plan::~Builder_plan()
+Builder_plans::~Builder_plans()
 {
 }
 
@@ -57,7 +57,7 @@ void generate_graphs(const Attr_grammar &grammar, Builder_graphs &b_graphs)
   * Applies a topological order at graph.
   * The changes are applies about paramenter "result_order".
   */
-void Builder_plan::generates_topological_order(const Graph &graph, Order_eval_eq &result_order, const Attr_grammar &grammar, const Context_rule &context_rule) const
+void Builder_plans::generates_topological_order(const Graph &graph, Order_eval_eq &result_order, const Attr_grammar &grammar, const Context_rule &context_rule) const
 {
 	typedef std::list<Vertex> MakeOrder;
 	MakeOrder make_order;
@@ -103,7 +103,7 @@ void Builder_plan::generates_topological_order(const Graph &graph, Order_eval_eq
   * Compute the rule's order.
   * The changes are applies about paramenter "result_order".
   */
-Order_eval_eq Builder_plan::compute_order(const Graph &graph_adp, const Order_eval_eq &order_eq, const Attr_grammar &grammar, const Context_rule &context_rule)
+Order_eval_eq Builder_plans::compute_order(const Graph &graph_adp, const Order_eval_eq &order_eq, const Attr_grammar &grammar, const Context_rule &context_rule)
 {
 	Graph graph(graph_adp);
 	/* Creates edges with the elem of order_eq
@@ -139,7 +139,7 @@ Order_eval_eq Builder_plan::compute_order(const Graph &graph_adp, const Order_ev
 /**
   * Prints all plans. Creates a graph that represents the plan and uses print_graph with dot.
   */
-void Builder_plan::print_all_plans(const Attr_grammar &grammar) const
+void Builder_plans::print_all_plans(const Attr_grammar &grammar) const
 {
 	string path_out(PATH_OUT_PLAN);
 	clean_output_folder(path_out);
@@ -196,7 +196,7 @@ void Builder_plan::print_all_plans(const Attr_grammar &grammar) const
 /**
   * Prints all proyected's plans. Creates a graph that represents the plan and uses print_graph with dot.
   */
-void Builder_plan::print_all_plans_project(const Attr_grammar &grammar) const
+void Builder_plans::print_all_plans_project(const Attr_grammar &grammar) const
 {
 	string path_out(PATH_OUT_PLAN_PROJECT);
 	clean_output_folder(path_out);
@@ -301,7 +301,7 @@ bool defined_work (const vector < Item_work > &list, const Item_work &item_work)
 /**
   * Generates and saves all evaluation's plans for the Attribute Grammar.
   */
-void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_graphs &build_graphs)
+void Builder_plans::generate_plans(const Attr_grammar &grammar, const Builder_graphs &build_graphs)
 {
 	vector < Item_work > work_list;
 	vector < Item_work > defined_item_work;
@@ -421,7 +421,7 @@ void Builder_plan::generate_plans(const Attr_grammar &grammar, const Builder_gra
 	print_all_plans_project(grammar);
 }
 
-bool Builder_plan::build_plans(const Attr_grammar &attr_grammar)
+bool Builder_plans::build_plans(const Attr_grammar &attr_grammar)
 {
 	Builder_graphs build_graphs;
 	generate_graphs(attr_grammar, build_graphs);
@@ -439,17 +439,17 @@ bool Builder_plan::build_plans(const Attr_grammar &attr_grammar)
 	}
 }
 
-const map < Key_plan, Order_eval_eq > &Builder_plan::get_plans() const
+const map < Key_plan, Order_eval_eq > &Builder_plans::get_plans() const
 {
 	return eval_plans;
 }
 
-const map < Key_plan_project, Order_eval_eq > &Builder_plan::get_plans_project() const
+const map < Key_plan_project, Order_eval_eq > &Builder_plans::get_plans_project() const
 {
 	return plans_project;
 }
 
-const vector < Order_eval_eq > &Builder_plan::get_init_orders() const
+const vector < Order_eval_eq > &Builder_plans::get_init_orders() const
 {
 	return init_order_ag;
 }

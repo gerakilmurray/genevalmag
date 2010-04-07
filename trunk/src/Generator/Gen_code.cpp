@@ -10,7 +10,7 @@
 #include <iostream>
 #include <time.h>
 
-#include "../Evaluation/Builder_plan.h"
+#include "../Evaluation/Builder_plans.h"
 #include "../Ast/Ast_function.h"
 #include "../Ast/Ast_literal.h"
 #include "../Ast/Ast_instance.h"
@@ -439,7 +439,7 @@ void generate_initialize_rules(string &text, const Attr_grammar &attr_grammar)
 	}
 }
 
-void Gen_code::generate_public(const vector<Visit_seq> & v_seq, const Builder_plan &b_plan, const Attr_grammar &attr_grammar)
+void Gen_code::generate_public(const vector<Visit_seq> & v_seq, const Builder_plans &b_plan, const Attr_grammar &attr_grammar)
 {
 	string public_t;
 	public_t.append("\n    public:\n");
@@ -762,7 +762,7 @@ void generate_eval_visiter(string &text)
 	text.append("        }\n\n");
 }
 
-void generate_evaluator(string &text, const Builder_plan &b_plan)
+void generate_evaluator(string &text, const Builder_plans &b_plan)
 {
 	text.append("        void evaluator_mag(struct Node *root)\n");
 	text.append("        {\n");
@@ -793,7 +793,7 @@ void generate_evaluator(string &text, const Builder_plan &b_plan)
 	text.append("        }\n");
 }
 
-void Gen_code::generate_methods(const Builder_plan &b_plan, const Attr_grammar &attr_grammar)
+void Gen_code::generate_methods(const Builder_plans &b_plan, const Attr_grammar &attr_grammar)
 {
 	string methods_t;
 
@@ -936,7 +936,7 @@ void Gen_code::generate_structs(const Attr_grammar &attr_grammar)
 	file_output.close();
 }
 
-void Gen_code::generate_code(const Attr_grammar &attr_grammar, const Builder_plan &b_plan, const vector<Visit_seq> & v_seq)
+void Gen_code::generate_code(const Attr_grammar &attr_grammar, const Builder_plans &b_plan, const vector<Visit_seq> &v_seq)
 {
 	generate_grammar_file(attr_grammar);
 	generate_header_file();
@@ -946,7 +946,7 @@ void Gen_code::generate_code(const Attr_grammar &attr_grammar, const Builder_pla
 
 	generate_header_class();
 	generate_private();
-	generate_public(v_seq,b_plan, attr_grammar);
+	generate_public(v_seq, b_plan, attr_grammar);
 	generate_methods(b_plan, attr_grammar);
 	generate_footer();
 }

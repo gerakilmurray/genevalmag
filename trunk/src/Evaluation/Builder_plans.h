@@ -1,13 +1,13 @@
 /**
-  *  \file		Builder_plan.h
+  *  \file		Builder_plans.h
   *  \brief		Header of generation plans module of Attribute Grammar.
   *  \date		18/02/2010
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-#ifndef BUILDER_PLAN_H_
-#define BUILDER_PLAN_H_
+#ifndef BUILDER_PLANS_H_
+#define BUILDER_PLANS_H_
 
 #include <map>
 
@@ -136,7 +136,7 @@ typedef struct k_p_project
 	}
 } Key_plan_project;
 
-class Builder_plan
+class Builder_plans
 {
 	private:
 		map < Key_plan, Order_eval_eq > eval_plans; /* "ro" function. Wuu yank's paper. */
@@ -164,14 +164,14 @@ class Builder_plan
 
 	public:
 		/**
-		  * Constructor empty of Builder plan.
+		  * Constructor empty of Builder plans.
 		  */
-		Builder_plan();
+		Builder_plans();
 
 		/**
-		  * Destructor of Builder plan.
+		  * Destructor of Builder plans.
 		  */
-		~Builder_plan();
+		~Builder_plans();
 
 		/**
 		  * Generates and saves all evaluation's plans for the Attribute Grammar.
@@ -196,4 +196,4 @@ class Builder_plan
 
 } /* end genevalmag */
 
-#endif /* BUILDER_PLAN_H_ */
+#endif /* BUILDER_PLANS_H_ */

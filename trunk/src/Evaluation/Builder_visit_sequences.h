@@ -1,18 +1,18 @@
 /**
-  *  \file      Build_visit_sequence.h
+  *  \file      Builder_visit_sequences.h
   *  \brief     Header with the functions for build the visits sequences of grammar.
   *  \date      17/03/2010
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-#ifndef BUILD_VISIT_SEQUENCE_H_
-#define BUILD_VISIT_SEQUENCE_H_
+#ifndef BUILDER_VISIT_SEQUENCES_H_
+#define BUILDER_VISIT_SEQUENCES_H_
 
 #include <map>
 
 #include "../Attr_grammar/Attr_grammar.h"
-#include "Builder_plan.h"
+#include "Builder_plans.h"
 
 using namespace std;
 
@@ -26,7 +26,7 @@ namespace genevalmag
  */
 typedef vector <int> Visit_seq;
 
-class Build_visit_sequence
+class Builder_visit_sequences
 {
     private:
         /**
@@ -39,7 +39,7 @@ class Build_visit_sequence
           * indicated by the plans, visiting the children, returning to the
           * parent or generating a compute attribute.
           */
-        bool gen_seq_visit(const Attr_grammar &attr_grammar, const vector < pair < Key_plan, Order_eval_eq > > &plans, size_t i_plan, vector<Ast_instance> &computed, vector<unsigned short> &plans_computed, const vector<unsigned short> &v_seq);
+        bool gen_visit_seq(const Attr_grammar &attr_grammar, const vector < pair < Key_plan, Order_eval_eq > > &plans, size_t i_plan, vector<Ast_instance> &computed, vector<unsigned short> &plans_computed_f, const vector<unsigned short> &v_seq);
 
         /**
           * Saves the visit sequence generate, mixing with pre-generated
@@ -49,19 +49,19 @@ class Build_visit_sequence
 
     public:
         /**
-          * Contructor empty of Build_visit_sequence.
+          * Contructor empty of Builder_visit_sequences.
           */
-        Build_visit_sequence();
+        Builder_visit_sequences();
 
         /**
-          * Destructor of Build_visit_sequence.
+          * Destructor of Builder_visit_sequences.
           */
-        virtual ~Build_visit_sequence();
+        virtual ~Builder_visit_sequences();
 
         /**
           * Generates a visit sequence for each evaluation plan.
           */
-        bool generate_seq_visit(const Attr_grammar &attr_grammar, const map < Key_plan, Order_eval_eq > &plans);
+        bool generate_visit_sequences(const Attr_grammar &attr_grammar, const map < Key_plan, Order_eval_eq > &plans);
 
         /**
           * Returns the vector with all visit sequences generates.
@@ -76,4 +76,4 @@ class Build_visit_sequence
 
 } /* end genevalmag */
 
-#endif /* BUILD_VISIT_SEQUENCE_H_ */
+#endif /* BUILDER_VISIT_SEQUENCES_H_ */

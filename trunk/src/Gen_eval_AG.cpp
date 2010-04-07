@@ -14,8 +14,8 @@
 
 #include "Attr_grammar/Attr_grammar.h"
 #include "Parser/Parser_AG.h"
-#include "Evaluation/Builder_plan.h"
-#include "Evaluation/Build_visit_sequence.h"
+#include "Evaluation/Builder_plans.h"
+#include "Evaluation/Builder_visit_sequences.h"
 #include "Generator/Gen_code.h"
 
 namespace genevalmag
@@ -52,11 +52,11 @@ int main()
 
 	if (p_mag.parse_grammar(PATH_INPUT_FILE))
 	{
-		Builder_plan b_plans;
+		Builder_plans b_plans;
 		if (b_plans.build_plans(p_mag.get_attr_grammar()))
 		{
-			Build_visit_sequence b_visit_seq;
-			if (b_visit_seq.generate_seq_visit(p_mag.get_attr_grammar(),b_plans.get_plans()))
+			Builder_visit_sequences b_visit_seq;
+			if (b_visit_seq.generate_visit_sequences(p_mag.get_attr_grammar(),b_plans.get_plans()))
 			{
 				Gen_code gen;
 				gen.generate_code(p_mag.get_attr_grammar(), b_plans, b_visit_seq.get_visit_seq());
