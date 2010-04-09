@@ -90,18 +90,9 @@ void Builder_plans::generates_topological_order(const Graph &graph, Order_eval_e
 			{
 				index = (grammar.get_index_eq_with_context(ins, context_rule.context));
 			}
+
 			assert (index > 0);
-			//if(!belong_index(index, result_order))
-			{
-				result_order.push_back(index);
-			}
-			//else
-			//{
-				//if (ins->get_attr()->is_synthetize() && ins->get_symb()->equals(*grammar.get_rule(context_rule.context[0]).get_left_symbol()))
-				//{
-				//	result_order.push_back(index);
-				//}
-			//}
+			result_order.push_back(index);
 		}
 	}
 }
@@ -261,24 +252,6 @@ void Builder_plans::print_all_plans_project(const Attr_grammar &grammar) const
 	}
 }
 
-/**
-  * Projects a order over a symbol.
-  */
-void project_order(const Rule &rule, const Attr_grammar &grammar, const Order_eval_eq &total_order, Order_eval_eq &p_order)
-{
-	for(size_t i(0); i < total_order.size(); i++)
-	{
-		const Ast_instance *ins(grammar.get_eq_l_value(total_order[i]));
-		if(rule.get_left_symbol()->equals(*ins->get_symb()))
-		{
-			if(rule.get_left_symbol()->get_attrs().size() > p_order.size())
-			{
-				p_order.push_back(total_order[i]);
-			}
-		}
-	}
-}
-
 void purge_plan_with(const Rule &rule, const Order_eval_eq &order_eq, Order_eval_eq &purged_order)
 {
 	for(size_t i(0); i < order_eq.size(); i++)
@@ -382,10 +355,9 @@ void Builder_plans::generate_plans(const Attr_grammar &grammar, const Builder_gr
 						const Rule& rule_proj(grammar.get_rule(adp->first[i+1]));
 
 						purge_plan_with(rule_proj, total_order, proj_order);
-						//project_order(rule_proj, grammar, total_order, proj_order);
 
 						if (proj_order.size() > 0)
-						// if size == 0 this plan not interesting on this project.
+						/* if size == 0 this plan not interesting on this project. */
 						{
 							/* Saves the new_plan_projected in the projected map. */
 							Key_plan_project key_project;
@@ -418,9 +390,7 @@ void Builder_plans::generate_plans(const Attr_grammar &grammar, const Builder_gr
 		}
 	}
 
-//	clean_output_folder();
 	build_graphs.print_all_graphs(grammar.get_rules());
-//	build_graphs.print_adp_graphs(grammar.get_rules());
 	print_all_plans(grammar);
 	print_all_plans_project(grammar);
 }
@@ -479,12 +449,11 @@ const map < Key_plan_project, Order_eval_eq >::const_iterator Builder_plans::get
 //	assert(it != plans_project.end());
 //	return it;
 
-	map < Key_plan_project, Order_eval_eq >::const_iterator it(plans_project.end());
-	for(map < Key_plan_project, Order_eval_eq >::const_iterator it_proj(plans_project.begin()); it_proj != plans_project.end(); it_proj++)
+	map < Key_plan_project, Order_eval_eq >::const_iterator it(plans_project.begin());
+	for(; it != plans_project.end(); it++)
 	{
-		if (it_proj->first == key)
+		if (it->first == key)
 		{
-			it = it_proj;
 			return it;
 		}
 	}

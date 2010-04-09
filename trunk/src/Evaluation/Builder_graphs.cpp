@@ -197,7 +197,6 @@ void Builder_graphs::compute_down_graph(const map<string,Symbol> &symbols, const
 	}
 
 	/* In this point obtains the all initialiced downs. */
-
 	Graph current_graph;
 	/* Circle Dp graph. */
 	for(map<unsigned short, Graph >::iterator dp(p_Dp_graphs.begin()); dp != p_Dp_graphs.end(); dp++)
