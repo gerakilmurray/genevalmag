@@ -246,6 +246,10 @@ void Builder_plans::print_all_plans_project(const Attr_grammar &grammar) const
 		/* Obtains the symbol projected. */
 		name_graph.append(" and Symbol: ");
 		name_graph.append(it->first.symbol_project->get_name());
+		name_graph.append(" ");
+		stringstream symb_ocurence;
+		symb_ocurence << it->first.index_ocurrence;
+		name_graph.append(symb_ocurence.str());
 		name_graph.append(".");
 
 		print_graph(graph_plan,path_out.c_str(),"_plan_project_graph", name_graph, names,"box");
@@ -389,7 +393,6 @@ void Builder_plans::generate_plans(const Attr_grammar &grammar, const Builder_gr
 			}
 		}
 	}
-
 	build_graphs.print_all_graphs(grammar.get_rules());
 	print_all_plans(grammar);
 	print_all_plans_project(grammar);
@@ -445,19 +448,9 @@ const unsigned short Builder_plans::get_index_plan(const map < Key_plan, Order_e
 
 const map < Key_plan_project, Order_eval_eq >::const_iterator Builder_plans::get_plan_project(const Key_plan_project &key) const
 {
-//	const map < Key_plan_project, Order_eval_eq >::const_iterator it(plans_project.find(key));
-//	assert(it != plans_project.end());
-//	return it;
-
-	map < Key_plan_project, Order_eval_eq >::const_iterator it(plans_project.begin());
-	for(; it != plans_project.end(); it++)
-	{
-		if (it->first == key)
-		{
-			return it;
-		}
-	}
+	const map < Key_plan_project, Order_eval_eq >::const_iterator it(plans_project.find(key));
 	assert(it != plans_project.end());
+	return it;
 }
 
 } /* end genevalmag */

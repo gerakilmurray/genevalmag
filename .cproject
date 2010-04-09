@@ -48,7 +48,7 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry excluding="Out_Gen_Mag/proof|Out_Gen_Mag/Eval_mag_long.hpp|Out_Gen_Mag/Eval_mag_mag.hpp|Out_Gen_Mag/trees.test|Out_Gen_Mag/proof_T2|Out_Gen_Mag/proof_longi|Out_Gen_Mag/proof_eval|Out_Gen_Mag/Grammar_mag.log|Out_Gen_Mag/eval_proof|Out_Gen_Mag/out_graph|Out_Gen_Mag/ALL_plan_project|Out_Gen_Mag/ALL_plan|Out_Gen_Mag/proof_longitud_T2.cpp|Out_Gen_Mag/proof_longitud.cpp|src/Util/Utilities.h|Out_Gen_Mag/Eval_mag.hpp|Out_Gen_Mag/Eval_mag_proof.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry excluding="Out_Gen_Mag (copia)|Out_Gen_Mag (copia)/proof_longitud.cpp|Out_Gen_Mag (copia)/proof_longitud_T2.cpp|Out_Gen_Mag (copia)/Eval_mag.hpp|Out_Gen_Mag (copia)/Eval_mag_proof.cpp|Out_Gen_Mag/proof|Out_Gen_Mag/Eval_mag_long.hpp|Out_Gen_Mag/Eval_mag_mag.hpp|Out_Gen_Mag/trees.test|Out_Gen_Mag/proof_T2|Out_Gen_Mag/proof_longi|Out_Gen_Mag/proof_eval|Out_Gen_Mag/Grammar_mag.log|Out_Gen_Mag/eval_proof|Out_Gen_Mag/out_graph|Out_Gen_Mag/ALL_plan_project|Out_Gen_Mag/ALL_plan|Out_Gen_Mag/proof_longitud_T2.cpp|Out_Gen_Mag/proof_longitud.cpp|src/Util/Utilities.h|Out_Gen_Mag/Eval_mag.hpp|Out_Gen_Mag/Eval_mag_proof.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 </sourceEntries>
 </configuration>
 </storageModule>
@@ -495,7 +495,7 @@
 <option id="gnu.cpp.compiler.option.include.paths.1467946376" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 <listOptionValue builtIn="false" value="/usr/local/boost_1_41_0"/>
 </option>
-<option id="gnu.cpp.compiler.option.other.other.846130191" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 -Wno-deprecated" valueType="string"/>
+<option id="gnu.cpp.compiler.option.other.other.846130191" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 -Wno-deprecated" valueType="string"/>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.2108336402" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.release.842585923" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.release">
@@ -516,7 +516,7 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry excluding="Out_Gen_Mag/proof|Out_Gen_Mag/Eval_mag_long.hpp|Out_Gen_Mag/Eval_mag_mag.hpp|Out_Gen_Mag/trees.test|Out_Gen_Mag/proof_T2|Out_Gen_Mag/proof_longi|Out_Gen_Mag/proof_eval|Out_Gen_Mag/Grammar_mag.log|Out_Gen_Mag/eval_proof|Out_Gen_Mag/out_graph|Out_Gen_Mag/ALL_plan_project|Out_Gen_Mag/ALL_plan|Out_Gen_Mag/proof_longitud_T2.cpp|Out_Gen_Mag/proof_longitud.cpp|src/Util/Utilities.h|Out_Gen_Mag/Eval_mag.hpp|Out_Gen_Mag/Eval_mag_proof.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry excluding="Out_Gen_Mag (copia)|Out_Gen_Mag (copia)/proof_longitud.cpp|Out_Gen_Mag (copia)/proof_longitud_T2.cpp|Out_Gen_Mag (copia)/Eval_mag.hpp|Out_Gen_Mag (copia)/Eval_mag_proof.cpp|Out_Gen_Mag/proof|Out_Gen_Mag/Eval_mag_long.hpp|Out_Gen_Mag/Eval_mag_mag.hpp|Out_Gen_Mag/trees.test|Out_Gen_Mag/proof_T2|Out_Gen_Mag/proof_longi|Out_Gen_Mag/proof_eval|Out_Gen_Mag/Grammar_mag.log|Out_Gen_Mag/eval_proof|Out_Gen_Mag/out_graph|Out_Gen_Mag/ALL_plan_project|Out_Gen_Mag/ALL_plan|Out_Gen_Mag/proof_longitud_T2.cpp|Out_Gen_Mag/proof_longitud.cpp|src/Util/Utilities.h|Out_Gen_Mag/Eval_mag.hpp|Out_Gen_Mag/Eval_mag_proof.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 </sourceEntries>
 </configuration>
 </storageModule>
