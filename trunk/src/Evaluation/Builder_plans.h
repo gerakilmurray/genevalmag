@@ -34,7 +34,8 @@ typedef struct c_rule
 
 	bool operator< (const c_rule &other) const
 	{
-		return (father < other.father) || (context < other.context);
+		return (context < other.context) ||
+		       (context == other.context && father < other.father);
 	}
 
 	c_rule &operator= (const c_rule &other)
@@ -100,7 +101,8 @@ typedef struct k_plan
 
 	bool operator< (const k_plan &other) const
 	{
-		return (id_plan < other.id_plan) || (plan < other.plan);
+		return (id_plan < other.id_plan) ||
+		       (id_plan == other.id_plan && plan < other.plan);
 	}
 
 	bool operator== (const k_plan &other) const
@@ -128,7 +130,9 @@ typedef struct k_p_project
 
 	bool operator< (const k_p_project &other) const
 	{
-		return (id_plan_project < other.id_plan_project) || (symbol_project->get_name() < other.symbol_project->get_name()) || (index_ocurrence < other.index_ocurrence);
+		return (id_plan_project < other.id_plan_project) ||
+		       (id_plan_project == other.id_plan_project && symbol_project->get_name() < other.symbol_project->get_name()) ||
+		       (id_plan_project == other.id_plan_project && symbol_project->get_name() == other.symbol_project->get_name() && index_ocurrence < other.index_ocurrence);
 	}
 
 	bool operator== (const k_p_project &other) const
@@ -208,8 +212,6 @@ class Builder_plans
 		const unsigned short get_index_plan(const map < Key_plan, Order_eval_eq >::const_iterator it_plan) const;
 
 		const map < Key_plan_project, Order_eval_eq >::const_iterator get_plan_project(const Key_plan_project &key) const;
-
-//		const vector< unsigned short > get_plans(Symbol * symb)
 };
 
 } /* end genevalmag */

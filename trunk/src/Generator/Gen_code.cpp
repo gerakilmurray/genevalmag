@@ -25,7 +25,7 @@ namespace genevalmag
 {
 
 const string FILE_GRAMMAR("Grammar_mag.log");
-const string FILE_NAME("Eval_mag.hpp");
+const string FILE_NAME("Eval_mag.cpp");
 const string DEFAULT_PATH("../GenEvalAG/");
 const string DEFAULT_FOLDER("Out_Gen_Mag/");
 
@@ -814,40 +814,6 @@ void Gen_code::generate_methods(const Builder_plans &b_plan, const Attr_grammar 
 	file_output.close();
 }
 
-void Gen_code::generate_externs(const Attr_grammar &attr_grammar)
-{
-	string externs;
-
-	externs.append("/**\n  * Sorts of the Semantic Domains.\n  */\n\n");
-
-	const map<string, Sort> &sorts(attr_grammar.get_sorts());
-
-	for(map<string, Sort>::const_iterator it_s(sorts.begin()); it_s != sorts.end(); it_s++)
-	{
-		if(!it_s->second.is_type_basic())
-		{
-			externs.append("//extern ");
-			externs.append(it_s->second.get_name());
-			externs.append(";\n\n");
-		}
-	}
-
-	externs.append("/**\n  * Functions and Operators of the Semantic Domains.\n  */\n\n");
-
-	const map<string, Function> &funcs(attr_grammar.get_functions());
-
-	for(map<string, Function>::const_iterator it_f(funcs.begin()); it_f != funcs.end(); it_f++)
-	{
-		externs.append("//extern ");
-		externs.append(it_f->second.signature());
-		externs.append("\n\n");
-	}
-
-	std::ofstream file_output(full_path.c_str(),ofstream::app);
-	file_output.write(externs.c_str(),externs.size());
-	file_output.close();
-}
-
 void Gen_code::generate_structs(const Attr_grammar &attr_grammar)
 {
 	string structs;
@@ -939,7 +905,6 @@ void Gen_code::generate_code(const Attr_grammar &attr_grammar, const Builder_pla
 	generate_grammar_file(attr_grammar);
 	generate_header_file();
 
-	generate_externs(attr_grammar);
 	generate_structs(attr_grammar);
 
 	generate_header_class();
