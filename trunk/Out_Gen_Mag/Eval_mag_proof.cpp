@@ -53,7 +53,6 @@ int main()
 
 	node_s1_z.childs.push_back(&node_s1_z_y3);
     
-    
     eval_mag.evaluator_mag(&node_s1);
 
     cout << " After evaluation." << endl;

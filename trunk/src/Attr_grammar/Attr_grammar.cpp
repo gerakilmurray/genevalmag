@@ -149,13 +149,13 @@ bool Attr_grammar::add_symbol(Symbol &symb)
     {
         map_symb = &ag_symb_terminals;
     }
-
     bool not_repeat = add <string, Symbol>(symb, *map_symb);
     if(not_repeat && symb.is_non_terminal())
     {
         map<string, Symbol>::iterator it(map_symb->find(symb.key()));
         load_attributes(it->second);
     }
+
     return not_repeat;
 }
 
@@ -186,7 +186,6 @@ bool Attr_grammar::add_rule(Rule &rule)
         /* The rule is already defined then it isn't inserted. */
         return false;
     }
-
     rule.set_id(cant_rules++);
 
     bool result(add <unsigned short, Rule>(rule, ag_rule));

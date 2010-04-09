@@ -29,9 +29,9 @@ attributes
  ******************/
 rules
     // P1
-    T ::= '0' T2 T2 T2 T2 T T
+    T ::= '0' T2 T T
             compute             
-                T[0].longi = T2[3].longi + T2[1].longi + T2[2].longi + T2[0].longi + T[1].longi + T[2].longi + 1;
+                T[0].longi = T2[0].longi + T[1].longi + T[2].longi;
             end;
             
     T2 ::= '1'
@@ -39,7 +39,7 @@ rules
                 T2[0].longi = 1;
             end;
             
-    T ::= '#'
+    T ::= '0'
             compute
                 T[0].longi = 0;
             end; 

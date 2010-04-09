@@ -10,13 +10,6 @@
 
 using namespace evalmag;
 
-
-int  f(int j)
-{
-	return j*5;
-}
-
-
 /**
   * Main method of the Eval_mag.
   */
@@ -24,64 +17,69 @@ int main()
 {
     Eval_mag eval_mag;
     eval_mag.print_v_seq();
+    eval_mag.translate_mag();
 
+// ROOT
     T node_1;
 	node_1.rule_id = 1;
 	node_1.parent = NULL;
+	
+// childs ROOT
+    T2 node_20;
+	node_20.rule_id = 2;
+	node_20.parent = &node_1;
 
-    T2 node_2;
-	node_2.rule_id = 2;
-	node_2.parent = &node_1;
-
-    T2 node_3;
-	node_3.rule_id = 2;
-	node_3.parent =&node_1;
-
-    T2 node_4;
-	node_4.rule_id = 2;
-	node_4.parent = &node_1;
-
-    T2 node_5;
-	node_5.rule_id = 2;
-	node_5.parent =&node_1;
 		
     T node_21;
 	node_21.rule_id = 1;
 	node_21.parent = &node_1;
 
-    T2 node_6;
-	node_6.rule_id = 2;
-	node_6.parent = &node_21;
-
-    T2 node_7;
-	node_7.rule_id = 2;
-	node_7.parent =&node_21;
-
-    T2 node_8;
-	node_8.rule_id = 2;
-	node_8.parent = &node_21;
-
-    T2 node_9;
-	node_9.rule_id = 2;
-	node_9.parent =&node_21;
-		
     T node_22;
 	node_22.rule_id = 3;
-	node_22.parent = &node_21;
+	node_22.parent = &node_1;
 
-	node_1.childs.push_back(&node_2);
-	node_1.childs.push_back(&node_3);
-	node_1.childs.push_back(&node_4);
-	node_1.childs.push_back(&node_5);
+	node_1.childs.push_back(&node_20);
 	node_1.childs.push_back(&node_21);
-	node_1.childs.push_back(&node_21);
+	node_1.childs.push_back(&node_22);
+	
+// childs of my second childs.
+	
+    T2 node_210;
+	node_210.rule_id = 2;
+	node_210.parent = &node_21;
 
-	node_21.childs.push_back(&node_6);
-	node_21.childs.push_back(&node_7);
-	node_21.childs.push_back(&node_8);
-	node_21.childs.push_back(&node_9);
-	node_21.childs.push_back(&node_22);
-	node_21.childs.push_back(&node_22);
+		
+    T node_211;
+	node_211.rule_id = 3;
+	node_211.parent = &node_21;
+
+    T node_212;
+	node_212.rule_id = 1;
+	node_212.parent = &node_21;
+
+	node_21.childs.push_back(&node_210);
+	node_21.childs.push_back(&node_211);
+	node_21.childs.push_back(&node_212);	
+
+
+// childs of thirtd child of my second child.
+	
+    T2 node_2120;
+	node_2120.rule_id = 2;
+	node_2120.parent = &node_212;
+
+		
+    T node_2121;
+	node_2121.rule_id = 3;
+	node_2121.parent = &node_212;
+
+    T node_2122;
+	node_2122.rule_id = 3;
+	node_2122.parent = &node_212;
+
+	node_212.childs.push_back(&node_2120);
+	node_212.childs.push_back(&node_2121);
+	node_212.childs.push_back(&node_2122);
 
 
 		

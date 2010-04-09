@@ -43,6 +43,11 @@ class Equation
           */
         unsigned int *_get_count_ref() const;
 
+        /**
+          * Traverse the equation tree while saves only the Ast_instance nodes in the vector result.
+          */
+        void inorder_only_instance(const Ast_node *head, vector<const Ast_instance*> &result) const;
+
     public:
         /**
           * Constructor empty of equation.
@@ -95,9 +100,9 @@ class Equation
         void inorder_only_leaf(const Ast_node *head, vector<const Ast_leaf*> &result) const;
 
         /**
-          * Traverse the equation tree while saves only the Ast_instance nodes in the vector result.
+          * Returns the Ast_instance nodes of the right side of Ast tree.
           */
-        void inorder_only_instance(const Ast_node *head, vector<const Ast_instance*> &result) const;
+        const vector<const Ast_instance*> get_instance_right_side() const;
 
         /**
           * Generate and return a string reprensentation of an Equation.
