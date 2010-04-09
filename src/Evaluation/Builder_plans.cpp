@@ -91,10 +91,17 @@ void Builder_plans::generates_topological_order(const Graph &graph, Order_eval_e
 				index = (grammar.get_index_eq_with_context(ins, context_rule.context));
 			}
 			assert (index > 0);
-			if(!belong_index(index, result_order))
+			//if(!belong_index(index, result_order))
 			{
 				result_order.push_back(index);
 			}
+			//else
+			//{
+				//if (ins->get_attr()->is_synthetize() && ins->get_symb()->equals(*grammar.get_rule(context_rule.context[0]).get_left_symbol()))
+				//{
+				//	result_order.push_back(index);
+				//}
+			//}
 		}
 	}
 }
@@ -384,12 +391,9 @@ void Builder_plans::generate_plans(const Attr_grammar &grammar, const Builder_gr
 							Key_plan_project key_project;
 							key_project.id_plan_project = key_plan;
 							key_project.symbol_project = right_side[i];
+							key_project.index_ocurrence = i;
 							pair < Key_plan_project, Order_eval_eq > new_p(key_project, proj_order);
-							pair<map<Key_plan_project, Order_eval_eq>::iterator, bool > r = plans_project.insert(new_p);
-							if(!r.second)
-							{
-								cout<< "NOOOOOOOOO" << endl;
-							}
+							plans_project.insert(new_p);
 
 							/* Creates new plans for the work-list with the rule's right symbol.  */
 							Key_work_list key;
@@ -452,6 +456,39 @@ const map < Key_plan_project, Order_eval_eq > &Builder_plans::get_plans_project(
 const vector < Order_eval_eq > &Builder_plans::get_init_orders() const
 {
 	return init_order_ag;
+}
+
+const unsigned short Builder_plans::get_index_plan(const map < Key_plan, Order_eval_eq >::const_iterator it_plan) const
+{
+	unsigned short res(0);
+
+	map < Key_plan, Order_eval_eq >::const_iterator first(eval_plans.begin());
+	map < Key_plan, Order_eval_eq >::const_iterator last(eval_plans.end());
+
+	while(it_plan != first && first != last)
+	{
+		res++;
+		first++;
+	}
+	return res;
+}
+
+const map < Key_plan_project, Order_eval_eq >::const_iterator Builder_plans::get_plan_project(const Key_plan_project &key) const
+{
+//	const map < Key_plan_project, Order_eval_eq >::const_iterator it(plans_project.find(key));
+//	assert(it != plans_project.end());
+//	return it;
+
+	map < Key_plan_project, Order_eval_eq >::const_iterator it(plans_project.end());
+	for(map < Key_plan_project, Order_eval_eq >::const_iterator it_proj(plans_project.begin()); it_proj != plans_project.end(); it_proj++)
+	{
+		if (it_proj->first == key)
+		{
+			it = it_proj;
+			return it;
+		}
+	}
+	assert(it != plans_project.end());
 }
 
 } /* end genevalmag */

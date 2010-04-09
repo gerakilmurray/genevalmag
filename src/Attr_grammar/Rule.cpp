@@ -303,7 +303,12 @@ bool Rule::equals(const Rule &other) const
 {
     if(r_left_symbol->equals(*(other.get_left_symbol())))
     {
-        for(vector<const Symbol*>::size_type i(0); i < r_right_side.size(); i++)
+    	if (r_right_side.size() != other.get_right_side().size())
+    	{
+    		return false;
+    	}
+
+        for(size_t i(0); i < r_right_side.size(); i++)
         {
             if (!r_right_side[i]->equals(*(other.get_right_side()[i])))
             {

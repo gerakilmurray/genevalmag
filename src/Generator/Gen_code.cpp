@@ -205,7 +205,6 @@ void generate_initialize_v_seq(string &text, const vector<Visit_seq> & v_seq)
 				"int"
 			)
 		);
-
 		text.append("            v_seq.push_back(");
 		text.append(name_vec);
 		text.append(");\n\n");
@@ -225,13 +224,6 @@ string generate_key_plan(string &text,const string n_key,int num_key, Key_plan k
 	text.append(name_key);
 	text.append(";\n");
 
-//	text.append(name_key);
-//	text.append(".id_plan.father = ");
-//	stringstream father;
-//	father << k_p.id_plan.father;
-//	text.append(father.str());
-//	text.append(";\n");
-
 	string context_key ("context_");
 	context_key.append(n_key);
 	string name_o_rule(
@@ -244,7 +236,6 @@ string generate_key_plan(string &text,const string n_key,int num_key, Key_plan k
 			"unsigned short"
 		)
 	);
-
 	text.append("            ");
 	text.append(name_key);
 	text.append(".id_plan = ");
@@ -264,7 +255,6 @@ string generate_key_plan(string &text,const string n_key,int num_key, Key_plan k
 			"unsigned short"
 		)
 	);
-
 	text.append("            ");
 	text.append(name_key);
 	text.append(".plan = ");
@@ -341,12 +331,19 @@ void generate_initialize_plan_proj(string &text, const map < Key_plan_project, O
 		text.append(name_key_plan);
 		text.append(";\n");
 
-		/* it->second */
 		text.append("            ");
 		text.append(name_key);
 		text.append(".node_project = \"");
 		text.append(it->first.symbol_project->get_name());
 		text.append("\";\n");
+
+		text.append("            ");
+		text.append(name_key);
+		text.append(".index_ocurrence = ");
+		stringstream str_index_ocurrence;
+		str_index_ocurrence << it->first.index_ocurrence;
+		text.append(str_index_ocurrence.str());
+		text.append(";\n");
 
 		/* generate key_order_eval_eq */
 		string name_order(
@@ -541,6 +538,7 @@ void generate_traverse(string &text)
 	text.append("                Key_plan_project k_plan_proj;\n");
 	text.append("                k_plan_proj.id_plan_project = k_plan;\n");
 	text.append("                k_plan_proj.node_project = rule[i+1];\n");
+	text.append("                k_plan_proj.index_ocurrence = i;\n");
 	text.append("                for(size_t j(0); j < eval_plans_project.size(); j++)\n");
 	text.append("                {\n");
 	text.append("                    if (eval_plans_project[j].first == k_plan_proj)\n");

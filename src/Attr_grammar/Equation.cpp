@@ -231,6 +231,16 @@ void Equation::inorder_only_instance(const Ast_node *head, vector<const Ast_inst
 }
 
 /**
+  * Returns the Ast_instance nodes of the right side of Ast tree.
+  */
+const vector<const Ast_instance*> Equation::get_instance_right_side() const
+{
+	vector<const Ast_instance*> result;
+	inorder_only_instance(r_value, result);
+	return result;
+}
+
+/**
   * Generate and return a string reprensentation of an Equation.
   *
   * Result= \<l_value\> "=" \<r_value\> ";"

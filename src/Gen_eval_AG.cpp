@@ -24,7 +24,7 @@ namespace genevalmag
 /**
   *	Path of the input file with the specification of AG.
   */
-const string PATH_INPUT_FILE ("./src/Test/mag.txt");
+const string PATH_INPUT_FILE ("./src/Test/count.txt");
 
 }
 
@@ -56,7 +56,7 @@ int main()
 		if (b_plans.build_plans(p_mag.get_attr_grammar()))
 		{
 			Builder_visit_sequences b_visit_seq;
-			if (b_visit_seq.generate_visit_sequences(p_mag.get_attr_grammar(),b_plans.get_plans()))
+			if (b_visit_seq.generate_visit_sequences(p_mag.get_attr_grammar(),b_plans))
 			{
 				Gen_code gen;
 				gen.generate_code(p_mag.get_attr_grammar(), b_plans, b_visit_seq.get_visit_seq());
@@ -64,7 +64,6 @@ int main()
 
 		}
 	}
-
 	cout << "Bye... :-D" << endl;
 
 	gettimeofday(&t_fin, NULL);

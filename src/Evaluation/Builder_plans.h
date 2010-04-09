@@ -103,6 +103,11 @@ typedef struct k_plan
 		return (id_plan < other.id_plan) || (plan < other.plan);
 	}
 
+	bool operator== (const k_plan &other) const
+	{
+		return (id_plan == other.id_plan) && (plan == other.plan);
+	}
+
 	k_plan &operator= (const k_plan &other)
 	{
 		if(this != &other)
@@ -119,10 +124,16 @@ typedef struct k_p_project
 {
 	Key_plan		id_plan_project;
 	const Symbol	*symbol_project;
+	unsigned short  index_ocurrence;
 
 	bool operator< (const k_p_project &other) const
 	{
-		return (id_plan_project < other.id_plan_project) || (symbol_project->get_name() < other.symbol_project->get_name());
+		return (id_plan_project < other.id_plan_project) || (symbol_project->get_name() < other.symbol_project->get_name()) || (index_ocurrence < other.index_ocurrence);
+	}
+
+	bool operator== (const k_p_project &other) const
+	{
+		return (id_plan_project == other.id_plan_project) && (symbol_project->get_name() == other.symbol_project->get_name()) && (index_ocurrence == other.index_ocurrence);
 	}
 
 	k_p_project &operator= (const k_p_project &other)
@@ -131,6 +142,7 @@ typedef struct k_p_project
 		{
 			id_plan_project = other.id_plan_project;
 			symbol_project = other.symbol_project;
+			index_ocurrence = other.index_ocurrence;
 		}
 		return *this;
 	}
@@ -192,6 +204,12 @@ class Builder_plans
 		const map < Key_plan_project, Order_eval_eq > &get_plans_project() const;
 
 		const vector < Order_eval_eq > &get_init_orders() const;
+
+		const unsigned short get_index_plan(const map < Key_plan, Order_eval_eq >::const_iterator it_plan) const;
+
+		const map < Key_plan_project, Order_eval_eq >::const_iterator get_plan_project(const Key_plan_project &key) const;
+
+//		const vector< unsigned short > get_plans(Symbol * symb)
 };
 
 } /* end genevalmag */
