@@ -188,6 +188,13 @@ bool Attr_grammar::add_rule(Rule &rule)
     }
     rule.set_id(cant_rules++);
 
+    if (ag_initial_symb != NULL && rule.belongs_non_terminal(*ag_initial_symb))
+    // Check if the rule respet the extended grammar.
+    {
+    	cerr << "ERROR: The grammar isn't extended grammar." << endl;
+    	exit(-1);
+    }
+
     bool result(add <unsigned short, Rule>(rule, ag_rule));
     if (result)
     {
