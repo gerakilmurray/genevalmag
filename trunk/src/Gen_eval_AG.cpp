@@ -24,7 +24,7 @@ namespace genevalmag
 /**
   *	Path of the input file with the specification of AG.
   */
-const string PATH_INPUT_FILE ("./src/Test/count.txt");
+const string PATH_INPUT_FILE ("./src/Test/mag.txt");
 
 }
 

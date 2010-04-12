@@ -39,13 +39,8 @@ const Attr_grammar &Parser_AG::get_attr_grammar()
 }
 
 /*
- * 		REP0RTES DE ERRORES.
+ * Our error reporting parsers
  */
-///////////////////////////////////////////////////////////////////////////////
-//
-//  Our error reporting parsers
-//
-///////////////////////////////////////////////////////////////////////////////
 std::ostream& operator<<(std::ostream& out, file_position const& lc)
 {
     return out <<
@@ -53,43 +48,6 @@ std::ostream& operator<<(std::ostream& out, file_position const& lc)
             "\nLine:\t" << lc.line <<
             "\nCol:\t" << lc.column << endl;
 }
-
-struct err_parser {
-    char const* eol_msg;
-    char const* msg;
-
-    err_parser(char const* eol_msg_, char const* msg_):eol_msg(eol_msg_),msg    (msg_){}
-
-    typedef nil_t result_t;
-
-    template <typename ScannerT>
-    int
-    operator()(ScannerT const& scan, result_t& /*result*/) const
-    {
-        if (scan.at_end()) {
-            if (eol_msg) {
-                file_position fpos = scan.first.get_position();
-                cerr << fpos << eol_msg << endl;
-            }
-        } else {
-            if (msg) {
-                file_position fpos = scan.first.get_position();
-                cerr << fpos << msg << endl;
-            }
-        }
-
-        return -1; // Fail.
-    }
-
-};
-typedef functor_parser<err_parser> error_report_p;
-
-error_report_p error_parser = err_parser( "ERROR QUE NO SE QUE HACE.","arreglate como puedas" );
-
-/*
- *     FIN REPORTES DE ERRORES.
- */
-
 
 /**
   * Declaration of a parser for inputs that ignore within
@@ -357,7 +315,6 @@ struct attritute_grammar: public grammar<attritute_grammar>
 	};
 };
 
-
 /**
   * This method invokes the method 'parse' of the library Spitir included in Boost.
   * Returns true if could parse all the input.
@@ -401,15 +358,6 @@ bool Parser_AG::parse_grammar(const string path_file_input)
 	    cerr << "ERROR: Parsing Failed." << endl;
 	    cerr << "ERROR: The following text will not be able to parse:" << endl;
 	    cerr << fp << endl;
-//	    cerr << "Parsing of file '" << fp.file
-//             << "' failed at line " << fp.line
-//	         << ", column " << fp.column << ".\n";
-
-
-
-//		const boost::spirit::file_position fp = info.stop.get_position();
-//		cerr << "\"" << info.stop << "\"" << endl;
-
 	}
 	cout << "-------------------------\n";
 
