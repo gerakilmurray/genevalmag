@@ -39,6 +39,16 @@ double timeval_diff(struct timeval *a, struct timeval *b)
     (double)(b->tv_sec + (double)b->tv_usec/1000000);
 }
 
+
+/**
+  *	GenevalMag  [OPTION] -f <input_file>
+  *	where [OPTION]:
+  *		-i 	Including header "h" or "hpp" file for resolve externs variables in generated code.
+  *		-fo Define the folder output for output generated information.
+  *		-o	Define the names files generated library.
+  */
+
+
 /**
   * Main method of the parsing.
   */
@@ -54,18 +64,22 @@ int main
 
 	gettimeofday(&t_ini, NULL);
 
-	int count;
-
 	// Display each command-line argument.
 	cout << "\nCommand-line arguments:\n";
-	for(count = 0; count < argc; count++)
+	for(int count = 0; count < argc; count++)
 	{
 		cout << "  argv[" << count << "]   " << argv[count] << "\n";
 	}
 
 	if(argc == 1)
 	{
-		cerr << "ERROR: enter the path of the input file." << endl;
+		cout << "ERROR: Geneval wrong uses.\n Uses:" << endl;
+		cout << "GenevalMag  [OPTION] -f <input_file>" << endl;
+		cout << " 	where [OPTION]:" << endl;
+		cout << "		-i 	Including header 'h' or 'hpp' file for resolve externs variables in generated code." << endl;
+		cout << " 		-fo Define the folder output for output generated information." << endl;
+		cout << "		-o	Define the names files generated library." << endl;
+
 		exit(-1);
 	}
 
