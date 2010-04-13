@@ -25,28 +25,13 @@ namespace genevalmag
 {
 
 const string FILE_GRAMMAR("Grammar_mag.log");
-const string FILE_NAME("Eval_mag.cpp");
-const string DEFAULT_PATH("../GenEvalAG/");
-const string DEFAULT_FOLDER("Out_Gen_Mag/");
 
-Gen_code::Gen_code()
+Gen_code::Gen_code(const string path, const string name_file)
 {
-	string path(DEFAULT_PATH);
-	path.append(DEFAULT_FOLDER);
-	create_folder(path);
 	path_output_code = path;
-	full_path = path_output_code;
-	full_path.append(FILE_NAME);
-}
-
-Gen_code::Gen_code(string path)
-{
-	string _path(path);
-	_path.append(DEFAULT_FOLDER);
-	create_folder(_path);
-	path_output_code = _path;
-	full_path = path_output_code;
-	full_path.append(FILE_NAME);
+	if (path_output_code[path_output_code.size()-1] != '/')
+		path_output_code.append("/");
+	file_name = name_file;
 }
 
 Gen_code::~Gen_code()
@@ -57,6 +42,8 @@ Gen_code::~Gen_code()
 void Gen_code::generate_grammar_file(const Attr_grammar &attr_grammar) const
 {
 	string p_grammar(path_output_code);
+
+
 	p_grammar.append(FILE_GRAMMAR);
 
 	string grammar_t;
@@ -88,7 +75,7 @@ void Gen_code::generate_header_file()
 	string header;
 	header.append("/**\n");
 	header.append("  *  \\file      ");
-	header.append(FILE_NAME);
+	header.append(file_name);
 	header.append("\n");
 	header.append("  *  \\brief     Class generator from static evaluator generator: GENEVALMAG \n");
 
@@ -116,7 +103,7 @@ void Gen_code::generate_header_file()
 	header.append("using namespace std;\n");
 	header.append("using namespace util_ag;\n\n");
 
-	std::ofstream file_output(full_path.c_str());
+	std::ofstream file_output(path_output_code.c_str());
 	file_output.write(header.c_str(),header.size());
 	file_output.close();
 }
@@ -127,7 +114,7 @@ void Gen_code::generate_header_class()
 	header.append("class Eval_mag\n");
 	header.append("{\n");
 
-	std::ofstream file_output(full_path.c_str(),ofstream::app);
+	std::ofstream file_output(path_output_code.c_str(),ofstream::app);
 	file_output.write(header.c_str(),header.size());
 	file_output.close();
 }
@@ -139,7 +126,7 @@ void Gen_code::generate_footer()
 	footer.append("} /* end namespace */\n\n");
 	footer.append("#endif /* EVAL_MAG_HPP_ */\n\n");
 
-	std::ofstream file_output(full_path.c_str(),ofstream::app);
+	std::ofstream file_output(path_output_code.c_str(),ofstream::app);
 	file_output.write(footer.c_str(),footer.size());
 	file_output.close();
 }
@@ -386,7 +373,7 @@ void Gen_code::generate_private()
 	private_t.append("        vector < Plan_project >      eval_plans_project;\n");
 	private_t.append("        vector < Rule >              rules;\n");
 
-	std::ofstream file_output(full_path.c_str(),ofstream::app);
+	std::ofstream file_output(path_output_code.c_str(),ofstream::app);
 	file_output.write(private_t.c_str(),private_t.size());
 	file_output.close();
 }
@@ -453,7 +440,7 @@ void Gen_code::generate_public(const vector<Visit_seq> & v_seq, const Builder_pl
 
 	public_t.append("        }\n\n");
 
-	std::ofstream file_output(full_path.c_str(),ofstream::app);
+	std::ofstream file_output(path_output_code.c_str(),ofstream::app);
 	file_output.write(public_t.c_str(),public_t.size());
 	file_output.close();
 }
@@ -737,15 +724,6 @@ void generate_eval_visiter(string &text)
 	text.append("        		if (item_visit > 0)\n");
 	text.append("        		{\n");
 	text.append("        		    eval_visiter(root->childs[item_visit - 1]);\n");
-
-//	text.append("        			for(size_t j(0); j < root->childs.size(); j++)\n");
-//	text.append("        			{\n");
-//	text.append("        				if (root->childs[j]->rule_id == item_visit)\n");
-//	text.append("        				{\n");
-//	text.append("        					eval_visiter(root->childs[j]);\n");
-//	text.append("        					break;\n");
-//	text.append("        				}\n");
-//	text.append("        			}\n");
 	text.append("        		}\n");
 	text.append("        		else if (item_visit < 0)\n");
 	text.append("        		{\n");
@@ -809,7 +787,7 @@ void Gen_code::generate_methods(const Builder_plans &b_plan, const Attr_grammar 
 
 	generate_evaluator(methods_t, b_plan);
 
-	std::ofstream file_output(full_path.c_str(), ofstream::app);
+	std::ofstream file_output(path_output_code.c_str(), ofstream::app);
 	file_output.write(methods_t.c_str(),methods_t.size());
 	file_output.close();
 }
@@ -895,7 +873,7 @@ void Gen_code::generate_structs(const Attr_grammar &attr_grammar)
 		structs.append(" ;\n\n");
 	}
 
-	std::ofstream file_output(full_path.c_str(), ofstream::app);
+	std::ofstream file_output(path_output_code.c_str(), ofstream::app);
 	file_output.write(structs.c_str(),structs.size());
 	file_output.close();
 }

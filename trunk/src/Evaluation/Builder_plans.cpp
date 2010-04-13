@@ -22,14 +22,17 @@ using namespace utilities;
 namespace genevalmag
 {
 
-const string PATH_OUT_PLAN("./Out_Gen_Mag/ALL_plan/");
-const string PATH_OUT_PLAN_PROJECT("./Out_Gen_Mag/ALL_plan_project/");
+const string PATH_OUT_PLAN("ALL_plan/");
+const string PATH_OUT_PLAN_PROJECT("ALL_plan_project/");
 
 /**
   * Constructor empty of Builder plan.
   */
-Builder_plans::Builder_plans()
+Builder_plans::Builder_plans(const string path)
 {
+	path_output  = path;
+	if (path_output[path_output.size()-1] != '/')
+		path_output.append("/");
 }
 
 /**
@@ -139,7 +142,8 @@ Order_eval_eq Builder_plans::compute_order(const Graph &graph_adp, const Order_e
   */
 void Builder_plans::print_all_plans(const Attr_grammar &grammar) const
 {
-	string path_out(PATH_OUT_PLAN);
+	string path_out(path_output);
+	path_out.append(PATH_OUT_PLAN);
 	clean_output_folder(path_out);
 	for(map < Key_plan, Order_eval_eq >::const_iterator it(eval_plans.begin()); it != eval_plans.end(); it++)
 	{
@@ -196,7 +200,8 @@ void Builder_plans::print_all_plans(const Attr_grammar &grammar) const
   */
 void Builder_plans::print_all_plans_project(const Attr_grammar &grammar) const
 {
-	string path_out(PATH_OUT_PLAN_PROJECT);
+	string path_out(path_output);
+	path_out.append(PATH_OUT_PLAN_PROJECT);
 	clean_output_folder(path_out);
 	for(map < Key_plan_project, Order_eval_eq >::const_iterator it(plans_project.begin()); it != plans_project.end(); it++)
 	{

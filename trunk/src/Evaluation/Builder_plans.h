@@ -161,6 +161,8 @@ class Builder_plans
 
 		vector < Order_eval_eq > init_order_ag;
 
+		string path_output;
+
 		/**
 		  * Applies a topological order at graph.
 		  * The changes are applies about paramenter "result_order".
@@ -182,7 +184,7 @@ class Builder_plans
 		/**
 		  * Constructor empty of Builder plans.
 		  */
-		Builder_plans();
+		Builder_plans(const string path);
 
 		/**
 		  * Destructor of Builder plans.

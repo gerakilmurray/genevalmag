@@ -25,12 +25,12 @@ namespace utilities
 /**
   * Create the folder passed as parameter.
   */
-void create_folder(const string path);
+bool create_folder(const string path);
 
 /**
   * Remove and create the output folder of files .dot and .png.
   */
-void clean_output_folder(const string path);
+bool clean_output_folder(const string path);
 
 /**
   * Generates the names of vertex. (The vertex's name is an instance).

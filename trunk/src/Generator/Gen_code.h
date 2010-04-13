@@ -20,7 +20,7 @@ class Gen_code
 	private:
 		string path_output_code;
 
-		string full_path;
+		string file_name;
 
 		void generate_grammar_file(const Attr_grammar &attr_grammar) const;
 
@@ -41,8 +41,7 @@ class Gen_code
 		void generate_structs(const Attr_grammar &attr_grammar);
 
 	public:
-		Gen_code();
-		Gen_code(string path);
+		Gen_code(const string path, const string name_file);
 
 		virtual ~Gen_code();
 
