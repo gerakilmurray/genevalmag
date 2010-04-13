@@ -21,31 +21,32 @@ namespace utilities
 /**
   * Create the folder passed as parameter.
   */
-void create_folder(const string path)
+bool create_folder(const string path)
 {
 	/* Create folder. */
 	string command_mkdir_folder("mkdir -p ");
 	command_mkdir_folder.append(path);
 	if (system (command_mkdir_folder.c_str()) != 0)
 	{
-		cerr << "ERROR: the filesystem denies folder's creation." << endl;
+		return false;
 	}
+	return true;
 }
 
 /**
   * Remove and create the output folder of files .dot and .png.
   */
-void clean_output_folder(const string path)
+bool clean_output_folder(const string path)
 {
 	/* Remove the folder. */
 	string command_rm_folder("rm -f -r ");
 	command_rm_folder.append(path);
 	if (system (command_rm_folder.c_str()) != 0)
 	{
-		cerr << "ERROR: the filesystem denies folder's remove." << endl;
+		return false;
 	}
 	/* Create folder. */
-	create_folder(path);
+	return create_folder(path);
 }
 
 /**
