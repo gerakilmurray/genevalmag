@@ -10,6 +10,8 @@
 #include <iostream>
 #include <time.h>
 
+#include <boost/algorithm/string.hpp>
+
 #include "../Evaluation/Builder_plans.h"
 #include "../Ast/Ast_function.h"
 #include "../Ast/Ast_literal.h"
@@ -26,29 +28,27 @@ namespace genevalmag
 
 const string FILE_GRAMMAR("Grammar_mag.log");
 
-Gen_code::Gen_code(const string path, const string name_file)
+Gen_code::Gen_code(const string &path_folder_output, const string &name_file)
 {
-	path_output_code = path;
-	if (path_output_code[path_output_code.size()-1] != '/')
-		path_output_code.append("/");
-	file_name = name_file;
+	path_output = path_folder_output;
+	if (path_output[path_output.size()-1] != '/')
+	{
+		path_output.append("/");
+	}
+	file_name_header = name_file;
+	file_name_header.append(".hpp");
+
+	file_name_code = name_file;
+	file_name_code.append(".cpp");
 }
 
 Gen_code::~Gen_code()
 {
-
 }
 
 void Gen_code::generate_grammar_file(const Attr_grammar &attr_grammar) const
 {
-	string p_grammar(path_output_code);
-
-
-	p_grammar.append(FILE_GRAMMAR);
-
-	string grammar_t;
-
-	grammar_t.append("/**\n");
+	string grammar_t("/**\n");
 	grammar_t.append("  *  \\file      ");
 	grammar_t.append(FILE_GRAMMAR);
 	grammar_t.append("\n");
@@ -65,68 +65,95 @@ void Gen_code::generate_grammar_file(const Attr_grammar &attr_grammar) const
 
 	grammar_t.append(attr_grammar.to_string());
 
-	std::ofstream file_output(p_grammar.c_str());
+	string path(path_output);
+	path.append(FILE_GRAMMAR);
+	std::ofstream file_output(path.c_str());
 	file_output.write(grammar_t.c_str(), grammar_t.size());
 	file_output.close();
 }
 
-void Gen_code::generate_header_file()
+void Gen_code::generate_code_file()
 {
-	string header;
-	header.append("/**\n");
-	header.append("  *  \\file      ");
-	header.append(file_name);
-	header.append("\n");
-	header.append("  *  \\brief     Class generator from static evaluator generator: GENEVALMAG \n");
+	string code_txt("/**\n");
+	code_txt.append("  *  \\file      ");
+	code_txt.append(file_name_code);
+	code_txt.append("\n");
+	code_txt.append("  *  \\brief     Implementation of methods of the library GenEvalMag.\n");
 
-	header.append("  *  \\date      ");
+	code_txt.append("  *  \\date      ");
 	time_t rawtime;
 	struct tm *timeinfo;
 	time (&rawtime);
 	timeinfo = localtime (&rawtime);
-	header.append(asctime (timeinfo));
+	code_txt.append(asctime (timeinfo));
 
-	header.append("  *  \\author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>\n");
-	header.append("  *  \\author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>\n");
-	header.append("*/\n\n");
+	code_txt.append("  *  \\author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>\n");
+	code_txt.append("  *  \\author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>\n");
+	code_txt.append("*/\n\n");
 
-	header.append("#ifndef EVAL_MAG_HPP_\n");
-	header.append("#define EVAL_MAG_HPP_\n\n");
+	code_txt.append("#include <stdlib.h>\n");
+	code_txt.append("#include <iostream>\n");
+	code_txt.append("#include <sstream>\n\n");
+	code_txt.append("#include \"");
+	code_txt.append(file_name_header);
+	code_txt.append("\"\n\n");
 
-	header.append("#include <stdlib.h>\n");
-	header.append("#include <iostream>\n");
-	header.append("#include <sstream>\n");
-	header.append("#include <vector>\n");
-	header.append("#include \"Node.hpp\"\n");
-	header.append("#include \"Plan.hpp\"\n\n");
+	code_txt.append("namespace evalmag\n");
+	code_txt.append("{\n\n");
 
-	header.append("using namespace std;\n");
-	header.append("using namespace util_ag;\n\n");
-
-	std::ofstream file_output(path_output_code.c_str());
-	file_output.write(header.c_str(),header.size());
+	string path(path_output);
+	path.append(file_name_code);
+	std::ofstream file_output(path.c_str());
+	file_output.write(code_txt.c_str(), code_txt.size());
 	file_output.close();
 }
 
-void Gen_code::generate_header_class()
+void Gen_code::generate_footer_header()
 {
-	string header;
-	header.append("class Eval_mag\n");
-	header.append("{\n");
+	string footer("/**\n  * Main class of GenEvalMag.\n  */\n");
+	footer.append("class Eval_mag\n");
+	footer.append("{\n");
 
-	std::ofstream file_output(path_output_code.c_str(),ofstream::app);
-	file_output.write(header.c_str(),header.size());
-	file_output.close();
-}
+	footer.append("    private:\n");
+	footer.append("        vector < Visit_sequence >    v_seq;\n\n");
+	footer.append("        /* \"ro\" function. Wuu yank's paper. */\n");
+	footer.append("        vector < Plan >              eval_plans;\n\n");
+	footer.append("        /* \"tita\" function. Wuu yank's paper. */\n\n");
+	footer.append("        vector < Plan_project >      eval_plans_project;\n\n");
+	footer.append("        vector < Rule >              rules;\n\n");
 
-void Gen_code::generate_footer()
-{
-	string footer;
+	footer.append("    public:\n");
+	footer.append("        Eval_mag();\n\n");
+	footer.append("        void print_v_seq();\n\n");
+	footer.append("        void traverse(struct Node * node, Order_eval_eq order);\n\n");
+	footer.append("        void translate_mag();\n\n");
+	footer.append("        void compute_eq(int num_eq, struct Node *root);\n\n");
+	footer.append("        void eval_visiter(struct Node *root);\n\n");
+	footer.append("        void evaluator_mag(struct Node *root);\n");
 	footer.append("};\n\n");
-	footer.append("} /* end namespace */\n\n");
-	footer.append("#endif /* EVAL_MAG_HPP_ */\n\n");
 
-	std::ofstream file_output(path_output_code.c_str(),ofstream::app);
+	footer.append("} /* end evalmag */\n\n");
+
+	string name_upper(boost::to_upper_copy(file_name_header));
+
+	footer.append("#endif /* _");
+	footer.append(name_upper);
+	footer.append("_ */\n\n");
+
+	string path(path_output);
+	path.append(file_name_header);
+	std::ofstream file_output(path.c_str(),ofstream::app);
+	file_output.write(footer.c_str(),footer.size());
+	file_output.close();
+}
+
+void Gen_code::generate_footer_code()
+{
+	string footer("} /* end evalmag */\n\n");
+
+	string path(path_output);
+	path.append(file_name_code);
+	std::ofstream file_output(path.c_str(),ofstream::app);
 	file_output.write(footer.c_str(),footer.size());
 	file_output.close();
 }
@@ -134,7 +161,7 @@ void Gen_code::generate_footer()
 template <class T>
 string write_vector_with_inic(string &text_buffer, string name_vec, size_t index, const vector<T> &vec, string type_vec, const string type_array)
 {
-	text_buffer.append("            ");
+	text_buffer.append("    ");
 	text_buffer.append(type_array);
 	text_buffer.append(" __");
 	string name (name_vec);
@@ -157,9 +184,8 @@ string write_vector_with_inic(string &text_buffer, string name_vec, size_t index
 			text_buffer.append(",");
 		}
 	}
-	text_buffer.append("};\n");
+	text_buffer.append("};\n    ");
 
-	text_buffer.append("            ");
 	text_buffer.append(type_vec);
 	text_buffer.append(" ");
 	text_buffer.append(name);
@@ -178,7 +204,7 @@ string write_vector_with_inic(string &text_buffer, string name_vec, size_t index
 
 void generate_initialize_v_seq(string &text, const vector<Visit_seq> & v_seq)
 {
-	text.append("            /**\n              * Initialize of Visit Sequences.\n              */\n\n");
+	text.append("    /**\n      * Initialize of Visit Sequences.\n      */\n");
 
 	for(size_t i(0); i < v_seq.size(); i++)
 	{
@@ -192,7 +218,7 @@ void generate_initialize_v_seq(string &text, const vector<Visit_seq> & v_seq)
 				"int"
 			)
 		);
-		text.append("            v_seq.push_back(");
+		text.append("    v_seq.push_back(");
 		text.append(name_vec);
 		text.append(");\n\n");
 	}
@@ -203,7 +229,7 @@ string generate_key_plan(string &text,const string n_key,int num_key, Key_plan k
 	/* generate key_plan */
 
 	/* it->first.id_plan */
-	text.append("            Key_plan ");
+	text.append("    Key_plan ");
 	string name_key(n_key);
 	stringstream str_index;
 	str_index << num_key;
@@ -223,7 +249,7 @@ string generate_key_plan(string &text,const string n_key,int num_key, Key_plan k
 			"unsigned short"
 		)
 	);
-	text.append("            ");
+	text.append("    ");
 	text.append(name_key);
 	text.append(".id_plan = ");
 	text.append(name_o_rule);
@@ -242,17 +268,17 @@ string generate_key_plan(string &text,const string n_key,int num_key, Key_plan k
 			"unsigned short"
 		)
 	);
-	text.append("            ");
+	text.append("    ");
 	text.append(name_key);
 	text.append(".plan = ");
 	text.append(name_order_eval);
-	text.append(";\n\n");
+	text.append(";\n");
 	return name_key;
 }
 
 void generate_initialize_plans(string &text, const map < Key_plan, Order_eval_eq > &plans_p)
 {
-	text.append("            /**\n              * Initialize of Evaluation Plans.\n              */\n\n");
+	text.append("    /**\n      * Initialize of Evaluation Plans.\n      */\n");
 
 	int num_key = 0;
 	for(map < Key_plan, Order_eval_eq >::const_iterator it(plans_p.begin()); it != plans_p.end(); it++)
@@ -276,7 +302,7 @@ void generate_initialize_plans(string &text, const map < Key_plan, Order_eval_eq
 		);
 
 		/* generate insert in map */
-		text.append("            Plan ");
+		text.append("    Plan ");
 		string name_new_p("__plan_");
 		name_new_p.append(str_index.str());
 		text.append(name_new_p);
@@ -285,7 +311,7 @@ void generate_initialize_plans(string &text, const map < Key_plan, Order_eval_eq
 		text.append(" , ");
 		text.append(name_order);
 		text.append(");\n");
-		text.append("            eval_plans.push_back(");
+		text.append("    eval_plans.push_back(");
 		text.append(name_new_p);
 		text.append(");\n\n");
 
@@ -295,7 +321,7 @@ void generate_initialize_plans(string &text, const map < Key_plan, Order_eval_eq
 
 void generate_initialize_plan_proj(string &text, const map < Key_plan_project, Order_eval_eq > &plans_p)
 {
-	text.append("            /**\n              * Initialize of Evaluation Plans Project.\n              */\n\n");
+	text.append("    /**\n      * Initialize of Evaluation Plans Project.\n      */\n");
 
 	int num_key = 0;
 	for(map < Key_plan_project, Order_eval_eq >::const_iterator it(plans_p.begin()); it != plans_p.end(); it++)
@@ -306,25 +332,23 @@ void generate_initialize_plan_proj(string &text, const map < Key_plan_project, O
 		stringstream str_index;
 		str_index << num_key;
 
-		text.append("            Key_plan_project ");
+		text.append("    Key_plan_project ");
 		string name_key("key_proj_");
 		name_key.append(str_index.str());
 		text.append(name_key);
 
-		text.append(";\n            ");
+		text.append(";\n    ");
 
 		text.append(name_key);
 		text.append(".id_plan_project = ");
 		text.append(name_key_plan);
-		text.append(";\n");
+		text.append(";\n    ");
 
-		text.append("            ");
 		text.append(name_key);
 		text.append(".node_project = \"");
 		text.append(it->first.symbol_project->get_name());
-		text.append("\";\n");
+		text.append("\";\n    ");
 
-		text.append("            ");
 		text.append(name_key);
 		text.append(".index_ocurrence = ");
 		stringstream str_index_ocurrence;
@@ -345,7 +369,7 @@ void generate_initialize_plan_proj(string &text, const map < Key_plan_project, O
 		);
 
 		/* generate insert in map */
-		text.append("            Plan_project ");
+		text.append("    Plan_project ");
 		string name_new_p("__plan_proj_");
 		name_new_p.append(str_index.str());
 		text.append(name_new_p);
@@ -354,7 +378,7 @@ void generate_initialize_plan_proj(string &text, const map < Key_plan_project, O
 		text.append(" , ");
 		text.append(name_order);
 		text.append(");\n");
-		text.append("            eval_plans_project.push_back(");
+		text.append("    eval_plans_project.push_back(");
 		text.append(name_new_p);
 		text.append(");\n\n");
 
@@ -362,25 +386,9 @@ void generate_initialize_plan_proj(string &text, const map < Key_plan_project, O
 	}
 }
 
-void Gen_code::generate_private()
-{
-	string private_t;
-	private_t.append("    private:\n");
-	private_t.append("        vector < Visit_sequence >    v_seq;\n");
-	private_t.append("        /* \"ro\" function. Wuu yank's paper. */\n");
-	private_t.append("        vector < Plan >              eval_plans;\n");
-	private_t.append("        /* \"tita\" function. Wuu yank's paper. */\n");
-	private_t.append("        vector < Plan_project >      eval_plans_project;\n");
-	private_t.append("        vector < Rule >              rules;\n");
-
-	std::ofstream file_output(path_output_code.c_str(),ofstream::app);
-	file_output.write(private_t.c_str(),private_t.size());
-	file_output.close();
-}
-
 void generate_initialize_rules(string &text, const Attr_grammar &attr_grammar)
 {
-	text.append("            /**\n              * Initialize of Rules of grammar.\n              */\n\n");
+	text.append("    /**\n      * Initialize of Rules of grammar.\n      */\n");
 
 	const map<unsigned short, Rule> &rules = attr_grammar.get_rules();
 	int index = 0;
@@ -415,7 +423,7 @@ void generate_initialize_rules(string &text, const Attr_grammar &attr_grammar)
 			)
 		);
 
-		text.append("            rules.push_back(");
+		text.append("    rules.push_back(");
 		text.append(name_vec);
 		text.append(");\n\n");
 
@@ -423,119 +431,122 @@ void generate_initialize_rules(string &text, const Attr_grammar &attr_grammar)
 	}
 }
 
-void Gen_code::generate_public(const vector<Visit_seq> & v_seq, const Builder_plans &b_plan, const Attr_grammar &attr_grammar)
+void Gen_code::generate_constructor(const vector<Visit_seq> & v_seq, const Builder_plans &b_plan, const Attr_grammar &attr_grammar)
 {
-	string public_t;
-	public_t.append("\n    public:\n");
-	public_t.append("        Eval_mag()\n");
-	public_t.append("        {\n");
+	string cons_txt("Eval_mag::Eval_mag()\n");
+	cons_txt.append("{\n");
 
-	generate_initialize_plans(public_t, b_plan.get_plans());
+	generate_initialize_plans(cons_txt, b_plan.get_plans());
 
-	generate_initialize_plan_proj(public_t, b_plan.get_plans_project());
+	generate_initialize_plan_proj(cons_txt, b_plan.get_plans_project());
 
-	generate_initialize_v_seq(public_t, v_seq);
+	generate_initialize_v_seq(cons_txt, v_seq);
 
-	generate_initialize_rules(public_t, attr_grammar);
+	generate_initialize_rules(cons_txt, attr_grammar);
 
-	public_t.append("        }\n\n");
+	cons_txt.append("}\n\n");
 
-	std::ofstream file_output(path_output_code.c_str(),ofstream::app);
-	file_output.write(public_t.c_str(),public_t.size());
+	string path(path_output);
+	path.append(file_name_code);
+	std::ofstream file_output(path.c_str(),ofstream::app);
+	file_output.write(cons_txt.c_str(),cons_txt.size());
 	file_output.close();
 }
 
 void generate_print(string &text)
 {
-	text.append("        void print_v_seq()\n        {\n");
-	text.append("            for(size_t i(0); i < v_seq.size(); i++)\n");
+	text.append("void Eval_mag::print_v_seq()\n    {\n");
+	text.append("    for(size_t i(0); i < v_seq.size(); i++)\n");
+	text.append("    {\n");
+	text.append("        cout << \"Visit Sequence Nro \" << i+1 << \": \";\n");
+	text.append("        for(size_t j(0); j < v_seq[i].size(); j++)\n");
+	text.append("        {\n");
+	text.append("            cout << v_seq[i][j];\n");
+	text.append("            if(j < v_seq[i].size() - 1)\n");
 	text.append("            {\n");
-	text.append("            	cout << \"Visit Sequence Nro \" << i+1 << \": \";\n");
-	text.append("            	for(size_t j(0); j < v_seq[i].size(); j++)\n");
-	text.append("            	{\n");
-	text.append("            		cout << v_seq[i][j];\n");
-	text.append("            		if(j < v_seq[i].size() - 1)\n");
-	text.append("            		{\n");
-	text.append("            			cout << \", \";\n");
-	text.append("            		}\n");
-	text.append("            	}\n");
-	text.append("            	cout << \".\" << endl;\n");
+	text.append("                cout << \", \";\n");
 	text.append("            }\n");
-	text.append("        }\n\n");
+	text.append("        }\n");
+	text.append("        cout << \".\" << endl;\n");
+	text.append("    }\n");
+	text.append("}\n\n");
 }
 
 void generate_translate(string &text)
 {
-	text.append("        void translate_mag()\n        {\n");
-
-	text.append("            for(size_t v_s(0); v_s < v_seq.size(); v_s++)\n");
+	text.append("void Eval_mag::translate_mag()\n    {\n");
+	text.append("    for(size_t v_s(0); v_s < v_seq.size(); v_s++)\n");
+	text.append("    {\n");
+	text.append("        for(size_t i(0); i < v_seq[v_s].size(); i++)\n");
+	text.append("        {\n");
+	text.append("            if(v_seq[v_s][i] > 0)\n");
 	text.append("            {\n");
-	text.append("                for(size_t i(0); i < v_seq[v_s].size(); i++)\n");
-	text.append("                {\n");
-	text.append("                    if(v_seq[v_s][i] > 0)\n                    {\n");
-	text.append("                        cout << \"Visit child \" << v_seq[v_s][i];\n");
-	text.append("                    }\n");
-	text.append("                    if(v_seq[v_s][i] == 0)\n                    {\n");
-	text.append("                        cout << \"Leave\";\n");
-	text.append("                    }\n");
-	text.append("                    if(v_seq[v_s][i] < 0)\n                    {\n");
-	text.append("                        cout << \"Compute \" << v_seq[v_s][i]*(-1);\n");
-	text.append("                	}\n");
-	text.append("                    if(i < v_seq[v_s].size() - 1)\n                    {\n");
-	text.append("                        cout << \", \";\n");
-	text.append("                    }\n");
-	text.append("                }\n");
-	text.append("                cout << \".\" << endl;\n");
+	text.append("                cout << \"Visit child \" << v_seq[v_s][i];\n");
 	text.append("            }\n");
-	text.append("        }\n\n");
+	text.append("            if(v_seq[v_s][i] == 0)\n");
+	text.append("            {\n");
+	text.append("                cout << \"Leave\";\n");
+	text.append("            }\n");
+	text.append("            if(v_seq[v_s][i] < 0)\n");
+	text.append("            {\n");
+	text.append("                cout << \"Compute \" << v_seq[v_s][i]*(-1);\n");
+	text.append("            }\n");
+	text.append("            if(i < v_seq[v_s].size() - 1)\n");
+	text.append("            {\n");
+	text.append("                cout << \", \";\n");
+	text.append("            }\n");
+	text.append("        }\n");
+	text.append("        cout << \".\" << endl;\n");
+	text.append("    }\n");
+	text.append("}\n\n");
 }
 
 void generate_traverse(string &text)
 {
-	text.append("        void traverse(struct Node * node, Order_eval_eq order)\n");
+	text.append("void Eval_mag::traverse(struct Node * node, Order_eval_eq order)\n");
+	text.append("{\n");
+	text.append("    Key_plan k_plan;\n");
+	text.append("    k_plan.id_plan.push_back(node->rule_id);\n");
+	text.append("    for(size_t i(0); i < node->childs.size(); i++)\n");
+	text.append("    {\n");
+	text.append("        k_plan.id_plan.push_back(node->childs[i]->rule_id);\n");
+	text.append("    }\n");
+	text.append("    k_plan.plan = order;\n");
+	text.append("    bool find_plan(false);\n");
+	text.append("    for(size_t i(0); i < eval_plans.size(); i++)\n");
+	text.append("    {\n");
+	text.append("        if (eval_plans[i].first == k_plan)\n");
 	text.append("        {\n");
-	text.append("            Key_plan k_plan;\n");
-	text.append("            k_plan.id_plan.push_back(node->rule_id);\n");
-	text.append("            for(size_t i(0); i < node->childs.size(); i++)\n");
-	text.append("            {\n");
-	text.append("                k_plan.id_plan.push_back(node->childs[i]->rule_id);\n");
-	text.append("            }\n");
-	text.append("            k_plan.plan = order;\n");
-	text.append("            bool find_plan(false);\n");
-	text.append("            for(size_t i(0); i < eval_plans.size(); i++)\n");
-	text.append("            {\n");
-	text.append("                if (eval_plans[i].first == k_plan)\n");
-	text.append("                {\n");
-	text.append("                    node->index_plan_v_seq = i;\n");
-	text.append("                    node->num_v_seq = 0;\n");
-	text.append("                    find_plan = true;\n");
-	text.append("                    break;\n");
-	text.append("                }\n");
-	text.append("            }\n");
+	text.append("            node->index_plan_v_seq = i;\n");
+	text.append("            node->num_v_seq = 0;\n");
+	text.append("            find_plan = true;\n");
+	text.append("            break;\n");
+	text.append("        }\n");
+	text.append("    }\n");
 
-	text.append("            if(!find_plan)\n");
-	text.append("            {\n");
-	text.append("                cerr << \"ERROR: the AST input is wrong create.\" << endl;\n");
-	text.append("                exit(-1);\n");
-	text.append("            }\n");
+	text.append("    if(!find_plan)\n");
+	text.append("    {\n");
+	text.append("        cerr << \"ERROR: the AST input is wrong create.\" << endl;\n");
+	text.append("        exit(-1);\n");
+	text.append("    }\n");
 
-	text.append("            Rule &rule(rules[node->rule_id - 1]);\n");
-	text.append("            for(size_t i(0); i < node->childs.size(); i++)\n");
+	text.append("    Rule &rule(rules[node->rule_id - 1]);\n");
+	text.append("    for(size_t i(0); i < node->childs.size(); i++)\n");
+	text.append("    {\n");
+	text.append("        Key_plan_project k_plan_proj;\n");
+	text.append("        k_plan_proj.id_plan_project = k_plan;\n");
+	text.append("        k_plan_proj.node_project = rule[i+1];\n");
+	text.append("        k_plan_proj.index_ocurrence = i;\n");
+	text.append("        for(size_t j(0); j < eval_plans_project.size(); j++)\n");
+	text.append("        {\n");
+	text.append("            if (eval_plans_project[j].first == k_plan_proj)\n");
 	text.append("            {\n");
-	text.append("                Key_plan_project k_plan_proj;\n");
-	text.append("                k_plan_proj.id_plan_project = k_plan;\n");
-	text.append("                k_plan_proj.node_project = rule[i+1];\n");
-	text.append("                k_plan_proj.index_ocurrence = i;\n");
-	text.append("                for(size_t j(0); j < eval_plans_project.size(); j++)\n");
-	text.append("                {\n");
-	text.append("                    if (eval_plans_project[j].first == k_plan_proj)\n");
-	text.append("                    {\n");
-	text.append("                        traverse(node->childs[i], eval_plans_project[j].second);\n");
-	text.append("                        break;\n");
-	text.append("                    }\n");
-	text.append("                }\n");
+	text.append("                traverse(node->childs[i], eval_plans_project[j].second);\n");
+	text.append("                break;\n");
 	text.append("            }\n");
-	text.append("        }\n\n");
+	text.append("        }\n");
+	text.append("    }\n");
+	text.append("}\n\n");
 }
 
 string generate_expr_text(const Ast_node *node, const Rule &rule)
@@ -641,12 +652,12 @@ void generate_all_methods_eqs(string &text, const Attr_grammar &attr_grammar)
 		{
 			stringstream str_i_eq;
 			str_i_eq << eq_it->second.get_id();
-			text.append("        // Eq ");
+			text.append("// Eq ");
 			text.append(cleaning_tabs(eq_it->second.to_string()));
-			text.append("\n        void compute_eq_");
+			text.append("\nvoid compute_eq_");
 			text.append(str_i_eq.str());
 			text.append("(struct Node *root)\n");
-			text.append("        {\n            ");
+			text.append("{\n    ");
 			text.append(symb_rule->get_name());
 			text.append(" *node((");
 			text.append(symb_rule->get_name());
@@ -656,11 +667,11 @@ void generate_all_methods_eqs(string &text, const Attr_grammar &attr_grammar)
 
 			if (ins_left->get_symb()->equals(*symb_rule))
 			{
-				text.append("            node->");
+				text.append("    node->");
 			}
 			else
 			{
-				text.append("            ((");
+				text.append("    ((");
 				text.append(ins_left->get_symb()->get_name());
 				text.append("*)node->childs[");
 				unsigned short index = ins_left->get_num();
@@ -687,63 +698,63 @@ void generate_all_methods_eqs(string &text, const Attr_grammar &attr_grammar)
 			string text_expr(generate_expr_text(eq_it->second.get_r_value(), r_it->second));
 			text.append(text_expr);
 			text.append(";\n");
-			text.append("        }\n\n");
+			text.append("}\n\n");
 		}
 	}
 }
 
 void generate_all_compute_eq(string &text, const Attr_grammar &attr_grammar)
 {
-
-	text.append("    	void compute_eq(int num_eq, struct Node *root)\n");
-	text.append("     	{\n");
-	text.append("    		switch ( num_eq ) {\n");
+	text.append("void Eval_mag::compute_eq(int num_eq, struct Node *root)\n");
+	text.append("{\n");
+	text.append("    switch ( num_eq ) {\n");
 
 	for(size_t i(0); i < attr_grammar.get_count_eqs(); i++)
 	{
 		stringstream str_i;
 		str_i << i+1;
-		text.append("    		  case ");
+		text.append("        case ");
 		text.append(str_i.str());
 		text.append(": compute_eq_");
 		text.append(str_i.str());
 		text.append("(root); break;\n\n");
 	}
-	text.append("     		  default: cout << \"ERROR: Fatal action.\" << endl;\n");
-	text.append("    		}\n");
-	text.append("     	}\n\n");
+	text.append("        default: cout << \"ERROR: Fatal action.\" << endl;\n");
+	text.append("    }\n");
+	text.append("}\n\n");
 }
 
 void generate_eval_visiter(string &text)
 {
-	text.append("        void eval_visiter(struct Node *root)\n");
-	text.append("        {\n");
-	text.append("        	for(size_t i(root->num_v_seq); i < v_seq[root->index_plan_v_seq].size(); i++)\n");
-	text.append("        	{\n");
-	text.append("        		int item_visit(v_seq[root->index_plan_v_seq][i]);\n");
-	text.append("        		if (item_visit > 0)\n");
-	text.append("        		{\n");
-	text.append("        		    eval_visiter(root->childs[item_visit - 1]);\n");
-	text.append("        		}\n");
-	text.append("        		else if (item_visit < 0)\n");
-	text.append("        		{\n");
-	text.append("    				compute_eq((item_visit * -1), root);\n");
-	text.append("        		}\n");
-	text.append("        		else\n");
-	text.append("        		{\n");
-	text.append("        			root->num_v_seq = i+1; // donde quede\n");
-	text.append("        			return;\n");
-	text.append("        		}\n");
-	text.append("        	}\n");
-	text.append("        }\n\n");
+	text.append("void Eval_mag::eval_visiter(struct Node *root)\n");
+	text.append("{\n");
+	text.append("    for(size_t i(root->num_v_seq); i < v_seq[root->index_plan_v_seq].size(); i++)\n");
+	text.append("    {\n");
+	text.append("    	int item_visit(v_seq[root->index_plan_v_seq][i]);\n");
+	text.append("    	if (item_visit > 0)\n");
+	text.append("    	{\n");
+	text.append("    	    eval_visiter(root->childs[item_visit - 1]);\n");
+	text.append("    	}\n");
+	text.append("    	else if (item_visit < 0)\n");
+	text.append("    	{\n");
+	text.append("           compute_eq((item_visit * -1), root);\n");
+	text.append("    	}\n");
+	text.append("    	else\n");
+	text.append("    	{\n");
+	text.append("    	    /* Saves the index of the current v_seq item. */\n");
+	text.append("    		root->num_v_seq = i+1;\n");
+	text.append("    		return;\n");
+	text.append("    	}\n");
+	text.append("    }\n");
+	text.append("}\n\n");
 }
 
 void generate_evaluator(string &text, const Builder_plans &b_plan)
 {
-	text.append("        void evaluator_mag(struct Node *root)\n");
-	text.append("        {\n");
+	text.append("void Eval_mag::evaluator_mag(struct Node *root)\n");
+	text.append("{\n");
 
-	text.append("            vector < Order_eval_eq > orders_init;\n");
+	text.append("    vector < Order_eval_eq > orders_init;\n");
 
 	const vector < Order_eval_eq > &init_orders = b_plan.get_init_orders();
 	for(size_t i(0); i < init_orders.size(); i++)
@@ -759,14 +770,14 @@ void generate_evaluator(string &text, const Builder_plans &b_plan)
 			)
 		);
 
-		text.append("            orders_init.push_back(");
+		text.append("    orders_init.push_back(");
 		text.append(init_order_name);
 		text.append(");\n");
 	}
 
-	text.append("        	traverse(root, orders_init[root->rule_id - 1]);\n");
-	text.append("        	eval_visiter(root);\n");
-	text.append("        }\n");
+	text.append("    traverse(root, orders_init[root->rule_id - 1]);\n");
+	text.append("    eval_visiter(root);\n");
+	text.append("}\n\n");
 }
 
 void Gen_code::generate_methods(const Builder_plans &b_plan, const Attr_grammar &attr_grammar)
@@ -787,18 +798,18 @@ void Gen_code::generate_methods(const Builder_plans &b_plan, const Attr_grammar 
 
 	generate_evaluator(methods_t, b_plan);
 
-	std::ofstream file_output(path_output_code.c_str(), ofstream::app);
+	string path(path_output);
+	path.append(file_name_code);
+	std::ofstream file_output(path.c_str(),ofstream::app);
 	file_output.write(methods_t.c_str(),methods_t.size());
 	file_output.close();
 }
 
 void Gen_code::generate_structs(const Attr_grammar &attr_grammar)
 {
-	string structs;
-	structs.append("namespace evalmag\n");
-	structs.append("{\n\n");
+	string structs("/**\n  * Structs of the symbols.\n  */\n");
 
-	structs.append("/**\n  * Structs of the symbols.\n  */\n\n");
+	string text_to_string("/**\n  * To_string of structs of the symbols.\n  */\n");
 
 	const map<string, Symbol> &symbol_non_terminals(attr_grammar.get_non_terminal_symbols());
 
@@ -808,8 +819,10 @@ void Gen_code::generate_structs(const Attr_grammar &attr_grammar)
 		structs.append(it_symb->second.get_name());
 		structs.append(": Node\n{\n");
 
-		string text_to_string("\n    string to_string() const\n    {\n");
-		text_to_string.append("        string text(\"Values of symbol ");
+		text_to_string.append("string ");
+		text_to_string.append(it_symb->second.get_name());
+		text_to_string.append("::to_string() const\n{\n");
+		text_to_string.append("    string text(\"Values of symbol ");
 		text_to_string.append(it_symb->second.get_name());
 		text_to_string.append(":\\n\");\n");
 
@@ -823,7 +836,7 @@ void Gen_code::generate_structs(const Attr_grammar &attr_grammar)
 			structs.append(";");
 			structs.append("\n");
 
-			text_to_string.append("        text.append(\" Attr ");
+			text_to_string.append("    text.append(\" Attr ");
 			text_to_string.append(attrs[j]->get_name());
 			text_to_string.append(" = \");\n");
 
@@ -835,61 +848,123 @@ void Gen_code::generate_structs(const Attr_grammar &attr_grammar)
 					string name_sstr("str_");
 					name_sstr.append(attrs[j]->get_name());
 
-					text_to_string.append("        stringstream ");
+					text_to_string.append("    stringstream ");
 					text_to_string.append(name_sstr);
-					text_to_string.append(";\n        ");
+					text_to_string.append(";\n    ");
 					text_to_string.append(name_sstr);
 					text_to_string.append(" << ");
 					text_to_string.append(attrs[j]->get_name());
 					text_to_string.append(";\n");
-					text_to_string.append("        text.append(");
+					text_to_string.append("    text.append(");
 					text_to_string.append(name_sstr);
 					text_to_string.append(".str());\n");
 				}
 				else
 				{
-					text_to_string.append("        text.append(");
+					text_to_string.append("    text.append(");
 					text_to_string.append(attrs[j]->get_name());
 					text_to_string.append(");\n");
 				}
 			}
 			else
 			{
-				text_to_string.append("        text.append(");
+				text_to_string.append("    text.append(");
 				text_to_string.append(attrs[j]->get_name());
 				text_to_string.append(".to_string());\n");
 			}
-			text_to_string.append("        text.append(\"\\n\");\n");
+			text_to_string.append("    text.append(\"\\n\");\n");
 		}
 
 		/* Generate method to_string() */
-		text_to_string.append("        for(size_t i(0); i < childs.size(); i++)\n        {\n");
-		text_to_string.append("            text.append(childs[i]->to_string());\n        }\n");
-		text_to_string.append("        return text;\n");
-		text_to_string.append("    }\n");
-		structs.append(text_to_string);
+		structs.append("\n    string to_string() const;\n");
+
+		/* Generate recursive call to all childs. */
+		text_to_string.append("    for(size_t i(0); i < childs.size(); i++)\n    {\n");
+		text_to_string.append("        text.append(childs[i]->to_string());\n    }\n");
+		text_to_string.append("    return text;\n");
+		text_to_string.append("}\n\n");
+
 		structs.append("} ");
 		structs.append(it_symb->second.get_name());
 		structs.append(" ;\n\n");
 	}
 
-	std::ofstream file_output(path_output_code.c_str(), ofstream::app);
-	file_output.write(structs.c_str(),structs.size());
+	string path_header(path_output);
+	path_header.append(file_name_header);
+	std::ofstream header_output(path_header.c_str(),ofstream::app);
+	header_output.write(structs.c_str(), structs.size());
+	header_output.close();
+
+	string path_code(path_output);
+	path_code.append(file_name_code);
+	std::ofstream code_output(path_code.c_str(),ofstream::app);
+	code_output.write(text_to_string.c_str(), text_to_string.size());
+	code_output.close();
+}
+
+void Gen_code::generate_header_file()
+{
+	string header("/**\n");
+	header.append("  *  \\file      ");
+	header.append(file_name_header);
+	header.append("\n");
+	header.append("  *  \\brief     Class generator from static evaluator generator: GENEVALMAG \n");
+
+	header.append("  *  \\date      ");
+	time_t rawtime;
+	struct tm *timeinfo;
+	time (&rawtime);
+	timeinfo = localtime (&rawtime);
+	header.append(asctime (timeinfo));
+
+	header.append("  *  \\author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>\n");
+	header.append("  *  \\author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>\n");
+	header.append("*/\n\n");
+
+	string name_upper(boost::to_upper_copy(file_name_header));
+
+	header.append("#ifndef _");
+	header.append(name_upper);
+	header.append("_\n");
+	header.append("#define _");
+	header.append(name_upper);
+	header.append("_\n\n");
+
+	header.append("#include <vector>\n\n");
+	header.append("#include \"Node.hpp\"\n");
+	header.append("#include \"Plan.hpp\"\n\n");
+
+	header.append("using namespace std;\n");
+	header.append("using namespace util_ag;\n\n");
+
+	header.append("namespace evalmag\n");
+	header.append("{\n\n");
+
+	string path(path_output);
+	path.append(file_name_header);
+	std::ofstream file_output(path.c_str());
+	file_output.write(header.c_str(), header.size());
 	file_output.close();
 }
 
-void Gen_code::generate_code(const Attr_grammar &attr_grammar, const Builder_plans &b_plan, const vector<Visit_seq> &v_seq)
+
+bool Gen_code::generate_code(const Attr_grammar &attr_grammar, const Builder_plans &b_plan, const vector<Visit_seq> &v_seq)
 {
+	cout << "* Generation code ---------- [ " << flush;
 	generate_grammar_file(attr_grammar);
+
 	generate_header_file();
+	generate_code_file();
 
 	generate_structs(attr_grammar);
-
-	generate_header_class();
-	generate_private();
-	generate_public(v_seq, b_plan, attr_grammar);
+	generate_constructor(v_seq, b_plan, attr_grammar);
 	generate_methods(b_plan, attr_grammar);
-	generate_footer();
+
+	generate_footer_header();
+	generate_footer_code();
+
+	cout << " OK  ]" << endl;
+	return true;
 }
 
 } /* end namespace */
