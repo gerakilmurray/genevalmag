@@ -10,6 +10,7 @@
 #define NODE_HPP_
 
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -18,13 +19,13 @@ namespace util_ag
 
 struct Node
 {
-        struct Node *parent;
-        vector<struct Node*> childs;
-        unsigned short rule_id;
-        unsigned short index_plan_v_seq; //index of vector de visit sequence.
-        unsigned short num_v_seq;   // donde quede.
+    struct Node *parent;
+    vector<struct Node*> childs;
+    unsigned short rule_id;
+    unsigned short index_plan_v_seq; //index of vector de visit sequence.
+    unsigned short num_v_seq;   // donde quede.
 
-        virtual string to_string() const = 0;
+    virtual string to_string() const = 0;
 };
 
 }/* end namespace */

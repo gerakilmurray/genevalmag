@@ -7,6 +7,7 @@
 */
 
 #include <vector>
+#include <iostream>
 
 #include "Eval_mag.hpp"
 
@@ -20,7 +21,6 @@ int main()
     Eval_mag eval_mag;
     eval_mag.print_v_seq();
 	eval_mag.translate_mag();
-
 
     S node_s1;
 	node_s1.rule_id = 1;

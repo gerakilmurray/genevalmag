@@ -18,34 +18,32 @@ namespace genevalmag
 class Gen_code
 {
 	private:
-		string path_output_code;
-
-		string file_name;
+		string path_output;
+		string file_name_header;
+		string file_name_code;
 
 		void generate_grammar_file(const Attr_grammar &attr_grammar) const;
 
 		void generate_header_file();
 
-		void generate_header_class();
+		void generate_footer_header();
 
-		void generate_footer();
-
-		void generate_private();
-
-		void generate_public(const vector<Visit_seq> & v_seq, const Builder_plans &b_plan, const Attr_grammar &attr_grammar);
-
-		void generate_methods(const Builder_plans &b_plan, const Attr_grammar &attr_grammar);
-
-		void generate_externs(const Attr_grammar &attr_grammar);
+		void generate_code_file();
 
 		void generate_structs(const Attr_grammar &attr_grammar);
 
+		void generate_constructor(const vector<Visit_seq> & v_seq, const Builder_plans &b_plan, const Attr_grammar &attr_grammar);
+
+		void generate_methods(const Builder_plans &b_plan, const Attr_grammar &attr_grammar);
+
+		void generate_footer_code();
+
 	public:
-		Gen_code(const string path, const string name_file);
+		Gen_code(const string &path_folder_output, const string &name_file);
 
 		virtual ~Gen_code();
 
-		void generate_code(const Attr_grammar &attr_grammar, const Builder_plans &b_plan ,const vector<Visit_seq> &v_seq);
+		bool generate_code(const Attr_grammar &attr_grammar, const Builder_plans &b_plan ,const vector<Visit_seq> &v_seq);
 };
 
 }

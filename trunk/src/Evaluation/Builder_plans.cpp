@@ -22,17 +22,19 @@ using namespace utilities;
 namespace genevalmag
 {
 
-const string PATH_OUT_PLAN("ALL_plan/");
-const string PATH_OUT_PLAN_PROJECT("ALL_plan_project/");
+const string PATH_OUT_PLAN("plans/");
+const string PATH_OUT_PLAN_PROJECT("plans_project/");
 
 /**
   * Constructor empty of Builder plan.
   */
-Builder_plans::Builder_plans(const string path)
+Builder_plans::Builder_plans(const string &path_folder_output)
 {
-	path_output  = path;
+	path_output = path_folder_output;
 	if (path_output[path_output.size()-1] != '/')
+	{
 		path_output.append("/");
+	}
 }
 
 /**
@@ -45,15 +47,25 @@ Builder_plans::~Builder_plans()
 /**
   * Generates all graphs for attribute grammar: DP, DOWN, DCG and ADP.
   */
-void generate_graphs(const Attr_grammar &grammar, Builder_graphs &b_graphs)
+bool generate_graphs(const Attr_grammar &grammar, Builder_graphs &b_graphs)
 {
-	b_graphs.compute_dependency_graphs(grammar.get_rules());
-
-	b_graphs.compute_down_graph(grammar.get_non_terminal_symbols(), grammar.get_rules());
-
-	b_graphs.compute_dcg(grammar.get_rules());
-
-	b_graphs.compute_adp_graph(grammar);
+	cout << "* Generate graphs ---------- [ " << flush;
+	if(b_graphs.compute_dependency_graphs(grammar.get_rules()))
+	{
+		if(b_graphs.compute_down_graph(grammar.get_non_terminal_symbols(), grammar.get_rules()))
+		{
+			if(b_graphs.compute_dcg(grammar.get_rules()))
+			{
+				if(b_graphs.compute_adp_graph(grammar))
+				{
+					cout << " OK  ]" << endl;
+					return true;
+				}
+			}
+		}
+	}
+	cout << "FAIL ]\n" << endl;
+	return false;
 }
 
 /**
@@ -138,13 +150,17 @@ Order_eval_eq Builder_plans::compute_order(const Graph &graph_adp, const Order_e
 }
 
 /**
-  * Prints all plans. Creates a graph that represents the plan and uses print_graph with dot.
+  * Saves all plans. Creates a graph that represents the plan and uses print_graph with dot.
   */
-void Builder_plans::print_all_plans(const Attr_grammar &grammar) const
+bool Builder_plans::save_all_plans(const Attr_grammar &grammar) const
 {
 	string path_out(path_output);
 	path_out.append(PATH_OUT_PLAN);
-	clean_output_folder(path_out);
+	if(!clean_output_folder(path_out))
+	{
+		return false;
+	}
+
 	for(map < Key_plan, Order_eval_eq >::const_iterator it(eval_plans.begin()); it != eval_plans.end(); it++)
 	{
 		Graph graph_plan;
@@ -191,18 +207,23 @@ void Builder_plans::print_all_plans(const Attr_grammar &grammar) const
 		}
 		name_graph.append(".");
 
-		print_graph(graph_plan,path_out.c_str(),"_plan_graph", name_graph, names,"box");
+		print_graph(graph_plan, path_out.c_str(), "_plan_graph", name_graph, names, "box");
 	}
+	return true;
 }
 
 /**
-  * Prints all proyected's plans. Creates a graph that represents the plan and uses print_graph with dot.
+  * Saves all proyected's plans. Creates a graph that represents the plan and uses print_graph with dot.
   */
-void Builder_plans::print_all_plans_project(const Attr_grammar &grammar) const
+bool Builder_plans::save_all_plans_project(const Attr_grammar &grammar) const
 {
 	string path_out(path_output);
 	path_out.append(PATH_OUT_PLAN_PROJECT);
-	clean_output_folder(path_out);
+	if(!clean_output_folder(path_out))
+	{
+		return false;
+	}
+
 	for(map < Key_plan_project, Order_eval_eq >::const_iterator it(plans_project.begin()); it != plans_project.end(); it++)
 	{
 		Graph graph_plan;
@@ -257,8 +278,9 @@ void Builder_plans::print_all_plans_project(const Attr_grammar &grammar) const
 		name_graph.append(symb_ocurence.str());
 		name_graph.append(".");
 
-		print_graph(graph_plan,path_out.c_str(),"_plan_project_graph", name_graph, names,"box");
+		print_graph(graph_plan, path_out.c_str(), "_plan_project_graph", name_graph, names, "box");
 	}
+	return true;
 }
 
 void purge_plan_with(const Rule &rule, const Order_eval_eq &order_eq, Order_eval_eq &purged_order)
@@ -290,7 +312,7 @@ bool defined_work (const vector < Item_work > &list, const Item_work &item_work)
 /**
   * Generates and saves all evaluation's plans for the Attribute Grammar.
   */
-void Builder_plans::generate_plans(const Attr_grammar &grammar, const Builder_graphs &build_graphs)
+bool Builder_plans::generate_plans(const Attr_grammar &grammar, const Builder_graphs &build_graphs)
 {
 	vector < Item_work > work_list;
 	vector < Item_work > defined_item_work;
@@ -398,27 +420,32 @@ void Builder_plans::generate_plans(const Attr_grammar &grammar, const Builder_gr
 			}
 		}
 	}
-	build_graphs.print_all_graphs(grammar.get_rules());
-	print_all_plans(grammar);
-	print_all_plans_project(grammar);
+	build_graphs.save_all_graphs(grammar.get_rules());
+	save_all_plans(grammar);
+	save_all_plans_project(grammar);
+	return true;
 }
 
 bool Builder_plans::build_plans(const Attr_grammar &attr_grammar)
 {
-	Builder_graphs build_graphs;
-	generate_graphs(attr_grammar, build_graphs);
-
-	if (build_graphs.check_cyclic_adp_dependencies())
+	Builder_graphs build_graphs(path_output);
+	if(generate_graphs(attr_grammar, build_graphs))
 	{
-		cerr << "ERROR: One o more graph ADP has an cycle in its dependencies. Look the folder GenEvalAG/Out_Gen_Mag for more details." << endl;
-		build_graphs.print_graphs_cyclic(attr_grammar.get_rules());
-		return false;
+		cout << "* Build plans -------------- [ " << flush;
+		if (build_graphs.check_cyclic_adp_dependencies())
+		{
+			cout << "FAIL ]\n" << endl;
+			cerr << "ERROR: One o more graph ADP has an cycle in its dependencies. Look the folder GenEvalAG/Out_Gen_Mag for more details." << endl;
+			build_graphs.save_cyclic_graphs(attr_grammar.get_rules());
+		}
+		else if(generate_plans(attr_grammar, build_graphs))
+		{
+			cout << " OK  ]" << endl;
+			return true;
+		}
 	}
-	else
-	{
-		generate_plans(attr_grammar, build_graphs);
-		return true;
-	}
+	cout << "FAIL ]\n" << endl;
+	return false;
 }
 
 const map < Key_plan, Order_eval_eq > &Builder_plans::get_plans() const

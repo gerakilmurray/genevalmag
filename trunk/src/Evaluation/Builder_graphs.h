@@ -58,6 +58,8 @@ class Builder_graphs
 		/* Store the adp graphs. The key corresponds to the key Rule with the inferior context*/
 		map <vector<unsigned short>, Graph> p_Adp_subgraphs_cyclics;
 
+		string path_output;
+
 		/**
 		  * Builds a graph for each symbol of the grammar with all atributes.
 		  * The graph only has vertexs. It hasn't edges.
@@ -74,14 +76,14 @@ class Builder_graphs
 		/**
 		  * Generate all combinations of the rules and saves a graph ADP for each of them.
 		  */
-		void combined_inf_contexts(const Rule *rule, Graph &graph, vector< vector<unsigned short> > &inf_context, size_t index_to_combine);
+		bool combined_inf_contexts(const Rule *rule, Graph &graph, vector< vector<unsigned short> > &inf_context, size_t index_to_combine);
 
 	public:
 
 		/**
 		  * Constructor empty of Builder graphs.
 		  */
-		Builder_graphs();
+		Builder_graphs(const string &path_folder_output);
 
 		/**
 		  * Destructor empty of Builder graphs.
@@ -111,7 +113,7 @@ class Builder_graphs
 		  * 			Edges: 	E --> E
 		  * 					T---> E
 		  */
-		void compute_dependency_graphs(const map<unsigned short,Rule> &rules);
+		bool compute_dependency_graphs(const map<unsigned short,Rule> &rules);
 
 		/**
 		  * Algorithm Down
@@ -121,7 +123,7 @@ class Builder_graphs
 		  * 	graph G: DP(1) U Down(E) U Down(T)
 		  * 	Project(G,{attributes of E})
 		  */
-		void compute_down_graph(const map<string, Symbol> &symbols, const map<unsigned short, Rule> &rules);
+		bool compute_down_graph(const map<string, Symbol> &symbols, const map<unsigned short, Rule> &rules);
 
 		/**
 		  * Algorithm DCG
@@ -131,7 +133,7 @@ class Builder_graphs
 		  * 	graph G: DP(1) U Down(E) U Down(T)
 		  * 	Project(G,{attributes of E})
 		  */
-		void compute_dcg(const map<unsigned short, Rule> &rules);
+		bool compute_dcg(const map<unsigned short, Rule> &rules);
 
 		/**
 		  * Algorithm ADP
@@ -141,7 +143,7 @@ class Builder_graphs
 		  * 	graph G: DP(1) U Dcg E (J1..JN) U Dcg T (K1..KM)
 		  * 	Where Ji y ki are rule with left-symbol E and T respectly.
 		  */
-		void compute_adp_graph(const Attr_grammar &grammar);
+		bool compute_adp_graph(const Attr_grammar &grammar);
 
 		/**
 		  * Checks if the graph contains cycle.
@@ -150,34 +152,34 @@ class Builder_graphs
 		bool check_cyclic_adp_dependencies();
 
 		/**
-		  * Prints all graphs generates: DP, Down, DCG and ADP.
+		  * Saves all graphs generates: DP, Down, DCG and ADP.
 		  */
-		void print_all_graphs(const map<unsigned short, Rule> &rules) const;
+		bool save_all_graphs(const map<unsigned short, Rule> &rules) const;
 
 		/**
-		  * Prints all graphs graph cycles.
+		  * Saves all graphs graph cycles.
 		  */
-		void print_graphs_cyclic(const map<unsigned short, Rule> &rules) const;
+		bool save_cyclic_graphs(const map<unsigned short, Rule> &rules) const;
 
 		/**
-		  * Prints all dp-graphs generates
+		  * Saves all dp-graphs generates
 		  */
-		void print_dp_graphs(const map<unsigned short, Rule> &rules) const;
+		bool save_dp_graphs(const map<unsigned short, Rule> &rules) const;
 
 		/**
-		  * Prints all down-graphs generates
+		  * Saves all down-graphs generates
 		  */
-		void print_down_graphs() const;
+		bool save_down_graphs() const;
 
 		/**
-		  * Prints all dcg-graphs generates
+		  * Saves all dcg-graphs generates
 		  */
-		void print_dcg_graphs(const map<unsigned short, Rule> &rules) const;
+		bool save_dcg_graphs(const map<unsigned short, Rule> &rules) const;
 
 		/**
-		  * Prints all adp-graphs generates
+		  * Saves all adp-graphs generates
 		  */
-		void print_adp_graphs(const map<unsigned short, Rule> &rules) const;
+		bool save_adp_graphs(const map<unsigned short, Rule> &rules) const;
 };
 
 } /* end genevalmag */

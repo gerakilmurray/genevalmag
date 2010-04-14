@@ -178,13 +178,13 @@ class Builder_plans
 		/**
 		  * Generates and saves all evaluation's plans for the Attribute Grammar.
 		  */
-		void generate_plans(const Attr_grammar &grammar, const Builder_graphs &build_graphs);
+		bool generate_plans(const Attr_grammar &grammar, const Builder_graphs &build_graphs);
 
 	public:
 		/**
 		  * Constructor empty of Builder plans.
 		  */
-		Builder_plans(const string path);
+		Builder_plans(const string &path_folder_output);
 
 		/**
 		  * Destructor of Builder plans.
@@ -197,13 +197,13 @@ class Builder_plans
 		bool build_plans(const Attr_grammar &attr_grammar);
 
 		/**
-		  * Prints all plans. Creates a graph that represents the plan and uses print_graph with dot.
+		  * Saves all plans. Creates a graph that represents the plan and uses print_graph with dot.
 		  */
-		void print_all_plans(const Attr_grammar &grammar) const;
+		bool save_all_plans(const Attr_grammar &grammar) const;
 		/**
-		  * Prints all proyected's plans. Creates a graph that represents the plan and uses print_graph with dot.
+		  * Saves all proyected's plans. Creates a graph that represents the plan and uses print_graph with dot.
 		  */
-		void print_all_plans_project(const Attr_grammar &grammar) const;
+		bool save_all_plans_project(const Attr_grammar &grammar) const;
 
 		const map < Key_plan, Order_eval_eq > &get_plans() const;
 

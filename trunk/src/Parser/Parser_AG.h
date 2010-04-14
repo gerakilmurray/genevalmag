@@ -43,7 +43,7 @@ class Parser_AG
 	  * This method invokes the method 'parse' of the library Spirit included in Boost.
 	  * Returns true if could parse all the input.
 	  */
-	bool parse_grammar(const string path_file_input);
+	bool parse_grammar(const string &path_file_input);
 };
 
 } /* end genevalmag */
