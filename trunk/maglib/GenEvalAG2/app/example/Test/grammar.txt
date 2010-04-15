@@ -1,0 +1,116 @@
+/**
+  *  \file		grammar.txt
+  *  \brief		File with a Attribute Grammar example that specific an AST.
+  *  \date		05/11/2009
+  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  */
+
+/****************************
+ * Block of Semantic Domain *
+ ****************************/
+semantic domain
+	/*****************
+	 * List of Sorts *
+	 *****************/
+	sort pepe;
+	sort adrian;
+
+	/*********************
+	 * List of Operators *
+	 *********************/
+	op infix	(40, right)		+  : int, int	 -> int;
+	op infix	(500,right)	*  : int, int -> int;
+	op infix	(1,non-assoc)	=  : int, int -> int;
+	op 			(99,_)			sqr: int		 -> int;
+	op postfix	(15,_)			&  : int		 -> int;	
+	op prefix	(70,right)		%  : int		 -> int;
+	op 			(18,non-assoc)	rq : string		 -> adrian;
+	op prefix	(90,left)		if  : int		 -> int;
+	op postfix	(2,left)		pos  : int		 -> int;
+		
+	/*********************
+	 * List of Functions *
+	 *********************/
+	function	f: int, int, char	-> string;
+	function	g: int				-> int;
+	function	h: 				-> int;
+	
+/***********************
+ * Block of Attributes *
+ ***********************/
+attributes
+	valor			: syn	<int>		of all;
+	lexema, termino	: syn	<int>		of all - {E, T};
+	lexx			: syn	<string>	of all - {T};
+	type			: inh	<string>	of all;
+	grade			:		<int>		of {E,T};
+	
+/******************
+ * Block of Rules *
+ ******************/
+rules
+	E ::=	E '+' T
+				compute
+					//E[0].valor = g(g(g((g(((((9))))+ h()))))) * f(T[0].termino * E[1].type, 4, 'z');
+					//E[0].lexx = "E";
+					//E[0].grade = 1 + 4;
+					
+					
+					/*E[0].grade = if4 + %5&pos + g( 1 + g(3 * (%2) * 7));
+					E[0].grade = if4 + %5&pos + g( 1 + g(3 * %2 * 7));
+					E[0].grade = ((((8 + 6))) * 7&);
+					T[0].grade = 8 + %if%if%if6& * 6;
+					E[0].grade = 1 + %%%% 6 & + 7pos;
+					E[0].grade = 1 + %7 * %9;
+					T[0].grade = 1 + %%%% 6 & + (7 + %3 * 4)pos;
+					E[0].grade = % if 6 + 9 &; 
+					E[0].grade = 1 + %(2 + 3 * T[0].valor) * if3pos;
+					E[0].grade = 1 + %if2 * 3pos;
+					E[0].grade = 8pos&pos&pos&pos& + %if%if6&;*/
+					
+
+					//E[0].grade = 2 * (3 + %5 + 6 )& * 14;
+					//E[0].grade = 1 + 2 + 3 + 4 + 5 + 6;
+					
+					E[0].grade = 1 + 2 + 3 + 4 + 5 + 6 + 2.3;
+					
+					//T[0].type = "Hola \n";
+					//E[1].type = E[0].type;
+				end
+		| 	T
+			  	//compute
+			  		//E[0].valor = T[0].termino * E[1].lexx + T[0].lexema;
+					//E[0].lexx = "E";
+					//E[0].grade = 46;
+					
+			  		//T[0].type = "Tipo";
+			  	//end
+		;
+
+	T ::=	id '*' id
+				//compute
+					//T[0].valor =  id[0].valor + ((id[0].valor + (id[1].valor)));
+					//T[0].lexema = 1024;
+					//T[0].termino = T[0].valor;
+					
+					//id[0].type = "ident     \t ";
+					//id[1].type = "ident";
+				//end
+		;
+	
+	id ::=	12.6
+				//compute
+					//id[0].valor = 1024;
+					//id[0].lexema = 2048; 
+					//id[0].termino = 100;
+					//id[0].lexx = "int_1";
+				//end
+		 |  '0'
+				//compute
+					//id[0].valor = 1024;
+					//id[0].lexema = 2048; 
+					//id[0].termino = 100; 
+					//id[0].lexx = "int0";
+				//end
+		;
