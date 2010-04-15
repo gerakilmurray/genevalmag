@@ -1,0 +1,37 @@
+participant Gen_eval_AG
+participant Parser_AG
+participant Spirit
+participant Semantics_actions
+participant Semantic_check
+participant Build_plans
+
+note left of Gen_eval_AG: Parser_AG p_mag;
+Gen_eval_AG->Parser_AG: p_mag();
+note left of Parser_AG: Attr_grammar attr_grammar; \n(all maps creates)
+
+Gen_eval_AG->Parser_AG: p_mag.parser_grammar(input_txt)
+note left of Parser_AG: set_at(&attr_grammar);\n set_s_check(&sem_check);
+
+Parser_AG->Spirit: parser(input_txt, attribute_grammar,skip_p);
+
+Spirit->Semantics_actions: Action semantic executed.
+Semantics_actions->Spirit: Continue with parser.
+
+Semantics_actions->Semantic_check: Checking semantic properties.
+
+Spirit->Parser_AG: return info of parsing.
+note left of Spirit: if parser==OKthen attr_grammar is fully complete.
+
+note right of Parser_AG: prints result parsing.
+
+Parser_AG->Gen_eval_AG: Parsing complete and fully internal structures created.
+note right of Gen_eval_AG: Builder_plan b_plans.
+Gen_eval_AG->Build_plans: b_plans.build_plans(Att_grammar);
+
+Build_plans->Builder_graph: go to create graph.\nBuilder_graphs b_graphs;
+note right of Builder_graph: 	
+b_graphs.compute_dependency_graphs(attr_grammar.get_rules());\n
+	b_graphs.compute_down_graph(attr_grammar.get_non_terminal_symbols(), attr_grammar.get_rules());\n
+	b_graphs.compute_dcg(attr_grammar.get_rules());\n
+	b_graphs.compute_adp_graph(attr_grammar);\n
+	b_graphs.print_all_graphs(attr_grammar.get_rules());\n
