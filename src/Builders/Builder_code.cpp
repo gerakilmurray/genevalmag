@@ -105,7 +105,7 @@ void Gen_code::generate_code_file(const vector<string> &headers_file) const
 
 	code_txt.append("#include <stdlib.h>\n");
 	code_txt.append("#include <iostream>\n");
-	code_txt.append("#include <sstream>\n\n");
+	code_txt.append("#include <sstream>\n");
 
 	for (size_t i(0);i<headers_file.size();i++)
 	{
@@ -114,7 +114,7 @@ void Gen_code::generate_code_file(const vector<string> &headers_file) const
 		code_txt.append("\"\n");
 	}
 
-	code_txt.append("\n#include \"");
+	code_txt.append("#include \"");
 	code_txt.append(file_name);
 	code_txt.append(".hpp\"\n\n");
 
@@ -915,7 +915,7 @@ void Gen_code::generate_structs(const Attr_grammar &attr_grammar) const
 		/* Generate constructor signature. */
 		structs.append("\n    Symbol_");
 		structs.append(it_symb->second.get_name());
-		structs.append("(unsigned short r_id);\n\n");
+		structs.append("(unsigned short r_id);\n");
 
 		/* Generate constructor method. */
 		text_constructor.append(it_symb->second.get_name());
