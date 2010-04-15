@@ -1,6 +1,11 @@
 /**
-  *  \file		Gen_eval_AG.cpp
-  *  \brief		Main module.
+  *  \file		segmag.cpp
+  *  \brief		Tool for generation of Static Evaluators for Multiplans Attribute Grammar.
+  *             Este codigo es el encargado de realizar la llamadas a las funciones que realizan
+  *             los algoritmos para ordenar los arreglos. Ademas se encarga de medir los tiempos
+  *             que dichos algoritmos demoran y asi realizar un histograma. Para esto emplea
+  *             las capacidades del utilitario.
+  *
   *  \date		09/02/2010
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
@@ -72,7 +77,7 @@ bool check_name(const string &strFilename)
 }
 
 /**
-  *	GenevalMag  [OPTION] -f <input_file>
+  *	segmag [OPTION] -f \<input_file\>
   *	where [OPTION]:
   *		-i 	Including header "h" or "hpp" file for resolve externs variables in generated code.
   *		-fo Define the folder output for output generated information.
