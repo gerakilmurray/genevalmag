@@ -468,7 +468,6 @@ void Builder_graphs::complete_dp_graphs(const map<unsigned short, Rule> &rules)
 bool Builder_graphs::save_dp_graphs(const map<unsigned short, Rule> &rules, const string path_output) const
 {
 	string path_out(path_output);
-	path_out.append(PATH_OUTPUT_GRAPHS);
 	path_out.append(PATH_OUTPUT_DP);
 
 	if(!clean_output_folder(path_out))
@@ -495,7 +494,6 @@ bool Builder_graphs::save_dp_graphs(const map<unsigned short, Rule> &rules, cons
 bool Builder_graphs::save_down_graphs(const string path_output) const
 {
 	string path_out(path_output);
-	path_out.append(PATH_OUTPUT_GRAPHS);
 	path_out.append(PATH_OUTPUT_DOWN);
 
 	if(!clean_output_folder(path_out))
@@ -522,7 +520,6 @@ bool Builder_graphs::save_down_graphs(const string path_output) const
 bool Builder_graphs::save_dcg_graphs(const map<unsigned short, Rule> &rules, const string path_output) const
 {
 	string path_out(path_output);
-	path_out.append(PATH_OUTPUT_GRAPHS);
 	path_out.append(PATH_OUTPUT_DCG);
 
 	if(!clean_output_folder(path_out))
@@ -551,7 +548,6 @@ bool Builder_graphs::save_dcg_graphs(const map<unsigned short, Rule> &rules, con
 bool Builder_graphs::save_adp_graphs(const map<unsigned short, Rule> &rules, const string path_output) const
 {
 	string path_out(path_output);
-	path_out.append(PATH_OUTPUT_GRAPHS);
 	path_out.append(PATH_OUTPUT_ADP);
 
 	if(!clean_output_folder(path_out))
