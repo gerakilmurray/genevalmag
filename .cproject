@@ -48,7 +48,7 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry excluding="app/example|static_code|GenEvalAG|Out_Gen_Mag (copia)|Out_Gen_Mag (copia)/proof_longitud.cpp|Out_Gen_Mag (copia)/proof_longitud_T2.cpp|Out_Gen_Mag (copia)/Eval_mag.hpp|Out_Gen_Mag (copia)/Eval_mag_proof.cpp|Out_Gen_Mag/proof|Out_Gen_Mag/Eval_mag_long.hpp|Out_Gen_Mag/Eval_mag_mag.hpp|Out_Gen_Mag/trees.test|Out_Gen_Mag/proof_T2|Out_Gen_Mag/proof_longi|Out_Gen_Mag/proof_eval|Out_Gen_Mag/Grammar_mag.log|Out_Gen_Mag/eval_proof|Out_Gen_Mag/out_graph|Out_Gen_Mag/ALL_plan_project|Out_Gen_Mag/ALL_plan|Out_Gen_Mag/proof_longitud_T2.cpp|Out_Gen_Mag/proof_longitud.cpp|src/Util/Utilities.h|Out_Gen_Mag/Eval_mag.hpp|Out_Gen_Mag/Eval_mag_proof.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry excluding="doc/html|app/example|static_code|GenEvalAG|Out_Gen_Mag (copia)|Out_Gen_Mag (copia)/proof_longitud.cpp|Out_Gen_Mag (copia)/proof_longitud_T2.cpp|Out_Gen_Mag (copia)/Eval_mag.hpp|Out_Gen_Mag (copia)/Eval_mag_proof.cpp|Out_Gen_Mag/proof|Out_Gen_Mag/Eval_mag_long.hpp|Out_Gen_Mag/Eval_mag_mag.hpp|Out_Gen_Mag/trees.test|Out_Gen_Mag/proof_T2|Out_Gen_Mag/proof_longi|Out_Gen_Mag/proof_eval|Out_Gen_Mag/Grammar_mag.log|Out_Gen_Mag/eval_proof|Out_Gen_Mag/out_graph|Out_Gen_Mag/ALL_plan_project|Out_Gen_Mag/ALL_plan|Out_Gen_Mag/proof_longitud_T2.cpp|Out_Gen_Mag/proof_longitud.cpp|src/Util/Utilities.h|Out_Gen_Mag/Eval_mag.hpp|Out_Gen_Mag/Eval_mag_proof.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 </sourceEntries>
 </configuration>
 </storageModule>
@@ -515,8 +515,28 @@
 </tool>
 </toolChain>
 </folderInfo>
+<folderInfo id="cdt.managedbuild.config.gnu.exe.release.642863455.714474252" name="/" resourcePath="doc/html">
+<toolChain id="cdt.managedbuild.toolchain.gnu.exe.release.1685860254" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.exe.release" unusedChildren="">
+<tool id="cdt.managedbuild.tool.gnu.archiver.base.1596579383" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.156879558"/>
+<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.447021814" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.650803102">
+<option id="gnu.cpp.compiler.exe.release.option.optimization.level.1025276805" superClass="gnu.cpp.compiler.exe.release.option.optimization.level" value="gnu.cpp.compiler.optimization.level.most" valueType="enumerated"/>
+<option id="gnu.cpp.compiler.exe.release.option.debugging.level.1008023964" superClass="gnu.cpp.compiler.exe.release.option.debugging.level" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
+<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1890973824" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+</tool>
+<tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.release.960978173" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.release.842585923">
+<option defaultValue="gnu.c.optimization.level.most" id="gnu.c.compiler.exe.release.option.optimization.level.1303072877" superClass="gnu.c.compiler.exe.release.option.optimization.level" valueType="enumerated"/>
+<option id="gnu.c.compiler.exe.release.option.debugging.level.1512590946" superClass="gnu.c.compiler.exe.release.option.debugging.level" value="gnu.c.debugging.level.none" valueType="enumerated"/>
+<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1531077864" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
+</tool>
+<tool id="cdt.managedbuild.tool.gnu.c.linker.exe.release.676682667" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.release.77142041"/>
+<tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.release.957840918" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.release.294850011"/>
+<tool id="cdt.managedbuild.tool.gnu.assembler.exe.release.178811646" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.exe.release.323729914">
+<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1241083264" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+</tool>
+</toolChain>
+</folderInfo>
 <sourceEntries>
-<entry excluding="app/example|static_code|GenEvalAG|Out_Gen_Mag (copia)|Out_Gen_Mag (copia)/proof_longitud.cpp|Out_Gen_Mag (copia)/proof_longitud_T2.cpp|Out_Gen_Mag (copia)/Eval_mag.hpp|Out_Gen_Mag (copia)/Eval_mag_proof.cpp|Out_Gen_Mag/proof|Out_Gen_Mag/Eval_mag_long.hpp|Out_Gen_Mag/Eval_mag_mag.hpp|Out_Gen_Mag/trees.test|Out_Gen_Mag/proof_T2|Out_Gen_Mag/proof_longi|Out_Gen_Mag/proof_eval|Out_Gen_Mag/Grammar_mag.log|Out_Gen_Mag/eval_proof|Out_Gen_Mag/out_graph|Out_Gen_Mag/ALL_plan_project|Out_Gen_Mag/ALL_plan|Out_Gen_Mag/proof_longitud_T2.cpp|Out_Gen_Mag/proof_longitud.cpp|src/Util/Utilities.h|Out_Gen_Mag/Eval_mag.hpp|Out_Gen_Mag/Eval_mag_proof.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry excluding="app/example|static_code|GenEvalAG|Out_Gen_Mag (copia)|Out_Gen_Mag (copia)/proof_longitud.cpp|Out_Gen_Mag (copia)/proof_longitud_T2.cpp|Out_Gen_Mag (copia)/Eval_mag.hpp|Out_Gen_Mag (copia)/Eval_mag_proof.cpp|Out_Gen_Mag/proof|Out_Gen_Mag/Eval_mag_long.hpp|Out_Gen_Mag/Eval_mag_mag.hpp|Out_Gen_Mag/trees.test|Out_Gen_Mag/proof_T2|Out_Gen_Mag/proof_longi|Out_Gen_Mag/proof_eval|Out_Gen_Mag/Grammar_mag.log|Out_Gen_Mag/eval_proof|Out_Gen_Mag/out_graph|Out_Gen_Mag/ALL_plan_project|Out_Gen_Mag/ALL_plan|Out_Gen_Mag/proof_longitud_T2.cpp|Out_Gen_Mag/proof_longitud.cpp|src/Util/Utilities.h|Out_Gen_Mag/Eval_mag.hpp|Out_Gen_Mag/Eval_mag_proof.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="GenEvalAG"/>
 </sourceEntries>
 </configuration>
 </storageModule>
