@@ -6,30 +6,6 @@
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-/**
-   \mainpage
-   maglib - Multiplan Attribute Grammar Library
-   <br>Director: Marcelo Daniel Arroyo <br>
-   <hr>
-   \author Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
-   \author Picco, Gonzalo Martin <gonzalopicco@gmail.com>
-   \date Mayo 2010
-
-   \par Leeme:
-   Trabajo realizado en el marco de la Tesis de Licenciatura en Ciencias de la Computación
-   <ul>
-   <li> Enlaces principales </li>
-   <li> algo
-   \htmlonly
-   <strong>HTML válido</strong><br>
-
-   \endhtmlonly
-   </li>
-   <li>etc...</li>
-   </ul>
-   <br><img src="../../../recursos/chinpance.png"><br>
-*/
-
 #ifndef MAGLIB_H_
 #define MAGLIB_H_
 
