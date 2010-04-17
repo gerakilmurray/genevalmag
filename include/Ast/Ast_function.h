@@ -15,6 +15,11 @@
 namespace genevalmag
 {
 
+/**
+  * This constant is used for set a function on operator.
+  */
+const bool IS_OPERATOR (true);
+
 class Ast_function: public Ast_inner_node
 {
     private:

@@ -21,8 +21,9 @@ namespace genevalmag
   */
 Attr_grammar::Attr_grammar()
 {
-    /* Remove garbage. */
+    /** Initialice values. */
     ag_initial_symb = NULL;
+    count_eqs       = 0;
 }
 
 /**
@@ -38,10 +39,10 @@ Attr_grammar::~Attr_grammar()
   * Returns true if insert succesfully.
   * In other case, return false.
   */
-template <class K, class T> bool add(T elem, map< K ,T > &map_elem)
+template <class K, class T> bool add(const T &elem, map< K ,T > &map_elem)
 {
     pair< K, T > new_p(elem.key(), elem);
-    pair<typename map< K, T  >::iterator, bool > result(map_elem.insert(new_p));
+    pair<typename map< K, T  >::const_iterator, bool > result(map_elem.insert(new_p));
     return result.second;
 }
 
@@ -65,7 +66,7 @@ template <class K, class T> string Attr_grammar::to_string_map(const map< K ,T >
 /**
   * Enqueues a sort in the list of the attribute grammar.
   */
-bool Attr_grammar::add_sort(Sort &sort)
+bool Attr_grammar::add_sort(const Sort &sort)
 {
     return add<string, Sort>(sort, ag_sort);
 }
@@ -73,7 +74,7 @@ bool Attr_grammar::add_sort(Sort &sort)
 /**
   * Enqueues a function in the list of the attribute grammar.
   */
-bool Attr_grammar::add_function(Function &func)
+bool Attr_grammar::add_function(const Function &func)
 {
     return add<string, Function>(func, ag_func);
 }
@@ -81,7 +82,7 @@ bool Attr_grammar::add_function(Function &func)
 /**
   * Enqueues a attribute in the list of the attribute grammar.
   */
-bool Attr_grammar::add_attribute(Attribute &attr)
+bool Attr_grammar::add_attribute(const Attribute &attr)
 {
     return add<string, Attribute>(attr, ag_attr);
 }
@@ -90,7 +91,7 @@ bool Attr_grammar::add_attribute(Attribute &attr)
   * Interprets the expression of sets and returns true
   * if the symbol belongs to that set.
   */
-bool belong(Symbol symb, string expr_attrs)
+bool belong(const Symbol &symb, const string &expr_attrs)
 {
     typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
     boost::char_separator<char> sep("{},-");
@@ -124,9 +125,9 @@ bool belong(Symbol symb, string expr_attrs)
 /**
   * Inserts the attributes belong the symbol.
   */
-void Attr_grammar::load_attributes(Symbol &symb)
+void Attr_grammar::load_attributes(Symbol &symb) const
 {
-    for(map<string,Attribute>::iterator it(ag_attr.begin()); it != ag_attr.end(); it++)
+    for(map<string,Attribute>::const_iterator it(ag_attr.begin()); it != ag_attr.end(); it++)
     {
         if(belong(symb, it->second.get_member_symbol()))
         {
@@ -138,7 +139,7 @@ void Attr_grammar::load_attributes(Symbol &symb)
 /**
   * Enqueues a symbol in the list of the attribute grammar.
   */
-bool Attr_grammar::add_symbol(Symbol &symb)
+bool Attr_grammar::add_symbol(const Symbol &symb)
 {
     map<string, Symbol> *map_symb;
     if (symb.is_non_terminal())
@@ -175,6 +176,7 @@ bool Attr_grammar::defined_rule(const Rule &rule) const
 }
 
 /**
+ *
   * Enqueues a rule in the list of the attribute grammar.
   */
 bool Attr_grammar::add_rule(Rule &rule)
@@ -222,7 +224,7 @@ const Sort &Attr_grammar::return_sort(string name_sort)
     /* Becouse is a type basic. if not the sort belong map. the map not have repeat. */
     sort_new.set_type_basic(true);
     add_sort(sort_new);
-    map<string,Sort>::iterator it(ag_sort.find(name_sort));
+    map<string,Sort>::const_iterator it(ag_sort.find(name_sort));
     return it->second;
 }
 
@@ -237,9 +239,9 @@ const map<string, Sort> &Attr_grammar::get_sorts() const
 /**
   * Finds in the list of function of the attribute grammar and returns the function with that name.
   */
-const Function *Attr_grammar::get_function(string key_function)
+const Function *Attr_grammar::get_function(string key_function) const
 {
-    map<string,Function>::iterator it(ag_func.find(key_function));
+    map<string,Function>::const_iterator it(ag_func.find(key_function));
     if (it == ag_func.end())
     {
         return NULL;
@@ -258,9 +260,9 @@ const map<string, Function> &Attr_grammar::get_functions() const
 /**
   * Finds in the list of operator of the attribute grammar and returns the operator with that name.
   */
-const Symbol &Attr_grammar::get_symbol(string name_symbol)
+const Symbol &Attr_grammar::get_symbol(string name_symbol) const
 {
-    map<string,Symbol>::iterator it(ag_symb_non_terminals.find(name_symbol));
+    map<string,Symbol>::const_iterator it(ag_symb_non_terminals.find(name_symbol));
     if (it == ag_symb_non_terminals.end())
     {
         it = ag_symb_terminals.find(name_symbol);
@@ -279,7 +281,7 @@ const map<unsigned short, Rule> &Attr_grammar::get_rules() const
 /**
   *  Returns the rule on paramenter.
   */
-const Rule &Attr_grammar::get_rule(unsigned short index)const
+const Rule &Attr_grammar::get_rule(unsigned short index) const
 {
     return ag_rule.find(index)->second;
 }
@@ -391,14 +393,6 @@ const Ast_instance *Attr_grammar::get_eq_l_value(unsigned short index) const
 unsigned short Attr_grammar::get_count_eqs() const
 {
     return count_eqs;
-}
-
-/**
-  *  Sets the initial rule.
-  */
-void  Attr_grammar::set_initial_symb(Symbol *init_symb)
-{
-    ag_initial_symb = init_symb;
 }
 
 /**

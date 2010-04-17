@@ -27,7 +27,7 @@ class Equation
           * Similar to a Smart Pointer to manage the release of the memory tree.
           * When this is 0, all memory is freed from the tree.
           */
-        unsigned int        *count_ref;
+        unsigned short      *count_ref;
 
         /**
           * Method of copy the equation, STL-like C++.
@@ -41,7 +41,7 @@ class Equation
         /**
           * Return the count reference.
           */
-        unsigned int *_get_count_ref() const;
+        unsigned short *_get_count_ref() const;
 
         /**
           * Traverse the equation tree while saves only the Ast_instance nodes in the vector result.
@@ -79,12 +79,12 @@ class Equation
         /**
           * Returns the id of the equation.
           */
-        unsigned short get_id() const;
+        const unsigned short get_id() const;
 
         /**
           * Sets the id of the equation.
           */
-        void set_id(unsigned short id);
+        void set_id(const unsigned short id);
         /**
           * Sets the left value of the equation.
           */
@@ -92,7 +92,7 @@ class Equation
         /**
           * Sets the rigth value of the equation: is a tree.
           */
-        void set_r_value(Ast_node *rvalue);
+        void set_r_value(const Ast_node *rvalue);
 
         /**
           * Traverse the equation tree while saves only the Ast_leaf nodes in the vector result.
@@ -111,12 +111,12 @@ class Equation
           *
           * where \<l_value\> = "instance_attr" and \<r_value\> is= "list of node_ast"
           */
-        string to_string() const;
+        const string to_string() const;
 
         /**
           * Compares the equation with other.
           */
-        bool equals(const Equation &other) const;
+        const bool equals(const Equation &other) const;
 
         /**
           * Generate and return the string key that identifies an Equation definitely.
@@ -125,7 +125,7 @@ class Equation
           *
           * where \<l_value\> = "instance_attr" and \<r_value\> is= "list of node_ast"
           */
-        string key() const;
+        const string key() const;
 };
 
 } /* end genevalmag */

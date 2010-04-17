@@ -16,8 +16,6 @@ semantic domain
      *********************/
     op infix    (10, left) +: int, int -> int;
     
-    function    f: int   -> int; 
-    
 /***********************
  * Block of Attributes *
  ***********************/
@@ -48,7 +46,7 @@ rules
     Y ::= 'm'
     		compute
 				Y[0].s2 = Y[0].i2;
-				Y[0].s3 = f(1);
+				Y[0].s3 = 1;
     		end;
 	// P3
     Y ::= 'n'

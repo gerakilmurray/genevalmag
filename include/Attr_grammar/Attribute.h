@@ -27,7 +27,7 @@ class Attribute
 {
     private:
         string         a_name;
-        const Sort*    a_sort_type;
+        const Sort     *a_sort_type;
         type_attr      a_mod_type;
         string         a_member_symbol;
 
@@ -63,7 +63,7 @@ class Attribute
         /**
           * Return the name of the attribute.
           */
-        string get_name() const;
+        const string get_name() const;
         /**
           * Return the sort type of the attribute.
           */
@@ -71,16 +71,16 @@ class Attribute
         /**
           * Return the modifiers of the attribute.
           */
-        type_attr get_mod_type() const;
+        const type_attr get_mod_type() const;
         /**
           * Return the membership list of the attribute.
           */
-        string get_member_symbol() const;
+        const string get_member_symbol() const;
 
         /**
           * Set the name of the attribute.
           */
-        void set_name(string name);
+        void set_name(const string name);
         /**
           * Set the sort type of the attribute.
           */
@@ -88,40 +88,40 @@ class Attribute
         /**
           * Set the modifiers of the attribute.
           */
-        void set_mod_type(type_attr mod_type);
+        void set_mod_type(const type_attr mod_type);
         /**
           * Set the membership list of the attribute.
           */
-        void set_member_symbol(string member_symbol);
+        void set_member_symbol(const string member_symbol);
 
         /**
           * Return true if the modifiers of the attribute is synthetize.
           */
-        bool is_synthetize() const;
+        const bool is_synthetize() const;
 
         /**
           * Return true if the modifiers of the attribute is inherit.
           */
-        bool is_inherit() const;
+        const bool is_inherit() const;
 
         /**
           * Generate and return a string reprensentation of a attribute.
           *
           * Result = name ":" modifiers "<" sort_type ["(" instance ")" IF DEBUG IS ON] "> of " membership_list
           */
-        string to_string() const;
+        const string to_string() const;
 
         /**
           * Compares the attribute with other.
           */
-        bool equals(const Attribute &other) const;
+        const bool equals(const Attribute &other) const;
 
         /**
           * Generate and return the string key that identifies a attribute definitely.
           *
           * Result = name modifiers sort_type membership_list
           */
-        string key() const;
+        const string key() const;
 };
 
 } /* end genevalmag */

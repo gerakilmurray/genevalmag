@@ -96,24 +96,24 @@ class Function
         /**
           * Returns the mode of the operator.
           */
-        oper_mode get_mode() const;
+        const oper_mode get_mode() const;
         /**
           * Returns the precedence of the operator.
           */
-        unsigned short get_prec() const;
+        const unsigned short get_prec() const;
         /**
           * Returns the associativity of the operator.
           */
-        oper_assoc get_oper_assoc() const;
+        const oper_assoc get_oper_assoc() const;
         /**
           * Returns the arity of Function.
           */
-        int get_arity() const;
+        const int get_arity() const;
 
         /**
           * Sets the name of the Function.
           */
-        void set_name(string name);
+        void set_name(const string name);
         /**
           * Sets the sort image of the Function.
           */
@@ -122,19 +122,19 @@ class Function
           * Sets the mode of the operator.
           * @param mode: string
           */
-        void set_mode(string mode);
+        void set_mode(const string mode);
         /**
           * Sets the precedence of the operator.
           */
-        void set_prec(unsigned short prec);
+        void set_prec(const unsigned short prec);
         /**
           * Sets the associativity of the operator.
           */
-        void set_oper_assoc(string assoc);
+        void set_oper_assoc(const string assoc);
         /**
           * Sets the boolean attribute with the parameter.
           */
-        void set_is_operator(bool value);
+        void set_is_operator(const bool value);
 
         /**
           * Enqueue a sort in the domain of the Function.
@@ -148,7 +148,7 @@ class Function
           *
           * where \<domain\> is= sort_1 ["(" \<instance\> ")" IF DEBUG IS ON] "," ... "," sort_n ["(" \<instance\> ")" IF DEBUG IS ON]
           */
-        string to_string() const;
+        const string to_string() const;
 
         /**
           * Generates and returns a string with the signature of a Function.
@@ -161,17 +161,17 @@ class Function
           *
           * where \<domain\> is = sort_1 P1"," ... "," sort_n Pn
           */
-        string signature() const;
+        const string signature() const;
 
         /**
           * Returns true if the Function is a Operator.
           */
-        bool is_operator() const;
+        const bool is_operator() const;
 
         /**
           * Compares the Function with other.
           */
-        bool equals(const Function &other) const;
+        const bool equals(const Function &other) const;
 
         /**
           * Generates and returns the string key that identifies a Function definitely.
@@ -180,7 +180,7 @@ class Function
           *
           * where \<domain\> is = sort_1 ... sort_n
           */
-        string key() const;
+        const string key() const;
 };
 
 } /* end genevalmag */

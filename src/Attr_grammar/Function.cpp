@@ -124,7 +124,7 @@ const Sort *Function::get_image() const
 /**
   * Returns the mode of the operator.
   */
-oper_mode Function::get_mode() const
+const oper_mode Function::get_mode() const
 {
     return f_mod;
 }
@@ -132,7 +132,7 @@ oper_mode Function::get_mode() const
 /**
   * Returns the precedence of the operator.
   */
-unsigned short Function::get_prec() const
+const unsigned short Function::get_prec() const
 {
     return f_prec;
 }
@@ -140,14 +140,14 @@ unsigned short Function::get_prec() const
 /**
   * Returns the associativity of the operator.
   */
-oper_assoc Function::get_oper_assoc() const
+const oper_assoc Function::get_oper_assoc() const
 {
     return f_assoc;
 }
 /**
   * Returns the arity of Function.
   */
-int Function::get_arity() const
+const int Function::get_arity() const
 {
     return f_domain.size();
 }
@@ -155,7 +155,7 @@ int Function::get_arity() const
 /**
   * Sets the name of the Function.
   */
-void Function::set_name(string name)
+void Function::set_name(const string name)
 {
     f_name = name;
 }
@@ -172,7 +172,7 @@ void Function::set_image(const Sort *image)
   * Sets the mode of the operator.
   * @param mode: string
   */
-void Function::set_mode(string mode)
+void Function::set_mode(const string mode)
 {
     if(mode.compare("infix") == 0)
     {
@@ -202,7 +202,7 @@ void Function::set_mode(string mode)
 /**
   * Sets the precedence of the operator.
   */
-void Function::set_prec(unsigned short prec)
+void Function::set_prec(const unsigned short prec)
 {
     f_prec = prec;
 }
@@ -210,7 +210,7 @@ void Function::set_prec(unsigned short prec)
 /**
   * Sets the associativity of the operator.
   */
-void Function::set_oper_assoc(string mod)
+void Function::set_oper_assoc(const string mod)
 {
     if(mod.compare("left") == 0)
     {
@@ -240,7 +240,7 @@ void Function::set_oper_assoc(string mod)
 /**
   * Sets the boolean attribute with the parameter.
   */
-void Function::set_is_operator(bool value)
+void Function::set_is_operator(const bool value)
 {
     f_is_operator = value;
 }
@@ -260,7 +260,7 @@ void Function::add_domain(const Sort *sort)
   *
   * where \<domain\> is= sort_1 ["(" \<instance\> ")" IF DEBUG IS ON] "," ... "," sort_n ["(" \<instance\> ")" IF DEBUG IS ON]
   */
-string Function::to_string() const
+const string Function::to_string() const
 {
     string func;
 
@@ -343,7 +343,7 @@ string Function::to_string() const
   *
   * where \<domain\> is= sort_1 P1"," ... "," sort_n Pn
   */
-string Function::signature() const
+const string Function::signature() const
 {
     string func;
     func.append(f_image->get_name());
@@ -373,7 +373,7 @@ string Function::signature() const
 /**
   * Returns true if the Function is a Operator.
   */
-bool Function::is_operator() const
+const bool Function::is_operator() const
 {
     return f_is_operator;
 }
@@ -381,7 +381,7 @@ bool Function::is_operator() const
 /**
   * Compares the Function with other.
   */
-bool Function::equals(const Function &other) const
+const bool Function::equals(const Function &other) const
 {
     return (key().compare(other.key()) == 0);
 }
@@ -393,7 +393,7 @@ bool Function::equals(const Function &other) const
   *
   * where \<domain\> is = sort_1 ... sort_n
   */
-string Function::key() const
+const string Function::key() const
 {
     string key;
     if(is_operator())
