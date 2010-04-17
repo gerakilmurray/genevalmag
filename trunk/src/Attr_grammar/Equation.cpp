@@ -26,7 +26,7 @@ namespace genevalmag
 Equation::Equation()
 {
     /* Initialize the counter. */
-    count_ref = new unsigned int(1);
+    count_ref = new unsigned short(1);
 
     #ifdef _DEBUG
         eqs++;
@@ -109,7 +109,7 @@ void Equation::destroy()
 /**
   * Return the count reference.
   */
-unsigned int *Equation::_get_count_ref() const
+unsigned short *Equation::_get_count_ref() const
 {
     return count_ref;
 }
@@ -133,7 +133,7 @@ const Ast_node *Equation::get_r_value() const
 /**
   * Returns the id of the equation.
   */
-unsigned short Equation::get_id() const
+const unsigned short Equation::get_id() const
 {
     return eq_id;
 }
@@ -141,7 +141,7 @@ unsigned short Equation::get_id() const
 /**
   * Sets the id of the equation.
   */
-void Equation::set_id(unsigned short id)
+void Equation::set_id(const unsigned short id)
 {
     eq_id = id;
 }
@@ -157,7 +157,7 @@ void Equation::set_l_value(const Ast_instance &lvalue)
 /**
   * Set the left value of the equation.
   */
-void Equation::set_r_value(Ast_node *rvalue)
+void Equation::set_r_value(const Ast_node *rvalue)
 {
     r_value = rvalue;
 }
@@ -247,7 +247,7 @@ const vector<const Ast_instance*> Equation::get_instance_right_side() const
   *
   * where \<l_value\> = "instance_attr" and \<r_value\> is= "list of node_ast"
   */
-string Equation::to_string() const
+const string Equation::to_string() const
 {
     string eq("(");
     stringstream id_eq;
@@ -265,7 +265,7 @@ string Equation::to_string() const
 /**
   * Compares the equation with other.
   */
-bool Equation::equals(const Equation &other) const
+const bool Equation::equals(const Equation &other) const
 {
     return key().compare(other.key()) == 0;
 }
@@ -277,7 +277,7 @@ bool Equation::equals(const Equation &other) const
   *
   * where \<l_value\> = "instance_attr" and \<r_value\> is= "list of node_ast"
   */
-string Equation::key() const
+const string Equation::key() const
 {
     string key(l_value.to_string());
     key.append(r_value->to_string());

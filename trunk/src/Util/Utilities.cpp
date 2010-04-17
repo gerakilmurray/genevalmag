@@ -56,7 +56,7 @@ bool copy_static_code(const string path)
 {
 	/* Copies files. */
 	string command_cp_("cp -f ");
-	command_cp_.append("./src/Builders/lib/* ");
+	command_cp_.append("./bin/lib/* ");
 	command_cp_.append(path);
 
 	if (system (command_cp_.c_str()) != 0)
