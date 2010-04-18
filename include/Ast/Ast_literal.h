@@ -28,10 +28,15 @@ enum literal_type
 class Ast_literal: public Ast_leaf
 {
     private:
-        /**
-          *    This represent a literal.
-          */
+		/**
+		  * /var value.
+		  * /brief literal value.
+		  */
         string          value;
+        /**
+		  * /var type.
+		  * /brief literal type: this type may be k_int, k_float, k_char, k_string.
+		  */
         literal_type    type;
 
         /**

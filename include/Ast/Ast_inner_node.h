@@ -19,10 +19,16 @@ namespace genevalmag
 class Ast_inner_node: public Ast_node
 {
     protected:
+	/**
+	  * /var childs.
+	  * /brief Childs's vector of node.
+	  */
         vector <Ast_node*> childs;
 
     public:
-
+        /**
+		  * Constructor of Ast_inner_node.
+		  */
         Ast_inner_node();
 
         /**

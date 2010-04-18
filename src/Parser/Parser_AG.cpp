@@ -6,8 +6,6 @@
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-/*#define BOOST_SPIRIT_DEBUG */
-
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -30,22 +28,29 @@ namespace genevalmag
 
 const string FILE_GRAMMAR("Grammar_mag.log");
 
+/**
+  * Constructor of Parser_AG.
+  */
 Parser_AG::Parser_AG()
 {
 }
-
+/**
+  * Destructor of Parser_AG.
+  */
 Parser_AG::~Parser_AG()
 {
 }
-
+/**
+  * Return att_grammar of parser.
+  */
 const Attr_grammar &Parser_AG::get_attr_grammar()
 {
 	return attr_grammar;
 }
 
-/*
- * Our error reporting parsers
- */
+/**
+  * Our error reporting parsers
+  */
 std::ostream& operator<<(std::ostream& out, file_position const& lc)
 {
     return out <<
@@ -124,9 +129,9 @@ struct attritute_grammar: public grammar<attritute_grammar>
 
 			r_basic_types	= strlit<>("int") | "float" | "string" | "char";
 
-			/**
-			  * Declaration of Semantic Domain.
-			  */
+			/*
+			 * Declaration of Semantic Domain.
+			 */
 
 			r_semantic_domain = lexeme_d[ strlit<>("semantic domain")  >> space_p ] >> +r_bloq_sem;
 
@@ -169,9 +174,9 @@ struct attritute_grammar: public grammar<attritute_grammar>
 
 			r_dom_func	= r_sort_st[&save_domain_func] % ',';
 
-			/**
-			  * Declaration of Attributes.
-			  */
+			/*
+			 * Declaration of Attributes.
+			 */
 			r_attributes = lexeme_d[ strlit<>("attributes")>> space_p ] >> +r_decl_attr[&create_attributes];
 
 			r_decl_attr  =(r_ident[&add_attribute][st_attributes.add] % ',') >>
@@ -184,9 +189,9 @@ struct attritute_grammar: public grammar<attritute_grammar>
 
 			r_type_attr  =(strlit<>("inh") | strlit<>("syn"));
 
-			/**
-			  * Declaration of Rules.
-			  */
+			/*
+			 * Declaration of Rules.
+			 */
 
 			r_rules		  = lexeme_d[ strlit<>("rules")>> space_p ] >> (+r_decl_rule) >> eps_p[&check_well_defined];
 
@@ -207,13 +212,13 @@ struct attritute_grammar: public grammar<attritute_grammar>
 
 			r_equation	  = r_instance[&create_equation] >> '=' >> r_expression[&save_rvalue] >> ';';
 
-			/**
-			  * expression's Grammar non ambiguos based in
-			  *
-			  * 	E = T *(<op_infix> T)
-			  *		T = F *(<op_postfix>) | (<op_prefix>) T
-			  *		F = (E) | function | literal | instance
-			  */
+			/*
+			 * expression's Grammar non ambiguos based in
+			 *
+			 * 	E = T *(<op_infix> T)
+			 *		T = F *(<op_postfix>) | (<op_prefix>) T
+			 *		F = (E) | function | literal | instance
+			 */
 			r_expression 		= r_expr_prime >> *(r_op_infix_st[&create_operator][&create_func_node] >> r_expr_prime[&create_root_infix_node])
 								;
 
@@ -227,39 +232,39 @@ struct attritute_grammar: public grammar<attritute_grammar>
 								| r_instance[&create_instance_node]
 								;
 
-			/**
-			  * The functions accept a list of expressions.
-			  */
+			/*
+			 * The functions accept a list of expressions.
+			 */
 			r_function			= r_function_st[&create_function][&create_func_node] >> ch_p('(')[&push_mark][&increment_level] >>!(r_expression % ',') >> ch_p(')')[&decrement_level];
 
-			/**
-			  * Literals accepted: Integer and Float numbers, characters and string,
-			  * between signs ' and " respectively.
-			  */
+			/*
+			 * Literals accepted: Integer and Float numbers, characters and string,
+			 * between signs ' and " respectively.
+		     */
 			r_literal			= longest_d[ real_p | int_p ][&create_lit_number]
 					 			| r_char[&create_lit_ch]
 								| r_string[&create_lit_str]
 							    ;
 
-			/**
-			  * An instance is, the symbol with the number of occurrences in square brackets within
-			  * the rule, with the specific attribute with which it operates.
-			  *
-			  * Example: E[0].value
-			  */
+			/*
+			 * An instance is, the symbol with the number of occurrences in square brackets within
+			 * the rule, with the specific attribute with which it operates.
+			 *
+			 * Example: E[0].value
+			 */
 			r_instance			= lexeme_d[ r_non_term_st[&create_instance] >>
 					  						'[' >> int_p[&save_index_ins] >> ']' >>
 					  						'.' >> r_attribute_st[&save_attr_ins]
 					  					  ];
 
-			/**
-			  * Declaration of Attribute Grammar.
-			  */
+			/*
+			 * Declaration of Attribute Grammar.
+			 */
 			r_att_grammar		= r_semantic_domain >> r_attributes >> r_rules >> end_p ;
 
-			/**
-			  * Parsers based in the symbol tables.
-			  */
+			/*
+			 * Parsers based in the symbol tables.
+			 */
 			r_sort_st			= st_sorts | r_basic_types;
 			r_op_prefix_st		= st_op_prefix;
 			r_op_infix_st		= st_op_infix;
@@ -268,9 +273,9 @@ struct attritute_grammar: public grammar<attritute_grammar>
 			r_attribute_st		= st_attributes;
 			r_non_term_st		= st_non_terminal;
 		}
-		/**
-		  * Symbols's Table for the elements of an Attribute Grammar.
-		  */
+		/*
+		 * Symbols's Table for the elements of an Attribute Grammar.
+		 */
 		symbols <> st_sorts;
 		symbols <> st_op_prefix;
 		symbols <> st_op_infix;
@@ -279,9 +284,9 @@ struct attritute_grammar: public grammar<attritute_grammar>
 		symbols <> st_attributes;
 		symbols <> st_non_terminal;
 
-		/**
-		  * Variables using in parsing time.
-		  */
+		/*
+		 * Variables using in parsing time.
+		 */
 		typedef rule<ScannerT> rule_exp;
 
 		 /* Rule in lexeme_d. */
@@ -350,14 +355,17 @@ bool Parser_AG::parse_grammar(const string &path_file_input)
 	set_at(&attr_grammar);
 	set_s_check(&sem_check);
 
+	/* Parses the input. */
 	parse_info<iterator_t> info(parse<iterator_t>(begin, end, attr_grammar_decl, skip_p));
 
 	if(info.full)
 	{
+		/* Parses success. */
 		cout << " OK  ]" << endl;
 	}
 	else
 	{
+		/* Parses Fail. */
 		cout << "FAIL ]\n" << endl;
 	    const file_position fp = info.stop.get_position();
 	    cerr << "ERROR: Parsing Failed, the following text will not be able to parse:" << endl;
@@ -366,6 +374,10 @@ bool Parser_AG::parse_grammar(const string &path_file_input)
 	return info.full;
 }
 
+/**
+  * This method saves all parsed string in a file.
+  * The file output is in argument path_output.
+  */
 void Parser_AG::save_grammar_file(const string path_output) const
 {
 	string grammar_t("/**\n");
@@ -376,6 +388,7 @@ void Parser_AG::save_grammar_file(const string path_output) const
 	grammar_t.append("  *  \\date      ");
 	time_t rawtime;
 	struct tm *timeinfo;
+
 	time (&rawtime);
 	timeinfo = localtime (&rawtime);
 	grammar_t.append(asctime (timeinfo));

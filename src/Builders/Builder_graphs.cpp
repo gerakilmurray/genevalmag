@@ -152,20 +152,24 @@ bool Builder_graphs::compute_dependency_graphs(const map<unsigned short,Rule> &r
 void Builder_graphs::compute_attr_vertex(const map<string,Symbol> &symbols)
 {
 	Graph current_graph;
+	/* For all symbol. */
 	for(map<string,Symbol >::const_iterator s_it(symbols.begin()); s_it != symbols.end(); s_it++)
 	{
 		property_map<Graph, vertex_data_t>::type props_down(get(vertex_data_t(), current_graph));
 		Ast_instance ins;
 		ins.set_symb(&s_it->second);
+		/* For all symbol's attributes */
 		for (size_t i(0); i < s_it->second.get_attrs().size(); i++)
 		{
 			ins.set_num(0);
 			ins.set_attr(s_it->second.get_attrs()[i]);
+			/* For all dp graph*/
 			for(map<unsigned short,Graph >::const_iterator dp(p_Dp_graphs.begin()); dp != p_Dp_graphs.end(); dp++)
 			{
 				Vertex node(return_vertex(dp->second, &ins));
 				if (node != USHRT_MAX)
 				{
+					/* The vertex is new in the graph. */
 					Vertex node_down(add_vertex(current_graph));
 					property_map<Graph, vertex_data_t>::const_type props_dp(get(vertex_data_t(), dp->second));
 					put(props_down, node_down, props_dp[node]);
@@ -382,6 +386,9 @@ struct cycle_detector: public dfs_visitor<>
 		cycle_detector(bool& has_cycle, Graph &graph): _has_cycle(has_cycle), _graph_cycle(graph){}
 
 	    template <class Edge, class G>
+	    /**
+	     *  Re-define method for detect circle when examine each edge: Save ciclic subgraph.
+	     */
 		void examine_edge(Edge u, const G &g)
 	    {
 	    	if(!_has_cycle)

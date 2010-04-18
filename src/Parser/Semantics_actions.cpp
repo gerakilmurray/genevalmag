@@ -24,14 +24,18 @@ namespace genevalmag
 {
 
 Attr_grammar *attr_grammar;
-
+/**
+  * Set attribute att_grammar.
+  */
 void set_at(Attr_grammar *at_grammar)
 {
 	attr_grammar = at_grammar;
 }
 
 Semantic_check *sem_check;
-
+/**
+  * Set attribute sem_check.
+  */
 void set_s_check(Semantic_check *s_check)
 {
 	sem_check = s_check;

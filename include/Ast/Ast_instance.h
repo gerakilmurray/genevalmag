@@ -20,8 +20,20 @@ namespace genevalmag
 class Ast_instance: public Ast_leaf
 {
     private:
+		/**
+		  * /var i_symb.
+		  * /brief Symbol of Ast_instance.
+		  */
         const Symbol          *i_symb;
+        /**
+		  * /var i_num.
+		  * /brief Syntax index of the instance.
+		  */
         unsigned short        i_num;
+        /**
+		  * /var i_attr.
+		  * /brief Attribute of Ast_instance.
+		  */
         const Attribute       *i_attr;
 
         /**

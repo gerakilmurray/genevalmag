@@ -10,7 +10,9 @@
 
 namespace genevalmag
 {
-
+/**
+  * Contructor of Ast_node.
+  */
 Ast_node::Ast_node()
 {
 	parent 				= NULL;

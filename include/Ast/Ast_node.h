@@ -21,11 +21,27 @@ namespace genevalmag
 class Ast_node
 {
     protected:
+		/**
+		  * /var parent.
+		  * /brief Father of node.
+		  */
         const Ast_node    *parent;
+        /**
+		  * /var type_synthetized.
+		  * /brief Type of node: Obtains of parse.
+		  */
         string            type_synthetized;
+        /**
+		  * /var conflict.
+		  * /brief Mark when conflicted node. This conflict is a conflict in the parse. Used for define the
+		  * 		precedence of function.
+		  */
         int               conflict;
 
     public:
+        /**
+          * Constructor of Ast_node.
+          */
         Ast_node();
 
         /**
