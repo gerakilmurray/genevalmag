@@ -101,7 +101,7 @@ class Symbol
         /**
           * Returns true if the Symbol's type is Non Terminal.
           */
-        bool is_non_terminal() const;
+        const bool is_non_terminal() const;
 
         /**
           * Generates and returns a string reprensentation of a Symbol.

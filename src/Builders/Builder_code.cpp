@@ -1,6 +1,6 @@
 /**
-  *  \file		Gen_code.cpp
-  *  \brief		Implementation of the methods the Gen_code.h.
+  *  \file		Builder_code.cpp
+  *  \brief		Implementation of the methods the Builder_code.h.
   *  \date		18/03/2010
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
@@ -26,18 +26,27 @@ using namespace utilities;
 namespace genevalmag
 {
 
-Gen_code::Gen_code(const string &path_folder_output, const string &name_file)
+/**
+  * Contructor with the path and name of output files to be generated.
+  */
+Builder_code::Builder_code(const string &path_folder_output, const string &name_file)
 {
 	path_output = path_folder_output;
 
 	file_name = name_file;
 }
 
-Gen_code::~Gen_code()
+/**
+  * Destructor of the Builder_code.
+  */
+Builder_code::~Builder_code()
 {
 }
 
-void Gen_code::generate_header_file() const
+/**
+  * Create the header file of the evaluator with some information.
+  */
+void Builder_code::generate_header_file() const
 {
 	string header("/**\n");
 	header.append("  *  \\file      ");
@@ -84,7 +93,10 @@ void Gen_code::generate_header_file() const
 	file_output.close();
 }
 
-void Gen_code::generate_code_file(const vector<string> &headers_file) const
+/**
+  * Create the source code file of the evaluator with some information.
+  */
+void Builder_code::generate_code_file(const vector<string> &headers_file) const
 {
 	string code_txt("/**\n");
 	code_txt.append("  *  \\file      ");
@@ -129,7 +141,10 @@ void Gen_code::generate_code_file(const vector<string> &headers_file) const
 	file_output.close();
 }
 
-void Gen_code::generate_footer_header() const
+/**
+  * Insert the header file's footer of the evaluator.
+  */
+void Builder_code::generate_footer_header() const
 {
 	string footer("/**\n  * Main class of GenEvalMag.\n  */\n");
 	footer.append("class ");
@@ -171,7 +186,10 @@ void Gen_code::generate_footer_header() const
 	file_output.close();
 }
 
-void Gen_code::generate_footer_code() const
+/**
+  * Insert the source code file's footer of the evaluator.
+  */
+void Builder_code::generate_footer_code() const
 {
 	string footer("} /* end evalmag */\n\n");
 
@@ -183,8 +201,18 @@ void Gen_code::generate_footer_code() const
 	file_output.close();
 }
 
-template <class T>
-string write_vector_with_inic(string &text_buffer, string name_vec, size_t index, const vector<T> &vec, string type_vec, const string type_array)
+/**
+  * Generates the initialice of an array of type T, with the elements of the vector, and create a new vector
+  * with this array.
+  * @param text_buffer
+  * @param name_vec
+  * @param index
+  * @param vec
+  * @param type_vec
+  * @param type_array
+  * @return
+  */
+template <class T> string write_vector_with_inic(string &text_buffer, string name_vec, size_t index, const vector<T> &vec, string type_vec, const string type_array)
 {
 	text_buffer.append("    ");
 	text_buffer.append(type_array);
@@ -227,6 +255,11 @@ string write_vector_with_inic(string &text_buffer, string name_vec, size_t index
 	return name;
 }
 
+/**
+  * Generates the initialization of all visit sequences.
+  * @param text
+  * @param v_seq
+  */
 void generate_initialize_v_seq(string &text, const vector<Visit_seq> & v_seq)
 {
 	text.append("    /**\n      * Initialize of Visit Sequences.\n      */\n");
@@ -249,6 +282,14 @@ void generate_initialize_v_seq(string &text, const vector<Visit_seq> & v_seq)
 	}
 }
 
+/**
+  * Generate a key plan with the parameters.
+  * @param text
+  * @param n_key
+  * @param num_key
+  * @param k_p
+  * @return
+  */
 string generate_key_plan(string &text,const string n_key,int num_key, Key_plan k_p )
 {
 	/* generate key_plan */
@@ -301,6 +342,11 @@ string generate_key_plan(string &text,const string n_key,int num_key, Key_plan k
 	return name_key;
 }
 
+/**
+  * Generates the initialization of all evaluations plans.
+  * @param text
+  * @param plans_p
+  */
 void generate_initialize_plans(string &text, const map < Key_plan, Order_eval_eq > &plans_p)
 {
 	text.append("    /**\n      * Initialize of Evaluation Plans.\n      */\n");
@@ -344,6 +390,11 @@ void generate_initialize_plans(string &text, const map < Key_plan, Order_eval_eq
 	}
 }
 
+/**
+  * Generates the initialization of all evaluation plan projects.
+  * @param text
+  * @param plans_p
+  */
 void generate_initialize_plan_proj(string &text, const map < Key_plan_project, Order_eval_eq > &plans_p)
 {
 	text.append("    /**\n      * Initialize of Evaluation Plans Project.\n      */\n");
@@ -411,6 +462,11 @@ void generate_initialize_plan_proj(string &text, const map < Key_plan_project, O
 	}
 }
 
+/**
+  * Generates the initialization of all rules.
+  * @param text
+  * @param attr_grammar
+  */
 void generate_initialize_rules(string &text, const Attr_grammar &attr_grammar)
 {
 	text.append("    /**\n      * Initialize of Rules of grammar.\n      */\n");
@@ -456,7 +512,11 @@ void generate_initialize_rules(string &text, const Attr_grammar &attr_grammar)
 	}
 }
 
-void Gen_code::generate_constructor(const vector<Visit_seq> & v_seq, const Builder_plans &b_plan, const Attr_grammar &attr_grammar) const
+/**
+  * Generates and inserts the evaluator class's constructor.
+  * With all initializations of Evaluation Plans, Evaluation Plans Project, Visit Sequences and Rules.
+  */
+void Builder_code::generate_constructor(const vector<Visit_seq> & v_seq, const Builder_plans &b_plan, const Attr_grammar &attr_grammar) const
 {
 	string cons_txt(file_name);
 	cons_txt.append("::");
@@ -481,7 +541,10 @@ void Gen_code::generate_constructor(const vector<Visit_seq> & v_seq, const Build
 	file_output.close();
 }
 
-void Gen_code::generate_print(string &text) const
+/**
+  * Generates the print method, for show the all visit sequences.
+  */
+void Builder_code::generate_print(string &text) const
 {
 	text.append("void ");
 	text.append(file_name);
@@ -502,7 +565,10 @@ void Gen_code::generate_print(string &text) const
 	text.append("}\n\n");
 }
 
-void Gen_code::generate_translate(string &text) const
+/**
+  * Generates the print method, for show the all visit sequences in a format more descriptive.
+  */
+void Builder_code::generate_translate(string &text) const
 {
 	text.append("void ");
 	text.append(file_name);
@@ -533,7 +599,10 @@ void Gen_code::generate_translate(string &text) const
 	text.append("}\n\n");
 }
 
-void Gen_code::generate_traverse(string &text) const
+/**
+  * Generates the method that crosses the AST and sets the evaluation plan that corresponds to each node.
+  */
+void Builder_code::generate_traverse(string &text) const
 {
 	text.append("void ");
 	text.append(file_name);
@@ -583,6 +652,12 @@ void Gen_code::generate_traverse(string &text) const
 	text.append("}\n\n");
 }
 
+/**
+  * Generates the plain text of a equation of this rule.
+  * @param node
+  * @param rule
+  * @return
+  */
 string generate_expr_text(const Ast_node *node, const Rule &rule)
 {
 	string expr;
@@ -673,6 +748,12 @@ string generate_expr_text(const Ast_node *node, const Rule &rule)
 	return expr;
 }
 
+/**
+  *
+  * Generates one method for each equation in the grammar, that computes it's value.
+  * @param text
+  * @param attr_grammar
+  */
 void generate_all_methods_eqs(string &text, const Attr_grammar &attr_grammar)
 {
 	const map <unsigned short, Rule> &rules(attr_grammar.get_rules());
@@ -737,7 +818,11 @@ void generate_all_methods_eqs(string &text, const Attr_grammar &attr_grammar)
 	}
 }
 
-void Gen_code::generate_all_compute_eq(string &text, const Attr_grammar &attr_grammar) const
+/**
+  * Generates a method with a large switch with all equations, invoking in each case,
+  * the method that computes.
+  */
+void Builder_code::generate_all_compute_eq(string &text, const Attr_grammar &attr_grammar) const
 {
 	text.append("void ");
 	text.append(file_name);
@@ -760,7 +845,11 @@ void Gen_code::generate_all_compute_eq(string &text, const Attr_grammar &attr_gr
 	text.append("}\n\n");
 }
 
-void Gen_code::generate_eval_visiter(string &text) const
+/**
+  * Generates the evaluator method, which following the visit sequences drawn,
+  * visit the nodes of the tree until computes it completely.
+  */
+void Builder_code::generate_eval_visiter(string &text) const
 {
 	text.append("void ");
 	text.append(file_name);
@@ -787,7 +876,11 @@ void Gen_code::generate_eval_visiter(string &text) const
 	text.append("}\n\n");
 }
 
-void Gen_code::generate_evaluator(string &text, const Builder_plans &b_plan) const
+/**
+  * Generates the evaluating method, which performs the method invocations
+  * to be computed all the attributes of the AST.
+  */
+void Builder_code::generate_evaluator(string &text, const Builder_plans &b_plan) const
 {
 	text.append("void ");
 	text.append(file_name);
@@ -816,15 +909,19 @@ void Gen_code::generate_evaluator(string &text, const Builder_plans &b_plan) con
 	text.append("}\n");
 }
 
-void Gen_code::generate_methods(const Builder_plans &b_plan, const Attr_grammar &attr_grammar) const
+/**
+  * Generates and inserts all class methods, includind traverse, visit evaluator and the main evaluator.
+  * This methods are based on the article by Wuu Yang.
+  */
+void Builder_code::generate_methods(const Builder_plans &b_plan, const Attr_grammar &attr_grammar) const
 {
 	string methods_t;
 
 	generate_print(methods_t);
 
-	generate_traverse(methods_t);
-
 	generate_translate(methods_t);
+
+	generate_traverse(methods_t);
 
 	generate_all_methods_eqs(methods_t, attr_grammar);
 
@@ -837,12 +934,28 @@ void Gen_code::generate_methods(const Builder_plans &b_plan, const Attr_grammar 
 	string path(path_output);
 	path.append(file_name);
 	path.append(".cpp");
-	std::ofstream file_output(path.c_str(),ofstream::app);
+	std::ofstream file_output(path.c_str(), ofstream::app);
 	file_output.write(methods_t.c_str(),methods_t.size());
 	file_output.close();
 }
 
-void Gen_code::generate_structs(const Attr_grammar &attr_grammar) const
+/**
+  * Generates and inserts all structs for represent each symbol of the grammar.
+  * With constructor and to_string methods.
+  *		  *
+  *
+  * For symbol S, with attrs s1 <syn> int, inserts:
+  *
+  * typedef struct Symbol_S: Node
+  * {
+  *     int s0;
+  *
+  *     Symbol_S(unsgned short r_id);
+  *
+  *     string to_string() const;
+  * } S ;
+  */
+void Builder_code::generate_structs(const Attr_grammar &attr_grammar) const
 {
 	string structs("/**\n  * Structs of the symbols.\n  */\n");
 	string text_constructor("/**\n  * Constructors of structs of the symbols.\n  */\n");
@@ -953,7 +1066,11 @@ void Gen_code::generate_structs(const Attr_grammar &attr_grammar) const
 	code_output.close();
 }
 
-bool Gen_code::generate_code(const Attr_grammar &attr_grammar, const Builder_plans &b_plan, const vector<Visit_seq> &v_seq, const vector<string> &headers_file) const
+/**
+  * Generates the header and source code of the static evaluator of the grammar passed as parameter,
+  * alog with their evaluations plans, visit sequence and headers for uses user functions defined.
+  */
+bool Builder_code::generate_code(const Attr_grammar &attr_grammar, const Builder_plans &b_plan, const vector<Visit_seq> &v_seq, const vector<string> &headers_file) const
 {
 	cout << "* Generation code ---------- [ " << flush;
 

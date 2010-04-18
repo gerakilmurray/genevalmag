@@ -15,7 +15,7 @@ namespace genevalmag
 
 #ifdef _DEBUG
     /* Numbers of Symbols current in the system. */
-    static int symbols(0);
+	static unsigned short symbols(0);
 #endif
 
 /**
@@ -165,7 +165,7 @@ void Symbol::add_attr(const Attribute *attr)
 /**
   * Returns true if the symbol's type is non-terminal.
   */
-bool Symbol::is_non_terminal() const
+const bool Symbol::is_non_terminal() const
 {
     return symb_type == k_non_terminal;
 }

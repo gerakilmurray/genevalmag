@@ -51,8 +51,8 @@ int Maglib::gen_evaluator(const string path_input_file, const string path_folder
 			Builder_visit_sequences b_visit_seq;
 			if (b_visit_seq.generate_visit_sequences(p_mag.get_attr_grammar(), b_plans))
 			{
-				Gen_code gen(path_output, name_library);
-				if(gen.generate_code(p_mag.get_attr_grammar(), b_plans, b_visit_seq.get_visit_seq(),headers))
+				Builder_code b_gen(path_output, name_library);
+				if(b_gen.generate_code(p_mag.get_attr_grammar(), b_plans, b_visit_seq.get_visit_seq(),headers))
 				{
 					return 0;
 				}

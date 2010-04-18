@@ -17,7 +17,7 @@ namespace genevalmag
 
 #ifdef _DEBUG
     /* Numbers of Functions current in the system. */
-    static int funtions(0);
+	static unsigned short funtions(0);
 #endif
 
 /**
@@ -304,14 +304,6 @@ const string Function::to_string() const
     {
         func.append(f_domain[i]->get_name());
 
-        #ifdef _DEBUG
-            func.append("(");
-            stringstream ins;
-            ins << f_domain[i]->get_ins();
-            func.append(ins.str());
-            func.append(")");
-        #endif
-
         if(i+1 < f_domain.size())
         {
             func.append(", ");
@@ -319,15 +311,6 @@ const string Function::to_string() const
     }
     func.append(" -> ");
     func.append(f_image->get_name());
-
-    #ifdef _DEBUG
-        func.append("(");
-        stringstream ins;
-        ins << f_image->get_ins();
-        func.append(ins.str());
-        func.append(")");
-    #endif
-
     func.append(";");
     return func;
 }

@@ -45,7 +45,7 @@ class Sort
         /**
           * Contructor with the name of the Sort.
           */
-        Sort(string name);
+        Sort(const string name);
         /**
           * Contructor copy of Sort.
           */
@@ -64,44 +64,40 @@ class Sort
         /**
           * Returns the name of the Sort.
           */
-        string get_name() const;
-        /**
-          * Returns the instance of the Sort.
-          */
-        int get_ins() const;
+        const string get_name() const;
 
         /**
           * Sets the name of the Sort.
           */
-        void set_name(string name);
+        void set_name(const string name);
         /**
           * Sets if the Sort is basic.
           */
-        void set_type_basic(bool type_basic);
+        void set_type_basic(const bool type_basic);
 
         /**
           * Generates and returns a string reprensentation of a Sort.
           *
           * Result = "sort" \<name\> ["(" \<instance\> ")" IF DEBUG IS ON] ";"
           */
-        string to_string() const;
+        const string to_string() const;
 
         /**
           * Compares the Sort with other.
           */
-        bool equals(const Sort &other) const;
+        const bool equals(const Sort &other) const;
 
         /**
           * Returns if the Sort is basic.
           */
-        bool is_type_basic() const;
+        const bool is_type_basic() const;
 
         /**
           * Generates and returns the string key that identifies a Sort definitely.
           *
           * Result = \<name\>
           */
-        string key() const;
+        const string key() const;
 };
 
 } /* end genevalmag */
