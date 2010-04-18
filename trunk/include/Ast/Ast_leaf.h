@@ -17,7 +17,9 @@ namespace genevalmag
 class Ast_leaf: public Ast_node
 {
     public:
-
+		/**
+		  * constructor of Ast_leaf.
+		  */
 		Ast_leaf();
         /**
           * Destructor of Ast_leaf.

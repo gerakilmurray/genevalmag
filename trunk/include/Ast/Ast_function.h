@@ -23,8 +23,20 @@ const bool IS_OPERATOR (true);
 class Ast_function: public Ast_inner_node
 {
     private:
+		/**
+		  * /var func.
+		  * /brief Function associates with Ast_function.
+		  */
         const Function    *func;
+        /**
+		  * /var precedence_level.
+          * /brief Level precedence of the function.
+          */
         unsigned short    precedence_level;
+        /**
+          * /var syntax_order.
+          * /brief Syntax order in the parse.
+          */
         unsigned short    syntax_order;
 
         /**

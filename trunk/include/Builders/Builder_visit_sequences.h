@@ -29,9 +29,10 @@ typedef vector <int> Visit_seq;
 class Builder_visit_sequences
 {
     private:
-        /**
-          * Stores all visit sequences generates.
-          */
+		/**
+		  * /var all_visit_seqs.
+		  * /brief Stores all visit sequences generates.
+		  */
         vector < Visit_seq > all_visit_seqs;
 
         /**

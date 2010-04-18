@@ -54,24 +54,30 @@ bool ins_attr_computed(const Ast_instance *ins, const vector<Ast_instance> &vec)
   */
 void get_inherits_of(const Symbol *symb, const vector<Ast_instance> &computed, vector<Ast_instance> &rec_child)
 {
-    for(size_t i(0); i < computed.size(); i++)
+	/* For all computed's vector. */
+	for(size_t i(0); i < computed.size(); i++)
     {
         if (computed[i].get_symb()->equals(*symb) && computed[i].get_attr()->is_inherit())
         {
+        	/* Push in the rec_child vector */
             rec_child.push_back(computed[i]);
             rec_child.back().set_num(0);
         }
     }
 }
-
+/**
+  * Merge two vector in the vec_target argument.
+  */
 void merge_vec(const vector<unsigned short> &vec_source, vector<unsigned short> &vec_targed)
 {
 	if(vec_targed.size() == 0)
 	{
+		/* Non necesary merge */
 		vec_targed = vec_source;
 	}
 	else
 	{
+		/* Merge necesary */
 		for(size_t i(0); i < vec_source.size(); i++)
 		{
 			if(!belong_index(vec_source[i],vec_targed))
@@ -141,6 +147,7 @@ bool Builder_visit_sequences::gen_visit_seq
 						index_ins--;
 					}
 
+					/* Generate visits */
 					map<Key_plan_project, Order_eval_eq >::const_iterator it_plan_proj;
 
 					for(size_t k(0); k < non_terminals.size(); k++)
@@ -162,13 +169,14 @@ bool Builder_visit_sequences::gen_visit_seq
 							index_ins--;
 						}
 					}
-
+					/* Generate the recursion to non computed child. */
 					vector <unsigned short> v_seq_child;
 					for(map < Key_plan, Order_eval_eq >::const_iterator it(b_plans.get_plans().begin()); it != b_plans.get_plans().end(); it++)
 					{
 						unsigned short i_child(b_plans.get_index_plan(it));
 						if((!belong_index(i_child, plans_computed)) && (it != it_plan))
 						{
+							/* Plan to recurse: it */
 							const Rule &rule_child(attr_grammar.get_rule(it->first.id_plan[0]));
 
 							if ((rule_child.get_left_symbol()->equals(*ins->get_symb())) &&
@@ -180,9 +188,12 @@ bool Builder_visit_sequences::gen_visit_seq
 								vector<unsigned short> p_computed_child;
 								p_computed_child.push_back(i_plan);
 								merge_vec(plans_computed, p_computed_child);
+
 								gen_visit_seq(attr_grammar, b_plans, it, ins_computed_child, p_computed_child, v_seq_child);
+
 								merge_vec(p_computed_child, v_seq_child);
 
+								/* Saves all instances calculated for the visit. */
 								for(size_t i_rec(0); i_rec < ins_computed_child.size(); i_rec++)
 								{
 									if(ins_computed_child[i_rec].get_attr()->is_synthetize())
@@ -196,6 +207,7 @@ bool Builder_visit_sequences::gen_visit_seq
 					}
 				}
 			}
+			/* Save computed instance. */
 			ins_computed_own.push_back(*ins);
 		}
 
@@ -225,7 +237,7 @@ bool Builder_visit_sequences::gen_visit_seq
     }
 
     if(i == it_plan->second.size())
-    /* Se guardo sin estados conflictivos. */
+    /* Saves without conflicted states. */
     {
         plans_computed.push_back(i_plan);
     }
@@ -240,6 +252,7 @@ void Builder_visit_sequences::save_visit_sequence(const Visit_seq &sequence, con
 {
     size_t i(0);
     size_t j(0);
+    /* Compares the two sequences for resolve conflitic sequence. */
     while(i < sequence.size() && j < all_visit_seqs[i_plan].size())
     {
         if(all_visit_seqs[i_plan][j] == sequence[i])
@@ -255,7 +268,7 @@ void Builder_visit_sequences::save_visit_sequence(const Visit_seq &sequence, con
             }
         }
     }
-
+    /* Check sequence leaves and save visit_sequence. */
     unsigned short cant_leaves_copy(0);
     for(size_t index(i); index < sequence.size(); index++)
     {
@@ -284,11 +297,13 @@ bool Builder_visit_sequences::generate_visit_sequences(const Attr_grammar &attr_
     }
 
     vector <unsigned short> visit_seq_computed;
+    /* For all plans */
 	for(map < Key_plan, Order_eval_eq >::const_iterator it(b_plans.get_plans().begin()); it != b_plans.get_plans().end(); it++)
     {
         const Rule &rule(attr_grammar.get_rule(it->first.id_plan[0]));
         if (rule.get_left_symbol()->equals(*attr_grammar.get_initial_symb()))
         {
+        	/* This plan is belong a initial symbol (initial rule). */
             unsigned short plan_inic(b_plans.get_index_plan(it));
             if(!belong_index(plan_inic, visit_seq_computed))
             {

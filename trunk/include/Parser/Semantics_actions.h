@@ -19,8 +19,13 @@ using namespace std;
 namespace genevalmag
 {
 
+/**
+  * Set attribute att_grammar.
+  */
 void set_at(Attr_grammar *at_grammar);
-
+/**
+  * Set attribute sem_check.
+  */
 void set_s_check(Semantic_check *s_check);
 
 /**

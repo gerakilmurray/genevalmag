@@ -29,23 +29,42 @@ typedef position_iterator<iterator_f> 	iterator_t;
 class Parser_AG
 {
 	private:
+		/**
+		  * /var attr_grammar.
+		  * /brief Internal structure of grammar.
+		  */
 		Attr_grammar attr_grammar;
-
+		/**
+		  * /var sem_check.
+		  * /brief Semantics control for grammar: Well define grammar.
+		  */
 		Semantic_check sem_check;
 
 	public:
+		/**
+		  * Constructor of Parser_AG.
+		  */
 		Parser_AG();
+		/**
+		  * Destructor of Parser_AG.
+		  */
 		~Parser_AG();
-
+		/**
+		  * Return att_grammar of parser.
+		  */
 		const Attr_grammar &get_attr_grammar();
 
-	/**
-	  * This method invokes the method 'parse' of the library Spirit included in Boost.
-	  * Returns true if could parse all the input.
-	  */
-	bool parse_grammar(const string &path_file_input);
+		/**
+		  * This method invokes the method 'parse' of the library Spirit included in Boost.
+		  * Returns true if could parse all the input.
+		  */
+		bool parse_grammar(const string &path_file_input);
 
-	void save_grammar_file(const string path_output) const;
+		/**
+		  * This method saves all parsed string in a file.
+		  * The file output is in argument path_output.
+		  */
+		void save_grammar_file(const string path_output) const;
 };
 
 } /* end genevalmag */
