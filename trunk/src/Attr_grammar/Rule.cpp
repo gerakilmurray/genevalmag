@@ -21,7 +21,7 @@ vector<Equation*> index_access_eq;
 
 #ifdef _DEBUG
     /* Numbers of symbols current in the system. */
-    static int rules(0);
+	static unsigned short rules(0);
 #endif
 
 /**
@@ -30,6 +30,7 @@ vector<Equation*> index_access_eq;
 Rule::Rule()
 {
     r_offset = 0;
+
     #ifdef _DEBUG
         rules++;
     #endif
@@ -114,7 +115,7 @@ const vector<const Symbol*> &Rule::get_right_side() const
 /**
   * Return the equations of the rule.
   */
-const map<unsigned short,Equation> &Rule::get_eqs() const
+const map<unsigned short, Equation> &Rule::get_eqs() const
 {
     return r_eqs;
 }
@@ -122,7 +123,7 @@ const map<unsigned short,Equation> &Rule::get_eqs() const
 /**
   * Returns the number of equations of the rule.
   */
-size_t Rule::get_number_eqs() const
+const size_t Rule::get_number_eqs() const
 {
     return r_eqs.size();
 }
@@ -130,7 +131,7 @@ size_t Rule::get_number_eqs() const
 /**
   * Returns the offset of all equation of the rule.
   */
-unsigned short Rule::get_offset() const
+const unsigned short Rule::get_offset() const
 {
     return r_offset;
 }
@@ -138,7 +139,7 @@ unsigned short Rule::get_offset() const
 /**
   * Return the i-equation of the rule.
   */
-const Equation *Rule::get_eq(unsigned short index) const
+const Equation *Rule::get_eq(const unsigned short index) const
 {
     map<unsigned short, Equation>::const_iterator it(r_eqs.find(index));
     if(it == r_eqs.end())
@@ -154,7 +155,7 @@ const Equation *Rule::get_eq(unsigned short index) const
 /**
   * Sets the identificator of the rule.
   */
-void Rule::set_id(unsigned short id)
+void Rule::set_id(const unsigned short id)
 {
     r_id = id;
 }
@@ -178,7 +179,7 @@ void Rule::add_right_symbol(const Symbol *right_symb)
 /**
   * Checks that the equation is not already defined in the rule.
   */
-bool Rule::defined_equation(const Equation &eq) const
+const bool Rule::defined_equation(const Equation &eq) const
 {
     for(map<unsigned short,Equation>::const_iterator it(r_eqs.begin()); it != r_eqs.end(); it++)
     {
@@ -193,7 +194,7 @@ bool Rule::defined_equation(const Equation &eq) const
 /**
   * Checks that symbol is a non-terminal into the rule.
   */
-bool Rule::belongs_non_terminal(const Symbol &non_term) const
+const bool Rule::belongs_non_terminal(const Symbol &non_term) const
 {
     if(non_term.equals(*r_left_symbol))
     {
@@ -212,7 +213,7 @@ bool Rule::belongs_non_terminal(const Symbol &non_term) const
 /**
   * Enqueue a equation in the list of the rule.
   */
-bool Rule::add_eq(Equation &eq)
+const bool Rule::add_eq(Equation &eq)
 {
     static unsigned short cant_eq(1);
 
@@ -247,7 +248,7 @@ bool Rule::add_eq(Equation &eq)
   *
   * where \<right_ride\> is s= symbol_1 " " ... " " symbol_n
   */
-string Rule::to_string() const
+const string Rule::to_string() const
 {
     string rule(to_string_not_eqs());
     if(!r_eqs.empty())
@@ -273,7 +274,7 @@ string Rule::to_string() const
   *
   * where right_ride is= symbol_1 " " ... " " symbol_n
   */
-string Rule::to_string_not_eqs() const
+const string Rule::to_string_not_eqs() const
 {
     string rule("R");
 
@@ -299,7 +300,7 @@ string Rule::to_string_not_eqs() const
 /**
   * Compares the rule with other.
   */
-bool Rule::equals(const Rule &other) const
+const bool Rule::equals(const Rule &other) const
 {
     if(r_left_symbol->equals(*(other.get_left_symbol())))
     {
@@ -328,7 +329,7 @@ bool Rule::equals(const Rule &other) const
   *
   * Result = \<id_rule\>
   */
-unsigned short Rule::key() const
+const unsigned short Rule::key() const
 {
     return r_id;
 }
@@ -336,7 +337,7 @@ unsigned short Rule::key() const
 /**
   * Returns the count of ocurrences of these symbol in the rule.
   */
-int Rule::count_non_terminal(const Symbol *symb) const
+const int Rule::count_non_terminal(const Symbol *symb) const
 {
     int count(0);
     if(symb->equals(*r_left_symbol))
@@ -356,10 +357,10 @@ int Rule::count_non_terminal(const Symbol *symb) const
 /**
   * Return the non-terminals symbols the right side of the rule.
   */
-vector<const Symbol*> Rule::get_non_terminals_right_side() const
+const vector<const Symbol*> Rule::get_non_terminals_right_side() const
 {
     vector<const Symbol*> result;
-    for(vector<const Symbol*>::size_type i(0); i < r_right_side.size(); i++)
+    for(size_t i(0); i < r_right_side.size(); i++)
     {
         if (r_right_side[i]->is_non_terminal())
         {

@@ -52,14 +52,7 @@ class Attr_grammar
 		/**
 		  * Checks that the rule is not already defined in the grammar.
 		  */
-		bool defined_rule(const Rule &rule) const;
-
-		/**
-		  * Operation template that print each element type T of the parameter map.
-		  *
-		  * Return the string representation of all elements of the map.
-		  */
-		template <class K, class T> string to_string_map(const map< K ,T > &map_elem) const;
+		const bool defined_rule(const Rule &rule) const;
 
 	public:
 		/**
@@ -75,28 +68,28 @@ class Attr_grammar
 		/**
 		  * Enqueue a sort in the list of the semantic domain.
 		  */
-		bool add_sort(const Sort &sort);
+		const bool add_sort(const Sort &sort);
 		/**
 		  * Enqueue a function in the list of the semantic domain.
 		  */
-		bool add_function(const Function &func);
+		const bool add_function(const Function &func);
 		/**
 		  * Enqueue a attribute in the list of the semantic domain.
 		  */
-		bool add_attribute(const Attribute &attr);
+		const bool add_attribute(const Attribute &attr);
 		/**
 		  * Enqueue a symbol in the list of the semantic domain.
 		  */
-		bool add_symbol(const Symbol &symb);
+		const bool add_symbol(const Symbol &symb);
 		/**
 		  * Enqueue a rule in the list of the semantic domain.
 		  */
-		bool add_rule(Rule &rule);
+		const bool add_rule(Rule &rule);
 
 		/**
 		  * Find in the list of sort of the semantic domain and return the sort with that name.
 		  */
-		const Sort &return_sort(string name_sort);
+		const Sort &return_sort(const string name_sort);
 		/**
 		  * Return the map with all sorts.
 		  */
@@ -104,7 +97,7 @@ class Attr_grammar
 		/**
 		  * Find in the list of function of the semantic domain and return the function with that name.
 		  */
-		const Function *get_function(string name_function) const;
+		const Function *get_function(const string name_function) const;
 		/**
 		  * Return the map with all functions.
 		  */
@@ -112,7 +105,7 @@ class Attr_grammar
 		/**
 		  * Find in the list of symbol of the semantic domain and return the symbol with that name.
 		  */
-		const Symbol &get_symbol(string name_symbol) const;
+		const Symbol &get_symbol(const string name_symbol) const;
 		/**
 		  *  Return the map with all rules.
 		  */
@@ -120,7 +113,7 @@ class Attr_grammar
 		/**
 		  *  Return the rule on paramenter.
 		  */
-		const Rule  &get_rule(unsigned short index)const;
+		const Rule  &get_rule(const unsigned short index) const;
 		/**
 		  *  Return the map with all symbols.
 		  */
@@ -132,23 +125,23 @@ class Attr_grammar
 		/**
 		  * Return vector with all rules with the left symbol equal that parameter.
 		  */
-		vector<unsigned short> get_rules_with_left_symbol(const Symbol *symb) const;
+		const vector<unsigned short> get_rules_with_left_symbol(const Symbol *symb) const;
 		/**
 		  * Returns the index of an equation in this range of rules with l_value equals to ins.
 		  */
-		unsigned short get_index_eq_with_context(const Ast_instance *ins, const vector<unsigned short> &context_rule) const;
+		const unsigned short get_index_eq_with_context(const Ast_instance *ins, const vector<unsigned short> &context_rule) const;
 		/**
 		  *    Returns the equation with this index.
 		  */
-		const Equation *get_eq(unsigned short index) const;
+		const Equation *get_eq(const unsigned short index) const;
 		/**
 		  * Returns the l_value of the equation with this index.
 		  */
-		const Ast_instance *get_eq_l_value(unsigned short index) const;
+		const Ast_instance *get_eq_l_value(const unsigned short index) const;
 		/**
 		  * Returns the count of equations in the grammar.
 		  */
-		unsigned short get_count_eqs() const;
+		const unsigned short get_count_eqs() const;
 
 		/**
 		  * Generate and return a string reprensentation of a semantic domain.
@@ -172,7 +165,7 @@ class Attr_grammar
 		  * where \<sorts\>, \<operators\>, \<functions\>, \<attributes\>, \<symbols\> and \<rules\>, are
 		  * full representation of each type.
 		  */
-		string to_string() const;
+		const string to_string() const;
 };
 
 } /* end genevalmag */

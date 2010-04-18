@@ -16,7 +16,7 @@ namespace genevalmag
 
 #ifdef _DEBUG
     /* Numbers of sorts current in the system. */
-    static int sorts(0);
+    static unsigned short sorts(0);
 #endif
 
 /**
@@ -92,10 +92,10 @@ Sort &Sort::operator=(const Sort &other)
 void Sort::copy(const Sort &other)
 {
     s_name          = other.get_name();
+    s_type_basic    = other.is_type_basic();
 
     /* Increment the instance of sort. */
-    s_ins           = other.get_ins() + 1;
-    s_type_basic    = other.is_type_basic();
+    s_ins           = other.s_ins + 1;
 }
 
 /**
@@ -108,30 +108,22 @@ void Sort::destroy()
 /**
   * Return the name of the Sort.
   */
-string Sort::get_name() const
+const string Sort::get_name() const
 {
     return s_name;
 }
 
 /**
-  * Return the instance of the Sort.
-  */
-int Sort::get_ins() const
-{
-    return s_ins;
-}
-
-/**
   * Set the name of the Sort.
   */
-void Sort::set_name(string name)
+void Sort::set_name(const string name)
 {
     s_name = name;
 }
 /**
   * Set if the Sort is basic.
   */
-void Sort::set_type_basic(bool type_basic)
+void Sort::set_type_basic(const bool type_basic)
 {
     s_type_basic = type_basic;
 }
@@ -140,7 +132,7 @@ void Sort::set_type_basic(bool type_basic)
   *
   * Result = "sort" \<name\> ["(" \<instance\> ")" IF DEBUG IS ON] ";"
   */
-string Sort::to_string() const
+const string Sort::to_string() const
 {
     string sort;
     if (is_type_basic())
@@ -150,13 +142,13 @@ string Sort::to_string() const
     sort.append("sort\t\t");
     sort.append(s_name);
 
-    #ifdef _DEBUG
-        sort.append("(");
-        stringstream ins;
-        ins << s_ins;
-        sort.append(ins.str());
-        sort.append(")");
-    #endif
+	#ifdef _DEBUG
+		sort.append("(");
+		stringstream ins;
+		ins << s_ins;
+		sort.append(ins.str());
+		sort.append(")");
+	#endif
 
     sort.append(";");
 
@@ -170,15 +162,15 @@ string Sort::to_string() const
 /**
   * Compares the Sort with other.
   */
-bool Sort::equals(const Sort &other) const
+const bool Sort::equals(const Sort &other) const
 {
-    return key().compare(other.key())==0;
+    return (key().compare(other.key()) == 0);
 }
 
 /**
   * Return if the Sort is basic.
   */
-bool Sort::is_type_basic() const
+const bool Sort::is_type_basic() const
 {
     return s_type_basic;
 }
@@ -188,7 +180,7 @@ bool Sort::is_type_basic() const
   *
   * Result = \<name\>
   */
-string Sort::key() const
+const string Sort::key() const
 {
     return s_name;
 }

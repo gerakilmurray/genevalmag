@@ -17,7 +17,7 @@ namespace genevalmag
 
 #ifdef _DEBUG
     /* Numbers of operators current in the system. */
-    static int eqs(0);
+	static unsigned short eqs(0);
 #endif
 
 /**

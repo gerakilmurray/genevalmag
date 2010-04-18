@@ -16,7 +16,7 @@ namespace genevalmag
 
 #ifdef _DEBUG
     /* Numbers of attributes current in the system. */
-    static int attrs(0);
+	static unsigned short attrs(0);
 #endif
 
 /**
@@ -186,14 +186,6 @@ const string Attribute::to_string() const
     }
     attr.append(" <");
     attr.append(a_sort_type->get_name());
-
-    #ifdef _DEBUG
-        attr.append("(");
-        stringstream ins;
-        ins << a_sort_type->get_ins();
-        attr.append(ins.str());
-        attr.append(")");
-    #endif
 
     attr.append("> \tof ");
     attr.append(a_member_symbol);

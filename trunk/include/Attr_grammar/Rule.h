@@ -38,7 +38,7 @@ class Rule
         /**
           * Checks that the equation is not already defined in the rule.
           */
-        bool defined_equation(const Equation &eq) const;
+        const bool defined_equation(const Equation &eq) const;
 
     public:
         /**
@@ -67,7 +67,7 @@ class Rule
         /**
           * Returns the right side of the rule.
           */
-        const vector<const Symbol*> &get_right_side()const;
+        const vector<const Symbol*> &get_right_side() const;
         /**
           * Returns the equations of the rule.
           */
@@ -75,32 +75,32 @@ class Rule
         /**
           * Returns the number of equations of the rule.
           */
-        size_t get_number_eqs() const;
+        const size_t get_number_eqs() const;
         /**
           * Returns the i-equation of the rule.
           */
-        const Equation *get_eq(unsigned short index) const;
+        const Equation *get_eq(const unsigned short index) const;
         /**
           * Returns the offset of all equation of the rule.
           */
-        unsigned short get_offset() const;
+        const unsigned short get_offset() const;
         /**
           * Returns the count of ocurrences of these symbol in the rule.
           */
-        int count_non_terminal(const Symbol *symb) const;
+        const int count_non_terminal(const Symbol *symb) const;
         /**
           * Checks that symbol is a non-terminal into the rule.
           */
-        bool belongs_non_terminal(const Symbol &non_term) const;
+        const bool belongs_non_terminal(const Symbol &non_term) const;
         /**
           * Return the non-terminals symbols the right side of the rule.
           */
-        vector<const Symbol*> get_non_terminals_right_side() const;
+        const vector<const Symbol*> get_non_terminals_right_side() const;
 
         /**
           * Sets the identificator of the rule.
           */
-        void set_id(unsigned short id);
+        void set_id(const unsigned short id);
         /**
           * Sets the left symbol of the rule.
           */
@@ -113,7 +113,7 @@ class Rule
         /**
           * Enqueue a equation in the list of the rule.
           */
-        bool add_eq(Equation &eq);
+        const bool add_eq(Equation &eq);
 
         /**
           * Generate and return a string reprensentation of a rule.
@@ -127,7 +127,7 @@ class Rule
           *
           * where right_ride is = symbol_1 " " ... " " symbol_n
           */
-        string to_string() const;
+        const string to_string() const;
 
         /**
           * Generate and return a string reprensentation of a rule.
@@ -136,19 +136,19 @@ class Rule
           *
           * where right_ride is = symbol_1 " " ... " " symbol_n
           */
-        string to_string_not_eqs() const;
+        const string to_string_not_eqs() const;
 
         /**
           * Compares the rule with other.
           */
-        bool equals(const Rule &other) const;
+        const bool equals(const Rule &other) const;
 
         /**
           * Return the number key that identifies a rule definitely.
           *
           * Result = \<id_rule\>
           */
-        unsigned short key() const;
+        const unsigned short key() const;
 };
 
 } /* end genevalmag */
