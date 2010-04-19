@@ -1072,8 +1072,6 @@ void Builder_code::generate_structs(const Attr_grammar &attr_grammar) const
   */
 bool Builder_code::generate_code(const Attr_grammar &attr_grammar, const Builder_plans &b_plan, const vector<Visit_seq> &v_seq, const vector<string> &headers_file) const
 {
-	cout << "* Generation code ---------- [ " << flush;
-
 	generate_header_file();
 	generate_code_file(headers_file);
 
@@ -1086,11 +1084,11 @@ bool Builder_code::generate_code(const Attr_grammar &attr_grammar, const Builder
 
 	if (!copy_static_code(path_output))
 	{
-		cout << "FAIL  ]" << endl;
+		cout << "* Generation code ---------- [ FAIL ]" << endl;
 		return false;
 	}
 
-	cout << " OK  ]" << endl;
+	cout << "* Generation code ---------- [  OK  ]" << endl;
 	return true;
 }
 

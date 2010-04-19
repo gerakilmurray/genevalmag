@@ -24,6 +24,9 @@ namespace genevalmag
 {
 
 Attr_grammar *attr_grammar;
+
+Semantic_check *sem_check;
+
 /**
   * Set attribute att_grammar.
   */
@@ -32,7 +35,6 @@ void set_at(Attr_grammar *at_grammar)
 	attr_grammar = at_grammar;
 }
 
-Semantic_check *sem_check;
 /**
   * Set attribute sem_check.
   */
@@ -378,9 +380,9 @@ void create_equation(const iterator_t str, const iterator_t end)
 void save_rvalue(const iterator_t str, const iterator_t end)
 {
 	/* Check that the type of r_value be expected from l_value. */
-	if (current_eq->get_l_value()->get_attr()->get_sort_type()->get_name().compare(stack_node.back()->get_type_synthetized()))
+	if (current_eq->get_l_value()->get_attr()->get_sort_type()->get_name().compare(stack_node.back()->get_type_synthetized()) != 0)
 	{
-		cerr << "Type not expected from l_value." << endl;
+		cerr << "ERROR: Type not expected from l_value." << endl;
 		exit(-1);
 	}
 
@@ -528,10 +530,12 @@ void create_root_function_node(const iterator_t str, const iterator_t end)
 		}
 		root->add_child(child);
 
-		key = child->get_type_synthetized().append(key);
+		string s_child(child->get_type_synthetized());
+		key = s_child.append(key);
 		i--;
 	}
-	key = root->get_function()->get_name().append(key);
+	string s_root(root->get_function()->get_name());
+	key = s_root.append(key);
 
 	/* Searches function. */
 	const Function *func(attr_grammar->get_function(key));

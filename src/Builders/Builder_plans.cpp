@@ -22,6 +22,9 @@ using namespace utilities;
 namespace genevalmag
 {
 
+/**
+  * Defaults path to saves evaluation plans y their projections.
+  */
 const string PATH_OUT_PLAN("plans/");
 const string PATH_OUT_PLAN_PROJECT("plans_project/");
 
@@ -39,11 +42,21 @@ Builder_plans::~Builder_plans()
 {
 }
 
+/**
+  * Saves all graphs generated as the analysis of the dependencies between attributes.
+  * @param rules
+  * @param path_output
+  */
 void Builder_plans::save_all_graphs(const map<unsigned short, Rule> &rules, const string path_output) const
 {
 	build_graphs.save_all_graphs(rules, path_output);
 }
 
+/**
+  * Saves the graphs generated as the analysis of the dependencies between attributes, which demonstrate cyclicity.
+  * @param rules
+  * @param path_output
+  */
 void Builder_plans::save_cyclic_graphs(const map<unsigned short, Rule> &rules, const string path_output) const
 {
 	build_graphs.save_cyclic_graphs(rules, path_output);
@@ -54,7 +67,6 @@ void Builder_plans::save_cyclic_graphs(const map<unsigned short, Rule> &rules, c
   */
 bool Builder_plans::generate_graphs(const Attr_grammar &grammar)
 {
-	cout << "* Generate graphs ---------- [ " << flush;
 	if(build_graphs.compute_dependency_graphs(grammar.get_rules()))
 	{
 		if(build_graphs.compute_down_graph(grammar.get_non_terminal_symbols(), grammar.get_rules()))
@@ -63,13 +75,13 @@ bool Builder_plans::generate_graphs(const Attr_grammar &grammar)
 			{
 				if(build_graphs.compute_adp_graph(grammar))
 				{
-					cout << " OK  ]" << endl;
+					cout << "* Generate graphs ---------- [  OK  ]" << endl;
 					return true;
 				}
 			}
 		}
 	}
-	cout << "FAIL ]\n" << endl;
+	cout << "* Generate graphs ---------- [ FAIL ]\n" << endl;
 	return false;
 }
 
@@ -156,6 +168,9 @@ Order_eval_eq Builder_plans::compute_order(const Graph &graph_adp, const Order_e
 
 /**
   * Saves all plans. Creates a graph that represents the plan and uses print_graph with dot.
+  * @param grammar
+  * @param path_output
+  * @return
   */
 bool Builder_plans::save_all_plans(const Attr_grammar &grammar, const string path_output) const
 {
@@ -171,7 +186,7 @@ bool Builder_plans::save_all_plans(const Attr_grammar &grammar, const string pat
 		Graph graph_plan;
 		string names[it->second.size()];
 		Vertex ant(0);
-		/* creates graph. */
+		/* Creates graph. */
 		for(size_t i(0); i < it->second.size(); i++)
 		{
 			Vertex current(add_vertex(graph_plan));
@@ -219,6 +234,9 @@ bool Builder_plans::save_all_plans(const Attr_grammar &grammar, const string pat
 
 /**
   * Saves all proyected's plans. Creates a graph that represents the plan and uses print_graph with dot.
+  * @param grammar
+  * @param path_output
+  * @return
   */
 bool Builder_plans::save_all_plans_project(const Attr_grammar &grammar, const string path_output) const
 {
@@ -234,7 +252,7 @@ bool Builder_plans::save_all_plans_project(const Attr_grammar &grammar, const st
 		Graph graph_plan;
 		string names[it->second.size()];
 		Vertex ant(0);
-		/* creates graph. */
+		/* Creates graph. */
 		for(size_t i(0); i < it->second.size(); i++)
 		{
 			Vertex current(add_vertex(graph_plan));
@@ -288,6 +306,12 @@ bool Builder_plans::save_all_plans_project(const Attr_grammar &grammar, const st
 	return true;
 }
 
+/**
+  * Copy in the result vector all equations belonging to the rule passed as parameter.
+  * @param rule
+  * @param order_eq
+  * @param purged_order
+  */
 void purge_plan_with(const Rule &rule, const Order_eval_eq &order_eq, Order_eval_eq &purged_order)
 {
 	for(size_t i(0); i < order_eq.size(); i++)
@@ -302,6 +326,12 @@ void purge_plan_with(const Rule &rule, const Order_eval_eq &order_eq, Order_eval
 	}
 }
 
+/**
+  * Searchs in the list the item work that passed as parameter, if it find return true, otherwise false.
+  * @param list
+  * @param item_work
+  * @return
+  */
 bool defined_work (const vector < Item_work > &list, const Item_work &item_work)
 {
 	for(size_t i(0); i < list.size(); i++)
@@ -336,7 +366,8 @@ bool Builder_plans::generate_plans(const Attr_grammar &grammar)
 	init_order_ag = init_order;
 
 	Key_work_list key;
-	key.father = 0; /* Initial rule hasn't father. */
+	/* Initial rule hasn't father. */
+	key.father = 0;
 	key.id_rule = initial_rule.key();
 	Item_work i_eval;
 	i_eval.item = key;
@@ -435,38 +466,54 @@ unsigned short Builder_plans::build_plans(const Attr_grammar &attr_grammar)
 {
 	if(generate_graphs(attr_grammar))
 	{
-		cout << "* Build plans -------------- [ " << flush;
 		if (build_graphs.check_cyclic_adp_dependencies())
 		{
-			cout << "ABORT ]\n" << endl;
+			cout << "* Build plans -------------- [ ABORT ]\n" << endl;
 			cerr << "ERROR: One o more graph ADP has an cycle in its dependencies. Look the folder GenEvalAG/Out_Gen_Mag for more details." << endl;
 			return 1;
 		}
 		else if(generate_plans(attr_grammar))
 		{
-			cout << " OK  ]" << endl;
+			cout << "* Build plans -------------- [  OK  ]" << endl;
 			return 0;
 		}
-		cout << "FAIL ]\n" << endl;
+		cout << "* Build plans -------------- [ FAIL ]\n" << endl;
 	}
 	return 2;
 }
 
+/**
+  * Returns all evaluations plans.
+  * @return
+  */
 const map < Key_plan, Order_eval_eq > &Builder_plans::get_plans() const
 {
 	return eval_plans;
 }
 
+/**
+  * Returns all evaluations plans project.
+  * @return
+  */
 const map < Key_plan_project, Order_eval_eq > &Builder_plans::get_plans_project() const
 {
 	return plans_project;
 }
 
+/**
+  * Returns the intial order of attributes of the initial symbol.
+  * @return
+  */
 const Order_eval_eq &Builder_plans::get_init_order() const
 {
 	return init_order_ag;
 }
 
+/**
+  * Returns the index inside the map of the plan that passed as parameter.
+  * @param it_plan
+  * @return
+  */
 const unsigned short Builder_plans::get_index_plan(const map < Key_plan, Order_eval_eq >::const_iterator it_plan) const
 {
 	unsigned short res(0);
@@ -482,6 +529,12 @@ const unsigned short Builder_plans::get_index_plan(const map < Key_plan, Order_e
 	return res;
 }
 
+/**
+  * Returns an constant iterator of a project plan with key equals at the key that passed as parameter.
+  * Always finds the element.
+  * @param key
+  * @return
+  */
 const map < Key_plan_project, Order_eval_eq >::const_iterator Builder_plans::get_plan_project(const Key_plan_project &key) const
 {
 	const map < Key_plan_project, Order_eval_eq >::const_iterator it(plans_project.find(key));

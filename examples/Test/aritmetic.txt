@@ -14,61 +14,127 @@ semantic domain
     /*********************
      * List of Operators *
      *********************/
-    op infix    (10, non-assoc) +: int, int -> int;
-    op infix    (10, left) -: int, int -> int;
-    op infix    (50, left) *: int, int -> int;
-    op prefix   (75, _)    -: int      -> int;
+    op infix    (5, left) +: int, int -> int;
+    op infix    (5, left) -: int, int -> int;
+    op infix    (6, left) /: int, int -> int;
+    op infix    (6, left) *: int, int -> int;
     
 /***********************
  * Block of Attributes *
  ***********************/
 attributes
-	valor : syn <int>    of all;
-	tipo  : syn	<int> of all;
-	pepe  : inh<int> of all;
+	valor : syn <int> of all;
 	
 /******************
  * Block of Rules *
  ******************/
 rules
+    M ::= E
+            compute
+                M[0].valor = E[0].valor; 
+            end;
+
     E ::= E '+' E
     		compute
-    			E[0].valor = 1 + 2;
-    			//E[1].tipo = "gonza  jk\n \j j";
-    			E[0].tipo = 3;
-    			//E[0].pepe = 1 + 2;
-    			E[2].pepe = 1 + 2;
-    			E[1].pepe = E[0].tipo;
-    			E[1].pepe = E[0].tipo;
-    		end;
+    			E[0].valor = E[1].valor + E[2].valor; 
+    		end
     		
-    E ::= T
-    		compute
-    			E[0].valor = 5;
-    			E[0].tipo = 55 + E[0].valor;
-    			T[0].pepe = 60;
-    		end;
-    		
-    T ::= 'hola'
+      |   E '-' E
             compute
-                T[0].valor = 9;
-                T[0].tipo = 8;
-            end;
-            
-/*       |  E '-' E
-       |  E '*' E
-       |  '(' E ')'
-       |  '-'E
-       | num
-       ;
+                E[0].valor = E[1].valor - E[2].valor; 
+            end
+
+      |   E '*' E
+            compute
+                E[0].valor = E[1].valor * E[2].valor; 
+            end
+
+      |   '(' E ')'
+            compute
+                E[0].valor = E[1].valor; 
+            end
+
+      |   '-'E
+            compute
+                E[0].valor = E[1].valor * (-1); 
+            end
+
+      |   num
+            compute
+                E[0].valor = num[0].valor; 
+            end
+      ;
 
     num ::= digit num
-    	 |  real num
+            compute
+                num[0].valor = (digit[0].valor * 10) + num[1].valor; 
+            end
+
+    	 |  real
+            compute
+                num[0].valor = real[0].valor; 
+            end
+
          |  digit
-         |  real
+            compute
+                num[0].valor = digit[0].valor; 
+            end
          ;
          
-   digit ::= '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '0' ;
+   digit ::= '1'
+            compute
+                digit[0].valor = 1;
+            end
+
+         |   '2'
+            compute
+                digit[0].valor = 2;
+            end
+
+         |   '3'
+            compute
+                digit[0].valor = 3;
+            end
+
+         |   '4'
+            compute
+                digit[0].valor = 4;
+            end
+
+         |   '5'
+            compute
+                digit[0].valor = 5;
+            end
+
+         |   '6'
+            compute
+                digit[0].valor = 6;
+            end
+
+         |   '7'
+            compute
+                digit[0].valor = 7;
+            end
+
+         |   '8'
+            compute
+                digit[0].valor = 8;
+            end
+
+         |   '9'
+            compute
+                digit[0].valor = 9;
+            end
+
+         |   '0'
+            compute
+                digit[0].valor = 0;
+            end
+
+         ;
     
-   real ::= digit '.' digit;*/
+   real ::= digit '.' digit
+            compute
+                real[0].valor = digit[0].valor + (digit[1].valor / 10);
+            end;
     
