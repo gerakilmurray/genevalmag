@@ -1,7 +1,7 @@
 /**
   *  \file		Semantic_check.cpp
   *  \brief		Implementation of the methods the Semantic_check.h
-  *  \date
+  *  \date      11/02/2010
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
@@ -500,13 +500,13 @@ bool Semantic_check::check_well_defined_AG(const map <unsigned short, Rule> &rul
 			if (attr_syn->is_synthetize() && !defined)
 			/* The attribute is synthetized. Must be defined. */
 			{
-				cerr << "ERROR: \"" << symb->get_name() << "["<< 0 << "]."<< attr_syn->get_name() << "\" tipo syntetize, no tiene una Eq que lo defina." << endl;
+				cerr << "ERROR: \"" << symb->get_name() << "["<< 0 << "]."<< attr_syn->get_name() << "\" type synthetized, haven't an equation that defines it." << endl;
 				return false;
 			}
 			if (attr_syn->is_inherit() && defined)
 			/* The attribute is inherit. Mustn't be defined. */
 			{
-				cerr << "ERROR: \"" << symb->get_name() << "["<< 0 << "]."<< attr_syn->get_name() << "\" tipo inherit, esta definido fuera de su scope." << endl;
+				cerr << "ERROR: \"" << symb->get_name() << "["<< 0 << "]."<< attr_syn->get_name() << "\" type inherited, is defined outside his scope." << endl;
 				return false;
 			}
 		}
@@ -542,12 +542,12 @@ bool Semantic_check::check_well_defined_AG(const map <unsigned short, Rule> &rul
 
 							if (attr->is_inherit() && !defined)
 							{
-								cerr << "ERROR: \"" << symb->get_name() << "["<< j << "]."<< attr->get_name() << "\" 99tipo inherit, no tiene una Eq que lo defina." << endl;
+								cerr << "ERROR: \"" << symb->get_name() << "["<< j << "]."<< attr->get_name() << "\" type inherited, haven't an equation that defines it." << endl;
 								return false;
 							}
 							if (attr->is_synthetize() && defined)
 							{
-								cerr << "ERROR: \"" << symb->get_name() << "["<< j << "]."<< attr->get_name() << "\" 88tipo syntetize, esta definido fuera de su scope." << endl;
+								cerr << "ERROR: \"" << symb->get_name() << "["<< j << "]."<< attr->get_name() << "\" type synthetized, is defined outside his scope." << endl;
 								return false;
 							}
 						}

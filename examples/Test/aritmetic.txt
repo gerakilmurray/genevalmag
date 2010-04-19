@@ -37,33 +37,37 @@ rules
     E ::= E '+' E
     		compute
     			E[0].valor = E[1].valor + E[2].valor; 
-    		end
+    		end;
     		
-      |   E '-' E
+    E ::= E '-' E
             compute
                 E[0].valor = E[1].valor - E[2].valor; 
-            end
+            end;
 
-      |   E '*' E
+    E ::= E '*' E
             compute
                 E[0].valor = E[1].valor * E[2].valor; 
-            end
+            end;
+            
+    E ::= E '/' E
+            compute
+                E[0].valor = E[1].valor / E[2].valor; 
+            end;
 
-      |   '(' E ')'
+    E ::= '(' E ')'
             compute
                 E[0].valor = E[1].valor; 
-            end
+            end;
 
-      |   '-'E
+    E ::= '-'E
             compute
                 E[0].valor = E[1].valor * (-1); 
-            end
+            end;
 
-      |   num
+    E ::= num
             compute
                 E[0].valor = num[0].valor; 
-            end
-      ;
+            end;
 
     num ::= digit num
             compute

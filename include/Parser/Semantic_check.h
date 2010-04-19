@@ -1,7 +1,7 @@
 /**
   *  \file		Semantic_check.h
   *  \brief		Header method semantic check of Attribute grammar.
-  *  \date
+  *  \date      11/02/2010
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */

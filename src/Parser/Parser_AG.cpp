@@ -119,13 +119,24 @@ struct attritute_grammar: public grammar<attritute_grammar>
 							  )
 				;
 
-			r_reserved_word = strlit<>("compute") 	|
-									   "all"	  	|
-									   "int" 		|
-									   "string" 	|
-									   "float"	 	|
-									   "char"
-							  ;
+			r_reserved_word = strlit<>("compute")
+									  |"all"
+									  |r_cpp_reserved_words
+									  ;
+
+			r_cpp_reserved_words = strlit<>("and") | "and_eq" | "asm" | "auto" | "bitand" | "bitor"
+									  | "bool" | "break" | "case" | "catch" | "char" | "class" | "compl"
+									  | "const" | "const_cast" | "continue" | "default" | "delete" | "do"
+									  | "double" | "dynamic_cast" | "else" | "enum" | "explicit" | "export"
+									  | "extern" | "false" | "float" | "for" | "friend" | "goto" | "if"
+									  | "inline" | "int" | "long" | "mutable" | "namespace" | "new" | "not"
+									  | "not_eq" | "operator" | "or" | "or_eq" | "private" | "protected"
+									  | "public" | "register" | "reinterpret_cast" | "return" | "short"
+									  | "signed" | "sizeof" | "static" | "static_cast" | "struct" | "switch"
+									  | "template" | "this" | "throw" | "true" | "try" | "typedef" | "typeid"
+									  | "typename" | "union" | "unsigned" | "using" | "virtual" | "void"
+									  | "volatile" | "wchar_t" | "while" | "xor" | "xor_eq"
+							          ;
 
 			r_basic_types	= strlit<>("int") | "float" | "string" | "char";
 
@@ -203,10 +214,9 @@ struct attritute_grammar: public grammar<attritute_grammar>
 			r_right_rule  = +( r_ident[&create_new_non_terminal][st_non_terminal.add]
 			                 | r_terminal[&create_new_terminal]
 							 )[&save_right_side_rule] >>
-							!(strlit<>("compute") >>
-								+(r_equation) >>
-							  strlit<>("end")
-							 );
+							 !r_compute_eq;
+
+			r_compute_eq  = strlit<>("compute") >> +(r_equation) >> strlit<>("end");
 
 			r_terminal	  = lexeme_d[ ch_p('\'') >> r_string_lit >> ch_p('\'') ];
 
@@ -293,7 +303,7 @@ struct attritute_grammar: public grammar<attritute_grammar>
 		typedef rule<typename lexeme_scanner<ScannerT>::type> rule_lexeme;
 
 		/* Basic rules: characters, strings and identifiers. */
-		rule_exp r_reserved_word, r_ident, r_oper, r_char, r_string, r_basic_types, char_pp;
+		rule_exp r_reserved_word, r_cpp_reserved_words, r_ident, r_oper, r_char, r_string, r_basic_types, char_pp;
 
 		rule_lexeme r_id_op, r_string_lit, r_esc_seq;
 
@@ -306,14 +316,16 @@ struct attritute_grammar: public grammar<attritute_grammar>
 		rule_exp r_attributes, r_decl_attr, r_type_attr, r_conj_symb;
 
 		/* Rule's rule. */
-		rule_exp r_rules, r_decl_rule, r_equation, r_right_rule, r_terminal;
+		rule_exp r_rules, r_decl_rule, r_equation, r_right_rule, r_terminal, r_compute_eq;
 
 		/* Expresion's rule: Compute. Add context for type expresion. */
 		rule_exp r_expression,  r_expr_prime, r_expr_prime_prime, r_function, r_literal, r_instance;
 
+		rule_lexeme r_attribute_st, r_non_term_st;
+
 		/* Translate for symbol table. */
 		rule_exp r_sort_st, r_op_prefix_st, r_op_infix_st, r_op_postfix_st,
-				 r_function_st, r_attribute_st, r_non_term_st, r_sort_stable;
+				 r_function_st, r_sort_stable;
 
 		/* Main rule. */
 		rule_exp r_att_grammar;
