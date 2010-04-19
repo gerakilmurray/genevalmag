@@ -1,9 +1,9 @@
 /**
-  * \file Utilities.h
-  * 	\brief EXPLICAR QUE ES ESTO
-  *  \date 09/03/2010
-  *  \author    Kilmurray, Gerardo Luis. 
-  *  \author    Picco, Gonzalo M. 
+  *  \file		Utilities.h
+  *  \brief		Header of utilities module, where are methods and function used by many class.
+  *  \date		09/03/2010
+  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
 #ifndef UTILITIES_H_

@@ -20,13 +20,20 @@ using namespace std;
 
 namespace genevalmag
 {
-/* Vector for order of equation. */
+
+/**
+  * Vector for order of equation.
+  * Each number represent an equation.
+  */
 typedef vector< unsigned short > Order_eval_eq;
 
-/* Vector that represents the inferior context of rule. */
+/**
+  * Vector that represents the inferior context of rule.
+  * Each number represent a rule.
+  */
 typedef vector< unsigned short > Order_rule;
 
-/* Father and conext of rule. */
+/** This struct represent a Context_rule, that is a father rule and the context of rule. */
 typedef struct c_rule
 {
 	unsigned short	father;
@@ -49,7 +56,7 @@ typedef struct c_rule
 	}
 } Context_rule;
 
-/* Father and id-rule of rule. */
+/** This struct represents a Key_work_list, that is a father rule and id-rule of the current rule. */
 typedef struct k_w
 {
 	unsigned short	father;
@@ -71,7 +78,7 @@ typedef struct k_w
 	}
 } Key_work_list;
 
-/* Struct that represents an item in the list of work. */
+/** This struct represents an Item work, that is an Key_work_list and an equations order evaluation. */
 typedef struct i_w
 {
 	Key_work_list	item;
@@ -93,7 +100,7 @@ typedef struct i_w
 	}
 } Item_work;
 
-/* Key for map of plans. */
+/** This structs represent a Key_plan, that is an id and an equations order evaluation. */
 typedef struct k_plan
 {
 	Order_rule      id_plan;
@@ -121,7 +128,7 @@ typedef struct k_plan
 	}
 } Key_plan;
 
-/* Key for map of plans_project. Is a the same key plan that map of plan with the projected symbol. */
+/** This struct represent a Key_plan_project, that is a Key_plan, the symbol and ocurrence, by which project. */
 typedef struct k_p_project
 {
 	Key_plan		id_plan_project;
@@ -155,12 +162,26 @@ typedef struct k_p_project
 class Builder_plans
 {
 	private:
-		map < Key_plan, Order_eval_eq > eval_plans; /* "ro" function. Wuu yank's paper. */
+	    /**
+	      * Store all evaluation plans of the grammar.
+	      * "ro" function. Wuu yank's paper.
+	      */
+		map < Key_plan, Order_eval_eq > eval_plans;
 
-		map < Key_plan_project, Order_eval_eq > plans_project; /* "tita" function. Wuu yank's paper. */
+		/**
+		  * Store all evaluation plans projects of the grammar.
+		  * "tita" function. Wuu yank's paper.
+		  */
+		map < Key_plan_project, Order_eval_eq > plans_project;
 
+		/**
+		  * Store the initial evaluation order of the attributes of the initial symbol.
+		  */
 		Order_eval_eq init_order_ag;
 
+		/**
+		  * Stores all graphs DP, DOWN, DCG and ADP, generated for the grammar's analisys.
+		  */
 		Builder_graphs build_graphs;
 
 		/**
@@ -207,26 +228,66 @@ class Builder_plans
 
 		/**
 		  * Saves all plans. Creates a graph that represents the plan and uses print_graph with dot.
+		  * @param grammar
+		  * @param path_output
+		  * @return
 		  */
 		bool save_all_plans(const Attr_grammar &grammar, const string path_output) const;
+
 		/**
 		  * Saves all proyected's plans. Creates a graph that represents the plan and uses print_graph with dot.
+		  * @param grammar
+		  * @param path_output
+		  * @return
 		  */
 		bool save_all_plans_project(const Attr_grammar &grammar, const string path_output) const;
 
+		/**
+		  * Returns all evaluations plans.
+		  * @return
+		  */
 		const map < Key_plan, Order_eval_eq > &get_plans() const;
 
+		/**
+		  * Returns all evaluations plans project.
+		  * @return
+		  */
 		const map < Key_plan_project, Order_eval_eq > &get_plans_project() const;
 
+		/**
+		  * Returns the intial order of attributes of the initial symbol.
+		  * @return
+		  */
 		const Order_eval_eq &get_init_order() const;
 
-		void save_all_graphs(const map<unsigned short, Rule> &rules, const string path_output) const;
-
-		void save_cyclic_graphs(const map<unsigned short, Rule> &rules, const string path_output) const;
-
+		/**
+		  * Returns the index inside the map of the plan that passed as parameter.
+		  * @param it_plan
+		  * @return
+		  */
 		const unsigned short get_index_plan(const map < Key_plan, Order_eval_eq >::const_iterator it_plan) const;
 
+		/**
+		  * Returns an constant iterator of a project plan with key equals at the key that passed as parameter.
+		  * Always finds the element.
+		  * @param key
+		  * @return
+		  */
 		const map < Key_plan_project, Order_eval_eq >::const_iterator get_plan_project(const Key_plan_project &key) const;
+
+		/**
+		  * Saves all graphs generated as the analysis of the dependencies between attributes.
+		  * @param rules
+		  * @param path_output
+		  */
+		void save_all_graphs(const map<unsigned short, Rule> &rules, const string path_output) const;
+
+		/**
+		  * Saves the graphs generated as the analysis of the dependencies between attributes, which demonstrate cyclicity.
+		  * @param rules
+		  * @param path_output
+		  */
+		void save_cyclic_graphs(const map<unsigned short, Rule> &rules, const string path_output) const;
 };
 
 } /* end genevalmag */

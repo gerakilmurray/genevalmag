@@ -331,14 +331,13 @@ struct attritute_grammar: public grammar<attritute_grammar>
   */
 bool Parser_AG::parse_grammar(const string &path_file_input)
 {
-	cout << "* Parsing grammar ---------- [ " << flush;
 	/* File open */
     /* Create a file iterator for this file */
     iterator_f first(path_file_input);
 
     if (!first)
     {
-    	cout << "FAIL ]\n" << endl;
+    	cout << "* Parsing grammar ---------- [ FAIL ]" << endl;
     	cerr << "ERROR: the file input non-exist." << endl;
         return false;
     }
@@ -361,12 +360,12 @@ bool Parser_AG::parse_grammar(const string &path_file_input)
 	if(info.full)
 	{
 		/* Parses success. */
-		cout << " OK  ]" << endl;
+		cout << "* Parsing grammar ---------- [  OK  ]" << endl;
 	}
 	else
 	{
 		/* Parses Fail. */
-		cout << "FAIL ]\n" << endl;
+		cout << "* Parsing grammar ---------- [ FAIL ]\n" << endl;
 	    const file_position fp = info.stop.get_position();
 	    cerr << "ERROR: Parsing Failed, the following text will not be able to parse:" << endl;
 	    cerr << fp << endl;

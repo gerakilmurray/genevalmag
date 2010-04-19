@@ -10,6 +10,7 @@
 
 namespace genevalmag
 {
+
 /**
   * Contructor of Ast_node.
   */
@@ -36,7 +37,7 @@ const Ast_node *Ast_node::get_parent() const
 /**
   * Returns the type synthetized of the Ast_node.
   */
-string Ast_node::get_type_synthetized() const
+const string Ast_node::get_type_synthetized() const
 {
 	return type_synthetized;
 }

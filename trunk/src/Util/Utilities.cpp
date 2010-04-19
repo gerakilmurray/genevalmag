@@ -1,10 +1,11 @@
 /**
-  *  \file		Utilities.hpp
-  *  \brief
-  *  \date		08/03/2010
+  *  \file		Utilities.h
+  *  \brief		Implementation of utilities module, where are methods and function used by many class.
+  *  \date		09/03/2010
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
+
 #include <fstream>
 
 #include <boost/graph/graphviz.hpp>
@@ -12,6 +13,7 @@
 
 #include "../../include/Util/Utilities.h"
 
+using namespace std;
 using namespace boost;
 using namespace genevalmag;
 
@@ -63,10 +65,8 @@ bool copy_static_code(const string path)
 	{
 		return false;
 	}
-
 	return true;
 }
-
 
 /**
   * Generates the names of vertex. (The vertex's name is an instance).
@@ -113,9 +113,11 @@ void print_graph(const Graph &graph, const string path, const string name_file, 
 	n_f.append(".dot");
 
 	/* Obtain of file of graphviz. */
-	std::ofstream salida(n_f.c_str());
-	std::map<std::string,std::string> graph_attr, vertex_attr, edge_attr;
-	/*graph_attr["size"]		= "5,3"; */
+	ofstream salida(n_f.c_str());
+
+	map<string,string> graph_attr, vertex_attr, edge_attr;
+
+	/* Sets the main characteristic of the graph. */
 	graph_attr["label"]			= name_graph;
 	graph_attr["rankdir"]		= "TD";
 	graph_attr["ratio"]			= "compress";
@@ -124,6 +126,7 @@ void print_graph(const Graph &graph, const string path, const string name_file, 
 	vertex_attr["style"] 		= "rounded,filled";
 	vertex_attr["fillcolor"]	= "gray";
 
+	/* Saves the dot file using the graphviz library. */
 	write_graphviz(salida, graph, make_label_writer(names),default_writer(),make_graph_attributes_writer(graph_attr, vertex_attr,edge_attr));
 }
 

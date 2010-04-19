@@ -57,7 +57,7 @@ class Ast_node
         /**
           * Returns the type synthetized of the Ast_node.
           */
-        string get_type_synthetized() const;
+        const string get_type_synthetized() const;
 
         /**
           * Returns the precendence wath produces the conflict.

@@ -289,7 +289,6 @@ void Builder_visit_sequences::save_visit_sequence(const Visit_seq &sequence, con
   */
 bool Builder_visit_sequences::generate_visit_sequences(const Attr_grammar &attr_grammar, const Builder_plans &b_plans)
 {
-	cout << "* Build visit sequence ----- [ " << flush;
     for(size_t i(0); i < b_plans.get_plans().size(); i++)
     {
     	Visit_seq v_s;
@@ -314,7 +313,7 @@ bool Builder_visit_sequences::generate_visit_sequences(const Attr_grammar &attr_
             }
         }
     }
-	cout << " OK  ]" << endl;
+	cout << "* Build visit sequence ----- [  OK  ]" << endl;
     return true;
 }
 
