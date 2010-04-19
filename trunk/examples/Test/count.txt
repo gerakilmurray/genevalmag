@@ -22,12 +22,17 @@ semantic domain
  * Block of Attributes *
  ***********************/
 attributes
-    longi : syn <int> of {T,T2};
+    longi : syn <int> of {S,T,T2};
     
 /******************
  * Block of Rules *
  ******************/
 rules
+    S ::= T
+            compute
+                S[0].longi = T[0].longi;
+            end;
+
     // P1
     T ::= '0' T2 T T
             compute             

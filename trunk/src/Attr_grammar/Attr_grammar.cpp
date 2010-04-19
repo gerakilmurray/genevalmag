@@ -196,21 +196,23 @@ const bool Attr_grammar::add_rule(Rule &rule)
     	cerr << "ERROR: The grammar isn't extended grammar." << endl;
     	exit(-1);
     }
-
     bool result(add <unsigned short, Rule>(rule, ag_rule));
     if (result)
     {
         if(ag_initial_symb == NULL)
         {
             /* Set initial symbol of grammar. */
-            map<unsigned short, Rule>::iterator    init_symb(ag_rule.find(rule.key()));
+            map<unsigned short, Rule>::const_iterator init_symb(ag_rule.find(rule.key()));
             ag_initial_symb = init_symb->second.get_left_symbol();
         }
-        map<unsigned short,Rule>::const_iterator last_rule(ag_rule.end());
-        last_rule--;
-        map<unsigned short,Equation>::const_iterator last_eq(last_rule->second.get_eqs().end());
-        last_eq--;
-        count_eqs = last_eq->second.get_id();
+        if(rule.get_eqs().size() > 0)
+        {
+			map<unsigned short,Rule>::const_iterator last_rule(ag_rule.end());
+			last_rule--;
+			map<unsigned short,Equation>::const_iterator last_eq(last_rule->second.get_eqs().end());
+			last_eq--;
+			count_eqs = last_eq->second.get_id();
+        }
     }
     return result;
 }

@@ -54,45 +54,45 @@ int Maglib::gen_evaluator
 		path_output.append("/");
 	}
 
-	/** Parses the input file to get the AG. */
+	/* Parses the input file to get the AG. */
 	Parser_AG p_mag;
 	if (p_mag.parse_grammar(path_input_file))
 	{
-		/** Parsing success and is a MAG. Proceed to save. */
+		/* Parsing success and is a MAG. Proceed to save. */
 		p_mag.save_grammar_file(path_output);
 
-		/** Start the plan's generation. */
+		/* Start the plan's generation. */
 		Builder_plans b_plans;
 		unsigned short res(b_plans.build_plans(p_mag.get_attr_grammar()));
 		if (res == 0)
 		{
-			/** Success, proceed to save all graphs generated. */
+			/* Success, proceed to save all graphs generated. */
 			b_plans.save_all_graphs(p_mag.get_attr_grammar().get_rules(), path_output);
 
-			/** And saves all plans generated too. */
+			/* And saves all plans generated too. */
 			b_plans.save_all_plans(p_mag.get_attr_grammar(), path_output);
 			b_plans.save_all_plans_project(p_mag.get_attr_grammar(), path_output);
 
-			/** Begins the visit sequence computation. */
+			/* Begins the visit sequence computation. */
 			Builder_visit_sequences b_visit_seq;
 			if (b_visit_seq.generate_visit_sequences(p_mag.get_attr_grammar(), b_plans))
 			{
-				/** Success, the last step is code generation. */
+				/* Success, the last step is code generation. */
 				Builder_code b_gen(path_output, name_library);
 				if(b_gen.generate_code(p_mag.get_attr_grammar(), b_plans, b_visit_seq.get_visit_seq(),headers))
 				{
-					/** Success, the evaluator is completed. */
+					/* Success, the evaluator is completed. */
 					return 0;
 				}
 			}
 		}
 		else if (res == 1)
 		{
-			/** The graphs generation exits because detects a cyclic graphs of attribute dependencies. */
+			/* The graphs generation exits because detects a cyclic graphs of attribute dependencies. */
 			b_plans.save_cyclic_graphs(p_mag.get_attr_grammar().get_rules(), path_output);
 		}
 	}
-	/** In this point some step fails. */
+	/* In this point some step fails. */
 	return -1;
 }
 

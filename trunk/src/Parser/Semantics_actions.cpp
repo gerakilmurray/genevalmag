@@ -274,6 +274,7 @@ void create_instance(const iterator_t str, const iterator_t end)
 	if (!current_rule->belongs_non_terminal(*symb))
 	{
 		cerr << "ERROR: non-terminal symbol \"" << name << "\" used does not belong to the rule: \""  << cleaning_tabs(current_rule->to_string_not_eqs())<< "\"."<< endl;
+		delete(symb);
 		exit(-1);
 	}
 
