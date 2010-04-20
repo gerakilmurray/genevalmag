@@ -14,16 +14,16 @@ semantic domain
     /*********************
      * List of Operators *
      *********************/
-    op infix    (5, left) +: int, int -> int;
-    op infix    (5, left) -: int, int -> int;
-    op infix    (6, left) /: int, int -> int;
-    op infix    (6, left) *: int, int -> int;
+    op infix    (5, left) +: float, float -> float;
+    op infix    (5, left) -: float, float -> float;
+    op infix    (6, left) /: float, float -> float;
+    op infix    (6, left) *: float, float -> float;
     
 /***********************
  * Block of Attributes *
  ***********************/
 attributes
-	valor : syn <int> of all;
+	valor : syn <float> of all;
 	
 /******************
  * Block of Rules *
@@ -61,7 +61,7 @@ rules
 
     E ::= '-'E
             compute
-                E[0].valor = E[1].valor * (-1); 
+                E[0].valor = E[1].valor * (-1.0); 
             end;
 
     E ::= num
@@ -71,7 +71,7 @@ rules
 
     num ::= digit num
             compute
-                num[0].valor = (digit[0].valor * 10) + num[1].valor; 
+                num[0].valor = (digit[0].valor * 10.0) + num[1].valor; 
             end
 
     	 |  real
@@ -87,58 +87,58 @@ rules
          
    digit ::= '1'
             compute
-                digit[0].valor = 1;
+                digit[0].valor = 1.0;
             end
 
          |   '2'
             compute
-                digit[0].valor = 2;
+                digit[0].valor = 2.0;
             end
 
          |   '3'
             compute
-                digit[0].valor = 3;
+                digit[0].valor = 3.0;
             end
 
          |   '4'
             compute
-                digit[0].valor = 4;
+                digit[0].valor = 4.0;
             end
 
          |   '5'
             compute
-                digit[0].valor = 5;
+                digit[0].valor = 5.0;
             end
 
          |   '6'
             compute
-                digit[0].valor = 6;
+                digit[0].valor = 6.0;
             end
 
          |   '7'
             compute
-                digit[0].valor = 7;
+                digit[0].valor = 7.0;
             end
 
          |   '8'
             compute
-                digit[0].valor = 8;
+                digit[0].valor = 8.0;
             end
 
          |   '9'
             compute
-                digit[0].valor = 9;
+                digit[0].valor = 9.0;
             end
 
          |   '0'
             compute
-                digit[0].valor = 0;
+                digit[0].valor = 0.0;
             end
 
          ;
     
    real ::= digit '.' digit
             compute
-                real[0].valor = digit[0].valor + (digit[1].valor / 10);
+                real[0].valor = digit[0].valor + (digit[1].valor / 10.0);
             end;
     
