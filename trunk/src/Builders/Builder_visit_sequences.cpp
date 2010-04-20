@@ -191,7 +191,9 @@ bool Builder_visit_sequences::gen_visit_seq
 
 								gen_visit_seq(attr_grammar, b_plans, it, ins_computed_child, p_computed_child, v_seq_child);
 
+								/* Update information_computed plans. */
 								merge_vec(p_computed_child, v_seq_child);
+								merge_vec(p_computed_child, plans_computed);
 
 								/* Saves all instances calculated for the visit. */
 								for(size_t i_rec(0); i_rec < ins_computed_child.size(); i_rec++)
@@ -296,6 +298,7 @@ bool Builder_visit_sequences::generate_visit_sequences(const Attr_grammar &attr_
     }
 
     vector <unsigned short> visit_seq_computed;
+    vector<unsigned short> plans_computed_all;
     /* For all plans */
 	for(map < Key_plan, Order_eval_eq >::const_iterator it(b_plans.get_plans().begin()); it != b_plans.get_plans().end(); it++)
     {
@@ -308,8 +311,10 @@ bool Builder_visit_sequences::generate_visit_sequences(const Attr_grammar &attr_
             {
                 vector<Ast_instance> ins_computed;
                 vector<unsigned short> plans_computed;
+                merge_vec(plans_computed_all, plans_computed);
 				gen_visit_seq(attr_grammar, b_plans, it, ins_computed, plans_computed, visit_seq_computed);
 				merge_vec(plans_computed, visit_seq_computed);
+				merge_vec(plans_computed, plans_computed_all);
             }
         }
     }
