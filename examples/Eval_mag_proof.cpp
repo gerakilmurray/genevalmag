@@ -9,7 +9,7 @@
 #include <vector>
 #include <iostream>
 
-#include "Eval_mag.hpp"
+#include "maggen.hpp"
 
 using namespace evalmag;
 
@@ -18,7 +18,7 @@ using namespace evalmag;
   */
 int main()
 {
-    Eval_mag eval_mag;
+    maggen eval_mag;
     eval_mag.print_v_seq();
 	eval_mag.translate_mag();
 

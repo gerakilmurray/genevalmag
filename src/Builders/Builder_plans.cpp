@@ -204,10 +204,13 @@ bool Builder_plans::save_all_plans(const Attr_grammar &grammar, const string pat
 		}
 		/* Obtains the rule. */
 		string name_graph("Evaluation Plan of rule ");
-		const Rule *rule(&(grammar.get_rules().find(it->first.id_plan[0])->second));
+
+		const Order_rule &context_o(contexts_uniques[it->first.id_plan]);
+
+		const Rule *rule(&(grammar.get_rules().find(context_o[0])->second));
 		name_graph.append(cleaning_tabs(rule->to_string_not_eqs()));
 
-		name_graph.append(write_inf_context(it->first.id_plan));
+		name_graph.append(write_inf_context(context_o));
 
 		const Order_eval_eq &plan_ctx(plans_uniques[it->first.plan]);
 
@@ -276,10 +279,13 @@ bool Builder_plans::save_all_plans_project(const Attr_grammar &grammar, const st
 
 		/* Obtains the rule. */
 		string name_graph("Evaluation Plan Project of rule ");
-		const Rule *rule(&(grammar.get_rules().find(it->first.id_plan_project.id_plan[0])->second));
+
+		const Order_rule &context_o(contexts_uniques[it->first.id_plan_project.id_plan]);
+
+		const Rule *rule(&(grammar.get_rules().find(context_o[0])->second));
 		name_graph.append(cleaning_tabs(rule->to_string_not_eqs()));
 
-		name_graph.append(write_inf_context(it->first.id_plan_project.id_plan));
+		name_graph.append(write_inf_context(context_o));
 
 		const Order_eval_eq &plan_p_ctx(plans_project_uniques[it->first.id_plan_project.plan]);
 
@@ -355,6 +361,26 @@ bool defined_work (const vector < Item_work > &list, const Item_work &item_work)
 	return false;
 }
 
+/**
+  * Returns the index in the vector of context, or inserts in the last position.
+  */
+unsigned short Builder_plans::return_index_context(const Order_rule &order)
+{
+	unsigned short index(0);
+	for(; index < contexts_uniques.size(); index++)
+	{
+		if(order == contexts_uniques[index])
+		{
+			return index;
+		}
+	}
+	contexts_uniques.push_back(order);
+	return index;
+}
+
+/**
+  * Returns the index in the vector, or inserts in the last position.
+  */
 unsigned short return_index_vec(const Order_eval_eq &order, vector<Order_eval_eq> &vec)
 {
 	unsigned short index(0);
@@ -369,11 +395,17 @@ unsigned short return_index_vec(const Order_eval_eq &order, vector<Order_eval_eq
 	return index;
 }
 
+/**
+  * Returns the index in the vector of plans, or inserts in the last position.
+  */
 unsigned short Builder_plans::return_index_plan(const Order_eval_eq &order)
 {
 	return return_index_vec(order, plans_uniques);
 }
 
+/**
+  * Returns the index in the vector of plans projects, or inserts in the last position.
+  */
 unsigned short Builder_plans::return_index_plan_p(const Order_eval_eq &order)
 {
 	return return_index_vec(order, plans_project_uniques);
@@ -442,7 +474,7 @@ bool Builder_plans::generate_plans(const Attr_grammar &grammar)
 
 					/* Saves the new_plan in the map. */
 					Key_plan key_plan;
-					key_plan.id_plan = adp->first;
+					key_plan.id_plan = return_index_context(adp->first);
 
 					key_plan.plan = i_work.order_attr;
 					unsigned short index_plan = return_index_plan(order_purged);
@@ -522,6 +554,15 @@ unsigned short Builder_plans::build_plans(const Attr_grammar &attr_grammar)
 }
 
 /**
+  * Returns all contexts rule uniques.
+  * @return
+  */
+const vector < Order_rule > &Builder_plans::get_contexts_uniques() const
+{
+	return contexts_uniques;
+}
+
+/**
   * Returns all evaluations plans.
   * @return
   */
@@ -529,6 +570,11 @@ const map < Key_plan, unsigned short > &Builder_plans::get_plans() const
 {
 	return eval_plans;
 }
+
+/**
+  * Returns all evaluations plans uniques.
+  * @return
+  */
 const vector < Order_eval_eq > &Builder_plans::get_plans_uniques() const
 {
 	return plans_uniques;
@@ -542,6 +588,11 @@ const map < Key_plan_project, unsigned short > &Builder_plans::get_plans_project
 {
 	return plans_project;
 }
+
+/**
+  * Returns all evaluations plans project uniques.
+  * @return
+  */
 const vector < Order_eval_eq > &Builder_plans::get_plans_project_uniques() const
 {
 	return plans_project_uniques;

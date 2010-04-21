@@ -32,6 +32,7 @@ class Symbol
         string                      symb_name;
         symbol_type                 symb_type;
         vector<const Attribute*>    symb_attrs;
+        unsigned short				symb_id;
 
         /**
           * Method of copy the symbol, STL-like C++.
@@ -75,6 +76,10 @@ class Symbol
           */
         symbol_type get_type() const;
         /**
+		  * Returns the id of the Symbol.
+		  */
+		unsigned short get_id() const;
+        /**
           * Returns the list of attributes of the Symbol.
           */
         const vector<const Attribute*> &get_attrs() const;
@@ -92,7 +97,10 @@ class Symbol
           * Sets the type of the Symbol.
           */
         void set_type(symbol_type type);
-
+        /**
+		  * Sets the id of the Symbol.
+		  */
+		void set_id(unsigned short id);
         /**
           * Enqueues a attribute in the list of the Symbol.
           */

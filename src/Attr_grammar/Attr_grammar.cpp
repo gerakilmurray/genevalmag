@@ -142,6 +142,7 @@ void Attr_grammar::load_attributes(Symbol &symb) const
 const bool Attr_grammar::add_symbol(const Symbol &symb)
 {
     map<string, Symbol> *map_symb;
+    static unsigned short id_symbol(1);
     if (symb.is_non_terminal())
     {
         map_symb = &ag_symb_non_terminals;
@@ -155,6 +156,7 @@ const bool Attr_grammar::add_symbol(const Symbol &symb)
     {
         map<string, Symbol>::iterator it(map_symb->find(symb.key()));
         load_attributes(it->second);
+        it->second.set_id(id_symbol++);
     }
 
     return not_repeat;
