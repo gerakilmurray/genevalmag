@@ -24,7 +24,7 @@ typedef vector< unsigned short > Order_rule;
 typedef struct k_plan
 {
     Order_rule    id_plan;
-    Order_eval_eq   plan;
+    unsigned short   plan;
 
     bool operator== (const k_plan &other) const
     {
@@ -69,10 +69,10 @@ typedef struct k_p_project
 /**
  * Types for manage of plans.
  */
-typedef vector< int >                            Visit_sequence;
-typedef vector< string >                         Rule;
-typedef pair< Key_plan,Order_eval_eq >           Plan;
-typedef pair< Key_plan_project, Order_eval_eq >  Plan_project;
+typedef vector< int >                            	Visit_sequence;
+typedef vector< string >                         	Rule;
+typedef pair< Key_plan,unsigned short >           	Plan;
+typedef pair< Key_plan_project, unsigned short >  	Plan_project;
 
 } /* end namespace */
 

@@ -82,7 +82,7 @@ typedef struct k_w
 typedef struct i_w
 {
 	Key_work_list	item;
-	Order_eval_eq	order_attr;
+	unsigned short	order_attr;
 
 	bool operator== (const i_w &other) const
 	{
@@ -104,7 +104,7 @@ typedef struct i_w
 typedef struct k_plan
 {
 	Order_rule      id_plan;
-	Order_eval_eq	plan;
+	unsigned short	plan;
 
 	bool operator< (const k_plan &other) const
 	{
@@ -166,18 +166,20 @@ class Builder_plans
 	      * Store all evaluation plans of the grammar.
 	      * "ro" function. Wuu yank's paper.
 	      */
-		map < Key_plan, Order_eval_eq > eval_plans;
+		map < Key_plan, unsigned short > eval_plans;
+		vector <Order_eval_eq> plans_uniques;
 
 		/**
 		  * Store all evaluation plans projects of the grammar.
 		  * "tita" function. Wuu yank's paper.
 		  */
-		map < Key_plan_project, Order_eval_eq > plans_project;
+		map < Key_plan_project, unsigned short > plans_project;
+		vector <Order_eval_eq> plans_project_uniques;
 
 		/**
 		  * Store the initial evaluation order of the attributes of the initial symbol.
 		  */
-		Order_eval_eq init_order_ag;
+		unsigned short init_order_ag;
 
 		/**
 		  * Stores all graphs DP, DOWN, DCG and ADP, generated for the grammar's analisys.
@@ -194,7 +196,7 @@ class Builder_plans
 		  * Compute the rule's order.
 		  * The changes are applies about paramenter "result_order".
 		  */
-		Order_eval_eq compute_order(const Graph &graph_adp, const Order_eval_eq &eq_order, const Attr_grammar &grammar, const Context_rule &context_rule);
+		Order_eval_eq compute_order(const Graph &graph_adp, unsigned short index_order, const Attr_grammar &grammar, const Context_rule &context_rule);
 
 		/**
 		  * Generates and saves all evaluation's plans for the Attribute Grammar.
@@ -205,6 +207,10 @@ class Builder_plans
 		  * Generates all graphs for attribute grammar: DP, DOWN, DCG and ADP.
 		  */
 		bool generate_graphs(const Attr_grammar &grammar);
+
+		unsigned short return_index_plan(const Order_eval_eq &order);
+
+		unsigned short return_index_plan_p(const Order_eval_eq &order);
 
 	public:
 		/**
@@ -246,26 +252,28 @@ class Builder_plans
 		  * Returns all evaluations plans.
 		  * @return
 		  */
-		const map < Key_plan, Order_eval_eq > &get_plans() const;
+		const map < Key_plan, unsigned short > &get_plans() const;
+		const vector < Order_eval_eq> &get_plans_uniques() const;
 
 		/**
 		  * Returns all evaluations plans project.
 		  * @return
 		  */
-		const map < Key_plan_project, Order_eval_eq > &get_plans_project() const;
+		const map < Key_plan_project, unsigned short > &get_plans_project() const;
+		const vector < Order_eval_eq> &get_plans_project_uniques() const;
 
 		/**
 		  * Returns the intial order of attributes of the initial symbol.
 		  * @return
 		  */
-		const Order_eval_eq &get_init_order() const;
+		const unsigned short &get_init_order() const;
 
 		/**
 		  * Returns the index inside the map of the plan that passed as parameter.
 		  * @param it_plan
 		  * @return
 		  */
-		const unsigned short get_index_plan(const map < Key_plan, Order_eval_eq >::const_iterator it_plan) const;
+		const unsigned short get_index_plan(const map < Key_plan, unsigned short >::const_iterator it_plan) const;
 
 		/**
 		  * Returns an constant iterator of a project plan with key equals at the key that passed as parameter.
@@ -273,7 +281,7 @@ class Builder_plans
 		  * @param key
 		  * @return
 		  */
-		const map < Key_plan_project, Order_eval_eq >::const_iterator get_plan_project(const Key_plan_project &key) const;
+		const map < Key_plan_project, unsigned short >::const_iterator get_plan_project(const Key_plan_project &key) const;
 
 		/**
 		  * Saves all graphs generated as the analysis of the dependencies between attributes.
