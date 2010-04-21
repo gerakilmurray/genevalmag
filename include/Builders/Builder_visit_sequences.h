@@ -44,9 +44,9 @@ class Builder_visit_sequences
         (
         	const Attr_grammar &attr_grammar,
         	const Builder_plans &b_plans,
-        	const map<Key_plan, Order_eval_eq>::const_iterator &it_plan,
+        	const map<Key_plan, unsigned short>::const_iterator &it_plan,
         	vector<Ast_instance> &computed,
-        	vector<unsigned short> &plans_computed_f,
+        	vector< map<Key_plan, unsigned short>::const_iterator > &plans_computed,
         	const vector<unsigned short> &v_seq_computed_f
         );
 

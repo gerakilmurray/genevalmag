@@ -133,9 +133,10 @@ void Builder_plans::generates_topological_order(const Graph &graph, Order_eval_e
   * Compute the rule's order.
   * The changes are applies about paramenter "result_order".
   */
-Order_eval_eq Builder_plans::compute_order(const Graph &graph_adp, const Order_eval_eq &order_eq, const Attr_grammar &grammar, const Context_rule &context_rule)
+Order_eval_eq Builder_plans::compute_order(const Graph &graph_adp, unsigned short index_order, const Attr_grammar &grammar, const Context_rule &context_rule)
 {
 	Graph graph(graph_adp);
+	const Order_eval_eq &order_eq(plans_project_uniques[index_order]);
 	/* Creates edges with the elem of order_eq
 	 * Ex: Order_eq = 2, 5, 6.
 	 *  Edges : (2,5), (5,6) */
@@ -181,13 +182,16 @@ bool Builder_plans::save_all_plans(const Attr_grammar &grammar, const string pat
 		return false;
 	}
 
-	for(map < Key_plan, Order_eval_eq >::const_iterator it(eval_plans.begin()); it != eval_plans.end(); it++)
+	for(map < Key_plan, unsigned short >::const_iterator it(eval_plans.begin()); it != eval_plans.end(); it++)
 	{
 		Graph graph_plan;
-		string names[it->second.size()];
+
+		const Order_eval_eq &plan_o(plans_uniques[it->second]);
+
+		string names[plan_o.size()];
 		Vertex ant(0);
 		/* Creates graph. */
-		for(size_t i(0); i < it->second.size(); i++)
+		for(size_t i(0); i < plan_o.size(); i++)
 		{
 			Vertex current(add_vertex(graph_plan));
 			if (i > 0)
@@ -195,7 +199,7 @@ bool Builder_plans::save_all_plans(const Attr_grammar &grammar, const string pat
 				add_edge(ant,current,graph_plan);
 			}
 			ant = current;
-			const Equation *eq(grammar.get_eq(it->second[i]));
+			const Equation *eq(grammar.get_eq(plan_o[i]));
 			names[i] = cleaning_tabs(eq->to_string());
 		}
 		/* Obtains the rule. */
@@ -205,21 +209,23 @@ bool Builder_plans::save_all_plans(const Attr_grammar &grammar, const string pat
 
 		name_graph.append(write_inf_context(it->first.id_plan));
 
+		const Order_eval_eq &plan_ctx(plans_uniques[it->first.plan]);
+
 		/* Obtains the rule's context. */
-		if (it->first.plan.size() == 0)
+		if (plan_ctx.size() == 0)
 		{
 			name_graph.append(", without Order.Sup");
 		}
 		else
 		{
 			name_graph.append(", order: ");
-			for(size_t i(0); i < it->first.plan.size(); i++)
+			for(size_t i(0); i < plan_ctx.size(); i++)
 			{
 				name_graph.append(" Eq");
 				stringstream key_eq;
-				key_eq << it->first.plan[i];
+				key_eq << plan_ctx[i];
 				name_graph.append(key_eq.str());
-				if(i < it->first.plan.size() - 1)
+				if(i < plan_ctx.size() - 1)
 				{
 					name_graph.append(" ,");
 				}
@@ -247,13 +253,16 @@ bool Builder_plans::save_all_plans_project(const Attr_grammar &grammar, const st
 		return false;
 	}
 
-	for(map < Key_plan_project, Order_eval_eq >::const_iterator it(plans_project.begin()); it != plans_project.end(); it++)
+	for(map < Key_plan_project, unsigned short >::const_iterator it(plans_project.begin()); it != plans_project.end(); it++)
 	{
 		Graph graph_plan;
-		string names[it->second.size()];
+
+		const Order_eval_eq &plan_p_o(plans_project_uniques[it->second]);
+
+		string names[plan_p_o.size()];
 		Vertex ant(0);
 		/* Creates graph. */
-		for(size_t i(0); i < it->second.size(); i++)
+		for(size_t i(0); i < plan_p_o.size(); i++)
 		{
 			Vertex current(add_vertex(graph_plan));
 			if (i > 0)
@@ -261,7 +270,7 @@ bool Builder_plans::save_all_plans_project(const Attr_grammar &grammar, const st
 				add_edge(ant,current,graph_plan);
 			}
 			ant = current;
-			const Equation *eq(grammar.get_eq(it->second[i]));
+			const Equation *eq(grammar.get_eq(plan_p_o[i]));
 			names[i] = cleaning_tabs(eq->to_string());
 		}
 
@@ -272,21 +281,23 @@ bool Builder_plans::save_all_plans_project(const Attr_grammar &grammar, const st
 
 		name_graph.append(write_inf_context(it->first.id_plan_project.id_plan));
 
+		const Order_eval_eq &plan_p_ctx(plans_project_uniques[it->first.id_plan_project.plan]);
+
 		/* Obtains the rule's context. */
-		if (it->first.id_plan_project.plan.size() == 0)
+		if (plan_p_ctx.size() == 0)
 		{
 			name_graph.append(", without Order.Sup");
 		}
 		else
 		{
 			name_graph.append(", Order.Sup: ");
-			for(size_t i(0); i < it->first.id_plan_project.plan.size(); i++)
+			for(size_t i(0); i < plan_p_ctx.size(); i++)
 			{
 				name_graph.append(" Eq");
 				stringstream key_eq;
-				key_eq << it->first.id_plan_project.plan[i];
+				key_eq << plan_p_ctx[i];
 				name_graph.append(key_eq.str());
-				if(i < it->first.id_plan_project.plan.size() - 1)
+				if(i < plan_p_ctx.size() - 1)
 				{
 					name_graph.append(" ,");
 				}
@@ -344,6 +355,31 @@ bool defined_work (const vector < Item_work > &list, const Item_work &item_work)
 	return false;
 }
 
+unsigned short return_index_vec(const Order_eval_eq &order, vector<Order_eval_eq> &vec)
+{
+	unsigned short index(0);
+	for(; index < vec.size(); index++)
+	{
+		if(order == vec[index])
+		{
+			return index;
+		}
+	}
+	vec.push_back(order);
+	return index;
+}
+
+unsigned short Builder_plans::return_index_plan(const Order_eval_eq &order)
+{
+	return return_index_vec(order, plans_uniques);
+}
+
+unsigned short Builder_plans::return_index_plan_p(const Order_eval_eq &order)
+{
+	return return_index_vec(order, plans_project_uniques);
+}
+
+
 /**
   * Generates and saves all evaluation's plans for the Attribute Grammar.
   */
@@ -363,7 +399,7 @@ bool Builder_plans::generate_plans(const Attr_grammar &grammar)
 	context.context = invoque_context;
 	generates_topological_order(build_graphs.get_dcg_graph(initial_rule.key()), init_order, grammar, context);
 
-	init_order_ag = init_order;
+	init_order_ag = return_index_plan_p(init_order);
 
 	Key_work_list key;
 	/* Initial rule hasn't father. */
@@ -371,7 +407,7 @@ bool Builder_plans::generate_plans(const Attr_grammar &grammar)
 	key.id_rule = initial_rule.key();
 	Item_work i_eval;
 	i_eval.item = key;
-	i_eval.order_attr = init_order;
+	i_eval.order_attr = init_order_ag;
 	work_list.push_back(i_eval);
 
 	const map<vector<unsigned short>,Graph> &adp_graphs(build_graphs.get_adp_graphs());
@@ -407,8 +443,10 @@ bool Builder_plans::generate_plans(const Attr_grammar &grammar)
 					/* Saves the new_plan in the map. */
 					Key_plan key_plan;
 					key_plan.id_plan = adp->first;
+
 					key_plan.plan = i_work.order_attr;
-					pair < Key_plan, Order_eval_eq > new_p(key_plan, order_purged);
+					unsigned short index_plan = return_index_plan(order_purged);
+					pair < Key_plan, unsigned short > new_p(key_plan, index_plan);
 					eval_plans.insert(new_p);
 
 					vector<const Symbol*> right_side(rule.get_non_terminals_right_side());
@@ -429,7 +467,8 @@ bool Builder_plans::generate_plans(const Attr_grammar &grammar)
 							key_project.id_plan_project = key_plan;
 							key_project.symbol_project = right_side[i];
 							key_project.index_ocurrence = i;
-							pair < Key_plan_project, Order_eval_eq > new_p(key_project, proj_order);
+							unsigned short index_plan_p = return_index_plan_p(proj_order);
+							pair < Key_plan_project, unsigned short > new_p(key_project, index_plan_p);
 							plans_project.insert(new_p);
 
 							/* Creates new plans for the work-list with the rule's right symbol.  */
@@ -440,7 +479,7 @@ bool Builder_plans::generate_plans(const Attr_grammar &grammar)
 							key.id_rule = adp->first[i+1];
 							Item_work i_work_new;
 							i_work_new.item = key;
-							i_work_new.order_attr = proj_order;
+							i_work_new.order_attr = index_plan_p;
 							if (!defined_work(defined_item_work, i_work_new))
 							{
 								if(!defined_work(work_list, i_work_new))
@@ -486,25 +525,34 @@ unsigned short Builder_plans::build_plans(const Attr_grammar &attr_grammar)
   * Returns all evaluations plans.
   * @return
   */
-const map < Key_plan, Order_eval_eq > &Builder_plans::get_plans() const
+const map < Key_plan, unsigned short > &Builder_plans::get_plans() const
 {
 	return eval_plans;
+}
+const vector < Order_eval_eq > &Builder_plans::get_plans_uniques() const
+{
+	return plans_uniques;
 }
 
 /**
   * Returns all evaluations plans project.
   * @return
   */
-const map < Key_plan_project, Order_eval_eq > &Builder_plans::get_plans_project() const
+const map < Key_plan_project, unsigned short > &Builder_plans::get_plans_project() const
 {
 	return plans_project;
 }
+const vector < Order_eval_eq > &Builder_plans::get_plans_project_uniques() const
+{
+	return plans_project_uniques;
+}
+
 
 /**
   * Returns the intial order of attributes of the initial symbol.
   * @return
   */
-const Order_eval_eq &Builder_plans::get_init_order() const
+const unsigned short &Builder_plans::get_init_order() const
 {
 	return init_order_ag;
 }
@@ -514,12 +562,12 @@ const Order_eval_eq &Builder_plans::get_init_order() const
   * @param it_plan
   * @return
   */
-const unsigned short Builder_plans::get_index_plan(const map < Key_plan, Order_eval_eq >::const_iterator it_plan) const
+const unsigned short Builder_plans::get_index_plan(const map < Key_plan, unsigned short >::const_iterator it_plan) const
 {
 	unsigned short res(0);
 
-	map < Key_plan, Order_eval_eq >::const_iterator first(eval_plans.begin());
-	map < Key_plan, Order_eval_eq >::const_iterator last(eval_plans.end());
+	map < Key_plan, unsigned short >::const_iterator first(eval_plans.begin());
+	map < Key_plan, unsigned short >::const_iterator last(eval_plans.end());
 
 	while(it_plan != first && first != last)
 	{
@@ -535,9 +583,9 @@ const unsigned short Builder_plans::get_index_plan(const map < Key_plan, Order_e
   * @param key
   * @return
   */
-const map < Key_plan_project, Order_eval_eq >::const_iterator Builder_plans::get_plan_project(const Key_plan_project &key) const
+const map < Key_plan_project, unsigned short >::const_iterator Builder_plans::get_plan_project(const Key_plan_project &key) const
 {
-	const map < Key_plan_project, Order_eval_eq >::const_iterator it(plans_project.find(key));
+	const map < Key_plan_project, unsigned short >::const_iterator it(plans_project.find(key));
 	assert(it != plans_project.end());
 	return it;
 }

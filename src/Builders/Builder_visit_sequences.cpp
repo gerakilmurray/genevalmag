@@ -65,10 +65,24 @@ void get_inherits_of(const Symbol *symb, const vector<Ast_instance> &computed, v
         }
     }
 }
+
+
+bool belong_it(const map<Key_plan, unsigned short>::const_iterator it, const vector< map<Key_plan, unsigned short>::const_iterator > &vec)
+{
+	for(size_t i(0); i < vec.size(); i++)
+	{
+		if(it == vec[i])
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 /**
   * Merge two vector in the vec_target argument.
   */
-void merge_vec(const vector<unsigned short> &vec_source, vector<unsigned short> &vec_targed)
+void merge_vec(const vector< map<Key_plan, unsigned short>::const_iterator> &vec_source, vector< map<Key_plan, unsigned short>::const_iterator> &vec_targed)
 {
 	if(vec_targed.size() == 0)
 	{
@@ -80,13 +94,24 @@ void merge_vec(const vector<unsigned short> &vec_source, vector<unsigned short> 
 		/* Merge necesary */
 		for(size_t i(0); i < vec_source.size(); i++)
 		{
-			if(!belong_index(vec_source[i],vec_targed))
+			if(!belong_it(vec_source[i],vec_targed))
 			{
 				vec_targed.push_back(vec_source[i]);
 			}
 		}
 	}
 }
+
+void plan_family_computed(const vector< map<Key_plan, unsigned short>::const_iterator > &plans_computed, vector<unsigned short> &visit_seq_computed)
+{
+	for (size_t i(0);i<plans_computed.size();i++)
+	{
+		unsigned short index_family(plans_computed[i]->second);
+		if (!belong_index(index_family, visit_seq_computed))
+			visit_seq_computed.push_back(index_family);
+	}
+}
+
 
 /**
   * Generates recursively the visit sequence, navigating the tree as
@@ -97,13 +122,13 @@ bool Builder_visit_sequences::gen_visit_seq
 (
 	const Attr_grammar &attr_grammar,
 	const Builder_plans &b_plans,
-	const map<Key_plan, Order_eval_eq>::const_iterator &it_plan,
+	const map<Key_plan, unsigned short>::const_iterator &it_plan,
 	vector<Ast_instance> &ins_computed,
-	vector<unsigned short> &plans_computed,
+	vector< map<Key_plan, unsigned short>::const_iterator > &plans_computed,
 	const vector<unsigned short> &v_seq_computed
 )
 {
-	unsigned short i_plan(b_plans.get_index_plan(it_plan));
+	const Order_eval_eq &plan(b_plans.get_plans_uniques()[it_plan->second]);
 
     short leaves(0);
     Visit_seq sequence;
@@ -112,9 +137,9 @@ bool Builder_visit_sequences::gen_visit_seq
     const Rule &rule(attr_grammar.get_rule(it_plan->first.id_plan[0]));
 
     size_t i(0);
-    for(; i < it_plan->second.size(); i++)
+    for(; i < plan.size(); i++)
     {
-        const Equation *eq(rule.get_eq(it_plan->second[i]));
+        const Equation *eq(rule.get_eq(plan[i]));
 
         const vector<const Ast_instance*> &instances_right_side(eq->get_instance_right_side()); /* ver copia tmp */
 
@@ -148,7 +173,7 @@ bool Builder_visit_sequences::gen_visit_seq
 					}
 
 					/* Generate visits */
-					map<Key_plan_project, Order_eval_eq >::const_iterator it_plan_proj;
+					map<Key_plan_project, unsigned short >::const_iterator it_plan_proj;
 
 					for(size_t k(0); k < non_terminals.size(); k++)
 					{
@@ -171,29 +196,29 @@ bool Builder_visit_sequences::gen_visit_seq
 					}
 					/* Generate the recursion to non computed child. */
 					vector <unsigned short> v_seq_child;
-					for(map < Key_plan, Order_eval_eq >::const_iterator it(b_plans.get_plans().begin()); it != b_plans.get_plans().end(); it++)
+					for(map < Key_plan, unsigned short >::const_iterator it(b_plans.get_plans().begin()); it != b_plans.get_plans().end(); it++)
 					{
-						unsigned short i_child(b_plans.get_index_plan(it));
-						if((!belong_index(i_child, plans_computed)) && (it != it_plan))
+						if((!belong_it(it, plans_computed)) && (it != it_plan))
 						{
 							/* Plan to recurse: it */
 							const Rule &rule_child(attr_grammar.get_rule(it->first.id_plan[0]));
 
 							if ((rule_child.get_left_symbol()->equals(*ins->get_symb())) &&
 								(it->first.plan == it_plan_proj->second))
+							/* The plan to launch the recursion has the need context. */
 							{
 								vector<Ast_instance> ins_computed_child;
 								get_inherits_of(ins->get_symb(), ins_computed_own, ins_computed_child);
 
-								vector<unsigned short> p_computed_child;
-								p_computed_child.push_back(i_plan);
+								vector< map<Key_plan, unsigned short>::const_iterator > p_computed_child;
+								p_computed_child.push_back(it);
 								merge_vec(plans_computed, p_computed_child);
 
 								gen_visit_seq(attr_grammar, b_plans, it, ins_computed_child, p_computed_child, v_seq_child);
 
 								/* Update information_computed plans. */
-								merge_vec(p_computed_child, v_seq_child);
 								merge_vec(p_computed_child, plans_computed);
+								plan_family_computed(p_computed_child, v_seq_child);
 
 								/* Saves all instances calculated for the visit. */
 								for(size_t i_rec(0); i_rec < ins_computed_child.size(); i_rec++)
@@ -232,16 +257,15 @@ bool Builder_visit_sequences::gen_visit_seq
 			break;
 		}
     }
-
-    if (!belong_index(i_plan, v_seq_computed))
+    if (!belong_index(it_plan->second, v_seq_computed))
     {
-    	save_visit_sequence(sequence, i_plan);
+    	save_visit_sequence(sequence, it_plan->second);
     }
 
-    if(i == it_plan->second.size())
+    if(i == plan.size())
     /* Saves without conflicted states. */
     {
-        plans_computed.push_back(i_plan);
+        plans_computed.push_back(it_plan);
     }
     return true;
 }
@@ -291,33 +315,33 @@ void Builder_visit_sequences::save_visit_sequence(const Visit_seq &sequence, con
   */
 bool Builder_visit_sequences::generate_visit_sequences(const Attr_grammar &attr_grammar, const Builder_plans &b_plans)
 {
-    for(size_t i(0); i < b_plans.get_plans().size(); i++)
+    for(size_t i(0); i < b_plans.get_plans_uniques().size(); i++)
     {
     	Visit_seq v_s;
         all_visit_seqs.push_back(v_s);
     }
 
     vector <unsigned short> visit_seq_computed;
-    vector<unsigned short> plans_computed_all;
+    vector <map<Key_plan, unsigned short>::const_iterator> plans_computed_all;
     /* For all plans */
-	for(map < Key_plan, Order_eval_eq >::const_iterator it(b_plans.get_plans().begin()); it != b_plans.get_plans().end(); it++)
+	for(map < Key_plan, unsigned short >::const_iterator it(b_plans.get_plans().begin()); it != b_plans.get_plans().end(); it++)
     {
         const Rule &rule(attr_grammar.get_rule(it->first.id_plan[0]));
         if (rule.get_left_symbol()->equals(*attr_grammar.get_initial_symb()))
         {
         	/* This plan is belong a initial symbol (initial rule). */
-            unsigned short plan_inic(b_plans.get_index_plan(it));
-            if(!belong_index(plan_inic, visit_seq_computed))
+            if(!belong_index(it->second, visit_seq_computed))
             {
                 vector<Ast_instance> ins_computed;
-                vector<unsigned short> plans_computed;
+                vector< map<Key_plan, unsigned short>::const_iterator > plans_computed;
                 merge_vec(plans_computed_all, plans_computed);
 				gen_visit_seq(attr_grammar, b_plans, it, ins_computed, plans_computed, visit_seq_computed);
-				merge_vec(plans_computed, visit_seq_computed);
 				merge_vec(plans_computed, plans_computed_all);
+				plan_family_computed(plans_computed, visit_seq_computed);
             }
         }
     }
+
 	cout << "* Build visit sequence ----- [  OK  ]" << endl;
     return true;
 }

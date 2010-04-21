@@ -163,7 +163,7 @@ void Builder_code::generate_footer_header() const
 	footer.append(file_name);
 	footer.append("();\n\n");
 	footer.append("        void print_v_seq();\n\n");
-	footer.append("        void traverse(struct Node * node, Order_eval_eq order);\n\n");
+	footer.append("        void traverse(struct Node * node, unsigned short order);\n\n");
 	footer.append("        void translate_mag();\n\n");
 	footer.append("        void compute_eq(int num_eq, struct Node *root);\n\n");
 	footer.append("        void eval_visiter(struct Node *root);\n\n");
@@ -324,20 +324,15 @@ string generate_key_plan(string &text,const string n_key,int num_key, Key_plan k
 	/* it->first.plan */
 	string key_order ("key_order_eq_");
 	key_order.append(n_key);
-	string name_order_eval(
-		write_vector_with_inic<unsigned short>(
-			text,
-			key_order,
-			num_key,
-			k_p.plan,
-			"Order_eval_eq",
-			"unsigned short"
-		)
-	);
+
 	text.append("    ");
 	text.append(name_key);
 	text.append(".plan = ");
-	text.append(name_order_eval);
+
+	stringstream key_plan_index;
+	key_plan_index << k_p.plan;
+	text.append(key_plan_index.str());
+
 	text.append(";\n");
 	return name_key;
 }
@@ -347,30 +342,18 @@ string generate_key_plan(string &text,const string n_key,int num_key, Key_plan k
   * @param text
   * @param plans_p
   */
-void generate_initialize_plans(string &text, const map < Key_plan, Order_eval_eq > &plans_p)
+void generate_initialize_plans(string &text, const map < Key_plan, unsigned short > &plans_p)
 {
 	text.append("    /**\n      * Initialize of Evaluation Plans.\n      */\n");
 
 	int num_key = 0;
-	for(map < Key_plan, Order_eval_eq >::const_iterator it(plans_p.begin()); it != plans_p.end(); it++)
+	for(map < Key_plan, unsigned short >::const_iterator it(plans_p.begin()); it != plans_p.end(); it++)
 	{
 		/* generate key_plan */
 		string name_key(generate_key_plan(text, "key_", num_key, it->first));
 
 		stringstream str_index;
 		str_index << num_key;
-
-		/* generate key_order_eval_eq */
-		string name_order(
-			write_vector_with_inic<unsigned short>(
-				text,
-				"order_eq_",
-				num_key,
-				it->second,
-				"Order_eval_eq",
-				"unsigned short"
-			)
-		);
 
 		/* generate insert in map */
 		text.append("    Plan ");
@@ -380,7 +363,11 @@ void generate_initialize_plans(string &text, const map < Key_plan, Order_eval_eq
 		text.append("(");
 		text.append(name_key);
 		text.append(" , ");
-		text.append(name_order);
+
+		stringstream plan_index;
+		plan_index << it->second;
+		text.append(plan_index.str());
+
 		text.append(");\n");
 		text.append("    eval_plans.push_back(");
 		text.append(name_new_p);
@@ -395,12 +382,12 @@ void generate_initialize_plans(string &text, const map < Key_plan, Order_eval_eq
   * @param text
   * @param plans_p
   */
-void generate_initialize_plan_proj(string &text, const map < Key_plan_project, Order_eval_eq > &plans_p)
+void generate_initialize_plan_proj(string &text, const map < Key_plan_project, unsigned short > &plans_p)
 {
 	text.append("    /**\n      * Initialize of Evaluation Plans Project.\n      */\n");
 
 	int num_key = 0;
-	for(map < Key_plan_project, Order_eval_eq >::const_iterator it(plans_p.begin()); it != plans_p.end(); it++)
+	for(map < Key_plan_project, unsigned short >::const_iterator it(plans_p.begin()); it != plans_p.end(); it++)
 	{
 		/* generate key_plan */
 		string name_key_plan(generate_key_plan(text, "key_plan_proj_", num_key, it->first.id_plan_project));
@@ -432,18 +419,6 @@ void generate_initialize_plan_proj(string &text, const map < Key_plan_project, O
 		text.append(str_index_ocurrence.str());
 		text.append(";\n");
 
-		/* generate key_order_eval_eq */
-		string name_order(
-			write_vector_with_inic<unsigned short>(
-				text,
-				"order_eq_proj_",
-				num_key,
-				it->second,
-				"Order_eval_eq",
-				"unsigned short"
-			)
-		);
-
 		/* generate insert in map */
 		text.append("    Plan_project ");
 		string name_new_p("__plan_proj_");
@@ -452,7 +427,11 @@ void generate_initialize_plan_proj(string &text, const map < Key_plan_project, O
 		text.append("(");
 		text.append(name_key);
 		text.append(" , ");
-		text.append(name_order);
+
+		stringstream plan_p_index;
+		plan_p_index << it->second;
+		text.append(plan_p_index.str());
+
 		text.append(");\n");
 		text.append("    eval_plans_project.push_back(");
 		text.append(name_new_p);
@@ -606,7 +585,7 @@ void Builder_code::generate_traverse(string &text) const
 {
 	text.append("void ");
 	text.append(file_name);
-	text.append("::traverse(struct Node * node, Order_eval_eq order)\n");
+	text.append("::traverse(struct Node * node, unsigned short order)\n");
 	text.append("{\n");
 	text.append("    Key_plan k_plan;\n");
 	text.append("    k_plan.id_plan.push_back(node->rule_id);\n");
@@ -620,7 +599,7 @@ void Builder_code::generate_traverse(string &text) const
 	text.append("    {\n");
 	text.append("        if (eval_plans[i].first == k_plan)\n");
 	text.append("        {\n");
-	text.append("            node->index_plan_v_seq = i;\n");
+	text.append("            node->index_plan_v_seq = eval_plans[i].second;\n");
 	text.append("            node->num_v_seq = 0;\n");
 	text.append("            find_plan = true;\n");
 	text.append("            break;\n");
@@ -887,22 +866,11 @@ void Builder_code::generate_evaluator(string &text, const Builder_plans &b_plan)
 	text.append("::evaluator_mag(struct Node *root)\n");
 	text.append("{\n");
 
-	text.append("    Order_eval_eq order_init;\n");
-
-	const Order_eval_eq init_order(b_plan.get_init_order());
-	string init_order_name(
-	write_vector_with_inic<unsigned short>(
-			text,
-			"order_root_",
-			0,
-			init_order,
-			"Order_eval_eq",
-			"unsigned short"
-		)
-	);
-	text.append("    order_init = ");
-	text.append(init_order_name);
-	text.append(";\n");
+	text.append("    unsigned short order_init(");
+	stringstream order_init_index;
+	order_init_index << b_plan.get_init_order();
+	text.append(order_init_index.str());
+	text.append(");\n");
 
 	text.append("    traverse(root, order_init);\n");
 	text.append("    eval_visiter(root);\n");
