@@ -134,7 +134,7 @@ bool Builder_visit_sequences::gen_visit_seq
     Visit_seq sequence;
     vector<Ast_instance> ins_computed_own;
 
-    const Rule &rule(attr_grammar.get_rule(it_plan->first.id_plan[0]));
+    const Rule &rule(attr_grammar.get_rule(b_plans.get_contexts_uniques()[it_plan->first.id_plan][0]));
 
     size_t i(0);
     for(; i < plan.size(); i++)
@@ -201,7 +201,7 @@ bool Builder_visit_sequences::gen_visit_seq
 						if((!belong_it(it, plans_computed)) && (it != it_plan))
 						{
 							/* Plan to recurse: it */
-							const Rule &rule_child(attr_grammar.get_rule(it->first.id_plan[0]));
+							const Rule &rule_child(attr_grammar.get_rule(b_plans.get_contexts_uniques()[it->first.id_plan][0]));
 
 							if ((rule_child.get_left_symbol()->equals(*ins->get_symb())) &&
 								(it->first.plan == it_plan_proj->second))
@@ -326,7 +326,7 @@ bool Builder_visit_sequences::generate_visit_sequences(const Attr_grammar &attr_
     /* For all plans */
 	for(map < Key_plan, unsigned short >::const_iterator it(b_plans.get_plans().begin()); it != b_plans.get_plans().end(); it++)
     {
-        const Rule &rule(attr_grammar.get_rule(it->first.id_plan[0]));
+        const Rule &rule(attr_grammar.get_rule(b_plans.get_contexts_uniques()[it->first.id_plan][0]));
         if (rule.get_left_symbol()->equals(*attr_grammar.get_initial_symb()))
         {
         	/* This plan is belong a initial symbol (initial rule). */

@@ -27,7 +27,7 @@ struct Node
 
     virtual string to_string() const = 0;
     
-    Node(unsigned short r_id)
+    Node(const unsigned short &r_id)
     {
         rule_id = r_id;
         parent = NULL;

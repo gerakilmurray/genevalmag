@@ -112,6 +112,15 @@ class Builder_code
 		  */
 		void generate_eval_visiter(string &text) const;
 
+		/**
+		  * Generates and inserts the class method that insert a new plan.
+		  */
+		void generate_add_plan(string &text) const;
+		/**
+		  * Generates and inserts the class method that insert a new projected plan.
+		  */
+		void generate_add_plan_project(string &text) const;
+
 	public:
 		/**
 		  * Contructor with the path and name of output files to be generated.

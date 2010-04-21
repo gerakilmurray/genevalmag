@@ -21,6 +21,7 @@
 #include <sstream>
 #include <fstream>
 #include <utility>
+#include <climits>
 
 #include <boost/graph/graphviz.hpp>
 #include <boost/graph/depth_first_search.hpp>

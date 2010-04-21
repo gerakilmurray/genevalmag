@@ -35,6 +35,7 @@ Symbol::Symbol(string &name, symbol_type type)
 {
     symb_name = name;
     symb_type = type;
+    symb_id   = 0;
 
     #ifdef _DEBUG
         symbols++;
@@ -89,6 +90,7 @@ void Symbol::copy(const Symbol &other)
     symb_name     = other.get_name();
     symb_type     = other.get_type();
     symb_attrs    = other.get_attrs();
+    symb_id		  = other.get_id();
 }
 
 /**
@@ -104,6 +106,14 @@ void Symbol::destroy()
 string Symbol::get_name() const
 {
     return symb_name;
+}
+
+/**
+  * Returns the id of the symbol.
+  */
+unsigned short Symbol::get_id() const
+{
+    return symb_id;
 }
 
 /**
@@ -152,6 +162,14 @@ void Symbol::set_name(string name)
 void Symbol::set_type(symbol_type type)
 {
     symb_type = type;
+}
+
+/**
+  * Sets the id of the symbol.
+  */
+void Symbol::set_id(unsigned short id)
+{
+    symb_id = id;
 }
 
 /**

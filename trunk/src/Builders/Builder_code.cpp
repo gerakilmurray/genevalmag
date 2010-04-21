@@ -95,6 +95,7 @@ void Builder_code::generate_header_file() const
 
 /**
   * Create the source code file of the evaluator with some information.
+  * @param headers_file
   */
 void Builder_code::generate_code_file(const vector<string> &headers_file) const
 {
@@ -118,6 +119,7 @@ void Builder_code::generate_code_file(const vector<string> &headers_file) const
 	code_txt.append("#include <stdlib.h>\n");
 	code_txt.append("#include <iostream>\n");
 	code_txt.append("#include <sstream>\n");
+	code_txt.append("#include <climits>\n");
 
 	for (size_t i(0);i<headers_file.size();i++)
 	{
@@ -153,6 +155,7 @@ void Builder_code::generate_footer_header() const
 
 	footer.append("    private:\n");
 	footer.append("        vector < Visit_sequence >    v_seq;\n\n");
+	footer.append("        vector < Order_rule >        contexts_rule;\n\n");
 	footer.append("        /* \"ro\" function. Wuu yank's paper. */\n");
 	footer.append("        vector < Plan >              eval_plans;\n\n");
 	footer.append("        /* \"tita\" function. Wuu yank's paper. */\n\n");
@@ -167,7 +170,9 @@ void Builder_code::generate_footer_header() const
 	footer.append("        void translate_mag();\n\n");
 	footer.append("        void compute_eq(int num_eq, struct Node *root);\n\n");
 	footer.append("        void eval_visiter(struct Node *root);\n\n");
-	footer.append("        void evaluator_mag(struct Node *root);\n");
+	footer.append("        void evaluator_mag(struct Node *root);\n\n");
+	footer.append("        void add_plan(const Key_plan &k_plan, unsigned short index_order);\n\n");
+	footer.append("        void add_plan_project(const Key_plan_project &k_plan_p, unsigned short index_order);\n");
 	footer.append("};\n\n");
 
 	footer.append("} /* end evalmag */\n\n");
@@ -292,49 +297,50 @@ void generate_initialize_v_seq(string &text, const vector<Visit_seq> & v_seq)
   */
 string generate_key_plan(string &text,const string n_key,int num_key, Key_plan k_p )
 {
-	/* generate key_plan */
-
-	/* it->first.id_plan */
 	text.append("    Key_plan ");
 	string name_key(n_key);
 	stringstream str_index;
 	str_index << num_key;
 	name_key.append(str_index.str());
 	text.append(name_key);
-	text.append(";\n");
-
-	string context_key ("context_");
-	context_key.append(n_key);
-	string name_o_rule(
-		write_vector_with_inic<unsigned short>(
-			text,
-			context_key,
-			num_key,
-			k_p.id_plan,
-			"Order_rule",
-			"unsigned short"
-		)
-	);
-	text.append("    ");
-	text.append(name_key);
-	text.append(".id_plan = ");
-	text.append(name_o_rule);
-	text.append(";\n");
-
-	/* it->first.plan */
-	string key_order ("key_order_eq_");
-	key_order.append(n_key);
-
-	text.append("    ");
-	text.append(name_key);
-	text.append(".plan = ");
-
+	text.append("(");
+	stringstream context_index;
+	context_index << k_p.id_plan;
+	text.append(context_index.str());
+	text.append(", ");
 	stringstream key_plan_index;
 	key_plan_index << k_p.plan;
 	text.append(key_plan_index.str());
+	text.append(");\n ");
 
-	text.append(";\n");
 	return name_key;
+}
+
+/**
+  * Generates the initialization of all contexts rules uniques.
+  * @param text
+  * @param contexts
+  */
+void generate_initialize_context(string &text, const vector < Order_rule > &contexts)
+{
+	text.append("    /**\n      * Initialize of Contexts Rules.\n      */\n");
+
+	for(size_t i(0); i < contexts.size(); i++)
+	{
+		string name_vec(
+			write_vector_with_inic<unsigned short>(
+				text,
+				"context_",
+				i,
+				contexts[i],
+				"Order_rule",
+				"unsigned short"
+			)
+		);
+		text.append("    contexts_rule.push_back(");
+		text.append(name_vec);
+		text.append(");\n\n");
+	}
 }
 
 /**
@@ -356,11 +362,7 @@ void generate_initialize_plans(string &text, const map < Key_plan, unsigned shor
 		str_index << num_key;
 
 		/* generate insert in map */
-		text.append("    Plan ");
-		string name_new_p("__plan_");
-		name_new_p.append(str_index.str());
-		text.append(name_new_p);
-		text.append("(");
+		text.append("   add_plan(");
 		text.append(name_key);
 		text.append(" , ");
 
@@ -368,9 +370,6 @@ void generate_initialize_plans(string &text, const map < Key_plan, unsigned shor
 		plan_index << it->second;
 		text.append(plan_index.str());
 
-		text.append(");\n");
-		text.append("    eval_plans.push_back(");
-		text.append(name_new_p);
 		text.append(");\n\n");
 
 		num_key++;
@@ -395,46 +394,30 @@ void generate_initialize_plan_proj(string &text, const map < Key_plan_project, u
 		stringstream str_index;
 		str_index << num_key;
 
-		text.append("    Key_plan_project ");
+		text.append("   Key_plan_project ");
 		string name_key("key_proj_");
 		name_key.append(str_index.str());
 		text.append(name_key);
 
-		text.append(";\n    ");
-
-		text.append(name_key);
-		text.append(".id_plan_project = ");
+		text.append("(");
 		text.append(name_key_plan);
-		text.append(";\n    ");
-
-		text.append(name_key);
-		text.append(".node_project = \"");
-		text.append(it->first.symbol_project->get_name());
-		text.append("\";\n    ");
-
-		text.append(name_key);
-		text.append(".index_ocurrence = ");
+		text.append(", ");
+		stringstream str_id_symb;
+		str_id_symb << it->first.symbol_project->get_id();
+		text.append(str_id_symb.str());
+		text.append(", ");
 		stringstream str_index_ocurrence;
 		str_index_ocurrence << it->first.index_ocurrence;
 		text.append(str_index_ocurrence.str());
-		text.append(";\n");
+		text.append(");\n");
 
 		/* generate insert in map */
-		text.append("    Plan_project ");
-		string name_new_p("__plan_proj_");
-		name_new_p.append(str_index.str());
-		text.append(name_new_p);
-		text.append("(");
+		text.append("    add_plan_project(");
 		text.append(name_key);
 		text.append(" , ");
-
 		stringstream plan_p_index;
 		plan_p_index << it->second;
 		text.append(plan_p_index.str());
-
-		text.append(");\n");
-		text.append("    eval_plans_project.push_back(");
-		text.append(name_new_p);
 		text.append(");\n\n");
 
 		num_key++;
@@ -458,28 +441,22 @@ void generate_initialize_rules(string &text, const Attr_grammar &attr_grammar)
 		str_index << index;
 
 		vector<const Symbol*> right_side_non_terminals(r_it->second.get_non_terminals_right_side());
-		vector<string> name_symbol_rule;
+		vector<unsigned short> name_symbol_rule;
 
-		string name_aux("\"");
-		name_aux.append(r_it->second.get_left_symbol()->get_name());
-		name_aux.append("\"");
-		name_symbol_rule.push_back(name_aux);
+		name_symbol_rule.push_back(r_it->second.get_left_symbol()->get_id());
 		for (size_t i(0); i < right_side_non_terminals.size(); i++)
 		{
-			name_aux = "\"";
-			name_aux.append(right_side_non_terminals[i]->get_name());
-			name_aux.append("\"");
-			name_symbol_rule.push_back(name_aux);
+			name_symbol_rule.push_back(right_side_non_terminals[i]->get_id());
 		}
 
 		string name_vec(
-			write_vector_with_inic<string>(
+			write_vector_with_inic<unsigned short>(
 				text,
 				"rule_non_terminal_",
 				index,
 				name_symbol_rule,
 				"Rule",
-				"string"
+				"unsigned short"
 			)
 		);
 
@@ -501,6 +478,8 @@ void Builder_code::generate_constructor(const vector<Visit_seq> & v_seq, const B
 	cons_txt.append("::");
 	cons_txt.append(file_name);
 	cons_txt.append("()\n{\n");
+
+	generate_initialize_context(cons_txt, b_plan.get_contexts_uniques());
 
 	generate_initialize_plans(cons_txt, b_plan.get_plans());
 
@@ -579,6 +558,24 @@ void Builder_code::generate_translate(string &text) const
 }
 
 /**
+  * Generates the return_index_context method, for get the index of a context rule.
+  */
+void generate_return_index_context(string &text)
+{
+	text.append("unsigned short return_index_context(const Order_rule &context, const vector < Order_rule > &v_contexts)\n");
+	text.append("{\n");
+	text.append("    for(size_t i(0); i < v_contexts.size(); i++)\n");
+	text.append("    {\n");
+	text.append("        if(context == v_contexts[i])\n");
+	text.append("        {\n");
+	text.append("            return i;\n");
+	text.append("        }\n");
+	text.append("    }\n");
+	text.append("    return USHRT_MAX;\n");
+	text.append("}\n\n");
+}
+
+/**
   * Generates the method that crosses the AST and sets the evaluation plan that corresponds to each node.
   */
 void Builder_code::generate_traverse(string &text) const
@@ -587,13 +584,19 @@ void Builder_code::generate_traverse(string &text) const
 	text.append(file_name);
 	text.append("::traverse(struct Node * node, unsigned short order)\n");
 	text.append("{\n");
-	text.append("    Key_plan k_plan;\n");
-	text.append("    k_plan.id_plan.push_back(node->rule_id);\n");
+	text.append("    Order_rule context;\n");
+	text.append("    context.push_back(node->rule_id);\n");
 	text.append("    for(size_t i(0); i < node->childs.size(); i++)\n");
 	text.append("    {\n");
-	text.append("        k_plan.id_plan.push_back(node->childs[i]->rule_id);\n");
+	text.append("        context.push_back(node->childs[i]->rule_id);\n");
 	text.append("    }\n");
-	text.append("    k_plan.plan = order;\n");
+	text.append("    unsigned short index_context(return_index_context(context, contexts_rule));\n");
+	text.append("    if(index_context == USHRT_MAX)\n");
+	text.append("    {\n");
+	text.append("        cerr << \"ERROR: the AST input is wrong create.\" << endl;\n");
+	text.append("        exit(-1);\n");
+	text.append("    }\n");
+	text.append("    Key_plan k_plan(index_context, order);\n");
 	text.append("    bool find_plan(false);\n");
 	text.append("    for(size_t i(0); i < eval_plans.size(); i++)\n");
 	text.append("    {\n");
@@ -605,20 +608,15 @@ void Builder_code::generate_traverse(string &text) const
 	text.append("            break;\n");
 	text.append("        }\n");
 	text.append("    }\n");
-
 	text.append("    if(!find_plan)\n");
 	text.append("    {\n");
 	text.append("        cerr << \"ERROR: the AST input is wrong create.\" << endl;\n");
 	text.append("        exit(-1);\n");
 	text.append("    }\n");
-
 	text.append("    Rule &rule(rules[node->rule_id - 1]);\n");
 	text.append("    for(size_t i(0); i < node->childs.size(); i++)\n");
 	text.append("    {\n");
-	text.append("        Key_plan_project k_plan_proj;\n");
-	text.append("        k_plan_proj.id_plan_project = k_plan;\n");
-	text.append("        k_plan_proj.node_project = rule[i+1];\n");
-	text.append("        k_plan_proj.index_ocurrence = i;\n");
+	text.append("        Key_plan_project k_plan_proj(k_plan, rule[i+1], i);\n");
 	text.append("        for(size_t j(0); j < eval_plans_project.size(); j++)\n");
 	text.append("        {\n");
 	text.append("            if (eval_plans_project[j].first == k_plan_proj)\n");
@@ -878,6 +876,34 @@ void Builder_code::generate_evaluator(string &text, const Builder_plans &b_plan)
 }
 
 /**
+  * Generates and inserts the class method that insert a new plan.
+  */
+void Builder_code::generate_add_plan(string &text) const
+{
+	text.append("void ");
+	text.append(file_name);
+	text.append("::add_plan(const Key_plan &k_plan, unsigned short index_order)\n");
+	text.append("{\n");
+	text.append("   Plan plan(k_plan, index_order);\n");
+	text.append("   eval_plans.push_back(plan);\n");
+	text.append("}\n\n");
+}
+
+/**
+  * Generates and inserts the class method that insert a new projected plan.
+  */
+void Builder_code::generate_add_plan_project(string &text) const
+{
+	text.append("void ");
+	text.append(file_name);
+	text.append("::add_plan_project(const Key_plan_project &k_plan_p, unsigned short index_order)\n");
+	text.append("{\n");
+	text.append("   Plan_project plan(k_plan_p, index_order);\n");
+	text.append("   eval_plans_project.push_back(plan);\n");
+	text.append("}\n\n");
+}
+
+/**
   * Generates and inserts all class methods, includind traverse, visit evaluator and the main evaluator.
   * This methods are based on the article by Wuu Yang.
   */
@@ -887,7 +913,13 @@ void Builder_code::generate_methods(const Builder_plans &b_plan, const Attr_gram
 
 	generate_print(methods_t);
 
+	generate_add_plan(methods_t);
+
+	generate_add_plan_project(methods_t);
+
 	generate_translate(methods_t);
+
+	generate_return_index_context(methods_t);
 
 	generate_traverse(methods_t);
 
@@ -996,13 +1028,13 @@ void Builder_code::generate_structs(const Attr_grammar &attr_grammar) const
 		/* Generate constructor signature. */
 		structs.append("\n    Symbol_");
 		structs.append(it_symb->second.get_name());
-		structs.append("(unsigned short r_id);\n");
+		structs.append("(const unsigned short &r_id);\n");
 
 		/* Generate constructor method. */
 		text_constructor.append(it_symb->second.get_name());
 		text_constructor.append("::Symbol_");
 		text_constructor.append(it_symb->second.get_name());
-		text_constructor.append("(unsigned short r_id): Node(r_id){}\n\n");
+		text_constructor.append("(const unsigned short &r_id): Node(r_id){}\n\n");
 
 		/* Generate method to_string() */
 		structs.append("\n    string to_string() const;\n");

@@ -103,7 +103,7 @@ typedef struct i_w
 /** This structs represent a Key_plan, that is an id and an equations order evaluation. */
 typedef struct k_plan
 {
-	Order_rule      id_plan;
+	unsigned short  id_plan;
 	unsigned short	plan;
 
 	bool operator< (const k_plan &other) const
@@ -162,19 +162,24 @@ typedef struct k_p_project
 class Builder_plans
 {
 	private:
+		/**
+		  * Store all different context rule generates in the grammar.
+		  */
+		vector < Order_rule > contexts_uniques;
+
 	    /**
 	      * Store all evaluation plans of the grammar.
 	      * "ro" function. Wuu yank's paper.
 	      */
 		map < Key_plan, unsigned short > eval_plans;
-		vector <Order_eval_eq> plans_uniques;
+		vector < Order_eval_eq > plans_uniques;
 
 		/**
 		  * Store all evaluation plans projects of the grammar.
 		  * "tita" function. Wuu yank's paper.
 		  */
 		map < Key_plan_project, unsigned short > plans_project;
-		vector <Order_eval_eq> plans_project_uniques;
+		vector < Order_eval_eq > plans_project_uniques;
 
 		/**
 		  * Store the initial evaluation order of the attributes of the initial symbol.
@@ -208,8 +213,19 @@ class Builder_plans
 		  */
 		bool generate_graphs(const Attr_grammar &grammar);
 
+		/**
+		  * Returns the index in the vector of context, or inserts in the last position.
+		  */
+		unsigned short return_index_context(const Order_rule &order);
+
+		/**
+		  * Returns the index in the vector of plans, or inserts in the last position.
+		  */
 		unsigned short return_index_plan(const Order_eval_eq &order);
 
+		/**
+		  * Returns the index in the vector of plans projects, or inserts in the last position.
+		  */
 		unsigned short return_index_plan_p(const Order_eval_eq &order);
 
 	public:
@@ -249,18 +265,34 @@ class Builder_plans
 		bool save_all_plans_project(const Attr_grammar &grammar, const string path_output) const;
 
 		/**
+		  * Returns all contexts rule uniques.
+		  * @return
+		  */
+		const vector < Order_rule > &get_contexts_uniques() const;
+
+		/**
 		  * Returns all evaluations plans.
 		  * @return
 		  */
 		const map < Key_plan, unsigned short > &get_plans() const;
-		const vector < Order_eval_eq> &get_plans_uniques() const;
+
+		/**
+		  * Returns all evaluations plans uniques.
+		  * @return
+		  */
+		const vector < Order_eval_eq > &get_plans_uniques() const;
 
 		/**
 		  * Returns all evaluations plans project.
 		  * @return
 		  */
 		const map < Key_plan_project, unsigned short > &get_plans_project() const;
-		const vector < Order_eval_eq> &get_plans_project_uniques() const;
+
+		/**
+		  * Returns all evaluations plans project uniques.
+		  * @return
+		  */
+		const vector < Order_eval_eq > &get_plans_project_uniques() const;
 
 		/**
 		  * Returns the intial order of attributes of the initial symbol.
