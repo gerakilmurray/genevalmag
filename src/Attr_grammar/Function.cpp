@@ -170,7 +170,6 @@ void Function::set_image(const Sort *image)
 
 /**
   * Sets the mode of the operator.
-  * @param mode: string
   */
 void Function::set_mode(const string mode)
 {
