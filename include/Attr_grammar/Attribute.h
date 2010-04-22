@@ -19,20 +19,37 @@ namespace genevalmag
   */
 enum type_attr
 {
-    k_inherit,
-    k_synthetize
+    k_inherit,  //!< k_inherit
+    k_synthetize//!< k_synthetize
 };
 
 class Attribute
 {
     private:
+		/**
+		 * \var a_name
+		 * \brief Attribute's name.
+		 */
         string         a_name;
+		/**
+		 * \var a_sort_type
+		 * \brief Attribute's type sort.
+		 */
         const Sort     *a_sort_type;
+		/**
+		 * \var a_mod_type
+		 * \brief Attribute's type.
+		 */
         type_attr      a_mod_type;
+		/**
+		 * \var a_member_symbol
+		 * \brief Attribute's member list.
+		 */
         string         a_member_symbol;
 
         /**
           * Method of copy the attribute, STL-like C++.
+          * @param other
           */
         void copy(const Attribute &other);
         /**
@@ -47,6 +64,8 @@ class Attribute
         Attribute();
         /**
           * Constructor copy of attribute.
+          * @param other
+          * @return
           */
         Attribute(const Attribute &other);
 
@@ -57,70 +76,87 @@ class Attribute
 
         /**
           * Operator assign(=) of attribute.
+          * @param other
+          * @return
           */
         Attribute &operator=(const Attribute &other);
 
         /**
-          * Return the name of the attribute.
+          * Returns the name of the attribute.
+          * @return
           */
         const string get_name() const;
         /**
-          * Return the sort type of the attribute.
+          * Returns the sort type of the attribute.
+          * @return
           */
         const Sort *get_sort_type() const;
         /**
-          * Return the modifiers of the attribute.
+          * Returns the modifiers of the attribute.
+          * @return
           */
         const type_attr get_mod_type() const;
         /**
-          * Return the membership list of the attribute.
+          * Returns the membership list of the attribute.
+          * @return
           */
         const string get_member_symbol() const;
 
         /**
-          * Set the name of the attribute.
+          * Sets the name of the attribute.
+          * @param name
           */
         void set_name(const string name);
         /**
-          * Set the sort type of the attribute.
+          * Sets the sort type of the attribute.
+          * @param sort_type
           */
         void set_sort_type(const Sort *sort_type);
         /**
-          * Set the modifiers of the attribute.
+          * Sets the modifiers of the attribute.
+          * @param mod_type
           */
         void set_mod_type(const type_attr mod_type);
         /**
-          * Set the membership list of the attribute.
+          * Sets the membership list of the attribute.
+          * @param member_symbol
           */
         void set_member_symbol(const string member_symbol);
 
         /**
-          * Return true if the modifiers of the attribute is synthetize.
+          * Returns true if the modifiers of the attribute is synthetize.
+          * @return
           */
         const bool is_synthetize() const;
-
         /**
-          * Return true if the modifiers of the attribute is inherit.
+          * Returns true if the modifiers of the attribute is inherit.
+          * @return
           */
         const bool is_inherit() const;
 
         /**
-          * Generate and return a string reprensentation of a attribute.
+          * Generates and returns a string reprensentation of a attribute.
           *
           * Result = name ":" modifiers "<" sort_type ["(" instance ")" IF DEBUG IS ON] "> of " membership_list
+          *
+          * @return
           */
         const string to_string() const;
 
         /**
           * Compares the attribute with other.
+          * @param other
+          * @return
           */
         const bool equals(const Attribute &other) const;
 
         /**
-          * Generate and return the string key that identifies a attribute definitely.
+          * Generates and returns the string key that identifies a attribute definitely.
           *
           * Result = name modifiers sort_type membership_list
-          */
+          *
+          * @return
+         */
         const string key() const;
 };
 

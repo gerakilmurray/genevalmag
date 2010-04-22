@@ -6,8 +6,8 @@
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-#ifndef SEMDOMAIN_H_
-#define SEMDOMAIN_H_
+#ifndef ATTR_GRAMMAR_H_
+#define ATTR_GRAMMAR_H_
 
 #include <map>
 
@@ -24,10 +24,15 @@ namespace genevalmag
 
 class Attr_grammar
 {
-
 	private:
 		/**
-		  *  Saves each element kind of the grammar's attribute.
+		  *  \brief Saves each element kind of the grammar's attribute.
+		  *  \var ag_sort
+		  *  \var ag_func
+		  *  \var ag_attr
+		  *  \var ag_symb_terminals
+		  *  \var ag_symb_non_terminals
+		  *  \var ag_rule
 		  */
 		map<string, Sort>            ag_sort;
 		map<string, Function>        ag_func;
@@ -36,21 +41,28 @@ class Attr_grammar
 		map<string, Symbol>          ag_symb_non_terminals;
 		map<unsigned short, Rule>    ag_rule;
 
-		/** Store the count of equations in the gramamar. */
+		/**
+		  * \brief Store the count of equations in the gramamar.
+		  * \var count_eqs
+		  */
 		unsigned short               count_eqs;
 
 		/**
-		  * Saves the name of the initial symbol of the grammar's attribute.
+		  * \brief Saves the name of the initial symbol of the grammar's attribute.
+		  * \var ag_initial_symb
 		  */
 		const Symbol                 *ag_initial_symb;
 
 		/**
 		  * Insert the attributes belong the symbol.
+ 		  * @param symb
 		  */
 		void load_attributes(Symbol &symb) const;
 
 		/**
 		  * Checks that the rule is not already defined in the grammar.
+		  * @param rule
+		  * @return
 		  */
 		const bool defined_rule(const Rule &rule) const;
 
@@ -67,79 +79,112 @@ class Attr_grammar
 
 		/**
 		  * Enqueue a sort in the list of the semantic domain.
+		  * @param sort
+		  * @return
 		  */
 		const bool add_sort(const Sort &sort);
 		/**
 		  * Enqueue a function in the list of the semantic domain.
-		  */
+		  * @param func
+          * @return
+          */
 		const bool add_function(const Function &func);
 		/**
 		  * Enqueue a attribute in the list of the semantic domain.
+		  * @param attr
+		  * @return
 		  */
 		const bool add_attribute(const Attribute &attr);
 		/**
 		  * Enqueue a symbol in the list of the semantic domain.
+		  * @param symb
+		  * @return
 		  */
 		const bool add_symbol(const Symbol &symb);
 		/**
 		  * Enqueue a rule in the list of the semantic domain.
+		  * @param rule
+		  * @return
 		  */
 		const bool add_rule(Rule &rule);
 
 		/**
 		  * Find in the list of sort of the semantic domain and return the sort with that name.
+		  * @param name_sort
+		  * @return
 		  */
 		const Sort &return_sort(const string name_sort);
 		/**
 		  * Return the map with all sorts.
+		  * @return
 		  */
 		const map<string, Sort> &get_sorts() const;
 		/**
 		  * Find in the list of function of the semantic domain and return the function with that name.
+		  * @param name_function
+		  * @return
 		  */
 		const Function *get_function(const string name_function) const;
 		/**
 		  * Return the map with all functions.
+		  * @return
 		  */
 		const map<string, Function> &get_functions() const;
 		/**
 		  * Find in the list of symbol of the semantic domain and return the symbol with that name.
+		  * @param name_symbol
+		  * @return
 		  */
 		const Symbol &get_symbol(const string name_symbol) const;
 		/**
 		  *  Return the map with all rules.
+		  * @return
 		  */
 		const map<unsigned short, Rule>  &get_rules() const;
 		/**
 		  *  Return the rule on paramenter.
+		  * @param index
+		  * @return
 		  */
 		const Rule  &get_rule(const unsigned short index) const;
 		/**
 		  *  Return the map with all symbols.
+		  * @return
 		  */
 		const map<string, Symbol> &get_non_terminal_symbols() const;
 		/**
 		  *  Return the initial rule.
+		  * @return
 		  */
 		const Symbol *get_initial_symb() const;
 		/**
 		  * Return vector with all rules with the left symbol equal that parameter.
+		  * @param symb
+		  * @return
 		  */
 		const vector<unsigned short> get_rules_with_left_symbol(const Symbol *symb) const;
 		/**
 		  * Returns the index of an equation in this range of rules with l_value equals to ins.
-		  */
+		  * @param ins
+		  * @param context_rule
+		  * @return
+		 */
 		const unsigned short get_index_eq_with_context(const Ast_instance *ins, const vector<unsigned short> &context_rule) const;
 		/**
 		  *    Returns the equation with this index.
+		  * @param index
+		  * @return
 		  */
 		const Equation *get_eq(const unsigned short index) const;
 		/**
 		  * Returns the l_value of the equation with this index.
+		  * @param index
+		  * @return
 		  */
 		const Ast_instance *get_eq_l_value(const unsigned short index) const;
 		/**
 		  * Returns the count of equations in the grammar.
+		  * @return
 		  */
 		const unsigned short get_count_eqs() const;
 
@@ -164,10 +209,12 @@ class Attr_grammar
 		  *
 		  * where \<sorts\>, \<operators\>, \<functions\>, \<attributes\>, \<symbols\> and \<rules\>, are
 		  * full representation of each type.
+		  *
+		  * @return
 		  */
 		const string to_string() const;
 };
 
 } /* end genevalmag */
 
-#endif /* SEMDOMAIN_H_ */
+#endif /* ATTR_GRAMMAR_H_ */

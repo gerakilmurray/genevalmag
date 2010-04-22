@@ -31,7 +31,7 @@ Symbol::Symbol()
 /**
   * Constructor with name and type of Symbol.
   */
-Symbol::Symbol(string &name, symbol_type type)
+Symbol::Symbol(const string &name, const symbol_type &type)
 {
     symb_name = name;
     symb_type = type;
@@ -151,7 +151,7 @@ const Attribute *Symbol::get_attribute(const string &name_attr) const
 /**
   * Set the name of the symbol.
   */
-void Symbol::set_name(string name)
+void Symbol::set_name(const string name)
 {
     symb_name = name;
 }
@@ -159,7 +159,7 @@ void Symbol::set_name(string name)
 /**
   * Sets the type of the symbol.
   */
-void Symbol::set_type(symbol_type type)
+void Symbol::set_type(const symbol_type type)
 {
     symb_type = type;
 }

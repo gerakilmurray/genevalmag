@@ -10,10 +10,10 @@
 #define PARSER_AG_H_
 
 #include <boost/spirit/include/classic_file_iterator.hpp>
-
 #include <boost/spirit/include/classic_position_iterator.hpp>
 
 #include "../Attr_grammar/Attr_grammar.h"
+
 #include "Semantic_check.h"
 
 using namespace BOOST_SPIRIT_CLASSIC_NS;
@@ -21,6 +21,9 @@ using namespace BOOST_SPIRIT_CLASSIC_NS;
 namespace genevalmag
 {
 
+/**
+  * Type definitions to report parsing errors, showing row and column.
+  */
 typedef char                  		 	char_t;
 typedef file_iterator <char_t>   		iterator_f;
 typedef position_iterator<iterator_f> 	iterator_t;
@@ -30,13 +33,13 @@ class Parser_AG
 {
 	private:
 		/**
-		  * /var attr_grammar.
-		  * /brief Internal structure of grammar.
+		  * \var attr_grammar.
+		  * \brief Internal structure of grammar.
 		  */
 		Attr_grammar attr_grammar;
 		/**
-		  * /var sem_check.
-		  * /brief Semantics control for grammar: Well define grammar.
+		  * \var sem_check.
+		  * \brief Semantics control for grammar: Well define grammar.
 		  */
 		Semantic_check sem_check;
 
@@ -50,19 +53,23 @@ class Parser_AG
 		  */
 		~Parser_AG();
 		/**
-		  * Return att_grammar of parser.
+		  * Returns att_grammar of parser.
+		  * @return
 		  */
 		const Attr_grammar &get_attr_grammar();
 
 		/**
 		  * This method invokes the method 'parse' of the library Spirit included in Boost.
 		  * Returns true if could parse all the input.
+		  * @param path_file_input
+		  * @return
 		  */
 		bool parse_grammar(const string &path_file_input);
 
 		/**
 		  * This method saves all parsed string in a file.
 		  * The file output is in argument path_output.
+		  * @param path_output
 		  */
 		void save_grammar_file(const string path_output) const;
 };
