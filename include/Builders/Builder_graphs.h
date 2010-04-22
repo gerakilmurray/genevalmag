@@ -77,16 +77,23 @@ class Builder_graphs
 		  * The graph only has vertexs. It hasn't edges.
 		  * Ex: Symbol E ; attributes: s,i
 		  * 	graph: 	vertex: E.s, E.i
+		  * @param symbols
 		  */
 		void compute_attr_vertex(const map<string,Symbol> &symbols);
 
 		/**
 		  * Completes dp-graph with the vertex of low on instances.
+		  * @param rules
 		  */
 		void complete_dp_graphs(const map<unsigned short, Rule> &rules);
 
 		/**
 		  * Generate all combinations of the rules and saves a graph ADP for each of them.
+		  * @param rule
+		  * @param graph
+		  * @param inf_context
+		  * @param index_to_combine
+		  * @return
 		  */
 		bool combined_inf_contexts(const Rule *rule, Graph &graph, vector< vector<unsigned short> > &inf_context, size_t index_to_combine);
 
@@ -94,26 +101,32 @@ class Builder_graphs
 
 		/**
 		  * Constructor empty of Builder graphs.
+		  * @return
 		  */
 		Builder_graphs();
 
 		/**
 		  * Destructor empty of Builder graphs.
+		  * @return
 		  */
 		~Builder_graphs();
 
 		/**
 		  * Returns the map with all ADP graphs creates.
+		  * @return
 		  */
 		const map<vector<unsigned short>, Graph> &get_adp_graphs() const;
 
 		/**
 		  * Returns the map with all ADP with cycle graphs creates.
+		  * @return
 		  */
 		const map<vector<unsigned short>, Graph> &get_cyclic_graphs() const;
 
 		/**
 		  * Returns the down graph of the symbol.
+		  * @param index_rule
+		  * @return
 		  */
 		const Graph &get_dcg_graph(unsigned short index_rule) const;
 
@@ -124,6 +137,8 @@ class Builder_graphs
 		  * 	graph: 	vertex: E,T
 		  * 			Edges: 	E --> E
 		  * 					T---> E
+		  * @param rules
+		  * @return
 		  */
 		bool compute_dependency_graphs(const map<unsigned short,Rule> &rules);
 
@@ -134,6 +149,9 @@ class Builder_graphs
 		  * 	(1) E:= E + T.
 		  * 	graph G: DP(1) U Down(E) U Down(T)
 		  * 	Project(G,{attributes of E})
+		  * @param symbols
+		  * @param rules
+		  * @return
 		  */
 		bool compute_down_graph(const map<string, Symbol> &symbols, const map<unsigned short, Rule> &rules);
 
@@ -144,6 +162,8 @@ class Builder_graphs
 		  * 	(1) E:= E + T.
 		  * 	graph G: DP(1) U Down(E) U Down(T)
 		  * 	Project(G,{attributes of E})
+		  * @param rules
+		  * @return
 		  */
 		bool compute_dcg(const map<unsigned short, Rule> &rules);
 
@@ -154,42 +174,62 @@ class Builder_graphs
 		  * 	(1) E:= E + T.
 		  * 	graph G: DP(1) U Dcg E (J1..JN) U Dcg T (K1..KM)
 		  * 	Where Ji y ki are rule with left-symbol E and T respectly.
+		  * @param grammar
+		  * @return
 		  */
 		bool compute_adp_graph(const Attr_grammar &grammar);
 
 		/**
 		  * Checks if the graph contains cycle.
 		  * Utilities a deph-firts-seach for traverse the graphs.
+		  * @return
 		  */
 		bool check_cyclic_adp_dependencies();
 
 		/**
 		  * Saves all graphs generates: DP, Down, DCG and ADP.
-		  */
+		  * @param rules
+		  * @param path_output
+		  * @return
+ 		  */
 		bool save_all_graphs(const map<unsigned short, Rule> &rules, const string path_output) const;
 
 		/**
 		  * Saves all graphs graph cycles.
+		  * @param rules
+		  * @param path_output
+		  * @return
 		  */
 		bool save_cyclic_graphs(const map<unsigned short, Rule> &rules, const string path_output) const;
 
 		/**
 		  * Saves all dp-graphs generates
+		  * @param rules
+		  * @param path_output
+		  * @return
 		  */
 		bool save_dp_graphs(const map<unsigned short, Rule> &rules, const string path_output) const;
 
 		/**
 		  * Saves all down-graphs generates
+		  * @param path_output
+		  * @return
 		  */
 		bool save_down_graphs(const string path_output) const;
 
 		/**
 		  * Saves all dcg-graphs generates
+		  * @param rules
+		  * @param path_output
+		  * @return
 		  */
 		bool save_dcg_graphs(const map<unsigned short, Rule> &rules, const string path_output) const;
 
 		/**
 		  * Saves all adp-graphs generates
+		  * @param rules
+		  * @param path_output
+		  * @return
 		  */
 		bool save_adp_graphs(const map<unsigned short, Rule> &rules, const string path_output) const;
 };
