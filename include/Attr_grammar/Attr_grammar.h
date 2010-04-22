@@ -190,25 +190,25 @@ class Attr_grammar
 
 		/**
 		  * Generate and return a string reprensentation of a semantic domain.
-		  *
-		  * Result = "semantic domain"
-		  *             \<sorts\>
-		  *             \<operators\>
-		  *             \<functions\>
-		  *
-		  *          "attributes"
-		  *             \<attributes\>
-		  *
-		  *         [This section is commented so that it can be parsed again.]
-		  *         ***********************************************************
-		  *          "symbols"
-		  *             \<symbols\>
-		  *         ***********************************************************
-		  *          "rules"
-		  *             \<rules\>
-		  *
-		  * where \<sorts\>, \<operators\>, \<functions\>, \<attributes\>, \<symbols\> and \<rules\>, are
-		  * full representation of each type.
+		  *\n
+		  * Result = "semantic domain"\n
+		  *             \<sorts\>\n
+		  *             \<operators\>\n
+		  *             \<functions\>\n
+		  *\n
+		  *          "attributes"\n
+		  *             \<attributes\>\n
+		  *\n
+		  *         [This section is commented so that it can be parsed again.]\n
+		  *         ***********************************************************\n
+		  *          "symbols"\n
+		  *             \<symbols\>\n
+		  *         ***********************************************************\n
+		  *          "rules"\n
+		  *             \<rules\>\n
+		  *\n
+		  * where \<sorts\>, \<operators\>, \<functions\>, \<attributes\>, \<symbols\> and \<rules\>, are\n
+		  * full representation of each type.\n
 		  *
 		  * @return
 		  */
