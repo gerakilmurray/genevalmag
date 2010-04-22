@@ -24,18 +24,18 @@ class Ast_function: public Ast_inner_node
 {
     private:
 		/**
-		  * /var func.
-		  * /brief Function associates with Ast_function.
+		  * \var func.
+		  * \brief Function associates with Ast_function.
 		  */
         const Function    *func;
         /**
-		  * /var precedence_level.
-          * /brief Level precedence of the function.
+		  * \var precedence_level.
+          * \brief Level precedence of the function.
           */
         unsigned short    precedence_level;
         /**
-          * /var syntax_order.
-          * /brief Syntax order in the parse.
+          * \var syntax_order.
+          * \brief Syntax order in the parse.
           */
         unsigned short    syntax_order;
 
@@ -130,38 +130,38 @@ class Ast_function: public Ast_inner_node
           */
         bool is_comparable(const Ast_function *other) const;
         /**
-          * Return:
-          *        = O        when is same precedence
-          *        < 0        when other have great precedence
-          *        > 0        when other have small precedence
+          * Returns:\n
+          *        \= O        when is same precedence\n
+          *        \< 0        when other have great precedence\n
+          *        \> 0        when other have small precedence\n
           * @param other
           * @return
           */
         int compare_precedence(const Ast_function *other) const;
         /**
-          * Return:
-          *        = O        when is same order
-          *        < 0        when other have great order
-          *        > 0        when other have small order
+          * Returns:\n
+          *        \= O        when is same order\n
+          *        \< 0        when other have great order\n
+          *        \> 0        when other have small order\n
           * @param other
           * @return
           */
         int compare_order(const Ast_function *other) const;
 
         /**
-          * Generate and return a string reprensentation of a Ast_function.
-          *
-          * If is a pure function:
-          *     Result= \<func_name\> "(" child[0], ... , child[n] ")"
-          *
-          * If is an infix binary operator:
-          *     Result= "(" child[0] \<op_name\> child[1] ")"
-          *
-          * If is an prefix unary operator:
-          *     Result= \<op_name\> "(" child[0] ")"
-          *
-          * If is an postfix unary operator:
-          *     Result= "(" child[0] ")" \<op_name\>
+          * Generate and return a string reprensentation of a Ast_function.\n
+          *\n
+          * If is a pure function:\n
+          *     Result= \<func_name\> "(" child[0], ... , child[n] ")"\n
+          *\n
+          * If is an infix binary operator:\n
+          *     Result= "(" child[0] \<op_name\> child[1] ")"\n
+          *\n
+          * If is an prefix unary operator:\n
+          *     Result= \<op_name\> "(" child[0] ")"\n
+          *\n
+          * If is an postfix unary operator:\n
+          *     Result= "(" child[0] ")" \<op_name\>\n
           * @return
           */
         string to_string() const;

@@ -358,6 +358,18 @@ void create_lit_str(const iterator_t str, const iterator_t end)
 	current_literal->set_value(str_l_without_cuotes);
 }
 
+void create_bool(const iterator_t str, const iterator_t end)
+{
+	if(current_literal == NULL)
+	{
+		current_literal = new Ast_literal();
+	}
+	string str_l(str, end);
+	current_literal->set_type(k_bool);
+	current_literal->set_type_synthetized("bool");
+	current_literal->set_value(str_l);
+}
+
 void create_function(const iterator_t str, const iterator_t end)
 {
 	current_func = new Function();

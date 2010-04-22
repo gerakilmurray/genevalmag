@@ -20,22 +20,27 @@ namespace genevalmag
 enum literal_type
 {
     k_int,
+    k_short,
+    k_long,
     k_float,
+    k_double,
     k_char,
-    k_string
+    k_wchar_t,
+    k_string,
+    k_bool
 };
 
 class Ast_literal: public Ast_leaf
 {
     private:
 		/**
-		  * /var value.
-		  * /brief literal value.
+		  * \var value.
+		  * \brief literal value.
 		  */
         string          value;
         /**
-		  * /var type.
-		  * /brief literal type: this type may be k_int, k_float, k_char, k_string.
+		  * \var type.
+		  * \brief literal type: this type may be k_int, k_float, k_char, k_string.
 		  */
         literal_type    type;
 
@@ -104,10 +109,11 @@ class Ast_literal: public Ast_leaf
           *
           * Result= literal
           *
-          * Ex: 1      -> int
-          *     1.0    -> float
-          *     '1'    -> char
-          *     "1"    -> string
+          * Ex: 1      -> int, short or long\n
+          *     1.0    -> float or double\n
+          *     '1'    -> char or wchar_t\n
+          *     "1"    -> string\n
+          *     true   -> bool\n
           * @return
           */
         string to_string() const;

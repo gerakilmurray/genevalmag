@@ -30,8 +30,8 @@ class Builder_visit_sequences
 {
     private:
 		/**
-		  * /var all_visit_seqs.
-		  * /brief Stores all visit sequences generates.
+		  * \var all_visit_seqs.
+		  * \brief Stores all visit sequences generates.
 		  */
         vector < Visit_seq > all_visit_seqs;
 

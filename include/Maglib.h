@@ -31,6 +31,12 @@ class Maglib
 		  * All outputs of the library be saved in the path_folder_output.
 		  * The evaluator classname is defined by name_library.
 		  * The user could include somes headers for uses externs functions to evaluator.
+		  *
+		  * @param path_input_file
+		  * @param path_folder_output
+		  * @param name_library
+		  * @param headers
+		  * @return
 		  */
 		int gen_evaluator
 		(

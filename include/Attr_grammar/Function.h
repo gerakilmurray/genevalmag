@@ -179,32 +179,32 @@ class Function
         void set_is_operator(const bool value);
 
         /**
-          * Enqueue a sort in the domain of the Function.
+          * Enqueues a sort in the domain of the Function.
           * @param sort
           */
         void add_domain(const Sort *sort);
 
         /**
-          * Generates and returns a string reprensentation of a Function.
-          *
-          * Result = "function" \<name\> ":" \<domain\> "->" \<image\> ";"
-          *
-          * where \<domain\> is= sort_1 ["(" \<instance\> ")" IF DEBUG IS ON] "," ... "," sort_n ["(" \<instance\> ")" IF DEBUG IS ON]
+          * Generates and returns a string reprensentation of a Function.\n
+          *\n
+          * Result = "function" \<name\> ":" \<domain\> "->" \<image\> ";"\n
+          *\n
+          * where \<domain\> is= sort_1 ["(" \<instance\> ")" IF DEBUG IS ON] "," ... "," sort_n ["(" \<instance\> ")" IF DEBUG IS ON]\n
           *
           * @return
           */
         const string to_string() const;
 
         /**
-          * Generates and returns a string with the signature of a Function.
-          *
-          * Result = \<image\> \<name\> "(" \<domain\> ");"
-          *
-          * or if is an operator:
-          *
-          * Result = \<image\> "operator"\<name\> "(" \<domain\> ");"
-          *
-          * where \<domain\> is = sort_1 P1"," ... "," sort_n Pn
+          * Generates and returns a string with the signature of a Function.\n
+          *\n
+          * Result = \<image\> \<name\> "(" \<domain\> ");"\n
+          *\n
+          * or if is an operator:\n
+          *\n
+          * Result = \<image\> "operator"\<name\> "(" \<domain\> ");"\n
+          *\n
+          * where \<domain\> is = sort_1 P1"," ... "," sort_n Pn\n
           *
           * @return
           */
@@ -224,11 +224,11 @@ class Function
         const bool equals(const Function &other) const;
 
         /**
-          * Generates and returns the string key that identifies a Function definitely.
-          *
-          * Result = \<name\> \<domain\> \<image\>
-          *
-          * where \<domain\> is = sort_1 ... sort_n
+          * Generates and returns the string key that identifies a Function definitely.\n
+          *\n
+          * Result = \<name\> \<domain\> \<image\>\n
+          *\n
+          * where \<domain\> is = sort_1 ... sort_n\n
           * @return
           */
         const string key() const;

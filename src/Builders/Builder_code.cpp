@@ -944,7 +944,7 @@ void Builder_code::generate_structs(const Attr_grammar &attr_grammar) const
 		text_to_string.append("string ");
 		text_to_string.append(it_symb->second.get_name());
 		text_to_string.append("::to_string() const\n{\n");
-		text_to_string.append("    string text(\"Values of symbol ");
+		text_to_string.append("    string text(\"-- Values of symbol ");
 		text_to_string.append(it_symb->second.get_name());
 		text_to_string.append(":\\n\");\n");
 
@@ -958,13 +958,24 @@ void Builder_code::generate_structs(const Attr_grammar &attr_grammar) const
 			structs.append(";");
 			structs.append("\n");
 
-			text_to_string.append("    text.append(\" Attr ");
+			text_to_string.append("    text.append(\"     - Attribute ");
+			if(attrs[j]->is_synthetize())
+			{
+				text_to_string.append("synthesized ");
+			}
+			else
+			{
+				text_to_string.append("inherited ");
+			}
 			text_to_string.append(attrs[j]->get_name());
 			text_to_string.append(" = \");\n");
 
 			if(attrs[j]->get_sort_type()->is_type_basic())
 			{
 				if((attrs[j]->get_sort_type()->get_name().compare("int") == 0) ||
+				   (attrs[j]->get_sort_type()->get_name().compare("long") == 0) ||
+				   (attrs[j]->get_sort_type()->get_name().compare("short") == 0) ||
+				   (attrs[j]->get_sort_type()->get_name().compare("double") == 0) ||
 				   (attrs[j]->get_sort_type()->get_name().compare("float") == 0))
 				{
 					string name_sstr("str_");
@@ -981,7 +992,14 @@ void Builder_code::generate_structs(const Attr_grammar &attr_grammar) const
 					text_to_string.append(name_sstr);
 					text_to_string.append(".str());\n");
 				}
+				else if (attrs[j]->get_sort_type()->get_name().compare("bool") == 0)
+				{
+					text_to_string.append("    text.append((");
+					text_to_string.append(attrs[j]->get_name());
+					text_to_string.append(")? \"true\": \"false\");\n");
+				}
 				else
+				/* The attribute is a string or a char. */
 				{
 					text_to_string.append("    text.append(");
 					text_to_string.append(attrs[j]->get_name());

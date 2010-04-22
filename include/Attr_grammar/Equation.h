@@ -21,12 +21,12 @@ class Equation
     private:
 		/**
 		  * \var eq_id
-		  * /breif Equation's identifier.
+		  * \brief Equation's identifier.
 		  */
         unsigned short      eq_id;
 		/**
 		  * \var eq_id
-		  * /breif Equation's left value.
+		  * \brief Equation's left value.
 		  */
         Ast_instance        l_value;
 		/**
@@ -135,11 +135,11 @@ class Equation
         const vector<const Ast_instance*> get_instance_right_side() const;
 
         /**
-          * Generates and returns a string reprensentation of an Equation.
-          *
-          * Result = \<l_value\> "=" \<r_value\> ";"
-          *
-          * where \<l_value\> = "instance_attr" and \<r_value\> is= "list of node_ast"
+          * Generates and returns a string reprensentation of an Equation.\n
+          *\n
+          * Result = \<l_value\> "=" \<r_value\> ";"\n
+          *\n
+          * where \<l_value\> = "instance_attr" and \<r_value\> is= "list of node_ast"\n
           *
           * @return
           */
@@ -153,11 +153,11 @@ class Equation
         const bool equals(const Equation &other) const;
 
         /**
-          * Generates and returns the string key that identifies an Equation definitely.
-          *
-          * Result = \<l_value\>\<r_value\>
-          *
-          * where \<l_value\> = "instance_attr" and \<r_value\> is= "list of node_ast"
+          * Generates and returns the string key that identifies an Equation definitely.\n
+          *\n
+          * Result = \<l_value\>\<r_value\>\n
+          *\n
+          * where \<l_value\> = "instance_attr" and \<r_value\> is= "list of node_ast"\n
           *
           * @return
           */

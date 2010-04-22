@@ -215,7 +215,7 @@ const bool Rule::belongs_non_terminal(const Symbol &non_term) const
   */
 const bool Rule::add_eq(Equation &eq)
 {
-    static unsigned short cant_eq(1);
+    static unsigned short id_eq(1);
 
     if (defined_equation(eq))
     {
@@ -224,29 +224,28 @@ const bool Rule::add_eq(Equation &eq)
          */
         return false;
     }
+    eq.set_id(id_eq);
 
-    eq.set_id(cant_eq++);
-
-    pair<unsigned short,Equation> new_eq(eq.get_id(), eq);
+    pair<unsigned short,Equation> new_eq(id_eq++, eq);
     pair<map<unsigned short, Equation>::iterator, bool > result(r_eqs.insert(new_eq));
 
     /* Update de offset of the rule */
-    r_offset = cant_eq - get_number_eqs();
+    r_offset = id_eq - get_number_eqs();
     assert(result.second);
     return true;
 }
 
 /**
-  * Generates and returns a string reprensentation of a Rule.
-  *
-  * Result = \<left_symbol\> "::=" \<right_side\>
-  *                                     "compute"
-  *                                             eq_1
-  *                                             ...
-  *                                             eq_n
-  *                                     "end;"
-  *
-  * where \<right_ride\> is s= symbol_1 " " ... " " symbol_n
+  * Generates and returns a string reprensentation of a Rule.\n
+  *\n
+  * Result = \<left_symbol\> "::=" \<right_side\>\n
+  *                                     "compute"\n
+  *                                             eq_1\n
+  *                                             ...\n
+  *                                             eq_n\n
+  *                                     "end;"\n
+  *\n
+  * where \<right_ride\> is s= symbol_1 " " ... " " symbol_n\n
   */
 const string Rule::to_string() const
 {

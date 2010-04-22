@@ -14,7 +14,7 @@ namespace genevalmag
 
 #ifdef _DEBUG
     /* Numbers of literals current in the system. */
-    static int ast_literals(0);
+    static unsigned short ast_literals(0);
 #endif
 
 /**
@@ -136,12 +136,16 @@ string Ast_literal::to_string() const
     switch(type)
     {
         case k_int:
+        case k_short:
+        case k_long:
         case k_float:
+        case k_double:
         {
             lit.append(value);
             break;
         }
         case k_char:
+        case k_wchar_t:
         {
             lit.append("'");
             lit.append(value);
@@ -154,6 +158,11 @@ string Ast_literal::to_string() const
             lit.append(value);
             lit.append("\"");
             break;
+        }
+        case k_bool:
+        {
+        	lit.append(value);
+			break;
         }
     }
     return lit;

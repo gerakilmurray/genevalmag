@@ -100,7 +100,7 @@ void generate_names_attr(const Graph &graph, string datas[], size_t size_d)
   */
 void print_graph(const Graph &graph, const string path, const string name_file, const string name_graph, const string names[], string shape_vertex)
 {
-	static int num_file(0); /* For name of file png. */
+	static unsigned short num_file(0); /* For name of file png. */
 
 	/* Create file dot. */
 	string n_f(path);

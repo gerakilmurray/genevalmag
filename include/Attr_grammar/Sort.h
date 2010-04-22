@@ -98,9 +98,9 @@ class Sort
         void set_type_basic(const bool type_basic);
 
         /**
-          * Generates and returns a string reprensentation of a Sort.
-          *
-          * Result = "sort" \<name\> ["(" \<instance\> ")" IF DEBUG IS ON] ";"
+          * Generates and returns a string reprensentation of a Sort.\n
+          *\n
+          * Result = "sort" \<name\> ["(" \<instance\> ")" IF DEBUG IS ON] ";"\n
           * @return
           */
         const string to_string() const;
@@ -119,9 +119,9 @@ class Sort
         const bool is_type_basic() const;
 
         /**
-          * Generates and returns the string key that identifies a Sort definitely.
-          *
-          * Result = \<name\>
+          * Generates and returns the string key that identifies a Sort definitely.\n
+          *\n
+          * Result = \<name\>\n
           *
           * @return
           */

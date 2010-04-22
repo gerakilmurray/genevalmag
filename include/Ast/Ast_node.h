@@ -22,19 +22,20 @@ class Ast_node
 {
     protected:
 		/**
-		  * /var parent.
-		  * /brief Father of node.
+		  * \var parent.
+		  * \brief Father of node.
 		  */
         const Ast_node    *parent;
         /**
-		  * /var type_synthetized.
-		  * /brief Type of node: Obtains of parse.
+		  * \var type_synthetized.
+		  * \brief Type of node: Obtains of parse.
 		  */
         string            type_synthetized;
         /**
-		  * /var conflict.
-		  * /brief Mark when conflicted node. This conflict is a conflict in the parse. Used for define the
-		  * 		precedence of function.
+		  * \var conflict.
+		  * \brief Mark when conflicted node.\n
+		  *        This conflict is a conflict in the parse.\n
+		  *        Used for define the precedence of function.\n
 		  */
         int               conflict;
 

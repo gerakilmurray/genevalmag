@@ -87,6 +87,7 @@ void save_attr_ins(const iterator_t str, const iterator_t end);
 void create_lit_number(const iterator_t str, const iterator_t end);
 void create_lit_ch(const iterator_t ch, const iterator_t end);
 void create_lit_str(const iterator_t str, const iterator_t end);
+void create_bool(const iterator_t str, const iterator_t end);
 void create_function(const iterator_t str, const iterator_t end);
 void create_operator(const iterator_t str, const iterator_t end);
 void create_equation(const iterator_t str, const iterator_t end);

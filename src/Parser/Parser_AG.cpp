@@ -105,9 +105,9 @@ struct attritute_grammar: public grammar<attritute_grammar>
 
 			r_id_op			= ch_p('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>';
 
-			r_char			= lexeme_d[ ch_p('\'') >> (alnum_p | r_id_op) >> ch_p('\'') ];
+			r_boolean		= strlit<>("true") | "false";
 
-			char_pp			= lexeme_d[ ch_p('\'') >> (anychar_p) >> ch_p('\'') ];
+			r_char			= lexeme_d[ ch_p('\'') >> (anychar_p) >> ch_p('\'') ];
 
 			r_string		= lexeme_d[ ch_p('\"') >> r_string_lit >> ch_p('\"') ];
 
@@ -120,31 +120,37 @@ struct attritute_grammar: public grammar<attritute_grammar>
 							  )
 				;
 
-			r_reserved_word = strlit<>("compute")
-									  |"all"
+			r_reserved_word = strlit<>("compute") |"all"
+									  |"sort" |"attributes" |"semantic domain" |"rules"
+									  |"infix" |"prefix" |"postfix"
+									  |"op" |"function"
+									  |"syn" |"inh"
+									  |"left" |"right" |"non-assoc"
 									  |r_cpp_reserved_words
 									  ;
 
-			r_cpp_reserved_words = strlit<>("and") | "and_eq" | "asm" | "auto" | "bitand" | "bitor"
-									  | "bool" | "break" | "case" | "catch" | "char" | "class" | "compl"
-									  | "const" | "const_cast" | "continue" | "default" | "delete" | "do"
-									  | "double" | "dynamic_cast" | "else" | "enum" | "explicit" | "export"
-									  | "extern" | "false" | "float" | "for" | "friend" | "goto" | "if"
-									  | "inline" | "int" | "long" | "mutable" | "namespace" | "new" | "not"
-									  | "not_eq" | "operator" | "or" | "or_eq" | "private" | "protected"
-									  | "public" | "register" | "reinterpret_cast" | "return" | "short"
-									  | "signed" | "sizeof" | "static" | "static_cast" | "struct" | "switch"
-									  | "template" | "this" | "throw" | "true" | "try" | "typedef" | "typeid"
-									  | "typename" | "union" | "unsigned" | "using" | "virtual" | "void"
-									  | "volatile" | "wchar_t" | "while" | "xor" | "xor_eq"
-							          ;
+			r_cpp_reserved_words = r_cpp_basic_types
+							     |	strlit<>("and") | "and_eq" | "asm" | "auto" | "bitand"
+							     | "bitor" | "break" | "case" | "catch" | "class" | "compl"
+							     | "const" | "const_cast" | "continue" | "default" | "delete"
+							     | "do" | "dynamic_cast" | "else" | "enum" | "explicit" | "export"
+							     | "extern" | "false" | "for" | "friend" | "goto" | "if"
+							     | "inline" | "mutable" | "namespace" | "new" | "not" | "not_eq"
+							     | "operator" | "or" | "or_eq" | "private" | "protected" | "public"
+							     | "register" | "reinterpret_cast" | "return" | "signed" | "sizeof"
+							     | "static" | "static_cast" | "struct" | "switch" | "template"
+							     | "this" | "throw" | "true" | "try" | "typedef" | "typeid"
+							     | "typename" | "union" | "unsigned" | "using" | "virtual"
+							     | "void" | "volatile" | "while" | "xor" | "xor_eq"
+							     ;
 
-			r_basic_types	= strlit<>("int") | "float" | "string" | "char";
+			r_cpp_basic_types = strlit<>("bool") | "char" | "double" | "float"
+							  | "int" | "long" | "short" | "wchar_t" | "string"
+							  ;
 
 			/*
 			 * Declaration of Semantic Domain.
 			 */
-
 			r_semantic_domain = lexeme_d[ strlit<>("semantic domain")  >> space_p ] >> +r_bloq_sem;
 
 			r_bloq_sem		  = r_decl_sort | r_decl_oper[&add_operator] | r_decl_func[&add_function];
@@ -255,6 +261,7 @@ struct attritute_grammar: public grammar<attritute_grammar>
 			r_literal			= longest_d[ real_p | int_p ][&create_lit_number]
 					 			| r_char[&create_lit_ch]
 								| r_string[&create_lit_str]
+								| r_boolean[&create_bool]
 							    ;
 
 			/*
@@ -276,7 +283,7 @@ struct attritute_grammar: public grammar<attritute_grammar>
 			/*
 			 * Parsers based in the symbol tables.
 			 */
-			r_sort_st			= st_sorts | r_basic_types;
+			r_sort_st			= st_sorts | r_cpp_basic_types;
 			r_op_prefix_st		= st_op_prefix;
 			r_op_infix_st		= st_op_infix;
 			r_op_postfix_st		= st_op_postfix;
@@ -303,30 +310,29 @@ struct attritute_grammar: public grammar<attritute_grammar>
 		 /* Rule in lexeme_d. */
 		typedef rule<typename lexeme_scanner<ScannerT>::type> rule_lexeme;
 
-		/* Basic rules: characters, strings and identifiers. */
-		rule_exp r_reserved_word, r_cpp_reserved_words, r_ident, r_oper, r_char, r_string, r_basic_types, char_pp;
+		/* Basic rules: identifiers and basic types. */
+		rule_exp r_reserved_word, r_cpp_reserved_words, r_cpp_basic_types, r_ident,
+				 r_oper, r_char, r_string, r_boolean;
 
 		rule_lexeme r_id_op, r_string_lit, r_esc_seq;
 
-		/* Semantic domain's rule: Sort, Operator and Function. */
-		rule_exp r_semantic_domain, r_bloq_sem, r_decl_sort, r_decl_oper, r_decl_func,
+        /* Semantic domain's rule: Sort, Operator and Function. */
+        rule_exp r_semantic_domain, r_bloq_sem, r_decl_sort, r_decl_oper, r_decl_func,
 				 r_oper_assoc, r_oper_mode, r_oper_prefix, r_oper_infix, r_oper_postfix,
 				 r_dom_func;
 
-		/* Atribute's rule. */
-		rule_exp r_attributes, r_decl_attr, r_type_attr, r_conj_symb;
+        /* Atribute's rule. */
+        rule_exp r_attributes, r_decl_attr, r_type_attr, r_conj_symb;
 
-		/* Rule's rule. */
-		rule_exp r_rules, r_decl_rule, r_equation, r_right_rule, r_terminal, r_compute_eq;
+        /* Rule's rule. */
+        rule_exp r_rules, r_decl_rule, r_equation, r_right_rule, r_terminal, r_compute_eq;
 
-		/* Expresion's rule: Compute. Add context for type expresion. */
-		rule_exp r_expression,  r_expr_prime, r_expr_prime_prime, r_function, r_literal, r_instance;
+        /* Expresion's rule: Compute. Add context for type expresion. */
+        rule_exp r_expression, r_expr_prime, r_expr_prime_prime, r_function, r_literal, r_instance;
 
-		rule_lexeme r_attribute_st, r_non_term_st;
-
-		/* Translate for symbol table. */
-		rule_exp r_sort_st, r_op_prefix_st, r_op_infix_st, r_op_postfix_st,
-				 r_function_st, r_sort_stable;
+        /* Translate for symbol table. */
+        rule_exp r_sort_st, r_op_prefix_st, r_op_infix_st, r_op_postfix_st,
+				 r_function_st, r_attribute_st, r_non_term_st, r_sort_stable;
 
 		/* Main rule. */
 		rule_exp r_att_grammar;

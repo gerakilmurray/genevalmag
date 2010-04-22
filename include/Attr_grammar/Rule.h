@@ -160,28 +160,28 @@ class Rule
         const bool add_eq(Equation &eq);
 
         /**
-          * Generates and returns a string reprensentation of a rule.
-          *
-          * Result = left_symbol "::=" right_side
-          *                                     "compute"
-          *                                             eq_1
-          *                                             ...
-          *                                             eq_n
-          *                                     "end;"
-          *
-          * where right_ride is = symbol_1 " " ... " " symbol_n
+          * Generates and returns a string reprensentation of a rule.\n
+          *\n
+          * Result = left_symbol "::=" right_side\n
+          *                                     "compute"\n
+          *                                             eq_1\n
+          *                                             ...\n
+          *                                             eq_n\n
+          *                                     "end;"\n
+          *\n
+          * where right_ride is = symbol_1 " " ... " " symbol_n\n
           *
           * @return
           */
         const string to_string() const;
 
         /**
-          * Generates and returns a string reprensentation of a rule.
-          *
-          * Result= left_symbol "::=" right_side ";"
-          *
-          * where right_ride is = symbol_1 " " ... " " symbol_n
-          *
+          * Generates and returns a string reprensentation of a rule.\n
+          *\n
+          * Result= left_symbol "::=" right_side ";"\n
+          *\n
+          * where right_ride is = symbol_1 " " ... " " symbol_n\n
+          *\n
           * @return
           */
         const string to_string_not_eqs() const;
@@ -194,9 +194,9 @@ class Rule
         const bool equals(const Rule &other) const;
 
         /**
-          * Returns the number key that identifies a rule definitely.
-          *
-          * Result = \<id_rule\>
+          * Returns the number key that identifies a rule definitely.\n
+          *\n
+          * Result = \<id_rule\>\n
           *
           * @return
           */

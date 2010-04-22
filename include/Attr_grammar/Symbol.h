@@ -112,7 +112,7 @@ class Symbol
 		  */
         const vector<const Attribute*> &get_attrs() const;
         /**
-          * Finds in the list of attribute of the symbol and
+          * Finds in the list of attribute of the symbol and\n
           * returns the attribute with that name passed as parameter.
           * @param name_attr
           * @return
@@ -147,13 +147,13 @@ class Symbol
         const bool is_non_terminal() const;
 
         /**
-          * Generates and returns a string reprensentation of a Symbol.
-          *
-          * Result= "symbol" \<name\> \<type\> ";"
-          *
-          * where if \<type\> is Non Terminal, then list the attributes of the symbol.
-          *
-          * list = "Attributes:" attr_1 "," ... "," attr_n
+          * Generates and returns a string reprensentation of a Symbol.\n
+          *\n
+          * Result= "symbol" \<name\> \<type\> ";"\n
+          *\n
+          * where if \<type\> is Non Terminal, then list the attributes of the symbol.\n
+          *\n
+          * list = "Attributes:" attr_1 "," ... "," attr_n\n
           *
           * @return
           */
@@ -167,9 +167,9 @@ class Symbol
         bool equals(const Symbol &other) const;
 
         /**
-          * Generates and returns the string key that identifies a Symbol definitely.
-          *
-          * Result= \<name\>
+          * Generates and returns the string key that identifies a Symbol definitely.\n
+          *\n
+          * Result= \<name\>\n
           *
           * @return
           */
