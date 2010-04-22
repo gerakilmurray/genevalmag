@@ -28,9 +28,9 @@ Attr_grammar *attr_grammar;
 Semantic_check *sem_check;
 
 /**
-  * Set attribute att_grammar.
+  * Set attribute attr_grammar.
   */
-void set_at(Attr_grammar *at_grammar)
+void set_attr_grammar(Attr_grammar *at_grammar)
 {
 	attr_grammar = at_grammar;
 }
@@ -38,7 +38,7 @@ void set_at(Attr_grammar *at_grammar)
 /**
   * Set attribute sem_check.
   */
-void set_s_check(Semantic_check *s_check)
+void set_sem_check(Semantic_check *s_check)
 {
 	sem_check = s_check;
 }

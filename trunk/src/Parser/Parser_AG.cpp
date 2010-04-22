@@ -363,8 +363,8 @@ bool Parser_AG::parse_grammar(const string &path_file_input)
 	attritute_grammar	attr_grammar_decl;
 	skip_parser			skip_p;
 
-	set_at(&attr_grammar);
-	set_s_check(&sem_check);
+	set_attr_grammar(&attr_grammar);
+	set_sem_check(&sem_check);
 
 	/* Parses the input. */
 	parse_info<iterator_t> info(parse<iterator_t>(begin, end, attr_grammar_decl, skip_p));
