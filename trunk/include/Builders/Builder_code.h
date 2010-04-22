@@ -50,19 +50,18 @@ class Builder_code
 		/**
 		  * Generates and inserts all structs for represent each symbol of the grammar.
 		  * With constructor and to_string methods.
-		  *		  *
 		  *
-		  * For symbol S, with attrs s1 <syn> int, inserts:
 		  *
-		  * typedef struct Symbol_S: Node
-          * {
-          *     int s0;
-          *
-          *     Symbol_S(unsgned short r_id);
-          *
-          *     string to_string() const;
-          * } S ;
-		  * @param attr_grammar
+		  * For symbol S, with attrs s1 \<syn\> int, inserts:\n
+		  *\n
+		  * typedef struct Symbol_S: Node\n
+          * {\n
+          *     int s0;\n
+          *\n
+          *     Symbol_S(unsgned short r_id);\n
+          *\n
+          *     string to_string() const;\n
+          * } S ;\n
 		  */
 		void generate_structs(const Attr_grammar &attr_grammar) const;
 
