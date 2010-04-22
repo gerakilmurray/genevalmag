@@ -97,7 +97,7 @@ void Rule::destroy()
 }
 
 /**
-  * Return the left symbol of the rule.
+  * Returns the left symbol of the rule.
   */
 const Symbol *Rule::get_left_symbol() const
 {
@@ -105,7 +105,7 @@ const Symbol *Rule::get_left_symbol() const
 }
 
 /**
-  * Return the right side of the rule.
+  * Returns the right side of the rule.
   */
 const vector<const Symbol*> &Rule::get_right_side() const
 {
@@ -113,7 +113,7 @@ const vector<const Symbol*> &Rule::get_right_side() const
 }
 
 /**
-  * Return the equations of the rule.
+  * Returns the equations of the rule.
   */
 const map<unsigned short, Equation> &Rule::get_eqs() const
 {
@@ -137,7 +137,7 @@ const unsigned short Rule::get_offset() const
 }
 
 /**
-  * Return the i-equation of the rule.
+  * Returns the i-equation of the rule.
   */
 const Equation *Rule::get_eq(const unsigned short index) const
 {
@@ -161,7 +161,7 @@ void Rule::set_id(const unsigned short id)
 }
 
 /**
-  * Set the left symbol of the rule.
+  * Sets the left symbol of the rule.
   */
 void Rule::set_left_symbol(const Symbol *left_symb)
 {
@@ -169,7 +169,7 @@ void Rule::set_left_symbol(const Symbol *left_symb)
 }
 
 /**
-  * Enqueue a symbol in the right side of the rule.
+  * Enqueues a symbol in the right side of the rule.
   */
 void Rule::add_right_symbol(const Symbol *right_symb)
 {
@@ -211,7 +211,7 @@ const bool Rule::belongs_non_terminal(const Symbol &non_term) const
 }
 
 /**
-  * Enqueue a equation in the list of the rule.
+  * Enqueues a equation in the list of the rule.
   */
 const bool Rule::add_eq(Equation &eq)
 {
@@ -237,7 +237,7 @@ const bool Rule::add_eq(Equation &eq)
 }
 
 /**
-  * Generate and return a string reprensentation of a Rule.
+  * Generates and returns a string reprensentation of a Rule.
   *
   * Result = \<left_symbol\> "::=" \<right_side\>
   *                                     "compute"
@@ -268,7 +268,7 @@ const string Rule::to_string() const
 }
 
 /**
-  * Generate and return a string reprensentation of a rule.
+  * Generates and returns a string reprensentation of a rule.
   *
   * Result = left_symbol "::=" right_side ";"
   *
@@ -325,7 +325,7 @@ const bool Rule::equals(const Rule &other) const
 }
 
 /**
-  * Return the number key that identifies a rule definitely.
+  * Returns the number key that identifies a rule definitely.
   *
   * Result = \<id_rule\>
   */
@@ -355,7 +355,7 @@ const int Rule::count_non_terminal(const Symbol *symb) const
 }
 
 /**
-  * Return the non-terminals symbols the right side of the rule.
+  * Returns the non-terminals symbols the right side of the rule.
   */
 const vector<const Symbol*> Rule::get_non_terminals_right_side() const
 {

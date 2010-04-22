@@ -144,6 +144,7 @@ const oper_assoc Function::get_oper_assoc() const
 {
     return f_assoc;
 }
+
 /**
   * Returns the arity of Function.
   */

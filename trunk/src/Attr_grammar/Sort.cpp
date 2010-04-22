@@ -106,7 +106,7 @@ void Sort::destroy()
 }
 
 /**
-  * Return the name of the Sort.
+  * Returns the name of the Sort.
   */
 const string Sort::get_name() const
 {
@@ -114,7 +114,7 @@ const string Sort::get_name() const
 }
 
 /**
-  * Set the name of the Sort.
+  * Sets the name of the Sort.
   */
 void Sort::set_name(const string name)
 {
@@ -127,6 +127,7 @@ void Sort::set_type_basic(const bool type_basic)
 {
     s_type_basic = type_basic;
 }
+
 /**
   * Generates and returns a string reprensentation of a Sort.
   *
@@ -168,7 +169,7 @@ const bool Sort::equals(const Sort &other) const
 }
 
 /**
-  * Return if the Sort is basic.
+  * Returns if the Sort is basic.
   */
 const bool Sort::is_type_basic() const
 {
@@ -176,7 +177,7 @@ const bool Sort::is_type_basic() const
 }
 
 /**
-  * Generate and return the string key that identifies a Sort definitely.
+  * Generates and returns the string key that identifies a Sort definitely.
   *
   * Result = \<name\>
   */

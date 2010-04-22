@@ -40,8 +40,9 @@ Parser_AG::Parser_AG()
 Parser_AG::~Parser_AG()
 {
 }
+
 /**
-  * Return att_grammar of parser.
+  * Returns att_grammar of parser.
   */
 const Attr_grammar &Parser_AG::get_attr_grammar()
 {

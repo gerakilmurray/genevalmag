@@ -149,7 +149,7 @@ const Attribute *Symbol::get_attribute(const string &name_attr) const
 }
 
 /**
-  * Set the name of the symbol.
+  * Sets the name of the symbol.
   */
 void Symbol::set_name(const string name)
 {
@@ -233,7 +233,7 @@ bool Symbol::equals(const Symbol &other) const
 }
 
 /**
-  * Generate and return the string key that identifies a symbol definitely.
+  * Generates and returns the string key that identifies a symbol definitely.
   *
   * Result = name
   */
