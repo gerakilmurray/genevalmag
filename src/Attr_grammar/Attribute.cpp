@@ -159,6 +159,7 @@ const bool Attribute::is_synthetize() const
 {
     return a_mod_type == k_synthetize;
 }
+
 /**
   * Return true if the modifiers of the attribute is inherit.
   */
@@ -166,6 +167,7 @@ const bool Attribute::is_inherit() const
 {
     return a_mod_type == k_inherit;
 }
+
 /**
   * Generate and return a string reprensentation of a attribute.
   *

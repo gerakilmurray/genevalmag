@@ -115,7 +115,7 @@ unsigned short *Equation::_get_count_ref() const
 }
 
 /**
-  * Return the l_value of the equation.
+  * Returns the l_value of the equation.
   */
 const Ast_instance *Equation::get_l_value() const
 {
@@ -123,7 +123,7 @@ const Ast_instance *Equation::get_l_value() const
 }
 
 /**
-  * Return the r_value of the equation.
+  * Returns the r_value of the equation.
   */
 const Ast_node *Equation::get_r_value() const
 {

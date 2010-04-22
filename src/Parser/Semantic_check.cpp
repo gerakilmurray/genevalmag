@@ -51,7 +51,7 @@ unsigned short Semantic_check::get_index_syntax_order() const
 }
 
 /**
-  * Increment the level because a new parenthesis opening.
+  * Increments the level because a new parenthesis opening.
   */
 void Semantic_check::increment_precedence_level()
 {
@@ -59,7 +59,7 @@ void Semantic_check::increment_precedence_level()
 }
 
 /**
-  * Decrement the level because a parenthesis closing.
+  * Decrements the level because a parenthesis closing.
   */
 void Semantic_check::decrement_precedence_level()
 {
@@ -67,7 +67,7 @@ void Semantic_check::decrement_precedence_level()
 }
 
 /**
-  * Increment the syntax order global.
+  * Increments the syntax order global.
   */
 void Semantic_check::increment_index_syntax_order()
 {
@@ -167,7 +167,7 @@ int swap_root_grandson(Ast_function **old_root)
 }
 
 /**
-  * Check and correct the precendence of the operator in a subtree.
+  * Checks and correct the precendence of the operator in a subtree.
   */
 void Semantic_check::correct_subtree(Ast_function **subtree, int index_root_subtree)
 {

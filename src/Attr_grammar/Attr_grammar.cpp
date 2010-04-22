@@ -178,7 +178,6 @@ const bool Attr_grammar::defined_rule(const Rule &rule) const
 }
 
 /**
- *
   * Enqueues a rule in the list of the attribute grammar.
   */
 const bool Attr_grammar::add_rule(Rule &rule)
