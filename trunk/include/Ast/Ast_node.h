@@ -41,36 +41,43 @@ class Ast_node
     public:
         /**
           * Constructor of Ast_node.
+          * @return
           */
         Ast_node();
 
         /**
           * Destructor of Ast_node.
+          * @return
           */
         virtual ~Ast_node();
 
         /**
           * Returns the parent pointer of the Ast_node.
+          * @return
           */
         const Ast_node *get_parent() const;
 
         /**
           * Returns the type synthetized of the Ast_node.
+          * @return
           */
         const string get_type_synthetized() const;
 
         /**
           * Returns the precendence wath produces the conflict.
+          * @return
           */
         int get_conflict() const;
 
         /**
           * Sets the parent pointer of the Ast_node.
+          * @param new_parent
           */
         void set_parent(const Ast_node *new_parent);
 
         /**
           * Returns the type synthetized of the Ast_node.
+          * @param new_type_synthetized
           */
         void set_type_synthetized(string new_type_synthetized);
 
@@ -81,16 +88,18 @@ class Ast_node
 
         /**
           * Turn on the conflict flag with the precendence wath produces.
+          * @param prec_conflict
           */
         void active_conflict(int prec_conflict);
 
         /**
           * Turn off the conflict flag with negative precendence.
-          */
+         */
         void desactive_conflict();
 
         /**
           * Generate and return a string reprensentation of a Ast_node.
+          * @return
           */
         virtual string to_string() const = 0;
 };

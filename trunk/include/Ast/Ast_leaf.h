@@ -19,20 +19,25 @@ class Ast_leaf: public Ast_node
     public:
 		/**
 		  * constructor of Ast_leaf.
-		  */
+	      * @return
+          */
 		Ast_leaf();
         /**
           * Destructor of Ast_leaf.
-          */
+		  * @return
+		  */
         virtual ~Ast_leaf();
 
         /**
           * Generate and return a string reprensentation of a Ast_leaf.
+          * @return
           */
         virtual string to_string() const = 0;
 
         /**
           * Compares the Ast_leaf with other.
+          * @param other
+          * @return
           */
         bool equals(const Ast_leaf *other) const;
 };

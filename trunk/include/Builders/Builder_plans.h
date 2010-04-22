@@ -36,15 +36,31 @@ typedef vector< unsigned short > Order_rule;
 /** This struct represent a Context_rule, that is a father rule and the context of rule. */
 typedef struct c_rule
 {
+	/**
+	 * \var father
+	 * \brief Index context father (rule).
+	 */
 	unsigned short	father;
+	/**
+	 * \var context
+	 * \brief Indexs contexts inferior (rules).
+	 */
 	Order_rule		context;
-
+	/**
+	 * operator<
+	 * @param other
+	 * @return
+	 */
 	bool operator< (const c_rule &other) const
 	{
 		return (context < other.context) ||
 		       (context == other.context && father < other.father);
 	}
-
+	/**
+	 * operator=
+	 * @param other
+	 * @return
+	 */
 	c_rule &operator= (const c_rule &other)
 	{
 		if(this != &other)
@@ -59,14 +75,30 @@ typedef struct c_rule
 /** This struct represents a Key_work_list, that is a father rule and id-rule of the current rule. */
 typedef struct k_w
 {
+	/**
+	 *  \var father
+	 *  \brief Index context father (rule)
+	 */
 	unsigned short	father;
+	/**
+	 * \var id_rule.
+	 * \brief The index of rule.
+	 */
 	unsigned short	id_rule;
-
+	/**
+	 * operator==
+	 * @param other
+	 * @return
+	 */
 	bool operator== (const k_w &other) const
 	{
 		return (father == other.father) && (id_rule == other.id_rule);
 	}
-
+	/**
+	 * operator=
+	 * @param other
+	 * @return
+	 */
 	k_w &operator= (const k_w &other)
 	{
 		if(this != &other)
@@ -81,14 +113,30 @@ typedef struct k_w
 /** This struct represents an Item work, that is an Key_work_list and an equations order evaluation. */
 typedef struct i_w
 {
+	/**
+	 * \var item
+	 * \brief A key_work_list.
+	 */
 	Key_work_list	item;
+	/**
+	 * \var order_attr
+	 * \brief Order of ecuation.
+	 */
 	unsigned short	order_attr;
-
+	/**
+	 * operator==
+	 * @param other
+	 * @return
+	 */
 	bool operator== (const i_w &other) const
 	{
 		return (item == other.item) && (order_attr == other.order_attr);
 	}
-
+	/**
+	 * operator=
+	 * @param other
+	 * @return
+	 */
 	i_w &operator= (const i_w &other)
 	{
 		if(this != &other)
@@ -103,20 +151,40 @@ typedef struct i_w
 /** This structs represent a Key_plan, that is an id and an equations order evaluation. */
 typedef struct k_plan
 {
+	/**
+	 * \var id_plan
+	 * \brief Index plan. - index to order superior.
+	 */
 	unsigned short  id_plan;
+	/**
+	 * \var plan
+	 * \brief Index plan.
+	 */
 	unsigned short	plan;
-
+	/**
+	 * operator<
+	 * @param other
+	 * @return
+	 */
 	bool operator< (const k_plan &other) const
 	{
 		return (id_plan < other.id_plan) ||
 		       (id_plan == other.id_plan && plan < other.plan);
 	}
-
+	/**
+	 * operator==
+	 * @param other
+	 * @return
+	 */
 	bool operator== (const k_plan &other) const
 	{
 		return (id_plan == other.id_plan) && (plan == other.plan);
 	}
-
+	/**
+	 * operator=
+	 * @param other
+	 * @return
+	 */
 	k_plan &operator= (const k_plan &other)
 	{
 		if(this != &other)
@@ -131,22 +199,46 @@ typedef struct k_plan
 /** This struct represent a Key_plan_project, that is a Key_plan, the symbol and ocurrence, by which project. */
 typedef struct k_p_project
 {
+	/**
+	 * \var id_plan_project
+	 * \brief key_plan
+	 */
 	Key_plan		id_plan_project;
+	/**
+	 * \var symbol_project
+	 * \brief Projected Symbol.
+	 */
 	const Symbol	*symbol_project;
+	/**
+	 * \var Index_ocurrence
+	 * \brief Appearance index of projected symbol.
+	 */
 	unsigned short  index_ocurrence;
-
+	/**
+	 * operator<
+	 * @param other
+	 * @return
+	 */
 	bool operator< (const k_p_project &other) const
 	{
 		return (id_plan_project < other.id_plan_project) ||
 		       (id_plan_project == other.id_plan_project && symbol_project->get_name() < other.symbol_project->get_name()) ||
 		       (id_plan_project == other.id_plan_project && symbol_project->get_name() == other.symbol_project->get_name() && index_ocurrence < other.index_ocurrence);
 	}
-
+	/**
+	 * operator==
+	 * @param other
+	 * @return
+	 */
 	bool operator== (const k_p_project &other) const
 	{
 		return (id_plan_project == other.id_plan_project) && (symbol_project->get_name() == other.symbol_project->get_name()) && (index_ocurrence == other.index_ocurrence);
 	}
-
+	/**
+	 * operator=
+	 * @param other
+	 * @return
+	 */
 	k_p_project &operator= (const k_p_project &other)
 	{
 		if(this != &other)
@@ -163,79 +255,105 @@ class Builder_plans
 {
 	private:
 		/**
-		  * Store all different context rule generates in the grammar.
+		  * \var contexts_uniques
+		  * \brief Store all different context rule generates in the grammar.
 		  */
 		vector < Order_rule > contexts_uniques;
 
 	    /**
-	      * Store all evaluation plans of the grammar.
+	      * \var eval_plans
+		  * \brief Store all evaluation plans of the grammar. Saves index of plans_uniques vector.
 	      * "ro" function. Wuu yank's paper.
 	      */
 		map < Key_plan, unsigned short > eval_plans;
 		vector < Order_eval_eq > plans_uniques;
 
 		/**
-		  * Store all evaluation plans projects of the grammar.
+		  * \var plans_project
+		  * \brief Store all evaluation plans projects of the grammar.Saves index of plans_project_uniques vector.
 		  * "tita" function. Wuu yank's paper.
 		  */
 		map < Key_plan_project, unsigned short > plans_project;
 		vector < Order_eval_eq > plans_project_uniques;
 
 		/**
-		  * Store the initial evaluation order of the attributes of the initial symbol.
+		  * \var init_order_ag
+		  * \brief Store the initial evaluation order of the attributes of the initial symbol.
 		  */
 		unsigned short init_order_ag;
 
 		/**
-		  * Stores all graphs DP, DOWN, DCG and ADP, generated for the grammar's analisys.
+		  * \var build_graphs
+		  * \brief Stores all graphs DP, DOWN, DCG and ADP, generated for the grammar's analisys.
 		  */
 		Builder_graphs build_graphs;
 
 		/**
 		  * Applies a topological order at graph.
 		  * The changes are applies about paramenter "result_order".
+		  * @param graph
+		  * @param eq_order
+		  * @param grammar
+		  * @param context_rule
 		  */
 		void generates_topological_order(const Graph &graph, Order_eval_eq &eq_order, const Attr_grammar &grammar, const Context_rule &context_rule) const;
 
 		/**
 		  * Compute the rule's order.
 		  * The changes are applies about paramenter "result_order".
+		  * @param graph_adp
+		  * @param index_order
+		  * @param grammar
+		  * @param context_rule
+		  * @return
 		  */
 		Order_eval_eq compute_order(const Graph &graph_adp, unsigned short index_order, const Attr_grammar &grammar, const Context_rule &context_rule);
 
 		/**
 		  * Generates and saves all evaluation's plans for the Attribute Grammar.
+		  * @param grammar
+		  * @return
 		  */
 		bool generate_plans(const Attr_grammar &grammar);
 
 		/**
 		  * Generates all graphs for attribute grammar: DP, DOWN, DCG and ADP.
+		  * @param grammar
+		  * @return
 		  */
 		bool generate_graphs(const Attr_grammar &grammar);
 
 		/**
 		  * Returns the index in the vector of context, or inserts in the last position.
+		  * @param order
+		  * @return
 		  */
 		unsigned short return_index_context(const Order_rule &order);
 
 		/**
 		  * Returns the index in the vector of plans, or inserts in the last position.
+		  * @param order
+		  * @return
 		  */
 		unsigned short return_index_plan(const Order_eval_eq &order);
 
 		/**
 		  * Returns the index in the vector of plans projects, or inserts in the last position.
+		  * @param order
+		  * @return
 		  */
 		unsigned short return_index_plan_p(const Order_eval_eq &order);
 
 	public:
 		/**
 		  * Constructor empty of Builder plans.
+		  * @return
 		  */
 		Builder_plans();
 
 		/**
 		  * Destructor of Builder plans.
+		  * @return
 		  */
 		~Builder_plans();
 
@@ -245,6 +363,8 @@ class Builder_plans
 		  * Return: 0: when all success process.
 		  * 		1: when detects cilcyc graph.
 		  * 		2: when detects error in the graph generation.
+		  * @param attr_grammar
+		  * @return
 		  */
 		unsigned short build_plans(const Attr_grammar &attr_grammar);
 

@@ -41,6 +41,7 @@ class Ast_function: public Ast_inner_node
 
         /**
           * Method of copy the Ast_function, STL-like C++.
+          * @param other
           */
         void copy(const Ast_function &other);
         /**
@@ -51,64 +52,81 @@ class Ast_function: public Ast_inner_node
     public:
         /**
           * Constructor empty of Ast_function.
+          * @return
           */
         Ast_function();
         /**
           * Constructor copy of Ast_function.
+          * @param other
+          * @return
           */
         Ast_function(const Ast_function &other);
 
         /**
           * Destructor of Ast_function.
+          * @return
           */
         virtual ~Ast_function();
 
         /**
           * Operator assign(=) of Ast_function.
+          * @param other
+          * @return
           */
         Ast_function &operator=(const Ast_function &other);
 
         /**
           * Returns the function pointer of the Ast_function.
+          * @return
           */
         const Function *get_function() const;
         /**
           * Returns the precedence level of the Ast_function.
+          * @return
           */
         unsigned short get_precedence_level() const;
         /**
           * Returns the syntax order of the Ast_function.
+          * @return
           */
         unsigned short get_syntax_order() const;
 
         /**
           * Sets the function pointer of the Ast_function.
+          * @param func
           */
         void set_function(const Function *func);
         /**
           * Sets the precedence level of the Ast_function.
+          * @param p_level
           */
         void set_precedence_level(unsigned short p_level);
         /**
           * Sets the syntax order of the Ast_function.
+          * @param s_order
           */
         void set_syntax_order(unsigned short s_order);
 
         /**
           * Returns if the function of Ast_function is prefix.
+          * @return
           */
         bool is_prefix() const;
         /**
           * Returns if the function of Ast_function is infix.
+          * @return
           */
         bool is_infix() const;
         /**
           * Returns if the function of Ast_function is postfix.
+          * @return
           */
         bool is_postfix() const;
 
         /**
           * Returns if both Ast_functions are in the same precedence level.
+          * @param other
+          * @return
           */
         bool is_comparable(const Ast_function *other) const;
         /**
@@ -116,6 +134,8 @@ class Ast_function: public Ast_inner_node
           *        = O        when is same precedence
           *        < 0        when other have great precedence
           *        > 0        when other have small precedence
+          * @param other
+          * @return
           */
         int compare_precedence(const Ast_function *other) const;
         /**
@@ -123,6 +143,8 @@ class Ast_function: public Ast_inner_node
           *        = O        when is same order
           *        < 0        when other have great order
           *        > 0        when other have small order
+          * @param other
+          * @return
           */
         int compare_order(const Ast_function *other) const;
 
@@ -140,6 +162,7 @@ class Ast_function: public Ast_inner_node
           *
           * If is an postfix unary operator:
           *     Result= "(" child[0] ")" \<op_name\>
+          * @return
           */
         string to_string() const;
 };

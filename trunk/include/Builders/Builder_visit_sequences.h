@@ -39,6 +39,13 @@ class Builder_visit_sequences
           * Generates recursively the visit sequence, navigating the tree as
           * indicated by the plans, visiting the children, returning to the
           * parent or generating a compute attribute.
+          * @param attr_grammar
+          * @param b_plans
+          * @param it_plan
+          * @param computed
+          * @param plans_computed
+          * @param v_seq_computed_f
+          * @return
           */
         bool gen_visit_seq
         (
@@ -53,27 +60,35 @@ class Builder_visit_sequences
         /**
           * Saves the visit sequence generate, mixing with pre-generated
           * visit sequences.
+          * @param sequence
+          * @param i_plan
           */
         void save_visit_sequence(const Visit_seq &sequence, const size_t i_plan);
 
     public:
         /**
           * Contructor empty of Builder_visit_sequences.
+          * @return
           */
         Builder_visit_sequences();
 
         /**
           * Destructor of Builder_visit_sequences.
+          * @return
           */
         virtual ~Builder_visit_sequences();
 
         /**
           * Generates a visit sequence for each evaluation plan.
+          * @param attr_grammar
+          * @param b_plans
+          * @return
           */
         bool generate_visit_sequences(const Attr_grammar &attr_grammar, const Builder_plans &b_plans);
 
         /**
           * Returns the vector with all visit sequences generates.
+          * @return
           */
         const vector < Visit_seq > &get_visit_seq() const;
 
