@@ -95,7 +95,6 @@ void Builder_code::generate_header_file() const
 
 /**
   * Create the source code file of the evaluator with some information.
-  * @param headers_file
   */
 void Builder_code::generate_code_file(const vector<string> &headers_file) const
 {
@@ -209,13 +208,6 @@ void Builder_code::generate_footer_code() const
 /**
   * Generates the initialice of an array of type T, with the elements of the vector, and create a new vector
   * with this array.
-  * @param text_buffer
-  * @param name_vec
-  * @param index
-  * @param vec
-  * @param type_vec
-  * @param type_array
-  * @return
   */
 template <class T> string write_vector_with_inic(string &text_buffer, string name_vec, size_t index, const vector<T> &vec, string type_vec, const string type_array)
 {
@@ -262,8 +254,6 @@ template <class T> string write_vector_with_inic(string &text_buffer, string nam
 
 /**
   * Generates the initialization of all visit sequences.
-  * @param text
-  * @param v_seq
   */
 void generate_initialize_v_seq(string &text, const vector<Visit_seq> & v_seq)
 {
@@ -289,11 +279,6 @@ void generate_initialize_v_seq(string &text, const vector<Visit_seq> & v_seq)
 
 /**
   * Generate a key plan with the parameters.
-  * @param text
-  * @param n_key
-  * @param num_key
-  * @param k_p
-  * @return
   */
 string generate_key_plan(string &text,const string n_key,int num_key, Key_plan k_p )
 {
@@ -318,8 +303,6 @@ string generate_key_plan(string &text,const string n_key,int num_key, Key_plan k
 
 /**
   * Generates the initialization of all contexts rules uniques.
-  * @param text
-  * @param contexts
   */
 void generate_initialize_context(string &text, const vector < Order_rule > &contexts)
 {
@@ -345,8 +328,6 @@ void generate_initialize_context(string &text, const vector < Order_rule > &cont
 
 /**
   * Generates the initialization of all evaluations plans.
-  * @param text
-  * @param plans_p
   */
 void generate_initialize_plans(string &text, const map < Key_plan, unsigned short > &plans_p)
 {
@@ -378,8 +359,6 @@ void generate_initialize_plans(string &text, const map < Key_plan, unsigned shor
 
 /**
   * Generates the initialization of all evaluation plan projects.
-  * @param text
-  * @param plans_p
   */
 void generate_initialize_plan_proj(string &text, const map < Key_plan_project, unsigned short > &plans_p)
 {
@@ -426,8 +405,6 @@ void generate_initialize_plan_proj(string &text, const map < Key_plan_project, u
 
 /**
   * Generates the initialization of all rules.
-  * @param text
-  * @param attr_grammar
   */
 void generate_initialize_rules(string &text, const Attr_grammar &attr_grammar)
 {
@@ -631,9 +608,6 @@ void Builder_code::generate_traverse(string &text) const
 
 /**
   * Generates the plain text of a equation of this rule.
-  * @param node
-  * @param rule
-  * @return
   */
 string generate_expr_text(const Ast_node *node, const Rule &rule)
 {
@@ -728,8 +702,6 @@ string generate_expr_text(const Ast_node *node, const Rule &rule)
 /**
   *
   * Generates one method for each equation in the grammar, that computes it's value.
-  * @param text
-  * @param attr_grammar
   */
 void generate_all_methods_eqs(string &text, const Attr_grammar &attr_grammar)
 {

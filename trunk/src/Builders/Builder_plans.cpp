@@ -44,8 +44,6 @@ Builder_plans::~Builder_plans()
 
 /**
   * Saves all graphs generated as the analysis of the dependencies between attributes.
-  * @param rules
-  * @param path_output
   */
 void Builder_plans::save_all_graphs(const map<unsigned short, Rule> &rules, const string path_output) const
 {
@@ -54,8 +52,6 @@ void Builder_plans::save_all_graphs(const map<unsigned short, Rule> &rules, cons
 
 /**
   * Saves the graphs generated as the analysis of the dependencies between attributes, which demonstrate cyclicity.
-  * @param rules
-  * @param path_output
   */
 void Builder_plans::save_cyclic_graphs(const map<unsigned short, Rule> &rules, const string path_output) const
 {
@@ -169,9 +165,6 @@ Order_eval_eq Builder_plans::compute_order(const Graph &graph_adp, unsigned shor
 
 /**
   * Saves all plans. Creates a graph that represents the plan and uses print_graph with dot.
-  * @param grammar
-  * @param path_output
-  * @return
   */
 bool Builder_plans::save_all_plans(const Attr_grammar &grammar, const string path_output) const
 {
@@ -243,9 +236,6 @@ bool Builder_plans::save_all_plans(const Attr_grammar &grammar, const string pat
 
 /**
   * Saves all proyected's plans. Creates a graph that represents the plan and uses print_graph with dot.
-  * @param grammar
-  * @param path_output
-  * @return
   */
 bool Builder_plans::save_all_plans_project(const Attr_grammar &grammar, const string path_output) const
 {
@@ -325,9 +315,6 @@ bool Builder_plans::save_all_plans_project(const Attr_grammar &grammar, const st
 
 /**
   * Copy in the result vector all equations belonging to the rule passed as parameter.
-  * @param rule
-  * @param order_eq
-  * @param purged_order
   */
 void purge_plan_with(const Rule &rule, const Order_eval_eq &order_eq, Order_eval_eq &purged_order)
 {
@@ -345,9 +332,6 @@ void purge_plan_with(const Rule &rule, const Order_eval_eq &order_eq, Order_eval
 
 /**
   * Searchs in the list the item work that passed as parameter, if it find return true, otherwise false.
-  * @param list
-  * @param item_work
-  * @return
   */
 bool defined_work (const vector < Item_work > &list, const Item_work &item_work)
 {
@@ -555,7 +539,6 @@ unsigned short Builder_plans::build_plans(const Attr_grammar &attr_grammar)
 
 /**
   * Returns all contexts rule uniques.
-  * @return
   */
 const vector < Order_rule > &Builder_plans::get_contexts_uniques() const
 {
@@ -564,7 +547,6 @@ const vector < Order_rule > &Builder_plans::get_contexts_uniques() const
 
 /**
   * Returns all evaluations plans.
-  * @return
   */
 const map < Key_plan, unsigned short > &Builder_plans::get_plans() const
 {
@@ -573,7 +555,6 @@ const map < Key_plan, unsigned short > &Builder_plans::get_plans() const
 
 /**
   * Returns all evaluations plans uniques.
-  * @return
   */
 const vector < Order_eval_eq > &Builder_plans::get_plans_uniques() const
 {
@@ -582,7 +563,6 @@ const vector < Order_eval_eq > &Builder_plans::get_plans_uniques() const
 
 /**
   * Returns all evaluations plans project.
-  * @return
   */
 const map < Key_plan_project, unsigned short > &Builder_plans::get_plans_project() const
 {
@@ -591,7 +571,6 @@ const map < Key_plan_project, unsigned short > &Builder_plans::get_plans_project
 
 /**
   * Returns all evaluations plans project uniques.
-  * @return
   */
 const vector < Order_eval_eq > &Builder_plans::get_plans_project_uniques() const
 {
@@ -601,7 +580,6 @@ const vector < Order_eval_eq > &Builder_plans::get_plans_project_uniques() const
 
 /**
   * Returns the intial order of attributes of the initial symbol.
-  * @return
   */
 const unsigned short &Builder_plans::get_init_order() const
 {
@@ -610,8 +588,6 @@ const unsigned short &Builder_plans::get_init_order() const
 
 /**
   * Returns the index inside the map of the plan that passed as parameter.
-  * @param it_plan
-  * @return
   */
 const unsigned short Builder_plans::get_index_plan(const map < Key_plan, unsigned short >::const_iterator it_plan) const
 {
@@ -631,8 +607,6 @@ const unsigned short Builder_plans::get_index_plan(const map < Key_plan, unsigne
 /**
   * Returns an constant iterator of a project plan with key equals at the key that passed as parameter.
   * Always finds the element.
-  * @param key
-  * @return
   */
 const map < Key_plan_project, unsigned short >::const_iterator Builder_plans::get_plan_project(const Key_plan_project &key) const
 {
