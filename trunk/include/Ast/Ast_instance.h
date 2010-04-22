@@ -21,18 +21,18 @@ class Ast_instance: public Ast_leaf
 {
     private:
 		/**
-		  * /var i_symb.
-		  * /brief Symbol of Ast_instance.
+		  * \var i_symb.
+		  * \brief Symbol of Ast_instance.
 		  */
         const Symbol			*i_symb;
         /**
-		  * /var i_num.
-		  * /brief Syntax index of the instance.
+		  * \var i_num.
+		  * \brief Syntax index of the instance.
 		  */
         unsigned short			i_num;
         /**
-		  * /var i_attr.
-		  * /brief Attribute of Ast_instance.
+		  * \var i_attr.
+		  * \brief Attribute of Ast_instance.
 		  */
         const Attribute			*i_attr;
 
@@ -109,17 +109,17 @@ class Ast_instance: public Ast_leaf
         void set_symb(const Symbol *symb);
 
         /**
-          * Generate and return a string reprensentation of a Ast_instance.
-          *
-          * Result= \<symbol\>"["\<number\>"]."\<attribute\>
-          *
-          * Ex: E[0].valor
+          * Generates and returns a string reprensentation of a Ast_instance.\n
+          *\n
+          * Result= \<symbol\>"["\<number\>"]."\<attribute\>\n
+          *\n
+          * Ex: E[0].valor\n
           * @return
           */
         string to_string() const;
 
         /**
-          * Compares the Ast_instance with other.
+          * Compares the Ast_instance with other.\n
           * Respects Symbol and attribute.
           * @param other
           * @return
@@ -127,11 +127,11 @@ class Ast_instance: public Ast_leaf
         bool equals_without_index(const Ast_instance *other) const;
 
         /**
-          * Generate and return the string key that identifies an Ast_instance definitely.
-          *
-          * Result= \<symbol\>\<number\>\<attribute\>
-          *
-          * Ex: E0valor
+          * Generates and returns the string key that identifies an Ast_instance definitely.\n
+          *\n
+          * Result= \<symbol\>\<number\>\<attribute\>\n
+          *\n
+          * Ex: E0valor\n
           * @return
           */
         string key() const;

@@ -41,34 +41,34 @@ class Builder_graphs
 {
 	private:
 		/**
-		  * /var p_Dp_graphs.
-		  * /brief Store the DP graphs. The key corresponds to the key Rule..
+		  * \var p_Dp_graphs.
+		  * \brief Store the DP graphs. The key corresponds to the key Rule..
 		  */
 		map <unsigned short, Graph> p_Dp_graphs;
 		/**
-		  * /var attr_vertex_graphs.
-		  * /brief Store the vertex-attr graphs. The key corresponds to the key Symbol.
+		  * \var attr_vertex_graphs.
+		  * \brief Store the vertex-attr graphs. The key corresponds to the key Symbol.
 		  */
 		map <string, Graph> attr_vertex_graphs;
 		/**
-		  * /var p_Down_graphs.
-		  * /brief Store the down graphs. The key corresponds to the key Symbol.
+		  * \var p_Down_graphs.
+		  * \brief Store the down graphs. The key corresponds to the key Symbol.
 		  */
 		map <string, Graph> p_Down_graphs;
 		/**
-		  * /var p_Dcg_graphs.
-		  * /brief Store the dcg graphs. The key corresponds to the key Rule.
+		  * \var p_Dcg_graphs.
+		  * \brief Store the dcg graphs. The key corresponds to the key Rule.
 		  */
 		/* Store the dcg graphs. The key corresponds to the key Rule. */
 		map <unsigned short, Graph> p_Dcg_graphs;
 		/**
-		  * /var p_Adp_graphs.
-		  * /brief Store the adp graphs. The key corresponds to the key Rule with the inferior context.
+		  * \var p_Adp_graphs.
+		  * \brief Store the adp graphs. The key corresponds to the key Rule with the inferior context.
 		  */
 		map <vector<unsigned short>, Graph> p_Adp_graphs;
 		/**
-		  * /var p_Adp_subgraphs_cyclics.
-		  * /brief Store the adp graphs. The key corresponds to the key Rule with the inferior context.
+		  * \var p_Adp_subgraphs_cyclics.
+		  * \brief Store the adp graphs. The key corresponds to the key Rule with the inferior context.
 		  */
 		map <vector<unsigned short>, Graph> p_Adp_subgraphs_cyclics;
 

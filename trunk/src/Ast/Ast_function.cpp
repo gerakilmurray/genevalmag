@@ -15,7 +15,7 @@ namespace genevalmag
 
 #ifdef _DEBUG
     /* Numbers of functions current in the system. */
-    static int ast_functions(0);
+    static unsigned short ast_functions(0);
 #endif
 
 /**

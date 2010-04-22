@@ -19,32 +19,32 @@ namespace genevalmag
   */
 enum type_attr
 {
-    k_inherit,  //!< k_inherit
-    k_synthetize//!< k_synthetize
+    k_inherit,
+    k_synthetize
 };
 
 class Attribute
 {
     private:
 		/**
-		 * \var a_name
-		 * \brief Attribute's name.
-		 */
+		  * \var a_name
+		  * \brief Attribute's name.
+		  */
         string         a_name;
 		/**
-		 * \var a_sort_type
-		 * \brief Attribute's type sort.
-		 */
+		  * \var a_sort_type
+		  * \brief Attribute's type sort.
+		  */
         const Sort     *a_sort_type;
 		/**
-		 * \var a_mod_type
-		 * \brief Attribute's type.
-		 */
+		  * \var a_mod_type
+		  * \brief Attribute's type.
+		  */
         type_attr      a_mod_type;
 		/**
-		 * \var a_member_symbol
-		 * \brief Attribute's member list.
-		 */
+		  * \var a_member_symbol
+		  * \brief Attribute's member list.
+		  */
         string         a_member_symbol;
 
         /**
@@ -135,10 +135,10 @@ class Attribute
         const bool is_inherit() const;
 
         /**
-          * Generates and returns a string reprensentation of a attribute.
-          *
-          * Result = name ":" modifiers "<" sort_type ["(" instance ")" IF DEBUG IS ON] "> of " membership_list
-          *
+          * Generates and returns a string reprensentation of a attribute.\n
+          *\n
+          * Result = name ":" modifiers "<" sort_type ["(" instance ")" IF DEBUG IS ON] "> of " membership_list\n
+          *\n
           * @return
           */
         const string to_string() const;
@@ -151,9 +151,9 @@ class Attribute
         const bool equals(const Attribute &other) const;
 
         /**
-          * Generates and returns the string key that identifies a attribute definitely.
-          *
-          * Result = name modifiers sort_type membership_list
+          * Generates and returns the string key that identifies a attribute definitely.\n
+          *\n
+          * Result = name modifiers sort_type membership_list\n
           *
           * @return
          */

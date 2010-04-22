@@ -69,7 +69,7 @@ int main()
 	eval_mag.evaluator_mag(&root);
 
     cout << " After evaluation." << endl;
-    cout << node_1.to_string() << endl;
+    cout << root.to_string() << endl;
     
     cout << "FIN EVAL_AG" << endl;
 

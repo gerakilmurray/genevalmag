@@ -78,87 +78,87 @@ class Attr_grammar
 		virtual ~Attr_grammar();
 
 		/**
-		  * Enqueue a sort in the list of the semantic domain.
+		  * Enqueues a sort in the list of the semantic domain.
 		  * @param sort
 		  * @return
 		  */
 		const bool add_sort(const Sort &sort);
 		/**
-		  * Enqueue a function in the list of the semantic domain.
+		  * Enqueues a function in the list of the semantic domain.
 		  * @param func
           * @return
           */
 		const bool add_function(const Function &func);
 		/**
-		  * Enqueue a attribute in the list of the semantic domain.
+		  * Enqueues a attribute in the list of the semantic domain.
 		  * @param attr
 		  * @return
 		  */
 		const bool add_attribute(const Attribute &attr);
 		/**
-		  * Enqueue a symbol in the list of the semantic domain.
+		  * Enqueues a symbol in the list of the semantic domain.
 		  * @param symb
 		  * @return
 		  */
 		const bool add_symbol(const Symbol &symb);
 		/**
-		  * Enqueue a rule in the list of the semantic domain.
+		  * Enqueues a rule in the list of the semantic domain.
 		  * @param rule
 		  * @return
 		  */
 		const bool add_rule(Rule &rule);
 
 		/**
-		  * Find in the list of sort of the semantic domain and return the sort with that name.
+		  * Finds in the list of sort of the semantic domain and returns the sort with that name.
 		  * @param name_sort
 		  * @return
 		  */
 		const Sort &return_sort(const string name_sort);
 		/**
-		  * Return the map with all sorts.
+		  * Returns the map with all sorts.
 		  * @return
 		  */
 		const map<string, Sort> &get_sorts() const;
 		/**
-		  * Find in the list of function of the semantic domain and return the function with that name.
+		  * Finds in the list of function of the semantic domain and returns the function with that name.
 		  * @param name_function
 		  * @return
 		  */
 		const Function *get_function(const string name_function) const;
 		/**
-		  * Return the map with all functions.
+		  * Returns the map with all functions.
 		  * @return
 		  */
 		const map<string, Function> &get_functions() const;
 		/**
-		  * Find in the list of symbol of the semantic domain and return the symbol with that name.
+		  * Finds in the list of symbol of the semantic domain and returns the symbol with that name.
 		  * @param name_symbol
 		  * @return
 		  */
 		const Symbol &get_symbol(const string name_symbol) const;
 		/**
-		  *  Return the map with all rules.
+		  *  Returns the map with all rules.
 		  * @return
 		  */
 		const map<unsigned short, Rule>  &get_rules() const;
 		/**
-		  *  Return the rule on paramenter.
+		  *  Returns the rule on paramenter.
 		  * @param index
 		  * @return
 		  */
 		const Rule  &get_rule(const unsigned short index) const;
 		/**
-		  *  Return the map with all symbols.
+		  *  Returns the map with all symbols.
 		  * @return
 		  */
 		const map<string, Symbol> &get_non_terminal_symbols() const;
 		/**
-		  *  Return the initial rule.
+		  *  Returns the initial rule.
 		  * @return
 		  */
 		const Symbol *get_initial_symb() const;
 		/**
-		  * Return vector with all rules with the left symbol equal that parameter.
+		  * Returns vector with all rules with the left symbol equal that parameter.
 		  * @param symb
 		  * @return
 		  */
@@ -171,7 +171,7 @@ class Attr_grammar
 		 */
 		const unsigned short get_index_eq_with_context(const Ast_instance *ins, const vector<unsigned short> &context_rule) const;
 		/**
-		  *    Returns the equation with this index.
+		  * Returns the equation with this index.
 		  * @param index
 		  * @return
 		  */
@@ -189,7 +189,7 @@ class Attr_grammar
 		const unsigned short get_count_eqs() const;
 
 		/**
-		  * Generate and return a string reprensentation of a semantic domain.
+		  * Generates and returns a string reprensentation of a semantic domain.\n
 		  *\n
 		  * Result = "semantic domain"\n
 		  *             \<sorts\>\n
@@ -207,8 +207,8 @@ class Attr_grammar
 		  *          "rules"\n
 		  *             \<rules\>\n
 		  *\n
-		  * where \<sorts\>, \<operators\>, \<functions\>, \<attributes\>, \<symbols\> and \<rules\>, are\n
-		  * full representation of each type.\n
+		  * where \<sorts\>, \<operators\>, \<functions\>, \<attributes\>, \<symbols\> and \<rules\>,\n
+		  * are a full representation of each type.\n
 		  *
 		  * @return
 		  */

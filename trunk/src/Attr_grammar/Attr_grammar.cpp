@@ -182,14 +182,14 @@ const bool Attr_grammar::defined_rule(const Rule &rule) const
   */
 const bool Attr_grammar::add_rule(Rule &rule)
 {
-    static unsigned short cant_rules(1);
+    static unsigned short id_rules(1);
 
     if (defined_rule(rule))
     {
         /* The rule is already defined then it isn't inserted. */
         return false;
     }
-    rule.set_id(cant_rules++);
+    rule.set_id(id_rules++);
 
     if (ag_initial_symb != NULL && rule.belongs_non_terminal(*ag_initial_symb))
     /* Check if the rule respet the extended grammar. */
@@ -203,8 +203,9 @@ const bool Attr_grammar::add_rule(Rule &rule)
         if(ag_initial_symb == NULL)
         {
             /* Set initial symbol of grammar. */
-            map<unsigned short, Rule>::const_iterator init_symb(ag_rule.find(rule.key()));
-            ag_initial_symb = init_symb->second.get_left_symbol();
+//            map<unsigned short, Rule>::const_iterator init_rule(ag_rule.find(rule.key()));
+//            ag_initial_symb = init_rule->second.get_left_symbol();
+        	ag_initial_symb = rule.get_left_symbol();
         }
         if(rule.get_eqs().size() > 0)
         {
@@ -224,7 +225,7 @@ const bool Attr_grammar::add_rule(Rule &rule)
 const Sort &Attr_grammar::return_sort(const string name_sort)
 {
     Sort sort_new(name_sort);
-    /* Becouse is a type basic. if not the sort belong map. the map not have repeat. */
+    /* It must be a basic type. Since it became an explicit add_sort above. */
     sort_new.set_type_basic(true);
     add_sort(sort_new);
     map<string,Sort>::const_iterator it(ag_sort.find(name_sort));

@@ -20,8 +20,8 @@ class Ast_inner_node: public Ast_node
 {
     protected:
 	/**
-	  * /var childs.
-	  * /brief Childs's vector of node.
+	  * \var childs.
+	  * \brief Childs's vector of node.
 	  */
         vector <Ast_node*> childs;
 
@@ -52,7 +52,7 @@ class Ast_inner_node: public Ast_node
         Ast_node *get_child(int index) const;
 
         /**
-          * Replaces index-child of the Ast_function with other.
+          * Replaces index-child of the Ast_function with other.\n
           * Updates the parent of the child.
           * @param index
           * @param other
@@ -60,7 +60,7 @@ class Ast_inner_node: public Ast_node
         void replace_child(int index, Ast_node *other);
 
         /**
-          * Adds a child in Ast_function.
+          * Adds a child in Ast_function.\n
           * Updates the parent of the child.
           * @param new_child
           */

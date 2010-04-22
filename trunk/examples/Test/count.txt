@@ -23,6 +23,7 @@ semantic domain
  ***********************/
 attributes
     longi : syn <int> of {S,T,T2};
+    val: syn <bool> of {S};
     
 /******************
  * Block of Rules *
@@ -31,6 +32,7 @@ rules
     S ::= T
             compute
                 S[0].longi = T[0].longi;
+                S[0].val = true;
             end;
 
     // P1

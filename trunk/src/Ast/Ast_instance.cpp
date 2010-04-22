@@ -16,7 +16,7 @@ namespace genevalmag
 
 #ifdef _DEBUG
     /* Numbers of instances current in the system. */
-    static int ast_instances(0);
+    static unsigned short ast_instances(0);
 #endif
 
 /**
