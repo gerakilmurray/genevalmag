@@ -1,0 +1,144 @@
+/**
+  *  \file		aritmetic.txt
+  *  \brief		Attribute Grammar example for aritmetic declarations.
+  *  \date		02/02/2010
+  *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  */
+
+/****************************
+ * Block of Semantic Domain *
+ ****************************/
+semantic domain
+
+    /*********************
+     * List of Operators *
+     *********************/
+    op infix    (5, left) +: float, float -> float;
+    op infix    (5, left) -: float, float -> float;
+    op infix    (6, left) /: float, float -> float;
+    op infix    (6, left) *: float, float -> float;
+    
+/***********************
+ * Block of Attributes *
+ ***********************/
+attributes
+	valor : syn <float> of all;
+	
+/******************
+ * Block of Rules *
+ ******************/
+rules
+    M ::= E
+            compute
+                M[0].valor = E[0].valor; 
+            end;
+
+    E ::= E '+' E
+    		compute
+    			E[0].valor = E[1].valor + E[2].valor; 
+    		end;
+    		
+    E ::= E '-' E
+            compute
+                E[0].valor = E[1].valor - E[2].valor; 
+            end;
+
+    E ::= E '*' E
+            compute
+                E[0].valor = E[1].valor * E[2].valor; 
+            end;
+            
+    E ::= E '/' E
+            compute
+                E[0].valor = E[1].valor / E[2].valor; 
+            end;
+
+    E ::= '(' E ')'
+            compute
+                E[0].valor = E[1].valor; 
+            end;
+
+    E ::= '-'E
+            compute
+                E[0].valor = E[1].valor * (-1.0); 
+            end;
+
+    E ::= num
+            compute
+                E[0].valor = num[0].valor; 
+            end;
+
+    num ::= digit num
+            compute
+                num[0].valor = (digit[0].valor * 10.0) + num[1].valor; 
+            end
+
+    	 |  real
+            compute
+                num[0].valor = real[0].valor; 
+            end
+
+         |  digit
+            compute
+                num[0].valor = digit[0].valor; 
+            end
+         ;
+         
+   digit ::= '1'
+            compute
+                digit[0].valor = 1.0;
+            end
+
+         |   '2'
+            compute
+                digit[0].valor = 2.0;
+            end
+
+         |   '3'
+            compute
+                digit[0].valor = 3.0;
+            end
+
+         |   '4'
+            compute
+                digit[0].valor = 4.0;
+            end
+
+         |   '5'
+            compute
+                digit[0].valor = 5.0;
+            end
+
+         |   '6'
+            compute
+                digit[0].valor = 6.0;
+            end
+
+         |   '7'
+            compute
+                digit[0].valor = 7.0;
+            end
+
+         |   '8'
+            compute
+                digit[0].valor = 8.0;
+            end
+
+         |   '9'
+            compute
+                digit[0].valor = 9.0;
+            end
+
+         |   '0'
+            compute
+                digit[0].valor = 0.0;
+            end
+
+         ;
+    
+   real ::= digit '.' digit
+            compute
+                real[0].valor = digit[0].valor + (digit[1].valor / 10.0);
+            end;
+    

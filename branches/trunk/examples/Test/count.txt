@@ -1,0 +1,52 @@
+/**
+  *  \file      count.txt
+  *  \brief     Attribute Grammar example.
+  *  \date      15/02/2010
+  *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  */
+
+/****************************
+ * Block of Semantic Domain *
+ ****************************/
+semantic domain
+
+    /*********************
+     * List of Operators *
+     *********************/
+    op infix    (10, left) +: int, int -> int;
+    
+    function    f: int   -> int;
+    
+/***********************
+ * Block of Attributes *
+ ***********************/
+attributes
+    longi : syn <int> of {S,T,T2};
+    val: syn <bool> of {S};
+    
+/******************
+ * Block of Rules *
+ ******************/
+rules
+    S ::= T
+            compute
+                S[0].longi = T[0].longi;
+                S[0].val = true;
+            end;
+
+    // P1
+    T ::= '0' T2 T T
+            compute             
+                T[0].longi = T2[0].longi + T[1].longi + T[2].longi;
+            end;
+            
+    T2 ::= '1'
+            compute
+                T2[0].longi = 1;
+            end;
+            
+    T ::= '0'
+            compute
+                T[0].longi = 0;
+            end; 
