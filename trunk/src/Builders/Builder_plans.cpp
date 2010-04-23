@@ -174,7 +174,6 @@ bool Builder_plans::save_all_plans(const Attr_grammar &grammar, const string pat
 	{
 		return false;
 	}
-
 	for(map < Key_plan, unsigned short >::const_iterator it(eval_plans.begin()); it != eval_plans.end(); it++)
 	{
 		Graph graph_plan;
@@ -201,11 +200,12 @@ bool Builder_plans::save_all_plans(const Attr_grammar &grammar, const string pat
 		const Order_rule &context_o(contexts_uniques[it->first.id_plan]);
 
 		const Rule *rule(&(grammar.get_rules().find(context_o[0])->second));
+
 		name_graph.append(cleaning_tabs(rule->to_string_not_eqs()));
 
 		name_graph.append(write_inf_context(context_o));
 
-		const Order_eval_eq &plan_ctx(plans_uniques[it->first.plan]);
+		const Order_eval_eq &plan_ctx(plans_project_uniques[it->first.plan]);
 
 		/* Obtains the rule's context. */
 		if (plan_ctx.size() == 0)

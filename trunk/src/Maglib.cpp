@@ -7,6 +7,7 @@
   */
 
 #include <vector>
+#include <iostream>
 #include <string>
 
 #include "../include/Parser/Parser_AG.h"
@@ -68,11 +69,9 @@ int Maglib::gen_evaluator
 		{
 			/* Success, proceed to save all graphs generated. */
 			b_plans.save_all_graphs(p_mag.get_attr_grammar().get_rules(), path_output);
-
 			/* And saves all plans generated too. */
 			b_plans.save_all_plans(p_mag.get_attr_grammar(), path_output);
 			b_plans.save_all_plans_project(p_mag.get_attr_grammar(), path_output);
-
 			/* Begins the visit sequence computation. */
 			Builder_visit_sequences b_visit_seq;
 			if (b_visit_seq.generate_visit_sequences(p_mag.get_attr_grammar(), b_plans))

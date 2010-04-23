@@ -103,7 +103,7 @@ struct attritute_grammar: public grammar<attritute_grammar>
 
 			r_oper			= lexeme_d[ (alpha_p | '_' | r_id_op) >> *(alnum_p | '_' | r_id_op) ];
 
-			r_id_op			= ch_p('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>'|'|'|'~'|'.'|','|':'|'?';
+			r_id_op			= ch_p('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>'|'|'|'~'|'.'|','|'?';
 
 			r_boolean		= strlit<>("true") | "false";
 

@@ -102,16 +102,48 @@ void merge_vec(const vector< map<Key_plan, unsigned short>::const_iterator> &vec
 	}
 }
 
-void plan_family_computed(const vector< map<Key_plan, unsigned short>::const_iterator > &plans_computed, vector<unsigned short> &visit_seq_computed)
+/**
+  * Merge two vector in the vec_target argument without the iterator passed as parameter.
+  */
+void merge_vec_without_plan
+(
+	const vector< map<Key_plan, unsigned short>::const_iterator> &vec_source,
+	vector< map<Key_plan, unsigned short>::const_iterator> &vec_targed,
+	const map<Key_plan, unsigned short>::const_iterator &plan
+)
 {
-	for (size_t i(0);i<plans_computed.size();i++)
+	if(vec_targed.size() == 0)
 	{
-		unsigned short index_family(plans_computed[i]->second);
-		if (!belong_index(index_family, visit_seq_computed))
-			visit_seq_computed.push_back(index_family);
+		/* Non necesary merge */
+		vec_targed = vec_source;
+	}
+	else
+	{
+		/* Merge necesary */
+		for(size_t i(0); i < vec_source.size(); i++)
+		{
+			if(!belong_it(vec_source[i], vec_targed) && vec_source[i] != plan)
+			{
+				vec_targed.push_back(vec_source[i]);
+			}
+		}
 	}
 }
 
+/**
+  * Converts the vector of iterators over evaluations plans, in their indexs inside of plans uniques.
+  */
+void plan_family_computed(const vector< map<Key_plan, unsigned short>::const_iterator> &plans_computed, vector<unsigned short> &visit_seq_computed)
+{
+	for (size_t i(0); i < plans_computed.size(); i++)
+	{
+		unsigned short index_family(plans_computed[i]->second);
+		if (!belong_index(index_family, visit_seq_computed))
+		{
+			visit_seq_computed.push_back(index_family);
+		}
+	}
+}
 
 /**
   * Generates recursively the visit sequence, navigating the tree as
@@ -202,7 +234,6 @@ bool Builder_visit_sequences::gen_visit_seq
 						{
 							/* Plan to recurse: it */
 							const Rule &rule_child(attr_grammar.get_rule(b_plans.get_contexts_uniques()[it->first.id_plan][0]));
-
 							if ((rule_child.get_left_symbol()->equals(*ins->get_symb())) &&
 								(it->first.plan == it_plan_proj->second))
 							/* The plan to launch the recursion has the need context. */
@@ -211,14 +242,17 @@ bool Builder_visit_sequences::gen_visit_seq
 								get_inherits_of(ins->get_symb(), ins_computed_own, ins_computed_child);
 
 								vector< map<Key_plan, unsigned short>::const_iterator > p_computed_child;
-								p_computed_child.push_back(it);
+								/* Adds as computed the current plan. */
+								p_computed_child.push_back(it_plan);
 								merge_vec(plans_computed, p_computed_child);
 
 								gen_visit_seq(attr_grammar, b_plans, it, ins_computed_child, p_computed_child, v_seq_child);
 
+								/* Removes current plan as computed. */
+								merge_vec_without_plan(p_computed_child, plans_computed, it_plan);
+
 								/* Update information_computed plans. */
-								merge_vec(p_computed_child, plans_computed);
-								plan_family_computed(p_computed_child, v_seq_child);
+								plan_family_computed(plans_computed, v_seq_child);
 
 								/* Saves all instances calculated for the visit. */
 								for(size_t i_rec(0); i_rec < ins_computed_child.size(); i_rec++)
