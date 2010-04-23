@@ -142,10 +142,10 @@ struct attritute_grammar: public grammar<attritute_grammar>
 							     | "this" | "throw" | "true" | "try" | "typedef" | "typeid"
 							     | "typename" | "union" | "unsigned" | "using" | "virtual"
 							     | "void" | "volatile" | "while" | "xor" | "xor_eq"
+							     | "long" | "short" | "wchar_t" | "double"
 							     ;
 
-			r_cpp_basic_types = strlit<>("bool") | "char" | "double" | "float"
-							  | "int" | "long" | "short" | "wchar_t" | "string"
+			r_cpp_basic_types = strlit<>("bool") | "char" | "float" | "int" | "string"
 							  ;
 
 			/*

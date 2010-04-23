@@ -136,16 +136,12 @@ string Ast_literal::to_string() const
     switch(type)
     {
         case k_int:
-        case k_short:
-        case k_long:
         case k_float:
-        case k_double:
         {
             lit.append(value);
             break;
         }
         case k_char:
-        case k_wchar_t:
         {
             lit.append("'");
             lit.append(value);

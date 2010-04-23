@@ -973,9 +973,6 @@ void Builder_code::generate_structs(const Attr_grammar &attr_grammar) const
 			if(attrs[j]->get_sort_type()->is_type_basic())
 			{
 				if((attrs[j]->get_sort_type()->get_name().compare("int") == 0) ||
-				   (attrs[j]->get_sort_type()->get_name().compare("long") == 0) ||
-				   (attrs[j]->get_sort_type()->get_name().compare("short") == 0) ||
-				   (attrs[j]->get_sort_type()->get_name().compare("double") == 0) ||
 				   (attrs[j]->get_sort_type()->get_name().compare("float") == 0))
 				{
 					string name_sstr("str_");

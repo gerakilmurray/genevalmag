@@ -20,12 +20,8 @@ namespace genevalmag
 enum literal_type
 {
     k_int,
-    k_short,
-    k_long,
     k_float,
-    k_double,
     k_char,
-    k_wchar_t,
     k_string,
     k_bool
 };
@@ -105,10 +101,10 @@ class Ast_literal: public Ast_leaf
         void set_value(string new_value);
 
         /**
-          * Generate and return a string reprensentation of a Ast_literal.
-          *
-          * Result= literal
-          *
+          * Generate and return a string reprensentation of a Ast_literal.\n
+          *\n
+          * Result= literal\n
+          *\n
           * Ex: 1      -> int, short or long\n
           *     1.0    -> float or double\n
           *     '1'    -> char or wchar_t\n
