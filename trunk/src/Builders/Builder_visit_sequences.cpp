@@ -230,7 +230,7 @@ bool Builder_visit_sequences::gen_visit_seq
 					vector <unsigned short> v_seq_child;
 					for(map < Key_plan, unsigned short >::const_iterator it(b_plans.get_plans().begin()); it != b_plans.get_plans().end(); it++)
 					{
-						if((!belong_it(it, plans_computed)) && (it != it_plan))
+						if((!belong_it(it, plans_computed)) && it->second != it_plan->second)
 						{
 							/* Plan to recurse: it */
 							const Rule &rule_child(attr_grammar.get_rule(b_plans.get_contexts_uniques()[it->first.id_plan][0]));
