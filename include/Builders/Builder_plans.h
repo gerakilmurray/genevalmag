@@ -385,6 +385,14 @@ class Builder_plans
 		bool save_all_plans_project(const Attr_grammar &grammar, const string path_output) const;
 
 		/**
+		  * Returns the context rule unique in this index.
+		  *
+		  * @param i_context
+		  * @return
+		  */
+		const Order_rule &get_context_unique(const unsigned short i_context) const;
+
+		/**
 		  * Returns all contexts rule uniques.
 		  * @return
 		  */

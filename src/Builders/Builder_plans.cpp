@@ -538,6 +538,14 @@ unsigned short Builder_plans::build_plans(const Attr_grammar &attr_grammar)
 }
 
 /**
+  * Returns the context rule unique in this index.
+  */
+const Order_rule &Builder_plans::get_context_unique(const unsigned short i_context) const
+{
+	return contexts_uniques[i_context];
+}
+
+/**
   * Returns all contexts rule uniques.
   */
 const vector < Order_rule > &Builder_plans::get_contexts_uniques() const
