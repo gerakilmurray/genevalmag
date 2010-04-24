@@ -149,9 +149,9 @@ class Rule
 
         /**
           * Enqueues a symbol in the right side of the rule.
-          * @param rigth_symb
+          * @param right_symb
           */
-        void add_right_symbol(const Symbol *rigth_symb);
+        void add_right_symbol(const Symbol *right_symb);
         /**
           * Enqueues a equation in the list of the rule.
           * @param eq

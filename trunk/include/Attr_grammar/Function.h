@@ -169,9 +169,9 @@ class Function
         void set_prec(const unsigned short prec);
         /**
           * Sets the associativity of the operator.
-          * @param assoc
+          * @param mod
           */
-        void set_oper_assoc(const string assoc);
+        void set_oper_assoc(const string mod);
         /**
           * Sets the boolean attribute with the parameter.
           * @param value

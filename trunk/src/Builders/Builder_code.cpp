@@ -914,9 +914,8 @@ void Builder_code::generate_methods(const Builder_plans &b_plan, const Attr_gram
 /**
   * Generates and inserts all structs for represent each symbol of the grammar.
   * With constructor and to_string methods.
-  *		  *
   *
-  * For symbol S, with attrs s1 <syn> int, inserts:
+  * For symbol S, with attrs s1 \<syn\> int, inserts:
   *
   * typedef struct Symbol_S: Node
   * {
