@@ -292,11 +292,11 @@ class Builder_plans
 		  * Applies a topological order at graph.
 		  * The changes are applies about paramenter "result_order".
 		  * @param graph
-		  * @param eq_order
+		  * @param result_order
 		  * @param grammar
 		  * @param context_rule
 		  */
-		void generates_topological_order(const Graph &graph, Order_eval_eq &eq_order, const Attr_grammar &grammar, const Context_rule &context_rule) const;
+		void generates_topological_order(const Graph &graph, Order_eval_eq &result_order, const Attr_grammar &grammar, const Context_rule &context_rule) const;
 
 		/**
 		  * Compute the rule's order.

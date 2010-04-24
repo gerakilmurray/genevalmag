@@ -39,12 +39,13 @@ class Builder_visit_sequences
           * Generates recursively the visit sequence, navigating the tree as
           * indicated by the plans, visiting the children, returning to the
           * parent or generating a compute attribute.
+          *
           * @param attr_grammar
           * @param b_plans
           * @param it_plan
-          * @param computed
+          * @param ins_computed
           * @param plans_computed
-          * @param v_seq_computed_f
+          * @param v_seq_computed
           * @return
           */
         bool gen_visit_seq
@@ -52,9 +53,9 @@ class Builder_visit_sequences
         	const Attr_grammar &attr_grammar,
         	const Builder_plans &b_plans,
         	const map<Key_plan, unsigned short>::const_iterator &it_plan,
-        	vector<Ast_instance> &computed,
+        	vector<Ast_instance> &ins_computed,
         	vector< map<Key_plan, unsigned short>::const_iterator > &plans_computed,
-        	const vector<unsigned short> &v_seq_computed_f
+        	const vector<unsigned short> &v_seq_computed
         );
 
         /**

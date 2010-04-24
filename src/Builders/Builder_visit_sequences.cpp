@@ -66,7 +66,9 @@ void get_inherits_of(const Symbol *symb, const vector<Ast_instance> &computed, v
     }
 }
 
-
+/**
+  * Returns true if the iterator belongs to the vector passed as parameter.
+  */
 bool belong_it(const map<Key_plan, unsigned short>::const_iterator it, const vector< map<Key_plan, unsigned short>::const_iterator > &vec)
 {
 	for(size_t i(0); i < vec.size(); i++)
@@ -162,7 +164,7 @@ bool Builder_visit_sequences::gen_visit_seq
 {
 	const Order_eval_eq &plan(b_plans.get_plans_uniques()[it_plan->second]);
 
-    short leaves(0);
+    bool leaves(false);
     Visit_seq sequence;
     vector<Ast_instance> ins_computed_own;
 
@@ -186,7 +188,8 @@ bool Builder_visit_sequences::gen_visit_seq
 			/* Non computed in superior context, need leave to computed. */
 			{
 				sequence.push_back(LEAVE);
-				leaves++;
+				leaves = true;
+				break;
 			}
 			else
 			{
@@ -230,7 +233,6 @@ bool Builder_visit_sequences::gen_visit_seq
 					vector <unsigned short> v_seq_child;
 					for(map < Key_plan, unsigned short >::const_iterator it(b_plans.get_plans().begin()); it != b_plans.get_plans().end(); it++)
 					{
-						//if((!belong_it(it, plans_computed)) && it->second != it_plan->second)
 						if(!belong_it(it, plans_computed) && !belong_index(it->second, v_seq_computed) && it->second !=it_plan->second)
 						{
 							/* Plan to recurse: it */
@@ -275,7 +277,7 @@ bool Builder_visit_sequences::gen_visit_seq
 		/* Compute this equation */
 		sequence.push_back(eq->get_id()*(-1));
 
-		if (leaves < 1)
+		if (!leaves)
 		{
 			/* Mark the instance */
 			const Ast_instance *l_v(eq->get_l_value());

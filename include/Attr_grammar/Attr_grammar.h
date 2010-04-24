@@ -121,10 +121,10 @@ class Attr_grammar
 		const map<string, Sort> &get_sorts() const;
 		/**
 		  * Finds in the list of function of the semantic domain and returns the function with that name.
-		  * @param name_function
+		  * @param key_function
 		  * @return
 		  */
-		const Function *get_function(const string name_function) const;
+		const Function *get_function(const string key_function) const;
 		/**
 		  * Returns the map with all functions.
 		  * @return

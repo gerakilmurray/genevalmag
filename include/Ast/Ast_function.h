@@ -93,9 +93,9 @@ class Ast_function: public Ast_inner_node
 
         /**
           * Sets the function pointer of the Ast_function.
-          * @param func
+          * @param function
           */
-        void set_function(const Function *func);
+        void set_function(const Function *function);
         /**
           * Sets the precedence level of the Ast_function.
           * @param p_level

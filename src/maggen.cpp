@@ -1,41 +1,76 @@
 /**
-  *  \file		segmag.cpp
-  *  \brief		Tool for generation of Static Evaluators for Multiplans Attribute Grammar.
-  *             Este codigo es el encargado de realizar la llamadas a las funciones que realizan
-  *             los algoritmos para ordenar los arreglos. Ademas se encarga de medir los tiempos
-  *             que dichos algoritmos demoran y asi realizar un histograma. Para esto emplea
-  *             las capacidades del utilitario.
+  *  \file		maggen.cpp
+  *  \brief		Tool for generation of Static Evaluators for Multiplans Attribute Grammar.\n
   *
   *  \date		09/02/2010
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
+/** magGen: Generador de evaluadores estáticos para gramáticas de atributos multiplanes.\n
+  * http://code.google.com/p/genevalmag/\n
+  * Copyright (C) 2010 Kilmurray - Picco, UNRC\n
+  *
+  * System:         magGen\n
+  * Homepage:       <http://code.google.com/p/genevalmag/>\n
+  * Language:       C++\n
+  *\n
+  * Authors:        Kilmurray Gerardo Luis\n
+  * Authors:        Picco Gonzalo Martín\n
+  * E-Mail:         gerakilmurray AT gmail.com\n
+  * E-Mail:         gonzalopicco AT gmail.com\n
+  *\n
+  * magGen is free software: you can redistribute it and/or modify\n
+  * it under the terms of the GNU General Public License as published by\n
+  * the Free Software Foundation, either version 3 of the License, or\n
+  * (at your option) any later version.\n
+  *
+  * magGen is distributed in the hope that it will be useful,\n
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of\n
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n
+  * GNU General Public License for more details.\n
+  *
+  * You should have received a copy of the GNU General Public License\n
+  * along with magGen. If not, see <http://www.gnu.org/licenses/>.\n
+  */
 
 /**
-   \mainpage
-   maggen - Generator of Static Evalutor of Multiplan Attribute Grammar.
-   <br>Director: Marcelo Daniel Arroyo <br>
-   <hr>
-   \author Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
-   \author Picco, Gonzalo Martin <gonzalopicco@gmail.com>
-   \date Mayo 2010
-
-   \par Leeme:
-   Trabajo realizado en el marco de la Tesis de Licenciatura en Ciencias de la Computación.
-   <ul>
-   <li> Enlaces principales </li>
-   <li> http://code.google.com/p/genevalmag/
-   \htmlonly
-   <strong>HTML válido</strong><br>
-
-   \endhtmlonly
-   </li>
-   <li>etc...</li>
-   </ul>
-   <br><img src="../../../recursos/chinpance.png"><br>
-*/
-
+  * \mainpage maggen - Generator of Static Evaluator of Multiplan Attribute Grammar.
+  *
+  * <br>Director: Marcelo Daniel Arroyo <br>
+  *
+  * \author Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  * \author Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  *
+  * \date Mayo 2010
+  *
+  * \section intro Introducción
+  *
+  * Trabajo realizado en el marco de la Tesis de Licenciatura en Ciencias de la Computación.
+  *
+  * En este repositorio podrá encontrar:\n
+  * - bin      : Contiene el binario de maggen y archivos necesarios para la generación del evaluador.
+  * - doc      : Contiene toda la documentación y tutoriales de la herramienta.
+  * - include  : Contiene las cabeceras para incluir los archivos que permiten parsing y analisis de MAG,
+  *              generación de grafos, planes y secuencias de visitas.
+  * - src      : Contiene todos los archivos de implementación de la herramienta.
+  * - examples : Contiene ejemplos para ver el funcionamiento de maggen.
+  * - scripts  : Contiene scripts en bash para convertir archivos .dot en imágenes PNG.
+  *
+  * Enlaces principales:
+  * <A HREF="http://code.google.com/p/genevalmag/"> Genevalmag GoogleCode </A>
+  *
+  * \section notes Notas
+  * En etapa de escritura del informe
+  *
+  * \section requirements Requerimientos
+  * Para compilar la herramienta magGen, se necesita:
+  * - Boost libraries 1.41
+  * - g++ 4.3.3
+  *
+  * <br><img src="http://genevalmag.googlecode.com/files/logo.png"><br>
+  *
+  */
 
 #include <stdio.h>
 #include <iostream>
