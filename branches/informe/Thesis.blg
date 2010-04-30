@@ -2,10 +2,18 @@ This is BibTeX, Version 0.99c (Web2C 7.5.6)
 The top-level auxiliary file: Thesis.aux
 A level-1 auxiliary file: TitlePage.aux
 A level-1 auxiliary file: Chapter1.aux
+A level-1 auxiliary file: Clas_ag.aux
+A level-1 auxiliary file: Mag.aux
+A level-1 auxiliary file: Met_eval.aux
+A level-1 auxiliary file: Eval_est.aux
+A level-1 auxiliary file: Dise.aux
+A level-1 auxiliary file: Implem.aux
+A level-1 auxiliary file: Usos.aux
+A level-1 auxiliary file: Conclusion.aux
 A level-1 auxiliary file: Appendix1.aux
 The style file: ThesisStyle.bst
 I couldn't open database file Thesis.bib
----line 29 of file Thesis.aux
+---line 37 of file Thesis.aux
  : \bibdata{Thesis
  :                }
 I'm skipping whatever remains of this command
@@ -15,7 +23,7 @@ Warning--I didn't find a database entry for "Oakes_RStat_1999"
 Warning--I didn't find a database entry for "Guimond_CVIU_2000"
 You've used 0 entries,
             2415 wiz_defined-function locations,
-            563 strings with 4581 characters,
+            571 strings with 4663 characters,
 and the built_in function-call counts, 22 in all, are:
 = -- 0
 > -- 0
