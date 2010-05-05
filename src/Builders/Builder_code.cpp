@@ -29,7 +29,17 @@ namespace genevalmag
 /**
   * Contructor with the path and name of output files to be generated.
   */
-Builder_code::Builder_code(const string &path_folder_output, const string &name_file)
+Builder_code::Builder_code
+(
+	const string &path_folder_output,
+	const string &name_file,
+	const Attr_grammar &attribute_grammar,
+	const Builder_plans &builder_plan,
+	const Builder_visit_sequences &builder_v_seq
+)
+	: attr_grammar(attribute_grammar),
+	  b_plans(builder_plan),
+	  b_v_seq(builder_v_seq)
 {
 	path_output = path_folder_output;
 
@@ -209,7 +219,15 @@ void Builder_code::generate_footer_code() const
   * Generates the initialice of an array of type T, with the elements of the vector, and create a new vector
   * with this array.
   */
-template <class T> string write_vector_with_inic(string &text_buffer, string name_vec, size_t index, const vector<T> &vec, string type_vec, const string type_array)
+template <class T> string write_vector_with_inic
+(
+	string &text_buffer,
+	const string name_vec,
+	const size_t index,
+	const vector <T> &vec,
+	const string type_vec,
+	const string type_array
+)
 {
 	text_buffer.append("    ");
 	text_buffer.append(type_array);
@@ -255,18 +273,18 @@ template <class T> string write_vector_with_inic(string &text_buffer, string nam
 /**
   * Generates the initialization of all visit sequences.
   */
-void generate_initialize_v_seq(string &text, const vector<Visit_seq> & v_seq)
+string Builder_code::generate_initialize_v_seq() const
 {
-	text.append("    /**\n      * Initialize of Visit Sequences.\n      */\n");
+	string text("    /**\n      * Initialize of Visit Sequences.\n      */\n");
 
-	for(size_t i(0); i < v_seq.size(); i++)
+	for(size_t i(0); i < b_v_seq.get_visit_seq().size(); i++)
 	{
 		string name_vec(
 			write_vector_with_inic<int>(
 				text,
 				"order_",
 				i,
-				v_seq[i],
+				b_v_seq.get_visit_seq()[i],
 				"Visit_sequence",
 				"int"
 			)
@@ -275,12 +293,13 @@ void generate_initialize_v_seq(string &text, const vector<Visit_seq> & v_seq)
 		text.append(name_vec);
 		text.append(");\n\n");
 	}
+	return text;
 }
 
 /**
   * Generate a key plan with the parameters.
   */
-string generate_key_plan(string &text,const string n_key,int num_key, Key_plan k_p )
+string generate_key_plan(string &text, const string &n_key, const int &num_key, const Key_plan &k_p)
 {
 	text.append("    Key_plan ");
 	string name_key(n_key);
@@ -304,18 +323,18 @@ string generate_key_plan(string &text,const string n_key,int num_key, Key_plan k
 /**
   * Generates the initialization of all contexts rules uniques.
   */
-void generate_initialize_context(string &text, const vector < Order_rule > &contexts)
+string Builder_code::generate_initialize_context() const
 {
-	text.append("    /**\n      * Initialize of Contexts Rules.\n      */\n");
+	string text("    /**\n      * Initialize of Contexts Rules.\n      */\n");
 
-	for(size_t i(0); i < contexts.size(); i++)
+	for(size_t i(0); i < b_plans.get_contexts_uniques().size(); i++)
 	{
 		string name_vec(
 			write_vector_with_inic<unsigned short>(
 				text,
 				"context_",
 				i,
-				contexts[i],
+				b_plans.get_contexts_uniques()[i],
 				"Order_rule",
 				"unsigned short"
 			)
@@ -324,17 +343,18 @@ void generate_initialize_context(string &text, const vector < Order_rule > &cont
 		text.append(name_vec);
 		text.append(");\n\n");
 	}
+	return text;
 }
 
 /**
   * Generates the initialization of all evaluations plans.
   */
-void generate_initialize_plans(string &text, const map < Key_plan, unsigned short > &plans_p)
+string Builder_code::generate_initialize_plans() const
 {
-	text.append("    /**\n      * Initialize of Evaluation Plans.\n      */\n");
+	string text("    /**\n      * Initialize of Evaluation Plans.\n      */\n");
 
 	int num_key = 0;
-	for(map < Key_plan, unsigned short >::const_iterator it(plans_p.begin()); it != plans_p.end(); it++)
+	for(map < Key_plan, unsigned short >::const_iterator it(b_plans.get_plans().begin()); it != b_plans.get_plans().end(); it++)
 	{
 		/* generate key_plan */
 		string name_key(generate_key_plan(text, "key_", num_key, it->first));
@@ -355,17 +375,18 @@ void generate_initialize_plans(string &text, const map < Key_plan, unsigned shor
 
 		num_key++;
 	}
+	return text;
 }
 
 /**
   * Generates the initialization of all evaluation plan projects.
   */
-void generate_initialize_plan_proj(string &text, const map < Key_plan_project, unsigned short > &plans_p)
+string Builder_code::generate_initialize_plan_proj() const
 {
-	text.append("    /**\n      * Initialize of Evaluation Plans Project.\n      */\n");
+	string text("    /**\n      * Initialize of Evaluation Plans Project.\n      */\n");
 
 	int num_key = 0;
-	for(map < Key_plan_project, unsigned short >::const_iterator it(plans_p.begin()); it != plans_p.end(); it++)
+	for(map < Key_plan_project, unsigned short >::const_iterator it(b_plans.get_plans_project().begin()); it != b_plans.get_plans_project().end(); it++)
 	{
 		/* generate key_plan */
 		string name_key_plan(generate_key_plan(text, "key_plan_proj_", num_key, it->first.id_plan_project));
@@ -401,14 +422,15 @@ void generate_initialize_plan_proj(string &text, const map < Key_plan_project, u
 
 		num_key++;
 	}
+	return text;
 }
 
 /**
   * Generates the initialization of all rules.
   */
-void generate_initialize_rules(string &text, const Attr_grammar &attr_grammar)
+string Builder_code::generate_initialize_rules() const
 {
-	text.append("    /**\n      * Initialize of Rules of grammar.\n      */\n");
+	string text("    /**\n      * Initialize of Rules of grammar.\n      */\n");
 
 	const map<unsigned short, Rule> &rules = attr_grammar.get_rules();
 	int index = 0;
@@ -443,28 +465,29 @@ void generate_initialize_rules(string &text, const Attr_grammar &attr_grammar)
 
 		index++;
 	}
+	return text;
 }
 
 /**
   * Generates and inserts the evaluator class's constructor.
   * With all initializations of Evaluation Plans, Evaluation Plans Project, Visit Sequences and Rules.
   */
-void Builder_code::generate_constructor(const vector<Visit_seq> & v_seq, const Builder_plans &b_plan, const Attr_grammar &attr_grammar) const
+void Builder_code::generate_constructor() const
 {
 	string cons_txt(file_name);
 	cons_txt.append("::");
 	cons_txt.append(file_name);
 	cons_txt.append("()\n{\n");
 
-	generate_initialize_context(cons_txt, b_plan.get_contexts_uniques());
+	cons_txt.append(generate_initialize_context());
 
-	generate_initialize_plans(cons_txt, b_plan.get_plans());
+	cons_txt.append(generate_initialize_plans());
 
-	generate_initialize_plan_proj(cons_txt, b_plan.get_plans_project());
+	cons_txt.append(generate_initialize_plan_proj());
 
-	generate_initialize_v_seq(cons_txt, v_seq);
+	cons_txt.append(generate_initialize_v_seq());
 
-	generate_initialize_rules(cons_txt, attr_grammar);
+	cons_txt.append(generate_initialize_rules());
 
 	cons_txt.append("}\n\n");
 
@@ -479,9 +502,9 @@ void Builder_code::generate_constructor(const vector<Visit_seq> & v_seq, const B
 /**
   * Generates the print method, for show the all visit sequences.
   */
-void Builder_code::generate_print(string &text) const
+string Builder_code::generate_print() const
 {
-	text.append("void ");
+	string text("void ");
 	text.append(file_name);
 	text.append("::print_v_seq()\n    {\n");
 	text.append("    for(size_t i(0); i < v_seq.size(); i++)\n");
@@ -498,14 +521,15 @@ void Builder_code::generate_print(string &text) const
 	text.append("        cout << \".\" << endl;\n");
 	text.append("    }\n");
 	text.append("}\n\n");
+	return text;
 }
 
 /**
   * Generates the print method, for show the all visit sequences in a format more descriptive.
   */
-void Builder_code::generate_translate(string &text) const
+string Builder_code::generate_translate() const
 {
-	text.append("void ");
+	string text("void ");
 	text.append(file_name);
 	text.append("::translate_mag()\n    {\n");
 	text.append("    for(size_t v_s(0); v_s < v_seq.size(); v_s++)\n");
@@ -532,14 +556,15 @@ void Builder_code::generate_translate(string &text) const
 	text.append("        cout << \".\" << endl;\n");
 	text.append("    }\n");
 	text.append("}\n\n");
+	return text;
 }
 
 /**
   * Generates the return_index_context method, for get the index of a context rule.
   */
-void generate_return_index_context(string &text)
+string generate_return_index_context()
 {
-	text.append("unsigned short return_index_context(const Order_rule &context, const vector < Order_rule > &v_contexts)\n");
+	string text("unsigned short return_index_context(const Order_rule &context, const vector < Order_rule > &v_contexts)\n");
 	text.append("{\n");
 	text.append("    for(size_t i(0); i < v_contexts.size(); i++)\n");
 	text.append("    {\n");
@@ -550,14 +575,15 @@ void generate_return_index_context(string &text)
 	text.append("    }\n");
 	text.append("    return USHRT_MAX;\n");
 	text.append("}\n\n");
+	return text;
 }
 
 /**
   * Generates the method that crosses the AST and sets the evaluation plan that corresponds to each node.
   */
-void Builder_code::generate_traverse(string &text) const
+string Builder_code::generate_traverse() const
 {
-	text.append("void ");
+	string text("void ");
 	text.append(file_name);
 	text.append("::traverse(struct Node * node, unsigned short order)\n");
 	text.append("{\n");
@@ -604,6 +630,7 @@ void Builder_code::generate_traverse(string &text) const
 	text.append("        }\n");
 	text.append("    }\n");
 	text.append("}\n\n");
+	return text;
 }
 
 /**
@@ -700,11 +727,11 @@ string generate_expr_text(const Ast_node *node, const Rule &rule)
 }
 
 /**
-  *
   * Generates one method for each equation in the grammar, that computes it's value.
   */
-void generate_all_methods_eqs(string &text, const Attr_grammar &attr_grammar)
+string Builder_code::generate_all_methods_eqs() const
 {
+	string text;
 	const map <unsigned short, Rule> &rules(attr_grammar.get_rules());
 	for(map <unsigned short, Rule>::const_iterator r_it(rules.begin()); r_it != rules.end(); r_it++)
 	{
@@ -765,15 +792,16 @@ void generate_all_methods_eqs(string &text, const Attr_grammar &attr_grammar)
 			text.append("}\n\n");
 		}
 	}
+	return text;
 }
 
 /**
   * Generates a method with a large switch with all equations, invoking in each case,
   * the method that computes.
   */
-void Builder_code::generate_all_compute_eq(string &text, const Attr_grammar &attr_grammar) const
+string Builder_code::generate_all_compute_eq() const
 {
-	text.append("void ");
+	string text("void ");
 	text.append(file_name);
 	text.append("::compute_eq(int num_eq, struct Node *root)\n");
 	text.append("{\n");
@@ -792,15 +820,16 @@ void Builder_code::generate_all_compute_eq(string &text, const Attr_grammar &att
 	text.append("        default: cout << \"ERROR: Fatal action.\" << endl;\n");
 	text.append("    }\n");
 	text.append("}\n\n");
+	return text;
 }
 
 /**
   * Generates the evaluator method, which following the visit sequences drawn,
   * visit the nodes of the tree until computes it completely.
   */
-void Builder_code::generate_eval_visiter(string &text) const
+string Builder_code::generate_eval_visiter() const
 {
-	text.append("void ");
+	string text("void ");
 	text.append(file_name);
 	text.append("::eval_visiter(struct Node *root)\n");
 	text.append("{\n");
@@ -823,85 +852,89 @@ void Builder_code::generate_eval_visiter(string &text) const
 	text.append("    	}\n");
 	text.append("    }\n");
 	text.append("}\n\n");
+	return text;
 }
 
 /**
   * Generates the evaluating method, which performs the method invocations
   * to be computed all the attributes of the AST.
   */
-void Builder_code::generate_evaluator(string &text, const Builder_plans &b_plan) const
+string Builder_code::generate_evaluator() const
 {
-	text.append("void ");
+	string text("void ");
 	text.append(file_name);
 	text.append("::evaluator_mag(struct Node *root)\n");
 	text.append("{\n");
 
 	text.append("    unsigned short order_init(");
 	stringstream order_init_index;
-	order_init_index << b_plan.get_init_order();
+	order_init_index << b_plans.get_init_order();
 	text.append(order_init_index.str());
 	text.append(");\n");
 
 	text.append("    traverse(root, order_init);\n");
 	text.append("    eval_visiter(root);\n");
 	text.append("}\n");
+	return text;
 }
 
 /**
   * Generates and inserts the class method that insert a new plan.
   */
-void Builder_code::generate_add_plan(string &text) const
+string Builder_code::generate_add_plan() const
 {
-	text.append("void ");
+	string text("void ");
 	text.append(file_name);
 	text.append("::add_plan(const Key_plan &k_plan, unsigned short index_order)\n");
 	text.append("{\n");
 	text.append("   Plan plan(k_plan, index_order);\n");
 	text.append("   eval_plans.push_back(plan);\n");
 	text.append("}\n\n");
+	return text;
 }
 
 /**
   * Generates and inserts the class method that insert a new projected plan.
   */
-void Builder_code::generate_add_plan_project(string &text) const
+string Builder_code::generate_add_plan_project() const
 {
-	text.append("void ");
+	string text("void ");
 	text.append(file_name);
 	text.append("::add_plan_project(const Key_plan_project &k_plan_p, unsigned short index_order)\n");
 	text.append("{\n");
 	text.append("   Plan_project plan(k_plan_p, index_order);\n");
 	text.append("   eval_plans_project.push_back(plan);\n");
 	text.append("}\n\n");
+	return text;
 }
 
 /**
   * Generates and inserts all class methods, includind traverse, visit evaluator and the main evaluator.
   * This methods are based on the article by Wuu Yang.
   */
-void Builder_code::generate_methods(const Builder_plans &b_plan, const Attr_grammar &attr_grammar) const
+void Builder_code::generate_methods() const
 {
 	string methods_t;
 
-	generate_print(methods_t);
+	methods_t.append(generate_print());
 
-	generate_add_plan(methods_t);
+	methods_t.append(generate_add_plan());
 
-	generate_add_plan_project(methods_t);
+	methods_t.append(generate_add_plan_project());
 
-	generate_translate(methods_t);
+	methods_t.append(generate_translate());
 
-	generate_return_index_context(methods_t);
+	methods_t.append(generate_return_index_context());
 
-	generate_traverse(methods_t);
+	methods_t.append(generate_traverse());
 
-	generate_all_methods_eqs(methods_t, attr_grammar);
+	methods_t.append(generate_all_methods_eqs());
 
-	generate_all_compute_eq(methods_t, attr_grammar);
+	methods_t.append(generate_all_compute_eq());
 
-	generate_eval_visiter(methods_t);
+	methods_t.append(generate_eval_visiter());
 
-	generate_evaluator(methods_t, b_plan);
+	methods_t.append(generate_evaluator());
 
 	string path(path_output);
 	path.append(file_name);
@@ -926,7 +959,7 @@ void Builder_code::generate_methods(const Builder_plans &b_plan, const Attr_gram
   *     string to_string() const;
   * } S ;
   */
-void Builder_code::generate_structs(const Attr_grammar &attr_grammar) const
+void Builder_code::generate_structs() const
 {
 	string structs("/**\n  * Structs of the symbols.\n  */\n");
 	string text_constructor("/**\n  * Constructors of structs of the symbols.\n  */\n");
@@ -1056,14 +1089,14 @@ void Builder_code::generate_structs(const Attr_grammar &attr_grammar) const
   * Generates the header and source code of the static evaluator of the grammar passed as parameter,
   * alog with their evaluations plans, visit sequence and headers for uses user functions defined.
   */
-bool Builder_code::generate_code(const Attr_grammar &attr_grammar, const Builder_plans &b_plan, const vector<Visit_seq> &v_seq, const vector<string> &headers_file) const
+bool Builder_code::generate_code(const vector<string> &headers_file) const
 {
 	generate_header_file();
 	generate_code_file(headers_file);
 
-	generate_structs(attr_grammar);
-	generate_constructor(v_seq, b_plan, attr_grammar);
-	generate_methods(b_plan, attr_grammar);
+	generate_structs();
+	generate_constructor();
+	generate_methods();
 
 	generate_footer_header();
 	generate_footer_code();

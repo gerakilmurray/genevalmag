@@ -30,6 +30,18 @@ class Builder_visit_sequences
 {
     private:
 		/**
+		  * \var b_plans.
+		  * \brief References to all plans generates.
+		  */
+		const Builder_plans &b_plans;
+
+		/**
+		  * \var attr_grammar.
+		  * \brief References to the attribute grammar.
+		  */
+		const Attr_grammar &attr_grammar;
+
+		/**
 		  * \var all_visit_seqs.
 		  * \brief Stores all visit sequences generates.
 		  */
@@ -40,8 +52,6 @@ class Builder_visit_sequences
           * indicated by the plans, visiting the children, returning to the
           * parent or generating a compute attribute.
           *
-          * @param attr_grammar
-          * @param b_plans
           * @param it_plan
           * @param ins_computed
           * @param plans_computed
@@ -50,8 +60,6 @@ class Builder_visit_sequences
           */
         bool gen_visit_seq
         (
-        	const Attr_grammar &attr_grammar,
-        	const Builder_plans &b_plans,
         	const map<Key_plan, unsigned short>::const_iterator &it_plan,
         	vector<Ast_instance> &ins_computed,
         	vector< map<Key_plan, unsigned short>::const_iterator > &plans_computed,
@@ -69,9 +77,11 @@ class Builder_visit_sequences
     public:
         /**
           * Contructor empty of Builder_visit_sequences.
+          * @param builder_plan
+          * @param attribute_grammar
           * @return
           */
-        Builder_visit_sequences();
+        Builder_visit_sequences(const Builder_plans &builder_plan, const Attr_grammar &attribute_grammar);
 
         /**
           * Destructor of Builder_visit_sequences.
@@ -81,11 +91,9 @@ class Builder_visit_sequences
 
         /**
           * Generates a visit sequence for each evaluation plan.
-          * @param attr_grammar
-          * @param b_plans
           * @return
           */
-        bool generate_visit_sequences(const Attr_grammar &attr_grammar, const Builder_plans &b_plans);
+        bool generate_visit_sequences();
 
         /**
           * Returns the vector with all visit sequences generates.
