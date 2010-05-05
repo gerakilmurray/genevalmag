@@ -1,0 +1,65 @@
+\chapter{Metodolog\'ia de trabajo}
+\label{chap:metodologia}
+\minitoc
+
+
+\section{Practicas de software}
+El análisis y especificación de requerimientos puede parecer una tarea relativamente sencilla, pero la realidad es que el proceso de escribir un software requiere de un marco de trabajo para estructurar, planificar y controlar  el desarrollo del sistema.
+Al mismo tiempo, el uso de herramientas en cada etapa del ciclo de vida (análisis, diseño, implementación y prueba), permite recorrer un camino de creación incremental del sistema, donde cada estadio del proceso refina el modelo. 
+La importancia del uso de herramientas, modelos y métodos para asistir el proceso radica en visualizar y garantizar cualidades del producto desarrollado en practicas de software comprobadas teóricamente. 
+
+Algunas de las prácticas de software se tratan en la siguiente sección:
+\begin{description}
+\item[\textbf{Análisis-Diseño}] Esta etapa se baso en el estudio del marco teórico compuesto por papers y libros propuestos por el director de tesis. Edemas, se concretaron reuniones frecuentes para evacuar dudas y tomar decisiones respecto a objetivos y aspectos a considerar en el modelo. Esta fase, también, se utilizo para familiarizarse y solidificar el manejo de herramientas empleadas en los distintos estadios del proceso. 
+
+\item[\textbf{Implementación}] En la etapa de implementación se invirtió una gran porción del tiempo total del proyecto. Esta fase, se dividió principalmente, en abordar los distintos estadio considerados en el análisis-diseño, pero, también, el refinamiento del diseño era una tarea que jugaba un papel importante. 
+
+
+\item[\textbf{Prueba}] Esta etapa esta íntimamente relacionada con la etapa anterior (implementación), debido a que fueron realizadas en conjunto. Es decir, las pruebas eran abordadas luego de la implementación de cada fase distinguida en análisis-diseño. Para ello se planteaba casos de prueba específicos para cada fase, basándose en casos abordados en el marco teórico soporte del proyecto.
+
+
+\item[\textbf{Documentación}] La documentación ,a nivel de código, fue abordada desde la etapa de implementación hasta el fin del proceso. Esta etapa prioriza en hecho de clarificar detalles de implementación hacia la comunicación entre los desarrolladores, como así también para desarrolladores o posibles colaboradores externos al proyectos.
+Edemas, en la parte final se utilizo full-time a la elaboración del informe, presentación y demas, que hacen el desarrollo de una tesina de materia de grado.
+\end{description}
+
+\section{Lenguaje de programación C++}
+C++ es un lenguaje de programación con tipado estático, multi-paradigma, compilado y de propósito general. Fue desarrollado por Bjarne Stroustrup en el año 1979 en los laboratorios Bell, como una mejora al lenguaje de programación C, y fue originalmente llamado ``C con clases''.
+
+El lenguaje ha evolucionado, ha sido estandarizado y aún continúa evolucionando. Actualmente, C++ soporta varios conceptos que permiten escribir programas con diferentes estilos: imperativo (procedural), orientado a objetos (herencia, polimorfismo, programación genérica, metaprogramación, etc).
+
+La elección de C++ como lenguaje a utilizar en el desarrollo de \maggen surgió despues de reuniones con el director de tesis, en las cuales de evaluaron lenguajes y se analizaron parámetros como lo son: 
+
+eficiencia en cuanto a tiempo de ejecución, posibilidad de redefinir de los operadores en un contexto dado, mediante la \textit{sobre carga de operadores}, utilización de librerías maduras como soporte de componentes necesarios y extras al objetivo de la tesis, etc. 
+
+Esta ultima, permitió la disponibilidad de bibliotecas genéricas, como la STL (Standard Template Library) y Boost Library que fueron utilizadas para disponer de funcionalidades y estructuras con solidas referencias.
+
+
+\section{Herramientas}
+Las lista de herramientas que se detallan a continuación fueron utilizadas con resultados muy positivos en cada una de las etapas del desarrollo de sistema. Es de destacar que las herramientas son ``free software''.  
+\begin{description}
+
+
+\item [Eclipse] es un entorno de desarrollo integrado de código abierto multiplataforma para desarrollar lo que el proyecto llama ``Aplicaciones de Cliente Enriquecido'', opuesto a las aplicaciones ``Cliente-liviano'' basadas en navegadores. Esta plataforma, típicamente ha sido usada para desarrollar entornos de desarrollo integrados (del inglés IDE). La versión utilizada fue ``Galileo'' (lanzada el 24 de junio del 2009).   \footnote{ {\tt http://www.eclipse.org/}}
+
+\item [Subversion] es un software de sistema de control de versiones. Es software libre bajo una licencia de tipo Apache/BSD y se le conoce también como \textit{svn} por ser ese el nombre del comando que se utiliza. Esta herramienta fue de vital importancia para llevar a cabo la coordinación, comunicación y elaboración controlada entre los desarrolladores autores del trabajo.\footnote{ {\tt http://subversion.apache.org/}}
+
+\item [\LaTeXe] es una herramienta para sistema de composición de textos, orientado especialmente a la creación de libros, documentos científicos y técnicos que contengan fórmulas matemáticas. Este documento en su totalidad se escribió utilizando \LaTeXe.\footnote{ {\tt http://www.latex-project.org/}}
+
+\item [kile] es un editor de Tex/LaTeX. Funciona conjuntamente con KDE en varios sistemas operativos.\footnote{ {\tt http://kile.sourceforge.net/}}
+
+\item [Graphviz] es una herramienta de visualización de grafos de código abierto. Genera una gran variedad de formatos de salida \footnote{ {\tt http://www.graphviz.org/}}
+
+\item [Nemiver] es una herramienta de debugger que se integra perfectamente en el entorno de escritorio GNOME. En la actualidad cuenta con un motor que utiliza el conocido GNU gdb debugger para depurar programas C/C++. \footnote{ {\tt http://projects.gnome.org/nemiver/}}
+
+\item [Dia] es una herramienta para la creación de cualquier tipo de diagrama.\footnote{ {\tt http://live.gnome.org/Dia}}
+
+\item[Bouml] es una herramienta para la creación de diagramas UML.\footnote{ {\tt http://bouml.free.fr/ }}
+
+\item [Análisis estático de código] entre los que se encuentran:
+      \begin{description}
+      \item [Cloc] \textbf{C}ounter \textbf{l}ines \textbf{o}f \textbf{c}ode. contador de lineas en blanco, lineas de comentario y lineas de código reales en muchos lenguajes de programación. Cloc esta escrito en ''Perl`` sin dependencias externas fuera del estándar de la distribución ''Perl v5.6``.\footnote{ {\tt http://cloc.sourceforge.net/}}
+      \item [CCCC] \textbf{C} and \textbf{C}++ \textbf{C}ode \textbf{C}ounter. Fue desarrollado como un campo de pruebas para una serie de ideas relacionadas con las métricas de software en un proyecto de Maestría \footnote{ {\tt http://cccc.sourceforge.net/}}
+      \item [Gcov] es un test de cubrimiento o cobertura de código. Es una forma de probar partes del programa no incluidas en los casos de prueba. Se utiliza en conjunto con GCC. \footnote{ {\tt http://gcc.gnu.org/onlinedocs/gcc/Gcov.html}}
+      \end{description}
+
+\end{description}

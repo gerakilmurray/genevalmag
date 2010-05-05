@@ -10,7 +10,10 @@ Desde que D. Knuth introdujo en 1966 las gramáticas de atributos (GA), estas se
 En una gramática de atributos, se relaciona con cada símbolo de una gramática libre de contexto un conjunto de atributos. Cada regla o producción tiene asociados un conjunto de reglas semánticas que toman la forma de asignación a atributos de valores denotados por la aplicación de una función, la cual puede tomar como argumentos intancias de atributos pertenecientes a los símbolos que aparecen en la producción.
 Las reglas semánticas inducen dependencias entre los atributos que ocurren en la producción. El orden de evaluación es implícito (si existe) y queda determinado por las dependencias entre las instancias de los atributos.
 Una regla semántica se podrá evaluar cuando las instancias de los atributos que aparecen como sus argumentos estén evaluadas. Un evaluador de gramáticas de atributos debe tener en cuenta las dependencias entre las instancias de atributos para seguir un orden consistente de evaluación de los mismos.
-Si una GA contiene dependencias circulares no podría ser evaluada ya que no podría encontrarse un orden de evaluación. Existen numerosas herramientas basadas en este formalismo o en alguna de sus ex-tensiones, entre las cuales podemos mencionar yacc, Yet Another Compiler-Compiler [29],desarrollado por ATT, AntLR, JavaCC, JavaCUP, ELI y muchas otras.
+Si una GA contiene dependencias circulares no podría ser evaluada ya que no podría encontrarse un orden de evaluación. Existen numerosas herramientas basadas en este formalismo o en alguna de sus ex-tensiones, entre las cuales podemos mencionar yacc, Yet Another Compiler-Compiler,desarrollado por AT\&T, AntLR, JavaCC, JavaCUP, ELI y muchas otras.
+
+
+\section{Arbol sintactico atribuido}
 
 
 \section{Métodos de Evaluación}
