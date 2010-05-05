@@ -22,7 +22,13 @@ const unsigned short LEAVE(0);
 /**
   * Contructor empty of Builder_visit_sequences.
   */
-Builder_visit_sequences::Builder_visit_sequences()
+Builder_visit_sequences::Builder_visit_sequences
+(
+	const Builder_plans &builder_plan,
+	const Attr_grammar &attribute_grammar
+)
+	: b_plans(builder_plan),
+	  attr_grammar(attribute_grammar)
 {
 }
 
@@ -154,8 +160,6 @@ void plan_family_computed(const vector< map<Key_plan, unsigned short>::const_ite
   */
 bool Builder_visit_sequences::gen_visit_seq
 (
-	const Attr_grammar &attr_grammar,
-	const Builder_plans &b_plans,
 	const map<Key_plan, unsigned short>::const_iterator &it_plan,
 	vector<Ast_instance> &ins_computed,
 	vector< map<Key_plan, unsigned short>::const_iterator > &plans_computed,
@@ -248,7 +252,7 @@ bool Builder_visit_sequences::gen_visit_seq
 								p_computed_child.push_back(it_plan);
 								merge_vec(plans_computed, p_computed_child);
 
-								gen_visit_seq(attr_grammar, b_plans, it, ins_computed_child, p_computed_child, v_seq_child);
+								gen_visit_seq(it, ins_computed_child, p_computed_child, v_seq_child);
 
 								/* Removes current plan as computed. */
 								merge_vec_without_plan(p_computed_child, plans_computed, it_plan);
@@ -349,7 +353,7 @@ void Builder_visit_sequences::save_visit_sequence(const Visit_seq &sequence, con
 /**
   * Generates a visit sequence for each evaluation plan.
   */
-bool Builder_visit_sequences::generate_visit_sequences(const Attr_grammar &attr_grammar, const Builder_plans &b_plans)
+bool Builder_visit_sequences::generate_visit_sequences()
 {
     for(size_t i(0); i < b_plans.get_plans_uniques().size(); i++)
     {
@@ -371,7 +375,7 @@ bool Builder_visit_sequences::generate_visit_sequences(const Attr_grammar &attr_
                 vector<Ast_instance> ins_computed;
                 vector< map<Key_plan, unsigned short>::const_iterator > plans_computed;
                 merge_vec(plans_computed_all, plans_computed);
-				gen_visit_seq(attr_grammar, b_plans, it, ins_computed, plans_computed, visit_seq_computed);
+				gen_visit_seq(it, ins_computed, plans_computed, visit_seq_computed);
 				merge_vec(plans_computed, plans_computed_all);
 				plan_family_computed(plans_computed, visit_seq_computed);
             }

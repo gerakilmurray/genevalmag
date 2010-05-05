@@ -20,6 +20,24 @@ class Builder_code
 {
 	private:
 		/**
+		  * \var attr_grammar.
+		  * \brief References to the attribute grammar.
+		  */
+		const Attr_grammar &attr_grammar;
+
+		/**
+		  * \var b_plans.
+		  * \brief References to all plans generates.
+		  */
+		const Builder_plans &b_plans;
+
+		/**
+		  * \var b_v_seq.
+		  * \brief References to all visit sequences generates.
+		  */
+		const Builder_visit_sequences &b_v_seq;
+
+		/**
 		  * \var path_output
 		  * \brief Defines the path where the files generated be saved.
 		  */
@@ -51,7 +69,6 @@ class Builder_code
 		  * Generates and inserts all structs for represent each symbol of the grammar.
 		  * With constructor and to_string methods.
 		  *
-		  *
 		  * For symbol S, with attrs s1 \<syn\> int, inserts:\n
 		  *\n
 		  * typedef struct Symbol_S: Node\n
@@ -63,24 +80,19 @@ class Builder_code
           *     string to_string() const;\n
           * } S ;\n
 		  */
-		void generate_structs(const Attr_grammar &attr_grammar) const;
+		void generate_structs() const;
 
 		/**
 		  * Generates and inserts the evaluator class's constructor.
 		  * With all initializations of Evaluation Plans, Evaluation Plans Project, Visit Sequences and Rules.
-		  * @param v_seq
-		  * @param b_plan
-		  * @param attr_grammar
 		  */
-		void generate_constructor(const vector<Visit_seq> & v_seq, const Builder_plans &b_plan, const Attr_grammar &attr_grammar) const;
+		void generate_constructor() const;
 
 		/**
 		  * Generates and inserts all class methods, includind traverse, visit evaluator and the main evaluator.
 		  * This methods are based on the article by Wuu Yang.
-		  * @param b_plan
-		  * @param attr_grammar
 		  */
-		void generate_methods(const Builder_plans &b_plan, const Attr_grammar &attr_grammar) const;
+		void generate_methods() const;
 
 		/**
 		  * Insert the source code file's footer of the evaluator.
@@ -89,64 +101,108 @@ class Builder_code
 
 		/**
 		  * Generates the print method, for show the all visit sequences.
-		  * @param text
+		  * @return
 		  */
-		void generate_print(string &text) const;
+		string generate_print() const;
 
 		/**
 		  * Generates the print method, for show the all visit sequences in a format more descriptive.
-		  * @param text
+		  * @return
 		  */
-		void generate_translate(string &text) const;
+		string generate_translate() const;
 
 		/**
 		  * Generates the method that crosses the AST and sets the evaluation plan that corresponds to each node.
-		  * @param text
+		  * @return
 		  */
-		void generate_traverse(string &text) const;
+		string generate_traverse() const;
 
 		/**
 		  * Generates a method with a large switch with all equations, invoking in each case,
 		  * the method that computes.
-		  * @param text
-		  * @param attr_grammar
+		  * @return
 		  */
-		void generate_all_compute_eq(string &text, const Attr_grammar &attr_grammar) const;
+		string generate_all_compute_eq() const;
 
 		/**
 		  * Generates the evaluating method, which performs the method invocations
 		  * to be computed all the attributes of the AST.
-		  * @param text
-		  * @param b_plan
+		  * @return
 		  */
-		void generate_evaluator(string &text, const Builder_plans &b_plan) const;
+		string generate_evaluator() const;
 
 		/**
 		  * Generates the evaluator method, which following the visit sequences drawn,
 		  * visit the nodes of the tree until computes it completely.
-		  * @param text
+		  * @return
 		  */
-		void generate_eval_visiter(string &text) const;
+		string generate_eval_visiter() const;
 
 		/**
 		  * Generates and inserts the class method that insert a new plan.
-		  * @param text
+		  * @return
 		  */
-		void generate_add_plan(string &text) const;
+		string generate_add_plan() const;
 		/**
 		  * Generates and inserts the class method that insert a new projected plan.
-		  * @param text
+		  * @return
 		  */
-		void generate_add_plan_project(string &text) const;
+		string generate_add_plan_project() const;
+
+		/**
+		  * Generates one method for each equation in the grammar, that computes it's value.
+		  * @return
+		  */
+		string generate_all_methods_eqs() const;
+
+		/**
+		  * Generates the initialization of all rules.
+		  * @return
+		  */
+		string generate_initialize_rules() const;
+
+		/**
+		  * Generates the initialization of all visit sequences.
+		  * @return
+		  */
+		string generate_initialize_v_seq() const;
+
+		/**
+		  * Generates the initialization of all contexts rules uniques.
+		  * @return
+		  */
+		string generate_initialize_context() const;
+
+		/**
+		  * Generates the initialization of all evaluations plans.
+		  * @return
+		  */
+		string generate_initialize_plans() const;
+
+		/**
+		  * Generates the initialization of all evaluation plan projects.
+		  * @return
+		  */
+		string generate_initialize_plan_proj() const;
 
 	public:
 		/**
 		  * Contructor with the path and name of output files to be generated.
 		  * @param path_folder_output
 		  * @param name_file
+		  * @param attribute_grammar
+		  * @param builder_plan
+		  * @param builder_v_seq
 		  * @return
 		  */
-		Builder_code(const string &path_folder_output, const string &name_file);
+		Builder_code
+		(
+			const string &path_folder_output,
+			const string &name_file,
+			const Attr_grammar &attribute_grammar,
+			const Builder_plans &builder_plan,
+			const Builder_visit_sequences &builder_v_seq
+		);
 
 		/**
 		  * Destructor of the Builder_code.
@@ -157,13 +213,10 @@ class Builder_code
 		/**
 		  * Generates the header and source code of the static evaluator of the grammar passed as parameter,
 		  * alog with their evaluations plans, visit sequence and headers for uses user functions defined.
-		  * @param attr_grammar
-		  * @param b_plan
-		  * @param v_seq
 		  * @param headers_file
 		  * @return
 		  */
-		bool generate_code(const Attr_grammar &attr_grammar, const Builder_plans &b_plan ,const vector<Visit_seq> &v_seq, const vector<string> &headers_file) const;
+		bool generate_code(const vector<string> &headers_file) const;
 };
 
 }

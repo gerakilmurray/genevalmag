@@ -255,6 +255,12 @@ class Builder_plans
 {
 	private:
 		/**
+		  * \var attr_grammar.
+		  * \brief References to the attribute grammar.
+		  */
+		const Attr_grammar &attr_grammar;
+
+		/**
 		  * \var contexts_uniques
 		  * \brief Store all different context rule generates in the grammar.
 		  */
@@ -296,7 +302,7 @@ class Builder_plans
 		  * @param grammar
 		  * @param context_rule
 		  */
-		void generates_topological_order(const Graph &graph, Order_eval_eq &result_order, const Attr_grammar &grammar, const Context_rule &context_rule) const;
+		void generates_topological_order(const Graph &graph, Order_eval_eq &result_order, const Context_rule &context_rule) const;
 
 		/**
 		  * Compute the rule's order.
@@ -307,21 +313,21 @@ class Builder_plans
 		  * @param context_rule
 		  * @return
 		  */
-		Order_eval_eq compute_order(const Graph &graph_adp, unsigned short index_order, const Attr_grammar &grammar, const Context_rule &context_rule);
+		Order_eval_eq compute_order(const Graph &graph_adp, unsigned short index_order, const Context_rule &context_rule);
 
 		/**
 		  * Generates and saves all evaluation's plans for the Attribute Grammar.
 		  * @param grammar
 		  * @return
 		  */
-		bool generate_plans(const Attr_grammar &grammar);
+		bool generate_plans();
 
 		/**
 		  * Generates all graphs for attribute grammar: DP, DOWN, DCG and ADP.
 		  * @param grammar
 		  * @return
 		  */
-		bool generate_graphs(const Attr_grammar &grammar);
+		bool generate_graphs();
 
 		/**
 		  * Returns the index in the vector of context, or inserts in the last position.
@@ -347,9 +353,10 @@ class Builder_plans
 	public:
 		/**
 		  * Constructor empty of Builder plans.
+		  * @param attribute_grammar
 		  * @return
 		  */
-		Builder_plans();
+		Builder_plans(const Attr_grammar &attribute_grammar);
 
 		/**
 		  * Destructor of Builder plans.
@@ -366,7 +373,7 @@ class Builder_plans
 		  * @param attr_grammar
 		  * @return
 		  */
-		unsigned short build_plans(const Attr_grammar &attr_grammar);
+		unsigned short build_plans();
 
 		/**
 		  * Saves all plans. Creates a graph that represents the plan and uses print_graph with dot.
@@ -374,7 +381,7 @@ class Builder_plans
 		  * @param path_output
 		  * @return
 		  */
-		bool save_all_plans(const Attr_grammar &grammar, const string path_output) const;
+		bool save_all_plans(const string path_output) const;
 
 		/**
 		  * Saves all proyected's plans. Creates a graph that represents the plan and uses print_graph with dot.
@@ -382,7 +389,7 @@ class Builder_plans
 		  * @param path_output
 		  * @return
 		  */
-		bool save_all_plans_project(const Attr_grammar &grammar, const string path_output) const;
+		bool save_all_plans_project(const string path_output) const;
 
 		/**
 		  * Returns the context rule unique in this index.
@@ -448,14 +455,14 @@ class Builder_plans
 		  * @param rules
 		  * @param path_output
 		  */
-		void save_all_graphs(const map<unsigned short, Rule> &rules, const string path_output) const;
+		void save_all_graphs(const string path_output) const;
 
 		/**
 		  * Saves the graphs generated as the analysis of the dependencies between attributes, which demonstrate cyclicity.
 		  * @param rules
 		  * @param path_output
 		  */
-		void save_cyclic_graphs(const map<unsigned short, Rule> &rules, const string path_output) const;
+		void save_cyclic_graphs(const string path_output) const;
 };
 
 } /* end genevalmag */

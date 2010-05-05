@@ -31,7 +31,7 @@ const string PATH_OUT_PLAN_PROJECT("plans_project/");
 /**
   * Constructor empty of Builder plan.
   */
-Builder_plans::Builder_plans()
+Builder_plans::Builder_plans(const Attr_grammar &attribute_grammar): attr_grammar(attribute_grammar)
 {
 }
 
@@ -45,31 +45,31 @@ Builder_plans::~Builder_plans()
 /**
   * Saves all graphs generated as the analysis of the dependencies between attributes.
   */
-void Builder_plans::save_all_graphs(const map<unsigned short, Rule> &rules, const string path_output) const
+void Builder_plans::save_all_graphs(const string path_output) const
 {
-	build_graphs.save_all_graphs(rules, path_output);
+	build_graphs.save_all_graphs(attr_grammar.get_rules(), path_output);
 }
 
 /**
   * Saves the graphs generated as the analysis of the dependencies between attributes, which demonstrate cyclicity.
   */
-void Builder_plans::save_cyclic_graphs(const map<unsigned short, Rule> &rules, const string path_output) const
+void Builder_plans::save_cyclic_graphs(const string path_output) const
 {
-	build_graphs.save_cyclic_graphs(rules, path_output);
+	build_graphs.save_cyclic_graphs(attr_grammar.get_rules(), path_output);
 }
 
 /**
   * Generates all graphs for attribute grammar: DP, DOWN, DCG and ADP.
   */
-bool Builder_plans::generate_graphs(const Attr_grammar &grammar)
+bool Builder_plans::generate_graphs()
 {
-	if(build_graphs.compute_dependency_graphs(grammar.get_rules()))
+	if(build_graphs.compute_dependency_graphs(attr_grammar.get_rules()))
 	{
-		if(build_graphs.compute_down_graph(grammar.get_non_terminal_symbols(), grammar.get_rules()))
+		if(build_graphs.compute_down_graph(attr_grammar.get_non_terminal_symbols(), attr_grammar.get_rules()))
 		{
-			if(build_graphs.compute_dcg(grammar.get_rules()))
+			if(build_graphs.compute_dcg(attr_grammar.get_rules()))
 			{
-				if(build_graphs.compute_adp_graph(grammar))
+				if(build_graphs.compute_adp_graph(attr_grammar))
 				{
 					cout << "* Generate graphs ---------- [  OK  ]" << endl;
 					return true;
@@ -85,7 +85,7 @@ bool Builder_plans::generate_graphs(const Attr_grammar &grammar)
   * Applies a topological order at graph.
   * The changes are applies about paramenter "result_order".
   */
-void Builder_plans::generates_topological_order(const Graph &graph, Order_eval_eq &result_order, const Attr_grammar &grammar, const Context_rule &context_rule) const
+void Builder_plans::generates_topological_order(const Graph &graph, Order_eval_eq &result_order, const Context_rule &context_rule) const
 {
 	typedef std::list<Vertex> MakeOrder;
 	MakeOrder make_order;
@@ -104,19 +104,19 @@ void Builder_plans::generates_topological_order(const Graph &graph, Order_eval_e
 		/* For the equation's order only interests the instances. */
 		{
 			unsigned short index;
-			if (ins->get_attr()->is_inherit() && ins->get_symb()->equals(*grammar.get_rule(context_rule.context[0]).get_left_symbol()))
+			if (ins->get_attr()->is_inherit() && ins->get_symb()->equals(*attr_grammar.get_rule(context_rule.context[0]).get_left_symbol()))
 			/* The instance is a inherit of left-symbol rule.
 			 * The instance searchs in the superior context of rule. */
 			{
 				vector<unsigned short> context_father;
 				context_father.push_back(context_rule.father);
-				index = (grammar.get_index_eq_with_context(ins, context_father));
+				index = (attr_grammar.get_index_eq_with_context(ins, context_father));
 			}
 			else
 			/* The instance is a inherit of right-symbol rule or syntetize of left-symbol.
 			 * The instance searchs in the context of rule. */
 			{
-				index = (grammar.get_index_eq_with_context(ins, context_rule.context));
+				index = (attr_grammar.get_index_eq_with_context(ins, context_rule.context));
 			}
 
 			assert (index > 0);
@@ -129,7 +129,7 @@ void Builder_plans::generates_topological_order(const Graph &graph, Order_eval_e
   * Compute the rule's order.
   * The changes are applies about paramenter "result_order".
   */
-Order_eval_eq Builder_plans::compute_order(const Graph &graph_adp, unsigned short index_order, const Attr_grammar &grammar, const Context_rule &context_rule)
+Order_eval_eq Builder_plans::compute_order(const Graph &graph_adp, unsigned short index_order, const Context_rule &context_rule)
 {
 	Graph graph(graph_adp);
 	const Order_eval_eq &order_eq(plans_project_uniques[index_order]);
@@ -140,13 +140,13 @@ Order_eval_eq Builder_plans::compute_order(const Graph &graph_adp, unsigned shor
 	{
 		property_map<Graph, vertex_data_t>::type prop(get(vertex_data_t(), graph));
 		/* Obtain v1 */
-		const Ast_instance *ins1(grammar.get_eq_l_value(order_eq[i-1]));
+		const Ast_instance *ins1(attr_grammar.get_eq_l_value(order_eq[i-1]));
 		assert(ins1 != NULL);
 		Vertex v1(return_vertex(graph, ins1));
 		assert(v1 != USHRT_MAX);
 
 		/* Obtain v2 */
-		const Ast_instance *ins2(grammar.get_eq_l_value(order_eq[i]));
+		const Ast_instance *ins2(attr_grammar.get_eq_l_value(order_eq[i]));
 		assert(ins2 != NULL);
 		Vertex v2(return_vertex(graph, ins2));
 		assert(v2 != USHRT_MAX);
@@ -158,7 +158,7 @@ Order_eval_eq Builder_plans::compute_order(const Graph &graph_adp, unsigned shor
 
 	Order_eval_eq result;
 	/* Applies topological order over graph. */
-	generates_topological_order(graph, result, grammar, context_rule);
+	generates_topological_order(graph, result, context_rule);
 
 	return result;
 }
@@ -166,7 +166,7 @@ Order_eval_eq Builder_plans::compute_order(const Graph &graph_adp, unsigned shor
 /**
   * Saves all plans. Creates a graph that represents the plan and uses print_graph with dot.
   */
-bool Builder_plans::save_all_plans(const Attr_grammar &grammar, const string path_output) const
+bool Builder_plans::save_all_plans(const string path_output) const
 {
 	string path_out(path_output);
 	path_out.append(PATH_OUT_PLAN);
@@ -191,7 +191,7 @@ bool Builder_plans::save_all_plans(const Attr_grammar &grammar, const string pat
 				add_edge(ant,current,graph_plan);
 			}
 			ant = current;
-			const Equation *eq(grammar.get_eq(plan_o[i]));
+			const Equation *eq(attr_grammar.get_eq(plan_o[i]));
 			names[i] = cleaning_tabs(eq->to_string());
 		}
 		/* Obtains the rule. */
@@ -199,7 +199,7 @@ bool Builder_plans::save_all_plans(const Attr_grammar &grammar, const string pat
 
 		const Order_rule &context_o(contexts_uniques[it->first.id_plan]);
 
-		const Rule *rule(&(grammar.get_rules().find(context_o[0])->second));
+		const Rule *rule(&(attr_grammar.get_rules().find(context_o[0])->second));
 
 		name_graph.append(cleaning_tabs(rule->to_string_not_eqs()));
 
@@ -237,7 +237,7 @@ bool Builder_plans::save_all_plans(const Attr_grammar &grammar, const string pat
 /**
   * Saves all proyected's plans. Creates a graph that represents the plan and uses print_graph with dot.
   */
-bool Builder_plans::save_all_plans_project(const Attr_grammar &grammar, const string path_output) const
+bool Builder_plans::save_all_plans_project(const string path_output) const
 {
 	string path_out(path_output);
 	path_out.append(PATH_OUT_PLAN_PROJECT);
@@ -263,7 +263,7 @@ bool Builder_plans::save_all_plans_project(const Attr_grammar &grammar, const st
 				add_edge(ant,current,graph_plan);
 			}
 			ant = current;
-			const Equation *eq(grammar.get_eq(plan_p_o[i]));
+			const Equation *eq(attr_grammar.get_eq(plan_p_o[i]));
 			names[i] = cleaning_tabs(eq->to_string());
 		}
 
@@ -272,7 +272,7 @@ bool Builder_plans::save_all_plans_project(const Attr_grammar &grammar, const st
 
 		const Order_rule &context_o(contexts_uniques[it->first.id_plan_project.id_plan]);
 
-		const Rule *rule(&(grammar.get_rules().find(context_o[0])->second));
+		const Rule *rule(&(attr_grammar.get_rules().find(context_o[0])->second));
 		name_graph.append(cleaning_tabs(rule->to_string_not_eqs()));
 
 		name_graph.append(write_inf_context(context_o));
@@ -399,12 +399,12 @@ unsigned short Builder_plans::return_index_plan_p(const Order_eval_eq &order)
 /**
   * Generates and saves all evaluation's plans for the Attribute Grammar.
   */
-bool Builder_plans::generate_plans(const Attr_grammar &grammar)
+bool Builder_plans::generate_plans()
 {
 	vector < Item_work > work_list;
 	vector < Item_work > defined_item_work;
 	/* Initial Rule: Is the position "1" because for obtain the initial symbol uses the rule "1"*/
-	const Rule &initial_rule(grammar.get_rules().begin()->second);
+	const Rule &initial_rule(attr_grammar.get_rules().begin()->second);
 
 	/* Initializes the work list with the rule with the initial symbol grammar. */
 	Order_eval_eq init_order;
@@ -413,7 +413,7 @@ bool Builder_plans::generate_plans(const Attr_grammar &grammar)
 	vector < unsigned short > invoque_context;
 	invoque_context.push_back(initial_rule.key());
 	context.context = invoque_context;
-	generates_topological_order(build_graphs.get_dcg_graph(initial_rule.key()), init_order, grammar, context);
+	generates_topological_order(build_graphs.get_dcg_graph(initial_rule.key()), init_order, context);
 
 	init_order_ag = return_index_plan_p(init_order);
 
@@ -441,7 +441,7 @@ bool Builder_plans::generate_plans(const Attr_grammar &grammar)
 			for(map<vector<unsigned short>,Graph>::const_iterator adp(adp_graphs.begin()); adp != adp_graphs.end(); adp++)
 			{
 				/* Current rule that defines the ADP. */
-				const Rule& rule(grammar.get_rule(adp->first[0]));
+				const Rule& rule(attr_grammar.get_rule(adp->first[0]));
 
 				if (rule.key() == i_work.item.id_rule)
 				/* The adp graph belong at rule of the item_work current. */
@@ -451,7 +451,7 @@ bool Builder_plans::generate_plans(const Attr_grammar &grammar)
 					context.father = i_work.item.father;
 					context.context = adp->first;
 
-					Order_eval_eq total_order(compute_order(adp->second, i_work.order_attr, grammar, context));
+					Order_eval_eq total_order(compute_order(adp->second, i_work.order_attr, context));
 
 					Order_eval_eq order_purged;
 					purge_plan_with(rule, total_order, order_purged);
@@ -471,7 +471,7 @@ bool Builder_plans::generate_plans(const Attr_grammar &grammar)
 					{
 						Order_eval_eq proj_order;
 
-						const Rule& rule_proj(grammar.get_rule(adp->first[i+1]));
+						const Rule& rule_proj(attr_grammar.get_rule(adp->first[i+1]));
 
 						purge_plan_with(rule_proj, total_order, proj_order);
 
@@ -517,9 +517,9 @@ bool Builder_plans::generate_plans(const Attr_grammar &grammar)
   * 		1: when detects cilcyc graph.
   * 		2: when detects error in the graph generation.
   */
-unsigned short Builder_plans::build_plans(const Attr_grammar &attr_grammar)
+unsigned short Builder_plans::build_plans()
 {
-	if(generate_graphs(attr_grammar))
+	if(generate_graphs())
 	{
 		if (build_graphs.check_cyclic_adp_dependencies())
 		{
@@ -527,7 +527,7 @@ unsigned short Builder_plans::build_plans(const Attr_grammar &attr_grammar)
 			cerr << "ERROR: One o more graph ADP has an cycle in its dependencies. Look the folder GenEvalAG/Out_Gen_Mag for more details." << endl;
 			return 1;
 		}
-		else if(generate_plans(attr_grammar))
+		else if(generate_plans())
 		{
 			cout << "* Build plans -------------- [  OK  ]" << endl;
 			return 0;

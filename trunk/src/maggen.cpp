@@ -147,7 +147,7 @@ void show_help_information()
 {
 	string help("Usage: maggen [OPTIONS]\n\n");
 	help.append("        where OPTIONS include:\n");
-	help.append("             -f  file      Define the input file of the tool. Othercase, uses the standart input (cin).");
+	help.append("             -f  file      Define the input file of the tool. Othercase, uses the standart input (cin).\n");
 	help.append("             -i  header    Including header '.h' or '.hpp' file for resolve externs variables in generated code.\n");
 	help.append("             -fo folder    Defines the folder output for output generated information.Othercase, uses \"./out_maggen/\".\n");
 	help.append("             -o  name      Defines the names files generated tool. Otherwise, uses \"mag_eval\".\n");
@@ -160,7 +160,7 @@ void show_help_information()
  * where OPTIONS include:
  *         -f  file      Define the input file of the tool. Othercase, uses the standart input (cin).
   *        -i  header    Including header '.h' or '.hpp' file for resolve externs variables in generated code.
- *         -fo folder    Defines the folder output for output generated information.Othercase, uses "./out_maggen/".
+ *         -fo folder    Defines the folder output for output generated information. Othercase, uses "./out_maggen/".
  *         -o  name      Defines the names files generated tool. Otherwise, uses "mag_eval".
  *         -h            Show this help message.
  */
