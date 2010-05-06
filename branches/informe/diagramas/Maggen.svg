@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Bouml (http://bouml.free.fr/) -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="922" height="239" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<g>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="240" y="123" width="86" height="16" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" text-anchor="middle" x="283" y="135">Ast</text>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="240" y="139" width="217" height="88" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-style="italic" text-anchor="middle" x="349" y="149">include::Ast</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="833" y="19" width="2" height="90" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="69" y="107" width="766" height="2" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="66" y="16" width="767" height="91" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="450" y="25">include::Maglib</text>
+	<line stroke="black" stroke-opacity="1" x1="66" y1="32" x2="833" y2="32" />
+	<line stroke="black" stroke-opacity="1" x1="66" y1="38" x2="833" y2="38" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="69" y="47">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="83" y="47">Maglib()</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="69" y="62">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="83" y="62">~Maglib()</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="69" y="77">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="83" y="77">gen_evaluator(in path_input_file : string, in path_folder_output : string, in name_library : string, in headers : vector&lt;string&gt;) : int</text>
+</g>
+<g>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="693" y="123" width="86" height="16" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" text-anchor="middle" x="736" y="135">Attr_grammar</text>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="693" y="139" width="217" height="88" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-style="italic" text-anchor="middle" x="802" y="149">include::Attr_grammar</text>
+</g>
+<g>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="11" y="123" width="86" height="16" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" text-anchor="middle" x="54" y="135">Builders</text>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="11" y="139" width="217" height="88" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-style="italic" text-anchor="middle" x="120" y="149">include::Builders</text>
+</g>
+<g>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="466" y="123" width="86" height="16" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" text-anchor="middle" x="509" y="135">Parser</text>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="466" y="139" width="217" height="88" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-style="italic" text-anchor="middle" x="575" y="149">include::Parser</text>
+</g>
+</svg>
