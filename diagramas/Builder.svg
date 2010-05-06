@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Bouml (http://bouml.free.fr/) -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="2286" height="1563" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1803" y="567" width="3" height="53" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1539" y="617" width="267" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="1535" y="563" width="268" height="54" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" text-anchor="middle" x="1669" y="574">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1669" y="593">include::Builders::property_vertex_dp</text>
+	<line stroke="black" stroke-opacity="1" x1="1535" y1="601" x2="1803" y2="601" />
+	<line stroke="black" stroke-opacity="1" x1="1535" y1="609" x2="1803" y2="609" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1758" y="717" width="3" height="53" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1584" y="767" width="177" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="1580" y="713" width="178" height="54" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" text-anchor="middle" x="1669" y="724">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1669" y="743">include::Builders::Vertex</text>
+	<line stroke="black" stroke-opacity="1" x1="1580" y1="751" x2="1758" y2="751" />
+	<line stroke="black" stroke-opacity="1" x1="1580" y1="759" x2="1758" y2="759" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1757" y="489" width="3" height="53" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1585" y="539" width="175" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="1581" y="485" width="176" height="54" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" text-anchor="middle" x="1669" y="496">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1669" y="515">include::Builders::Graph</text>
+	<line stroke="black" stroke-opacity="1" x1="1581" y1="523" x2="1757" y2="523" />
+	<line stroke="black" stroke-opacity="1" x1="1581" y1="531" x2="1757" y2="531" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1671" y1="562" x2="1677" y2="556" />
+	<line stroke="black" stroke-opacity="1" x1="1671" y1="562" x2="1665" y2="556" />
+	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="1671" y1="543" x2="1671" y2="562" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="335" y="864" width="3" height="53" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="115" y="914" width="223" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="111" y="860" width="224" height="54" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" text-anchor="middle" x="223" y="871">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="223" y="890">include::Builders::Key_work_list</text>
+	<line stroke="black" stroke-opacity="1" x1="111" y1="898" x2="335" y2="898" />
+	<line stroke="black" stroke-opacity="1" x1="111" y1="906" x2="335" y2="906" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1782" y="645" width="3" height="53" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1560" y="695" width="225" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="1556" y="641" width="226" height="54" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" text-anchor="middle" x="1669" y="652">&lt;&lt;struct&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1669" y="671">include::Builders::vertex_data_t</text>
+	<line stroke="black" stroke-opacity="1" x1="1556" y1="679" x2="1782" y2="679" />
+	<line stroke="black" stroke-opacity="1" x1="1556" y1="687" x2="1782" y2="687" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1671" y1="640" x2="1677" y2="634" />
+	<line stroke="black" stroke-opacity="1" x1="1671" y1="640" x2="1665" y2="634" />
+	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="1671" y1="621" x2="1671" y2="640" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="336" y="927" width="3" height="109" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="114" y="1033" width="225" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="110" y="923" width="226" height="110" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" text-anchor="middle" x="223" y="934">&lt;&lt;struct&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="223" y="953">include::Builders::k_w</text>
+	<line stroke="black" stroke-opacity="1" x1="110" y1="961" x2="336" y2="961" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="114" y="972">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="128" y="972">father : ushort</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="114" y="989">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="128" y="989">id_rule : ushort</text>
+	<line stroke="black" stroke-opacity="1" x1="110" y1="997" x2="336" y2="997" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="114" y="1008">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="128" y="1008">operator ==(in other : k_w) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="114" y="1025">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="128" y="1025">operator =(in other : k_w) : k_w</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1816" y="470">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1518" y="430">-p_Dp_graphs</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="247" y="494">-plans_project_uniques</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1113" y="187">-build_graphs</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="853" y="495">-contexts_uniques</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1460" y="484">-p_Adp_graphs</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="349" y="873">+item</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="933" y="287">-b_plans {readOnly}</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="48" y="210">-b_plans {readOnly}</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1371" y="551">-p_Dcg_graphs</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1492" y="1022">-b_v_seq {readOnly}</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="850" y="592">+context</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1383" y="538">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="173" y="616">-eval_plans</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="174" y="603">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1789" y="483">-attr_vertex_graphs</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1762" y="414">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="539" y="616">-plans_project</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1814" y="1070">-all_visit_seqs</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="268" y="601">+id_plan_project</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="121" y="493">-plans_uniques</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1531" y="415">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1746" y="427">-p_Down_graphs</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1876" y="535">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1472" y="470">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1836" y="547">-p_Adp_subgraphs_cyclics</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="2132" y="27" width="3" height="351" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1210" y="375" width="925" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="1206" y="23" width="926" height="352" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1669" y="34">include::Builders::Builder_graphs</text>
+	<line stroke="black" stroke-opacity="1" x1="1206" y1="42" x2="2132" y2="42" />
+	<line stroke="black" stroke-opacity="1" x1="1206" y1="50" x2="2132" y2="50" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="1210" y="61">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1224" y="61">compute_attr_vertex(in symbols : map&lt;string,Symbol&gt;) : void</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="1210" y="78">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1224" y="78">complete_dp_graphs(in rules : map&lt;unsigned short, Rule&gt;) : void</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="1210" y="95">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1224" y="95">combined_inf_contexts(in rule : Rule, inout graph : Graph, inout inf_context : vector&lt; vector&lt;unsigned short&gt; &gt;, in index_to_combine : size_t) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="1210" y="112">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1224" y="112">Builder_graphs()</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="1210" y="129">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1224" y="129">~Builder_graphs()</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="1210" y="146">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1224" y="146">get_adp_graphs() : map&lt;vector&lt;unsigned short&gt;, Graph&gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="1210" y="163">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1224" y="163">get_cyclic_graphs() : map&lt;vector&lt;unsigned short&gt;, Graph&gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="1210" y="180">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1224" y="180">get_dcg_graph(in index_rule : ushort) : Graph</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="1210" y="197">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1224" y="197">compute_dependency_graphs(in rules : map&lt;unsigned short,Rule&gt;) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="1210" y="214">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1224" y="214">compute_down_graph(in symbols : map&lt;string, Symbol&gt;, in rules : map&lt;unsigned short, Rule&gt;) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="1210" y="231">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1224" y="231">compute_dcg(in rules : map&lt;unsigned short, Rule&gt;) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="1210" y="248">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1224" y="248">compute_adp_graph(in grammar : Attr_grammar) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="1210" y="265">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1224" y="265">check_cyclic_adp_dependencies() : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="1210" y="282">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1224" y="282">save_all_graphs(in rules : map&lt;unsigned short, Rule&gt;, in path_output : string) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="1210" y="299">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1224" y="299">save_cyclic_graphs(in rules : map&lt;unsigned short, Rule&gt;, in path_output : string) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="1210" y="316">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1224" y="316">save_dp_graphs(in rules : map&lt;unsigned short, Rule&gt;, in path_output : string) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="1210" y="333">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1224" y="333">save_down_graphs(in path_output : string) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="1210" y="350">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1224" y="350">save_dcg_graphs(in rules : map&lt;unsigned short, Rule&gt;, in path_output : string) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="1210" y="367">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1224" y="367">save_adp_graphs(in rules : map&lt;unsigned short, Rule&gt;, in path_output : string) : bool</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="618" y="927" width="3" height="97" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="392" y="1021" width="229" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="388" y="923" width="230" height="98" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" text-anchor="middle" x="503" y="934">&lt;&lt;struct&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="503" y="953">include::Builders::i_w</text>
+	<line stroke="black" stroke-opacity="1" x1="388" y1="961" x2="618" y2="961" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="392" y="972">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="406" y="972">order_attr : ushort</text>
+	<line stroke="black" stroke-opacity="1" x1="388" y1="980" x2="618" y2="980" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="392" y="991">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="406" y="991">operator ==(in other : i_w) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="392" y="1008">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="406" y="1008">operator =(in other : i_w) : i_w</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1737" y1="484" x2="1743" y2="478" />
+	<line stroke="black" stroke-opacity="1" x1="1737" y1="484" x2="1731" y2="478" />
+	<line stroke="black" stroke-opacity="1" x1="1737" y1="379" x2="1737" y2="484" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="1737,379 1743,385 1737,391 1731,385" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1935" y1="379" x2="1935" y2="493" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="1935,379 1941,385 1935,391 1929,385" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1612" y1="484" x2="1618" y2="478" />
+	<line stroke="black" stroke-opacity="1" x1="1612" y1="484" x2="1606" y2="478" />
+	<line stroke="black" stroke-opacity="1" x1="1612" y1="379" x2="1612" y2="484" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="1612,379 1618,385 1612,391 1606,385" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="387" y1="971" x2="363" y2="971" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="387,971 381,977 375,971 381,965" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1421" y1="379" x2="1421" y2="493" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="1421,379 1427,385 1421,391 1415,385" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1289" y1="379" x2="1289" y2="527" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="1289,379 1295,385 1289,391 1283,385" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="2058" y1="379" x2="2058" y2="526" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="2058,379 2064,385 2058,391 2052,385" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1761" y1="493" x2="1767" y2="499" />
+	<line stroke="black" stroke-opacity="1" x1="1761" y1="493" x2="1767" y2="487" />
+	<line stroke="black" stroke-opacity="1" x1="1935" y1="493" x2="1761" y2="493" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="363" y1="971" x2="363" y2="884" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="339" y1="884" x2="345" y2="890" />
+	<line stroke="black" stroke-opacity="1" x1="339" y1="884" x2="345" y2="878" />
+	<line stroke="black" stroke-opacity="1" x1="363" y1="884" x2="339" y2="884" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1580" y1="527" x2="1574" y2="521" />
+	<line stroke="black" stroke-opacity="1" x1="1580" y1="527" x2="1574" y2="533" />
+	<line stroke="black" stroke-opacity="1" x1="1289" y1="527" x2="1580" y2="527" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1761" y1="526" x2="1767" y2="532" />
+	<line stroke="black" stroke-opacity="1" x1="1761" y1="526" x2="1767" y2="520" />
+	<line stroke="black" stroke-opacity="1" x1="2058" y1="526" x2="1761" y2="526" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1580" y1="493" x2="1574" y2="487" />
+	<line stroke="black" stroke-opacity="1" x1="1580" y1="493" x2="1574" y2="499" />
+	<line stroke="black" stroke-opacity="1" x1="1421" y1="493" x2="1580" y2="493" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1186" y="1087" width="3" height="463" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="94" y="1547" width="1095" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="90" y="1083" width="1096" height="464" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="638" y="1094">include::Builders::Builder_code</text>
+	<line stroke="black" stroke-opacity="1" x1="90" y1="1102" x2="1186" y2="1102" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1113">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1113">path_output : string</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1130">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1130">file_name : string</text>
+	<line stroke="black" stroke-opacity="1" x1="90" y1="1138" x2="1186" y2="1138" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1149">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1149">generate_header_file() : void</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1166">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1166">generate_footer_header() : void</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1183">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1183">generate_code_file(in headers_file : vector&lt;string&gt;) : void</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1200">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1200">generate_structs() : void</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1217">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1217">generate_constructor() : void</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1234">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1234">generate_methods() : void</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1251">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1251">generate_footer_code() : void</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1268">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1268">generate_print() : string</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1285">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1285">generate_translate() : string</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1302">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1302">generate_traverse() : string</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1319">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1319">generate_all_compute_eq() : string</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1336">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1336">generate_evaluator() : string</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1353">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1353">generate_eval_visiter() : string</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1370">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1370">generate_add_plan() : string</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1387">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1387">generate_add_plan_project() : string</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1404">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1404">generate_all_methods_eqs() : string</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1421">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1421">generate_initialize_rules() : string</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1438">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1438">generate_initialize_v_seq() : string</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1455">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1455">generate_initialize_context() : string</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1472">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1472">generate_initialize_plans() : string</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1489">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1489">generate_initialize_plan_proj() : string</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1506">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1506">Builder_code(in path_folder_output : string, in name_file : string, in attribute_grammar : Attr_grammar, in builder_plan : Builder_plans, in builder_v_seq : Builder_visit_sequences)</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1523">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1523">~Builder_code()</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="94" y="1540">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="108" y="1540">generate_code(in headers_file : vector&lt;string&gt;) : bool</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="605" y="864" width="3" height="53" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="405" y="914" width="203" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="401" y="860" width="204" height="54" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" text-anchor="middle" x="503" y="871">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="503" y="890">include::Builders::Item_work</text>
+	<line stroke="black" stroke-opacity="1" x1="401" y1="898" x2="605" y2="898" />
+	<line stroke="black" stroke-opacity="1" x1="401" y1="906" x2="605" y2="906" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="953" y="728" width="3" height="53" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="737" y="778" width="219" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="733" y="724" width="220" height="54" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" text-anchor="middle" x="843" y="735">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="843" y="754">include::Builders::Context_rule</text>
+	<line stroke="black" stroke-opacity="1" x1="733" y1="762" x2="953" y2="762" />
+	<line stroke="black" stroke-opacity="1" x1="733" y1="770" x2="953" y2="770" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="919" y="27" width="3" height="429" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="187" y="453" width="735" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="183" y="23" width="736" height="430" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="551" y="34">include::Builders::Builder_plans</text>
+	<line stroke="black" stroke-opacity="1" x1="183" y1="42" x2="919" y2="42" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="53">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="53">init_order_ag : ushort</text>
+	<line stroke="black" stroke-opacity="1" x1="183" y1="61" x2="919" y2="61" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="72">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="72">generates_topological_order(in graph : Graph, inout result_order : Order_eval_eq, in context_rule : Context_rule) : void</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="89">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="89">compute_order(in graph_adp : Graph, in index_order : ushort, in context_rule : Context_rule) : Order_eval_eq</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="106">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="106">generate_plans() : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="123">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="123">generate_graphs() : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="140">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="140">return_index_context(in order : Order_rule) : ushort</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="157">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="157">return_index_plan(in order : Order_eval_eq) : ushort</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="174">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="174">return_index_plan_p(in order : Order_eval_eq) : ushort</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="191">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="191">Builder_plans(in attribute_grammar : Attr_grammar)</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="208">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="208">~Builder_plans()</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="225">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="225">build_plans() : ushort</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="242">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="242">save_all_plans(in path_output : string) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="259">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="259">save_all_plans_project(in path_output : string) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="276">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="276">get_context_unique(in i_context : ushort) : Order_rule</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="293">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="293">get_contexts_uniques() : vector&lt; Order_rule &gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="310">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="310">get_plans() : map&lt; Key_plan, unsigned short &gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="327">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="327">get_plans_uniques() : vector&lt; Order_eval_eq &gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="344">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="344">get_plans_project() : map&lt; Key_plan_project, unsigned short &gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="361">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="361">get_plans_project_uniques() : vector&lt; Order_eval_eq &gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="378">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="378">get_init_order() : ushort</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="395">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="395">get_index_plan(in it_plan : map&lt; Key_plan, unsigned short &gt;::const_iterator) : ushort</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="412">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="412">get_plan_project(in key : Key_plan_project) : map&lt; Key_plan_project, unsigned short &gt;::const_iterator</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="429">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="429">save_all_graphs(in path_output : string) : void</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="187" y="446">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="201" y="446">save_cyclic_graphs(in path_output : string) : void</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1205" y1="198" x2="1199" y2="192" />
+	<line stroke="black" stroke-opacity="1" x1="1205" y1="198" x2="1199" y2="204" />
+	<line stroke="black" stroke-opacity="1" x1="923" y1="198" x2="1205" y2="198" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="923,198 929,192 935,198 929,204" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="89" y1="1302" x2="66" y2="1302" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="182" y1="221" x2="176" y2="215" />
+	<line stroke="black" stroke-opacity="1" x1="182" y1="221" x2="176" y2="227" />
+	<line stroke="black" stroke-opacity="1" x1="66" y1="221" x2="182" y2="221" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="66" y1="1302" x2="66" y2="221" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="964" y="511" width="3" height="64" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="723" y="572" width="244" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="719" y="507" width="245" height="65" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" text-anchor="middle" x="842" y="518">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="842" y="537">include::Builders::Order_rule</text>
+	<line stroke="black" stroke-opacity="1" x1="719" y1="545" x2="964" y2="545" />
+	<line stroke="black" stroke-opacity="1" x1="719" y1="553" x2="964" y2="553" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="402" y="519" width="3" height="53" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="176" y="569" width="229" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="172" y="515" width="230" height="54" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" text-anchor="middle" x="287" y="526">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="287" y="545">include::Builders::Order_eval_eq</text>
+	<line stroke="black" stroke-opacity="1" x1="172" y1="553" x2="402" y2="553" />
+	<line stroke="black" stroke-opacity="1" x1="172" y1="561" x2="402" y2="561" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="2270" y="858" width="3" height="147" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="696" y="1002" width="1577" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="692" y="854" width="1578" height="148" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1481" y="865">include::Builders::Builder_visit_sequences</text>
+	<line stroke="black" stroke-opacity="1" x1="692" y1="873" x2="2270" y2="873" />
+	<line stroke="black" stroke-opacity="1" x1="692" y1="881" x2="2270" y2="881" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="696" y="892">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="710" y="892">gen_visit_seq(in it_plan : map&lt;Key_plan, unsigned short&gt;::const_iterator, inout ins_computed : vector&lt;Ast_instance&gt;, inout plans_computed : vector&lt; map&lt;Key_plan, unsigned short&gt;::const_iterator &gt;, in v_seq_computed : vector&lt;unsigned short&gt;) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="696" y="909">-</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="710" y="909">save_visit_sequence(in sequence : Visit_seq, in i_plan : size_t) : void</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="696" y="926">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="710" y="926">Builder_visit_sequences(in builder_plan : Builder_plans, in attribute_grammar : Attr_grammar)</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="696" y="943">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="710" y="943">~Builder_visit_sequences()</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="696" y="960">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="710" y="960">generate_visit_sequences() : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="696" y="977">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="710" y="977">get_visit_seq() : vector&lt; Visit_seq &gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="696" y="994">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="710" y="994">print_all_visit_sequences() : void</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1190" y1="1316" x2="1482" y2="1316" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1483" y1="853" x2="1483" y2="775" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="391" y1="514" x2="397" y2="508" />
+	<line stroke="black" stroke-opacity="1" x1="391" y1="514" x2="385" y2="508" />
+	<line stroke="black" stroke-opacity="1" x1="391" y1="457" x2="391" y2="514" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="391,457 397,463 391,469 385,463" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="128" y="479">&lt;&lt;vector&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="220" y1="514" x2="226" y2="508" />
+	<line stroke="black" stroke-opacity="1" x1="220" y1="514" x2="214" y2="508" />
+	<line stroke="black" stroke-opacity="1" x1="220" y1="457" x2="220" y2="514" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="220,457 226,463 220,469 214,463" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1113" y="172">&lt;&lt;vector&gt;&gt;</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="279" y="480">&lt;&lt;vector&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="843" y1="506" x2="849" y2="500" />
+	<line stroke="black" stroke-opacity="1" x1="843" y1="506" x2="837" y2="500" />
+	<line stroke="black" stroke-opacity="1" x1="843" y1="457" x2="843" y2="506" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="843,457 849,463 843,469 837,463" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="923" y1="298" x2="929" y2="304" />
+	<line stroke="black" stroke-opacity="1" x1="923" y1="298" x2="929" y2="292" />
+	<line stroke="black" stroke-opacity="1" x1="1044" y1="298" x2="923" y2="298" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1483" y1="775" x2="1044" y2="775" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1482" y1="1006" x2="1476" y2="1012" />
+	<line stroke="black" stroke-opacity="1" x1="1482" y1="1006" x2="1488" y2="1012" />
+	<line stroke="black" stroke-opacity="1" x1="1482" y1="1316" x2="1482" y2="1006" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1044" y1="775" x2="1044" y2="298" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="338" y="707" width="3" height="125" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="96" y="829" width="245" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="92" y="703" width="246" height="126" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" text-anchor="middle" x="215" y="714">&lt;&lt;struct&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="215" y="733">include::Builders::k_plan</text>
+	<line stroke="black" stroke-opacity="1" x1="92" y1="741" x2="338" y2="741" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="96" y="752">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="110" y="752">id_plan : ushort</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="96" y="769">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="110" y="769">plan : ushort</text>
+	<line stroke="black" stroke-opacity="1" x1="92" y1="777" x2="338" y2="777" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="96" y="788">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="110" y="788">operator &lt;(in other : k_plan) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="96" y="805">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="110" y="805">operator ==(in other : k_plan) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="96" y="822">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="110" y="822">operator =(in other : k_plan) : k_plan</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="963" y="615" width="3" height="91" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="727" y="703" width="239" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="723" y="611" width="240" height="92" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" text-anchor="middle" x="843" y="622">&lt;&lt;struct&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="843" y="641">include::Builders::c_rule</text>
+	<line stroke="black" stroke-opacity="1" x1="723" y1="649" x2="963" y2="649" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="727" y="660">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="741" y="660">father : ushort</text>
+	<line stroke="black" stroke-opacity="1" x1="723" y1="668" x2="963" y2="668" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="727" y="679">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="741" y="679">operator &lt;(in other : c_rule) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="727" y="696">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="741" y="696">operator =(in other : c_rule) : c_rule</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1899" y="1086" width="3" height="53" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1709" y="1136" width="193" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="1705" y="1082" width="194" height="54" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" text-anchor="middle" x="1802" y="1093">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1802" y="1112">include::Builders::Visit_seq</text>
+	<line stroke="black" stroke-opacity="1" x1="1705" y1="1120" x2="1899" y2="1120" />
+	<line stroke="black" stroke-opacity="1" x1="1705" y1="1128" x2="1899" y2="1128" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="1813" y="1054">&lt;&lt;vector&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="840" y1="576" x2="834" y2="582" />
+	<line stroke="black" stroke-opacity="1" x1="840" y1="576" x2="846" y2="582" />
+	<line stroke="black" stroke-opacity="1" x1="840" y1="610" x2="840" y2="576" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="840,610 834,604 840,598 846,604" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1804" y1="1081" x2="1810" y2="1075" />
+	<line stroke="black" stroke-opacity="1" x1="1804" y1="1081" x2="1798" y2="1075" />
+	<line stroke="black" stroke-opacity="1" x1="1804" y1="1006" x2="1804" y2="1081" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="1804,1006 1810,1012 1804,1018 1798,1012" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="312" y="632" width="3" height="53" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="122" y="682" width="193" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="118" y="628" width="194" height="54" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" text-anchor="middle" x="215" y="639">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="215" y="658">include::Builders::Key_plan</text>
+	<line stroke="black" stroke-opacity="1" x1="118" y1="666" x2="312" y2="666" />
+	<line stroke="black" stroke-opacity="1" x1="118" y1="674" x2="312" y2="674" />
+</g>
+<g>
+	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="182" y1="266" x2="90" y2="266" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="463" y1="457" x2="463" y2="584" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="463,457 469,463 463,469 457,463" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="652" y="632" width="3" height="53" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="408" y="682" width="247" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="404" y="628" width="248" height="54" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" text-anchor="middle" x="528" y="639">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="528" y="658">include::Builders::Key_plan_project</text>
+	<line stroke="black" stroke-opacity="1" x1="404" y1="666" x2="652" y2="666" />
+	<line stroke="black" stroke-opacity="1" x1="404" y1="674" x2="652" y2="674" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="542" y="604">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="90" y1="266" x2="90" y2="653" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="575" y1="457" x2="575" y2="590" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="575,457 581,463 575,469 569,463" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="463" y1="584" x2="163" y2="584" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="575" y1="590" x2="529" y2="590" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="163" y1="627" x2="169" y2="621" />
+	<line stroke="black" stroke-opacity="1" x1="163" y1="627" x2="157" y2="621" />
+	<line stroke="black" stroke-opacity="1" x1="163" y1="584" x2="163" y2="627" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="117" y1="653" x2="111" y2="647" />
+	<line stroke="black" stroke-opacity="1" x1="117" y1="653" x2="111" y2="659" />
+	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="90" y1="653" x2="117" y2="653" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="681" y="707" width="3" height="109" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="379" y="813" width="305" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="375" y="703" width="306" height="110" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" text-anchor="middle" x="528" y="714">&lt;&lt;struct&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="528" y="733">include::Builders::k_p_project</text>
+	<line stroke="black" stroke-opacity="1" x1="375" y1="741" x2="681" y2="741" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="379" y="752">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="393" y="752">index_ocurrence : ushort</text>
+	<line stroke="black" stroke-opacity="1" x1="375" y1="760" x2="681" y2="760" />
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="379" y="771">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="393" y="771">operator &lt;(in other : k_p_project) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="379" y="788">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="393" y="788">operator ==(in other : k_p_project) : bool</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" font-weight="bold" x="379" y="805">+</text>
+	<text font-family="Sans Serif" font-size="9" fill="#000000" xml:space="preserve" x="393" y="805">operator =(in other : k_p_project) : k_p_project</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="529" y1="627" x2="535" y2="621" />
+	<line stroke="black" stroke-opacity="1" x1="529" y1="627" x2="523" y2="621" />
+	<line stroke="black" stroke-opacity="1" x1="529" y1="590" x2="529" y2="627" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="374" y1="759" x2="356" y2="759" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="374,759 368,765 362,759 368,753" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="356" y1="657" x2="356" y2="608" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="356" y1="759" x2="356" y2="657" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="356" y1="608" x2="282" y2="608" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="282" y1="627" x2="288" y2="621" />
+	<line stroke="black" stroke-opacity="1" x1="282" y1="627" x2="276" y2="621" />
+	<line stroke="black" stroke-opacity="1" x1="282" y1="608" x2="282" y2="627" />
+</g>
+</svg>

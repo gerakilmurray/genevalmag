@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Bouml (http://bouml.free.fr/) -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1897" height="1259" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1215" y="10" width="2" height="394" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="635" y="402" width="582" height="2" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="632" y="7" width="583" height="395" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="924" y="16">include::Attr_grammar::Attr_grammar</text>
+	<line stroke="black" stroke-opacity="1" x1="632" y1="23" x2="1215" y2="23" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="32">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="32">count_eqs : ushort</text>
+	<line stroke="black" stroke-opacity="1" x1="632" y1="39" x2="1215" y2="39" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="48">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="48">load_attributes(inout symb : Symbol) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="63">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="63">defined_rule(in rule : Rule) : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="78">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="78">Attr_grammar()</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="93">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="93">~Attr_grammar()</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="108">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="108">add_sort(in sort : Sort) : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="123">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="123">add_function(in func : Function) : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="138">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="138">add_attribute(in attr : Attribute) : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="153">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="153">add_symbol(in symb : Symbol) : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="168">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="168">add_rule(inout rule : Rule) : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="183">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="183">return_sort(in name_sort : string) : Sort</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="198">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="198">get_sorts() : map&lt;string, Sort&gt;</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="213">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="213">get_function(in key_function : string) : Function</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="228">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="228">get_functions() : map&lt;string, Function&gt;</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="243">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="243">get_symbol(in name_symbol : string) : Symbol</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="258">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="258">get_rules() : map&lt;unsigned short, Rule&gt;</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="273">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="273">get_rule(in index : ushort) : Rule</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="288">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="288">get_non_terminal_symbols() : map&lt;string, Symbol&gt;</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="303">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="303">get_initial_symb() : Symbol</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="318">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="318">get_rules_with_left_symbol(in symb : Symbol) : vector&lt;unsigned short&gt;</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="333">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="333">get_index_eq_with_context(in ins : Ast_instance, in context_rule : vector&lt;unsigned short&gt;) : ushort</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="348">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="348">get_eq(in index : ushort) : Equation</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="363">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="363">get_eq_l_value(in index : ushort) : Ast_instance</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="378">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="378">get_count_eqs() : ushort</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="635" y="393">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="649" y="393">to_string() : string</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="382" y="780">-f_domain</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="853" y="448">-ag_attr</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1613" y="447">-ag_rule</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="985" y="830">-symb_attrs</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="755">-r_right_side</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1245" y="226">-ag_initial_symb {readOnly}</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="587" y="826">-a_sort_type {readOnly}</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="361" y="930">-f_assoc</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1099" y="448">-ag_symb_non_terminals</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1208" y="855">-symb_type</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="853" y="838">-a_mod_type</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1268" y="836">-r_left_symbol {readOnly}</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="381" y="816">-f_image {readOnly}</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1624" y="900">-r_eqs</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="521" y="448">-ag_sort</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="232" y="448">-ag_func</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1264" y="448">-ag_symb_terminals</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="124" y="930">-f_mod</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1777" y="461" width="2" height="408" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1439" y="867" width="340" height="2" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="1436" y="458" width="341" height="409" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1607" y="467">include::Attr_grammar::Rule</text>
+	<line stroke="black" stroke-opacity="1" x1="1436" y1="474" x2="1777" y2="474" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="483">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="483">r_id : ushort</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="498">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="498">r_offset : ushort</text>
+	<line stroke="black" stroke-opacity="1" x1="1436" y1="505" x2="1777" y2="505" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="514">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="514">copy(in other : Rule) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="529">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="529">destroy() : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="544">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="544">defined_equation(in eq : Equation) : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="559">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="559">Rule()</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="574">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="574">Rule(in other : Rule)</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="589">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="589">~Rule()</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="604">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="604">operator =(in other : Rule) : Rule</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="619">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="619">get_left_symbol() : Symbol</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="634">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="634">get_right_side() : vector&lt;const Symbol*&gt;</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="649">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="649">get_eqs() : map&lt;unsigned short,Equation&gt;</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="664">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="664">get_number_eqs() : size_t</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="679">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="679">get_eq(in index : ushort) : Equation</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="694">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="694">get_offset() : ushort</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="709">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="709">count_non_terminal(in symb : Symbol) : int</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="724">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="724">belongs_non_terminal(in non_term : Symbol) : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="739">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="739">get_non_terminals_right_side() : vector&lt;const Symbol*&gt;</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="754">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="754">set_id(in id : ushort) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="769">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="769">set_left_symbol(in left_symb : Symbol) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="784">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="784">add_right_symbol(in right_symb : Symbol) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="799">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="799">add_eq(inout eq : Equation) : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="814">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="814">to_string() : string</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="829">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="829">to_string_not_eqs() : string</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="844">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="844">equals(in other : Rule) : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1439" y="859">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1453" y="859">key() : ushort</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="644" y="462" width="2" height="274" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="390" y="734" width="256" height="2" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="387" y="459" width="257" height="275" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="516" y="468">include::Attr_grammar::Sort</text>
+	<line stroke="black" stroke-opacity="1" x1="387" y1="475" x2="644" y2="475" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="390" y="484">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="404" y="484">s_name : string</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="390" y="499">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="404" y="499">s_ins : uint</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="390" y="514">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="404" y="514">s_type_basic : bool</text>
+	<line stroke="black" stroke-opacity="1" x1="387" y1="521" x2="644" y2="521" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="390" y="530">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="404" y="530">copy(in other : Sort) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="390" y="545">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="404" y="545">destroy() : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="390" y="560">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="404" y="560">Sort()</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="390" y="575">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="404" y="575">Sort(in name : string)</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="390" y="590">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="404" y="590">Sort(in other : Sort)</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="390" y="605">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="404" y="605">~Sort()</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="390" y="620">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="404" y="620">operator =(in other : Sort) : Sort</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="390" y="635">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="404" y="635">get_name() : string</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="390" y="650">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="404" y="650">set_name(in name : string) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="390" y="665">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="404" y="665">set_type_basic(in type_basic : bool) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="390" y="680">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="404" y="680">to_string() : string</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="390" y="695">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="404" y="695">equals(in other : Sort) : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="390" y="710">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="404" y="710">is_type_basic() : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="390" y="725">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="404" y="725">key() : string</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="513" y="438">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="926" y1="405" x2="926" y2="430" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="926,405 932,411 926,417 920,411" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1625" y="437">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="926" y1="405" x2="926" y2="430" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="926,405 932,411 926,417 920,411" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="926" y1="430" x2="1603" y2="430" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="926" y1="430" x2="512" y2="430" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1603" y1="457" x2="1609" y2="451" />
+	<line stroke="black" stroke-opacity="1" x1="1603" y1="457" x2="1597" y2="451" />
+	<line stroke="black" stroke-opacity="1" x1="1603" y1="430" x2="1603" y2="457" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="512" y1="458" x2="518" y2="452" />
+	<line stroke="black" stroke-opacity="1" x1="512" y1="458" x2="506" y2="452" />
+	<line stroke="black" stroke-opacity="1" x1="512" y1="430" x2="512" y2="458" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1012" y="462" width="2" height="334" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="680" y="794" width="334" height="2" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="677" y="459" width="335" height="335" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="845" y="468">include::Attr_grammar::Attribute</text>
+	<line stroke="black" stroke-opacity="1" x1="677" y1="475" x2="1012" y2="475" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="484">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="484">a_name : string</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="499">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="499">a_member_symbol : string</text>
+	<line stroke="black" stroke-opacity="1" x1="677" y1="506" x2="1012" y2="506" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="515">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="515">copy(in other : Attribute) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="530">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="530">destroy() : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="545">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="545">Attribute()</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="560">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="560">Attribute(in other : Attribute)</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="575">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="575">~Attribute()</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="590">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="590">operator =(in other : Attribute) : Attribute</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="605">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="605">get_name() : string</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="620">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="620">get_sort_type() : Sort</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="635">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="635">get_mod_type() : type_attr</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="650">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="650">get_member_symbol() : string</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="665">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="665">set_name(in name : string) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="680">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="680">set_sort_type(in sort_type : Sort) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="695">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="695">set_mod_type(in mod_type : type_attr) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="710">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="710">set_member_symbol(in member_symbol : string) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="725">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="725">is_synthetize() : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="740">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="740">is_inherit() : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="755">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="755">to_string() : string</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="770">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="770">equals(in other : Attribute) : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="680" y="785">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="694" y="785">key() : string</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1882" y="912" width="2" height="334" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1342" y="1244" width="542" height="2" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="1339" y="909" width="543" height="335" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1611" y="918">include::Attr_grammar::Equation</text>
+	<line stroke="black" stroke-opacity="1" x1="1339" y1="925" x2="1882" y2="925" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="934">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="934">eq_id : ushort</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="949">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="949">count_ref : ushort</text>
+	<line stroke="black" stroke-opacity="1" x1="1339" y1="956" x2="1882" y2="956" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="965">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="965">copy(in other : Equation) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="980">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="980">destroy() : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="995">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="995">_get_count_ref() : ushort</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="1010">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="1010">inorder_only_instance(in head : Ast_node, inout result : vector&lt;const Ast_instance*&gt;) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="1025">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="1025">Equation()</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="1040">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="1040">Equation(in other : Equation)</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="1055">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="1055">~Equation()</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="1070">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="1070">operator =(in other : Equation) : Equation</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="1085">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="1085">get_l_value() : Ast_instance</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="1100">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="1100">get_r_value() : Ast_node</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="1115">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="1115">get_id() : ushort</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="1130">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="1130">set_id(in id : ushort) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="1145">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="1145">set_l_value(in lvalue : Ast_instance) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="1160">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="1160">set_r_value(in rvalue : Ast_node) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="1175">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="1175">inorder_only_leaf(in head : Ast_node, inout result : vector&lt;const Ast_leaf*&gt;) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="1190">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="1190">get_instance_right_side() : vector&lt;const Ast_instance*&gt;</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="1205">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="1205">to_string() : string</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="1220">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="1220">equals(in other : Equation) : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1342" y="1235">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1356" y="1235">key() : string</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="354" y="462" width="2" height="438" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="104" y="898" width="252" height="2" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="101" y="459" width="253" height="439" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="228" y="468">include::Attr_grammar::Function</text>
+	<line stroke="black" stroke-opacity="1" x1="101" y1="475" x2="354" y2="475" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="484">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="484">f_name : string</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="499">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="499">f_prec : ushort</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="514">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="514">f_is_operator : bool</text>
+	<line stroke="black" stroke-opacity="1" x1="101" y1="521" x2="354" y2="521" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="530">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="530">copy(in other : Function) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="545">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="545">destroy() : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="560">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="560">Function()</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="575">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="575">Function(in other : Function)</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="590">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="590">~Function()</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="605">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="605">operator =(in other : Function) : Function</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="620">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="620">get_name() : string</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="635">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="635">get_domain() : vector&lt;const Sort*&gt;</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="650">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="650">get_image() : Sort</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="665">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="665">get_mode() : oper_mode</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="680">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="680">get_prec() : ushort</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="695">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="695">get_oper_assoc() : oper_assoc</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="710">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="710">get_arity() : int</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="725">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="725">set_name(in name : string) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="740">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="740">set_image(in image : Sort) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="755">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="755">set_mode(in mode : string) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="770">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="770">set_prec(in prec : ushort) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="785">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="785">set_oper_assoc(in mod : string) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="800">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="800">set_is_operator(in value : bool) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="815">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="815">add_domain(in sort : Sort) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="830">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="830">to_string() : string</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="845">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="845">signature() : string</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="860">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="860">is_operator() : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="875">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="875">equals(in other : Function) : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="104" y="890">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="118" y="890">key() : string</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1609" y1="908" x2="1615" y2="902" />
+	<line stroke="black" stroke-opacity="1" x1="1609" y1="908" x2="1603" y2="902" />
+	<line stroke="black" stroke-opacity="1" x1="1609" y1="870" x2="1609" y2="908" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="1609,870 1615,876 1609,882 1603,876" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="926" y1="405" x2="926" y2="430" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="926,405 932,411 926,417 920,411" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="760" y1="797" x2="760" y2="837" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="357" y1="788" x2="468" y2="788" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="375" y="767">&lt;&lt;vector&gt;&gt;</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1615" y="889">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="226" y="439">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="926" y1="405" x2="926" y2="430" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="926,405 932,411 926,417 920,411" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="357" y1="805" x2="509" y2="805" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="844" y="439">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="468" y1="737" x2="462" y2="743" />
+	<line stroke="black" stroke-opacity="1" x1="468" y1="737" x2="474" y2="743" />
+	<line stroke="black" stroke-opacity="1" x1="468" y1="788" x2="468" y2="737" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="760" y1="837" x2="558" y2="837" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="926" y1="430" x2="841" y2="430" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="509" y1="737" x2="503" y2="743" />
+	<line stroke="black" stroke-opacity="1" x1="509" y1="737" x2="515" y2="743" />
+	<line stroke="black" stroke-opacity="1" x1="509" y1="805" x2="509" y2="737" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="926" y1="430" x2="222" y2="430" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="841" y1="458" x2="847" y2="452" />
+	<line stroke="black" stroke-opacity="1" x1="841" y1="458" x2="835" y2="452" />
+	<line stroke="black" stroke-opacity="1" x1="841" y1="430" x2="841" y2="458" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="222" y1="458" x2="228" y2="452" />
+	<line stroke="black" stroke-opacity="1" x1="222" y1="458" x2="216" y2="452" />
+	<line stroke="black" stroke-opacity="1" x1="222" y1="430" x2="222" y2="458" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="558" y1="737" x2="552" y2="743" />
+	<line stroke="black" stroke-opacity="1" x1="558" y1="737" x2="564" y2="743" />
+	<line stroke="black" stroke-opacity="1" x1="558" y1="837" x2="558" y2="737" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="946" y="852" width="2" height="70" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="742" y="920" width="206" height="2" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="739" y="849" width="207" height="71" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" text-anchor="middle" x="843" y="858">&lt;&lt;enum&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="843" y="874">include::Attr_grammar::type_attr</text>
+	<line stroke="black" stroke-opacity="1" x1="739" y1="881" x2="946" y2="881" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="742" y="890">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="756" y="890">k_inherit : type_attr</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="742" y="905">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="756" y="905">k_synthetize : type_attr</text>
+	<line stroke="black" stroke-opacity="1" x1="739" y1="912" x2="946" y2="912" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="225" y="944" width="2" height="86" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="7" y="1028" width="220" height="2" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="4" y="941" width="221" height="87" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" text-anchor="middle" x="115" y="950">&lt;&lt;enum&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="115" y="966">include::Attr_grammar::oper_mode</text>
+	<line stroke="black" stroke-opacity="1" x1="4" y1="973" x2="225" y2="973" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="7" y="982">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="21" y="982">k_prefix : oper_mode</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="7" y="997">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="21" y="997">k_infix : oper_mode</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="7" y="1012">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="21" y="1012">k_postfix : oper_mode</text>
+	<line stroke="black" stroke-opacity="1" x1="4" y1="1019" x2="225" y2="1019" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1343" y="462" width="2" height="348" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1055" y="808" width="290" height="2" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="1052" y="459" width="291" height="349" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1198" y="468">include::Attr_grammar::Symbol</text>
+	<line stroke="black" stroke-opacity="1" x1="1052" y1="475" x2="1343" y2="475" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="484">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="484">symb_name : string</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="499">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="499">symb_id : ushort</text>
+	<line stroke="black" stroke-opacity="1" x1="1052" y1="506" x2="1343" y2="506" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="515">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="515">copy(in other : Symbol) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="530">-</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="530">destroy() : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="545">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="545">Symbol()</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="560">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="560">Symbol(in name : string, in type : symbol_type)</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="575">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="575">Symbol(in other : Symbol)</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="590">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="590">~Symbol()</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="605">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="605">operator =(in other : Symbol) : Symbol</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="620">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="620">get_name() : string</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="635">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="635">get_type() : symbol_type</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="650">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="650">get_id() : ushort</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="665">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="665">get_attrs() : vector&lt;const Attribute*&gt;</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="680">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="680">get_attribute(in name_attr : string) : Attribute</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="695">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="695">set_name(in name : string) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="710">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="710">set_type(in type : symbol_type) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="725">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="725">set_id(in id : ushort) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="740">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="740">add_attr(in attr : Attribute) : void</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="755">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="755">is_non_terminal() : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="770">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="770">to_string() : string</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="785">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="785">equals(in other : Symbol) : bool</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1055" y="800">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1069" y="800">key() : string</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="926" y1="405" x2="926" y2="430" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="926,405 932,411 926,417 920,411" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="843" y1="848" x2="849" y2="842" />
+	<line stroke="black" stroke-opacity="1" x1="843" y1="848" x2="837" y2="842" />
+	<line stroke="black" stroke-opacity="1" x1="843" y1="797" x2="843" y2="848" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="843,797 849,803 843,809 837,803" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1435" y1="845" x2="1251" y2="845" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1218" y1="236" x2="1397" y2="236" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1346" y1="765" x2="1352" y2="771" />
+	<line stroke="black" stroke-opacity="1" x1="1346" y1="765" x2="1352" y2="759" />
+	<line stroke="black" stroke-opacity="1" x1="1435" y1="765" x2="1346" y2="765" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="230" y1="901" x2="230" y2="921" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="230,901 236,907 230,913 224,907" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1285" y="438">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1132" y="437">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1354" y="744">&lt;&lt;vector&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="926" y1="405" x2="926" y2="430" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="926,405 932,411 926,417 920,411" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="982" y="818">&lt;&lt;vector&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1083" y1="811" x2="1083" y2="837" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="926" y1="430" x2="1089" y2="430" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="926" y1="430" x2="1254" y2="430" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1083" y1="837" x2="961" y2="837" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1397" y1="236" x2="1397" y2="604" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1251" y1="811" x2="1245" y2="817" />
+	<line stroke="black" stroke-opacity="1" x1="1251" y1="811" x2="1257" y2="817" />
+	<line stroke="black" stroke-opacity="1" x1="1251" y1="845" x2="1251" y2="811" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="230" y1="921" x2="114" y2="921" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="961" y1="797" x2="955" y2="803" />
+	<line stroke="black" stroke-opacity="1" x1="961" y1="797" x2="967" y2="803" />
+	<line stroke="black" stroke-opacity="1" x1="961" y1="837" x2="961" y2="797" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1089" y1="458" x2="1095" y2="452" />
+	<line stroke="black" stroke-opacity="1" x1="1089" y1="458" x2="1083" y2="452" />
+	<line stroke="black" stroke-opacity="1" x1="1089" y1="430" x2="1089" y2="458" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1254" y1="458" x2="1260" y2="452" />
+	<line stroke="black" stroke-opacity="1" x1="1254" y1="458" x2="1248" y2="452" />
+	<line stroke="black" stroke-opacity="1" x1="1254" y1="430" x2="1254" y2="458" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1346" y1="604" x2="1352" y2="610" />
+	<line stroke="black" stroke-opacity="1" x1="1346" y1="604" x2="1352" y2="598" />
+	<line stroke="black" stroke-opacity="1" x1="1397" y1="604" x2="1346" y2="604" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="114" y1="940" x2="120" y2="934" />
+	<line stroke="black" stroke-opacity="1" x1="114" y1="940" x2="108" y2="934" />
+	<line stroke="black" stroke-opacity="1" x1="114" y1="921" x2="114" y2="940" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="463" y="944" width="2" height="86" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="243" y="1028" width="222" height="2" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="240" y="941" width="223" height="87" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" text-anchor="middle" x="352" y="950">&lt;&lt;enum&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="352" y="966">include::Attr_grammar::oper_assoc</text>
+	<line stroke="black" stroke-opacity="1" x1="240" y1="973" x2="463" y2="973" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="243" y="982">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="257" y="982">k_left : oper_assoc</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="243" y="997">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="257" y="997">k_right : oper_assoc</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="243" y="1012">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="257" y="1012">k_non_assoc : oper_assoc</text>
+	<line stroke="black" stroke-opacity="1" x1="240" y1="1019" x2="463" y2="1019" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1312" y="869" width="2" height="70" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1084" y="937" width="230" height="2" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="1081" y="866" width="231" height="71" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" text-anchor="middle" x="1197" y="875">&lt;&lt;enum&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1197" y="891">include::Attr_grammar::symbol_type</text>
+	<line stroke="black" stroke-opacity="1" x1="1081" y1="898" x2="1312" y2="898" />
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1084" y="907">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1098" y="907">k_terminal : symbol_type</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" font-weight="bold" x="1084" y="922">+</text>
+	<text font-family="Sans Serif" font-size="8" fill="#000000" xml:space="preserve" x="1098" y="922">k_non_terminal : symbol_type</text>
+	<line stroke="black" stroke-opacity="1" x1="1081" y1="929" x2="1312" y2="929" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="230" y1="901" x2="230" y2="921" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="230,901 236,907 230,913 224,907" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1198" y1="865" x2="1204" y2="859" />
+	<line stroke="black" stroke-opacity="1" x1="1198" y1="865" x2="1192" y2="859" />
+	<line stroke="black" stroke-opacity="1" x1="1198" y1="811" x2="1198" y2="865" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="1198,811 1204,817 1198,823 1192,817" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="230" y1="921" x2="351" y2="921" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="351" y1="940" x2="357" y2="934" />
+	<line stroke="black" stroke-opacity="1" x1="351" y1="940" x2="345" y2="934" />
+	<line stroke="black" stroke-opacity="1" x1="351" y1="921" x2="351" y2="940" />
+</g>
+</svg>
