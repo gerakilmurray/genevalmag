@@ -7,7 +7,53 @@
 
 \section{Lenguaje de especificaci\'on de las MAG}
 
-bla bla.
+El lenguaje de especificación utilizado para la descripción de una Gramática de atributos (MAG) fue definido en el marco de este proyecto. Esto permite definir una gramática de atributos como input de \maggen. 
+La secciones que conforman la descripción de una gramática de atributos se corresponden con las características que definen a una gramática de atributos como tal (ver capitulo de GA). 
+Informalmente, los bloques que conforman la especificación son:
+\begin{description}
+\item [Bloque Dominio Semántico] Destinando a la declaración de sort, operadores y funciones que se utilizaran en el bloque de ecuaciones. Este bloque es denominado ``semantic domain''.
+\item [Bloque de Atributos] Destinando a la declaración y definición de los atributos asociados a cada símbolo. Este bloque es denominado ``attributes''.
+\item [Bloque de Reglas] Destinado a la declaración y definición de las reglas sintácticas de la gramática con sus correspondientes ecuaciones semánticas para cada atributo asociado a cada símbolo. Este bloque es denominado ``rules''.
+\end{description}
+
+\subsection{Bloque Dominio semántico}
+
+En esta sección presentaremos el bloque ``semantic domain'' en detalle. Este bloque esta subdividido en 3 secciones, que se corresponden con la definición de los sort o tipos, los operadores y las funciones.
+\subsubsection{Declaración de sort}
+La declaración de ``sort'' esta dada por la siguiente regla en la gramática:
+\begin{table}[!htb]
+\lstset{language=C++}
+\scriptsize
+\begin{lstlisting}[frame=single]
+r_decl_sort   =   lexeme_d[ strlit<>("sort")  >> space_p ] >>
+                  (r_ident[&create_sort][st_sorts.add] % ',') >> ';';
+\end{lstlisting}
+\end{table}
+\subsubsection{Declaración de operadores}
+\subsubsection{Declaración de funciones}
+\subsection{Bloque de Atributos}
+En esta sección presentaremos el bloque ``attributes'' en detalle. Las reglas en la gramática se presentan a continuación.
+\begin{table}[!htb]
+\lstset{language=C++}
+\scriptsize
+\begin{lstlisting}[frame=single]
+r_attributes = lexeme_d[ strlit<>("attributes")>> space_p ] >> 
+                  +r_decl_attr[&create_attributes];
+
+r_decl_attr  =  (r_ident[&add_attribute][st_attributes.add] % ',') >>
+                  ':' >> !(r_type_attr[&save_type_attr]) >> '<' >> 
+                  r_sort_st[&save_sort_attr] >> '>' >>
+                  lexeme_d[ strlit<>("of")>> space_p ] >>
+                  (r_conj_symb |(strlit<>("all") >> !('-' >> 
+                  r_conj_symb)))[&save_member_list_attr] >> ';';
+
+r_conj_symb  = '{' >>(r_ident % ',') >> '}';
+
+r_type_attr  =(strlit<>("inh") | strlit<>("syn"));
+\end{lstlisting}
+\end{table}
+
+\subsection{Bloque de reglas}
 
 
 \section{Estrucutas internas}
