@@ -2,6 +2,30 @@
 \label{chap:intro}
 \minitoc
 
+n las ciencias de la computación los lenguajes juegan un rol muy importante en muchas disciplinas. Desde los comienzos
+se buscaron mecanismos para describirlos y manejarlos, esta rama de la informática ha logrado muchos avances en el tema.
+Dentro de los mecanismos desarrollados, las gramáticas han logrado ocupar unos de los lugares más destacados. La continua 
+evolución y descubrimientos de nuevas gramáticas necesitó que se organizaran, y no fue hasta 1956 que Noam Chomsky propuso
+una jerarquía sobre las gramáticas.\\
+Las clasificó en 4 niveles:\\
+
+\begin{tabular}{| p{1cm} | p{3.5cm} | p{4cm} | p{3cm} |}
+\hline
+\multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Tipo}} &
+\multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Lenguaje}} &
+\multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Autómata}} &
+\multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Restricciones}} \\ \hline
+
+\textbf{0} & Recursivamente enumerable (LRE) & Máquina de Turing (MT) & Sin restricciones \\ \hline
+\textbf{1} & Dependiente del contexto (LSC) & Autómata linealmente acotado & $\alpha A \beta \rightarrow \alpha\gamma\beta$ \\ \hline
+\textbf{2} & Independiente del contexto (LLC) & Autómata con pila & $A \rightarrow \gamma$ \\ \hline
+\textbf{3} & Regular (RL) & Autómata finito & $A \rightarrow aB$ \\
+  &              &                 & $A \rightarrow a$ \\ \hline
+\end{tabular}
+
+
+
+
 
 Desde que D. Knuth introdujo en 1966 las gramáticas de atributos (GA), estas se han utilizado ampliamente para el desarrollo de herramientas de procesamiento de lenguajes formales como compiladores, intérpretes, traductores como también para especificar la semántica de lenguajes de programación. Las gramáticas de atributos son un formalismo simple para la especificación de la semántica de lenguajes formales, como los lenguajes de programación o de especificación. Integran la modularidad que brindan las gramáticas libres de contexto y la expresividad de un lenguaje funcional.
 
