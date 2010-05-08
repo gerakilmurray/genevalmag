@@ -1,13 +1,44 @@
-\chapter{Diseño e Implementaci\'on de \maggen}
+\chapter{Detalles de Implementaci\'on de \maggen}
 \label{chap:implem}
 \minitoc
 
+En esta sección se aclararan y expondrán desiciones que se realizaron a lo largo de la implementación de esta herramienta.\\
+Primero, como ya se menciona en el capítulo anterior, el lenguaje sobre el cual se realizó el desarrollo de \maggen es C++, con lo que todo el código es principalmente característico de un modelo de programación Orientado a Objetos, aunque para lograr ciertas optimizaciones y poder integrar componentes de externos a la herramienta.
 
-bla bla
+\section{Parsing usando \boost \ \spirit}
 
-\section{GNU/linux}
+El primer desafío de codificación, fue que se debía conseguir parsear el archivo de entrada de la herramienta, en el cual vendría la especificación de una Gramática de Atributos, respetando la sintáxis presentada anteriormente, o no.\\
+La solución obtenida se apoya en la utilización de un framework reconocido mundialmente, denominado \spirit, perteneciente a la biblioteca de C++ llamada \boost. Esta decisión trajo dos grandes beneficios; la confiabilidad de el parser obtenido y la rápida obtención del mismo, ya que la gran ventaja de \spirit, es que permite escribir la definición de la gramática en lenguaje \textbf{C++}.\\
+Para comenzar a definir una gramática hay que crear una estructura que herede de la clase \texttt{grammar}. Dentro de ella se debe definir a su vez otra estructura templatizada denominada \texttt{definition}. En donde realmente estará la definición de la gramática.\\
+El mecanismo de definición es el siguiente, los operadores de metalenguaje son: \texttt{$=$}, \texttt{$|$}, \texttt{$>>$}, \texttt{$*$}, \texttt{$+$} y \texttt{$!$}, los cuales son: definición, disyunción, conjunción, 0 o más veces, 1 o más veces y opcional (0 o 1 vez), respectivamente. Mediante los cuales podemos combinar nuevas reglas con parsers
 
-bla bla
+\subsection{\texttt{``semantic domain''} en \spirit}
+
+En esta sección de la especificación se debían aceptar tres tipos de elementos: \texttt{sorts}, \texttt{operations}, \texttt{functions}.\\
+Los \texttt{sorts} seran los tipos que se podrán utilizar para definir los dominios e imagenes de los operadores y funciones. \spirit\ tiene varias directivas que modifican los parsers predefinidos y que agregan más sintáxis.\\
+\spirit\ tiene un gran conjunto de parsers que abarcan la mayoria de los tipos y representación de datos y valores utilizados en el común de los lenguajes.
+
+\begin{tabular}{| l | l |}
+\hline
+anychar\_p &  Acepta cualquier caracter simple (incluyendo el caracter nulo: '$\setminus0$')\\ \hline
+alnum\_p   &  Matches alpha-numeric characters \\ \hline
+alpha\_p   &  Matches alphabetic characters \\ \hline
+blank\_p   &  Matches spaces or tabs \\ \hline
+digit\_p   &  Matches numeric digits \\ \hline
+lower\_p   &  Matches lower case letters \\ \hline
+space\_p   &  Matches spaces, tabs, returns, and newlines \\ \hline
+upper\_p   &  Matches upper case letters \\ \hline
+
+\end{tabular}
+
+
+\subsection{\texttt{``attributes''} en \spirit }
+sdsad
+
+
+\subsection{\texttt{``rules''} en \spirit }
+
+sadsadsd
 
 \section{Algoritmo de generaci\'on de secuencia de visita}
 
