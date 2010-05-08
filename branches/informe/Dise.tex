@@ -15,47 +15,193 @@ Informalmente, los bloques que conforman la especificación son:
 \item [Bloque de Atributos] Destinando a la declaración y definición de los atributos asociados a cada símbolo. Este bloque es denominado ``attributes''.
 \item [Bloque de Reglas] Destinado a la declaración y definición de las reglas sintácticas de la gramática con sus correspondientes ecuaciones semánticas para cada atributo asociado a cada símbolo. Este bloque es denominado ``rules''.
 \end{description}
+De manera formal, se define una gramática G: CFG que define el lenguaje de especificación para el archivo de entrada aceptado por \maggen.
+\begin{center}
+\lstset{language=inform}
+\scriptsize
+\begin{lstlisting}[frame=single]
+S   =   semantic domain decl_Sd
+    |   attributes decl_attr
+    |   rules  decl_rules
+\end{lstlisting}
+\end{center}
+
+En las secciones posteriores se presentaran los símbolos con mas detalle  \textit{$<decl\_Sd>$}, \textit{$<decl\_attr>$} y \textit{$<decl\_rules>$}
 
 \subsection{Bloque Dominio semántico}
 
 En esta sección presentaremos el bloque ``semantic domain'' en detalle. Este bloque esta subdividido en 3 secciones, que se corresponden con la definición de los sort o tipos, los operadores y las funciones.
+\begin{center}
+\lstset{language=inform}
+\tiny
+\begin{lstlisting}[frame=single]
+decl_Sd = decl_sorts
+        | decl_operators
+        | decl_functions
+\end{lstlisting}
+\end{center}
 \subsubsection{Declaración de sort}
-La declaración de ``sort'' esta dada por la siguiente regla en la gramática:
-\begin{table}[!htb]
-\lstset{language=C++}
-\scriptsize
+La declaración de ``sort'' esta dada por la siguiente sintaxis:
+\begin{center}
+\lstset{language=inform}
+\tiny
 \begin{lstlisting}[frame=single]
-r_decl_sort   =   lexeme_d[ strlit<>("sort")  >> space_p ] >>
-                  (r_ident[&create_sort][st_sorts.add] % ',') >> ';';
+decl_sorts  =   'sort' NAME_SORT ';'
 \end{lstlisting}
-\end{table}
+\end{center}
 \subsubsection{Declaración de operadores}
-\subsubsection{Declaración de funciones}
-\subsection{Bloque de Atributos}
-En esta sección presentaremos el bloque ``attributes'' en detalle. Las reglas en la gramática se presentan a continuación.
-\begin{table}[!htb]
-\lstset{language=C++}
-\scriptsize
+En esta sección presentaremos la seccion de declaración de operaciones en detalle, la cual esta definida de la siguiente manera:
+\begin{center}
+\lstset{language=inform}
+\tiny
 \begin{lstlisting}[frame=single]
-r_attributes = lexeme_d[ strlit<>("attributes")>> space_p ] >> 
-                  +r_decl_attr[&create_attributes];
+decl_operators = 
+              'op' infix mode_op NAME_OP ':' NAME_SORT ','  NAME_SORT '->' NAME_SORT ';' 
+            | 'op' prefix mode_op NAME_OP ':' NAME_SORT '->' NAME_SORT ';'               
+            | 'op' posfix mode_op NAME_OP ':' NAME_SORT '->' NAME_SORT ';'
 
-r_decl_attr  =  (r_ident[&add_attribute][st_attributes.add] % ',') >>
-                  ':' >> !(r_type_attr[&save_type_attr]) >> '<' >> 
-                  r_sort_st[&save_sort_attr] >> '>' >>
-                  lexeme_d[ strlit<>("of")>> space_p ] >>
-                  (r_conj_symb |(strlit<>("all") >> !('-' >> 
-                  r_conj_symb)))[&save_member_list_attr] >> ';';
+mode_op         = '(' NUM_PRECEDENCE ','assoc ')'
 
-r_conj_symb  = '{' >>(r_ident % ',') >> '}';
-
-r_type_attr  =(strlit<>("inh") | strlit<>("syn"));
+assoc           = (left | right | non_assoc) 
 \end{lstlisting}
-\end{table}
+\end{center}
+\subsubsection{Declaración de funciones}
+
+\begin{center}
+\lstset{language=inform}
+\tiny
+\begin{lstlisting}[frame=single]
+decl_functions =  'function'	NAME_FUNC':' domain '->' NAME_SORT ';'
+domain  = NAME_SORT
+        | NAME_SORT ',' domain
+\end{lstlisting}
+\end{center}
+\subsection{Bloque de Atributos}
+En esta sección presentaremos el bloque ``attributes'' en detalle. El bloque de atributos esta definida de la siguiente manera.
+\begin{center}
+\lstset{language=inform}
+\tiny
+\begin{lstlisting}[frame=single]
+decl_attr   = (d_attr)+ 
+d_attr      = NAMA_ATTR : '<' t_attr '>' type_attr 'of' '{'list_symbol'}';
+t_attr      = inh
+            | syn
+list_symbol = SYMB_NON_TERMINAL 
+            | SYMB_NON_TERMINAL ',' list_symbol
+\end{lstlisting}
+\end{center}
 
 \subsection{Bloque de reglas}
+Por ultimo el bloque de reglas. Esta dado por el siguiente sintaxis:
+\begin{center}
+\lstset{language=inform}
+\tiny
+\begin{lstlisting}[frame=single]
+decl_rules   = (d_rule)+ 
+d_rule       = SYMB_NON_TERMINAL '::=' rigft_symb decl_eqs
+rigft_symb   = ( SYMB_NON_TERMINAL | SYMB_TERMINAL)+
 
+decl_eqs     = 'compute' d_eqs  'end;'
+             | ';'
+d_eqs        = instance '=' right_eq ';'
 
+right_eq     = leaf
+             | leaf OP_INFIX leaf right_eq
+             | (OP_PREFIX)+ leaf
+             | leaf (OP_POSTFIX)+
+             | 'NAME_FUNC' '(' right_eq ')' 
+
+leaf         = instance
+             | LITERAL
+
+instance     = 'symb_non_terminal' '[' 'num_ins' ']' '.' 'name_attr'
+            
+\end{lstlisting}
+\end{center}
+\subsection{Comentarios}
+La especificación permite agregar comentarios. Por cuestiones de simplicidad se han utilizado las mismas reglas sintácticas que C y C++ para el adicionado de lineas o bloques de comentario. Los cuales se detallan a continuación:
+\begin{description}
+ \item [$\textbf{/*}$ comment $\textbf{*/}$] es la forma de inserción de bloques de comentarios.
+ \item [$\textbf{//}$ line commet] es comentario de una linea.
+\end{description} 
+
+\subsection{Ejemplo}
+El ejemplo presentado en la figura \ref{fig:ejemplo_mag} es uno de los casos de test desarrollado para la construcción de \maggen. La importancia de este radica en que, el mismo, es un caso de estudio dado en una de las principales bases teóricas que han sido usadas para el sistema.
+
+\begin{figure}
+  \centering
+\lstset{language=inform}
+\scriptsize
+\begin{lstlisting}[frame=single]
+/**
+  *  \file              Mag.txt
+  *  \brief             Attribute Grammar example.
+  *  \date              15/02/2010
+  *  \author            Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author            Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  */
+/****************************
+ * Block of Semantic Domain *
+ ****************************/
+semantic domain
+    /*********************
+     * List of Operators *
+     *********************/
+    op infix    (10, left) +: int, int -> int;
+/***********************
+ * Block of Attributes *
+ ***********************/
+attributes
+            s0 : syn <int> of {S};
+            s1  : syn            <int> of {X};
+            s2  : syn <int> of {Y};
+            s3  : syn <int> of {Y};
+            s4  : syn <int> of {Z};
+                
+            i1  : inh <int> of {X};
+            i2  : inh <int> of {Y};
+            i3  : inh <int> of {Y};
+/******************
+ * Block of Rules *
+ ******************/
+rules
+            // P1
+    S ::= X Y Z
+                compute                        
+                        S[0].s0 = X[0].s1 + Y[0].s2 + Y[0].s3 + Z[0].s4;
+                        X[0].i1 = Y[0].s3;
+                        Y[0].i2 = X[0].s1;
+                        Y[0].i3 = Y[0].s2;
+                end;
+    // P2
+    Y ::= 'm'
+                compute
+                        Y[0].s2 = Y[0].i2;
+                        Y[0].s3 = 1;
+                end;
+            // P3
+    Y ::= 'n'
+                compute
+                        Y[0].s2 = 2;
+                        Y[0].s3 = Y[0].i3;
+                end;
+            // P4
+            X ::= 'm'
+                compute
+                        X[0].s1 = X[0].i1;
+                end;
+                        
+            // P5
+            Z ::= Y
+                compute
+                        Z[0].s4 = Y[0].s3;
+                        Y[0].i2 = 3;
+                        Y[0].i3 = Y[0].s2;
+                end;           
+\end{lstlisting}
+  \caption{Ejemplo ag\_wuu\_yang.input }
+  \label{fig:ejemplo_mag}
+\end{figure} 
 \section{Estrucutas internas}
 bla bla
 
