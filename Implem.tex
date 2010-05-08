@@ -10,6 +10,30 @@ Primero, como ya se menciona en el capítulo anterior, el lenguaje sobre el cual
 El primer desafío de codificación, fue que se debía conseguir parsear el archivo de entrada de la herramienta, en el cual vendría la especificación de una Gramática de Atributos, respetando la sintáxis presentada anteriormente, o no.\\
 La solución obtenida se apoya en la utilización de un framework reconocido mundialmente, denominado \spirit, perteneciente a la biblioteca de C++ llamada \boost. Esta decisión trajo dos grandes beneficios; la confiabilidad de el parser obtenido y la rápida obtención del mismo, ya que la gran ventaja de \spirit, es que permite escribir la definición de la gramática en lenguaje \textbf{C++}.\\
 Para comenzar a definir una gramática hay que crear una estructura que herede de la clase \texttt{grammar}. Dentro de ella se debe definir a su vez otra estructura templatizada denominada \texttt{definition}. En donde realmente estará la definición de la gramática.\\
+
+\begin{center}\lstset{language=C++}
+\scriptsize
+\begin{lstlisting}[frame=single,numbers=left]
+struct my_grammar : public grammar<my_grammar>
+{
+    template <typename ScannerT>
+    struct definition
+    {
+        rule<ScannerT>  r;
+
+        definition(my_grammar const& self)
+        {
+            r = /*..define here..*/;
+        }
+
+        rule<ScannerT> const& start() const
+        {
+            return r;
+        }
+    };
+};
+\end{lstlisting}\end{center}
+
 El mecanismo de definición es el siguiente, los operadores de metalenguaje son: \texttt{$=$}, \texttt{$|$}, \texttt{$>>$}, \texttt{$*$}, \texttt{$+$} y \texttt{$!$}, los cuales son: definición, disyunción, conjunción, 0 o más veces, 1 o más veces y opcional (0 o 1 vez), respectivamente. Mediante los cuales podemos combinar nuevas reglas con parsers. \spirit\ dispone de un gran conjunto de parsers que abarcan la mayoria de los tipos y representación de datos y valores utilizados en el común de los lenguajes (ver tabla \ref{parsers}). Además posee varias directivas que modifican el comportamiento de los parsers, encapsulándose en una expresión (ver tabla \ref{directivas}).
 
 \begin{figure}\begin{center}\begin{tabular}{| l | l |}
@@ -35,21 +59,19 @@ eps\_p     &   Cadena vacía (epsilon)\\ \hline
 end\_p     &   Caracter de fin de archivo (EOF)\\ \hline
 \end{tabular}\caption{\label{parsers} Parsers predefinidos de \spirit\ utilizados}\end{center}\end{figure}
 
-\begin{figure}\begin{center}\begin{tabular}{| l | l |}
+\begin{figure}\begin{center}\begin{tabular}{| l | p{8cm} |}
 \hline
 \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Directiva}} &
 \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Efecto}} \\ \hline
-lexeme\_d    &  Deshabilita cualquier parser del contexto superior\\ \hline
-as\_lower\_d &  Convierte en minúscula el ca\\ \hline
-longest\_d   &  \\ \hline
+lexeme\_d    &  Deshabilita la omisión de espacios en blanco (space\_p)\\ \hline
+as\_lower\_d &  Convierte en minúscula lo aceptado por la expresión\\ \hline
+longest\_d   &  Deshabilita el corto circuito, manda al analizador que pruebe todas las alternativas posibles y elija secuencia más larga aceptada \\ \hline
 \end{tabular}\caption{\label{directivas} Directivas de \spirit\ aplicadas}\end{center}\end{figure}
 
 \subsection{\texttt{``semantic domain''} en \spirit}
 
-En esta sección de la especificación se debían aceptar tres tipos de elementos: \texttt{sort
-s}, \texttt{operations}, \texttt{functions}.\\
-Los \texttt{sorts} seran los tipos que se podrán utilizar para definir los dominios e imagenes de los operadores y funciones. 
-
+En esta sección de la especificación se debían aceptar tres tipos de elementos: \texttt{sorts}, \texttt{operations} y \texttt{functions}.\\
+Los \texttt{sorts} seran los tipos que se podrán utilizar para definir los dominios e imagenes de los operadores y funciones.
 
 \subsection{\texttt{``attributes''} en \spirit }
 sdsad
