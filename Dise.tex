@@ -11,18 +11,18 @@ El lenguaje de especificación utilizado para la descripción de una Gramática 
 La secciones que conforman la descripción de una gramática de atributos se corresponden con las características que definen a una gramática de atributos como tal (ver capitulo de GA). 
 Informalmente, los bloques que conforman la especificación son:
 \begin{description}
-\item [Bloque Dominio Semántico] Destinando a la declaración de sort, operadores y funciones que se utilizaran en el bloque de ecuaciones. Este bloque es denominado ``semantic domain''.
-\item [Bloque de Atributos] Destinando a la declaración y definición de los atributos asociados a cada símbolo. Este bloque es denominado ``attributes''.
-\item [Bloque de Reglas] Destinado a la declaración y definición de las reglas sintácticas de la gramática con sus correspondientes ecuaciones semánticas para cada atributo asociado a cada símbolo. Este bloque es denominado ``rules''.
+\item [Bloque Dominio Semántico] Destinando a la declaración de sort, operadores y funciones que se utilizaran en el bloque de ecuaciones. Este bloque es denominado ``\texttt{semantic domain}''.
+\item [Bloque de Atributos] Destinando a la declaración y definición de los atributos asociados a cada símbolo. Este bloque es denominado ``\texttt{attributes}''.
+\item [Bloque de Reglas] Destinado a la declaración y definición de las reglas sintácticas de la gramática con sus correspondientes ecuaciones semánticas para cada atributo asociado a cada símbolo. Este bloque es denominado ``\texttt{rules}''.
 \end{description}
-De manera formal, se define una gramática G: CFG que define el lenguaje de especificación para el archivo de entrada aceptado por \maggen.
+De manera formal, se define una gramática \textbf{G: CFG} que define el lenguaje de especificación para el archivo de entrada aceptado por \maggen. El símbolo inicial de G es ``S''.
 \begin{center}
 \lstset{language=inform}
 \scriptsize
 \begin{lstlisting}[frame=single]
-S   =   semantic domain decl_Sd
-    |   attributes decl_attr
-    |   rules  decl_rules
+S   =   'semantic domain' decl_Sd
+    |   'attributes' decl_attrs
+    |   'rules' decl_rules
 \end{lstlisting}
 \end{center}
 
@@ -30,32 +30,34 @@ En las secciones posteriores se presentaran los símbolos con mas detalle  \text
 
 \subsection{Bloque Dominio semántico}
 
-En esta sección presentaremos el bloque ``semantic domain'' en detalle. Este bloque esta subdividido en 3 secciones, que se corresponden con la definición de los sort o tipos, los operadores y las funciones.
+En esta sección presentaremos el bloque ``\texttt{semantic domain}'' en detalle. Este bloque esta subdividido en 3 secciones, que se corresponden con la definición de los sort o tipos, los operadores y las funciones.
 \begin{center}
 \lstset{language=inform}
 \tiny
 \begin{lstlisting}[frame=single]
-decl_Sd = decl_sorts
-        | decl_operators
-        | decl_functions
+decl_Sd = (decl_sort)*
+        | (decl_operator)*
+        | (decl_function)*
 \end{lstlisting}
 \end{center}
 \subsubsection{Declaración de sort}
-La declaración de ``sort'' esta dada por la siguiente sintaxis:
+La declaración de ``sort'' esta dada por:
 \begin{center}
 \lstset{language=inform}
 \tiny
 \begin{lstlisting}[frame=single]
-decl_sorts  =   'sort' NAME_SORT ';'
+decl_sort  =   'sort' NAME_SORT ';'
 \end{lstlisting}
 \end{center}
+\textit{``NAME\_SORT''} representa el nombre del sort o tipo. El mismo se corresponde con la definición de un identificador en el común de los lenguajes de programación. Es decir, acepta caracteres alfanuméricos y guión bajo y restringe el los caracteres numéricos como primer carácter, como también palabras reservadas definidas por la especificación. (Para mas detalles ver ANEXO  XXX de implementación en \spirit).
+% \ref{append:grammarspirit}
 \subsubsection{Declaración de operadores}
-En esta sección presentaremos la seccion de declaración de operaciones en detalle, la cual esta definida de la siguiente manera:
+En esta sección presentaremos la sección de declaración de operaciones. El lenguaje acepta 3 tipos de operadores que difieren en su forma de uso y cantidad de operandos, los cuales son: infijo, prefijo y posfijo. La interpretación de cada uno de ellos esta dada por la interpretación natural común a todos los lenguajes de programación. A continuación se presenta esta sección con mas detalle:
 \begin{center}
 \lstset{language=inform}
 \tiny
 \begin{lstlisting}[frame=single]
-decl_operators = 
+decl_operator = 
               'op' infix mode_op NAME_OP ':' NAME_SORT ','  NAME_SORT '->' NAME_SORT ';' 
             | 'op' prefix mode_op NAME_OP ':' NAME_SORT '->' NAME_SORT ';'               
             | 'op' posfix mode_op NAME_OP ':' NAME_SORT '->' NAME_SORT ';'
@@ -65,34 +67,48 @@ mode_op         = '(' NUM_PRECEDENCE ','assoc ')'
 assoc           = (left | right | non_assoc) 
 \end{lstlisting}
 \end{center}
+\textit{``NAME\_OP''} representa un identificador para el operador (infija, prefija y post fija). Las restricciones y detalles a tener en cuenta para este identificador son las mismas que se analizaron para ``NAME\_SORT''.
+\textit{``NUN\_PRECEDENCE''} representa un numero positivo que define la precedencia del operador. Cabe aclarar que a mayor numero mayor la precedencia.
 \subsubsection{Declaración de funciones}
-
+ La noción de funciones dentro de la especificación es tomada con la noción natural de función matemática. Es decir, toda función esta definida mediante un identificador, un dominio y una imagen.
 \begin{center}
 \lstset{language=inform}
 \tiny
 \begin{lstlisting}[frame=single]
-decl_functions =  'function'	NAME_FUNC':' domain '->' NAME_SORT ';'
-domain  = NAME_SORT
-        | NAME_SORT ',' domain
+decl_function =  'function' NAME_FUNC':' domain '->' NAME_SORT ';'
+domain  = NAME_SORT ',' domain
+        | NAME_SORT 
+        | \lambda
 \end{lstlisting}
 \end{center}
+\textit{``NAME\_FUNC''} define el identificador de la función, en el cual se asumen las mismas restricciones tomadas para ``NAME\_SORT''. Cabe aclarar que se acepta un dominio vacío lo que permite el uso de funciones que solo retorna un valor.
 \subsection{Bloque de Atributos}
-En esta sección presentaremos el bloque ``attributes'' en detalle. El bloque de atributos esta definida de la siguiente manera.
+En esta sección presentaremos el bloque ``attributes'' en detalle. La información que define un atributo dentro del lenguaje esta dado por: 
+\begin{description}
+\item [Nombre:] representa el nombre del atributo, el mismo se adecua a los requisitos de identidicador analizados anteriormente.
+\item [Clase de atributo:] el cual esta dado por si el atributo es sintetizado o heredado.
+\item [Tipo:] esta dado por el tipo del atributo. El mismo corresponde a un tipo básico o a un sort definido en la sección de \textit{Sort}
+\item [Símbolos de pertenencia:] son los símbolos a lo cuales se asocia el atributo.
+\end{description}
+A continuación se muestra con mas detalle la sección de atributos.
 \begin{center}
 \lstset{language=inform}
 \tiny
 \begin{lstlisting}[frame=single]
-decl_attr   = (d_attr)+ 
-d_attr      = NAMA_ATTR : '<' t_attr '>' type_attr 'of' '{'list_symbol'}';
-t_attr      = inh
+decl_attrs  = (d_attr)+ 
+d_attr      = NAMA_ATTR ':' '<' c_attr '>' type_attr 'of' '{'list_symbol'}';
+c_attr      = inh
             | syn
-list_symbol = SYMB_NON_TERMINAL 
-            | SYMB_NON_TERMINAL ',' list_symbol
+list_symbol = SYMB_NON_TERMINAL ',' list_symbol
+            | SYMB_NON_TERMINAL 
 \end{lstlisting}
 \end{center}
-
+\textit{``NAME\_ATTR''} define el identificador de un atributo. Se tienen las mismas consideraciones que para el identificador de sort, operador y función. \textit{``SYMB\_NON\_TERMINAL''} describe un símbolo no terminal de la gramática. En este punto se debe tener en cuenta que los símbolo utilizados en este punto deben ser símbolos no terminales utilizados en el bloque de reglas.
 \subsection{Bloque de reglas}
-Por ultimo el bloque de reglas. Esta dado por el siguiente sintaxis:
+Por ultimo el bloque de reglas. La interpretación de las reglas dentro del lenguaje esta dada por la definición de gramática libre de contexto.          El símbolo terminal se considera un símbolo entre comilla simple ('). Ejemplo: 'literal'. 
+
+Las ecuaciones describen las reglas semánticas que definen la sintaxis de la gramática. Cada ecuación define la interpretación semántica de los atributo de cada símbolo. Además se deben tener en cuentas los requisitos necesarios de una gramática bien definida (Ver capitulo XXX).  
+A continuación se describe este bloque:
 \begin{center}
 \lstset{language=inform}
 \tiny
@@ -118,6 +134,16 @@ instance     = 'symb_non_terminal' '[' 'num_ins' ']' '.' 'name_attr'
             
 \end{lstlisting}
 \end{center}
+\textit{``SYMB\_NON\_TERMINAL''} y \textit{``SYMB\_TERMINAL''} describen símbolos no terminales y terminales respetivamente. En este punto se tiene en cuenta la diferenciación entre estos tipos de símbolos como se analizo en el párrafo anterior. 
+\textit{``OP\_INFIX''}, \textit{``OP\_PREFIX''}, \textit{``OP\_POSTFIX''} y  \textit{``NAME\_FUNC''} describen operadores infijos, prefijo y posfijo y el identificador de función respectivamente.Tanto los operadores como también la función se asumen definidos en la sección ``\texttt{semantic domain}''.
+\textit{``LITERAL''} describe los tipos de literales entero, real, carácter y string con las siguientes consideraciones:
+\begin{description}
+\item [Entero] es considerado el carácter numérico sin punto.
+\item [real] es considerado cartear numérico numérico son un punto (el punto es considerado para separar valor decimal).
+\item [carácter] es considerado el carácter alfabético entre comillas simple (').
+\item [string] es considerado a al sucesión de caracteres entre comillas dobles (`` '').
+\end{description}
+
 \subsection{Comentarios}
 La especificación permite agregar comentarios. Por cuestiones de simplicidad se han utilizado las mismas reglas sintácticas que C y C++ para el adicionado de lineas o bloques de comentario. Los cuales se detallan a continuación:
 \begin{description}
@@ -126,13 +152,15 @@ La especificación permite agregar comentarios. Por cuestiones de simplicidad se
 \end{description} 
 
 \subsection{Ejemplo}
-El ejemplo presentado en la figura \ref{fig:ejemplo_mag} es uno de los casos de test desarrollado para la construcción de \maggen. La importancia de este radica en que, el mismo, es un caso de estudio dado en una de las principales bases teóricas que han sido usadas para el sistema.
+El ejemplo presentado en la figura \ref{fig:ejemplo_mag} es uno de los casos de test desarrollado para la construcción de \maggen. La importancia de este radica en que, el mismo, es un caso de estudio dado en una de las principales bases teóricas que han sido usadas para el sistema. 
+En el ejemplo se observa en principio (linea 1 a 7) un bloque de comentario y luego los bloques que definen la gramática como se ha analizado en las secciones anteriores; bloque semántico de la linea 8 a 16 luego el de atributos y a partir de la linea 29 el bloque de reglas con sus respectivas ecuaciones.
+
 
 \begin{figure}
   \centering
 \lstset{language=inform}
 \scriptsize
-\begin{lstlisting}[frame=single]
+\begin{lstlisting}[frame=single,numbers=left]
 /**
   *  \file              Mag.txt
   *  \brief             Attribute Grammar example.
@@ -140,17 +168,12 @@ El ejemplo presentado en la figura \ref{fig:ejemplo_mag} es uno de los casos de 
   *  \author            Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author            Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
-/****************************
- * Block of Semantic Domain *
- ****************************/
+
+// Block of Semantic Domain
 semantic domain
-    /*********************
-     * List of Operators *
-     *********************/
+     // List of Operators 
     op infix    (10, left) +: int, int -> int;
-/***********************
- * Block of Attributes *
- ***********************/
+// Block of Attributes
 attributes
             s0 : syn <int> of {S};
             s1  : syn            <int> of {X};
@@ -161,9 +184,7 @@ attributes
             i1  : inh <int> of {X};
             i2  : inh <int> of {Y};
             i3  : inh <int> of {Y};
-/******************
- * Block of Rules *
- ******************/
+// Block of Rules
 rules
             // P1
     S ::= X Y Z
@@ -201,7 +222,8 @@ rules
 \end{lstlisting}
   \caption{Ejemplo ag\_wuu\_yang.input }
   \label{fig:ejemplo_mag}
-\end{figure} 
+\end{figure}
+ 
 \section{Estrucutas internas}
 bla bla
 
