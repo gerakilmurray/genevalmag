@@ -7,15 +7,24 @@
 
 \section{Lenguaje de especificaci\'on de las MAG}
 
-El lenguaje de especificación utilizado para la descripción de una Gramática de atributos (MAG) fue definido en el marco de este proyecto. Esto permite definir una gramática de atributos como input de \maggen. 
-La secciones que conforman la descripción de una gramática de atributos se corresponden con las características que definen a una gramática de atributos como tal (ver capitulo de GA). 
+El lenguaje de especificación utilizado para la descripción de una Gramática de atributos (MAG) fue definido en el marco de este proyecto. Esto permite definir una gramática de atributos como input de \maggen.
+ 
+La secciones que conforman la descripción de una gramática de atributos se corresponden con las características que definen a una gramática de atributos como tal (ver capitulo de GA).
+ 
 Informalmente, los bloques que conforman la especificación son:
 \begin{description}
 \item [Bloque Dominio Semántico] Destinando a la declaración de sort, operadores y funciones que se utilizaran en el bloque de ecuaciones. Este bloque es denominado ``\texttt{semantic domain}''.
 \item [Bloque de Atributos] Destinando a la declaración y definición de los atributos asociados a cada símbolo. Este bloque es denominado ``\texttt{attributes}''.
 \item [Bloque de Reglas] Destinado a la declaración y definición de las reglas sintácticas de la gramática con sus correspondientes ecuaciones semánticas para cada atributo asociado a cada símbolo. Este bloque es denominado ``\texttt{rules}''.
 \end{description}
-De manera formal, se define una gramática \textbf{G: CFG} que define el lenguaje de especificación para el archivo de entrada aceptado por \maggen. El símbolo inicial de G es ``S''.
+
+A los tres bloques analizados anteriormente, podemos clasificarlos en dos, teniendo en cuenta su comportamiento o funcionalidad dentro de la especificación. Los dos primeros, son bloques puramente declatativos o dedicados a la definicion de elementos que serán utilizados en el tercer bloque. Este bloque, es considerado el de mayor auge, ya que marca la sintaxis y semántica de la gramática.
+
+Cada bloque del lenguaje de especificación contiene su sintaxis propia para su defincion, es por ello que, en las secciones siguiente nos encargaremos de mostrar detalles de cada uno de ellos.
+
+El analisis de cada bloque se realizara de una manera mas formal y observando cada bloque como partes de una gramatica.
+
+Entonces, sea \textbf{G: CFG}  que define el lenguaje de especificación para el archivo de entrada aceptado por \maggen. Se define la siguiente regla de \textbf{G: CFG} para el simbolo inicial ``S''.
 \begin{center}
 \lstset{language=inform}
 \scriptsize
@@ -26,92 +35,209 @@ S   =   'semantic domain' decl_Sd
 \end{lstlisting}
 \end{center}
 
-En las secciones posteriores se presentaran los símbolos con mas detalle  \textit{$<decl\_Sd>$}, \textit{$<decl\_attr>$} y \textit{$<decl\_rules>$}
+En las secciones siguientes se presentaran los símbolos \textit{decl\_Sd}, \textit{decl\_attr} y \textit{decl\_rules} con mas detalle.  
 
 \subsection{Bloque Dominio semántico}
 
-En esta sección presentaremos el bloque ``\texttt{semantic domain}'' en detalle. Este bloque esta subdividido en 3 secciones, que se corresponden con la definición de los sort o tipos, los operadores y las funciones.
+El bloque ``\texttt{semantic domain}'' es el encargado de la definicion de elementos que seran necesarios para los bloques siquientes. 
+
+El bloque semántico esta subdividido en 3 secciones, que se corresponden con la definición de sort, operadores y funciones, cada una con su sintaxis propia. 
+
+Entonces se define el símbolo \textit{decl\_Sd} como:
 \begin{center}
 \lstset{language=inform}
-\tiny
+\scriptsize
 \begin{lstlisting}[frame=single]
 decl_Sd = (decl_sort)*
         | (decl_operator)*
         | (decl_function)*
 \end{lstlisting}
 \end{center}
+El uso de ``\texttt{*}'' (``0 o mas veces'') en cada subsección y no de ``\texttt{+}'', esta dado, debido a que cada una de estas secciones son opcionales, es decir, no se obliga a la existencia de cada seccion. Esto es, ya que podría interesar la definicion de una gramatica que no cuente con funciones, por ejemplo.
+
+La sintaxis particular de cada seccion se analiza individualmente a continuación.
+
 \subsubsection{Declaración de sort}
-La declaración de ``sort'' esta dada por:
+La subsección de ``\texttt{sort}'' declara todos los posibles tipos que seran necesesarios para las declaraciones siguientes. Todo \texttt{sort} es distinguible en el lenguaje mediante un nombre.
+
+A continuacion se define el simbolo \texttt{decl\_sort}
 \begin{center}
 \lstset{language=inform}
-\tiny
+\scriptsize
 \begin{lstlisting}[frame=single]
 decl_sort  =   'sort' NAME_SORT ';'
 \end{lstlisting}
 \end{center}
-\textit{``NAME\_SORT''} representa el nombre del sort o tipo. El mismo se corresponde con la definición de un identificador en el común de los lenguajes de programación. Es decir, acepta caracteres alfanuméricos y guión bajo y restringe el los caracteres numéricos como primer carácter, como también palabras reservadas definidas por la especificación. (Para mas detalles ver ANEXO  XXX de implementación en \spirit).
+\textit{``NAME\_SORT''} representa el nombre del sort o tipo. El mismo, se corresponde con la definición de un identificador en el común de los lenguajes de programación. Es decir, acepta caracteres alfanuméricos y guión bajo y restringe los caracteres numéricos como primer carácter, como también palabras reservadas definidas por la especificación (para mas detalles ver ANEXO  XXX de implementación en \spirit).\\
 % \ref{append:grammarspirit}
+
+\fbox{
+\underline{Ejempo:} \texttt{sort int;}\\
+Esta linea declara el tip ``int''.
+}
+
+\subsubsection*{Tipos predefinidos por el lenguaje}
+\label{sec:typepredefined}
+El lenguaje de especificación contempla los siguiente tipos básicos:
+\begin{itemize}
+\item [int] Tipo entero de 32 bits.
+\item [float] Tipo real en punto flotante de 32 bits.
+\item [bool] Tiene en cuenta los valores \texttt{true} y \texttt{false}.
+\item [char] Tipo char en el comun de los lenguajes (encerrado entre comillas simples).
+\item [string] Cadenas de caracteres (entre comillas dobles).
+\end{itemize}
+En caso que se declares estos explicitamente en la especificaciones, la linea no es reflejada en el funcionamiento interno de \maggen.
+
 \subsubsection{Declaración de operadores}
-En esta sección presentaremos la sección de declaración de operaciones. El lenguaje acepta 3 tipos de operadores que difieren en su forma de uso y cantidad de operandos, los cuales son: infijo, prefijo y posfijo. La interpretación de cada uno de ellos esta dada por la interpretación natural común a todos los lenguajes de programación. A continuación se presenta esta sección con mas detalle:
+La sección destinada a la declaración de \texttt{operadores} acepta 3 tipos de operadores, los cuales, difieren en su forma de uso y cantidad de operandos. Denominados, infijo, prefijo y posfijo. 
+
+La interpretación de cada uno, esta dada por la interpretación natural común a todos los lenguajes de programación, a modo de ejemplo se muetran un operador de cada tipo para evitar problemas en esta seccion:
+\begin{itemize}
+\item \underline{Operador prefijo:} Ejemplo: -2. Operador de menos unario. 
+\item \underline{Operador posfijo:} Ejemplo: i++. Operador de auto-incremento en lenguaje C y C++.
+\item \underline{Operador infijo:} Ejemplo: 2+3. Operador ``suma''.
+\end{itemize}
+
+A continuación se define el simbolo \texttt{decl\_operator}:
 \begin{center}
 \lstset{language=inform}
-\tiny
+\scriptsize
 \begin{lstlisting}[frame=single]
 decl_operator = 
               'op' infix mode_op NAME_OP ':' NAME_SORT ','  NAME_SORT '->' NAME_SORT ';' 
             | 'op' prefix mode_op NAME_OP ':' NAME_SORT '->' NAME_SORT ';'               
             | 'op' posfix mode_op NAME_OP ':' NAME_SORT '->' NAME_SORT ';'
+            | 'op' mode_op NAME_OP ':' NAME_SORT '->' NAME_SORT ';'
 
-mode_op         = '(' NUM_PRECEDENCE ','assoc ')'
+mode_op         = '(' m_op ')'
+                | lambda
 
-assoc           = (left | right | non_assoc) 
+m_op            =  NUM_PRECEDENCE ',' assoc
+                | '_' ',' assoc
+                | NUM_PRECEDENCE ',' '_'
+                | '_' ',' '_'
+
+assoc           = (left | right | non-assoc) 
 \end{lstlisting}
 \end{center}
 \textit{``NAME\_OP''} representa un identificador para el operador (infija, prefija y post fija). Las restricciones y detalles a tener en cuenta para este identificador son las mismas que se analizaron para ``NAME\_SORT''.
+
 \textit{``NUN\_PRECEDENCE''} representa un numero positivo que define la precedencia del operador. Cabe aclarar que a mayor numero mayor la precedencia.
+
+Es importante analizar el uso de ``\_'' para precedencia y associatividad en el echo de que estos datos son tomados opcionalmente, es decir se puede omitir dicha infomación. Lo mismo sucede con el tipo del operador (infijo, prefijo y posrijo). 
+
+Para estos casos especiales se utilizan los siguiente valores default:
+\begin{description}
+\label{desc:default}
+\item [Precedencia] = \texttt{USHRT\_MAX}.
+\item [Asociatividad] = \texttt{left}.
+\item [Tipo de operador] = \texttt{prefix}.
+\end{description}
+
+Otro caso a tener cuenta es el uso de \texttt{non-assoc} como asociatidad del operador. Este caso define que el operador no tiene asociatividad, con lo que el uso del mismo en las ecuaciones debe respetar esta condicion, en caso contrario se observara error por mal uso.
+A continuacion, se analizan algunos ejemplos de declaraciones de operadores:\\
+
+\fbox{
+\underline{Ejempo 1:} \texttt{op infix (\_,right) *: int, int -> int;}\\
+Esta linea declara el operador infijo ``\texttt{*}'' con precedencia default y asociatividad \texttt{right}.Esta linea tambien podria haber sido definida como:\\ \texttt{op infix *: int, int -> int;}\\ donde se usan valores default para precedencia y asociatividad.
+}
+
+\fbox{
+\underline{Ejempo 2:} \texttt{op prefix (60,non-assoc) \%: int -> int;}\\
+Esta linea decara el operador prefijo ``\texttt{\%}'' con precedencia \texttt{60} y associatividad \texttt{non-assoc}. Esta linea tambien podria haber sido definida como:\\  \texttt{op (60,non-assoc) \%: int -> int;} \\ y en el caso que se desee usar valores de asociatividad y precedencia default asi:\\
+\texttt{op \%: int -> int;}
+}
 \subsubsection{Declaración de funciones}
  La noción de funciones dentro de la especificación es tomada con la noción natural de función matemática. Es decir, toda función esta definida mediante un identificador, un dominio y una imagen.
+
+Definimos \texttt{decl\_function} como:
 \begin{center}
 \lstset{language=inform}
-\tiny
+\scriptsize
 \begin{lstlisting}[frame=single]
 decl_function =  'function' NAME_FUNC':' domain '->' NAME_SORT ';'
 domain  = NAME_SORT ',' domain
         | NAME_SORT 
-        | \lambda
+        | lambda
 \end{lstlisting}
 \end{center}
-\textit{``NAME\_FUNC''} define el identificador de la función, en el cual se asumen las mismas restricciones tomadas para ``NAME\_SORT''. Cabe aclarar que se acepta un dominio vacío lo que permite el uso de funciones que solo retorna un valor.
+\textit{``NAME\_FUNC''} define el identificador de la función, en el cual se asumen las mismas restricciones tomadas para los identificadores analizados en las seccines anteriores. Cabe aclarar que se acepta un dominio vacío lo que permite el uso de funciones que solo retorna un valor.
+
+Es importante tener en cuenta que las funciones son tomadas con los valores default de operador para asociatividad y precedencia \ref{desc:default}.\\
+\fbox{
+\underline{Ejempo:} \texttt{function f:int, int, int, int -> real;}\\
+Esta linea declara la funcion ``\texttt{f}'' que tiene como entrada 4 elementos de tipo ``\texttt{int}'' y como salida un elemento de tipo ``\texttt{real}''.
+}
 \subsection{Bloque de Atributos}
 En esta sección presentaremos el bloque ``attributes'' en detalle. La información que define un atributo dentro del lenguaje esta dado por: 
 \begin{description}
-\item [Nombre:] representa el nombre del atributo, el mismo se adecua a los requisitos de identidicador analizados anteriormente.
-\item [Clase de atributo:] el cual esta dado por si el atributo es sintetizado o heredado.
-\item [Tipo:] esta dado por el tipo del atributo. El mismo corresponde a un tipo básico o a un sort definido en la sección de \textit{Sort}
-\item [Símbolos de pertenencia:] son los símbolos a lo cuales se asocia el atributo.
+\item [Nombre:] representa el nombre del atributo, el mismo respeta los requisitos de identidicador analizados anteriormente.
+\item [Clase de atributo:] está dado por la clase del atributo, esto es sintetizado (\texttt{syn}) o heredado (\texttt{inh}).
+\item [Tipo:] está dado por el tipo del atributo. El mismo corresponde a un tipo básico o a un sort definido en la sección de \textit{Sort}.
+\item [Símbolos de pertenencia:] hace referencia a los simbolos a los cuales se asocia el atributo.
 \end{description}
-A continuación se muestra con mas detalle la sección de atributos.
+
+A continuación se define el simbolo \texttt{decl\_attrs} como:
 \begin{center}
 \lstset{language=inform}
-\tiny
+\scriptsize
 \begin{lstlisting}[frame=single]
 decl_attrs  = (d_attr)+ 
-d_attr      = NAMA_ATTR ':' '<' c_attr '>' type_attr 'of' '{'list_symbol'}';
+
+d_attr      = NAMA_ATTR ':' '<' c_attr '>' NAME_SORT 'of' symbols;
+
+symbols     = '{'list_symbol'}' 
+            | 'all'
+            | 'all' '-' '{'list_symbol'}'
+
 c_attr      = inh
             | syn
+            | lambda
 list_symbol = SYMB_NON_TERMINAL ',' list_symbol
             | SYMB_NON_TERMINAL 
 \end{lstlisting}
 \end{center}
-\textit{``NAME\_ATTR''} define el identificador de un atributo. Se tienen las mismas consideraciones que para el identificador de sort, operador y función. \textit{``SYMB\_NON\_TERMINAL''} describe un símbolo no terminal de la gramática. En este punto se debe tener en cuenta que los símbolo utilizados en este punto deben ser símbolos no terminales utilizados en el bloque de reglas.
-\subsection{Bloque de reglas}
-Por ultimo el bloque de reglas. La interpretación de las reglas dentro del lenguaje esta dada por la definición de gramática libre de contexto.          El símbolo terminal se considera un símbolo entre comilla simple ('). Ejemplo: 'literal'. 
+\textit{``NAME\_ATTR''} define el identificador de un atributo. Se tienen las mismas consideraciones que para el identificador de sort, operador y función.
 
-Las ecuaciones describen las reglas semánticas que definen la sintaxis de la gramática. Cada ecuación define la interpretación semántica de los atributo de cada símbolo. Además se deben tener en cuentas los requisitos necesarios de una gramática bien definida (Ver capitulo XXX).  
-A continuación se describe este bloque:
+\textit{``SYMB\_NON\_TERMINAL''} describe un símbolo no terminal de la gramática. En este punto se debe tener en cuenta que los símbolo utilizados deben ser símbolos no terminales utilizados en el bloque de reglas.
+
+\textit{``NAME\_SORT''} declara el tipo del atributo, el mismo esta dado por un sort definido por el usuario o por un tipo predefinido por el lenguaje \ref{sec:typepredefined}.
+
+
+Observaciones importantes a tener en cuenta:
+\begin{itemize}
+\item En la declaracion de los simbolos a los cuales pertenece el atributos, ``\texttt{all}'' se interpreta como ``todos los simbolos'', es decir, el atributo declarado se asocia a todos los simbolos de la gramatica. Ademas es posible utilizar el operado ``diferencia'' de conjuntos ``\texttt{-}'' para especificar el conjuntos de simbolos a los cuales perteneces el atributo. 
+\item Si no se especifíca la clase del atributo (sintetizado o heredado) el mismo es tomado como el caso default a sintetizado.
+\end{itemize}
+
+Analicemos algunos ejemplos:\\
+
+\fbox{
+\texttt{Ejempo 1:} \texttt{lexx : syn <string> of all - {T}};\\
+Se define el atributo ``\texttt{lex}'' sintetizado de tipo ``\texttt{string}'' para todos los simbolos excepto el simbolo ``\texttt{T}''.
+}
+\fbox{
+\underline{Ejempo 2:} \texttt{type : inh <string> of all};\\
+Se define el atributo ``\texttt{type}'' heredado de tipo ``\texttt{string}'' para todos los simbolos de la gramatica.
+}
+\fbox{
+\texttt{Ejempo 3:} \texttt{grade : <int>  of {E,T};}\\
+Se define el atributo ``\texttt{grade}'' sintetizado (default) de tipo ``\texttt{int}'' para los simbolos ``\texttt{E}'' y ``\texttt{T}''..
+}
+
+\subsection{Bloque de reglas}
+Por ultimo el bloque de reglas. La interpretación de las reglas dentro del lenguaje esta dada por la definición de gramática libre de contexto.          
+
+El símbolo terminal se considera un símbolo entre comilla simple (\texttt{'}).\\ 
+\fbox{
+Ejemplo: \texttt{'literal'}.} 
+
+Las ecuaciones describen las reglas semánticas que definen la sintaxis de la gramática. Cada ecuación define la interpretación semántica de los atributo de cada símbolo. Además se deben tener en cuentas los requisitos necesarios de una gramática bien definida (Ver capitulo XXX).
+
+A continuación se define el simbolo \texttt{decl\_rules}:
 \begin{center}
 \lstset{language=inform}
-\tiny
+\scriptsize
 \begin{lstlisting}[frame=single]
 decl_rules   = (d_rule)+ 
 d_rule       = SYMB_NON_TERMINAL '::=' rigft_symb decl_eqs
@@ -122,9 +248,9 @@ decl_eqs     = 'compute' d_eqs  'end;'
 d_eqs        = instance '=' right_eq ';'
 
 right_eq     = leaf
-             | leaf OP_INFIX leaf right_eq
-             | (OP_PREFIX)+ leaf
-             | leaf (OP_POSTFIX)+
+             | leaf OP_NAME leaf right_eq
+             | (OP_NAME)+ leaf
+             | leaf (OP_NAME)+
              | 'NAME_FUNC' '(' right_eq ')' 
 
 leaf         = instance
@@ -134,27 +260,43 @@ instance     = 'symb_non_terminal' '[' 'num_ins' ']' '.' 'name_attr'
             
 \end{lstlisting}
 \end{center}
-\textit{``SYMB\_NON\_TERMINAL''} y \textit{``SYMB\_TERMINAL''} describen símbolos no terminales y terminales respetivamente. En este punto se tiene en cuenta la diferenciación entre estos tipos de símbolos como se analizo en el párrafo anterior. 
-\textit{``OP\_INFIX''}, \textit{``OP\_PREFIX''}, \textit{``OP\_POSTFIX''} y  \textit{``NAME\_FUNC''} describen operadores infijos, prefijo y posfijo y el identificador de función respectivamente.Tanto los operadores como también la función se asumen definidos en la sección ``\texttt{semantic domain}''.
-\textit{``LITERAL''} describe los tipos de literales entero, real, carácter y string con las siguientes consideraciones:
+\textit{``SYMB\_NON\_TERMINAL''} y \textit{``SYMB\_TERMINAL''} describen símbolos no terminales y terminales respetivamente. En este punto, se tiene en cuenta la diferenciación entre estos tipos de símbolos como se analizo en el párrafo anterior.
+ 
+\textit{``OP\_NAME y  \textit{``NAME\_FUNC''} describen identificadores de operadores infijos, prefijo y posfijo (segun su uso) y el de función respectivamente.Tanto los operadores como las funciónes se asumen definidos en la sección ``\texttt{semantic domain}''.
+
+\textit{``LITERAL''} describe los tipos de literales entero, real, carácter, string y bool con las siguientes consideraciones:
 \begin{description}
-\item [Entero] es considerado el carácter numérico sin punto.
-\item [real] es considerado cartear numérico numérico son un punto (el punto es considerado para separar valor decimal).
-\item [carácter] es considerado el carácter alfabético entre comillas simple (').
-\item [string] es considerado a al sucesión de caracteres entre comillas dobles (`` '').
+\item [Entero] es considerado un entero de 32 bits. 
+\item [Real] es considerado un numero en punto flotante de 32 bits. La separación de decimales se da mediante el punto (.).
+\item [Carácter] es considerado un caracter cualquiera entre comillas simples (').
+\item [String] es considerado una cadena de caracteres entre comillas dobles (`` '').
+\item [Bool] representa los valores \texttt{true} y \texttt{false}.
 \end{description}
 
+Analicemos algunas cuestiones a tener en cuenta:
+\begin{itemize}
+\item Es posible definir una regla de la gramática sin sección de ecuaciones, para ello se debe omitir la seccion de ``\texttt{compute}'' en la definicion. Si se define la seccion de ``\texttt{compute}'' el lenguaje obliga a definir al menos una ecuacion.
+\item La sintaxis para el uso de los operadores esta dada por el tipo de operador: infijo, prefijo y posfijo. Para las funciones se utiliza la manera natural de invocacion de una funcion en el comun de los lenguajes de programación. Esto es, mediante le nombre de la funcion y los parametros entre parentesis.
+\item La asociatividad y precedencia de la expresion en las ecuaciones es calculada mediante los valores definidos en las secciones correspondientes. Cabe aclarar que es posible utililizar parentesis para agrupar subexpresiones.
+\end{itemize}
+
+Veamos algunos algunos ejemplos:\\
+\fbox{
+\underline{Ejemplo 1:} bla bla
+}
+\fbox{
+\underline{Ejemplo 2:} bla bla.
+}
 \subsection{Comentarios}
-La especificación permite agregar comentarios. Por cuestiones de simplicidad se han utilizado las mismas reglas sintácticas que C y C++ para el adicionado de lineas o bloques de comentario. Los cuales se detallan a continuación:
+La especificación permite agregar comentarios. Para una mejor familiarizacion con el usuario se han utilizado las mismas reglas sintácticas que C y C++ para el adicionado de lineas o bloques de comentario. Los cuales se detallan a continuación:
 \begin{description}
  \item [$\textbf{/*}$ comment $\textbf{*/}$] es la forma de inserción de bloques de comentarios.
  \item [$\textbf{//}$ line commet] es comentario de una linea.
 \end{description} 
 
 \subsection{Ejemplo}
-El ejemplo presentado en la figura \ref{fig:ejemplo_mag} es uno de los casos de test desarrollado para la construcción de \maggen. La importancia de este radica en que, el mismo, es un caso de estudio dado en una de las principales bases teóricas que han sido usadas para el sistema. 
+El ejemplo presentado en la figura \ref{fig:ejemplo_mag} es uno de los casos de prueba desarrollado para la construcción de \maggen. La importancia de éste radica en que, el mismo, es un caso de estudio dado en una de las principales bases teóricas que han sido usadas para el sistema. La gramatica de ejemplo es una MAG pero no ANCAG.
 En el ejemplo se observa en principio (linea 1 a 7) un bloque de comentario y luego los bloques que definen la gramática como se ha analizado en las secciones anteriores; bloque semántico de la linea 8 a 16 luego el de atributos y a partir de la linea 29 el bloque de reglas con sus respectivas ecuaciones.
-
 
 \begin{figure}
   \centering
