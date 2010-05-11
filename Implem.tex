@@ -4,9 +4,9 @@
 
 En esta sección se aclararan y expondrán decisiones que se realizaron a lo largo de la implementación de esta herramienta.
 
-Primero, como ya se menciona en el capítulo anterior, el lenguaje sobre el cual se realizó el desarrollo de \maggen es C++, con lo que todo el código es principalmente característico de un modelo de programación Orientado a Objetos, aunque para lograr ciertas optimizaciones y poder integrar componentes de externos a la herramienta.
+Primero, como ya se menciona en el capítulo anterior, el lenguaje sobre el cual se realizó el desarrollo de \maggen es C++, con lo que todo el código es principalmente característico de un modelo de programación Orientado a Objetos, aunque posee secciones de Programación Imperativa, para lograr ciertas optimizaciones y poder integrar componentes de externos a la herramienta.
 
-\section{Parsing usando \boost \ \spirit}
+\section{Parsing usando \boost\ \spirit}
 
 El primer desafío de codificación, fue que se debía conseguir parsear el archivo de entrada de la herramienta, en el cual vendría la especificación de una Gramática de Atributos, respetando la sintaxis presentada anteriormente, o no.
 
@@ -25,20 +25,20 @@ El usuario es el responsable de definir las ``\texttt{semantic actions}'' para l
 
 Para comenzar a definir una gramática hay que crear una estructura que herede de la clase \texttt{grammar}. Dentro de ella se debe definir a su vez otra estructura templatizada denominada \texttt{definition}. En donde realmente estará la definición de la gramática.
 
-\begin{center}\begin{lstlisting}[language=C++,basicstyle=\scriptsize,numbers=left]
-struct my_grammar : public grammar<my_grammar>
+\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize,numbers=left, numbersep=5pt, numberstyle=\tiny]
+struct my_grammar: public grammar <my_grammar>
 {
     template <typename ScannerT>
     struct definition
     {
-        rule<ScannerT> r;
+        rule <ScannerT> r;
 
         definition(my_grammar const& self)
         {
-            r = /*..define here..*/;
+            r = /*... Aqui va la definicion ...*/;
         }
 
-        rule<ScannerT> const& start() const
+        rule <ScannerT> const& start() const
         {
             return r;
         }
@@ -75,25 +75,25 @@ Por otra parte, \spirit\ dispone de un gran conjunto de parsers que abarcan la m
 \hline
 \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Parser}} &
 \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Entrada aceptada}} \\ \hline
-anychar\_p &   Cualquier carácter simple (incluyendo el carácter nulo: '$\setminus0$')\\ \hline
-alnum\_p   &   Caracteres alfa-numéricos \\ \hline
-alpha\_p   &   Caracteres alfabéticos \\ \hline
-% blank\_p   &   Un espacio o tabulación \\ \hline
-digit\_p   &   Dígitos numéricos \\ \hline
-lower\_p   &   Caracteres en minúscula \\ \hline
-upper\_p   &   Caracteres en mayúscula \\ \hline
-space\_p   &   Espacios, tabulaciones, saltos de línea y nuevas líneas \\ \hline
-ch\_p      &   Carácter especificado como parámetro \\ \hline
-str\_p     &   Cadena especificada como parámetro \\ \hline
-oct\_p     &   Dígito en octal \\ \hline
-hex\_p     &   Dígito en hexadecimal \\ \hline
-uint\_p    &   Número entero sin signo de 32 bits\\ \hline
-int\_p     &   Número entero 32 bits\\ \hline
-real\_p    &   Número flotante 32 bits\\ \hline
-eps\_p     &   Cadena vacía (épsilon)\\ \hline
-end\_p     &   Carácter de fin de archivo (EOF)\\ \hline
+anychar\_p & Cualquier carácter simple (incluyendo el carácter nulo: '$\setminus0$')\\ \hline
+alnum\_p   & Caracteres alfa-numéricos \\ \hline
+alpha\_p   & Caracteres alfabéticos \\ \hline
+% blank\_p & Un espacio o tabulación \\ \hline
+digit\_p   & Dígitos numéricos \\ \hline
+lower\_p   & Caracteres en minúscula \\ \hline
+upper\_p   & Caracteres en mayúscula \\ \hline
+space\_p   & Espacios, tabulaciones, saltos de línea y nuevas líneas \\ \hline
+ch\_p      & Carácter especificado como parámetro \\ \hline
+str\_p     & Cadena especificada como parámetro \\ \hline
+oct\_p     & Dígito en octal \\ \hline
+hex\_p     & Dígito en hexadecimal \\ \hline
+uint\_p    & Número entero sin signo de 32 bits\\ \hline
+int\_p     & Número entero 32 bits\\ \hline
+real\_p    & Número flotante 32 bits\\ \hline
+eps\_p     & Cadena vacía (épsilon)\\ \hline
+end\_p     & Carácter de fin de archivo (EOF)\\ \hline
 \end{tabular}
-\caption{Parsers predefinidos de \spirit\ utilizados}\label{parsers} 
+\caption{\label{parsers}Parsers predefinidos de \spirit\ utilizados} 
 \end{figure}
 
 Además posee varias directivas que modifican el comportamiento de los parsers, encapsulándose en una expresión definida por el usuario (ver tabla \ref{directivas}).
@@ -103,16 +103,31 @@ Además posee varias directivas que modifican el comportamiento de los parsers, 
 \hline
 \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Directiva}} &
 \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Efecto}} \\ \hline
-lexeme\_d    &  Deshabilita la omisión de espacios en blanco (space\_p)\\ \hline
-as\_lower\_d &  Convierte en minúscula lo aceptado por la expresión\\ \hline
-longest\_d   &  Deshabilita el corto circuito, manda al analizador que pruebe todas las alternativas posibles y elija la secuencia más larga aceptada \\ \hline
+lexeme\_d    & Deshabilita la omisión de espacios en blanco (space\_p)\\ \hline
+as\_lower\_d & Convierte en minúscula lo aceptado por la expresión\\ \hline
+longest\_d   & Deshabilita el corto circuito, manda al analizador que pruebe todas las alternativas posibles y elija la secuencia más larga aceptada \\ \hline
 \end{tabular}
-\caption{Directivas de \spirit\ aplicadas}\label{directivas}
+\caption{\label{directivas}Directivas de \spirit\ aplicadas}
 \end{figure}
+
+Para el manejo de los símbolos válidos dentro de la definición de la gramática, \spirit soporta nativamente, el concepto de ``Tablas de símbolos''. Lo que permite registrar de manera dinámica nuevos símbolos, en particular dentro de nuestra herramienta nos ayudó a manejar los conjuntos de nombres válidos para los \texttt{sorts}, los símbolos no terminales permitidos en las ecuaciones, entre otros usos.
+
+\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize,numbers=left, numbersep=5pt, numberstyle=\tiny]
+/*
+ * Symbols's Table for the elements of an Attribute Grammar.
+ */
+symbols <> st_sorts;
+symbols <> st_op_prefix;
+symbols <> st_op_infix;
+symbols <> st_op_postfix;
+symbols <> st_functions;
+symbols <> st_attributes;
+symbols <> st_non_terminal;
+\end{lstlisting}\end{center}
 
 Para comenzar a interactuar con el framework, el usuario debe declarar un objeto de la estructura definida y pasarlo como parámetro a una función específica de \spirit.
 
-\begin{center}\begin{lstlisting}[language=C++,basicstyle=\scriptsize,numbers=left,numbersep=5pt,numberstyle=\tiny]
+\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
 my_grammar g;
 
 if (parse(first, last, g, space_p).full)
@@ -127,9 +142,79 @@ else
 
 \subsection{\texttt{``semantic domain''} en \spirit}
 
-En esta sección de la especificación se debían aceptar tres tipos de elementos: \texttt{sorts}, \texttt{operations} y \texttt{functions}.
+En esta sección de la especificación se debían aceptar tres tipos de elementos: \texttt{sorts}, \texttt{operators} y \texttt{functions}.
 
 Los \texttt{sorts} serán los tipos que se podrán utilizar para definir los dominios e imágenes de los operadores y funciones.
+
+Según lo explicado en el Diseño, las reglas de cada clase, han sido codificados de la siguiente manera.
+
+\begin{description}
+\item [\texttt{sorts}] Exijimos que luego del identificador ``\texttt{sort}'' halla un espacio\footnote{Ver definición de space\_p \ref{parsers}}. El nombre leído, se usará para crear un nuevo Sort dentro de la GA y también se insertará en la tabla de símbolos de sorts. Se acepta una lista de nombres de sorts para comodidad del usuario.
+
+\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+/* Declaration of Sorts. */
+
+r_decl_sort = lexeme_d[str_p("sort")>>space_p]>>
+              (r_ident[&create_sort][st_sorts.add]%',')>>
+              ';';
+\end{lstlisting}\end{center}
+
+\item [\texttt{operators}] Para los operadores también se exije el espacio. Por definición se aceptan tres tipos: infijos, prefijos e infijos, por lo que se hizo una regla para cada uno, sólamente discriminado los dominios, ya que todos poseen una sóla imágen. Notar que los sorts permitidos, son sacados directamente de las tablas de símbolos destinadas para ese propósito.
+
+\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+/* Declaration of Operators. */
+
+r_decl_oper  = lexeme_d[str_p("op")>>space_p][&inic_func]>>
+               (r_oper_infix|r_oper_postfix|r_oper_prefix)>>
+               str_p("->")>>
+               r_sort_st[&save_image_func]>>
+               ';';
+
+r_oper_infix = str_p("infix")[&save_mode_op]>>
+               !r_oper_mode>>
+               r_oper[&save_name_func][st_op_infix.add]>>
+               ':'>>
+               r_sort_st[&save_domain_func]>>','>>r_sort_st[&save_domain_func];
+
+r_oper_postfix = str_p("postfix")[&save_mode_op]>>
+                 !r_oper_mode>>
+                 r_oper[&save_name_func][st_op_postfix.add]>>
+                 ':'>>
+                 r_sort_st[&save_domain_func];
+
+r_oper_prefix = !(str_p("prefix")[&save_mode_op])>>
+                !r_oper_mode>>
+                r_oper[&save_name_func][st_op_prefix.add]>>
+                ':'>>
+                r_sort_st[&save_domain_func];
+
+r_oper_mode = '('>>
+               (uint_p[&save_prec_op]|'_')>>
+               ','>>
+               (r_oper_assoc[&save_assoc_op]|'_')>>
+               ')';
+
+r_oper_assoc = str_p("left")|"right"|"non-assoc";
+\end{lstlisting}\end{center}
+
+\item [\texttt{functions}] Para las funciones se permiten como dominio listas de sorts, los cuales serán agregados incrementalmente a la función que se está declarando.
+
+\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+/* Declaration of Functions. */
+
+r_decl_func = lexeme_d[str_p("function")>>space_p]>>
+              r_oper[&inic_func][&save_name_func][st_functions.add]>>
+              ':'>>
+              !r_dom_func>>
+              str_p("->")>>
+              r_sort_st[&save_image_func]>>
+              ';';
+
+r_dom_func = r_sort_st[&save_domain_func]%',';
+\end{lstlisting}\end{center}
+
+\end{description}
+
 
 \subsection{\texttt{``attributes''} en \spirit }
 sdsad
