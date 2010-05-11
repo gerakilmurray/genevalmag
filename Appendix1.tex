@@ -1,12 +1,10 @@
-\chapter{Appendix Example}
-\label{chap:appendix1}
+\chapter{Apéndice}
+\label{chap:appendix}
 
-\section{Appendix Example section}
-
-\subsection{Especificación completa en \spirit}
+\section{Especificación completa en \spirit}
 \label{append:grammarspirit}
-\begin{center}\lstset{language=C++}
-\begin{lstlisting}
+
+\begin{center}\begin{lstlisting}[numbers=left,basicstyle=\tiny,language=C++]
 /**
   * Declaration of the Attribute Grammar structure
   * with the Spirit library of Boost.
@@ -197,7 +195,9 @@ struct attritute_grammar: public grammar<attritute_grammar>
                      r_expr_prime[&create_root_infix_node]);
 
       r_expr_prime = r_expr_prime_prime>>
-                     *(r_op_postfix_st[&create_operator][&create_func_node][&create_root_postfix_node])
+                     *(
+                      r_op_postfix_st[&create_operator][&create_func_node][&create_root_postfix_node]
+                      )
                    | r_op_prefix_st[&create_operator][&create_func_node]>>
                      r_expr_prime[&create_root_prefix_node]
                    ;
