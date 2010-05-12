@@ -48,7 +48,7 @@ struct my_grammar: public grammar <my_grammar>
 
 Para definirla, disponemos de un amplio conjunto de herramientas. Primero, los operadores de metalenguaje listados en la tabla \ref{ope_spirit}, los cuales permiten construir nuevas reglas combinando reglas ya definidas, parsers y constantes permitidas en el framework.
 
-\begin{figure}\centering
+\begin{figure}\centering\scriptsize
 \begin{tabular}{| c | p{9cm} |}
 \hline
 \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Operador}} &
@@ -70,7 +70,7 @@ $!$                  A & Opcional, 0 o 1 vez \\ \hline
 
 Por otra parte, \spirit\ dispone de un gran conjunto de parsers que abarcan la mayoría de los tipos básicos, representación de datos y valores utilizados en el común de los lenguajes (ver tabla \ref{parsers}).
 
-\begin{figure}\centering
+\begin{figure}\centering\scriptsize
 \begin{tabular}{| l | l |}
 \hline
 \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Parser}} &
@@ -98,7 +98,7 @@ end\_p     & Carácter de fin de archivo (EOF)\\ \hline
 
 Además posee varias directivas que modifican el comportamiento de los parsers, encapsulándose en una expresión definida por el usuario (ver tabla \ref{directivas}).
 
-\begin{figure}\centering
+\begin{figure}\centering\scriptsize
 \begin{tabular}{| l | p{8cm} |}
 \hline
 \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Directiva}} &
@@ -110,7 +110,10 @@ longest\_d   & Deshabilita el corto circuito, manda al analizador que pruebe tod
 \caption{\label{directivas}Directivas de \spirit\ aplicadas}
 \end{figure}
 
-Para el manejo de los símbolos válidos dentro de la definición de la gramática, \spirit soporta nativamente, el concepto de ``Tablas de símbolos''. Lo que permite registrar de manera dinámica nuevos símbolos, en particular dentro de nuestra herramienta nos ayudó a manejar los conjuntos de nombres válidos para los \texttt{sorts}, los símbolos no terminales permitidos en las ecuaciones, entre otros usos.
+Para el manejo de los símbolos válidos dentro de la definición de la gramática, \spirit\ soporta nativamente, el concepto de ``Tablas de símbolos''. Lo que permite registrar de manera dinámica nuevos símbolos, en particular dentro de nuestra herramienta nos ayudó a manejar los conjuntos de nombres válidos para los \texttt{sorts}, los símbolos no terminales permitidos en las ecuaciones, entre otros usos.
+
+\vspace{1cm}
+
 
 \begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize,numbers=left, numbersep=5pt, numberstyle=\tiny]
 /*
@@ -139,6 +142,71 @@ else
     cout << "Parsing Failed\n";
 }
 \end{lstlisting}\end{center}
+
+Lo primero que se tuvo que realizar, fue definir los componentes básicos que se iban a necesitar para construír las demás declaraciones.
+
+\begin{description}
+\item [Identificadores] son los nombres de sorts, funciones, atributos, símbolos no terminales y reglas, permitidos por \maggen\ y se basan en el común de los estándares. Dedido a que el lenguaje del evaluador generado es C++, todas las palabras reservadas de ese lenguaje, son de la misma clase para nuestra herramienta.
+
+\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+r_ident = lexeme_d[(alpha_p|'_')>>*(alnum_p|'_')]-r_reserved_word;
+
+r_reserved_word = str_p("compute")|"end"
+                | "all"
+                | "semantic domain"|"attributes" |"rules"
+                | "sort"|"op"|"function"
+                | "infix"|"prefix"|"postfix"
+                | "syn"|"inh"
+                | "left"|"right"|"non-assoc"
+                | r_cpp_reserved_words
+                ;
+
+r_cpp_reserved_words = r_cpp_basic_types
+                     | str_p("and")|"and_eq"|"asm"|"auto"|"bitand"
+                     | "bitor"|"break"|"case"|"catch"|"class"|"compl"
+                     | "const"|"const_cast"|"continue"|"default"
+                     | "delete"|"do"|"double"|"dynamic_cast"|"else"
+                     | "enum"|"explicit"|"export"|"extern"|"false"
+                     | "for"|"friend"|"goto"|"if"|"inline"|"long"
+                     | "mutable"|"namespace"|"new"|"not"|"not_eq"
+                     | "operator"|"or"|"or_eq"|"private"|"protected"
+                     | "public"|"register"|"reinterpret_cast"|"return"
+                     | "short"|"signed"|"sizeof"|"static"|"static_cast"
+                     | "struct"|"switch"|"template"|"this"|"throw"|"true"
+                     | "try"|"typedef"|"typeid"|"typename"|"union"
+                     | "unsigned"|"using"|"virtual"|"void"|"volatile"
+                     | "wchar_t"|"while"|"xor"|"xor_eq"
+                     ;
+
+r_cpp_basic_types = str_p("bool")|"char"|"float"|"int"|"string";
+\end{lstlisting}\end{center}
+
+\item [Operadores] Dentro de la especificación de la GA, se permiten como nombre válidos para los operadores, caracteres alfabéticos, numéricos y los operadores básicos de C++. 
+
+\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+r_oper = lexeme_d[(alpha_p|'_'|r_id_op)>>*(alnum_p|'_'|r_id_op)];
+
+r_id_op = ch_p('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>'|'|'|'~'|'.'|','|'?';
+\end{lstlisting}\end{center}
+
+\item [Literales] Son los valores de constantes y tipos básicos aceptados, se adecuan a los estándares de C++. Sólamente se tuvo que definir los valores lógicos, los caracteres entre comillas simples y las cadenas de caracteres entre comillas dobles, ya que para los tipos numéricos, existen parsers predefinidos de \spirit\ como ya se dio a conocer.
+
+\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+r_boolean = str_p("true")|"false";
+
+r_char = lexeme_d[ch_p('\'')>>(anychar_p)>>ch_p('\'')];
+
+r_string = lexeme_d[ch_p('\"')>>r_string_lit>>ch_p('\"')];
+
+r_string_lit = +((anychar_p-(ch_p('\"')|"\\"|'\'' ))|r_esc_seq);
+
+r_esc_seq = ch_p('\\')>>
+            ( oct_p
+            | as_lower_d['x']>>hex_p
+            | (anychar_p-ch_p('\n'))
+            );               
+\end{lstlisting}\end{center}
+\end{description}
 
 \subsection{\texttt{``semantic domain''} en \spirit}
 
@@ -197,7 +265,7 @@ r_oper_mode = '('>>
 r_oper_assoc = str_p("left")|"right"|"non-assoc";
 \end{lstlisting}\end{center}
 
-\item [\texttt{functions}] Para las funciones se permiten como dominio listas de sorts, los cuales serán agregados incrementalmente a la función que se está declarando.
+\item [\texttt{functions}] Para las funciones se permiten como dominio listas de sorts, los cuales serán agregados incrementalmente a la función que se está declarando. La utilización de acciones semánticas facilitan la modularización.
 
 \begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
 /* Declaration of Functions. */
@@ -212,17 +280,45 @@ r_decl_func = lexeme_d[str_p("function")>>space_p]>>
 
 r_dom_func = r_sort_st[&save_domain_func]%',';
 \end{lstlisting}\end{center}
-
 \end{description}
 
-
 \subsection{\texttt{``attributes''} en \spirit }
-sdsad
 
+Para la codificación de esta sección la funcionalidad buscada era que el usuario mediante una expresión en términos de conjuntos definiera la pertenencia de cada atributo. Por lo que se tuvo que implementar un ``mini-intérprete'' sobre conjuntos.
+
+Un detalle a tener en cuenta, es que en este punto, no se encuentran declarado ningún ``Símbolo Terminal o No Terminal'', asi que todo símbolo mencionado será creado dentro de la herramienta. Pero la vinculación de los atributos con sus respectivos dueños, se realizará más adelante, además existe la posibilidad de declarar un atributo para todo símbolo, mediante la sentendia \texttt{all}.
+
+\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+/*
+ * Declaration of Attributes.
+ */
+r_attributes = lexeme_d[str_p("attributes")>>space_p]>>
+               +r_decl_attr[&create_attributes];
+
+r_decl_attr = (r_ident[&add_attribute][st_attributes.add]%',')>>
+              ':'>>
+              !(r_type_attr[&save_type_attr])>>
+              '<'>>r_sort_st[&save_sort_attr]>>'>'>>
+              lexeme_d[str_p("of")>>space_p]>>
+              (r_conj_symb |
+               (str_p("all")>>!('-'>>r_conj_symb))
+              )[&save_member_list_attr]>>
+              ';';
+
+r_conj_symb = '{'>>(r_ident%',')>>'}';
+
+r_type_attr = str_p("inh")|"syn";
+\end{lstlisting}\end{center}
 
 \subsection{\texttt{``rules''} en \spirit }
 
-sadsadsd
+Toda la implementación del analizador sintáctico de \maggen\ está dentro del directorio ``Parser'', en el que se encuentran los siguientes archivos:
+
+\begin{description}
+\item [Parser.cpp] baba
+\item [Semantics\_actions.cpp] bebe
+\item [Semantics\_checks.cpp] bubu
+\end{description}
 
 \section{Algoritmo de generación de secuencia de visita}
 
