@@ -25,7 +25,7 @@ El usuario es el responsable de definir las ``\texttt{semantic actions}'' para l
 
 Para comenzar a definir una gramática hay que crear una estructura que herede de la clase \texttt{grammar}. Dentro de ella se debe definir a su vez otra estructura templatizada denominada \texttt{definition}. En donde realmente estará la definición de la gramática.
 
-\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize,numbers=left, numbersep=5pt, numberstyle=\tiny]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize,numbers=left, numbersep=5pt, numberstyle=\tiny]
 struct my_grammar: public grammar <my_grammar>
 {
     template <typename ScannerT>
@@ -44,26 +44,26 @@ struct my_grammar: public grammar <my_grammar>
         }
     };
 };
-\end{lstlisting}\end{center}
+\end{lstlisting}
 
 Para definirla, disponemos de un amplio conjunto de herramientas. Primero, los operadores de metalenguaje listados en la tabla \ref{ope_spirit}, los cuales permiten construir nuevas reglas combinando reglas ya definidas, parsers y constantes permitidas en el framework.
 
 \begin{figure}\centering\scriptsize
-\begin{tabular}{| c | p{9cm} |}
+\begin{tabular}{| c | p{7cm} |}
 \hline
 \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Operador}} &
 \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Semántica}} \\ \hline
-A $=$                B & Definición de A en base a B \\ \hline
-A $|$                B & Unión, acepta A o B, también llamada ``alternativa''\\ \hline
-A $\&$               B & Intersección, acepta A y B \\ \hline
-A $-$                B & Diferencia, acepta A pero no a B  \\ \hline
-A $\textasciicircum$ B & Disyunción exclusiva, acepta A o B, pero no a ambos \\ \hline
-A $>>$               B & Secuencia, acepta A seguido de B \\ \hline
-A $\%$               B & Lista, acepta A separados por ocurrencias de B.\\
-                       & Es equivalente a: A $>>$ *(B $>>$ A)\\ \hline
-$*$                  A & Estrella de Kleene, 0 o más veces \\ \hline
-$+$                  A & Positivo, 1 o más veces \\ \hline
-$!$                  A & Opcional, 0 o 1 vez \\ \hline
+A $=$                  B  & Definición de A en base a B \\ \hline
+A $|$                  B  & Unión, acepta A o B, también llamada ``alternativa''\\ \hline
+A $\&$                 B  & Intersección, acepta A y B \\ \hline
+A $-$                  B  & Diferencia, acepta A pero no a B  \\ \hline
+A $\textasciicircum$   B  & Disyunción exclusiva, acepta A o B, pero no a ambos \\ \hline
+A $>>$                 B  & Secuencia, acepta A seguido de B \\ \hline
+\multirow{2}{*}{A $\%$ B} & Lista, acepta A separados por ocurrencias de B.\\
+                          & Es equivalente a: A $>>$ *(B $>>$ A)\\ \hline
+$*$                    A  & Estrella de Kleene, 0 o más veces \\ \hline
+$+$                    A  & Positivo, 1 o más veces \\ \hline
+$!$                    A  & Opcional, 0 o 1 vez \\ \hline
 \end{tabular}
 \caption{Operadores de \spirit\ utilizados}\label{ope_spirit}
 \end{figure}
@@ -99,13 +99,15 @@ end\_p     & Carácter de fin de archivo (EOF)\\ \hline
 Además posee varias directivas que modifican el comportamiento de los parsers, encapsulándose en una expresión definida por el usuario (ver tabla \ref{directivas}).
 
 \begin{figure}\centering\scriptsize
-\begin{tabular}{| l | p{8cm} |}
+\begin{tabular}{| l | p{7cm} |}
 \hline
 \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Directiva}} &
 \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Efecto}} \\ \hline
 lexeme\_d    & Deshabilita la omisión de espacios en blanco (space\_p)\\ \hline
 as\_lower\_d & Convierte en minúscula lo aceptado por la expresión\\ \hline
-longest\_d   & Deshabilita el corto circuito, manda al analizador que pruebe todas las alternativas posibles y elija la secuencia más larga aceptada \\ \hline
+\multirow{3}{*}{longest\_d} & Deshabilita el corto circuito, manda al analizador que\\
+                            & pruebe todas las alternativas posibles y elija la secuen-\\
+                            & cia más larga aceptada \\ \hline
 \end{tabular}
 \caption{\label{directivas}Directivas de \spirit\ aplicadas}
 \end{figure}
@@ -114,8 +116,7 @@ Para el manejo de los símbolos válidos dentro de la definición de la gramáti
 
 \vspace{1cm}
 
-
-\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize,numbers=left, numbersep=5pt, numberstyle=\tiny]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize,numbers=left, numbersep=5pt, numberstyle=\tiny]
 /*
  * Symbols's Table for the elements of an Attribute Grammar.
  */
@@ -126,11 +127,11 @@ symbols <> st_op_postfix;
 symbols <> st_functions;
 symbols <> st_attributes;
 symbols <> st_non_terminal;
-\end{lstlisting}\end{center}
+\end{lstlisting}
 
 Para comenzar a interactuar con el framework, el usuario debe declarar un objeto de la estructura definida y pasarlo como parámetro a una función específica de \spirit.
 
-\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
 my_grammar g;
 
 if (parse(first, last, g, space_p).full)
@@ -141,14 +142,14 @@ else
 {
     cout << "Parsing Failed\n";
 }
-\end{lstlisting}\end{center}
+\end{lstlisting}
 
-Lo primero que se tuvo que realizar, fue definir los componentes básicos que se iban a necesitar para construír las demás declaraciones.
+Lo primero que se tuvo que realizar, fue definir los componentes básicos que se iban a necesitar para construir las demás declaraciones.
 
 \begin{description}
-\item [Identificadores] son los nombres de sorts, funciones, atributos, símbolos no terminales y reglas, permitidos por \maggen\ y se basan en el común de los estándares. Dedido a que el lenguaje del evaluador generado es C++, todas las palabras reservadas de ese lenguaje, son de la misma clase para nuestra herramienta.
+\item [Identificadores] son los nombres de sorts, funciones, atributos, símbolos no terminales y reglas, permitidos por \maggen\ y se basan en el común de los estándares. Debido a que el lenguaje del evaluador generado es C++, todas las palabras reservadas de ese lenguaje, son de la misma clase para nuestra herramienta.
 
-\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
 r_ident = lexeme_d[(alpha_p|'_')>>*(alnum_p|'_')]-r_reserved_word;
 
 r_reserved_word = str_p("compute")|"end"
@@ -179,19 +180,19 @@ r_cpp_reserved_words = r_cpp_basic_types
                      ;
 
 r_cpp_basic_types = str_p("bool")|"char"|"float"|"int"|"string";
-\end{lstlisting}\end{center}
+\end{lstlisting}
 
 \item [Operadores] Dentro de la especificación de la GA, se permiten como nombre válidos para los operadores, caracteres alfabéticos, numéricos y los operadores básicos de C++. 
 
-\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
 r_oper = lexeme_d[(alpha_p|'_'|r_id_op)>>*(alnum_p|'_'|r_id_op)];
 
 r_id_op = ch_p('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>'|'|'|'~'|'.'|','|'?';
-\end{lstlisting}\end{center}
+\end{lstlisting}
 
-\item [Literales] Son los valores de constantes y tipos básicos aceptados, se adecuan a los estándares de C++. Sólamente se tuvo que definir los valores lógicos, los caracteres entre comillas simples y las cadenas de caracteres entre comillas dobles, ya que para los tipos numéricos, existen parsers predefinidos de \spirit\ como ya se dio a conocer.
+\item [Literales] Son los valores de constantes y tipos básicos aceptados, se adecuan a los estándares de C++. Solamente se tuvo que definir los valores lógicos, los caracteres entre comillas simples y las cadenas de caracteres entre comillas dobles, ya que para los tipos numéricos, existen parsers predefinidos de \spirit\ como ya se dio a conocer.
 
-\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
 r_boolean = str_p("true")|"false";
 
 r_char = lexeme_d[ch_p('\'')>>(anychar_p)>>ch_p('\'')];
@@ -205,7 +206,7 @@ r_esc_seq = ch_p('\\')>>
             | as_lower_d['x']>>hex_p
             | (anychar_p-ch_p('\n'))
             );               
-\end{lstlisting}\end{center}
+\end{lstlisting}
 \end{description}
 
 \subsection{\texttt{``semantic domain''} en \spirit}
@@ -217,19 +218,19 @@ Los \texttt{sorts} serán los tipos que se podrán utilizar para definir los dom
 Según lo explicado en el Diseño, las reglas de cada clase, han sido codificados de la siguiente manera.
 
 \begin{description}
-\item [\texttt{sorts}] Exijimos que luego del identificador ``\texttt{sort}'' halla un espacio\footnote{Ver definición de space\_p \ref{parsers}}. El nombre leído, se usará para crear un nuevo Sort dentro de la GA y también se insertará en la tabla de símbolos de sorts. Se acepta una lista de nombres de sorts para comodidad del usuario.
+\item [\texttt{sorts}] Exigimos que luego del identificador ``\texttt{sort}'' halla un espacio\footnote{Ver definición de space\_p \ref{parsers}}. El nombre leído, se usará para crear un nuevo Sort dentro de la GA y también se insertará en la tabla de símbolos de sorts. Se acepta una lista de nombres de sorts para comodidad del usuario.
 
-\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
 /* Declaration of Sorts. */
 
 r_decl_sort = lexeme_d[str_p("sort")>>space_p]>>
               (r_ident[&create_sort][st_sorts.add]%',')>>
               ';';
-\end{lstlisting}\end{center}
+\end{lstlisting}
 
-\item [\texttt{operators}] Para los operadores también se exije el espacio. Por definición se aceptan tres tipos: infijos, prefijos e infijos, por lo que se hizo una regla para cada uno, sólamente discriminado los dominios, ya que todos poseen una sóla imágen. Notar que los sorts permitidos, son sacados directamente de las tablas de símbolos destinadas para ese propósito.
+\item [\texttt{operators}] Para los operadores también se exige el espacio. Por definición se aceptan tres tipos: infijos, prefijos y posfijos, por lo que se hizo una regla para cada uno, solamente discriminado los dominios, ya que todos poseen una sóla imagen. Notar que los sorts permitidos, son sacados directamente de las tablas de símbolos destinadas para ese propósito.
 
-\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
 /* Declaration of Operators. */
 
 r_decl_oper  = lexeme_d[str_p("op")>>space_p][&inic_func]>>
@@ -263,11 +264,11 @@ r_oper_mode = '('>>
                ')';
 
 r_oper_assoc = str_p("left")|"right"|"non-assoc";
-\end{lstlisting}\end{center}
+\end{lstlisting}
 
 \item [\texttt{functions}] Para las funciones se permiten como dominio listas de sorts, los cuales serán agregados incrementalmente a la función que se está declarando. La utilización de acciones semánticas facilitan la modularización.
 
-\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
 /* Declaration of Functions. */
 
 r_decl_func = lexeme_d[str_p("function")>>space_p]>>
@@ -279,16 +280,18 @@ r_decl_func = lexeme_d[str_p("function")>>space_p]>>
               ';';
 
 r_dom_func = r_sort_st[&save_domain_func]%',';
-\end{lstlisting}\end{center}
+\end{lstlisting}
 \end{description}
 
 \subsection{\texttt{``attributes''} en \spirit }
 
-Para la codificación de esta sección la funcionalidad buscada era que el usuario mediante una expresión en términos de conjuntos definiera la pertenencia de cada atributo. Por lo que se tuvo que implementar un ``mini-intérprete'' sobre conjuntos.
+Para la codificación de esta sección la funcionalidad buscada era que el usuario mediante una expresión en términos de conjuntos definiera la pertenencia de cada atributo. Por lo que se tuvo que implementar un ``mini-intérprete'' sobre expresiones de conjuntos.
 
-Un detalle a tener en cuenta, es que en este punto, no se encuentran declarado ningún ``Símbolo Terminal o No Terminal'', asi que todo símbolo mencionado será creado dentro de la herramienta. Pero la vinculación de los atributos con sus respectivos dueños, se realizará más adelante, además existe la posibilidad de declarar un atributo para todo símbolo, mediante la sentendia \texttt{all}.
+Un detalle a tener en cuenta, en este punto, es que no se encuentra declarado ningún ``Símbolo No Terminal'', así que todo símbolo mencionado dentro de la expresión será creado bajo demanda.
 
-\begin{center}\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+La vinculación de los atributos con sus respectivos dueños, se realizará más adelante, debido a que existe la posibilidad de declarar un atributo para todo símbolo, mediante la sentencia \texttt{all}, antes de tener totalmente definido el conjunto de símbolos no terminales de la gramática.
+
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
 /*
  * Declaration of Attributes.
  */
@@ -308,9 +311,110 @@ r_decl_attr = (r_ident[&add_attribute][st_attributes.add]%',')>>
 r_conj_symb = '{'>>(r_ident%',')>>'}';
 
 r_type_attr = str_p("inh")|"syn";
-\end{lstlisting}\end{center}
+\end{lstlisting}
 
-\subsection{\texttt{``rules''} en \spirit }
+\subsection{\texttt{``rules''} en \spirit}
+
+En la definición de una gramática las reglas son los pilares, por eso en esta sección se debía brindar la mayor flexibilidad al usuario.
+
+El bloque de reglas comienza con el identificador ``\texttt{rules}'', mediante un espacio de por medio, la lista  de reglas. Cada una de las mismas son enumeradas desde 1 para mantener una indexación interna. Una vez consumido el bloque se realizan los chequeos que determinan si la GA es MAG o no.
+
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+/*
+ * Declaration of Rules.
+ */
+r_rules = lexeme_d[str_p("rules")>>space_p]>>
+          (+r_decl_rule)>>eps_p[&check_well_defined];
+\end{lstlisting}
+
+Una regla individualmente esta representada por un identificador y los caracteres ``\texttt{::=}'' y una lista de símbolos, dejando también la posibilidad de escribir reglas abreviadas mediante el uso del operador ``|'' junto a una nueva lista de símbolos, evitando repetir el lado izquierdo de la regla.
+
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+r_decl_rule = r_ident[&create_new_non_terminal][&create_rule][st_non_terminal.add]>>
+              str_p("::=")>>
+              r_right_rule[&save_rule]>>
+              *(str_p("|")[&create_abbreviated_rule]>>
+              r_right_rule[&save_rule])>>
+              ';';
+\end{lstlisting}
+
+Dentro de la lista de símbolos se aceptan identificadores de símbolos no terminales y símbolos terminales, definidos mediante una regla específica. Ambos, son creados controlando que no existan repetidos, actualizando la tabla de símbolos solamente de los no terminales.
+
+Se consideran símbolos terminales a cualquier cadena de caracteres encerrada entre comillas simples.
+
+Por definición, una regla puede no contener un bloque de ecuaciones, por lo que es opcional.
+
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+r_right_rule = +( r_ident[&create_new_non_terminal][st_non_terminal.add]
+                | r_terminal[&create_new_terminal]
+                )[&save_right_side_rule]>>
+               !r_compute_eq;
+
+r_terminal = lexeme_d[ch_p('\'')>>r_string_lit>>ch_p('\'')];
+\end{lstlisting}
+
+El mismo estará delimitado por las cadenas \texttt{``compute}'' y \texttt{``end}'', en su interior se aceptará una lista con al menos \textbf{una} ecuación. Las cuales están compuestas por una instancia de atributo, como ``\texttt{l-value}'', el carácter ``\texttt{=}'' y una expresión como ``\texttt{r-value}''.
+
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+r_compute_eq = str_p("compute")>>
+               +(r_equation)>>
+               str_p("end");
+
+r_equation = r_instance[&create_equation]>>
+             '='>>
+             r_expression[&save_rvalue]>>
+             ';';
+\end{lstlisting}
+
+Las expresiones aceptadas por la herramienta, pueden ser de cualquier tipo, es decir, se utilizó la gramática de expresiones ambigüas que figura en la mayoría de los libros sobre este tema.
+
+\begin{lstlisting}[backgroundcolor=\color{white}]
+E := E op E
+   | (E)
+   | literal
+\end{lstlisting}
+
+Donde ``op'' se interpreta como cualquier operador. Esta gramática presentaba el problema de la ``recursión a izquierda'', por lo que se la quitó obteniendo lo siguiente.
+
+\begin{lstlisting}[backgroundcolor=\color{white}]
+E := T op1 E
+   | T
+
+T := F op2 T
+   | F
+
+F := (E)
+   | literal
+\end{lstlisting}
+
+En nuestra especificación, los ``literales'' pueden ser solamente tres cosas: funciones, instancias de atributos y los literales propiamente dichos (caracteres, cadenas, valores lógicos, números enteros y flotantes). Los operadores fueron discriminados puntualmente según su sintaxis.
+
+Además, debido a una restricción de \spirit, se tuvo que reescribir toda regla de la forma:
+
+\begin{center}\textbf{\large{$ A := B A | B  \Rightarrow  A := B (A)* $}}\end{center}
+
+Logrando la siguiente gramática de expresiones, que luego fue codificada en \spirit.
+
+\begin{lstlisting}[backgroundcolor=\color{white}]
+E := T (op_infix E)*
+
+T := F (op_postfix)*
+   | op_prefix T
+
+F := (E)
+   | function
+   | literal
+   | instance
+
+literal := real
+         | int
+         | char
+         | string
+         | bool
+\end{lstlisting}
+
+
+\subsection*{Observaciones}
 
 Toda la implementación del analizador sintáctico de \maggen\ está dentro del directorio ``Parser'', en el que se encuentran los siguientes archivos:
 
