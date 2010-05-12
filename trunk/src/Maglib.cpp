@@ -90,6 +90,8 @@ int Maglib::gen_evaluator
 		{
 			/* The graphs generation exits because detects a cyclic graphs of attribute dependencies. */
 			b_plans.save_cyclic_graphs(path_output);
+			cerr << "ERROR: One o more graph ADP has an cycle in its dependencies. Look the folder " << path_output
+			<< "graphs/CYCLIC_graphs/ for more details." << endl;
 		}
 	}
 	/* In this point some step fails. */

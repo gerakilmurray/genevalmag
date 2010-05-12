@@ -524,7 +524,6 @@ unsigned short Builder_plans::build_plans()
 		if (build_graphs.check_cyclic_adp_dependencies())
 		{
 			cout << "* Build plans -------------- [ ABORT ]\n" << endl;
-			cerr << "ERROR: One o more graph ADP has an cycle in its dependencies. Look the folder GenEvalAG/Out_Gen_Mag for more details." << endl;
 			return 1;
 		}
 		else if(generate_plans())
