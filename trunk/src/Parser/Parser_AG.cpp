@@ -17,7 +17,7 @@
 #include <boost/spirit/include/classic_functor_parser.hpp>
 
 #include "../../include/Parser/Parser_AG.h"
-#include "../../include/Parser/Semantic_check.h"
+#include "../../include/Parser/Semantics_checks.h"
 #include "../../include/Parser/Semantics_actions.h"
 
 using namespace std;

@@ -14,7 +14,7 @@
 
 #include "../Attr_grammar/Attr_grammar.h"
 
-#include "Semantic_check.h"
+#include "Semantics_checks.h"
 
 using namespace BOOST_SPIRIT_CLASSIC_NS;
 
@@ -41,7 +41,7 @@ class Parser_AG
 		  * \var sem_check.
 		  * \brief Semantics control for grammar: Well define grammar.
 		  */
-		Semantic_check sem_check;
+		Semantics_checks sem_check;
 
 	public:
 		/**

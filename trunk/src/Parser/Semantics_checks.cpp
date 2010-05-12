@@ -1,6 +1,6 @@
 /**
-  *  \file		Semantic_check.cpp
-  *  \brief		Implementation of the methods the Semantic_check.h
+  *  \file		Semantics_checks.cpp
+  *  \brief		Implementation of the methods the Semantics_checks.h
   *  \date      11/02/2010
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
@@ -11,7 +11,7 @@
 #include <iostream>
 #include <map>
 
-#include "../../include/Parser/Semantic_check.h"
+#include "../../include/Parser/Semantics_checks.h"
 
 using namespace std;
 
@@ -21,7 +21,7 @@ namespace genevalmag
 /**
   * Contructor empty of Semantic check.
   */
-Semantic_check::Semantic_check()
+Semantics_checks::Semantics_checks()
 {
 	precedence_level	= 0;
 	index_syntax_order	= 0;
@@ -30,14 +30,14 @@ Semantic_check::Semantic_check()
 /**
   * Destructor of Semantic check.
   */
-Semantic_check::~Semantic_check()
+Semantics_checks::~Semantics_checks()
 {
 }
 
 /**
   * Returns the precedence level.
   */
-unsigned short Semantic_check::get_precedence_level() const
+unsigned short Semantics_checks::get_precedence_level() const
 {
     return precedence_level;
 }
@@ -45,7 +45,7 @@ unsigned short Semantic_check::get_precedence_level() const
 /**
   * Returns the current index of the syntax order.
   */
-unsigned short Semantic_check::get_index_syntax_order() const
+unsigned short Semantics_checks::get_index_syntax_order() const
 {
     return index_syntax_order;
 }
@@ -53,7 +53,7 @@ unsigned short Semantic_check::get_index_syntax_order() const
 /**
   * Increments the level because a new parenthesis opening.
   */
-void Semantic_check::increment_precedence_level()
+void Semantics_checks::increment_precedence_level()
 {
 	precedence_level++;
 }
@@ -61,7 +61,7 @@ void Semantic_check::increment_precedence_level()
 /**
   * Decrements the level because a parenthesis closing.
   */
-void Semantic_check::decrement_precedence_level()
+void Semantics_checks::decrement_precedence_level()
 {
 	precedence_level--;
 }
@@ -69,7 +69,7 @@ void Semantic_check::decrement_precedence_level()
 /**
   * Increments the syntax order global.
   */
-void Semantic_check::increment_index_syntax_order()
+void Semantics_checks::increment_index_syntax_order()
 {
 	index_syntax_order++;
 }
@@ -77,7 +77,7 @@ void Semantic_check::increment_index_syntax_order()
 /**
   * Resets all variables that affect in the precedence analisys.
   */
-void Semantic_check::reset_semantic_context()
+void Semantics_checks::reset_semantic_context()
 {
 	precedence_level	= 0;
 	index_syntax_order	= 0;
@@ -169,7 +169,7 @@ int swap_root_grandson(Ast_function **old_root)
 /**
   * Checks and correct the precendence of the operator in a subtree.
   */
-void Semantic_check::correct_subtree(Ast_function **subtree, int index_root_subtree)
+void Semantics_checks::correct_subtree(Ast_function **subtree, int index_root_subtree)
 {
 	Ast_function *aux((Ast_function*)(*subtree)->get_child(index_root_subtree));
 	correct_precedence(&aux);
@@ -206,7 +206,7 @@ void Semantic_check::correct_subtree(Ast_function **subtree, int index_root_subt
   *   - The syntactic order of the expression is not altered.
   *   - The operation with higher precedence apply first.
   */
-void Semantic_check::correct_precedence(Ast_function **root_tree)
+void Semantics_checks::correct_precedence(Ast_function **root_tree)
 {
 	if (!(*root_tree)->is_prefix() && ((*root_tree)->get_child(0)->get_conflict() > -1))
 	/* Special case which must complete a check of some sub-level of the tree. */
@@ -288,7 +288,7 @@ void Semantic_check::correct_precedence(Ast_function **root_tree)
   * If it detects conflicts modifying the expression tree with rotations and
   * resources to continue controlling.
   */
-void Semantic_check::correct_associativity(Ast_function **root_tree)
+void Semantics_checks::correct_associativity(Ast_function **root_tree)
 {
 	/* Detecting if the child is of Ast_function type. */
 	Ast_function *child(dynamic_cast<Ast_function*>((*root_tree)->get_child(0)));
@@ -334,7 +334,7 @@ void Semantic_check::correct_associativity(Ast_function **root_tree)
   * Verifies that all non-terminals in the grammar has defines in a rule.
   * That is, it is the left value of some rule of grammar.
   */
-bool Semantic_check::check_all_defined_non_terminal(const map <unsigned short, Rule> &rules, const map <string, Symbol> &non_terminals)
+bool Semantics_checks::check_all_defined_non_terminal(const map <unsigned short, Rule> &rules, const map <string, Symbol> &non_terminals)
 {
 	bool left_symbol_defined(false);
 
@@ -403,7 +403,7 @@ int get_index(string name_symb, vector<string> non_term)
   * then computes the Warshall algorithm for transitive closure and thus can identify
   * from the initial symbol all symbols reachable.
   */
-bool Semantic_check::check_reachability(const map <unsigned short, Rule> &rules, const map <string, Symbol> &non_terminals, const Symbol *init_symbol)
+bool Semantics_checks::check_reachability(const map <unsigned short, Rule> &rules, const map <string, Symbol> &non_terminals, const Symbol *init_symbol)
 {
 	vector<string> non_term;
 	/* Obtain all non_terminals name. */
@@ -484,7 +484,7 @@ bool check_eq_defines_it(const Symbol *symb, const int index, const Attribute *a
   * Checks that all synthetized attributes of the left symbols of all rule are defined with an equation.
   * And all inherit attributes of all right symbol too.
   */
-bool Semantic_check::check_well_defined_AG(const map <unsigned short, Rule> &rules)
+bool Semantics_checks::check_well_defined_AG(const map <unsigned short, Rule> &rules)
 {
 	for (map<unsigned short, Rule>::const_iterator it_r(rules.begin()); it_r != rules.end(); it_r++)
 	{

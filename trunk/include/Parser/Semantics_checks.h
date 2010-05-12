@@ -1,12 +1,12 @@
 /**
-  *  \file		Semantic_check.h
-  *  \brief		Header method semantic check of Attribute grammar.
+  *  \file		Semantics_checks.h
+  *  \brief		Header method Semantics checks of Attribute grammar.
   *  \date      11/02/2010
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
-#ifndef SEMANTIC_CKECK_H_
-#define SEMANTIC_CKECK_H_
+#ifndef SEMANTICS_CKECKS_H_
+#define SEMANTICS_CKECKS_H_
 
 #include <string>
 #include <map>
@@ -18,7 +18,7 @@
 namespace genevalmag
 {
 
-class Semantic_check
+class Semantics_checks
 {
 	private:
 		/**
@@ -42,14 +42,14 @@ class Semantic_check
 
 	public:
 		/**
-		  * Contructor empty of Semantic check.
+		  * Contructor empty of Semantics checks.
 		  */
-		Semantic_check();
+		Semantics_checks();
 
 		/**
-		  * Destructor of Semantic check.
+		  * Destructor of Semantics checks.
 		  */
-		~Semantic_check();
+		~Semantics_checks();
 
 		/**
 		  * Returns the precedence level.
@@ -141,4 +141,4 @@ class Semantic_check
 
 } /* end genevalmag */
 
-#endif /* SEMANTIC_CKECK_H_ */
+#endif /* SEMANTICS_CKECKS_H_ */
