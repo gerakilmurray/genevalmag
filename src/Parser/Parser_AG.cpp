@@ -101,25 +101,6 @@ struct attritute_grammar: public grammar<attritute_grammar>
 
 			r_ident = lexeme_d[(alpha_p|'_')>>*(alnum_p|'_')]-r_reserved_word;
 
-			r_oper = lexeme_d[(alpha_p|'_'|r_id_op)>>*(alnum_p|'_'|r_id_op)];
-
-			r_id_op = ch_p('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>'|'|'|'~'|'.'|','|'?';
-
-			r_boolean = str_p("true")|"false";
-
-			r_char = lexeme_d[ch_p('\'')>>(anychar_p)>>ch_p('\'')];
-
-			r_string = lexeme_d[ch_p('\"')>>r_string_lit>>ch_p('\"')];
-
-			r_string_lit = +((anychar_p-(ch_p('\"')|"\\"|'\'' ))|r_esc_seq);
-
-			r_esc_seq = ch_p('\\')>>
-					    ( oct_p
-						| as_lower_d['x']>>hex_p
-						| (anychar_p-ch_p('\n'))
-						)
-				      ;
-
 			r_reserved_word = str_p("compute")|"end"
 					        | "all"
 							| "semantic domain"|"attributes" |"rules"
@@ -148,6 +129,25 @@ struct attritute_grammar: public grammar<attritute_grammar>
 							     ;
 
 			r_cpp_basic_types = str_p("bool")|"char"|"float"|"int"|"string";
+
+			r_oper = lexeme_d[(alpha_p|'_'|r_id_op)>>*(alnum_p|'_'|r_id_op)];
+
+			r_id_op = ch_p('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>'|'|'|'~'|'.'|','|'?';
+
+			r_boolean = str_p("true")|"false";
+
+			r_char = lexeme_d[ch_p('\'')>>(anychar_p)>>ch_p('\'')];
+
+			r_string = lexeme_d[ch_p('\"')>>r_string_lit>>ch_p('\"')];
+
+			r_string_lit = +((anychar_p-(ch_p('\"')|"\\"|'\'' ))|r_esc_seq);
+
+			r_esc_seq = ch_p('\\')>>
+					    ( oct_p
+						| as_lower_d['x']>>hex_p
+						| (anychar_p-ch_p('\n'))
+						)
+				      ;
 
 			/*
 			 * Declaration of Semantic Domain.
@@ -250,11 +250,12 @@ struct attritute_grammar: public grammar<attritute_grammar>
 						    )[&save_right_side_rule]>>
 						   !r_compute_eq;
 
+
+			r_terminal = lexeme_d[ch_p('\'')>>r_string_lit>>ch_p('\'')];
+
 			r_compute_eq = str_p("compute")>>
 					       +(r_equation)>>
 					       str_p("end");
-
-			r_terminal = lexeme_d[ch_p('\'')>>r_string_lit>>ch_p('\'')];
 
 			r_equation = r_instance[&create_equation]>>
 					     '='>>
@@ -321,7 +322,10 @@ struct attritute_grammar: public grammar<attritute_grammar>
 			/*
 			 * Declaration of Attribute Grammar.
 			 */
-			r_att_grammar = r_semantic_domain>>r_attributes>>r_rules>>end_p ;
+			r_att_grammar = r_semantic_domain >>
+					        r_attributes >>
+					        r_rules >>
+					        end_p;
 
 			/*
 			 * Parsers based in the symbol tables.
