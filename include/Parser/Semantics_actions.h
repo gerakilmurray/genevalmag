@@ -13,7 +13,7 @@
 
 #include "../Attr_grammar/Attr_grammar.h"
 
-#include "Semantic_check.h"
+#include "Semantics_checks.h"
 #include "Parser_AG.h"
 
 using namespace std;
@@ -31,7 +31,7 @@ void set_attr_grammar(Attr_grammar *at_grammar);
   * Sets attribute sem_check.
   * @param s_check
   */
-void set_sem_check(Semantic_check *s_check);
+void set_sem_check(Semantics_checks *s_check);
 
 /**
   * Methods and functions for parse Sort class.

@@ -25,7 +25,7 @@ namespace genevalmag
 
 Attr_grammar *attr_grammar;
 
-Semantic_check *sem_check;
+Semantics_checks *sem_check;
 
 /**
   * Sets attribute attr_grammar.
@@ -38,7 +38,7 @@ void set_attr_grammar(Attr_grammar *at_grammar)
 /**
   * Sets attribute sem_check.
   */
-void set_sem_check(Semantic_check *s_check)
+void set_sem_check(Semantics_checks *s_check)
 {
 	sem_check = s_check;
 }
