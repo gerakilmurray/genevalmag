@@ -2,7 +2,54 @@
 \label{chap:disen_}
 \minitoc
 
-\section{Qué es \maggen}
+\section{\textquestiondown Qué es \maggen?}
+\maggen\ es una herramienta generadora de evaluadores estáticos para gramáticas atribuidas multiplans(MAG). 
+
+Esto es, dada una MAG en el lenguaje de especificación, \maggen\ computa los planes de evaluación y genera las distintas secuencias de visita para todos los posibles contextos. Estas secuencias, son codificadas en un archivo C++ junto con los algoritmos necesarios para evaluar cualquier AST perteneciente la gramática \textit{input} de \maggen.
+
+El evaluador generado por \maggen\ recibe un AST y devuelve este AST decorado. El potencial del evaluador generado por \maggen, esta dado, por tener estáticamente todos las posibles secuencias de visita para los posibles AST de entrada, entonces sólo debe seleccionar las secuencias para el AST dado y luego recorrerlo según como las mimas lo indiquen.
+
+\section{Como funciona \maggen}
+Dado una MAG, \maggen\ calcula los grafos de dependencias de atributos de los símbolos de la gramática. A partir de ellos, es posible la aplicación de algoritmos de para la obtención de planes de evaluación y luego secuencias de visitas de dichos planes. \maggen\ se basa en la construcción de 4 tipos de grafos, que se construyen de manera incremental sobre la gramática. Estos grafos, son los presentados en el capitulo XXX, Dependency graph (\textbf{DP}), Down graph (\textbf{Down}), Downward characteristic graph (\textbf{DCG}) y augmented dependency graph (\textbf{ADP}). Sobre estos últimos se basa el calculo de los planes de evaluación.
+
+El funcionamiento de \maggen\ esta dado por la integración de 4 etapas, consideradas principales, que marcaron el proceso de desarrollo de la herramienta:
+\begin{itemize}
+\item Lenguaje especificación de MAG.
+\item Parser del lenguaje,representación interna y chequeos.
+\item Construcción de grafos y aplicación de algoritmos de computo de planes y secuencias de visita.
+\item Generación de código.
+\end{itemize}
+
+El computo de \maggen\ se realiza atravesando cada una de estas etapas secuencialmente, es decir, la terminación exitosa de una, habilita la siguiente; por lo tanto cada etapa mantiene su salida de errores de manera independiente. 
+
+La salida normal de \maggen que indica que se han realizado todas las etapas correctamente, es la siguiente:
+
+\begin{lstlisting}[backgroundcolor=\color{white}]
+               * Parsing grammar ---------- [  OK  ]
+               * Generate graphs ---------- [  OK  ]
+               * Build plans -------------- [  OK  ]
+               * Build visit sequence ----- [  OK  ]
+               * Generation code ---------- [  OK  ]
+
+               Generation complete in: 0.372814 seconds.
+\end{lstlisting}
+
+En caso de funcionamiento anormal de alguna de las etapas, se detectará un \textbf{FAIL} en la etapa correspondiente y se indicará la información del mismo.
+
+Un caso alternativo de salida, se da cuando \maggen\ detecta planes cíclicos, visualizándose un \textbf{ABORT} en la etapa de creación de planes:
+
+\begin{lstlisting}[backgroundcolor=\color{white}] 
+               * Parsing grammar ---------- [  OK  ]
+               * Generate graphs ---------- [  OK  ]
+               * Build plans -------------- [ ABORT ]
+
+               ERROR: One o more graph ADP has an cycle in its dependencies.Look the folder GenEvalAG/Out_Gen_Mag for more details.
+
+               Generation complete in: 0.056179 seconds.
+\end{lstlisting}
+Notar que, el mensaje de error indicara la ruta donde fueron almacenados los grafos con problemas de ciclicidad. Para este caso particular fue: \textit{GenEvalAG/Out\_Gen\_Mag.}
+
+En lo que resta del capitulo se abordaran detalles de cada etapa, analizada en esta sección.
 
 \section{Lenguaje de especificación de las MAG}
 
@@ -18,68 +65,56 @@ Informalmente, el lenguaje de especificación se conforma de las siguientes part
 \item [Bloque de Reglas] Destinado a la declaración y definición de las reglas sintácticas de la gramática con sus correspondientes ecuaciones semánticas para cada atributo asociado a cada símbolo. Este bloque es denominado ``\texttt{rules}''.
 \end{description}
 
-A los tres bloques analizados anteriormente, podemos clasificarlos en dos, teniendo en cuenta su comportamiento o funcionalidad dentro de la especificación. Los dos primeros, son bloques puramente declatativos o dedicados a la definición de elementos que serán utilizados en el tercer bloque. Este bloque, es considerado el de mayor áuge, ya que marca la sintaxis y semántica de la gramática.
+A los tres bloques analizados anteriormente, podemos clasificarlos en dos, teniendo en cuenta su comportamiento o funcionalidad dentro de la especificación. Los dos primeros, son bloques puramente declarativos o dedicados a la definición de elementos que serán utilizados en el tercer bloque. Este bloque, es considerado el de mayor auge, ya que marca la sintaxis y semántica de la gramática.
 
-Cada bloque del lenguaje de especificación contiene su sintaxis propia para su definción, es por ello que, en las secciones siguientes nos encargaremos de mostrar detalles de cada uno de ellos.
+Cada bloque del lenguaje de especificación contiene su sintaxis propia para su definición, es por ello que, en las secciones siguientes nos encargaremos de mostrar detalles de cada uno de ellos.
 
 El análisis de cada bloque se realizará de una manera más formal y observando cada bloque como partes de una gramática.
 
 Entonces, sea \textbf{G: CFG} que define el lenguaje de especificación para el archivo de entrada aceptado por \maggen. Se define la siguiente regla de \textbf{G: CFG} para el símbolo inicial ``S''.
 
-\begin{center}
-\lstset{language=inform, linewidth=10cm}
-\lstset{frame=shadowbox, rulesepcolor=\color{blue}}
-% \scriptsize
-\begin{lstlisting}
+\begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{blue},language=inform, linewidth=10cm ]
 S   =   'semantic domain' decl_Sd
     |   'attributes' decl_attrs
     |   'rules' decl_rules
 \end{lstlisting}
-\end{center}
 
 En las secciones siguientes se presentaran los símbolos \textit{decl\_Sd}, \textit{decl\_attr} y \textit{decl\_rules} con más detalle.  
 
 \subsection{Bloque Dominio semántico}
 
-El bloque ``\texttt{semantic domain}'' es el encargado de la definición de elementos que serán necesarios para los bloques siquientes. 
+El bloque ``\texttt{semantic domain}'' es el encargado de la definición de elementos que serán necesarios para los bloques siguientes. 
 
 El bloque semántico esta subdividido en 3 secciones, que se corresponden con la definición de sort, operadores y funciones, cada una con su sintaxis propia. 
 
 Entonces se define el símbolo \textit{decl\_Sd} como:
 
-\begin{center}
-\lstset{language=inform, linewidth=10cm}
-\lstset{frame=shadowbox, rulesepcolor=\color{blue}}
-% \scriptsize
-\begin{lstlisting}
+\begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{blue},language=inform,linewidth=10cm]
 decl_Sd = (decl_sort)*
         | (decl_operator)*
         | (decl_function)*
 \end{lstlisting}
-\end{center}
 
 El uso de ``\texttt{*}'' (``0 o mas veces'') en cada subsección y no de ``\texttt{+}'', esta dado, debido a que cada una de estas secciones son opcionales, es decir, no se obliga a la existencia de cada sección. Por ejemplo, podría interesar la definición de una gramática que no cuente con funciones.
 
 La sintaxis particular de cada sección se analiza individualmente a continuación.
 
 \subsubsection{Declaración de sort}
-La subsección de ``\texttt{sort}'' declara todos los posibles tipos que seran necesesarios para las declaraciones siguientes. Todo \texttt{sort} es distinguible en el lenguaje mediante un nombre.
+La subsección de ``\texttt{sort}'' declara todos los posibles tipos que serán necesarios para las declaraciones siguientes. Todo \texttt{sort} es distinguible en el lenguaje mediante un nombre.
 
 A continuación se define el símbolo \texttt{decl\_sort}
 
-\begin{center}
-\lstset{language=inform, linewidth=10cm}
-\lstset{frame=shadowbox, rulesepcolor=\color{blue}}
-% \scriptsize
-\begin{lstlisting}
-decl_sort = 'sort' NAME_SORT ';'
-\end{lstlisting}
-\end{center}
+\begin{lstlisting}[escapeinside=<>, frame=shadowbox, rulesepcolor=\color{blue},language=inform, linewidth=10cm]
+decl_sort = 'sort' NAME_SORT  list_sort ';'
 
-\textit{``NAME\_SORT''} representa el nombre del sort o tipo. El mismo, se corresponde con la definición de un identificador en el común de los lenguajes de programación. Es decir, acepta caracteres alfanuméricos y guiones bajos, restringiendo a los caracteres numéricos como primer caracter, como también palabras reservadas definidas por la especificación (para mas detalles ver ANEXO  XXX de implementación en \spirit).\\
+list_sort = ',' NAME_SORT list_sort
+          | <$\lambda$> 
+\end{lstlisting}
+
+\textit{``NAME\_SORT''} representa el nombre del sort o tipo. El mismo, se corresponde con la definición de un identificador en el común de los lenguajes de programación. Es decir, acepta caracteres alfanuméricos y guiones bajos, restringiendo a los caracteres numéricos como primer carácter, como también palabras reservadas definidas por la especificación (para mas detalles ver ANEXO  XXX de implementación en \spirit).\\
 % \ref{append:grammarspirit}
 
-\underline{Ejempo:} \begin{center}
+\underline{Ejemplo:} \begin{center}
     \fbox{\texttt{\ sort int;\ }}\end{center}
 \vspace{0.2cm}
 Esta línea declara el tipo ``int''.
@@ -106,7 +141,7 @@ En caso de declaración explícita de cualquiera de ellos, en la especificación
 \subsubsection{Declaración de operadores}
 La sección destinada a la declaración de \texttt{operadores} acepta 3 tipos de operadores, los cuales, difieren en su forma de uso y cantidad de operandos. Denominados, infijo, prefijo y posfijo. 
 
-La interpretación de cada uno, esta dada por la interpretación natural común a todos los lenguajes de programación, a modo de ejemplo se muetran un operador de cada tipo para evitar problemas en esta sección:
+La interpretación de cada uno, esta dada por la interpretación natural común a todos los lenguajes de programación, a modo de ejemplo se muestran un operador de cada tipo para evitar problemas en esta sección:
 
 \begin{itemize}
 \item \underline{Operador prefijo:} \textit{Ejemplo:} -2. Operador de menos unario. 
@@ -118,16 +153,12 @@ La interpretación de cada uno, esta dada por la interpretación natural común 
 
 A continuación se define el símbolo \texttt{decl\_operator}:
 
-\begin{center}
-\lstset{language=inform}
-\lstset{frame=shadowbox, rulesepcolor=\color{blue}}
-% \scriptsize
-\begin{lstlisting}[escapeinside=<>]
+\begin{lstlisting}[escapeinside=<>, frame=shadowbox, rulesepcolor=\color{blue}, language=inform ]
 decl_operator = 'op' 'infix'  mode_op NAME_OP ':'
                 NAME_SORT ','  NAME_SORT '->' NAME_SORT ';' 
               | 'op' 'prefix' mode_op NAME_OP ':'
                 NAME_SORT '->' NAME_SORT ';'               
-              | 'op' 'posfix' mode_op NAME_OP ':'
+              | 'op' 'postfix' mode_op NAME_OP ':'
                 NAME_SORT '->' NAME_SORT ';'
               | 'op' mode_op NAME_OP ':'
                 NAME_SORT '->' NAME_SORT ';'
@@ -142,15 +173,14 @@ m_op    = NUM_PRECEDENCE ',' assoc
 
 assoc   = (left | right | non-assoc) 
 \end{lstlisting}
-\end{center}
 
-\textit{``NAME\_OP''} representa un identificador para el operador (infija, prefija y postfija). Las restricciones y detalles a tener en cuenta para este identificador son las mismas que se analizaron para ``NAME\_SORT''.
+\textit{``NAME\_OP''} representa un identificador para el operador (infija, prefija y posfija). Las restricciones y detalles a tener en cuenta para este identificador son las mismas que se analizaron para ``NAME\_SORT''.
 
 \textit{``NUN\_PRECEDENCE''} representa un número positivo que define la precedencia del operador. Cabe aclarar que a mayor número mayor la precedencia.
 
 \subsubsection*{Consideraciones}
 
-Es importante analizar el uso de ``\_'' para precedencia y asociatividad en el hecho de que estos datos son tomados opcionalmente, es decir se puede omitir dicha información. Lo mismo sucede con el tipo del operador (infijo, prefijo y postfijo). 
+Es importante analizar el uso de ``\_'' para precedencia y asociatividad en el hecho de que estos datos son tomados opcionalmente, es decir se puede omitir dicha información. Lo mismo sucede con el tipo del operador (infijo, prefijo y posfijo). 
 
 Para estos casos especiales se utilizarán los siguientes valores por defecto:
 
@@ -163,7 +193,7 @@ Para estos casos especiales se utilizarán los siguientes valores por defecto:
 \item [Tipo de operador] = \texttt{prefix}.
 \end{description}
 
-Otro caso a tener cuenta es el uso de \texttt{non-assoc} como asociatidad del operador. Este caso define que el operador no tiene asociatividad, con lo que el uso del mismo en las ecuaciones debe respetar esta condición, en caso contrario se observará un error por mal uso.
+Otro caso a tener cuenta es el uso de \texttt{non-assoc} como asociatividad del operador. Este caso define que el operador no tiene asociatividad, con lo que el uso del mismo en las ecuaciones debe respetar esta condición, en caso contrario se observará un error por mal uso.
 \subsection*{Ejemplos}
 
 \begin{enumerate}
@@ -200,18 +230,13 @@ La noción de funciones dentro de la especificación es tomada con la noción na
 
 Definimos \texttt{decl\_function} como:
 
-\begin{center}
-\lstset{language=inform}
-\lstset{frame=shadowbox, rulesepcolor=\color{blue}}
-% \scriptsize
-\begin{lstlisting}[escapeinside=<>]
+\begin{lstlisting}[escapeinside=<>,frame=shadowbox, rulesepcolor=\color{blue}, language=inform ]
 decl_function = 'function' NAME_FUNC':' domain '->' NAME_SORT ';'
 
 domain        = NAME_SORT ',' domain
               | NAME_SORT 
               | <$\lambda$>
 \end{lstlisting}
-\end{center}
 
 \textit{``NAME\_FUNC''} define el identificador de la función, en el cual se asumen las mismas restricciones tomadas para los identificadores analizados en las secciones anteriores. Cabe aclarar que se acepta un dominio vacío lo que permite el uso de funciones que solo retornan un valor.
 
@@ -237,11 +262,7 @@ En esta sección presentaremos el bloque ``attributes'' en detalle. La informaci
 
 A continuación se define el símbolo \texttt{decl\_attrs} como:
 
-\begin{center}
-\lstset{language=inform}
-\lstset{frame=shadowbox, rulesepcolor=\color{blue}}
-% \scriptsize
-\begin{lstlisting}[escapeinside=@@]
+\begin{lstlisting}[escapeinside=@@, frame=shadowbox, rulesepcolor=\color{blue}, language=inform]
 decl_attrs = (d_attr)+ 
 
 d_attr = NAME_ATTR ':' '<' c_attr '>' NAME_SORT 'of' symbols;
@@ -257,7 +278,6 @@ c_attr = 'inh'
 list_symbol = SYMB_NON_TERMINAL ',' list_symbol
             | SYMB_NON_TERMINAL 
 \end{lstlisting}
-\end{center}
 
 \textit{``NAME\_ATTR''} define el identificador de un atributo. Se tienen las mismas consideraciones que para el identificador de sort, operador y función.
 
@@ -304,15 +324,12 @@ El símbolo terminal se considera un símbolo entre comillas simples (\texttt{'}
 \underline{Ejemplo:}\ \fbox{\ \texttt{'literal'}\ }\\
 \vspace{0.2cm}
 
-Las ecuaciones describen las reglas semánticas que definen la sintaxis de la gramática. Cada ecuación define la interpretación semántica de los atributos de cada símbolo. Además se deben tener en cuenta los requisitos necesarios de una gramática bien definida (Ver capítulo XXX).
+Las ecuaciones describen las reglas semánticas que definen la sintaxis de la gramática. Cada ecuación define la interpretación semántica de los atributos de cada símbolo; esta definición se realiza mediante una expresión constituida por \textbf{instancias}, \textbf{literales} o aplicación de operadores y funciones a subexpresiones.
+En este punto se deben tener en cuenta los requisitos necesarios de una gramática bien definida (Ver capítulo XXX).
 
 A continuación se define el símbolo \texttt{decl\_rules}:
 
-\begin{center}
-\lstset{language=inform}
-\lstset{frame=shadowbox, rulesepcolor=\color{blue}}
-% \scriptsize
-\begin{lstlisting}
+\begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{blue}, language=inform]
 decl_rules = (d_rule)+ 
 
 d_rule = SYMB_NON_TERMINAL '::=' rigft_symb decl_eqs
@@ -336,7 +353,6 @@ leaf = instance
 instance = SYMB_NON_TERMINAL '[' NUM_INS ']' '.' NAME_ATTR
             
 \end{lstlisting}
-\end{center}
 
 \textit{``SYMB\_NON\_TERMINAL''} y \textit{``SYMB\_TERMINAL''} describen símbolos no terminales y terminales respetivamente. En este punto, se tiene en cuenta la diferenciación entre estos tipos de símbolos como se analizó en el párrafo anterior.
  
@@ -371,7 +387,7 @@ Se compone de tres partes:
 \item Índice sintáctico, comenzando de 0 para la primera ocurrencia.
 \item Atributo.
 \end{itemize}
-\underline{Ejemplo:}\ \begin{center}
+\begin{center} \underline{Ejemplo:}\  
 \fbox{\ E[2].type\ }\end{center} 
 
 Asocia al símbolo ``E'' con el atributo ``type'' en la ocurrencia 3 del símbolo.
@@ -415,16 +431,15 @@ La especificación permite agregar comentarios. Para una mejor familiarización 
 \end{description} 
 
 \subsection{Ejemplo}
-El ejemplo presentado en la figura \ref{fig:ejemplo_mag} es uno de los casos de prueba desarrollado para la construcción de \maggen. La importancia de éste radica en que, el mismo, es un caso de estudio dado en una de las principales bases teóricas que han sido usadas para el sistema. La gramática de ejemplo es MAG pero no ANCAG.
+El ejemplo presentado en la figura \ref{fig:ejemplo_mag} es uno de los casos de prueba desarrollado para la construcción de \maggen. La importancia de éste radica en que, el mismo, es un caso de estudio dado en una de las principales bases teóricas que han sido usadas para el sistema[referencia bibliográfica paper]. 
+
+Una característica que motivó el desarrollo de este ejemplo es que se trata de una gramática MAG pero no ANCAG.
 
 En el ejemplo se observa en principio (línea 1 a 7) un bloque de comentario y luego los bloques que definen la gramática como se ha analizado en las secciones anteriores; bloque semántico de la línea 8 a 13 luego el de atributos y a partir de la línea 25 el bloque de reglas con sus respectivas ecuaciones.
 
 \begin{figure}
-\centering
-\lstset{language=inform}
-\lstset{numbers=left, numberstyle=\tiny, numbersep=5pt}
 \scriptsize
-\begin{lstlisting}
+\begin{lstlisting}[numbers=left, numberstyle=\tiny, numbersep=5pt, language=cobol ]
 /**
   *  \file    ag_Wuu_yang.input
   *  \brief   Attribute Grammar example.
@@ -492,8 +507,48 @@ rules
 \label{fig:ejemplo_mag}
 \end{figure}
  
-\section{Estructuras internas}
-bla bla
+\section{Parser del lenguaje,representación interna y chequeos}
+El parser del lenguaje de especificación se llevó a cabo utilizando las librerías \boost\  \spirit. Detalles de este tema, son tratado puntualmente en CAPITULO IMPL. 
+
+En esta sección nos encargaremos de algunas consideraciones del parser desde el punto de vista de su funcionamiento, algunos detalles en la representación interna y de los chequeos realizados sobre la entrada de \maggen\ para asegurar características de gramática bien definida.
+\subsection*{Parser del lenguaje}
+El parser de la entrada de \maggen\ esta dado por un recorrido secuencial y ante cualquier error sintáctico, la herramienta indica finaliza su ejecucion indicando el error correspondiente. 
+
+Supongamos la siguiente porción de una entrada de \maggen:
+
+\begin{lstlisting}[numbers=left, numberstyle=\tiny, numbersep=5pt, firstnumber=8, language=cobol, linewidth=12cm]
+  ...
+/****************************
+ * Block of Semantic Domain *
+ ****************************/
+semantic domain
+    sort ecuacion, lista;
+    /*********************
+     * List of Operators *
+     *********************/
+    op infix    10, left) +: int, int -> int;
+  ...
+\end{lstlisting}
+La linea 17 presenta un error de sintaxis (falta de paréntesis), entonces \maggen\ aborta el parser e informa de la siguiente manera:
+\begin{lstlisting}[backgroundcolor=\color{white}, linewidth=15cm]
+     * Parsing grammar ---------- [ FAIL ]
+
+     Generation complete in: 0.015683 seconds.
+     ERROR: Parsing Failed, the following text will not be able to parse:
+
+     File: ./examples/ag_count/ag_count.input
+     Line: 17
+     Col:  5
+\end{lstlisting}
+Notar que, la linea y columna donde se indica el error corresponde al inicio de la zona donde la interpretación fue fallida. Podría suceder en varios casos que el error no se detecte específicamente en la linea y columna que se indica, entonces lo conveniente es buscar el error a partir del punto especificado. Para este caso particular, se indica linea:17 y columna:5, este punto se encuentra sobre \texttt{op}, pero el error se observa seguido de \texttt{infix}.
+
+\subsection*{Representación interna}
+Las estructuras creadas para la representacion interna de la gramática se encuentran dentro del paquete \texttt{Att\_grammar} de \maggen. Detalles de implementación sobre este paquete seran tratando en la seccion XXX (imp). Ahora nos encargaremos de algunas consideraciones con respecto al diseño.
+
+
+
+
+\subsection*{Chequeos}
 
 \section{Disen\~o del evaluador est\'atico generado}
 
