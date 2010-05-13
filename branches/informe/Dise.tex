@@ -9,7 +9,7 @@ Esto es, dada una MAG en el lenguaje de especificación, \maggen\ computa los pl
 
 El evaluador generado por \maggen\ recibe un AST y devuelve este AST decorado. El potencial del evaluador generado por \maggen, esta dado, por tener estáticamente todos las posibles secuencias de visita para los posibles AST de entrada, entonces sólo debe seleccionar las secuencias para el AST dado y luego recorrerlo según como las mimas lo indiquen.
 
-\section{Como funciona \maggen}
+\section{\textquestiondown Como funciona \maggen ?}
 Dado una MAG, \maggen\ calcula los grafos de dependencias de atributos de los símbolos de la gramática. A partir de ellos, es posible la aplicación de algoritmos de para la obtención de planes de evaluación y luego secuencias de visitas de dichos planes. \maggen\ se basa en la construcción de 4 tipos de grafos, que se construyen de manera incremental sobre la gramática. Estos grafos, son los presentados en el capitulo XXX, Dependency graph (\textbf{DP}), Down graph (\textbf{Down}), Downward characteristic graph (\textbf{DCG}) y augmented dependency graph (\textbf{ADP}). Sobre estos últimos se basa el calculo de los planes de evaluación.
 
 El funcionamiento de \maggen\ esta dado por la integración de 4 etapas, consideradas principales, que marcaron el proceso de desarrollo de la herramienta:
@@ -431,88 +431,20 @@ La especificación permite agregar comentarios. Para una mejor familiarización 
 \end{description} 
 
 \subsection{Ejemplo}
-El ejemplo presentado en la figura \ref{fig:ejemplo_mag} es uno de los casos de prueba desarrollado para la construcción de \maggen. La importancia de éste radica en que, el mismo, es un caso de estudio dado en una de las principales bases teóricas que han sido usadas para el sistema[referencia bibliográfica paper]. 
 
-Una característica que motivó el desarrollo de este ejemplo es que se trata de una gramática MAG pero no ANCAG.
+En el apéndice \ref{append:agwuuyang} observamos uno de los casos de prueba desarrollado para la fase de testing de \maggen. El mismo es presentado en pseudocódigo y luego escrito en el lenguaje de especificación. 
 
-En el ejemplo se observa en principio (línea 1 a 7) un bloque de comentario y luego los bloques que definen la gramática como se ha analizado en las secciones anteriores; bloque semántico de la línea 8 a 13 luego el de atributos y a partir de la línea 25 el bloque de reglas con sus respectivas ecuaciones.
+Una característica que motivó el desarrollo de este ejemplo es que se trata de una gramática MAG pero no ANCAG. Además, él mismo, es un caso de estudio analizado en una de las principales bases teóricas que han sido usadas para el desarrollo de \maggen[referencia bibliográfica paper]. 
 
-\begin{figure}
-\scriptsize
-\begin{lstlisting}[numbers=left, numberstyle=\tiny, numbersep=5pt, language=cobol ]
-/**
-  *  \file    ag_Wuu_yang.input
-  *  \brief   Attribute Grammar example.
-  *  \date    15/02/2010
-  *  \author  Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
-  *  \author  Picco, Gonzalo Martin <gonzalopicco@gmail.com>
-  */
+En la presentación del ejemplo en el lenguaje de especificación, se observa en principio (línea 1 a 7) un bloque de comentario y luego los bloques que definen la gramática como se ha analizado en las secciones anteriores; bloque semántico de la línea 8 a 13 luego el de atributos y a partir de la línea 25 el bloque de reglas con sus respectivas ecuaciones.
 
-// Block of Semantic Domain
-semantic domain
-  // List of Operators 
-  op infix  (10, left) +: int, int -> int;
-
-// Block of Attributes
-attributes
-  s0 : syn <int> of {S};
-  s1 : syn <int> of {X};
-  s2 : syn <int> of {Y};
-  s3 : syn <int> of {Y};
-  s4 : syn <int> of {Z};
-  i1 : inh <int> of {X};
-  i2 : inh <int> of {Y};
-  i3 : inh <int> of {Y};
-
-// Block of Rules
-rules
-  // P1
-  S ::= X Y Z
-      compute  
-          S[0].s0 = X[0].s1 + Y[0].s2 + Y[0].s3 + Z[0].s4;
-          X[0].i1 = Y[0].s3;
-          Y[0].i2 = X[0].s1;
-          Y[0].i3 = Y[0].s2;
-      end;
-
-  // P2
-  Y ::= 'm'
-      compute
-          Y[0].s2 = Y[0].i2;
-          Y[0].s3 = 1;
-      end;
-
-  // P3
-  Y ::= 'n'
-      compute
-          Y[0].s2 = 2;
-          Y[0].s3 = Y[0].i3;
-      end;
-
-  // P4
-  X ::= 'm'
-      compute
-          X[0].s1 = X[0].i1;
-      end;
-  
-  // P5
-  Z ::= Y
-      compute
-          Z[0].s4 = Y[0].s3;
-          Y[0].i2 = 3;
-          Y[0].i3 = Y[0].s2;
-      end;           
-\end{lstlisting}
-\caption{Ejemplo ag\_wuu\_yang.input }
-\label{fig:ejemplo_mag}
-\end{figure}
  
 \section{Parser del lenguaje,representación interna y chequeos}
 El parser del lenguaje de especificación se llevó a cabo utilizando las librerías \boost\  \spirit. Detalles de este tema, son tratado puntualmente en CAPITULO IMPL. 
 
 En esta sección nos encargaremos de algunas consideraciones del parser desde el punto de vista de su funcionamiento, algunos detalles en la representación interna y de los chequeos realizados sobre la entrada de \maggen\ para asegurar características de gramática bien definida.
 \subsection*{Parser del lenguaje}
-El parser de la entrada de \maggen\ esta dado por un recorrido secuencial y ante cualquier error sintáctico, la herramienta indica finaliza su ejecucion indicando el error correspondiente. 
+El parser de la entrada de \maggen\ esta dado por un recorrido secuencial y ante cualquier error sintáctico, la herramienta finaliza su ejecución indicando el error correspondiente. 
 
 Supongamos la siguiente porción de una entrada de \maggen:
 
@@ -529,7 +461,7 @@ semantic domain
     op infix    10, left) +: int, int -> int;
   ...
 \end{lstlisting}
-La linea 17 presenta un error de sintaxis (falta de paréntesis), entonces \maggen\ aborta el parser e informa de la siguiente manera:
+La linea 17 presenta un error de sintaxis (falta de paréntesis), entonces \maggen\ finaliza el parser e informa de la siguiente manera:
 \begin{lstlisting}[backgroundcolor=\color{white}, linewidth=15cm]
      * Parsing grammar ---------- [ FAIL ]
 
@@ -543,12 +475,48 @@ La linea 17 presenta un error de sintaxis (falta de paréntesis), entonces \magg
 Notar que, la linea y columna donde se indica el error corresponde al inicio de la zona donde la interpretación fue fallida. Podría suceder en varios casos que el error no se detecte específicamente en la linea y columna que se indica, entonces lo conveniente es buscar el error a partir del punto especificado. Para este caso particular, se indica linea:17 y columna:5, este punto se encuentra sobre \texttt{op}, pero el error se observa seguido de \texttt{infix}.
 
 \subsection*{Representación interna}
-Las estructuras creadas para la representacion interna de la gramática se encuentran dentro del paquete \texttt{Att\_grammar} de \maggen. Detalles de implementación sobre este paquete seran tratando en la seccion XXX (imp). Ahora nos encargaremos de algunas consideraciones con respecto al diseño.
+Las estructuras creadas para la representación interna de la gramática se encuentran dentro del paquete \texttt{Att\_grammar} de \maggen. Detalles de implementación sobre este paquete serán tratando en la sección XXX (imp). Ahora nos encargaremos de algunas consideraciones con respecto al diseño.
 
-
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: XXXXXXXXXXXXXX XXXXXXXXXX XXXXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXXX XXXXXXXXXX XXXXXXXXX.
 
 
 \subsection*{Chequeos}
+
+El conjuntos de chequeos que se realizan sobre la gramática de entrada a \maggen, están directamente relacionados con el concepto de gramática bien definida analizado en el cap XX. Además, se aplican una serie de chequeos extras para evitar cálculos erróneos en las etapas posteriores. 
+
+Los chequeos realizados son clasificados en sintácticos y semánticos, los primeros, en su mayoría, son realizados durante el parser, en cambio, los chequeos semánticos se realizan luego del parser, aplicando escaneos específicos sobre la gramática. De estos últimos nos encargaremos en esta sección.
+El modulo encargado de realizar estos chequeos, se ubica en el paquete \texttt{Parser} de \maggen\ y se denomina \texttt{Semantics\_checks}.
+
+A continuación se detallan dichos chequeos:
+
+\begin{description}
+\item [Precedencia] El chequeo de precedencia corresponde con preservar la precedencia definida de cada operador. Dicho chequeo es realizado sobre cada una de las ecuaciones definidas en la gramática de entrada. Por ejemplo:\\ Dada la siguiente ecuacion: 
+\begin{center}
+ \fbox{ E[0].valor = E[1].valor + E[2].valor * E[2].valor }
+\end{center}
+La interpretación de la ecuacion esta dada por la definición de la precedencia de los operadores \texttt{+} y \texttt{*}(se asume que los dos operadores son infijos y están bien usado). Si tomamos a \texttt{*} con mayor precedencia que \texttt{+}, la interpretación implícita es:
+\begin{center}
+ \fbox{ E[0].valor = E[1].valor + (E[2].valor * E[2].valor) }
+\end{center}
+
+El uso de paréntesis en las expresiones define explícitamente la prioridad de los operadores, por lo que, los chequeos asumen esa precedencia entre los operadores. Por ejemplo en la ecuacion vista arriba, si la definimos utilizando paréntesis, es decir:\  
+ \fbox{E[0].valor = (E[1].valor + E[2].valor) * E[2].valor}\ la interpretación es tomada en ese sentido.
+
+\item [Asociatividad] El chequeo de asociatividad realiza un análisis sobre las expresiones de las ecuaciones para asegurar la asociatividad definida del operador. Por ejemplo, si se ha definido un operador \texttt{non-assoc}, se espera que el uso del mismo sea consistente con esa definición, es decir, no se considere una posible asociación del operador. 
+
+Al igual que para la precedencia, la asociatividad asume las mismas condiciones cuando la expresión utiliza paréntesis.
+
+\item [Alcanzabilidad] Es una característica importante a tener en cuenta sobre los símbolos de la gramática. Este chequeo realiza un análisis sobre la totalidad de las reglas en busca de símbolos no terminales no alcanzables desde el símbolo inicial. Este caso no es considerado error fatal en \maggen, sino como \textit{warning}.
+\item [Condiciones de AG] Este chequeo tiene en cuenta un conjunto de condiciones que debe cumplir la gramática. Ellos son:
+\begin{itemize}
+\item Cada regla debe definir todos los atributos sintetizados del símbolo de la parte izquierda.
+\item Cada regla debe definir todos los atributos heredados de los símbolos de la parte derecha.
+\item Cada regla sólo define los atributos de los símbolos que participan en dicha regla.
+\item En caso de redefinición alguna instancia en la regla, la misma es ignorada.
+\item Los índices de las instancias deben ser consistente con la cantidad de apariciones del símbolo, en la regla. Ejemplo: \\En la siguiente regla:\ \fbox{ S ::= S T }\ los índices posibles de las instancias son \texttt{0} y \texttt{1} para el símbolo ``S'' y \texttt{0} para el símbolo ``T''. 
+\end{itemize}
+\end{description}
+
 
 \section{Disen\~o del evaluador est\'atico generado}
 
