@@ -1,5 +1,5 @@
 /**
-  *  \file      Ast_function.h
+  *  \file      Expr_function.h
   *  \brief     Function element of an Attribute Syntax Tree (AST).
   *  \date      21/12/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
@@ -9,7 +9,7 @@
 #ifndef AST_FUNCTION_H_
 #define AST_FUNCTION_H_
 
-#include "Ast_inner_node.h"
+#include "Expr_node.h"
 #include "../Attr_grammar/Function.h"
 
 namespace genevalmag
@@ -20,12 +20,12 @@ namespace genevalmag
   */
 const bool IS_OPERATOR (true);
 
-class Ast_function: public Ast_inner_node
+class Expr_function: public Expr_node
 {
     private:
 		/**
 		  * \var func.
-		  * \brief Function associates with Ast_function.
+		  * \brief Function associates with Expr_function.
 		  */
         const Function    *func;
         /**
@@ -40,95 +40,95 @@ class Ast_function: public Ast_inner_node
         unsigned short    syntax_order;
 
         /**
-          * Method of copy the Ast_function, STL-like C++.
+          * Method of copy the Expr_function, STL-like C++.
           * @param other
           */
-        void copy(const Ast_function &other);
+        void copy(const Expr_function &other);
         /**
-          * Method destroy Ast_function, STL-like C++.
+          * Method destroy Expr_function, STL-like C++.
           */
         void destroy();
 
     public:
         /**
-          * Constructor empty of Ast_function.
+          * Constructor empty of Expr_function.
           * @return
           */
-        Ast_function();
+        Expr_function();
         /**
-          * Constructor copy of Ast_function.
+          * Constructor copy of Expr_function.
           * @param other
           * @return
           */
-        Ast_function(const Ast_function &other);
+        Expr_function(const Expr_function &other);
 
         /**
-          * Destructor of Ast_function.
+          * Destructor of Expr_function.
           * @return
           */
-        virtual ~Ast_function();
+        virtual ~Expr_function();
 
         /**
-          * Operator assign(=) of Ast_function.
+          * Operator assign(=) of Expr_function.
           * @param other
           * @return
           */
-        Ast_function &operator=(const Ast_function &other);
+        Expr_function &operator=(const Expr_function &other);
 
         /**
-          * Returns the function pointer of the Ast_function.
+          * Returns the function pointer of the Expr_function.
           * @return
           */
         const Function *get_function() const;
         /**
-          * Returns the precedence level of the Ast_function.
+          * Returns the precedence level of the Expr_function.
           * @return
           */
         unsigned short get_precedence_level() const;
         /**
-          * Returns the syntax order of the Ast_function.
+          * Returns the syntax order of the Expr_function.
           * @return
           */
         unsigned short get_syntax_order() const;
 
         /**
-          * Sets the function pointer of the Ast_function.
+          * Sets the function pointer of the Expr_function.
           * @param function
           */
         void set_function(const Function *function);
         /**
-          * Sets the precedence level of the Ast_function.
+          * Sets the precedence level of the Expr_function.
           * @param p_level
           */
         void set_precedence_level(unsigned short p_level);
         /**
-          * Sets the syntax order of the Ast_function.
+          * Sets the syntax order of the Expr_function.
           * @param s_order
           */
         void set_syntax_order(unsigned short s_order);
 
         /**
-          * Returns if the function of Ast_function is prefix.
+          * Returns if the function of Expr_function is prefix.
           * @return
           */
         bool is_prefix() const;
         /**
-          * Returns if the function of Ast_function is infix.
+          * Returns if the function of Expr_function is infix.
           * @return
           */
         bool is_infix() const;
         /**
-          * Returns if the function of Ast_function is postfix.
+          * Returns if the function of Expr_function is postfix.
           * @return
           */
         bool is_postfix() const;
 
         /**
-          * Returns if both Ast_functions are in the same precedence level.
+          * Returns if both Expr_functions are in the same precedence level.
           * @param other
           * @return
           */
-        bool is_comparable(const Ast_function *other) const;
+        bool is_comparable(const Expr_function *other) const;
         /**
           * Returns:\n
           *        \= O        when is same precedence\n
@@ -137,7 +137,7 @@ class Ast_function: public Ast_inner_node
           * @param other
           * @return
           */
-        int compare_precedence(const Ast_function *other) const;
+        int compare_precedence(const Expr_function *other) const;
         /**
           * Returns:\n
           *        \= O        when is same order\n
@@ -146,10 +146,10 @@ class Ast_function: public Ast_inner_node
           * @param other
           * @return
           */
-        int compare_order(const Ast_function *other) const;
+        int compare_order(const Expr_function *other) const;
 
         /**
-          * Generate and return a string reprensentation of a Ast_function.\n
+          * Generate and return a string reprensentation of a Expr_function.\n
           *\n
           * If is a pure function:\n
           *     Result= \<func_name\> "(" child[0], ... , child[n] ")"\n

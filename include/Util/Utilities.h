@@ -11,7 +11,7 @@
 
 #include <string>
 
-#include "../Ast/Ast_leaf.h"
+#include "../Expression_tree/Expr_leaf.h"
 #include "../Attr_grammar/Symbol.h"
 #include "../Builders/Builder_graphs.h"
 
@@ -82,7 +82,7 @@ void print_graph_txt(const Graph &graph);
   * @param node
   * @return
   */
-Vertex return_vertex(const Graph &graph,const Ast_leaf *node);
+Vertex return_vertex(const Graph &graph,const Expr_leaf *node);
 
 /**
   * Joins graph1 and graph2 in graph_merged.

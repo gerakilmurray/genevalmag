@@ -1,5 +1,5 @@
 /**
-  *  \file      Ast_literal.cpp
+  *  \file      Expr_literal.cpp
   *  \brief     Implementation of a literal element of an Attribute Syntax Tree (AST).
   *  \date      21/12/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
@@ -7,7 +7,7 @@
   */
   
 #include <iostream>
-#include "../../include/Ast/Ast_literal.h"
+#include "../../include/Expression_tree/Expr_literal.h"
 
 namespace genevalmag
 {
@@ -18,9 +18,9 @@ namespace genevalmag
 #endif
 
 /**
-  * Constructor empty of Ast_literal.
+  * Constructor empty of Expr_literal.
   */
-Ast_literal::Ast_literal():Ast_leaf()
+Expr_literal::Expr_literal():Expr_leaf()
 {
     #ifdef _DEBUG
         ast_literals++;
@@ -28,9 +28,9 @@ Ast_literal::Ast_literal():Ast_leaf()
 }
 
 /**
-  * Constructor copy of Ast_literal.
+  * Constructor copy of Expr_literal.
   */
-Ast_literal::Ast_literal(const Ast_literal &other)
+Expr_literal::Expr_literal(const Expr_literal &other)
 {
     copy(other);
 
@@ -40,9 +40,9 @@ Ast_literal::Ast_literal(const Ast_literal &other)
 }
 
 /**
-  * Destructor of Ast_literal.
+  * Destructor of Expr_literal.
   */
-Ast_literal::~Ast_literal()
+Expr_literal::~Expr_literal()
 {
     destroy();
 
@@ -56,9 +56,9 @@ Ast_literal::~Ast_literal()
 }
 
 /**
-  * Operator assign(=) of Ast_literal.
+  * Operator assign(=) of Expr_literal.
   */
-Ast_literal &Ast_literal::operator=(const Ast_literal &other)
+Expr_literal &Expr_literal::operator=(const Expr_literal &other)
 {
     if(this != &other)
     {
@@ -69,9 +69,9 @@ Ast_literal &Ast_literal::operator=(const Ast_literal &other)
 }
 
 /**
-  * Method of copy the Ast_literal, STL-like C++.
+  * Method of copy the Expr_literal, STL-like C++.
   */
-void Ast_literal::copy(const Ast_literal &other)
+void Expr_literal::copy(const Expr_literal &other)
 {
     value               = other.get_value();
     type                = other.get_type();
@@ -81,46 +81,46 @@ void Ast_literal::copy(const Ast_literal &other)
 }
 
 /**
-  * Method destroy Ast_literal, STL-like C++.
+  * Method destroy Expr_literal, STL-like C++.
   */
-void Ast_literal::destroy()
+void Expr_literal::destroy()
 {
 }
 
 /**
-  * Returns the type of the Ast_literal.
+  * Returns the type of the Expr_literal.
   */
-literal_type Ast_literal::get_type() const
+literal_type Expr_literal::get_type() const
 {
     return type;
 }
 
 /**
-  * Returns the value of the Ast_literal.
+  * Returns the value of the Expr_literal.
   */
-string Ast_literal::get_value() const
+string Expr_literal::get_value() const
 {
     return value;
 }
 
 /**
-  * Sets the type of the Ast_literal.
+  * Sets the type of the Expr_literal.
   */
-void Ast_literal::set_type(literal_type new_type)
+void Expr_literal::set_type(literal_type new_type)
 {
     type = new_type;
 }
 
 /**
-  * Sets the value of the Ast_literal.
+  * Sets the value of the Expr_literal.
   */
-void Ast_literal::set_value(string new_value)
+void Expr_literal::set_value(string new_value)
 {
     value = new_value;
 }
 
 /**
-  * Generate and return a string reprensentation of a Ast_literal.
+  * Generate and return a string reprensentation of a Expr_literal.
   *
   * Result= literal
   *
@@ -129,7 +129,7 @@ void Ast_literal::set_value(string new_value)
   *     '1'    -> char
   *     "1"    -> string
   */
-string Ast_literal::to_string() const
+string Expr_literal::to_string() const
 {
     string lit;
 

@@ -9,9 +9,9 @@
 #ifndef EQUATION_H_
 #define EQUATION_H_
 
-#include "../Ast/Ast_node.h"
-#include "../Ast/Ast_inner_node.h"
-#include "../Ast/Ast_instance.h"
+#include "../Expression_tree/Expression.h"
+#include "../Expression_tree/Expr_node.h"
+#include "../Expression_tree/Expr_instance.h"
 
 namespace genevalmag
 {
@@ -28,12 +28,12 @@ class Equation
 		  * \var eq_id
 		  * \brief Equation's left value.
 		  */
-        Ast_instance        l_value;
+        Expr_instance        l_value;
 		/**
 		  * \var eq_id
 		  * \brief Equation's tree expression.
 		  */
-        const Ast_node      *r_value;
+        const Expression      *r_value;
 
         /**
           * \var count_ref
@@ -59,11 +59,11 @@ class Equation
         unsigned short *_get_count_ref() const;
 
         /**
-          * Traverse the equation tree while saves only the Ast_instance nodes in the vector result.
+          * Traverse the equation tree while saves only the Expr_instance nodes in the vector result.
           * @param head
           * @param result
           */
-        void inorder_only_instance(const Ast_node *head, vector<const Ast_instance*> &result) const;
+        void inorder_only_instance(const Expression *head, vector<const Expr_instance*> &result) const;
 
     public:
         /**
@@ -93,12 +93,12 @@ class Equation
           * Returns the l_value of the equation.
           * @return
           */
-        const Ast_instance *get_l_value() const;
+        const Expr_instance *get_l_value() const;
         /**
           * Returns the r_value of the equation.
           * @return
           */
-        const Ast_node *get_r_value() const;
+        const Expression *get_r_value() const;
         /**
           * Returns the id of the equation.
           * @return
@@ -114,25 +114,25 @@ class Equation
           * Sets the left value of the equation.
           * @param lvalue
           */
-        void set_l_value(const Ast_instance &lvalue);
+        void set_l_value(const Expr_instance &lvalue);
         /**
           * Sets the rigth value of the equation: is a tree.
           * @param rvalue
           */
-        void set_r_value(const Ast_node *rvalue);
+        void set_r_value(const Expression *rvalue);
 
         /**
-          * Traverse the equation tree while saves only the Ast_leaf nodes in the vector result.
+          * Traverse the equation tree while saves only the Expr_leaf nodes in the vector result.
           * @param head
           * @param result
           */
-        void inorder_only_leaf(const Ast_node *head, vector<const Ast_leaf*> &result) const;
+        void inorder_only_leaf(const Expression *head, vector<const Expr_leaf*> &result) const;
 
         /**
-          * Returns the Ast_instance nodes of the right side of Ast tree.
+          * Returns the pointer of the Expression.
           * @return
           */
-        const vector<const Ast_instance*> get_instance_right_side() const;
+        const vector<const Expr_instance*> get_instance_right_side() const;
 
         /**
           * Generates and returns a string reprensentation of an Equation.\n

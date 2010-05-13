@@ -1,5 +1,5 @@
 /**
-  *  \file      Ast_instance.h
+  *  \file      Expr_instance.h
   *  \brief     Instance element of an Attribute Syntax Tree (AST).
   *  \date      21/12/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
@@ -9,7 +9,7 @@
 #ifndef AST_INSTANCE_H_
 #define AST_INSTANCE_H_
 
-#include "Ast_leaf.h"
+#include "Expr_leaf.h"
 
 #include "../Attr_grammar/Symbol.h"
 #include "../Attr_grammar/Attribute.h"
@@ -17,12 +17,12 @@
 namespace genevalmag
 {
 
-class Ast_instance: public Ast_leaf
+class Expr_instance: public Expr_leaf
 {
     private:
 		/**
 		  * \var i_symb.
-		  * \brief Symbol of Ast_instance.
+		  * \brief Symbol of Expr_instance.
 		  */
         const Symbol			*i_symb;
         /**
@@ -32,84 +32,84 @@ class Ast_instance: public Ast_leaf
         unsigned short			i_num;
         /**
 		  * \var i_attr.
-		  * \brief Attribute of Ast_instance.
+		  * \brief Attribute of Expr_instance.
 		  */
         const Attribute			*i_attr;
 
         /**
-          * Method of copy the Ast_instance, STL-like C++.
+          * Method of copy the Expr_instance, STL-like C++.
           * @param other
           */
-        void copy(const Ast_instance &other);
+        void copy(const Expr_instance &other);
         /**
-          * Method destroy Ast_instance, STL-like C++.
+          * Method destroy Expr_instance, STL-like C++.
           */
         void destroy();
 
     public:
         /**
-          * Constructor empty of Ast_instance.
+          * Constructor empty of Expr_instance.
           * @return
           */
-        Ast_instance();
+        Expr_instance();
         /**
-          * Constructor copy of Ast_instance.
+          * Constructor copy of Expr_instance.
           * @param other
           * @return
           */
-        Ast_instance(const Ast_instance &other);
+        Expr_instance(const Expr_instance &other);
 
         /**
-          * Destructor of Ast_instance.
+          * Destructor of Expr_instance.
           * @return
           */
-        virtual ~Ast_instance();
+        virtual ~Expr_instance();
 
         /**
-          * Operator assign(=) of Ast_instance.
+          * Operator assign(=) of Expr_instance.
           * @param other
           * @return
           */
-        Ast_instance &operator=(const Ast_instance &other);
+        Expr_instance &operator=(const Expr_instance &other);
 
         /**
-          * Returns the attribute pointer of the Ast_instance.
+          * Returns the attribute pointer of the Expr_instance.
           * @return
           */
         const Attribute *get_attr() const;
 
         /**
-          * Returns the number of the Ast_instance.
+          * Returns the number of the Expr_instance.
           * @return
           */
         unsigned short get_num() const;
 
         /**
-          * Returns the symbol pointer of the Ast_instance.
+          * Returns the symbol pointer of the Expr_instance.
           * @return
           */
         const Symbol *get_symb() const;
 
         /**
-          * Sets the attribute pointer of the Ast_instance.
+          * Sets the attribute pointer of the Expr_instance.
           * @param attr
           */
         void set_attr(const Attribute *attr);
 
         /**
-          * Sets the number of the Ast_instance.
+          * Sets the number of the Expr_instance.
           * @param num
           */
         void set_num(unsigned short num);
 
         /**
-          * Sets the symbol pointer of the Ast_instance.
+          * Sets the symbol pointer of the Expr_instance.
           * @param symb
           */
         void set_symb(const Symbol *symb);
 
         /**
-          * Generates and returns a string reprensentation of a Ast_instance.\n
+          * Generates and returns a string reprensentation of a Expr_instance.\n
           *\n
           * Result= \<symbol\>"["\<number\>"]."\<attribute\>\n
           *\n
@@ -119,15 +119,15 @@ class Ast_instance: public Ast_leaf
         string to_string() const;
 
         /**
-          * Compares the Ast_instance with other.\n
+          * Compares the Expr_instance with other.\n
           * Respects Symbol and attribute.
           * @param other
           * @return
           */
-        bool equals_without_index(const Ast_instance *other) const;
+        bool equals_without_index(const Expr_instance *other) const;
 
         /**
-          * Generates and returns the string key that identifies an Ast_instance definitely.\n
+          * Generates and returns the string key that identifies an Expr_instance definitely.\n
           *\n
           * Result= \<symbol\>\<number\>\<attribute\>\n
           *\n

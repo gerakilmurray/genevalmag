@@ -326,7 +326,7 @@ const vector<unsigned short> Attr_grammar::get_rules_with_left_symbol(const Symb
 /**
   * Returns the index of an equation in this range of rules with l_value equals to ins.
   */
-const unsigned short Attr_grammar::get_index_eq_with_context(const Ast_instance *ins, const vector<unsigned short> &context_rule) const
+const unsigned short Attr_grammar::get_index_eq_with_context(const Expr_instance *ins, const vector<unsigned short> &context_rule) const
 {
     short index_ins(ins->get_num());
 
@@ -384,7 +384,7 @@ const Equation *Attr_grammar::get_eq(const unsigned short index) const
 /**
   * Returns the l_value of the equation with this index.
   */
-const Ast_instance *Attr_grammar::get_eq_l_value(const unsigned short index) const
+const Expr_instance *Attr_grammar::get_eq_l_value(const unsigned short index) const
 {
     const Equation *eq(get_eq(index));
     assert(eq != NULL);

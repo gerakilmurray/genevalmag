@@ -11,7 +11,7 @@
 #include <string>
 #include <map>
 
-#include "../Ast/Ast_function.h"
+#include "../Expression_tree/Expr_function.h"
 #include "../Attr_grammar/Rule.h"
 #include "../Attr_grammar/Symbol.h"
 
@@ -38,7 +38,7 @@ class Semantics_checks
 		  * @param subtree
 		  * @param index_root_subtree
 		  */
-		void correct_subtree(Ast_function **subtree, int index_root_subtree);
+		void correct_subtree(Expr_function **subtree, int index_root_subtree);
 
 	public:
 		/**
@@ -95,7 +95,7 @@ class Semantics_checks
 		  *
 		  * @param root_tree
 		  */
-		void correct_precedence(Ast_function **root_tree);
+		void correct_precedence(Expr_function **root_tree);
 
 		/**
 		  * Controls around the tree, that any operator who applies more than once on
@@ -105,7 +105,7 @@ class Semantics_checks
 		  *
 		  * @param root_tree
 		  */
-		void correct_associativity(Ast_function **root_tree);
+		void correct_associativity(Expr_function **root_tree);
 
 		/**
 		  * Verifies that all non-terminals in the grammar has defines in a rule.

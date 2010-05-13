@@ -90,8 +90,8 @@ void generate_names_attr(const Graph &graph, string datas[], size_t size_d)
 
 	for(size_t i(0); i < size_d; i++)
 	{
-		/* The vertexs in a Down graph are ONLY Ast_instance. */
-		datas[i] = ((Ast_instance*)props[i])->get_attr()->get_name();
+		/* The vertexs in a Down graph are ONLY Expr_instance. */
+		datas[i] = ((Expr_instance*)props[i])->get_attr()->get_name();
 	}
 }
 
@@ -158,7 +158,7 @@ void print_graph_txt(const Graph &graph)
   * Given a graph and node, returns the vertex descriptor of node in the graph.
   * If not search it, so returns USHRT_MAX.
   */
-Vertex return_vertex(const Graph &graph, const Ast_leaf *node)
+Vertex return_vertex(const Graph &graph, const Expr_leaf *node)
 {
 	property_map<Graph, vertex_data_t>::const_type props(get(vertex_data_t(), graph));
 	for(size_t i(0); i < num_vertices(graph); i++)
@@ -221,7 +221,7 @@ void project_graph(const Symbol *symb, Graph &graph)
 	/* Reduces the graph for symbol "symb". */
 	for (size_t i(num_vertices(graph)); i > 0; i--)
 	{
-		const Ast_instance *ins(dynamic_cast<const Ast_instance*>(props[i-1]));
+		const Expr_instance *ins(dynamic_cast<const Expr_instance*>(props[i-1]));
 		if (!(ins) || !(ins->get_symb()->equals(*symb)) || !(ins->get_num() == 0))
 		/* The node is a literal-node or is a node with symbol diferent that symb. */
 		{

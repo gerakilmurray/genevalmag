@@ -169,7 +169,7 @@ class Attr_grammar
 		  * @param context_rule
 		  * @return
 		 */
-		const unsigned short get_index_eq_with_context(const Ast_instance *ins, const vector<unsigned short> &context_rule) const;
+		const unsigned short get_index_eq_with_context(const Expr_instance *ins, const vector<unsigned short> &context_rule) const;
 		/**
 		  * Returns the equation with this index.
 		  * @param index
@@ -181,7 +181,7 @@ class Attr_grammar
 		  * @param index
 		  * @return
 		  */
-		const Ast_instance *get_eq_l_value(const unsigned short index) const;
+		const Expr_instance *get_eq_l_value(const unsigned short index) const;
 		/**
 		  * Returns the count of equations in the grammar.
 		  * @return

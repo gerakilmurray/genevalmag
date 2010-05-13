@@ -1,27 +1,27 @@
 /**
-  *  \file      Ast_leaf.cpp
+  *  \file      Expr_leaf.cpp
   *  \brief     Implementation element of an Attribute Syntax Tree (AST).
   *  \date      21/12/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-#include "../../include/Ast/Ast_leaf.h"
+#include "../../include/Expression_tree/Expr_leaf.h"
 
 namespace genevalmag
 {
 
-Ast_leaf::Ast_leaf():Ast_node(){}
+Expr_leaf::Expr_leaf():Expression(){}
 
 /**
-  * Destructor of Ast_leaf.
+  * Destructor of Expr_leaf.
   */
-Ast_leaf::~Ast_leaf(){};
+Expr_leaf::~Expr_leaf(){};
 
 /**
-  * Compares the Ast_leaf with other.
+  * Compares the Expr_leaf with other.
   */
-bool Ast_leaf::equals(const Ast_leaf *other) const
+bool Expr_leaf::equals(const Expr_leaf *other) const
 {
     return (to_string().compare(other->to_string()) == 0);
 }

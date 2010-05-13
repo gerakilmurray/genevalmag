@@ -61,7 +61,7 @@ class Builder_visit_sequences
         bool gen_visit_seq
         (
         	const map<Key_plan, unsigned short>::const_iterator &it_plan,
-        	vector<Ast_instance> &ins_computed,
+        	vector<Expr_instance> &ins_computed,
         	vector< map<Key_plan, unsigned short>::const_iterator > &plans_computed,
         	const vector<unsigned short> &v_seq_computed
         );
