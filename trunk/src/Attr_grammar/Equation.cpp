@@ -10,7 +10,7 @@
 #include <iostream>
 
 #include "../../include/Attr_grammar/Equation.h"
-#include "../../include/Ast/Ast_literal.h"
+#include "../../include/Expression_tree/Expr_literal.h"
 
 namespace genevalmag
 {
@@ -117,7 +117,7 @@ unsigned short *Equation::_get_count_ref() const
 /**
   * Returns the l_value of the equation.
   */
-const Ast_instance *Equation::get_l_value() const
+const Expr_instance *Equation::get_l_value() const
 {
     return &l_value;
 }
@@ -125,7 +125,7 @@ const Ast_instance *Equation::get_l_value() const
 /**
   * Returns the r_value of the equation.
   */
-const Ast_node *Equation::get_r_value() const
+const Expression *Equation::get_r_value() const
 {
     return r_value;
 }
@@ -149,7 +149,7 @@ void Equation::set_id(const unsigned short id)
 /**
   * Set the left value of the equation.
   */
-void Equation::set_l_value(const Ast_instance &lvalue)
+void Equation::set_l_value(const Expr_instance &lvalue)
 {
     l_value = lvalue;
 }
@@ -157,23 +157,23 @@ void Equation::set_l_value(const Ast_instance &lvalue)
 /**
   * Set the left value of the equation.
   */
-void Equation::set_r_value(const Ast_node *rvalue)
+void Equation::set_r_value(const Expression *rvalue)
 {
     r_value = rvalue;
 }
 
 /**
-  * Traverse the equation tree while saves only the Ast_leaf nodes in the vector result.
+  * Traverse the equation tree while saves only the Expr_leaf nodes in the vector result.
   */
-void Equation::inorder_only_leaf(const Ast_node* head, vector<const Ast_leaf*> &result) const
+void Equation::inorder_only_leaf(const Expression* head, vector<const Expr_leaf*> &result) const
 {
-    const Ast_inner_node* root(dynamic_cast<const Ast_inner_node*>(head));
+    const Expr_node* root(dynamic_cast<const Expr_node*>(head));
 
     if(root)
     {
         for(size_t i(0); i < root->get_childs().size(); i++)
         {
-            Ast_inner_node *child(dynamic_cast<Ast_inner_node*>(root->get_child(i)));
+            Expr_node *child(dynamic_cast<Expr_node*>(root->get_child(i)));
 
             if (child)
             {
@@ -181,30 +181,30 @@ void Equation::inorder_only_leaf(const Ast_node* head, vector<const Ast_leaf*> &
             }
             else
             {
-                Ast_leaf *child_leaf((Ast_leaf*)root->get_child(i));
+                Expr_leaf *child_leaf((Expr_leaf*)root->get_child(i));
                 result.push_back(child_leaf);
             }
         }
     }
     else
     {
-        Ast_leaf *root_leaf((Ast_leaf*)head);
+        Expr_leaf *root_leaf((Expr_leaf*)head);
         result.push_back(root_leaf);
     }
 }
 
 /**
-  * Traverse the equation tree while saves only the Ast_instace nodes in the vector result.
+  * Traverse the equation tree while saves only the Expr_instance nodes in the vector result.
   */
-void Equation::inorder_only_instance(const Ast_node *head, vector<const Ast_instance*> &result) const
+void Equation::inorder_only_instance(const Expression *head, vector<const Expr_instance*> &result) const
 {
-    const Ast_inner_node *root(dynamic_cast<const Ast_inner_node*>(head));
+    const Expr_node *root(dynamic_cast<const Expr_node*>(head));
 
     if(root)
     {
         for(size_t i(0); i < root->get_childs().size(); i++)
         {
-            Ast_inner_node *child(dynamic_cast<Ast_inner_node*>(root->get_child(i)));
+            Expr_node *child(dynamic_cast<Expr_node*>(root->get_child(i)));
 
             if (child)
             {
@@ -212,7 +212,7 @@ void Equation::inorder_only_instance(const Ast_node *head, vector<const Ast_inst
             }
             else
             {
-                Ast_instance *child_instace(dynamic_cast<Ast_instance*>(root->get_child(i)));
+                Expr_instance *child_instace(dynamic_cast<Expr_instance*>(root->get_child(i)));
                 if (child_instace)
                 {
                     result.push_back(child_instace);
@@ -222,7 +222,7 @@ void Equation::inorder_only_instance(const Ast_node *head, vector<const Ast_inst
     }
     else
     {
-        Ast_instance *child_instace(dynamic_cast<Ast_instance*>((Ast_leaf*)head));
+        Expr_instance *child_instace(dynamic_cast<Expr_instance*>((Expr_leaf*)head));
         if (child_instace)
         {
             result.push_back(child_instace);
@@ -231,11 +231,11 @@ void Equation::inorder_only_instance(const Ast_node *head, vector<const Ast_inst
 }
 
 /**
-  * Returns the Ast_instance nodes of the right side of Ast tree.
+  * Returns the pointer of the Expression.
   */
-const vector<const Ast_instance*> Equation::get_instance_right_side() const
+const vector<const Expr_instance*> Equation::get_instance_right_side() const
 {
-	vector<const Ast_instance*> result;
+	vector<const Expr_instance*> result;
 	inorder_only_instance(r_value, result);
 	return result;
 }

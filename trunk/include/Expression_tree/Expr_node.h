@@ -1,5 +1,5 @@
 /**
-  *  \file      Ast_inner_node.h
+  *  \file      Expr_node.h
   *  \brief     Abstract recursive element of an Attribute Syntax Tree (AST).
   *  \date      21/12/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
@@ -11,63 +11,63 @@
 
 #include <vector>
 
-#include "Ast_node.h"
+#include "Expression.h"
 
 namespace genevalmag
 {
 
-class Ast_inner_node: public Ast_node
+class Expr_node: public Expression
 {
     protected:
 	/**
 	  * \var childs.
 	  * \brief Childs's vector of node.
 	  */
-        vector <Ast_node*> childs;
+        vector <Expression*> childs;
 
     public:
         /**
-		  * Constructor of Ast_inner_node.
+		  * Constructor of Expr_node.
           * @return
           */
-        Ast_inner_node();
+        Expr_node();
 
         /**
-          * Destructor of Ast_inner_node.
+          * Destructor of Expr_node.
           * @return
           */
-        virtual ~Ast_inner_node();
+        virtual ~Expr_node();
 
         /**
-          * Returns the vector with all children of the Ast_function.
+          * Returns the vector with all children of the Expr_function.
           * @return
           */
-        const vector<Ast_node*> &get_childs() const;
+        const vector<Expression*> &get_childs() const;
 
         /**
-          * Returns the index-child of the Ast_function.
+          * Returns the index-child of the Expr_function.
           * @param index
           * @return
           */
-        Ast_node *get_child(int index) const;
+        Expression *get_child(int index) const;
 
         /**
-          * Replaces index-child of the Ast_function with other.\n
+          * Replaces index-child of the Expr_function with other.\n
           * Updates the parent of the child.
           * @param index
           * @param other
           */
-        void replace_child(int index, Ast_node *other);
+        void replace_child(int index, Expression *other);
 
         /**
-          * Adds a child in Ast_function.\n
+          * Adds a child in Expr_function.\n
           * Updates the parent of the child.
           * @param new_child
           */
-        void add_child(Ast_node *new_child);
+        void add_child(Expression *new_child);
 
         /**
-          * Generate and return a string reprensentation of an Ast_inner_node.
+          * Generate and return a string reprensentation of an Expr_node.
           * @return
           */
         virtual string to_string() const = 0;

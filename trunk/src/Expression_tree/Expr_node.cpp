@@ -1,22 +1,22 @@
 /**
-  *  \file      Ast_inner_node.cpp
+  *  \file      Expr_node.cpp
   *  \brief     Implementation element of an Attribute Syntax Tree (AST).
   *  \date      21/12/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-#include "../../include/Ast/Ast_inner_node.h"
+#include "../../include/Expression_tree/Expr_node.h"
 
 namespace genevalmag
 {
 
-Ast_inner_node::Ast_inner_node():Ast_node(){}
+Expr_node::Expr_node():Expression(){}
 
 /**
-  * Destructor of Ast_inner_node.
+  * Destructor of Expr_node.
   */
-Ast_inner_node::~Ast_inner_node()
+Expr_node::~Expr_node()
 {
 	for (unsigned int i(0); i < childs.size(); i++)
 	{
@@ -25,36 +25,36 @@ Ast_inner_node::~Ast_inner_node()
 }
 
 /**
-  * Returns the vector with all children of the Ast_function.
+  * Returns the vector with all children of the Expr_function.
   */
-const vector<Ast_node*> &Ast_inner_node::get_childs() const
+const vector<Expression*> &Expr_node::get_childs() const
 {
 	return childs;
 }
 
 /**
-  * Returns the index-child of the Ast_function.
+  * Returns the index-child of the Expr_function.
   */
-Ast_node *Ast_inner_node::get_child(int index) const
+Expression *Expr_node::get_child(int index) const
 {
 	return childs[index];
 }
 
 /**
-  * Replaces index-child of the Ast_function with other.
+  * Replaces index-child of the Expr_function with other.
   * Updates the parent of the child.
   */
-void Ast_inner_node::replace_child(int index, Ast_node *other)
+void Expr_node::replace_child(int index, Expression *other)
 {
 	childs[index] = other;
 	other->set_parent(this);
 }
 
 /**
-  * Adds a child in Ast_function.
+  * Adds a child in Expr_function.
   * Updates the parent of the child.
   */
-void Ast_inner_node::add_child(Ast_node *new_child)
+void Expr_node::add_child(Expression *new_child)
 {
 	childs.insert(childs.begin(), new_child);
 	new_child->set_parent(this);

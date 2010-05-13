@@ -1,5 +1,5 @@
 /**
-  *  \file      Ast_instance.cpp
+  *  \file      Expr_instance.cpp
   *  \brief     Implementation of a instance element of an Attribute Syntax Tree (AST).
   *  \date      21/12/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
@@ -9,7 +9,7 @@
 #include <sstream>
 #include <iostream>
 
-#include "../../include/Ast/Ast_instance.h"
+#include "../../include/Expression_tree/Expr_instance.h"
 
 namespace genevalmag
 {
@@ -20,9 +20,9 @@ namespace genevalmag
 #endif
 
 /**
-  * Constructor empty of Ast_instance.
+  * Constructor empty of Expr_instance.
   */
-Ast_instance::Ast_instance():Ast_leaf()
+Expr_instance::Expr_instance():Expr_leaf()
 {
     #ifdef _DEBUG
         ast_instances++;
@@ -30,9 +30,9 @@ Ast_instance::Ast_instance():Ast_leaf()
 }
 
 /**
-  * Constructor copy of Ast_instance.
+  * Constructor copy of Expr_instance.
   */
-Ast_instance::Ast_instance(const Ast_instance &other)
+Expr_instance::Expr_instance(const Expr_instance &other)
 {
     copy(other);
 
@@ -42,9 +42,9 @@ Ast_instance::Ast_instance(const Ast_instance &other)
 }
 
 /**
-  * Destructor of Ast_instance.
+  * Destructor of Expr_instance.
   */
-Ast_instance::~Ast_instance()
+Expr_instance::~Expr_instance()
 {
     destroy();
 
@@ -58,9 +58,9 @@ Ast_instance::~Ast_instance()
 }
 
 /**
-  * Operator assign(=) of Ast_instance.
+  * Operator assign(=) of Expr_instance.
   */
-Ast_instance &Ast_instance::operator=(const Ast_instance &other)
+Expr_instance &Expr_instance::operator=(const Expr_instance &other)
 {
     if(this != &other)
     {
@@ -71,9 +71,9 @@ Ast_instance &Ast_instance::operator=(const Ast_instance &other)
 }
 
 /**
-  * Method of copy the Ast_instance, STL-like C++.
+  * Method of copy the Expr_instance, STL-like C++.
   */
-void Ast_instance::copy(const Ast_instance &other)
+void Expr_instance::copy(const Expr_instance &other)
 {
     i_symb              = other.get_symb();
     i_num               = other.get_num();
@@ -84,70 +84,70 @@ void Ast_instance::copy(const Ast_instance &other)
 }
 
 /**
-  * Method destroy Ast_instance, STL-like C++.
+  * Method destroy Expr_instance, STL-like C++.
   */
-void Ast_instance::destroy()
+void Expr_instance::destroy()
 {
     i_symb = NULL;
     i_attr = NULL;
 }
 
 /**
-  * Returns the attribute pointer of the Ast_instance.
+  * Returns the attribute pointer of the Expr_instance.
   */
-const Attribute *Ast_instance::get_attr() const
+const Attribute *Expr_instance::get_attr() const
 {
     return i_attr;
 }
 
 /**
-  * Returns the number of the Ast_instance.
+  * Returns the number of the Expr_instance.
   */
-unsigned short Ast_instance::get_num() const
+unsigned short Expr_instance::get_num() const
 {
     return i_num;
 }
 
 /**
-  * Returns the symbol pointer of the Ast_instance.
+  * Returns the symbol pointer of the Expr_instance.
   */
-const Symbol *Ast_instance::get_symb() const
+const Symbol *Expr_instance::get_symb() const
 {
     return i_symb;
 }
 
 /**
-  * Sets the attribute pointer of the Ast_instance.
+  * Sets the attribute pointer of the Expr_instance.
   */
-void Ast_instance::set_attr(const Attribute *attr)
+void Expr_instance::set_attr(const Attribute *attr)
 {
     i_attr = attr;
 }
 
 /**
-  * Sets the number of the Ast_instance.
+  * Sets the number of the Expr_instance.
   */
-void Ast_instance::set_num(unsigned short num)
+void Expr_instance::set_num(unsigned short num)
 {
     i_num = num;
 }
 
 /**
-  * Sets the symbol pointer of the Ast_instance.
+  * Sets the symbol pointer of the Expr_instance.
   */
-void Ast_instance::set_symb(const Symbol *symb)
+void Expr_instance::set_symb(const Symbol *symb)
 {
     i_symb = symb;
 }
 
 /**
-  * Generate and return a string reprensentation of a Ast_instance.
+  * Generate and return a string reprensentation of a Expr_instance.
   *
   * Result= \<symbol\>"["\<number\>"]."\<attribute\>
   *
   * Ex: E[0].valor
   */
-string Ast_instance::to_string() const
+string Expr_instance::to_string() const
 {
     /* Save symbol's name. */
     string inst(i_symb->get_name());
@@ -166,10 +166,10 @@ string Ast_instance::to_string() const
 }
 
 /**
-  * Compares the Ast_instance with other.
+  * Compares the Expr_instance with other.
   * Respects Symbol and attribute.
   */
-bool Ast_instance::equals_without_index(const Ast_instance *other) const
+bool Expr_instance::equals_without_index(const Expr_instance *other) const
 {
     /* Save ins 1 */
     string inst1(i_symb->get_name());
@@ -183,13 +183,13 @@ bool Ast_instance::equals_without_index(const Ast_instance *other) const
 }
 
 /**
-  * Generate and return the string key that identifies an Ast_instance definitely.
+  * Generate and return the string key that identifies an Expr_instance definitely.
   *
   * Result= \<symbol\>\<number\>\<attribute\>
   *
   * Ex: E0valor
   */
-string Ast_instance::key() const
+string Expr_instance::key() const
 {
     /* Save symbol's name. */
     string inst(i_symb->get_name());

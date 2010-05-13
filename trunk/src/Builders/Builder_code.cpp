@@ -13,9 +13,9 @@
 #include <boost/algorithm/string.hpp>
 
 #include "../../include/Builders/Builder_plans.h"
-#include "../../include/Ast/Ast_function.h"
-#include "../../include/Ast/Ast_literal.h"
-#include "../../include/Ast/Ast_instance.h"
+#include "../../include/Expression_tree/Expr_function.h"
+#include "../../include/Expression_tree/Expr_literal.h"
+#include "../../include/Expression_tree/Expr_instance.h"
 #include "../../include/Util/Utilities.h"
 
 #include "../../include/Builders/Builder_code.h"
@@ -636,10 +636,10 @@ string Builder_code::generate_traverse() const
 /**
   * Generates the plain text of a equation of this rule.
   */
-string generate_expr_text(const Ast_node *node, const Rule &rule)
+string generate_expr_text(const Expression *node, const Rule &rule)
 {
 	string expr;
-	const Ast_function* func(dynamic_cast<const Ast_function*>(node));
+	const Expr_function* func(dynamic_cast<const Expr_function*>(node));
 	if(func)
 	{
 		if (!func->get_function()->is_operator())
@@ -678,14 +678,14 @@ string generate_expr_text(const Ast_node *node, const Rule &rule)
 	}
 	else
 	{
-		const Ast_literal *lit(dynamic_cast<const Ast_literal *>(node));
+		const Expr_literal *lit(dynamic_cast<const Expr_literal *>(node));
 		if(lit)
 		{
 			expr.append(lit->to_string());
 		}
 		else
 		{
-			const Ast_instance *ins((const Ast_instance *) node);
+			const Expr_instance *ins((const Expr_instance *) node);
 
 			if (ins->get_symb()->equals(*rule.get_left_symbol()) && (ins->get_num() == 0))
 			{
@@ -754,7 +754,7 @@ string Builder_code::generate_all_methods_eqs() const
 			text.append(symb_rule->get_name());
 			text.append("*) root);\n");
 
-			const Ast_instance *ins_left(eq_it->second.get_l_value());
+			const Expr_instance *ins_left(eq_it->second.get_l_value());
 
 			if (ins_left->get_symb()->equals(*symb_rule))
 			{

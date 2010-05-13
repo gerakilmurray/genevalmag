@@ -1,13 +1,13 @@
 /**
-  *  \file      Ast_node.h
-  *  \brief     Abstract element of an Attribute Syntax Tree (AST).
+  *  \file      Expression.h
+  *  \brief     Abstract expression.
   *  \date      21/12/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-#ifndef AST_NODE_H_
-#define AST_NODE_H_
+#ifndef EXPRESSION_H_
+#define EXPRESSION_H_
 
 #include <string>
 
@@ -18,14 +18,14 @@ using namespace std;
 namespace genevalmag
 {
 
-class Ast_node
+class Expression
 {
     protected:
 		/**
 		  * \var parent.
-		  * \brief Father of node.
+		  * \brief Father of Expression.
 		  */
-        const Ast_node    *parent;
+        const Expression    *parent;
         /**
 		  * \var type_synthetized.
 		  * \brief Type of node: Obtains of parse.
@@ -41,25 +41,25 @@ class Ast_node
 
     public:
         /**
-          * Constructor of Ast_node.
+          * Constructor of Expression.
           * @return
           */
-        Ast_node();
+        Expression();
 
         /**
-          * Destructor of Ast_node.
+          * Destructor of Expression.
           * @return
           */
-        virtual ~Ast_node();
+        virtual ~Expression();
 
         /**
-          * Returns the parent pointer of the Ast_node.
+          * Returns the parent pointer of the Expression.
           * @return
           */
-        const Ast_node *get_parent() const;
+        const Expression *get_parent() const;
 
         /**
-          * Returns the type synthetized of the Ast_node.
+          * Returns the type synthetized of the Expression.
           * @return
           */
         const string get_type_synthetized() const;
@@ -71,19 +71,19 @@ class Ast_node
         int get_conflict() const;
 
         /**
-          * Sets the parent pointer of the Ast_node.
+          * Sets the parent pointer of the Expression.
           * @param new_parent
           */
-        void set_parent(const Ast_node *new_parent);
+        void set_parent(const Expression *new_parent);
 
         /**
-          * Returns the type synthetized of the Ast_node.
+          * Returns the type synthetized of the Expression.
           * @param new_type_synthetized
           */
         void set_type_synthetized(string new_type_synthetized);
 
         /**
-          * Sets the parent pointer of the Ast_node in NULL.
+          * Sets the parent pointer of the Expression in NULL.
           */
         void delete_parent();
 
@@ -99,7 +99,7 @@ class Ast_node
         void desactive_conflict();
 
         /**
-          * Generate and return a string reprensentation of a Ast_node.
+          * Generate and return a string reprensentation of a Expression.
           * @return
           */
         virtual string to_string() const = 0;
@@ -107,4 +107,4 @@ class Ast_node
 
 } /* end genevalmag */
 
-#endif /* AST_NODE_H_ */
+#endif /* EXPRESSION_H_ */

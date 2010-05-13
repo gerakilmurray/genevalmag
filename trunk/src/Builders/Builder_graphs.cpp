@@ -110,7 +110,7 @@ bool Builder_graphs::compute_dependency_graphs(const map<unsigned short,Rule> &r
 		/* For each instance build a new edge entre left instance and rigth instance. */
 		{
 			/* Insert left instance. */
-			vector<const Ast_leaf*> elem_leaf_tree;
+			vector<const Expr_leaf*> elem_leaf_tree;
 			eq->second.inorder_only_leaf(eq->second.get_r_value(), elem_leaf_tree);
 
 			/* Verify if vertex belong at graph. */
@@ -157,7 +157,7 @@ void Builder_graphs::compute_attr_vertex(const map<string,Symbol> &symbols)
 	for(map<string,Symbol >::const_iterator s_it(symbols.begin()); s_it != symbols.end(); s_it++)
 	{
 		property_map<Graph, vertex_data_t>::type props_down(get(vertex_data_t(), current_graph));
-		Ast_instance ins;
+		Expr_instance ins;
 		ins.set_symb(&s_it->second);
 		/* For all symbol's attributes */
 		for (size_t i(0); i < s_it->second.get_attrs().size(); i++)

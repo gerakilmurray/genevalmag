@@ -18,7 +18,7 @@
 #include "../Attr_grammar/Rule.h"
 #include "../Attr_grammar/Symbol.h"
 #include "../Attr_grammar/Attr_grammar.h"
-#include "../Ast/Ast_leaf.h"
+#include "../Expression_tree/Expr_leaf.h"
 
 using namespace std;
 using namespace boost;
@@ -31,7 +31,7 @@ struct vertex_data_t
     typedef vertex_property_tag kind;
 };
 
-typedef property <vertex_data_t, const genevalmag::Ast_leaf*> property_vertex_dp;
+typedef property <vertex_data_t, const genevalmag::Expr_leaf*> property_vertex_dp;
 
 typedef adjacency_list<hash_setS, vecS, directedS, property_vertex_dp > Graph;
 

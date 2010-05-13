@@ -104,9 +104,9 @@ void Semantics_checks::reset_semantic_context()
   *      / \			      / \
   *     D   E                B   D
   */
-int swap_root_child(Ast_function **old_root, int i_new_root)
+int swap_root_child(Expr_function **old_root, int i_new_root)
 {
-	Ast_function *new_root((Ast_function*)(*old_root)->get_child(i_new_root));
+	Expr_function *new_root((Expr_function*)(*old_root)->get_child(i_new_root));
 	new_root->set_parent((*old_root)->get_parent());
 
 	int index_swap(-1);
@@ -120,7 +120,7 @@ int swap_root_child(Ast_function **old_root, int i_new_root)
 	}
 
 	/* Get E.  Get D. */
-	Ast_node *aux(new_root->get_child(index_swap));
+	Expression *aux(new_root->get_child(index_swap));
 	/* Set child E to A. Set child D to A. */
 	(*old_root)->replace_child(i_new_root, aux);
 	/* Set child A to B. Set child A to C. */
@@ -142,9 +142,9 @@ int swap_root_child(Ast_function **old_root, int i_new_root)
   *      \                          / \
   *       F                        F   C
   */
-int swap_root_grandson(Ast_function **old_root)
+int swap_root_grandson(Expr_function **old_root)
 {
-	Ast_function *new_root((Ast_function *)(*old_root)->get_child(0));
+	Expr_function *new_root((Expr_function *)(*old_root)->get_child(0));
 
 	int index_swap(-1);
 	if (new_root->is_infix())
@@ -157,9 +157,9 @@ int swap_root_grandson(Ast_function **old_root)
 		index_swap = 0;
 	}
 
-	Ast_function *swap((Ast_function *)new_root->get_child(index_swap));
+	Expr_function *swap((Expr_function *)new_root->get_child(index_swap));
 	new_root->set_parent((*old_root)->get_parent());
-	Ast_node *grandson(swap->get_child(0));
+	Expression *grandson(swap->get_child(0));
 	(*old_root)->replace_child(0, grandson);
 	swap->replace_child(0, (*old_root));
 	(*old_root) = new_root;
@@ -169,9 +169,9 @@ int swap_root_grandson(Ast_function **old_root)
 /**
   * Checks and correct the precendence of the operator in a subtree.
   */
-void Semantics_checks::correct_subtree(Ast_function **subtree, int index_root_subtree)
+void Semantics_checks::correct_subtree(Expr_function **subtree, int index_root_subtree)
 {
-	Ast_function *aux((Ast_function*)(*subtree)->get_child(index_root_subtree));
+	Expr_function *aux((Expr_function*)(*subtree)->get_child(index_root_subtree));
 	correct_precedence(&aux);
 
 	/* Update new son by the result of recursion. */
@@ -206,19 +206,19 @@ void Semantics_checks::correct_subtree(Ast_function **subtree, int index_root_su
   *   - The syntactic order of the expression is not altered.
   *   - The operation with higher precedence apply first.
   */
-void Semantics_checks::correct_precedence(Ast_function **root_tree)
+void Semantics_checks::correct_precedence(Expr_function **root_tree)
 {
 	if (!(*root_tree)->is_prefix() && ((*root_tree)->get_child(0)->get_conflict() > -1))
 	/* Special case which must complete a check of some sub-level of the tree. */
 	{
 		if (((*root_tree)->get_function()->get_prec() > (*root_tree)->get_child(0)->get_conflict()) &&
-			((*root_tree)->is_comparable((Ast_function*)(*root_tree)->get_child(0))))
+			((*root_tree)->is_comparable((Expr_function*)(*root_tree)->get_child(0))))
 		/* Same level precedence and change is needed to correct conflict of precedence. */
 		{
 			int i_subtree(swap_root_grandson(root_tree));
 
 			/* Checks that the subtree with the older root is well formed. */
-			Ast_function *subtree((Ast_function*)(*root_tree)->get_child(i_subtree));
+			Expr_function *subtree((Expr_function*)(*root_tree)->get_child(i_subtree));
 			correct_subtree(&subtree,0);
 
 			/* Updates the main tree, with the new root of subtree. */
@@ -238,11 +238,11 @@ void Semantics_checks::correct_precedence(Ast_function **root_tree)
 	while (i_child < (*root_tree)->get_function()->get_arity())
 	/* It covers all children. */
 	{
-		/* Detecting if the child is of Ast_function type. */
-		Ast_function *node(dynamic_cast<Ast_function*>((*root_tree)->get_child(i_child)));
+		/* Detecting if the child is of Expr_function type. */
+		Expr_function *node(dynamic_cast<Expr_function*>((*root_tree)->get_child(i_child)));
 
 		if (node)
-		/* The node is the Ast_function because the dynamic cast was successfully. */
+		/* The node is the Expr_function because the dynamic cast was successfully. */
 		{
 			if (((*root_tree)->compare_precedence(node) > 0) && ((*root_tree)->is_comparable(node)))
 			/* Same level precedence and detection of posible swap. */
@@ -288,10 +288,10 @@ void Semantics_checks::correct_precedence(Ast_function **root_tree)
   * If it detects conflicts modifying the expression tree with rotations and
   * resources to continue controlling.
   */
-void Semantics_checks::correct_associativity(Ast_function **root_tree)
+void Semantics_checks::correct_associativity(Expr_function **root_tree)
 {
-	/* Detecting if the child is of Ast_function type. */
-	Ast_function *child(dynamic_cast<Ast_function*>((*root_tree)->get_child(0)));
+	/* Detecting if the child is of Expr_function type. */
+	Expr_function *child(dynamic_cast<Expr_function*>((*root_tree)->get_child(0)));
 	if(child)
 	{
 		if((*root_tree)->get_function()->equals(*(child->get_function())))
@@ -321,7 +321,7 @@ void Semantics_checks::correct_associativity(Ast_function **root_tree)
 	}
 	if((*root_tree)->is_infix())
 	{
-		Ast_function *child_rec(dynamic_cast<Ast_function*>((*root_tree)->get_child(1)));
+		Expr_function *child_rec(dynamic_cast<Expr_function*>((*root_tree)->get_child(1)));
 		if (child_rec)
 		{
 			correct_associativity(&child_rec);

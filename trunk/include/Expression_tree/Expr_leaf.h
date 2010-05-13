@@ -1,47 +1,47 @@
 /**
-  *  \file      Ast_leaf.h
+  *  \file      Expr_leaf.h
   *  \brief     Abstract final element of an Attribute Syntax Tree (AST).
   *  \date      21/12/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-#ifndef AST_LEAF_H_
-#define AST_LEAF_H_
+#ifndef EXPR_LEAF_H_
+#define EXPR_LEAF_H_
 
-#include "Ast_node.h"
+#include "Expression.h"
 
 namespace genevalmag
 {
 
-class Ast_leaf: public Ast_node
+class Expr_leaf: public Expression
 {
     public:
 		/**
-		  * Constructor of Ast_leaf.
+		  * Constructor of Expr_leaf.
 	      * @return
           */
-		Ast_leaf();
+		Expr_leaf();
         /**
-          * Destructor of Ast_leaf.
+          * Destructor of Expr_leaf.
 		  * @return
 		  */
-        virtual ~Ast_leaf();
+        virtual ~Expr_leaf();
 
         /**
-          * Generates and returns a string reprensentation of a Ast_leaf.
+          * Generates and returns a string reprensentation of a Expr_leaf.
           * @return
           */
         virtual string to_string() const = 0;
 
         /**
-          * Compares the Ast_leaf with other.
+          * Compares the Expr_leaf with other.
           * @param other
           * @return
           */
-        bool equals(const Ast_leaf *other) const;
+        bool equals(const Expr_leaf *other) const;
 };
 
 } /* end genevalmag */
 
-#endif /* AST_LEAF_H_ */
+#endif /* EXPR_LEAF_H_ */

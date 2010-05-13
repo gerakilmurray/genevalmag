@@ -1,5 +1,5 @@
 /**
-  *  \file      Ast_function.cpp
+  *  \file      Expr_function.cpp
   *  \brief     Implementation of a function element of an Attribute Syntax Tree (AST).
   *  \date      21/12/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
@@ -8,7 +8,7 @@
   
 #include <iostream>
 
-#include "../../include/Ast/Ast_function.h"
+#include "../../include/Expression_tree/Expr_function.h"
 
 namespace genevalmag
 {
@@ -19,9 +19,9 @@ namespace genevalmag
 #endif
 
 /**
-  * Constructor empty of Ast_function.
+  * Constructor empty of Expr_function.
   */
-Ast_function::Ast_function():Ast_inner_node()
+Expr_function::Expr_function():Expr_node()
 {
     precedence_level    = 0;
     syntax_order        = 0;
@@ -32,9 +32,9 @@ Ast_function::Ast_function():Ast_inner_node()
 }
 
 /**
-  * Constructor copy of Ast_function.
+  * Constructor copy of Expr_function.
   */
-Ast_function::Ast_function(const Ast_function &other)
+Expr_function::Expr_function(const Expr_function &other)
 {
     copy(other);
 
@@ -44,9 +44,9 @@ Ast_function::Ast_function(const Ast_function &other)
 }
 
 /**
-  * Destructor of Ast_function.
+  * Destructor of Expr_function.
   */
-Ast_function::~Ast_function()
+Expr_function::~Expr_function()
 {
     destroy();
 
@@ -60,9 +60,9 @@ Ast_function::~Ast_function()
 }
 
 /**
-  * Operator assign(=) of Ast_function.
+  * Operator assign(=) of Expr_function.
   */
-Ast_function &Ast_function::operator=(const Ast_function &other)
+Expr_function &Expr_function::operator=(const Expr_function &other)
 {
     if(this != &other)
     {
@@ -73,9 +73,9 @@ Ast_function &Ast_function::operator=(const Ast_function &other)
 }
 
 /**
-  * Method of copy the Ast_function, STL-like C++.
+  * Method of copy the Expr_function, STL-like C++.
   */
-void Ast_function::copy(const Ast_function &other)
+void Expr_function::copy(const Expr_function &other)
 {
     func                = other.get_function();
     precedence_level    = other.get_precedence_level();
@@ -87,88 +87,88 @@ void Ast_function::copy(const Ast_function &other)
 }
 
 /**
-  * Method destroy Ast_function, STL-like C++.
+  * Method destroy Expr_function, STL-like C++.
   */
-void Ast_function::destroy()
+void Expr_function::destroy()
 {
 }
 
 /**
-  * Returns the function pointer of the Ast_function.
+  * Returns the function pointer of the Expr_function.
   */
-const Function *Ast_function::get_function() const
+const Function *Expr_function::get_function() const
 {
     return func;
 }
 
 /**
-  * Returns the precedence level of the Ast_function.
+  * Returns the precedence level of the Expr_function.
   */
-unsigned short Ast_function::get_precedence_level() const
+unsigned short Expr_function::get_precedence_level() const
 {
     return precedence_level;
 }
 
 /**
-  * Returns the syntax order of the Ast_function.
+  * Returns the syntax order of the Expr_function.
   */
-unsigned short Ast_function::get_syntax_order() const
+unsigned short Expr_function::get_syntax_order() const
 {
     return syntax_order;
 }
 
 /**
-  * Sets the function pointer of the Ast_function.
+  * Sets the function pointer of the Expr_function.
   */
-void Ast_function::set_function(const Function *function)
+void Expr_function::set_function(const Function *function)
 {
     func = function;
 }
 
 /**
-  * Sets the precedence level of the Ast_function.
+  * Sets the precedence level of the Expr_function.
   */
-void Ast_function::set_precedence_level(unsigned short p_level)
+void Expr_function::set_precedence_level(unsigned short p_level)
 {
     precedence_level = p_level;
 }
 
 /**
-  * Sets the syntax order of the Ast_function.
+  * Sets the syntax order of the Expr_function.
   */
-void Ast_function::set_syntax_order(unsigned short s_order)
+void Expr_function::set_syntax_order(unsigned short s_order)
 {
     syntax_order = s_order;
 }
 
 /**
-  * Returns if the function of Ast_function is prefix.
+  * Returns if the function of Expr_function is prefix.
   */
-bool Ast_function::is_prefix() const
+bool Expr_function::is_prefix() const
 {
     return (func->get_mode() == k_prefix);
 }
 
 /**
-  * Returns if the function of Ast_function is infix.
+  * Returns if the function of Expr_function is infix.
   */
-bool Ast_function::is_infix() const
+bool Expr_function::is_infix() const
 {
     return (func->get_mode() == k_infix);
 }
 
 /**
-  * Returns if the function of Ast_function is postfix.
+  * Returns if the function of Expr_function is postfix.
   */
-bool Ast_function::is_postfix() const
+bool Expr_function::is_postfix() const
 {
     return (func->get_mode() == k_postfix);
 }
 
 /**
-  * Returns if both Ast_functions are in the same precedence level.
+  * Returns if both Expr_functions are in the same precedence level.
   */
-bool Ast_function::is_comparable(const Ast_function *other) const
+bool Expr_function::is_comparable(const Expr_function *other) const
 {
     return (precedence_level == other->get_precedence_level());
 }
@@ -179,7 +179,7 @@ bool Ast_function::is_comparable(const Ast_function *other) const
   *        < 0        when other have great precedence
   *        > 0        when other have small precedence
   */
-int Ast_function::compare_precedence(const Ast_function *other) const
+int Expr_function::compare_precedence(const Expr_function *other) const
 {
     return (func->get_prec() - other->get_function()->get_prec());
 }
@@ -190,13 +190,13 @@ int Ast_function::compare_precedence(const Ast_function *other) const
   *        < 0        when other have great order
   *        > 0        when other have small order
   */
-int Ast_function::compare_order(const Ast_function *other) const
+int Expr_function::compare_order(const Expr_function *other) const
 {
     return (syntax_order - other->get_syntax_order());
 }
 
 /**
-  * Generate and return a string reprensentation of a Ast_function.
+  * Generate and return a string reprensentation of a Expr_function.
   *
   * If is a pure function:
   *     Result= \<func_name\> "(" child[0], ... , child[n] ")"
@@ -210,7 +210,7 @@ int Ast_function::compare_order(const Ast_function *other) const
   * If is an postfix unary operator:
   *     Result= "(" child[0] ")" \<op_name\>
   */
-string Ast_function::to_string() const
+string Expr_function::to_string() const
 {
     if(func->is_operator())
     {

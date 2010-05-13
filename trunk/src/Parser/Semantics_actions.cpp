@@ -12,9 +12,9 @@
 #include <boost/algorithm/string/erase.hpp>
 
 #include "../../include/Parser/Semantics_actions.h"
-#include "../../include/Ast/Ast_instance.h"
-#include "../../include/Ast/Ast_literal.h"
-#include "../../include/Ast/Ast_function.h"
+#include "../../include/Expression_tree/Expr_instance.h"
+#include "../../include/Expression_tree/Expr_literal.h"
+#include "../../include/Expression_tree/Expr_function.h"
 #include "../../include/Util/Utilities.h"
 
 using namespace std;
@@ -67,16 +67,16 @@ Rule *current_rule;
 /**
   * Pointer to the last instance of attribute to parse successfully.
   */
-Ast_instance	*current_instance;
-Ast_literal		*current_literal;
-Ast_function	*current_ast_function;
+Expr_instance	*current_instance;
+Expr_literal		*current_literal;
+Expr_function	*current_ast_function;
 Equation		*current_eq;
 
 /**
   * Stacks for expression precedence manager.
   */
-vector<Ast_node*> 			stack_node;
-vector<Ast_inner_node*> 	stack_inner_node;
+vector<Expression*> 			stack_node;
+vector<Expr_node*> 	stack_inner_node;
 
 
 /**
@@ -280,7 +280,7 @@ void create_instance(const iterator_t str, const iterator_t end)
 
 	if(current_instance == NULL)
 	{
-		current_instance = new Ast_instance();
+		current_instance = new Expr_instance();
 	}
 	current_instance->set_symb(symb);
 }
@@ -312,7 +312,7 @@ void create_lit_number(const iterator_t str, const iterator_t end)
 
 	if(current_literal == NULL)
 	{
-		current_literal = new Ast_literal();
+		current_literal = new Expr_literal();
 	}
 
 	size_t pos(num.find('.',0));
@@ -334,7 +334,7 @@ void create_lit_ch(const iterator_t ch, const iterator_t end)
 {
 	if(current_literal == NULL)
 	{
-		current_literal = new Ast_literal();
+		current_literal = new Expr_literal();
 	}
 	/* The pointer +1 and -1 for remove the single quotes. Ex: 'u' --> u. */
 	string ch_l(ch,end);
@@ -348,7 +348,7 @@ void create_lit_str(const iterator_t str, const iterator_t end)
 {
 	if(current_literal == NULL)
 	{
-		current_literal = new Ast_literal();
+		current_literal = new Expr_literal();
 	}
 	/* The pointer +1 and -1 for remove the double quotes. Ex: "uno" --> uno. */
 	string str_l(str, end);
@@ -362,7 +362,7 @@ void create_bool(const iterator_t str, const iterator_t end)
 {
 	if(current_literal == NULL)
 	{
-		current_literal = new Ast_literal();
+		current_literal = new Expr_literal();
 	}
 	string str_l(str, end);
 	current_literal->set_type(k_bool);
@@ -399,11 +399,11 @@ void save_rvalue(const iterator_t str, const iterator_t end)
 		exit(-1);
 	}
 
-	Ast_node * root_tree(stack_node.back());
+	Expression * root_tree(stack_node.back());
 	stack_node.pop_back();
 
 	/* Check and solve conflicts of associativity. */
-	Ast_function * root_func(dynamic_cast<Ast_function*>(root_tree));
+	Expr_function * root_func(dynamic_cast<Expr_function*>(root_tree));
 	if (root_func)
 	{
 		sem_check->correct_associativity(&root_func);
@@ -428,7 +428,7 @@ void save_rvalue(const iterator_t str, const iterator_t end)
 
 void push_mark(char name)
 {
-	current_literal = new Ast_literal();
+	current_literal = new Expr_literal();
 	/* Mark for parameter of function. */
 	current_literal->set_type_synthetized("#");
 	current_literal->set_value("#");
@@ -458,7 +458,7 @@ void create_instance_node(const iterator_t str, const iterator_t end)
 
 void create_func_node(const iterator_t str, const iterator_t end)
 {
-	current_ast_function = new Ast_function();
+	current_ast_function = new Expr_function();
 	/* Set aux function. */
 	current_ast_function->set_function(current_func);
 
@@ -469,7 +469,7 @@ void create_func_node(const iterator_t str, const iterator_t end)
 
 	current_func = NULL;
 
-	/* Push Ast_function in stack. */
+	/* Push Expr_function in stack. */
 	stack_inner_node.push_back(current_ast_function);
 	current_ast_function = NULL;
 };
@@ -477,15 +477,15 @@ void create_func_node(const iterator_t str, const iterator_t end)
 void create_root_infix_node(const iterator_t str, const iterator_t end)
 {
 	/* Pop the infix operator. */
-	Ast_function *root((Ast_function*)stack_inner_node.back());
+	Expr_function *root((Expr_function*)stack_inner_node.back());
 	stack_inner_node.pop_back();
 
 	/* Pop first parameter of operator. */
-	Ast_node *r_child(stack_node.back());
+	Expression *r_child(stack_node.back());
 	stack_node.pop_back();
 
 	/* Pop second parameter of operator. */
-	Ast_node *l_child(stack_node.back());
+	Expression *l_child(stack_node.back());
 	stack_node.pop_back();
 
 	string key("infix");
@@ -524,7 +524,7 @@ void create_root_infix_node(const iterator_t str, const iterator_t end)
 void create_root_function_node(const iterator_t str, const iterator_t end)
 {
 	/* Pop the function. */
-	Ast_function *root((Ast_function*)stack_inner_node.back());
+	Expr_function *root((Expr_function*)stack_inner_node.back());
 	stack_inner_node.pop_back();
 
 	string key;
@@ -533,7 +533,7 @@ void create_root_function_node(const iterator_t str, const iterator_t end)
 	/* The cycle searches the parameters until that finds the mark. */
 	{
 		/* Parameter of function. */
-		Ast_node *child(stack_node.back());
+		Expression *child(stack_node.back());
 		stack_node.pop_back();
 
 		if (child->get_type_synthetized().compare("#") == 0)
@@ -574,11 +574,11 @@ void create_root_function_node(const iterator_t str, const iterator_t end)
 void create_root_postfix_node(const iterator_t str, const iterator_t end)
 {
 	/* Pop the postfix operator. */
-	Ast_function *root((Ast_function*)stack_inner_node.back());
+	Expr_function *root((Expr_function*)stack_inner_node.back());
 	stack_inner_node.pop_back();
 
 	/* Parameters of operator. */
-	Ast_node *child(stack_node.back());
+	Expression *child(stack_node.back());
 	stack_node.pop_back();
 
 	string key("postfix");
@@ -614,11 +614,11 @@ void create_root_postfix_node(const iterator_t str, const iterator_t end)
 void create_root_prefix_node(const iterator_t str, const iterator_t end)
 {
 	/* Pop the prefix operator. */
-	Ast_function *root((Ast_function*)stack_inner_node.back());
+	Expr_function *root((Expr_function*)stack_inner_node.back());
 	stack_inner_node.pop_back();
 
 	/* Parameter of operator. */
-	Ast_node *child(stack_node.back());
+	Expression *child(stack_node.back());
 	stack_node.pop_back();
 
 	string key("prefix");

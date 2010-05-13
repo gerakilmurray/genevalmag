@@ -43,7 +43,7 @@ Builder_visit_sequences::~Builder_visit_sequences()
   * Searches this instance on the list passed as parameter.
   * If found the instance return true.
   */
-bool ins_attr_computed(const Ast_instance *ins, const vector<Ast_instance> &vec)
+bool ins_attr_computed(const Expr_instance *ins, const vector<Expr_instance> &vec)
 {
     for(size_t i(0); i < vec.size(); i++)
     {
@@ -58,7 +58,7 @@ bool ins_attr_computed(const Ast_instance *ins, const vector<Ast_instance> &vec)
 /**
   * Obtains the instances of inherit attributes that this symbol.
   */
-void get_inherits_of(const Symbol *symb, const vector<Ast_instance> &computed, vector<Ast_instance> &rec_child)
+void get_inherits_of(const Symbol *symb, const vector<Expr_instance> &computed, vector<Expr_instance> &rec_child)
 {
 	/* For all computed's vector. */
 	for(size_t i(0); i < computed.size(); i++)
@@ -161,7 +161,7 @@ void plan_family_computed(const vector< map<Key_plan, unsigned short>::const_ite
 bool Builder_visit_sequences::gen_visit_seq
 (
 	const map<Key_plan, unsigned short>::const_iterator &it_plan,
-	vector<Ast_instance> &ins_computed,
+	vector<Expr_instance> &ins_computed,
 	vector< map<Key_plan, unsigned short>::const_iterator > &plans_computed,
 	const vector<unsigned short> &v_seq_computed
 )
@@ -170,7 +170,7 @@ bool Builder_visit_sequences::gen_visit_seq
 
     bool leaves(false);
     Visit_seq sequence;
-    vector<Ast_instance> ins_computed_own;
+    vector<Expr_instance> ins_computed_own;
 
     const Rule &rule(attr_grammar.get_rule(b_plans.get_context_unique(it_plan->first.id_plan)[0]));
 
@@ -179,11 +179,11 @@ bool Builder_visit_sequences::gen_visit_seq
     {
         const Equation *eq(rule.get_eq(plan[i]));
 
-        const vector<const Ast_instance*> &instances_right_side(eq->get_instance_right_side()); /* ver copia tmp */
+        const vector<const Expr_instance*> &instances_right_side(eq->get_instance_right_side()); /* ver copia tmp */
 
         for(size_t j(0); j < instances_right_side.size(); j++)
 		{
-			const Ast_instance *ins(instances_right_side[j]);
+			const Expr_instance *ins(instances_right_side[j]);
 
 			if((ins->get_symb()->equals(*rule.get_left_symbol())) &&
 			   (ins->get_num() == 0) &&
@@ -245,7 +245,7 @@ bool Builder_visit_sequences::gen_visit_seq
 								(it->first.plan == it_plan_proj->second))
 							/* The plan to launch the recursion has the need context. */
 							{
-								vector<Ast_instance> ins_computed_child;
+								vector<Expr_instance> ins_computed_child;
 								get_inherits_of(ins->get_symb(), ins_computed_own, ins_computed_child);
 								vector< map<Key_plan, unsigned short>::const_iterator > p_computed_child;
 								/* Adds as computed the current plan. */
@@ -284,7 +284,7 @@ bool Builder_visit_sequences::gen_visit_seq
 		if (!leaves)
 		{
 			/* Mark the instance */
-			const Ast_instance *l_v(eq->get_l_value());
+			const Expr_instance *l_v(eq->get_l_value());
 			if (l_v->get_attr()->is_synthetize())
 			{
 				ins_computed.push_back(*l_v);
@@ -372,7 +372,7 @@ bool Builder_visit_sequences::generate_visit_sequences()
         	/* This plan is belong a initial symbol (initial rule). */
             if(!belong_index(it->second, visit_seq_computed))
             {
-                vector<Ast_instance> ins_computed;
+                vector<Expr_instance> ins_computed;
                 vector< map<Key_plan, unsigned short>::const_iterator > plans_computed;
                 merge_vec(plans_computed_all, plans_computed);
 				gen_visit_seq(it, ins_computed, plans_computed, visit_seq_computed);

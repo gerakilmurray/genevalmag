@@ -99,7 +99,7 @@ void Builder_plans::generates_topological_order(const Graph &graph, Order_eval_e
 	/* Cycles over make_oder for save the id_equation in result_order. */
 	for (MakeOrder::iterator i(make_order.begin()); i != make_order.end(); ++i)
 	{
-		const Ast_instance* ins(dynamic_cast<const Ast_instance*>(prop[*i]));
+		const Expr_instance* ins(dynamic_cast<const Expr_instance*>(prop[*i]));
 		if (ins)
 		/* For the equation's order only interests the instances. */
 		{
@@ -140,13 +140,13 @@ Order_eval_eq Builder_plans::compute_order(const Graph &graph_adp, unsigned shor
 	{
 		property_map<Graph, vertex_data_t>::type prop(get(vertex_data_t(), graph));
 		/* Obtain v1 */
-		const Ast_instance *ins1(attr_grammar.get_eq_l_value(order_eq[i-1]));
+		const Expr_instance *ins1(attr_grammar.get_eq_l_value(order_eq[i-1]));
 		assert(ins1 != NULL);
 		Vertex v1(return_vertex(graph, ins1));
 		assert(v1 != USHRT_MAX);
 
 		/* Obtain v2 */
-		const Ast_instance *ins2(attr_grammar.get_eq_l_value(order_eq[i]));
+		const Expr_instance *ins2(attr_grammar.get_eq_l_value(order_eq[i]));
 		assert(ins2 != NULL);
 		Vertex v2(return_vertex(graph, ins2));
 		assert(v2 != USHRT_MAX);
