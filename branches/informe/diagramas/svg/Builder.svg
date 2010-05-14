@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Bouml (http://bouml.free.fr/) -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1852" height="1101" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1528" y="706" width="5" height="105" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1348" y="806" width="185" height="5" />
+	<rect fill="#c0ffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="1342" y="700" width="186" height="106" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="1435" y="722">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1435" y="759">Vertex</text>
+	<line stroke="black" stroke-opacity="1" x1="1342" y1="774" x2="1528" y2="774" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1569" y="446" width="5" height="105" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1299" y="546" width="275" height="5" />
+	<rect fill="#c0ffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="1293" y="440" width="276" height="106" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="1431" y="462">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1431" y="499">property_vertex_dp</text>
+	<line stroke="black" stroke-opacity="1" x1="1293" y1="514" x2="1569" y2="514" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1524" y="300" width="5" height="105" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1344" y="400" width="185" height="5" />
+	<rect fill="#c0ffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="1338" y="294" width="186" height="106" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="1431" y="316">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1431" y="353">Graph</text>
+	<line stroke="black" stroke-opacity="1" x1="1338" y1="368" x2="1524" y2="368" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1434" y1="439" x2="1440" y2="433" />
+	<line stroke="black" stroke-opacity="1" x1="1434" y1="439" x2="1428" y2="433" />
+	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="1434" y1="406" x2="1434" y2="439" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="456" y="762" width="5" height="105" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="264" y="862" width="197" height="5" />
+	<rect fill="#90ccff" stroke="black" stroke-width="1" stroke-opacity="1" x="258" y="756" width="198" height="106" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="357" y="778">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="357" y="815">Key_work_list</text>
+	<line stroke="black" stroke-opacity="1" x1="258" y1="830" x2="456" y2="830" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1530" y="585" width="5" height="105" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1340" y="685" width="195" height="5" />
+	<rect fill="#c0ffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="1334" y="579" width="196" height="106" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="1432" y="601">&lt;&lt;struct&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1432" y="638">vertex_data_t</text>
+	<line stroke="black" stroke-opacity="1" x1="1334" y1="653" x2="1530" y2="653" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1434" y1="578" x2="1440" y2="572" />
+	<line stroke="black" stroke-opacity="1" x1="1434" y1="578" x2="1428" y2="572" />
+	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="1434" y1="552" x2="1434" y2="578" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="247" y="763" width="5" height="159" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="89" y="917" width="163" height="5" />
+	<rect fill="#90ccff" stroke="black" stroke-width="1" stroke-opacity="1" x="83" y="757" width="164" height="160" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="165" y="779">&lt;&lt;struct&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="165" y="816">k_w</text>
+	<line stroke="black" stroke-opacity="1" x1="83" y1="831" x2="247" y2="831" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="91" y="853">+</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="120" y="853">father</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="91" y="886">+</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="120" y="886">id_rule</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="309" y="510">id_plan_project</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1478" y="194">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="8" y="50">b_plans</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="913" y="374">context</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1244" y="994">all_visit_seqs</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1168" y="266">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1221" y="216">p_Dp_graphs</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="278" y="206">plans_project_uniques</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1459" y="216">p_Down_graphs</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="746" y="998">b_v_seq</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="939" y="24">build_graphs</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="644" y="108">b_plans</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="602" y="424">plans_project</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="671" y="214">contexts_uniques</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1156" y="390">p_Dcg_graphs</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1596" y="368">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1154" y="290">p_Adp_graphs</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="56" y="224">plans_uniques</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="182" y="388">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="182" y="414">eval_plans</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1238" y="190">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1528" y="260">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="472" y="796">item</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1535" y="390">p_Adp_subgraphs_cyclics</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1176" y="370">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1485" y="286">attr_vertex_graphs</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="725" y="764" width="5" height="125" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="567" y="884" width="163" height="5" />
+	<rect fill="#90ccff" stroke="black" stroke-width="1" stroke-opacity="1" x="561" y="758" width="164" height="126" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="643" y="780">&lt;&lt;struct&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="643" y="817">i_w</text>
+	<line stroke="black" stroke-opacity="1" x1="561" y1="832" x2="725" y2="832" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="569" y="854">+</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="598" y="854">order_attr</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1756" y="34" width="5" height="112" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1111" y="141" width="650" height="5" />
+	<rect fill="#c0ffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="1105" y="28" width="651" height="113" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1431" y="50">Builder_graphs</text>
+	<line stroke="black" stroke-opacity="1" x1="1105" y1="65" x2="1756" y2="65" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1455" y1="293" x2="1461" y2="287" />
+	<line stroke="black" stroke-opacity="1" x1="1455" y1="293" x2="1449" y2="287" />
+	<line stroke="black" stroke-opacity="1" x1="1455" y1="147" x2="1455" y2="293" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="1455,147 1461,153 1455,159 1449,153" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="462" y1="811" x2="468" y2="817" />
+	<line stroke="black" stroke-opacity="1" x1="462" y1="811" x2="468" y2="805" />
+	<line stroke="black" stroke-opacity="1" x1="560" y1="811" x2="462" y2="811" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="560,811 554,817 548,811 554,805" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1150" y1="147" x2="1150" y2="311" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="1150,147 1156,153 1150,159 1144,153" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1337" y1="311" x2="1331" y2="305" />
+	<line stroke="black" stroke-opacity="1" x1="1337" y1="311" x2="1331" y2="317" />
+	<line stroke="black" stroke-opacity="1" x1="1150" y1="311" x2="1337" y2="311" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1337" y1="350" x2="1331" y2="344" />
+	<line stroke="black" stroke-opacity="1" x1="1337" y1="350" x2="1331" y2="356" />
+	<line stroke="black" stroke-opacity="1" x1="1126" y1="350" x2="1337" y2="350" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1714" y1="147" x2="1714" y2="310" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="1714,147 1720,153 1714,159 1708,153" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1740" y1="147" x2="1740" y2="352" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="1740,147 1746,153 1740,159 1734,153" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1126" y1="147" x2="1126" y2="350" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="1126,147 1132,153 1126,159 1120,153" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1530" y1="352" x2="1536" y2="358" />
+	<line stroke="black" stroke-opacity="1" x1="1530" y1="352" x2="1536" y2="346" />
+	<line stroke="black" stroke-opacity="1" x1="1740" y1="352" x2="1530" y2="352" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1386" y1="293" x2="1392" y2="287" />
+	<line stroke="black" stroke-opacity="1" x1="1386" y1="293" x2="1380" y2="287" />
+	<line stroke="black" stroke-opacity="1" x1="1386" y1="147" x2="1386" y2="293" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="1386,147 1392,153 1386,159 1380,153" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1530" y1="310" x2="1536" y2="316" />
+	<line stroke="black" stroke-opacity="1" x1="1530" y1="310" x2="1536" y2="304" />
+	<line stroke="black" stroke-opacity="1" x1="1714" y1="310" x2="1530" y2="310" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="646" y="960" width="5" height="128" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="145" y="1083" width="506" height="5" />
+	<rect fill="#ffeb60" stroke="black" stroke-width="1" stroke-opacity="1" x="139" y="954" width="507" height="129" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="393" y="976">Builder_code</text>
+	<line stroke="black" stroke-opacity="1" x1="139" y1="991" x2="646" y2="991" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="147" y="1013">-</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="176" y="1013">path_output</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="147" y="1046">-</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="176" y="1046">file_name</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="936" y="762" width="5" height="105" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="756" y="862" width="185" height="5" />
+	<rect fill="#90ccff" stroke="black" stroke-width="1" stroke-opacity="1" x="750" y="756" width="186" height="106" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="843" y="778">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="843" y="815">Item_work</text>
+	<line stroke="black" stroke-opacity="1" x1="750" y1="830" x2="936" y2="830" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="994" y="536" width="5" height="105" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="814" y="636" width="185" height="5" />
+	<rect fill="#90ccff" stroke="black" stroke-width="1" stroke-opacity="1" x="808" y="530" width="186" height="106" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="901" y="552">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="901" y="589">Context_rule</text>
+	<line stroke="black" stroke-opacity="1" x1="808" y1="604" x2="994" y2="604" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="631" y="33" width="5" height="110" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="126" y="138" width="510" height="5" />
+	<rect fill="#90ccff" stroke="black" stroke-width="1" stroke-opacity="1" x="120" y="27" width="511" height="111" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="376" y="49">Builder_plans</text>
+	<line stroke="black" stroke-opacity="1" x1="120" y1="64" x2="631" y2="64" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="128" y="86">-</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="157" y="86">init_order_ag</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="138" y1="1016" x2="12" y2="1016" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1104" y1="45" x2="1098" y2="39" />
+	<line stroke="black" stroke-opacity="1" x1="1104" y1="45" x2="1098" y2="51" />
+	<line stroke="black" stroke-opacity="1" x1="637" y1="45" x2="1104" y2="45" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="637,45 643,39 649,45 643,51" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="119" y1="66" x2="113" y2="60" />
+	<line stroke="black" stroke-opacity="1" x1="119" y1="66" x2="113" y2="72" />
+	<line stroke="black" stroke-opacity="1" x1="12" y1="66" x2="119" y2="66" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="12" y1="1016" x2="12" y2="66" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1207" y="955" width="5" height="124" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="858" y="1074" width="354" height="5" />
+	<rect fill="#ffc0ff" stroke="black" stroke-width="1" stroke-opacity="1" x="852" y="949" width="355" height="125" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1030" y="971">Builder_visit_sequences</text>
+	<line stroke="black" stroke-opacity="1" x1="852" y1="986" x2="1207" y2="986" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="364" y="244" width="5" height="105" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="164" y="344" width="205" height="5" />
+	<rect fill="#90ccff" stroke="black" stroke-width="1" stroke-opacity="1" x="158" y="238" width="206" height="106" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="261" y="260">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="261" y="297">Order_eval_eq</text>
+	<line stroke="black" stroke-opacity="1" x1="158" y1="312" x2="364" y2="312" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="994" y="244" width="5" height="105" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="814" y="344" width="185" height="5" />
+	<rect fill="#90ccff" stroke="black" stroke-width="1" stroke-opacity="1" x="808" y="238" width="186" height="106" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="901" y="260">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="901" y="297">Order_rule</text>
+	<line stroke="black" stroke-opacity="1" x1="808" y1="312" x2="994" y2="312" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="266" y1="144" x2="266" y2="222" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="266,144 272,150 266,156 260,150" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="692" y="188">&lt;&lt;vector&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="637" y1="140" x2="904" y2="140" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="637,140 643,134 649,140 643,146" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="637" y1="86" x2="643" y2="92" />
+	<line stroke="black" stroke-opacity="1" x1="637" y1="86" x2="643" y2="80" />
+	<line stroke="black" stroke-opacity="1" x1="1032" y1="86" x2="637" y2="86" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="851" y1="1017" x2="845" y2="1011" />
+	<line stroke="black" stroke-opacity="1" x1="851" y1="1017" x2="845" y2="1023" />
+	<line stroke="black" stroke-opacity="1" x1="652" y1="1017" x2="851" y2="1017" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="326" y="184">&lt;&lt;vector&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1032" y1="948" x2="1032" y2="86" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="64" y="198">&lt;&lt;vector&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="240" y1="237" x2="246" y2="231" />
+	<line stroke="black" stroke-opacity="1" x1="240" y1="237" x2="234" y2="231" />
+	<line stroke="black" stroke-opacity="1" x1="240" y1="144" x2="240" y2="237" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="240,144 246,150 240,156 234,150" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="904" y1="237" x2="910" y2="231" />
+	<line stroke="black" stroke-opacity="1" x1="904" y1="237" x2="898" y2="231" />
+	<line stroke="black" stroke-opacity="1" x1="904" y1="140" x2="904" y2="237" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="266" y1="222" x2="432" y2="222" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="432" y1="222" x2="432" y2="282" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="295" y="557" width="5" height="159" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="137" y="711" width="163" height="5" />
+	<rect fill="#90ccff" stroke="black" stroke-width="1" stroke-opacity="1" x="131" y="551" width="164" height="160" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="213" y="573">&lt;&lt;struct&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="213" y="610">k_plan</text>
+	<line stroke="black" stroke-opacity="1" x1="131" y1="625" x2="295" y2="625" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="139" y="647">+</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="168" y="647">id_plan</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="139" y="680">+</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="168" y="680">plan</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1601" y="971" width="5" height="105" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1421" y="1071" width="185" height="5" />
+	<rect fill="#ffc0ff" stroke="black" stroke-width="1" stroke-opacity="1" x="1415" y="965" width="186" height="106" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="1508" y="987">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1508" y="1024">Visit_seq</text>
+	<line stroke="black" stroke-opacity="1" x1="1415" y1="1039" x2="1601" y2="1039" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="979" y="400" width="5" height="125" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="821" y="520" width="163" height="5" />
+	<rect fill="#90ccff" stroke="black" stroke-width="1" stroke-opacity="1" x="815" y="394" width="164" height="126" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="897" y="416">&lt;&lt;struct&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="897" y="453">c_rule</text>
+	<line stroke="black" stroke-opacity="1" x1="815" y1="468" x2="979" y2="468" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="823" y="490">+</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="852" y="490">father</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="370" y1="282" x2="376" y2="288" />
+	<line stroke="black" stroke-opacity="1" x1="370" y1="282" x2="376" y2="276" />
+	<line stroke="black" stroke-opacity="1" x1="432" y1="282" x2="370" y2="282" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="903" y1="350" x2="897" y2="356" />
+	<line stroke="black" stroke-opacity="1" x1="903" y1="350" x2="909" y2="356" />
+	<line stroke="black" stroke-opacity="1" x1="903" y1="393" x2="903" y2="350" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="903,393 897,387 903,381 909,387" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1414" y1="1020" x2="1408" y2="1014" />
+	<line stroke="black" stroke-opacity="1" x1="1414" y1="1020" x2="1408" y2="1026" />
+	<line stroke="black" stroke-opacity="1" x1="1213" y1="1020" x2="1414" y2="1020" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="1213,1020 1219,1014 1225,1020 1219,1026" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1249" y="969">&lt;&lt;vector&gt;&gt;</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="304" y="436" width="5" height="105" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="124" y="536" width="185" height="5" />
+	<rect fill="#90ccff" stroke="black" stroke-width="1" stroke-opacity="1" x="118" y="430" width="186" height="106" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="211" y="452">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="211" y="489">Key_plan</text>
+	<line stroke="black" stroke-opacity="1" x1="118" y1="504" x2="304" y2="504" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="117" y1="480" x2="111" y2="474" />
+	<line stroke="black" stroke-opacity="1" x1="117" y1="480" x2="111" y2="486" />
+	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="44" y1="480" x2="117" y2="480" />
+</g>
+<g>
+	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="44" y1="102" x2="44" y2="480" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="552" y1="144" x2="552" y2="368" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="552,144 558,150 552,156 546,150" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="552" y1="368" x2="162" y2="368" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="162" y1="429" x2="168" y2="423" />
+	<line stroke="black" stroke-opacity="1" x1="162" y1="429" x2="156" y2="423" />
+	<line stroke="black" stroke-opacity="1" x1="162" y1="368" x2="162" y2="429" />
+</g>
+<g>
+	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="122" y1="101" x2="122" y2="102" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="750" y="450" width="5" height="105" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="514" y="550" width="241" height="5" />
+	<rect fill="#90ccff" stroke="black" stroke-width="1" stroke-opacity="1" x="508" y="444" width="242" height="106" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="629" y="466">&lt;&lt;typedef&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="629" y="503">Key_plan_project</text>
+	<line stroke="black" stroke-opacity="1" x1="508" y1="518" x2="750" y2="518" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="616" y="398">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="598" y1="443" x2="604" y2="437" />
+	<line stroke="black" stroke-opacity="1" x1="598" y1="443" x2="592" y2="437" />
+	<line stroke="black" stroke-opacity="1" x1="598" y1="144" x2="598" y2="443" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="598,144 604,150 598,156 592,150" />
+</g>
+<g>
+	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="122" y1="102" x2="44" y2="102" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="753" y="570" width="5" height="125" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="515" y="690" width="243" height="5" />
+	<rect fill="#90ccff" stroke="black" stroke-width="1" stroke-opacity="1" x="509" y="564" width="244" height="126" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="631" y="586">&lt;&lt;struct&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="631" y="623">k_p_project</text>
+	<line stroke="black" stroke-opacity="1" x1="509" y1="638" x2="753" y2="638" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="517" y="660">+</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="546" y="660">index_ocurrence</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="310" y1="523" x2="313" y2="530" />
+	<line stroke="black" stroke-opacity="1" x1="310" y1="523" x2="317" y2="519" />
+	<line stroke="black" stroke-opacity="1" x1="508" y1="587" x2="310" y2="523" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="508,587 500,590 496,583 504,579" />
+</g>
+</svg>

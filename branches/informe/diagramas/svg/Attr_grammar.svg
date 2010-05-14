@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Bouml (http://bouml.free.fr/) -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1441" height="715" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="881" y="49" width="5" height="126" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="672" y="170" width="214" height="5" />
+	<rect fill="#ffa858" stroke="black" stroke-width="1" stroke-opacity="1" x="666" y="43" width="215" height="127" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="774" y="65">Attr_grammar</text>
+	<line stroke="black" stroke-opacity="1" x1="666" y1="80" x2="881" y2="80" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="674" y="102">-</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="703" y="102">count_eqs</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="578" y="285" width="5" height="155" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="386" y="435" width="197" height="5" />
+	<rect fill="#ffc0c0" stroke="black" stroke-width="1" stroke-opacity="1" x="380" y="279" width="198" height="156" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="479" y="301">Sort</text>
+	<line stroke="black" stroke-opacity="1" x1="380" y1="316" x2="578" y2="316" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="388" y="338">-</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="417" y="338">s_name</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="388" y="371">-</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="417" y="371">s_ins</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="388" y="404">-</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="417" y="404">s_type_basic</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="418" y="182">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="665" y1="158" x2="486" y2="242" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="665,158 662,165 654,163 657,155" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="486" y1="278" x2="492" y2="272" />
+	<line stroke="black" stroke-opacity="1" x1="486" y1="278" x2="480" y2="272" />
+	<line stroke="black" stroke-opacity="1" x1="486" y1="242" x2="486" y2="278" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="442" y="208">ag_sort</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="321" y="488">f_domain</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="291" y="242">f_image</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="72" y="256">ag_func</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="890" y="111">ag_symb_terminals</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="899" y="44">ag_symb_non_terminals</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="827" y="213">ag_initial_symb</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="565" y="458">a_sort_type</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="861" y="454">symb_attrs</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="658" y="264">ag_attr</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1143" y="242">r_left_symbol</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1105" y="447">r_right_side</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1304" y="202">ag_rule</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1326" y="484">r_eqs</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="780" y="492">a_mod_type</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="168" y="490">f_mod</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="8" y="490">f_assoc</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1079" y="490">symb_type</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="295" y="285" width="5" height="155" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="101" y="435" width="199" height="5" />
+	<rect fill="#dcdcdc" stroke="black" stroke-width="1" stroke-opacity="1" x="95" y="279" width="200" height="156" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="195" y="301">Function</text>
+	<line stroke="black" stroke-opacity="1" x1="95" y1="316" x2="295" y2="316" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="103" y="338">-</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="132" y="338">f_name</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="103" y="371">-</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="132" y="371">f_prec</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="103" y="404">-</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="132" y="404">f_is_operator</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1162" y="284" width="5" height="121" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="978" y="400" width="189" height="5" />
+	<rect fill="#c0ffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="972" y="278" width="190" height="122" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1067" y="300">Symbol</text>
+	<line stroke="black" stroke-opacity="1" x1="972" y1="315" x2="1162" y2="315" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="980" y="337">-</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1009" y="337">symb_name</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="980" y="370">-</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1009" y="370">symb_id</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="283" y1="441" x2="283" y2="472" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="283" y1="472" x2="480" y2="472" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="300" y="464">&lt;&lt;vector&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="480" y1="441" x2="474" y2="447" />
+	<line stroke="black" stroke-opacity="1" x1="480" y1="441" x2="486" y2="447" />
+	<line stroke="black" stroke-opacity="1" x1="480" y1="472" x2="480" y2="441" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="246" y1="278" x2="246" y2="256" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="246" y1="256" x2="416" y2="256" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="416" y1="278" x2="422" y2="272" />
+	<line stroke="black" stroke-opacity="1" x1="416" y1="278" x2="410" y2="272" />
+	<line stroke="black" stroke-opacity="1" x1="416" y1="256" x2="416" y2="278" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="48" y="224">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="665" y1="123" x2="186" y2="192" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="665,123 659,129 653,124 658,117" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="186" y1="278" x2="192" y2="272" />
+	<line stroke="black" stroke-opacity="1" x1="186" y1="278" x2="180" y2="272" />
+	<line stroke="black" stroke-opacity="1" x1="186" y1="192" x2="186" y2="278" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="936" y="86">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="887" y1="125" x2="1066" y2="125" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="887,125 893,119 899,125 893,131" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1066" y1="277" x2="1072" y2="271" />
+	<line stroke="black" stroke-opacity="1" x1="1066" y1="277" x2="1060" y2="271" />
+	<line stroke="black" stroke-opacity="1" x1="1066" y1="125" x2="1066" y2="277" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1282" y="176">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="887" y1="60" x2="1135" y2="60" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="887,60 893,54 899,60 893,66" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1135" y1="277" x2="1141" y2="271" />
+	<line stroke="black" stroke-opacity="1" x1="1135" y1="277" x2="1129" y2="271" />
+	<line stroke="black" stroke-opacity="1" x1="1135" y1="60" x2="1135" y2="277" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="820" y1="176" x2="820" y2="228" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="820" y1="228" x2="1006" y2="228" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1006" y1="277" x2="1012" y2="271" />
+	<line stroke="black" stroke-opacity="1" x1="1006" y1="277" x2="1000" y2="271" />
+	<line stroke="black" stroke-opacity="1" x1="1006" y1="228" x2="1006" y2="277" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="907" y="284" width="5" height="121" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="641" y="400" width="271" height="5" />
+	<rect fill="#90ccff" stroke="black" stroke-width="1" stroke-opacity="1" x="635" y="278" width="272" height="122" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="771" y="300">Attribute</text>
+	<line stroke="black" stroke-opacity="1" x1="635" y1="315" x2="907" y2="315" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="643" y="337">-</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="672" y="337">a_name</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="643" y="370">-</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="672" y="370">a_member_symbol</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1348" y="284" width="5" height="121" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1220" y="400" width="133" height="5" />
+	<rect fill="#ffeb60" stroke="black" stroke-width="1" stroke-opacity="1" x="1214" y="278" width="134" height="122" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1281" y="300">Rule</text>
+	<line stroke="black" stroke-opacity="1" x1="1214" y1="315" x2="1348" y2="315" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="1222" y="337">-</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1251" y="337">r_id</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="1222" y="370">-</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1251" y="370">r_offset</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="401" y="511" width="5" height="191" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="211" y="697" width="195" height="5" />
+	<rect fill="#dcdcdc" stroke="black" stroke-width="1" stroke-opacity="1" x="205" y="505" width="196" height="192" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="303" y="527">&lt;&lt;enum&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="303" y="564">oper_assoc</text>
+	<line stroke="black" stroke-opacity="1" x1="205" y1="579" x2="401" y2="579" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="213" y="601">+</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="242" y="601">k_left</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="213" y="634">+</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="242" y="634">k_right</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="213" y="667">+</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="242" y="667">k_non_assoc</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1183" y="511" width="5" height="159" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="961" y="665" width="227" height="5" />
+	<rect fill="#c0ffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="955" y="505" width="228" height="160" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="1069" y="527">&lt;&lt;enum&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1069" y="564">symbol_type</text>
+	<line stroke="black" stroke-opacity="1" x1="955" y1="579" x2="1183" y2="579" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="963" y="601">+</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="992" y="601">k_terminal</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="963" y="634">+</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="992" y="634">k_non_terminal</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="726" y1="406" x2="726" y2="470" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="726" y1="470" x2="548" y2="470" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="548" y1="441" x2="542" y2="447" />
+	<line stroke="black" stroke-opacity="1" x1="548" y1="441" x2="554" y2="447" />
+	<line stroke="black" stroke-opacity="1" x1="548" y1="470" x2="548" y2="441" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1033" y1="406" x2="1033" y2="435" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1096" y="424">&lt;&lt;vector&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1033" y1="435" x2="838" y2="435" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="838" y1="406" x2="832" y2="412" />
+	<line stroke="black" stroke-opacity="1" x1="838" y1="406" x2="844" y2="412" />
+	<line stroke="black" stroke-opacity="1" x1="838" y1="435" x2="838" y2="406" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="974" y="20">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="775" y1="277" x2="781" y2="271" />
+	<line stroke="black" stroke-opacity="1" x1="775" y1="277" x2="769" y2="271" />
+	<line stroke="black" stroke-opacity="1" x1="775" y1="176" x2="775" y2="277" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="775,176 781,182 775,188 769,182" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1275" y1="277" x2="1275" y2="257" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1275" y1="257" x2="1150" y2="257" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1150" y1="277" x2="1156" y2="271" />
+	<line stroke="black" stroke-opacity="1" x1="1150" y1="277" x2="1144" y2="271" />
+	<line stroke="black" stroke-opacity="1" x1="1150" y1="257" x2="1150" y2="277" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="853" y="427">&lt;&lt;vector&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1258" y1="406" x2="1258" y2="431" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1258" y1="431" x2="1098" y2="431" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1098" y1="406" x2="1092" y2="412" />
+	<line stroke="black" stroke-opacity="1" x1="1098" y1="406" x2="1104" y2="412" />
+	<line stroke="black" stroke-opacity="1" x1="1098" y1="431" x2="1098" y2="406" />
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="632" y="236">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="887" y1="153" x2="1324" y2="218" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="887,153 893,147 898,154 892,159" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1324" y1="277" x2="1330" y2="271" />
+	<line stroke="black" stroke-opacity="1" x1="1324" y1="277" x2="1318" y2="271" />
+	<line stroke="black" stroke-opacity="1" x1="1324" y1="218" x2="1324" y2="277" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="259" y1="504" x2="261" y2="496" />
+	<line stroke="black" stroke-opacity="1" x1="259" y1="504" x2="251" y2="501" />
+	<line stroke="black" stroke-opacity="1" x1="230" y1="441" x2="259" y2="504" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="230,441 237,443 235,451 227,448" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1070" y1="504" x2="1076" y2="498" />
+	<line stroke="black" stroke-opacity="1" x1="1070" y1="504" x2="1064" y2="498" />
+	<line stroke="black" stroke-opacity="1" x1="1070" y1="406" x2="1070" y2="504" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="1070,406 1076,412 1070,418 1064,412" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1359" y="510" width="5" height="121" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1209" y="626" width="155" height="5" />
+	<rect fill="#ffeb60" stroke="black" stroke-width="1" stroke-opacity="1" x="1203" y="504" width="156" height="122" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="1281" y="526">Equation</text>
+	<line stroke="black" stroke-opacity="1" x1="1203" y1="541" x2="1359" y2="541" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="1211" y="563">-</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1240" y="563">eq_id</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="1211" y="596">-</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1240" y="596">count_ref</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="869" y="511" width="5" height="159" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="679" y="665" width="195" height="5" />
+	<rect fill="#90ccff" stroke="black" stroke-width="1" stroke-opacity="1" x="673" y="505" width="196" height="160" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="771" y="527">&lt;&lt;enum&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="771" y="564">type_attr</text>
+	<line stroke="black" stroke-opacity="1" x1="673" y1="579" x2="869" y2="579" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="681" y="601">+</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="710" y="601">k_inherit</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="681" y="634">+</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="710" y="634">k_synthetize</text>
+</g>
+<g>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="1294" y="462">&lt;&lt;map&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1284" y1="503" x2="1290" y2="497" />
+	<line stroke="black" stroke-opacity="1" x1="1284" y1="503" x2="1278" y2="497" />
+	<line stroke="black" stroke-opacity="1" x1="1284" y1="406" x2="1284" y2="503" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="1284,406 1290,412 1284,418 1278,412" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="774" y1="504" x2="780" y2="498" />
+	<line stroke="black" stroke-opacity="1" x1="774" y1="504" x2="768" y2="498" />
+	<line stroke="black" stroke-opacity="1" x1="774" y1="406" x2="774" y2="504" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="774,406 780,412 774,418 768,412" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="173" y="511" width="5" height="191" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="15" y="697" width="163" height="5" />
+	<rect fill="#dcdcdc" stroke="black" stroke-width="1" stroke-opacity="1" x="9" y="505" width="164" height="192" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="91" y="527">&lt;&lt;enum&gt;&gt;</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="91" y="564">oper_mode</text>
+	<line stroke="black" stroke-opacity="1" x1="9" y1="579" x2="173" y2="579" />
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="17" y="601">+</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="46" y="601">k_prefix</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="17" y="634">+</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="46" y="634">k_infix</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="17" y="667">+</text>
+	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="46" y="667">k_postfix</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="104" y1="504" x2="112" y2="502" />
+	<line stroke="black" stroke-opacity="1" x1="104" y1="504" x2="102" y2="495" />
+	<line stroke="black" stroke-opacity="1" x1="149" y1="441" x2="104" y2="504" />
+	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="149,441 150,449 142,450 140,442" />
+</g>
+</svg>
