@@ -1,13 +1,13 @@
 /**
   *  \file      Expr_function.h
-  *  \brief     Function element of an Attribute Syntax Tree (AST).
+  *  \brief     Function element of an Expression.
   *  \date      21/12/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-#ifndef AST_FUNCTION_H_
-#define AST_FUNCTION_H_
+#ifndef EXPR_FUNCTION_H_
+#define EXPR_FUNCTION_H_
 
 #include "Expr_node.h"
 #include "../Attr_grammar/Function.h"
@@ -169,4 +169,4 @@ class Expr_function: public Expr_node
 
 } /* end genevalmag */
 
-#endif /* AST_FUNCTION_H_ */
+#endif /* EXPR_FUNCTION_H_ */

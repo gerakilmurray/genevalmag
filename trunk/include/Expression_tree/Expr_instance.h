@@ -1,13 +1,13 @@
 /**
   *  \file      Expr_instance.h
-  *  \brief     Instance element of an Attribute Syntax Tree (AST).
+  *  \brief     Instance element of an Expression.
   *  \date      21/12/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-#ifndef AST_INSTANCE_H_
-#define AST_INSTANCE_H_
+#ifndef EXPR_INSTANCE_H_
+#define EXPR_INSTANCE_H_
 
 #include "Expr_leaf.h"
 
@@ -139,4 +139,4 @@ class Expr_instance: public Expr_leaf
 
 } /* end genevalmag */
 
-#endif /* AST_INSTANCE_H_ */
+#endif /* EXPR_INSTANCE_H_ */

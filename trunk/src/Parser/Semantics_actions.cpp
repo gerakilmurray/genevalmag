@@ -437,7 +437,7 @@ void push_mark(char name)
 }
 
 /**
-  * Creation AST nodes.
+  * Creation expression nodes.
   */
 
 void create_literal_node(const iterator_t str, const iterator_t end)
