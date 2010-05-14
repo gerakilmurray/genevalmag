@@ -93,7 +93,7 @@ real\_p    & Número flotante 32 bits\\ \hline
 eps\_p     & Cadena vacía (épsilon)\\ \hline
 end\_p     & Carácter de fin de archivo (EOF)\\ \hline
 \end{tabular}
-\caption{\label{parsers}Parsers predefinidos de \spirit\ utilizados} 
+\caption{\label{parsers} Parsers predefinidos de \spirit\ utilizados} 
 \end{figure}
 
 Además posee varias directivas que modifican el comportamiento de los parsers, encapsulándose en una expresión definida por el usuario (ver tabla \ref{directivas}).
@@ -109,7 +109,7 @@ as\_lower\_d & Convierte en minúscula lo aceptado por la expresión\\ \hline
                             & pruebe todas las alternativas posibles y elija la secuen-\\
                             & cia más larga aceptada \\ \hline
 \end{tabular}
-\caption{\label{directivas}Directivas de \spirit\ aplicadas}
+\caption{\label{directivas} Directivas de \spirit\ aplicadas}
 \end{figure}
 
 Para el manejo de los símbolos válidos dentro de la definición de la gramática, \spirit\ soporta nativamente, el concepto de ``Tablas de símbolos''. Lo que permite registrar de manera dinámica nuevos símbolos, en particular dentro de nuestra herramienta nos ayudó a manejar los conjuntos de nombres válidos para los \texttt{sorts}, los símbolos no terminales permitidos en las ecuaciones, entre otros usos.
@@ -353,7 +353,17 @@ r_right_rule = +( r_ident[&create_new_non_terminal][st_non_terminal.add]
 r_terminal = lexeme_d[ch_p('\'')>>r_string_lit>>ch_p('\'')];
 \end{lstlisting}
 
-El mismo estará delimitado por las cadenas \texttt{``compute}'' y \texttt{``end}'', en su interior se aceptará una lista con al menos \textbf{una} ecuación. Las cuales están compuestas por una instancia de atributo, como ``\texttt{l-value}'', el carácter ``\texttt{=}'' y una expresión como ``\texttt{r-value}''.
+El mismo estará delimitado por las cadenas \texttt{``compute}'' y \texttt{``end}'', en su interior se aceptará una lista con al menos \textbf{una} ecuación.
+
+Dentro de la definición sólo se podrán utilizar instancias de atributos de los símbolos no terminales que aparecen en la declaración de la regla. Además se debe especificar el índice de ocurrencia, el cual debe cumplir las siguientes condiciones:
+
+\begin{enumerate}
+\item Debe ser positivo
+\item El símbolo de la izquierda de la regla tiene el índice 0.
+\item Los símbolos no terminales de la parte derecha de la regla, están numerados de izquierda a derecha arrancando en 0 para cada símbolo diferente.
+\end{enumerate}
+
+Cada ecuación tiene una instancia de atributo, como ``\texttt{l-value}'', el carácter ``\texttt{=}'' y una expresión como ``\texttt{r-value}''.
 
 \begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
 r_compute_eq = str_p("compute")>>
@@ -366,7 +376,7 @@ r_equation = r_instance[&create_equation]>>
              ';';
 \end{lstlisting}
 
-Las expresiones aceptadas por la herramienta, pueden ser de cualquier tipo, es decir, se utilizó la gramática de expresiones ambigüas que figura en la mayoría de los libros sobre este tema.
+La herramienta acepta cualquier tipo de expresión, ya que se permite que se definan nuevos operadores y funciones según las necesidades de la gramática para la cual se generará el evaluador. Se utilizó la gramática de expresiones ambigüas que figura en la mayoría de los libros de análisis de lenguajes.
 
 \begin{lstlisting}[backgroundcolor=\color{white}]
 E := E op E
@@ -413,6 +423,43 @@ literal := real
          | bool
 \end{lstlisting}
 
+Aprovechando las funcionalidades de \spirit, se resolvió una ambigüedad al momento de parser un número entero y un flotante, exigiendo que se quede con la cadena más larga que pudiese coincidir en la gramática. Para ello se codificó lo siguiente:
+
+\begin{lstlisting}[backgroundcolor=\color{white}]
+longest_d [ real_p | int_p ]
+\end{lstlisting}
+
+Utilizando la directiva \texttt{longest\_d} sobre los dos parsers predefinidos de dichos valores numéricos.
+
+La mayori
+
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+/*
+ * Expression's Grammar non ambiguos based in
+ *
+ *  E = T *(<op_infix> T)
+ *  T = F *(<op_postfix>)
+ *    | (<op_prefix>) T
+ *  F = (E)
+ *    | function
+ *    | literal
+ *    | instance
+ */
+r_expression = r_expr_prime>>*(r_op_infix_st[&create_operator][&create_func_node]>>
+               r_expr_prime[&create_root_infix_node]);
+
+r_expr_prime = r_expr_prime_prime>>
+               *(r_op_postfix_st[&create_operator][&create_func_node][&create_root_postfix_node])
+             | r_op_prefix_st[&create_operator][&create_func_node]>>
+               r_expr_prime[&create_root_prefix_node]
+               ;
+
+r_expr_prime_prime  = ch_p('(')[&increment_level]>>r_expression>>ch_p(')')[&decrement_level]
+                    | r_function[&create_root_function_node]
+                    | r_literal[&create_literal_node]
+                    | r_instance[&create_instance_node]
+                    ;
+\end{lstlisting}
 
 \subsection*{Observaciones}
 
