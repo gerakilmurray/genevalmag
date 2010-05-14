@@ -434,7 +434,7 @@ La especificación permite agregar comentarios. Para una mejor familiarización 
 
 En el apéndice \ref{append:agwuuyang} observamos uno de los casos de prueba desarrollado para la fase de testing de \maggen. El mismo es presentado en pseudocódigo y luego escrito en el lenguaje de especificación. 
 
-Una característica que motivó el desarrollo de este ejemplo es que se trata de una gramática MAG pero no ANCAG. Además, él mismo, es un caso de estudio analizado en una de las principales bases teóricas que han sido usadas para el desarrollo de \maggen[referencia bibliográfica paper]. 
+Una característica que motivó el desarrollo de este ejemplo es que se trata de una gramática MAG pero no ANCAG. Además, el mismo, es un caso de estudio analizado en una de las principales bases teóricas que han sido usadas para el desarrollo de \maggen[referencia bibliográfica paper]. 
 
 En la presentación del ejemplo en el lenguaje de especificación, se observa en principio (línea 1 a 7) un bloque de comentario y luego los bloques que definen la gramática como se ha analizado en las secciones anteriores; bloque semántico de la línea 8 a 13 luego el de atributos y a partir de la línea 25 el bloque de reglas con sus respectivas ecuaciones.
 
@@ -475,49 +475,102 @@ La linea 17 presenta un error de sintaxis (falta de paréntesis), entonces \magg
 Notar que, la linea y columna donde se indica el error corresponde al inicio de la zona donde la interpretación fue fallida. Podría suceder en varios casos que el error no se detecte específicamente en la linea y columna que se indica, entonces lo conveniente es buscar el error a partir del punto especificado. Para este caso particular, se indica linea:17 y columna:5, este punto se encuentra sobre \texttt{op}, pero el error se observa seguido de \texttt{infix}.
 
 \subsection*{Representación interna}
-Las estructuras creadas para la representación interna de la gramática se encuentran dentro del paquete \texttt{Att\_grammar} de \maggen. Detalles de implementación sobre este paquete serán tratando en la sección XXX (imp). Ahora nos encargaremos de algunas consideraciones con respecto al diseño.
+Las estructuras creadas para la representación interna de la gramática se encuentran dentro de los paquetes \texttt{Attr\_grammar} y \texttt{Expression\_tree} de \maggen. Detalles de implementación sobre estos paquete serán tratando en la sección XXX (imp). 
 
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: XXXXXXXXXXXXXX XXXXXXXXXX XXXXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXXX XXXXXXXXXX XXXXXXXXX.
+Ahora nos encargaremos de algunas consideraciones respecto del diseño. 
+\texttt{Expression\_tree} agrupa módulos para la representación de las expresiones de las ecuaciones y \texttt{Att\_grammar}, encapsula los demas componentes de la gramática.
+\begin{figure}\centering
+\includegraphics[width=450pt,height=180pt]{Disen.png}
+\caption{\label{fig:disen}Interacción de Attr\_grammar en \maggen}
+\end{figure}
+
+El funcionamiento de \maggen\ esta dado por una instancia de la estructura llamada \texttt{Attr\_grammar}, la cual encapsula toda la información de la gramática de atributos parseada. La misma contiene los elementos que se agrupan en los paquetes anteriormente nombrados y es la que desencadena el calculo de planes, secuencias de visita y, por ultimo, la generación de código.  
+En la figura \ref{fig:disen} se presenta un diagrama que muestra la interacción de esta estructura en el funcionamiento de \maggen.
+
+Analicemos ahora el diseño de los paquetes nombrado arriba, y con ellos la estructura \texttt{Attr\_grammar}.  El siguiente diagrama muestra la representacion interna de una gramatica dentro de \maggen:
+
 
 
 \subsection*{Chequeos}
 
-El conjuntos de chequeos que se realizan sobre la gramática de entrada a \maggen, están directamente relacionados con el concepto de gramática bien definida analizado en el cap XX. Además, se aplican una serie de chequeos extras para evitar cálculos erróneos en las etapas posteriores. 
+El conjuntos de chequeos que se realizan sobre la gramática de entrada a \maggen, están directamente relacionados con el concepto de gramática bien definida analizado en el cap XX. Además, se aplican una serie de chequeos extras para evitar cálculos inconsistentes en las etapas posteriores. 
 
-Los chequeos realizados son clasificados en sintácticos y semánticos, los primeros, en su mayoría, son realizados durante el parser, en cambio, los chequeos semánticos se realizan luego del parser, aplicando escaneos específicos sobre la gramática. De estos últimos nos encargaremos en esta sección.
-El modulo encargado de realizar estos chequeos, se ubica en el paquete \texttt{Parser} de \maggen\ y se denomina \texttt{Semantics\_checks}.
+Los chequeos realizados son clasificados en sintácticos y semánticos, los primeros, en su mayoría, son realizados durante el parser, en cambio, los chequeos semánticos se realizan luego del parser de cada regla, aplicando escaneos específicos. De estos últimos nos encargaremos en esta sección.
+El modulo que agrupa estos chequeos, se ubica en el paquete \texttt{Parser} de \maggen\ y se denomina \texttt{Semantics\_checks}.
 
 A continuación se detallan dichos chequeos:
 
 \begin{description}
-\item [Precedencia] El chequeo de precedencia corresponde con preservar la precedencia definida de cada operador. Dicho chequeo es realizado sobre cada una de las ecuaciones definidas en la gramática de entrada. Por ejemplo:\\ Dada la siguiente ecuacion: 
+\item [Precedencia] El chequeo de precedencia consiste en preservar la precedencia definida de cada operador. Dicho chequeo, es realizado sobre cada una de las ecuaciones definidas en la gramática. Por ejemplo:\\ Dada la siguiente ecuacion: 
 \begin{center}
  \fbox{ E[0].valor = E[1].valor + E[2].valor * E[2].valor }
 \end{center}
-La interpretación de la ecuacion esta dada por la definición de la precedencia de los operadores \texttt{+} y \texttt{*}(se asume que los dos operadores son infijos y están bien usado). Si tomamos a \texttt{*} con mayor precedencia que \texttt{+}, la interpretación implícita es:
+Su interpretación está dada por la definición de la precedencia de los operadores \texttt{+} y \texttt{*}(se asume que los dos operadores son infijos y están bien usado). Si tomamos \texttt{*} con mayor precedencia que \texttt{+}, \maggen\ interpreta implícitamente como si la ecuacion tuviera paréntesis:
 \begin{center}
  \fbox{ E[0].valor = E[1].valor + (E[2].valor * E[2].valor) }
 \end{center}
 
-El uso de paréntesis en las expresiones define explícitamente la prioridad de los operadores, por lo que, los chequeos asumen esa precedencia entre los operadores. Por ejemplo en la ecuacion vista arriba, si la definimos utilizando paréntesis, es decir:\  
+El uso de paréntesis en las expresiones define explícitamente la prioridad de los operadores, por lo que, \maggen\ asume esa precedencia. Por ejemplo en la ecuación vista arriba, si la definimos utilizando paréntesis, es decir:\  
  \fbox{E[0].valor = (E[1].valor + E[2].valor) * E[2].valor}\ la interpretación es tomada en ese sentido.
 
-\item [Asociatividad] El chequeo de asociatividad realiza un análisis sobre las expresiones de las ecuaciones para asegurar la asociatividad definida del operador. Por ejemplo, si se ha definido un operador \texttt{non-assoc}, se espera que el uso del mismo sea consistente con esa definición, es decir, no se considere una posible asociación del operador. 
+\item [Asociatividad] El chequeo de asociatividad realiza un análisis sobre las expresiones de las ecuaciones, para asegurar la asociatividad definida de cada operador. Por ejemplo, si se ha definido un operador \texttt{non-assoc}, se espera que el uso del mismo sea consistente con esa definición, es decir, no se considere una posible asociación del mismo. 
 
-Al igual que para la precedencia, la asociatividad asume las mismas condiciones cuando la expresión utiliza paréntesis.
+Cuando se utilizan paréntesis en la expresión, \maggen\ asume la asociatividad que se especifica explícitamente.
 
-\item [Alcanzabilidad] Es una característica importante a tener en cuenta sobre los símbolos de la gramática. Este chequeo realiza un análisis sobre la totalidad de las reglas en busca de símbolos no terminales no alcanzables desde el símbolo inicial. Este caso no es considerado error fatal en \maggen, sino como \textit{warning}.
+\item [Alcanzabilidad] Es una característica importante a tener en cuenta sobre los símbolos de la gramática. Este chequeo, realiza un análisis sobre la totalidad de las reglas en busca de símbolos no terminales no alcanzables desde el símbolo inicial. Este caso no es considerado error fatal en \maggen, sino como \textit{warning}.
 \item [Condiciones de AG] Este chequeo tiene en cuenta un conjunto de condiciones que debe cumplir la gramática. Ellos son:
 \begin{itemize}
 \item Cada regla debe definir todos los atributos sintetizados del símbolo de la parte izquierda.
 \item Cada regla debe definir todos los atributos heredados de los símbolos de la parte derecha.
 \item Cada regla sólo define los atributos de los símbolos que participan en dicha regla.
 \item En caso de redefinición alguna instancia en la regla, la misma es ignorada.
-\item Los índices de las instancias deben ser consistente con la cantidad de apariciones del símbolo, en la regla. Ejemplo: \\En la siguiente regla:\ \fbox{ S ::= S T }\ los índices posibles de las instancias son \texttt{0} y \texttt{1} para el símbolo ``S'' y \texttt{0} para el símbolo ``T''. 
+\item Los índices de las instancias deben ser consistente con la cantidad de apariciones del símbolo, en la regla. Ejemplo: \\En la siguiente regla:\ \fbox{ S ::= S T }\ los índices posibles de las instancias son \texttt{0} y \texttt{1} para el símbolo ``S'' y \texttt{0} para el símbolo ``T''.
+\item La gramática debe respetar las condiciones exigidas para una gramática extendida. 
 \end{itemize}
 \end{description}
 
+\section{Construcción de grafos y aplicación de algoritmos de computo de planes y secuencias de visita}
+En la figura \ref{fig:disen} pudimos analizar el funcionamiento de \maggen, teniendo en cuenta la estrucura \texttt{Attr\_grammar}, en esta seccion abordaremos detalles en el diseño del paquete \texttt{Builder}, especificamente la construcción de grafos, de planes y de secuancias de visita. Un detalle a tener en cuenta es que, a partir de esta etapa,  todas las manipulaciones son realizadas sobre la seccion de ecuacion de cada reglas.
 
-\section{Disen\~o del evaluador est\'atico generado}
+\subsection*{Construcción de grafos}
+Detalles de implementación seran analizando en la seccion XX, ahora tomaremos un par de minutos para mencionar algunas consideracion con respecto al funcionamiento de los grafos en \maggen.
 
-bla bla
+
+La construcción de grafos se realiza en el modulo \texttt{builder\_graphs}. \maggen\ crea 4 tipos de grafos:
+\begin{figure}\centering
+ \includegraphics[width=200pt,height=77pt]{graph/dp.png}
+\caption{\label{dpgraph} DP Graph.}
+\end{figure}
+
+\begin{figure}\centering
+ \includegraphics[width=75pt,height=97pt]{graph/down.png}
+\caption{\label{downgraph} DOWN Graph.}
+\end{figure}
+
+\begin{figure}\centering
+ \includegraphics[width=200pt,height=101pt]{graph/dcg.png}
+\caption{\label{dcggraph} DCG Graph.}
+\end{figure}
+
+\begin{figure}\centering
+ \includegraphics[width=200pt,height=209pt]{graph/adp.png}
+\caption{\label{adpgraph} ADP Graph.}
+\end{figure}
+
+
+\begin{itemize}
+\item DP graph. Ver figura\footnote {\label{foot:graph} Figura generada utilizando la herramienta \textit{graphviz} sobre el archivo \texttt{.dot} generado por \maggen.} \ref{dpgraph}, generado a partir del ejemplo analizado en el apendice \ref{append:agwuuyang}.
+\item DOWN graph. Ver figura$^{\ref{foot:graph}}$ \ref{downgraph} generado a partir del ejemplo analizado en el apendice \ref{append:agwuuyang}.
+\item DCG graph.Ver figura$^{\ref{foot:graph}}$ \ref{dcggraph} generado a partir del ejemplo analizado en el apendice \ref{append:agwuuyang}.
+\item ADP graph. Ver figura$^{\ref{foot:graph}}$  \ref{adpgraph} generado a partir del ejemplo analizado en el apendice \ref{append:agwuuyang}.
+\end{itemize}
+
+La contruccion de cada tipo de grafo respeta los principios analizados en el capitulo XXX.
+
+
+\subsection*{Construcción de planes}
+\subsection*{Construcción de secuencias de visita}
+
+
+\section{Generación de Código}
+La etapa final de \maggen\ esta dado por la generacion de codigo para el evaluador estático. 
