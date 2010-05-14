@@ -1,6 +1,6 @@
 /**
   *  \file      Expr_leaf.cpp
-  *  \brief     Implementation element of an Attribute Syntax Tree (AST).
+  *  \brief     Implementation element of an Expression.
   *  \date      21/12/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>

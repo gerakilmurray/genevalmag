@@ -1,6 +1,6 @@
 /**
   *  \file      Expr_function.cpp
-  *  \brief     Implementation of a function element of an Attribute Syntax Tree (AST).
+  *  \brief     Implementation of a function element of an Expression.
   *  \date      21/12/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
@@ -15,7 +15,7 @@ namespace genevalmag
 
 #ifdef _DEBUG
     /* Numbers of functions current in the system. */
-    static unsigned short ast_functions(0);
+    static unsigned short functions(0);
 #endif
 
 /**
@@ -27,7 +27,7 @@ Expr_function::Expr_function():Expr_node()
     syntax_order        = 0;
 
     #ifdef _DEBUG
-        ast_functions++;
+        functions++;
     #endif
 }
 
@@ -39,7 +39,7 @@ Expr_function::Expr_function(const Expr_function &other)
     copy(other);
 
     #ifdef _DEBUG
-        ast_functions++;
+        functions++;
     #endif
 }
 
@@ -51,10 +51,10 @@ Expr_function::~Expr_function()
     destroy();
 
     #ifdef _DEBUG
-        ast_functions--;
-        if(ast_functions == 0)
+        functions--;
+        if(functions == 0)
         {
-            cout << ast_functions << " -> AST Functions" << endl;
+            cout << functions << " -> Functions" << endl;
         }
     #endif
 }

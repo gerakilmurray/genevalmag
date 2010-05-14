@@ -1,6 +1,6 @@
 /**
   *  \file      Expr_instance.cpp
-  *  \brief     Implementation of a instance element of an Attribute Syntax Tree (AST).
+  *  \brief     Implementation of a instance element of an Expression.
   *  \date      21/12/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
@@ -16,7 +16,7 @@ namespace genevalmag
 
 #ifdef _DEBUG
     /* Numbers of instances current in the system. */
-    static unsigned short ast_instances(0);
+    static unsigned short instances(0);
 #endif
 
 /**
@@ -25,7 +25,7 @@ namespace genevalmag
 Expr_instance::Expr_instance():Expr_leaf()
 {
     #ifdef _DEBUG
-        ast_instances++;
+        instances++;
     #endif
 }
 
@@ -37,7 +37,7 @@ Expr_instance::Expr_instance(const Expr_instance &other)
     copy(other);
 
     #ifdef _DEBUG
-        ast_instances++;
+        instances++;
     #endif
 }
 
@@ -49,10 +49,10 @@ Expr_instance::~Expr_instance()
     destroy();
 
     #ifdef _DEBUG
-        ast_instances--;
-        if(ast_instances == 0)
+        instances--;
+        if(instances == 0)
         {
-            cout << ast_instances << " -> AST Instances" << endl;
+            cout << instances << " -> Instances" << endl;
         }
     #endif
 }

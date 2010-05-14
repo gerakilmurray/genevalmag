@@ -179,7 +179,7 @@ bool Builder_visit_sequences::gen_visit_seq
     {
         const Equation *eq(rule.get_eq(plan[i]));
 
-        const vector<const Expr_instance*> &instances_right_side(eq->get_instance_right_side()); /* ver copia tmp */
+        const vector<const Expr_instance*> &instances_right_side(eq->get_instance_right_side());
 
         for(size_t j(0); j < instances_right_side.size(); j++)
 		{

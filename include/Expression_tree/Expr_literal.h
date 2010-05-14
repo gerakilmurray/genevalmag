@@ -1,13 +1,13 @@
 /**
   *  \file      Expr_literal.h
-  *  \brief     Literal element of an Attribute Syntax Tree (AST).
+  *  \brief     Literal element of an Expression.
   *  \date      21/12/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-#ifndef AST_LITERAL_H_
-#define AST_LITERAL_H_
+#ifndef EXPR_LITERAL_H_
+#define EXPR_LITERAL_H_
 
 #include "Expr_leaf.h"
 
@@ -117,4 +117,4 @@ class Expr_literal: public Expr_leaf
 
 } /* end genevalmag */
 
-#endif /* AST_LITERAL_H_ */
+#endif /* EXPR_LITERAL_H_ */

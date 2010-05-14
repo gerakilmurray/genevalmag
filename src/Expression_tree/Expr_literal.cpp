@@ -1,6 +1,6 @@
 /**
   *  \file      Expr_literal.cpp
-  *  \brief     Implementation of a literal element of an Attribute Syntax Tree (AST).
+  *  \brief     Implementation of a literal element of an Expression.
   *  \date      21/12/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
@@ -14,7 +14,7 @@ namespace genevalmag
 
 #ifdef _DEBUG
     /* Numbers of literals current in the system. */
-    static unsigned short ast_literals(0);
+    static unsigned short literals(0);
 #endif
 
 /**
@@ -23,7 +23,7 @@ namespace genevalmag
 Expr_literal::Expr_literal():Expr_leaf()
 {
     #ifdef _DEBUG
-        ast_literals++;
+        literals++;
     #endif
 }
 
@@ -35,7 +35,7 @@ Expr_literal::Expr_literal(const Expr_literal &other)
     copy(other);
 
     #ifdef _DEBUG
-        ast_literals++;
+        literals++;
     #endif
 }
 
@@ -47,10 +47,10 @@ Expr_literal::~Expr_literal()
     destroy();
 
     #ifdef _DEBUG
-        ast_literals--;
-        if(ast_literals == 0)
+        literals--;
+        if(literals == 0)
         {
-            cout << ast_literals << " -> AST Literals" << endl;
+            cout << literals << " -> Literals" << endl;
         }
     #endif
 }

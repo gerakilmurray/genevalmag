@@ -1,13 +1,13 @@
 /**
   *  \file      Expr_node.h
-  *  \brief     Abstract recursive element of an Attribute Syntax Tree (AST).
+  *  \brief     Abstract recursive element of an Expression.
   *  \date      21/12/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
   */
 
-#ifndef AST_INNER_NODE_H_
-#define AST_INNER_NODE_H_
+#ifndef EXPR_NODE_H_
+#define EXPR_NODE_H_
 
 #include <vector>
 
@@ -75,4 +75,4 @@ class Expr_node: public Expression
 
 } /* end genevalmag */
 
-#endif /* AST_INNER_NODE_H_ */
+#endif /* EXPR_NODE_H_ */
