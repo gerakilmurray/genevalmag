@@ -15,8 +15,6 @@
 
 #include <boost/graph/adjacency_list.hpp>
 
-#include "../Attr_grammar/Rule.h"
-#include "../Attr_grammar/Symbol.h"
 #include "../Attr_grammar/Attr_grammar.h"
 #include "../Expression_tree/Expr_leaf.h"
 
@@ -40,6 +38,12 @@ typedef Graph::vertex_descriptor Vertex;
 class Builder_graphs
 {
 	private:
+		/**
+		  * \var attr_grammar.
+		  * \brief References to the attribute grammar.
+		  */
+		const Attr_grammar &attr_grammar;
+
 		/**
 		  * \var p_Dp_graphs.
 		  * \brief Store the DP graphs. The key corresponds to the key Rule..
@@ -77,15 +81,13 @@ class Builder_graphs
 		  * The graph only has vertexs. It hasn't edges.
 		  * Ex: Symbol E ; attributes: s,i
 		  * 	graph: 	vertex: E.s, E.i
-		  * @param symbols
 		  */
-		void compute_attr_vertex(const map<string,Symbol> &symbols);
+		void compute_attr_vertex();
 
 		/**
 		  * Completes dp-graph with the vertex of low on instances.
-		  * @param rules
 		  */
-		void complete_dp_graphs(const map<unsigned short, Rule> &rules);
+		void complete_dp_graphs();
 
 		/**
 		  * Generate all combinations of the rules and saves a graph ADP for each of them.
@@ -101,9 +103,10 @@ class Builder_graphs
 
 		/**
 		  * Constructor empty of Builder graphs.
+		  * @param attribute_grammar
 		  * @return
 		  */
-		Builder_graphs();
+		Builder_graphs(const Attr_grammar & attribute_grammar);
 
 		/**
 		  * Destructor empty of Builder graphs.
@@ -137,10 +140,9 @@ class Builder_graphs
 		  * 	graph: 	vertex: E,T
 		  * 			Edges: 	E --> E
 		  * 					T---> E
-		  * @param rules
 		  * @return
 		  */
-		bool compute_dependency_graphs(const map<unsigned short,Rule> &rules);
+		bool compute_dependency_graphs();
 
 		/**
 		  * Algorithm Down
@@ -149,11 +151,9 @@ class Builder_graphs
 		  * 	(1) E:= E + T.
 		  * 	graph G: DP(1) U Down(E) U Down(T)
 		  * 	Project(G,{attributes of E})
-		  * @param symbols
-		  * @param rules
 		  * @return
 		  */
-		bool compute_down_graph(const map<string, Symbol> &symbols, const map<unsigned short, Rule> &rules);
+		bool compute_down_graph();
 
 		/**
 		  * Algorithm DCG
@@ -162,10 +162,9 @@ class Builder_graphs
 		  * 	(1) E:= E + T.
 		  * 	graph G: DP(1) U Down(E) U Down(T)
 		  * 	Project(G,{attributes of E})
-		  * @param rules
 		  * @return
 		  */
-		bool compute_dcg(const map<unsigned short, Rule> &rules);
+		bool compute_dcg();
 
 		/**
 		  * Algorithm ADP
@@ -174,10 +173,9 @@ class Builder_graphs
 		  * 	(1) E:= E + T.
 		  * 	graph G: DP(1) U Dcg E (J1..JN) U Dcg T (K1..KM)
 		  * 	Where Ji y ki are rule with left-symbol E and T respectly.
-		  * @param grammar
 		  * @return
 		  */
-		bool compute_adp_graph(const Attr_grammar &grammar);
+		bool compute_adp_graph();
 
 		/**
 		  * Checks if the graph contains cycle.
@@ -188,27 +186,24 @@ class Builder_graphs
 
 		/**
 		  * Saves all graphs generates: DP, Down, DCG and ADP.
-		  * @param rules
 		  * @param path_output
 		  * @return
  		  */
-		bool save_all_graphs(const map<unsigned short, Rule> &rules, const string path_output) const;
+		bool save_all_graphs(const string path_output) const;
 
 		/**
 		  * Saves all graphs graph cycles.
-		  * @param rules
 		  * @param path_output
 		  * @return
 		  */
-		bool save_cyclic_graphs(const map<unsigned short, Rule> &rules, const string path_output) const;
+		bool save_cyclic_graphs(const string path_output) const;
 
 		/**
 		  * Saves all dp-graphs generates
-		  * @param rules
 		  * @param path_output
 		  * @return
 		  */
-		bool save_dp_graphs(const map<unsigned short, Rule> &rules, const string path_output) const;
+		bool save_dp_graphs(const string path_output) const;
 
 		/**
 		  * Saves all down-graphs generates
@@ -219,19 +214,17 @@ class Builder_graphs
 
 		/**
 		  * Saves all dcg-graphs generates
-		  * @param rules
 		  * @param path_output
 		  * @return
 		  */
-		bool save_dcg_graphs(const map<unsigned short, Rule> &rules, const string path_output) const;
+		bool save_dcg_graphs(const string path_output) const;
 
 		/**
 		  * Saves all adp-graphs generates
-		  * @param rules
 		  * @param path_output
 		  * @return
 		  */
-		bool save_adp_graphs(const map<unsigned short, Rule> &rules, const string path_output) const;
+		bool save_adp_graphs(const string path_output) const;
 };
 
 } /* end genevalmag */

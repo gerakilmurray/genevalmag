@@ -53,7 +53,7 @@ const string FILE_ADP_SUBGRAPH_CYCLIC ("_adp_subgraph_with_cyclic");
 /**
   * Constructor empty of Builder graphs.
   */
-Builder_graphs::Builder_graphs()
+Builder_graphs::Builder_graphs(const Attr_grammar & attribute_grammar): attr_grammar(attribute_grammar)
 {
 }
 
@@ -96,8 +96,10 @@ const Graph &Builder_graphs::get_dcg_graph(unsigned short index_rule) const
   * 			Edges: 	E --> E
   * 					T---> E
   */
-bool Builder_graphs::compute_dependency_graphs(const map<unsigned short,Rule> &rules)
+bool Builder_graphs::compute_dependency_graphs()
 {
+	const map<unsigned short,Rule> &rules(attr_grammar.get_rules());
+
 	Graph current_p_Dp_graph;
 	property_map<Graph, vertex_data_t>::type leafs(get(vertex_data_t(), current_p_Dp_graph));
 
@@ -150,8 +152,10 @@ bool Builder_graphs::compute_dependency_graphs(const map<unsigned short,Rule> &r
   * Ex: Symbol E ; attributes: s,i
   * 	graph: 	vertex: E.s, E.i
   */
-void Builder_graphs::compute_attr_vertex(const map<string,Symbol> &symbols)
+void Builder_graphs::compute_attr_vertex()
 {
+	const map<string, Symbol> &symbols(attr_grammar.get_non_terminal_symbols());
+
 	Graph current_graph;
 	/* For all symbol. */
 	for(map<string,Symbol >::const_iterator s_it(symbols.begin()); s_it != symbols.end(); s_it++)
@@ -194,11 +198,13 @@ void Builder_graphs::compute_attr_vertex(const map<string,Symbol> &symbols)
   * 	graph G: DP(1) U Down(E) U Down(T)
   * 	Project(G,{attributes of E})
   */
-bool Builder_graphs::compute_down_graph(const map<string,Symbol> &symbols, const map<unsigned short,Rule> &rules)
+bool Builder_graphs::compute_down_graph()
 {
-	compute_attr_vertex(symbols);
+	const map<unsigned short,Rule> &rules(attr_grammar.get_rules());
 
-	complete_dp_graphs(rules);
+	compute_attr_vertex();
+
+	complete_dp_graphs();
 
 	/* Insert current graph in map of down graph. */
 	for(map<string,Graph >::iterator attr_it(attr_vertex_graphs.begin()); attr_it != attr_vertex_graphs.end(); attr_it++)
@@ -253,8 +259,10 @@ bool Builder_graphs::compute_down_graph(const map<string,Symbol> &symbols, const
   * 	graph G: DP(1) U Down(E) U Down(T)
   * 	Project(G,{attributes of E})
   */
-bool Builder_graphs::compute_dcg(const map<unsigned short, Rule> &rules)
+bool Builder_graphs::compute_dcg()
 {
+	const map<unsigned short,Rule> &rules(attr_grammar.get_rules());
+
 	Graph current_graph;
 	/* Circle Dp graph. */
 	for(map <unsigned short, Graph>::iterator it(p_Dp_graphs.begin()); it != p_Dp_graphs.end(); it++)
@@ -349,14 +357,14 @@ bool Builder_graphs::combined_inf_contexts(const Rule *rule, Graph &graph, vecto
   * 	graph G: DP(1) U Dcg E (J1..JN) U Dcg T (K1..KM)
   * 	Where Ji y ki are rule with left-symbol E and T respectly.
   */
-bool Builder_graphs::compute_adp_graph(const Attr_grammar &grammar)
+bool Builder_graphs::compute_adp_graph()
 {
 	Graph current_graph;
 	/* Circle Dp graph. */
 	for(map <unsigned short,Graph>::iterator it(p_Dp_graphs.begin()); it != p_Dp_graphs.end(); it++)
 	{
 		/* Obtain rule of graph. */
-		const Rule *current_rule(&(grammar.get_rules().find(it->first)->second));
+		const Rule *current_rule(&(attr_grammar.get_rules().find(it->first)->second));
 
 		/* Obtain all non-terminals symbols of the right-side of the rule. */
 		vector<const Symbol*> r_non_terminals(current_rule->get_non_terminals_right_side());
@@ -369,7 +377,7 @@ bool Builder_graphs::compute_adp_graph(const Attr_grammar &grammar)
 		for (size_t i(0); i < r_non_terminals.size(); i++)
 		{
 			/* Obtain all rule with the left-symbol one right symbol of the current_rule. */
-			inf_contexts.push_back(grammar.get_rules_with_left_symbol(r_non_terminals[i]));
+			inf_contexts.push_back(attr_grammar.get_rules_with_left_symbol(r_non_terminals[i]));
 		}
 
 		/* Generates and saves all combinatios of context with these rules. */
@@ -458,8 +466,10 @@ bool Builder_graphs::check_cyclic_adp_dependencies()
 /**
   * Completes dp-graph with the vertex of low on instances.
   */
-void Builder_graphs::complete_dp_graphs(const map<unsigned short, Rule> &rules)
+void Builder_graphs::complete_dp_graphs()
 {
+	const map<unsigned short, Rule> &rules(attr_grammar.get_rules());
+
 	for(map<unsigned short,Graph >::iterator dp(p_Dp_graphs.begin()); dp != p_Dp_graphs.end(); dp++)
 	{
 		const Rule &rule(rules.find(dp->first)->second);
@@ -473,8 +483,10 @@ void Builder_graphs::complete_dp_graphs(const map<unsigned short, Rule> &rules)
 /**
   * Saves all dp-graphs generates
   */
-bool Builder_graphs::save_dp_graphs(const map<unsigned short, Rule> &rules, const string path_output) const
+bool Builder_graphs::save_dp_graphs(const string path_output) const
 {
+	const map<unsigned short, Rule> &rules(attr_grammar.get_rules());
+
 	string path_out(path_output);
 	path_out.append(PATH_OUTPUT_DP);
 
@@ -525,8 +537,10 @@ bool Builder_graphs::save_down_graphs(const string path_output) const
 /**
   * Saves all dcg-graphs generates.
   */
-bool Builder_graphs::save_dcg_graphs(const map<unsigned short, Rule> &rules, const string path_output) const
+bool Builder_graphs::save_dcg_graphs(const string path_output) const
 {
+	const map<unsigned short, Rule> &rules(attr_grammar.get_rules());
+
 	string path_out(path_output);
 	path_out.append(PATH_OUTPUT_DCG);
 
@@ -553,8 +567,10 @@ bool Builder_graphs::save_dcg_graphs(const map<unsigned short, Rule> &rules, con
 /**
   * Saves all adp-graphs generates.
   */
-bool Builder_graphs::save_adp_graphs(const map<unsigned short, Rule> &rules, const string path_output) const
+bool Builder_graphs::save_adp_graphs(const string path_output) const
 {
+	const map<unsigned short, Rule> &rules(attr_grammar.get_rules());
+
 	string path_out(path_output);
 	path_out.append(PATH_OUTPUT_ADP);
 
@@ -583,24 +599,28 @@ bool Builder_graphs::save_adp_graphs(const map<unsigned short, Rule> &rules, con
 /**
   * Saves all graphs generates: DP, Down, DCG and ADP.
   */
-bool Builder_graphs::save_all_graphs(const map<unsigned short, Rule> &rules, const string path_output) const
+bool Builder_graphs::save_all_graphs(const string path_output) const
 {
 	string path_out(path_output);
 	path_out.append(PATH_OUTPUT_GRAPHS);
 
-	if(clean_output_folder(path_out) &&
-       save_dp_graphs(rules, path_out) &&
-       save_down_graphs(path_out) &&
-       save_dcg_graphs(rules, path_out) &&
-       save_adp_graphs(rules, path_out))
+	if(
+		clean_output_folder(path_out) &&
+		save_dp_graphs(path_out) &&
+		save_down_graphs(path_out) &&
+		save_dcg_graphs(path_out) &&
+		save_adp_graphs(path_out)
+	)
 	{
 		return true;
 	}
 	return false;
 }
 
-bool Builder_graphs::save_cyclic_graphs(const map<unsigned short, Rule> &rules, const string path_output) const
+bool Builder_graphs::save_cyclic_graphs(const string path_output) const
 {
+	const map<unsigned short, Rule> &rules(attr_grammar.get_rules());
+
 	string path_out(path_output);
 	path_out.append(PATH_OUTPUT_GRAPHS);
 
