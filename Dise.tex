@@ -487,13 +487,22 @@ Ahora nos encargaremos de algunas consideraciones respecto del diseño.
 El funcionamiento de \maggen\ esta dado por una instancia de la estructura llamada \texttt{Attr\_grammar}, la cual encapsula toda la información de la gramática de atributos parseada. La misma contiene los elementos que se agrupan en los paquetes anteriormente nombrados y es la que desencadena el calculo de planes, secuencias de visita y, por ultimo, la generación de código.  
 En la figura \ref{fig:disen} se presenta un diagrama que muestra la interacción de esta estructura en el funcionamiento de \maggen.
 
-Analicemos ahora el diseño de los paquetes nombrado arriba, y con ellos la estructura \texttt{Attr\_grammar}.  El siguiente diagrama muestra la representacion interna de una gramatica dentro de \maggen:
+
+\begin{figure}\centering
+\includegraphics[width=450pt,height=297pt]{Disen2.png}
+\caption{\label{fig:disen2}Diseño interno de una gramática de atributos en \maggen}
+\end{figure}
+Analicemos ahora el diseño de los paquetes nombrados arriba, y con ellos la estructura \texttt{Attr\_grammar}.  En la figura \ref{fig:disen2} se muestra un diagrama con la representación interna de una gramática dentro de \maggen. Notemos algunas observaciones del diseño que muestra el diagrama:
+\begin{itemize}
+\item La relación entre los paquetes se produce por un lado, mediante la clase \texttt{Rule}, en el sentido de que toda regla contiene un conjunto de ecuaciones y cada una de estas esta definida a través de un \textit{l\_value:}\texttt{Exp\_instance} y un \textit{r\_value:}\texttt{Expression}. Por otro lado, \texttt{Exp\_instance} se vincula con \texttt{Symbol} y \texttt{Attribute} y \texttt{Exp\_function} con \texttt{Function}.
+\item Toda la información de una gramática de atributos esta representada en la clase \texttt{Attr\_grammar} y por ende, el ciclo de vida de cada de uno de sus componentes es administrado por esta clase, durante todo el funcionamiento de \maggen. 
+\end{itemize}
 
 
 
 \subsection*{Chequeos}
 
-El conjuntos de chequeos que se realizan sobre la gramática de entrada a \maggen, están directamente relacionados con el concepto de gramática bien definida analizado en el cap XX. Además, se aplican una serie de chequeos extras para evitar cálculos inconsistentes en las etapas posteriores. 
+El conjuntos de chequeos que se realizan sobre la gramática de entrada a \maggen, están directamente relacionados con el concepto de gramática bien definida analizado en el cap XX. Además, se aplican una serie de chequeos extras para evitar cálculos inconsistentes en las etapas posteriores. La totalidad de los chequeos, son realizados sobre el bloque de reglas de la gramática\footnote{En su mayoría los chequeos se realizan sobre las ecuaciones de las reglas.}, debido a que este, es el más significativo y sobre el cual se apoyan los cálculos posteriores.
 
 Los chequeos realizados son clasificados en sintácticos y semánticos, los primeros, en su mayoría, son realizados durante el parser, en cambio, los chequeos semánticos se realizan luego del parser de cada regla, aplicando escaneos específicos. De estos últimos nos encargaremos en esta sección.
 El modulo que agrupa estos chequeos, se ubica en el paquete \texttt{Parser} de \maggen\ y se denomina \texttt{Semantics\_checks}.
@@ -530,10 +539,10 @@ Cuando se utilizan paréntesis en la expresión, \maggen\ asume la asociatividad
 \end{description}
 
 \section{Construcción de grafos y aplicación de algoritmos de computo de planes y secuencias de visita}
-En la figura \ref{fig:disen} pudimos analizar el funcionamiento de \maggen, teniendo en cuenta la estrucura \texttt{Attr\_grammar}, en esta seccion abordaremos detalles en el diseño del paquete \texttt{Builder}, especificamente la construcción de grafos, de planes y de secuancias de visita. Un detalle a tener en cuenta es que, a partir de esta etapa,  todas las manipulaciones son realizadas sobre la seccion de ecuacion de cada reglas.
+En la figura \ref{fig:disen} pudimos analizar el funcionamiento de \maggen, teniendo en cuenta la estructura \texttt{Attr\_grammar}, en esta sección abordaremos detalles en el diseño del paquete \texttt{Builder}, específicamente la construcción de grafos, de planes y de secuencias de visita. Un detalle a tener en cuenta es que, a partir de esta etapa,  todas las manipulaciones son realizadas sobre la sección de ecuacion de cada reglas.
 
 \subsection*{Construcción de grafos}
-Detalles de implementación seran analizando en la seccion XX, ahora tomaremos un par de minutos para mencionar algunas consideracion con respecto al funcionamiento de los grafos en \maggen.
+Detalles de implementación serán analizando en la sección XX, ahora tomaremos un par de minutos para mencionar algunas consideración con respecto al funcionamiento de los grafos en \maggen.
 
 
 La construcción de grafos se realiza en el modulo \texttt{builder\_graphs}. \maggen\ crea 4 tipos de grafos:
@@ -559,18 +568,27 @@ La construcción de grafos se realiza en el modulo \texttt{builder\_graphs}. \ma
 
 
 \begin{itemize}
-\item DP graph. Ver figura\footnote {\label{foot:graph} Figura generada utilizando la herramienta \textit{graphviz} sobre el archivo \texttt{.dot} generado por \maggen.} \ref{dpgraph}, generado a partir del ejemplo analizado en el apendice \ref{append:agwuuyang}.
-\item DOWN graph. Ver figura$^{\ref{foot:graph}}$ \ref{downgraph} generado a partir del ejemplo analizado en el apendice \ref{append:agwuuyang}.
-\item DCG graph.Ver figura$^{\ref{foot:graph}}$ \ref{dcggraph} generado a partir del ejemplo analizado en el apendice \ref{append:agwuuyang}.
-\item ADP graph. Ver figura$^{\ref{foot:graph}}$  \ref{adpgraph} generado a partir del ejemplo analizado en el apendice \ref{append:agwuuyang}.
+\item DP graph. Ver figura\footnote {\label{foot:graph} Figura generada utilizando la herramienta \textit{graphviz} sobre el archivo \texttt{.dot} generado por \maggen.} \ref{dpgraph}, generado a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
+\item DOWN graph. Ver figura$^{\ref{foot:graph}}$ \ref{downgraph} generado a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
+\item DCG graph.Ver figura$^{\ref{foot:graph}}$ \ref{dcggraph} generado a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
+\item ADP graph. Ver figura$^{\ref{foot:graph}}$  \ref{adpgraph} generado a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
 \end{itemize}
 
-La contruccion de cada tipo de grafo respeta los principios analizados en el capitulo XXX.
+La construcción de cada tipo de grafo respeta los principios analizados en el capitulo XXX.
 
 
 \subsection*{Construcción de planes}
+La estapa de contruccion de planes, tal como lo muetra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``Builder''. El calculo de planes en \maggen\ se basó en los visto en el cap XXX, donde podemos destacar dos cosas muy imortante a tener en cuenta:
+\begin{enumerate}
+\item El punto de entrada para el calculo de los planes esta dado sobre los grafos ADP. 
+\item El calculo de planes se basa en un orden topologico de la evaluacion de los atributos de los simbolos, teniendo en cuenta los distintos contextos posibles.
+\end{enumerate}
+ En lo que sigue de la seccion entraremos en detalle sobre el punto 2.
+bla blab alb albal...
 \subsection*{Construcción de secuencias de visita}
+La etapa de construcción de secuencias de visita, tal como lo muestra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``Builder''. El calculo de secuencias de visita en \maggen\ son computados a partir de los diferentes planes obtenidos en el capitulo anterior.
 
+El funcionamiento básico del calculo esta dado por la aplicación de una especie de \textit{simulación} de la evaluación de cada atributo de los símbolos. Esta consiste en evaluar la ecuacion obteniendo sus dependencias de sus posibles contextos, entonces, de esta forma se obtienen las visitas a realizar para la computación de cada una de las instancias\footnote{Recordemos, en este punto, que una instancia es considerada una aparición del símbolo y que se compone de símbolo, índice y atributo.} de cada regla de la gramática.
 
 \section{Generación de Código}
-La etapa final de \maggen\ esta dado por la generacion de codigo para el evaluador estático. 
+La etapa final de \maggen\ esta dado por la generación de código para el evaluador estático. 
