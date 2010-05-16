@@ -25,7 +25,7 @@ class Expression
 		  * \var parent.
 		  * \brief Father of Expression.
 		  */
-        const Expression    *parent;
+        const Expression  *parent;
         /**
 		  * \var type_synthetized.
 		  * \brief Type of node: Obtains of parse.

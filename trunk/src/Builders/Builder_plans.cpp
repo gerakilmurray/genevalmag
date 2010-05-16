@@ -31,7 +31,9 @@ const string PATH_OUT_PLAN_PROJECT("plans_project/");
 /**
   * Constructor empty of Builder plan.
   */
-Builder_plans::Builder_plans(const Attr_grammar &attribute_grammar): attr_grammar(attribute_grammar)
+Builder_plans::Builder_plans(const Attr_grammar &attribute_grammar):
+	attr_grammar(attribute_grammar),
+	build_graphs(attribute_grammar)
 {
 }
 
@@ -47,7 +49,7 @@ Builder_plans::~Builder_plans()
   */
 void Builder_plans::save_all_graphs(const string path_output) const
 {
-	build_graphs.save_all_graphs(attr_grammar.get_rules(), path_output);
+	build_graphs.save_all_graphs(path_output);
 }
 
 /**
@@ -55,7 +57,7 @@ void Builder_plans::save_all_graphs(const string path_output) const
   */
 void Builder_plans::save_cyclic_graphs(const string path_output) const
 {
-	build_graphs.save_cyclic_graphs(attr_grammar.get_rules(), path_output);
+	build_graphs.save_cyclic_graphs(path_output);
 }
 
 /**
@@ -63,13 +65,13 @@ void Builder_plans::save_cyclic_graphs(const string path_output) const
   */
 bool Builder_plans::generate_graphs()
 {
-	if(build_graphs.compute_dependency_graphs(attr_grammar.get_rules()))
+	if(build_graphs.compute_dependency_graphs())
 	{
-		if(build_graphs.compute_down_graph(attr_grammar.get_non_terminal_symbols(), attr_grammar.get_rules()))
+		if(build_graphs.compute_down_graph())
 		{
-			if(build_graphs.compute_dcg(attr_grammar.get_rules()))
+			if(build_graphs.compute_dcg())
 			{
-				if(build_graphs.compute_adp_graph(attr_grammar))
+				if(build_graphs.compute_adp_graph())
 				{
 					cout << "* Generate graphs ---------- [  OK  ]" << endl;
 					return true;

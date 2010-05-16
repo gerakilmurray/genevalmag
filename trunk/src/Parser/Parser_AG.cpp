@@ -140,7 +140,7 @@ struct attritute_grammar: public grammar<attritute_grammar>
 
 			r_string = lexeme_d[ch_p('\"')>>r_string_lit>>ch_p('\"')];
 
-			r_string_lit = +((anychar_p-(ch_p('\"')|"\\"|'\'' ))|r_esc_seq);
+			r_string_lit = +((anychar_p-(ch_p('\"')|"\\"|'\''))|r_esc_seq);
 
 			r_esc_seq = ch_p('\\')>>
 					    ( oct_p
@@ -253,9 +253,9 @@ struct attritute_grammar: public grammar<attritute_grammar>
 
 			r_terminal = lexeme_d[ch_p('\'')>>r_string_lit>>ch_p('\'')];
 
-			r_compute_eq = str_p("compute")>>
+			r_compute_eq = lexeme_d[str_p("compute")>>space_p]>>
 					       +(r_equation)>>
-					       str_p("end");
+						   str_p("end");
 
 			r_equation = r_instance[&create_equation]>>
 					     '='>>
