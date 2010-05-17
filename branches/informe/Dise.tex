@@ -494,7 +494,8 @@ En la figura \ref{fig:disen} se presenta un diagrama que muestra la interacción
 \end{figure}
 Analicemos ahora el diseño de los paquetes nombrados arriba, y con ellos la estructura \texttt{Attr\_grammar}.  En la figura \ref{fig:disen2} se muestra un diagrama con la representación interna de una gramática dentro de \maggen. Notemos algunas observaciones del diseño que muestra el diagrama:
 \begin{itemize}
-\item La relación entre los paquetes se produce por un lado, mediante la clase \texttt{Rule}, en el sentido de que toda regla contiene un conjunto de ecuaciones y cada una de estas esta definida a través de un \textit{l\_value:}\texttt{Exp\_instance} y un \textit{r\_value:}\texttt{Expression}. Por otro lado, \texttt{Exp\_instance} se vincula con \texttt{Symbol} y \texttt{Attribute} y \texttt{Exp\_function} con \texttt{Function}.
+\item La relación entre los paquetes se produce por un lado, mediante la clase \texttt{Rule}, en el sentido de que toda regla contiene un conjunto de ecuaciones y cada una de estas esta definida a través de un \textit{l\_value:}\texttt{Expr\_instance} y un \textit{r\_value:}\texttt{Expression}. Por otro lado, \texttt{Expr\_instance} se vincula con \texttt{Symbol} y \texttt{Attribute} y \texttt{Expr\_function} con \texttt{Function}.
+
 \item Toda la información de una gramática de atributos esta representada en la clase \texttt{Attr\_grammar} y por ende, el ciclo de vida de cada de uno de sus componentes es administrado por esta clase, durante todo el funcionamiento de \maggen. 
 \end{itemize}
 
@@ -574,21 +575,54 @@ La construcción de grafos se realiza en el modulo \texttt{builder\_graphs}. \ma
 \item ADP graph. Ver figura$^{\ref{foot:graph}}$  \ref{adpgraph} generado a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
 \end{itemize}
 
-La construcción de cada tipo de grafo respeta los principios analizados en el capitulo XXX.
+La construcción de cada tipo de grafo respeta los principios analizados en el capitulo XXX. 
+
+Dentro de los 4 tipos de grafos analizados, los necesarios para el computo de etapas siguientes, son los ``ADP graph''. Los demas tipos de grafo, son requeridos como calculo previo para la construcción de los ADP.
 
 
 \subsection*{Construcción de planes}
-La estapa de contruccion de planes, tal como lo muetra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``Builder''. El calculo de planes en \maggen\ se basó en los visto en el cap XXX, donde podemos destacar dos cosas muy imortante a tener en cuenta:
+La etapa de construcción de planes, tal como lo muestra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``Builder''. El calculo de planes en \maggen\ se basa en lo analizado en el cap XXX y teniendo en cuenta estos dos puntos:
+
 \begin{enumerate}
 \item El punto de entrada para el calculo de los planes esta dado sobre los grafos ADP. 
-\item El calculo de planes se basa en un orden topologico de la evaluacion de los atributos de los simbolos, teniendo en cuenta los distintos contextos posibles.
+\item El calculo de planes se basa en un orden topológico de la evaluación de los atributos de los símbolos, teniendo en cuenta los distintos contextos posibles.
 \end{enumerate}
- En lo que sigue de la seccion entraremos en detalle sobre el punto 2.
-bla blab alb albal...
-\subsection*{Construcción de secuencias de visita}
-La etapa de construcción de secuencias de visita, tal como lo muestra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``Builder''. El calculo de secuencias de visita en \maggen\ son computados a partir de los diferentes planes obtenidos en el capitulo anterior.
+En la sección XXX se tratan detalles de implementación, en donde podemos analizar el funcionamientos de lo que tratamos anteriormente, en especial el punto 2.
 
-El funcionamiento básico del calculo esta dado por la aplicación de una especie de \textit{simulación} de la evaluación de cada atributo de los símbolos. Esta consiste en evaluar la ecuacion obteniendo sus dependencias de sus posibles contextos, entonces, de esta forma se obtienen las visitas a realizar para la computación de cada una de las instancias\footnote{Recordemos, en este punto, que una instancia es considerada una aparición del símbolo y que se compone de símbolo, índice y atributo.} de cada regla de la gramática.
+
+\subsection*{Construcción de secuencias de visita}
+La etapa de construcción de secuencias de visita, tal como lo muestra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``Builder''. Las mismas, son computados a partir de los diferentes planes obtenidos en el sección anterior.
+
+El funcionamiento para la construcción de las secuencias, esta dado por la aplicación de una especie de \textit{simulación}, para la evaluación de cada atributo de los símbolos. El resultado de esta simulación, son los valores que conforman la secuencia de visita, donde la interpretación de ellos son: 
+\begin{description}
+\item [Compute] Valor mayor que cero que representa el numero de la ecuacion a resolver\footnote{La ecuación a computar pertenece a la regla del plan corriente.}.
+\item [Visit] valor menor que cero que representa el numero nodo hijo a visitar\footnote{El nodo hijo esta dado por el contexto de la regla del plan corriente.}.
+\item [Leave] valor ``0''.
+\end{description}
+A modo de ejemplo observemos las siguientes secuencias de visita generada por \maggen\ para el ejemplo analizado en el apéndice \ref{append:agwuuyang}:
+\begin{description}
+\item [\{-7,0,-8\}] Secuencia de visita para la regla \texttt{P3} (sin contexto inferior). En este caso, la secuencia de visita se traduce a lo siguiente:
+\begin{enumerate}
+\item \textbf{Computar} la ecuacion 7.
+\item \textbf{Leave}\footnote{El leave retorna el control a la secuencia de visita de contexto superior, es decir, desde donde se invocó a esta secuencia.}.
+\item \textbf{Computar} la ecuacion 8.
+\end{enumerate}
+
+\item [\{-11,1,-12,-10\}] Secuencia de visita para la regla \texttt{P5} con el contexto de \texttt{P2}. En este caso, la secuencia de visita se traduce a lo siguiente:
+\begin{enumerate}
+\item \textbf{Computar} la ecuacion 11.
+\item \textbf{Visitar} el nodo hijo 1, es decir \texttt{Y}, como el contexto es \texttt{P2}, significa visitar a P2.
+\item \textbf{Computar} la ecuacion 12.
+\item \textbf{Computar} la ecuacion 10.
+\end{enumerate}
+
+\end{description}
+Cabe aclarar que todas las secuencias de visita tienen una \textbf{leave} implícito al final, es decir, cuando se completo la computación de la secuencia se retorna a su ámbito de invocación.
+
+\underline{Heurística de la simulación:}\\
+
+
+Esta consiste en evaluar la ecuacion obteniendo sus dependencias de sus posibles contextos, entonces, de esta forma se obtienen las visitas a realizar para la computación de cada una de las instancias\footnote{Recordemos, en este punto, que una instancia es considerada una aparición del símbolo y que se compone de símbolo, índice y atributo.} de cada regla de la gramática.
 
 \section{Generación de Código}
 La etapa final de \maggen\ esta dado por la generación de código para el evaluador estático. 
