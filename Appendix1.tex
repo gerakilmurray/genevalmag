@@ -318,20 +318,20 @@ struct attritute_grammar: public grammar<attritute_grammar>
 \scriptsize
 \subsection{Pseudocodigo}
 \begin{lstlisting}[escapeinside=@@, backgroundcolor=\color{white}]
-     (P1)   S @$\rightarrow$@ XYZ      
+     (R1)   S @$\rightarrow$@ XYZ      
                      S.s0 := X.s1 + Y.s2 + Ys3 + Zs4
                      X.i1 := Y.s3  
                      Y.i2 := X.s1
                      Y.i3 := Y.s2
-     (P2)   Y @$\rightarrow$@ m        
+     (R2)   Y @$\rightarrow$@ m        
                      Y.s2 := Y.i2
                      Y.s3 := 1
-     (P3)   Y @$\rightarrow$@ n        
+     (R3)   Y @$\rightarrow$@ n        
                      Y.s2 := 2
                      Y.s3 := Y.i3
-     (P4)   X @$\rightarrow$@ m        
+     (R4)   X @$\rightarrow$@ m        
                      X.s1 := X.i1
-     (P5)   Z @$\rightarrow$@ Y        
+     (R5)   Z @$\rightarrow$@ Y        
                      Z.s4 := Y.s3
                      Y.i2 := 3
                      Y.i3 := Y.s2
@@ -366,7 +366,7 @@ attributes
 
 // Block of Rules
 rules
-  // P1
+  // R1
   S ::= X Y Z
       compute  
           S[0].s0 = X[0].s1 + Y[0].s2 + Y[0].s3 + Z[0].s4;
@@ -375,27 +375,27 @@ rules
           Y[0].i3 = Y[0].s2;
       end;
 
-  // P2
+  // R2
   Y ::= 'm'
       compute
           Y[0].s2 = Y[0].i2;
           Y[0].s3 = 1;
       end;
 
-  // P3
+  // R3
   Y ::= 'n'
       compute
           Y[0].s2 = 2;
           Y[0].s3 = Y[0].i3;
       end;
 
-  // P4
+  // R4
   X ::= 'm'
       compute
           X[0].s1 = X[0].i1;
       end;
   
-  // P5
+  // R5
   Z ::= Y
       compute
           Z[0].s4 = Y[0].s3;

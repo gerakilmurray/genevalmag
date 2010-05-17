@@ -577,7 +577,7 @@ La construcción de grafos se realiza en el modulo \texttt{builder\_graphs}. \ma
 
 La construcción de cada tipo de grafo respeta los principios analizados en el capitulo XXX. 
 
-Dentro de los 4 tipos de grafos analizados, los necesarios para el computo de etapas siguientes, son los ``ADP graph''. Los demas tipos de grafo, son requeridos como calculo previo para la construcción de los ADP.
+De de los 4 tipos de grafos analizados, los necesarios para el computo de etapas siguientes, son los ``ADP graph''. Los demas, son requeridos como cálculo previo para la construcción de estos.
 
 
 \subsection*{Construcción de planes}
@@ -587,13 +587,32 @@ La etapa de construcción de planes, tal como lo muestra el diagrama de la figur
 \item El punto de entrada para el calculo de los planes esta dado sobre los grafos ADP. 
 \item El calculo de planes se basa en un orden topológico de la evaluación de los atributos de los símbolos, teniendo en cuenta los distintos contextos posibles.
 \end{enumerate}
-En la sección XXX se tratan detalles de implementación, en donde podemos analizar el funcionamientos de lo que tratamos anteriormente, en especial el punto 2.
+En la sección XXX se tratan detalles de implementación, en donde podemos analizar el funcionamientos de lo tratado anteriormente, en especial el punto 2.
+Un \textbf{plan} se compone de lista de numeros de ecuaciones a computar. Todo plan nos marca un orden de evaluacion interpretando la lista de numeros de ecuaciones, de izquierda a derecha.
+
+\subsubsection*{Planes proyectados}
+Estos se obtienen a partir de los planes analizados anteriormente, proyectando el plan para cada simbolo de la parte derecha de la regla. La importancia de estos planes radica en la contruccion de las secuencias de visita y ademas en el algoritmo principal de evaluacion en la generacion de codigo.
+\begin{figure}\centering
+ \includegraphics[width=250pt,height=139pt]{plans/plan.png}
+\caption{\label{fig:plan}Plan obtenido por \maggen\ para la regla P1}
+\end{figure}
+
+En la figura\footnote{Figura obtenida con la herramienta \textit{graphviz} sobre el archivo \texttt{.dot} generado por \maggen.} \ref{fig:plan} observamos un plan obtenido por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}. Este plan contiene el orden de los números de ecuacion que pertenecen a la regla del plan, los planes proyectados son computados sobre el plan total, es decir con todas las dependencias. Para aclarar este echo, observemos los planes proyectados obtenidos:\\
+\begin{tabular}{l l}
+\includegraphics[width=220pt,height=35pt]{plans/plan_proj1.png} &
+\includegraphics[width=220pt,height=73pt]{plans/plan_proj2.png} 
+\end{tabular}
+\begin{center}
+ \includegraphics[width=220pt,height=36pt]{plans/plan_proj3.png}
+\end{center}
+
+Notar que cada plan proyectado ha capturado las ecuaciones de cada símbolo de la parte derecha para el computo de sus atributos, dependiendo del contexto. Es decir, en el caso del símbolo ``Y'' su orden ha sido computado observando las dependencias de la regla R2. Estas dependencias son necesarias para el calculo del plan completo en las ecuaciones 2 y 4. 
 
 
 \subsection*{Construcción de secuencias de visita}
 La etapa de construcción de secuencias de visita, tal como lo muestra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``Builder''. Las mismas, son computados a partir de los diferentes planes obtenidos en el sección anterior.
 
-El funcionamiento para la construcción de las secuencias, esta dado por la aplicación de una especie de \textit{simulación}, para la evaluación de cada atributo de los símbolos. El resultado de esta simulación, son los valores que conforman la secuencia de visita, donde la interpretación de ellos son: 
+El funcionamiento para la construcción de las secuencias, esta dado por la aplicación de una especie de \textit{simulación}, para la evaluación de cada atributo de los símbolos. El resultado de esta simulación, son los valores que conforman la secuencia de visita, tal como se ha analizado en la sección XXX. Estos valores siguen la siguiente interpretación: 
 \begin{description}
 \item [Compute] Valor mayor que cero que representa el numero de la ecuacion a resolver\footnote{La ecuación a computar pertenece a la regla del plan corriente.}.
 \item [Visit] valor menor que cero que representa el numero nodo hijo a visitar\footnote{El nodo hijo esta dado por el contexto de la regla del plan corriente.}.
@@ -608,21 +627,27 @@ A modo de ejemplo observemos las siguientes secuencias de visita generada por \m
 \item \textbf{Computar} la ecuacion 8.
 \end{enumerate}
 
-\item [\{-11,1,-12,-10\}] Secuencia de visita para la regla \texttt{P5} con el contexto de \texttt{P2}. En este caso, la secuencia de visita se traduce a lo siguiente:
+\item [\{-11,1,-12,-10\}] Secuencia de visita para la regla \texttt{R5} con el contexto de \texttt{P2}. En este caso, la secuencia de visita se traduce a lo siguiente:
 \begin{enumerate}
 \item \textbf{Computar} la ecuacion 11.
-\item \textbf{Visitar} el nodo hijo 1, es decir \texttt{Y}, como el contexto es \texttt{P2}, significa visitar a P2.
+\item \textbf{Visitar} el nodo hijo 1, es decir \texttt{Y}, como el contexto es \texttt{P2}, significa visitar a R2.
 \item \textbf{Computar} la ecuacion 12.
 \item \textbf{Computar} la ecuacion 10.
 \end{enumerate}
 
 \end{description}
-Cabe aclarar que todas las secuencias de visita tienen una \textbf{leave} implícito al final, es decir, cuando se completo la computación de la secuencia se retorna a su ámbito de invocación.
+Cabe aclarar que todas las secuencias de visita tienen un \textbf{leave} implícito al final, es decir, cuando se completo la computación de la secuencia se retorna a su ámbito de invocación.
 
-\underline{Heurística de la simulación:}\\
+\subsubsection*{Heurística de la simulación}
+El punto principal del cual se basa la heurística es, evaluar el plan buscando las dependencias de cada ecuacion en el contexto del mismo. Veamos los pasos básicos a tener en cuenta con el siguiente ejemplo:\\
+Supongamos uno de los planes\footnote{Es importante notar el echo de que cada plan se conforma de los números de ecuaciones a computar.} calculados por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}:\\
+\underline{Plan:} \{ 2, 3, 4, 1 \}. Ver figura \ref{fig:plan}.
+
+  
+ 
 
 
-Esta consiste en evaluar la ecuacion obteniendo sus dependencias de sus posibles contextos, entonces, de esta forma se obtienen las visitas a realizar para la computación de cada una de las instancias\footnote{Recordemos, en este punto, que una instancia es considerada una aparición del símbolo y que se compone de símbolo, índice y atributo.} de cada regla de la gramática.
+
 
 \section{Generación de Código}
 La etapa final de \maggen\ esta dado por la generación de código para el evaluador estático. 
