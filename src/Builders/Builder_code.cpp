@@ -170,18 +170,18 @@ void Builder_code::generate_footer_header() const
 	footer.append("        /* \"tita\" function. Wuu yank's paper. */\n\n");
 	footer.append("        vector < Plan_project >      eval_plans_project;\n\n");
 	footer.append("        vector < Rule >              rules;\n\n");
+	footer.append("        void add_plan(const Key_plan &k_plan, unsigned short index_order);\n");
+	footer.append("        void add_plan_project(const Key_plan_project &k_plan_p, unsigned short index_order);\n");
+	footer.append("        void compute_eq(int num_eq, struct Node *root);\n");
+	footer.append("        void traverse(struct Node * node, unsigned short order);\n");
+	footer.append("        void eval_visiter(struct Node *root);\n\n");
 
 	footer.append("    public:\n        ");
 	footer.append(file_name);
 	footer.append("();\n\n");
 	footer.append("        void print_v_seq();\n\n");
-	footer.append("        void traverse(struct Node * node, unsigned short order);\n\n");
 	footer.append("        void translate_mag();\n\n");
-	footer.append("        void compute_eq(int num_eq, struct Node *root);\n\n");
-	footer.append("        void eval_visiter(struct Node *root);\n\n");
 	footer.append("        void evaluator_mag(struct Node *root);\n\n");
-	footer.append("        void add_plan(const Key_plan &k_plan, unsigned short index_order);\n\n");
-	footer.append("        void add_plan_project(const Key_plan_project &k_plan_p, unsigned short index_order);\n");
 	footer.append("};\n\n");
 
 	footer.append("} /* end evalmag */\n\n");
