@@ -261,12 +261,15 @@ int main
 
 	int exit_code(-1);
 
-	Maglib g;
-	exit_code = g.gen_evaluator(path_input_file, path_folder_output, name_library, headers);
+	Maglib gen;
+	exit_code = gen.gen_evaluator(path_input_file, path_folder_output, name_library, headers);
 
-	gettimeofday(&t_fin, NULL);
-	secs = timeval_diff(&t_fin, &t_ini);
-	printf("\nGeneration complete in: %.6g seconds.\n", secs);
+	if (exit_code == 0)
+	{
+		gettimeofday(&t_fin, NULL);
+		secs = timeval_diff(&t_fin, &t_ini);
+		printf("\nGeneration complete in: %.6g seconds.\n", secs);
+	}
 
 	return exit_code;
 }
