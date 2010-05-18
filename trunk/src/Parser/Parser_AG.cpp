@@ -298,7 +298,7 @@ struct attritute_grammar: public grammar<attritute_grammar>
 
 			/*
 			 * Literals accepted: Integer and Float numbers, characters
-			 * and string, between signs ' and " respectively.
+			 * and string, between signs ' and " respectively, and boolean.
 		     */
 			r_literal = longest_d[real_p|int_p][&create_lit_number]
 					  | r_char[&create_lit_ch]
