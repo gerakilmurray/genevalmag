@@ -44,8 +44,6 @@ Un caso alternativo de salida, se da cuando \maggen\ detecta planes cíclicos, v
                * Build plans -------------- [ ABORT ]
 
                ERROR: One o more graph ADP has an cycle in its dependencies.Look the folder GenEvalAG/Out_Gen_Mag for more details.
-
-               Generation complete in: 0.056179 seconds.
 \end{lstlisting}
 Notar que, el mensaje de error indicara la ruta donde fueron almacenados los grafos con problemas de ciclicidad. Para este caso particular fue: \textit{GenEvalAG/Out\_Gen\_Mag.}
 
@@ -465,7 +463,6 @@ La linea 17 presenta un error de sintaxis (falta de paréntesis), entonces \magg
 \begin{lstlisting}[backgroundcolor=\color{white}, linewidth=15cm]
      * Parsing grammar ---------- [ FAIL ]
 
-     Generation complete in: 0.015683 seconds.
      ERROR: Parsing Failed, the following text will not be able to parse:
 
      File: ./examples/ag_count/ag_count.input
@@ -591,13 +588,14 @@ En la sección XXX se tratan detalles de implementación, en donde podemos anali
 Un \textbf{plan} se compone de lista de numeros de ecuaciones a computar. Todo plan nos marca un orden de evaluacion interpretando la lista de numeros de ecuaciones, de izquierda a derecha.
 
 \subsubsection*{Planes proyectados}
-Estos se obtienen a partir de los planes analizados anteriormente, proyectando el plan para cada simbolo de la parte derecha de la regla. La importancia de estos planes radica en la contruccion de las secuencias de visita y ademas en el algoritmo principal de evaluacion en la generacion de codigo.
+Estos se obtienen a partir de los planes analizados anteriormente, proyectando el plan para cada símbolo de la parte derecha de la regla. La importancia de estos planes radica en la construcción de las secuencias de visita y además en el algoritmo principal de evaluación en la generación de código.
 \begin{figure}\centering
  \includegraphics[width=250pt,height=139pt]{plans/plan.png}
 \caption{\label{fig:plan}Plan obtenido por \maggen\ para la regla P1}
 \end{figure}
 
 En la figura\footnote{Figura obtenida con la herramienta \textit{graphviz} sobre el archivo \texttt{.dot} generado por \maggen.} \ref{fig:plan} observamos un plan obtenido por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}. Este plan contiene el orden de los números de ecuacion que pertenecen a la regla del plan, los planes proyectados son computados sobre el plan total, es decir con todas las dependencias. Para aclarar este echo, observemos los planes proyectados obtenidos:\\
+
 \begin{tabular}{l l}
 \includegraphics[width=220pt,height=35pt]{plans/plan_proj1.png} &
 \includegraphics[width=220pt,height=73pt]{plans/plan_proj2.png} 
@@ -642,12 +640,31 @@ Cabe aclarar que todas las secuencias de visita tienen un \textbf{leave} implíc
 El punto principal del cual se basa la heurística es, evaluar el plan buscando las dependencias de cada ecuacion en el contexto del mismo. Veamos los pasos básicos a tener en cuenta con el siguiente ejemplo:\\
 Supongamos uno de los planes\footnote{Es importante notar el echo de que cada plan se conforma de los números de ecuaciones a computar.} calculados por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}:\\
 \underline{Plan:} \{ 2, 3, 4, 1 \}. Ver figura \ref{fig:plan}.
+\begin{enumerate}
+\item Se recorre el plan tomando en cada paso una de las ecuaciones. Para este caso particular comenzamos con la ecuación 2.
+\item Dada la ecuación \texttt{i}\footnote{Para este caso particular \textit{i} toma los valores 0,1,2,3.}, en el plan, debemos computar \textit{l\_value} de la ecuacion. Para ello debemos resolver todas las dependencias dadas por \textit{r\_value}.
+\item Dada una dependencia de la ecuacion, primero se chequea si las misma fue computada en algún paso anterior,sino, analizamos de la siguiente manera:
+\begin{itemize}
+\item Si la dependencia proviene de una instancia que pertenece al \textbf{símbolo de la parte izquierda de la regla} y además contiene un \textbf{atributo heredado}, entonces estamos en condiciones de realizar un ``\texttt{leave}''.
+\item Si la dependencia proviene de una instancia que pertenece a un \textbf{símbolo de la parte derecha de la regla} y además contiene un \textbf{atributo sintetizado}, entonces estamos en condiciones de realizar un ``\texttt{visit}''. En este caso, debemos analizar, según el contexto, cual es el plan (nodo hijo) se debe visitar. 
+\end{itemize}
+Notar que en los dos puntos anteriores, nos quedan los casos de dependencia perteneciente al símbolo de la parte izquierda con atributo sintetizado y dependencia de símbolo de la parte derecha con atributo heredado, pero estos casos, son los que deben definirse en este ambiente y como partimos del plan evaluación, el orden de dependencias es consistente con la demanda de las mismas.
+\item Luego de la obtención de todas las dependencias, se realiza un \textbf{compute} del \textit{l\_value} y se marca a este como \texttt{evaluado}. El paso siguiente es avanzar una ecuacion en la lista que impone el plan y realizar los mismos tratamientos.
+\end{enumerate} 
+\begin{figure}\centering
+\includegraphics[width=249pt,height=586pt]{simu.png}
+\caption{\label{fig:simul}Heurística computo de secuencia de visita}
+\end{figure}
+Para mas detalle observemos la figura \ref{fig:simul}.
 
-  
- 
-
-
+Notar que para el computo de las secuencias de visitas totales nos basta con lanzar la simulación analizada anteriormente para los planes iniciales\footnote{Los planes iniciales son aquellos que provienen de regla inicial.}. La explicación de esto se sustenta en las propiedades garantizadas con los chequeos en la gramática, principalmente la propiedad de alcanzabilidad. De esta forma, los planes iniciales lanzan los demas planes necesarios para el computo total de las secuencias.
 
 
 \section{Generación de Código}
-La etapa final de \maggen\ esta dado por la generación de código para el evaluador estático. 
+La etapa final de \maggen\ esta dado por la generación de código para el evaluador estático. Como hemos analizado en el diagrama visto en la figura \ref{fig:disen}, esta etapa se realiza en el paquete ``Builder'', específicamente en el modulo \texttt{Builder\_code}.
+
+La etapa de generación de código produce dos archivos: \textit{interfase}(.hpp) e \textit{implementación}(.cpp). En el apéndice \ref{append:agwuuyangcode} observamos el código generado para el ejemplo de Wuu yang ya analizado durante todo este capitulo.
+A continuación abordaremos algunas consideraciones sobre la generación de código en \maggen.
+
+
+
