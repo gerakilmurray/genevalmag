@@ -558,6 +558,35 @@ Toda la implementación del analizador sintáctico de \maggen\ está dentro del 
 
 \section{Chequeos semánticos durante el parsing}
 
+Dentro de este módulo se mantienen las variables que almacenan el nivel de precedencia corriente durante el parsing. El mismo es inicializado en 0 (cero), se incrementa en 1 (uno) cada vez que se detecta un paréntesis que abre y se decrementa al encontrar uno que cierra.
+
+Además, para enumerar los símbolos que van apareciendo dentro de las reglas, se mantiene un índice se aparición lexicográfico. Comienza en 0 (cero) y se incrementa cada vez que se consume un símbolo dentro de la declaración de la regla.
+
+Ambos valores numéricos son reseteados cada vez que se comienza a analizar una nueva regla.
+
+\subsection{Solución a problemas de precedencia de operadores}
+
+Mientras se parsea una expresión se debe mantener como invariante que los operadores de mayor precedencia se apliquen antes que otro con menor. Por lo que cada vez que se detecta un nuevo operador, se debe evaluar si se tiene que realizar modificaciones al árbol armado hasta el momento, aparte de la inserción del operador y sus argumentos.
+
+Cuando se presenta un problema de precedencia, se realizan dos tipos de rotaciones que se aplica recursivamente en todo el árbol.
+
+Las mismas se presentan en los siguientes diagramas.
+
+\begin{figure}\centering
+\includegraphics[width=250pt, height=82pt]{./rotacion1.png}
+\caption{\label{rotacion1} Caso de rotación cuando la operación de la izquierda tiene menor precedencia.}
+\end{figure}
+
+\begin{figure}\centering
+\includegraphics[width=250pt, height=85pt]{./rotacion2.png}
+\caption{\label{rotacion2} Caso de rotación cuando la operación de la derecha tiene menor precedencia.}
+\end{figure}
+
+\begin{figure}\centering
+\includegraphics[width=250pt, height=107pt]{./rotacion3.png}
+\caption{\label{rotacion3} Rotacion}
+\end{figure}
+
 \begin{enumerate}
 \item Precedencia de operadores dentro de expresiones
 \item Asociatividad de operadores dentro de expresiones
@@ -572,3 +601,6 @@ Toda la implementación del analizador sintáctico de \maggen\ está dentro del 
 bla bla
 \section{Algoritmo de generación de código}
 bla bla
+
+
+\normalsize
