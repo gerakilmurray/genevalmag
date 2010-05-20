@@ -360,7 +360,7 @@ r_equation = r_instance[&create_equation]>>
              ';';
 \end{lstlisting}
 
-La herramienta acepta cualquier tipo de expresión, ya que se permite que se definan nuevos operadores y funciones según las necesidades de la gramática para la cual se generará el evaluador. Se utilizó la gramática de expresiones ambigüas que figura en la mayoría de los libros de análisis de lenguajes.
+La herramienta acepta cualquier tipo de expresión, ya que se permite que se definan nuevos operadores y funciones según las necesidades de la gramática para la cual se generará el evaluador. Se utilizó la gramática de expresiones ambiguas que figura en la mayoría de los libros de análisis de lenguajes.
 
 \begin{lstlisting}[backgroundcolor=\color{white}]
 E := E op E
@@ -429,7 +429,7 @@ r_expr_prime_prime = ch_p('(')[&increment_level]>>
 
 Las definiciones de los tres tipos de literales son coherentes con el estilo de codificación que se usó hasta el momento.
 
-Las funciones aceptan expresiones como parámetros, asi que, la asociatividad y precedencia de esas expresiones se resuelve entre los paréntesis explícitos que se exigen en la invocación a una función.
+Las funciones aceptan expresiones como parámetros, así que, la asociatividad y precedencia de esas expresiones se resuelve entre los paréntesis explícitos que se exigen en la invocación a una función.
 
 Al completar esta regla se creará una \texttt{Expr\_function} dentro de la gramática.
 
@@ -469,7 +469,7 @@ r_instance = lexeme_d[
              ];
 \end{lstlisting}
 
-En este punto se encuentran defininidas todas las reglas necesarias para declarar la regla que define a una \textbf{Gramática de Atributos}. Es decir, un dominio semántico, un bloque de atributos y un bloque de reglas. El parser \texttt{end\_p} se necesita para que consuma los espacios restantes hasta el fin del archivo de entrada.
+En este punto se encuentran definidas todas las reglas necesarias para declarar la regla que define a una \textbf{Gramática de Atributos}. Es decir, un dominio semántico, un bloque de atributos y un bloque de reglas. El parser \texttt{end\_p} se necesita para que consuma los espacios restantes hasta el fin del archivo de entrada.
 
 \begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
 r_att_grammar = r_semantic_domain >>
@@ -551,7 +551,7 @@ Toda la implementación del analizador sintáctico de \maggen\ está dentro del 
 \begin{description}
 \item [Parser.cpp] En el que se encuentran todas las estructuras comentadas en la sección anterior.
 
-\item [Semantics\_actions.cpp] Aquí se implentaron todas las acciones semánticas que se utilizan durante el análisis sintáctico para ir creando los objetos que internamente representan y componen a una Gramática de Atributos.
+\item [Semantics\_actions.cpp] Aquí se implementaron todas las acciones semánticas que se utilizan durante el análisis sintáctico para ir creando los objetos que internamente representan y componen a una Gramática de Atributos.
 
 \item [Semantics\_checks.cpp] Simultáneamente con el parser, se realizan chequeos de propiedades sobre las reglas que se consumieron completamente. Dichos algoritmos se encuentran implementados en este archivo. Ahora se mencionarán detalles sobre los mismos.
 \end{description}
@@ -560,17 +560,17 @@ Toda la implementación del analizador sintáctico de \maggen\ está dentro del 
 
 Dentro de este módulo se mantienen las variables que almacenan el nivel de precedencia corriente durante el parsing. El mismo es inicializado en 0 (cero), se incrementa en 1 (uno) cada vez que se detecta un paréntesis que abre y se decrementa al encontrar uno que cierra.
 
-Además, para enumerar los símbolos que van apareciendo dentro de las reglas, se mantiene un índice se aparición lexicográfico. Comienza en 0 (cero) y se incrementa cada vez que se consume un símbolo dentro de la declaración de la regla.
+Además, para enumerar los símbolos que van apareciendo dentro de las reglas, se mantiene un índice se aparición sintáctico. Comienza en 0 (cero) y se incrementa cada vez que se consume un símbolo dentro de la declaración de la regla.
 
 Ambos valores numéricos son reseteados cada vez que se comienza a analizar una nueva regla.
 
 \subsection{Solución a problemas de precedencia de operadores}
 
-Mientras se parsea una expresión se debe mantener como invariante que los operadores de mayor precedencia se apliquen antes que otro con menor. Por lo que cada vez que se detecta un nuevo operador, se debe evaluar si se tiene que realizar modificaciones al árbol armado hasta el momento, aparte de la inserción del operador y sus argumentos.
+Mientras se parsea una expresión se busca mantener la propiedad de que los \textbf{operadores de mayor precedencia se apliquen antes que otros con menor}. Por lo que cada vez que se detecta un nuevo operador, se debe evaluar si se tiene que realizar modificaciones al árbol armado hasta el momento, aparte de la inserción del operador y sus argumentos.
 
-Cuando se presenta un problema de precedencia, se realizan dos tipos de rotaciones que se aplica recursivamente en todo el árbol.
+Cuando se presenta un problema de precedencia, se realizan rotaciones que se aplican recursivamente en todo el árbol. 
 
-Las mismas se presentan en los siguientes diagramas.
+Los cambios mantienen invariante la propiedad de que no se afecta al orden sintáctico de la expresión, es decir, el aplanamiento del árbol de izquierda a derecha (in-order) es el mismo antes y después de las permutaciones.
 
 \begin{figure}\centering
 \includegraphics[width=250pt, height=82pt]{./rotacion1.png}
@@ -584,23 +584,42 @@ Las mismas se presentan en los siguientes diagramas.
 
 \begin{figure}\centering
 \includegraphics[width=250pt, height=107pt]{./rotacion3.png}
-\caption{\label{rotacion3} Rotacion}
+\caption{\label{rotacion3} Caso de rotación cuando se detectó un conflicto sin resolver.}
 \end{figure}
 
-\begin{enumerate}
-\item Precedencia de operadores dentro de expresiones
-\item Asociatividad de operadores dentro de expresiones
-\item Alcanzabilidad de símbolos y reglas
-\item Consistencia de bloque de atributos y reglas
-\item Gramática bien definida
-\end{enumerate}
+Existen dos grandes casos a considerar:
+\begin{itemize}
+\item Si se inserta una operación infija, como hijo de otra operación, pero con menor precedencia que su padre, entonces se modificará el árbol, dejando como nueva raíz la operación infija recién insertada. 
 
+Existen dos variantes, las cuales son presentadas en los diagramas \ref{rotacion1} y \ref{rotacion2}.
 
-\section{Algoritmo de generación de secuencia de visita}
+\item En cambio, cuando se inserta cualquier operación como hija de una operación prefija (raíz) y la insertada tiene mejor precedencia que la raíz, no se resuelve instantáneamente el error, dado que se alteraría el orden sintáctico de la expresión. Para ello se prende una bandera, a la cual se le asigna el valor de precedencia que tiene la operación recién insertada. Entonces cuando en el siguiente paso se agregue una nueva raíz, si tiene mayor precedencia que su ``nieto'' en el árbol, se realiza la siguiente rotación mostrada en el diagrama \ref{rotacion3}.
+\end{itemize}
 
-bla bla
-\section{Algoritmo de generación de código}
-bla bla
+\subsection{Asociatividad de operadores dentro de expresiones}
+
+El chequeo de la asociatividad y las eventuales modificaciones en el árbol de expresión, a diferencia del tratamiento que se le da a los problemas de precedencia, no se realiza a medida que se obtiene el árbol, sino que se lo aplica solamente una vez, cuando ya se terminó de parsear la expresión.
+
+Esto se implementó así, ya que en ese punto, todos los elementos del árbol se encuentran posicionados respetando todas las precedencias, quedando potencialmente inconsistente la asociación de dos o más operadores infijos iguales, dentro del mismo nivel sintáctico, y con asociatividad a \textbf{derecha}, ya que por defecto todos los operadores son asociados a izquierda, debido al parser descendente recursivo que aplica \spirit.
+
+Además, cuando se detectan dos operadores no asociativos se genera un error por mal uso de ese operador dentro de la expresión. Tal como se analizó en la sección XXX.
+
+\subsection{Alcanzabilidad de símbolos y reglas}
+
+En la especificación pueden existir de símbolos y reglas declaradas que no pueden ser alcanzados desde el símbolo inicial de la gramática. Los mismos no son útiles en la gramática ya que nunca producirán cadenas del lenguaje. Los mismos no son considerados errores pero son informados mediante alertas (\texttt{warnings}).
+
+Este chequeo se implementó con una versión del algoritmo de Warshall\footnote{En honor a Stephen Warshall (1935 - 2006)}, que calcula la ``Clausura Transitiva'' de un grafo.
+
+Para aplicarlo, primero se construye una matriz de valores lógicos reflejando todas las reglas declaradas. Luego de computar la clausura, se recorre la fila del símbolo inicial, que pertenece a la \textbf{única} regla inicial de la gramática por ser \textbf{extendida}. Todo símbolo que se encuentra con valor falso es inalcanzable.
+
+\subsection{Consistencia de bloque de atributos y bloque de reglas}
+
+Este chequeo consiste en verificar que no existan símbolos declarados en el bloque de atributos, que no hallan sido involucrados en ninguna regla. Esto puede suceder se crearon los símbolos de la expresión de conjuntos que define la pertenencia de un atributo.
+
+La heurística utilizada, consiste en recorrer el \texttt{map} de símbolos no terminales y verificando que existe al menos una regla que lo tenga como parte izquierda.
+
+\subsection{Gramática bien definida}
+
 
 
 \normalsize
