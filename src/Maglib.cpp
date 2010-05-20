@@ -14,6 +14,7 @@
 #include "../include/Builders/Builder_plans.h"
 #include "../include/Builders/Builder_visit_sequences.h"
 #include "../include/Builders/Builder_code.h"
+#include "../include/Util/Utilities.h"
 #include "../include/Maglib.h"
 
 namespace genevalmag
@@ -59,6 +60,13 @@ int Maglib::gen_evaluator
 	Parser_AG p_mag;
 	if (p_mag.parse_grammar(path_input_file))
 	{
+		/* Erase and create the output folder */
+		if(!utilities::clean_output_folder(path_output))
+		{
+			cerr << "ERROR: the path " << path_output << " is invalid or inaccessible." << endl;
+			return -1;
+		}
+
 		/* Parsing success and is a MAG. Proceed to save. */
 		p_mag.save_grammar_file(path_output);
 

@@ -9,6 +9,10 @@
 #ifndef MAGLIB_H_
 #define MAGLIB_H_
 
+#include <string>
+
+using namespace std;
+
 namespace genevalmag
 {
 
