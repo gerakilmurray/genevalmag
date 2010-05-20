@@ -82,12 +82,10 @@
 
 #include <boost/tokenizer.hpp>
 
-#include "../include/Util/Utilities.h"
 #include "../include/Maglib.h"
 
 using namespace std;
 using namespace boost;
-using namespace utilities;
 
 namespace genevalmag
 {
@@ -170,6 +168,23 @@ bool parse_parameters(int argc, char *argv[], string &path_input_file, string &p
 	bool folder_output_setup(false);
 	bool name_file_output_setup(false);
 
+
+	/* Singular option case: Help info */
+	if (argc == 2)
+	{
+		string arg_h (argv[1]);
+		if (arg_h.compare("-h") == 0)
+		{
+			show_help_information();
+			exit(0);
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	/* Multiples options case */
 	int i(1);
 	while (i < argc)
 	{
@@ -177,6 +192,7 @@ bool parse_parameters(int argc, char *argv[], string &path_input_file, string &p
 		{
 			string arg_i (argv[i++]);
 			string value_arg_i(argv[i++]);
+
 			if ((arg_i.compare("-f") == 0) && (!file_input_setup) && (check_file_exist(value_arg_i)))
 			{
 				file_input_setup = true;
@@ -195,11 +211,6 @@ bool parse_parameters(int argc, char *argv[], string &path_input_file, string &p
 			else if ((arg_i.compare("-i") == 0) && (check_file_exist(value_arg_i)))
 			{
 				headers.push_back(value_arg_i);
-			}
-			else if (arg_i.compare("-h") == 0)
-			{
-				show_help_information();
-				exit(0);
 			}
 			else
 			{
@@ -236,9 +247,7 @@ int main
 	string name_library(DEFAULT_FILE_NAME);
 	vector<string> headers;
 
-	if((argc == 1) ||
-	   (!parse_parameters(argc, argv, path_input_file, path_folder_output, name_library, headers)) ||
-	   (!clean_output_folder(path_folder_output)))
+	if(!parse_parameters(argc, argv, path_input_file, path_folder_output, name_library, headers))
 	{
 		string err_use("ERROR: maggen wrong uses.\n\n");
 		cerr << err_use << endl;
@@ -259,10 +268,8 @@ int main
 	    file_input.close();
 	}
 
-	int exit_code(-1);
-
 	Maglib gen;
-	exit_code = gen.gen_evaluator(path_input_file, path_folder_output, name_library, headers);
+	int exit_code = gen.gen_evaluator(path_input_file, path_folder_output, name_library, headers);
 
 	if (exit_code == 0)
 	{
