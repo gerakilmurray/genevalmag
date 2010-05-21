@@ -1,6 +1,6 @@
 /**
-  *  \file		Mag.txt
-  *  \brief		Attribute Grammar example.
+  *  \file		ag_wuu_yang.input
+  *  \brief		Attribute Grammar example from Wuu Yang's paper.
   *  \date		15/02/2010
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
@@ -20,8 +20,8 @@ semantic domain
  * Block of Attributes *
  ***********************/
 attributes
-	s0 : syn <int> of {S};
-	s1  : syn	<int> of {X};
+	s0  : syn <int> of {S};
+	s1  : syn <int> of {X};
 	s2  : syn <int> of {Y};
 	s3  : syn <int> of {Y};
 	s4  : syn <int> of {Z};
@@ -59,7 +59,6 @@ rules
 			compute
 				X[0].s1 = X[0].i1;
 			end;
-			
 	// P5
 	Z ::= Y
 			compute
