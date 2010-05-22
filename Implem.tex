@@ -620,6 +620,28 @@ La heurística utilizada, consiste en recorrer el \texttt{map} de símbolos no t
 
 \subsection{Gramática bien definida}
 
+Este control es uno de los más importantes, ya que si la gramática por más que haya sido parseada correctamente, si no cumple con las condiciones de una MAG, nuestra herramienta la descarta y no le generará su correspondiente evaluador.
 
+Como ya me sencionó en el capítulo XXX, varias son las condiciones que se deben chequear.
+
+La heurística aplicada fue recorrer el \texttt{map} de reglas, donde para cada una verificábamos que estuviesen definidas dentro de su \texttt{map} de ecuaciones, una para cada uno de sus atributos sintetizados. Y a su vez, una ecuación para cada atributo heredado de sus símbolos de la parte derecha.
+
+Además, también se controlara que no existieran ecuaciones incorrectas, es decir:
+\begin{itemize}
+\item Ecuaciones para atributos heredados del símbolo de la izquierda.
+\item Ecuaciones para atributos sintetizados de símbolos de la parte derecha.
+\end{itemize}
+
+Cada vez que se detectaba un error, se lo informa mediante alguno de los siguientes mensajes según corresponda.
+
+% \vspace{0.4cm}
+\begin{flushleft}\texttt{``ERROR: ``E[1].syn\_1'' type synthetized, haven't an equation that defines it.''\\
+\vspace{0.2cm}
+``ERROR: ``S[0].inh\_1'' type inherited, is defined outside his scope.''\\
+\vspace{0.2cm}
+``ERROR: ``E[1].inh\_2'' type inherited, haven't an equation that defines it.''\\
+\vspace{0.2cm}
+``ERROR: ``S[0].syn\_2'' type synthetized, is defined outside his scope.''
+}\end{flushleft}
 
 \normalsize
