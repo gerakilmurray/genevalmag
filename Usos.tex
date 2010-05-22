@@ -54,16 +54,16 @@ La totalidad de la información generada por la herramienta es mostrada en la fi
 
 
 \section{Uso del evaluador generado}
-Para el usos del evaluador generado por \maggen necesitamos los 4 archivos generados en el directorio de salida, siguiendo con la salida de la seccion anterior, ellos son:
+Para el usos del evaluador generado por \maggen\ necesitamos los 4 archivos generados en el directorio de salida, siguiendo con la salida de la seccion anterior, ellos son:
 \begin{itemize}
 \item maggen.hpp.
 \item maggen.cpp.
 \item Plan.hpp.
 \item Node.hpp.
 \end{itemize}
-El evaluador generado por \maggen\ puede ser usado como un modulo C++ en conjunto con otro proyecto. En esta seccion seguiremos con un ejemplo el uso del evaluador para el ejemplo Wuu Yang, el cual se ha tratado en los capitulos anteriores (Ver entrada a \maggen en el apendice \ref{append:agwuuyang}).
+El evaluador generado por \maggen\ puede ser usado como un modulo C++ en conjunto con otro proyecto. En esta seccion seguiremos con un ejemplo el uso del evaluador para el ejemplo Wuu Yang, el cual se ha tratado en los capitulos anteriores (Ver entrada a \maggen\ en el apendice \ref{append:agwuuyang}).
 
-Como bien hemos visto en secciones anteriores, la entrada del evaluador generado por \maggen\ es un AST. El siguiente modulo de codigo C++ describe un AST para la gramatica del ejemplo de Wuu Yang.
+Como bien hemos visto en secciones anteriores, la entrada del evaluador generado por \maggen\ es un AST. El siguiente módulo de código C++ describe un AST para la gramática del ejemplo de Wuu Yang.
 
 \tiny
 \lstinputlisting[numbers=left, numberstyle=\tiny, numbersep=5pt, language=c++]{input_file_code/ast.cpp}
@@ -80,8 +80,12 @@ Los atributos de cada símbolo del AST esta con valores indefinidos, veamos en l
 
 Analicemos los valores de los atributos de cada símbolo en la siguiente tabla:
 \begin{center}\begin{tabular}{|| c | c | l ||}
-\hline  \hline
-\rowcolor[rgb]{0.8, 0.8, 0.8} \textbf{Símbolo}&\textbf{Atributo}&\textbf{Evaluación}\\ \hline
+\hline \hline
+
+\multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Símbolo}} &
+\multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Atributo}} &
+\multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Evaluación}} \\ \hline
+
 \multirow{2}{*}{\textbf{S}} & \multirow{2}{*}{s0} & \texttt{(eq 1) S.s0 = X.s1 + Y.s2 + Y.s3 + Z.s4}\\ 
 			&& \textbf{S.s0 = 4}\\ \hline
 
