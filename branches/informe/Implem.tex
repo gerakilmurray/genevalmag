@@ -634,14 +634,20 @@ Además, también se controlara que no existieran ecuaciones incorrectas, es dec
 
 Cada vez que se detectaba un error, se lo informa mediante alguno de los siguientes mensajes según corresponda.
 
-% \vspace{0.4cm}
-\begin{flushleft}\texttt{``ERROR: ``E[1].syn\_1'' type synthetized, haven't an equation that defines it.''\\
-\vspace{0.2cm}
-``ERROR: ``S[0].inh\_1'' type inherited, is defined outside his scope.''\\
-\vspace{0.2cm}
-``ERROR: ``E[1].inh\_2'' type inherited, haven't an equation that defines it.''\\
-\vspace{0.2cm}
-``ERROR: ``S[0].syn\_2'' type synthetized, is defined outside his scope.''
-}\end{flushleft}
+\texttt{\begin{itemize}
+\item ``ERROR: ``E[1].syn1'' type synthetized, haven't an equation that defines it.''
+\item ``ERROR: ``S[0].inh1'' type inherited, is defined outside his scope.''
+\item ``ERROR: ``E[1].inh2'' type inherited, haven't an equation that defines it.''
+\item ``ERROR: ``S[0].syn2'' type synthetized, is defined outside his scope.''
+\end{itemize}}
+
+
+\section{Obtención de planes de evaluación}
+
+Como ya se explicó en el diseño, el propósito final de \maggen\ es obtener todos los planes posibles de la gramática de entrada.
+
+Los planes están representamos como una secuencia de identificadores de ecuaciones. Utilizando la clase \texttt{vector} de la STL y manteniendo la unicidad en la enumeración de las ecuaciones.
+
+Como se generan en muchos casos los mismos planes muchas veces, se desidió.
 
 \normalsize
