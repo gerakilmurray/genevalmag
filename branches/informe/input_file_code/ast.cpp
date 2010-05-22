@@ -1,6 +1,6 @@
 /**
-  *  \file      Eval_mag_proof.cpp
-  *  \brief     File of proof for Eval_mag. 
+  *  \file      ag_wuu_yang.cpp
+  *  \brief     File of proof from Wuu Yang's paper.
   *  \date      Thu Mar 25 21:04:46 2010
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
@@ -14,13 +14,11 @@
 using namespace evalmag;
 
 /**
-  * Main method of the Eval_mag.
+  * Main method.
   */
 int main()
 {
     maggen eval_mag;
-    eval_mag.print_v_seq();
-	eval_mag.translate_mag();
 
     S node_s1(1);
 	X node_s1_x(4);
@@ -34,8 +32,6 @@ int main()
 
     cout << " After evaluation." << endl;
     cout << node_s1.to_string() << endl;
-    
-    cout << "FIN EVAL_AG" << endl;
 
     return 0;
 }
