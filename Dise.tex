@@ -50,6 +50,7 @@ Notar que, el mensaje de error indicara la ruta donde fueron almacenados los gra
 En lo que resta del capitulo se abordaran detalles de cada etapa, analizada en esta sección.
 
 \section{Lenguaje de especificación de las MAG}
+\label{sec:lenguajeMAG}
 
 El lenguaje de especificación utilizado para la descripción de una Gramática de atributos (MAG) fue definido en el marco de este proyecto. Esto permite definir una gramática de atributos como input de \maggen.
  
@@ -499,7 +500,7 @@ Analicemos ahora el diseño de los paquetes nombrados arriba, y con ellos la est
 
 
 \subsection*{Chequeos}
-
+\label{subsec:check}
 El conjuntos de chequeos que se realizan sobre la gramática de entrada a \maggen, están directamente relacionados con el concepto de gramática bien definida analizado en el cap XX. Además, se aplican una serie de chequeos extras para evitar cálculos inconsistentes en las etapas posteriores. La totalidad de los chequeos, son realizados sobre el bloque de reglas de la gramática\footnote{En su mayoría los chequeos se realizan sobre las ecuaciones de las reglas.}, debido a que este, es el más significativo y sobre el cual se apoyan los cálculos posteriores.
 
 Los chequeos realizados son clasificados en sintácticos y semánticos, los primeros, en su mayoría, son realizados durante el parser, en cambio, los chequeos semánticos se realizan luego del parser de cada regla, aplicando escaneos específicos. De estos últimos nos encargaremos en esta sección.
