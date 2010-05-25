@@ -6,6 +6,7 @@ Para usar \maggen\ debemos invocar la herramienta mediante la linea de comando, 
 \maggen\ puede ser invocado utilizando una serie de parametros que inciden directamente sobre el resultados producido por la herramienta. En el desarrollo de este capitulo trataremos estos temas en detalles y ademas analizaremos el uso del evaluador generado por \maggen.
 
 \section{Uso de \maggen: Parametros y opciones}
+\label{sec:uso-maggen}
 La totalidad de parámetros y opciones de \maggen\ son opcionales. La sintaxis de invocación de la herramienta esta dada por:\\
 \begin{center}\texttt{maggen [OPTIONS]}\end{center}
 Las opciones son las siguientes:
@@ -126,47 +127,93 @@ Notar que el ejemplo Wuu yang analizado es considerablemente simple, pero podemo
 
 \section{Mensajes y avisos}
 
-En la siguiente tabla analizamos la descripcion de los posibles errores y aviso que se deben tener en cuenta cuando usamos \maggen.
+En la tabla \ref{table:mensajes} analizamos la descripción de los posibles errores y avisos que se deben tener en cuenta cuando usamos \maggen.
 \newpage
+
+\begin{small}
 \begin{longtable}{| p{5cm} || p{5cm} | p{5cm} |}
-\caption{Tabla con mensajes de error en \maggen.}\label{table:mensajes}\\ 
+
+\caption{Tabla con mensajes de error y avisos en \maggen.}\label{table:mensajes}\\ 
 \hline
 
-\rowcolor[rgb]{0.8, 0.8, 0.8} \textbf{Mensaje} & \textbf{Descripcion} & \textbf{Ayuda}\\
-\hline
+ \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}c||}{\textbf{Mensaje}} & \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}c|}{\textbf{Descripción}} & \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}c|}{\textbf{Ayuda}}\\
+\hline \hline
 
-ERROR: operator non-associtive using wrong use \ldots & bla bla & no se.\\ \hline
-ERROR: Symbol Non-Teminal \textit{SYMBOL} uses in the right part without rule & bla bla & nose \\ \hline
-ERROR: \textit{SYMBOL} [ \textit{NUM} ]. \textit{ATTR} type synthetized, haven't an equation that defines it. & bla bla & nose \\ \hline
-ERROR: \textit{SYMBOL} [ \textit{NUM} ].\textit{ATTR} type inherited, haven't an equation that defines it. & bla bla & nose \\ \hline
+ERROR: operator non-associtive using wrong use: \textit{OP} & El operador \textit{OP} es non-assoc y se pretende una asociación del mismo, en alguna expresión. & Modifique la definición del operador o chequee la expresión.\\ \hline
 
-ERROR: \textit{SYMBOL} [ \textit{NUM} ].\textit{ATTR} type synthetized, is defined outside his scope. & bla bla & nose \\ \hline
+ERROR: Symbol Non-Teminal \textit{SYM} uses in the right part without rule & El símbolo \textit{SYM}, usado en la gramática, no tiene regla que lo defina. & Chequee los símbolos usados o defina una regla para el símbolo \textit{SYM}. \\ \hline
 
+ERROR: \textit{SYM} [\textit{NUM}]. \textit{ATTR} type synthetized, haven't an equation that defines it. & Gramática mal definida, atributo sintetizado \textit{ATTR} sin ecuacion que lo defina. Para mas información chequee la sección \ref{subsec:check} & Defina ecuacion para la instancia o chequee la definición de la gramática. \\ \hline
 
-ERROR: the file input non-exist & blabla & noose \\ \hline
-ERROR: Parsing Failed, the following text will not be able to parse: \ldots & bla bla & nose \\ \hline
+ERROR: \textit{SYM} [\textit{NUM}].\textit{ATTR} type inherited, haven't an equation that defines it. & Gramática mal definida, atributo heredado \textit{ATTR} sin ecuacion que lo defina. Para mas información chequee la sección \ref{subsec:check} & Defina ecuacion para la instancia o chequee la definición de la gramática. \\ \hline
 
-ERROR: non-terminal symbol \textit{SYMBOL} used does not belong to the rule: \textit{RULE} & bla bla & nose \\ \hline
-ERROR: Index \textit{NUM} of symbol  \textit{SYMBOL} incorrect. & bla bla & nose \\ \hline 
-ERROR: \textit{ATTR} Attribute non-existent. Check the attributes used in the symbols. & bla bla & nose. \\ \hline
-ERROR: Type not expected from l\_value." & bla bla & nose \\ \hline 
-ERROR: infix operator non-exist: \textit{OP-INFIX}. & bla bla & nose \\ \hline 
-ERROR: Function non-exist: \textit{FUNCTION}. & bla bla & nose \\ \hline 
-ERROR: postfix operator non-exist: \textit{OP-POSFIX}. & bla bla & nose \\ \hline 
-ERROR: prefix operator non-exist: \textit{OP-PREFIX}. & bla bla & nose \\ \hline 
-ERROR: The grammar isn't extended grammar. & bla bla & nose \\ \hline
-ERROR: the path \textit{PATH} is invalid or inaccessible. & bla bla & nose \\ \hline
-ERROR: One o more graph ADP has an cycle in its dependencies. Look the folder \textit{PATH-OUTPUT}. & bla bla & nose \\ \hline 
-ERROR: Path non exist: \textit{PATH}. & bla bla & nose \\ \hline 
-ERROR: maggen wrong uses. & bla bla & nose \\ \hline
+ERROR: \textit{SYM} [\textit{NUM}].\textit{ATTR} type synthetized, is defined outside his scope. & La instancia \textit{SYM} [\textit{NUM}].\textit{ATTR} esta definida fuera de su regla de alcance. & Defina ecuacion en el alcance de la regla o chequee la instancia usada. \\ \hline
 
 
+ERROR: the file input non-exist & El archivo de entrada a \maggen\ no existe o es inaccesible. & Chequee la ruta del archivo de entrada. \\ \hline
+
+ERROR: Parsing Failed, the following text will not be able to parse: \ldots & Error sintáctico en la definición de la gramática. Para mas información chequee la sección \ref{sec:lenguajeMAG} & Revise la sintaxis del lenguaje de definición para \maggen\ y modifique su definición. \\ \hline
+
+ERROR: non-terminal symbol \textit{SYM} used does not belong to the rule: \textit{R} & Instancia utilizada fuera de su entorno. Símbolo de la instancia no pertenece al entorno de la regla. & Revise el uso de la instancia o modifique la regla \textit{R}.  \\ \hline
+
+ERROR: Index \textit{NUM} of symbol  \textit{SYM} incorrect. & Índice \textit{NUM} de instancia fuera de rango. No corresponde el índice con el orden sintáctico del símbolo en la regla. & Revise el índice \textit{NUM} o modifique la definición de la regla.  \\ \hline 
+
+ERROR: \textit{ATTR} Attribute non-existent. Check the attributes used in the symbols. & El atributo no pertenece al símbolo. & Defina el atributo \textit{ATTR} o modifique el uso de esa instancia. \\ \hline
+
+ERROR: Type not expected from l\_value." & Error de tipo. El tipo que sintetiza la expresión r\_value no corresponde con el tipo de l\_value & Revise la expresión en busca de mal uso de operadores, o modifique los tipos de los atributos u operadores. \\ \hline
+ 
+ERROR: infix operator non-exist: \textit{OP-IN}. & El operador infijo \textit{OP-IN} utilizado en la expresión no esta definido o esta siendo usado con tipos erróneos. & Defina el operador o modifique la expresión. \\ \hline
+
+ 
+ERROR: Function non-exist: \textit{F}. & La función \textit{F} utilizada en la expresión no esta definida o esta usada con tipos erróneos. & Defina la función o modifique la expresión. \\ \hline
+ 
+ERROR: postfix operator non-exist: \textit{OP-POS}. & El operador posfijo \textit{OP-POS} utilizado en la expresión no esta definido o esta usado con tipos erróneos. & Defina el operador o modifique la expresión. \\ \hline 
+ERROR: prefix operator non-exist: \textit{OP-PRE}. & El operador prefijo \textit{OP-PRE} utilizado en la expresión no esta definido o esta usado con tipos erróneos. & Defina el operador o modifique la expresión. \\ \hline 
+ERROR: The grammar isn't extended grammar. & Error en la definición de la gramática, la misma no cumple con la propiedad de gramática extendida. ver detalles en sección XXX & Chequee la definición de la gramática y modifiquela para que cumple la propiedad. \\ \hline
+ERROR: the path \textit{PATH} is invalid or inaccessible. & El camino (PATH) es inexistente o inaccesible. & Verifique la ruta e invoque a \maggen\ nuevamente. \\ \hline
+
+ERROR: One o more graph ADP has an cycle in its dependencies. Look the folder \textit{PATH-OUTPUT}. & El proceso de \maggen\ tuvo que ser abortado, debido a la existencia de planes con dependencias circulares.  & Chequee la definición de las ecuaciones que se vinculan con los grafos mostrados en \textit{PATH-OUTPUT}. \\ \hline 
+
+ERROR: Path non exist: \textit{PATH}. & Ruta errónea o inaccesible. & Modifique la ruta PATH o ingrese una nueva. \\ \hline 
+ERROR: maggen wrong uses. & Mal uso de \maggen, uno de los argumentos es erróneo, en la invocación. & Modifique los argumentos. Para mas detalle chequee sección \ref{sec:uso-maggen} \\ \hline
 
 
-ERROR: the AST input is wrong create. & bla bla & nose \\ \hline
-ERROR: the AST input is wrong create. & bla bla & nose \\ \hline
-ERROR: Fatal action. & bla bla & nose \\ \hline
-ERROR: Index out bounds: combined ADP graphs.& bla bla & nose \\ 
-\hline 
+ERROR: Index out bounds: combined ADP graphs.& Error fatal en la generación de contextos para la construcción de ADP. & Chequee la entrada a \maggen.\\ 
+\hline \hline
+
+\multicolumn{3}{||||>{\columncolor[rgb]{0.8, 0.8, 0.8}}c||||}{\textbf{Avisos}} \\
+\hline \hline
+
+WARNING: Symbol Non-Teminal  \textit{SYM} unreachable. & El simbol \textit{SYM} es inalcanzable desde la regla inicial de la gramática. El mismo es ignorado en el proceso de computo. & Chequee la gramática de entrada a \maggen\ o elimine el símbolo en caso de uso innecesario. \\ \hline
+
+WARNING: Sort duplicate was ignored: $-->$ \textit{S} & La declaración del sort \textit{S} esta duplicada. \maggen\ ignora dicha linea. & Elimine la declaración del sort \textit{S} o modifique la misma en caso de declaración de sort distinto. \\ \hline
+
+WARNING: Declaration duplicate was ignored: $-->$ \textit{F} & La declaración de la función \textit{F} esta duplicada. \maggen\ ignora dicha linea. & Elimine la declaración de la función \textit{F} o modifique la misma en caso de declaración de función distinta. \\ \hline
+
+WARNING: Ignores the eq \textit{E} duplicate definition for \textit{IN} in rule: $-->$ \textit{R} & La ecuacion \textit{E} para la instancia \textit{IN} en la regla \textit{R} es ignorada por \maggen, debido a que la instancia \textit{IN} ya tiene ecuacion que la defina. & Chequee las ecuaciones que definen la instancia \textit{IN} y elimine una o verifique posibles errores de tipeo en la ecuacion. \\ \hline
 
 \end{longtable}
+\end{small}
+\normalsize
+En la tabla anterior se pudo analizar tanto los errores, como los avisos en el uso de \maggen. Esta diferencia en los mensajes, se hace en el sentido de que los avisos, no son considerados errores fatales en el proceso de la herramienta y por ende no es necesario abortar el funcionamiento. Los errores considerados avisos, \textbf{son ignorados} dentro del funcionamiento interno de \maggen.
+
+
+Al igual como analizamos para \maggen, a continuación veamos los mensajes de error en el uso del evaluador generado:
+
+ \begin{table}[h]
+\begin{small}
+\begin{tabular}{| p{5cm} || p{5cm} | p{5cm} |}
+\hline \hline
+ \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}c||}{\textbf{Mensaje}} & \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}c|}{\textbf{Descripción}} & \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}c|}{\textbf{Ayuda}}\\
+\hline 
+
+ERROR: the AST input is wrong create. & El AST de entrada al evaluador generado por \maggen\ está mal formado. & chequee el AST o modifique la gramática de entrada a \maggen\ y genere un nuevo evaluador. \\ \hline
+ERROR: Fatal action. & Se desea invocar a la computación de una ecuacion errónea e inexistente. & Chequee el AST de entrada al evaluador. \\ \hline
+\end{tabular}
+\caption{Mensajes de error cuando usamos el evaluador generado por \maggen.}
+\end{small}
+\end{table}
+
+
+El error mas importante y mas común cuando se usa el evaluador generado por \maggen\ esta dado por el AST de entrada. Es aconsejable que se chequee de manera exhaustiva la creación de estos AST para evitar complicaciones.
+
