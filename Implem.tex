@@ -1,4 +1,4 @@
-\chapter{Detalles de Implementación de \maggen}
+1\chapter{Detalles de Implementación de \maggen}
 \label{chap:implem}
 \minitoc
 
@@ -59,7 +59,7 @@ A $-$                  B  & Diferencia, acepta A pero no a B  \\ \hline
 A $\textasciicircum$   B  & Disyunción exclusiva, acepta A o B, pero no a ambos \\ \hline
 A $>>$                 B  & Secuencia, acepta A seguido de B \\ \hline
 \multirow{2}{*}{A $\%$ B} & Lista, acepta A separados por ocurrencias de B.\\
-                          & Es equivalente a: A $>>$ *(B $>>$ A)\\ \hline
+                          & Es equivalente a: A $>>$ *(B $>n$ A)\\ \hline
 $*$                    A  & Estrella de Kleene, 0 o más veces \\ \hline
 $+$                    A  & Positivo, 1 o más veces \\ \hline
 $!$                    A  & Opcional, 0 o 1 vez \\ \hline
@@ -179,7 +179,7 @@ r_id_op = ch_p('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>'|'|'|'~'|'.'|','|'?';
 \begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
 r_boolean = str_p("true")|"false";
 
-r_char = lexeme_d[ch_p('\'')>>(anychar_p)>>ch_p('\'')];
+r_char = lexeme_d[ch_p('\'')>>(anychar_p)n>ch_p('\'')];
 
 r_string = lexeme_d[ch_p('\"')>>r_string_lit>>ch_p('\"')];
 
@@ -291,7 +291,7 @@ r_decl_attr = (r_ident[&add_attribute][st_attributes.add]%',')>>
               '<'>>r_sort_st[&save_sort_attr]>>'>'>>
               lexeme_d[str_p("of")>>space_p]>>
               (r_conj_symb |
-               (str_p("all")>>!('-'>>r_conj_symb))
+               (str_p("all")n>!('-'>>r_conj_symb))
               )[&save_member_list_attr]>>
               ';';
 
@@ -354,7 +354,7 @@ r_compute_eq = lexeme_d[str_p("compute")>>space_p]>>
                +(r_equation)>>
                str_p("end");
 
-r_equation = r_instance[&create_equation]>>
+r_equation = r_instance[&create_equation]n>
              '='>>
              r_expression[&save_rvalue]>>
              ';';
@@ -648,6 +648,146 @@ Como ya se explicó en el diseño, el propósito final de \maggen\ es obtener to
 
 Los planes están representamos como una secuencia de identificadores de ecuaciones. Utilizando la clase \texttt{vector} de la STL y manteniendo la unicidad en la enumeración de las ecuaciones.
 
-Como se generan en muchos casos los mismos planes muchas veces, se desidió.
+Como en general, se iban a generar en muchos casos los mismos planes, se desidió mantener un \texttt{vector} con todos los planes diferentes, así solo generaríamos la mínima cantidad de planes únicos.
+
+Como en el algoritmo que se presenta en el artículo de Wuu Yang(ver bibliografía XXX), a cada plan se lo asocia con un \texttt{key}, primero implementamos esa clave como una estructura con los siguientes datos:
+\begin{itemize}
+\item La regla a la cual pertenece el plan
+\item Una secuencia para computar sus atributos
+\end{itemize}
+
+Esa secuencia se representó de igual manera que un plan, ya que computar un atributo es equivalente a saber el identificador de la ecuación que lo tiene como \texttt{l-value}.
+
+El conjunto de estas secuencias, son los planes proyectados, es decir, las exigencias que se le imponen a una regla desde un contexto superior que la invoca a que se compute. Para el símbolo inicial, esta secuancia es obtenida como el órden topológico de su grafo DCG, ya que este contiene todas las dependencias entre los atributos de la regla, el cual si o si, será un órden de computación consistente para sus ecuaciones.
+
+Al igual que con los planes de evaluación, los planes proyectados también sufrían de muchas repeticiones, por lo cual se usaron índices indirectos a un repositorio de los mismos almacenados en un \texttt{vector}.
+
+Cada plan proyectado estaba bajo una clave particular, la cual según el algoritmo debía contener:
+\begin{itemize}
+\item La regla a la cual pertenece el plan proyectado
+\item Una secuencia para computar sus atributos
+\item El símbolo con el cual se proyento el plan de evaluación
+\end{itemize}
+
+Los dos primeros valores, corresponden a un \texttt{key} de un plan de evaluación, asi que se usó directamente esa estructura.
+
+\subsection{Construcción de grafos}
+
+Para la representación de los grafos uitlizamos la \boost\ \textit{\textbf{Graph Library}} (\textbf{BGL}). Ya que la misma presentaba muchas funcionalidades y ya se encontraba como una dependencia externa de la herramienta.
+
+Como en la mayoria de los componentes de esta biblioteca, los mismos eran plantillas que necesitaban ser instanciados.
+
+Las dependencias dentro de las reglas se dan entre las instancias de atributos de las ecuaciones y además los literales.
+
+En la \textbf{BGL} los valores que se quieren asociar a los nodos, se vinculan mediante \textit{propiedades} inherentes a cada uno.
+
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+struct vertex_data_t
+{
+    typedef vertex_property_tag kind;
+};
+typedef property <vertex_data_t, const genevalmag::Expr_leaf*> property_vertex_dp;
+typedef adjacency_list <hash_setS, vecS, directedS, property_vertex_dp> Graph;
+typedef Graph::vertex_descriptor Vertex;
+\end{lstlisting}
+
+Se mantienen dentro de la herramienta un \texttt{map} para cada uno de los tipos de grafos necesarios y además para los subgrafos ADP cíclicos que eventualmente se detecten y para optimizar la construcción de los otros, los grafos que contienen todas las instancias de cada regla sin aristas entre si.
+
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+map <string, Graph>                 attr_vertex_graphs;
+map <unsigned short, Graph>         p_Dp_graphs;
+map <string, Graph>                 p_Down_graphs;
+map <unsigned short, Graph>         p_Dcg_graphs;
+map <vector<unsigned short>, Graph> p_Adp_graphs;
+map <vector<unsigned short>, Graph> p_Adp_subgraphs_cyclics;
+\end{lstlisting}
+
+El chequeo de ciclicidad sobre los grafos ADP, se implementó utilizando el algoritmo de búsqueda en profundidad (Depth-first search) de \boost\ combinado con la creación de un ``visitador'' especilizado que a medida recorre el grafo, va guardado los nodos y aristas visitadas mientras no se halla detectado un ciclo. Ese subgrafo es lo que se guarda y se muestra al usuario.
+
+La detección de ciclos se realiza cuando el algoritmo invoca a la función \texttt{back\_edge}, en donde nosotros prendemos una bandera.
+
+Tanto el grafo como la variable lógica, usada como bandera, son pasadas en el constructor y utilizadas internamente mediante referencias.
+
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+struct cycle_detector: public dfs_visitor<>
+{
+  public:
+    cycle_detector(bool& has_cycle, Graph &graph):
+      _has_cycle(has_cycle),
+      _graph_cycle(graph)
+    {}
+
+    template <class Edge, class G>
+    void examine_edge(Edge u, const G &g)
+    {
+      if(!_has_cycle)
+      {
+        ...
+      }
+    }
+
+    template <class Edge, class G>
+    void back_edge(Edge u, const G& g)
+    {
+      _has_cycle = true;
+    }
+
+  protected:
+    bool   &_has_cycle;
+    Graph  &_graph_cycle;
+};
+\end{lstlisting}
+
+Para cada regla, se tienen que considerar todos los posibles contextos inferios posibles de acuerdo a las reglas que tengan los símbolos no terminales de su parte derecha. Se implementó un método que recursivamente genera un contexto diferente y guarda la regla cuando ya no quedan más variantes.
+
+Al igual que con los planes, los contextos de las reglas se repiten mucho, así que se utilizaron índices indirectos sobre un \texttt{vector} que almacena unicamente los contextos diferentes.
+
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+vector < Order_rule >    contexts_uniques;
+vector < Order_eval_eq > plans_uniques;
+vector < Order_eval_eq > plans_project_uniques;
+\end{lstlisting}
+
+Antes de insertar un elemento en cualquiera de estos repositorios se verifica que no exista. En caso de que ya se encuentre, se devuelve el índice correspondiente dentro del vector, sino se insertará al final y se devolverá el índice del último elemento.
+
+Una vez que se generaron todos los tipos de grafos, los mismos son guardados en distintos directorios en formato \textbf{dot}\cite{dot}. Para ello utilizamos la función \texttt{write\_graphviz} perteneciente a al módulo Graphviz de \boost.
+
+
+\section{Algoritmo de Computar Planes de Wuu Yang}
+
+\begin{lstlisting}[basicstyle=\footnotesize, escapeinside=<>, language=inform]
+Algorithm: ComputePlan
+
+WL := <$\emptyset$>
+<$\Delta$> := a function that is undefined in every place
+<$\mu$> := an arbitrarily chosen evaluation order of the start symbol's attributes
+
+for each production q whose left-hand-side nonterminal is the start symbol S do
+  WL := WL <$\cup$> { (q , <$\mu$>) }
+end for
+
+repeat
+  repeat
+    (q, <$\omega$>) := an element of WL
+    WL := WL - { (q, <$\omega$>) }
+  until <$\Delta$>(q, <$\omega$>) = undefined
+  
+  <$\Delta$> := [<$\Delta$> | <$\Delta$>(q, <$\omega$>) = defined ]
+  
+  Let production q be denoted by X<$_{0}$> <$\rightarrow$> <$\alpha_{0}$>X<$_{1}$><$\alpha_{1}$>X<$_{2}$><$\alpha_{2}$> <$\ldots$> X<$_{k}$><$\alpha_{k}$>.
+  
+  for each ADP (q | p<$_{1}$>, p<$_{2}$>, <$\ldots$> , p<$_{k}$>) <$\in$> SADP (q) do
+    <$\psi$> := ComputeOrder (ADP (q | p<$_{1}$>, p<$_{2}$>, <$\ldots$> , p<$_{k}$>), <$\omega$>)
+    <$\gamma$>[q , <$\omega$>, p<$_{1}$>, p<$_{2}$>, <$\ldots$> , p<$_{k}$>] := <$\psi$>
+    for each nonterminal X<$_{i}$> appearing on the right-hand-side of production q do
+      <$\psi_{i}$> := project (<$\psi$>, {X<$_{i}$>'s attribute occurrences})
+      <$\theta$>[q , <$\omega$>, i , p<$_{1}$>, p<$_{2}$>, <$\ldots$> , p<$_{k}$>] := <$\psi_{i}$>
+      if <$\Delta$>(<$p_{i}$>, <$\psi_{i}$>) = undefined then
+        WL := WL <$\cup$> { (<$p_{i}$>, <$\psi_{i}$>) }
+      end if
+    end for
+  end for
+until WL = <$\emptyset$>
+\end{lstlisting}
 
 \normalsize
