@@ -1,17 +1,121 @@
 \chapter{Usando \maggen}
 \label{chap:usos}
 \minitoc
-Para usar \maggen\ debemos invocar la herramienta mediante la linea de comando, es decir, debemos contar con una terminal\footnote{En sistemas \textit{windows} compatible: win+R y luego \texttt{cmd} y en sistemas \textit{unix}: Alt+f2 y luego \texttt{xterm}} para su ejecución. Por cuestiones de simpicidad y flexibilidad de la herramienta, no se considero el desarrollo de un \textit{front-end} para \maggen. Además, debemos tener en cuenta, que el usuario presentara interes en el resultado generado de \maggen y no de una innecesaria interfaz grafica, que entorpeceria su comportamiento combinatorio con otros comandos.
+Para usar \maggen\ debemos invocar la herramienta mediante la linea de comando, es decir, debemos contar con una terminal\footnote{En sistemas \textit{windows} compatible: win+R y luego \texttt{cmd} y en sistemas \textit{unix}: Alt+f2 y luego \texttt{xterm}} para su ejecución. Por cuestiones de simplicidad y flexibilidad de la herramienta, no se considero el desarrollo de un \textit{front-end} para \maggen. Además, debemos tener en cuenta, que el usuario presentara interés en el resultado generado de \maggen y no de una innecesaria interfaz gráfica, que entorpecería su comportamiento combinatorio con otros comandos.
   
-\maggen\ puede ser invocado utilizando una serie de parametros que inciden directamente sobre el resultados producido por la herramienta. En el desarrollo de este capitulo trataremos estos temas en detalles y ademas analizaremos el uso del evaluador generado por \maggen.
+\maggen\ puede ser invocado utilizando una serie de parámetros que inciden directamente sobre el resultados producido por la herramienta. En el desarrollo de este capitulo trataremos estos temas en detalles y además analizaremos el uso del evaluador generado por \maggen. En la sección siguiente abordaremos detalles en la compilación e instalación de la herramienta.
 
-\section{Uso de \maggen: Parametros y opciones}
+\section{Compilación e Instalación de \maggen}
+\maggen\ puede ser descargado desde el repositorio svn (\cite{svn}) utilizando el siguiente comando:
+\begin{verbatim}
+ svn checkout http://genevalmag.googlecode.com/svn/trunk/ maggen
+\end{verbatim}
+
+Una vez descargado \maggen\ contaremos con un directorio llamado {\sf maggen/}
+
+Para compilar e instalar \maggen\ se deberán ejecutar en una terminal los siguientes comandos desde la carpeta {\sf /maggen} :
+\begin{verbatim}
+1.- maggen$ ./configure
+2.- maggen$ make clean
+3.- maggen$ make
+4.- maggen$ sudo make install
+\end{verbatim}
+\subsection*{Directorio {\sf maggen}}
+Luego de la compilación e instalación, el directorio raíz de \maggen\ se compone de lo siguiente:
+\begin{itemize}
+\item \textbf{/bin} Directorio que contiene modulos estáticos necesarios para la generación de código y uso del evaluador obtenido.
+{\footnotesize \begin{verbatim}
+ maggen$ ls -R bin/
+ bin:
+ lib
+
+ bin/lib:
+ Node.hpp  Plan.hpp
+\end{verbatim} }
+ 
+\item \textbf{/src} Directorio raíz en el que se encuentran todos los archivos fuentes.
+{\footnotesize \begin{verbatim}
+maggen$ ls -R src/ 
+src/:
+Attr_grammar  Builders  Expression_tree  maggen.cpp  Maglib.cpp  Parser  Util
+
+src/Attr_grammar:
+Attr_grammar.cpp  Attribute.cpp  Equation.cpp  Function.cpp  Rule.cpp  Sort.cpp  Symbol.cpp
+
+src/Builders:
+Builder_code.cpp  Builder_graphs.cpp  Builder_plans.cpp  Builder_visit_sequences.cpp
+
+src/Expression_tree:
+Expression.cpp  Expr_function.cpp  Expr_instance.cpp  Expr_leaf.cpp  Expr_literal.cpp  Expr_node.cpp
+
+src/Parser:
+Parser_AG.cpp  Semantics_actions.cpp  Semantics_checks.cpp
+
+src/Util:
+Utilities.cpp
+\end{verbatim} }
+
+\item \textbf{/include} Directorio raíz en el que se encuentran todos los archivos de cabecera.
+
+{\footnotesize \begin{verbatim}
+maggen$ ls -R include/
+include/:
+Attr_grammar  Builders  Expression_tree  Maglib.h  Parser  Util
+
+include/Attr_grammar:
+Attr_grammar.h  Attribute.h  Equation.h  Function.h  Rule.h  Sort.h  Symbol.h
+
+include/Builders:
+Builder_code.h  Builder_graphs.h  Builder_plans.h  Builder_visit_sequences.h
+
+include/Expression_tree:
+Expression.h  Expr_function.h  Expr_instance.h  Expr_leaf.h  Expr_literal.h  Expr_node.h
+
+include/Parser:
+Parser_AG.h  Semantics_actions.h  Semantics_checks.h
+
+include/Util:
+Utilities.h
+\end{verbatim}}
+
+\item \textbf{/scripts} Directorio que contiene scripts útiles para el usuario, por ejemplo: \texttt{dot2png.sh} para convertir a imagen \textit{png} los archivos de grafos y planes generados por \maggen.
+{\footnotesize \begin{verbatim}
+ maggen$ ls -R scripts/
+ scripts/:
+ dot2png.sh
+\end{verbatim} }
+ 
+\item \textbf{/examples} En este directorio se encuentran tres ejemplos de gramáticas para probar la herramienta.
+{\footnotesize \begin{verbatim}
+ maggen$ ls -R examples/
+ examples/:
+ ag_aritmetic  ag_count  ag_wuu_yang
+
+ examples/ag_aritmetic:
+ ag_aritmetic.cpp  ag_aritmetic.input
+
+ examples/ag_count:
+ ag_count.cpp  ag_count.input
+
+ examples/ag_wuu_yang:
+ ag_wuu_yang.cpp  ag_wuu_yang.input
+\end{verbatim} }
+
+\item \textbf{/doc} Directorio que contiene la documentación de la herramienta (doxygen).
+\item \textbf{/Release} Directorio con los archivos compilados.
+\item Archivos usados por automake y autoconf para generar los archivos Makefile y el script configure que permiten automatizar el proceso de compilación, empaquetado e instalación del proyecto.
+\end{itemize}
+
+Ahora ya estamos listos para empezar a usar \maggen, en las siguientes secciones analizaremos como usar la herramienta.
+
+
+\section{Uso de \maggen: Parámetros y opciones}
 \label{sec:uso-maggen}
 La totalidad de parámetros y opciones de \maggen\ son opcionales. La sintaxis de invocación de la herramienta esta dada por:\\
 \begin{center}\texttt{maggen [OPTIONS]}\end{center}
 Las opciones son las siguientes:
 \begin{description}
-\item [-f  file] Definir el archivo de entrada de \maggen\ como \texttt{file}. Si omitimos esta opción \maggen espera la entrada por la entrada estándar (cin) hasta leer el caracter EOF (end of file) \footnote{En sistemas unix el caracter EOF puede ser producido con Ctrl+D dentro de una consola de comandos.}.
+\item [-f  file] Definir el archivo de entrada de \maggen\ como \texttt{file}. Si omitimos esta opción \maggen espera la entrada por la entrada estándar (cin) hasta leer el carácter EOF (end of file) \footnote{En sistemas unix el carácter EOF puede ser producido con Ctrl+D dentro de una consola de comandos.}.
 \item [-i  header] Incluir \texttt{header} en la generación de código. Genera un \texttt{\#include ``header''} del archivo que referencia esa ruta. Dicha linea, \maggen la agrega al archivo generado.
 \item [-fo folder] Define \texttt{folder} como el directorio de salida para \maggen. Si omitimos esta opción, \maggen\ usa el folder por defecto ``\textit{./out\_maggen/}''.
 \item [-o  name] Define a \texttt{name} como el nombre de la clase y del archivo generado por \maggen. Si omitimos esta opción, \maggen\ usa por defecto el nombre ``\textbf{mag\_eval}''.
@@ -29,7 +133,7 @@ A continuación observemos algunos ejemplo de invocación de \maggen.
 \caption{\label{fig:outnormal} Usando \maggen\ con opciones.}
 \end{figure}
 
-\item Si invocamos a \maggen\ sin la opción \texttt{-f} (independientemente que usemos o no las demas opciones) se espera la entrada por entrada estándar. Esto nos permite poder utilizar a \maggen\ en conjunto con otros comandos, Ejemplo:\\ \texttt{cat file | maggen -fo ./out/}.\\ Esto muestra a \maggen\ en conjunto con \texttt{cat} usando una tuberia (pipe o |).
+\item Si invocamos a \maggen\ sin la opción \texttt{-f} (independientemente que usemos o no las demas opciones) se espera la entrada por entrada estándar. Esto nos permite poder utilizar a \maggen\ en conjunto con otros comandos, Ejemplo:\\ \texttt{cat file | maggen -fo ./out/}.\\ Esto muestra a \maggen\ en conjunto con \texttt{cat} usando una tubería (pipe o |).
 
 \end{itemize}
 
@@ -55,14 +159,14 @@ La totalidad de la información generada por la herramienta es mostrada en la fi
 
 
 \section{Uso del evaluador generado}
-Para el usos del evaluador generado por \maggen\ necesitamos los 4 archivos generados en el directorio de salida, siguiendo con la salida de la seccion anterior, ellos son:
+Para el usos del evaluador generado por \maggen\ necesitamos los 4 archivos generados en el directorio de salida, siguiendo con la salida de la sección anterior, ellos son:
 \begin{itemize}
 \item maggen.hpp.
 \item maggen.cpp.
 \item Plan.hpp.
 \item Node.hpp.
 \end{itemize}
-El evaluador generado por \maggen\ puede ser usado como un modulo C++ en conjunto con otro proyecto. En esta seccion seguiremos con un ejemplo el uso del evaluador para el ejemplo Wuu Yang, el cual se ha tratado en los capitulos anteriores (Ver entrada a \maggen\ en el apendice \ref{append:agwuuyang}).
+El evaluador generado por \maggen\ puede ser usado como un modulo C++ en conjunto con otro proyecto. En esta sección seguiremos con un ejemplo el uso del evaluador para el ejemplo Wuu Yang, el cual se ha tratado en los capítulos anteriores (Ver entrada a \maggen\ en el apéndice \ref{append:agwuuyang}).
 
 Como bien hemos visto en secciones anteriores, la entrada del evaluador generado por \maggen\ es un AST. El siguiente módulo de código C++ describe un AST para la gramática del ejemplo de Wuu Yang.
 
@@ -72,7 +176,7 @@ Como bien hemos visto en secciones anteriores, la entrada del evaluador generado
 
 Observemos el AST con el siguiente diagrama:
 \begin{center}
-\includegraphics[width=250pt,height=193pt]{ast.png}
+\includegraphics[width=200pt,height=154pt]{ast.png}
 \end{center}
 Los atributos de cada símbolo del AST esta con valores indefinidos, veamos en la siguiente imagen con la compilación e invocación del evaluador generado por \maggen\ para computar los atributos de los símbolos del AST.
 \begin{center}
@@ -169,7 +273,7 @@ ERROR: Function non-exist: \textit{F}. & La función \textit{F} utilizada en la 
  
 ERROR: postfix operator non-exist: \textit{OP-POS}. & El operador posfijo \textit{OP-POS} utilizado en la expresión no esta definido o esta usado con tipos erróneos. & Defina el operador o modifique la expresión. \\ \hline 
 ERROR: prefix operator non-exist: \textit{OP-PRE}. & El operador prefijo \textit{OP-PRE} utilizado en la expresión no esta definido o esta usado con tipos erróneos. & Defina el operador o modifique la expresión. \\ \hline 
-ERROR: The grammar isn't extended grammar. & Error en la definición de la gramática, la misma no cumple con la propiedad de gramática extendida. ver detalles en sección XXX & Chequee la definición de la gramática y modifiquela para que cumple la propiedad. \\ \hline
+ERROR: The grammar isn't extended grammar. & Error en la definición de la gramática, la misma no cumple con la propiedad de gramática extendida. ver detalles en sección XXX & Chequee la definición de la gramática para que cumpla la propiedad.(sección grammar extended) \\ \hline
 ERROR: the path \textit{PATH} is invalid or inaccessible. & El camino (PATH) es inexistente o inaccesible. & Verifique la ruta e invoque a \maggen\ nuevamente. \\ \hline
 
 ERROR: One o more graph ADP has an cycle in its dependencies. Look the folder \textit{PATH-OUTPUT}. & El proceso de \maggen\ tuvo que ser abortado, debido a la existencia de planes con dependencias circulares.  & Chequee la definición de las ecuaciones que se vinculan con los grafos mostrados en \textit{PATH-OUTPUT}. \\ \hline 
@@ -190,7 +294,7 @@ WARNING: Sort duplicate was ignored: $-->$ \textit{S} & La declaración del sort
 
 WARNING: Declaration duplicate was ignored: $-->$ \textit{F} & La declaración de la función \textit{F} esta duplicada. \maggen\ ignora dicha linea. & Elimine la declaración de la función \textit{F} o modifique la misma en caso de declaración de función distinta. \\ \hline
 
-WARNING: Ignores the eq \textit{E} duplicate definition for \textit{IN} in rule: $-->$ \textit{R} & La ecuacion \textit{E} para la instancia \textit{IN} en la regla \textit{R} es ignorada por \maggen, debido a que la instancia \textit{IN} ya tiene ecuacion que la defina. & Chequee las ecuaciones que definen la instancia \textit{IN} y elimine una o verifique posibles errores de tipeo en la ecuacion. \\ \hline
+WARNING: Ignores the eq \textit{E} duplicate definition for \textit{IN} in rule: $-->$ \textit{R} & La ecuacion \textit{E} para la instancia \textit{IN} en la regla \textit{R} es ignorada por \maggen, debido a que la instancia \textit{IN} ya tiene ecuacion que la defina. & Chequee las ecuaciones que definen la instancia \textit{IN} y elimine una o verifique posibles errores en la ecuacion. \\ \hline
 
 \end{longtable}
 \end{small}
