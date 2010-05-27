@@ -21,7 +21,6 @@
 #include "../../include/Parser/Semantics_actions.h"
 
 using namespace std;
-using namespace boost;
 
 namespace genevalmag
 {
