@@ -31,7 +31,7 @@ struct vertex_data_t
 
 typedef property <vertex_data_t, const genevalmag::Expr_leaf*> property_vertex_dp;
 
-typedef adjacency_list<hash_setS, vecS, directedS, property_vertex_dp > Graph;
+typedef adjacency_list <hash_setS, vecS, directedS, property_vertex_dp> Graph;
 
 typedef Graph::vertex_descriptor Vertex;
 

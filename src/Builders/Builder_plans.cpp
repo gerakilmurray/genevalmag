@@ -397,7 +397,6 @@ unsigned short Builder_plans::return_index_plan_p(const Order_eval_eq &order)
 	return return_index_vec(order, plans_project_uniques);
 }
 
-
 /**
   * Generates and saves all evaluation's plans for the Attribute Grammar.
   */
@@ -585,7 +584,6 @@ const vector < Order_eval_eq > &Builder_plans::get_plans_project_uniques() const
 {
 	return plans_project_uniques;
 }
-
 
 /**
   * Returns the intial order of attributes of the initial symbol.
