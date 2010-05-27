@@ -1,0 +1,33 @@
+Algorithm: ComputePlan
+
+WL := <$\emptyset$>
+<$\Delta$> := a function that is undefined in every place
+<$\mu$> := an arbitrarily chosen evaluation order of the start symbol's attributes
+
+for each production q whose left-hand-side nonterminal is the start symbol S do
+  WL := WL <$\cup$> { (q , <$\mu$>) }
+end for
+
+repeat
+  repeat
+    (q, <$\omega$>) := an element of WL
+    WL := WL - { (q, <$\omega$>) }
+  until <$\Delta$>(q, <$\omega$>) = undefined
+  
+  <$\Delta$> := [<$\Delta$> | <$\Delta$>(q, <$\omega$>) = defined ]
+  
+  Let production q be denoted by X<$_{0}$> <$\rightarrow$> <$\alpha_{0}$>X<$_{1}$><$\alpha_{1}$>X<$_{2}$><$\alpha_{2}$> <$\ldots$> X<$_{k}$><$\alpha_{k}$>.
+  
+  for each ADP (q | p<$_{1}$>, p<$_{2}$>, <$\ldots$> , p<$_{k}$>) <$\in$> SADP (q) do
+    <$\psi$> := ComputeOrder (ADP (q | p<$_{1}$>, p<$_{2}$>, <$\ldots$> , p<$_{k}$>), <$\omega$>)
+    <$\gamma$>[q , <$\omega$>, p<$_{1}$>, p<$_{2}$>, <$\ldots$> , p<$_{k}$>] := <$\psi$>
+    for each nonterminal X<$_{i}$> appearing on the right-hand-side of production q do
+      <$\psi_{i}$> := project (<$\psi$>, {X<$_{i}$>'s attribute occurrences})
+      <$\theta$>[q , <$\omega$>, i , p<$_{1}$>, p<$_{2}$>, <$\ldots$> , p<$_{k}$>] := <$\psi_{i}$>
+      if <$\Delta$>(<$p_{i}$>, <$\psi_{i}$>) = undefined then
+        WL := WL <$\cup$> { (<$p_{i}$>, <$\psi_{i}$>) }
+      end if
+    end for
+  end for
+until WL = <$\emptyset$>
+

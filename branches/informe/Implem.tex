@@ -1,4 +1,4 @@
-1\chapter{Detalles de Implementación de \maggen}
+\chapter{Detalles de Implementación de \maggen}
 \label{chap:implem}
 \minitoc
 
@@ -752,42 +752,68 @@ Antes de insertar un elemento en cualquiera de estos repositorios se verifica qu
 
 Una vez que se generaron todos los tipos de grafos, los mismos son guardados en distintos directorios en formato \textbf{dot}\cite{dot}. Para ello utilizamos la función \texttt{write\_graphviz} perteneciente a al módulo Graphviz de \boost.
 
+La generación de grafos es incremental, partiendo de la computación de los grafos DP, siguiendo los Down, DCG y por último los grafos ADP. Ante cualquier fallo, la generación se considerará incompleta.
 
-\section{Algoritmo de Computar Planes de Wuu Yang}
-
-\begin{lstlisting}[basicstyle=\footnotesize, escapeinside=<>, language=inform]
-Algorithm: ComputePlan
-
-WL := <$\emptyset$>
-<$\Delta$> := a function that is undefined in every place
-<$\mu$> := an arbitrarily chosen evaluation order of the start symbol's attributes
-
-for each production q whose left-hand-side nonterminal is the start symbol S do
-  WL := WL <$\cup$> { (q , <$\mu$>) }
-end for
-
-repeat
-  repeat
-    (q, <$\omega$>) := an element of WL
-    WL := WL - { (q, <$\omega$>) }
-  until <$\Delta$>(q, <$\omega$>) = undefined
-  
-  <$\Delta$> := [<$\Delta$> | <$\Delta$>(q, <$\omega$>) = defined ]
-  
-  Let production q be denoted by X<$_{0}$> <$\rightarrow$> <$\alpha_{0}$>X<$_{1}$><$\alpha_{1}$>X<$_{2}$><$\alpha_{2}$> <$\ldots$> X<$_{k}$><$\alpha_{k}$>.
-  
-  for each ADP (q | p<$_{1}$>, p<$_{2}$>, <$\ldots$> , p<$_{k}$>) <$\in$> SADP (q) do
-    <$\psi$> := ComputeOrder (ADP (q | p<$_{1}$>, p<$_{2}$>, <$\ldots$> , p<$_{k}$>), <$\omega$>)
-    <$\gamma$>[q , <$\omega$>, p<$_{1}$>, p<$_{2}$>, <$\ldots$> , p<$_{k}$>] := <$\psi$>
-    for each nonterminal X<$_{i}$> appearing on the right-hand-side of production q do
-      <$\psi_{i}$> := project (<$\psi$>, {X<$_{i}$>'s attribute occurrences})
-      <$\theta$>[q , <$\omega$>, i , p<$_{1}$>, p<$_{2}$>, <$\ldots$> , p<$_{k}$>] := <$\psi_{i}$>
-      if <$\Delta$>(<$p_{i}$>, <$\psi_{i}$>) = undefined then
-        WL := WL <$\cup$> { (<$p_{i}$>, <$\psi_{i}$>) }
-      end if
-    end for
-  end for
-until WL = <$\emptyset$>
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+bool generate_graphs()
+{
+  if(build_graphs.compute_dependency_graphs())
+  {
+    if(build_graphs.compute_down_graph())
+    {
+      if(build_graphs.compute_dcg())
+      {
+        if(build_graphs.compute_adp_graph())
+        {
+          cout << "* Generate graphs ---------- [  OK  ]" << endl;
+          return true;
+        }
+      }
+    }
+  }
+  cout << "* Generate graphs ---------- [ FAIL ]\n" << endl;
+  return false;
+}
 \end{lstlisting}
+
+Una vez que se concluyó la generación de grafos, se construyen los planes, se prosigue con el chequeo de ciclicidad de los grafos ADP. Si se supera con éxito, se generarán los planes, sino se abortará el proceso.
+
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+unsigned short build_plans()
+{
+  if(generate_graphs())
+  {
+    if (build_graphs.check_cyclic_adp_dependencies())
+    {
+      cout << "* Build plans -------------- [ ABORT ]\n" << endl;
+      return 1;
+    }
+    else if(generate_plans())
+    {
+      cout << "* Build plans -------------- [  OK  ]" << endl;
+      return 0;
+    }
+    cout << "* Build plans -------------- [ FAIL ]\n" << endl;
+  }
+  return 2;
+}
+\end{lstlisting}
+
+El proceso de construir un plan es complejo, la heurística seguida respeta el algoritmo para computar planes presentado por Wuu Yang.
+
+\lstinputlisting[basicstyle=\footnotesize, language=inform, escapeinside=<>, numbers=left, numberstyle=\tiny, numbersep=5pt]{input_file_code/compute_plan_wuu_yang}
+
+Por lo que se implementaron las funciones y elementos involucrados con lo siguiente:
+
+\begin{itemize}
+\item \textbf{WL} \flecha \texttt{vector <Item\_work> work\_list;}
+\item {\LARGE\textbf{$\Delta$}} \flecha \texttt{vector <Item\_work> defined\_item\_work;}
+\item \textbf{ComputeOrder} \flecha \texttt{compute\_order}
+\item \textbf{Project} \flecha \texttt{purge\_plan\_with}
+\item {\LARGE\textbf{$\Theta$}} \flecha \texttt{map <Key\_plan, unsigned short> eval\_plans;}
+\item {\LARGE\textbf{$\gamma$}} \flecha \texttt{map <Key\_plan\_project, unsigned short> plans\_project;}
+\end{itemize}
+
+
 
 \normalsize

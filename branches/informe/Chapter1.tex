@@ -1,4 +1,4 @@
-\chapter{Introducci\'on}
+\chapter{Introducción}
 \label{chap:intro}
 \minitoc
 
@@ -9,7 +9,7 @@ evolución y descubrimientos de nuevas gramáticas necesitó que se organizaran,
 una jerarquía sobre las gramáticas.\\
 Las clasificó en 4 niveles:\\
 
-\begin{figure}\begin{center}
+\begin{figure}[h!]\centering 
 \begin{tabular}{| p{1cm} | p{3.5cm} | p{4cm} | p{3cm} |}
 \hline
 \multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Tipo}} &
@@ -23,41 +23,41 @@ Las clasificó en 4 niveles:\\
 \textbf{3} & Regular (RL) & Autómata finito & $A \rightarrow aB$ \\
   &              &                 & $A \rightarrow a$ \\ \hline
 \end{tabular}\caption{\label{chomsky} Jerarquía de Chomsky}
-\end{center}\end{figure}
+\end{figure}
 
 Desde que D. Knuth introdujo en 1966 las gramáticas de atributos (GA), estas se han utilizado ampliamente para el desarrollo de herramientas de procesamiento de lenguajes formales como compiladores, intérpretes, traductores como también para especificar la semántica de lenguajes de programación. Las gramáticas de atributos son un formalismo simple para la especificación de la semántica de lenguajes formales, como los lenguajes de programación o de especificación. Integran la modularidad que brindan las gramáticas libres de contexto y la expresividad de un lenguaje funcional.
 
 \section{Gramática de Atributos}
 
-En una gramática de atributos, se relaciona con cada símbolo de una gramática libre de contexto un conjunto de atributos. Cada regla o producción tiene asociados un conjunto de reglas semánticas que toman la forma de asignación a atributos de valores denotados por la aplicación de una función, la cual puede tomar como argumentos intancias de atributos pertenecientes a los símbolos que aparecen en la producción.
+En una gramática de atributos, se relaciona con cada símbolo de una gramática libre de contexto un conjunto de atributos. Cada regla o producción tiene asociados un conjunto de reglas semánticas que toman la forma de asignación a atributos de valores denotados por la aplicación de una función, la cual puede tomar como argumentos instancias de atributos pertenecientes a los símbolos que aparecen en la producción.
 Las reglas semánticas inducen dependencias entre los atributos que ocurren en la producción. El orden de evaluación es implícito (si existe) y queda determinado por las dependencias entre las instancias de los atributos.
 Una regla semántica se podrá evaluar cuando las instancias de los atributos que aparecen como sus argumentos estén evaluadas. Un evaluador de gramáticas de atributos debe tener en cuenta las dependencias entre las instancias de atributos para seguir un orden consistente de evaluación de los mismos.
-Si una GA contiene dependencias circulares no podría ser evaluada ya que no podría encontrarse un orden de evaluación. Existen numerosas herramientas basadas en este formalismo o en alguna de sus ex-tensiones, entre las cuales podemos mencionar yacc, Yet Another Compiler-Compiler,desarrollado por AT\&T, AntLR, JavaCC, JavaCUP, ELI y muchas otras.
+Si una GA contiene dependencias circulares no podría ser evaluada ya que no podría encontrarse un orden de evaluación. Existen numerosas herramientas basadas en este formalismo o en alguna de sus extensiones, entre las cuales podemos mencionar yacc, Yet Another Compiler-Compiler, desarrollado por AT\&T, AntLR, JavaCC, JavaCUP, ELI y muchas otras.
 
 
-\section{Arbol sintactico atribuido}
+\section{Árbol sintáctico atribuido}
 
 
 \section{Métodos de Evaluación}
 
-Los métodos estáticos deben tener en cuenta todos los posibles árboles sintácticos posibles a ser generados por la gramática y calcular todas las posibles dependencias entre las instancias de los atributos. Además, se deberán detectar las posibles depen-dencias circulares, para informar la viabilidad de su evaluación.
-Esto se conoce como el problema de la circularidad, el cual se ha demostrado ser intrínsecamente exponencial [20]. El problema de la circularidad ha motivado que muchos investigadores hayan rea-lizado esfuerzos en la búsqueda e identificación de familias o subgrupos de gramáticas de atributos, para las cuales puedan detectarse circularidades con algoritmos de menor complejidad (polinomial o lineal).
+Los métodos estáticos deben tener en cuenta todos los posibles árboles sintácticos posibles a ser generados por la gramática y calcular todas las posibles dependencias entre las instancias de los atributos. Además, se deberán detectar las posibles dependencias circulares, para informar la viabilidad de su evaluación.
+Esto se conoce como el problema de la circularidad, el cual se ha demostrado ser intrínsecamente exponencial [XXX]. El problema de la circularidad ha motivado que muchos investigadores hayan realizado esfuerzos en la búsqueda e identificación de familias o subgrupos de gramáticas de atributos, para las cuales puedan detectarse circularidades con algoritmos de menor complejidad (polinomial o lineal).
 Estas familias imponen restricciones sobre la gramática de atributos o sobre las dependencias entre sus atributos para garantizar que una GA no sea circular, con el costo de restringir su poder expresivo. 
-Las clases de familias de gramáticas de atributos que se han utilizado para el desarrollo de herramientas eficientes y que se encuentran ampliamente analizadas en la bibliografía especializada, encontramos las s-atribuidas, l-atribuidas, las gramáticas de atributos ordenadas (OAG) y las absolutamente no circulares (ANCAG)[2]. En 1980, Uwe Kastens[23] caracterizó las gramáticas de atributos ordenadas y propuso un método para su evaluación, denominado secuencias de visita. Estas son secuencias de operaciones que conducen el recorrido del árbol sintáctico atribuido y realizan la evaluación de las instancias de los atributos. Kastens propone un método para generar las secuencias de visita en tiempo poli-nomial para la familia OAG.
-Mas recientemente, en 1999, se han propuesto nuevas familias de GA para las que se pueden implementar evaluadores eficientes basado en métodos estáticos y con un mayor poder expresivo que las utilizadas tradicionalmente[44].
+Las clases de familias de gramáticas de atributos que se han utilizado para el desarrollo de herramientas eficientes y que se encuentran ampliamente analizadas en la bibliografía especializada, encontramos las s-atribuidas, l-atribuidas, las gramáticas de atributos ordenadas (OAG) y las absolutamente no circulares (ANCAG)[XXX]. En 1980, Uwe Kastens[XXX] caracterizó las gramáticas de atributos ordenadas y propuso un método para su evaluación, denominado secuencias de visita. Estas son secuencias de operaciones que conducen el recorrido del árbol sintáctico atribuido y realizan la evaluación de las instancias de los atributos. Kastens propone un método para generar las secuencias de visita en tiempo polinomial para la familia OAG.
+Mas recientemente, en 1999, se han propuesto nuevas familias de GA para las que se pueden implementar evaluadores eficientes basado en métodos estáticos y con un mayor poder expresivo que las utilizadas tradicionalmente[XXX].
 
 
 
-\subsection{Evaluci\'on din\'amica}
+\subsection{Evaluación dinámica}
 
 bla bla
 
-\subsection{Evaluaci\'on est\'atica}
+\subsection{Evaluación estática}
 
-\subsection{Evaluacion de la familia ANCAG}
+\subsection{Evaluación de la familia ANCAG}
 \section{Secuencia de visita}
-\section{Generaci\'on de evaluadores para GA bien definidas}
-\section{Evaluaci\'on durante el parsing}
+\section{Generación de evaluadores para GA bien definidas}
+\section{Evaluación durante el parsing}
 
 bla bla
 
