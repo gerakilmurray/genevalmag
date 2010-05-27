@@ -2,13 +2,57 @@
 \label{chap:mag}
 \minitoc
 
+Tal como lo presenta Wuu-Yang en \cite{wuu-yang1} la familia de \textit{gramática de atributos multi-plans} es una clase que se encuentra dentro de las WDAG y dentro de ellas de las NC.
+
+La familia de las MAG es estrictamente mayor que las ANCAG. La importancia de esta familia radica en que el procedimiento de computación de planes de evaluación estáticos toma \textbf{tiempo polinomial} en el numero de símbolos y producciones.
+
+A continuación trataremos en detalle la familia de las MAG y en el capitulo siguiente abordaremos el mecanismo de evaluación de las mismas.
+
+
+\section{Notación}
+En esta sección, se define la notación que se usara en le desarrollo del presente capitulo para la definición de la familia MAG.
+Básicamente, la notación usada es la utilizada por Wuu yang en \cite{wuu-yang1}, la cual proviene de la notación de kastens en \cite{kastens}.
+
+\textbf{Definición} Una gramática de atributos esta dada por:
+
+\begin{itemize}
+\item Una CFG: (N, T, P, S) donde N es un conjunto finito de símbolos no terminales, T es un conjunto finito de símbolos terminales, S es un símbolo no terminal distinguido denominado \textit{símbolo inicial} y P es un conjunto de producción de la forma $X\rightarrow\alpha$ donde X es un símbolo no terminal ($X\in N$) y $\alpha$ es una cadena de terminales y no terminales. Una producción $\textit{p}\in P$ pude verse como
+ $X_{0}\rightarrow\alpha_{0}X_{1}\alpha_{1}X_{2}\alpha_{2}\dots X_{k}\alpha_{k}$ 
+donde \textit{$X_{0}, X_{1}, X_{2},\dots, X_{k}$} son símbolos no terminales y  \textit{$\alpha_{0}, \alpha_{1}, \alpha_{2}, \dots, \alpha_{k}$} son cadenas de símbolos terminales (posiblemente vacíos). Además se asume, que el símbolo inicial (S) no aparece en ninguna parte derecha de ninguna producción $\textit{p} \in P.$
+\item Cada símbolo no terminal de la CFG tiene asociado un conjunto de \textit{atributos}. Cada uno de ellos describen las propiedades de una ``instancia'' especifica del simbol en el árbol sintáctico. Un atributo \textit{a} de un símbolo X se denota como \textit{X.a}. Una \textit{instacia} se define como la ocurrencia del símbolo, la cual esta dada por, además del símbolo y el atributo , también por un índice de aparición de ese símbolo en la producción y se denota como \textit{X[i].a} donde \textit{i} es el índice sintáctico de aparición del símbolo X. Cabe aclarar que se toma un \textit{i} para cada símbolo distinto en la producción. Por ejemplo, dada la producción $X\rightarrow Y X$ donde el conjunto de atributos se define como \textit{\{a,b\}} tanto para X como para Y, las posibles instancias son: \textit{X[0].a, X[0].b, X[1].a, X[1].a, Y[0].a} y \textit{Y[0].b}.
+\end{itemize}
+
+Un detalle de notación con respecto a CFG, en todos el desarrollo del trabajo se denotara a los símbolos no terminales con letras en mayúscula y a los símbolos terminales con letras en minúscula.
+
+\section{Preliminares}
+
+\subsection{\textit{DP} graph}
+Los \textit{DP} graph denotan las relaciones de dependencias directas entre las instancias de la gramática. 
+
+Informalmente, un \textit{DP} graph esta definido por un grafo (ver teoría de grafo) con las siguientes consideraciones: 
+
+\begin{itemize}
+\item Los nodos denotan \textit{instancias} de una producción.
+\item Las aristas denotan la dependencia entre las instancias. Una arista $X[i].a\rightarrow Y[j].a$, \footnote{con \textit{i} y \textit{j} índices de ocurrencias consistentes para cada símbolo} denota que la evaluación de la instancia \textit{X[i].a} depende de la evaluación de \textit{Y[i].a} 
+\end{itemize}
+
+El \textit{DP} graph se denota como \textit{DP(p)} donde \textit{p} es una producción de la gramática. De manera mas formal, DP(p) se define como:
+
+ME FALTA TEORÍA PARA ESTO.
+% \begin{center}
+%  $DP(p) = \{(X[i].a, Y[j].b) | X[i].a \rightarrow Y[j].b ∈ Rp \}$
+% \end{center}
+
+
+\subsection{\textit{Down} graph}
+
+\subsection{\textit{DCG} graph}
+
+\subsection{\textit{ADP} graph}
 
 
 
-\section{Clasificaci\'on de Wuu Yang}
+\section{Definición MAG}
 
-\subsection{Gramaticas no circulates(NC)}
-bla bla
-
-\subsection{ANCAG}
-
+Una gramática \textit{G} es una \textit{gramática de atributos multi-plans} si y solo si para toda producción \textit{q} en \textit{G}, todo grafo en \textit{SADP(q)} es no circular.
+BLA BLA   
