@@ -799,21 +799,17 @@ unsigned short build_plans()
 }
 \end{lstlisting}
 
-El proceso de construir un plan es complejo, la heurística seguida respeta el algoritmo para computar planes presentado por Wuu Yang.
-
-\lstinputlisting[basicstyle=\footnotesize, language=inform, escapeinside=<>, numbers=left, numberstyle=\tiny, numbersep=5pt]{input_file_code/compute_plan_wuu_yang}
+El proceso de construir un plan es complejo, la heurística seguida respeta el algoritmo para computar planes presentado por Wuu Yang (ver XXX).
 
 Por lo que se implementaron las funciones y elementos involucrados con lo siguiente:
 
 \begin{itemize}
-\item \textbf{WL} \flecha \texttt{vector <Item\_work> work\_list;}
-\item {\LARGE\textbf{$\Delta$}} \flecha \texttt{vector <Item\_work> defined\_item\_work;}
-\item \textbf{ComputeOrder} \flecha \texttt{compute\_order}
-\item \textbf{Project} \flecha \texttt{purge\_plan\_with}
-\item {\LARGE\textbf{$\Theta$}} \flecha \texttt{map <Key\_plan, unsigned short> eval\_plans;}
-\item {\LARGE\textbf{$\gamma$}} \flecha \texttt{map <Key\_plan\_project, unsigned short> plans\_project;}
+\item Lista de trabajos: \textbf{WL} \flecha \texttt{vector <Item\_work>\ work\_list;}
+\item Trabajos realizados: {\LARGE\textbf{$\Delta$}} \flecha \texttt{vector <Item\_work>\ defined\_item\_work;}
+\item Función que computar un orden de evaluación de ecuaciones: \textbf{ComputeOrder} \flecha \texttt{compute\_order}
+\item Función que filtra del orden total sólo lo para un símbolo: \textbf{Project} \flecha \texttt{purge\_plan\_with}
+\item Planes de evaluación: {\LARGE\textbf{$\Theta$}} \flecha \texttt{map <Key\_plan, unsigned short>\ eval\_plans;}
+\item Planes de evaluación proyectados: {\LARGE\textbf{$\gamma$}} \flecha \texttt{map <Key\_plan\_project, unsigned short>\ plans\_project;}
 \end{itemize}
-
-
 
 \normalsize

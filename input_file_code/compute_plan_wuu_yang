@@ -31,3 +31,27 @@ repeat
   end for
 until WL = <$\emptyset$>
 
+
+function ComputeOrder (G , <$\omega$>) return a new total order
+  /* G is an ADP graph of a production. <$\omega$> is a total order */
+  /* of the attributes of the left-hand-side nonterminal in the production. */
+  Let <$\omega$> denote the total order a<$_{1}$> <$\rightarrow$> a<$_{2}$> <$\rightarrow$> <$\ldots$> <$\rightarrow$> a<$_{m}$>.
+
+  for i from 1 to m - 1 do
+    G := G <$\cup$> {the edge a<$_{i}$> <$\rightarrow$> a<$_{i+1}$>}
+  end for
+
+  <$\Psi$> := any total order compatible the partial order represented by the graph G.
+  return <$\Psi$>
+end function ComputeOrder
+
+
+function project (<$\Psi$>, N ) return a new (partial or total) order
+  /* <$\Psi$> is a (partial or total) order of certain attribute occurrences in a production. */
+  /* N is a subset of the attribute occurrences appearing in <$\Psi$>. */
+  <$\Psi$> := the transitive closure of <$\Psi$>
+  Remove, from <$\Psi$>, all the attribute occurrences not in N
+  return the resulting (partial or total) order
+end function project
+
+
