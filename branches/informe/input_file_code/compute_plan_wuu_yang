@@ -23,7 +23,7 @@ repeat
     <$\gamma$>[q , <$\omega$>, p<$_{1}$>, p<$_{2}$>, <$\ldots$> , p<$_{k}$>] := <$\psi$>
     for each nonterminal X<$_{i}$> appearing on the right-hand-side of production q do
       <$\psi_{i}$> := project (<$\psi$>, {X<$_{i}$>'s attribute occurrences})
-      <$\theta$>[q , <$\omega$>, i , p<$_{1}$>, p<$_{2}$>, <$\ldots$> , p<$_{k}$>] := <$\psi_{i}$>
+      <$\Theta$>[q , <$\omega$>, i , p<$_{1}$>, p<$_{2}$>, <$\ldots$> , p<$_{k}$>] := <$\psi_{i}$>
       if <$\Delta$>(<$p_{i}$>, <$\psi_{i}$>) = undefined then
         WL := WL <$\cup$> { (<$p_{i}$>, <$\psi_{i}$>) }
       end if
