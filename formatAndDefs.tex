@@ -222,7 +222,13 @@ urlcolor=linkcol %couleur des liens pour les url
 	 \setlength{\itemsep}{\parsep}}}%
 { \end{list} }
 
-\newtheorem{definition}{Définition}
+
+%\newenvironment{definition}[1][Definicion]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newtheorem{definition}{Definici\'on}[section]
+\newtheorem{theorem}{Teorema}[section]
+
 \renewcommand{\epsilon}{\varepsilon}
 
 % centered page environment
