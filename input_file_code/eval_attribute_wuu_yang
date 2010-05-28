@@ -1,0 +1,21 @@
+Algorithm: EvaluateAttributes
+
+algorithm eval (T)
+  /* T is an unevaluated syntax tree. */
+  /* Choose a plan for each nonterminal node in T. */
+  /* <$\mu$> is the evaluation order of the attributes of the start symbol chosen in ComputePlan. */
+  traverse(root of T, <$\mu$>)
+  Use any traditional visit-oriented evaluator to evaluate attribute instances in T.
+  
+procedure traverse (n, <$\omega$>)
+  /* n is a nonterminal node in the syntax tree. */
+  /* <$\omega$> is the evaluation order of attributes of the left-hand-side nonterminal located at node n. */
+  q := the production applied at node n
+  Let p<$_{1}$>, p<$_{2}$>, <$\ldots$> , p<$_{k}$> be the productions applied at the nonterminal child nodes of n
+  plan [n] := <$\Gamma$>[q, <$\omega$>, p<$_{1}$>, p<$_{2}$>, <$\ldots$> , p<$_{k}$>]
+
+  for each nonterminal child mi of n in T do
+    traverse (m<$_{i}$> , <$\Theta$>[q, <$\omega$>, i, p<$_{1}$>, p<$_{2}$>, <$\ldots$> , p<$_{k}$>])
+  end for
+end procedure traverse
+
