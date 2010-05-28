@@ -1,53 +1,6 @@
-\chapter{Acerca de \maggen}
+\chapter{Diseño de \maggen}
 \label{chap:disen_}
 \minitoc
-
-\section{\textquestiondown Qué es \maggen?}
-\maggen\ es una herramienta generadora de evaluadores estáticos para gramáticas atribuidas multiplans(MAG). 
-
-Esto es, dada una MAG en el lenguaje de especificación, \maggen\ computa los planes de evaluación y genera las distintas secuencias de visita para todos los posibles contextos. Estas secuencias, son codificadas en un archivo C++ junto con los algoritmos necesarios para evaluar cualquier AST perteneciente la gramática \textit{input} de \maggen.
-
-El evaluador generado por \maggen\ recibe un AST y devuelve este AST decorado. El potencial del evaluador generado por \maggen, esta dado, por tener estáticamente todos las posibles secuencias de visita para los posibles AST de entrada, entonces sólo debe seleccionar las secuencias para el AST dado y luego recorrerlo según como las mimas lo indiquen.
-
-\section{\textquestiondown Como funciona \maggen ?}
-Dado una MAG, \maggen\ calcula los grafos de dependencias de atributos de los símbolos de la gramática. A partir de ellos, es posible la aplicación de algoritmos de para la obtención de planes de evaluación y luego secuencias de visitas de dichos planes. \maggen\ se basa en la construcción de 4 tipos de grafos, que se construyen de manera incremental sobre la gramática. Estos grafos, son los presentados en el capitulo XXX, Dependency graph (\textbf{DP}), Down graph (\textbf{Down}), Downward characteristic graph (\textbf{DCG}) y augmented dependency graph (\textbf{ADP}). Sobre estos últimos se basa el calculo de los planes de evaluación.
-
-El funcionamiento de \maggen\ esta dado por la integración de 4 etapas, consideradas principales, que marcaron el proceso de desarrollo de la herramienta:
-\begin{itemize}
-\item Lenguaje especificación de MAG.
-\item Parser del lenguaje,representación interna y chequeos.
-\item Construcción de grafos y aplicación de algoritmos de computo de planes y secuencias de visita.
-\item Generación de código.
-\end{itemize}
-
-El computo de \maggen\ se realiza atravesando cada una de estas etapas secuencialmente, es decir, la terminación exitosa de una, habilita la siguiente; por lo tanto cada etapa mantiene su salida de errores de manera independiente. 
-
-La salida normal de \maggen que indica que se han realizado todas las etapas correctamente, es la siguiente:
-
-\begin{lstlisting}[backgroundcolor=\color{white}]
-               * Parsing grammar ---------- [  OK  ]
-               * Generate graphs ---------- [  OK  ]
-               * Build plans -------------- [  OK  ]
-               * Build visit sequence ----- [  OK  ]
-               * Generation code ---------- [  OK  ]
-
-               Generation complete in: 0.372814 seconds.
-\end{lstlisting}
-
-En caso de funcionamiento anormal de alguna de las etapas, se detectará un \textbf{FAIL} en la etapa correspondiente y se indicará la información del mismo.
-
-Un caso alternativo de salida, se da cuando \maggen\ detecta planes cíclicos, visualizándose un \textbf{ABORT} en la etapa de creación de planes:
-
-\begin{lstlisting}[backgroundcolor=\color{white}] 
-               * Parsing grammar ---------- [  OK  ]
-               * Generate graphs ---------- [  OK  ]
-               * Build plans -------------- [ ABORT ]
-
-               ERROR: One o more graph ADP has an cycle in its dependencies.Look the folder GenEvalAG/Out_Gen_Mag for more details.
-\end{lstlisting}
-Notar que, el mensaje de error indicara la ruta donde fueron almacenados los grafos con problemas de ciclicidad. Para este caso particular fue: \textit{GenEvalAG/Out\_Gen\_Mag.}
-
-En lo que resta del capitulo se abordaran detalles de cada etapa, analizada en esta sección.
 
 \section{Lenguaje de especificación de las MAG}
 \label{sec:lenguajeMAG}
@@ -438,7 +391,7 @@ Una característica que motivó el desarrollo de este ejemplo es que se trata de
 En la presentación del ejemplo en el lenguaje de especificación, se observa en principio (línea 1 a 7) un bloque de comentario y luego los bloques que definen la gramática como se ha analizado en las secciones anteriores; bloque semántico de la línea 8 a 13 luego el de atributos y a partir de la línea 25 el bloque de reglas con sus respectivas ecuaciones.
 
  
-\section{Parser del lenguaje,representación interna y chequeos}
+\section{Parser del lenguaje, representación interna y chequeos}
 El parser del lenguaje de especificación se llevó a cabo utilizando las librerías \boost\  \spirit. Detalles de este tema, son tratado puntualmente en CAPITULO IMPL. 
 
 En esta sección nos encargaremos de algunas consideraciones del parser desde el punto de vista de su funcionamiento, algunos detalles en la representación interna y de los chequeos realizados sobre la entrada de \maggen\ para asegurar características de gramática bien definida.
