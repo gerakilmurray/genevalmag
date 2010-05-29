@@ -24,19 +24,19 @@ Una gramática de atributos es una tupla GA = (G, A, V, Dom, F, R) donde:
 \item Dom : $A\rightarrow V$ asocia a cada atributo un dominio o conjunto de valores d ∈ V .
 \item F es un conjunto finito de funciones semánticas de la forma:
 \begin{equation}
-f \subseteq (\otimes_{j=0}^{k}{ Dom(a_{j} ))\rightarrow Dom(a_{0})}
+f \subseteq (\bigotimes\limits_{j=0}^{k}{ Dom(a_{j} ))\rightarrow Dom(a_{0})}
 \end{equation}
 
-\item R = $\bigcup _{p∈P} Rp$ es el conjunto finito de reglas de atribución o ecuaciones asociadas a cada producción p ∈ P , donde
+\item R = $\bigcup _{p∈P} R^{p}$ es el conjunto finito de reglas de atribución o ecuaciones asociadas a cada producción p ∈ P , donde
 \begin{equation}
-R^{p} = \bigcup\limits_{j=0}^{m^{p}}{\{R_{j}^{p}\}}\ \ \ \ \ \ (\#(R^{p} ) = m^{p} ≥ 0)
+R^{p} = \bigcup\limits_{j=0}^{m^{p}}{\{r_{j}^{p}\}}\ \ \ \ \ \ (\#(R^{p} ) = m^{p} ≥ 0)
 \end{equation}
-y cada regla $r_{j}^{p} \in R^{p}$ , con 0 ≤ j ≤ mp es una tupla de la forma
+y cada regla $r_{j}^{p} \in R^{p}$ , con 0 ≤ j ≤ $m^{p}$ es de la forma
 
 \begin{equation}
-r_{j}^{p} = f(X_{0}.a0 ,\dots , X_{k}.ak)
+r_{j}^{p}: X_{0}.a_{0} = f(X_{1}.a_{1} ,\dots , X_{k}.a_{k})
 \end{equation} 
-con $X_{i} \in X^{p}$ , $a_{i} \in A(X_{i})$, (0 ≤ i ≤ k) y $f \in F$.
+donde cada $X_{i}$ es un símbolo que ocurre en la producción \textit{p} , $a_{i} \in A(X_{i})$, ($0 \leqslant i \leqslant k$) y $f \in F$.
 
 \end{itemize}
 \end{definition}
@@ -44,80 +44,107 @@ con $X_{i} \in X^{p}$ , $a_{i} \in A(X_{i})$, (0 ≤ i ≤ k) y $f \in F$.
 Detalles de notación:
 \begin{itemize}
 \item Con respecto a CFG, en todos el desarrollo del trabajo se denotara a los símbolos no terminales con letras en mayúscula y a los símbolos terminales con letras en minúscula.
-\item Se utilizará la notación \textbf{X.a} para significar que el atributo \texttt{a} está asociado al símbolo \texttt{X} (a $\in$ A(X)) y para denotar el valor de una ocurrencia o instancia del attributo \texttt{a} del símbolo \texttt{X} en una regla de atribución.
+\item Se utilizará la notación \textbf{X.a} para significar que el atributo \texttt{a} está asociado al símbolo \texttt{X} (a $\in$ A(X)) y para denotar el valor de una ocurrencia o instancia del atributo \texttt{a} del símbolo \texttt{X} en una regla de atribución.
 
 \end{itemize}
-En \cite{tesismarcelo} (capito 2) podemos encontrar detalles sobre las definiciones arriba analizadas, como asi tambien, conceptos que fueron considerados en el desarrollo del proyecto.  
-
+En \cite{tesismarcelo} (cap. 2) podemos ampliar con mayor detalle y formalismo lo analizado arriba.
 \section{Preliminares}
-
+\label{sec:pre-grafos}
 \subsection{Grafo \textit{DP}}
 Los grafos \textit{DP} denotan las relaciones de dependencias directas entre las instancias de la gramática. 
 
-Un grafo \textit{DP} esta definido (ver teoría de grafo) con las siguientes consideraciones: 
+Un grafo \textit{DP} esta definido (\cite{estruc-algorit}) con las siguientes consideraciones: 
 
 \begin{itemize}
 \item Los nodos denotan \textit{instancias} de una producción.
-\item Las aristas denotan la dependencia entre las instancias. Una arista $X_{i}.a\rightarrow X{j}.b$, \footnote{con \textit{i} y \textit{j} índices de ocurrencias consistentes con alguna ecuacion de la gramatica} denota que la evaluación de la instancia \textit{$X_{i}.a$} depende de la evaluación de \textit{$Y_{i}.b$} 
+\item Las aristas denotan la dependencia entre las instancias. Una arista $X_{i}.a\rightarrow X{j}.b$, \footnote{con \textit{i} y \textit{j} índices de ocurrencias consistentes con alguna ecuacion de la gramática} denota que la evaluación de la instancia \textit{$X_{i}.a$} depende de la evaluación de \textit{$Y_{i}.b$} 
 \end{itemize}
 
-El conjunto de dependencias directas de una producción, de la gramtica, se denota como \textit{DP(p)}(\textit{p} produccion de la gramática) y se define como:
+El conjunto de dependencias directas de una producción, de la gramática, se denota como \textit{DP(p)}(\textit{p} producción de la gramática) y se define como:
  \begin{definition}
-Dada una produccion \textit{p} de una gramatica de atributos definida como en \ref{def:grammarattr}, entonces
+Dada una producción p de una gramática de atributos definida como en \ref{def:grammarattr}, entonces
 \begin{equation}
  DP(p) = \{(X_{i}.a, X_{j}.b) | X_{i}.a \rightarrow Y_{j}.b \in R^{p} \}
 \end{equation}
 \end{definition}
 
 \subsection{Grafo \textit{Down}}
-Los grafos \textit{Down} denotan las relaciones de los atributos de un simbolo. 
+Los grafos \textit{Down} denotan las relaciones de los atributos de un símbolo. 
 
-Un grafo \textit{Down} esta definido (ver teoría de grafo) con las siguientes consideraciones: 
+Un grafo \textit{Down} esta definido (\cite{estruc-algorit}) con las siguientes consideraciones: 
 
 \begin{itemize}
-\item Los nodos denotan \textit{atributos} de un simbolo.
-\item Las aristas denotan la dependencia entre los atributos de un simbolo. Dado los atributos $a$ y $b\in A(X)$ del simbolo $X\in VN$, una arista $a\rightarrow b$, denota que la evaluación del atributo \texttt{a} depende de la evaluación de \texttt{b}. 
+\item Los nodos denotan \textit{atributos} de un símbolo.
+\item Las aristas denotan la dependencia entre los atributos de un símbolo. Dado los atributos $a$ y $b\in A(X)$ del símbolo $X\in VN$, una arista $a\rightarrow b$, denota que la evaluación del atributo \texttt{a} depende de la evaluación de \texttt{b}. 
 \end{itemize}
-El conjunto de dependencias entre los atributos de un simbolo se denota como  
-\texttt{Down(X)}($X\in VN$ de una gramtica G) y se define:
+El conjunto de dependencias entre los atributos de un símbolo se denota como  
+\texttt{Down(X)}($X\in VN$ de una gramática G) y se define:
 \begin{definition}
-Dada un simbolo \textit{X} de una gramatica de atributos definida como en \ref{def:grammarattr}, entonces
+Dada un símbolo X de una gramática de atributos definida como en \ref{def:grammarattr}, entonces
 \begin{equation}
- Down(X) = \{(a,b) | a \rightarrow b \} con a,b \in A(X)
+ Down(X) = \{(a,b) | a \rightarrow b \} con\ a,b \in A(X)
 \end{equation}
 \end{definition}
 \subsection{Grafo \textit{DCG}}
 
-\textit{DCG} significa \textit{downward characteristic graphs}, los mismos contienen las dependencias entre instancias de la gramatica para una produccion \textit{p}, teniendo en cuenta un simbolo en la gramatica.
+\textit{DCG} significa \textit{downward characteristic graphs}, los mismos contienen las dependencias entre instancias de la gramática para una producción \textit{p}, teniendo en cuenta un símbolo en la gramática.
 \begin{definition}
-Dado \textit{q} una produccion de la forma $X_{0}\rightarrow \alpha_{0} X_{1} \alpha_{1} X_{2} \dots X_{k} \alpha_{k}$, el \textit{downward characteristic graph} of $X_{0}$ en los subarboles derivados via la produccion \textit{q}, denotado como $DCG_{X_{0}}(q)$, es un grafo donde: 
+Dado q una producción de la forma $X_{0}\rightarrow \alpha_{0} X_{1} \alpha_{1} X_{2} \dots X_{k} \alpha_{k}$, el \textit{downward characteristic graph} of $X_{0}$ en los subárboles derivados vía la producción \textit{q}, denotado como $DCG_{X_{0}}(q)$, es un grafo donde: 
 \begin{itemize}
-\item Los nodos son atributos del simbolo $X_{0}$.
-\item Una arista, $X.a \rightarrow X.b$, denota una dependencia (transitiva) de X.b sobre X.a en algun subarbol derivado desde $X_{0}$ via \textit{q}.
+\item Los nodos son atributos del símbolo $X_{0}$.
+\item Una arista, $X.a \rightarrow X.b$, denota una dependencia (transitiva) de X.b sobre X.a en algún subárbol derivado desde $X_{0}$ vía \textit{q}.
 \end{itemize}
 \end{definition}
 Tomemos el siguiente teorema presentado por Wuu-Yang en \cite{wuu-yang1}:
 \begin{theorem}
- $\bigcup\limits_{\textit{todo p}}{}{DCG_{X} (p) = Down (X)}$
+ $\bigcup\limits_{\textit{todo p}}{DCG_{X} (p) = Down (X)}$
 \end{theorem}
-\underline{Nota:} $DCG_{X}(p)$ contiene las depndencias, entre las instancias de la gramatica, para el simbolo \texttt{X}, acotando el analisis para la produccion \textit{p} y los posibles contextos inferiores.
+\underline{Nota:} $DCG_{X}(p)$ contiene las dependencias, entre las instancias de la gramática, para el símbolo \texttt{X}, acotando el análisis para la producción \textit{p} y los posibles contextos inferiores.
 
 
-En la seccion XXX se analiza el algoritmo para contruir los grafos DCG.
+En la sección XXX se analiza el algoritmo para construir los grafos DCG.
 
 \subsection{Grafo \textit{ADP}}
 
-Las siglas \textit{ADP} significan \textit{augmented dependency graph}. El grafo \textit{ADP} esta definido por instancias de la gramatica en los nodos y una arista estan definidas como: $X_{i}.a\rightarrow X{j}.b$, denota que la evaluación de la instancia \textit{$X_{i}.a$} depende de la evaluación de \textit{$Y_{i}.b$}
+Las siglas \textit{ADP} significan \textit{augmented dependency graph}. El grafo \textit{ADP} esta definido por instancias de la gramática, en los nodos, y cada arista se define como: $X_{i}.a\rightarrow X{j}.b$, denota que la evaluación de la instancia \textit{$X_{i}.a$} depende de la evaluación de \textit{$Y_{i}.b$}.
 
-El conjunto de dependencias se denota como $ADP (q | p_{1}, p_{2}, \dots, p_{k})$ y se define:
+El conjunto de dependencias aumentadas se denota como $ADP (q | p_{1}, p_{2}, \dots, p_{k})$ y se define:
 \begin{definition}
+Sea q una producción de la forma $X_{0}\rightarrow \alpha_{0} X_{1} \alpha_{1} X_{2} \dots X_{k} \alpha_{k}$. Sea $p_{i}$ una producción cuya parte izquierda es $X_{i}$ ($1\leqslant i \leqslant k$). 
 \begin{equation}
  ADP (q | p_{1}, p_{2}, \dots, p_{k}) = DP(q) \bigcup\limits_{k}^{i=1}{DGC_{X_{i}}} (p_{i})
+\end{equation}
+\end{definition}
+
+A partir de la definición anterior surge la siguiente:
+\begin{definition}
+El conjunto de todas las posibles dependencias aumentadas para una producción q se define como:
+ \begin{equation}
+ SADP(q) = \bigcup\limits_{q\in P}{ADP (q | p_{1}, p_{2}, \dots, p_{k})} 
 \end{equation}
 \end{definition}
 
 
 \section{Definición MAG}
 
-Una gramática \textit{G} es una \textit{gramática de atributos multi-planes} si y solo si para toda producción \textit{q} en \textit{G}, todo grafo en \textit{SADP(q)} es no circular.
-BLA BLA   
+Una gramática \textit{G} de la forma \ref{def:grammarattr} es una \textit{gramática de atributos multi-planes} si y solo si 
+\begin{equation}
+ \forall q : q \in P: (\forall g:g\ es\ un\ grafo\ de\ q \wedge g \in SADP(q) : g\ es\ no\ circular) 
+\end{equation}
+
+Las \textit{gramáticas multi-plans} mantienen propiedades deseables como:
+\begin{itemize}
+\item La clases de gramáticas MAG cumplen la propiedad de que todas las gramáticas de atributos en dicha clase son \textbf{no circulares}.
+\item Toda gramática MAG cumple con las propiedades de gramática bien definida, esto es, todo árbol sintáctico derivado sobre una MAG contiene dependencias no circulares.
+\end{itemize}
+
+De los conceptos analizado arriba surgen los siguientes teoremas:
+
+\begin{theorem}
+ $IDP-ANCAG(q) = \bigcup SADP(q)$, para toda producción q. 
+\end{theorem}
+
+\begin{theorem}
+ Toda gramática ANCAG es una gramática MAG, pero no viceversa.
+\end{theorem}
+
