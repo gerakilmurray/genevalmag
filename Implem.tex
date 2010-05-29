@@ -16,7 +16,7 @@ La solución obtenida se apoya en la utilización de un framework reconocido mun
 
 Se puede resumir que el proceso de análisis sintáctico, en este framework, se componente de cuatro partes.
 
-\begin{figure}\centering
+\begin{figure}[h!]\centering
 \includegraphics[width=450pt, height=180pt]{./spirit.png}
 \caption{Procesos dentro de \spirit}\label{procesoSpirit}
 \end{figure}
@@ -47,11 +47,12 @@ struct my_grammar: public grammar <my_grammar>
 
 Para definirla, disponemos de un amplio conjunto de herramientas. Primero, los operadores de metalenguaje listados en la tabla \ref{ope_spirit}, los cuales permiten construir nuevas reglas combinando reglas ya definidas, parsers y constantes permitidas en el framework.
 
-\begin{figure}\centering\scriptsize
+\begin{figure}[h!]\centering\scriptsize
 \begin{tabular}{| c | p{7cm} |}
 \hline
-\multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Operador}} &
-\multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Semántica}} \\ \hline
+
+\rowcolor{gris} \textbf{Operador} & \textbf{Semántica} \\ \hline
+
 A $=$                  B  & Definición de A en base a B \\ \hline
 A $|$                  B  & Unión, acepta A o B, también llamada ``alternativa''\\ \hline
 A $\&$                 B  & Intersección, acepta A y B \\ \hline
@@ -69,11 +70,12 @@ $!$                    A  & Opcional, 0 o 1 vez \\ \hline
 
 Por otra parte, \spirit\ dispone de un gran conjunto de parsers que abarcan la mayoría de los tipos básicos, representación de datos y valores utilizados en el común de los lenguajes (ver tabla \ref{parsers}).
 
-\begin{figure}\centering\scriptsize
+\begin{figure}[h!]\centering\scriptsize
 \begin{tabular}{| l | l |}
 \hline
-\multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Parser}} &
-\multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Entrada aceptada}} \\ \hline
+
+\rowcolor{gris} \textbf{Parser} & \textbf{Entrada aceptada} \\ \hline
+
 anychar\_p & Cualquier carácter simple (incluyendo el carácter nulo: '$\setminus0$')\\ \hline
 alnum\_p   & Caracteres alfa-numéricos \\ \hline
 alpha\_p   & Caracteres alfabéticos \\ \hline
@@ -86,22 +88,23 @@ ch\_p      & Carácter especificado como parámetro \\ \hline
 str\_p     & Cadena especificada como parámetro \\ \hline
 oct\_p     & Dígito en octal \\ \hline
 hex\_p     & Dígito en hexadecimal \\ \hline
-uint\_p    & Número entero sin signo de 32 bits\\ \hline
-int\_p     & Número entero 32 bits\\ \hline
-real\_p    & Número flotante 32 bits\\ \hline
-eps\_p     & Cadena vacía (épsilon)\\ \hline
-end\_p     & Carácter de fin de archivo (EOF)\\ \hline
+uint\_p    & Número entero sin signo de 32 bits \\ \hline
+int\_p     & Número entero 32 bits \\ \hline
+real\_p    & Número flotante 32 bits \\ \hline
+eps\_p     & Cadena vacía (épsilon) \\ \hline
+end\_p     & Carácter de fin de archivo (EOF) \\ \hline
 \end{tabular}
 \caption{\label{parsers} Parsers predefinidos de \spirit\ utilizados} 
 \end{figure}
 
 Además posee varias directivas que modifican el comportamiento de los parsers, encapsulándose en una expresión definida por el usuario (ver tabla \ref{directivas}).
 
-\begin{figure}\centering\scriptsize
+\begin{figure}[h!]\centering\scriptsize
 \begin{tabular}{| l | p{7cm} |}
 \hline
-\multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Directiva}} &
-\multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Efecto}} \\ \hline
+
+\rowcolor{gris} \textbf{Directiva} & \textbf{Efecto} \\ \hline
+
 lexeme\_d    & Deshabilita la omisión de espacios en blanco (space\_p)\\ \hline
 as\_lower\_d & Convierte en minúscula lo aceptado por la expresión\\ \hline
 \multirow{3}{*}{longest\_d} & Deshabilita el corto circuito, manda al analizador que\\
@@ -115,18 +118,20 @@ Para el manejo de los símbolos válidos dentro de la definición de la gramáti
 
 Para comenzar a interactuar con el framework, el usuario debe declarar un objeto de la estructura definida y pasarlo como parámetro a una función específica de \spirit.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+\begingroup
+\begin{lstlisting}[float=t!, language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
 my_grammar g;
 
 if (parse(first, last, g, space_p).full)
 {
-    cout << "Parsing Succeeded\n";
+  cout << "Parsing Succeeded\n";
 }
 else
 {
-    cout << "Parsing Failed\n";
+  cout << "Parsing Failed\n";
 }
 \end{lstlisting}
+\endgroup
 
 \section{Gramática de Atributos con \spirit}
 
@@ -135,7 +140,9 @@ Lo primero que se tuvo que realizar, fue definir los componentes básicos que se
 \begin{description}
 \item [Identificadores] son los nombres de sorts, funciones, atributos, símbolos no terminales y reglas, permitidos por \maggen\ y se basan en el común de los estándares. Debido a que el lenguaje del evaluador generado es C++, todas las palabras reservadas de ese lenguaje, son de la misma clase para nuestra herramienta.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+\newpage
+
+\begin{lstlisting}[float=h!, language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
 r_ident = lexeme_d[(alpha_p|'_')>>*(alnum_p|'_')]-r_reserved_word;
 
 r_reserved_word = str_p("compute")|"end"
@@ -189,7 +196,7 @@ r_esc_seq = ch_p('\\')>>
             ( oct_p
             | as_lower_d['x']>>hex_p
             | (anychar_p-ch_p('\n'))
-            );               
+            );
 \end{lstlisting}
 \end{description}
 
@@ -225,11 +232,11 @@ r_decl_sort = lexeme_d[str_p("sort")>>space_p]>>
 \item [\texttt{operators}] Para los operadores también se exige el espacio$^{\ref{foot:espacio}}$ luego de la cadena ``\texttt{op}''. Por definición se aceptan tres tipos: infijos, prefijos y posfijos, por lo que se hizo una regla para cada uno, solamente discriminado los dominios, ya que todos poseen una sóla imagen. Notar que los sorts permitidos, son sacados directamente de las tablas de símbolos destinadas para ese propósito.
 
 \begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
-r_decl_oper  = lexeme_d[str_p("op")>>space_p][&inic_func]>>
-               (r_oper_infix|r_oper_postfix|r_oper_prefix)>>
-               str_p("->")>>
-               r_sort_st[&save_image_func]>>
-               ';';
+r_decl_oper = lexeme_d[str_p("op")>>space_p][&inic_func]>>
+              (r_oper_infix|r_oper_postfix|r_oper_prefix)>>
+              str_p("->")>>
+              r_sort_st[&save_image_func]>>
+              ';';
 
 r_oper_infix = str_p("infix")[&save_mode_op]>>
                !r_oper_mode>>
@@ -572,28 +579,29 @@ Cuando se presenta un problema de precedencia, se realizan rotaciones que se apl
 
 Los cambios mantienen invariante la propiedad de que no se afecta al orden sintáctico de la expresión, es decir, el aplanamiento del árbol de izquierda a derecha (in-order) es el mismo antes y después de las permutaciones.
 
-\begin{figure}\centering
-\includegraphics[width=250pt, height=82pt]{./rotacion1.png}
-\caption{\label{rotacion1} Caso de rotación cuando la operación de la izquierda tiene menor precedencia.}
-\end{figure}
-
-\begin{figure}\centering
-\includegraphics[width=250pt, height=85pt]{./rotacion2.png}
-\caption{\label{rotacion2} Caso de rotación cuando la operación de la derecha tiene menor precedencia.}
-\end{figure}
-
-\begin{figure}\centering
-\includegraphics[width=250pt, height=107pt]{./rotacion3.png}
-\caption{\label{rotacion3} Caso de rotación cuando se detectó un conflicto sin resolver.}
-\end{figure}
-
 Existen dos grandes casos a considerar:
+
 \begin{itemize}
 \item Si se inserta una operación infija, como hijo de otra operación, pero con menor precedencia que su padre, entonces se modificará el árbol, dejando como nueva raíz la operación infija recién insertada. 
 
 Existen dos variantes, las cuales son presentadas en los diagramas \ref{rotacion1} y \ref{rotacion2}.
 
+\begin{figure}[h!]\centering
+\includegraphics[width=250pt, height=82pt]{./rotacion1.png}
+\caption{\label{rotacion1} Caso de rotación cuando la operación de la izquierda tiene menor precedencia.}
+\end{figure}
+
+\begin{figure}[h!]\centering
+\includegraphics[width=250pt, height=85pt]{./rotacion2.png}
+\caption{\label{rotacion2} Caso de rotación cuando la operación de la derecha tiene menor precedencia.}
+\end{figure}
+
 \item En cambio, cuando se inserta cualquier operación como hija de una operación prefija (raíz) y la insertada tiene mejor precedencia que la raíz, no se resuelve instantáneamente el error, dado que se alteraría el orden sintáctico de la expresión. Para ello se prende una bandera, a la cual se le asigna el valor de precedencia que tiene la operación recién insertada. Entonces cuando en el siguiente paso se agregue una nueva raíz, si tiene mayor precedencia que su ``nieto'' en el árbol, se realiza la siguiente rotación mostrada en el diagrama \ref{rotacion3}.
+
+\begin{figure}[h!]\centering
+\includegraphics[width=250pt, height=107pt]{./rotacion3.png}
+\caption{\label{rotacion3} Caso de rotación cuando se detectó un conflicto sin resolver.}
+\end{figure}
 \end{itemize}
 
 \subsection{Asociatividad de operadores dentro de expresiones}
@@ -684,7 +692,7 @@ En la \textbf{BGL} los valores que se quieren asociar a los nodos, se vinculan m
 \begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
 struct vertex_data_t
 {
-    typedef vertex_property_tag kind;
+  typedef vertex_property_tag kind;
 };
 typedef property <vertex_data_t, const genevalmag::Expr_leaf*> property_vertex_dp;
 typedef adjacency_list <hash_setS, vecS, directedS, property_vertex_dp> Graph;

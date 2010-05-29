@@ -10,18 +10,22 @@ una jerarquía sobre las gramáticas.\\
 Las clasificó en 4 niveles:\\
 
 \begin{figure}[h!]\centering 
-\begin{tabular}{| p{1cm} | p{3.5cm} | p{4cm} | p{3cm} |}
+\begin{tabular}{| c | p{3.5cm} | p{4cm} | p{3cm} |}
 \hline
-\multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Tipo}} &
-\multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Lenguaje}} &
-\multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Autómata}} &
-\multicolumn{1}{|>{\columncolor[rgb]{0.8, 0.8, 0.8}}l|}{\textbf{Restricciones}} \\ \hline
 
-\textbf{0} & Recursivamente enumerable (LRE) & Máquina de Turing (MT) & Sin restricciones \\ \hline
-\textbf{1} & Dependiente del contexto (LSC) & Autómata linealmente acotado & $\alpha A \beta \rightarrow \alpha\gamma\beta$ \\ \hline
-\textbf{2} & Independiente del contexto (LLC) & Autómata con pila & $A \rightarrow \gamma$ \\ \hline
-\textbf{3} & Regular (RL) & Autómata finito & $A \rightarrow aB$ \\
-  &              &                 & $A \rightarrow a$ \\ \hline
+\rowcolor{gris} \textbf{Tipo} & \textbf{Lenguaje} & \textbf{Autómata} & \textbf{Restricciones} \\ \hline
+
+\multirow{2}{*}{\textbf{0}} & Recursivamente   & Máquina de  & \multirow{2}{*}{Sin restricciones} \\ 
+                            & enumerable (LRE) & Turing (MT) & \\ \hline
+
+\multirow{2}{*}{\textbf{1}} & Dependiente del & Autómata linealmente & \multirow{2}{*}{$\alpha A \beta \rightarrow \alpha\gamma\beta$} \\ 
+                            & contexto (LSC)  & acotado              & \\ \hline
+
+\multirow{2}{*}{\textbf{2}} & Independiente del & \multirow{2}{*}{Autómata con pila} & \multirow{2}{*}{$A \rightarrow \gamma$} \\ 
+                            & contexto (LLC)    &                   & \\ \hline
+
+\multirow{2}{*}{\textbf{3}} & \multirow{2}{*}{Regular (RL)} & \multirow{2}{*}{Autómata finito} & $A \rightarrow aB$ \\ 
+                            &              &                 & $A \rightarrow a$ \\ \hline
 \end{tabular}\caption{\label{chomsky} Jerarquía de Chomsky}
 \end{figure}
 
