@@ -46,7 +46,7 @@ function ComputeOrder (G , <$\omega$>) return a new total order
 end function ComputeOrder
 
 
-function project (<$\Psi$>, N ) return a new (partial or total) order
+function project (<$\Psi$>, N) return a new (partial or total) order
   /* <$\Psi$> is a (partial or total) order of certain attribute occurrences in a production. */
   /* N is a subset of the attribute occurrences appearing in <$\Psi$>. */
   <$\Psi$> := the transitive closure of <$\Psi$>

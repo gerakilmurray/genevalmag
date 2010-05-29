@@ -1,4 +1,5 @@
-\usepackage{amsmath,amssymb}             % AMS Math
+% AMS Math
+\usepackage{amsmath,amssymb}
 % \usepackage[french]{babel}
 %\usepackage[latin1]{inputenc}
 
@@ -12,13 +13,17 @@
 \usepackage{color}
 \usepackage{textcomp}
 \definecolor{listinggray}{gray}{0.9}
-\definecolor{lbcolor}{rgb}{0.95,0.95,0.95}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\definecolor{gris}{rgb}{0.8,0.8,0.8}
+\definecolor{azul}{rgb}{0.0,0.3,0.6}
+
 \lstset{
     backgroundcolor=\color{lbcolor},
-    tabsize=4,
-    rulecolor=,
+    tabsize=2,
+%     rulecolor=,
 %   language=matlab,
 %   basicstyle=\tiny,
+%     basicstyle=\renewcommand{\baselinestretch}{0.97}\small\tt
     upquote=true,
     aboveskip={1\baselineskip},
     columns=[c]fixed,
@@ -32,8 +37,9 @@
     showstringspaces=false,
     identifierstyle=\ttfamily,
     keywordstyle=\color[rgb]{0.1,0.1,0.6}\bfseries,
-    commentstyle=\color[rgb]{0.133,0.545,0.133},
+    commentstyle=\color[rgb]{0.133,0.545,0.133}\textit,
     stringstyle=\color[rgb]{0.627,0.126,0.941},
+    keepspaces=true
 }
 
 
@@ -42,7 +48,6 @@
 \renewcommand{\baselinestretch}{1.05}
 
 % Table of contents for each chapter
-
 \usepackage[nottoc, notlof, notlot]{tocbibind}
 \usepackage{minitoc}
 \setcounter{minitocdepth}{2}
@@ -50,7 +55,6 @@
 \renewcommand\mtctitle{Contenido}
 \renewcommand\mlftitle{Figuras}
 \renewcommand\mlttitle{Tablas}
-% Use \minitoc where to put a table of contents
 
 \usepackage{aecompl}
 
@@ -60,16 +64,11 @@
 \renewcommand{\nomname}{List of Abbreviations}
 
 \newcommand{\maggen}{\textbf{magGen}}
-
 \newcommand{\boost}{\textit{\textbf{Boost}}}
-
 \newcommand{\spirit}{\textit{\textbf{Spirit}}}
-
 \newcommand{\flecha}{$\hspace{0.3cm} \Longrightarrow \hspace{0.3cm}$}
 
 \makenomenclature
-
-% My pdf code
 
 \usepackage{ifpdf}
 
@@ -99,7 +98,7 @@
 bookmarksopen=true,
 pdftitle="\maggen",
 pdfauthor="Kilmurray - Picco'", 
-pdfsubject="Generador de Evaluadores est·ticos para MAG", %subject of the document
+pdfsubject="Generador de Evaluadores est√°ticos para MAG", %subject of the document
 %pdftoolbar=false, % toolbar hidden
 pdfmenubar=true, %menubar shown
 pdfhighlight=/O, %effect of clicking on a link
@@ -211,7 +210,6 @@ urlcolor=linkcol %couleur des liens pour les url
 \let\minitocORIG\minitoc
 \renewcommand{\minitoc}{\minitocORIG \vspace{1.5em}}
 
-\usepackage{multirow}
 \usepackage{slashbox}
 
 \newenvironment{bulletList}%

@@ -25,13 +25,13 @@ El computo de \maggen\ se realiza atravesando cada una de estas etapas secuencia
 La salida normal de \maggen que indica que se han realizado todas las etapas correctamente, es la siguiente:
 
 \begin{lstlisting}[backgroundcolor=\color{white}]
-               * Parsing grammar ---------- [  OK  ]
-               * Generate graphs ---------- [  OK  ]
-               * Build plans -------------- [  OK  ]
-               * Build visit sequence ----- [  OK  ]
-               * Generation code ---------- [  OK  ]
+   * Parsing grammar ---------- [  OK  ]
+   * Generate graphs ---------- [  OK  ]
+   * Build plans -------------- [  OK  ]
+   * Build visit sequence ----- [  OK  ]
+   * Generation code ---------- [  OK  ]
 
-               Generation complete in: 0.372814 seconds.
+   Generation complete in: 0.372814 seconds.
 \end{lstlisting}
 
 En caso de funcionamiento anormal de alguna de las etapas, se detectará un \textbf{FAIL} en la etapa correspondiente y se indicará la información del mismo.
@@ -39,18 +39,19 @@ En caso de funcionamiento anormal de alguna de las etapas, se detectará un \tex
 Un caso alternativo de salida, se da cuando \maggen\ detecta planes cíclicos, visualizándose un \textbf{ABORT} en la etapa de creación de planes:
 
 \begin{lstlisting}[backgroundcolor=\color{white}] 
-               * Parsing grammar ---------- [  OK  ]
-               * Generate graphs ---------- [  OK  ]
-               * Build plans -------------- [ ABORT ]
+   * Parsing grammar ---------- [  OK  ]
+   * Generate graphs ---------- [  OK  ]
+   * Build plans -------------- [ ABORT ]
 
-               ERROR: One o more graph ADP has an cycle in its dependencies.Look the folder GenEvalAG/Out_Gen_Mag for more details.
+   ERROR: One o more graph ADP has an cycle in its dependencies.Look the folder GenEvalAG/Out_Gen_Mag for more details.
 \end{lstlisting}
-Notar que, el mensaje de error indicara la ruta donde fueron almacenados los grafos con problemas de ciclicidad. Para este caso particular fue: \textit{GenEvalAG/Out\_Gen\_Mag.}
 
-En el capitulo siguiente se abordaran detalles respecto al diseño de \maggen teniendo en cuenta cada una de las etapas, analizadas en esta sección.
+Notar que, el mensaje de error indicara la ruta donde fueron almacenados los grafos con problemas de ciclicidad. Para este caso particular fue: \textit{GenEvalAG/Out\_Gen\_Mag}.\\
 
-\begin{bulletList}
- \item First point
- \item Second point
-% \item Here is an abbreviation reference \nomenclature{DTI}{Diffusion Tensor Imaging} DTI
-\end{bulletList}
+En el capítulo siguiente se abordaran detalles respecto al diseño de \maggen\ teniendo en cuenta cada una de las etapas, analizadas en esta sección.
+
+% \begin{bulletList}
+%  \item First point
+%  \item Second point
+% % \item Here is an abbreviation reference \nomenclature{DTI}{Diffusion Tensor Imaging} DTI
+% \end{bulletList}

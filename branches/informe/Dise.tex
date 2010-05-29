@@ -25,7 +25,7 @@ El análisis de cada bloque se realizará de una manera más formal y observando
 
 Entonces, sea \textbf{G: CFG} que define el lenguaje de especificación para el archivo de entrada aceptado por \maggen. Se define la siguiente regla de \textbf{G: CFG} para el símbolo inicial ``S''.
 
-\begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{blue},language=inform, linewidth=10cm ]
+\begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{azul},language=inform, linewidth=10cm ]
 S   =   'semantic domain' decl_Sd
     |   'attributes' decl_attrs
     |   'rules' decl_rules
@@ -41,7 +41,7 @@ El bloque semántico esta subdividido en 3 secciones, que se corresponden con la
 
 Entonces se define el símbolo \textit{decl\_Sd} como:
 
-\begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{blue},language=inform,linewidth=10cm]
+\begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{azul},language=inform,linewidth=10cm]
 decl_Sd = (decl_sort)*
         | (decl_operator)*
         | (decl_function)*
@@ -56,7 +56,7 @@ La subsección de ``\texttt{sort}'' declara todos los posibles tipos que serán 
 
 A continuación se define el símbolo \texttt{decl\_sort}
 
-\begin{lstlisting}[escapeinside=<>, frame=shadowbox, rulesepcolor=\color{blue},language=inform, linewidth=10cm]
+\begin{lstlisting}[escapeinside=<>, frame=shadowbox, rulesepcolor=\color{azul},language=inform, linewidth=10cm]
 decl_sort = 'sort' NAME_SORT  list_sort ';'
 
 list_sort = ',' NAME_SORT list_sort
@@ -105,7 +105,7 @@ La interpretación de cada uno, esta dada por la interpretación natural común 
 
 A continuación se define el símbolo \texttt{decl\_operator}:
 
-\begin{lstlisting}[escapeinside=<>, frame=shadowbox, rulesepcolor=\color{blue}, language=inform ]
+\begin{lstlisting}[escapeinside=<>, frame=shadowbox, rulesepcolor=\color{azul}, language=inform ]
 decl_operator = 'op' 'infix'  mode_op NAME_OP ':'
                 NAME_SORT ','  NAME_SORT '->' NAME_SORT ';' 
               | 'op' 'prefix' mode_op NAME_OP ':'
@@ -182,7 +182,7 @@ La noción de funciones dentro de la especificación es tomada con la noción na
 
 Definimos \texttt{decl\_function} como:
 
-\begin{lstlisting}[escapeinside=<>,frame=shadowbox, rulesepcolor=\color{blue}, language=inform ]
+\begin{lstlisting}[escapeinside=<>,frame=shadowbox, rulesepcolor=\color{azul}, language=inform ]
 decl_function = 'function' NAME_FUNC':' domain '->' NAME_SORT ';'
 
 domain        = NAME_SORT ',' domain
@@ -214,7 +214,7 @@ En esta sección presentaremos el bloque ``attributes'' en detalle. La informaci
 
 A continuación se define el símbolo \texttt{decl\_attrs} como:
 
-\begin{lstlisting}[escapeinside=@@, frame=shadowbox, rulesepcolor=\color{blue}, language=inform]
+\begin{lstlisting}[escapeinside=@@, frame=shadowbox, rulesepcolor=\color{azul}, language=inform]
 decl_attrs = (d_attr)+ 
 
 d_attr = NAME_ATTR ':' '<' c_attr '>' NAME_SORT 'of' symbols;
@@ -281,7 +281,7 @@ En este punto se deben tener en cuenta los requisitos necesarios de una gramáti
 
 A continuación se define el símbolo \texttt{decl\_rules}:
 
-\begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{blue}, language=inform]
+\begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{azul}, language=inform]
 decl_rules = (d_rule)+ 
 
 d_rule = SYMB_NON_TERMINAL '::=' rigft_symb decl_eqs
@@ -392,81 +392,88 @@ En la presentación del ejemplo en el lenguaje de especificación, se observa en
 
  
 \section{Parser del lenguaje, representación interna y chequeos}
+
 El parser del lenguaje de especificación se llevó a cabo utilizando las librerías \boost\  \spirit. Detalles de este tema, son tratado puntualmente en CAPITULO IMPL. 
 
 En esta sección nos encargaremos de algunas consideraciones del parser desde el punto de vista de su funcionamiento, algunos detalles en la representación interna y de los chequeos realizados sobre la entrada de \maggen\ para asegurar características de gramática bien definida.
+
 \subsection*{Parser del lenguaje}
+
 El parser de la entrada de \maggen\ esta dado por un recorrido secuencial y ante cualquier error sintáctico, la herramienta finaliza su ejecución indicando el error correspondiente. 
 
 Supongamos la siguiente porción de una entrada de \maggen:
 
 \begin{lstlisting}[numbers=left, numberstyle=\tiny, numbersep=5pt, firstnumber=8, language=cobol, linewidth=12cm]
-  ...
-/****************************
- * Block of Semantic Domain *
- ****************************/
+...
 semantic domain
-    sort ecuacion, lista;
-    /*********************
-     * List of Operators *
-     *********************/
-    op infix    10, left) +: int, int -> int;
-  ...
+  sort ecuacion, lista;
+
+  /* List of Operators */
+  op infix    10, left) +: int, int -> int;
+...
 \end{lstlisting}
 La linea 17 presenta un error de sintaxis (falta de paréntesis), entonces \maggen\ finaliza el parser e informa de la siguiente manera:
 \begin{lstlisting}[backgroundcolor=\color{white}, linewidth=15cm]
-     * Parsing grammar ---------- [ FAIL ]
+   * Parsing grammar ---------- [ FAIL ]
 
-     ERROR: Parsing Failed, the following text will not be able to parse:
+   ERROR: Parsing Failed, the following text will not be able to parse:
 
-     File: ./examples/ag_count/ag_count.input
-     Line: 17
-     Col:  5
+   File: ./examples/ag_count/ag_count.input
+   Line: 17
+   Col:  5
 \end{lstlisting}
 Notar que, la linea y columna donde se indica el error corresponde al inicio de la zona donde la interpretación fue fallida. Podría suceder en varios casos que el error no se detecte específicamente en la linea y columna que se indica, entonces lo conveniente es buscar el error a partir del punto especificado. Para este caso particular, se indica linea:17 y columna:5, este punto se encuentra sobre \texttt{op}, pero el error se observa seguido de \texttt{infix}.
 
 \subsection*{Representación interna}
+
 Las estructuras creadas para la representación interna de la gramática se encuentran dentro de los paquetes \texttt{Attr\_grammar} y \texttt{Expression\_tree} de \maggen. Detalles de implementación sobre estos paquete serán tratando en la sección XXX (imp). 
 
 Ahora nos encargaremos de algunas consideraciones respecto del diseño. 
 \texttt{Expression\_tree} agrupa módulos para la representación de las expresiones de las ecuaciones y \texttt{Att\_grammar}, encapsula los demas componentes de la gramática.
-\begin{figure}\centering
+
+El funcionamiento de \maggen\ esta dado por una instancia de la estructura llamada \texttt{Attr\_grammar}, la cual encapsula toda la información de la gramática de atributos parseada. La misma contiene los elementos que se agrupan en los paquetes anteriormente nombrados y es la que desencadena el cálculo de planes, secuencias de visita y, por último, la generación de código. 
+ 
+En la figura \ref{fig:disen} se presenta un diagrama que muestra la interacción de esta estructura en el funcionamiento de \maggen.
+
+\begin{figure}[h!]\centering
 \includegraphics[width=450pt,height=180pt]{Disen.png}
 \caption{\label{fig:disen}Interacción de Attr\_grammar en \maggen}
 \end{figure}
 
-El funcionamiento de \maggen\ esta dado por una instancia de la estructura llamada \texttt{Attr\_grammar}, la cual encapsula toda la información de la gramática de atributos parseada. La misma contiene los elementos que se agrupan en los paquetes anteriormente nombrados y es la que desencadena el calculo de planes, secuencias de visita y, por ultimo, la generación de código.  
-En la figura \ref{fig:disen} se presenta un diagrama que muestra la interacción de esta estructura en el funcionamiento de \maggen.
+Analicemos ahora el diseño de los paquetes nombrados arriba, y con ellos la estructura \texttt{Attr\_grammar}.  En la figura \ref{fig:disen2} se muestra un diagrama con la representación interna de una gramática dentro de \maggen.
 
-
-\begin{figure}\centering
+\begin{figure}[h!]\centering
 \includegraphics[width=450pt,height=297pt]{Disen2.png}
 \caption{\label{fig:disen2}Diseño interno de una gramática de atributos en \maggen}
 \end{figure}
-Analicemos ahora el diseño de los paquetes nombrados arriba, y con ellos la estructura \texttt{Attr\_grammar}.  En la figura \ref{fig:disen2} se muestra un diagrama con la representación interna de una gramática dentro de \maggen. Notemos algunas observaciones del diseño que muestra el diagrama:
+
+Notemos algunas observaciones del diseño que muestra el diagrama:
+
 \begin{itemize}
 \item La relación entre los paquetes se produce por un lado, mediante la clase \texttt{Rule}, en el sentido de que toda regla contiene un conjunto de ecuaciones y cada una de estas esta definida a través de un \textit{l\_value:}\texttt{Expr\_instance} y un \textit{r\_value:}\texttt{Expression}. Por otro lado, \texttt{Expr\_instance} se vincula con \texttt{Symbol} y \texttt{Attribute} y \texttt{Expr\_function} con \texttt{Function}.
 
 \item Toda la información de una gramática de atributos esta representada en la clase \texttt{Attr\_grammar} y por ende, el ciclo de vida de cada de uno de sus componentes es administrado por esta clase, durante todo el funcionamiento de \maggen. 
 \end{itemize}
 
-
-
 \subsection*{Chequeos}
 \label{subsec:check}
+
 El conjuntos de chequeos que se realizan sobre la gramática de entrada a \maggen, están directamente relacionados con el concepto de gramática bien definida analizado en el cap XX. Además, se aplican una serie de chequeos extras para evitar cálculos inconsistentes en las etapas posteriores. La totalidad de los chequeos, son realizados sobre el bloque de reglas de la gramática\footnote{En su mayoría los chequeos se realizan sobre las ecuaciones de las reglas.}, debido a que este, es el más significativo y sobre el cual se apoyan los cálculos posteriores.
 
 Los chequeos realizados son clasificados en sintácticos y semánticos, los primeros, en su mayoría, son realizados durante el parser, en cambio, los chequeos semánticos se realizan luego del parser de cada regla, aplicando escaneos específicos. De estos últimos nos encargaremos en esta sección.
-El modulo que agrupa estos chequeos, se ubica en el paquete \texttt{Parser} de \maggen\ y se denomina \texttt{Semantics\_checks}.
+El módulo que agrupa estos chequeos, se ubica en el paquete \texttt{Parser} de \maggen\ y se denomina \texttt{Semantics\_checks}.
 
 A continuación se detallan dichos chequeos:
 
 \begin{description}
-\item [Precedencia] El chequeo de precedencia consiste en preservar la precedencia definida de cada operador. Dicho chequeo, es realizado sobre cada una de las ecuaciones definidas en la gramática. Por ejemplo:\\ Dada la siguiente ecuacion: 
+\item [Precedencia] El chequeo de precedencia consiste en preservar la precedencia definida de cada operador. Dicho chequeo, es realizado sobre cada una de las ecuaciones definidas en la gramática. Por ejemplo:\\ Dada la siguiente ecuacion:
+
 \begin{center}
  \fbox{ E[0].valor = E[1].valor + E[2].valor * E[2].valor }
 \end{center}
+
 Su interpretación está dada por la definición de la precedencia de los operadores \texttt{+} y \texttt{*}(se asume que los dos operadores son infijos y están bien usado). Si tomamos \texttt{*} con mayor precedencia que \texttt{+}, \maggen\ interpreta implícitamente como si la ecuacion tuviera paréntesis:
+
 \begin{center}
  \fbox{ E[0].valor = E[1].valor + (E[2].valor * E[2].valor) }
 \end{center}
@@ -479,7 +486,9 @@ El uso de paréntesis en las expresiones define explícitamente la prioridad de 
 Cuando se utilizan paréntesis en la expresión, \maggen\ asume la asociatividad que se especifica explícitamente.
 
 \item [Alcanzabilidad] Es una característica importante a tener en cuenta sobre los símbolos de la gramática. Este chequeo, realiza un análisis sobre la totalidad de las reglas en busca de símbolos no terminales no alcanzables desde el símbolo inicial. Este caso no es considerado error fatal en \maggen, sino como \textit{warning}.
+
 \item [Condiciones de AG] Este chequeo tiene en cuenta un conjunto de condiciones que debe cumplir la gramática. Ellos son:
+
 \begin{itemize}
 \item Cada regla debe definir todos los atributos sintetizados del símbolo de la parte izquierda.
 \item Cada regla debe definir todos los atributos heredados de los símbolos de la parte derecha.
@@ -491,59 +500,68 @@ Cuando se utilizan paréntesis en la expresión, \maggen\ asume la asociatividad
 \end{description}
 
 \section{Construcción de grafos y obtención de planes y secuencias de visita}
+
 En la figura \ref{fig:disen} pudimos analizar el funcionamiento de \maggen, teniendo en cuenta la estructura \texttt{Attr\_grammar}, en esta sección abordaremos detalles en el diseño del paquete \texttt{Builder}, específicamente la construcción de grafos, de planes y de secuencias de visita. Un detalle a tener en cuenta es que, a partir de esta etapa,  todas las manipulaciones son realizadas sobre la sección de ecuacion de cada reglas.
 
 \subsection*{Construcción de grafos}
 \label{subsec:graph}
-Detalles de implementación serán analizando en la sección XX, ahora tomaremos un par de minutos para mencionar algunas consideración con respecto al funcionamiento de los grafos en \maggen.
+
+Detalles de implementación serán analizando en la sección XX, ahora tomaremos un par de minutos para mencionar algunas consideración con respecto al funcionamiento de los grafos en \maggen.\\
 
 La construcción de grafos se realiza en el modulo \texttt{builder\_graphs}. \maggen\ crea 4 tipos de grafos:
-\begin{figure}\centering
+
+\begin{itemize}
+\item DP graph. Ver figura\footnote {\label{foot:graph} Figura generada utilizando la herramienta \textit{graphviz} sobre el archivo \texttt{.dot} generado por \maggen.} \ref{dpgraph}, generado a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
+
+\begin{figure}[h!]\centering
  \includegraphics[width=200pt,height=77pt]{graph/dp.png}
 \caption{\label{dpgraph} DP Graph.}
 \end{figure}
 
-\begin{figure}\centering
+\item DOWN graph. Ver figura$^{\ref{foot:graph}}$ \ref{downgraph} generado a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
+
+\begin{figure}[h!]\centering
  \includegraphics[width=75pt,height=97pt]{graph/down.png}
 \caption{\label{downgraph} DOWN Graph.}
 \end{figure}
 
-\begin{figure}\centering
+\item DCG graph.Ver figura$^{\ref{foot:graph}}$ \ref{dcggraph} generado a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
+
+\begin{figure}[h!]\centering
  \includegraphics[width=200pt,height=101pt]{graph/dcg.png}
 \caption{\label{dcggraph} DCG Graph.}
 \end{figure}
 
-\begin{figure}\centering
+\item ADP graph. Ver figura$^{\ref{foot:graph}}$  \ref{adpgraph} generado a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
+
+\begin{figure}[h!]\centering
  \includegraphics[width=200pt,height=209pt]{graph/adp.png}
 \caption{\label{adpgraph} ADP Graph.}
 \end{figure}
 
-
-\begin{itemize}
-\item DP graph. Ver figura\footnote {\label{foot:graph} Figura generada utilizando la herramienta \textit{graphviz} sobre el archivo \texttt{.dot} generado por \maggen.} \ref{dpgraph}, generado a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
-\item DOWN graph. Ver figura$^{\ref{foot:graph}}$ \ref{downgraph} generado a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
-\item DCG graph.Ver figura$^{\ref{foot:graph}}$ \ref{dcggraph} generado a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
-\item ADP graph. Ver figura$^{\ref{foot:graph}}$  \ref{adpgraph} generado a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
 \end{itemize}
 
 La construcción de cada tipo de grafo respeta los principios analizados en el capitulo XXX. 
 
 De de los 4 tipos de grafos analizados, los necesarios para el computo de etapas siguientes, son los ``ADP graph''. Los demas, son requeridos como cálculo previo para la construcción de estos.
 
-
 \subsection*{Construcción de planes}
+
 La etapa de construcción de planes, tal como lo muestra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``Builder''. El calculo de planes en \maggen\ se basa en lo analizado en el cap XXX y teniendo en cuenta estos dos puntos:
 
 \begin{enumerate}
 \item El punto de entrada para el calculo de los planes esta dado sobre los grafos ADP. 
 \item El calculo de planes se basa en un orden topológico de la evaluación de los atributos de los símbolos, teniendo en cuenta los distintos contextos posibles.
 \end{enumerate}
+
 En la sección XXX se tratan detalles de implementación, en donde podemos analizar el funcionamientos de lo tratado anteriormente, en especial el punto 2.
 Un \textbf{plan} se compone de lista de números de ecuaciones a computar. Todo plan nos marca un orden de evaluación interpretando la lista de números de ecuaciones, de izquierda a derecha.
 
 \subsubsection*{Planes proyectados}
+
 Estos se obtienen a partir de los planes analizados anteriormente, proyectando el plan para cada símbolo de la parte derecha de la regla. La importancia de estos planes radica en la construcción de las secuencias de visita y además en el algoritmo principal de evaluación en la generación de código.
-\begin{figure}\centering
+
+\begin{figure}[h!]\centering
  \includegraphics[width=250pt,height=139pt]{plans/plan.png}
 \caption{\label{fig:plan}Plan obtenido por \maggen\ para la regla R1}
 \end{figure}
@@ -554,25 +572,30 @@ En la figura\footnote{Figura obtenida con la herramienta \textit{graphviz} sobre
 \includegraphics[width=220pt,height=35pt]{plans/plan_proj1.png} &
 \includegraphics[width=220pt,height=73pt]{plans/plan_proj2.png} 
 \end{tabular}
+
 \begin{center}
  \includegraphics[width=220pt,height=36pt]{plans/plan_proj3.png}
 \end{center}
 
 Notar que cada plan proyectado ha capturado las ecuaciones de cada símbolo de la parte derecha para el computo de sus atributos, dependiendo del contexto. Es decir, en el caso del símbolo ``Y'' su orden ha sido computado observando las dependencias de la regla R2. Estas dependencias son necesarias para el calculo del plan completo en las ecuaciones 2 y 4. 
 
-
 \subsection*{Construcción de secuencias de visita}
+
 La etapa de construcción de secuencias de visita, tal como lo muestra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``Builder''. Las mismas, son computados a partir de los diferentes planes obtenidos en el sección anterior.
 
 El funcionamiento para la construcción de las secuencias, esta dado por la aplicación de una especie de \textit{simulación}, para la evaluación de cada atributo de los símbolos. El resultado de esta simulación, son los valores que conforman la secuencia de visita, tal como se ha analizado en la sección XXX. Estos valores siguen la siguiente interpretación: 
+
 \begin{description}
 \item [Compute] Valor mayor que cero que representa el numero de la ecuacion a resolver\footnote{La ecuación a computar pertenece a la regla del plan corriente.}.
 \item [Visit] valor menor que cero que representa el numero nodo hijo a visitar\footnote{El nodo hijo esta dado por el contexto de la regla del plan corriente.}.
 \item [Leave] valor ``0''.
 \end{description}
+
 A modo de ejemplo observemos las siguientes secuencias de visita generada por \maggen\ para el ejemplo analizado en el apéndice \ref{append:agwuuyang}:
+
 \begin{description}
 \item [\{-7,0,-8\}] Secuencia de visita para la regla \texttt{P3} (sin contexto inferior). En este caso, la secuencia de visita se traduce a lo siguiente:
+
 \begin{enumerate}
 \item \textbf{Computar} la ecuacion 7.
 \item \textbf{Leave}\footnote{El leave retorna el control a la secuencia de visita de contexto superior, es decir, desde donde se invocó a esta secuencia.}.
@@ -580,109 +603,133 @@ A modo de ejemplo observemos las siguientes secuencias de visita generada por \m
 \end{enumerate}
 
 \item [\{-11,1,-12,-10\}] Secuencia de visita para la regla \texttt{R5} con el contexto de \texttt{P2}. En este caso, la secuencia de visita se traduce a lo siguiente:
+
 \begin{enumerate}
 \item \textbf{Computar} la ecuacion 11.
 \item \textbf{Visitar} el nodo hijo 1, es decir \texttt{Y}, como el contexto es \texttt{P2}, significa visitar a R2.
 \item \textbf{Computar} la ecuacion 12.
 \item \textbf{Computar} la ecuacion 10.
 \end{enumerate}
-
 \end{description}
+
 Cabe aclarar que todas las secuencias de visita tienen un \textbf{leave} implícito al final, es decir, cuando se completo la computación de la secuencia se retorna a su ámbito de invocación.
 
 \subsubsection*{Heurística de la simulación}
+
 El punto principal del cual se basa la heurística es, evaluar el plan buscando las dependencias de cada ecuacion en el contexto del mismo. Veamos los pasos básicos a tener en cuenta con el siguiente ejemplo:\\
+
 Supongamos uno de los planes\footnote{Es importante notar el echo de que cada plan se conforma de los números de ecuaciones a computar.} calculados por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}:\\
-\begin{figure}\centering
-\includegraphics[width=250pt,height=438pt]{simu.png}
-\caption{\label{fig:simul}Heurística computo de secuencia de visita}
-\end{figure}
+
 \underline{Plan:} \{ 2, 3, 4, 1 \}. Ver figura \ref{fig:plan}.
+
 \begin{enumerate}
 \item Se recorre el plan tomando en cada paso una de las ecuaciones. Para este caso particular comenzamos con la ecuación 2.
+
 \item Dada la ecuación \texttt{i}\footnote{Para este caso particular \textit{i} toma los valores 0,1,2,3.}, en el plan, debemos computar \textit{l\_value} de la ecuacion. Para ello debemos resolver todas las dependencias dadas por \textit{r\_value}.
+
 \item Dada una dependencia de la ecuacion, primero se chequea si las misma fue computada en algún paso anterior,sino, analizamos de la siguiente manera:
+
 \begin{itemize}
 \item Si la dependencia proviene de una instancia que pertenece al \textbf{símbolo de la parte izquierda de la regla} y además contiene un \textbf{atributo heredado}, entonces estamos en condiciones de realizar un ``\texttt{leave}''.
+
 \item Si la dependencia proviene de una instancia que pertenece a un \textbf{símbolo de la parte derecha de la regla} y además contiene un \textbf{atributo sintetizado}, entonces estamos en condiciones de realizar un ``\texttt{visit}''. En este caso, debemos analizar, según el contexto, cual es el plan (nodo hijo) se debe visitar. 
 \end{itemize}
+
 Notar que en los dos puntos anteriores, nos quedan los casos de dependencia perteneciente al símbolo de la parte izquierda con atributo sintetizado y dependencia de símbolo de la parte derecha con atributo heredado, pero estos casos, son los que deben definirse en este ambiente y como partimos del plan evaluación, el orden de dependencias es consistente con la demanda de las mismas.
+
 \item Luego de la obtención de todas las dependencias, se realiza un \textbf{compute} del \textit{l\_value} y se marca a este como \texttt{evaluado}. El paso siguiente es avanzar una ecuacion en la lista que impone el plan y realizar los mismos tratamientos.
 \end{enumerate} 
 
 Para mas detalle observemos la figura \ref{fig:simul}.
-\newpage
-El resultado del ejemplo, aplicando los pasos tratados arriba, es presentado en el siguiente diagrama:
-\begin{center}
-\includegraphics[width=300pt,height=160pt]{plan2seq.png}
-\end{center}
-Notar que para el computo de las secuencias de visitas totales nos basta con lanzar la simulación analizada anteriormente para los planes iniciales\footnote{Los planes iniciales son aquellos que provienen de regla inicial.}. La explicación de esto se sustenta en las propiedades garantizadas con los chequeos en la gramática, principalmente la propiedad de alcanzabilidad. De esta forma, los planes iniciales lanzan los demas planes necesarios para el computo total de las secuencias.
 
+\begin{figure}[h!]\centering
+\includegraphics[width=300pt,height=525pt]{simu.png}
+\caption{\label{fig:simul}Heurística computo de secuencia de visita}
+\end{figure}
+
+\newpage
+
+El resultado del ejemplo, aplicando los pasos tratados arriba, es presentado en el diagrama \ref{fig:resul_vis}.
+
+\begin{figure}[h!]\centering
+\includegraphics[width=300pt,height=160pt]{plan2seq.png}
+\caption{\label{fig:resul_vis} Ejemplo de Secuencia de visita}
+\end{figure}
+
+Notar que para el cómputo de las secuencias de visitas totales nos basta con lanzar la simulación analizada anteriormente para los planes iniciales\footnote{Los planes iniciales son aquellos que provienen de regla inicial.}. La explicación de esto se sustenta en las propiedades garantizadas con los chequeos en la gramática, principalmente la propiedad de alcanzabilidad. De esta forma, los planes iniciales lanzan los demas planes necesarios para el computo total de las secuencias.
 
 \section{Generación de Código}
+
 La etapa final de \maggen\ esta dada por la generación de código para el evaluador estático. Como hemos analizado en el diagrama visto en la figura \ref{fig:disen}, esta etapa se realiza en el paquete ``Builder'', específicamente en el modulo \texttt{Builder\_code}.
 
 La etapa de generación de código produce dos archivos: \textit{interface} (.hpp) e \textit{implementación} (.cpp). En el apéndice \ref{append:agwuuyangcode} observamos el código generado para el ejemplo de Wuu Yang ya analizado durante todo este capitulo.
 A continuación abordaremos algunas consideraciones sobre la generación de código en \maggen\ teniendo en cuenta lo observado en el apéndice.
 
 Consideraciones de la clase:
+
 \begin{description}
 \item [Atributos] Cabe aclarar que la totalidad de los atributos tiene visibilidad privada.
-\scriptsize 
-\begin{lstlisting}[backgroundcolor=\color{white}, language=c++]
-vector < Visit_sequence >    v_seq;
-vector < Order_rule >        contexts_rule;
-vector < Plan >              eval_plans;
-vector < Plan_project >      eval_plans_project;
-vector < Rule >              rules;
+ 
+\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++]
+vector < Visit_sequence >  v_seq;
+vector < Order_rule >      contexts_rule;
+vector < Plan >            eval_plans;
+vector < Plan_project >    eval_plans_project;
+vector < Rule >            rules;
 \end{lstlisting}
-\normalsize
+
+% \normalsize
+
 Estos, son usados por los métodos del evaluador generado por \maggen. Podemos hacer una diferencia en el echo de que, \texttt{v\_seq} es usado directamente por el algoritmo de evaluación, en cambio los demás son usados por algoritmos previos a este. Cada uno de los tipos usados para estos atributos son definidos en otro módulo, el cual analizaremos mas adelante.
+
 \item [Métodos] Es necesario tengamos en cuenta visibilidad:
+
 \begin{itemize}
 \item Privados:
-\scriptsize
-\begin{lstlisting}[backgroundcolor=\color{white}, language=c++]
+
+\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++]
 void add_plan(const Key_plan &k_plan, unsigned short index_order);
 void add_plan_project(const Key_plan_project &k_plan_p, unsigned short index_order);
 void compute_eq(int num_eq, struct Node *root);
 void traverse(struct Node * node, unsigned short order);
 void eval_visiter(struct Node *root);
 \end{lstlisting}
-\normalsize
+% \normalsize
+
 Estos métodos son usados internamente por el evaluador generado por \maggen\ teniendo en cuenta lo siguiente:\\
 \texttt{compute\_eq} tiene la responsabilidad de invocar a los \textbf{compute} de cada ecuacion y \texttt{eval\_visiter} tiene la responsabilidad de los \textbf{visit} a nodos. Notar que, estos métodos trabajan sobre las secuencias de visita.
 
 El método \texttt{traverse} recorre el AST de entrada al evaluador y asigna a cada nodo un plan de evaluación\footnote{Los planes que asigna el método traverse son los generados estáticamente por \maggen.} y con ello una secuencia de visita correspondiente.
 
 \texttt{add\_plan} y \texttt{add\_plan\_project} agregan planes y planes proyectados respectivamente, los mismos son usados en la inicialización del evaluador (constructor de clase).
+
 \item Públicos:
-\scriptsize
-\begin{lstlisting}[backgroundcolor=\color{white}, language=c++]
+
+\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++]
 maggen();
 void print_v_seq();
 void translate_mag();
 void evaluator_mag(struct Node *root);
 \end{lstlisting}
-\normalsize
+% \normalsize
+
 Estos, son los servicios públicos que ofrece el evaluador generado por \maggen. El métodos mas importante, es \texttt{evaluator\_mag}, el cual pone en funcionamiento el evaluador generado por \maggen. El parámetro tomado por el método representa la raíz del AST que se desea evaluar.
 
 El constructor de clase\footnote{El nombre de la clase y por ende el del constructor de la misma depende de los parámetros con los cuales se invocó a \maggen. VER USO XX} realiza la inicialización de los atributos de la misma. Los valores de inicialización de los atributos son obtenidos por los cómputos de cada etapa de \maggen\ vistas en todo este capitulo.
 
 Los dos métodos anexos, \texttt{print\_v\_seq} y \texttt{translate\_mag} pueden ser usados para visualizar las secuencias de visita del evaluador. Los dos realizan la misma funcionalidad, pero muestran las secuencias de visita de manera diferente, como lista de valores o como secuencia de compute, visit o  leave (detalle de secuencia de visita en XX).
 \end{itemize}
- 
 \end{description}
 
 Además de la clase, \maggen\ genera \texttt{struct} para cada uno de los símbolos de la gramática y para cada uno implementa el método \texttt{to\_string()} que se responsabiliza de como mostrar por pantalla cada símbolo, teniendo en cuenta sus atributos. Para mas detalle analizar en el apéndice \ref{append:agwuuyangcode}, específicamente los \texttt{struct} para los símbolos \texttt{S, X, Y, Z}.
 
-\normalsize
-Los dos modulos analizados arriba, generados por \maggen, se apoyan sobre dos módulos mas, que son anexados de manera estática por la herramienta, ellos son: \texttt{Node.hpp} y \texttt{Plan.hpp}. Los mismos contienen definiciones de ``tipos'' y ``metodos'' necesarios por el el evaluador generado.
+% \normalsize
+
+Los dos módulos analizados arriba, generados por \maggen, se apoyan sobre dos módulos mas, que son anexados de manera estática por la herramienta, ellos son: \texttt{Node.hpp} y \texttt{Plan.hpp}. Los mismos contienen definiciones de ``tipos'' y ``metodos'' necesarios por el el evaluador generado.
 A continuación observamos el interior de cada uno de ellos:
 
-\tiny
-\lstinputlisting[numbers=left, numberstyle=\tiny, numbersep=5pt, language=c++]{input_file_code/Node.hpp}
+\lstinputlisting[basicstyle=\tiny, numbers=left, numberstyle=\tiny, numbersep=5pt, language=c++]{input_file_code/Node.hpp}
 
-\tiny
-\lstinputlisting[numbers=left, numberstyle=\tiny, numbersep=5pt, language=c++]{input_file_code/Plan.hpp}
+\lstinputlisting[basicstyle=\tiny, numbers=left, numberstyle=\tiny, numbersep=5pt, language=c++]{input_file_code/Plan.hpp}
+
 \normalsize
