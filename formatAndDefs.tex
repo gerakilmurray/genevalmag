@@ -1,21 +1,33 @@
-% AMS Math
-\usepackage{amsmath,amssymb}
-% \usepackage[french]{babel}
-%\usepackage[latin1]{inputenc}
-
 \usepackage[spanish]{babel} % division de silabas en spanish.
 \usepackage{ucs}
 \usepackage[utf8]{inputenc}
+
+% AMS Math
+\usepackage{amsmath,amssymb}
+%\usepackage[latin1]{inputenc}
+
 \usepackage{longtable}
 \usepackage{multirow}
 
 \usepackage{listings}
 \usepackage{color}
 \usepackage{textcomp}
+
 \definecolor{listinggray}{gray}{0.9}
 \definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
 \definecolor{gris}{rgb}{0.8,0.8,0.8}
 \definecolor{azul}{rgb}{0.0,0.3,0.6}
+
+\lstdefinelanguage{specmag}{
+  keywords={compute, end, all, semantic, domain, attributes, rules, sort, op, function, infix, prefix, postfix, syn, inh, left, right, non-assoc, and, and_eq, asm, auto, bitand, bitor, break, case, catch, class, compl, const, const_cast, continue, default, delete, do, double, dynamic_cast, else, enum, explicit, export, extern, false, for, friend, goto, if, inline, long, mutable, namespace, new, not, not_eq, operator, or, or_eq, private, protected, public, register, reinterpret_cast, return, short, signed, sizeof, static, static_cast, struct, switch, template, this, throw, true, try, typedef, typeid, typename, union, unsigned, using, virtual, void, volatile, wchar_t, while, xor, xor_eq, bool, char, float, int, string},
+  sensitive=true,
+  morecomment=[s]{/*}{*/},
+  morecomment=[l]{\//},
+  rangeprefix= /*,
+  rangesuffix= */,
+  morestring=[d]{"}
+}
+
 
 \lstset{
     backgroundcolor=\color{lbcolor},
@@ -37,7 +49,7 @@
     showstringspaces=false,
     identifierstyle=\ttfamily,
     keywordstyle=\color[rgb]{0.1,0.1,0.6}\bfseries,
-    commentstyle=\color[rgb]{0.133,0.545,0.133}\textit,
+    commentstyle=\color[rgb]{0.133,0.545,0.133},
     stringstyle=\color[rgb]{0.627,0.126,0.941},
     keepspaces=true
 }
@@ -61,12 +73,12 @@
 % Glossary / list of abbreviations
 
 \usepackage[intoc]{nomencl}
-\renewcommand{\nomname}{List of Abbreviations}
+\renewcommand{\nomname}{Lista de Abreviaturas}
 
 \newcommand{\maggen}{\textbf{magGen}}
 \newcommand{\boost}{\textit{\textbf{Boost}}}
 \newcommand{\spirit}{\textit{\textbf{Spirit}}}
-\newcommand{\flecha}{$\hspace{0.3cm} \Longrightarrow \hspace{0.3cm}$}
+\newcommand{\flecha}{$\hfill \Longrightarrow \hfill$}
 
 \makenomenclature
 

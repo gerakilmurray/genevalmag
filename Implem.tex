@@ -14,18 +14,20 @@ La solución obtenida se apoya en la utilización de un framework reconocido mun
 
 \spirit\ es un framework generador de analizadores sintácticos, o parsers, descendentes recursivos orientado a objetos implementado usando técnicas de meta-programación con plantillas. Las expresiones mediante plantillas, permiten aproximar la sintaxis de una ``\textit{\textit{Forma Backus Normal Extendida}}'' (\textbf{EBNF}) completamente en C++.
 
-Se puede resumir que el proceso de análisis sintáctico, en este framework, se componente de cuatro partes.
+Se puede resumir que el proceso de análisis sintáctico, en este framework, se componen de cuatro partes como lo muestra la figura \ref{fig:procesoSpirit}.
 
 \begin{figure}[h!]\centering
 \includegraphics[width=450pt, height=180pt]{./spirit.png}
-\caption{Procesos dentro de \spirit}\label{procesoSpirit}
+\caption{Procesos dentro de \spirit}\label{fig:procesoSpirit}
 \end{figure}
 
 El usuario es el responsable de definir las ``\texttt{semantic actions}'' para lograr capturar los resultados intermedios, producidos durante la etapa de parsing y no sólo obtener un valor lógico sobre si se pudo o no, consumir toda la cadena de entrada.
 
 Para comenzar a definir una gramática hay que crear una estructura que herede de la clase \texttt{grammar}. Dentro de ella se debe definir a su vez otra estructura templatizada denominada \texttt{definition}. En donde realmente estará la definición de la gramática.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize,numbers=left, numbersep=5pt, numberstyle=\tiny]
+\newpage
+
+\begin{lstlisting}[float, language=C++, basicstyle=\scriptsize,numbers=left, numbersep=5pt, numberstyle=\tiny]
 struct my_grammar: public grammar <my_grammar>
 {
     template <typename ScannerT>
@@ -139,8 +141,6 @@ Lo primero que se tuvo que realizar, fue definir los componentes básicos que se
 
 \begin{description}
 \item [Identificadores] son los nombres de sorts, funciones, atributos, símbolos no terminales y reglas, permitidos por \maggen\ y se basan en el común de los estándares. Debido a que el lenguaje del evaluador generado es C++, todas las palabras reservadas de ese lenguaje, son de la misma clase para nuestra herramienta.
-
-\newpage
 
 \begin{lstlisting}[float=h!, language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
 r_ident = lexeme_d[(alpha_p|'_')>>*(alnum_p|'_')]-r_reserved_word;
@@ -416,7 +416,7 @@ literal := real
 
 Dentro de las expresiones se tenía que ir resolviendo la precedencia de los operadores declarados por el usuario. Además, la utilización de paréntesis crea distintos niveles de precedencia. Cada vez que se utiliza la producción que genera \texttt{( E )}, la precedencia de los operadores que se utilicen en la expresión \texttt{E}, se resolverán en ese nivel.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
+\begin{lstlisting}[float, language=C++, basicstyle=\scriptsize, numbers=left, numbersep=5pt, numberstyle=\tiny]
 r_expression = r_expr_prime>>*(r_op_infix_st[&create_operator][&create_func_node]>>
                r_expr_prime[&create_root_infix_node]);
 
@@ -610,7 +610,7 @@ El chequeo de la asociatividad y las eventuales modificaciones en el árbol de e
 
 Esto se implementó así, ya que en ese punto, todos los elementos del árbol se encuentran posicionados respetando todas las precedencias, quedando potencialmente inconsistente la asociación de dos o más operadores infijos iguales, dentro del mismo nivel sintáctico, y con asociatividad a \textbf{derecha}, ya que por defecto todos los operadores son asociados a izquierda, debido al parser descendente recursivo que aplica \spirit.
 
-Además, cuando se detectan dos operadores no asociativos se genera un error por mal uso de ese operador dentro de la expresión. Tal como se analizó en la sección XXX.
+Además, cuando se detectan dos operadores no asociativos se genera un error por mal uso de ese operador dentro de la expresión. Tal como se analizó en la sección \ref{XXX}.
 
 \subsection{Alcanzabilidad de símbolos y reglas}
 
@@ -630,7 +630,7 @@ La heurística utilizada, consiste en recorrer el \texttt{map} de símbolos no t
 
 Este control es uno de los más importantes, ya que si la gramática por más que haya sido parseada correctamente, si no cumple con las condiciones de una MAG, nuestra herramienta la descarta y no le generará su correspondiente evaluador.
 
-Como ya me sencionó en el capítulo XXX, varias son las condiciones que se deben chequear.
+Como ya me sencionó en el capítulo \ref{XXX}, varias son las condiciones que se deben chequear.
 
 La heurística aplicada fue recorrer el \texttt{map} de reglas, donde para cada una verificábamos que estuviesen definidas dentro de su \texttt{map} de ecuaciones, una para cada uno de sus atributos sintetizados. Y a su vez, una ecuación para cada atributo heredado de sus símbolos de la parte derecha.
 
@@ -658,7 +658,7 @@ Los planes están representamos como una secuencia de identificadores de ecuacio
 
 Como en general, se iban a generar en muchos casos los mismos planes, se desidió mantener un \texttt{vector} con todos los planes diferentes, así solo generaríamos la mínima cantidad de planes únicos.
 
-Como en el algoritmo que se presenta en el artículo de Wuu Yang(ver bibliografía XXX), a cada plan se lo asocia con un \texttt{key}, primero implementamos esa clave como una estructura con los siguientes datos:
+Como en el algoritmo que se presenta en el artículo de Wuu Yang(ver bibliografía \ref{XXX}), a cada plan se lo asocia con un \texttt{key}, primero implementamos esa clave como una estructura con los siguientes datos:
 \begin{itemize}
 \item La regla a la cual pertenece el plan
 \item Una secuencia para computar sus atributos
@@ -807,17 +807,29 @@ unsigned short build_plans()
 }
 \end{lstlisting}
 
-El proceso de construir un plan es complejo, la heurística seguida respeta el algoritmo para computar planes presentado por Wuu Yang (ver XXX).
+El proceso de construir un plan es complejo, la heurística seguida respeta el algoritmo para computar planes presentado por Wuu Yang (ver \ref{XXX}).
 
-Por lo que se implementaron las funciones y elementos involucrados con lo siguiente:
+Por lo que se implementaron las funciones y elementos involucrados con lo siguiente:\\
 
-\begin{itemize}
-\item Lista de trabajos: \textbf{WL} \flecha \texttt{vector <Item\_work>\ work\_list;}
-\item Trabajos realizados: {\LARGE\textbf{$\Delta$}} \flecha \texttt{vector <Item\_work>\ defined\_item\_work;}
-\item Función que computar un orden de evaluación de ecuaciones: \textbf{ComputeOrder} \flecha \texttt{compute\_order}
-\item Función que filtra del orden total sólo lo para un símbolo: \textbf{Project} \flecha \texttt{purge\_plan\_with}
-\item Planes de evaluación: {\LARGE\textbf{$\Theta$}} \flecha \texttt{map <Key\_plan, unsigned short>\ eval\_plans;}
-\item Planes de evaluación proyectados: {\LARGE\textbf{$\gamma$}} \flecha \texttt{map <Key\_plan\_project, unsigned short>\ plans\_project;}
-\end{itemize}
+
+\begin{tabular}{| p{5cm} | p{10cm} |}
+\hline
+Lista de trabajos \textbf{WL} & \texttt{vector <Item\_work>\ work\_list} \\ \hline
+
+Trabajos realizados {\LARGE\textbf{$\Delta$}} & \texttt{vector <Item\_work>\ defined\_item\_work} \\ \hline
+
+Función \textbf{ComputeOrder} de ecuaciones & \texttt{compute\_order(const Graph \&graph\_adp, unsigned short index\_order, const Context\_rule \&context\_rule)} \\ \hline
+
+Función \textbf{Project} orden de ecuaciones para un símbolo & \texttt{purge\_plan\_with(const Rule \&rule, const Order\_eval\_eq \&order\_eq, Order\_eval\_eq \&purged\_order)} \\ \hline
+
+Planes de evaluación {\LARGE\textbf{$\Theta$}} & \texttt{map <Key\_plan, unsigned short>\ eval\_plans} \\ \hline
+
+Planes de evaluación proyectados {\LARGE\textbf{$\gamma$}} & \texttt{map <Key\_plan\_project, unsigned short>\ plans\_project} \\
+\hline
+\end{tabular}
+
+\vspace{0.3cm}
+
+La función \texttt{compute\_order} debe analizar las .
 
 \normalsize

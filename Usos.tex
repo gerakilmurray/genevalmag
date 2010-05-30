@@ -115,6 +115,7 @@ Ahora ya estamos listos para empezar a usar \maggen, en las siguientes secciones
 La totalidad de parámetros y opciones de \maggen\ son opcionales. La sintaxis de invocación de la herramienta esta dada por:\\
 \begin{center}\texttt{maggen [OPTIONS]}\end{center}
 Las opciones son las siguientes:
+
 \begin{description}
 \item [-f  file] Definir el archivo de entrada de \maggen\ como \texttt{file}. Si omitimos esta opción \maggen espera la entrada por la entrada estándar (\texttt{cin}) hasta leer el carácter \texttt{EOF} (end of file)\footnote{En sistemas Unix el carácter \texttt{EOF} puede ser producido con \textbf{Ctrl+D} dentro de una consola de comandos.}.
 \item [-i  header] Incluir \texttt{header} en la generación de código. Genera un \texttt{\#include ``header''} del archivo que referencia esa ruta. Dicha linea, \maggen la agrega al archivo generado.
@@ -122,13 +123,18 @@ Las opciones son las siguientes:
 \item [-o  name] Define a \texttt{name} como el nombre de la clase y del archivo generado por \maggen. Si omitimos esta opción, \maggen\ usa por defecto el nombre ``\textbf{mag\_eval}''.
 \item [-h] Muestra mensaje de ayuda.
 \end{description}
+
 A continuación observemos algunos ejemplo de invocación de \maggen.
 \begin{itemize}
 \item Si invocamos:\\ \texttt{./maggen -h} obtenemos el siguiente mensaje de ayuda:
-\begin{center}
+
+\begin{figure}[h!]\centering
 \includegraphics[width=350pt,height=60pt]{help.png}
-\end{center}
+\caption{\label{fig:outhelp} Información de ayuda de \maggen.}
+\end{figure}
+
 \item Si invocamos: \\ \texttt{./maggen -fo ./Out\_wuu\_yang -o evalmag -f ./examples/ag\_wuu\_yang/ag\_wuu\_yang.input}. \\ Especificamos como archivo de entrada a \texttt{ag\_wuu\_yang.input}, como directorio de salida \texttt{./Out\_wuu\_yang} y el nombre de la clase (y archivo) generada con el nombre \texttt{evalmag}. La figura \ref{fig:outnormal} muestra la salida de esta invocación.
+
 \begin{figure}[h!]\centering
 \includegraphics[width=350pt,height=70pt]{normal.png}
 \caption{\label{fig:outnormal} Usando \maggen\ con opciones.}
@@ -281,7 +287,7 @@ ERROR: postfix operator non-exist: \textit{OP-POS}. & El operador posfijo \texti
 
 ERROR: prefix operator non-exist: \textit{OP-PRE}. & El operador prefijo \textit{OP-PRE} utilizado en la expresión no esta definido o esta usado con tipos erróneos. & Defina el operador o modifique la expresión. \\ \hline 
 
-ERROR: The grammar isn't extended grammar. & Error en la definición de la gramática, la misma no cumple con la propiedad de gramática extendida. ver detalles en sección XXX & Chequee la definición de la gramática para que cumpla la propiedad.(sección grammar extended) \\ \hline
+ERROR: The grammar isn't extended grammar. & Error en la definición de la gramática, la misma no cumple con la propiedad de gramática extendida. ver detalles en sección \ref{XXX} & Chequee la definición de la gramática para que cumpla la propiedad.(sección grammar extended) \\ \hline
 
 ERROR: the path \textit{PATH} is invalid or inaccessible. & El camino (PATH) es inexistente o inaccesible. & Verifique la ruta e invoque a \maggen\ nuevamente. \\ \hline
 

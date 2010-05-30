@@ -12,29 +12,28 @@
 \subsection{Pseudocódigo}
 \begin{lstlisting}[basicstyle=\scriptsize, escapeinside=@@, backgroundcolor=\color{white}]
      (R1)   S @$\rightarrow$@ XYZ      
-                     S.s0 := X.s1 + Y.s2 + Ys3 + Zs4
-                     X.i1 := Y.s3  
-                     Y.i2 := X.s1
-                     Y.i3 := Y.s2
+              S.s0 := X.s1 + Y.s2 + Ys3 + Zs4
+              X.i1 := Y.s3  
+              Y.i2 := X.s1
+              Y.i3 := Y.s2
      (R2)   Y @$\rightarrow$@ m        
-                     Y.s2 := Y.i2
-                     Y.s3 := 1
+              Y.s2 := Y.i2
+              Y.s3 := 1
      (R3)   Y @$\rightarrow$@ n        
-                     Y.s2 := 2
-                     Y.s3 := Y.i3
+              Y.s2 := 2
+              Y.s3 := Y.i3
      (R4)   X @$\rightarrow$@ m        
-                     X.s1 := X.i1
+              X.s1 := X.i1
      (R5)   Z @$\rightarrow$@ Y        
-                     Z.s4 := Y.s3
-                     Y.i2 := 3
-                     Y.i3 := Y.s2
+              Z.s4 := Y.s3
+              Y.i2 := 3
+              Y.i3 := Y.s2
 \end{lstlisting} 
 
 \subsection{Con lenguaje de especificación}
 
 \subsubsection*{Archivo de input: \texttt{ag\_wuu\_yang.input}}
-\lstinputlisting[basicstyle=\tiny, numbers=left, numberstyle=\tiny, numbersep=5pt, language=c++]{input_file_code/ag_wuu_yang.input}
-
+\lstinputlisting[basicstyle=\tiny, numbers=left, numberstyle=\tiny, numbersep=5pt, language=specmag]{input_file_code/ag_wuu_yang.input}
 
 \section{Código generado por \maggen: Ejemplo Wuu Yang.}
 \label{append:agwuuyangcode}
@@ -45,7 +44,6 @@ Los archivos fueron obtenidos invocando a \maggen\ de la siguiente forma:
 \footnotesize
 \texttt{\maggen\ -fo ../Out\_wuu\_yang -o maggen -f  ../examples/ag\_wuu\_yang/ag\_wuu\_yang.input}
 \end{center}
-
 
 \subsection*{Archivo interface: \texttt{maggen.hpp}}
 
