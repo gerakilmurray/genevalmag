@@ -1,9 +1,9 @@
 /**
-  *  \file      maggen.hpp
-  *  \brief     Class generator from static evaluator generator: GENEVALMAG 
-  *  \date      Tue May 18 13:02:35 2010
-  *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
-  *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+  *  \file    maggen.hpp
+  *  \brief   Class generator from static evaluator generator: GENEVALMAG 
+  *  \date    Tue May 18 13:02:35 2010
+  *  \author  Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  *  \author  Picco, Gonzalo Martin <gonzalopicco@gmail.com>
 */
 
 #ifndef _MAGGEN_HPP_
@@ -25,42 +25,42 @@ namespace evalmag
   */
 typedef struct Symbol_S: Node
 {
-    int s0;
+  int s0;
 
-    Symbol_S(const unsigned short &r_id);
+  Symbol_S(const unsigned short &r_id);
 
-    string to_string() const;
+  string to_string() const;
 } S ;
 
 typedef struct Symbol_X: Node
 {
-    int i1;
-    int s1;
+  int i1;
+  int s1;
 
-    Symbol_X(const unsigned short &r_id);
+  Symbol_X(const unsigned short &r_id);
 
-    string to_string() const;
+  string to_string() const;
 } X ;
 
 typedef struct Symbol_Y: Node
 {
-    int i2;
-    int i3;
-    int s2;
-    int s3;
+  int i2;
+  int i3;
+  int s2;
+  int s3;
 
-    Symbol_Y(const unsigned short &r_id);
+  Symbol_Y(const unsigned short &r_id);
 
-    string to_string() const;
+  string to_string() const;
 } Y ;
 
 typedef struct Symbol_Z: Node
 {
-    int s4;
+  int s4;
 
-    Symbol_Z(const unsigned short &r_id);
+  Symbol_Z(const unsigned short &r_id);
 
-    string to_string() const;
+  string to_string() const;
 } Z ;
 
 /**
@@ -68,34 +68,34 @@ typedef struct Symbol_Z: Node
   */
 class maggen
 {
-    private:
-        vector < Visit_sequence >    v_seq;
+  private:
+    vector < Visit_sequence >  v_seq;
 
-        vector < Order_rule >        contexts_rule;
+    vector < Order_rule >    contexts_rule;
 
-        /* "ro" function. Wuu yank's paper. */
-        vector < Plan >              eval_plans;
+    /* "ro" function. Wuu yank's paper. */
+    vector < Plan >        eval_plans;
 
-        /* "tita" function. Wuu yank's paper. */
+    /* "tita" function. Wuu yank's paper. */
 
-        vector < Plan_project >      eval_plans_project;
+    vector < Plan_project >    eval_plans_project;
 
-        vector < Rule >              rules;
+    vector < Rule >        rules;
 
-        void add_plan(const Key_plan &k_plan, unsigned short index_order);
-        void add_plan_project(const Key_plan_project &k_plan_p, unsigned short index_order);
-        void compute_eq(int num_eq, struct Node *root);
-        void traverse(struct Node * node, unsigned short order);
-        void eval_visiter(struct Node *root);
+    void add_plan(const Key_plan &k_plan, unsigned short index_order);
+    void add_plan_project(const Key_plan_project &k_plan_p, unsigned short index_order);
+    void compute_eq(int num_eq, struct Node *root);
+    void traverse(struct Node * node, unsigned short order);
+    void eval_visiter(struct Node *root);
 
-    public:
-        maggen();
+  public:
+    maggen();
 
-        void print_v_seq();
+    void print_v_seq();
 
-        void translate_mag();
+    void translate_mag();
 
-        void evaluator_mag(struct Node *root);
+    void evaluator_mag(struct Node *root);
 
 };
 

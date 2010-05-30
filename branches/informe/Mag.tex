@@ -8,7 +8,6 @@ La familia de las MAG es estrictamente mayor que las ANCAG. La importancia de es
 
 A continuación trataremos en detalle la familia de las MAG y en el capitulo siguiente abordaremos el mecanismo de evaluación de las mismas.
 
-
 \section{Gramática de atributos}
 En esta sección, se define la notación que se usara en le desarrollo del presente capitulo para la definición de la familia MAG.
 Básicamente, la notación usada es la utilizada por Wuu yang en \cite{wuu-yang1}, la cual proviene de la notación de Kastens en \cite{kastens}.
@@ -61,10 +60,10 @@ Un grafo \textit{DP} esta definido (\cite{estruc-algorit}) con las siguientes co
 \end{itemize}
 
 El conjunto de dependencias directas de una producción, de la gramática, se denota como \textit{DP(p)}(\textit{p} producción de la gramática) y se define como:
- \begin{definition}
+\begin{definition}
 Dada una producción p de una gramática de atributos definida como en \ref{def:grammarattr}, entonces
 \begin{equation}
- DP(p) = \{(X_{i}.a, X_{j}.b) | X_{i}.a \rightarrow Y_{j}.b \in R^{p} \}
+DP(p) = \{(X_{i}.a, X_{j}.b) | X_{i}.a \rightarrow Y_{j}.b \in R^{p} \}
 \end{equation}
 \end{definition}
 
@@ -82,7 +81,7 @@ El conjunto de dependencias entre los atributos de un símbolo se denota como
 \begin{definition}
 Dada un símbolo X de una gramática de atributos definida como en \ref{def:grammarattr}, entonces
 \begin{equation}
- Down(X) = \{(a,b) | a \rightarrow b \} con\ a,b \in A(X)
+Down(X) = \{(a,b) | a \rightarrow b \} con\ a,b \in A(X)
 \end{equation}
 \end{definition}
 \subsection{Grafo \textit{DCG}}
@@ -97,12 +96,11 @@ Dado q una producción de la forma $X_{0}\rightarrow \alpha_{0} X_{1} \alpha_{1}
 \end{definition}
 Tomemos el siguiente teorema presentado por Wuu-Yang en \cite{wuu-yang1}:
 \begin{theorem}
- $\bigcup\limits_{\textit{todo p}}{DCG_{X} (p) = Down (X)}$
+$\bigcup\limits_{\textit{todo p}}{DCG_{X} (p) = Down (X)}$
 \end{theorem}
 \underline{Nota:} $DCG_{X}(p)$ contiene las dependencias, entre las instancias de la gramática, para el símbolo \texttt{X}, acotando el análisis para la producción \textit{p} y los posibles contextos inferiores.
 
-
-En la sección XXX se analiza el algoritmo para construir los grafos DCG.
+En la seccion \ref{XXX} se analiza el algoritmo para contruir los grafos DCG.
 
 \subsection{Grafo \textit{ADP}}
 
@@ -112,24 +110,23 @@ El conjunto de dependencias aumentadas se denota como $ADP (q | p_{1}, p_{2}, \d
 \begin{definition}
 Sea q una producción de la forma $X_{0}\rightarrow \alpha_{0} X_{1} \alpha_{1} X_{2} \dots X_{k} \alpha_{k}$. Sea $p_{i}$ una producción cuya parte izquierda es $X_{i}$ ($1\leqslant i \leqslant k$). 
 \begin{equation}
- ADP (q | p_{1}, p_{2}, \dots, p_{k}) = DP(q) \bigcup\limits_{k}^{i=1}{DGC_{X_{i}}} (p_{i})
+ADP (q | p_{1}, p_{2}, \dots, p_{k}) = DP(q) \bigcup\limits_{k}^{i=1}{DGC_{X_{i}}} (p_{i})
 \end{equation}
 \end{definition}
 
 A partir de la definición anterior surge la siguiente:
 \begin{definition}
 El conjunto de todas las posibles dependencias aumentadas para una producción q se define como:
- \begin{equation}
- SADP(q) = \bigcup\limits_{q\in P}{ADP (q | p_{1}, p_{2}, \dots, p_{k})} 
+\begin{equation}
+SADP(q) = \bigcup\limits_{q\in P}{ADP (q | p_{1}, p_{2}, \dots, p_{k})} 
 \end{equation}
 \end{definition}
-
 
 \section{Definición MAG}
 
 Una gramática \textit{G} de la forma \ref{def:grammarattr} es una \textit{gramática de atributos multi-planes} si y solo si 
 \begin{equation}
- \forall q : q \in P: (\forall g:g\ es\ un\ grafo\ de\ q \wedge g \in SADP(q) : g\ es\ no\ circular) 
+\forall q : q \in P: (\forall g:g\ es\ un\ grafo\ de\ q \wedge g \in SADP(q) : g\ es\ no\ circular) 
 \end{equation}
 
 Las \textit{gramáticas multi-plans} mantienen propiedades deseables como:
@@ -141,10 +138,10 @@ Las \textit{gramáticas multi-plans} mantienen propiedades deseables como:
 De los conceptos analizado arriba surgen los siguientes teoremas:
 
 \begin{theorem}
- $IDP-ANCAG(q) = \bigcup SADP(q)$, para toda producción q. 
+$IDP-ANCAG(q) = \bigcup SADP(q)$, para toda producción q. 
 \end{theorem}
 
 \begin{theorem}
- Toda gramática ANCAG es una gramática MAG, pero no viceversa.
+Toda gramática ANCAG es una gramática MAG, pero no viceversa.
 \end{theorem}
 

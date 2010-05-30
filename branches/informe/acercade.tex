@@ -10,7 +10,7 @@ Esto es, dada una MAG en el lenguaje de especificación, \maggen\ computa los pl
 El evaluador generado por \maggen\ recibe un AST y devuelve este AST decorado. El potencial del evaluador generado por \maggen, esta dado, por tener estáticamente todos las posibles secuencias de visita para los posibles AST de entrada, entonces sólo debe seleccionar las secuencias para el AST dado y luego recorrerlo según como las mimas lo indiquen.
 
 \section{\textquestiondown Como funciona \maggen ?}
-Dado una MAG, \maggen\ calcula los grafos de dependencias de atributos de los símbolos de la gramática. A partir de ellos, es posible la aplicación de algoritmos de para la obtención de planes de evaluación y luego secuencias de visitas de dichos planes. \maggen\ se basa en la construcción de 4 tipos de grafos, que se construyen de manera incremental sobre la gramática. Estos grafos, son los presentados en el capitulo XXX, Dependency graph (\textbf{DP}), Down graph (\textbf{Down}), Downward characteristic graph (\textbf{DCG}) y augmented dependency graph (\textbf{ADP}). Sobre estos últimos se basa el calculo de los planes de evaluación.
+Dado una MAG, \maggen\ calcula los grafos de dependencias de atributos de los símbolos de la gramática. A partir de ellos, es posible la aplicación de algoritmos de para la obtención de planes de evaluación y luego secuencias de visitas de dichos planes. \maggen\ se basa en la construcción de 4 tipos de grafos, que se construyen de manera incremental sobre la gramática. Estos grafos, son los presentados en el capitulo \ref{XXX}, Dependency graph (\textbf{DP}), Down graph (\textbf{Down}), Downward characteristic graph (\textbf{DCG}) y augmented dependency graph (\textbf{ADP}). Sobre estos últimos se basa el calculo de los planes de evaluación.
 
 El funcionamiento de \maggen\ esta dado por la integración de 4 etapas, consideradas principales, que marcaron el proceso de desarrollo de la herramienta:
 \begin{itemize}
@@ -49,9 +49,3 @@ Un caso alternativo de salida, se da cuando \maggen\ detecta planes cíclicos, v
 Notar que, el mensaje de error indicara la ruta donde fueron almacenados los grafos con problemas de ciclicidad. Para este caso particular fue: \textit{GenEvalAG/Out\_Gen\_Mag}.\\
 
 En el capítulo siguiente se abordaran detalles respecto al diseño de \maggen\ teniendo en cuenta cada una de las etapas, analizadas en esta sección.
-
-% \begin{bulletList}
-%  \item First point
-%  \item Second point
-% % \item Here is an abbreviation reference \nomenclature{DTI}{Diffusion Tensor Imaging} DTI
-% \end{bulletList}
