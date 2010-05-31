@@ -38,7 +38,7 @@ struct attritute_grammar: public grammar<attritute_grammar>
                       | "sort"|"op"|"function"
                       | "infix"|"prefix"|"postfix"
                       | "syn"|"inh"
-                      | "left"|"right"|"non-assoc"
+                      | "left"|"right"|"non_assoc"
                       | r_cpp_reserved_words
                       ;
 
@@ -109,7 +109,7 @@ struct attritute_grammar: public grammar<attritute_grammar>
                       (r_oper_assoc[&save_assoc_op]|'_')>>
                       ')';
 
-      r_oper_assoc = str_p("left")|"right"|"non-assoc";
+      r_oper_assoc = str_p("left")|"right"|"non_assoc";
 
       /* Declaration of Functions. */
 

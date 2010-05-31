@@ -26,9 +26,9 @@ El análisis de cada bloque se realizará de una manera más formal y observando
 Entonces, sea \textbf{G: CFG} que define el lenguaje de especificación para el archivo de entrada aceptado por \maggen. Se define la siguiente regla de \textbf{G: CFG} para el símbolo inicial ``S''.
 
 \begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{azul},language=specmag, linewidth=10cm ]
-S   =   'semantic domain' decl_Sd
-    |   'attributes' decl_attrs
-    |   'rules' decl_rules
+S   =   semantic domain decl_Sd
+    |   attributes decl_attrs
+    |   rules decl_rules
 \end{lstlisting}
 \vspace{0.3cm}
 
@@ -58,11 +58,11 @@ La subsección de ``\texttt{sort}'' declara todos los posibles tipos que serán 
 
 A continuación se define el símbolo \texttt{decl\_sort}
 
-\begin{lstlisting}[escapeinside=<>, frame=shadowbox, rulesepcolor=\color{azul},language=specmag, linewidth=10cm]
-decl_sort = 'sort' NAME_SORT  list_sort ';'
+\begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{azul}, language=specmag, linewidth=10cm]
+decl_sort = sort NAME_SORT  list_sort;
 
-list_sort = ',' NAME_SORT list_sort
-          | <$\lambda$> 
+list_sort = , NAME_SORT list_sort
+          | `$\lambda$`
 \end{lstlisting}
 \vspace{0.3cm}
 
@@ -70,7 +70,7 @@ list_sort = ',' NAME_SORT list_sort
 
 \underline{Ejemplo:} \begin{center} \fbox{\texttt{\ sort int;\ }} \end{center}
 \vspace{0.2cm}
-Esta línea declara el tipo ``int''.
+Esta línea declara el tipo ``\texttt{int}''.
 
 \subsubsection*{Tipos predefinidos por el lenguaje}
 \label{sec:typepredefined}
@@ -97,34 +97,34 @@ La sección destinada a la declaración de \texttt{operadores} acepta 3 tipos de
 La interpretación de cada uno, esta dada por la interpretación natural común a todos los lenguajes de programación, a modo de ejemplo se muestran un operador de cada tipo para evitar problemas en esta sección:
 
 \begin{itemize}
-\item \underline{Operador prefijo:} \textit{Ejemplo:} -2. Operador de menos unario. 
+\item \underline{Operador \texttt{prefijo}:} \textit{Ejemplo:} \textbf{-2}. Operador de menos unario. 
 
-\item \underline{Operador posfijo:} \textit{Ejemplo:} i++. Operador de auto-incremento en lenguaje C y C++.
+\item \underline{Operador \texttt{posfijo}:} \textit{Ejemplo:} \textbf{i++}. Operador de auto-incremento en lenguaje C y C++.
 
-\item \underline{Operador infijo:} \textit{Ejemplo: 2 + 3}. Operador ``suma''.
+\item \underline{Operador \texttt{infijo}:} \textit{Ejemplo: \textbf{2 + 3}}. Operador ``suma''.
 \end{itemize}
 
 A continuación se define el símbolo \texttt{decl\_operator}:
 
-\begin{lstlisting}[escapeinside=<>, frame=shadowbox, rulesepcolor=\color{azul}, language=specmag ]
-decl_operator = 'op' 'infix'  mode_op NAME_OP ':'
-                NAME_SORT ','  NAME_SORT '->' NAME_SORT ';' 
-              | 'op' 'prefix' mode_op NAME_OP ':'
-                NAME_SORT '->' NAME_SORT ';'               
-              | 'op' 'postfix' mode_op NAME_OP ':'
-                NAME_SORT '->' NAME_SORT ';'
-              | 'op' mode_op NAME_OP ':'
-                NAME_SORT '->' NAME_SORT ';'
+\begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{azul}, language=specmag ]
+decl_operator = op infix  mode_op NAME_OP:
+                NAME_SORT ,  NAME_SORT -> NAME_SORT;
+              | op prefix mode_op NAME_OP:
+                NAME_SORT -> NAME_SORT;
+              | op postfix mode_op NAME_OP:
+                NAME_SORT -> NAME_SORT;
+              | op mode_op NAME_OP:
+                NAME_SORT -> NAME_SORT;
 
-mode_op = '(' m_op ')'
-        | <$\lambda$>
+mode_op = ( m_op )
+        | `$\lambda$`
 
-m_op    = NUM_PRECEDENCE ',' assoc
-        | '_' ',' assoc
-        | NUM_PRECEDENCE ',' '_'
-        | '_' ',' '_'
+m_op    = NUM_PRECEDENCE , assoc
+        | _ , assoc
+        | NUM_PRECEDENCE , _
+        | _ , _
 
-assoc   = (left | right | <\texttt{\color{blue}{non-assoc}}>) 
+assoc   = (left | right | non_assoc)
 \end{lstlisting}
 \vspace{0.3cm}
 
@@ -148,7 +148,7 @@ Para estos casos especiales se utilizarán los siguientes valores por defecto:
 \item [Tipo de operador] = \texttt{prefix}.
 \end{description}
 
-Otro caso a tener cuenta es el uso de \texttt{non-assoc} como asociatividad del operador. Este caso define que el operador no tiene asociatividad, con lo que el uso del mismo en las ecuaciones debe respetar esta condición, en caso contrario se observará un error por mal uso.
+Otro caso a tener cuenta es el uso de \texttt{non\_assoc} como asociatividad del operador. Este caso define que el operador no tiene asociatividad, con lo que el uso del mismo en las ecuaciones debe respetar esta condición, en caso contrario se observará un error por mal uso.
 \subsection*{Ejemplos}
 
 \begin{enumerate}
@@ -166,13 +166,13 @@ donde se usan valores por defecto para precedencia y asociatividad.
 
 \item 
 \begin{center}
-\fbox{\texttt{\ op prefix (60,non-assoc) \%: int -> int;\ }}\end{center}
+\fbox{\texttt{\ op prefix (60,non\_assoc) \%: int -> int;\ }}\end{center}
 \vspace{0.2cm}
-Esta línea declara el operador prefijo ``\texttt{\%}'' con precedencia \texttt{60} y asociatividad \texttt{non-assoc}. Esta línea también podría haber sido definida como:
+Esta línea declara el operador prefijo ``\texttt{\%}'' con precedencia \texttt{60} y asociatividad \texttt{non\_assoc}. Esta línea también podría haber sido definida como:
 \vspace{0.2cm}
 
 \begin{center}
-\fbox{\texttt{\ op (60, non-assoc) \%: int -> int;\ }}\end{center}
+\fbox{\texttt{\ op (60, non\_assoc) \%: int -> int;\ }}\end{center}
 \vspace{0.2cm}
 y en el caso que se desee usar valores de asociatividad y precedencia por defecto así:
 \vspace{0.2cm}
@@ -185,12 +185,12 @@ La noción de funciones dentro de la especificación es tomada con la noción na
 
 Definimos \texttt{decl\_function} como:
 
-\begin{lstlisting}[escapeinside=<>,frame=shadowbox, rulesepcolor=\color{azul}, language=specmag ]
-decl_function = 'function' NAME_FUNC':' domain '->' NAME_SORT ';'
+\begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{azul}, language=specmag]
+decl_function = function NAME_FUNC: decl_domain -> NAME_SORT;
 
-domain        = NAME_SORT ',' domain
-              | NAME_SORT 
-              | <$\lambda$>
+decl_domain = NAME_SORT, decl_domain
+            | NAME_SORT
+            | `$\lambda$`
 \end{lstlisting}
 \vspace{0.3cm}
 
@@ -218,20 +218,20 @@ En esta sección presentaremos el bloque ``attributes'' en detalle. La informaci
 
 A continuación se define el símbolo \texttt{decl\_attrs} como:
 
-\begin{lstlisting}[escapeinside=@@, frame=shadowbox, rulesepcolor=\color{azul}, language=specmag]
-decl_attrs = (d_attr)+ 
+\begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{azul}, language=specmag]
+decl_attrs = (d_attr)+
 
-d_attr = NAME_ATTR ':' '<' c_attr '>' NAME_SORT 'of' symbols;
+d_attr = NAME_ATTR : < c_attr > NAME_SORT of symbols;
 
-symbols = '{'list_symbol'}' 
-        | 'all'
-        | 'all' '-' '{' list_symbol '}'
+symbols = { list_symbol }
+        | all
+        | all - { list_symbol }
 
-c_attr = 'inh'
-       | 'syn'
-       | @$\lambda$@
+c_attr = inh
+       | syn
+       | `$\lambda$`
 
-list_symbol = SYMB_NON_TERMINAL ',' list_symbol
+list_symbol = SYMB_NON_TERMINAL , list_symbol
             | SYMB_NON_TERMINAL 
 \end{lstlisting}
 \vspace{0.3cm}
@@ -273,6 +273,7 @@ Se define el atributo ``\texttt{type}'' heredado de tipo ``\texttt{string}'' par
 \vspace{0.2cm}
 Se define el atributo ``\texttt{grade}'' sintetizado (por defecto) de tipo ``\texttt{int}'' para los símbolos ``\texttt{E}'' y ``\texttt{T}''.\\
 \end{enumerate}
+
 \subsection{Bloque de reglas}
 Por último el bloque de reglas. La interpretación de las reglas dentro del lenguaje esta dada por la definición de gramática libre de contexto.          
 
@@ -289,25 +290,25 @@ A continuación se define el símbolo \texttt{decl\_rules}:
 \begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{azul}, language=specmag]
 decl_rules = (d_rule)+ 
 
-d_rule = SYMB_NON_TERMINAL '::=' rigft_symb decl_eqs
+d_rule = SYMB_NON_TERMINAL ::= rigft_symb decl_eqs
 
 rigft_symb = (SYMB_NON_TERMINAL | SYMB_TERMINAL)+
 
-decl_eqs = 'compute' d_eqs 'end;'
-         | ';'
+decl_eqs = compute d_eqs end;
+         | ;
 
-d_eqs = instance '=' right_eq ';'
+d_eqs = instance = right_eq;
 
 right_eq = leaf
          | leaf OP_NAME leaf right_eq
          | (OP_NAME)+ leaf
          | leaf (OP_NAME)+
-         | NAME_FUNC '(' right_eq ')' 
+         | NAME_FUNC ( right_eq ) 
 
 leaf = instance
      | LITERAL
 
-instance = SYMB_NON_TERMINAL '[' NUM_INS ']' '.' NAME_ATTR
+instance = SYMB_NON_TERMINAL[NUM_INS].NAME_ATTR
 \end{lstlisting}
 \vspace{0.3cm}
 
@@ -408,7 +409,7 @@ El parser de la entrada de \maggen\ esta dado por un recorrido secuencial y ante
 
 Supongamos la siguiente porción de una entrada de \maggen:
 
-\begin{lstlisting}[numbers=left, numberstyle=\tiny, numbersep=5pt, firstnumber=8, language=specmag, linewidth=12cm]
+\begin{lstlisting}[numbers=left, firstnumber=8, language=specmag, linewidth=12cm]
 ...
 semantic domain
   sort ecuacion, lista;
@@ -491,7 +492,7 @@ Su interpretación está dada por la definición de la precedencia de los operad
 El uso de paréntesis en las expresiones define explícitamente la prioridad de los operadores, por lo que, \maggen\ asume esa precedencia. Por ejemplo en la ecuación vista arriba, si la definimos utilizando paréntesis, es decir:\  
  \fbox{E[0].valor = (E[1].valor + E[2].valor) * E[2].valor}\ la interpretación es tomada en ese sentido.
 
-\item [Asociatividad] El chequeo de asociatividad realiza un análisis sobre las expresiones de las ecuaciones, para asegurar la asociatividad definida de cada operador. Por ejemplo, si se ha definido un operador \texttt{non-assoc}, se espera que el uso del mismo sea consistente con esa definición, es decir, no se considere una posible asociación del mismo. 
+\item [Asociatividad] El chequeo de asociatividad realiza un análisis sobre las expresiones de las ecuaciones, para asegurar la asociatividad definida de cada operador. Por ejemplo, si se ha definido un operador \texttt{non\_assoc}, se espera que el uso del mismo sea consistente con esa definición, es decir, no se considere una posible asociación del mismo. 
 
 Cuando se utilizan paréntesis en la expresión, \maggen\ asume la asociatividad que se especifica explícitamente.
 
@@ -732,8 +733,8 @@ Además de la clase, \maggen\ genera \texttt{struct} para cada uno de los símbo
 Los dos módulos analizados arriba, generados por \maggen, se apoyan sobre dos módulos mas, que son anexados de manera estática por la herramienta, ellos son: \texttt{Node.hpp} y \texttt{Plan.hpp}. Los mismos contienen definiciones de ``tipos'' y ``métodos'' necesarios por el el evaluador generado.
 A continuación observamos el interior de cada uno de ellos:
 
-\lstinputlisting[basicstyle=\tiny, numbers=left, numberstyle=\tiny, numbersep=5pt, language=c++]{input_file_code/Node.hpp}
+\lstinputlisting[basicstyle=\tiny, numbers=left, language=c++]{input_file_code/Node.hpp}
 
-\lstinputlisting[basicstyle=\tiny, numbers=left, numberstyle=\tiny, numbersep=5pt, language=c++]{input_file_code/Plan.hpp}
+\lstinputlisting[basicstyle=\tiny, numbers=left, language=c++]{input_file_code/Plan.hpp}
 
 \normalsize
