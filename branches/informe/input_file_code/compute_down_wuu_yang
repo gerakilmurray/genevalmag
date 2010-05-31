@@ -8,17 +8,17 @@ end for
 repeat
   changed := false
  
-  for each production p: X<$_{0}$> <$\rightarrow$> <$\alpha_{0}$>X<$_{1}$><$\alpha_{1}$>X<$_{2}$><$\alpha_{2}$> <$\ldots$> X<$_{k}$><$\alpha_{k}$> do
-    /* Augment DP(p) with Down(X<$_{1}$>), Down(X<$_{2}$>), <$\ldots$> , Down(X<$_{k}$>). */
-    G := DP(p) <$\cup$> Down(X<$_{1}$) <$\cup$> Down(X<$_{2}$) <$\cup$> <$\ldots$> <$\cup$> Down(X<$_{k}$>)
+  for each production p: X`$_{0}$` `$\rightarrow$` `$\alpha_{0}$`X`$_{1}$``$\alpha_{1}$`X`$_{2}$``$\alpha_{2}$` `$\ldots$` X`$_{k}$``$\alpha_{k}$` do
+    /* Augment DP(p) with Down(X`$_{1}$`), Down(X`$_{2}$`), `$\ldots$` , Down(X`$_{k}$`). */
+    G := DP(p) `$\cup$` Down(X`$_{1}$) `$\cup$` Down(X`$_{2}$) `$\cup$` `$\ldots$` `$\cup$` Down(X`$_{k}$`)
 
-    /* Compute NewDown(X<$_{0}$>). */
-    NewDown(X<$_{0}$>) := project (G, {X<$_{0}$>'s attributes})
+    /* Compute NewDown(X`$_{0}$`). */
+    NewDown(X`$_{0}$`) := project (G, {X`$_{0}$`'s attributes})
  
-    /* Check if NewDown(X<$_{0}$>) has changed. */
-    if NewDown(X<$_{0}$>) <$\subseteq$> Down(X<$_{0}$>) then
+    /* Check if NewDown(X`$_{0}$`) has changed. */
+    if NewDown(X`$_{0}$`) `$\subseteq$` Down(X`$_{0}$`) then
       changed := true
-      Down(X<$_{0}$>) := Down(X<$_{0}$>) <$\cup$> NewDown(X<$_{0}$>)
+      Down(X`$_{0}$`) := Down(X`$_{0}$`) `$\cup$` NewDown(X`$_{0}$`)
     end if
   end for
 until changed = false

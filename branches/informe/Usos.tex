@@ -185,7 +185,7 @@ El evaluador generado por \maggen\ puede ser usado como un modulo C++ en conjunt
 
 Como bien hemos visto en secciones anteriores, la entrada del evaluador generado por \maggen\ es un AST. El siguiente módulo de código C++ describe un AST para la gramática del ejemplo de Wuu Yang.
 
-\lstinputlisting[basicstyle=\tiny, language=c++, numbers=left, numberstyle=\tiny, numbersep=5pt]{input_file_code/ast.cpp}
+\lstinputlisting[basicstyle=\tiny, language=c++, numbers=left]{input_file_code/ast.cpp}
 
 Observemos el AST con el siguiente diagrama:
 
@@ -257,7 +257,7 @@ En la tabla \ref{table:mensajes} analizamos la descripción de los posibles erro
 
 \rowcolor{gris} \textbf{Mensaje} & \textbf{Descripción} & \textbf{Ayuda} \\ \hline \hline
 
-ERROR: operator non-associtive using wrong use: \textit{OP} & El operador \textit{OP} es non-assoc y se pretende una asociación del mismo, en alguna expresión. & Modifique la definición del operador o chequee la expresión.\\ \hline
+ERROR: operator non-associtive using wrong use: \textit{OP} & El operador \textit{OP} es non\_assoc y se pretende una asociación del mismo, en alguna expresión. & Modifique la definición del operador o chequee la expresión.\\ \hline
 
 ERROR: Symbol Non-Teminal \textit{SYMB} uses in the right part without rule & El símbolo \textit{SYMB}, usado en la gramática, no tiene regla que lo defina. & Chequee los símbolos usados o defina una regla para el símbolo \textit{SYMB}. \\ \hline
 
