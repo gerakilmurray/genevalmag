@@ -19,21 +19,12 @@ namespace genevalmag
 
 vector<Equation*> index_access_eq;
 
-#ifdef _DEBUG
-    /* Numbers of symbols current in the system. */
-	static unsigned short rules(0);
-#endif
-
 /**
   * Constructor empty of rule.
   */
 Rule::Rule()
 {
     r_offset = 0;
-
-    #ifdef _DEBUG
-        rules++;
-    #endif
 }
 
 /**
@@ -42,10 +33,6 @@ Rule::Rule()
 Rule::Rule(const Rule &other)
 {
     copy(other);
-
-    #ifdef _DEBUG
-        rules++;
-    #endif
 }
 
 /**
@@ -54,14 +41,6 @@ Rule::Rule(const Rule &other)
 Rule::~Rule()
 {
     destroy();
-
-    #ifdef _DEBUG
-        rules--;
-        if(rules == 0)
-        {
-            cout << rules << " -> Rules" << endl;
-        }
-    #endif
 }
 
 /**
@@ -275,13 +254,13 @@ const string Rule::to_string() const
   */
 const string Rule::to_string_not_eqs() const
 {
-    string rule("R");
+    string rule("/*R");
 
     stringstream key_rule;
     key_rule << r_id;
     rule.append(key_rule.str());
 
-    rule.append(": ");
+    rule.append("*/ ");
 
     rule.append(r_left_symbol->get_name());
     rule.append("\t::=\t");

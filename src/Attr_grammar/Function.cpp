@@ -15,11 +15,6 @@
 namespace genevalmag
 {
 
-#ifdef _DEBUG
-    /* Numbers of Functions current in the system. */
-	static unsigned short funtions(0);
-#endif
-
 /**
   * Contructor empty of Function.
   */
@@ -29,10 +24,6 @@ Function::Function()
     f_prec           = USHRT_MAX;
     f_assoc          = k_left;
     f_is_operator    = false;
-
-    #ifdef _DEBUG
-        funtions++;
-    #endif
 }
 
 /**
@@ -41,10 +32,6 @@ Function::Function()
 Function::Function(const Function &other)
 {
     copy(other);
-
-    #ifdef _DEBUG
-        funtions++;
-    #endif
 }
 
 /**
@@ -53,14 +40,6 @@ Function::Function(const Function &other)
 Function::~Function()
 {
     destroy();
-
-    #ifdef _DEBUG
-        funtions--;
-        if(funtions == 0)
-        {
-            cout << funtions << " -> Funtions" << endl;
-        }
-    #endif
 }
 
 /**
@@ -224,7 +203,7 @@ void Function::set_oper_assoc(const string mod)
         }
         else
         {
-            if(mod.compare("non-assoc") == 0)
+            if(mod.compare("non_assoc") == 0)
             {
                 f_assoc = k_non_assoc;
             }
@@ -290,7 +269,7 @@ const string Function::to_string() const
         {
             case k_left:      func.append("left");      break;
             case k_right:     func.append("right");     break;
-            case k_non_assoc: func.append("non-assoc"); break;
+            case k_non_assoc: func.append("non_assoc"); break;
         }
         func.append(") ");
     }

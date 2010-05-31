@@ -13,19 +13,11 @@
 namespace genevalmag
 {
 
-#ifdef _DEBUG
-    /* Numbers of Symbols current in the system. */
-	static unsigned short symbols(0);
-#endif
-
 /**
   * Constructor empty of Symbol.
   */
 Symbol::Symbol()
 {
-    #ifdef _DEBUG
-        symbols++;
-    #endif
 }
 
 /**
@@ -36,10 +28,6 @@ Symbol::Symbol(const string &name, const symbol_type &type)
     symb_name = name;
     symb_type = type;
     symb_id   = 0;
-
-    #ifdef _DEBUG
-        symbols++;
-    #endif
 }
 
 /**
@@ -48,10 +36,6 @@ Symbol::Symbol(const string &name, const symbol_type &type)
 Symbol::Symbol(const Symbol &other)
 {
     copy(other);
-
-    #ifdef _DEBUG
-        symbols++;
-    #endif
 }
 
 /**
@@ -60,13 +44,6 @@ Symbol::Symbol(const Symbol &other)
 Symbol::~Symbol()
 {
     destroy();
-    #ifdef _DEBUG
-        symbols--;
-        if(symbols == 0)
-        {
-            cout << symbols << " -> Symbols" << endl;
-        }
-    #endif
 }
 
 /**
