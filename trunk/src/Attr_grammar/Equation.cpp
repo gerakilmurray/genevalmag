@@ -15,11 +15,6 @@
 namespace genevalmag
 {
 
-#ifdef _DEBUG
-    /* Numbers of operators current in the system. */
-	static unsigned short eqs(0);
-#endif
-
 /**
   * Constructor empty of equation.
   */
@@ -27,10 +22,6 @@ Equation::Equation()
 {
     /* Initialize the counter. */
     count_ref = new unsigned short(1);
-
-    #ifdef _DEBUG
-        eqs++;
-    #endif
 }
 
 /**
@@ -39,10 +30,6 @@ Equation::Equation()
 Equation::Equation(const Equation &other)
 {
     copy(other);
-
-    #ifdef _DEBUG
-        eqs++;
-    #endif
 }
 
 /**
@@ -54,14 +41,6 @@ Equation::~Equation()
     (*count_ref)--;
 
     destroy();
-
-    #ifdef _DEBUG
-        eqs--;
-        if(eqs == 0)
-        {
-            cout << eqs << " -> Equations" << endl;
-        }
-    #endif
 }
 
 /**
@@ -249,11 +228,11 @@ const vector<const Expr_instance*> Equation::get_instance_right_side() const
   */
 const string Equation::to_string() const
 {
-    string eq("(");
+    string eq("/*");
     stringstream id_eq;
     id_eq << eq_id;
     eq.append(id_eq.str());
-    eq.append(") ");
+    eq.append("*/ ");
 
     eq.append(l_value.to_string());
     eq.append("\t=\t");

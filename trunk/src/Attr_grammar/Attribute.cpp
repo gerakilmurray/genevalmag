@@ -14,19 +14,11 @@
 namespace genevalmag
 {
 
-#ifdef _DEBUG
-    /* Numbers of attributes current in the system. */
-	static unsigned short attrs(0);
-#endif
-
 /**
   * Constructor empty of attribute.
   */
 Attribute::Attribute()
 {
-    #ifdef _DEBUG
-        attrs++;
-    #endif
 }
 
 /**
@@ -35,10 +27,6 @@ Attribute::Attribute()
 Attribute::Attribute(const Attribute &other)
 {
     copy(other);
-
-    #ifdef _DEBUG
-        attrs++;
-    #endif
 }
 
 /**
@@ -47,14 +35,6 @@ Attribute::Attribute(const Attribute &other)
 Attribute::~Attribute()
 {
     destroy();
-
-    #ifdef _DEBUG
-        attrs--;
-        if(attrs == 0)
-        {
-            cout << attrs << " -> Attributes" << endl;
-        }
-    #endif
 }
 
 /**

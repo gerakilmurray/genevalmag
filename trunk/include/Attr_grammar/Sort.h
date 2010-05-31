@@ -9,11 +9,6 @@
 #ifndef SORT_H_
 #define SORT_H_
 
-/**
-  * \brief Enables/disables all output debuger in all class.
-  */
-//#define _DEBUG
-
 #include <string>
 
 using namespace std;

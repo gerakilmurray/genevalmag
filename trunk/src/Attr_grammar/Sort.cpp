@@ -14,21 +14,12 @@
 namespace genevalmag
 {
 
-#ifdef _DEBUG
-    /* Numbers of sorts current in the system. */
-    static unsigned short sorts(0);
-#endif
-
 /**
   * Contructor empty of Sort.
   */
 Sort::Sort()
 {
     s_ins = 1;
-
-    #ifdef _DEBUG
-        sorts++;
-    #endif
 }
 
 /**
@@ -39,10 +30,6 @@ Sort::Sort(string name)
     s_ins            = 1;
     s_name           = name;
     s_type_basic     = false;
-
-    #ifdef _DEBUG
-        sorts++;
-    #endif
 }
 
 /**
@@ -51,10 +38,6 @@ Sort::Sort(string name)
 Sort::Sort(const Sort &other)
 {
     copy(other);
-
-    #ifdef _DEBUG
-        sorts++;
-    #endif
 }
 
 /**
@@ -63,14 +46,6 @@ Sort::Sort(const Sort &other)
 Sort::~Sort()
 {
     destroy();
-
-    #ifdef _DEBUG
-        sorts--;
-        if(sorts == 0)
-        {
-            cout << sorts << " -> Sorts" << endl;
-        }
-    #endif
 }
 
 /**
