@@ -1,6 +1,6 @@
 /**
   *  \file    Node.h
-  *  \brief
+  *  \brief   Header for node AST inside the MAG Evaluator.
   *  \date    17/03/2010
   *  \author  Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author  Picco, Gonzalo Martin <gonzalopicco@gmail.com>

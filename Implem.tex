@@ -615,7 +615,7 @@ Además, cuando se detectan dos operadores no asociativos se genera un error por
 
 En la especificación pueden existir de símbolos y reglas declaradas que no pueden ser alcanzados desde el símbolo inicial de la gramática. Los mismos no son útiles en la gramática ya que nunca producirán cadenas del lenguaje. Los mismos no son considerados errores pero son informados mediante alertas (\texttt{warnings}).
 
-Este chequeo se implementó con una versión del algoritmo de Warshall\footnote{En honor a Stephen Warshall (1935 - 2006)}, que calcula la ``Clausura Transitiva'' de un grafo.
+Este chequeo se implementó con una versión del algoritmo de Warshall\footnote{En honor a Stephen Warshall (1935-2006)}, que calcula la ``Clausura Transitiva'' de un grafo.
 
 Para aplicarlo, primero se construye una matriz de valores lógicos reflejando todas las reglas declaradas. Luego de computar la clausura, se recorre la fila del símbolo inicial, que pertenece a la \textbf{única} regla inicial de la gramática por ser \textbf{extendida}. Todo símbolo que se encuentra con valor falso es inalcanzable.
 
@@ -646,7 +646,6 @@ Cada vez que se detectaba un error, se lo informa mediante alguno de los siguien
 \item ``ERROR: ``E[1].inh2'' type inherited, haven't an equation that defines it.''
 \item ``ERROR: ``S[0].syn2'' type synthetized, is defined outside his scope.''
 \end{items}}
-
 
 \section{Obtención de planes de evaluación}
 
@@ -687,7 +686,7 @@ Las dependencias dentro de las reglas se dan entre las instancias de atributos d
 
 En la \textbf{BGL} los valores que se quieren asociar a los nodos, se vinculan mediante \textit{propiedades} inherentes a cada uno.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=13cm]
 struct vertex_data_t
 {
   typedef vertex_property_tag kind;
@@ -696,11 +695,10 @@ typedef property <vertex_data_t, const genevalmag::Expr_leaf*> property_vertex_d
 typedef adjacency_list <hash_setS, vecS, directedS, property_vertex_dp> Graph;
 typedef Graph::vertex_descriptor Vertex;
 \end{lstlisting}
-\vspace{0.3cm}
 
 Se mantienen dentro de la herramienta un \texttt{map} para cada uno de los tipos de grafos necesarios y además para los subgrafos ADP cíclicos que eventualmente se detecten y para optimizar la construcción de los otros, los grafos que contienen todas las instancias de cada regla sin aristas entre si.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,linewidth=11.5cm]
 map <string, Graph>                 attr_vertex_graphs;
 map <unsigned short, Graph>         p_Dp_graphs;
 map <string, Graph>                 p_Down_graphs;
@@ -708,7 +706,6 @@ map <unsigned short, Graph>         p_Dcg_graphs;
 map <vector<unsigned short>, Graph> p_Adp_graphs;
 map <vector<unsigned short>, Graph> p_Adp_subgraphs_cyclics;
 \end{lstlisting}
-\vspace{0.3cm}
 
 El chequeo de ciclicidad sobre los grafos ADP, se implementó utilizando el algoritmo de búsqueda en profundidad (Depth-first search) de \boost\ combinado con la creación de un ``visitador'' especializado que a medida recorre el grafo, va guardado los nodos y aristas visitadas mientras no se halla detectado un ciclo. Ese subgrafo es lo que se guarda y se muestra al usuario.
 
@@ -716,7 +713,7 @@ La detección de ciclos se realiza cuando el algoritmo invoca a la función \tex
 
 Tanto el grafo como la variable lógica, usada como bandera, son pasadas en el constructor y utilizadas internamente mediante referencias.
 
-\begin{lstlisting}[float, language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbers=left,columns=fullflexible,linewidth=8.5cm]
 struct cycle_detector: public dfs_visitor<>
 {
   public:
@@ -730,7 +727,7 @@ struct cycle_detector: public dfs_visitor<>
     {
       if(!_has_cycle)
       {
-        ...
+         ...
       }
     }
 
@@ -745,18 +742,16 @@ struct cycle_detector: public dfs_visitor<>
     Graph  &_graph_cycle;
 };
 \end{lstlisting}
-\vspace{0.3cm}
 
 Para cada regla, se tienen que considerar todos los posibles contextos inferiores posibles de acuerdo a las reglas que tengan los símbolos no terminales de su parte derecha. Se implementó un método que recursivamente genera un contexto diferente y guarda la regla cuando ya no quedan más variantes.
 
 Al igual que con los planes, los contextos de las reglas se repiten mucho, así que se utilizaron índices indirectos sobre un \texttt{vector} que almacena únicamente los contextos diferentes.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
-vector < Order_rule >    contexts_uniques;
-vector < Order_eval_eq > plans_uniques;
-vector < Order_eval_eq > plans_project_uniques;
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbers=left,columns=fullflexible,linewidth=8cm]
+vector <Order_rule>     contexts_uniques;
+vector <Order_eval_eq> plans_uniques;
+vector <Order_eval_eq> plans_project_uniques;
 \end{lstlisting}
-\vspace{0.3cm}
 
 Antes de insertar un elemento en cualquiera de estos repositorios se verifica que no exista. En caso de que ya se encuentre, se devuelve el índice correspondiente dentro del vector, sino se insertará al final y se devolverá el índice del último elemento.
 
@@ -764,7 +759,7 @@ Una vez que se generaron todos los tipos de grafos, los mismos son guardados en 
 
 La generación de grafos es incremental, partiendo de la computación de los grafos DP, siguiendo los Down, DCG y por último los grafos ADP. Ante cualquier fallo, la generación se considerará incompleta.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=10.5cm]
 bool generate_graphs()
 {
   if(build_graphs.compute_dependency_graphs())
@@ -789,7 +784,7 @@ bool generate_graphs()
 
 Una vez que se concluyó la generación de grafos, se construyen los planes, se prosigue con el chequeo de ciclicidad de los grafos ADP. Si se supera con éxito, se generarán los planes, sino se abortará el proceso.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=11cm]
 unsigned short build_plans()
 {
   if(generate_graphs())
@@ -866,9 +861,9 @@ Este proceso como se explicó en el capítulo \ref{XXX}, consiste en lograr a pa
 Por la forma de los mismos, se decidió como forma de representación un arreglo de enteros, con el siguiente criterio:
 
 \begin{itemize}
-\item $\texttt{Visit\ \ } \Rightarrow \textbf{>0}$: Números positivos indican que nodo hijo se debe visitar, arrancando en 1 para el primero.
-\item $\texttt{Leave\ \ } \Rightarrow \textbf{=0}$: El cero indica que tenemos que volver a nuestro padre.
-\item $\texttt{Compute} \Rightarrow \textbf{<0}$: Números negativos indican que ecuación debe computarse, tomando obviamente el valor absoluto y respetando la numeración global de las mismas.
+\item $\texttt{Visit}\ \ \ \  \Rightarrow \ \ \textbf{>0}$: Números positivos indican que nodo hijo se debe visitar, arrancando en 1 para el primero.
+\item $\texttt{Leave}\ \ \ \  \Rightarrow \ \ \textbf{=0}$: El cero indica que tenemos que volver a nuestro padre.
+\item $\texttt{Compute} \Rightarrow \ \textbf{<0}$: Números negativos indican que ecuación debe computarse, tomando obviamente el valor absoluto y respetando la numeración global de las mismas.
 \end{itemize}
 
 La cantidad de secuencias de visitas es la misma que la de los planes de evaluación generados, y como este proceso se apoya en una ``\textbf{simulación}'', la construcción de las secuencias se da en forma incremental. Por eso se inicializan todas las estructuras de almacenamiento con secuencias de visitas vacías, que luego serán modificadas mediante indexación sobre el repositorio.
@@ -877,7 +872,7 @@ Aquí queda claro la optimización realizada mediante la creación de planes ún
 
 La implementación fue la siguiente:
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=7cm]
 typedef vector < int > Visit_seq;
 
 vector < Visit_seq > all_visit_seqs;
@@ -906,7 +901,7 @@ vector<unsigned short> &v_seq_computed
 
 El algoritmo principal, \texttt{generate\_visit\_sequences}, es más bien un invocador de la función \texttt{gen\_visit\_seq}, que es la que realmente lleva a cabo las llamadas que simulan la evaluación.
 
-\begin{lstlisting}[language=C++, basicstyle=\tiny, numbers=left, columns=fullflexible]
+\begin{lstlisting}[language=C++, basicstyle=\tiny, numbers=left, columns=fullflexible,columns=fullflexible,linewidth=14.5cm]
 bool generate_visit_sequences()
 {
   for(size_t i(0); i < b_plans.get_plans_uniques().size(); i++)
@@ -940,6 +935,66 @@ bool generate_visit_sequences()
 }
 \end{lstlisting}
 
+Dentro de \texttt{gen\_visit\_seq}, se recorre el plan de evaluación respetando los criterios explicados en \ref{XXX}, asegurando que sólo se actualiza la secuencia de visita correspondiente al plan actual, si no se produjo ningún \texttt{leave}. Para ello se lleva una variable lógica (flag) que indica la ausencia de \texttt{leaves}, además una secuencia de visita y un listado de instancias de atributos computados a nivel local.
+
+Durante su funcionamiento se cumplen las siguientes condiciones:
+\begin{itemize}
+\item Los atributos sintetizados del símbolo de la izquierda de la regla, son informados a nodo padre, mediante su inserción en \texttt{ins\_computed} pasado como referencia.
+
+\item Los atributos ya sean sintetizados del símbolo de la izquierda o heredados de algún símbolo de la derecha, son insertados en \texttt{ins\_computed\_own}.
+
+\item Siempre que se termina de recorrer un plan, se actualiza la secuencia de visita del plan actual siempre y cuando no pertenezca a \texttt{v\_seq\_computed}.
+
+La actualización se lleva a cabo mediante la función \texttt{update\_visit\_sequence}, la cual:
+\begin{items}
+  \item Recibe un índice que representa tanto a un plan como a su secuencia de visita y una secuencia de visita ``nueva''.
+  \item Enpareja la vieja secuencia, verificando posición a posición que sean iguales, pero si en la secuencia ya guardada existe un \texttt{leave}, es decir, un cero, vuelve a avanzar.
+  \item Termina cuando encuentra diferencias o cuando llega al final de alguna de las dos secuencias.
+  \item Por último, actualiza la secuencia guardada insertando los valores restantes que hayan quedado de la nueva secuencia.
+\end{items}
+
+\underline{Por ejemplo:}\hspace*{1.7cm} \textbf{[4,-3,3,-1,0]} update con \textbf{[4,-3,3,-1,2,-2,1]}\\
+\hspace*{4cm} da como resultado: \textbf{[4,-3,3,-1,0,2,-2,1]}.
+
+\item Si un plan se recorrió en su totalidad, se inserta en \texttt{plans\_computed}.
+
+\item El instancia de atributo que se encuentra en el \texttt{l-value} de la ecuación, será marcado con un \texttt{compute} solamente cuando se haya podido consumir el \texttt{r-value} de la ecuación y no se haya dado un \texttt{leave}.
+
+\item Cuando se debe realizar un \texttt{visit}
+
+\begin{items}
+\item Se obtiene de la instancia de atributo, es número de ocurrencia, que sirve para identificar al nodo hijo a visitar.
+
+\item Una vez localizado, se busca el plan proyectado para ese símbolo bajo el contexto actual.
+
+\item Luego se inserta en la secuencia de visita de visita local el \texttt{visit}.
+
+\item Se invoca recursivamente a \texttt{gen\_visit\_seq} con:
+
+\begin{items}
+\item \texttt{ins\_computed\_child}: inicializado con todos los atributos heredados del símbolo a recursar, calculados hasta el momento.
+
+\item \texttt{p\_computed\_child}: inicializado con todos los planes computados hasta el momento, más el índice del plan actual ``virtualmente'' ya computado para evitar ciclos de llamadas recursivas.
+
+\item \texttt{v\_seq\_child}: inicialmente está vacío para la recursión del primer plan seleccionado, pero es acumulativo para las demás llamadas. Indica las secuencias de visita ya calculadas.
+\end{items}
+
+\item Al terminar la volver de la llamada a \texttt{gen\_visit\_seq}, se extraen los resultados útiles para este contexto.
+
+\begin{items}
+\item Nuevos planes computados a partir de la llamada sobre el nodo hijo, exceptuando la ``computada virtual'' del plan actual. Insertados en \texttt{plans\_computed}.
+
+\item Nuevos atributos sintetizados calculados del nodo hijo. Insertados en \texttt{ins\_computed\_own}.
+
+\item Nuevas secuencias de visitas obtenidas completamente. Insertados en \texttt{v\_seq\_child}.
+\end{items}
+\end{items}
+
+
+
+
+
+\end{itemize}
 
 
 

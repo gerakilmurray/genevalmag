@@ -316,7 +316,7 @@ instance = SYMB_NON_TERMINAL[NUM_INS].NAME_ATTR
  
 \textit{``OP\_NAME''} y  \textit{``NAME\_FUNC''} describen identificadores de operadores infijos, prefijos y posfijos (según su uso) y el de función respectivamente. Tanto los operadores como las funciones se asumen definidos en la sección ``\texttt{semantic domain}''.
 
-\textit{``NUM\_INS''} corresponde con un numero mayor que cero que identifica la ocurrencia del símbolo (para mas detalle ver \ref{subsec:consirule} punto 4).
+\textit{``NUM\_INS''} corresponde con un número mayor que cero que identifica la ocurrencia del símbolo (para mas detalle ver \ref{subsec:consirule} punto 4).
 
 \textit{``LITERAL''} describe los tipos de literales entero, real, carácter, string y bool con las siguientes consideraciones:
 
@@ -479,13 +479,13 @@ El módulo que agrupa estos chequeos, se ubica en el paquete \texttt{Parser} de 
 A continuación se detallan dichos chequeos:
 
 \begin{description}
-\item [Precedencia] El chequeo de precedencia consiste en preservar la precedencia definida de cada operador. Dicho chequeo, es realizado sobre cada una de las ecuaciones definidas en la gramática. Por ejemplo:\\ Dada la siguiente ecuacion:
+\item [Precedencia] El chequeo de precedencia consiste en preservar la precedencia definida de cada operador. Dicho chequeo, es realizado sobre cada una de las ecuaciones definidas en la gramática. Por ejemplo:\\ Dada la siguiente ecuación:
 
 \begin{center}
  \fbox{ E[0].valor = E[1].valor + E[2].valor * E[2].valor }
 \end{center}
 
-Su interpretación está dada por la definición de la precedencia de los operadores \texttt{+} y \texttt{*}(se asume que los dos operadores son infijos y están bien usado). Si tomamos \texttt{*} con mayor precedencia que \texttt{+}, \maggen\ interpreta implícitamente como si la ecuacion tuviera paréntesis:
+Su interpretación está dada por la definición de la precedencia de los operadores \texttt{+} y \texttt{*}(se asume que los dos operadores son infijos y están bien usado). Si tomamos \texttt{*} con mayor precedencia que \texttt{+}, \maggen\ interpreta implícitamente como si la ecuación tuviera paréntesis:
 
 \begin{center}
  \fbox{ E[0].valor = E[1].valor + (E[2].valor * E[2].valor) }
@@ -514,7 +514,7 @@ Cuando se utilizan paréntesis en la expresión, \maggen\ asume la asociatividad
 
 \section{Construcción de grafos y obtención de planes y secuencias de visita}
 
-En la figura \ref{fig:disen} pudimos analizar el funcionamiento de \maggen, teniendo en cuenta la estructura \texttt{Attr\_grammar}, en esta sección abordaremos detalles en el diseño del paquete \texttt{Builder}, específicamente la construcción de grafos, de planes y de secuencias de visita. Un detalle a tener en cuenta es que, a partir de esta etapa, todas las manipulaciones son realizadas sobre la sección de ecuacion de cada reglas.
+En la figura \ref{fig:disen} pudimos analizar el funcionamiento de \maggen, teniendo en cuenta la estructura \texttt{Attr\_grammar}, en esta sección abordaremos detalles en el diseño del paquete \texttt{Builder}, específicamente la construcción de grafos, de planes y de secuencias de visita. Un detalle a tener en cuenta es que, a partir de esta etapa, todas las manipulaciones son realizadas sobre la sección de ecuación de cada reglas.
 
 \subsection*{Construcción de grafos}
 \label{subsec:graph}
@@ -576,7 +576,7 @@ Estos se obtienen a partir de los planes analizados anteriormente, proyectando e
 \caption{\label{fig:plan}Plan obtenido por \maggen\ para la regla R1}
 \end{figure}
 
-En la figura\footnote{Figura obtenida con la herramienta \textit{graphviz} sobre el archivo \texttt{.dot} generado por \maggen.} \ref{fig:plan} observamos un plan obtenido por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}. Este plan contiene el orden de los números de ecuacion que pertenecen a la regla del plan, los planes proyectados son computados sobre el plan total, es decir con todas las dependencias. Para aclarar este echo, observemos los planes proyectados obtenidos:\\
+En la figura\footnote{Figura obtenida con la herramienta \textit{graphviz} sobre el archivo \texttt{.dot} generado por \maggen.} \ref{fig:plan} observamos un plan obtenido por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}. Este plan contiene el orden de los números de ecuación que pertenecen a la regla del plan, los planes proyectados son computados sobre el plan total, es decir con todas las dependencias. Para aclarar este echo, observemos los planes proyectados obtenidos:\\
 
 \begin{tabular}{l l}
 \includegraphics[width=220pt,height=35pt]{plans/plan_proj1.png} &
@@ -587,7 +587,7 @@ En la figura\footnote{Figura obtenida con la herramienta \textit{graphviz} sobre
  \includegraphics[width=220pt,height=36pt]{plans/plan_proj3.png}
 \end{center}
 
-Notar que cada plan proyectado ha capturado las ecuaciones de cada símbolo de la parte derecha para el computo de sus atributos, dependiendo del contexto. Es decir, en el caso del símbolo ``Y'' su orden ha sido computado observando las dependencias de la regla R2. Estas dependencias son necesarias para el calculo del plan completo en las ecuaciones 2 y 4. 
+Notar que cada plan proyectado ha capturado las ecuaciones de cada símbolo de la parte derecha para el cómputo de sus atributos, dependiendo del contexto. Es decir, en el caso del símbolo ``Y'' su orden ha sido computado observando las dependencias de la regla R2. Estas dependencias son necesarias para el cálculo del plan completo en las ecuaciones 2 y 4. 
 
 \subsection*{Construcción de secuencias de visita}
 
@@ -596,8 +596,8 @@ La etapa de construcción de secuencias de visita, tal como lo muestra el diagra
 El funcionamiento para la construcción de las secuencias, esta dado por la aplicación de una especie de \textit{simulación}, para la evaluación de cada atributo de los símbolos. El resultado de esta simulación, son los valores que conforman la secuencia de visita, tal como se ha analizado en la sección \ref{XXX}. Estos valores siguen la siguiente interpretación: 
 
 \begin{description}
-\item [Compute] Valor mayor que cero que representa el numero de la ecuacion a resolver\footnote{La ecuación a computar pertenece a la regla del plan corriente.}.
-\item [Visit] valor menor que cero que representa el numero nodo hijo a visitar\footnote{El nodo hijo esta dado por el contexto de la regla del plan corriente.}.
+\item [Compute] Valor mayor que cero que representa el número de la ecuación a resolver\footnote{La ecuación a computar pertenece a la regla del plan corriente.}.
+\item [Visit] valor menor que cero que representa el número nodo hijo a visitar\footnote{El nodo hijo esta dado por el contexto de la regla del plan corriente.}.
 \item [Leave] valor ``0''.
 \end{description}
 
@@ -607,18 +607,18 @@ A modo de ejemplo observemos las siguientes secuencias de visita generada por \m
 \item [\{-7,0,-8\}] Secuencia de visita para la regla \texttt{R3} (sin contexto inferior). En este caso, la secuencia de visita se traduce a lo siguiente:
 
 \begin{enumerate}
-\item \textbf{Computar} la ecuacion 7.
+\item \textbf{Computar} la ecuación 7.
 \item \textbf{Leave}\footnote{El leave retorna el control a la secuencia de visita de contexto superior, es decir, desde donde se invocó a esta secuencia.}.
-\item \textbf{Computar} la ecuacion 8.
+\item \textbf{Computar} la ecuación 8.
 \end{enumerate}
 
 \item [\{-11,1,-12,-10\}] Secuencia de visita para la regla \texttt{R5} con el contexto de \texttt{P2}. En este caso, la secuencia de visita se traduce a lo siguiente:
 
 \begin{enumerate}
-\item \textbf{Computar} la ecuacion 11.
+\item \textbf{Computar} la ecuación 11.
 \item \textbf{Visitar} el nodo hijo 1, es decir \texttt{Y}, como el contexto es \texttt{P2}, significa visitar a R2.
-\item \textbf{Computar} la ecuacion 12.
-\item \textbf{Computar} la ecuacion 10.
+\item \textbf{Computar} la ecuación 12.
+\item \textbf{Computar} la ecuación 10.
 \end{enumerate}
 \end{description}
 
@@ -626,18 +626,18 @@ Cabe aclarar que todas las secuencias de visita tienen un \textbf{leave} implíc
 
 \subsubsection*{Heurística de la simulación}
 
-El punto principal del cual se basa la heurística es, evaluar el plan buscando las dependencias de cada ecuacion en el contexto del mismo. Veamos los pasos básicos a tener en cuenta con el siguiente ejemplo:\\
+El punto principal del cual se basa la heurística es, evaluar el plan buscando las dependencias de cada ecuación en el contexto del mismo. Veamos los pasos básicos a tener en cuenta con el siguiente ejemplo:\\
 
-Supongamos uno de los planes\footnote{Es importante notar el echo de que cada plan se conforma de los números de ecuaciones a computar.} calculados por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}:\\
+Supongamos uno de los planes\footnote{Es importante notar el hecho de que cada plan se conforma de los números de ecuaciones a computar.} calculados por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}:\\
 
 \underline{Plan:} \{ 2, 3, 4, 1 \}. Ver figura \ref{fig:plan}.
 
 \begin{enumerate}
 \item Se recorre el plan tomando en cada paso una de las ecuaciones. Para este caso particular comenzamos con la ecuación 2.
 
-\item Dada la ecuación \texttt{i}\footnote{Para este caso particular \textit{i} toma los valores 0,1,2,3.}, en el plan, debemos computar \textit{l\_value} de la ecuacion. Para ello debemos resolver todas las dependencias dadas por \textit{r\_value}.
+\item Dada la ecuación \texttt{i}\footnote{Para este caso particular \textit{i} toma los valores 0,1,2,3.}, en el plan, debemos computar \textit{l\_value} de la ecuación. Para ello debemos resolver todas las dependencias dadas por \textit{r\_value}.
 
-\item Dada una dependencia de la ecuacion, primero se chequea si las misma fue computada en algún paso anterior,sino, analizamos de la siguiente manera:
+\item Dada una dependencia de la ecuación, primero se chequea si las misma fue computada en algún paso anterior, sino, analizamos de la siguiente manera:
 
 \begin{itemize}
 \item Si la dependencia proviene de una instancia que pertenece al \textbf{símbolo de la parte izquierda de la regla} y además contiene un \textbf{atributo heredado}, entonces estamos en condiciones de realizar un ``\texttt{leave}''.
@@ -647,14 +647,14 @@ Supongamos uno de los planes\footnote{Es importante notar el echo de que cada pl
 
 Notar que en los dos puntos anteriores, nos quedan los casos de dependencia perteneciente al símbolo de la parte izquierda con atributo sintetizado y dependencia de símbolo de la parte derecha con atributo heredado, pero estos casos, son los que deben definirse en este ambiente y como partimos del plan evaluación, el orden de dependencias es consistente con la demanda de las mismas.
 
-\item Luego de la obtención de todas las dependencias, se realiza un \textbf{compute} del \textit{l\_value} y se marca a este como \texttt{evaluado}. El paso siguiente es avanzar una ecuacion en la lista que impone el plan y realizar los mismos tratamientos.
+\item Luego de la obtención de todas las dependencias, se realiza un \textbf{compute} del \textit{l\_value} y se marca a este como \texttt{evaluado}. El paso siguiente es avanzar una ecuación en la lista que impone el plan y realizar los mismos tratamientos.
 \end{enumerate} 
 
 Para mas detalle observemos la figura \ref{fig:simul}.
 
 \begin{figure}[h!]\centering
 \includegraphics[width=300pt,height=525pt]{simu.png}
-\caption{\label{fig:simul}Heurística computo de secuencia de visita}
+\caption{\label{fig:simul}Heurística cómputo de secuencia de visita}
 \end{figure}
 
 \newpage
@@ -666,7 +666,7 @@ El resultado del ejemplo, aplicando los pasos tratados arriba, es presentado en 
 \caption{\label{fig:resul_vis} Ejemplo de Secuencia de visita}
 \end{figure}
 
-Notar que para el cómputo de las secuencias de visitas totales nos basta con lanzar la simulación analizada anteriormente para los planes iniciales\footnote{Los planes iniciales son aquellos que provienen de regla inicial.}. La explicación de esto se sustenta en las propiedades garantizadas con los chequeos en la gramática, principalmente la propiedad de alcanzabilidad. De esta forma, los planes iniciales lanzan los demás planes necesarios para el computo total de las secuencias.
+Notar que para el cómputo de las secuencias de visitas totales nos basta con lanzar la simulación analizada anteriormente para los planes iniciales\footnote{Los planes iniciales son aquellos que provienen de regla inicial.}. La explicación de esto se sustenta en las propiedades garantizadas con los chequeos en la gramática, principalmente la propiedad de alcanzabilidad. De esta forma, los planes iniciales lanzan los demás planes necesarios para el cómputo total de las secuencias.
 
 \section{Generación de Código}
 
@@ -706,7 +706,7 @@ void eval_visiter(struct Node *root);
 \vspace{0.3cm}
 
 Estos métodos son usados internamente por el evaluador generado por \maggen\ teniendo en cuenta lo siguiente:\\
-\texttt{compute\_eq} tiene la responsabilidad de invocar a los \textbf{compute} de cada ecuacion y \texttt{eval\_visiter} tiene la responsabilidad de los \textbf{visit} a nodos. Notar que, estos métodos trabajan sobre las secuencias de visita.
+\texttt{compute\_eq} tiene la responsabilidad de invocar a los \textbf{compute} de cada ecuación y \texttt{eval\_visiter} tiene la responsabilidad de los \textbf{visit} a nodos. Notar que, estos métodos trabajan sobre las secuencias de visita.
 
 El método \texttt{traverse} recorre el AST de entrada al evaluador y asigna a cada nodo un plan de evaluación\footnote{Los planes que asigna el método traverse son los generados estáticamente por \maggen.} y con ello una secuencia de visita correspondiente.
 
