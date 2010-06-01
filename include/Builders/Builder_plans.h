@@ -269,7 +269,7 @@ class Builder_plans
 	    /**
 	      * \var eval_plans
 		  * \brief Store all evaluation plans of the grammar. Saves index of plans_uniques vector.
-	      * "ro" function. Wuu yank's paper.
+	      * "ro" function. Wuu Yang's paper.
 	      */
 		map < Key_plan, unsigned short > eval_plans;
 		vector < Order_eval_eq > plans_uniques;
@@ -277,7 +277,7 @@ class Builder_plans
 		/**
 		  * \var plans_project
 		  * \brief Store all evaluation plans projects of the grammar.Saves index of plans_project_uniques vector.
-		  * "tita" function. Wuu yank's paper.
+		  * "theta" function. Wuu Yang's paper.
 		  */
 		map < Key_plan_project, unsigned short > plans_project;
 		vector < Order_eval_eq > plans_project_uniques;

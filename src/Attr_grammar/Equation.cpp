@@ -235,7 +235,7 @@ const string Equation::to_string() const
     eq.append("*/ ");
 
     eq.append(l_value.to_string());
-    eq.append("\t=\t");
+    eq.append(" = ");
     eq.append(r_value->to_string());
     eq.append(";");
     return eq;

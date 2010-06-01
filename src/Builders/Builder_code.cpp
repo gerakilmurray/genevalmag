@@ -165,9 +165,9 @@ void Builder_code::generate_footer_header() const
 	footer.append("    private:\n");
 	footer.append("        vector < Visit_sequence >    v_seq;\n\n");
 	footer.append("        vector < Order_rule >        contexts_rule;\n\n");
-	footer.append("        /* \"ro\" function. Wuu yank's paper. */\n");
+	footer.append("        /* \"ro\" function. Wuu Yang's paper. */\n");
 	footer.append("        vector < Plan >              eval_plans;\n\n");
-	footer.append("        /* \"tita\" function. Wuu yank's paper. */\n\n");
+	footer.append("        /* \"theta\" function. Wuu Yang's paper. */\n");
 	footer.append("        vector < Plan_project >      eval_plans_project;\n\n");
 	footer.append("        vector < Rule >              rules;\n\n");
 	footer.append("        void add_plan(const Key_plan &k_plan, unsigned short index_order);\n");

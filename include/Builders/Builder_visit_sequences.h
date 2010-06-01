@@ -67,12 +67,12 @@ class Builder_visit_sequences
         );
 
         /**
-          * Saves the visit sequence generate, mixing with pre-generated
+          * Updates the visit sequence generate, mixing with pre-generated
           * visit sequences.
           * @param sequence
           * @param i_plan
           */
-        void save_visit_sequence(const Visit_seq &sequence, const size_t i_plan);
+        void update_visit_sequence(const Visit_seq &sequence, const size_t i_plan);
 
     public:
         /**

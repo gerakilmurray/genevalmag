@@ -232,14 +232,14 @@ const string Rule::to_string() const
     if(!r_eqs.empty())
     /* If r_eqs is empty not show it the compute's block. */
     {
-        rule.append("\n\t\t\tcompute\n");
+        rule.append("\n            compute\n");
         for(map<unsigned short,Equation>::const_iterator it(r_eqs.begin()); it != r_eqs.end(); it++)
         {
-            rule.append("\t\t\t\t");
+            rule.append("                ");
             rule.append(it->second.to_string());
             rule.append("\n");
         }
-        rule.append("\t\t\tend");
+        rule.append("            end");
     }
     rule.append(";\n");
     return rule;
@@ -263,7 +263,7 @@ const string Rule::to_string_not_eqs() const
     rule.append("*/ ");
 
     rule.append(r_left_symbol->get_name());
-    rule.append("\t::=\t");
+    rule.append(" ::= ");
     for(vector<const Symbol*>::size_type i(0); i < r_right_side.size(); i++)
     {
         rule.append(r_right_side[i]->get_name());
