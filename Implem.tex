@@ -217,7 +217,7 @@ En esta sección de la especificación se debían aceptar tres tipos de elemento
 
 Los \texttt{sorts} serán los tipos que se podrán utilizar para definir los dominios e imágenes de los operadores y funciones.
 
-Según lo explicado en el Diseño, las reglas de cada clase, han sido codificados de la siguiente manera.
+Según lo explicado en el diseño \ref{XXX}, las reglas de cada clase, han sido codificados de la siguiente manera.
 
 \begin{description}
 \item [\texttt{sorts}] Exigimos que luego del identificador ``\texttt{sort}'' halla un espacio\footnote{\label{foot:espacio} Ver definición de \texttt{space\_p} \ref{parsers}}. El nombre leído, se usará para crear un nuevo Sort dentro de la GA y también se insertará en la tabla de símbolos de sorts. Se acepta una lista de nombres de sorts para comodidad del usuario.
@@ -649,7 +649,7 @@ Cada vez que se detectaba un error, se lo informa mediante alguno de los siguien
 
 \section{Obtención de planes de evaluación}
 
-Como ya se explicó en el diseño, el propósito final de \maggen\ es obtener todos los planes posibles de la gramática de entrada.
+Como ya se explicó en el diseño \ref{XXX}, el propósito final de \maggen\ es obtener todos los planes posibles de la gramática de entrada.
 
 Teóricamente un plan es una secuencia de atributos, que indica un orden de evaluación total y consistentes de los mismos. Dentro de \maggen, se optó para su representación una secuencia de identificadores de ecuaciones. Ya que cada ecuación tiene solamente \textbf{un} \texttt{l-value}, que es precisamente un atributo. Se utiliza la clase \texttt{vector} de la STL, para su almacenamiento y están enumeradas de forma tal que pueden ser identificadas de manera univoca.
 
@@ -990,8 +990,78 @@ La actualización se lleva a cabo mediante la función \texttt{update\_visit\_se
 \end{items}
 \end{items}
 
+\section{Generación de código}
+
+Esta es la última etapa de \maggen\ y la que produce el resultado esperado por el usuario: el código fuente en C++ de un Evaluador para la gramática que especificó en el archivo de entrada.
+
+Es un proceso que debe dejar plasmado en código estático todos los resultados obtenidos durante las anteriores etapas.
+
+Para obtener un diseño dentro de los estándares de C++, se crean dos archivos: una cabecera \texttt{.hpp} y un fuente \texttt{.cpp}.
+
+Ambos archivos son creados con el nombre proporsionado por el usuario mediante la opción \texttt{maggen -o name} o sino con el nombre por defecto: \texttt{mag\_eval}.
+
+\subsection{Cabecera del evaluador}
+
+Dentro de este archivo, se definen para cada \textbf{símbolo no terminal} una tipo en base a una estructura que incluye a sus atributos, un constructor y un método \texttt{to\_string()} que genera una cadena con su estado actual.
+
+\underline{Por ejemplo:}
+\begin{center}\texttt{symbol Y  NonTerminal Attributes: i2,i3,s2,s3;}\end{center}
+se define lo siguiente:
+\begin{lstlisting}[language=C++, basicstyle=\tiny, numbers=left, columns=fullflexible,columns=fullflexible,linewidth=7cm]
+typedef struct Symbol_Y: Node
+{
+    int i2;
+    int i3;
+    int s2;
+    int s3;
+
+    Symbol_Y(const unsigned short &r_id);
+
+    string to_string() const;
+} Y ;
+\end{lstlisting}
+
+Luego de análisis, se determinó que realmente varias estructuras que eran vitales en fases anteriores, ahora en el contexto y funcionamiento del evaluador eran innecesarias. Por ejemplo, de los planes de evaluación y planes proyectados, únicamente se utilizan los índices de los mismos. Esto sucede ya que debido a la optimización de generar sólo planes diferentes e indexarlos, no existe necesidad de tener en forma estática la definición de cada uno de ellos.
+
+En cambio, las secuencias de visitas son imprescindibles para la evaluación, así también una versión reducida de las definiciones de las reglas, incluyendo solamente un arreglo con los nombres de cada símbolo no terminal que participa en la misma, en donde la posición cero corresponde al símbolo \texttt{head}\footnote{Ver \ref{XXX}}.
+
+Además, se definen los repositorios para 
 
 
+
+\subsection{Fuente del evaluador}
+
+\begin{lstlisting}[language=C++, basicstyle=\tiny, numbers=left, columns=fullflexible,columns=fullflexible,linewidth=9cm]
+bool generate_code(const vector<string> &headers_file) const
+{
+  generate_header_file();
+  generate_code_file(headers_file);
+
+  generate_structs();
+  generate_constructor();
+  generate_methods();
+
+  generate_footer_header();
+  generate_footer_code();
+
+  if (!copy_static_code(path_output))
+  {
+    cout << "* Generation code ---------- [ FAIL ]" << endl;
+    return false;
+  }
+
+  cout << "* Generation code ---------- [  OK  ]" << endl;
+  return true;
+}
+\end{lstlisting}
+
+
+El algoritmo que se tuvo que implementar para poder evaluar un AST, es el propuesto por Wuu Yang en \ref{XXX}. El cual se compone de dos funciones:
+
+\begin{items}
+\item \texttt{traverse}:
+\item \texttt{eval\_visiter}:
+\end{items}
 
 
 \end{itemize}
