@@ -35,7 +35,10 @@ En el desarrollo de este capítulo, introductorio, abordaremos un amplio numero 
 \maggen\ es el objetivo principal del proyecto y su denominación esta dada por la combinación de las silabas \textbf{mag}, que significa \textit{multi-plans attribute grammar} y \textbf{Gen} por \textit{generator}. Estas dos silabas dan significado a \maggen\ como ``Generador de Evaluadores Estáticos para MAG''.
 
 \section{Gramática libre de contexto}
+En el nivel 2 de la jerarquía de chomsky \ref{chomsky} se encuentran los lenguajes libres de contexto. Las gramaticas libres de contexto son un formalismo que permite expresar cadenas de este tipo de lenguajes.
 
+Las gramaticas libres de contexto han tomado gran importancia en la descripción de formatos de documentos\footnote{ DTD - document-type definition.}, como XML (extensible markup language) y también en tecnología de compilación, mediante la construcción de \textit{parser} de lenguajes.  
+\begin{definition}
 Una gramática libre de contexto se conforma de 4 componentes necesarios para la descripción de un lenguaje:
 \begin{enumerate}
 \item Un conjunto finito de símbolos que son los string que se definen el lenguaje. Este conjunto es denominado ``alfabeto de terminales'' o simplemente \textit{\textbf{símbolos terminales}}.
@@ -44,7 +47,7 @@ Una gramática libre de contexto se conforma de 4 componentes necesarios para la
 
 \item Una variable que representa el comienzo del lenguaje, que se denomina \textit{\textbf{símbolo inicial}}. Dicha variable pertenece al conjunto del punto 2.
 
-\item Un conjunto finito de \textit{\textbf{producciones o reglas}} que representan la definicion recursiva de un lenguaje. Cada producción consiste de las siguientes partes:
+\item Un conjunto finito de \textit{\textbf{producciones o reglas}} que representan la definición recursiva de un lenguaje. Cada producción consiste de las siguientes partes:
 
 \begin{enumerate}
 \item Un símbolo no terminal perteneciente al conjunto del punto 2, denominado \textit{\textbf{head}} de la producción.
@@ -57,14 +60,52 @@ Una gramática libre de contexto se conforma de 4 componentes necesarios para la
 \end{enumerate}
 
 Estos cuatro componentes pueden ser representados por una tupla \textbf{<V,T,S,P>}\ donde \textbf{V} es el conjunto de no terminales (punto 1), \textbf{T} el conjunto de terminales (punto 2), \textbf{S} es el símbolo inicial (punto 3) y \textbf{P} es el conjunto de producciones (punto 4).
-
-Veamos dos ejemplos desarrollados en \cite{gramática} (capítulo 5):
+\end{definition}
+Veamos dos ejemplos desarrollados en \cite{gramatica} (capítulo 5):
 
 \begin{enumerate}
-\item Eje 1: palíndromo.
-\item Eje 2: expresión.
+\item Ejemplo: palíndromo:
+Definimos la gramatica $G_{pal}$ para definir el lenguaje de palindromos\footnote{Un palíndromo (del griego palin dromein, volver a ir hacia atrás) es una palabra, número o frase que se lee igual hacia adelante que hacia atrás. Si se trata de un número, se llama capicúa (\urllink{http://es.wikipedia.org/wiki/Pal\%C3\%ADndromo}).}: \\
+$G_{pal} = (\{P\},\{0,1\},P,A)$
+donde A es el siguiente conjunto de producciones:
+\begin{enumerate}
+\item $P \rightarrow \lambda$
+\item $P \rightarrow 0$
+\item $P \rightarrow 1$
+\item $P \rightarrow 0 P 0$
+\item $P \rightarrow 1 P 1$
 \end{enumerate}
- 
+Ejemplos de cadenas del lenguaje $G_{pal}$:
+\begin{items}
+\item $\lambda$
+\item 0011
+\item 11110000
+\item etc.
+\end{items}
+
+\item Ejemplo: Gramatica de expresiones:\\
+\textbf{G = (\{E,I\}, \{+,*,(,),a,b,0,1\}, E, P)} donde P es el conjunto de producciones siguiente:
+\begin{enumerate}
+\item $E \rightarrow I$
+\item $E \rightarrow E + E$
+\item $E \rightarrow E * E$
+\item $E \rightarrow (E)$
+\item $I \rightarrow a$
+\item $I \rightarrow b$
+\item $I \rightarrow Ia$
+\item $I \rightarrow Ib$
+\item $I \rightarrow I0$
+\item $I \rightarrow I1$
+\end{enumerate}
+\begin{items}
+\item a
+\item b00
+\item a*(a+b00)
+\item etc.
+\end{items}
+\end{enumerate}
+
+\underline{Notación}: Cuando denotamos una producción podemos utilizar una abreviación para agrupar aquellas producciones con el mismo \textit{head}. Para ello utilizamos el metasimbolo ``|''. Por ejemplo el conjunto de producciones de $G_{pal}$ podríamos escribirlas como: $P \rightarrow \lambda | 0 | 1 | 0P0 | 1P1$ 
 
 \section{Gramática de Atributos (GA)}
 
@@ -81,11 +122,15 @@ Una regla semántica se podrá evaluar cuando las instancias de los atributos qu
 Un árbol sintáctico abstracto (AST) es una forma condensada de un árbol de análisis sintáctico. Este es útil para representar construcciones de lenguajes.
 
 Por ejemplo una producción de la forma:
-\begin{center}\LARGE
+\begin{center}\large
 $S\ \rightarrow\ \textbf{if}\ B\ \textbf{then}\ S1\ \textbf{else}\ S2$                                                                      \end{center}
 puede aparecer en un árbol sintáctico como:
 
-PLUM imagen.
+\begin{figure}[h!]\centering
+\includegraphics[width=125pt,height=53pt]{ast-ejemplo.pdf}
+\caption{\label{ejem-ast} Ejemplo AST.}
+\end{figure}
+
 
 Un árbol sintáctico se compone de dos tipos de nodos:
 \begin{description}
