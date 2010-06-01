@@ -27,7 +27,7 @@ Para comenzar a definir una gramática hay que crear una estructura que herede d
 
 \newpage
 
-\begin{lstlisting}[float, language=C++, basicstyle=\scriptsize,numbers=left]
+\begin{lstlisting}[float, language=C++, basicstyle=\scriptsize,numbers=left, columns=fullflexible,linewidth=8cm]
 struct my_grammar: public grammar <my_grammar>
 {
     template <typename ScannerT>
@@ -120,7 +120,7 @@ Para el manejo de los símbolos válidos dentro de la definición de la gramáti
 
 Para comenzar a interactuar con el framework, el usuario debe declarar un objeto de la estructura definida y pasarlo como parámetro a una función específica de \spirit.
 
-\begin{lstlisting}[float=t!, language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[float=t!, language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible,linewidth=6cm]
 my_grammar g;
 
 if (parse(first, last, g, space_p).full)
@@ -141,40 +141,40 @@ Lo primero que se tuvo que realizar, fue definir los componentes básicos que se
 \begin{description}
 \item [Identificadores] son los nombres de sorts, funciones, atributos, símbolos no terminales y reglas, permitidos por \maggen\ y se basan en el común de los estándares. Debido a que el lenguaje del evaluador generado es C++, todas las palabras reservadas de ese lenguaje, son de la misma clase para nuestra herramienta.
 
-\begin{lstlisting}[float=h!, language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[float=h!, language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible,linewidth=11cm]
 r_ident = lexeme_d[(alpha_p|'_')>>*(alnum_p|'_')]-r_reserved_word;
 
 r_reserved_word = str_p("compute")|"end"
-                | "all"
-                | "semantic domain"|"attributes" |"rules"
-                | "sort"|"op"|"function"
-                | "infix"|"prefix"|"postfix"
-                | "syn"|"inh"
-                | "left"|"right"|"non_assoc"
-                | r_cpp_reserved_words;
+                        | "all"
+                        | "semantic domain"|"attributes" |"rules"
+                        | "sort"|"op"|"function"
+                        | "infix"|"prefix"|"postfix"
+                        | "syn"|"inh"
+                        | "left"|"right"|"non_assoc"
+                        | r_cpp_reserved_words;
 
 r_cpp_reserved_words = r_cpp_basic_types
-                     | str_p("and")|"and_eq"|"asm"|"auto"|"bitand"
-                     | "bitor"|"break"|"case"|"catch"|"class"|"compl"
-                     | "const"|"const_cast"|"continue"|"default"
-                     | "delete"|"do"|"double"|"dynamic_cast"|"else"
-                     | "enum"|"explicit"|"export"|"extern"|"false"
-                     | "for"|"friend"|"goto"|"if"|"inline"|"long"
-                     | "mutable"|"namespace"|"new"|"not"|"not_eq"
-                     | "operator"|"or"|"or_eq"|"private"|"protected"
-                     | "public"|"register"|"reinterpret_cast"|"return"
-                     | "short"|"signed"|"sizeof"|"static"|"static_cast"
-                     | "struct"|"switch"|"template"|"this"|"throw"|"true"
-                     | "try"|"typedef"|"typeid"|"typename"|"union"
-                     | "unsigned"|"using"|"virtual"|"void"|"volatile"
-                     | "wchar_t"|"while"|"xor"|"xor_eq";
+                                | str_p("and")|"and_eq"|"asm"|"auto"|"bitand"
+                                | "bitor"|"break"|"case"|"catch"|"class"|"compl"
+                                | "const"|"const_cast"|"continue"|"default"
+                                | "delete"|"do"|"double"|"dynamic_cast"|"else"
+                                | "enum"|"explicit"|"export"|"extern"|"false"
+                                | "for"|"friend"|"goto"|"if"|"inline"|"long"
+                                | "mutable"|"namespace"|"new"|"not"|"not_eq"
+                                | "operator"|"or"|"or_eq"|"private"|"protected"
+                                | "public"|"register"|"reinterpret_cast"|"return"
+                                | "short"|"signed"|"sizeof"|"static"|"static_cast"
+                                | "struct"|"switch"|"template"|"this"|"throw"|"true"
+                                | "try"|"typedef"|"typeid"|"typename"|"union"
+                                | "unsigned"|"using"|"virtual"|"void"|"volatile"
+                                | "wchar_t"|"while"|"xor"|"xor_eq";
 
 r_cpp_basic_types = str_p("bool")|"char"|"float"|"int"|"string";
 \end{lstlisting}
 
 \item [Operadores] Dentro de la especificación de la GA, se permiten como nombre válidos para los operadores, caracteres alfabéticos, numéricos y los operadores básicos de C++. 
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible,linewidth=10cm]
 r_oper = lexeme_d[(alpha_p|'_'|r_id_op)>>*(alnum_p|'_'|r_id_op)];
 
 r_id_op = ch_p('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>'|'|'|'~'|'.'|','|'?';
@@ -182,7 +182,7 @@ r_id_op = ch_p('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>'|'|'|'~'|'.'|','|'?';
 
 \item [Literales] Son los valores de constantes y tipos básicos aceptados, se adecuan a los estándares de C++. Solamente se tuvo que definir los valores lógicos, los caracteres entre comillas simples y las cadenas de caracteres entre comillas dobles, ya que para los tipos numéricos, existen parsers predefinidos de \spirit\ como ya se dio a conocer.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=9cm]
 r_boolean = str_p("true")|"false";
 
 r_char = lexeme_d[ch_p('\'')>>(anychar_p)n>ch_p('\'')];
@@ -192,16 +192,16 @@ r_string = lexeme_d[ch_p('\"')>>r_string_lit>>ch_p('\"')];
 r_string_lit = +((anychar_p-(ch_p('\"')|"\\"|'\'' ))|r_esc_seq);
 
 r_esc_seq = ch_p('\\')>>
-            ( oct_p
-            | as_lower_d['x']>>hex_p
-            | (anychar_p-ch_p('\n'))
-            );
+                  ( oct_p
+                  | as_lower_d['x']>>hex_p
+                  | (anychar_p-ch_p('\n'))
+                  );
 \end{lstlisting}
 \end{description}
 
 Para tener una consistencia de identificadores para cada componente de la gramática, utilizamos tablas de símbolos como repositorio, pero también como regla para limitar los posibles valores en posteriores definiciones.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize,numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize,numbers=left,columns=fullflexible,linewidth=5cm]
 symbols <> st_sorts;
 symbols <> st_op_prefix;
 symbols <> st_op_infix;
@@ -222,58 +222,58 @@ Según lo explicado en el Diseño, las reglas de cada clase, han sido codificado
 \begin{description}
 \item [\texttt{sorts}] Exigimos que luego del identificador ``\texttt{sort}'' halla un espacio\footnote{\label{foot:espacio} Ver definición de \texttt{space\_p} \ref{parsers}}. El nombre leído, se usará para crear un nuevo Sort dentro de la GA y también se insertará en la tabla de símbolos de sorts. Se acepta una lista de nombres de sorts para comodidad del usuario.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize,numbers=left,columns=fullflexible,linewidth=9cm]
 r_decl_sort = lexeme_d[str_p("sort")>>space_p]>>
-              (r_ident[&create_sort][st_sorts.add]%',')>>
-              ';';
+                     (r_ident[&create_sort][st_sorts.add]%',')>>
+                     ';';
 \end{lstlisting}
 
 \item [\texttt{operators}] Para los operadores también se exige el espacio$^{\ref{foot:espacio}}$ luego de la cadena ``\texttt{op}''. Por definición se aceptan tres tipos: infijos, prefijos y posfijos, por lo que se hizo una regla para cada uno, solamente discriminado los dominios, ya que todos poseen una sóla imagen. Notar que los sorts permitidos, son sacados directamente de las tablas de símbolos destinadas para ese propósito.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,numbers=left,columns=fullflexible,linewidth=13cm]
 r_decl_oper = lexeme_d[str_p("op")>>space_p][&inic_func]>>
-              (r_oper_infix|r_oper_postfix|r_oper_prefix)>>
-              str_p("->")>>
-              r_sort_st[&save_image_func]>>
-              ';';
+                     (r_oper_infix|r_oper_postfix|r_oper_prefix)>>
+                     str_p("->")>>
+                     r_sort_st[&save_image_func]>>
+                     ';';
 
 r_oper_infix = str_p("infix")[&save_mode_op]>>
-               !r_oper_mode>>
-               r_oper[&save_name_func][st_op_infix.add]>>
-               ':'>>
-               r_sort_st[&save_domain_func]>>','>>r_sort_st[&save_domain_func];
+                      !r_oper_mode>>
+                      r_oper[&save_name_func][st_op_infix.add]>>
+                      ':'>>
+                      r_sort_st[&save_domain_func]>>','>>r_sort_st[&save_domain_func];
 
 r_oper_postfix = str_p("postfix")[&save_mode_op]>>
-                 !r_oper_mode>>
-                 r_oper[&save_name_func][st_op_postfix.add]>>
-                 ':'>>
-                 r_sort_st[&save_domain_func];
+                         !r_oper_mode>>
+                         r_oper[&save_name_func][st_op_postfix.add]>>
+                         ':'>>
+                         r_sort_st[&save_domain_func];
 
 r_oper_prefix = !(str_p("prefix")[&save_mode_op])>>
-                !r_oper_mode>>
-                r_oper[&save_name_func][st_op_prefix.add]>>
-                ':'>>
-                r_sort_st[&save_domain_func];
+                        !r_oper_mode>>
+                        r_oper[&save_name_func][st_op_prefix.add]>>
+                        ':'>>
+                        r_sort_st[&save_domain_func];
 
 r_oper_mode = '('>>
-               (uint_p[&save_prec_op]|'_')>>
-               ','>>
-               (r_oper_assoc[&save_assoc_op]|'_')>>
-               ')';
+                     (uint_p[&save_prec_op]|'_')>>
+                     ','>>
+                     (r_oper_assoc[&save_assoc_op]|'_')>>
+                     ')';
 
 r_oper_assoc = str_p("left")|"right"|"non_assoc";
 \end{lstlisting}
 
 \item [\texttt{functions}] Para las funciones se permiten como dominio listas de sorts, los cuales serán agregados incrementalmente a la función que se está declarando. La utilización de acciones semánticas facilitan la modularización. La declaración comienza con la cadena ``\texttt{function}'' seguida de una espacio$^{\ref{foot:espacio}}$.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=11cm]
 r_decl_func = lexeme_d[str_p("function")>>space_p]>>
-              r_oper[&inic_func][&save_name_func][st_functions.add]>>
-              ':'>>
-              !r_dom_func>>
-              str_p("->")>>
-              r_sort_st[&save_image_func]>>
-              ';';
+                     r_oper[&inic_func][&save_name_func][st_functions.add]>>
+                     ':'>>
+                     !r_dom_func>>
+                     str_p("->")>>
+                     r_sort_st[&save_image_func]>>
+                     ';';
 
 r_dom_func = r_sort_st[&save_domain_func]%',';
 \end{lstlisting}
@@ -287,19 +287,19 @@ Un detalle a tener en cuenta, en este punto, es que no se encuentra declarado ni
 
 La vinculación de los atributos con sus respectivos dueños, se realizará más adelante, debido a que existe la posibilidad de declarar un atributo para todo símbolo, mediante la sentencia \texttt{all}, antes de tener totalmente definido el conjunto de símbolos no terminales de la gramática.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=11cm]
 r_attributes = lexeme_d[str_p("attributes")>>space_p]>>
-               +r_decl_attr[&create_attributes];
+                      +r_decl_attr[&create_attributes];
 
 r_decl_attr = (r_ident[&add_attribute][st_attributes.add]%',')>>
-              ':'>>
-              !(r_type_attr[&save_type_attr])>>
-              '<'>>r_sort_st[&save_sort_attr]>>'>'>>
-              lexeme_d[str_p("of")>>space_p]>>
-              (r_conj_symb |
-               (str_p("all")n>!('-'>>r_conj_symb))
-              )[&save_member_list_attr]>>
-              ';';
+                      ':'>>
+                      !(r_type_attr[&save_type_attr])>>
+                      '<'>>r_sort_st[&save_sort_attr]>>'>'>>
+                      lexeme_d[str_p("of")>>space_p]>>
+                      (r_conj_symb |
+                      (str_p("all")n>!('-'>>r_conj_symb))
+                      )[&save_member_list_attr]>>
+                      ';';
 
 r_conj_symb = '{'>>(r_ident%',')>>'}';
 
@@ -312,20 +312,20 @@ En la definición de una gramática las reglas son los pilares, por eso en esta 
 
 El bloque de reglas comienza con el identificador ``\texttt{rules}'', seguida de un espacio$^{\ref{foot:espacio}}$ y una lista de reglas. Cada una de las mismas son enumeradas desde 1 para mantener una indexación interna. Una vez consumido el bloque se realizan los chequeos que determinan si la GA es MAG o no.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbers=left,columns=fullflexible,linewidth=9cm]
 r_rules = lexeme_d[str_p("rules")>>space_p]>>
-          (+r_decl_rule)>>eps_p[&check_well_defined];
+               (+r_decl_rule)>>eps_p[&check_well_defined];
 \end{lstlisting}
 
 Una regla individualmente esta representada por un identificador y los caracteres ``\texttt{::=}'' y una lista de símbolos, dejando también la posibilidad de escribir reglas abreviadas mediante el uso del operador ``|'' junto a una nueva lista de símbolos, evitando repetir el lado izquierdo de la regla.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbers=left,columns=fullflexible,linewidth=13cm]
 r_decl_rule = r_ident[&create_new_non_terminal][&create_rule][st_non_terminal.add]>>
-              str_p("::=")>>
-              r_right_rule[&save_rule]>>
-              *(str_p("|")[&create_abbreviated_rule]>>
-              r_right_rule[&save_rule])>>
-              ';';
+                     str_p("::=")>>
+                     r_right_rule[&save_rule]>>
+                     *(str_p("|")[&create_abbreviated_rule]>>
+                     r_right_rule[&save_rule])>>
+                     ';';
 \end{lstlisting}
 
 Dentro de la lista de símbolos se aceptan identificadores de símbolos no terminales y símbolos terminales, definidos mediante una regla específica. Ambos, son creados controlando que no existan repetidos, actualizando la tabla de símbolos solamente de los no terminales.
@@ -334,11 +334,11 @@ Se consideran símbolos terminales a cualquier cadena de caracteres encerrada en
 
 Por definición, una regla puede no contener un bloque de ecuaciones, por lo que es opcional.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=11cm]
 r_right_rule = +( r_ident[&create_new_non_terminal][st_non_terminal.add]
-                | r_terminal[&create_new_terminal]
-                )[&save_right_side_rule]>>
-               !r_compute_eq;
+                         | r_terminal[&create_new_terminal]
+                         )[&save_right_side_rule]>>
+                       !r_compute_eq;
 
 r_terminal = lexeme_d[ch_p('\'')>>r_string_lit>>ch_p('\'')];
 \end{lstlisting}
@@ -355,36 +355,36 @@ Dentro de la definición sólo se podrán utilizar instancias de atributos de lo
 
 Cada ecuación tiene una instancia de atributo, como ``\texttt{l-value}'', el carácter ``\texttt{=}'' y una expresión como ``\texttt{r-value}''.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=9cm]
 r_compute_eq = lexeme_d[str_p("compute")>>space_p]>>
-               +(r_equation)>>
-               str_p("end");
+                       +(r_equation)>>
+                       str_p("end");
 
 r_equation = r_instance[&create_equation]n>
-             '='>>
-             r_expression[&save_rvalue]>>
-             ';';
+                    '='>>
+                    r_expression[&save_rvalue]>>
+                    ';';
 \end{lstlisting}
 
 La herramienta acepta cualquier tipo de expresión, ya que se permite que se definan nuevos operadores y funciones según las necesidades de la gramática para la cual se generará el evaluador. Se utilizó la gramática de expresiones ambiguas que figura en la mayoría de los libros de análisis de lenguajes.
 
-\begin{lstlisting}[backgroundcolor=\color{white}]
+\begin{lstlisting}[backgroundcolor=\color{white},columns=fullflexible,linewidth=7cm]
 E := E op E
-   | (E)
-   | literal
+    |  (E)
+    |  literal
 \end{lstlisting}
 
 Donde ``op'' se interpreta como cualquier operador. Esta gramática presentaba el problema de la ``recursión a izquierda'', por lo que se la quitó obteniendo lo siguiente.
 
-\begin{lstlisting}[backgroundcolor=\color{white}]
+\begin{lstlisting}[backgroundcolor=\color{white},columns=fullflexible,linewidth=7cm]
 E := T op1 E
-   | T
+    |  T
 
 T := F op2 T
-   | F
+    |  F
 
 F := (E)
-   | literal
+    |  literal
 \end{lstlisting}
 
 En nuestra especificación, los ``literales'' pueden ser solamente de tres tipos: funciones, instancias de atributos y los literales propiamente dichos (caracteres, cadenas, valores lógicos, números enteros y flotantes). Los operadores fueron discriminados puntualmente según su sintaxis.
@@ -395,42 +395,42 @@ Además, debido a una restricción de \spirit, se tuvo que reescribir toda regla
 
 Logrando la siguiente gramática de expresiones, que luego fue codificada en \spirit.
 
-\begin{lstlisting}[backgroundcolor=\color{white}]
+\begin{lstlisting}[backgroundcolor=\color{white},columns=fullflexible,linewidth=7cm]
 E := T (op_infix E)*
 
 T := F (op_postfix)*
-   | op_prefix T
+    |  op_prefix T
 
 F := (E)
-   | function
-   | literal
-   | instance
+    |  function
+    |  literal
+    |  instance
 
 literal := real
-         | int
-         | char
-         | string
-         | bool
+             |  int
+             |  char
+             |  string
+             |  bool
 \end{lstlisting}
 
 Dentro de las expresiones se tenía que ir resolviendo la precedencia de los operadores declarados por el usuario. Además, la utilización de paréntesis crea distintos niveles de precedencia. Cada vez que se utiliza la producción que genera \texttt{( E )}, la precedencia de los operadores que se utilicen en la expresión \texttt{E}, se resolverán en ese nivel.
 
-\begin{lstlisting}[float, language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[float, language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=13cm]
 r_expression = r_expr_prime>>*(r_op_infix_st[&create_operator][&create_func_node]>>
-               r_expr_prime[&create_root_infix_node]);
+                      r_expr_prime[&create_root_infix_node]);
 
 r_expr_prime = r_expr_prime_prime>>
-               *(r_op_postfix_st[&create_operator][&create_func_node]
-                                [&create_root_postfix_node])
-             | r_op_prefix_st[&create_operator][&create_func_node]>>
-               r_expr_prime[&create_root_prefix_node];
+                      *(r_op_postfix_st[&create_operator][&create_func_node]
+                                               [&create_root_postfix_node])
+                    | r_op_prefix_st[&create_operator][&create_func_node]>>
+                      r_expr_prime[&create_root_prefix_node];
 
 r_expr_prime_prime = ch_p('(')[&increment_level]>>
-                        r_expression>>
-                     ch_p(')')[&decrement_level]
-                   | r_function[&create_root_function_node]
-                   | r_literal[&create_literal_node]
-                   | r_instance[&create_instance_node];
+                                   r_expression>>
+                               ch_p(')')[&decrement_level]
+                             | r_function[&create_root_function_node]
+                             | r_literal[&create_literal_node]
+                             | r_instance[&create_instance_node];
 \end{lstlisting}
 
 Las definiciones de los tres tipos de literales son coherentes con el estilo de codificación que se usó hasta el momento.
@@ -439,11 +439,11 @@ Las funciones aceptan expresiones como parámetros, así que, la asociatividad y
 
 Al completar esta regla se creará una \texttt{Expr\_function} dentro de la gramática.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=11cm]
 r_function = r_function_st[&create_function][&create_func_node]>>
-             ch_p('(')[&push_mark][&increment_level]>>
-             !(r_expression%',')>>
-             ch_p(')')[&decrement_level];
+                   ch_p('(')[&push_mark][&increment_level]>>
+                   !(r_expression%',')>>
+                   ch_p(')')[&decrement_level];
 \end{lstlisting}
 
 Aprovechando las funcionalidades de \spirit, se resolvió una ambigüedad al momento de parser un número entero y un flotante, exigiendo que se quede con la cadena más larga que pudiese coincidir en la gramática. Para ello se codificó lo siguiente:
@@ -456,40 +456,40 @@ Para los demás literales se usaron las reglas definidas en un comienzo de la gr
 
 Luego de parsear cada uno de los literales se crean los respectivos objetos dentro del ambiente de tipo \texttt{Expr\_literal}.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=9cm]
 r_literal = longest_d[real_p|int_p][&create_lit_number]
-          | r_char[&create_lit_ch]
-          | r_string[&create_lit_str]
-          | r_boolean[&create_bool];
+                | r_char[&create_lit_ch]
+                | r_string[&create_lit_str]
+                | r_boolean[&create_bool];
 \end{lstlisting}
 
 Una instancia debe ser un bloque que contenga una ocurrencia de un símbolo y un atributo del mismo. Por lo que no se aceptan espacios intermedios. Se utilizó la directiva \texttt{lexeme\_d}.
 
 Con los datos obtenidos se crea un objeto de tipo \texttt{Expr\_instance}.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=9cm]
 r_instance = lexeme_d[
-               r_non_term_st[&create_instance]>>
-               '['>>int_p[&save_index_ins]>>']'>>
-               '.'>>r_attribute_st[&save_attr_ins]
-             ];
+                      r_non_term_st[&create_instance]>>
+                      '['>>int_p[&save_index_ins]>>']'>>
+                      '.'>>r_attribute_st[&save_attr_ins]
+                    ];
 \end{lstlisting}
 
 En este punto se encuentran definidas todas las reglas necesarias para declarar la regla que define a una \textbf{Gramática de Atributos}. Es decir, un dominio semántico, un bloque de atributos y un bloque de reglas. El parser \texttt{end\_p} se necesita para que consuma los espacios restantes hasta el fin del archivo de entrada.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=7cm]
 r_att_grammar = r_semantic_domain >>
-                r_attributes >>
-                r_rules >>
-                end_p;
+                        r_attributes >>
+                        r_rules >>
+                        end_p;
 \end{lstlisting}
 
 Por cuestiones de diseño de \spirit, no se podían aplicar acciones semánticas a las tablas de símbolos, por lo que se crearon reglas auxiliares para mediar de puente.
 
 A excepción de la regla que se utilizó para definir los identificadores válidos para un \texttt{sort}, a la que se le agregaron los tipos básicos soportados por \maggen.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
-r_sort_st       = st_sorts|r_cpp_basic_types;
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,linewidth=9cm]
+r_sort_st       = st_sorts | r_cpp_basic_types;
 r_op_prefix_st  = st_op_prefix;
 r_op_infix_st   = st_op_infix;
 r_op_postfix_st = st_op_postfix;
@@ -502,7 +502,7 @@ r_non_term_st   = st_non_terminal;
 
 Para incorporar los dos estilos de comentarios de C++, se definió una gramática que los aceptara y se utilizó como el parser para todos las cadenas que se omiten dentro del archivo de entrada.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=8cm]
 struct skip_parser: public grammar <skip_parser>
 {
   template <typename ScannerT>
@@ -511,9 +511,9 @@ struct skip_parser: public grammar <skip_parser>
     definition(skip_parser const &self)
     {
       skip = space_p
-           | "//" >> *(anychar_p - '\n')
-           | "/*" >> *(anychar_p - "*/") >> "*/"
-           ;
+              |  "//" >> *(anychar_p - '\n')
+              |  "/*" >> *(anychar_p - "*/") >> "*/"
+              ;
     }
     rule <ScannerT> skip;
 
@@ -527,9 +527,9 @@ struct skip_parser: public grammar <skip_parser>
 
 La invocación a la funcionalidad de \spirit\ se realiza con una instancia de \texttt{attritute\_grammar}, como gramática objetivo, y otra de \texttt{skip\_parser}, como parser de omisión.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=13cm]
 attritute_grammar  attr_grammar_decl;
-skip_parser        skip_p;
+skip_parser           skip_p;
 
 parse_info<iterator_t> info(parse<iterator_t>(begin, end, attr_grammar_decl, skip_p));
 \end{lstlisting}
@@ -544,7 +544,7 @@ Primero, para aceptar archivos como entrada de la herramienta, se tiene que hace
 
 De esta forma, el parser que se invocará para que analice la entrada de \maggen, lo hará moviéndose mediante este iterador y ante cualquier error, se podrá obtener la última posición parseada correctamente.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,linewidth=10cm]
 typedef char                           char_t;
 typedef file_iterator <char_t>         iterator_f;
 typedef position_iterator <iterator_f> iterator_t;
@@ -640,13 +640,12 @@ Además, también se controlara que no existieran ecuaciones incorrectas, es dec
 \end{itemize}
 
 Cada vez que se detectaba un error, se lo informa mediante alguno de los siguientes mensajes según corresponda.
-
-\texttt{\begin{itemize}
+\texttt{\begin{items}
 \item ``ERROR: ``E[1].syn1'' type synthetized, haven't an equation that defines it.''
 \item ``ERROR: ``S[0].inh1'' type inherited, is defined outside his scope.''
 \item ``ERROR: ``E[1].inh2'' type inherited, haven't an equation that defines it.''
 \item ``ERROR: ``S[0].syn2'' type synthetized, is defined outside his scope.''
-\end{itemize}}
+\end{items}}
 
 
 \section{Obtención de planes de evaluación}
@@ -890,19 +889,58 @@ El algoritmo que se diseñó es recursivo y se apoya en ciertas listas que lleva
 
 \begin{description}
 \item [Instancias Computadas:] referencia a las instancias de atributos que ya se calcularon en algún contexto.
-\begin{center}
-\texttt{\textbf{vector<Expr\_instance> \&ins\_computed}}
-\end{center}
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize]
+vector<Expr_instance> &ins_computed
+\end{lstlisting}
 
-\item [Planes Computados:] referencia a los planes de evaluación ya completados.
-\begin{center}
-\texttt{\textbf{vector< map<Key\_plan, unsigned short>::const\_iterator > \&plans\_computed}}
-\end{center}
+\item [Planes Computados:] referencia a los planes de evaluación ya traducidos por completo.
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize]
+vector< map<Key_plan, unsigned short>::const_iterator > &plans_computed
+\end{lstlisting}
 
-\item [Secuencias de Visita Computadas:] 
-\begin{center}
-\texttt{\textbf{vector<unsigned short> \&v\_seq\_computed}}
-\end{center}
+\item [Secuencias de Visita Computadas:] referencia a las secuencias de visita que ya fueron calculadas completamente.
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize]
+vector<unsigned short> &v_seq_computed
+\end{lstlisting}
 \end{description}
+
+El algoritmo principal, \texttt{generate\_visit\_sequences}, es más bien un invocador de la función \texttt{gen\_visit\_seq}, que es la que realmente lleva a cabo las llamadas que simulan la evaluación.
+
+\begin{lstlisting}[language=C++, basicstyle=\tiny, numbers=left, columns=fullflexible]
+bool generate_visit_sequences()
+{
+  for(size_t i(0); i < b_plans.get_plans_uniques().size(); i++)
+  {
+    Visit_seq v_s;
+    all_visit_seqs.push_back(v_s);
+  }
+
+  vector <unsigned short> visit_seq_computed;
+  vector <map<Key_plan, unsigned short>::const_iterator> plans_computed_all;
+  /* For all plans */
+  for(map < Key_plan, unsigned short >::const_iterator it(b_plans.get_plans().begin()); it != b_plans.get_plans().end(); it++)
+  {
+    const Rule &rule(attr_grammar.get_rule(b_plans.get_context_unique(it->first.id_plan)[0]));
+    if (rule.get_left_symbol()->equals(*attr_grammar.get_initial_symb()))
+    {
+      /* This plan is belong a initial symbol (initial rule). */
+      if(!belong_index(it->second, visit_seq_computed))
+      {
+        vector<Expr_instance> ins_computed;
+        vector< map<Key_plan, unsigned short>::const_iterator > plans_computed;
+        merge_vec(plans_computed_all, plans_computed);
+        gen_visit_seq(it, ins_computed, plans_computed, visit_seq_computed);
+        merge_vec(plans_computed, plans_computed_all);
+        plan_family_computed(plans_computed, visit_seq_computed);
+      }
+    }
+  }
+  cout << "* Build visit sequence ----- [  OK  ]" << endl;
+  return true;
+}
+\end{lstlisting}
+
+
+
 
 \normalsize
