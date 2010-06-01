@@ -181,9 +181,9 @@ string Symbol::to_string() const
     switch(symb_type)
     {
         case k_non_terminal:
-            symb.append("\tNonTerminal");
+            symb.append(" NonTerminal");
 
-            symb.append("\tAttributes: ");
+            symb.append(" -> Attributes: ");
             for(vector<Attribute*>::size_type i(0); i < symb_attrs.size(); i++)
             {
                 symb.append(symb_attrs[i]->get_name());
@@ -194,7 +194,7 @@ string Symbol::to_string() const
             }
             break;
         case k_terminal:
-            symb.append("\tTerminal");
+            symb.append(" Terminal");
             break;
     }
     symb.append(";");

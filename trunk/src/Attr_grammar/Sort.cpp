@@ -115,7 +115,7 @@ const string Sort::to_string() const
     {
         sort.append("//");
     }
-    sort.append("sort\t\t");
+    sort.append("sort ");
     sort.append(s_name);
 
 	#ifdef _DEBUG
@@ -130,7 +130,7 @@ const string Sort::to_string() const
 
     if (is_type_basic())
     {
-        sort.append("\t-> Type Basic");
+        sort.append(" -> Type Basic");
     }
     return sort;
 }

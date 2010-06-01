@@ -157,7 +157,7 @@ const string Attribute::to_string() const
 {
     string attr;
     attr.append(a_name);
-    attr.append("\t:\t");
+    attr.append(" : ");
     if(is_synthetize())
     {
         attr.append("syn");
@@ -169,7 +169,7 @@ const string Attribute::to_string() const
     attr.append(" <");
     attr.append(a_sort_type->get_name());
 
-    attr.append("> \tof ");
+    attr.append("> of ");
     attr.append(a_member_symbol);
     attr.append(";");
     return attr;

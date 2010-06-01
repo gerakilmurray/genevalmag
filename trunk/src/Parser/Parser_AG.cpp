@@ -54,9 +54,9 @@ const Attr_grammar &Parser_AG::get_attr_grammar()
 std::ostream& operator<<(std::ostream& out, file_position const& lc)
 {
     return out <<
-            "\nFile:\t" << lc.file <<
-            "\nLine:\t" << lc.line <<
-            "\nCol:\t" << lc.column << endl;
+            "\nFile:  " << lc.file <<
+            "\nLine:  " << lc.line <<
+            "\nCol:   " << lc.column << endl;
 }
 
 /**

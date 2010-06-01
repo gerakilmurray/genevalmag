@@ -252,7 +252,7 @@ const string Function::to_string() const
             case k_prefix:  func.append("prefix");  break;
             case k_postfix: func.append("postfix"); break;
         }
-        func.append("\t(");
+        func.append(" (");
         if(f_prec == UINT_MAX)
         {
             /* Default precedence. */
@@ -275,7 +275,7 @@ const string Function::to_string() const
     }
     else
     {
-        func.append("function\t");
+        func.append("function  ");
     }
     func.append(f_name);
     func.append(": ");

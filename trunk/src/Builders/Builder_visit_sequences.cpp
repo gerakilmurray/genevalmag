@@ -279,10 +279,13 @@ bool Builder_visit_sequences::gen_visit_seq
 		}
 
 		/* Compute this equation */
-		sequence.push_back(eq->get_id()*(-1));
+//		sequence.push_back(eq->get_id()*(-1));
 
 		if (!leaves)
 		{
+			/* Compute this equation */
+			sequence.push_back(eq->get_id()*(-1));
+
 			/* Mark the instance */
 			const Expr_instance *l_v(eq->get_l_value());
 			if (l_v->get_attr()->is_synthetize())
@@ -299,7 +302,7 @@ bool Builder_visit_sequences::gen_visit_seq
     }
     if (!belong_index(it_plan->second, v_seq_computed))
     {
-    	save_visit_sequence(sequence, it_plan->second);
+    	update_visit_sequence(sequence, it_plan->second);
     }
 
     if(i == plan.size())
@@ -311,10 +314,10 @@ bool Builder_visit_sequences::gen_visit_seq
 }
 
 /**
-  * Saves the visit sequence generate, mixing with pre-generated
+  * Update the visit sequence generate, mixing with pre-generated
   * visit sequences.
   */
-void Builder_visit_sequences::save_visit_sequence(const Visit_seq &sequence, const size_t i_plan)
+void Builder_visit_sequences::update_visit_sequence(const Visit_seq &sequence, const size_t i_plan)
 {
     size_t i(0);
     size_t j(0);
@@ -348,6 +351,8 @@ void Builder_visit_sequences::save_visit_sequence(const Visit_seq &sequence, con
         }
         all_visit_seqs[i_plan].push_back(sequence[index]);
     }
+    /* Only saves at most one leave */
+    assert(cant_leaves_copy<2);
 }
 
 /**

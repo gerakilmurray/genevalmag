@@ -56,7 +56,7 @@ template <class K, class T> const string to_string_map(const map< K ,T > &map_el
     string elem;
     for(typename map< K, T >::const_iterator it(map_elem.begin()); it != map_elem.end(); it++)
     {
-        elem.append("\t");
+        elem.append("    ");
         elem.append(it->second.to_string());
         elem.append("\n");
     }
@@ -412,15 +412,14 @@ const string Attr_grammar::to_string() const
     semdomain.append(to_string_map<string, Function>(ag_func));
     semdomain.append("\nattributes\n");
     semdomain.append(to_string_map<string, Attribute>(ag_attr));
-    semdomain.append("\n/***********************************************************");
+    semdomain.append("\n/*");
     semdomain.append("\nsymbols\n");
     semdomain.append(to_string_map<string, Symbol>(ag_symb_non_terminals));
     semdomain.append(to_string_map<string, Symbol>(ag_symb_terminals));
-    semdomain.append("\n***********************************************************/\n");
+    semdomain.append("*/\n");
     semdomain.append("/*  >>>>>>>>>> Initial Symbol of Grammar is ");
     semdomain.append(ag_initial_symb->get_name());
     semdomain.append(" <<<<<<<<<<  */\n");
-    semdomain.append("/**********************************************************/\n");
     semdomain.append("\nrules\n");
     semdomain.append(to_string_map<unsigned short, Rule>(ag_rule));
     semdomain.append("\n");
