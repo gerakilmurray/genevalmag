@@ -249,3 +249,10 @@ urlcolor=linkcol %couleur des liens pour les url
 {\vspace*{\fill}}
 
 \newcommand{\urllink}[1]{\htmladdnormallink{#1}{#1}}
+
+\newenvironment{items}{
+\begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{itemize}}
