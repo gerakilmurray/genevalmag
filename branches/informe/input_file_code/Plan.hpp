@@ -1,6 +1,6 @@
 /**
   *  \file    Plan.hpp
-  *  \brief   
+  *  \brief   Header with all struts, types and functions for plan's manager.
   *  \date    23/03/2010
   *  \author  Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author  Picco, Gonzalo Martin <gonzalopicco@gmail.com>
