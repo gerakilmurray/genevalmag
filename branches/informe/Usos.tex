@@ -2,9 +2,9 @@
 \label{chap:usos}
 \minitoc
 
-Para usar \maggen\ debemos invocar la herramienta mediante la linea de comando, es decir, debemos contar con una terminal\footnote{En sistemas \textit{Windows} compatible: \textbf{Win+R} y luego \texttt{cmd} y en sistemas \textit{Unix}: \textbf{Alt+F2} y luego \texttt{xterm}} para su ejecución. Por cuestiones de simplicidad y flexibilidad de la herramienta, no se consideró el desarrollo de un \textit{front-end} para \maggen. Además, debemos tener en cuenta, que el usuario presentara interés en el resultado generado de \maggen y no de una innecesaria interfaz gráfica, que entorpecería su comportamiento combinatorio con otros comandos.
+Para usar \maggen\ debemos invocar la herramienta mediante la linea de comando, es decir, debemos contar con una terminal\footnote{En sistemas \textit{Windows} compatible: \textbf{Win+R} y luego \texttt{cmd} y en sistemas \textit{Unix}: \textbf{Alt+F2} y luego \texttt{xterm}} para su ejecución. Por cuestiones de simplicidad y flexibilidad de la herramienta, no se consideró el desarrollo de un \textit{front-end} para \maggen. Además, debemos tener en cuenta, que el usuario presentara interés en el resultado generado de \maggen\ y no de una innecesaria interfaz gráfica, que entorpecería su comportamiento combinatorio con otros comandos.
   
-\maggen\ puede ser invocado utilizando una serie de parámetros que inciden directamente sobre el resultados producido por la herramienta. En el desarrollo de este capitulo trataremos estos temas en detalles y además analizaremos el uso del evaluador generado por \maggen. En la sección siguiente abordaremos detalles en la compilación e instalación de la herramienta.
+\maggen\ puede ser invocado utilizando una serie de parámetros que inciden directamente sobre el resultados producido por la herramienta. En el desarrollo de este capítulo trataremos estos temas en detalles y además analizaremos el uso del evaluador generado por \maggen. En la sección siguiente abordaremos detalles en la compilación e instalación de la herramienta.
 
 \section{Compilación e Instalación de \maggen}
 \maggen\ puede ser descargado desde el repositorio svn (\cite{svn}) utilizando el siguiente comando:
@@ -117,8 +117,8 @@ La totalidad de parámetros y opciones de \maggen\ son opcionales. La sintaxis d
 Las opciones son las siguientes:
 
 \begin{description}
-\item [-f  file] Definir el archivo de entrada de \maggen\ como \texttt{file}. Si omitimos esta opción \maggen espera la entrada por la entrada estándar (\texttt{cin}) hasta leer el carácter \texttt{EOF} (end of file)\footnote{En sistemas Unix el carácter \texttt{EOF} puede ser producido con \textbf{Ctrl+D} dentro de una consola de comandos.}.
-\item [-i  header] Incluir \texttt{header} en la generación de código. Genera un \texttt{\#include ``header''} del archivo que referencia esa ruta. Dicha linea, \maggen la agrega al archivo generado.
+\item [-f  file] Definir el archivo de entrada de \maggen\ como \texttt{file}. Si omitimos esta opción \maggen\ espera la entrada por la entrada estándar (\texttt{cin}) hasta leer el carácter \texttt{EOF} (end of file)\footnote{En sistemas Unix el carácter \texttt{EOF} puede ser producido con \textbf{Ctrl+D} dentro de una consola de comandos.}.
+\item [-i  header] Incluir \texttt{header} en la generación de código. Genera un \texttt{\#include ``header''} del archivo que referencia esa ruta. Dicha linea, \maggen\ la agrega al archivo generado.
 \item [-fo folder] Define \texttt{folder} como el directorio de salida para \maggen. Si omitimos esta opción, \maggen\ usa el folder por defecto ``\textit{./out\_maggen/}''.
 \item [-o  name] Define a \texttt{name} como el nombre de la clase y del archivo generado por \maggen. Si omitimos esta opción, \maggen\ usa por defecto el nombre ``\textbf{mag\_eval}''.
 \item [-h] Muestra mensaje de ayuda.
@@ -306,7 +306,7 @@ WARNING: Symbol Non-Teminal  \textit{SYMB} unreachable. & El símbolo \textit{SY
 
 WARNING: Sort duplicate was ignored: $-->$ \textit{S} & La declaración del sort \textit{S} esta duplicada. \maggen\ ignora dicha linea. & Elimine la declaración del sort \textit{S} o modifique la misma en caso de declaración de sort distinto. \\ \hline
 
-WARNING: Declaration duplicate was ignored: $-->$ \textit{F} & La declaración de la función \textit{F} esta duplicada. \maggen\ ignora dicha linea. & Elimine la declaración de la función \textit{F} o modifique la misma en caso de declaración de función distinta. \\ \hline
+WARNING: Declaration duplicate was ignored: $-->$ \textit{F} & La declaración de la función \textit{F} esta duplicada. \maggen\ ignora dicha línea. & Elimine la declaración de la función \textit{F} o modifique la misma en caso de declaración de función distinta. \\ \hline
 
 WARNING: Ignores the eq \textit{E} duplicate definition for \textit{IN} in rule: $-->$ \textit{R} & La ecuación \textit{E} para la instancia \textit{IN} en la regla \textit{R} es ignorada por \maggen, debido a que la instancia \textit{IN} ya tiene ecuación que la defina. & Chequee las ecuaciones que definen la instancia \textit{IN} y elimine una o verifique posibles errores en la ecuación. \\ \hline
 
