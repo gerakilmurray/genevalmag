@@ -8,47 +8,52 @@ La familia de las MAG es estrictamente mayor que las ANCAG. La importancia de es
 
 A continuación trataremos en detalle la familia de las MAG y en el capitulo siguiente abordaremos el mecanismo de evaluación de las mismas.
 
-\section{Gramática de atributos}
-En esta sección, se define la notación que se usara en le desarrollo del presente capitulo para la definición de la familia MAG.
-Básicamente, la notación usada es la utilizada por Wuu yang en \cite{wuu-yang1}, la cual proviene de la notación de Kastens en \cite{kastens}.
+% \section{Gramática de atributos}
+% En esta sección, se define la notación que se usara en le desarrollo del presente capitulo para la definición de la familia MAG.
+% Básicamente, la notación usada es la utilizada por Wuu yang en \cite{wuu-yang1}, la cual proviene de la notación de Kastens en \cite{kastens}.
 
-\begin{definition}
-\label{def:grammarattr}
-Una gramática de atributos es una tupla GA = (G, A, V, Dom, F, R) donde:
-\begin{itemize}
-\item G = (VN , VT , S, P ) es una gramática libre de contexto reducida y no ambigua.
-\item A = $\cup_{X\in(VN \cup T)} A(X)$, es el conjunto finito de atributos (A(X) es el conjunto de atributos asociados al símbolo X)
-
-\item V es el conjunto finito de dominios de valores de los atributos.
-\item Dom : $A\rightarrow V$ asocia a cada atributo un dominio o conjunto de valores d ∈ V .
-\item F es un conjunto finito de funciones semánticas de la forma:
-\begin{equation}
-f \subseteq (\bigotimes\limits_{j=0}^{k}{ Dom(a_{j} ))\rightarrow Dom(a_{0})}
-\end{equation}
-
-\item R = $\bigcup _{p∈P} R^{p}$ es el conjunto finito de reglas de atribución o ecuaciones asociadas a cada producción p ∈ P , donde
-\begin{equation}
-R^{p} = \bigcup\limits_{j=0}^{m^{p}}{\{r_{j}^{p}\}}\ \ \ \ \ \ (\#(R^{p} ) = m^{p} ≥ 0)
-\end{equation}
-y cada regla $r_{j}^{p} \in R^{p}$ , con 0 ≤ j ≤ $m^{p}$ es de la forma
-
-\begin{equation}
-r_{j}^{p}: X_{0}.a_{0} = f(X_{1}.a_{1} ,\dots , X_{k}.a_{k})
-\end{equation} 
-donde cada $X_{i}$ es un símbolo que ocurre en la producción \textit{p} , $a_{i} \in A(X_{i})$, ($0 \leqslant i \leqslant k$) y $f \in F$.
-
-\end{itemize}
-\end{definition}
-
-Detalles de notación:
-\begin{itemize}
-\item Con respecto a CFG, en todos el desarrollo del trabajo se denotara a los símbolos no terminales con letras en mayúscula y a los símbolos terminales con letras en minúscula.
-\item Se utilizará la notación \textbf{X.a} para significar que el atributo \texttt{a} está asociado al símbolo \texttt{X} (a $\in$ A(X)) y para denotar el valor de una ocurrencia o instancia del atributo \texttt{a} del símbolo \texttt{X} en una regla de atribución.
-
-\end{itemize}
-En \cite{tesismarcelo} (cap. 2) podemos ampliar con mayor detalle y formalismo lo analizado arriba.
 \section{Preliminares}
 \label{sec:pre-grafos}
+Antes de llegar a la definición de la familia de \textit{gramáticas multi-plans}, presentaremos un ejemplo de gramática de atributos que servirá para estudiar conceptos previos, como lo son, la construcción de una serie de grafos necesarios para el análisis de los integrantes de dicha familia.
+
+El ejemplo es presentado en la figura \ref{ag-no-ANCAG}. El mismo es trabajo, luego, en las etapas consideradas para el diseño de \maggen.
+
+\begin{AG}
+
+\newproduction{S}{XYZ}
+    \begin{Attribution}
+        \attribution{S.s0 := f(X.s1,Y.s2,Y.s3,Z.s4)}
+        \attribution{X.i1 := Y.s3}
+        \attribution{Y.i2 := X.s1}
+        \attribution{Y.i3 := Y.s2}
+    \end{Attribution}
+
+\newproduction{Y}{m}    
+    \begin{Attribution}
+        \attribution{Y.s2 := Y.i2}
+        \attribution{Y.s3 := 1}
+    \end{Attribution}
+    
+\newproduction{Y}{n}
+    \begin{Attribution}
+        \attribution{Y.s2 := 2}
+        \attribution{Y.s3 := Y.i3}
+    \end{Attribution}
+    
+\newproduction{X}{m}
+    \begin{Attribution}
+        \attribution{X.s1 := X.i1}
+    \end{Attribution}
+    
+\newproduction{Z}{Y}
+    \begin{Attribution}
+        \attribution{Z.s4 := Y.s3}
+        \attribution{Y.i2 := 3}
+        \attribution{Y.i3 := Y.s2}
+    \end{Attribution}
+\caption{Una gramática de atributos no ANCAG}
+\label{ag-no-ANCAG}
+\end{AG}
 \subsection{Grafo \textit{DP}}
 Los grafos \textit{DP} denotan las relaciones de dependencias directas entre las instancias de la gramática. 
 
@@ -67,6 +72,9 @@ DP(p) = \{(X_{i}.a, X_{j}.b) | X_{i}.a \rightarrow Y_{j}.b \in R^{p} \}
 \end{equation}
 \end{definition}
 
+La noción de dependencia directa y DP(p) fueron presentados, también, en el capitulo introductorio, cuando se presentó la definición de Árbol sintáctico atribuido (\label{def:ast-attr}).  
+En la figura \ref{dp-wuu-yang} se observan los grafos DP para la gramática de la figura \ref{ag-no-ANCAG}.
+
 \subsection{Grafo \textit{Down}}
 Los grafos \textit{Down} denotan las relaciones de los atributos de un símbolo. 
 
@@ -84,6 +92,8 @@ Dada un símbolo X de una gramática de atributos definida como en \ref{def:gram
 Down(X) = \{(a,b) | a \rightarrow b \} con\ a,b \in A(X)
 \end{equation}
 \end{definition}
+En la figura \ref{down-wuu-yang} se muestran los grafos Down(X) y Down(Y) para la gramática de la figura \ref{ag-no-ANCAG}.
+
 \subsection{Grafo \textit{DCG}}
 
 \textit{DCG} significa \textit{downward characteristic graphs}, los mismos contienen las dependencias entre instancias de la gramática para una producción \textit{p}, teniendo en cuenta un símbolo en la gramática.
@@ -100,7 +110,7 @@ $\bigcup\limits_{\textit{todo p}}{DCG_{X} (p) = Down (X)}$
 \end{theorem}
 \underline{Nota:} $DCG_{X}(p)$ contiene las dependencias, entre las instancias de la gramática, para el símbolo \texttt{X}, acotando el análisis para la producción \textit{p} y los posibles contextos inferiores.
 
-En la seccion \ref{XXX} se analiza el algoritmo para contruir los grafos DCG.
+En la sección \ref{XXX} se analiza el algoritmo para construir los grafos DCG.
 
 \subsection{Grafo \textit{ADP}}
 
@@ -122,6 +132,25 @@ SADP(q) = \bigcup\limits_{q\in P}{ADP (q | p_{1}, p_{2}, \dots, p_{k})}
 \end{equation}
 \end{definition}
 
+\begin{figure}\centering
+ \includegraphics[width=250pt,height=195pt]{ej-grafos.png}
+\caption{\label{dp-wuu-yang}Grafos DP para la gramática de la figura \ref{ag-no-ANCAG}.}
+\end{figure}
+\begin{figure}\centering
+ \includegraphics[width=350pt,height=31pt]{ej-grafos1.png}
+\caption{\label{down-wuu-yang} DOWN(X) y DOWN(Y) para la gramática de la figura \ref{ag-no-ANCAG}.}
+\end{figure}
+
+\begin{figure}\centering
+ \includegraphics[width=350pt,height=52pt]{ej-grafos3.png}
+\caption{\label{dcg-wuu-yang} Grafos DCG para la gramática de la figura \ref{ag-no-ANCAG}.}
+\end{figure}
+
+\begin{figure}\centering
+ \includegraphics[width=350pt,height=132pt]{ej-grafos4.png}
+\caption{\label{adp-wuu-yang} ADP(P0):contexto inferior P1, para la gramática de la figura \ref{ag-no-ANCAG}.}
+\end{figure}
+
 \section{Definición MAG}
 
 Una gramática \textit{G} de la forma \ref{def:grammarattr} es una \textit{gramática de atributos multi-planes} si y solo si 
@@ -135,7 +164,16 @@ Las \textit{gramáticas multi-plans} mantienen propiedades deseables como:
 \item Toda gramática MAG cumple con las propiedades de gramática bien definida, esto es, todo árbol sintáctico derivado sobre una MAG contiene dependencias no circulares.
 \end{itemize}
 
-De los conceptos analizado arriba surgen los siguientes teoremas:
+
+De los conceptos analizado arriba surgen la siguiente definición y los siguientes 2 teoremas:
+
+\begin{definition}
+ Sea una \textit{q} una producción de la forma $X_{0}\rightarrow \alpha_{0} X_{1} \alpha_{1} X_{2} \dots X_{k} \alpha_{k}$. Sea $p_{i}$ definimos:
+\begin{equation}
+ IDP-ANCAG(q) = DP(q) \bigcup\limits_{k}^{i=1}{Down(X_{i})}
+\end{equation}
+
+\end{definition}
 
 \begin{theorem}
 $IDP-ANCAG(q) = \bigcup SADP(q)$, para toda producción q. 
@@ -145,3 +183,13 @@ $IDP-ANCAG(q) = \bigcup SADP(q)$, para toda producción q.
 Toda gramática ANCAG es una gramática MAG, pero no viceversa.
 \end{theorem}
 
+\begin{figure}\centering
+ \includegraphics[width=350pt,height=132pt]{ej-grafos2.png}
+\caption{\label{idp-wuu-yang}Grafo IDP-ANCAG(P0) para el ejemplo \ref{ag-no-ANCAG}.}
+\end{figure}
+
+Un resultado que muestra la veracidad del teorema anterior se observa en la gramática de la figura \ref{ag-no-ANCAG}, la cual es gramática MAG, pero la misma no es ANCAG. Este resultado se puede notar en la figura \ref{ancag-circle}, donde se marca la dependencia circular en el grafo.
+\begin{figure}\centering
+ \includegraphics[width=350pt,height=135pt]{ej-grafos2-circle.png}
+\caption{\label{ancag-circle} Grafo IDP-ANCAG(P0) marcando ciclo.}
+\end{figure}
