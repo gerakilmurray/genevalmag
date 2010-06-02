@@ -1,7 +1,7 @@
 /**
   *  \file      maggen.hpp
   *  \brief     Class generator from static evaluator generator: GENEVALMAG 
-  *  \date      Wed Jun  2 11:02:50 2010
+  *  \date      Wed Jun  2 18:14:42 2010
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
 */

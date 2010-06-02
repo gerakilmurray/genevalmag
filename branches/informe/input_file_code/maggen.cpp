@@ -1,7 +1,7 @@
 /**
   *  \file      maggen.cpp
   *  \brief     Implementation of methods of the library GenEvalMag.
-  *  \date      Wed Jun  2 11:02:50 2010
+  *  \date      Wed Jun  2 18:14:42 2010
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
 */
@@ -293,7 +293,7 @@ void maggen::add_plan_project(const Key_plan_project &k_plan_p, unsigned short i
    eval_plans_project.push_back(plan);
 }
 
-void maggen::translates_visit_seqs()
+void maggen::translates_visit_segs()
     {
     for(size_t v_s(0); v_s < v_seq.size(); v_s++)
     {
@@ -466,29 +466,17 @@ void maggen::compute_eq(int num_eq, struct Node *root)
 {
     switch ( num_eq ) {
         case 1: compute_eq_1(root); break;
-
         case 2: compute_eq_2(root); break;
-
         case 3: compute_eq_3(root); break;
-
         case 4: compute_eq_4(root); break;
-
         case 5: compute_eq_5(root); break;
-
         case 6: compute_eq_6(root); break;
-
         case 7: compute_eq_7(root); break;
-
         case 8: compute_eq_8(root); break;
-
         case 9: compute_eq_9(root); break;
-
         case 10: compute_eq_10(root); break;
-
         case 11: compute_eq_11(root); break;
-
         case 12: compute_eq_12(root); break;
-
         default: cout << "ERROR: Fatal action." << endl;
     }
 }

@@ -27,7 +27,7 @@ Para comenzar a definir una gramática hay que crear una estructura que herede d
 
 \newpage
 
-\begin{lstlisting}[float, language=C++, basicstyle=\scriptsize,numbers=left, columns=fullflexible,linewidth=8cm]
+\begin{lstlisting}[float, language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=8cm]
 struct my_grammar: public grammar <my_grammar>
 {
     template <typename ScannerT>
@@ -120,7 +120,7 @@ Para el manejo de los símbolos válidos dentro de la definición de la gramáti
 
 Para comenzar a interactuar con el framework, el usuario debe declarar un objeto de la estructura definida y pasarlo como parámetro a una función específica de \spirit.
 
-\begin{lstlisting}[float=t!, language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible,linewidth=6cm]
+\begin{lstlisting}[float=t!, language=C++, basicstyle=\scriptsize, columns=fullflexible,linewidth=6cm]
 my_grammar g;
 
 if (parse(first, last, g, space_p).full)
@@ -141,7 +141,7 @@ Lo primero que se tuvo que realizar, fue definir los componentes básicos que se
 \begin{description}
 \item [Identificadores] son los nombres de sorts, funciones, atributos, símbolos no terminales y reglas, permitidos por \maggen\ y se basan en el común de los estándares. Debido a que el lenguaje del evaluador generado es C++, todas las palabras reservadas de ese lenguaje, son de la misma clase para nuestra herramienta.
 
-\begin{lstlisting}[float=h!, language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible,linewidth=11cm]
+\begin{lstlisting}[float=h!, language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=11cm]
 r_ident = lexeme_d[(alpha_p|'_')>>*(alnum_p|'_')]-r_reserved_word;
 
 r_reserved_word = str_p("compute")|"end"
@@ -174,7 +174,7 @@ r_cpp_basic_types = str_p("bool")|"char"|"float"|"int"|"string";
 
 \item [Operadores] Dentro de la especificación de la GA, se permiten como nombre válidos para los operadores, caracteres alfabéticos, numéricos y los operadores básicos de C++. 
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible,linewidth=10cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=10cm]
 r_oper = lexeme_d[(alpha_p|'_'|r_id_op)>>*(alnum_p|'_'|r_id_op)];
 
 r_id_op = ch_p('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>'|'|'|'~'|'.'|','|'?';
@@ -182,7 +182,7 @@ r_id_op = ch_p('+')|'*'|'/'|'^'|'%'|'&'|'<'|'='|'-'|'>'|'|'|'~'|'.'|','|'?';
 
 \item [Literales] Son los valores de constantes y tipos básicos aceptados, se adecuan a los estándares de C++. Solamente se tuvo que definir los valores lógicos, los caracteres entre comillas simples y las cadenas de caracteres entre comillas dobles, ya que para los tipos numéricos, existen parsers predefinidos de \spirit\ como ya se dio a conocer.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=9cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=9cm]
 r_boolean = str_p("true")|"false";
 
 r_char = lexeme_d[ch_p('\'')>>(anychar_p)n>ch_p('\'')];
@@ -201,7 +201,7 @@ r_esc_seq = ch_p('\\')>>
 
 Para tener una consistencia de identificadores para cada componente de la gramática, utilizamos tablas de símbolos como repositorio, pero también como regla para limitar los posibles valores en posteriores definiciones.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize,numbers=left,columns=fullflexible,linewidth=5cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=5cm]
 symbols <> st_sorts;
 symbols <> st_op_prefix;
 symbols <> st_op_infix;
@@ -222,7 +222,7 @@ Según lo explicado en el diseño \ref{XXX}, las reglas de cada clase, han sido 
 \begin{description}
 \item [\texttt{sorts}] Exigimos que luego del identificador ``\texttt{sort}'' halla un espacio\footnote{\label{foot:espacio} Ver definición de \texttt{space\_p} \ref{parsers}}. El nombre leído, se usará para crear un nuevo Sort dentro de la GA y también se insertará en la tabla de símbolos de sorts. Se acepta una lista de nombres de sorts para comodidad del usuario.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize,numbers=left,columns=fullflexible,linewidth=9cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=9cm]
 r_decl_sort = lexeme_d[str_p("sort")>>space_p]>>
                      (r_ident[&create_sort][st_sorts.add]%',')>>
                      ';';
@@ -230,7 +230,7 @@ r_decl_sort = lexeme_d[str_p("sort")>>space_p]>>
 
 \item [\texttt{operators}] Para los operadores también se exige el espacio$^{\ref{foot:espacio}}$ luego de la cadena ``\texttt{op}''. Por definición se aceptan tres tipos: infijos, prefijos y posfijos, por lo que se hizo una regla para cada uno, solamente discriminado los dominios, ya que todos poseen una sóla imagen. Notar que los sorts permitidos, son sacados directamente de las tablas de símbolos destinadas para ese propósito.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,numbers=left,columns=fullflexible,linewidth=13cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=13cm]
 r_decl_oper = lexeme_d[str_p("op")>>space_p][&inic_func]>>
                      (r_oper_infix|r_oper_postfix|r_oper_prefix)>>
                      str_p("->")>>
@@ -266,7 +266,7 @@ r_oper_assoc = str_p("left")|"right"|"non_assoc";
 
 \item [\texttt{functions}] Para las funciones se permiten como dominio listas de sorts, los cuales serán agregados incrementalmente a la función que se está declarando. La utilización de acciones semánticas facilitan la modularización. La declaración comienza con la cadena ``\texttt{function}'' seguida de una espacio$^{\ref{foot:espacio}}$.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=11cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=11cm]
 r_decl_func = lexeme_d[str_p("function")>>space_p]>>
                      r_oper[&inic_func][&save_name_func][st_functions.add]>>
                      ':'>>
@@ -287,7 +287,7 @@ Un detalle a tener en cuenta, en este punto, es que no se encuentra declarado ni
 
 La vinculación de los atributos con sus respectivos dueños, se realizará más adelante, debido a que existe la posibilidad de declarar un atributo para todo símbolo, mediante la sentencia \texttt{all}, antes de tener totalmente definido el conjunto de símbolos no terminales de la gramática.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=11cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=11cm]
 r_attributes = lexeme_d[str_p("attributes")>>space_p]>>
                       +r_decl_attr[&create_attributes];
 
@@ -312,14 +312,14 @@ En la definición de una gramática las reglas son los pilares, por eso en esta 
 
 El bloque de reglas comienza con el identificador ``\texttt{rules}'', seguida de un espacio$^{\ref{foot:espacio}}$ y una lista de reglas. Cada una de las mismas son enumeradas desde 1 para mantener una indexación interna. Una vez consumido el bloque se realizan los chequeos que determinan si la GA es MAG o no.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbers=left,columns=fullflexible,linewidth=9cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=9cm]
 r_rules = lexeme_d[str_p("rules")>>space_p]>>
                (+r_decl_rule)>>eps_p[&check_well_defined];
 \end{lstlisting}
 
 Una regla individualmente esta representada por un identificador y los caracteres ``\texttt{::=}'' y una lista de símbolos, dejando también la posibilidad de escribir reglas abreviadas mediante el uso del operador ``|'' junto a una nueva lista de símbolos, evitando repetir el lado izquierdo de la regla.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbers=left,columns=fullflexible,linewidth=13cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=13cm]
 r_decl_rule = r_ident[&create_new_non_terminal][&create_rule][st_non_terminal.add]>>
                      str_p("::=")>>
                      r_right_rule[&save_rule]>>
@@ -334,7 +334,7 @@ Se consideran símbolos terminales a cualquier cadena de caracteres encerrada en
 
 Por definición, una regla puede no contener un bloque de ecuaciones, por lo que es opcional.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=11cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=11cm]
 r_right_rule = +( r_ident[&create_new_non_terminal][st_non_terminal.add]
                          | r_terminal[&create_new_terminal]
                          )[&save_right_side_rule]>>
@@ -355,7 +355,7 @@ Dentro de la definición sólo se podrán utilizar instancias de atributos de lo
 
 Cada ecuación tiene una instancia de atributo, como ``\texttt{l-value}'', el carácter ``\texttt{=}'' y una expresión como ``\texttt{r-value}''.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=9cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=9cm]
 r_compute_eq = lexeme_d[str_p("compute")>>space_p]>>
                        +(r_equation)>>
                        str_p("end");
@@ -368,7 +368,7 @@ r_equation = r_instance[&create_equation]n>
 
 La herramienta acepta cualquier tipo de expresión, ya que se permite que se definan nuevos operadores y funciones según las necesidades de la gramática para la cual se generará el evaluador. Se utilizó la gramática de expresiones ambiguas que figura en la mayoría de los libros de análisis de lenguajes.
 
-\begin{lstlisting}[backgroundcolor=\color{white},columns=fullflexible,linewidth=7cm]
+\begin{lstlisting}[backgroundcolor=\color{white}, columns=fullflexible, linewidth=7cm]
 E := E op E
     |  (E)
     |  literal
@@ -376,7 +376,7 @@ E := E op E
 
 Donde ``op'' se interpreta como cualquier operador. Esta gramática presentaba el problema de la ``recursión a izquierda'', por lo que se la quitó obteniendo lo siguiente.
 
-\begin{lstlisting}[backgroundcolor=\color{white},columns=fullflexible,linewidth=7cm]
+\begin{lstlisting}[backgroundcolor=\color{white}, columns=fullflexible, linewidth=7cm]
 E := T op1 E
     |  T
 
@@ -395,7 +395,7 @@ Además, debido a una restricción de \spirit, se tuvo que reescribir toda regla
 
 Logrando la siguiente gramática de expresiones, que luego fue codificada en \spirit.
 
-\begin{lstlisting}[backgroundcolor=\color{white},columns=fullflexible,linewidth=7cm]
+\begin{lstlisting}[backgroundcolor=\color{white}, columns=fullflexible, linewidth=7cm]
 E := T (op_infix E)*
 
 T := F (op_postfix)*
@@ -415,7 +415,7 @@ literal := real
 
 Dentro de las expresiones se tenía que ir resolviendo la precedencia de los operadores declarados por el usuario. Además, la utilización de paréntesis crea distintos niveles de precedencia. Cada vez que se utiliza la producción que genera \texttt{( E )}, la precedencia de los operadores que se utilicen en la expresión \texttt{E}, se resolverán en ese nivel.
 
-\begin{lstlisting}[float, language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=13cm]
+\begin{lstlisting}[float, language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=13cm]
 r_expression = r_expr_prime>>*(r_op_infix_st[&create_operator][&create_func_node]>>
                       r_expr_prime[&create_root_infix_node]);
 
@@ -439,7 +439,7 @@ Las funciones aceptan expresiones como parámetros, así que, la asociatividad y
 
 Al completar esta regla se creará una \texttt{Expr\_function} dentro de la gramática.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=11cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=11cm]
 r_function = r_function_st[&create_function][&create_func_node]>>
                    ch_p('(')[&push_mark][&increment_level]>>
                    !(r_expression%',')>>
@@ -456,7 +456,7 @@ Para los demás literales se usaron las reglas definidas en un comienzo de la gr
 
 Luego de parsear cada uno de los literales se crean los respectivos objetos dentro del ambiente de tipo \texttt{Expr\_literal}.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=9cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=9cm]
 r_literal = longest_d[real_p|int_p][&create_lit_number]
                 | r_char[&create_lit_ch]
                 | r_string[&create_lit_str]
@@ -467,7 +467,7 @@ Una instancia debe ser un bloque que contenga una ocurrencia de un símbolo y un
 
 Con los datos obtenidos se crea un objeto de tipo \texttt{Expr\_instance}.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=9cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=9cm]
 r_instance = lexeme_d[
                       r_non_term_st[&create_instance]>>
                       '['>>int_p[&save_index_ins]>>']'>>
@@ -477,7 +477,7 @@ r_instance = lexeme_d[
 
 En este punto se encuentran definidas todas las reglas necesarias para declarar la regla que define a una \textbf{Gramática de Atributos}. Es decir, un dominio semántico, un bloque de atributos y un bloque de reglas. El parser \texttt{end\_p} se necesita para que consuma los espacios restantes hasta el fin del archivo de entrada.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=7cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=7cm]
 r_att_grammar = r_semantic_domain >>
                         r_attributes >>
                         r_rules >>
@@ -488,7 +488,7 @@ Por cuestiones de diseño de \spirit, no se podían aplicar acciones semánticas
 
 A excepción de la regla que se utilizó para definir los identificadores válidos para un \texttt{sort}, a la que se le agregaron los tipos básicos soportados por \maggen.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,linewidth=9cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, linewidth=9cm]
 r_sort_st       = st_sorts | r_cpp_basic_types;
 r_op_prefix_st  = st_op_prefix;
 r_op_infix_st   = st_op_infix;
@@ -502,7 +502,7 @@ r_non_term_st   = st_non_terminal;
 
 Para incorporar los dos estilos de comentarios de C++, se definió una gramática que los aceptara y se utilizó como el parser para todos las cadenas que se omiten dentro del archivo de entrada.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=8cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=8cm]
 struct skip_parser: public grammar <skip_parser>
 {
   template <typename ScannerT>
@@ -527,7 +527,7 @@ struct skip_parser: public grammar <skip_parser>
 
 La invocación a la funcionalidad de \spirit\ se realiza con una instancia de \texttt{attritute\_grammar}, como gramática objetivo, y otra de \texttt{skip\_parser}, como parser de omisión.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=13cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=13cm]
 attritute_grammar  attr_grammar_decl;
 skip_parser           skip_p;
 
@@ -544,7 +544,7 @@ Primero, para aceptar archivos como entrada de la herramienta, se tiene que hace
 
 De esta forma, el parser que se invocará para que analice la entrada de \maggen, lo hará moviéndose mediante este iterador y ante cualquier error, se podrá obtener la última posición parseada correctamente.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,linewidth=10cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, linewidth=10cm]
 typedef char                           char_t;
 typedef file_iterator <char_t>         iterator_f;
 typedef position_iterator <iterator_f> iterator_t;
@@ -686,7 +686,7 @@ Las dependencias dentro de las reglas se dan entre las instancias de atributos d
 
 En la \textbf{BGL} los valores que se quieren asociar a los nodos, se vinculan mediante \textit{propiedades} inherentes a cada uno.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=13cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=13cm]
 struct vertex_data_t
 {
   typedef vertex_property_tag kind;
@@ -698,7 +698,7 @@ typedef Graph::vertex_descriptor Vertex;
 
 Se mantienen dentro de la herramienta un \texttt{map} para cada uno de los tipos de grafos necesarios y además para los subgrafos ADP cíclicos que eventualmente se detecten y para optimizar la construcción de los otros, los grafos que contienen todas las instancias de cada regla sin aristas entre si.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,linewidth=11.5cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, linewidth=11.5cm]
 map <string, Graph>                 attr_vertex_graphs;
 map <unsigned short, Graph>         p_Dp_graphs;
 map <string, Graph>                 p_Down_graphs;
@@ -713,7 +713,7 @@ La detección de ciclos se realiza cuando el algoritmo invoca a la función \tex
 
 Tanto el grafo como la variable lógica, usada como bandera, son pasadas en el constructor y utilizadas internamente mediante referencias.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbers=left,columns=fullflexible,linewidth=8.5cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=8.5cm]
 struct cycle_detector: public dfs_visitor<>
 {
   public:
@@ -747,7 +747,7 @@ Para cada regla, se tienen que considerar todos los posibles contextos inferiore
 
 Al igual que con los planes, los contextos de las reglas se repiten mucho, así que se utilizaron índices indirectos sobre un \texttt{vector} que almacena únicamente los contextos diferentes.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, numbers=left,columns=fullflexible,linewidth=8cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible, linewidth=8cm]
 vector <Order_rule>     contexts_uniques;
 vector <Order_eval_eq> plans_uniques;
 vector <Order_eval_eq> plans_project_uniques;
@@ -759,7 +759,7 @@ Una vez que se generaron todos los tipos de grafos, los mismos son guardados en 
 
 La generación de grafos es incremental, partiendo de la computación de los grafos DP, siguiendo los Down, DCG y por último los grafos ADP. Ante cualquier fallo, la generación se considerará incompleta.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=10.5cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible, linewidth=10.5cm]
 bool generate_graphs()
 {
   if(build_graphs.compute_dependency_graphs())
@@ -784,7 +784,7 @@ bool generate_graphs()
 
 Una vez que se concluyó la generación de grafos, se construyen los planes, se prosigue con el chequeo de ciclicidad de los grafos ADP. Si se supera con éxito, se generarán los planes, sino se abortará el proceso.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=11cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible, linewidth=11cm]
 unsigned short build_plans()
 {
   if(generate_graphs())
@@ -872,7 +872,7 @@ Aquí queda claro la optimización realizada mediante la creación de planes ún
 
 La implementación fue la siguiente:
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left,columns=fullflexible,linewidth=7cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=7cm]
 typedef vector < int > Visit_seq;
 
 vector < Visit_seq > all_visit_seqs;
@@ -901,7 +901,7 @@ vector<unsigned short> &v_seq_computed
 
 El algoritmo principal, \texttt{generate\_visit\_sequences}, es más bien un invocador de la función \texttt{gen\_visit\_seq}, que es la que realmente lleva a cabo las llamadas que simulan la evaluación.
 
-\begin{lstlisting}[language=C++, basicstyle=\tiny, numbers=left, columns=fullflexible,columns=fullflexible,linewidth=14.5cm]
+\begin{lstlisting}[language=C++, basicstyle=\tiny, numbers=left, columns=fullflexible, linewidth=14.5cm]
 bool generate_visit_sequences()
 {
   for(size_t i(0); i < b_plans.get_plans_uniques().size(); i++)
@@ -993,6 +993,9 @@ La actualización se lleva a cabo mediante la función \texttt{update\_visit\_se
 \end{items}
 \end{items}
 
+\end{itemize}
+
+
 \section{Generación de código}
 
 Esta es la última etapa de \maggen\ y la que produce el resultado esperado por el usuario: el código fuente en C++ de un Evaluador para la gramática que especificó en el archivo de entrada.
@@ -1007,7 +1010,7 @@ La generación de código es un proceso reiterativo sobre cada elemento almacena
 
 La función principal es \texttt{generate\_code}, en donde se invocan a las demás funciones para generar los fuentes del evaluador.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible,columns=fullflexible,linewidth=10cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible, linewidth=10cm]
 bool generate_code(const vector<string> &headers_file) const
 {
   generate_header_file();
@@ -1040,7 +1043,7 @@ Dentro de este archivo, se definen para cada \textbf{símbolo no terminal} una t
 \underline{Por ejemplo:} símbolo Y, del ejemplo de Wuu Yang en el apéndice \ref{XXX}.
 \begin{center}\texttt{symbol Y  NonTerminal Attributes: i2,i3,s2,s3;}\end{center}
 se define lo siguiente:
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible,columns=fullflexible,linewidth=7cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=7cm]
 typedef struct Symbol_Y: Node
 {
     int i2;
@@ -1062,11 +1065,11 @@ Aquí se incluyen los perfiles de las funciones públicas y privadas mencionadas
 
 \subsection{Fuente del evaluador}
 
-Lo primero que el ``desarrollador'' se encuentra al abrir este archivo, es la implementación del constructor y del método \texttt{to\_string()} de cada uno de los símbolos no terminales. Por nuestro diseño, cada nodo del AST tiene un identificador de regla, que debe ser un \textbf{número positivo mayor que cero}.
+Lo primero que el ``desarrollador\footnote{Un usuario que se interesa en indagar el código del evaluador.}'' se encuentra al abrir este archivo, es la implementación del constructor y del método \texttt{to\_string()} de cada uno de los símbolos no terminales. Por nuestro diseño, cada nodo del AST tiene un identificador de regla, que debe ser un \textbf{número positivo mayor que cero}.
 
 A modo de ejemplo, observemos el código para el símbolo Y, del ejemplo de Wuu Yang en el apéndice \ref{XXX}.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible,columns=fullflexible,linewidth=9cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=9cm]
 Y::Symbol_Y(const unsigned short &r_id): Node(r_id){}
 
 string Y::to_string() const
@@ -1100,20 +1103,59 @@ string Y::to_string() const
 }
 \end{lstlisting}
 
-Luego 
+Toda las estructuras son inicializadas en el constructor del evaluador, las mismas son:
 
+\begin{itemize}
+\item Contextos:
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=9cm]
+unsigned short __context_0[] = {1,4,2,5};
+Order_rule context_0(__context_0, __context_0 + sizeof(__context_0) / sizeof(unsigned short));
+contexts_rule.push_back(context_0);
+\end{lstlisting}
 
+\item Planes de evaluación:
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=9cm]
+Key_plan key_0(0, 0);
+add_plan(key_0 , 0);
+\end{lstlisting}
 
-El algoritmo que se tuvo que implementar para poder evaluar un AST, es el propuesto por Wuu Yang en \ref{XXX}. El cual se compone de dos funciones:
+\item Planes de evaluación proyectados:
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=9cm]
+Key_plan key_plan_proj_0(0, 0);
+Key_plan_project key_proj_0(key_plan_proj_0, 2, 0);
+add_plan_project(key_proj_0 , 1);
+\end{lstlisting}
 
-\begin{items}
-\item \texttt{traverse}:
-\item \texttt{eval\_visiter}:
-\end{items}
+\item Secuencias de visita:
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=9cm]
+int __order_0[] = {2,-2,1,-3,2,-4,3,-1};
+Visit_sequence order_0(__order_0, __order_0 + sizeof(__order_0) / sizeof(int));
+v_seq.push_back(order_0);
+\end{lstlisting}
 
-
+\item Reglas:
+\begin{lstlisting}[language=C++,basicstyle=\scriptsize,columns=fullflexible,columns=fullflexible,linewidth=9cm]
+unsigned short __rule_non_terminal_0[] = {1,2,3,4};
+Rule rule_non_terminal_0(__rule_non_terminal_0, __rule_non_terminal_0 + sizeof(__rule_non_terminal_0) / sizeof(unsigned short));
+rules.push_back(rule_non_terminal_0);
+\end{lstlisting}
 \end{itemize}
 
+La mayor parte de los algoritmos utilizados dentro del evaluador generado, se encuentran escritos dentro de la herramienta y son transcritos al archivos fuente directamente.
+
+El algoritmo que implementamos para poder evaluar un AST, es el propuesto por Wuu Yang en \ref{XXX}. El cual realiza en dos etapas bien definidas:
+
+\begin{description}
+\item [Primera recorrida del AST] se invoca a la función
+\begin{items}
+\item \texttt{traverse}: responsable de selecionar el plan de evaluación para cada nodo no terminal.
+\end{items}
+
+\item [Segunda recorrida del AST] se invoca a la función
+\begin{items}
+\item \texttt{eval\_visiter}: es un evaluador orientado a visitas, que debe computar los valores de los atributos de los nodos.
+\end{items}
+\end{description}
 
 
 \normalsize
