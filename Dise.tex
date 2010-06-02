@@ -13,7 +13,9 @@ Informalmente, el lenguaje de especificación se conforma de las siguientes part
 
 \begin{description}
 \item [Bloque Dominio Semántico] Destinando a la declaración de sort, operadores y funciones que se utilizarán en los otros dos bloques. Este bloque es denominado ``\texttt{semantic domain}''.
+
 \item [Bloque de Atributos] Destinando a la declaración y definición de los atributos asociados a cada símbolo. Este bloque es denominado ``\texttt{attributes}''.
+
 \item [Bloque de Reglas] Destinado a la declaración y definición de las reglas sintácticas de la gramática con sus correspondientes ecuaciones semánticas para cada atributo asociado a cada símbolo. Este bloque es denominado ``\texttt{rules}''.
 \end{description}
 
@@ -401,7 +403,7 @@ En la presentación del ejemplo en el lenguaje de especificación, se observa en
  
 \section{Parser del lenguaje, representación interna y chequeos}
 
-El parser del lenguaje de especificación se llevó a cabo utilizando las librerías \boost\  \spirit. Detalles de este tema, son tratado puntualmente en CAPITULO IMPL. 
+El parser del lenguaje de especificación se llevó a cabo utilizando las librerías \boost\  \spirit. Detalles de este tema, son tratado puntualmente en CAPÍTULO IMPL. 
 
 En esta sección nos encargaremos de algunas consideraciones del parser desde el punto de vista de su funcionamiento, algunos detalles en la representación interna y de los chequeos realizados sobre la entrada de \maggen\ para asegurar características de gramática bien definida.
 
@@ -672,7 +674,7 @@ Notar que para el cómputo de las secuencias de visitas totales nos basta con la
 
 La etapa final de \maggen\ esta dada por la generación de código para el evaluador estático. Como hemos analizado en el diagrama visto en la figura \ref{fig:disen}, esta etapa se realiza en el paquete ``Builder'', específicamente en el modulo \texttt{Builder\_code}.
 
-La etapa de generación de código produce dos archivos: \textit{interface} (.hpp) e \textit{implementación} (.cpp). En el apéndice \ref{append:agwuuyangcode} observamos el código generado para el ejemplo de Wuu Yang ya analizado durante todo este capitulo.
+La etapa de generación de código produce dos archivos: \textit{interface} (.hpp) e \textit{implementación} (.cpp). En el apéndice \ref{append:agwuuyangcode} observamos el código generado para el ejemplo de Wuu Yang ya analizado durante todo este capítulo.
 A continuación abordaremos algunas consideraciones sobre la generación de código en \maggen\ teniendo en cuenta lo observado en el apéndice.
 
 Consideraciones de la clase:
@@ -696,7 +698,7 @@ Estos, son usados por los métodos del evaluador generado por \maggen. Podemos h
 \begin{itemize}
 \item Privados:
 
-\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=15cm]
+\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=13cm]
 void add_plan(const Key_plan &k_plan, unsigned short index_order);
 void add_plan_project(const Key_plan_project &k_plan_p, unsigned short index_order);
 void compute_eq(int num_eq, struct Node *root);
@@ -716,17 +718,17 @@ El método \texttt{traverse} recorre el AST de entrada al evaluador y asigna a c
 
 \begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=6cm]
 maggen();
-void print_v_seq();
-void translate_mag();
+void print_visit_seqs();
+void translates_visit_seqs();
 void evaluator_mag(struct Node *root);
 \end{lstlisting}
 \vspace{0.3cm}
 
 Estos, son los servicios públicos que ofrece el evaluador generado por \maggen. El métodos mas importante, es \texttt{evaluator\_mag}, el cual pone en funcionamiento el evaluador generado por \maggen. El parámetro tomado por el método representa la raíz del AST que se desea evaluar.
 
-El constructor de clase\footnote{El nombre de la clase y por ende el del constructor de la misma depende de los parámetros con los cuales se invocó a \maggen. VER USO \ref{XXX}} realiza la inicialización de los atributos de la misma. Los valores de inicialización de los atributos son obtenidos por los cómputos de cada etapa de \maggen\ vistas en todo este capitulo.
+El constructor de clase\footnote{El nombre de la clase y por ende el del constructor de la misma depende de los parámetros con los cuales se invocó a \maggen. VER USO \ref{XXX}} realiza la inicialización de los atributos de la misma. Los valores de inicialización de los atributos son obtenidos por los cómputos de cada etapa de \maggen\ vistas en todo este capítulo.
 
-Los dos métodos anexos, \texttt{print\_v\_seq} y \texttt{translate\_mag} pueden ser usados para visualizar las secuencias de visita del evaluador. Los dos realizan la misma funcionalidad, pero muestran las secuencias de visita de manera diferente, como lista de valores o como secuencia de compute, visit o  leave (detalle de secuencia de visita en \ref{XXX}).
+Los dos métodos anexos, \texttt{print\_visit\_seqs} y \texttt{translates\_visit\_seqs} pueden ser usados para visualizar las secuencias de visita del evaluador. Los dos realizan la misma funcionalidad, pero muestran las secuencias de visita de manera diferente, como lista de valores o como secuencia de \texttt{compute}, \texttt{visit} o \texttt{leave} (detalle de secuencia de visita en \ref{XXX}).
 \end{itemize}
 \end{description}
 

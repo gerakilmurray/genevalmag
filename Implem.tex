@@ -911,9 +911,9 @@ bool generate_visit_sequences()
   }
 
   vector <unsigned short> visit_seq_computed;
-  vector <map<Key_plan, unsigned short>::const_iterator> plans_computed_all;
+  vector <map <Key_plan, unsigned short>::const_iterator> plans_computed_all;
   /* For all plans */
-  for(map < Key_plan, unsigned short >::const_iterator it(b_plans.get_plans().begin()); it != b_plans.get_plans().end(); it++)
+  for(map <Key_plan, unsigned short>::const_iterator it(b_plans.get_plans().begin()); it != b_plans.get_plans().end(); it++)
   {
     const Rule &rule(attr_grammar.get_rule(b_plans.get_context_unique(it->first.id_plan)[0]));
     if (rule.get_left_symbol()->equals(*attr_grammar.get_initial_symb()))
@@ -921,8 +921,8 @@ bool generate_visit_sequences()
       /* This plan is belong a initial symbol (initial rule). */
       if(!belong_index(it->second, visit_seq_computed))
       {
-        vector<Expr_instance> ins_computed;
-        vector< map<Key_plan, unsigned short>::const_iterator > plans_computed;
+        vector <Expr_instance> ins_computed;
+        vector <map <Key_plan, unsigned short>::const_iterator> plans_computed;
         merge_vec(plans_computed_all, plans_computed);
         gen_visit_seq(it, ins_computed, plans_computed, visit_seq_computed);
         merge_vec(plans_computed, plans_computed_all);
@@ -947,10 +947,13 @@ Durante su funcionamiento se cumplen las siguientes condiciones:
 
 La actualización se lleva a cabo mediante la función \texttt{update\_visit\_sequence}, la cual:
 \begin{items}
-  \item Recibe un índice que representa tanto a un plan como a su secuencia de visita y una secuencia de visita ``nueva''.
-  \item Enpareja la vieja secuencia, verificando posición a posición que sean iguales, pero si en la secuencia ya guardada existe un \texttt{leave}, es decir, un cero, vuelve a avanzar.
-  \item Termina cuando encuentra diferencias o cuando llega al final de alguna de las dos secuencias.
-  \item Por último, actualiza la secuencia guardada insertando los valores restantes que hayan quedado de la nueva secuencia.
+\item Recibe un índice que representa tanto a un plan como a su secuencia de visita y una secuencia de visita ``nueva''.
+
+\item Enpareja la vieja secuencia, verificando posición a posición que sean iguales, pero si en la secuencia ya guardada existe un \texttt{leave}, es decir, un cero, vuelve a avanzar.
+
+\item Termina cuando encuentra diferencias o cuando llega al final de alguna de las dos secuencias.
+
+\item Por último, actualiza la secuencia guardada insertando los valores restantes que hayan quedado de la nueva secuencia.
 \end{items}
 
 \underline{Por ejemplo:}\hspace*{1.7cm} \textbf{[4,-3,3,-1,0]} update con \textbf{[4,-3,3,-1,2,-2,1]}\\
@@ -993,45 +996,18 @@ La actualización se lleva a cabo mediante la función \texttt{update\_visit\_se
 \section{Generación de código}
 
 Esta es la última etapa de \maggen\ y la que produce el resultado esperado por el usuario: el código fuente en C++ de un Evaluador para la gramática que especificó en el archivo de entrada.
-
+s
 Es un proceso que debe dejar plasmado en código estático todos los resultados obtenidos durante las anteriores etapas.
 
 Para obtener un diseño dentro de los estándares de C++, se crean dos archivos: una cabecera \texttt{.hpp} y un fuente \texttt{.cpp}.
 
 Ambos archivos son creados con el nombre proporsionado por el usuario mediante la opción \texttt{maggen -o name} o sino con el nombre por defecto: \texttt{mag\_eval}.
 
-\subsection{Cabecera del evaluador}
+La generación de código es un proceso reiterativo sobre cada elemento almacenado en los repositorios de la herramienta. Por ejemplo, la función que produce el código que representa a un símbolo, se aplicará sobre cada uno de ellos.
 
-Dentro de este archivo, se definen para cada \textbf{símbolo no terminal} una tipo en base a una estructura que incluye a sus atributos, un constructor y un método \texttt{to\_string()} que genera una cadena con su estado actual.
+La función principal es \texttt{generate\_code}, en donde se invocan a las demás funciones para generar los fuentes del evaluador.
 
-\underline{Por ejemplo:}
-\begin{center}\texttt{symbol Y  NonTerminal Attributes: i2,i3,s2,s3;}\end{center}
-se define lo siguiente:
-\begin{lstlisting}[language=C++, basicstyle=\tiny, numbers=left, columns=fullflexible,columns=fullflexible,linewidth=7cm]
-typedef struct Symbol_Y: Node
-{
-    int i2;
-    int i3;
-    int s2;
-    int s3;
-
-    Symbol_Y(const unsigned short &r_id);
-
-    string to_string() const;
-} Y ;
-\end{lstlisting}
-
-Luego de análisis, se determinó que realmente varias estructuras que eran vitales en fases anteriores, ahora en el contexto y funcionamiento del evaluador eran innecesarias. Por ejemplo, de los planes de evaluación y planes proyectados, únicamente se utilizan los índices de los mismos. Esto sucede ya que debido a la optimización de generar sólo planes diferentes e indexarlos, no existe necesidad de tener en forma estática la definición de cada uno de ellos.
-
-En cambio, las secuencias de visitas son imprescindibles para la evaluación, así también una versión reducida de las definiciones de las reglas, incluyendo solamente un arreglo con los nombres de cada símbolo no terminal que participa en la misma, en donde la posición cero corresponde al símbolo \texttt{head}\footnote{Ver \ref{XXX}}.
-
-Además, se definen los repositorios para 
-
-
-
-\subsection{Fuente del evaluador}
-
-\begin{lstlisting}[language=C++, basicstyle=\tiny, numbers=left, columns=fullflexible,columns=fullflexible,linewidth=9cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible,columns=fullflexible,linewidth=10cm]
 bool generate_code(const vector<string> &headers_file) const
 {
   generate_header_file();
@@ -1054,6 +1030,78 @@ bool generate_code(const vector<string> &headers_file) const
   return true;
 }
 \end{lstlisting}
+
+Notar que recibe como parámetro una referencia a los ``\texttt{headers}'' que el usuario proporsionó en el momento de la invocación de \maggen\footnotetext{Ver capítulo \ref{XXX} sobre Usos}. Los mismos serán incluídos en el archivo \texttt{.cpp}.
+
+\subsection{Cabecera del evaluador}
+
+Dentro de este archivo, se definen para cada \textbf{símbolo no terminal} una tipo en base a una estructura que incluye a sus atributos, un constructor y un método \texttt{to\_string()} que genera una cadena con su estado actual.
+
+\underline{Por ejemplo:} símbolo Y, del ejemplo de Wuu Yang en el apéndice \ref{XXX}.
+\begin{center}\texttt{symbol Y  NonTerminal Attributes: i2,i3,s2,s3;}\end{center}
+se define lo siguiente:
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible,columns=fullflexible,linewidth=7cm]
+typedef struct Symbol_Y: Node
+{
+    int i2;
+    int i3;
+    int s2;
+    int s3;
+
+    Symbol_Y(const unsigned short &r_id);
+
+    string to_string() const;
+} Y ;
+\end{lstlisting}
+
+Luego de realizar ciertos análisis, se determinó que realmente varias estructuras que eran vitales en fases anteriores, ahora en el contexto y funcionamiento del evaluador eran innecesarias. Por ejemplo, de los planes de evaluación y planes proyectados, únicamente se utilizan los índices de los mismos. Esto sucede ya que debido a la optimización de generar sólo planes diferentes e indexarlos, no existe necesidad de tener en forma estática la definición de cada uno de ellos.
+
+En cambio, las secuencias de visitas son imprescindibles para la evaluación, así también una versión reducida de las definiciones de las reglas, incluyendo solamente un arreglo con los nombres de cada símbolo no terminal que participa en la misma, en donde la posición cero corresponde al símbolo \texttt{head}\footnote{Ver \ref{XXX}}.
+
+Aquí se incluyen los perfiles de las funciones públicas y privadas mencionadas en \ref{XXX}.
+
+\subsection{Fuente del evaluador}
+
+Lo primero que el ``desarrollador'' se encuentra al abrir este archivo, es la implementación del constructor y del método \texttt{to\_string()} de cada uno de los símbolos no terminales. Por nuestro diseño, cada nodo del AST tiene un identificador de regla, que debe ser un \textbf{número positivo mayor que cero}.
+
+A modo de ejemplo, observemos el código para el símbolo Y, del ejemplo de Wuu Yang en el apéndice \ref{XXX}.
+
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible,columns=fullflexible,linewidth=9cm]
+Y::Symbol_Y(const unsigned short &r_id): Node(r_id){}
+
+string Y::to_string() const
+{
+  string text("-- Values of symbol Y:\n");
+  text.append("     - Attribute inherited i2 = ");
+  stringstream str_i2;
+  str_i2 << i2;
+  text.append(str_i2.str());
+  text.append("\n");
+  text.append("     - Attribute inherited i3 = ");
+  stringstream str_i3;
+  str_i3 << i3;
+  text.append(str_i3.str());
+  text.append("\n");
+  text.append("     - Attribute synthesized s2 = ");
+  stringstream str_s2;
+  str_s2 << s2;
+  text.append(str_s2.str());
+  text.append("\n");
+  text.append("     - Attribute synthesized s3 = ");
+  stringstream str_s3;
+  str_s3 << s3;
+  text.append(str_s3.str());
+  text.append("\n");
+  for(size_t i(0); i < childs.size(); i++)
+  {
+    text.append(childs[i]->to_string());
+  }
+  return text;
+}
+\end{lstlisting}
+
+Luego 
+
 
 
 El algoritmo que se tuvo que implementar para poder evaluar un AST, es el propuesto por Wuu Yang en \ref{XXX}. El cual se compone de dos funciones:
