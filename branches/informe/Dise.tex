@@ -734,11 +734,82 @@ Los dos métodos anexos, \texttt{print\_visit\_seqs} y \texttt{translates\_visit
 
 Además de la clase, \maggen\ genera \texttt{struct} para cada uno de los símbolos de la gramática y para cada uno implementa el método \texttt{to\_string()} que se responsabiliza de como mostrar por pantalla cada símbolo, teniendo en cuenta sus atributos. Para mas detalle analizar en el apéndice \ref{append:agwuuyangcode}, específicamente los \texttt{struct} para los símbolos \texttt{S, X, Y, Z}.
 
-Los dos módulos analizados arriba, generados por \maggen, se apoyan sobre dos módulos mas, que son anexados de manera estática por la herramienta, ellos son: \texttt{Node.hpp} y \texttt{Plan.hpp}. Los mismos contienen definiciones de ``tipos'' y ``métodos'' necesarios por el el evaluador generado.
-A continuación observamos el interior de cada uno de ellos:
+Los dos módulos analizados arriba, generados por \maggen, se apoyan sobre dos módulos más, que son anexados de manera estática por la herramienta, ellos son: \texttt{Node.hpp} y \texttt{Plan.hpp}.
 
-\lstinputlisting[basicstyle=\tiny, numbers=left, language=c++]{input_file_code/Node.hpp}
+Los mismos contienen definiciones de ``tipos'' y ``métodos'' necesarios por el el evaluador generado.
 
-\lstinputlisting[basicstyle=\tiny, numbers=left, language=c++]{input_file_code/Plan.hpp}
+\subsection{Cabecera: \texttt{Node.hpp}}
+
+El tipo de datos nodo de un AST, se encuentra definido en este archivo. Los campos del mismo son:
+\begin{items}
+\item \texttt{struct Node *parent:} referencia al nodo superior.
+
+\item \texttt{vector <struct Node*>\ childs:} listado de referencias a los hijos.
+
+\item \texttt{unsigned short rule\_id:} identificador de la regla que representa el nodo.
+
+\item \texttt{unsigned short visit\_seq\_index:} índice de la secuencia de visita que le corresponde al nodo para su evaluación.
+
+\item \texttt{unsigned short pos\_visit\_seq:} posición desde donde debe comenzar a recorrerse la secuencia de visita.
+\end{items}
+
+Además se encuentra su constructor y una funcionalidad para agregar hijos.
+
+\subsection{Cabecera: \texttt{Plan.hpp}}
+
+Aquí se encuentran las definiciones de tipos necesarios para el evaluador:
+
+\begin{items}
+\item Orden de evaluación de ecuaciones:
+\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=7.5cm]
+typedef vector <unsigned short> Order_eval_eq;
+\end{lstlisting}
+
+\item Orden de evaluación de reglas (contexto):
+\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=7cm]
+typedef vector <unsigned short> Order_rule;
+\end{lstlisting}
+
+\item Clave para planes de evaluación:
+\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=4.5cm]
+typedef struct k_plan
+{
+    unsigned short  id_plan;
+    unsigned short  plan;
+    ...
+} Key_plan;
+\end{lstlisting}
+
+\item Clave para planes de evaluación proyectados:
+\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=6cm]
+typedef struct k_p_project
+{
+    Key_plan        id_plan_project;
+    unsigned short  node_project;
+    unsigned short  index_ocurrence;
+    ...
+} Key_plan_project;
+\end{lstlisting}
+
+\item Secuencia de visita:
+\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=6cm]
+typedef vector <int> Visit_sequence;
+\end{lstlisting}
+
+\item Versión reducida de regla:
+\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=6cm]
+typedef vector <unsigned short> Rule;
+\end{lstlisting}
+
+\item Plan de evaluación:
+\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=7.5cm]
+typedef pair <Key_plan, unsigned short> Plan;
+\end{lstlisting}
+
+\item Plan de evaluación proyectado:
+\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=10cm]
+typedef pair <Key_plan_project, unsigned short> Plan_project;
+\end{lstlisting}
+\end{items}
 
 \normalsize
