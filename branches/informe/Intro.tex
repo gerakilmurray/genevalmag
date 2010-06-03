@@ -9,22 +9,22 @@ Dentro de los mecanismos desarrollados, las gramáticas han logrado ocupar unos 
 Las clasificó en 4 niveles:
 
 \begin{figure}[h!]\centering 
-\begin{tabular}{| c | p{3.5cm} | p{4cm} | p{3cm} |}
+\begin{tabular}{| c | p{3.5cm} | p{3cm} | p{2.5cm} | p{3cm}|}
 \hline
 
-\rowcolor{gris} \textbf{Tipo} & \textbf{Lenguaje} & \textbf{Autómata} & \textbf{Restricciones} \\ \hline
+\rowcolor{gris} \textbf{Tipo} & \textbf{Lenguaje} & \textbf{Autómata} & \textbf{Gramática} &  \textbf{Restricciones} \\ \hline
 
-\multirow{2}{*}{\textbf{0}} & Recursivamente   & Máquina de  & \multirow{2}{*}{Sin restricciones} \\ 
-                            & enumerable (LRE) & Turing (MT) & \\ \hline
+\multirow{2}{*}{\textbf{0}} & Recursivamente   & Máquina de  & \multirow{2}{*}{Irrestrictas} & \multirow{2}{*}{Sin restricciones} \\ 
+                            & enumerable (LRE) & Turing (MT) & &  \\ \hline
 
-\multirow{2}{*}{\textbf{1}} & Dependiente del & Autómata linealmente & \multirow{2}{*}{$\alpha A \beta \rightarrow \alpha\gamma\beta$} \\ 
-                            & contexto (LSC)  & acotado              & \\ \hline
+\multirow{2}{*}{\textbf{1}} & Dependiente del & Autómata lineal- & Dependiente &\multirow{2}{*}{$\alpha A \beta \rightarrow \alpha\gamma\beta$} \\ 
+                            & contexto (LSC)  & mente acotado              & de  contexto & \\ \hline
 
-\multirow{2}{*}{\textbf{2}} & Independiente del & \multirow{2}{*}{Autómata con pila} & \multirow{2}{*}{$A \rightarrow \gamma$} \\ 
-                            & contexto (LLC)    &                   & \\ \hline
+\multirow{2}{*}{\textbf{2}} & Independiente del & \multirow{2}{*}{Autómata con pila} & Independiente & \multirow{2}{*}{$A \rightarrow \gamma$} \\ 
+                            & contexto (LLC)    &           & de contexto& \\ \hline
 
-\multirow{2}{*}{\textbf{3}} & \multirow{2}{*}{Regular (RL)} & \multirow{2}{*}{Autómata finito} & $A \rightarrow aB$ \\ 
-                            &              &                 & $A \rightarrow a$ \\ \hline
+\multirow{2}{*}{\textbf{3}} & \multirow{2}{*}{Regular (RL)} & \multirow{2}{*}{Autómata finito} & \multirow{2}{*}{Regular} &$A \rightarrow aB$ \\ 
+                            &              &                 & & $A \rightarrow a$ \\ \hline
 \end{tabular}\caption{\label{chomsky} Jerarquía de Chomsky}
 \end{figure}
 
@@ -35,9 +35,9 @@ En el desarrollo de este capítulo, introductorio, abordaremos un amplio numero 
 \maggen\ es el objetivo principal del proyecto y su denominación esta dada por la combinación de las silabas \textbf{mag}, que significa \textit{multi-plans attribute grammar} y \textbf{Gen} por \textit{generator}. Estas dos silabas dan significado a \maggen\ como ``Generador de Evaluadores Estáticos para MAG''.
 
 \section{Gramática libre de contexto}
-En el nivel 2 de la jerarquía de chomsky \ref{chomsky} se encuentran los lenguajes libres de contexto. Las gramaticas libres de contexto son un formalismo que permite expresar cadenas de este tipo de lenguajes.
+En el nivel 2 de la jerarquía de chomsky (fig. \ref{chomsky}) se encuentran los lenguajes libres de contexto. Las gramaticas libres de contexto son un formalismo que permite expresar cadenas de este tipo de lenguajes.
 
-Las gramaticas libres de contexto han tomado gran importancia en la descripción de formatos de documentos\footnote{ DTD - document-type definition.}, como XML (extensible markup language) y también en tecnología de compilación, mediante la construcción de \textit{parser} de lenguajes.  
+Las gramaticas libres de contexto han tomado gran importancia en la descripción de formatos de documentos\footnote{ DTD - document-type definition.}, como XML (eXtensible Markup Language) y también en tecnología de compilación, mediante la construcción de \textit{parser} de lenguajes (Ver \cite{compiladores}).  
 \begin{definition}
 Una gramática libre de contexto se conforma de 4 componentes necesarios para la descripción de un lenguaje:
 \begin{enumerate}
@@ -107,7 +107,33 @@ Ejemplos de cadenas del lenguaje $G_{pal}$:
 \end{items}
 \end{enumerate}
 
-\underline{Notación}: Cuando denotamos una producción podemos utilizar una abreviación para agrupar aquellas producciones con el mismo \textit{head}. Para ello utilizamos el metasimbolo ``|''. Por ejemplo el conjunto de producciones de $G_{pal}$ podríamos escribirlas como: $P \rightarrow \lambda | 0 | 1 | 0P0 | 1P1$ 
+\underline{Abreviación de reglas}: Cuando denotamos una producción podemos utilizar una abreviación para agrupar aquellas producciones con el mismo \textit{head}. Para ello utilizamos el metasimbolo ``|''. Por ejemplo el conjunto de producciones de $G_{pal}$ podríamos escribirlas como: $P \rightarrow \lambda | 0 | 1 | 0P0 | 1P1$ 
+
+\underline{Observación:}
+De aquí en adelante se asumirá que el símbolo de comienzo $ S $  aparece en la parte izquierda de una única producción y no puede aparecer en la parte derecha de ninguna producción\footnote{Esta forma se denomina \emph{forma normal} o tambien \textit{Gramatica extendida}.}. \\
+
+\begin{definition} Se dice que una gramática libre de contexto $G=<V,T,S,P>$
+es \textbf{reducida} si
+$\forall B \in V$ , $\exists \alpha , \gamma \in \Sigma^{*} : S \clausderiva{G} \alpha B \gamma$ y $\exists \tau \in T^{*} : B \clausderiva{G} \tau$.
+\label{def:reducida}
+\end{definition}
+
+\begin{definition} 
+Dada una gramatica $G=<V,T,P,S>$ definimos $ST=(K,D)$ como un árbol de derivación (o parse tree) donde $K$ es un conjunto de nodos y $D$ es una relación no reflexiva sobre $K$), con $k_0$ como raíz; si cumple las siguientes condiciones:
+\begin{items}
+\item $ K \subseteq (V \cup T \cup \epsilon) $
+\item $k_0$ es un rotulo raiz para el simbolo S.
+\item $ S \rightarrow k_1 \ldots k_n $ donde $k_1 \ldots k_n$ son rotulos para los simbolos de la parte derecha de la producción.
+\item Si $k_i \in T \cup \{\epsilon\}$, ($1 \leq i \leq n$), entonces $k_i$ es una hoja de $ST$.
+\item Si $k_i \in V$,  ($1 \leq i \leq n$), entonces $k_i$ es la raíz del 
+      árbol sintáctico para la gramática libre de contexto $<V,T,P,K_I>$, donde $K_I$ es un rotulo para $k_i$.
+\end{items}
+\label{def:arbolderivacion}
+\end{definition}
+
+\begin{definition} Una gramática libre de contexto $G=<V,T,S,P>$ es \textbf{ambigua} si para una cadena $\alpha$, derivada de $G$, existen dos o más árboles de derivación diferentes.
+\label{def:ambigua}
+\end{definition}
 
 \section*{Notación}
 
@@ -119,13 +145,13 @@ Las gramáticas de atributos son un formalismo simple para la especificación de
 
 En una gramática de atributos, se relaciona con cada símbolo de una gramática libre de contexto un conjunto de atributos. Cada regla o producción tiene asociados un conjunto de reglas semánticas que toman la forma de asignación a atributos de valores denotados por la aplicación de una función, la cual puede tomar como argumentos instancias de atributos pertenecientes a los símbolos que aparecen en la producción.
 Las reglas semánticas inducen dependencias entre los atributos que ocurren en la producción. El orden de evaluación es implícito (si existe) y queda determinado por las dependencias entre las instancias de los atributos.
-Una regla semántica se podrá evaluar cuando las instancias de los atributos que aparecen como sus argumentos estén evaluadas. 
+Una regla semántica se podrá evaluar cuando las instancias de los atributos que aparecen como sus argumentos estén evaluadas. La noción de orden de evaluación es detalla en la sección \ref{sec:met_eval}
 
 \begin{definition}
 \label{def:grammarattr}
 Una gramática de atributos es una tupla GA = (G, A, V, Dom, F, R) donde:
 \begin{itemize}
-\item G = (VN , VT , S, P ) es una gramática libre de contexto reducida y no ambigua.
+\item G = (VN , VT , S, P ) es una gramática libre de contexto reducida y no ambigua (Ver definiciones \ref{def:arbolderivacion} y \ref{def:reducida}).
 \item A = $\cup_{X\in(VN \cup T)} A(X)$, es el conjunto finito de atributos (A(X) es el conjunto de atributos asociados al símbolo X)
 
 \item V es el conjunto finito de dominios de valores de los atributos.
@@ -217,10 +243,9 @@ $$ DP(p) = \{ (X_i.a,X_j.b) \mid X_j.b \rightarrow X_i.a \in R^p \} $$
 \end{definition}
 
 \section{Métodos de Evaluación}
-
+\label{sec:met_eval}
 Un evaluador de gramáticas de atributos debe tener en cuenta las dependencias entre las instancias de atributos para seguir un orden consistente de evaluación de los mismos.
-\begin{definition} Un orden de evaluación consistente, con respecto a las dependencias entre los 
-atributos de una gramática de atributos $ GA $, es una secuencia (orden parcial) de instancias de atributos
+\begin{definition} Un orden de evaluación consistente, con respecto a las dependencias entre los atributos de una gramática de atributos $ GA $, es una secuencia (orden parcial) de instancias de atributos
 con la siguiente restricción:
 
 Dada una regla $r_j^p:X_0.a_0=f(\ldots,X_i.a_i,\ldots)$ en una producción $p$, 
