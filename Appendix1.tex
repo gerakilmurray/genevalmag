@@ -30,10 +30,13 @@
               Y.i3 := Y.s2
 \end{lstlisting} 
 
-\subsection{Con lenguaje de especificación}
+\subsection{Con lenguaje de especificación de \maggen}
 
-\subsubsection*{Archivo de input: \texttt{ag\_wuu\_yang.input}}
-\lstinputlisting[basicstyle=\tiny, numbers=left, language=specmag]{input_file_code/ag_wuu_yang.input}
+\subsubsection{Archivo de input: \texttt{ag\_wuu\_yang.input}}
+\lstinputlisting[basicstyle=\tiny, numbers=left, columns=fullflexible, language=specmag]{input_file_code/ag_wuu_yang.input}
+
+\subsubsection{Archivo de output: \texttt{Grammar\_mag.log}}
+\lstinputlisting[basicstyle=\tiny, numbers=left, columns=fullflexible, language=specmag]{input_file_code/Grammar_mag.log}
 
 \section{Código generado por \maggen: Ejemplo Wuu Yang.}
 \label{append:agwuuyangcode}
@@ -45,12 +48,20 @@ Los archivos fueron obtenidos invocando a \maggen\ de la siguiente forma:
 \texttt{\maggen\ -fo ../Out\_wuu\_yang -o maggen -f  ../examples/ag\_wuu\_yang/ag\_wuu\_yang.input}
 \end{center}
 
-\subsection*{Archivo interface: \texttt{maggen.hpp}}
+\subsection{Archivo interface: \texttt{maggen.hpp}}
+\label{append:maggenhpp}
+\lstinputlisting[basicstyle=\tiny, columns=fullflexible, numbers=left, language=c++]{input_file_code/maggen.hpp}
 
-\lstinputlisting[basicstyle=\tiny, numbers=left, language=c++]{input_file_code/maggen.hpp}
+\subsection{Archivo implementación: \texttt{maggen.cpp}}
+\label{append:maggencpp}
+\lstinputlisting[basicstyle=\tiny, columns=fullflexible, numbers=left, language=c++]{input_file_code/maggen.cpp}
 
-\subsection*{Archivo implementación: \texttt{maggen.cpp}}
+\subsection{Archivo cabecera: \texttt{Node.hpp}}
+\label{append:nodehpp}
+\lstinputlisting[basicstyle=\tiny, numbers=left, columns=fullflexible, language=c++]{input_file_code/Node.hpp}
 
-\lstinputlisting[basicstyle=\tiny, numbers=left, language=c++]{input_file_code/maggen.cpp}
+\subsection{Archivo cabecera: \texttt{Plan.hpp}}
+\label{append:planhpp}
+\lstinputlisting[basicstyle=\tiny, numbers=left, columns=fullflexible, language=c++]{input_file_code/Plan.hpp}
 
 \normalsize

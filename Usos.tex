@@ -185,7 +185,7 @@ El evaluador generado por \maggen\ puede ser usado como un modulo C++ en conjunt
 
 Como bien hemos visto en secciones anteriores, la entrada del evaluador generado por \maggen\ es un AST. El siguiente módulo de código C++ describe un AST para la gramática del ejemplo de Wuu Yang.
 
-\lstinputlisting[basicstyle=\tiny, language=c++, numbers=left]{input_file_code/ast.cpp}
+\lstinputlisting[basicstyle=\tiny, language=c++, numbers=left]{input_file_code/ag_wuu_yang.cpp}
 
 Observemos el AST con el siguiente diagrama:
 
@@ -326,7 +326,9 @@ Al igual como analizamos para \maggen, a continuación veamos los mensajes de er
 
 \rowcolor{gris} \textbf{Mensaje} & \textbf{Descripción} & \textbf{Ayuda} \\ \hline
 
-ERROR: the AST input is wrong create. & El AST de entrada al evaluador generado por \maggen\ está mal formado. & chequee el AST o modifique la gramática de entrada a \maggen\ y genere un nuevo evaluador. \\ \hline
+ERROR: the AST input is wrong create. Context rule does not exist. & Los nodos del AST describen una combinación de reglas no posible en la gramática de entrada. & Revise el AST o modifique la gramática y genere nuevamente el evaluador con \maggen. \\ \hline
+
+ERROR: the AST input is wrong create. Evaluation plan does not exist. & El orden de evaluación impuesto al nodo no corresponde. & Revise si la gramática esta bien especificada. \\ \hline
 
 ERROR: Fatal action. & Se desea invocar a la computación de una ecuación errónea e inexistente. & Chequee el AST de entrada al evaluador. \\ \hline
 \end{tabular}
