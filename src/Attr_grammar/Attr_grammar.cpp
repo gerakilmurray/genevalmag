@@ -406,7 +406,7 @@ const unsigned short Attr_grammar::get_count_eqs() const
   */
 const string Attr_grammar::to_string() const
 {
-    string semdomain("\nsemantic domain\n");
+    string semdomain("semantic domain\n");
     semdomain.append(to_string_map<string, Sort>(ag_sort));
     semdomain.append("\n");
     semdomain.append(to_string_map<string, Function>(ag_func));
@@ -417,9 +417,9 @@ const string Attr_grammar::to_string() const
     semdomain.append(to_string_map<string, Symbol>(ag_symb_non_terminals));
     semdomain.append(to_string_map<string, Symbol>(ag_symb_terminals));
     semdomain.append("*/\n");
-    semdomain.append("/*  >>>>>>>>>> Initial Symbol of Grammar is ");
+    semdomain.append("/* >>>>>>>>>> Initial Symbol of Grammar is ");
     semdomain.append(ag_initial_symb->get_name());
-    semdomain.append(" <<<<<<<<<<  */\n");
+    semdomain.append(" <<<<<<<<<< */\n");
     semdomain.append("\nrules\n");
     semdomain.append(to_string_map<unsigned short, Rule>(ag_rule));
     semdomain.append("\n");

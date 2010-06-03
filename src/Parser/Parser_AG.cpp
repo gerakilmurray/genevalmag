@@ -447,19 +447,19 @@ bool Parser_AG::parse_grammar(const string &path_file_input)
 void Parser_AG::save_grammar_file(const string path_output) const
 {
 	string grammar_t("/**\n");
-	grammar_t.append("  *  \\file      ");
+	grammar_t.append("  * \\file    ");
 	grammar_t.append(FILE_GRAMMAR);
 	grammar_t.append("\n");
-	grammar_t.append("  *  \\brief     Specification of the parsed grammar mag.\n");
-	grammar_t.append("  *  \\date      ");
+	grammar_t.append("  * \\brief   Specification of the parsed grammar mag.\n");
+	grammar_t.append("  * \\date    ");
 	time_t rawtime;
 	struct tm *timeinfo;
 
 	time (&rawtime);
 	timeinfo = localtime (&rawtime);
 	grammar_t.append(asctime (timeinfo));
-	grammar_t.append("  *  \\author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>\n");
-	grammar_t.append("  *  \\author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>\n");
+	grammar_t.append("  * \\author  Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>\n");
+	grammar_t.append("  * \\author  Picco, Gonzalo Martin <gonzalopicco@gmail.com>\n");
 	grammar_t.append("*/\n\n");
 
 	grammar_t.append(attr_grammar.to_string());
