@@ -1,7 +1,7 @@
 Algoritmo: ComputeDCG
 
-for each production p: X`$_{0}$` `$\rightarrow$` `$\alpha_{0}$`X`$_{1}$``$\alpha_{1}$`X`$_{2}$``$\alpha_{2}$` `$\ldots$` X`$_{k}$``$\alpha_{k}$` do
+for cada produccion p: X`$_{0}$` `$\rightarrow$` `$\alpha_{0}$`X`$_{1}$``$\alpha_{1}$`X`$_{2}$``$\alpha_{2}$` `$\ldots$` X`$_{k}$``$\alpha_{k}$` do
   G := DP(p) `$\cup$`
        Down(X`$_{1}$`) `$\cup$` Down(X`$_{2}$`) `$\cup$` `$\ldots$` `$\cup$` Down(X`$_{k}$`
-  DCG`$_{X0}$`(p) := project (G, {X`$_{0}$`'s attributes})
+  DCG`$_{X0}$`(p) := project (G, {Los atributos de X`$_{0}$`})
 end for

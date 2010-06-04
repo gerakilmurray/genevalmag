@@ -424,7 +424,7 @@ semantic domain
 \end{lstlisting}
 \vspace{0.3cm}
 
-La linea 17 presenta un error de sintaxis (falta de paréntesis), entonces \maggen\ finaliza el parser e informa de la siguiente manera:
+La línea 17 presenta un error de sintaxis (falta de paréntesis), entonces \maggen\ finaliza el parser e informa de la siguiente manera:
 
 \begin{lstlisting}[backgroundcolor=\color{white}, linewidth=15cm]
    * Parsing grammar ---------- [ FAIL ]
@@ -437,7 +437,7 @@ La linea 17 presenta un error de sintaxis (falta de paréntesis), entonces \magg
 \end{lstlisting}
 \vspace{0.3cm}
 
-Notar que, la linea y columna donde se indica el error corresponde al inicio de la zona donde la interpretación fue fallida. Podría suceder en varios casos que el error no se detecte específicamente en la linea y columna que se indica, entonces lo conveniente es buscar el error a partir del punto especificado. Para este caso particular, se indica linea:17 y columna:5, este punto se encuentra sobre \texttt{op}, pero el error se observa seguido de \texttt{infix}.
+Notar que, la línea y columna donde se indica el error corresponde al inicio de la zona donde la interpretación fue fallida. Podría suceder en varios casos que el error no se detecte específicamente en la línea y columna que se indica, entonces lo conveniente es buscar el error a partir del punto especificado. Para este caso particular, se indica línea:17 y columna:5, este punto se encuentra sobre \texttt{op}, pero el error se observa seguido de \texttt{infix}.
 
 \subsection*{Representación interna}
 
