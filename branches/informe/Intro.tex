@@ -35,7 +35,7 @@ En el desarrollo de este capítulo, introductorio, abordaremos un amplio numero 
 \maggen\ es el objetivo principal del proyecto y su denominación esta dada por la combinación de las silabas \textbf{mag}, que significa \textit{multi-plans attribute grammar} y \textbf{Gen} por \textit{generator}. Estas dos silabas dan significado a \maggen\ como ``Generador de Evaluadores Estáticos para MAG''.
 
 \section{Gramática libre de contexto}
-En el nivel 2 de la jerarquía de chomsky (fig. \ref{chomsky}) se encuentran los lenguajes libres de contexto. Las gramáticas libres de contexto son un formalismo que permite expresar cadenas de este tipo de lenguajes.
+En el nivel 2 de la jerarquía de chomsky (fig. \ref{chomsky}) se encuentran los lenguajes libres de contexto. Las gramáticas libres de contexto (CFG) son un formalismo que permite expresar cadenas de este tipo de lenguajes.
 
 Las gramáticas libres de contexto han tomado gran importancia en la descripción de formatos de documentos\footnote{DTD - document-type definition.}, como XML (eXtensible Markup Language) y también en tecnología de compilación, mediante la construcción de \textit{parser} de lenguajes (Ver \cite{compiladores}).  
 \begin{definition}
@@ -63,7 +63,7 @@ Estos cuatro componentes pueden ser representados por una tupla \textbf{<V,T,S,P
 \end{definition}
 \underline{Nota:}
 En todo el desarrollo del trabajo se denotara a los símbolos no terminales con letras en mayúscula y a los símbolos terminales con letras en minúscula para mayor claridad.
-Veamos dos ejemplos desarrollados en \cite{gramatica} (capítulo 5):
+Veamos dos ejemplos desarrollados en \cite{gramática} (capítulo 5):
 
 \begin{enumerate}
 \item Ejemplo: palíndromo:
@@ -139,9 +139,9 @@ Dada una gramática $G=<V,T,P,S>$ definimos $ST=(K,D)$ como un árbol de derivac
 
 La notación usada tanto en el desarrollo del proyecto, comunicación entre los autores y redacción de este informe es la utilizada por Wuu yang en \cite{wuu-yang1}, la cual proviene de la notación de Kastens en \cite{kastens} y la utilizada por el Mg. Marcelo Arroyo en \cite{tesismarcelo}
 
-\section{Gramática de Atributos (GA)}
+\section{Gramática de Atributos}
 
-Las gramáticas de atributos son un formalismo simple para la especificación de la semántica de lenguajes formales, como los lenguajes de programación o de especificación. Integran la modularidad que brindan las gramáticas libres de contexto y la expresividad de un lenguaje funcional.
+Las Gramáticas de Atributos (GA) son un formalismo simple para la especificación de la semántica de lenguajes formales, como los lenguajes de programación o de especificación. Integran la modularidad que brindan las gramáticas libres de contexto y la expresividad de un lenguaje funcional.
 
 En una gramática de atributos, se relaciona con cada símbolo de una gramática libre de contexto un conjunto de atributos. Cada regla o producción tiene asociados un conjunto de reglas semánticas que toman la forma de asignación a atributos de valores denotados por la aplicación de una función, la cual puede tomar como argumentos instancias de atributos pertenecientes a los símbolos que aparecen en la producción.
 Las reglas semánticas inducen dependencias entre los atributos que ocurren en la producción. El orden de evaluación es implícito (si existe) y queda determinado por las dependencias entre las instancias de los atributos.
@@ -151,7 +151,7 @@ Una regla semántica se podrá evaluar cuando las instancias de los atributos qu
 \label{def:grammarattr}
 Una gramática de atributos es una tupla GA = (G, A, V, Dom, F, R) donde:
 \begin{itemize}
-\item G = (VN , VT , S, P ) es una gramática libre de contexto reducida y no ambigua (Ver definiciones \ref{def:arbolderivacion} y \ref{def:reducida}).
+\item G = (VN , VT , S, P ) es una CFG reducida y no ambigua (Ver definiciones \ref{def:arbolderivacion} y \ref{def:reducida}).
 \item A = $\cup_{X\in(VN \cup T)} A(X)$, es el conjunto finito de atributos (A(X) es el conjunto de atributos asociados al símbolo X)
 
 \item V es el conjunto finito de dominios de valores de los atributos.
@@ -227,7 +227,7 @@ donde:
 \item $ V_{GD}(T) = \{ X.a \mid \exists n, $ un nodo de T(GA) con 
       rótulo $ X $ y $a \in A(X)$..
       
-\item la relación $ E_{GD}(T) $ (arcos de $ GD(T) $) cumple con la siguiente 
+\item La relación $ E_{GD}(T) $ (arcos de $ GD(T) $) cumple con la siguiente 
       propiedad:
 
       Sea $n$ un nodo de $T(GA)$ con rótulo $X_0$, cuyos hijos son los nodos
@@ -247,9 +247,7 @@ $$ DP(p) = \{ (X_i.a,X_j.b) \mid X_j.b \rightarrow X_i.a \in R^p \} $$
 \section{Métodos de Evaluación}
 \label{sec:met_eval}
 Un evaluador de gramáticas de atributos debe tener en cuenta las dependencias entre las instancias de atributos para seguir un orden consistente de evaluación de los mismos.
-\begin{definition} Un orden de evaluación consistente, con respecto a las dependencias entre los atributos de una gramática de atributos $ GA $, es una secuencia (orden parcial) de instancias de atributos
-con la siguiente restricción:
-
+\begin{definition} Un orden de evaluación consistente, con respecto a las dependencias entre los atributos de una gramática de atributos $ GA $, es una secuencia (orden parcial) de instancias de atributos con la siguiente restricción:
 Dada una regla $r_j^p:X_0.a_0=f(\ldots,X_i.a_i,\ldots)$ en una producción $p$, 
 $X_i.a_i$ deberá preceder a $X_0.a_0$.
 \end{definition}
@@ -267,20 +265,40 @@ Luego, en 1998, Wuu-Yang en \cite{wuu-yang1} caracteriza una nueva familia denom
 
 \subsection{Evaluación dinámica}
 
-Un evaluador dinámico tiene como ventajas su simplicidad y que es posible evaluar cualquier WDAG (GA bien definida) o aún GA’s irrestrictas utilizando \textit{evaluación lazy}\footnote{\urllink{http://en.wikipedia.org/wiki/Lazy\_evaluation}} (siempre y cuando exista el mínimo punto fijo en el álgebra de términos denotado por las ecuaciones de atribución). Además se pueden detectar ciclos en el grafo de dependencias antes o durante la evaluación.
+Un evaluador dinámico tiene como ventajas su simplicidad y que es posible evaluar cualquier WDAG (GA bien definida)\footnote{Esta familia es detalla en el capitulo siguiente (sección \ref{XXX}).} o aún GA’s irrestrictas utilizando \textit{evaluación lazy}\footnote{\urllink{http://en.wikipedia.org/wiki/Lazy\_evaluation}} (siempre y cuando exista el mínimo punto fijo en el álgebra de términos denotado por las ecuaciones de atribución). Además se pueden detectar ciclos en el grafo de dependencias antes o durante la evaluación.
 
-Las principales desventajas son que generalmente es necesario mantener el árbol sintáctico y el grafo de dependencias. La construcción del grafo de dependencias consume tiempo y memoria. Para una GA del tamaño comúnmente usado en la práctica los requerimientos de memoria pueden ser considerables.
+Las principales desventajas son que generalmente es necesario mantener el árbol sintáctico y el grafo de dependencias. La construcción del grafo de dependencias consume tiempo y memoria; y a su vez, el tiempo de procesamiento insumido en la construcción del grafo de dependencias puede ser mayor que el proceso de evaluación en sí mismo. En la practica, si tomamos una GA de un tamaño normalmente usado, los requerimientos de memoria pueden ser considerables.  
 
-El tiempo de procesamiento insumido en la construcción del grafo de dependencias puede ser mayor que el proceso de evaluación en sí mismo. Los evaluadores dinámicos no han tenido mucho interés en el desarrollo de herramientas de generación de procesadores de lenguajes como por ejemplo los compiladores, porque uno de los principales requisitos de un compilador es que sea eficiente, ya que durante un desarrollo un programador generalmente necesita recompilar un número muy importante de veces hasta obtener una versión final del programa requerido.
+La realidad es que, los evaluadores dinámicos no han tenido mucho interés en el desarrollo de herramientas de generación de procesadores de lenguajes (como por ejemplo los compiladores)debido a que uno de los principales requisitos de un compilador es que sea eficiente, ya que durante un desarrollo un programador generalmente necesita recompilar un número muy importante de veces hasta obtener una versión final del programa requerido.
 
-Razón por la cual en el presente trabajo se pone énfasis en métodos de evaluación estática, y no se profundizará en los métodos dinámicos
+Razón por la cual \maggen\ genera un evaluador estático y debido a esto no profundizaremos demasiado en este tipo de evaluadores.
 
 \subsection{Evaluación estática}
-Los métodos estáticos deben tener en cuenta todos los posibles árboles sintácticos posibles a ser generados por la gramática y calcular todas las posibles dependencias entre las instancias de los atributos. Además, se deberán detectar las posibles dependencias circulares, para informar la viabilidad de su evaluación.
+Los métodos estáticos deben tener en cuenta todos los posibles árboles sintácticos posibles a ser generados por la gramática y calcular todas las posibles dependencias entre las instancias de los atributos. 
+
+Un árbol sintáctico se construye a partir de la aplicación sucesiva de producciones de la
+gramática. Una instancia de una producción en un árbol sintáctico tiene como
+\emph{contexto inferior} a las instancias de las producciones aplicadas a los no terminales de la parte derecha.
+Dada una producción $p$ se deben tomar en cuenta tres tipos de dependencias:
+\begin{enumerate}
+\item las dependencias directas obtenidas por las ecuaciones de $p$
+\item las dependencias impuestas por el contexto superior
+\item las dependencias impuestas en el contexto inferior
+\end{enumerate}
+
+Instancias diferentes de una producción $p$ tendrán las mismas dependencias
+directas, pero podrán tener diferentes dependencias impuestas por los contextos
+inferiores y superiores. Es necesario entonces, determinar todas las
+\emph{dependencias posibles} entre las instancias de los atributos que ocurren
+en una producción para luego poder determinar todas los \emph{planes de evaluacion
+posibles} entre los atributos que ocurren en una producción.
+
+Entonces, cada plan de evaluacion que computa las dependencias impuestas en una produccion va acompañado con el \textit{contexto} en el cual el mismo se efectua.
+
+Además, se deberán detectar las posibles dependencias circulares, para informar la viabilidad de su evaluación.
 
 \section{Secuencia de visita}
 \section{Generación de evaluadores para GA bien definidas}
-\section{Evaluación durante el parsing}
 
 bla bla
 

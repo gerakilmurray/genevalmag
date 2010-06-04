@@ -55,6 +55,22 @@ A toda la familia.
 El tratamientos de lenguajes es uno de los temas más estudiados en los últimos años.
 Las gramáticas de atributos son un formalismo que permite utilizar el poder descriptivo de las gramáticas libres de contexto y la expresividad de los lenguajes funcionales. 
 
+VER****
+
+En una gramática de atributos, se relaciona con cada símbolo de una gramática libre de contexto un conjunto de atributos. Cada regla o producción tiene asociados un conjunto de reglas semánticas que toman la forma de asignación a atributos de valores denotados por la aplicación de una función, la cual puede tomar como argumentos instancias de atributos pertenecientes a los símbolos que aparecen en la producción.
+Las reglas semánticas inducen dependencias entre los atributos que ocurren en la producción. El orden de evaluación es implícito (si existe) y queda determinado por las dependencias entre las instancias de los atributos.
+
+Si una GA contiene dependencias circulares no podría ser evaluada ya que no se encontraría un orden de evaluación. Esto se conoce como el problema de la circularidad, el cual se ha demostrado ser intrínsecamente exponencial\ref{XXX}. El problema de la circularidad ha motivado que muchos investigadores hayan realizado esfuerzos en la búsqueda e identificación de familias o subgrupos de gramáticas de atributos, para las cuales puedan detectarse circularidades con algoritmos de menor complejidad (polinomial o lineal).
+
+Estas familias imponen restricciones sobre la gramática de atributos o sobre las dependencias entre sus atributos para garantizar que una GA no sea circular, con el costo de restringir su poder expresivo.
+
+En 1980, Uwe Kastens\ref{XXX} caracterizó las gramáticas de atributos ordenadas y propuso un método para su evaluación, denominado secuencias de visita. Estas son, secuencias de operaciones que conducen el recorrido del árbol sintáctico atribuido y realizan la evaluación de las instancias de los atributos. Kastens propone un método para generar las secuencias de visita en tiempo polinomial para la familia OAG. Esta familia y otras como las absolutamente no circulares (ANCAG)\ref{XXX} son tratadas en el capítulo 2.
+
+Luego, en 1998, Wuu-Yang en \cite{wuu-yang1} caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multi-plans}, presentado una algoritmo de evaluación basado en secuencia de visita en tiempo polinomial en el numero de símbolos y producciones. Estas, son desarrolladas en el capítulo 3 y son en las que se basa el funcionamientos de \maggen.
+*******
+
+
+
 {\large\textbf{Palabras claves:}}
 
 Gramáticas, Atributos, Multi-planes, AG, MAG, Generador, Evaluadores, C++, Estáticos\\
