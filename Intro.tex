@@ -35,15 +35,15 @@ En el desarrollo de este capítulo, introductorio, abordaremos un amplio numero 
 \maggen\ es el objetivo principal del proyecto y su denominación esta dada por la combinación de las silabas \textbf{mag}, que significa \textit{multi-plans attribute grammar} y \textbf{Gen} por \textit{generator}. Estas dos silabas dan significado a \maggen\ como ``Generador de Evaluadores Estáticos para MAG''.
 
 \section{Gramática libre de contexto}
-En el nivel 2 de la jerarquía de chomsky (fig. \ref{chomsky}) se encuentran los lenguajes libres de contexto. Las gramaticas libres de contexto son un formalismo que permite expresar cadenas de este tipo de lenguajes.
+En el nivel 2 de la jerarquía de chomsky (fig. \ref{chomsky}) se encuentran los lenguajes libres de contexto. Las gramáticas libres de contexto son un formalismo que permite expresar cadenas de este tipo de lenguajes.
 
-Las gramaticas libres de contexto han tomado gran importancia en la descripción de formatos de documentos\footnote{ DTD - document-type definition.}, como XML (eXtensible Markup Language) y también en tecnología de compilación, mediante la construcción de \textit{parser} de lenguajes (Ver \cite{compiladores}).  
+Las gramáticas libres de contexto han tomado gran importancia en la descripción de formatos de documentos\footnote{DTD - document-type definition.}, como XML (eXtensible Markup Language) y también en tecnología de compilación, mediante la construcción de \textit{parser} de lenguajes (Ver \cite{compiladores}).  
 \begin{definition}
 Una gramática libre de contexto se conforma de 4 componentes necesarios para la descripción de un lenguaje:
 \begin{enumerate}
 \item Un conjunto finito de símbolos que son los string que se definen el lenguaje. Este conjunto es denominado ``alfabeto de terminales'' o simplemente \textit{\textbf{símbolos terminales}}.
 
-\item Un conjunto finito de variables llamados \textit{\textbf{símbolos no terminales}} o ``categorías sintácticas''.Cada uno de estos define un lenguaje, es decir un conjunto de strings.
+\item Un conjunto finito de variables llamados \textit{\textbf{símbolos no terminales}} o ``categorías sintácticas''. Cada uno de estos define un lenguaje, es decir un conjunto de strings.
 
 \item Una variable que representa el comienzo del lenguaje, que se denomina \textit{\textbf{símbolo inicial}}. Dicha variable pertenece al conjunto del punto 2.
 
@@ -67,7 +67,7 @@ Veamos dos ejemplos desarrollados en \cite{gramatica} (capítulo 5):
 
 \begin{enumerate}
 \item Ejemplo: palíndromo:
-Definimos la gramatica $G_{pal}$ para definir el lenguaje de palindromos\footnote{Un palíndromo (del griego palin dromein, volver a ir hacia atrás) es una palabra, número o frase que se lee igual hacia adelante que hacia atrás. Si se trata de un número, se llama capicúa (\urllink{http://es.wikipedia.org/wiki/Pal\%C3\%ADndromo}).}: \\
+Definimos la gramática $G_{pal}$ para definir el lenguaje de palíndromos\footnote{Un palíndromo (del griego \textit{palin dromein}, volver a ir hacia atrás) es una palabra, número o frase que se lee igual hacia adelante que hacia atrás. Si se trata de un número, se llama capicúa (\urllink{http://es.wikipedia.org/wiki/Palíndromo}).}: \\
 $G_{pal} = (\{P\},\{0,1\},P,A)$
 donde A es el siguiente conjunto de producciones:
 \begin{enumerate}
@@ -85,7 +85,7 @@ Ejemplos de cadenas del lenguaje $G_{pal}$:
 \item etc.
 \end{items}
 
-\item Ejemplo: Gramatica de expresiones:\\
+\item Ejemplo: Gramática de expresiones:\\
 \textbf{G = (\{E,I\}, \{+,*,(,),a,b,0,1\}, E, P)} donde P es el conjunto de producciones siguiente:
 \begin{enumerate}
 \item $E \rightarrow I$
@@ -107,10 +107,10 @@ Ejemplos de cadenas del lenguaje $G_{pal}$:
 \end{items}
 \end{enumerate}
 
-\underline{Abreviación de reglas}: Cuando denotamos una producción podemos utilizar una abreviación para agrupar aquellas producciones con el mismo \textit{head}. Para ello utilizamos el metasimbolo ``|''. Por ejemplo el conjunto de producciones de $G_{pal}$ podríamos escribirlas como: $P \rightarrow \lambda | 0 | 1 | 0P0 | 1P1$ 
+\underline{Abreviación de reglas}: Cuando denotamos una producción podemos utilizar una abreviación para agrupar aquellas producciones con el mismo \textit{head}. Para ello utilizamos el metasímbolo ``|''. Por ejemplo el conjunto de producciones de $G_{pal}$ podríamos escribirlas como: $P \rightarrow \lambda | 0 | 1 | 0P0 | 1P1$ 
 
 \underline{Observación:}
-De aquí en adelante se asumirá que el símbolo de comienzo $ S $  aparece en la parte izquierda de una única producción y no puede aparecer en la parte derecha de ninguna producción\footnote{Esta forma se denomina \emph{forma normal} o tambien \textit{Gramatica extendida}.}. \\
+De aquí en adelante se asumirá que el símbolo de comienzo $ S $  aparece en la parte izquierda de una única producción y no puede aparecer en la parte derecha de ninguna producción\footnote{Esta forma se denomina \emph{forma normal} o también \textit{Gramática extendida}.}. \\
 
 \begin{definition} Se dice que una gramática libre de contexto $G=<V,T,S,P>$
 es \textbf{reducida} si
@@ -119,11 +119,11 @@ $\forall B \in V$ , $\exists \alpha , \gamma \in \Sigma^{*} : S \clausderiva{G} 
 \end{definition}
 
 \begin{definition} 
-Dada una gramatica $G=<V,T,P,S>$ definimos $ST=(K,D)$ como un árbol de derivación (o parse tree) donde $K$ es un conjunto de nodos y $D$ es una relación no reflexiva sobre $K$), con $k_0$ como raíz; si cumple las siguientes condiciones:
+Dada una gramática $G=<V,T,P,S>$ definimos $ST=(K,D)$ como un árbol de derivación (o parse tree) donde $K$ es un conjunto de nodos y $D$ es una relación no reflexiva sobre $K$), con $k_0$ como raíz; si cumple las siguientes condiciones:
 \begin{items}
 \item $ K \subseteq (V \cup T \cup \epsilon) $
-\item $k_0$ es un rotulo raiz para el simbolo S.
-\item $ S \rightarrow k_1 \ldots k_n $ donde $k_1 \ldots k_n$ son rotulos para los simbolos de la parte derecha de la producción.
+\item $k_0$ es un rotulo raíz para el símbolo S.
+\item $ S \rightarrow k_1 \ldots k_n $ donde $k_1 \ldots k_n$ son rótulos para los símbolos de la parte derecha de la producción.
 \item Si $k_i \in T \cup \{\epsilon\}$, ($1 \leq i \leq n$), entonces $k_i$ es una hoja de $ST$.
 \item Si $k_i \in V$,  ($1 \leq i \leq n$), entonces $k_i$ es la raíz del 
       árbol sintáctico para la gramática libre de contexto $<V,T,P,K_I>$, donde $K_I$ es un rotulo para $k_i$.
@@ -137,7 +137,7 @@ Dada una gramatica $G=<V,T,P,S>$ definimos $ST=(K,D)$ como un árbol de derivaci
 
 \section*{Notación}
 
-La notación usada tanto en el desarrollo del proyecto, comunicacion entre los autores y redaccion de este informe es la utilizada por Wuu yang en \cite{wuu-yang1}, la cual proviene de la notación de Kastens en \cite{kastens} y la utilizada por el Mg. Marcelo Arroyo en \cite{tesismarcelo}
+La notación usada tanto en el desarrollo del proyecto, comunicación entre los autores y redacción de este informe es la utilizada por Wuu yang en \cite{wuu-yang1}, la cual proviene de la notación de Kastens en \cite{kastens} y la utilizada por el Mg. Marcelo Arroyo en \cite{tesismarcelo}
 
 \section{Gramática de Atributos (GA)}
 
@@ -198,7 +198,9 @@ puede aparecer en un árbol sintáctico como:
 Dado una gramática G= \textbf{<V,T,S,P>}\, un árbol de derivación (o árbol sintáctico)
 ST(G) es un árbol que se compone de dos tipos de nodos:
 \begin{description}
-\item [Nodos hojas] Cada nodo hoja es nombrada por una variable en T o por $\lambda$. En caso de que el nodo se nombre con $\lambda$, este es el único hijo du nodo padre.
+
+\item [Nodos hojas] Cada nodo hoja es nombrada por una variable en T o por $\lambda$. En caso de que el nodo se nombre con $\lambda$, este es el único hijo del nodo padre.
+
 \item [Nodos interiores] Cada nodo interior es nombrado por una variable en V. Dado $A\in V$ y $p\in P$ de la forma $A\rightarrow X_{1},X_{2},\dots, X_{k}$ el node \textbf{A} tendrá los hijos $X_{1},X_{2},\dots, X_{k}$
 \end{description}
 \end{definition}
@@ -207,7 +209,7 @@ ST(G) es un árbol que se compone de dos tipos de nodos:
 Un árbol sintáctico atribuido es un AST que agrega información a los nodos, para almacenar los atributos de cada símbolo.
 Para una mayor claridad, definimos un nodo del árbol como una tupla $( X_{0}.a_0, (X_{1}.a_1,X_{2}.a_2,\ldots ,X_{k}.a_k) )$ donde $(X_{0}.a_0)$ es el rotulo y $(X_{1}.a_1,X_{2}.a_2,\ldots ,X_{k}.a_k)$ son los nodos hijos.
 
-Diremos que en un nodo $n=( X_{0}._{a0}, (X_{1}.a_1,X_{2}.a_2,\ldots ,X_{k}.a_k) )$ cada $X_{i}.a_i$, $(1 \leq i \leq k)$, es una instancia del atributo $X_{i}.a_i$,en la gramatica.
+Diremos que en un nodo $n=( X_{0}._{a0}, (X_{1}.a_1,X_{2}.a_2,\ldots ,X_{k}.a_k) )$ cada $X_{i}.a_i$, $(1 \leq i \leq k)$, es una instancia del atributo $X_{i}.a_i$,en la gramática.
 
 \begin{definition} 
 \label{def:ast-attr}

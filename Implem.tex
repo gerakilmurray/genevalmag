@@ -880,7 +880,7 @@ vector < Visit_seq > all_visit_seqs;
 
 Como ya se analizó en \ref{XXX}, basta con lanzar el proceso de simulación sobre él o los planes asociados a la regla inicial. Además es correcto, porque toda evaluación comenzará desde ese punto.
 
-El algoritmo que se diseñó es recursivo y se apoya en ciertas listas que llevan información de contextos anteriores que son utilizados para realizar podas\footnote{Heurística que permite descartar ramas completas en problemas sobre desición en árboles y grafos análogamente. \urllink{http://en.wikipedia.org/wiki/Branch\_and\_cut}} y cálculos innecesarios. Estos son:
+El algoritmo que se diseñó es recursivo y se apoya en ciertas listas que llevan información de contextos anteriores que son utilizados para realizar podas\footnote{Heurística que permite descartar ramas completas en problemas sobre decisión en árboles y grafos análogamente. \urllink{http://en.wikipedia.org/wiki/Branch\_and\_cut}} y cálculos innecesarios. Estos son:
 
 \begin{description}
 \item [Instancias Computadas:] referencia a las instancias de atributos que ya se calcularon en algún contexto.
@@ -949,7 +949,7 @@ La actualización se lleva a cabo mediante la función \texttt{update\_visit\_se
 \begin{items}
 \item Recibe un índice que representa tanto a un plan como a su secuencia de visita y una secuencia de visita ``nueva''.
 
-\item Enpareja la vieja secuencia, verificando posición a posición que sean iguales, pero si en la secuencia ya guardada existe un \texttt{leave}, es decir, un cero, vuelve a avanzar.
+\item Empareja la vieja secuencia, verificando posición a posición que sean iguales, pero si en la secuencia ya guardada existe un \texttt{leave}, es decir, un cero, vuelve a avanzar.
 
 \item Termina cuando encuentra diferencias o cuando llega al final de alguna de las dos secuencias.
 
@@ -1002,7 +1002,7 @@ Esta es la última etapa de \maggen\ y la que produce el resultado esperado por 
 
 Es un proceso que debe dejar plasmado en código estático todos los resultados obtenidos durante las anteriores etapas.
 
-Para obtener un diseño dentro de los estándares de C++, se crean dos archivos: una cabecera \texttt{.hpp} y un fuente \texttt{.cpp}. Ambos archivos son creados con el nombre proporsionado por el usuario mediante la opción \texttt{maggen -o name} o sino con el nombre por defecto: \texttt{mag\_eval}.
+Para obtener un diseño dentro de los estándares de C++, se crean dos archivos: una cabecera \texttt{.hpp} y un fuente \texttt{.cpp}. Ambos archivos son creados con el nombre proporcionado por el usuario mediante la opción \texttt{maggen -o name} o sino con el nombre por defecto: \texttt{mag\_eval}.
 
 También se copian al directorio de salida de \maggen, dos archivos utilizados por el evaluador:
 \begin{items}
@@ -1042,7 +1042,7 @@ bool generate_code(const vector<string> &headers_file) const
 }
 \end{lstlisting}
 
-Notar que recibe como parámetro una referencia a los ``\texttt{headers}'' que el usuario proporsionó en el momento de la invocación de \maggen \footnote{Ver capítulo \ref{XXX} sobre Usos}. Los mismos serán incluídos en el archivo \texttt{.cpp}.
+Notar que recibe como parámetro una referencia a los ``\texttt{headers}'' que el usuario proporcionó en el momento de la invocación de \maggen \footnote{Ver capítulo \ref{XXX} sobre Usos}. Los mismos serán incluidos en el archivo \texttt{.cpp}.
 
 \subsection{Cabecera del evaluador}
 
@@ -1142,7 +1142,7 @@ v_seq.push_back(order_0);
 \end{lstlisting}
 
 \item Reglas:
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, columns=fullflexible]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible]
 unsigned short __rule_non_terminal_0[] = {1, 2, 3, 4};
 Rule rule_non_terminal_0(__rule_non_terminal_0, __rule_non_terminal_0 + sizeof(__rule_non_terminal_0) / sizeof(unsigned short));
 rules.push_back(rule_non_terminal_0);
@@ -1156,7 +1156,7 @@ El algoritmo que implementamos para poder evaluar un AST, es el propuesto por Wu
 \begin{description}
 \item [Primera recorrida del AST] se invoca a la función
 \begin{items}
-\item \texttt{traverse}: responsable de selecionar el plan de evaluación para cada nodo no terminal.
+\item \texttt{traverse}: responsable de seleccionar el plan de evaluación para cada nodo no terminal.
 \end{items}
 
 \item [Segunda recorrida del AST] se invoca a la función
@@ -1165,11 +1165,24 @@ El algoritmo que implementamos para poder evaluar un AST, es el propuesto por Wu
 \end{items}
 \end{description}
 
+El código del evaluador reducido por su gran nivel de modularización. Recibe como parámetro la raíz del AST a evaluar. El orden inicial de evaluación para los atributos del símbolo inicial y que por ser una gramática extendida no ocurre en ningún otro lado de la misma, siempre se encuentra en la posición cero del arreglo de planes de evaluación únicos.
+
+\vspace*{0.2cm}
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible, linewidth=6cm]
+void evaluator_mag(struct Node *root)
+{
+    unsigned short order_init(0);
+    traverse(root, order_init);
+    eval_visiter(root);
+}
+\end{lstlisting}
+\vspace*{0.2cm}
+
 \subsection*{\fbox{\texttt{\textbf{void traverse (struct Node *node, unsigned short order)}}}}
 
 Esta función a partir del identificador de regla que posee cada nodo AST, construye un \texttt{Order\_rule}, es decir, su contexto de invocación. Luego, mediante la función \texttt{return\_index\_context} se obtiene su índice relativo dentro del arreglo que contiene a todos los contextos únicos computados por \maggen. Si no lo encuentra, produce un error ya que el AST de entrada posee un contexto incorrecto para la gramática para la cual se generó el evaluador.
 
-Despúes se arma un \texttt{Key\_plan} con dicho índice y el parámetro \texttt{order}, que es el índice del plan proyectado que es el orden de evaluación de sus ecuaciones, impuesto por su contexto superior.
+Después se arma un \texttt{Key\_plan} con dicho índice y el parámetro \texttt{order}, que es el índice del plan proyectado que es el orden de evaluación de sus ecuaciones, impuesto por su contexto superior.
 
 Por último se busca el plan de evaluación correspondiente al nodo visitado y se lo guarda en la estructura del nodo en el campo \texttt{visit\_seq\_index}.
 
@@ -1195,7 +1208,7 @@ Esta función sigue los lineamientos de la secuencia de visita referenciada por 
 
 \vspace*{0.2cm}
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible, columns=fullflexible, linewidth=13cm]
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible, linewidth=13cm]
 void eval_visiter(struct Node *root)
 {
   for(size_t i(root->pos_visit_seq); i < v_seq[root->visit_seq_index].size(); i++)
@@ -1219,6 +1232,92 @@ void eval_visiter(struct Node *root)
 }
 \end{lstlisting}
 
-Notar que cuando se debe realizar un \texttt{visit}, sólo consiste en llamar a el evaluador sobre el hijo. Si en cambio, estamos ante un \texttt{compute} se llama a la función \texttt{compute\_eq}, que será explicada a continuación. Y cada vez que sucede un \texttt{leave}, se debe guardar en el nodo actual la siguiente posición de última visitada, para que en la siguiente visita, el evaluador continue omitendo al \texttt{leave}.
+Notar que cuando se debe realizar un \texttt{visit}, sólo consiste en llamar a el evaluador sobre el hijo. Si en cambio, estamos ante un \texttt{compute} se llama a la función \texttt{compute\_eq}, que será explicada a continuación. Y cada vez que sucede un \texttt{leave}, se debe guardar en el nodo actual la siguiente posición de última visitada, para que en la siguiente visita, el evaluador continue omitiendo al \texttt{leave}.
+
+\subsection{Cómputo de ecuaciones}
+
+El cálculo de una ecuación es definida por el usuario y se debe respetar al momento de generar código C++. Por lo que para cada ecuación se inserta un método que tiene toda la semántica involucrada, es decir, llamadas a funciones externas, uso de operadores declarados, entre otros.
+
+Lo primero que se hace es la conversión explícita del tipo\footnote{Type casting - \urllink{http://en.wikipedia.org/wiki/Type\_conversion}.} de cada nodo a su respectivo tipo, para poder acceder a sus atributos. Ya que todos los nodos son en una primera instancia del tipo \texttt{Node}\footnote{Declarado en \texttt{Node.hpp}.} y debe ser convertido a alguno de los tipos estructurados que se declararon para cada uno de los símbolos no terminales.
+
+Siguiendo con el ejemplo del apéndice \ref{XXX}, tomemos las ecuaciones de la regla inicial:
+
+\vspace*{0.2cm}
+\begin{lstlisting}[language=specmag, basicstyle=\scriptsize, columns=fullflexible, linewidth=8cm]
+// P1
+S ::= X Y Z
+    compute        
+      S[0].s0 = X[0].s1 + Y[0].s2 + Y[0].s3 + Z[0].s4;
+      X[0].i1 = Y[0].s3;
+      Y[0].i2 = X[0].s1;
+      Y[0].i3 = Y[0].s2;
+    end;
+\end{lstlisting}
+\vspace*{0.2cm}
+
+se generarán los siguientes 4 métodos:
+
+\vspace*{0.2cm}
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible]
+// Eq /*1*/ S[0].s0 = (((X[0].s1 + Y[0].s2) + Y[0].s3) + Z[0].s4);
+void compute_eq_1(struct Node *root)
+{
+  S *node((S*) root);
+  node->s0 = (((((X*)node->childs[0])->s1 + ((Y*)node->childs[1])->s2) + ((Y*)node->childs[1])->s3) + ((Z*)node->childs[2])->s4);
+}
+
+// Eq /*2*/ X[0].i1 = Y[0].s3;
+void compute_eq_2(struct Node *root)
+{
+  S *node((S*) root);
+  ((X*)node->childs[0])->i1 = ((Y*)node->childs[1])->s3;
+}
+
+// Eq /*3*/ Y[0].i2 = X[0].s1;
+void compute_eq_3(struct Node *root)
+{
+  S *node((S*) root);
+  ((Y*)node->childs[1])->i2 = ((X*)node->childs[0])->s1;
+}
+
+// Eq /*4*/ Y[0].i3 = Y[0].s2;
+void compute_eq_4(struct Node *root)
+{
+  S *node((S*) root);
+  ((Y*)node->childs[1])->i3 = ((Y*)node->childs[1])->s2;
+}
+\end{lstlisting}
+\vspace*{0.2cm}
+
+Cuando el algoritmo \texttt{eval\_visiter} invoca a que se compute una ecuación, el responsable de llamar al método correcto es:
+
+\begin{center}\texttt{compute\_eq(int num\_eq, struct Node *root)}\end{center}
+
+Que en resumidas palabras, es una gran sentencia de selección múltiple (\texttt{switch}) en base al identificador de la ecuación, que determina unívocamente la función a invocar.
+
+En el caso del ejemplo, existen 12 ecuaciones, por lo que el método generado es el siguiente:
+
+\vspace*{0.2cm}
+\begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible]
+void compute_eq(int num_eq, struct Node *root)
+{
+  switch ( num_eq ) {
+    case 1: compute_eq_1(root); break;
+    case 2: compute_eq_2(root); break;
+    case 3: compute_eq_3(root); break;
+    case 4: compute_eq_4(root); break;
+    case 5: compute_eq_5(root); break;
+    case 6: compute_eq_6(root); break;
+    case 7: compute_eq_7(root); break;
+    case 8: compute_eq_8(root); break;
+    case 9: compute_eq_9(root); break;
+    case 10: compute_eq_10(root); break;
+    case 11: compute_eq_11(root); break;
+    case 12: compute_eq_12(root); break;
+    default: cout << "ERROR: Fatal action." << endl;
+  }
+}
+\end{lstlisting}
+\vspace*{0.2cm}
 
 \normalsize

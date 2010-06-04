@@ -1,6 +1,6 @@
-Algorithm: ComputeDownGraph
+Algoritmo: ComputeDownGraph
 
-/* Initially, Down(X) = a graph with nodes only, for every symbol X. */
+/* Inicialmente Down(X) = un grafo con solamente los atributos del simbolo X como nodos. */
 for each symbol X do
   Down(X) := a graph whose nodes are attributes of symbol X and which has no edges
 end for
@@ -9,25 +9,16 @@ repeat
   changed := false
  
   for each production p: X`$_{0}$` `$\rightarrow$` `$\alpha_{0}$`X`$_{1}$``$\alpha_{1}$`X`$_{2}$``$\alpha_{2}$` `$\ldots$` X`$_{k}$``$\alpha_{k}$` do
-    /* Augment DP(p) with Down(X`$_{1}$`), Down(X`$_{2}$`), `$\ldots$` , Down(X`$_{k}$`). */
+    /* Aumentar DP(p) con Down(X`$_{1}$`), Down(X`$_{2}$`), `$\ldots$` , Down(X`$_{k}$`). */
     G := DP(p) `$\cup$` Down(X`$_{1}$) `$\cup$` Down(X`$_{2}$) `$\cup$` `$\ldots$` `$\cup$` Down(X`$_{k}$`)
 
-    /* Compute NewDown(X`$_{0}$`). */
+    /* Computar NewDown(X`$_{0}$`). */
     NewDown(X`$_{0}$`) := project (G, {X`$_{0}$`'s attributes})
  
-    /* Check if NewDown(X`$_{0}$`) has changed. */
+    /* Verficar si NewDown(X`$_{0}$`) ha sido cambiado. */
     if NewDown(X`$_{0}$`) `$\subseteq$` Down(X`$_{0}$`) then
       changed := true
       Down(X`$_{0}$`) := Down(X`$_{0}$`) `$\cup$` NewDown(X`$_{0}$`)
     end if
   end for
 until changed = false
-
-function project (G, N) return a new graph
-  /* G is a graph. N is a set of nodes in G. */
-  G := the transitive closure of G
-  Remove, from G, all the nodes not in N and all edges incident on the deleted nodes.
-  return the resulting graph G
-end function project
-
-

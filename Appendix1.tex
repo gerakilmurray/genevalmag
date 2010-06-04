@@ -10,21 +10,21 @@
 \label{append:agwuuyang}
 
 \subsection{Pseudocódigo}
-\begin{lstlisting}[basicstyle=\scriptsize, escapeinside=@@, backgroundcolor=\color{white}]
-     (R1)   S @$\rightarrow$@ XYZ      
-              S.s0 := X.s1 + Y.s2 + Ys3 + Zs4
+\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}]
+     (R1)   S `$\rightarrow$` XYZ      
+              S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
               X.i1 := Y.s3  
               Y.i2 := X.s1
               Y.i3 := Y.s2
-     (R2)   Y @$\rightarrow$@ m        
+     (R2)   Y `$\rightarrow$` m        
               Y.s2 := Y.i2
               Y.s3 := 1
-     (R3)   Y @$\rightarrow$@ n        
+     (R3)   Y `$\rightarrow$` n        
               Y.s2 := 2
               Y.s3 := Y.i3
-     (R4)   X @$\rightarrow$@ m        
+     (R4)   X `$\rightarrow$` m        
               X.s1 := X.i1
-     (R5)   Z @$\rightarrow$@ Y        
+     (R5)   Z `$\rightarrow$` Y        
               Z.s4 := Y.s3
               Y.i2 := 3
               Y.i3 := Y.s2
