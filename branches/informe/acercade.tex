@@ -3,14 +3,14 @@
 \minitoc
 
 \section{\textquestiondown Qué es \maggen?}
-\maggen\ es una herramienta generadora de evaluadores estáticos para gramáticas atribuidas multiplans(MAG). 
+\maggen\ es una herramienta generadora de evaluadores estáticos para gramáticas atribuidas multiplanes(MAG). 
 
 Esto es, dada una MAG en el lenguaje de especificación, \maggen\ computa los planes de evaluación y genera las distintas secuencias de visita para todos los posibles contextos. Estas secuencias, son codificadas en un archivo C++ junto con los algoritmos necesarios para evaluar cualquier AST perteneciente la gramática \textit{input} de \maggen.
 
-El evaluador generado por \maggen\ recibe un AST y devuelve este AST decorado. El potencial del evaluador generado por \maggen, esta dado, por tener estáticamente todos las posibles secuencias de visita para los posibles AST de entrada, entonces sólo debe seleccionar las secuencias para el AST dado y luego recorrerlo según como las mimas lo indiquen.
+El evaluador generado por \maggen\ recibe un AST y devuelve este AST decorado. El potencial del evaluador generado por \maggen, esta dado, por tener estáticamente todos las posibles secuencias de visita para los posibles AST de entrada, entonces sólo debe seleccionar las secuencias para el AST dado y luego recorrerlo según como las mismas lo indiquen.
 
 \section{\textquestiondown Como funciona \maggen ?}
-Dado una MAG, \maggen\ calcula los grafos de dependencias de atributos de los símbolos de la gramática. A partir de ellos, es posible la aplicación de algoritmos de para la obtención de planes de evaluación y luego secuencias de visitas de dichos planes. \maggen\ se basa en la construcción de 4 tipos de grafos, que se construyen de manera incremental sobre la gramática. Estos grafos, son los presentados en el capitulo \ref{XXX}, Dependency graph (\textbf{DP}), Down graph (\textbf{Down}), Downward characteristic graph (\textbf{DCG}) y augmented dependency graph (\textbf{ADP}). Sobre estos últimos se basa el calculo de los planes de evaluación.
+Dado una MAG, \maggen\ calcula los grafos de dependencias de atributos de los símbolos de la gramática. A partir de ellos, es posible la aplicación de algoritmos de para la obtención de planes de evaluación y luego secuencias de visitas de dichos planes. \maggen\ se basa en la construcción de 4 tipos de grafos, que se construyen de manera incremental sobre la gramática. Estos grafos, son los presentados en el capítulo \ref{XXX}, Dependency graph (\textbf{DP}), Down graph (\textbf{Down}), Downward Characteristic graph (\textbf{DCG}) y Augmented Dependency graph (\textbf{ADP}). Sobre estos últimos se basa el cálculo de los planes de evaluación.
 
 El funcionamiento de \maggen\ esta dado por la integración de 4 etapas, consideradas principales, que marcaron el proceso de desarrollo de la herramienta:
 \begin{itemize}
@@ -43,9 +43,9 @@ Un caso alternativo de salida, se da cuando \maggen\ detecta planes cíclicos, v
    * Generate graphs ---------- [  OK  ]
    * Build plans -------------- [ ABORT ]
 
-   ERROR: One o more graph ADP has an cycle in its dependencies.Look the folder GenEvalAG/Out_Gen_Mag for more details.
+   ERROR: One o more graph ADP has an cycle in its dependencies. Look the folder "path_output"/graphs/CYCLIC_graphs/ for more details.
 \end{lstlisting}
 
-Notar que, el mensaje de error indicara la ruta donde fueron almacenados los grafos con problemas de ciclicidad. Para este caso particular fue: \textit{GenEvalAG/Out\_Gen\_Mag}.\\
+\textit{Notar que, el mensaje de error indicará la ruta donde fueron almacenados los grafos con problemas de ciclicidad. La variable \texttt{path\_output}, será seteada con un valor por defecto o por la ruta proporcionada por el usuario al momento del uso de la herramienta.}
 
-En el capítulo siguiente se abordaran detalles respecto al diseño de \maggen\ teniendo en cuenta cada una de las etapas, analizadas en esta sección.
+En el capítulo siguiente se abordarán detalles respecto al diseño de \maggen\ teniendo en cuenta cada una de las etapas, analizadas en esta sección.

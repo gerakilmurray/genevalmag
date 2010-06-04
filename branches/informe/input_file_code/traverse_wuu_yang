@@ -1,0 +1,15 @@
+Metodo: traverse
+
+procedure traverse (n, `$\omega$`)
+  /* n es un nodo no terminal node de un AST. */
+  /* `$\omega$` es un orden de evaluacion de los atributos del simbolo no terminal de mas a izquierda localizado en n. */
+
+  q := la produccion aplicada al nodo n
+
+  Sean p`$_{1}$`, p`$_{2}$`, `$\ldots$` , p`$_{k}$` las producciones aplicadas a los nodos hijos no terminales de n.
+  plan [n] := `$\Gamma$`[q, `$\omega$`, p`$_{1}$`, p`$_{2}$`, `$\ldots$` , p`$_{k}$`]
+
+  for each nonterminal child mi of n in T do
+    traverse (m`$_{i}$` , `$\Theta$`[q, `$\omega$`, i, p`$_{1}$`, p`$_{2}$`, `$\ldots$` , p`$_{k}$`])
+  end for
+end procedure traverse

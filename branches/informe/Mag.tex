@@ -72,7 +72,7 @@ DP(p) = \{(X_{i}.a, X_{j}.b) | X_{i}.a \rightarrow Y_{j}.b \in R^{p} \}
 \end{equation}
 \end{definition}
 
-La noción de dependencia directa y DP(p) fueron presentados, también, en el capitulo introductorio, cuando se presentó la definición de Árbol sintáctico atribuido (\label{def:ast-attr}).  
+La noción de dependencia directa y DP(p) fueron presentados, también, en el capítulo introductorio, cuando se presentó la definición de Árbol sintáctico atribuido (\label{def:ast-attr}).  
 En la figura \ref{dp-wuu-yang} se observan los grafos DP para la gramática de la figura \ref{ag-no-ANCAG}.
 
 \subsection{Grafo \textit{Down}}
@@ -96,9 +96,9 @@ En la figura \ref{down-wuu-yang} se muestran los grafos Down(X) y Down(Y) para l
 
 \subsection{Grafo \textit{DCG}}
 
-\textit{DCG} significa \textit{downward characteristic graphs}, los mismos contienen las dependencias entre instancias de la gramática para una producción \textit{p}, teniendo en cuenta un símbolo en la gramática.
+\textit{DCG} significa \textit{Downward Characteristic Graphs}, los mismos contienen las dependencias entre instancias de la gramática para una producción \textit{p}, teniendo en cuenta un símbolo en la gramática.
 \begin{definition}
-Dado q una producción de la forma $X_{0}\rightarrow \alpha_{0} X_{1} \alpha_{1} X_{2} \dots X_{k} \alpha_{k}$, el \textit{downward characteristic graph} of $X_{0}$ en los subárboles derivados vía la producción \textit{q}, denotado como $DCG_{X_{0}}(q)$, es un grafo donde: 
+Dado q una producción de la forma $X_{0}\rightarrow \alpha_{0} X_{1} \alpha_{1} X_{2} \dots X_{k} \alpha_{k}$, el \textit{Downward Characteristic graph} of $X_{0}$ en los subárboles derivados vía la producción \textit{q}, denotado como $DCG_{X_{0}}(q)$, es un grafo donde: 
 \begin{itemize}
 \item Los nodos son atributos del símbolo $X_{0}$.
 \item Una arista, $X.a \rightarrow X.b$, denota una dependencia (transitiva) de X.b sobre X.a en algún subárbol derivado desde $X_{0}$ vía \textit{q}.
@@ -114,7 +114,7 @@ En la sección \ref{XXX} se analiza el algoritmo para construir los grafos DCG.
 
 \subsection{Grafo \textit{ADP}}
 
-Las siglas \textit{ADP} significan \textit{augmented dependency graph}. El grafo \textit{ADP} esta definido por instancias de la gramática, en los nodos, y cada arista se define como: $X_{i}.a\rightarrow X{j}.b$, denota que la evaluación de la instancia \textit{$X_{i}.a$} depende de la evaluación de \textit{$Y_{i}.b$}.
+Las siglas \textit{ADP} significan \textit{Augmented Dependency graph}. El grafo \textit{ADP} esta definido por instancias de la gramática, en los nodos, y cada arista se define como: $X_{i}.a\rightarrow X{j}.b$, denota que la evaluación de la instancia \textit{$X_{i}.a$} depende de la evaluación de \textit{$Y_{i}.b$}.
 
 El conjunto de dependencias aumentadas se denota como $ADP (q | p_{1}, p_{2}, \dots, p_{k})$ y se define:
 \begin{definition}

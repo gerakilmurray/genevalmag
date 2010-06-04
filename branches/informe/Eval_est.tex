@@ -2,13 +2,15 @@
 \label{chap:eval_est}
 \minitoc
 
-En este capitulo se presentan los algoritmos de construcción de grafos, planes y de computo de secuencias. En su mayoría, los mismos, se apoyan en los algoritmos propuestos por Wuu-yang en \ref{wuu-yang1}. El computo de secuencias de visita de secuencias de visita fue íntegramente desarrollado e implementado en el marco de construcción de \maggen. 
+En este capítulo se presentan los algoritmos de construcción de grafos, planes y de cómputo de secuencias. En su mayoría, los mismos, se apoyan en los propuestos por Wuu-yang en \ref{wuu-yang1}. El cálculo de secuencias de visita fue íntegramente desarrollado e implementado en el marco de construcción de \maggen. 
 
-Para obtener un algoritmo correcto y con mayor grado de eficiencia, los algoritmos fueron testeados con la herramienta \textit{gcov} (Detalles en sección \ref{XXX}). Principalmente, esta herramienta fue utilizada para el algoritmo de computo de secuencias de secuencias de visita. En conjunto con \textit{gcov}, la heurística que utiliza el algoritmo fue refinado en varias etapas.
+Para obtener algoritmos correctos y con mayor grado de eficiencia, los mismo fueron testeados con la herramienta \textit{gcov} (Detalles en sección \ref{XXX}). Principalmente, esta herramienta fue utilizada para el algoritmo de cómputo de secuencias de secuencias de visita. En conjunto con \textit{gcov}, la heurística que utiliza el algoritmo fue refinada en varias etapas.
 
 \section{Algoritmos para cómputo de grafos: DP, DOWN, DCG y ADP}
 
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=inform, numbers=left, columns=fullflexible]{input_file_code/compute_down_wuu_yang}
+
+\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=inform, numbers=left, columns=fullflexible]{input_file_code/project_wuu_yang}
 
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=inform, numbers=left, columns=fullflexible]{input_file_code/compute_dcg_wuu_yang}
 
@@ -16,8 +18,14 @@ Para obtener un algoritmo correcto y con mayor grado de eficiencia, los algoritm
 
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=inform, numbers=left, columns=fullflexible]{input_file_code/compute_plan_wuu_yang}
 
+\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=inform, numbers=left, columns=fullflexible]{input_file_code/compute_order_wuu_yang}
+
+\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=inform, numbers=left, columns=fullflexible]{input_file_code/project2_wuu_yang}
+
 \section{Algoritmo de cómputo de secuencias de visita}
 
 \section{Algoritmo de evaluación de atributos}
 
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=inform, numbers=left, columns=fullflexible]{input_file_code/eval_attribute_wuu_yang}
+
+\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=inform, numbers=left, columns=fullflexible]{input_file_code/traverse_wuu_yang}
