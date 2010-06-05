@@ -9,7 +9,7 @@ Dentro de los mecanismos desarrollados, las gramáticas han logrado ocupar unos 
 Las clasificó en 4 niveles:
 
 \begin{figure}[h!]\centering 
-\begin{tabular}{| c | p{3.5cm} | p{3cm} | p{2.5cm} | p{3cm}|}
+\begin{tabular}{| c | p{3.5cm} | p{3.5cm} | p{2.4cm} | p{2.9cm}|}
 \hline
 
 \rowcolor{gris} \textbf{Tipo} & \textbf{Lenguaje} & \textbf{Autómata} & \textbf{Gramática} &  \textbf{Restricciones} \\ \hline
@@ -119,19 +119,19 @@ $\forall B \in V$ , $\exists \alpha , \gamma \in \Sigma^{*} : S \clausderiva{G} 
 \end{definition}
 
 \begin{definition} 
-Dada una gramática $G=<V,T,P,S>$ definimos $ST=(K,D)$ como un árbol de derivación (o parse tree) donde $K$ es un conjunto de nodos y $D$ es una relación no reflexiva sobre $K$), con $k_0$ como raíz; si cumple las siguientes condiciones:
+Dada una gramática $G = <V,T,P,S>$ definimos $ST = (K,D)$ como un árbol de derivación (o parse tree) donde $K$ es un conjunto de nodos y $D$ es una relación no reflexiva sobre $K$), con $k_0$ como raíz; si cumple las siguientes condiciones:
 \begin{items}
 \item $ K \subseteq (V \cup T \cup \epsilon) $
-\item $k_0$ es un rotulo raíz para el símbolo S.
-\item $ S \rightarrow k_1 \ldots k_n $ donde $k_1 \ldots k_n$ son rótulos para los símbolos de la parte derecha de la producción.
-\item Si $k_i \in T \cup \{\epsilon\}$, ($1 \leq i \leq n$), entonces $k_i$ es una hoja de $ST$.
-\item Si $k_i \in V$,  ($1 \leq i \leq n$), entonces $k_i$ es la raíz del 
-      árbol sintáctico para la gramática libre de contexto $<V,T,P,K_I>$, donde $K_I$ es un rotulo para $k_i$.
+\item $k_{0}$ es un rótulo raíz para el símbolo S.
+\item $ S \rightarrow k_{1} \ldots k_{n} $ donde $k_{1} \ldots k_{n}$ son rótulos para los símbolos de la parte derecha de la producción.
+\item Si $k_{i} \in T \cup \{\epsilon\}$, ($1 \leq i \leq n$), entonces $k_{i}$ es una hoja de $ST$.
+\item Si $k_{i} \in V$,  ($1 \leq i \leq n$), entonces $k_{i}$ es la raíz del 
+      árbol sintáctico para la gramática libre de contexto $<V,T,P,K_I>$, donde $K_{I}$ es un rótulo para $k_{i}$.
 \end{items}
 \label{def:arbolderivacion}
 \end{definition}
 
-\begin{definition} Una gramática libre de contexto $G=<V,T,S,P>$ es \textbf{ambigua} si para una cadena $\alpha$, derivada de $G$, existen dos o más árboles de derivación diferentes.
+\begin{definition} Una gramática libre de contexto $G = <V,T,S,P>$ es \textbf{ambigua} si para una cadena $\alpha$, derivada de $G$, existen dos o más árboles de derivación diferentes.
 \label{def:ambigua}
 \end{definition}
 
@@ -139,13 +139,34 @@ Dada una gramática $G=<V,T,P,S>$ definimos $ST=(K,D)$ como un árbol de derivac
 
 La notación usada tanto en el desarrollo del proyecto, comunicación entre los autores y redacción de este informe es la utilizada por Wuu yang en \cite{wuu-yang1}, la cual proviene de la notación de Kastens en \cite{kastens} y la utilizada por el Mg. Marcelo Arroyo en \cite{tesismarcelo}
 
+\section{Gramática bien formada}
+
+Una gramática bien formada\footnote{En inglés Well Defined, de allí la abreviatura WD.}, es una gramática que no contiene directa o indirectamente reglas recursivas a izquierda.
+
+Esta propiedad estructural verificable implica la completitud, siempre y cuando se sea lo suficientemente permisivo para muchos propósitos.
+
+Una gramática puede tener reglas recursivas a izquierda, pero seguirá siendo completa si su ciclo se degenera y se vuelve inalcanzable.
+
+\begin{definition}
+Definimos inductivamente al conjunto $WF_{G}$ (\textbf{well formed grammar}) como sigue. Escribimos WF(\textbf{e}) a $ \textbf{e}\in WF_{G}$ que significa la expresión \textbf{e} es \textbf{well formed} o bien formada en G.
+\begin{enumerate}
+\item $ WF(\varepsilon)$
+\item $ WF(a)$
+\item $ WF(A)$ si $WF ( R_{G}(A))$
+\item $ WF(e_{1}e_{2})$ si $ WF(e_{1})$ y $e_{1}\rightarrow 0$ implica $ WF(e_{2})$
+\item $ WF(e_{1}/e_{2})$ si $ WF(e_{1})$ y $ WF(e_{2})$
+\item $ WF(e^{*})$ si $ WF(e)$ y $ e\not\rightarrow 0$
+\item $ WF(!e)$ si $ WF(e)$
+\end{enumerate}
+\end{definition}
+
 \section{Gramática de Atributos}
 
 Las Gramáticas de Atributos (GA) son un formalismo simple para la especificación de la semántica de lenguajes formales, como los lenguajes de programación o de especificación. Integran la modularidad que brindan las gramáticas libres de contexto y la expresividad de un lenguaje funcional.
 
 En una gramática de atributos, se relaciona con cada símbolo de una gramática libre de contexto un conjunto de atributos. Cada regla o producción tiene asociados un conjunto de reglas semánticas que toman la forma de asignación a atributos de valores denotados por la aplicación de una función, la cual puede tomar como argumentos instancias de atributos pertenecientes a los símbolos que aparecen en la producción.
 Las reglas semánticas inducen dependencias entre los atributos que ocurren en la producción. El orden de evaluación es implícito (si existe) y queda determinado por las dependencias entre las instancias de los atributos.
-Una regla semántica se podrá evaluar cuando las instancias de los atributos que aparecen como sus argumentos estén evaluadas. La noción de orden de evaluación es detalla en la sección \ref{sec:met_eval}
+Una regla semántica se podrá evaluar cuando las instancias de los atributos que aparecen como sus argumentos estén evaluadas. La noción de orden de evaluación es detallada en la sección \ref{sec:met_eval}
 
 \begin{definition}
 \label{def:grammarattr}
@@ -155,17 +176,17 @@ Una gramática de atributos es una tupla GA = (G, A, V, Dom, F, R) donde:
 \item A = $\cup_{X\in(VN \cup T)} A(X)$, es el conjunto finito de atributos (A(X) es el conjunto de atributos asociados al símbolo X)
 
 \item V es el conjunto finito de dominios de valores de los atributos.
-\item Dom : $A\rightarrow V$ asocia a cada atributo un dominio o conjunto de valores d ∈ V .
+\item Dom : $A\rightarrow V$ asocia a cada atributo un dominio o conjunto de valores d $\in$ V .
 \item F es un conjunto finito de funciones semánticas de la forma:
 \begin{equation}
 f \subseteq (\bigotimes\limits_{j=0}^{k}{ Dom(a_{j} ))\rightarrow Dom(a_{0})}
 \end{equation}
 
-\item R = $\bigcup _{p∈P} R^{p}$ es el conjunto finito de reglas de atribución o ecuaciones asociadas a cada producción p ∈ P , donde
+\item R = $\bigcup _{p \in P} R^{p}$ es el conjunto finito de reglas de atribución o ecuaciones asociadas a cada producción p $\in$ P , donde
 \begin{equation}
-R^{p} = \bigcup\limits_{j=0}^{m^{p}}{\{r_{j}^{p}\}}\ \ \ \ \ \ (\#(R^{p} ) = m^{p} ≥ 0)
+R^{p} = \bigcup\limits_{j=0}^{m^{p}}{\{r_{j}^{p}\}}\ \ \ \ \ \ (\#(R^{p} ) = m^{p} \geq 0)
 \end{equation}
-y cada regla $r_{j}^{p} \in R^{p}$ , con 0 ≤ j ≤ $m^{p}$ es de la forma
+y cada regla $r_{j}^{p} \in R^{p}$ , con 0 $\leq$ j $\leq$ $m^{p}$ es de la forma
 
 \begin{equation}
 r_{j}^{p}: X_{0}.a_{0} = f(X_{1}.a_{1} ,\dots , X_{k}.a_{k})
@@ -204,12 +225,13 @@ ST(G) es un árbol que se compone de dos tipos de nodos:
 \item [Nodos interiores] Cada nodo interior es nombrado por una variable en V. Dado $A\in V$ y $p\in P$ de la forma $A\rightarrow X_{1},X_{2},\dots, X_{k}$ el node \textbf{A} tendrá los hijos $X_{1},X_{2},\dots, X_{k}$
 \end{description}
 \end{definition}
+
 \subsection*{Árbol Sintáctico atribuido}
 
 Un árbol sintáctico atribuido es un AST que agrega información a los nodos, para almacenar los atributos de cada símbolo.
-Para una mayor claridad, definimos un nodo del árbol como una tupla $( X_{0}.a_0, (X_{1}.a_1,X_{2}.a_2,\ldots ,X_{k}.a_k) )$ donde $(X_{0}.a_0)$ es el rotulo y $(X_{1}.a_1,X_{2}.a_2,\ldots ,X_{k}.a_k)$ son los nodos hijos.
+Para una mayor claridad, definimos un nodo del árbol como una tupla $(X_{0}.a_{0}, (X_{1}.a_{1}, X_{2}.a_{2}, \ldots , X_{k}.a_{k}))$ donde $(X_{0}.a_{0})$ es el rótulo y $(X_{1}.a_{1}, X_{2}.a_{2}, \ldots , X_{k}.a_{k})$ son los nodos hijos.
 
-Diremos que en un nodo $n=( X_{0}._{a0}, (X_{1}.a_1,X_{2}.a_2,\ldots ,X_{k}.a_k) )$ cada $X_{i}.a_i$, $(1 \leq i \leq k)$, es una instancia del atributo $X_{i}.a_i$,en la gramática.
+Diremos que en un nodo $n = (X_{0}._{a0}, (X_{1}.a_{1}, X_{2}.a_{2}, \ldots, X_{k}.a_{k}))$ cada $X_{i}.a_{i}$, $(1 \leq i \leq k)$, es una instancia del atributo $X_{i}.a_{i}$, en la gramática.
 
 \begin{definition} 
 \label{def:ast-attr}
@@ -217,9 +239,9 @@ El árbol atribuido, sobre el cual las instancias de los atributos en cada nodo 
 denomina \textbf{árbol decorado}.
 \end{definition}
 
-\begin{definition} Para un árbol sintáctico atribuido $ T(GA) $, su grafo de dependencias $ GD(T) $ es el grafo construido a partir de la composición de los grafos de dependencias $ GD(p) $ de cada producción aplicada durante la construcción de $T$. Formalmente,
+\begin{definition} Para un árbol sintáctico atribuido $T(GA)$, su grafo de dependencias $GD(T)$ es el grafo construido a partir de la composición de los grafos de dependencias $GD(p)$ de cada producción aplicada durante la construcción de $T$. Formalmente,
 
-$$ GD(T)=(V_{GD}(T),E_{GD}(T)) $$
+$GD(T)=(V_{GD}(T),E_{GD}(T))$
 
 donde:
 
@@ -232,14 +254,14 @@ donde:
 
       Sea $n$ un nodo de $T(GA)$ con rótulo $X_0$, cuyos hijos son los nodos
       $ n_1, n_2, \ldots ,n_k $, con $ k \geq 0 $ con rótulos 
-      $ X_1 $, $ X_2 $, \ldots, $ X_k $, respectivamente, y sea 
+      $ X_1 $, $ X_2 $, $\ldots$, $ X_k $, respectivamente, y sea 
       $p:X_0 \rightarrow X_1 X_2 \ldots X_k$ una producción de GA, entonces,
       
-      $$ (X_{i}.a,X_{j}.b) \in E_{GD}(T) \Leftrightarrow 
-         (X_{i}.a,X_{j}.b) \in DP(p) \hspace{.5cm} 0 \leq i, \: j \leq k $$
+      $ (X_{i}.a,X_{j}.b) \in E_{GD}(T) \Leftrightarrow 
+         (X_{i}.a,X_{j}.b) \in DP(p) \hspace{0.5cm} 0 \leq i, \: j \leq k $
 donde DP(p) se define como:
 
-$$ DP(p) = \{ (X_i.a,X_j.b) \mid X_j.b \rightarrow X_i.a \in R^p \} $$
+$DP(p) = \{(X_{i}.a,X_{j}.b) \mid X_{j}.b \rightarrow X_{i}.a \in R^{p}\}$
 
 \end{enumerate}
 \end{definition}
@@ -247,9 +269,9 @@ $$ DP(p) = \{ (X_i.a,X_j.b) \mid X_j.b \rightarrow X_i.a \in R^p \} $$
 \section{Métodos de Evaluación}
 \label{sec:met_eval}
 Un evaluador de gramáticas de atributos debe tener en cuenta las dependencias entre las instancias de atributos para seguir un orden consistente de evaluación de los mismos.
-\begin{definition} Un orden de evaluación consistente, con respecto a las dependencias entre los atributos de una gramática de atributos $ GA $, es una secuencia (orden parcial) de instancias de atributos con la siguiente restricción:
-Dada una regla $r_j^p:X_0.a_0=f(\ldots,X_i.a_i,\ldots)$ en una producción $p$, 
-$X_i.a_i$ deberá preceder a $X_0.a_0$.
+\begin{definition} Un orden de evaluación consistente, con respecto a las dependencias entre los atributos de una gramática de atributos $GA$, es una secuencia (orden parcial) de instancias de atributos con la siguiente restricción:
+Dada una regla $r_{j}^{p} : X_{0}.a_{0} = f(\ldots, X_{i}.a_{i}, \ldots)$ en una producción $p$, 
+$X_{i}.a_{i}$ deberá preceder a $X_{0}.a_{0}$.
 \end{definition}
 
 \begin{definition} Una gramática de atributos $GA$ es circular si y solo si existe un árbol sintáctico atribuido $T(GA)$, tal que su grafo de dependencias $GD(T)$ contiene al menos un ciclo.
@@ -281,9 +303,9 @@ gramática. Una instancia de una producción en un árbol sintáctico tiene como
 \emph{contexto inferior} a las instancias de las producciones aplicadas a los no terminales de la parte derecha.
 Dada una producción $p$ se deben tomar en cuenta tres tipos de dependencias:
 \begin{enumerate}
-\item las dependencias directas obtenidas por las ecuaciones de $p$
-\item las dependencias impuestas por el contexto superior
-\item las dependencias impuestas en el contexto inferior
+\item Directas obtenidas por las ecuaciones de $p$
+\item Impuestas por el contexto superior
+\item Impuestas en el contexto inferior
 \end{enumerate}
 
 Instancias diferentes de una producción $p$ tendrán las mismas dependencias
