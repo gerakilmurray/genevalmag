@@ -395,7 +395,7 @@ Además, debido a una restricción de \spirit, se tuvo que reescribir toda regla
 
 Logrando la siguiente gramática de expresiones, que luego fue codificada en \spirit.
 
-\begin{lstlisting}[backgroundcolor=\color{white}, columns=fullflexible, linewidth=7cm]
+\begin{lstlisting}[float=h!, backgroundcolor=\color{white}, columns=fullflexible, linewidth=7cm]
 E := T (op_infix E)*
 
 T := F (op_postfix)*
@@ -415,7 +415,7 @@ literal := real
 
 Dentro de las expresiones se tenía que ir resolviendo la precedencia de los operadores declarados por el usuario. Además, la utilización de paréntesis crea distintos niveles de precedencia. Cada vez que se utiliza la producción que genera \texttt{( E )}, la precedencia de los operadores que se utilicen en la expresión \texttt{E}, se resolverán en ese nivel.
 
-\begin{lstlisting}[float, language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=13cm]
+\begin{lstlisting}[float=h!, language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=13cm]
 r_expression = r_expr_prime>>*(r_op_infix_st[&create_operator][&create_func_node]>>
                       r_expr_prime[&create_root_infix_node]);
 
@@ -439,7 +439,7 @@ Las funciones aceptan expresiones como parámetros, así que, la asociatividad y
 
 Al completar esta regla se creará una \texttt{Expr\_function} dentro de la gramática.
 
-\begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=11cm]
+\begin{lstlisting}[float=h!, language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=11cm]
 r_function = r_function_st[&create_function][&create_func_node]>>
                    ch_p('(')[&push_mark][&increment_level]>>
                    !(r_expression%', ')>>
@@ -640,12 +640,12 @@ Además, también se controlara que no existieran ecuaciones incorrectas, es dec
 \end{itemize}
 
 Cada vez que se detectaba un error, se lo informa mediante alguno de los siguientes mensajes según corresponda.
-\texttt{\begin{items}
+\small{\texttt{\begin{items}
 \item ``ERROR: ``E[1].syn1'' type synthetized, haven't an equation that defines it.''
 \item ``ERROR: ``S[0].inh1'' type inherited, is defined outside his scope.''
 \item ``ERROR: ``E[1].inh2'' type inherited, haven't an equation that defines it.''
 \item ``ERROR: ``S[0].syn2'' type synthetized, is defined outside his scope.''
-\end{items}}
+\end{items}}}
 
 \section{Obtención de planes de evaluación}
 
@@ -832,13 +832,13 @@ Para la función \texttt{compute\_order} se debe considerar el orden de evaluaci
 Por ejemplo para este orden de atributos:
 \vspace{0.1cm}
 \begin{center}
-\LARGE\textbf{$a_{4}, a_{2}, a_{0}, a_{1}, a_{5}, a_{6}, a_{3}$}
+\Large\textbf{$a_{4}, a_{2}, a_{0}, a_{1}, a_{5}, a_{6}, a_{3}$}
 \end{center}
 \vspace{0.2cm}
 Se insertarán las siguientes 6 aristas, que podían ya existir dentro del grafo:
 \vspace{0.1cm}
 \begin{center}
-\LARGE\textbf{$a_{4} \rightarrow a_{2}, a_{2} \rightarrow a_{0}, a_{0} \rightarrow a_{1}, a_{1} \rightarrow a_{5}, a_{5} \rightarrow a_{6}, a_{6} \rightarrow a_{3}$}
+\Large\textbf{$a_{4} \rightarrow a_{2}, a_{2} \rightarrow a_{0}, a_{0} \rightarrow a_{1}, a_{1} \rightarrow a_{5}, a_{5} \rightarrow a_{6}, a_{6} \rightarrow a_{3}$}
 \end{center}
 \vspace{0.2cm}
 

@@ -403,7 +403,7 @@ En la presentación del ejemplo en el lenguaje de especificación, se observa en
  
 \section{Parser del lenguaje, representación interna y chequeos}
 
-El parser del lenguaje de especificación se llevó a cabo utilizando las librerías \boost\  \spirit. Detalles de este tema, son tratado puntualmente en CAPÍTULO IMPL. 
+El parser del lenguaje de especificación se llevó a cabo utilizando las librerías \boost\ \spirit. Detalles de este tema, son tratado puntualmente en \ref{XXX}. 
 
 En esta sección nos encargaremos de algunas consideraciones del parser desde el punto de vista de su funcionamiento, algunos detalles en la representación interna y de los chequeos realizados sobre la entrada de \maggen\ para asegurar características de gramática bien definida.
 
@@ -413,7 +413,7 @@ El parser de la entrada de \maggen\ esta dado por un recorrido secuencial y ante
 
 Supongamos la siguiente porción de una entrada de \maggen:
 
-\begin{lstlisting}[numbers=left, firstnumber=8, language=specmag, linewidth=8cm, columns=fullflexible]
+\begin{lstlisting}[numbers=left, firstnumber=10, numbers=left, language=specmag, linewidth=9cm, columns=fullflexible]
 ...
 semantic domain
   sort ecuacion, lista;
@@ -424,9 +424,9 @@ semantic domain
 \end{lstlisting}
 \vspace{0.3cm}
 
-La línea 17 presenta un error de sintaxis (falta de paréntesis), entonces \maggen\ finaliza el parser e informa de la siguiente manera:
+La línea 15 presenta un error de sintaxis (falta de paréntesis), entonces \maggen\ finaliza el parser e informa de la siguiente manera:
 
-\begin{lstlisting}[backgroundcolor=\color{white}, linewidth=15cm]
+\begin{lstlisting}[backgroundcolor=\color{white}]
    * Parsing grammar ---------- [ FAIL ]
 
    ERROR: Parsing Failed, the following text will not be able to parse:
@@ -771,7 +771,7 @@ typedef vector <unsigned short> Order_rule;
 \end{lstlisting}
 
 \item Clave para planes de evaluación:
-\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=4.5cm]
+\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=4.3cm]
 typedef struct k_plan
 {
     unsigned short  id_plan;
@@ -781,7 +781,7 @@ typedef struct k_plan
 \end{lstlisting}
 
 \item Clave para planes de evaluación proyectados:
-\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=6cm]
+\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=5.5cm]
 typedef struct k_p_project
 {
     Key_plan        id_plan_project;
@@ -792,7 +792,7 @@ typedef struct k_p_project
 \end{lstlisting}
 
 \item Secuencia de visita:
-\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=6cm]
+\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=5.7cm]
 typedef vector <int> Visit_sequence;
 \end{lstlisting}
 
@@ -802,12 +802,12 @@ typedef vector <unsigned short> Rule;
 \end{lstlisting}
 
 \item Plan de evaluación:
-\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=7.5cm]
+\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=7.2cm]
 typedef pair <Key_plan, unsigned short> Plan;
 \end{lstlisting}
 
 \item Plan de evaluación proyectado:
-\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=10cm]
+\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=9.5cm]
 typedef pair <Key_plan_project, unsigned short> Plan_project;
 \end{lstlisting}
 \end{items}
