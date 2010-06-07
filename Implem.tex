@@ -25,7 +25,7 @@ El usuario es el responsable de definir las ``\texttt{semantic actions}'' para l
 
 Para comenzar a definir una gramática hay que crear una estructura que herede de la clase \texttt{grammar}. Dentro de ella se debe definir a su vez otra estructura templatizada denominada \texttt{definition}. En donde realmente estará la definición de la gramática.
 
-\newpage
+% \newpage
 
 \begin{lstlisting}[float, language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=8cm]
 struct my_grammar: public grammar <my_grammar>
@@ -707,7 +707,9 @@ map <vector<unsigned short>, Graph> p_Adp_graphs;
 map <vector<unsigned short>, Graph> p_Adp_subgraphs_cyclics;
 \end{lstlisting}
 
-El chequeo de ciclicidad sobre los grafos ADP, se implementó utilizando el algoritmo de búsqueda en profundidad (Depth-first search) de \boost\ combinado con la creación de un ``visitador'' especializado que a medida recorre el grafo, va guardado los nodos y aristas visitadas mientras no se halla detectado un ciclo. Ese subgrafo es lo que se guarda y se muestra al usuario.
+\subsection*{Ciclicidad}
+
+El chequeo de ciclicidad sobre los grafos ADP, se implementó utilizando el algoritmo de búsqueda en profundidad (Depth-first search) de \boost\ combinado con la creación de un ``visitador'' especializado. El cual a medida que recorre el grafo, va guardado los nodos y aristas visitadas mientras no se halla detectado un ciclo. Ese subgrafo es mostrado al usuario en caso de error, sino es descartado.
 
 La detección de ciclos se realiza cuando el algoritmo invoca a la función \texttt{back\_edge}, en donde nosotros prendemos una bandera.
 
@@ -743,7 +745,11 @@ struct cycle_detector: public dfs_visitor<>
 };
 \end{lstlisting}
 
+\subsection*{Contextos}
+
 Para cada regla, se tienen que considerar todos los posibles contextos inferiores posibles de acuerdo a las reglas que tengan los símbolos no terminales de su parte derecha. Se implementó un método que recursivamente genera un contexto diferente y guarda la regla cuando ya no quedan más variantes.
+
+\subsection*{Unicidad de contextos, planes y planes proyectados}
 
 Al igual que con los planes, los contextos de las reglas se repiten mucho, así que se utilizaron índices indirectos sobre un \texttt{vector} que almacena únicamente los contextos diferentes.
 
@@ -755,7 +761,11 @@ vector <Order_eval_eq> plans_project_uniques;
 
 Antes de insertar un elemento en cualquiera de estos repositorios se verifica que no exista. En caso de que ya se encuentre, se devuelve el índice correspondiente dentro del vector, sino se insertará al final y se devolverá el índice del último elemento.
 
+\subsection*{Representación en Dot}
+
 Una vez que se generaron todos los tipos de grafos, los mismos son guardados en distintos directorios en formato \textbf{dot}\cite{dot}. Para ello utilizamos la función \texttt{write\_graphviz} perteneciente a al módulo Graphviz de \boost.
+
+\subsection*{Generación de grafos}
 
 La generación de grafos es incremental, partiendo de la computación de los grafos DP, siguiendo los Down, DCG y por último los grafos ADP. Ante cualquier fallo, la generación se considerará incompleta.
 
@@ -781,6 +791,8 @@ bool generate_graphs()
 }
 \end{lstlisting}
 \vspace{0.3cm}
+
+\subsection*{Generación de planes}
 
 Una vez que se concluyó la generación de grafos, se construyen los planes, se prosigue con el chequeo de ciclicidad de los grafos ADP. Si se supera con éxito, se generarán los planes, sino se abortará el proceso.
 

@@ -2,30 +2,104 @@
 \label{chap:eval_est}
 \minitoc
 
-En este capítulo se presentan los algoritmos de construcción de grafos, planes y de cómputo de secuencias. En su mayoría, los mismos, se apoyan en los propuestos por Wuu-yang en \ref{wuu-yang1}. El cálculo de secuencias de visita fue íntegramente desarrollado e implementado en el marco de construcción de \maggen. 
+En este capítulo se presentan los algoritmos de construcción de cada tipo de grafo, así como los usados para el cómputo de planes de evaluación y sus respectivas secuencias de visita. En su mayoría, los mismos, se basan en los propuestos por Wuu Yang en \ref{wuu-yang1}. Mientras que el algoritmo para el cálculo de secuencias de visita fue íntegramente desarrollado e implementado en el marco de la tesis.
 
-Para obtener algoritmos correctos y con mayor grado de eficiencia, los mismo fueron testeados con la herramienta \textit{gcov} (Detalles en sección \ref{XXX}). Principalmente, esta herramienta fue utilizada para el algoritmo de cómputo de secuencias de secuencias de visita. En conjunto con \textit{gcov}, la heurística que utiliza el algoritmo fue refinada en varias etapas.
+Para comprobar la correctitud de los algoritmos y lograr mayor grado de eficiencia, los mismos fueron testeados mediante la herramienta \textit{gcov} (Detalles en sección \ref{XXX}). La cual fue utilizada con mayor énfasis para el algoritmo de cómputo de secuencias de visita. En conjunto con los resultados propocionados por \textit{gcov} y análisis teóricos, la heurística que implementa el algoritmo fue refinada en varias oportunidades.
 
-\section{Algoritmos para cómputo de grafos: DP, DOWN, DCG y ADP}
+\section{Algoritmos para cómputo de grafos}
 
-\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=inform, numbers=left, columns=fullflexible]{input_file_code/compute_down_wuu_yang}
+Todos estos algoritmos tienen una característica en común, expresan las depedencias existentes entre los atributos de una gramática. Por lo tanto en su construcción, los nodos y aristas son obtenidos de las relaciones entre dichos elementos.
 
-\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=inform, numbers=left, columns=fullflexible]{input_file_code/project_wuu_yang}
+\subsection*{Cómputo de DP}
 
-\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=inform, numbers=left, columns=fullflexible]{input_file_code/compute_dcg_wuu_yang}
+Se debe generar un grafo DP por cada regla de la gramática. Es el más directo de construir, ya que por cada ecuación de la regla actual, se agrega una arista entre cada uno de los símbolos del \texttt{r-value} con destino el \texttt{l-value} de la ecuación. Obviamente se agregan los nodos necesarios y sin repeticiones. 
+
+\begin{algorithm}[H]
+\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_dp_wuu_yang}
+\caption{\texttt{compute\_dp\_graphs}}
+\end{algorithm}
+
+\subsection*{Cómputo de Down}
+
+Este tipo de grafo, se debe crear para cada uno de los símbolos no terminales de la gramática, considerando únicamente la relaciones de depedencia entre sus atributos.
+
+\begin{algorithm}[H]
+\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_down_wuu_yang}
+\caption{\texttt{compute\_down\_graphs}}
+\end{algorithm}
+
+La función \texttt{project} lo que hace básicamente es dado un grafo, elimina todos los nodos y aristas relacionadas con esos nodos que no representen a los atributos que le pasan como parámetro.
+
+\begin{algorithm}[H]
+\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/project_wuu_yang}
+\caption{\texttt{project} sobre grafos}
+\end{algorithm}
+
+\subsection*{Cómputo de DCG}
+
+Estos grafos se generan para cada regla de la gramática y considerando las depedencias entre los atributos del símbolo de la parte izquierda de la producción (\texttt{head}). Para computarlo se unen el grafo DP de la regla junto a todos los grafos Down de los símbolos de la parte derecha de la regla (\texttt{body}). Se utiliza nuevamente la función \texttt{project}.
+
+\begin{algorithm}[H]
+\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_dcg_wuu_yang}
+\caption{\texttt{compute\_dcg\_graphs}}
+\end{algorithm}
+
+\subsection*{Cómputo de ADP}
+
+Para generar estos grafos, Wuu Yang no plantea un algoritmo preciso aunque no es necesario ya que toda la heurística necesaria se encuentra en la definición de los mismos (ver \ref{mag:adpdef}).
+
+Un grafo ADP corresponde a una regla bajo una cierta combinación de producciones para cada uno de sus hijos. Es decir, que para una misma regla pueden existir varios grafos ADP, ya que sus hijos pueden producir varios \textbf{contextos}\footnote{Ver \ref{XXX}.}.
+
+\begin{algorithm}[H]
+\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_adp_wuu_yang}
+\caption{\texttt{compute\_adp\_graphs}}
+\end{algorithm}
 
 \section{Algoritmo de cómputo de planes}
 
-\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=inform, numbers=left, columns=fullflexible]{input_file_code/compute_plan_wuu_yang}
+Luego de verificar que la gramática es MAG\footnote{Ver \ref{XXX}.}, se debe generar los planes de evaluación para la gramática. Cada ADP producirá un plan de evaluación, por lo que ambos tendrán el mismo identificador, es decir, la regla a la cual pertenece y el contexto que se aplicó a los símbolos no terminales de la misma.
 
-\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=inform, numbers=left, columns=fullflexible]{input_file_code/compute_order_wuu_yang}
+Este algoritmo propuesto por Wuu Yang, es detallado en profundidad mostrando su correctitud\footnote{Ver \ref{XXX} para más detalles.}.
 
-\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=inform, numbers=left, columns=fullflexible]{input_file_code/project2_wuu_yang}
+La idea principal es utilizar una cola de trabajos, en la cual se insertan un pares que contienen una regla y un orden de evaluación para sus atributos. Para cada uno de los grafos ADP asociados a la regla, se le computa su orden de evaluación para el contexto especificado por el grafo.
+
+Luego, para cada uno de los símbolos no terminales de la parte derecha de la regla, considerando la producción que le corresponde según el contexto, se obtiene el plan proyectado. Ese nuevo par, se intenta insertar en la cola de trabajos para seguir con el cómputo de planes.
+
+\begin{algorithm}[H]
+\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_plan_wuu_yang}
+\caption{\texttt{compute\_plans}}
+\end{algorithm}
+
+La función \texttt{compute\_order}, debe agregarle al grafo ADP la información inducida por el orden para evaluar los atributos del símbolo \textbf{head} de la regla a la que pertenece el grafo.
+
+Para ello, como todo orden se puede ver como una secuencia, se agregan al grafo un nodo por cada elementos del orden y las aristas para todos los pares posibles\footnote{Ver más detalles en \ref{XXX}}.
+
+\begin{algorithm}[H]
+\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_order_wuu_yang}
+\caption{\texttt{compute\_order}}
+\end{algorithm}
+
+La funcionalidad que cumple \texttt{project}, es dado un grafo purgarlo de todo elemento ajeno a el conjunto de ocurrencias de atributos especificados como parámetro. Pero para evitar que al eliminar nodos y aritas el grafo pierda información sobre las depedencias entre los atributos, se calcula previamente la clausura transitiva del grafo.
+
+\begin{algorithm}[H]
+\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/project2_wuu_yang}
+\caption{\texttt{project} orden de evaluación}
+\end{algorithm}
 
 \section{Algoritmo de cómputo de secuencias de visita}
 
+Las secuencias de visitas, son las traducciones de los planes de evaluación en secuencias compuestas por tres comandos\footnote{\texttt{compute}, \texttt{leave} y \texttt{visit}, ver más detalles en \ref{XXX}.} que permitan navegar por es AST a evaluar.
+
+Este algoritmo ...
+
 \section{Algoritmo de evaluación de atributos}
 
-\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=inform, numbers=left, columns=fullflexible]{input_file_code/eval_attribute_wuu_yang}
+\begin{algorithm}[H]
+\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/eval_attribute_wuu_yang}
+\caption{Evaluación de atributos}
+\end{algorithm}
 
-\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=inform, numbers=left, columns=fullflexible]{input_file_code/traverse_wuu_yang}
+\begin{algorithm}[H]
+\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/traverse_wuu_yang}
+\caption{\texttt{traverse}}
+\end{algorithm}

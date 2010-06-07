@@ -1,5 +1,3 @@
-Algoritmo: EvaluateAttributes
-
 algorithm eval (T)
   /* T es un AST no evaluado. */
   /* Selecciona un plan de evaluacion para cada nodo no terminal en T. */

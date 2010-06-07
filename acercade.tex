@@ -24,7 +24,8 @@ El computo de \maggen\ se realiza atravesando cada una de estas etapas secuencia
 
 La salida normal de \maggen que indica que se han realizado todas las etapas correctamente, es la siguiente:
 
-\begin{lstlisting}[backgroundcolor=\color{white}]
+\vspace{0.3cm}
+\begin{lstlisting}[backgroundcolor=\color{white}, basicstyle=\footnotesize]
    * Parsing grammar ---------- [  OK  ]
    * Generate graphs ---------- [  OK  ]
    * Build plans -------------- [  OK  ]
@@ -33,18 +34,21 @@ La salida normal de \maggen que indica que se han realizado todas las etapas cor
 
    Generation complete in: 0.372814 seconds.
 \end{lstlisting}
+\vspace{0.3cm}
 
 En caso de funcionamiento anormal de alguna de las etapas, se detectará un \textbf{FAIL} en la etapa correspondiente y se indicará la información del mismo.
 
 Un caso alternativo de salida, se da cuando \maggen\ detecta planes cíclicos, visualizándose un \textbf{ABORT} en la etapa de creación de planes:
 
-\begin{lstlisting}[backgroundcolor=\color{white}] 
+\vspace{0.3cm}
+\begin{lstlisting}[backgroundcolor=\color{white}, basicstyle=\footnotesize] 
    * Parsing grammar ---------- [  OK  ]
    * Generate graphs ---------- [  OK  ]
    * Build plans -------------- [ ABORT ]
 
    ERROR: One o more graph ADP has an cycle in its dependencies. Look the folder "path_output"/graphs/CYCLIC_graphs/ for more details.
 \end{lstlisting}
+\vspace{0.3cm}
 
 \textit{Notar que, el mensaje de error indicará la ruta donde fueron almacenados los grafos con problemas de ciclicidad. La variable \texttt{path\_output}, será seteada con un valor por defecto o por la ruta proporcionada por el usuario al momento del uso de la herramienta.}\\
 

@@ -5,7 +5,7 @@ function project (G, N) retorna un grafo nuevo
   
   GT := computo de la clausura transitiva de G
   
-  Remover del grafo GT, todos los nodos que no pertenecen a N y todas las aristas que inciden en los nodos borrados.
+  Remover del grafo GT, todos los nodos que no pertenecen a N y todas las aristas que incidian en ellos.
      
   return GT
 end function project
