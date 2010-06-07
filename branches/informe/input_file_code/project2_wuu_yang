@@ -1,7 +1,5 @@
-Funcion: project
-
 function project (`$\Psi$`, N) retorna un orden (parcial o total) nuevo
-  /* `$\Psi$` es un orden (parcial o total) de un conjunto de ocurrencias de atributos de una produccion. */
+  /* `$\Psi$` es un orden parcial o total, de un conjunto de ocurrencias de atributos de un simbolo. */
   /* N es un subconjunto de las ocurrencias de atributos que aparecen en `$\Psi$`. */
 
   `$\Psi$2` := computo de la clausura transitiva de `$\Psi$`

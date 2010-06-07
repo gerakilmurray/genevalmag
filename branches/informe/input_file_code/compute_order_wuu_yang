@@ -1,8 +1,6 @@
-Funcion: ComputeOrder
-
-function ComputeOrder (G, `$\omega$`) retorna un orden total nuevo
+function compute_order (G, `$\omega$`) retorna un orden total nuevo
   /* G es un grafo ADP de una produccion. /*
-  /* `$\omega$` es un orden total de los atributos del simbolo no terminal del lado izquierdo de la produccion. */
+  /* `$\omega$` es un orden total de los atributos del head de la produccion. */
 
   Sea `$\omega$` que denota un orden total de `$_{1}$` `$\rightarrow$` a`$_{2}$` `$\rightarrow$` `$\ldots$` `$\rightarrow$` a`$_{m}$`.
 
@@ -10,7 +8,7 @@ function ComputeOrder (G, `$\omega$`) retorna un orden total nuevo
     G := G `$\cup$` {the edge a`$_{i}$` `$\rightarrow$` a`$_{i+1}$`}
   end for
 
-  `$\Psi$` := computo de cualquier orden total compatible con el order parcial representado por el grafo G.
+  `$\Psi$` := computo de cualquier orden total compatible con el order parcial representado por G.
 
   return `$\Psi$`
   

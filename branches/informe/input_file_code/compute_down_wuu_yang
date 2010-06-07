@@ -1,7 +1,5 @@
-Algoritmo: ComputeDownGraph
-
 /* Inicialmente Down(X) = un grafo con solamente los atributos del simbolo X como nodos. */
-for each symbol X do
+for cada simbolo X do
   Down(X) := un grafo donde los nodos son los atributos del simbolo X sin ninguna arista
 end for
 
@@ -10,7 +8,7 @@ repeat
  
   for cada produccion p: X`$_{0}$` `$\rightarrow$` `$\alpha_{0}$`X`$_{1}$``$\alpha_{1}$`X`$_{2}$``$\alpha_{2}$` `$\ldots$` X`$_{k}$``$\alpha_{k}$` do
     /* Aumentar DP(p) con Down(X`$_{1}$`), Down(X`$_{2}$`), `$\ldots$` , Down(X`$_{k}$`). */
-    G := DP(p) `$\cup$` Down(X`$_{1}$) `$\cup$` Down(X`$_{2}$) `$\cup$` `$\ldots$` `$\cup$` Down(X`$_{k}$`)
+    G := DP(p) `$\cup$` Down(X`$_{1}$`) `$\cup$` Down(X`$_{2}$`) `$\cup$` `$\ldots$` `$\cup$` Down(X`$_{k}$`)
 
     /* Computar NewDown(X`$_{0}$`). */
     NewDown(X`$_{0}$`) := project (G, {Los atributos de X`$_{0}$`})

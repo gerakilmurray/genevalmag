@@ -1,5 +1,3 @@
-Algoritmo: ComputePlan
-
 WL := `$\emptyset$`
 `$\Delta$` := una funcion indefinida en todo valor
 `$\mu$` := un orden aleatorio de evaluacion de los atributos del simbolo inicial.
@@ -19,7 +17,7 @@ repeat
   Sea la produccion q denotada por X`$_{0}$` `$\rightarrow$` `$\alpha_{0}$`X`$_{1}$``$\alpha_{1}$`X`$_{2}$``$\alpha_{2}$` `$\ldots$` X`$_{k}$``$\alpha_{k}$`.
   
   for cada ADP(q | p`$_{1}$`, p`$_{2}$`, `$\ldots$` , p`$_{k}$`) `$\in$` SADP (q) do
-    `$\psi$` := ComputeOrder (ADP (q | p`$_{1}$`, p`$_{2}$`, `$\ldots$` , p`$_{k}$`), `$\omega$`)
+    `$\psi$` := compute_order (ADP (q | p`$_{1}$`, p`$_{2}$`, `$\ldots$` , p`$_{k}$`), `$\omega$`)
     `$\gamma$`[q , `$\omega$`, p`$_{1}$`, p`$_{2}$`, `$\ldots$` , p`$_{k}$`] := `$\psi$`
     for cada no terminal X`$_{i}$` que aparece en el lado derecho de la produccion q do
       `$\psi_{i}$` := project (`$\psi$`, {Ocurrencias de atributos de X`$_{i}$`})

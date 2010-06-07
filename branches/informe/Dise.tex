@@ -27,6 +27,7 @@ El análisis de cada bloque se realizará de una manera más formal y observando
 
 Entonces, sea \textbf{G: CFG} que define el lenguaje de especificación para el archivo de entrada aceptado por \maggen. Se define la siguiente regla de \textbf{G: CFG} para el símbolo inicial ``S''.
 
+\vspace{0.3cm}
 \begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{azul},language=specmag, linewidth=10cm ]
 S = semantic domain decl_Sd
   | attributes decl_attrs
@@ -44,6 +45,7 @@ El bloque semántico esta subdividido en 3 secciones, que se corresponden con la
 
 Entonces se define el símbolo \textit{decl\_Sd} como:
 
+\vspace{0.3cm}
 \begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{azul},language=inform,linewidth=10cm]
 decl_Sd = (decl_sort)*
         | (decl_operator)*
@@ -60,6 +62,7 @@ La subsección de ``\texttt{sort}'' declara todos los posibles tipos que serán 
 
 A continuación se define el símbolo \texttt{decl\_sort}
 
+\vspace{0.3cm}
 \begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{azul}, language=specmag, linewidth=10cm]
 decl_sort = sort NAME_SORT  list_sort;
 
@@ -108,6 +111,7 @@ La interpretación de cada uno, esta dada por la interpretación natural común 
 
 A continuación se define el símbolo \texttt{decl\_operator}:
 
+\vspace{0.3cm}
 \begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{azul}, language=specmag ]
 decl_operator = op infix  mode_op NAME_OP:
                 NAME_SORT ,  NAME_SORT -> NAME_SORT;
@@ -129,7 +133,6 @@ m_op    = NUM_PRECEDENCE , assoc
 assoc   = (left | right | non_assoc)
 \end{lstlisting}
 \vspace{0.3cm}
-
 
 \textit{``NAME\_OP''} representa un identificador para el operador (infija, prefija y posfija). Las restricciones y detalles a tener en cuenta para este identificador son las mismas que se analizaron para ``NAME\_SORT''.
 
@@ -187,6 +190,7 @@ La noción de funciones dentro de la especificación es tomada con la noción na
 
 Definimos \texttt{decl\_function} como:
 
+\vspace{0.3cm}
 \begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{azul}, language=specmag]
 decl_function = function NAME_FUNC: decl_domain -> NAME_SORT;
 
@@ -220,6 +224,7 @@ En esta sección presentaremos el bloque ``attributes'' en detalle. La informaci
 
 A continuación se define el símbolo \texttt{decl\_attrs} como:
 
+\vspace{0.3cm}
 \begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{azul}, language=specmag]
 decl_attrs = (d_attr)+
 
@@ -289,6 +294,7 @@ En este punto se deben tener en cuenta los requisitos necesarios de una gramáti
 
 A continuación se define el símbolo \texttt{decl\_rules}:
 
+\vspace{0.3cm}
 \begin{lstlisting}[frame=shadowbox, rulesepcolor=\color{azul}, language=specmag]
 decl_rules = (d_rule)+ 
 
@@ -413,7 +419,8 @@ El parser de la entrada de \maggen\ esta dado por un recorrido secuencial y ante
 
 Supongamos la siguiente porción de una entrada de \maggen:
 
-\begin{lstlisting}[numbers=left, firstnumber=10, numbers=left, language=specmag, linewidth=9cm, columns=fullflexible]
+\vspace{0.3cm}
+\begin{lstlisting}[basicstyle=\footnotesize, numbers=left, firstnumber=10, numbers=left, language=specmag, linewidth=9cm, columns=fullflexible]
 ...
 semantic domain
   sort ecuacion, lista;
@@ -426,7 +433,8 @@ semantic domain
 
 La línea 15 presenta un error de sintaxis (falta de paréntesis), entonces \maggen\ finaliza el parser e informa de la siguiente manera:
 
-\begin{lstlisting}[backgroundcolor=\color{white}]
+\vspace{0.3cm}
+\begin{lstlisting}[backgroundcolor=\color{white}, basicstyle=\footnotesize]
    * Parsing grammar ---------- [ FAIL ]
 
    ERROR: Parsing Failed, the following text will not be able to parse:
@@ -514,7 +522,7 @@ Cuando se utilizan paréntesis en la expresión, \maggen\ asume la asociatividad
 \end{itemize}
 \end{description}
 
-\section{Construcción de grafos y obtención de planes y secuencias de visita}
+\section{Construcción de grafos, planes y secuencias de visita}
 
 En la figura \ref{fig:disen} pudimos analizar el funcionamiento de \maggen, teniendo en cuenta la estructura \texttt{Attr\_grammar}, en esta sección abordaremos detalles en el diseño del paquete \texttt{Builder}, específicamente la construcción de grafos, de planes y de secuencias de visita. Un detalle a tener en cuenta es que, a partir de esta etapa, todas las manipulaciones son realizadas sobre la sección de ecuación de cada reglas.
 
@@ -681,7 +689,8 @@ Consideraciones de la clase:
 
 \begin{description}
 \item [Atributos] Cabe aclarar que la totalidad de los atributos tiene visibilidad privada.
- 
+
+\vspace{0.3cm}
 \begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=7cm]
 vector <Visit_sequence> v_seq;
 vector <Order_rule>       contexts_rule;
@@ -698,6 +707,7 @@ Estos, son usados por los métodos del evaluador generado por \maggen. Podemos h
 \begin{itemize}
 \item Privados:
 
+\vspace{0.3cm}
 \begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=13cm]
 void add_plan(const Key_plan &k_plan, unsigned short index_order);
 void add_plan_project(const Key_plan_project &k_plan_p, unsigned short index_order);
@@ -716,6 +726,7 @@ El método \texttt{traverse} recorre el AST de entrada al evaluador y asigna a c
 
 \item Públicos:
 
+\vspace{0.3cm}
 \begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}, language=c++, columns=fullflexible, linewidth=6cm]
 maggen();
 void print_visit_seqs();
