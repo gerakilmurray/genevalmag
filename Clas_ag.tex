@@ -8,6 +8,46 @@ Cada una de las familias de gramática de atributos tiene su propio poder expres
 
 En el capítulo siguiente trataremos la familia de las gramática de atributos multi-planes (MAG) que son las usadas en el marco de este trabajo. A continuación trataremos otras familias que contribuyen a la teoría de gramática de atributos.
 
+A continuación se presenta un teorema que describe la relación entre las
+familias de GA presentadas en esta seción, en base a su poder expresivo.
+Las familias por debajo de la línea divisoria se corresponden con estrategias de
+evaluación preestablecidas.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{ll}
+\textbf{AG}         & Gramáticas de atributos \\
+\textbf{WDAG}       & Gramáticas de atributos bien definidas\\
+\textbf{ANCAG}      & GA absolutamente no circulares \\
+\textbf{EOAG}       & GA Ordenadas Extendidas \\
+\textbf{OAG}        & GA Ordenadas \\
+\hline
+\textbf{m-APAG} & GA evaluables en \emph{m} pasadas alternantes \\
+\textbf{n-PAG}      & GA evaluables en \emph{n} pasadas \\
+\textbf{L-AG}       & GA l-atribuidas \\
+\textbf{S-AG}       & GA s-atribuidas \\
+\end{tabular}
+\end{center}
+\caption{Jerarquía de GA}
+\label{jer-GA}
+\end{table}
+
+Es fácil ver desde sus correspondientes definiciones que $IDP-{ANCAG}(p) \subseteq EDP(p)$, 
+para cada producción $p \in P$ de una GA, ya que cada grafo $IDP-{ANCAG}(p)$ está definido 
+en base a las dependencias directas de los atributos de los símbolos que ocurren en $p$ mas las 
+dependencias (transitivas) de las producciones que tienen a esos símbolos como 
+parte izquierda, no en cualquier parte como en el caso de los grafos $EDP(p)$.
+
+Por lo tanto, los grafos de la familia $ANCAG$ nunca contendrán arcos no
+contenidos en los grafos correspondendientes de la familia $EOAG$, lo que 
+implica claramente la inclusión de las familias, ya que si una GA es $ANCAG$ 
+también es $EOAG$. \\
+
+La inclusión de las familias definidas en base a una estrategia de evaluación es
+obvia. Sólo cabe aclarar que una $L-AG$ es una $n-PAG$ con $n=1$ con una pasada
+descendente de izquierda a derecha.
+
+
 \section{Clasificación basada en la estrategia de evaluación}
 
 hablar de las WDAG y también de las OAG. Tener en cuenta (Marcelo p 44)
