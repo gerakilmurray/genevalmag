@@ -2,11 +2,9 @@
 \label{chap:intro}
 \minitoc
 
-En las ciencias de la computación los lenguajes juegan un rol muy importante en muchas disciplinas. Desde los comienzos se buscaron mecanismos para describirlos y manejarlos, esta rama de la informática ha logrado muchos avances en el tema.
+En las ciencias de la computación los lenguajes juegan un rol muy importante en muchas disciplinas. Desde los comienzos se buscaron mecanismos para describirlos y manejarlos.
 
-Dentro de los mecanismos desarrollados, las gramáticas han logrado ocupar unos de los lugares más destacados. La continua evolución y descubrimientos de nuevas gramáticas necesitó que se organizaran, y no fue hasta 1956 que Noam Chomsky propuso una jerarquía sobre las gramáticas.
-
-Las clasificó en 4 niveles:
+Dentro de los mecanismos desarrollados, las gramáticas han logrado ocupar unos de los lugares más destacados. La continua evolución y descubrimientos de nuevas gramáticas necesitó que se las organizara, y no fue hasta 1956 que Noam Chomsky propuso una jerarquía sobre las gramáticas, en 4 niveles (figura \ref{chomsky}).
 
 \begin{figure}[h!]\centering 
 \begin{tabular}{| c | p{3.5cm} | p{3.5cm} | p{2.4cm} | p{2.9cm}|}
@@ -63,10 +61,10 @@ Estos cuatro componentes pueden ser representados por una tupla \textbf{<V,T,S,P
 \end{definition}
 \underline{Nota:}
 En todo el desarrollo del trabajo se denotara a los símbolos no terminales con letras en mayúscula y a los símbolos terminales con letras en minúscula para mayor claridad.
-Veamos dos ejemplos desarrollados en \cite{gramática} (capítulo 5):
+Veamos dos ejemplos desarrollados en el capitulo 5 de  \cite{gramatica}.
 
 \begin{enumerate}
-\item Ejemplo: palíndromo:
+\item \underline{Ejemplo:} palíndromo:
 Definimos la gramática $G_{pal}$ para definir el lenguaje de palíndromos\footnote{Un palíndromo (del griego \textit{palin dromein}, volver a ir hacia atrás) es una palabra, número o frase que se lee igual hacia adelante que hacia atrás. Si se trata de un número, se llama capicúa (\urllink{http://es.wikipedia.org/wiki/Palíndromo}).}: \\
 $G_{pal} = (\{P\},\{0,1\},P,A)$
 donde A es el siguiente conjunto de producciones:
@@ -80,12 +78,12 @@ donde A es el siguiente conjunto de producciones:
 Ejemplos de cadenas del lenguaje $G_{pal}$:
 \begin{items}
 \item $\lambda$
-\item 0011
-\item 11110000
+\item 0110
+\item 010101101010
 \item etc.
 \end{items}
 
-\item Ejemplo: Gramática de expresiones:\\
+\item \underline{Ejemplo:} Gramática de expresiones:\\
 \textbf{G = (\{E,I\}, \{+,*,(,),a,b,0,1\}, E, P)} donde P es el conjunto de producciones siguiente:
 \begin{enumerate}
 \item $E \rightarrow I$
@@ -107,29 +105,48 @@ Ejemplos de cadenas del lenguaje $G_{pal}$:
 \end{items}
 \end{enumerate}
 
-\underline{Abreviación de reglas}: Cuando denotamos una producción podemos utilizar una abreviación para agrupar aquellas producciones con el mismo \textit{head}. Para ello utilizamos el metasímbolo ``|''. Por ejemplo el conjunto de producciones de $G_{pal}$ podríamos escribirlas como: $P \rightarrow \lambda | 0 | 1 | 0P0 | 1P1$ 
+\underline{Abreviación de reglas}: Cuando denotamos una producción podemos utilizar una abreviación para agrupar aquellas producciones con el mismo \textit{head}. Para ello utilizamos el metasímbolo ``|''. Por ejemplo el conjunto de producciones de $G_{pal}$ podríamos escribirlas como: $P \rightarrow \lambda | 0 | 1 | 0P0 | 1P1$.
 
 \underline{Observación:}
 De aquí en adelante se asumirá que el símbolo de comienzo $ S $  aparece en la parte izquierda de una única producción y no puede aparecer en la parte derecha de ninguna producción\footnote{Esta forma se denomina \emph{forma normal} o también \textit{Gramática extendida}.}. \\
 
 \begin{definition} Se dice que una gramática libre de contexto $G=<V,T,S,P>$
 es \textbf{reducida} si
-$\forall B \in V$ , $\exists \alpha , \gamma \in \Sigma^{*} : S \clausderiva{G} \alpha B \gamma$ y $\exists \tau \in T^{*} : B \clausderiva{G} \tau$.
+$\forall B \in V$ , $\exists \alpha , \gamma \in \Sigma^{*} : S \clausderiva{G} \alpha B \gamma$ y $\exists \tau \in T^{*} : B \clausderiva{G} \tau$\footnote{ $\clausderiva{G}$: deriva en 0 o más pasos; es detallada en \cite{tesismarcelo}}.
 \label{def:reducida}
 \end{definition}
 
-\begin{definition} 
-Dada una gramática $G = <V,T,P,S>$ definimos $ST = (K,D)$ como un árbol de derivación (o parse tree) donde $K$ es un conjunto de nodos y $D$ es una relación no reflexiva sobre $K$), con $k_0$ como raíz; si cumple las siguientes condiciones:
+\section{Árbol sintáctico}
+
+Un árbol sintáctico abstracto (AST) es una forma condensada de un árbol de análisis sintáctico. Estos son sumamente útiles para representar construcciones del lenguajes.
+
+Por ejemplo una producción de la forma:
+\begin{center}\large
+$S\ \rightarrow\ \textbf{if}\ B\ \textbf{then}\ S1\ \textbf{else}\ S2$                                                                      \end{center}
+puede representarse en un árbol sintáctico como:
+
+\begin{figure}[h!]\centering
+\includegraphics[width=125pt,height=53pt]{ast-ejemplo.pdf}
+\caption{\label{ejem-ast} Ejemplo AST.}
+\end{figure}
+
+\begin{definition}
+\label{def:arbolderivacion}
+Dado una gramática G= \textbf{<V,T,S,P>}\, definimos $ST = (K,D)$ como un árbol de derivación (o parse tree) donde $K$ es un conjunto de nodos y $D$ es una relación no reflexiva sobre $K$, con $k_0$ como raíz; si cumple las siguientes condiciones:
+
 \begin{items}
-\item $ K \subseteq (V \cup T \cup \epsilon) $
+\item $ K \subseteq (V \cup T \cup \lambda) $
 \item $k_{0}$ es un rótulo raíz para el símbolo S.
 \item $ S \rightarrow k_{1} \ldots k_{n} $ donde $k_{1} \ldots k_{n}$ son rótulos para los símbolos de la parte derecha de la producción.
-\item Si $k_{i} \in T \cup \{\epsilon\}$, ($1 \leq i \leq n$), entonces $k_{i}$ es una hoja de $ST$.
+\item Si $k_{i} \in T \cup \{\lambda\}$, ($1 \leq i \leq n$), entonces $k_{i}$ es un \textbf{Nodo Hoja} de $ST$. 
 \item Si $k_{i} \in V$,  ($1 \leq i \leq n$), entonces $k_{i}$ es la raíz del 
-      árbol sintáctico para la gramática libre de contexto $<V,T,P,K_I>$, donde $K_{I}$ es un rótulo para $k_{i}$.
+      sub-árbol sintáctico para la CFG $<V_{i},T_{i},P_{i},K_I>$, donde $K_{I}$ es un rótulo para $k_{i}$, denominado \textbf{Nodo Interno} de ST.
 \end{items}
-\label{def:arbolderivacion}
 \end{definition}
+
+\underline{Observación:} Para una producción $p\in P_{i}$ de la forma $A\rightarrow \alpha_{0}X_{1}\alpha_{1}X_{2}\alpha_{2} \ldots X_{k}\alpha_{k}$ el nodo interno \textbf{A} tendrá a $X_{1}, X_{2},\dots, X_{k}$ como hijos internos y como hojas $\alpha_{0}, \alpha_{1}, \alpha_{2} \ldots \alpha_{k}$.
+
+\\EJEMPLO PALINDROMO.
 
 \begin{definition} Una gramática libre de contexto $G = <V,T,S,P>$ es \textbf{ambigua} si para una cadena $\alpha$, derivada de $G$, existen dos o más árboles de derivación diferentes.
 \label{def:ambigua}
@@ -137,43 +154,24 @@ Dada una gramática $G = <V,T,P,S>$ definimos $ST = (K,D)$ como un árbol de der
 
 \section*{Notación}
 
-La notación usada tanto en el desarrollo del proyecto, comunicación entre los autores y redacción de este informe es la utilizada por Wuu yang en \cite{wuu-yang1}, la cual proviene de la notación de Kastens en \cite{kastens} y la utilizada por el Mg. Marcelo Arroyo en \cite{tesismarcelo}
-
-\section{Gramática bien formada}
-
-Una gramática bien formada\footnote{En inglés Well Defined, de allí la abreviatura WD.}, es una gramática que no contiene directa o indirectamente reglas recursivas a izquierda.
-
-Esta propiedad estructural verificable implica la completitud, siempre y cuando se sea lo suficientemente permisivo para muchos propósitos.
-
-Una gramática puede tener reglas recursivas a izquierda, pero seguirá siendo completa si su ciclo se degenera y se vuelve inalcanzable.
-
-\begin{definition}
-Definimos inductivamente al conjunto $WF_{G}$ (\textbf{well formed grammar}) como sigue. Escribimos WF(\textbf{e}) a $ \textbf{e}\in WF_{G}$ que significa la expresión \textbf{e} es \textbf{well formed} o bien formada en G.
-\begin{enumerate}
-\item $ WF(\varepsilon)$
-\item $ WF(a)$
-\item $ WF(A)$ si $WF ( R_{G}(A))$
-\item $ WF(e_{1}e_{2})$ si $ WF(e_{1})$ y $e_{1}\rightarrow 0$ implica $ WF(e_{2})$
-\item $ WF(e_{1}/e_{2})$ si $ WF(e_{1})$ y $ WF(e_{2})$
-\item $ WF(e^{*})$ si $ WF(e)$ y $ e\not\rightarrow 0$
-\item $ WF(!e)$ si $ WF(e)$
-\end{enumerate}
-\end{definition}
+La notación usada tanto en el desarrollo del proyecto, comunicación entre los autores y redacción de este informe es la utilizada por Wuu Yang en \cite{wuu-yang1}, la cual proviene de la notación de Kastens en \cite{kastens} y la utilizada por el Mg. Marcelo Arroyo en \cite{tesismarcelo}
 
 \section{Gramática de Atributos}
 
 Las Gramáticas de Atributos (GA) son un formalismo simple para la especificación de la semántica de lenguajes formales, como los lenguajes de programación o de especificación. Integran la modularidad que brindan las gramáticas libres de contexto y la expresividad de un lenguaje funcional.
 
-En una gramática de atributos, se relaciona con cada símbolo de una gramática libre de contexto un conjunto de atributos. Cada regla o producción tiene asociados un conjunto de reglas semánticas que toman la forma de asignación a atributos de valores denotados por la aplicación de una función, la cual puede tomar como argumentos instancias de atributos pertenecientes a los símbolos que aparecen en la producción.
-Las reglas semánticas inducen dependencias entre los atributos que ocurren en la producción. El orden de evaluación es implícito (si existe) y queda determinado por las dependencias entre las instancias de los atributos.
-Una regla semántica se podrá evaluar cuando las instancias de los atributos que aparecen como sus argumentos estén evaluadas. La noción de orden de evaluación es detallada en la sección \ref{sec:met_eval}
+En una GA, se relaciona con cada símbolo de una CFG un conjunto de atributos. Cada regla o producción tiene asociados un conjunto de reglas semánticas que toman la forma de asignación a atributos de valores denotados por la aplicación de una función, la cual puede tomar como argumentos instancias de atributos pertenecientes a los símbolos que aparecen en la producción.
+
+Las reglas semánticas, o ecuaciones, inducen dependencias entre los atributos que ocurren en la producción. El orden de evaluación (si existe) queda determinado por las dependencias entre las instancias de los atributos.
+
+Una ecuación se podrá evaluar cuando las instancias de los atributos que aparecen como sus argumentos estén evaluadas. La noción de orden de evaluación es detallada en la sección \ref{sec:met_eval}
 
 \begin{definition}
 \label{def:grammarattr}
 Una gramática de atributos es una tupla GA = (G, A, V, Dom, F, R) donde:
 \begin{itemize}
 \item G = (VN , VT , S, P ) es una CFG reducida y no ambigua (Ver definiciones \ref{def:arbolderivacion} y \ref{def:reducida}).
-\item A = $\cup_{X\in(VN \cup T)} A(X)$, es el conjunto finito de atributos (A(X) es el conjunto de atributos asociados al símbolo X)
+\item A = $\cup_{X\in(VN \cup VT)} A(X)$, es el conjunto finito de atributos (A(X) es el conjunto de atributos asociados al símbolo X)
 
 \item V es el conjunto finito de dominios de valores de los atributos.
 \item Dom : $A\rightarrow V$ asocia a cada atributo un dominio o conjunto de valores d $\in$ V .
@@ -199,34 +197,9 @@ donde cada $X_{i}$ es un símbolo que ocurre en la producción \textit{p} , $a_{
 \begin{definition} Un atributo $a$ está asociado al símbolo $X$ si y sólo si $a \in A(X)$. 
 \end{definition}
 \underline{Nota:}
-Se utilizará la notación \textbf{X.a} para significar que el atributo \texttt{a} está asociado al símbolo \texttt{X} (a $\in$ A(X)) y para denotar el valor de una ocurrencia o instancia del atributo \texttt{a} del símbolo \texttt{X} en una regla de atribución
+Se utilizará la notación \textbf{X.a} para significar que el atributo \texttt{a} está asociado al símbolo \texttt{X} (a $\in$ A(X)) y para denotar el valor de una ocurrencia o instancia del atributo \texttt{a} del símbolo \texttt{X} en una regla de atribución.
 
-\section{Árbol sintáctico}
-
-Un árbol sintáctico abstracto (AST) es una forma condensada de un árbol de análisis sintáctico. Estos son sumamente útiles para representar construcciones del lenguajes.
-
-Por ejemplo una producción de la forma:
-\begin{center}\large
-$S\ \rightarrow\ \textbf{if}\ B\ \textbf{then}\ S1\ \textbf{else}\ S2$                                                                      \end{center}
-puede aparecer en un árbol sintáctico como:
-
-\begin{figure}[h!]\centering
-\includegraphics[width=125pt,height=53pt]{ast-ejemplo.pdf}
-\caption{\label{ejem-ast} Ejemplo AST.}
-\end{figure}
-\begin{definition}
-
-Dado una gramática G= \textbf{<V,T,S,P>}\, un árbol de derivación (o árbol sintáctico)
-ST(G) es un árbol que se compone de dos tipos de nodos:
-\begin{description}
-
-\item [Nodos hojas] Cada nodo hoja es nombrada por una variable en T o por $\lambda$. En caso de que el nodo se nombre con $\lambda$, este es el único hijo del nodo padre.
-
-\item [Nodos interiores] Cada nodo interior es nombrado por una variable en V. Dado $A\in V$ y $p\in P$ de la forma $A\rightarrow X_{1},X_{2},\dots, X_{k}$ el node \textbf{A} tendrá los hijos $X_{1},X_{2},\dots, X_{k}$
-\end{description}
-\end{definition}
-
-\subsection*{Árbol Sintáctico atribuido}
+\subsection*{Árbol Sintáctico Atribuido}
 
 Un árbol sintáctico atribuido es un AST que agrega información a los nodos, para almacenar los atributos de cada símbolo.
 Para una mayor claridad, definimos un nodo del árbol como una tupla $(X_{0}.a_{0}, (X_{1}.a_{1}, X_{2}.a_{2}, \ldots , X_{k}.a_{k}))$ donde $(X_{0}.a_{0})$ es el rótulo y $(X_{1}.a_{1}, X_{2}.a_{2}, \ldots , X_{k}.a_{k})$ son los nodos hijos.
@@ -274,10 +247,11 @@ Dada una regla $r_{j}^{p} : X_{0}.a_{0} = f(\ldots, X_{i}.a_{i}, \ldots)$ en una
 $X_{i}.a_{i}$ deberá preceder a $X_{0}.a_{0}$.
 \end{definition}
 
-\begin{definition} Una gramática de atributos $GA$ es circular si y solo si existe un árbol sintáctico atribuido $T(GA)$, tal que su grafo de dependencias $GD(T)$ contiene al menos un ciclo.
+\begin{definition} 
+Una gramática de atributos $GA$ es circular si y solo si existe un árbol sintáctico atribuido $T(GA)$, tal que su grafo de dependencias $GD(T)$ contiene al menos un ciclo.
 \end{definition}
 
-Si una GA contiene dependencias circulares no podría ser evaluada ya que no se encontraría un orden de evaluación. Esto se conoce como el problema de la circularidad, el cual se ha demostrado ser intrínsecamente exponencial\ref{XXX}. El problema de la circularidad ha motivado que muchos investigadores hayan realizado esfuerzos en la búsqueda e identificación de familias o subgrupos de gramáticas de atributos, para las cuales puedan detectarse circularidades con algoritmos de menor complejidad (polinomial o lineal).
+Si una GA contiene dependencias circulares no podría ser evaluada ya que no se encontraría un orden de evaluación. Esto se conoce como el problema de la circularidad, el cual se ha demostrado ser intrínsecamente exponencial\ref{intri-exc}. El problema de la circularidad ha motivado que muchos investigadores hayan realizado esfuerzos en la búsqueda e identificación de familias o subgrupos de gramáticas de atributos, para las cuales puedan detectarse circularidades con algoritmos de menor complejidad (polinomial o lineal).
 
 Estas familias imponen restricciones sobre la gramática de atributos o sobre las dependencias entre sus atributos para garantizar que una GA no sea circular, con el costo de restringir su poder expresivo.
 
@@ -303,24 +277,76 @@ gramática. Una instancia de una producción en un árbol sintáctico tiene como
 \emph{contexto inferior} a las instancias de las producciones aplicadas a los no terminales de la parte derecha.
 Dada una producción $p$ se deben tomar en cuenta tres tipos de dependencias:
 \begin{enumerate}
-\item Directas obtenidas por las ecuaciones de $p$
-\item Impuestas por el contexto superior
-\item Impuestas en el contexto inferior
+\item Directas obtenidas por las ecuaciones de $p$.
+\item Impuestas por el contexto superior.
+\item Impuestas en el contexto inferior.
 \end{enumerate}
 
-Instancias diferentes de una producción $p$ tendrán las mismas dependencias
-directas, pero podrán tener diferentes dependencias impuestas por los contextos
-inferiores y superiores. Es necesario entonces, determinar todas las
-\emph{dependencias posibles} entre las instancias de los atributos que ocurren
-en una producción para luego poder determinar todas los \emph{planes de evaluacion
-posibles} entre los atributos que ocurren en una producción.
+Instancias diferentes de una producción $p$ tendrán las mismas dependencias directas, pero podrán tener diferentes dependencias impuestas por los contextos inferiores y superiores. Es necesario entonces, determinar todas las \emph{dependencias posibles} entre las instancias de los atributos que ocurren en una producción para luego poder determinar todas los \emph{planes de evaluacion posibles} entre los atributos que ocurren en una producción.
 
 Entonces, cada plan de evaluacion que computa las dependencias impuestas en una produccion va acompañado con el \textit{contexto} en el cual el mismo se efectua.
 
 Además, se deberán detectar las posibles dependencias circulares, para informar la viabilidad de su evaluación.
 
+
+\section{Gramáticas de atributos bien definidas}
+\label{subsec:well-defined}
+
+Es necesario la definición de \textit{gramática de atributos bien definida}, ya que \maggen\ trabaja sobre ellas, y la entrada que espera la herramienta es una gramática que cumple con los conceptos que se detallan a continuación.  
+
+\begin{definition} Una gramática de atributos es completa si cumple con las siguientes propiedades:
+\begin{enumerate}
+\item Para toda producción $p \in P$, de la forma $p:X \rightarrow \chi$, todos
+      los atributos sintetizados de $X$ se definen en $p$.
+\item Para toda producción $p \in P$, de la forma $p:Y \rightarrow \mu X \nu$, 
+      todos los atributos heredados de $X$ se definen en $p$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition} 
+Una gramática de atributos es \textbf{bien definida (WDAG)\footnote{En inglés Well Defined, de allí la abreviatura WD.}} si es completa y no se detectan planes con dependencias circulares\footnote{En la sección \ref{XXX} se presenta detalles sobre el algoritmo y la implementación usada para el desarrollo de \maggen.}.
+\end{definition}
+
+
 \section{Secuencia de visita}
+
+En 1980, Uwe Kastens propone un método de evaluación para la familia $OAG$, denominado \emph{secuencias de visita}\cite{Kastens}. Esta familia de gramáticas son presentadas en la sección \ref{XXX}.
+
+En esta sección se analizará el concepto de secuencias de visita desde el punto de vista utilizado para el desarrollo de \maggen. Además, dicho enfoque es aplicable, también, no sólo a las OAG sino también para WDAGs.
+
+Sea $n$ un nodo de un árbol atribuido $T$. 
+Una secuencia de visitas en el nodo $n$ es una secuencia de tres operaciones u acciones: 
+\emph{visit(child,i)}, \emph{compute(at)} y \emph{leave(i)}.
+
+\begin{description}
+\item La acción \emph{visit(child,i)} indica que el evaluador debe moverse (visitar) el nodo hijo \emph{child} de $n$ y corresponde a la \emph{i-ésima} visita al nodo hijo.
+
+\item La acción \emph{compute(at)} indica que debe evaluarse la ecuación que define 
+$at$ en la producción $p$ aplicada correspondiente al nodo $n$.
+
+\item La acción \emph{leave(i)} indica que ha finalizado la visita \emph{i-ésima} en
+el nodo corriente y que se debe visitar al nodo padre.
+\end{description}
+
+Un evaluador basado en secuencias de visita, comienza ejecutando las operaciones en el nodo raíz del árbol. En cada visita a un nodo se ejecutan las operaciones en secuencia hasta la ejecución de una operación \emph{leave(i)}.
+En su próxima visita ($i+1$), se continúa con la operación que sigue a \emph{leave(i)}.
+
+Cada secuencia de visitas finaliza con una operación \emph{leave}\footnote{La mayoría de las veces implícita, es decir este \emph{leave} esta dado por el fin de la secuencia.}. La evaluación termina cuando se ejecutaron todas las operaciones del nodo raíz del árbol
+sintáctico.
+
+Los evaluadores basados en secuencias de visita pertenecen a una familia denominada  \emph{evaluadores multivisita}, ya que el proceso de evaluación puede requerir múltiples visitas a cada nodo. \\
+
+Se pueden generar secuencias de visita a partir de los grafos de dependencias inducidas de cada producción. Cada subsecuencia de instancias de atributos heredados del símbolo de la parte izquierda de la producción se reemplazan por una operación \emph{leave}, cada ocurrencias de un atributo definido en la producción (sintetizados del símbolo de la parte izquierda o heredados de un símbolo de la parte derecha) se reemplazan por la correspondiente operación \emph{compute} y cada subsecuencia de instancias de atributos sintetizados de el símbolo $X_i$ de la parte derecha de la producción se reemplaza por una  operación \emph{visit(i)}.
+
+En la sección \ref{XXX} se presenta el algoritmo y las secuencias de visita generadas por \maggen.
+
+
+
 \section{Generación de evaluadores para GA bien definidas}
 
-bla bla
+Tal como analizamos en las secciones anteriores para evaluar un GA debemos computar dependencias entre los atributos, obtener planes y crear secuencias de visitas, teniendo en cuenta posibles problemas de circularidad. En la generación de un evaluador, estas etapas también deben ser realizadas, teniendo en cuenta que una producción (de una GA) puede tener asociada mas de un plan, dependiendo del contexto de su aplicación (Ver \ref{XXX}). 
+
+Un evaluador para una GA bien definida deberá realizar una previa selección del plan correspondiente a cada nodo del árbol sintáctico. Para dicha selección, el evaluador necesitará realizar un recorrido ascendente del árbol sintáctico para \emph{marcar} los nodos con la información sobre las dependencias \emph{actuales} transitivas en base al subárbol.
+
+En la sección \ref{XXX} presentamos algoritmos eval y traverse, teniendo en cuenta heurísticas utilizadas por Wuu Yang en \ref{wuu-yang1}.
 
