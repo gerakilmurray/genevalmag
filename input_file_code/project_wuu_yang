@@ -1,11 +1,6 @@
-Algoritmo: project
-
-function project (G, N) retorna un grafo nuevo
+function project (G, N)
   /* G es un grafo. N es un conjunto de nodos de G. */
-  
   GT := computo de la clausura transitiva de G
-  
-  Remover del grafo GT, todos los nodos que no pertenecen a N y todas las aristas que incidian en ellos.
-     
-  return GT
-end function project
+  Remover del grafo GT todos los nodos que no pertenecen a N y las aristas que incidian en ellos.
+  return GT /* Retorna un grafo nuevo. */
+end function

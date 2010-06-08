@@ -1,10 +1,10 @@
-for cada produccion p: X`$_{0}$` `$\rightarrow$` `$\alpha_{0}$`X`$_{1}$``$\alpha_{1}$`X`$_{2}$``$\alpha_{2}$` `$\ldots$` X`$_{k}$``$\alpha_{k}$` do
-  /* En un contenedor almacenar todos los contextos posibles. */
-  contexts = generar todos los posibles contextos para X`$_{1}$`, X`$_{2}$`,`$\ldots$`, X`$_{k}$`
-
-  /* Generar un ADP para cada contexto. */
-  for cada contexto C `$\in$` contexts tal que C = p`$_{1}$`, p`$_{2}$`,`$\ldots$`, p`$_{k}$` do
-    ADP(p,C`$_{i}$`) = DP(p) `$\cup$` DCG`$_{X1}$`(p`$_{1}$`) `$\cup$` DCG`$_{X2}$`(p`$_{2}$`) `$\cup$` `$\ldots$` `$\cup$` DCG`$_{Xk}$`(p`$_{k}$`)
+procedure compute_adp_graphs()
+  for cada produccion p: X`$_{0}$` `$\rightarrow$` `$\alpha_{0}$`X`$_{1}$``$\alpha_{1}$`X`$_{2}$``$\alpha_{2}$` `$\ldots$` X`$_{k}$``$\alpha_{k}$` do
+    /* En un contenedor almacenar todos los contextos posibles. */
+    contexts = generar todos los posibles contextos para X`$_{1}$`, X`$_{2}$`,`$\ldots$`, X`$_{k}$`
+    /* Generar un ADP para cada contexto. */
+    for cada contexto C `$\in$` contexts tal que C = p`$_{1}$`, p`$_{2}$`,`$\ldots$`, p`$_{k}$` do
+      ADP(p,C`$_{i}$`) = DP(p) `$\cup$` DCG`$_{X1}$`(p`$_{1}$`) `$\cup$` DCG`$_{X2}$`(p`$_{2}$`) `$\cup$` `$\ldots$` `$\cup$` DCG`$_{Xk}$`(p`$_{k}$`)
+    end for
   end for
-
-end for
+end procedure
