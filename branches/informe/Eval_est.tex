@@ -90,7 +90,20 @@ La funcionalidad que cumple \texttt{project}, es dado un grafo purgarlo de todo 
 
 Las secuencias de visitas, son las traducciones de los planes de evaluación en secuencias compuestas por tres comandos\footnote{\texttt{compute}, \texttt{leave} y \texttt{visit}, ver más detalles en \ref{XXX}.} que permitan navegar por es AST a evaluar.
 
-Este algoritmo ...
+Este proceso fue diseñado e implementado para el desarrollo de \maggen. La generación se dividió en dos algoritmos, el primero inicializa todas las secuencias de visitas y luego invoca al segundo solamente para los planes de evaluación que pertenecen a la producción inicial de la gramática, que por se \textbf{extendida}\footnote{Ver ref{XXX}.} es única.
+
+\begin{algorithm}[H]
+\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/generate_visit_sequences}
+\caption{Generador de secuencias de visitas.}
+\end{algorithm}
+
+El segundo realiza un proceso recursivo para lograr la traducción, como ya se explicó en \ref{XXX} es una simulación del recorrido sobre el árbol que se realizaría en tiempo de evaluación.
+
+\begin{algorithm}[H]
+\lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/gen_visit_seq}
+\caption{Función \texttt{gen\_visit\_seq}.}
+\end{algorithm}
+
 
 \section{Algoritmo de evaluación de atributos}
 

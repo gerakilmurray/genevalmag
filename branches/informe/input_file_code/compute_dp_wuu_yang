@@ -1,18 +1,15 @@
-/* Inicialmente DP(p) = un grafo vacio. */
-for cada produccion p do
-  DP(p) := `$\emptyset$`
-end for
-
-for cada produccion p: X`$_{0}$` `$\rightarrow$` `$\alpha_{0}$`X`$_{1}$``$\alpha_{1}$`X`$_{2}$``$\alpha_{2}$` `$\ldots$` X`$_{k}$``$\alpha_{k}$` do
-  
-  /* Sean Eq`$_{1}$`, Eq`$_{2}$`, `$\ldots$` , Eq`$_{k}$` las ecuaciones de p. */
-  for cada ecuacion Eq do
-    
-    /* Sea Eq`$_{i}$`: X`$_{o1}$`.attr`$_{a1}$` = f`$_{n}$`(X`$_{o2}$`.attr`$_{a2}$`, X`$_{o3}$`.attr`$_{a3}$`, `$\ldots$` , X`$_{om}$`.attr`$_{am}$`) */
-    for cada simbolo de la derecha de la ecuacion do
-      DP(p) = DP(p) `$\cup$` (X`$_{oj}$`.attr`$_{aj}$` `$\rightarrow$` `\textbf{X$_{o1}$.attr$_{a1}$}`)
-    end for
-    
+procedure compute_dp_graphs()
+  /* Inicialmente DP(p) = un grafo vacio. */
+  for cada produccion p do
+    DP(p) := `$\emptyset$`
   end for
-  
-end for
+  for cada produccion p: X`$_{0}$` `$\rightarrow$` `$\alpha_{0}$`X`$_{1}$``$\alpha_{1}$`X`$_{2}$``$\alpha_{2}$` `$\ldots$` X`$_{k}$``$\alpha_{k}$` do
+    /* Sean Eq`$_{1}$`, Eq`$_{2}$`, `$\ldots$` , Eq`$_{k}$` las ecuaciones de p. */
+    for cada ecuacion Eq do
+      /* Sea Eq`$_{i}$`: X`$_{o1}$`.attr`$_{a1}$` = f`$_{n}$`(X`$_{o2}$`.attr`$_{a2}$`, X`$_{o3}$`.attr`$_{a3}$`, `$\ldots$` , X`$_{om}$`.attr`$_{am}$`) */
+      for cada simbolo de la derecha de la ecuacion do
+        DP(p) = DP(p) `$\cup$` (X`$_{oj}$`.attr`$_{aj}$` `$\rightarrow$` `\textbf{X$_{o1}$.attr$_{a1}$}`)
+      end for
+    end for
+  end for
+end procedure

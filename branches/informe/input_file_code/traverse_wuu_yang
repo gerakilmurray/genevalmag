@@ -1,5 +1,3 @@
-Metodo: traverse
-
 procedure traverse (n, `$\omega$`)
   /* n es un nodo no terminal node de un AST. */
   /* `$\omega$` es un orden de evaluacion de los atributos del simbolo no terminal de mas a izquierda localizado en n. */
@@ -12,4 +10,4 @@ procedure traverse (n, `$\omega$`)
   for cada hijo no terminal m`$_{i}$` of n in T do
     traverse (m`$_{i}$` , `$\Theta$`[q, `$\omega$`, i, p`$_{1}$`, p`$_{2}$`, `$\ldots$` , p`$_{k}$`])
   end for
-end procedure traverse
+end procedure

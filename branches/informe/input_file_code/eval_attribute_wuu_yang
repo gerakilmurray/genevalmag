@@ -1,4 +1,4 @@
-algorithm eval (T)
+procedure eval (T)
   /* T es un AST no evaluado. */
   /* Selecciona un plan de evaluacion para cada nodo no terminal en T. */
   /* `$\mu$` es un orden de evaluacion de los atributos del simbolo inicial. */
@@ -7,3 +7,4 @@ algorithm eval (T)
   Usar un Evaluador Orientado a Visita tradicional para evaluar las instancias de atributos de T.
   
   /* T es ahora un AST decorado*/
+end procedure
