@@ -146,7 +146,13 @@ Dado una gramática G= \textbf{<V,T,S,P>}\, definimos $ST = (K,D)$ como un árbo
 
 \underline{Observación:} Para una producción $p\in P_{i}$ de la forma $A\rightarrow \alpha_{0}X_{1}\alpha_{1}X_{2}\alpha_{2} \ldots X_{k}\alpha_{k}$ el nodo interno \textbf{A} tendrá a $X_{1}, X_{2},\dots, X_{k}$ como hijos internos y como hojas $\alpha_{0}, \alpha_{1}, \alpha_{2} \ldots \alpha_{k}$.
 
-EJEMPLO PALINDROMO.
+En la figura \ref{fig:ejePala-st} se observa un arbol de derivacion para la cadena \textit{0110} del lenguaje de palindromos dado por $G_{pal}$.
+
+\begin{figure}[h!]\centering
+\includegraphics[width=105pt,height=150pt]{pal-ast.png}
+\caption{\label{fig:ejePala-st} Arbol de derivacion para la cadena \textit{0110} en $G_{pal}$.}
+\end{figure}
+
 
 \begin{definition} Una gramática libre de contexto $G = <V,T,S,P>$ es \textbf{ambigua} si para una cadena $\alpha$, derivada de $G$, existen dos o más árboles de derivación diferentes.
 \label{def:ambigua}
@@ -199,7 +205,7 @@ donde cada $X_{i}$ es un símbolo que ocurre en la producción \textit{p} , $a_{
 \underline{Nota:}
 Se utilizará la notación \textbf{X.a} para significar que el atributo \texttt{a} está asociado al símbolo \texttt{X} (a $\in$ A(X)) y para denotar el valor de una ocurrencia o instancia del atributo \texttt{a} del símbolo \texttt{X} en una regla de atribución.
 
-\subsection*{Árbol Sintáctico Atribuido}
+\subsection{Árbol Sintáctico Atribuido}
 
 Un árbol sintáctico atribuido es un AST que agrega información a los nodos, para almacenar los atributos de cada símbolo.
 Para una mayor claridad, definimos un nodo del árbol como una tupla $(X_{0}.a_{0}, (X_{1}.a_{1}, X_{2}.a_{2}, \ldots , X_{k}.a_{k}))$ donde $(X_{0}.a_{0})$ es el rótulo y $(X_{1}.a_{1}, X_{2}.a_{2}, \ldots , X_{k}.a_{k})$ son los nodos hijos.
@@ -261,15 +267,16 @@ Luego, en 1998, Wuu-Yang en \cite{wuu-yang1} caracteriza una nueva familia denom
 
 \subsection{Evaluación dinámica}
 
-Un evaluador dinámico tiene como ventajas su simplicidad y que es posible evaluar cualquier WDAG (GA bien definida)\footnote{Esta familia es detalla en el capitulo siguiente (sección \ref{XXX}).} o aún GA’s irrestrictas utilizando \textit{evaluación lazy}\footnote{\urllink{http://en.wikipedia.org/wiki/Lazy\_evaluation}} (siempre y cuando exista el mínimo punto fijo en el álgebra de términos denotado por las ecuaciones de atribución). Además se pueden detectar ciclos en el grafo de dependencias antes o durante la evaluación.
-
-Las principales desventajas son que generalmente es necesario mantener el árbol sintáctico y el grafo de dependencias. La construcción del grafo de dependencias consume tiempo y memoria; y a su vez, el tiempo de procesamiento insumido en la construcción del grafo de dependencias puede ser mayor que el proceso de evaluación en sí mismo. En la practica, si tomamos una GA de un tamaño normalmente usado, los requerimientos de memoria pueden ser considerables.  
+Un evaluador dinámico tiene como ventajas su simplicidad y la posibilidad de detectar ciclos en el grafo de dependencias antes o durante la evaluación. Ademas que, es posible evaluar cualquier WDAG (GA bien definida)\footnote{Esta familia es detalla en el capitulo siguiente (sección \ref{sec:well-defined}).}.
 
 La realidad es que, los evaluadores dinámicos no han tenido mucho interés en el desarrollo de herramientas de generación de procesadores de lenguajes (como por ejemplo los compiladores)debido a que uno de los principales requisitos de un compilador es que sea eficiente, ya que durante un desarrollo un programador generalmente necesita recompilar un número muy importante de veces hasta obtener una versión final del programa requerido.
+
+Las principales desventajas son que generalmente es necesario mantener el árbol sintáctico y el grafo de dependencias. La construcción del grafo de dependencias consume tiempo y memoria; y a su vez, el tiempo de procesamiento insumido en la construcción del grafo de dependencias puede ser mayor que el proceso de evaluación en sí mismo. En la practica, si tomamos una GA de un tamaño normalmente usado, los requerimientos de memoria pueden ser considerables.  
 
 Razón por la cual \maggen\ genera un evaluador estático y debido a esto no profundizaremos demasiado en este tipo de evaluadores.
 
 \subsection{Evaluación estática}
+\label{subsec:eval-est}
 Los métodos estáticos deben tener en cuenta todos los posibles árboles sintácticos posibles a ser generados por la gramática y calcular todas las posibles dependencias entre las instancias de los atributos. 
 
 Un árbol sintáctico se construye a partir de la aplicación sucesiva de producciones de la
@@ -289,28 +296,9 @@ Entonces, cada plan de evaluacion que computa las dependencias impuestas en una 
 Además, se deberán detectar las posibles dependencias circulares, para informar la viabilidad de su evaluación.
 
 
-\section{Gramáticas de atributos bien definidas}
-\label{subsec:well-defined}
-
-Es necesario la definición de \textit{gramática de atributos bien definida}, ya que \maggen\ trabaja sobre ellas, y la entrada que espera la herramienta es una gramática que cumple con los conceptos que se detallan a continuación.  
-
-\begin{definition} Una gramática de atributos es completa si cumple con las siguientes propiedades:
-\begin{enumerate}
-\item Para toda producción $p \in P$, de la forma $p:X \rightarrow \chi$, todos
-      los atributos sintetizados de $X$ se definen en $p$.
-\item Para toda producción $p \in P$, de la forma $p:Y \rightarrow \mu X \nu$, 
-      todos los atributos heredados de $X$ se definen en $p$.
-\end{enumerate}
-\end{definition}
-
-\begin{definition} 
-Una gramática de atributos es \textbf{bien definida (WDAG)\footnote{En inglés Well Defined, de allí la abreviatura WD.}} si es completa y no se detectan planes con dependencias circulares\footnote{En la sección \ref{XXX} se presenta detalles sobre el algoritmo y la implementación usada para el desarrollo de \maggen.}.
-\end{definition}
-
-
 \section{Secuencia de visita}
-
-En 1980, Uwe Kastens propone un método de evaluación para la familia $OAG$, denominado \emph{secuencias de visita}\cite{Kastens}. Esta familia de gramáticas son presentadas en la sección \ref{XXX}.
+\label{sec:sec-visit}
+En 1980, Uwe Kastens propone un método de evaluación para la familia $OAG$, denominado \emph{secuencias de visita}\cite{Kastens}. Esta familia de gramáticas es presentada en la sección \ref{sec:def-oag} de este informe.
 
 En esta sección se analizará el concepto de secuencias de visita desde el punto de vista utilizado para el desarrollo de \maggen. Además, dicho enfoque es aplicable, también, no sólo a las OAG sino también para WDAGs.
 
@@ -334,17 +322,15 @@ En su próxima visita ($i+1$), se continúa con la operación que sigue a \emph{
 Cada secuencia de visitas finaliza con una operación \emph{leave}\footnote{La mayoría de las veces implícita, es decir este \emph{leave} esta dado por el fin de la secuencia.}. La evaluación termina cuando se ejecutaron todas las operaciones del nodo raíz del árbol
 sintáctico.
 
-Los evaluadores basados en secuencias de visita pertenecen a una familia denominada  \emph{evaluadores multivisita}, ya que el proceso de evaluación puede requerir múltiples visitas a cada nodo. \\
+Los evaluadores basados en secuencias de visita pertenecen a una familia denominada  \emph{evaluadores multivisita}, ya que el proceso de evaluación puede requerir múltiples visitas a cada nodo.
 
-Se pueden generar secuencias de visita a partir de los grafos de dependencias inducidas de cada producción. Cada subsecuencia de instancias de atributos heredados del símbolo de la parte izquierda de la producción se reemplazan por una operación \emph{leave}, cada ocurrencias de un atributo definido en la producción (sintetizados del símbolo de la parte izquierda o heredados de un símbolo de la parte derecha) se reemplazan por la correspondiente operación \emph{compute} y cada subsecuencia de instancias de atributos sintetizados de el símbolo $X_i$ de la parte derecha de la producción se reemplaza por una  operación \emph{visit(i)}.
+Se pueden generar secuencias de visita a partir de los grafos de dependencias inducidas de cada producción. Cada subsecuencia de instancias de atributos heredados del símbolo de la parte izquierda de la producción se reemplazan por una operación \emph{leave}, cada ocurrencias de un atributo definido en la producción (sintetizados del símbolo \textit{head} o heredados de un símbolo del \textit{body}) se reemplazan por la correspondiente operación \emph{compute} y cada subsecuencia de instancias de atributos sintetizados de el símbolo $X_i$ de la parte derecha de la producción se reemplaza por una  operación \emph{visit(i)}.
 
 En la sección \ref{XXX} se presenta el algoritmo y las secuencias de visita generadas por \maggen.
 
-
-
 \section{Generación de evaluadores para GA bien definidas}
 
-Tal como analizamos en las secciones anteriores para evaluar un GA debemos computar dependencias entre los atributos, obtener planes y crear secuencias de visitas, teniendo en cuenta posibles problemas de circularidad. En la generación de un evaluador, estas etapas también deben ser realizadas, teniendo en cuenta que una producción (de una GA) puede tener asociada mas de un plan, dependiendo del contexto de su aplicación (Ver \ref{XXX}). 
+Tal como analizamos en las secciones anteriores para evaluar un GA debemos computar dependencias entre los atributos, obtener planes y crear secuencias de visitas, teniendo en cuenta posibles problemas de circularidad. En la generación de un evaluador, estas etapas también deben ser realizadas, teniendo en cuenta que una producción (de una GA) puede tener asociada mas de un plan, dependiendo del contexto de su aplicación (Ver \ref{subsec:eval-est}). 
 
 Un evaluador para una GA bien definida deberá realizar una previa selección del plan correspondiente a cada nodo del árbol sintáctico. Para dicha selección, el evaluador necesitará realizar un recorrido ascendente del árbol sintáctico para \emph{marcar} los nodos con la información sobre las dependencias \emph{actuales} transitivas en base al subárbol.
 

@@ -1,8 +1,8 @@
-\chapter{Gramática de Atributos Multi-planes}
+\chapter{Gramática de Atributos Multi-planes (MAG)}
 \label{chap:mag}
 \minitoc
 
-Tal como lo presenta Wuu-Yang en \cite{wuu-yang1} la familia de \textit{gramática de atributos multi-planes} es una clase que se encuentra dentro de las WDAG y dentro de ellas de las NC.
+Tal como lo presenta Wuu-Yang en \cite{wuu-yang1} y como lo analizamos en la seccion \ref{XX}, la familia de \textit{gramática de atributos multi-planes} es una clase que se encuentra dentro de las WDAG y dentro de ellas de las NC.
 
 La familia de las MAG es estrictamente mayor que las ANCAG. La importancia de esta familia radica en que el procedimiento de computación de planes de evaluación estáticos toma \textbf{tiempo polinomial} en el numero de símbolos y producciones.
 
@@ -153,7 +153,7 @@ SADP(q) = \bigcup\limits_{q\in P}{ADP (q | p_{1}, p_{2}, \dots, p_{k})}
 \end{figure}
 
 \section{Definición MAG}
-
+\label{def:MAG}
 Una gramática \textit{G} de la forma \ref{def:grammarattr} es una \textit{gramática de atributos multi-planes} si y solo si 
 \begin{equation}
 \forall q : q \in P: (\forall g:g\ es\ un\ grafo\ de\ q \wedge g \in SADP(q) : g\ es\ no\ circular) 
@@ -162,14 +162,15 @@ Una gramática \textit{G} de la forma \ref{def:grammarattr} es una \textit{gram�
 Las \textit{gramáticas multi-plans} mantienen propiedades deseables como:
 \begin{itemize}
 \item La clases de gramáticas MAG cumplen la propiedad de que todas las gramáticas de atributos en dicha clase son \textbf{no circulares}.
-\item Toda gramática MAG cumple con las propiedades de gramática bien definida, esto es, todo árbol sintáctico derivado sobre una MAG contiene dependencias no circulares.
+\item Toda gramática MAG cumple con las propiedades de gramática bien definida\footnote{Es importante tener en cuenta las condiciones para gramática completa, detallada en \ref{def:gacompleta}} (WDAG), esto es, todo árbol sintáctico derivado sobre una MAG contiene dependencias no circulares.
 \end{itemize}
 
 
 De los conceptos analizado arriba surgen la siguiente definición y los siguientes 2 teoremas:
 
 \begin{definition}
- Sea una \textit{q} una producción de la forma $X_{0}\rightarrow \alpha_{0} X_{1} \alpha_{1} X_{2} \dots X_{k} \alpha_{k}$. Sea $p_{i}$ definimos:
+\label{def:ancag}
+ Sea una \textit{q} una producción de la forma $X_{0}\rightarrow \alpha_{0} X_{1} \alpha_{1} X_{2} \dots X_{k} \alpha_{k}$ definimos:
 \begin{equation}
  IDP-ANCAG(q) = DP(q) \bigcup\limits_{k}^{i=1}{Down(X_{i})}
 \end{equation}
@@ -177,10 +178,12 @@ De los conceptos analizado arriba surgen la siguiente definición y los siguient
 \end{definition}
 
 \begin{theorem}
+\label{th:ancag1}
 $IDP-ANCAG(q) = \bigcup SADP(q)$, para toda producción q. 
 \end{theorem}
 
 \begin{theorem}
+\label{th:ancag2}
 Toda gramática ANCAG es una gramática MAG, pero no viceversa.
 \end{theorem}
 

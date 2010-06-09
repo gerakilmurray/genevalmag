@@ -1,82 +1,123 @@
-\chapter{Clasificación de gramática de atributos}
-\label{chap: clas_ag}
+\chapter{Familias de gramática de atributos}
+\label{chap:clas_ag}
 \minitoc
 
-La clasificación de las gramática de atributos puede verse teniendo en cuenta dos aspectos: según la \textbf{estrategia de evaluación} y según las \textbf{dependencias entre los atributos}. 
+Las familias de GA pueden ser clasificadas, principalmente, teniendo en cuenta dos aspectos: según la \textbf{estrategia de evaluación} y según las \textbf{dependencias entre los atributos}. 
+
+Las primeras, se basan en procedimientos de evaluación previamente definidos, en donde la idea es hacer varios recorridos del árbol atribuido e ir evaluando los atributos que sean posibles en cada uno de ellos. Luego de varios recorridos todos los atributos deberían estar evaluados (por supuesto si el grafo de dependencias es acíclico). Esta estrategia requiere que se tenga información sobre las dependencias entre los atributos durante la evaluación. Con respecto a las segundas, las GA presentan dependencias entre sus atributos que tienen ciertas características que permiten determinar estáticamente\footnote{Analizando las reglas de atribución de las producciones.} un orden total de sus instancias de atributos para cada producción que sea consistente con sus dependencias. 
 
 Cada una de las familias de gramática de atributos tiene su propio poder expresivo, como así también, sus restricciones en el método de evaluación. La relación entre estos dos aspectos esta dado por el siguiente razonamiento: \textit{mientras mas restricciones en el método de evaluación, menos poder expresivo}.
 
-En el capítulo siguiente trataremos la familia de las gramática de atributos multi-planes (MAG) que son las usadas en el marco de este trabajo. A continuación trataremos otras familias que contribuyen a la teoría de gramática de atributos.
+En el desarrollo de este capitulo se presentaran algunas de las familias de GA desde el punto de vista de las dependencias entre sus atributos\footnote{La familia de gramáticas analizadas desde el punto de vista de la estrategia de evaluación no serán abordadas, debido a que escapan al propósito del trabajo realizado. Las mismas pueden ser consultadas en \cite{tesismarcelo}.}, a solo efecto de abordar una comparación final y aportar una marco teórico adecuado para el análisis de gramáticas de atributos multi-plans (MAG). Las MAG, son analizadas en el capitulo siguiente y además son en las que se basa el desarrollo de \maggen. 
 
-A continuación se presenta un teorema que describe la relación entre las
-familias de GA presentadas en esta seción, en base a su poder expresivo.
-Las familias por debajo de la línea divisoria se corresponden con estrategias de
-evaluación preestablecidas.
+En el presente capitulo, no profundizaremos demasiado en los métodos de evaluación de las cada familias. Este tema es detallado por Marcelo Arroyo en \cite{tesismarcelo}, Wuu Yang en \cite{wuu-yang2} y U. Kastens en \cite{kastens}.
 
-\begin{table}
-\begin{center}
+\section{Gramáticas de Atributos bien definidas (WDAG)}
+\label{sec:well-defined}
+
+Las \textit{gramática de atributos bien definida},(o \textit{well-defined}) es una familia basada en la estrategia de evaluación. En esta sección conoceremos dicha familia y al final del capitulo analizaremos la relación con las demas. 
+
+\begin{definition} \label{def:gacompleta}Una gramática de atributos es completa si cumple con las siguientes propiedades:
+\begin{enumerate}
+\item Para toda producción $p \in P$, de la forma $p:X \rightarrow \chi$, todos los atributos sintetizados de $X$ se definen en $p$.
+\item Para toda producción $p \in P$, de la forma $p:Y \rightarrow \mu X \nu$, todos los atributos heredados de $X$ se definen en $p$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition} 
+Una gramática de atributos es \textbf{bien definida (WDAG)\footnote{En inglés Well Defined, de allí la abreviatura WD.}} si es completa y no se detectan planes con dependencias circulares.
+\end{definition}
+
+\section{Gramática de Atributos ordenadas (OAG)}
+\label{sec:def-oag}
+En cada gramática de esa clase, los atributos de un símbolo $X \in \Sigma$ pueden ser evaluados en un orden (total) determinado, es decir que es posible determinar un orden de evaluación independientemente de su contexto.
+Esta información se puede utilizar para producir evaluadores para esta familia que sean muy eficientes, tanto en tiempo como en espacio y el algoritmo de verificación de circularidad tiene tiempo polinomial.
+
+\begin{definition} Dada una GA, una familia de órdenes totales $O=\{O(X)\}$, donde cada $ O(X) $ es un orden total sobre los atributos del símbolo $ X \in \Sigma $, es consistente con el grafo de dependencias de la producción $p: X_0 \rightarrow X_1 X_2 \ldots X_{np}$, si el grafo de dependencias aumentado con dichos órdenes es no circular:
+
+$$ DP_{ord}(p) \equiv DP(p) \cup \{ (X.a, X.b) \in O(X) \mid \textrm{X ocurre en p} \} $$
+\end{definition}
+
+\begin{definition} Una gramática de atributos es (ordenada) (OAG) si para cada producción existe un orden total, es decir que cada grafo $ DP_{ord}(p) $ no es circular.
+\end{definition}
+
+En 1996, Wuu Yang\cite{XXX} caracterizó una extensión a las OAG que permite que el algoritmo de decisión de pertenencia a esta nueva familia sea de tiempo polinomial. A ésta extensión se la conoce como \textbf{Extended OAG o EOAG}.
+
+La observación realizada permite determinar conjuntos de atributos de un símbolo que sean \emph{promovibles}, los cuales pueden moverse a una partición mas alta de la cual podría ser asignados por el algoritmo visto en la sección anterior.
+
+El algoritmo propuesto, el cual se describe en esta sección, introduce un paso adicional, previo a la construcción del particionado, que consiste en la construcción de los conjuntos de dependencias aumentadas de los símbolos y redefine el particionado para que se tengan en cuenta estas dependencias.
+
+\section{Gramática de Atributos absolutamente no circulares (ANCAG)}
+
+Esta familia de gramáticas de atributos, denominada también \emph{fuertemente no circulares}) no comprende las GAs cuyas dependencias entre sus atributos es tal que cada atributo sintetizado del símbolo \textit{head} de cada producción,depende (directa o indirectamente) de un conjunto de sus atributos heredados.
+
+Es posible definir formalmente que una GA es \emph{ANCAG} si se extiende el grafo de dependencias de cada producción $p: X_0 \rightarrow X_1 X_2 \ldots X_{np}$:
+
+$$ IDP_{ANCAG} = \bigcup_{p \in P} IDP_{ANCAG}(p) $$
+
+$$ IDP_{ANCAG}(p) = DP(p) \cup \{ (X.a,X.b) \mid
+                             \exists q: X \rightarrow \alpha \: \in \: P $$
+                $$ \land \: (X.a,X.b) \in IDP_{ANCAG}(q) \} $$
+
+\begin{definition} Una gramática de atributos es ANCAG si ningún grafo $ IDP_{ANCAG}(p) $, para toda producción $p$, es circular.
+\end{definition}
+
+Notar que la relación $IDP-ANCAG(p)$ es pesimista ya que podría contener dependencias que nunca se podrían dar simultáneamente en un árbol sintáctico. Es decir, un grafo $IDP-ANCAG(p)$ contiene todas las dependencias transitivas entre los atributos que ocurren en $p$ para la unión de todos los posibles contextos inferiores. Este enfoque permite puntualizar ciclos en las dependencias que tienen poco sentido a efectos prácticos.
+
+Retomaremos esta familia en el capitulo siguiente con la definición \ref{def:ancag} y los teoremas \ref{th:ancag1} y \ref{th:ancag2} para cubrir su relación con la familia MAG.
+
+\section{Gramáticas de Atributos no circulares (NC)}
+
+En 1999 Wuu Yang\cite{wuu-yang2} propone una nueva clasificación de \emph{Gramáticas de atributos no circulares basadas en información de contextos inferiores (lookahead behavior)}. Esta jerarquía fue denominada por Wuu Yang como  \emph{\textbf{NC}}.
+
+La idea básica en la jerarquía \emph{NC} es tratar de computar grafos de dependencias inducidos para cada producción y cada símbolo no terminal, que sean aproximaciones mas reales (refinamientos) a los grafos utilizados en la caracterización de otras clases como las descriptas anteriormente. 
+
+Es posible encontrar aproximaciones mas exactas si se tienen en cuenta los posibles contextos inferiores de una instancia de aplicación de una producción. Esto a diferencia de las ANCAG que construyen grafos de dependencias sin tener en cuenta los posibles contextos y reales y penalizan en posibles dependencias cíclicas inútiles prácticamente. 
+
+La jerarquía \emph{NC} se clasifica en clases según el \textit{lookahead behavior}. Este mide el nivel de transitividad en la observación de los posibles contextos inferiores de una producción. Analicemos algunas de las clases en la jerarquía \emph{NC}:
+\begin{description}
+\item [NC(0)] Esta clase (sin $lookahead$) se corresponde con la familia ANCAG, debido que no observa contexto inferiores. 
+\item [NC(1)] Las gramáticas $NC(1)$ mantienen un $lookahead$ de 1 y un resultado importante es que la familia NC(1) contiene a las ANCAG. Wuu Yang en \cite{wuu-yang} presenta la familia de las MAG y las asocia con esta subfamilia dentro de la jerarquía $NC(1)$. Es por ello que en el capitulo siguiente es tratada en detalles esta familia de gramáticas.
+\item[NC(k)] Esta clase tiene en cuenta un $k>1$, es decir un $lookahead$ de k. La clase $NC(k)$ consiste de aquellas GA's para las cuales existe un conjunto de planes de evaluación para cada producción, que quedan determinados analizando $k$ niveles de producciones descendientes. Es decir $k$ niveles de observación en los posibles contextos inferiores.
+\item[NC($\infty$)] Existen gramáticas de atributos que no pertenecen a la familia $NC(k)$ para ningún $k$. Esto sucede cuando la gramática tiene producciones que son mutuamente recursivas. Un árbol sintáctico podría contener derivaciones de la forma $X \rightarrow Y \rightarrow X$ para cualquier número de repeticiones y si existiera un ciclo en las dependencias no podría determinarse estáticamente para ningún número finito de descendientes $k$.
+
+Un evaluador para las GA $NC(\infty)$ necesita tener en cuenta un número \emph{potencialmente (no realmente)} infinito de descendientes. En términos de un árbol sintáctico, lo anterior significa que el evaluador necesitará ``mirar'' hasta las hojas para seleccionar un plan para una instancia de una producción.
+
+\begin{theorem} La familia $NC(\infty)$ se corresponde con la familia de gramáticas de atributos bien definidas (WDAGs).
+\end{theorem}
+
+
+\end{description}
+
+Un resultado importante presentado por Wuu Yang en \cite{wuu-yang2} es el siguiente:
+\begin{theorem}
+ Dado un k finito, NC(k) es una subclase propia de NC(k+1) y existe un procedimiento de decisión para NC(k).
+\end{theorem}
+
+
+
+\section{Relación entre familias}
+
+A continuación, analizamos la relación entre familias de GA que fueron presentadas en este capitulo. El enfoque del análisis esta dado por el poder expresivo de cada familia (Ver figura \ref{jer-GA}).
+
+\begin{table}[!h]\centering
 \begin{tabular}{ll}
 \textbf{AG}         & Gramáticas de atributos \\
-\textbf{WDAG}       & Gramáticas de atributos bien definidas\\
-\textbf{ANCAG}      & GA absolutamente no circulares \\
+\textbf{WDAG o NC($\infty$)}       & Gramáticas de atributos bien definidas\\
+\textbf{NC(k)}       & Gramáticas de atributos no circulares con $k > 1$\\
+\textbf{MAG o NC(1)}       & Gramáticas de atributos Multi-plans\\
+\textbf{ANCAG o NC(0)}      & GA absolutamente no circulares \\
 \textbf{EOAG}       & GA Ordenadas Extendidas \\
 \textbf{OAG}        & GA Ordenadas \\
-\hline
-\textbf{m-APAG} & GA evaluables en \emph{m} pasadas alternantes \\
-\textbf{n-PAG}      & GA evaluables en \emph{n} pasadas \\
-\textbf{L-AG}       & GA l-atribuidas \\
-\textbf{S-AG}       & GA s-atribuidas \\
+% \hline
+% \textbf{m-APAG}     & GA evaluables en \emph{m} pasadas alternantes \\
+% \textbf{n-PAG}      & GA evaluables en \emph{n} pasadas \\
+% \textbf{L-AG}       & GA l-atribuidas \\
+% \textbf{S-AG}       & GA s-atribuidas \\
 \end{tabular}
-\end{center}
 \caption{Jerarquía de GA}
 \label{jer-GA}
 \end{table}
 
-Es fácil ver desde sus correspondientes definiciones que $IDP-{ANCAG}(p) \subseteq EDP(p)$, 
-para cada producción $p \in P$ de una GA, ya que cada grafo $IDP-{ANCAG}(p)$ está definido 
-en base a las dependencias directas de los atributos de los símbolos que ocurren en $p$ mas las 
-dependencias (transitivas) de las producciones que tienen a esos símbolos como 
-parte izquierda, no en cualquier parte como en el caso de los grafos $EDP(p)$.
-
-Por lo tanto, los grafos de la familia $ANCAG$ nunca contendrán arcos no
-contenidos en los grafos correspondendientes de la familia $EOAG$, lo que 
-implica claramente la inclusión de las familias, ya que si una GA es $ANCAG$ 
-también es $EOAG$. \\
-
-La inclusión de las familias definidas en base a una estrategia de evaluación es
-obvia. Sólo cabe aclarar que una $L-AG$ es una $n-PAG$ con $n=1$ con una pasada
-descendente de izquierda a derecha.
-
-
-\section{Clasificación basada en la estrategia de evaluación}
-
-hablar de las WDAG y también de las OAG. Tener en cuenta (Marcelo p 44)
-
-\begin{itemize}
-\item AG      Gramáticas de atributos
-\item WDAG    Gramáticas de atributos bien definidas   
-\item ANCAG   GA absolutamente no circulares
-\item EOAG    GA Ordenadas Extendidas
-\item OAG     GA Ordenadas       
-\item m-APAG  GA evaluables en m pasadas alternantes       
-\item n-PAG   GA evaluables en n pasada       
-\item L-AG    GA l-atribuida        
-\item S-AG    GA s-atribuidas
-\end{itemize}
-
-\section{Clasificación basada en dependencias}
-
-bla bla
-
-\section{Clasificación de Knuth}
-
-cla cla
-
-\subsection{Árbol sintáctico atribuido}
-
-
-\subsection{Gramáticas no circulares (NC)}
-
-bla bla
-
-\subsection{ANCAG}
+En la relación mostrada arriba se incluye la familia MAG, las cual será analizada en el capitulo siguiente.
+Detalles sobre demostraciones acordes a las inclusiones presentadas son tratadas ampliamente por Marcelo Arroyo en \cite{tesismarcelo}.
