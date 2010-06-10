@@ -8,7 +8,6 @@ procedure generate_visit_sequences()
   for cada plan de evaluacion pe do
     /* Sea pe = (ord, C) donde ord es el orden de evaluacion de ecuaciones y C el contexto. */
     /* Sea C = p`$_{0}$`, p`$_{1}$`, p`$_{2}$`, `$\ldots$` , p`$_{n}$`. */
-    
     /* Sea S el simbolo inicial de la gramatica. */
     if head(p`$_{0}$`) = S then
       gen_visit_seq(pe)

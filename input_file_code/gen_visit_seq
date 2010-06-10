@@ -1,13 +1,11 @@
 procedure gen_visit_seq (p)
   /* Sea p = (ord, C) donde ord es el orden de evaluacion de ecuaciones y C el contexto. */
   /* Sea C = p`$_{0}$`, p`$_{1}$`, p`$_{2}$`, `$\ldots$` , p`$_{n}$`. */
-  
   v_seq_local = []
   /* Sea ord = eq`$_{0}$`, eq`$_{1}$`, eq`$_{2}$`, `$\ldots$` , eq`$_{k}$`. */
   for cada eq `$\in$` ord do
     /* Sea eq = (l_v, r_l) donde l_v es una instancia de atributo y r_l es un arbol de instancia de atributos. */
     r_side = inorder(r_l)
-    
     for cada instancia de atributo ins `$\in$` r_side do
       if inherited(ins) `$\wedge$` symbol(ins) == head(p`$_{0}$`) `$\wedge$` non_computed(ins) then
         v_seq_local = v_seq_local  `$\cup$` "leave"
@@ -26,6 +24,5 @@ procedure gen_visit_seq (p)
     end for
     v_seq_local = v_seq_local  `$\cup$` "compute" eq
   end for
-
   update(visit_seq(p), v_seq_local)
 end procedure
