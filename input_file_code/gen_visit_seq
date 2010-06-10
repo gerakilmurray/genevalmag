@@ -16,9 +16,7 @@ procedure gen_visit_seq (p)
           p_proj = buscar plan proyectado segun el contexto actual.
           plan = buscar plan segun el plan proyectado.
           gen_visit_seq(plan)
-          
           Actualizar instancias computadas
-                    
         end if
       end if
     end for
