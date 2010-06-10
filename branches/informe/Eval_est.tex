@@ -4,11 +4,11 @@
 
 En este capítulo se presentan los algoritmos de construcción de cada tipo de grafo, así como los usados para el cómputo de planes de evaluación y sus respectivas secuencias de visita. En su mayoría, los mismos, se basan en los propuestos por Wuu Yang en \ref{wuu-yang1}. Mientras que el algoritmo para el cálculo de secuencias de visita fue íntegramente desarrollado e implementado en el marco de la tesis.
 
-Para comprobar la correctitud de los algoritmos y lograr mayor grado de eficiencia, los mismos fueron testeados mediante la herramienta \textit{gcov} (Detalles en sección \ref{XXX}). La cual fue utilizada con mayor énfasis para el algoritmo de cómputo de secuencias de visita. En conjunto con los resultados propocionados por \textit{gcov} y análisis teóricos, la heurística que implementa el algoritmo fue refinada en varias oportunidades.
+Para comprobar la correctitud de los algoritmos y lograr mayor grado de eficiencia, los mismos fueron testeados mediante la herramienta \textit{gcov} (Detalles en sección \ref{XXX}). La cual fue utilizada con mayor énfasis para el algoritmo de cómputo de secuencias de visita. En conjunto con los resultados proporcionados por \textit{gcov} y análisis teóricos, la heurística que implementa el algoritmo fue refinada en varias oportunidades.
 
 \section{Algoritmos para cómputo de grafos}
 
-Todos estos algoritmos tienen una característica en común, expresan las depedencias existentes entre los atributos de una gramática. Por lo tanto en su construcción, los nodos y aristas son obtenidos de las relaciones entre dichos elementos.
+Todos estos algoritmos tienen una característica en común, expresan las dependencias existentes entre los atributos de una gramática desde distinto aspectos. Por lo tanto en su construcción, los nodos y aristas son obtenidos de las relaciones entre dichos elementos.
 
 \subsection*{Cómputo de DP}
 
@@ -21,7 +21,7 @@ Se debe generar un grafo DP por cada regla de la gramática. Es el más directo 
 
 \subsection*{Cómputo de Down}
 
-Este tipo de grafo, se debe crear para cada uno de los símbolos no terminales de la gramática, considerando únicamente la relaciones de depedencia entre sus atributos.
+Este tipo de grafo, se debe crear para cada uno de los símbolos no terminales de la gramática, considerando únicamente la relaciones de dependencia entre sus atributos.
 
 \begin{algorithm}[H]
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_down_wuu_yang}
@@ -37,7 +37,7 @@ La función \texttt{project} lo que hace básicamente es dado un grafo, elimina 
 
 \subsection*{Cómputo de DCG}
 
-Estos grafos se generan para cada regla de la gramática y considerando las depedencias entre los atributos del símbolo de la parte izquierda de la producción (\texttt{head}). Para computarlo se unen el grafo DP de la regla junto a todos los grafos Down de los símbolos de la parte derecha de la regla (\texttt{body}). Se utiliza nuevamente la función \texttt{project}.
+Estos grafos se generan para cada regla de la gramática y considerando las dependencias entre los atributos del símbolo de la parte izquierda de la producción (\texttt{head}). Para computarlo se unen el grafo DP de la regla junto a todos los grafos Down de los símbolos de la parte derecha de la regla (\texttt{body}). Se utiliza nuevamente la función \texttt{project}.
 
 \begin{algorithm}[H]
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_dcg_wuu_yang}
@@ -79,7 +79,7 @@ Para ello, como todo orden se puede ver como una secuencia, se agregan al grafo 
 \caption{\texttt{compute\_order}}
 \end{algorithm}
 
-La funcionalidad que cumple \texttt{project}, es dado un grafo purgarlo de todo elemento ajeno a el conjunto de ocurrencias de atributos especificados como parámetro. Pero para evitar que al eliminar nodos y aritas el grafo pierda información sobre las depedencias entre los atributos, se calcula previamente la clausura transitiva del grafo.
+La funcionalidad que cumple \texttt{project}, es dado un grafo purgarlo de todo elemento ajeno a el conjunto de ocurrencias de atributos especificados como parámetro. Pero para evitar que al eliminar nodos y aristas el grafo pierda información sobre las dependencias entre los atributos, se calcula previamente la clausura transitiva del grafo.
 
 \begin{algorithm}[H]
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/project2_wuu_yang}
@@ -87,17 +87,32 @@ La funcionalidad que cumple \texttt{project}, es dado un grafo purgarlo de todo 
 \end{algorithm}
 
 \section{Algoritmo de cómputo de secuencias de visita}
+\label{sec:algseqvisit}
 
-Las secuencias de visitas, son las traducciones de los planes de evaluación en secuencias compuestas por tres comandos\footnote{\texttt{compute}, \texttt{leave} y \texttt{visit}, ver más detalles en \ref{XXX}.} que permitan navegar por es AST a evaluar.
+Las secuencias de visitas, son traducciones de los planes de evaluación en secuencias compuestas por tres comandos\footnote{\texttt{compute}, \texttt{leave} y \texttt{visit}, ver más detalles en \ref{XXX}.} que permitan la navegación por el AST para su evaluación.
 
-Este proceso fue diseñado e implementado para el desarrollo de \maggen. La generación se dividió en dos algoritmos, el primero inicializa todas las secuencias de visitas y luego invoca al segundo solamente para los planes de evaluación que pertenecen a la producción inicial de la gramática, que por se \textbf{extendida}\footnote{Ver ref{XXX}.} es única.
+Este proceso fue diseñado e implementado para el desarrollo de \maggen. La generación se dividió en dos algoritmos, el primero se encarga de la inicialización de todas las secuencias de visitas y la invocación del segundo solamente para los planes de evaluación que pertenecen a la producción inicial de la gramática.
+
+La traducción bajo demanda de los planes de evaluación, permite realizar optimizaciones como se explicará en el capítulo \ref{chap:implem} de implementación.
 
 \begin{algorithm}[H]
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/generate_visit_sequences}
 \caption{Generador de secuencias de visitas.}
 \end{algorithm}
 
-El segundo realiza un proceso recursivo para lograr la traducción, como ya se explicó en \ref{XXX} es una simulación del recorrido sobre el árbol que se realizaría en tiempo de evaluación.
+El segundo realiza un proceso recursivo para lograr la traducción. Como ya se explicó en \ref{XXX}, es una simulación del recorrido sobre el árbol en tiempo de evaluación.
+
+Por lo que se debe llevar una secuencia de visita local, a la cual se le insertarán los distintos comandos. Además, será necesario una función que lleve cuáles son las instancias de atributos ya calculadas.
+
+Como se hizo notar en \ref{}, existen pequeñas diferencias entre los comandos que integran la secuencia de visita a nivel teórico y los que realmente se implementaron. En esta sección, se verán desde el segundo punto de vista.
+
+De esta forma, cuando se detecta un \texttt{visit}, se debe detectar a que hijo tiene que recursar, en base al plan actual, el cual tiene un contexto establecido, determinar el plan proyectado que será el orden de evaluación impuesto a nuestro hijo en la recursión. Al volver se debe actualizar todas las instancias de atributos que fueron computadas en el contexto inferior, para evitar futuras visitas innecesarias.
+
+Con el mismo criterio, al producirse un \texttt{leave} por la necesidad de requerir que en el contexto superior se calcule una instancia de atributo, puede ser que se calculen más de lo que solicitó, por eso se deben actualizar la información de computados.
+
+Una ecuación se podrá computar solamente cuando todo su \texttt{r-value} halla sido marcado como computado, ya sea mediante un \texttt{visit} o \texttt{leave}.
+
+Por último, es necesario una función que combine y actualice la secuencia de visita global, con la que se calculó a nivel local. Esto es ya que una secuencia de visita puede ser completada en más de una visita.
 
 \begin{algorithm}[H]
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/gen_visit_seq}
@@ -106,6 +121,9 @@ El segundo realiza un proceso recursivo para lograr la traducción, como ya se e
 
 
 \section{Algoritmo de evaluación de atributos}
+\label{sec:algevalattr}
+
+Este algoritmo, no se encuentra implementado dentro de \maggen, sino dentro del evaluador generado. Se basa en dos etapas bien definidas y con propósitos diferentes. Se deben realizar dos recorridos del AST de entrada, en el primero es una barrida descendente en la que se seleccionan los planes de evaluación para cada regla almancenada en los nodos. En el segundo, no precisamente se realiza un recorrido uniforme, sino que se navega descendente y ascendentemente, se acuerdo a la secuencia de visita correspondiente al plan seleccionado en la primera etapa.
 
 \begin{algorithm}[H]
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/eval_attribute_wuu_yang}

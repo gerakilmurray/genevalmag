@@ -20,28 +20,24 @@ A toda la familia.
 
 \begin{vcenterpage}
 
-
-
-{\large\textbf{Resumen:\\}}
+{\large\textbf{Resumen\\}}
 \noindent\rule[2pt]{\textwidth}{0.5pt}
 
 El tratamientos de lenguajes es uno de los temas más estudiados en los últimos años.
 Las gramáticas de atributos son un formalismo que permite utilizar el poder descriptivo de las gramáticas libres de contexto y la expresividad de los lenguajes funcionales.\\ 
 
-En una gramática de atributos, se relaciona con cada símbolo de una \textit{gramática libre de contexto} un conjunto de atributos. Cada regla o producción tiene asociados un c\textit{onjunto de reglas semánticas} que toman la forma de asignación a atributos de valores denotados por la aplicación de una función, la cual puede tomar como argumentos instancias de atributos pertenecientes a los símbolos que aparecen en la producción.
+En una gramática de atributos, se relaciona con cada símbolo de una \textit{gramática libre de contexto} un conjunto de atributos. Cada regla o producción tiene asociado un \textit{conjunto de reglas semánticas} que toman la forma de asignación a atributos de valores denotados por la aplicación de una función, la cual puede tomar como argumentos instancias de atributos pertenecientes a los símbolos que aparecen en la producción.
 Las reglas semánticas inducen \textit{dependencias entre los atributos} que ocurren en la producción. El \textit{orden de evaluación} es implícito (si existe) y queda determinado por las dependencias entre las instancias de los atributos.
 
-Si una gramatica de atributos contiene dependencias circulares no podría ser evaluada ya que no se encontraría un orden de evaluación. Esto se conoce como el \textbf{problema de la circularidad}, el cual ha motivado que muchos investigadores hayan realizado esfuerzos en la búsqueda e identificación de familias de gramáticas de atributos, para las cuales puedan detectarse circularidades con algoritmos eficientes.
+Si una gramática de atributos contiene dependencias circulares no podría ser evaluada ya que no se encontraría un orden de evaluación. Esto se conoce como el \textbf{problema de la circularidad}, el cual ha motivado que muchos investigadores hayan realizado esfuerzos en la búsqueda e identificación de familias de gramáticas de atributos, para las cuales puedan detectarse circularidades con algoritmos eficientes.
 
 Estas familias imponen restricciones sobre la gramática de atributos o sobre las dependencias entre sus atributos para garantizar que una GA no sea circular, con el costo de restringir su poder expresivo.
 
-En 1998, Wuu Yang caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multi-planes}(MAG), presentado un algoritmo de evaluación basado en secuencia de visita en tiempo polinomial, en el numero de símbolos y producciones.\\ 
+En 1998, Wuu Yang caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multi-planes} (MAG), presentado un algoritmo de evaluación basado en secuencia de visita en tiempo polinomial, en el número de símbolos y producciones.\\ 
 
-\maggen\ es una herramienta que genera evaluadores para esta familia de gramaticas basando su funcionamiento en las bases teoricas presentadas por Wuu Yang. La salida de \maggen\ es un modulo C++ que se corresponde con un evaluador estatico de una gramatica MAG. El mismo, contiene secuencias de visita para todos los planes de evaluacion en los posibles contextos.
+\maggen\ es una herramienta que genera evaluadores para esta familia de gramáticas basando su funcionamiento en las bases teóricas presentadas por Wuu Yang. La salida de \maggen\ es un módulo C++ que se corresponde con un evaluador estático de una gramática MAG. El mismo, contiene secuencias de visita para todos los planes de evaluación en los posibles contextos y los algortimos para llevar a cabo la evaluación de un árbol sintáctico atribuido (AST).
 
-El desarrollo de \maggen\ es el principal aporte de este trabajo. La herramienta fue desarrollada teniendo en cuenta, una integracion y combinacion con otros modulos de un ambiente de tratamientos de lenguajes.
-
-
+El desarrollo de \maggen\ es el principal aporte de este trabajo. La herramienta fue desarrollada teniendo en cuenta, la capacidad de integración y combinación con otros módulos de un ambiente de tratamientos de lenguajes.
 
 % {\large\textbf{Palabras claves:}}
 % 
@@ -50,8 +46,6 @@ El desarrollo de \maggen\ es el principal aporte de este trabajo. La herramienta
 \noindent\rule[2pt]{\textwidth}{0.5pt}
 
 \end{vcenterpage}
-
-
 
 \tableofcontents
 
