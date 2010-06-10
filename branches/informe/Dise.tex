@@ -7,7 +7,7 @@
 
 El lenguaje de especificación utilizado para la descripción de una Gramática de atributos (MAG) fue definido en el marco de este proyecto. Esto permite definir una gramática de atributos como input de \maggen.
  
-La secciones que conforman la descripción de una gramática de atributos (MAG) se corresponden con las características que la definen analizados en los capitulos anteriores (ver capítulo \ref{chap:mag} y principalmente la definicion \ref{def:MAG}).
+La secciones que conforman la descripción de una gramática de atributos (MAG) se corresponden con las características que la definen analizados en los capítulos anteriores (ver capítulo \ref{chap:mag} y principalmente la definición \ref{def:MAG}).
  
 Informalmente, el lenguaje de especificación se conforma de las siguientes partes:
 
@@ -290,7 +290,7 @@ El símbolo terminal se considera un símbolo entre comillas simples (\texttt{'}
 \vspace{0.2cm}
 
 Las ecuaciones describen las reglas semánticas que definen la sintaxis de la gramática. Cada ecuación define la interpretación semántica de los atributos de cada símbolo; esta definición se realiza mediante una expresión constituida por \textbf{instancias}, \textbf{literales} o aplicación de operadores y funciones a subexpresiones.
-En este punto se deben tener en cuenta los requisitos necesarios de una gramática bien definida (Ver seccion \ref{sec:well-defined}).
+En este punto se deben tener en cuenta los requisitos necesarios de una gramática bien definida (Ver sección \ref{sec:well-defined}).
 
 A continuación se define el símbolo \texttt{decl\_rules}:
 
@@ -449,7 +449,7 @@ Notar que, la línea y columna donde se indica el error corresponde al inicio de
 
 \subsection*{Representación interna}
 
-Las estructuras creadas para la representación interna de la gramática se encuentran dentro de los paquetes \texttt{Attr\_grammar} y \texttt{Expression\_tree} de \maggen. Detalles de implementación sobre estos paquete serán tratando en la sección \ref{XXX} (imp). 
+Las estructuras creadas para la representación interna de la gramática se encuentran dentro de los paquetes \texttt{Attr\_grammar} y \texttt{Expression\_tree} de \maggen. Detalles de implementación sobre estos paquete serán tratando en la sección \ref{XXX}. 
 
 Ahora nos encargaremos de algunas consideraciones respecto del diseño. 
 \texttt{Expression\_tree} agrupa módulos para la representación de las expresiones de las ecuaciones y \texttt{Att\_grammar}, encapsula los demás componentes de la gramática.
@@ -561,7 +561,7 @@ La construcción de grafos se realiza en el modulo \texttt{builder\_graphs}. \ma
 
 Las figuras\footnote{\label{foot:graph} Imagen generada utilizando la herramienta \textit{graphviz} sobre el archivo \texttt{.dot} generado por \maggen.} muestran un ejemplo de cada tipo de grafo, generados a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
 
-La construcción de cada tipo de grafo respeta los principios analizados en el capítulo \ref{chap:mag} y los algorimos respectivo analizados en el capitulo  \ref{chap:eval_est}. 
+La construcción de cada tipo de grafo respeta los principios analizados en el capítulo \ref{chap:mag} y los algoritmos respectivo analizados en el capítulo  \ref{chap:eval_est}. 
 
 De de los 4 tipos de grafos analizados, los necesarios para el cómputo de etapas siguientes, son los ``ADP graph''. Los demás, son requeridos como cálculo previo para la construcción de estos.
 
@@ -574,7 +574,7 @@ La etapa de construcción de planes, tal como lo muestra el diagrama de la figur
 \item El cálculo de planes se basa en un orden topológico de la evaluación de los atributos de los símbolos, teniendo en cuenta los distintos contextos posibles.
 \end{enumerate}
 
-En la sección \ref{XXX} se tratan detalles de implementación, en donde podemos analizar el funcionamientos de lo tratado anteriormente, en especial el punto 2.
+En la sección \ref{sec:obtplaneval} se tratan detalles de implementación, en donde podemos analizar el funcionamientos de lo tratado anteriormente, en especial el punto 2.
 Un \textbf{plan} se compone de lista de números de ecuaciones a computar. Todo plan nos marca un orden de evaluación interpretando la lista de números de ecuaciones, de izquierda a derecha.
 
 \subsubsection*{Planes proyectados}
@@ -737,9 +737,9 @@ void evaluator_mag(struct Node *root);
 
 Estos, son los servicios públicos que ofrece el evaluador generado por \maggen. El métodos mas importante, es \texttt{evaluator\_mag}, el cual pone en funcionamiento el evaluador generado por \maggen. El parámetro tomado por el método representa la raíz del AST que se desea evaluar.
 
-El constructor de clase\footnote{El nombre de la clase y por ende el del constructor de la misma depende de los parámetros con los cuales se invocó a \maggen\ (Ver capitulo \ref{chap:usos}).} realiza la inicialización de los atributos de la misma. Los valores de inicialización de los atributos son obtenidos por los cómputos de cada etapa de \maggen\ vistas en todo este capítulo.
+El constructor de clase\footnote{El nombre de la clase y por ende el del constructor de la misma depende de los parámetros con los cuales se invocó a \maggen\ (Ver capítulo \ref{chap:usos}).} realiza la inicialización de los atributos de la misma. Los valores de inicialización de los atributos son obtenidos por los cómputos de cada etapa de \maggen\ vistas en todo este capítulo.
 
-Los dos métodos anexos, \texttt{print\_visit\_seqs} y \texttt{translates\_visit\_seqs} pueden ser usados para visualizar las secuencias de visita del evaluador. Los dos realizan la misma funcionalidad, pero muestran las secuencias de visita de manera diferente, como lista de valores o como secuencia de \texttt{compute}, \texttt{visit} o \texttt{leave} (detalle de secuencia de visita en \ref{XX - implem}).
+Los dos métodos anexos, \texttt{print\_visit\_seqs} y \texttt{translates\_visit\_seqs} pueden ser usados para visualizar las secuencias de visita del evaluador. Los dos realizan la misma funcionalidad, pero muestran las secuencias de visita de manera diferente, como lista de valores o como secuencia de \texttt{compute}, \texttt{visit} o \texttt{leave}.
 \end{itemize}
 \end{description}
 
