@@ -794,6 +794,7 @@ bool generate_graphs()
 \vspace{0.3cm}
 
 \subsection*{Generación de planes}
+\label{sec:genplanes}
 
 Una vez que se concluyó la generación de grafos, se construyen los planes, se prosigue con el chequeo de ciclicidad de los grafos ADP. Si se supera con éxito, se generarán los planes, sino se abortará el proceso.
 
@@ -1164,7 +1165,10 @@ rules.push_back(rule_non_terminal_0);
 
 La mayor parte de los algoritmos utilizados dentro del evaluador generado, se encuentran escritos dentro de la herramienta y son transcritos al archivos fuente directamente.
 
-El algoritmo que implementamos para poder evaluar un AST, es el propuesto por Wuu Yang en \ref{XXX}. El cual realiza en dos etapas bien definidas:
+\subsection*{Algoritmo de evaluación}
+\label{sec:codcppalgeval}
+
+El algoritmo que implementamos para poder evaluar un AST, es el propuesto por Wuu Yang en \ref{sec:algevalattr}. El cual realiza en dos etapas bien definidas:
 
 \begin{description}
 \item [Primera recorrida del AST] se invoca a la función
@@ -1178,7 +1182,7 @@ El algoritmo que implementamos para poder evaluar un AST, es el propuesto por Wu
 \end{items}
 \end{description}
 
-El código del evaluador reducido por su gran nivel de modularización. Recibe como parámetro la raíz del AST a evaluar. El orden inicial de evaluación para los atributos del símbolo inicial y que por ser una gramática extendida no ocurre en ningún otro lado de la misma, siempre se encuentra en la posición cero del arreglo de planes de evaluación únicos.
+El código del evaluador es reducido por su gran nivel de modularización. Recibe como parámetro la raíz del AST a evaluar. El orden inicial de evaluación para los atributos del símbolo inicial y que por ser una gramática extendida no ocurre en ningún otro lado de la misma, siempre se encuentra en la posición cero del arreglo de planes de evaluación únicos.
 
 \vspace*{0.2cm}
 \begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible, linewidth=6cm]
