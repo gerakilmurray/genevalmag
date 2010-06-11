@@ -38,7 +38,7 @@ S = semantic domain decl_Sd
 En las secciones siguientes se presentaran los símbolos \textit{decl\_Sd}, \textit{decl\_attr} y \textit{decl\_rules} con más detalle.  
 
 \subsection{Bloque Dominio semántico}
-
+\label{subsec:bloq-sem}
 El bloque ``\texttt{semantic domain}'' es el encargado de la definición de elementos que serán necesarios para los bloques siguientes. 
 
 El bloque semántico esta subdividido en 3 secciones, que se corresponden con la definición de sort, operadores y funciones, cada una con su sintaxis propia. 
@@ -97,7 +97,7 @@ El lenguaje de especificación contempla los siguiente tipos básicos:
 En caso de declaración explícita de cualquiera de ellos, en la especificación, la línea no es reflejada en el funcionamiento interno de \maggen.
 
 \subsubsection{Declaración de operadores}
-La sección destinada a la declaración de \texttt{operadores} acepta 3 tipos de operadores, los cuales, difieren en su forma de uso y cantidad de operandos. Denominados, infijo, prefijo y posfijo. 
+La sección destinada a la declaración de \texttt{operadores} acepta 3 tipos de operadores, los cuales, difieren en su forma de uso y cantidad de operandos. Denominados, \textit{infijo, prefijo y posfijo}. 
 
 La interpretación de cada uno, esta dada por la interpretación natural común a todos los lenguajes de programación, a modo de ejemplo se muestran un operador de cada tipo para evitar problemas en esta sección:
 
@@ -409,7 +409,7 @@ En la presentación del ejemplo en el lenguaje de especificación, se observa en
  
 \section{Parser del lenguaje, representación interna y chequeos}
 
-El parser del lenguaje de especificación se llevó a cabo utilizando las librerías \boost\ \spirit. Detalles de este tema, son tratado puntualmente en \ref{XXX-implem}. 
+El parser del lenguaje de especificación se llevó a cabo utilizando las librerías \boost\ \spirit. Detalles de este tema, son tratado puntualmente en las secciones \ref{sec:par-spirit} y \ref{sec:gramspirit}. 
 
 En esta sección nos encargaremos de algunas consideraciones del parser desde el punto de vista de su funcionamiento, algunos detalles en la representación interna y de los chequeos realizados sobre la entrada de \maggen\ para asegurar características de gramática bien definida.
 
@@ -449,7 +449,7 @@ Notar que, la línea y columna donde se indica el error corresponde al inicio de
 
 \subsection*{Representación interna}
 
-Las estructuras creadas para la representación interna de la gramática se encuentran dentro de los paquetes \texttt{Attr\_grammar} y \texttt{Expression\_tree} de \maggen. Detalles de implementación sobre estos paquete serán tratando en la sección \ref{XXX}. 
+Las estructuras creadas para la representación interna de la gramática se encuentran dentro de los paquetes \texttt{Attr\_grammar} y \texttt{Expression\_tree} de \maggen. Detalles de implementación sobre estos paquete serán tratando en el capítulo siguiente. 
 
 Ahora nos encargaremos de algunas consideraciones respecto del diseño. 
 \texttt{Expression\_tree} agrupa módulos para la representación de las expresiones de las ecuaciones y \texttt{Att\_grammar}, encapsula los demás componentes de la gramática.
@@ -529,7 +529,7 @@ En la figura \ref{fig:disen} pudimos analizar el funcionamiento de \maggen, teni
 \subsection*{Construcción de grafos}
 \label{subsec:graph}
 
-Detalles de implementación serán analizando en la sección \ref{XXX}, ahora tomaremos un par de minutos para mencionar algunas consideración con respecto al funcionamiento de los grafos en \maggen.\\
+Detalles de implementación serán analizando en la sección \ref{subsec:const-graf}, ahora tomaremos un par de minutos para mencionar algunas consideración con respecto al funcionamiento de los grafos en \maggen.\\
 
 La construcción de grafos se realiza en el modulo \texttt{builder\_graphs}. \maggen\ crea 4 tipos de grafos, que se corresponden con los detallas en \ref{sec:pre-grafos}:
 
@@ -566,7 +566,7 @@ La construcción de cada tipo de grafo respeta los principios analizados en el c
 De de los 4 tipos de grafos analizados, los necesarios para el cómputo de etapas siguientes, son los ``ADP graph''. Los demás, son requeridos como cálculo previo para la construcción de estos.
 
 \subsection*{Construcción de planes}
-
+\label{subsec:conts-plan-dise}
 La etapa de construcción de planes, tal como lo muestra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``Builder''. El cálculo de planes en \maggen\ se basa en lo analizado en el cap \ref{chap:eval_est} (Ver sección \ref{sec:comp-planes}) y teniendo en cuenta estos dos puntos:
 
 \begin{enumerate}
@@ -636,7 +636,7 @@ A modo de ejemplo observemos las siguientes secuencias de visita generada por \m
 Cabe aclarar que todas las secuencias de visita tienen un \textbf{leave} implícito al final, es decir, cuando se completo la computación de la secuencia se retorna a su ámbito de invocación.
 
 \subsubsection*{Heurística de la simulación}
-
+\label{subsec:heuris-simul}
 El punto principal del cual se basa la heurística es, evaluar el plan buscando las dependencias de cada ecuación en el contexto del mismo. Veamos los pasos básicos a tener en cuenta con el siguiente ejemplo:\\
 
 Supongamos uno de los planes\footnote{Es importante notar el hecho de que cada plan se conforma de los números de ecuaciones a computar.} calculados por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}:\\

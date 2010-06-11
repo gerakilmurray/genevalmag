@@ -44,7 +44,7 @@ $$ DP_{ord}(p) \equiv DP(p) \cup \{ (X.a, X.b) \in O(X) \mid \textrm{X ocurre en
 En 1996, Wuu Yang\cite{wuu-yang4} caracterizó una extensión a las OAG que permite que el algoritmo de decisión de pertenencia a esta nueva familia sea de tiempo polinomial. A ésta extensión se la conoce como \textbf{Extended OAG o EOAG}.
 
 El algoritmo propuesto, se basa en la introducción de un paso adicional, previo a la construcción del particionado, que consiste en el armado de conjuntos de dependencias aumentadas de los símbolos y redefine el particionado para que se tengan en cuenta estas dependencias.
-Marcelo Arroyo en \ref{tesismarcelo} presenta un análisis detallado sobre esta familia y  los algoritmos que propuso Wuu Yang.
+Marcelo Arroyo en \cite{tesismarcelo} presenta un análisis detallado sobre esta familia y  los algoritmos que propuso Wuu Yang.
 
 \section{Gramática de Atributos absolutamente no circulares (ANCAG)}
 
@@ -66,7 +66,7 @@ Notar que la relación $IDP-ANCAG(p)$ es pesimista ya que podría contener depen
 Retomaremos esta familia en el capítulo siguiente con la definición \ref{def:ancag} y los teoremas \ref{th:ancag1} y \ref{th:ancag2} para cubrir su relación con la familia MAG.
 
 \section{Gramáticas de Atributos no circulares (NC)}
-
+\label{sec:gramNC}
 En 1999 Wuu Yang\cite{wuu-yang2} propone una nueva clasificación de \emph{Gramáticas de atributos no circulares basadas en información de contextos inferiores (lookahead behavior)}. Esta jerarquía fue denominada por Wuu Yang como  \emph{\textbf{NC}}.
 
 La idea básica en la jerarquía \emph{NC} es tratar de computar grafos de dependencias inducidos para cada producción y cada símbolo no terminal, que sean aproximaciones mas reales (refinamientos) a los grafos utilizados en la caracterización de otras clases como las descriptas anteriormente. 
@@ -76,7 +76,7 @@ Es posible encontrar aproximaciones mas exactas si se tienen en cuenta los posib
 La jerarquía \emph{NC} se clasifica en clases según el \textit{lookahead behavior}. Este mide el nivel de transitividad en la observación de los posibles contextos inferiores de una producción. Analicemos algunas de las clases en la jerarquía \emph{NC}:
 \begin{description}
 \item [NC(0)] Esta clase (sin $lookahead$) se corresponde con la familia ANCAG, debido que no observa contexto inferiores. 
-\item [NC(1)] Las gramáticas $NC(1)$ mantienen un $lookahead$ de 1 y un resultado importante es que la familia $NC(1)$ contiene a las ANCAG. Wuu Yang en \cite{wuu-yang} presenta la familia de las MAG y las asocia con esta subfamilia dentro de la jerarquía $NC(1)$. Es por ello que en el capítulo siguiente es tratada en detalles esta familia de gramáticas.
+\item [NC(1)] Las gramáticas $NC(1)$ mantienen un $lookahead$ de 1 y un resultado importante es que la familia $NC(1)$ contiene a las ANCAG. Wuu Yang en \cite{wuu-yang1} presenta la familia de las MAG y las asocia con esta subfamilia dentro de la jerarquía $NC(1)$. Es por ello que en el capítulo siguiente es tratada en detalles esta familia de gramáticas.
 \item[NC(k)] Esta clase tiene en cuenta un $k>1$, es decir un $lookahead$ de $k$. La clase $NC(k)$ consiste de aquellas GA's para las cuales existe un conjunto de planes de evaluación para cada producción, que quedan determinados analizando $k$ niveles de producciones descendientes. Es decir $k$ niveles de observación en los posibles contextos inferiores.
 \item[NC($\infty$)] Existen gramáticas de atributos que no pertenecen a la familia $NC(k)$ para ningún $k$. Esto sucede cuando la gramática tiene producciones que son mutuamente recursivas. Un árbol sintáctico podría contener derivaciones de la forma $X \rightarrow Y \rightarrow X$ para cualquier número de repeticiones y si existiera un ciclo en las dependencias no podría determinarse estáticamente para ningún número finito de descendientes $k$.
 
@@ -93,7 +93,7 @@ Dado un $k$ finito, $NC(k)$ es una subclase propia de $NC(k+1)$ y existe un proc
 
 
 \section{Relación entre familias}
-
+\label{sec:relfamag}
 A continuación, analizamos la relación entre familias de GA que fueron presentadas en este capítulo. El enfoque del análisis esta dado por el poder expresivo de cada familia (Ver figura \ref{jer-GA}).
 
 \begin{table}[!h]\centering

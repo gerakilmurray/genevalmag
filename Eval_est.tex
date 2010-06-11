@@ -38,7 +38,7 @@ La función \texttt{project} recibe un grafo, del cual debe eliminar todos los n
 \end{algorithm}
 
 \subsection{Cómputo de DCG}
-
+\label{subsec:alg-DCG}
 Estos grafos se generan para cada regla de la gramática y considerando las dependencias entre los atributos del símbolo de la parte izquierda de la producción (\texttt{head}). Para computarlo se unen el grafo DP de la regla junto a todos los grafos Down de los símbolos de la parte derecha de la regla (\texttt{body}). Se utiliza nuevamente la función \texttt{project}.
 
 \begin{algorithm}[H]

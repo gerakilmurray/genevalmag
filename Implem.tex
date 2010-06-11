@@ -7,7 +7,7 @@ En esta sección se aclararan y expondrán decisiones que se realizaron a lo lar
 Primero, como ya se menciona en el capítulo anterior, el lenguaje sobre el cual se realizó el desarrollo de \maggen\ es C++, con lo que todo el código es principalmente característico de un modelo de programación Orientado a Objetos, aunque posee secciones de Programación Imperativa, para lograr ciertas optimizaciones y poder integrar componentes de externos a la herramienta.
 
 \section{Parsing usando \boost\ \spirit}
-
+\label{sec:par-spirit}
 El primer desafío de codificación, fue que se debía conseguir parsear el archivo de entrada de la herramienta, en el cual vendría la especificación de una Gramática de Atributos, respetando la sintaxis presentada anteriormente, o no.
 
 La solución obtenida se apoya en la utilización de un framework reconocido mundialmente, denominado \spirit, perteneciente a la biblioteca de C++ llamada \boost. Esta decisión trajo dos grandes beneficios; la confiabilidad de el parser obtenido y la rápida obtención del mismo, ya que la gran ventaja de \spirit, es que permite escribir la definición de la gramática en lenguaje \textbf{C++}.
@@ -135,7 +135,7 @@ else
 
 
 \section{Gramática de Atributos con \spirit}
-
+\label{sec:gramspirit}
 Lo primero que se tuvo que realizar, fue definir los componentes básicos que se iban a necesitar para construir las demás declaraciones.
 
 \begin{description}
@@ -217,7 +217,8 @@ En esta sección de la especificación se debían aceptar tres tipos de elemento
 
 Los \texttt{sorts} serán los tipos que se podrán utilizar para definir los dominios e imágenes de los operadores y funciones.
 
-Según lo explicado en el diseño \ref{XXX}, las reglas de cada clase, han sido codificados de la siguiente manera.
+% Según lo explicado en el diseño \ref{XXX}, las reglas de cada clase, han sido codificados de la siguiente manera.
+Teniendo en cuenta lo analizado en la seccion \ref{subsec:bloq-sem}, a continuación se analizan un algunas consideracion de implementación.
 
 \begin{description}
 \item [\texttt{sorts}] Exigimos que luego del identificador ``\texttt{sort}'' halla un espacio\footnote{\label{foot:espacio} Ver definición de \texttt{space\_p} \ref{parsers}}. El nombre leído, se usará para crear un nuevo Sort dentro de la GA y también se insertará en la tabla de símbolos de sorts. Se acepta una lista de nombres de sorts para comodidad del usuario.
@@ -629,7 +630,7 @@ La heurística utilizada, consiste en recorrer el \texttt{map} de símbolos no t
 
 Este control es uno de los más importantes, ya que si la gramática por más que haya sido parseada correctamente, si no cumple con las condiciones de una MAG, nuestra herramienta la descarta y no le generará su correspondiente evaluador.
 
-Como ya se mencionó en el capítulo \ref{XXX}, varias son las condiciones que se deben chequear.
+Como ya se mencionó en la sección \ref{subsec:check}, varias son las condiciones que se deben chequear.
 
 La heurística aplicada fue recorrer el \texttt{map} de reglas, donde para cada una verificábamos que estuviesen definidas dentro de su \texttt{map} de ecuaciones, una para cada uno de sus atributos sintetizados. Y a su vez, una ecuación para cada atributo heredado de sus símbolos de la parte derecha.
 
@@ -650,13 +651,13 @@ Cada vez que se detectaba un error, se lo informa mediante alguno de los siguien
 \section{Obtención de planes de evaluación}
 \label{sec:obtplaneval}
 
-Como ya se explicó en el diseño \ref{XXX}, el propósito final de \maggen\ es obtener todos los planes posibles de la gramática de entrada.
+El propósito final de \maggen\ es obtener todos los planes posibles de la gramática de entrada. En la sección \ref{subsec:conts-plan-dise}, se analizaron algunas consideracions a tener en cuenta, en esta seccion las retomamos desde el punto de vista de la implementación. 
 
 Teóricamente un plan es una secuencia de atributos, que indica un orden de evaluación total y consistentes de los mismos. Dentro de \maggen, se optó para su representación una secuencia de identificadores de ecuaciones. Ya que cada ecuación tiene solamente \textbf{un} \texttt{l-value}, que es precisamente un atributo. Se utiliza la clase \texttt{vector} de la STL, para su almacenamiento y están enumeradas de forma tal que pueden ser identificadas de manera univoca.
 
 Como en general, se iban a generar en muchos casos los mismos planes, se decidió mantener un \texttt{vector} con todos los planes diferentes, así solo generaríamos la mínima cantidad de planes únicos.
 
-Como en el algoritmo que se presenta en el artículo de Wuu Yang(ver bibliografía \ref{XXX}), a cada plan se lo asocia con un \texttt{key}, primero implementamos esa clave como una estructura con los siguientes datos:
+Como en el algoritmo que se presenta en el artículo de Wuu Yang (\cite{wuu-yang1}), a cada plan se lo asocia con un \texttt{key}, primero implementamos esa clave como una estructura con los siguientes datos:
 \begin{itemize}
 \item La regla a la cual pertenece el plan
 \item Una secuencia para computar sus atributos
@@ -678,7 +679,7 @@ Cada plan proyectado estaba bajo una clave particular, la cual según el algorit
 Los dos primeros valores, corresponden a un \texttt{key} de un plan de evaluación, así que se usó directamente esa estructura.
 
 \subsection{Construcción de grafos}
-
+\label{subsec:const-graf}
 Para la representación de los grafos utilizamos la \boost\ \textit{\textbf{Graph Library}} (\textbf{BGL}). Ya que la misma presentaba muchas funcionalidades y ya se encontraba como una dependencia externa de la herramienta.
 
 Como en la mayoría de los componentes de esta biblioteca, los mismos eran plantillas que necesitaban ser instanciados.
@@ -820,7 +821,7 @@ unsigned short build_plans()
 \end{lstlisting}
 \vspace{0.3cm}
 
-El proceso de construir un plan es complejo, la heurística seguida respeta el algoritmo para computar planes presentado por Wuu Yang (ver \ref{XXX}).
+El proceso de construir un plan es complejo, la heurística seguida respeta el algoritmo para computar planes presentado por Wuu Yang (\cite{wuu-yang1}).
 
 Por lo que se implementaron las funciones y elementos involucrados con lo siguiente:\\
 
@@ -864,7 +865,7 @@ La función \texttt{purge\_plan\_with}, dado un plan de evaluación de ecuacione
 
 \section{Construcción de Secuencias de Visita}
 
-Este proceso como se explicó en el capítulo \ref{XXX}, consiste en lograr a partir se cada plan de evaluación su correspondiente traducción a una secuencia de visita consistente, que permita navegar el árbol al momento de la evaluación. Por lo que la misma esta compuesta por básicamente tres valores:
+Este proceso como se explicó en la sección \ref{sec:constseqvisit}, consiste en lograr a partir de cada plan de evaluación, su correspondiente traducción a una secuencia de visita consistente, que permita navegar el árbol al momento de la evaluación. La misma esta compuesta, básicamente, por tres valores:
 
 \begin{itemize}
 \item \texttt{Visit}: visitar a un nodo hijo debido a que necesita que le compute algún atributo sintetizado.
@@ -882,7 +883,9 @@ Por la forma de los mismos, se decidió como forma de representación un arreglo
 
 La cantidad de secuencias de visitas es la misma que la de los planes de evaluación generados, y como este proceso se apoya en una ``\textbf{simulación}'', la construcción de las secuencias se da en forma incremental. Por eso se inicializan todas las estructuras de almacenamiento con secuencias de visitas vacías, que luego serán modificadas mediante indexación sobre el repositorio.
 
-Aquí queda claro la optimización realizada mediante la creación de planes únicos, es decir, no existen dentro de \maggen\ planes repetidos. Por lo tanto, sólo se crearán una cantidad mínima de secuencias de visita también. Para ver cifras de la optimización, dirigirse al capítulo \ref{XXX}.
+Aquí queda claro la optimización realizada mediante la creación de planes únicos, es decir, no existen dentro de \maggen\ planes repetidos. Por lo tanto, sólo se crearán una cantidad mínima de secuencias de visita también. 
+
+% Para ver cifras de la optimización, dirigirse al capítulo \ref{XXX}.
 
 La implementación fue la siguiente:
 
@@ -892,7 +895,7 @@ typedef vector < int > Visit_seq;
 vector < Visit_seq > all_visit_seqs;
 \end{lstlisting}
 
-Como ya se analizó en \ref{XXX}, basta con lanzar el proceso de simulación sobre él o los planes asociados a la regla inicial. Además es correcto, porque toda evaluación comenzará desde ese punto.
+Como ya se analizó en la sección \ref{subsec:heuris-simul}, con la heuristica utilizada,  basta con lanzar el proceso de simulación sobre él o los planes asociados a la regla inicial. Además es correcto, porque toda evaluación comenzará desde ese punto.
 
 El algoritmo que se diseñó es recursivo y se apoya en ciertas listas que llevan información de contextos anteriores que son utilizados para realizar podas\footnote{Heurística que permite descartar ramas completas en problemas sobre decisión en árboles y grafos análogamente. \urllink{http://en.wikipedia.org/wiki/Branch\_and\_cut}} y cálculos innecesarios. Estos son:
 
@@ -971,7 +974,7 @@ La actualización se lleva a cabo mediante la función \texttt{update\_visit\_se
 \end{items}
 
 \underline{Por ejemplo:}\hspace*{1cm} \textbf{[-7, 0]} update con \textbf{[-7, -8]}\\
-\hspace*{2.8cm} da como resultado: \textbf{[-7, 0, -8]}\footnote{Secuencia de visita del ejemplo del apéndice \ref{XXX}}.
+\hspace*{2.8cm} da como resultado: \textbf{[-7, 0, -8]}\footnote{Secuencia de visita del ejemplo del apéndice \ref{append:agwuuyang}}.
 
 \item Si un plan se recorrió en su totalidad, se inserta en \texttt{plans\_computed}.
 
@@ -1056,13 +1059,13 @@ bool generate_code(const vector<string> &headers_file) const
 }
 \end{lstlisting}
 
-Notar que recibe como parámetro una referencia a los ``\texttt{headers}'' que el usuario proporcionó en el momento de la invocación de \maggen \footnote{Ver capítulo \ref{XXX} sobre Usos}. Los mismos serán incluidos en el archivo \texttt{.cpp}.
+Notar que recibe como parámetro una referencia a los ``\texttt{headers}'' que el usuario proporcionó en el momento de la invocación de \maggen \footnote{Ver sección \ref{sec:uso-maggen} para obtener detalles sobre parametros de invocación.}. Los mismos serán incluidos en el archivo \texttt{.cpp}.
 
 \subsection{Cabecera del evaluador}
 
 Dentro de este archivo, se definen para cada \textbf{símbolo no terminal} una tipo en base a una estructura que incluye a sus atributos, un constructor y un método \texttt{to\_string()} que genera una cadena con su estado actual.
 
-\underline{Por ejemplo:} símbolo Y, del ejemplo de Wuu Yang en el apéndice \ref{XXX}.
+\underline{Por ejemplo:} símbolo Y, del ejemplo de Wuu Yang en el apéndice \ref{append:agwuuyang}.
 \begin{center}\texttt{symbol Y  NonTerminal Attributes: i2, i3, s2, s3;}\end{center}
 se define lo siguiente:
 \begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=7cm]
@@ -1089,7 +1092,7 @@ Aquí se incluyen los perfiles de las funciones públicas y privadas mencionadas
 
 Lo primero que el ``desarrollador\footnote{Un usuario que se interesa en indagar el código del evaluador.}'' se encuentra al abrir este archivo, es la implementación del constructor y del método \texttt{to\_string()} de cada uno de los símbolos no terminales. Por nuestro diseño, cada nodo del AST tiene un identificador de regla, que debe ser un \textbf{número positivo mayor que cero}.
 
-A modo de ejemplo, observemos el código para el símbolo Y, del ejemplo de Wuu Yang en el apéndice \ref{XXX}.
+A modo de ejemplo, observemos el código para el símbolo Y, del ejemplo de Wuu Yang en el apéndice \ref{append:agwuuyang}.
 
 \begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=9cm]
 Y::Symbol_Y(const unsigned short &r_id): Node(r_id){}
@@ -1205,7 +1208,7 @@ Por último se busca el plan de evaluación correspondiente al nodo visitado y s
 
 Ahora se debe visitar a cada uno hijos, imponiéndole a los mismos un orden específico para que evalúen sus atributos según nuestras dependencias.
 
-Para lo cual tenemos que elegir el plan proyectado con nuestro plan seleccionado, el identificador de regla de nuestro hijo y el símbolo no terminal que representa en nuestro \textbf{body}\footnote{Ver \ref{XXX} definición de \textbf{CFG}.}
+Para lo cual tenemos que elegir el plan proyectado con nuestro plan seleccionado, el identificador de regla de nuestro hijo y el símbolo no terminal que representa en nuestro \textbf{body}\footnote{Ver \ref{sec:def-CFG} definición de \textbf{CFG}.}
 
 Por lo cual se construye lo siguiente para buscarlo dentro del vector de planes proyectados únicos:
 
@@ -1257,7 +1260,7 @@ El cálculo de una ecuación es definida por el usuario y se debe respetar al mo
 
 Lo primero que se hace es la conversión explícita del tipo\footnote{Type casting - \urllink{http://en.wikipedia.org/wiki/Type\_conversion}.} de cada nodo a su respectivo tipo, para poder acceder a sus atributos. Ya que todos los nodos son en una primera instancia del tipo \texttt{Node}\footnote{Declarado en \texttt{Node.hpp}.} y debe ser convertido a alguno de los tipos estructurados que se declararon para cada uno de los símbolos no terminales.
 
-Siguiendo con el ejemplo del apéndice \ref{XXX}, tomemos las ecuaciones de la regla inicial:
+Siguiendo con el ejemplo del apéndice \ref{append:agwuuyang}, tomemos las ecuaciones de la regla inicial:
 
 \vspace*{0.2cm}
 \begin{lstlisting}[language=specmag, basicstyle=\scriptsize, columns=fullflexible, linewidth=8cm]

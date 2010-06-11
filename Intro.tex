@@ -33,6 +33,7 @@ En el desarrollo de este capítulo, introductorio, abordaremos un amplio numero 
 \maggen\ es el objetivo principal del proyecto y su denominación esta dada por la combinación de las silabas \textbf{mag}, que significa \textit{multi-plans attribute grammar} y \textbf{Gen} por \textit{generator}. Estas dos silabas dan significado a \maggen\ como ``Generador de Evaluadores Estáticos para MAG''.
 
 \section{Gramática libre de contexto}
+\label{sec:def-CFG}
 En el nivel 2 de la jerarquía de chomsky (fig. \ref{chomsky}) se encuentran los lenguajes libres de contexto. Las gramáticas libres de contexto (CFG) son un formalismo que permite expresar cadenas de este tipo de lenguajes.
 
 Las gramáticas libres de contexto han tomado gran importancia en la descripción de formatos de documentos\footnote{DTD - document-type definition.}, como XML (eXtensible Markup Language) y también en tecnología de compilación, mediante la construcción de \textit{parser} de lenguajes (Ver \cite{compiladores}).  
@@ -61,7 +62,7 @@ Estos cuatro componentes pueden ser representados por una tupla \textbf{<V,T,S,P
 \end{definition}
 \underline{Nota:}
 En todo el desarrollo del trabajo se denotara a los símbolos no terminales con letras en mayúscula y a los símbolos terminales con letras en minúscula para mayor claridad.
-Veamos dos ejemplos desarrollados en el capítulo 5 de  \cite{gramatica}.
+Veamos dos ejemplos desarrollados en \cite{gramatica} (cap. 5).
 
 \begin{enumerate}
 \item \underline{Ejemplo:} palíndromo:
@@ -263,7 +264,7 @@ Estas familias imponen restricciones sobre la gramática de atributos o sobre la
 
 En 1980, Uwe Kastens\cite{kastens} caracterizó las gramáticas de atributos ordenadas y propuso un método para su evaluación, denominado secuencias de visita. Estas son, secuencias de operaciones que conducen el recorrido del árbol sintáctico atribuido y realizan la evaluación de las instancias de los atributos. Kastens propone un método para generar las secuencias de visita en tiempo polinomial para la familia OAG. Esta familia y otras como las absolutamente no circulares (ANCAG) son tratadas en el capítulo 2.
 
-Luego, en 1998, Wuu-Yang en \cite{wuu-yang1} caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multi-plans}, presentando una algoritmo de evaluación basado en secuencia de visita en tiempo polinomial en el numero de símbolos y producciones. Estas, son desarrolladas en el capítulo 3 y son en las que se basa el funcionamientos de \maggen.  
+Luego, en 1998, Wuu-Yang en \cite{wuu-yang1} caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multi-plans}, presentando una algoritmo de evaluación basado en secuencia de visita en tiempo polinomial en el numero de símbolos y producciones. Estas, son desarrolladas en el capítulo \ref{chap:mag} y son en las que se basa el funcionamientos de \maggen.  
 
 \subsection{Evaluación dinámica}
 
@@ -299,7 +300,7 @@ De ahora en adelante, cada vez que se hable de evaluador, se hará referencia a 
 
 \section{Secuencia de visita}
 \label{sec:sec-visit}
-En 1980, Uwe Kastens propone un método de evaluación para la familia $OAG$, denominado \emph{secuencias de visita}\cite{Kastens}. Esta familia de gramáticas es presentada en la sección \ref{sec:def-oag} de este informe.
+En 1980, Uwe Kastens propone un método de evaluación para la familia $OAG$, denominado \emph{secuencias de visita}\cite{kastens}. Esta familia de gramáticas es presentada en la sección \ref{sec:def-oag} de este informe.
 
 En esta sección se analizará el concepto de secuencias de visita desde el punto de vista utilizado para el desarrollo de \maggen. Además, dicho enfoque es aplicable, también, no sólo a las OAG sino también para WDAGs.
 
@@ -337,6 +338,6 @@ Tal como analizamos en las secciones anteriores para evaluar un GA debemos compu
 
 Un evaluador para una GA bien definida deberá realizar una previa selección del plan correspondiente a cada nodo del árbol sintáctico. Para dicha selección, el evaluador necesitará realizar un recorrido ascendente del árbol sintáctico para \emph{marcar} los nodos con la información sobre las dependencias \emph{actuales} transitivas en base al subárbol.
 
-En la sección \ref{sec:algevalattr} presentamos algoritmos eval y traverse, teniendo en cuenta heurísticas utilizadas por Wuu Yang en \ref{wuu-yang1}.
+En la sección \ref{sec:algevalattr} presentamos algoritmos eval y traverse, teniendo en cuenta heurísticas utilizadas por Wuu Yang en \cite{wuu-yang1}.
 
-Además, en los capítulos \ref{chap:disen} y \ref{chap:implem} se pueden analizar detalles sobre la generación de un evaluador, específicamente, los utilizados para el desarrollo de \maggen.
+Además, en los capítulos \ref{chap:disen_} y \ref{chap:implem} se pueden analizar detalles sobre la generación de un evaluador, específicamente, los utilizados para el desarrollo de \maggen.
