@@ -34,11 +34,13 @@ En el desarrollo de este capítulo, introductorio, abordaremos un amplio numero 
 
 \section{Gramática libre de contexto}
 \label{sec:def-CFG}
-En el nivel 2 de la jerarquía de chomsky (fig. \ref{chomsky}) se encuentran los lenguajes libres de contexto. Las gramáticas libres de contexto (CFG) son un formalismo que permite expresar cadenas de este tipo de lenguajes.
+En el nivel 2 de la jerarquía de Chomsky (Ver figura \ref{chomsky}) se encuentran los lenguajes libres de contexto. Las gramáticas libres de contexto (CFG) son un formalismo que permite expresar cadenas de este tipo de lenguajes.
 
-Las gramáticas libres de contexto han tomado gran importancia en la descripción de formatos de documentos\footnote{DTD - document-type definition.}, como XML (eXtensible Markup Language) y también en tecnología de compilación, mediante la construcción de \textit{parser} de lenguajes (Ver \cite{compiladores}).  
+Las CFG han tomado gran importancia en la descripción de formatos de documentos\footnote{DTD - Document-Type Definition.}, como XML (eXtensible Markup Language) y también en tecnología de compilación, mediante la construcción de \textit{parser} de lenguajes (Ver \cite{compiladores}).  
+
 \begin{definition}
 Una gramática libre de contexto se conforma de 4 componentes necesarios para la descripción de un lenguaje:
+
 \begin{enumerate}
 \item Un conjunto finito de símbolos que son los string que se definen el lenguaje. Este conjunto es denominado ``alfabeto de terminales'' o simplemente \textit{\textbf{símbolos terminales}}.
 
@@ -55,11 +57,11 @@ Una gramática libre de contexto se conforma de 4 componentes necesarios para la
 
 \item Una secuencia de 0 o mas símbolos no terminales y terminales. Este, es denominado \textit{\textbf{body}} de la producción y representa el string formado por el \textit{head}.
 \end{enumerate}
-
 \end{enumerate}
 
 Estos cuatro componentes pueden ser representados por una tupla \textbf{<V,T,S,P>}\ donde \textbf{V} es el conjunto de no terminales (punto 1), \textbf{T} el conjunto de terminales (punto 2), \textbf{S} es el símbolo inicial (punto 3) y \textbf{P} es el conjunto de producciones (punto 4).
 \end{definition}
+
 \underline{Nota:}
 En todo el desarrollo del trabajo se denotara a los símbolos no terminales con letras en mayúscula y a los símbolos terminales con letras en minúscula para mayor claridad.
 Veamos dos ejemplos desarrollados en \cite{gramatica} (cap. 5).
@@ -76,6 +78,7 @@ donde A es el siguiente conjunto de producciones:
 \item $P \rightarrow 0 P 0$
 \item $P \rightarrow 1 P 1$
 \end{enumerate}
+
 Ejemplos de cadenas del lenguaje $G_{pal}$:
 \begin{items}
 \item $\lambda$
@@ -109,9 +112,9 @@ Ejemplos de cadenas del lenguaje $G_{pal}$:
 \underline{Abreviación de reglas}: Cuando denotamos una producción podemos utilizar una abreviación para agrupar aquellas producciones con el mismo \textit{head}. Para ello utilizamos el meta-símbolo ``|''. Por ejemplo el conjunto de producciones de $G_{pal}$ podríamos escribirlas como: $P \rightarrow \lambda | 0 | 1 | 0P0 | 1P1$.
 
 \underline{Observación:}
-De aquí en adelante se asumirá que el símbolo de comienzo $ S $  aparece en la parte izquierda de una única producción y no puede aparecer en la parte derecha de ninguna producción\footnote{Esta forma se denomina \emph{forma normal} o también \textit{Gramática extendida}.}. \\
+De aquí en adelante se asumirá que el símbolo de comienzo $S$  aparece en la parte izquierda de una única producción y no puede aparecer en la parte derecha de ninguna producción\footnote{Esta forma se denomina \emph{forma normal} o también \textit{Gramática extendida}.}. \\
 
-\begin{definition} Se dice que una gramática libre de contexto $G=<V,T,S,P>$
+\begin{definition} Se dice que una CFG $G=<V,T,S,P>$
 es \textbf{reducida} si
 $\forall B \in V$ , $\exists \alpha , \gamma \in \Sigma^{*} : S \clausderiva{G} \alpha B \gamma$ y $\exists \tau \in T^{*} : B \clausderiva{G} \tau$\footnote{ $\clausderiva{G}$: deriva en 0 o más pasos; es detallada en \cite{tesismarcelo}}.
 \label{def:reducida}
@@ -155,13 +158,13 @@ En la figura \ref{fig:ejePala-st} se observa un árbol de derivación para la ca
 \end{figure}
 
 
-\begin{definition} Una gramática libre de contexto $G = <V,T,S,P>$ es \textbf{ambigua} si para una cadena $\alpha$, derivada de $G$, existen dos o más árboles de derivación diferentes.
+\begin{definition} Una CFG $G = <V,T,S,P>$ es \textbf{ambigua} si para una cadena $\alpha$, derivada de $G$, existen dos o más árboles de derivación diferentes.
 \label{def:ambigua}
 \end{definition}
 
 \section*{Notación}
 
-La notación usada tanto en el desarrollo del proyecto, comunicación entre los autores y redacción de este informe es la utilizada por Wuu Yang en \cite{wuu-yang1}, la cual proviene de la notación de Kastens en \cite{kastens} y la utilizada por el Mg. Marcelo Arroyo en \cite{tesismarcelo}
+La notación usada tanto en el desarrollo del proyecto, comunicación entre los autores y redacción de este informe es la utilizada por Wuu Yang en \cite{wuu-yang1}, la cual proviene de la notación de Kastens en \cite{kastens} y la utilizada por el Mg. Marcelo Arroyo en \cite{tesismarcelo}.
 
 \section{Gramática de Atributos}
 

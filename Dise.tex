@@ -134,11 +134,12 @@ assoc   = (left | right | non_assoc)
 \end{lstlisting}
 \vspace{0.3cm}
 
-\textit{``NAME\_OP''} representa un identificador para el operador (infija, prefija y posfija). Las restricciones y detalles a tener en cuenta para este identificador son las mismas que se analizaron para ``NAME\_SORT''.
+\textit{``NAME\_OP''} representa un identificador para el operador (infijo, prefijo y posfijo). Las restricciones y detalles a tener en cuenta para este identificador son las mismas que se analizaron para ``NAME\_SORT''.
 
-\textit{``NUN\_PRECEDENCE''} representa un número positivo que define la precedencia del operador. Cabe aclarar que a mayor número mayor la precedencia.
+\textit{``NUM\_PRECEDENCE''} representa un número positivo que define la precedencia del operador. Cabe aclarar que a mayor número mayor la precedencia.
 
 \subsubsection*{Consideraciones}
+\label{subsubsec:operconsi}
 
 Es importante analizar el uso de ``\_'' para precedencia y asociatividad en el hecho de que estos datos son tomados opcionalmente, es decir se puede omitir dicha información. Lo mismo sucede con el tipo del operador (infijo, prefijo y posfijo). 
 
@@ -154,6 +155,7 @@ Para estos casos especiales se utilizarán los siguientes valores por defecto:
 \end{description}
 
 Otro caso a tener cuenta es el uso de \texttt{non\_assoc} como asociatividad del operador. Este caso define que el operador no tiene asociatividad, con lo que el uso del mismo en las ecuaciones debe respetar esta condición, en caso contrario se observará un error por mal uso.
+
 \subsection*{Ejemplos}
 
 \begin{enumerate}
@@ -395,7 +397,7 @@ La especificación permite agregar comentarios. Para una mejor familiarización 
 
 \begin{description}
 \item [$\textbf{/*}$ comment $\textbf{*/}$] es la forma de inserción de bloques de comentarios.
-\item [$\textbf{//}$ line commet] es comentario de una línea.
+\item [$\textbf{//}$ line comment] es comentario de una línea.
 \end{description} 
 
 \subsection{Ejemplo}
@@ -452,7 +454,7 @@ Notar que, la línea y columna donde se indica el error corresponde al inicio de
 Las estructuras creadas para la representación interna de la gramática se encuentran dentro de los paquetes \texttt{Attr\_grammar} y \texttt{Expression\_tree} de \maggen. Detalles de implementación sobre estos paquete serán tratando en el capítulo siguiente. 
 
 Ahora nos encargaremos de algunas consideraciones respecto del diseño. 
-\texttt{Expression\_tree} agrupa módulos para la representación de las expresiones de las ecuaciones y \texttt{Att\_grammar}, encapsula los demás componentes de la gramática.
+\texttt{Expression\_tree} agrupa módulos para la representación de las expresiones de las ecuaciones y \texttt{Attr\_grammar}, encapsula los demás componentes de la gramática.
 
 El funcionamiento de \maggen\ esta dado por una instancia de la estructura llamada \texttt{Attr\_grammar}, la cual encapsula toda la información de la gramática de atributos parseada. La misma contiene los elementos que se agrupan en los paquetes anteriormente nombrados y es la que desencadena el cálculo de planes, secuencias de visita y, por último, la generación de código. 
  
@@ -531,7 +533,7 @@ En la figura \ref{fig:disen} pudimos analizar el funcionamiento de \maggen, teni
 
 Detalles de implementación serán analizando en la sección \ref{subsec:const-graf}, ahora tomaremos un par de minutos para mencionar algunas consideración con respecto al funcionamiento de los grafos en \maggen.\\
 
-La construcción de grafos se realiza en el modulo \texttt{builder\_graphs}. \maggen\ crea 4 tipos de grafos, que se corresponden con los detallas en \ref{sec:pre-grafos}:
+La construcción de grafos se realiza en el modulo \texttt{builder\_graphs}. \maggen\ crea 4 tipos de grafos, que se corresponden con los detallados en \ref{sec:pre-grafos}:
 
 \begin{itemize}
 \item Grafo DP, ver \ref{dpgraph}.
@@ -559,7 +561,7 @@ La construcción de grafos se realiza en el modulo \texttt{builder\_graphs}. \ma
   \end{figure}
 \end{itemize}
 
-Las figuras\footnote{\label{foot:graph} Imagen generada utilizando la herramienta \textit{graphviz} sobre el archivo \texttt{.dot} generado por \maggen.} muestran un ejemplo de cada tipo de grafo, generados a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
+Las figuras\footnote{\label{foot:graph} Imagen generada utilizando la herramienta \textit{graphviz} sobre el archivo \texttt{.dot} generado por \maggen.} muestran un ejemplo de cada tipo de grafo, generadas a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
 
 La construcción de cada tipo de grafo respeta los principios analizados en el capítulo \ref{chap:mag} y los algoritmos respectivo analizados en el capítulo  \ref{chap:eval_est}. 
 
@@ -567,7 +569,7 @@ De de los 4 tipos de grafos analizados, los necesarios para el cómputo de etapa
 
 \subsection*{Construcción de planes}
 \label{subsec:conts-plan-dise}
-La etapa de construcción de planes, tal como lo muestra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``Builder''. El cálculo de planes en \maggen\ se basa en lo analizado en el cap \ref{chap:eval_est} (Ver sección \ref{sec:comp-planes}) y teniendo en cuenta estos dos puntos:
+La etapa de construcción de planes, tal como lo muestra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``Builder''. El cálculo de planes en \maggen\ se basa en lo analizado en el capítulo \ref{chap:eval_est} (Ver sección \ref{sec:comp-planes}) y teniendo en cuenta estos dos puntos:
 
 \begin{enumerate}
 \item El punto de entrada para el cálculo de los planes esta dado sobre los grafos ADP. 
@@ -668,7 +670,7 @@ Para mas detalle observemos la figura \ref{fig:simul}.
 \caption{\label{fig:simul}Heurística cómputo de secuencia de visita}
 \end{figure}
 
-\newpage
+% \newpage
 
 El resultado del ejemplo, aplicando los pasos tratados arriba, es presentado en el diagrama \ref{fig:resul_vis}.
 
@@ -680,6 +682,7 @@ El resultado del ejemplo, aplicando los pasos tratados arriba, es presentado en 
 Notar que para el cómputo de las secuencias de visitas totales nos basta con lanzar la simulación analizada anteriormente para los planes iniciales\footnote{Los planes iniciales son aquellos que provienen de regla inicial.}. La explicación de esto se sustenta en las propiedades garantizadas con los chequeos en la gramática, principalmente la propiedad de alcanzabilidad. De esta forma, los planes iniciales lanzan los demás planes necesarios para el cómputo total de las secuencias.
 
 \section{Generación de Código}
+\label{sec:gencodigo}
 
 La etapa final de \maggen\ esta dada por la generación de código para el evaluador estático. Como hemos analizado en el diagrama visto en la figura \ref{fig:disen}, esta etapa se realiza en el paquete ``Builder'', específicamente en el modulo \texttt{Builder\_code}.
 
@@ -713,7 +716,7 @@ Estos, son usados por los métodos del evaluador generado por \maggen. Podemos h
 void add_plan(const Key_plan &k_plan, unsigned short index_order);
 void add_plan_project(const Key_plan_project &k_plan_p, unsigned short index_order);
 void compute_eq(int num_eq, struct Node *root);
-void traverse(struct Node * node, unsigned short order);
+void traverse(struct Node *node, unsigned short order);
 void eval_visiter(struct Node *root);
 \end{lstlisting}
 \vspace{0.3cm}

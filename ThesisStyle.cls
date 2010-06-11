@@ -740,8 +740,8 @@
 \newcommand\chaptername{Capitulo}
 \newcommand\appendixname{Ap\'endice}
 \def\today{\ifcase\month\or
-  January\or February\or March\or April\or May\or June\or
-  July\or August\or September\or October\or November\or December\fi
+  Enero\or Febrero\or Marzo\or Abril\or Mayo\or Junio\or
+  Julio\or Agosto\or Septiembre\or Octubre\or Noviembre\or Diciembre\fi
   \space\number\day, \number\year}
 \setlength\columnsep{10\p@}
 \setlength\columnseprule{0\p@}
