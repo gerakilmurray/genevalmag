@@ -11,30 +11,30 @@ Para comprobar la correctitud de los algoritmos y lograr mayor grado de eficienc
 Todos estos algoritmos tienen una característica en común, expresan las dependencias existentes entre los atributos de una gramática desde distinto aspectos. Por lo tanto en su construcción, los nodos y aristas son obtenidos de las relaciones entre dichos elementos.
 
 \subsection{Cómputo de DP}
-
+\label{subsec:alg-DP}
 Se debe generar un grafo DP por cada regla de la gramática, representando las dependencias directas entre los atributos de los símbolos que participan en la producción.
 
 Es el más directo de construir, ya que por cada ecuación de la regla actual, se agrega una arista entre cada uno de los símbolos del \texttt{r-value} con destino el \texttt{l-value} de la ecuación. Obviamente se deben agregan los nodos necesarios y sin repeticiones, para cada una de las instancias de atributos.
 
 \begin{algorithm}[H]
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_dp_wuu_yang}
-\caption{\texttt{compute\_dp\_graphs}}
+\caption{\label{alg:graphdp} Cómputo de grafos \textit{DP}}
 \end{algorithm}
 
 \subsection{Cómputo de Down}
-
+\label{subsec:alg-DOWN}
 Este tipo de grafo, se debe crear para cada uno de los símbolos no terminales de la gramática. Representan las relaciones de dependencia entre solamente sus atributos, considerando todas las reglas en las que participan.
 
 \begin{algorithm}[H]
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_down_wuu_yang}
-\caption{\texttt{compute\_down\_graphs}}
+\caption{\label{alg:graphdown} Cómputo de grafos \textit{Down}}
 \end{algorithm}
 
 La función \texttt{project} recibe un grafo, del cual debe eliminar todos los nodos y aristas relacionadas que no pertenecen al conjunto de atributos que le pasan como segundo parámetro. Pero para evitar que al eliminar nodos y aristas el grafo pierda información sobre las dependencias entre los atributos, se calcula previamente la clausura transitiva del grafo.
 
 \begin{algorithm}[H]
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/project_wuu_yang}
-\caption{\texttt{project} sobre grafos}
+\caption{\label{alg:graphproj} Proyección sobre grafos}
 \end{algorithm}
 
 \subsection{Cómputo de DCG}
@@ -43,18 +43,18 @@ Estos grafos se generan para cada regla de la gramática y considerando las depe
 
 \begin{algorithm}[H]
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_dcg_wuu_yang}
-\caption{\texttt{compute\_dcg\_graphs}}
+\caption{\label{alg:graphdcg} Cómputo de grafos \textit{DCG}}
 \end{algorithm}
 
 \subsection{Cómputo de ADP}
-
+\label{subsec:alg-ADP} 
 Para generar estos grafos, Wuu Yang no plantea un algoritmo preciso aunque no es necesario ya que toda la heurística necesaria se encuentra en la definición de los mismos (ver \ref{mag:adpdef}).
 
 Un grafo ADP corresponde a una regla bajo una cierta combinación de producciones para cada uno de sus hijos. Es decir, que para una misma regla pueden existir varios grafos ADP, ya que sus hijos pueden producir más de un contexto.
 
 \begin{algorithm}[H]
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_adp_wuu_yang}
-\caption{\texttt{compute\_adp\_graphs}}
+\caption{\label{alg:graphadp} Cómputo de grafos \textit{ADP}}
 \end{algorithm}
 
 \section{Algoritmo de cómputo de planes}
@@ -69,7 +69,7 @@ Luego, para cada uno de los símbolos no terminales de la parte derecha de la re
 
 \begin{algorithm}[H]
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_plan_wuu_yang}
-\caption{\texttt{compute\_plans}}
+\caption{\label{alg:planeval} Cómputo de planes de evaluación}
 \end{algorithm}
 
 La función \texttt{compute\_order}, debe agregarle al grafo ADP la información inducida por el orden para evaluar los atributos del símbolo \textbf{head} de la regla a la que pertenece el grafo.
@@ -78,14 +78,14 @@ Para ello, como todo orden se puede ver como una secuencia, se agregan al grafo 
 
 \begin{algorithm}[H]
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_order_wuu_yang}
-\caption{\texttt{compute\_order}}
+\caption{Cómputo de orden de evaluación}
 \end{algorithm}
 
 La funcionalidad que cumple \texttt{project}, es dado un orden de evaluación purgarlo de todo elemento ajeno a el conjunto de ocurrencias de atributos especificados como parámetro. Previamente se debe aplicarle la clausura transitiva para conservar las relaciones de precedencia entre las ocurrencias.
 
 \begin{algorithm}[H]
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/project2_wuu_yang}
-\caption{\texttt{project} orden de evaluación}
+\caption{\label{alg:projordeval} Proyección sobre orden de evaluación}
 \end{algorithm}
 
 \section{Algoritmo de cómputo de secuencias de visita}
@@ -99,7 +99,7 @@ La traducción bajo demanda de los planes de evaluación, permite realizar optim
 
 \begin{algorithm}[H]
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/generate_visit_sequences}
-\caption{Generador de secuencias de visitas.}
+\caption{\label{alg:genvisitseq} Generador de secuencias de visitas}
 \end{algorithm}
 
 El segundo realiza un proceso recursivo para lograr la traducción. Se lo puede considerar como una simulación del recorrido sobre el árbol en tiempo de evaluación. En la sección \ref{sec:constseqvisit} se ampliará este funcionamiento.
@@ -116,7 +116,7 @@ Por último, es necesario una función que combine y actualice la secuencia de v
 
 \begin{algorithm}[H]
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/gen_visit_seq}
-\caption{Función \texttt{gen\_visit\_seq}.}
+\caption{\label{alg:genvisitseqrec} Función recursiva de generación de secuencias de visita}
 \end{algorithm}
 
 \section{Algoritmo de evaluación de atributos}
@@ -132,7 +132,7 @@ En el segundo recorrido, no precisamente se realiza en un sentido uniforme, sino
 
 \begin{algorithm}[H]
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/eval_attribute_wuu_yang}
-\caption{Evaluación de atributos}
+\caption{\label{alg:evalattr} Evaluación de atributos}
 \end{algorithm}
 
 Esta función, tiene toda la información necesaria ya precargada, gracias al procesamiento previo de los anteriores algoritmos. Debe determinar el plan de evaluación, almacenado en $\Gamma$, armando la clave con la regla asociada al nodo corriente y las reglas asociadas de todos los hijos. El orden de evaluación de atributos $\omega$, le viene como parámetro, el cual corresponde con un plan de evaluación proyectado, que desde el contexto superior le impusieron. Una vez seleccionado el plan, también queda establecida la secuencia de visita, para el nodo.
@@ -141,5 +141,5 @@ Para continuar con el proceso, se debe seleccionar para cada hijo el plan proyec
 
 \begin{algorithm}[H]
 \lstinputlisting[basicstyle=\scriptsize\ttfamily, language=specmag, numbers=left, columns=fullflexible]{input_file_code/traverse_wuu_yang}
-\caption{\texttt{traverse}}
+\caption{\label{alg:traverse} Función Traverse}
 \end{algorithm}
