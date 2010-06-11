@@ -2,7 +2,7 @@
 \label{chap:mag}
 \minitoc
 
-Tal como lo presenta Wuu-Yang en \cite{wuu-yang1} y como lo analizamos en el capitulo anterior (Ver sec. \ref{sec:gramNC} y \ref{sec:relfamag}), la familia de \textit{gramática de atributos multi-planes} es una clase que se encuentra dentro de las WDAG y dentro de ellas de las NC.
+Tal como lo presenta Wuu Yang en \cite{wuu-yang1} y como lo analizamos en el capítulo anterior (Ver sec. \ref{sec:relfamag}), la familia de \textit{gramática de atributos multi-planes} es una clase que se encuentra dentro de las WDAG y si tomamos la jerarquía $NC$ (Wuu Yang) se corresponde con la clase $NC(1)$.
 
 La familia de las MAG es estrictamente mayor que las ANCAG. La importancia de esta familia radica en que el procedimiento de computación de planes de evaluación estáticos toma \textbf{tiempo polinomial} en el numero de símbolos y producciones.
 
@@ -50,6 +50,7 @@ El ejemplo es presentado en la figura \ref{ag-no-ANCAG}. El mismo es trabajo, lu
 \caption{Una gramática de atributos no ANCAG}
 \label{ag-no-ANCAG}
 \end{AG}
+
 \subsection{Grafo \textit{DP}}
 Los grafos \textit{DP} denotan las relaciones de dependencias directas entre las instancias de la gramática. 
 
@@ -71,6 +72,8 @@ DP(p) = \{(X_{i}.a, X_{j}.b) | X_{i}.a \rightarrow Y_{j}.b \in R^{p} \}
 La noción de dependencia directa y $DP(p)$ fueron presentados, también, en el capítulo introductorio, cuando se presentó la definición de Árbol sintáctico atribuido (\label{def:ast-attr}).  
 En la figura \ref{dp-wuu-yang} se observan los grafos $DP$ para la gramática de la figura \ref{ag-no-ANCAG}.
 
+En la sección \ref{subsec:alg-DP} se presenta el algoritmo para la construcción de este tipo de grafos.
+
 \subsection{Grafo \textit{Down}}
 Los grafos \textit{Down} denotan las relaciones de los atributos de un símbolo. 
 
@@ -89,6 +92,8 @@ Down(X) = \{(a,b) | a \rightarrow b \} con\ a,b \in A(X)
 \end{equation}
 \end{definition}
 En la figura \ref{down-wuu-yang} se muestran los grafos $Down(X)$ y $Down(Y)$ para la gramática de la figura \ref{ag-no-ANCAG}.
+
+En la sección \ref{subsec:alg-DOWN} se presenta el algoritmo para la construcción de este tipo de grafos.
 
 \subsection{Grafo \textit{DCG}}
 
@@ -147,6 +152,8 @@ SADP(q) = \bigcup\limits_{q\in P}{ADP (q | p_{1}, p_{2}, \dots, p_{k})}
  \includegraphics[width=350pt,height=132pt]{ej-grafos4.png}
 \caption{\label{adp-wuu-yang} ADP(P0):contexto inferior P1, para la gramática de la figura \ref{ag-no-ANCAG}.}
 \end{figure}
+
+En la sección \ref{subsec:alg-ADP} se presenta el algoritmo para la construcción de los grafos ADP.
 
 \section{Definición MAG}
 \label{def:MAG}
