@@ -5,9 +5,9 @@
 \section{Lenguaje de especificación de las MAG}
 \label{sec:lenguajeMAG}
 
-El lenguaje de especificación utilizado para la descripción de una Gramática de atributos (MAG) fue definido en el marco de este proyecto. Esto permite definir una gramática de atributos como input de \maggen.
+El lenguaje de especificación utilizado para la descripción de una Gramática de atributos (MAG) fue definido en el marco de este proyecto. Este permite definir la entrada de \maggen.
  
-La secciones que conforman la descripción de una gramática de atributos (MAG) se corresponden con las características que la definen analizados en los capítulos anteriores (ver capítulo \ref{chap:mag} y principalmente la definición \ref{def:MAG}).
+La secciones que conforman la descripción de una gramática de atributos (MAG), en el lenguaje, se corresponden con las características que definen una MAG, tal como fueron analizados en los capítulos anteriores (ver capítulo \ref{chap:mag}, principalmente la definición \ref{def:MAG}).
  
 Informalmente, el lenguaje de especificación se conforma de las siguientes partes:
 
@@ -19,7 +19,7 @@ Informalmente, el lenguaje de especificación se conforma de las siguientes part
 \item [Bloque de Reglas] Destinado a la declaración y definición de las reglas sintácticas de la gramática con sus correspondientes ecuaciones semánticas para cada atributo asociado a cada símbolo. Este bloque es denominado ``\texttt{rules}''.
 \end{description}
 
-A los tres bloques analizados anteriormente, podemos clasificarlos en dos, teniendo en cuenta su comportamiento o funcionalidad dentro de la especificación. Los dos primeros, son bloques puramente declarativos o dedicados a la definición de elementos que serán utilizados en el tercer bloque. Este bloque, es considerado el de mayor auge, ya que marca la sintaxis y semántica de la gramática.
+A los tres bloques analizados anteriormente, podemos clasificarlos en dos, teniendo en cuenta su comportamiento o funcionalidad dentro del lenguaje la especificación. Los dos primeros, son bloques puramente declarativos o dedicados a la definición de elementos que serán utilizados en el tercer bloque. La seccion de reglas es considerado el de mayor auge, ya que marca la sintaxis y semántica de la gramática.
 
 Cada bloque del lenguaje de especificación contiene su sintaxis propia para su definición, es por ello que, en las secciones siguientes nos encargaremos de mostrar detalles de cada uno de ellos.
 
@@ -39,9 +39,7 @@ En las secciones siguientes se presentaran los símbolos \textit{decl\_Sd}, \tex
 
 \subsection{Bloque Dominio semántico}
 \label{subsec:bloq-sem}
-El bloque ``\texttt{semantic domain}'' es el encargado de la definición de elementos que serán necesarios para los bloques siguientes. 
-
-El bloque semántico esta subdividido en 3 secciones, que se corresponden con la definición de sort, operadores y funciones, cada una con su sintaxis propia. 
+El bloque ``\texttt{semantic domain}'' es el encargado de la definición de elementos que serán necesarios para los bloques siguientes, el mismo esta subdividido en 3 secciones, que se corresponden con la definición de sort, operadores y funciones, cada una con su sintaxis propia. 
 
 Entonces se define el símbolo \textit{decl\_Sd} como:
 
@@ -99,7 +97,7 @@ En caso de declaración explícita de cualquiera de ellos, en la especificación
 \subsubsection{Declaración de operadores}
 La sección destinada a la declaración de \texttt{operadores} acepta 3 tipos de operadores, los cuales, difieren en su forma de uso y cantidad de operandos. Denominados, \textit{infijo, prefijo y posfijo}. 
 
-La interpretación de cada uno, esta dada por la interpretación natural común a todos los lenguajes de programación, a modo de ejemplo se muestran un operador de cada tipo para evitar problemas en esta sección:
+La interpretación de cada uno, esta dada por la interpretación natural común a todos los lenguajes de programación, a modo de ejemplo se muestran un operador de cada tipo para evitar inconsistencias en las definiciones:
 
 \begin{itemize}
 \item \underline{Operador \texttt{prefijo}:} \textit{Ejemplo:} \textbf{-2}. Operador de menos unario. 
@@ -141,7 +139,7 @@ assoc   = (left | right | non_assoc)
 \subsubsection*{Consideraciones}
 \label{subsubsec:operconsi}
 
-Es importante analizar el uso de ``\_'' para precedencia y asociatividad en el hecho de que estos datos son tomados opcionalmente, es decir se puede omitir dicha información. Lo mismo sucede con el tipo del operador (infijo, prefijo y posfijo). 
+Es importante analizar el uso de ``\_'' para precedencia y asociatividad, en el hecho de que estos datos son tomados opcionalmente, es decir se puede omitir dicha información. Lo mismo sucede con el tipo del operador (infijo, prefijo y posfijo). 
 
 Para estos casos especiales se utilizarán los siguientes valores por defecto:
 
@@ -284,7 +282,7 @@ Se define el atributo ``\texttt{grade}'' sintetizado (por defecto) de tipo ``\te
 \end{enumerate}
 
 \subsection{Bloque de reglas}
-Por último el bloque de reglas. La interpretación de las reglas dentro del lenguaje esta dada por la definición de gramática libre de contexto.          
+Por último el bloque de reglas. La interpretación de las reglas dentro del lenguaje esta dada por la definición de gramática libre de contexto (Ver definición \ref{sec:def-CFG}).          
 
 El símbolo terminal se considera un símbolo entre comillas simples (\texttt{'}).\\ 
 
@@ -322,7 +320,7 @@ instance = SYMB_NON_TERMINAL[NUM_INS].NAME_ATTR
 \end{lstlisting}
 \vspace{0.3cm}
 
-\textit{``SYMB\_NON\_TERMINAL''} y \textit{``SYMB\_TERMINAL''} describen símbolos no terminales y terminales respectivamente. En este punto, se tiene en cuenta la diferenciación entre estos tipos de símbolos como se analizó en el párrafo anterior.
+\textit{``SYMB\_NON\_TERMINAL''} y \textit{``SYMB\_TERMINAL''} describen símbolos no terminales y terminales respectivamente. En este punto, se tiene en cuenta la diferenciación entre estos tipos de símbolos como se analizó en el párrafo anterior (a través de \' para los terminales).
  
 \textit{``OP\_NAME''} y  \textit{``NAME\_FUNC''} describen identificadores de operadores infijos, prefijos y posfijos (según su uso) y el de función respectivamente. Tanto los operadores como las funciones se asumen definidos en la sección ``\texttt{semantic domain}''.
 
@@ -345,11 +343,11 @@ instance = SYMB_NON_TERMINAL[NUM_INS].NAME_ATTR
 
 \item La sintaxis para el uso de los operadores esta dada por el tipo del operador: infijo, prefijo o posfijo. Para las funciones se utiliza la manera natural de invocación de una función en el común de los lenguajes de programación. Esto es, mediante el nombre de la función y los parámetros entre paréntesis.
 
-\item La asociatividad y precedencia de la expresión en las ecuaciones es calculada mediante los valores definidos en las secciones correspondientes. Cabe aclarar que es posible utilizar paréntesis para agrupar subexpresiones.
+\item La asociatividad y precedencia de la expresión en las ecuaciones es calculada mediante los valores definidos en las seccion de declaración de funciones. Cabe aclarar que es posible utilizar paréntesis para agrupar subexpresiones.
 
-\item La asociación del símbolo no terminal con el atributo se denomina \textbf{instancia}. La misma se corresponde con la ocurrencia del símbolo. 
+\item La asociación del símbolo no terminal con el atributo se denomina \textbf{instancia}. La misma se corresponde con la \textit{ocurrencia del símbolo}\footnote{El concepto de ocurrencia de un símbolo fue presentado en el capítulo introductorio en la definción \ref{def:grammarattr}}. 
 
-Se compone de tres partes:
+Se compone de tres partes\footnote{Estas partes se corresponden con las usadas para el desarrollo de \maggen.}:
 \begin{itemize}
 \item Símbolo no terminal.
 \item Índice sintáctico, comenzando de 0 para la primera ocurrencia.
@@ -475,20 +473,20 @@ Analicemos ahora el diseño de los paquetes nombrados arriba, y con ellos la est
 Notemos algunas observaciones del diseño que muestra el diagrama:
 
 \begin{itemize}
-\item La relación entre los paquetes se produce por un lado, mediante la clase \texttt{Rule}, en el sentido de que toda regla contiene un conjunto de ecuaciones y cada una de estas esta definida a través de un \textit{l\_value:}\texttt{Expr\_instance} y un \textit{r\_value:}\texttt{Expression}. Por otro lado, \texttt{Expr\_instance} se vincula con \texttt{Symbol} y \texttt{Attribute} y \texttt{Expr\_function} con \texttt{Function}.
+\item La relación entre los paquetes se produce por un lado, mediante la clase \texttt{Rule}, en el sentido de que toda regla contiene un conjunto de ecuaciones y cada una de estas, está definida a través de un \textit{l\_value:}\texttt{Expr\_instance} y un \textit{r\_value:}\texttt{Expression}. Por otro lado, \texttt{Expr\_instance} se vincula con \texttt{Symbol} y \texttt{Attribute} y \texttt{Expr\_function} con \texttt{Function}.
 
-\item Toda la información de una gramática de atributos esta representada en la clase \texttt{Attr\_grammar} y por ende, el ciclo de vida de cada de uno de sus componentes es administrado por esta clase, durante todo el funcionamiento de \maggen. 
+\item Toda la información de una gramática de atributos esta representada en la clase \texttt{Attr\_grammar} y por ende, el ciclo de vida de cada uno de sus componentes es administrado por esta clase, durante todo el funcionamiento de \maggen. 
 \end{itemize}
 
 \subsection*{Chequeos}
 \label{subsec:check}
 
-El conjuntos de chequeos que se realizan sobre la gramática de entrada a \maggen, están directamente relacionados con el concepto de gramática bien definida analizado en la sección \ref{sec:well-defined}. Además, se aplican una serie de chequeos extras para evitar cálculos inconsistentes en las etapas posteriores. La totalidad de los chequeos, son realizados sobre el bloque de reglas de la gramática\footnote{En su mayoría los chequeos se realizan sobre las ecuaciones de las reglas.}, debido a que este, es el más significativo y sobre el cual se apoyan los cálculos posteriores.
+El conjuntos de chequeos que se realizan sobre la gramática de entrada a \maggen, están directamente relacionados con el concepto de gramática bien definida analizado en la sección \ref{sec:well-defined}. Además, se aplican una serie de chequeos extras para evitar cálculos inconsistentes en las etapas posteriores. La totalidad de los chequeos, son realizados sobre el bloque de reglas de la gramática\footnote{En su mayoría los chequeos se realizan sobre las ecuaciones de las reglas.}, debido a que este, es el más significativo y sobre el cual se apoyan los cálculos posteriores (en particular, el cálculo de planes).
 
 Los chequeos realizados son clasificados en sintácticos y semánticos, los primeros, en su mayoría, son realizados durante el parser, en cambio, los chequeos semánticos se realizan luego del parser de cada regla, aplicando escaneos específicos. De estos últimos nos encargaremos en esta sección.
 El módulo que agrupa estos chequeos, se ubica en el paquete \texttt{Parser} de \maggen\ y se denomina \texttt{Semantics\_checks}.
 
-A continuación se detallan dichos chequeos:
+A continuación se detallan dichos chequeos\footnote{Detalles sobre la implementación de cada uno de los chequeos, ver sección \ref{sec:checksem}}:
 
 \begin{description}
 \item [Precedencia] El chequeo de precedencia consiste en preservar la precedencia definida de cada operador. Dicho chequeo, es realizado sobre cada una de las ecuaciones definidas en la gramática. Por ejemplo:\\ Dada la siguiente ecuación:
@@ -526,7 +524,7 @@ Cuando se utilizan paréntesis en la expresión, \maggen\ asume la asociatividad
 
 \section{Construcción de grafos, planes y secuencias de visita}
 
-En la figura \ref{fig:disen} pudimos analizar el funcionamiento de \maggen, teniendo en cuenta la estructura \texttt{Attr\_grammar}, en esta sección abordaremos detalles en el diseño del paquete \texttt{Builder}, específicamente la construcción de grafos, de planes y de secuencias de visita. Un detalle a tener en cuenta es que, a partir de esta etapa, todas las manipulaciones son realizadas sobre la sección de ecuación de cada reglas.
+En la figura \ref{fig:disen} pudimos analizar el funcionamiento de \maggen, teniendo en cuenta la estructura \texttt{Attr\_grammar}, en esta sección abordaremos detalles en el diseño del paquete \texttt{Builder}, específicamente la construcción de grafos, de planes y de secuencias de visita. Un detalle a tener en cuenta es que, a partir de esta etapa, todas las manipulaciones son realizadas sobre la sección de ecuaciónes de cada reglas.
 
 \subsection*{Construcción de grafos}
 \label{subsec:graph}
@@ -639,7 +637,7 @@ Cabe aclarar que todas las secuencias de visita tienen un \textbf{leave} implíc
 
 \subsubsection*{Heurística de la simulación}
 \label{subsec:heuris-simul}
-El punto principal del cual se basa la heurística es, evaluar el plan buscando las dependencias de cada ecuación en el contexto del mismo. Veamos los pasos básicos a tener en cuenta con el siguiente ejemplo:\\
+El punto principal en el cual se basa la heurística es, evaluar el plan buscando las dependencias de cada ecuación en el contexto del mismo. Veamos los pasos básicos a tener en cuenta con el siguiente ejemplo:\\
 
 Supongamos uno de los planes\footnote{Es importante notar el hecho de que cada plan se conforma de los números de ecuaciones a computar.} calculados por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}:\\
 
@@ -669,8 +667,6 @@ Para mas detalle observemos la figura \ref{fig:simul}.
 \includegraphics[width=300pt,height=525pt]{simu.png}
 \caption{\label{fig:simul}Heurística cómputo de secuencia de visita}
 \end{figure}
-
-% \newpage
 
 El resultado del ejemplo, aplicando los pasos tratados arriba, es presentado en el diagrama \ref{fig:resul_vis}.
 
