@@ -97,7 +97,6 @@ void push_mark(char name);
 /**
   * Creation expression nodes.
   */
-
 void create_literal_node(const iterator_t str, const iterator_t end);
 void create_instance_node(const iterator_t str, const iterator_t end);
 void create_func_node(const iterator_t str, const iterator_t end);

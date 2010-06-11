@@ -1,6 +1,6 @@
 /**
   *  \file      Sort.h
-  *  \brief     Class of the sort of the grammar parsed.
+  *  \brief     Class of the sort of the attribute grammar.
   *  \date      28/09/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>

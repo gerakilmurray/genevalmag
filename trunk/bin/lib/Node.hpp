@@ -48,4 +48,3 @@ struct Node
 }/* end namespace */
 
 #endif /* NODE_HPP_ */
-

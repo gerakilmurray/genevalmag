@@ -99,4 +99,3 @@ typedef pair <Key_plan_project, unsigned short> Plan_project;
 } /* end namespace */
 
 #endif /* PLAN_HPP_ */
-

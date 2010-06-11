@@ -19,11 +19,12 @@ using namespace std;
 namespace genevalmag
 {
 
-/*
- * Where     item  > 0 represent to visit to this rule number.
- *           item == 0 represent to leave.
- *           item  < 0 represent to compute this equation number.
- */
+/**
+  * Where:
+  *  item  > 0 represent to visit to this rule number.
+  *  item == 0 represent to leave.
+  *  item  < 0 represent to compute this equation number.
+  */
 typedef vector <int> Visit_seq;
 
 class Builder_visit_sequences

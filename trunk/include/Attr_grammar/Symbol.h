@@ -1,6 +1,6 @@
 /**
   *  \file      Symbol.h
-  *  \brief     Class of the symbol of the grammar parsed.
+  *  \brief     Class of the symbol of the attribute grammar.
   *  \date      04/11/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
