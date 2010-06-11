@@ -2,15 +2,11 @@
 \label{chap:mag}
 \minitoc
 
-Tal como lo presenta Wuu-Yang en \cite{wuu-yang1} y como lo analizamos en la seccion \ref{XX}, la familia de \textit{gramática de atributos multi-planes} es una clase que se encuentra dentro de las WDAG y dentro de ellas de las NC.
+Tal como lo presenta Wuu-Yang en \cite{wuu-yang1} y como lo analizamos en el capitulo anterior (Ver sec. \ref{sec:gramNC} y \ref{sec:relfamag}), la familia de \textit{gramática de atributos multi-planes} es una clase que se encuentra dentro de las WDAG y dentro de ellas de las NC.
 
 La familia de las MAG es estrictamente mayor que las ANCAG. La importancia de esta familia radica en que el procedimiento de computación de planes de evaluación estáticos toma \textbf{tiempo polinomial} en el numero de símbolos y producciones.
 
 A continuación trataremos en detalle la familia de las MAG y en el capítulo siguiente abordaremos el mecanismo de evaluación de las mismas.
-
-% \section{Gramática de atributos}
-% En esta sección, se define la notación que se usara en le desarrollo del presente capítulo para la definición de la familia MAG.
-% Básicamente, la notación usada es la utilizada por Wuu yang en \cite{wuu-yang1}, la cual proviene de la notación de Kastens en \cite{kastens}.
 
 \section{Preliminares}
 \label{sec:pre-grafos}
@@ -72,8 +68,8 @@ DP(p) = \{(X_{i}.a, X_{j}.b) | X_{i}.a \rightarrow Y_{j}.b \in R^{p} \}
 \end{equation}
 \end{definition}
 
-La noción de dependencia directa y DP(p) fueron presentados, también, en el capítulo introductorio, cuando se presentó la definición de Árbol sintáctico atribuido (\label{def:ast-attr}).  
-En la figura \ref{dp-wuu-yang} se observan los grafos DP para la gramática de la figura \ref{ag-no-ANCAG}.
+La noción de dependencia directa y $DP(p)$ fueron presentados, también, en el capítulo introductorio, cuando se presentó la definición de Árbol sintáctico atribuido (\label{def:ast-attr}).  
+En la figura \ref{dp-wuu-yang} se observan los grafos $DP$ para la gramática de la figura \ref{ag-no-ANCAG}.
 
 \subsection{Grafo \textit{Down}}
 Los grafos \textit{Down} denotan las relaciones de los atributos de un símbolo. 
@@ -85,14 +81,14 @@ Un grafo \textit{Down} esta definido (\cite{estruc-algorit}) con las siguientes 
 \item Las aristas denotan la dependencia entre los atributos de un símbolo. Dado los atributos $a$ y $b\in A(X)$ del símbolo $X\in VN$, una arista $a\rightarrow b$, denota que la evaluación del atributo \texttt{a} depende de la evaluación de \texttt{b}. 
 \end{itemize}
 El conjunto de dependencias entre los atributos de un símbolo se denota como  
-\texttt{Down(X)}($X\in VN$ de una gramática G) y se define:
+\texttt{Down(X)}($X\in VN$ de una gramática $G$) y se define:
 \begin{definition}
 Dada un símbolo X de una gramática de atributos definida como en \ref{def:grammarattr}, entonces
 \begin{equation}
 Down(X) = \{(a,b) | a \rightarrow b \} con\ a,b \in A(X)
 \end{equation}
 \end{definition}
-En la figura \ref{down-wuu-yang} se muestran los grafos Down(X) y Down(Y) para la gramática de la figura \ref{ag-no-ANCAG}.
+En la figura \ref{down-wuu-yang} se muestran los grafos $Down(X)$ y $Down(Y)$ para la gramática de la figura \ref{ag-no-ANCAG}.
 
 \subsection{Grafo \textit{DCG}}
 
@@ -110,7 +106,7 @@ $\bigcup\limits_{\textit{todo p}}{DCG_{X} (p) = Down (X)}$
 \end{theorem}
 \underline{Nota:} $DCG_{X}(p)$ contiene las dependencias, entre las instancias de la gramática, para el símbolo \texttt{X}, acotando el análisis para la producción \textit{p} y los posibles contextos inferiores.
 
-En la sección \ref{XXX} se analiza el algoritmo para construir los grafos DCG.
+En la sección \ref{subsec:alg-DCG} se analiza el algoritmo para construir los grafos DCG.
 
 \subsection{Grafo \textit{ADP}}
 \label{mag:adpdef}
