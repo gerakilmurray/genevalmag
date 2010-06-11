@@ -28,7 +28,7 @@ Dentro de los mecanismos desarrollados, las gramáticas han logrado ocupar unos 
 
 Desde que D. Knuth introdujo en 1966 las gramáticas de atributos (GA), estas se han utilizado ampliamente para el desarrollo de herramientas de procesamiento de lenguajes formales como compiladores, intérpretes, traductores como también para especificar la semántica de lenguajes de programación.
 
-En el desarrollo de este capítulo, introductorio, abordaremos un amplio numero de conceptos desde un punto de vista informal. A partir del capítulo 2 hasta el 4 inclusive se analizaran algunos de ellos, con mas formalidad y los siguientes capítulos estarán destinados al desarrollo de \maggen. 
+En el desarrollo de este capítulo, introductorio, abordaremos un amplio numero de conceptos, a partir del capítulo 2 hasta el 4 inclusive se analizaran algunas familias de gramáticas de atributos y los siguientes capítulos estarán destinados al desarrollo de \maggen. 
 
 \maggen\ es el objetivo principal del proyecto y su denominación esta dada por la combinación de las silabas \textbf{mag}, que significa \textit{multi-plans attribute grammar} y \textbf{Gen} por \textit{generator}. Estas dos silabas dan significado a \maggen\ como ``Generador de Evaluadores Estáticos para MAG''.
 
@@ -42,9 +42,9 @@ Las CFG han tomado gran importancia en la descripción de formatos de documentos
 Una gramática libre de contexto se conforma de 4 componentes necesarios para la descripción de un lenguaje:
 
 \begin{enumerate}
-\item Un conjunto finito de símbolos que son los string que se definen el lenguaje. Este conjunto es denominado ``alfabeto de terminales'' o simplemente \textit{\textbf{símbolos terminales}}.
+\item Un conjunto finito de símbolos que son los \textit{string} que definen el lenguaje. Este conjunto es denominado ``\textbf{alfabeto de terminales}'' o simplemente \textit{\textbf{símbolos terminales}}.
 
-\item Un conjunto finito de variables llamados \textit{\textbf{símbolos no terminales}} o ``categorías sintácticas'. Cada uno de estos define un lenguaje, es decir un conjunto de strings.
+\item Un conjunto finito de variables llamados \textit{\textbf{símbolos no terminales}} o ``categorías sintácticas'. Cada uno de estos define un lenguaje, es decir un conjunto de \textit{strings}.
 
 \item Una variable que representa el comienzo del lenguaje, que se denomina \textit{\textbf{símbolo inicial}}. Dicha variable pertenece al conjunto del punto 2.
 
@@ -55,7 +55,7 @@ Una gramática libre de contexto se conforma de 4 componentes necesarios para la
 
 \item El símbolo \textbf{$\rightarrow$}.
 
-\item Una secuencia de 0 o mas símbolos no terminales y terminales. Este, es denominado \textit{\textbf{body}} de la producción y representa el string formado por el \textit{head}.
+\item Una secuencia de $0$ o mas símbolos no terminales y terminales. Este, es denominado \textit{\textbf{body}} de la producción y representa el \textit{string} formado por el \textit{head}.
 \end{enumerate}
 \end{enumerate}
 
@@ -64,6 +64,7 @@ Estos cuatro componentes pueden ser representados por una tupla \textbf{<V,T,S,P
 
 \underline{Nota:}
 En todo el desarrollo del trabajo se denotara a los símbolos no terminales con letras en mayúscula y a los símbolos terminales con letras en minúscula para mayor claridad.
+
 Veamos dos ejemplos desarrollados en \cite{gramatica} (cap. 5).
 
 \begin{enumerate}
@@ -88,7 +89,7 @@ Ejemplos de cadenas del lenguaje $G_{pal}$:
 \end{items}
 
 \item \underline{Ejemplo:} Gramática de expresiones:\\
-\textbf{G = (\{E,I\}, \{+,*,(,),a,b,0,1\}, E, P)} donde P es el conjunto de producciones siguiente:
+\textbf{$G_{exp}$ = (\{E,I\}, \{+,*,(,),a,b,0,1\}, E, P)} donde P es el conjunto de producciones siguiente:
 \begin{enumerate}
 \item $E \rightarrow I$
 \item $E \rightarrow E + E$
@@ -112,11 +113,13 @@ Ejemplos de cadenas del lenguaje $G_{pal}$:
 \underline{Abreviación de reglas}: Cuando denotamos una producción podemos utilizar una abreviación para agrupar aquellas producciones con el mismo \textit{head}. Para ello utilizamos el meta-símbolo ``|''. Por ejemplo el conjunto de producciones de $G_{pal}$ podríamos escribirlas como: $P \rightarrow \lambda | 0 | 1 | 0P0 | 1P1$.
 
 \underline{Observación:}
-De aquí en adelante se asumirá que el símbolo de comienzo $S$  aparece en la parte izquierda de una única producción y no puede aparecer en la parte derecha de ninguna producción\footnote{Esta forma se denomina \emph{forma normal} o también \textit{Gramática extendida}.}. \\
+
+De aquí en adelante se asumirá que el símbolo de comienzo $S$  aparece en la parte izquierda (\textit{head}) de una única producción y no puede aparecer en la parte derecha (\textit{body}) de ninguna producción\footnote{Esta forma se denomina \emph{forma normal} o también \textit{Gramática extendida}.}. \\
+
 
 \begin{definition} Se dice que una CFG $G=<V,T,S,P>$
 es \textbf{reducida} si
-$\forall B \in V$ , $\exists \alpha , \gamma \in \Sigma^{*} : S \clausderiva{G} \alpha B \gamma$ y $\exists \tau \in T^{*} : B \clausderiva{G} \tau$\footnote{ $\clausderiva{G}$: deriva en 0 o más pasos; es detallada en \cite{tesismarcelo}}.
+$\forall B \in V$ , $\exists \alpha , \gamma \in \Sigma^{*} : S \clausderiva{G} \alpha B \gamma$ y $\exists \tau \in T^{*} : B \clausderiva{G} \tau$\footnote{ $\clausderiva{G}$: deriva en $0$ o más pasos; es detallada en \cite{tesismarcelo}}.
 \label{def:reducida}
 \end{definition}
 
@@ -164,7 +167,7 @@ En la figura \ref{fig:ejePala-st} se observa un árbol de derivación para la ca
 
 \section*{Notación}
 
-La notación usada tanto en el desarrollo del proyecto, comunicación entre los autores y redacción de este informe es la utilizada por Wuu Yang en \cite{wuu-yang1}, la cual proviene de la notación de Kastens en \cite{kastens} y la utilizada por el Mg. Marcelo Arroyo en \cite{tesismarcelo}.
+La notación usada tanto en el desarrollo del proyecto, comunicación entre los autores y redacción de este informe es la utilizada por Wuu Yang en \cite{wuu-yang1}, la cual proviene de la notación de Kastens en \cite{kastens} y la utilizada por el Marcelo Arroyo en \cite{tesismarcelo}.
 
 \section{Gramática de Atributos}
 
@@ -263,17 +266,15 @@ Una gramática de atributos $GA$ es circular si y solo si existe un árbol sint�
 
 Si una GA contiene dependencias circulares no podría ser evaluada ya que no se encontraría un orden de evaluación. Esto se conoce como el problema de la circularidad, el cual se ha demostrado ser intrínsecamente exponencial\cite{intri-exc}. El problema de la circularidad ha motivado que muchos investigadores hayan realizado esfuerzos en la búsqueda e identificación de familias o subgrupos de gramáticas de atributos, para las cuales puedan detectarse circularidades con algoritmos de menor complejidad (polinomial o lineal).
 
-Estas familias imponen restricciones sobre la gramática de atributos o sobre las dependencias entre sus atributos para garantizar que una GA no sea circular, con el costo de restringir su poder expresivo.
-
 En 1980, Uwe Kastens\cite{kastens} caracterizó las gramáticas de atributos ordenadas y propuso un método para su evaluación, denominado secuencias de visita. Estas son, secuencias de operaciones que conducen el recorrido del árbol sintáctico atribuido y realizan la evaluación de las instancias de los atributos. Kastens propone un método para generar las secuencias de visita en tiempo polinomial para la familia OAG. Esta familia y otras como las absolutamente no circulares (ANCAG) son tratadas en el capítulo 2.
 
-Luego, en 1998, Wuu-Yang en \cite{wuu-yang1} caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multi-plans}, presentando una algoritmo de evaluación basado en secuencia de visita en tiempo polinomial en el numero de símbolos y producciones. Estas, son desarrolladas en el capítulo \ref{chap:mag} y son en las que se basa el funcionamientos de \maggen.  
+Luego, en 1998, Wuu-Yang en \cite{wuu-yang1} caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multi-plans}, presentando una algoritmo de evaluación basado en secuencia de visita en tiempo polinomial en el numero de símbolos y producciones. Esta familia, es presentada en el capítulo \ref{chap:mag} y son en las que se basa el funcionamiento de \maggen.  
 
 \subsection{Evaluación dinámica}
 
 Un evaluador dinámico tiene como ventajas su simplicidad y la posibilidad de detectar ciclos en el grafo de dependencias antes o durante la evaluación. Además que, es posible evaluar cualquier WDAG (GA bien definida)\footnote{Esta familia es detalla en el capítulo siguiente (sección \ref{sec:well-defined}).}.
 
-La realidad es que, los evaluadores dinámicos no han tenido mucho interés en el desarrollo de herramientas de generación de procesadores de lenguajes (como por ejemplo los compiladores)debido a que uno de los principales requisitos de un compilador es que sea eficiente, ya que durante un desarrollo un programador generalmente necesita recompilar un número muy importante de veces hasta obtener una versión final del programa requerido.
+La realidad es que, los evaluadores dinámicos no han tenido mucho interés en el desarrollo de herramientas de generación de procesadores de lenguajes (como por ejemplo los compiladores) debido a que uno de los principales requisitos de un compilador es que sea eficiente, ya que durante un desarrollo un programador generalmente necesita recompilar un número muy importante de veces hasta obtener una versión final del programa requerido.
 
 Las principales desventajas son que generalmente es necesario mantener el árbol sintáctico y el grafo de dependencias. La construcción del grafo de dependencias consume tiempo y memoria; y a su vez, el tiempo de procesamiento insumido en la construcción del grafo de dependencias puede ser mayor que el proceso de evaluación en sí mismo. En la practica, si tomamos una GA de un tamaño normalmente usado, los requerimientos de memoria pueden ser considerables.  
 
@@ -281,12 +282,14 @@ Razón por la cual \maggen\ genera un evaluador estático y debido a esto no pro
 
 \subsection{Evaluación estática}
 \label{subsec:eval-est}
-Los métodos estáticos deben tener en cuenta todos los posibles árboles sintácticos posibles a ser generados por la gramática y calcular todas las posibles dependencias entre las instancias de los atributos. 
+Los métodos estáticos deben tener en cuenta todos los árboles sintácticos posibles a ser generados por la gramática y calcular las dependencias, entre las instancias de los atributos, para cada uno de ellos. 
+
+Un concepto relevante a tener en cuenta es el \textit{contexto de una produccion}, con respecto al mismo no referimos a continuación.
 
 Un árbol sintáctico se construye a partir de la aplicación sucesiva de producciones de la
 gramática. Una instancia de una producción en un árbol sintáctico tiene como
 \emph{contexto inferior} a las instancias de las producciones aplicadas a los no terminales de la parte derecha.
-Dada una producción $p$ se deben tomar en cuenta tres tipos de dependencias:
+Dada una producción $p$ se deben tomar en cuenta tres tipos de dependencias que definen el contexto de la misma:
 \begin{enumerate}
 \item Directas obtenidas por las ecuaciones de $p$.
 \item Impuestas por el contexto superior.
@@ -305,10 +308,10 @@ De ahora en adelante, cada vez que se hable de evaluador, se hará referencia a 
 \label{sec:sec-visit}
 En 1980, Uwe Kastens propone un método de evaluación para la familia $OAG$, denominado \emph{secuencias de visita}\cite{kastens}. Esta familia de gramáticas es presentada en la sección \ref{sec:def-oag} de este informe.
 
-En esta sección se analizará el concepto de secuencias de visita desde el punto de vista utilizado para el desarrollo de \maggen. Además, dicho enfoque es aplicable, también, no sólo a las OAG sino también para WDAGs.
+En esta sección se analizará el concepto de secuencias de visita desde el punto de vista en el cual lo presenta Kastens. Además, dicho enfoque es aplicable, también, no sólo a las OAG sino también para WDAGs.
 
 Sea $n$ un nodo de un árbol atribuido $T$. 
-Una secuencia de visitas en el nodo $n$ es una secuencia de tres operaciones u acciones: 
+Una secuencia de visitas en el nodo $n$ es una secuencia de tres operaciones o acciones: 
 \emph{visit(child,i)}, \emph{compute(at)} y \emph{leave(i)}.
 
 \begin{description}
@@ -321,9 +324,10 @@ $at$ en la producción $p$ aplicada correspondiente al nodo $n$.
 el nodo corriente y que se debe visitar al nodo padre.
 \end{description}
 \underline{\textit{Nota:}}
+
 En la capítulo de implementación de \maggen\ (Ver cap. \ref{chap:implem}) se abordaran detalles sobre el funcionamiento de estas tres operaciones, tanto para el algoritmo de generación de secuencias, como así también para el evaluador generado. Uno de los principales cambios, con respecto a lo visto en los puntos de arriba, es que el índice $i$ es omitido (en visit y leave) debido a que cada nodo lleva un propio contador de invocaciones y mantiene los cambios estado en cada una de ellas.  
 
-Un evaluador basado en secuencias de visita, comienza ejecutando las operaciones en el nodo raíz del árbol. En cada visita a un nodo se ejecutan las operaciones en secuencia hasta la ejecución de una operación \emph{leave(i)}.
+Un evaluador basado en secuencias de visita, comienza ejecutando las operaciones en el nodo raíz del árbol. En cada visita a un nodo, se ejecutan las operaciones en secuencia hasta la ejecución de una operación \emph{leave(i)}.
 En su próxima visita ($i+1$), se continúa con la operación que sigue a \emph{leave(i)}.
 
 Cada secuencia de visitas finaliza con una operación \emph{leave}\footnote{La mayoría de las veces implícita, es decir este \emph{leave} esta dado por el fin de la secuencia.}. La evaluación termina cuando se ejecutaron todas las operaciones del nodo raíz del árbol
@@ -341,6 +345,6 @@ Tal como analizamos en las secciones anteriores para evaluar un GA debemos compu
 
 Un evaluador para una GA bien definida deberá realizar una previa selección del plan correspondiente a cada nodo del árbol sintáctico. Para dicha selección, el evaluador necesitará realizar un recorrido ascendente del árbol sintáctico para \emph{marcar} los nodos con la información sobre las dependencias \emph{actuales} transitivas en base al subárbol.
 
-En la sección \ref{sec:algevalattr} presentamos algoritmos eval y traverse, teniendo en cuenta heurísticas utilizadas por Wuu Yang en \cite{wuu-yang1}.
+En la sección \ref{sec:algevalattr} presentamos algoritmos \texttt{eval} y \texttt{traverse}, teniendo en cuenta heurísticas utilizadas por Wuu Yang en \cite{wuu-yang1}.
 
 Además, en los capítulos \ref{chap:disen_} y \ref{chap:implem} se pueden analizar detalles sobre la generación de un evaluador, específicamente, los utilizados para el desarrollo de \maggen.
