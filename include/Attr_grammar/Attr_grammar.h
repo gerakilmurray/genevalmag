@@ -1,6 +1,6 @@
 /**
   *  \file      Attr_grammar.h
-  *  \brief     Class that represent the full attribute grammar parsed.
+  *  \brief     Class that represent the full attribute grammar.
   *  \date      28/09/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>

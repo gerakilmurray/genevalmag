@@ -1,6 +1,6 @@
 /**
   *  \file      Rule.h
-  *  \brief     Class of the rule of the grammar parsed.
+  *  \brief     Class of the rule of the attribute grammar.
   *  \date      05/11/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>

@@ -1,6 +1,6 @@
 /**
   *  \file      Attribute.h
-  *  \brief     Class of the attribute of the grammar parsed.
+  *  \brief     Class of the attribute of the attribute grammar.
   *  \date      23/10/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>

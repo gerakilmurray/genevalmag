@@ -219,6 +219,6 @@ class Builder_code
 		bool generate_code(const vector<string> &headers_file) const;
 };
 
-}
+} /* end genevalmag */
 
 #endif /* BUILDER_CODE_H_ */

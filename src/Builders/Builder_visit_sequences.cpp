@@ -278,9 +278,6 @@ bool Builder_visit_sequences::gen_visit_seq
 			ins_computed_own.push_back(*ins);
 		}
 
-		/* Compute this equation */
-//		sequence.push_back(eq->get_id()*(-1));
-
 		if (!leaves)
 		{
 			/* Compute this equation */

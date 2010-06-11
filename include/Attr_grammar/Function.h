@@ -1,6 +1,6 @@
 /**
   *  \file      Function.h
-  *  \brief     Class of the function of the grammar parsed.
+  *  \brief     Class of the function of the attribute grammar.
   *  \date      26/11/2009
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>

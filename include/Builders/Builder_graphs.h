@@ -1,6 +1,6 @@
 /**
   *  \file		Builder_graphs.h
-  *  \brief		Header with the functions for build graph of grammar.
+  *  \brief		Header with the functions for build all kind of graphs for the attribute grammar.
   *  \date		17/02/2010
   *  \author	Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author	Picco, Gonzalo Martin <gonzalopicco@gmail.com>
@@ -24,15 +24,17 @@ using namespace boost;
 namespace genevalmag
 {
 
+/* Definitions of Graph using BGL. */
 struct vertex_data_t
 {
     typedef vertex_property_tag kind;
 };
 
+/* The graph stores a Expresion leaf, ie, an instance or literal. */
 typedef property <vertex_data_t, const genevalmag::Expr_leaf*> property_vertex_dp;
-
 typedef adjacency_list <hash_setS, vecS, directedS, property_vertex_dp> Graph;
 
+/* Descriptor it's a references to vertex graph. */
 typedef Graph::vertex_descriptor Vertex;
 
 class Builder_graphs

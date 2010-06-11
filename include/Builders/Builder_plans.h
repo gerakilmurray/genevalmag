@@ -57,10 +57,10 @@ typedef struct c_rule
 		       (context == other.context && father < other.father);
 	}
 	/**
-	 * operator=
-	 * @param other
-	 * @return
-	 */
+	  * operator=
+	  * @param other
+	  * @return
+	  */
 	c_rule &operator= (const c_rule &other)
 	{
 		if(this != &other)
@@ -76,29 +76,29 @@ typedef struct c_rule
 typedef struct k_w
 {
 	/**
-	 *  \var father
-	 *  \brief Index context father (rule)
-	 */
+      *  \var father
+	  *  \brief Index context father (rule)
+	  */
 	unsigned short	father;
 	/**
-	 * \var id_rule.
-	 * \brief The index of rule.
-	 */
+	  * \var id_rule.
+	  * \brief The index of rule.
+	  */
 	unsigned short	id_rule;
 	/**
-	 * operator==
-	 * @param other
-	 * @return
-	 */
+	  * operator==
+	  * @param other
+	  * @return
+	  */
 	bool operator== (const k_w &other) const
 	{
 		return (father == other.father) && (id_rule == other.id_rule);
 	}
 	/**
-	 * operator=
-	 * @param other
-	 * @return
-	 */
+	  * operator=
+	  * @param other
+	  * @return
+	  */
 	k_w &operator= (const k_w &other)
 	{
 		if(this != &other)
@@ -114,29 +114,29 @@ typedef struct k_w
 typedef struct i_w
 {
 	/**
-	 * \var item
-	 * \brief A key_work_list.
-	 */
+	  * \var item
+	  * \brief A key_work_list.
+	  */
 	Key_work_list	item;
 	/**
-	 * \var order_attr
-	 * \brief Order of ecuation.
-	 */
+	  * \var order_attr
+	  * \brief Order of ecuation.
+	  */
 	unsigned short	order_attr;
 	/**
-	 * operator==
-	 * @param other
-	 * @return
-	 */
+	  * operator==
+	  * @param other
+	  * @return
+	  */
 	bool operator== (const i_w &other) const
 	{
 		return (item == other.item) && (order_attr == other.order_attr);
 	}
 	/**
-	 * operator=
-	 * @param other
-	 * @return
-	 */
+	  * operator=
+	  * @param other
+	  * @return
+	  */
 	i_w &operator= (const i_w &other)
 	{
 		if(this != &other)
@@ -152,39 +152,39 @@ typedef struct i_w
 typedef struct k_plan
 {
 	/**
-	 * \var id_plan
-	 * \brief Index plan. - index to order superior.
-	 */
+	  * \var id_plan
+	  * \brief Index plan. - index to order superior.
+	  */
 	unsigned short  id_plan;
 	/**
-	 * \var plan
-	 * \brief Index plan.
-	 */
+	  * \var plan
+	  * \brief Index plan.
+	  */
 	unsigned short	plan;
 	/**
-	 * operator<
-	 * @param other
-	 * @return
-	 */
+	  * operator<
+	  * @param other
+	  * @return
+	  */
 	bool operator< (const k_plan &other) const
 	{
 		return (id_plan < other.id_plan) ||
 		       (id_plan == other.id_plan && plan < other.plan);
 	}
 	/**
-	 * operator==
-	 * @param other
-	 * @return
-	 */
+	  * operator==
+	  * @param other
+	  * @return
+	  */
 	bool operator== (const k_plan &other) const
 	{
 		return (id_plan == other.id_plan) && (plan == other.plan);
 	}
 	/**
-	 * operator=
-	 * @param other
-	 * @return
-	 */
+	  * operator=
+	  * @param other
+	  * @return
+	  */
 	k_plan &operator= (const k_plan &other)
 	{
 		if(this != &other)
@@ -200,25 +200,25 @@ typedef struct k_plan
 typedef struct k_p_project
 {
 	/**
-	 * \var id_plan_project
-	 * \brief key_plan
-	 */
+	  * \var id_plan_project
+	  * \brief key_plan
+	  */
 	Key_plan		id_plan_project;
 	/**
-	 * \var symbol_project
-	 * \brief Projected Symbol.
-	 */
+	  * \var symbol_project
+	  * \brief Projected Symbol.
+	  */
 	const Symbol	*symbol_project;
 	/**
-	 * \var Index_ocurrence
-	 * \brief Appearance index of projected symbol.
-	 */
+	  * \var Index_ocurrence
+	  * \brief Appearance index of projected symbol.
+	  */
 	unsigned short  index_ocurrence;
 	/**
-	 * operator<
-	 * @param other
-	 * @return
-	 */
+	  * operator<
+	  * @param other
+	  * @return
+	  */
 	bool operator< (const k_p_project &other) const
 	{
 		return (id_plan_project < other.id_plan_project) ||
@@ -226,19 +226,19 @@ typedef struct k_p_project
 		       (id_plan_project == other.id_plan_project && symbol_project->get_name() == other.symbol_project->get_name() && index_ocurrence < other.index_ocurrence);
 	}
 	/**
-	 * operator==
-	 * @param other
-	 * @return
-	 */
+	  * operator==
+	  * @param other
+	  * @return
+	  */
 	bool operator== (const k_p_project &other) const
 	{
 		return (id_plan_project == other.id_plan_project) && (symbol_project->get_name() == other.symbol_project->get_name()) && (index_ocurrence == other.index_ocurrence);
 	}
 	/**
-	 * operator=
-	 * @param other
-	 * @return
-	 */
+	  * operator=
+	  * @param other
+	  * @return
+	  */
 	k_p_project &operator= (const k_p_project &other)
 	{
 		if(this != &other)
@@ -299,7 +299,6 @@ class Builder_plans
 		  * The changes are applies about paramenter "result_order".
 		  * @param graph
 		  * @param result_order
-		  * @param grammar
 		  * @param context_rule
 		  */
 		void generates_topological_order(const Graph &graph, Order_eval_eq &result_order, const Context_rule &context_rule) const;
@@ -309,7 +308,6 @@ class Builder_plans
 		  * The changes are applies about paramenter "result_order".
 		  * @param graph_adp
 		  * @param index_order
-		  * @param grammar
 		  * @param context_rule
 		  * @return
 		  */
@@ -317,14 +315,12 @@ class Builder_plans
 
 		/**
 		  * Generates and saves all evaluation's plans for the Attribute Grammar.
-		  * @param grammar
 		  * @return
 		  */
 		bool generate_plans();
 
 		/**
 		  * Generates all graphs for attribute grammar: DP, DOWN, DCG and ADP.
-		  * @param grammar
 		  * @return
 		  */
 		bool generate_graphs();
@@ -370,14 +366,12 @@ class Builder_plans
 		  * Return: 0: when all success process.
 		  * 		1: when detects cilcyc graph.
 		  * 		2: when detects error in the graph generation.
-		  * @param attr_grammar
 		  * @return
 		  */
 		unsigned short build_plans();
 
 		/**
 		  * Saves all plans. Creates a graph that represents the plan and uses print_graph with dot.
-		  * @param grammar
 		  * @param path_output
 		  * @return
 		  */
@@ -385,7 +379,6 @@ class Builder_plans
 
 		/**
 		  * Saves all proyected's plans. Creates a graph that represents the plan and uses print_graph with dot.
-		  * @param grammar
 		  * @param path_output
 		  * @return
 		  */
@@ -452,14 +445,12 @@ class Builder_plans
 
 		/**
 		  * Saves all graphs generated as the analysis of the dependencies between attributes.
-		  * @param rules
 		  * @param path_output
 		  */
 		void save_all_graphs(const string path_output) const;
 
 		/**
 		  * Saves the graphs generated as the analysis of the dependencies between attributes, which demonstrate cyclicity.
-		  * @param rules
 		  * @param path_output
 		  */
 		void save_cyclic_graphs(const string path_output) const;
