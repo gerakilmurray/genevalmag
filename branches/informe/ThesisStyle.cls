@@ -737,8 +737,10 @@
 \newcommand\figurename{Figura}
 \newcommand\tablename{Tabla}
 \newcommand\partname{Parte}
-\newcommand\chaptername{Capitulo}
-\newcommand\appendixname{Ap\'endice}
+\newcommand\chaptername{Cap\'itulo}
+\newcommand\appendixname{Apéndice}
+
+
 \def\today{\ifcase\month\or
   Enero\or Febrero\or Marzo\or Abril\or Mayo\or Junio\or
   Julio\or Agosto\or Septiembre\or Octubre\or Noviembre\or Diciembre\fi
