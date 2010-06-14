@@ -65,11 +65,11 @@
 
 \usepackage[T1]{fontenc}
 % \usepackage[left=3cm,right=2cm,top=4cm,bottom=3cm,includefoot,includehead,headheight=13.6pt]{geometry}
-\usepackage[left=1.3in,right=1.1in,top=1.1in,bottom=1.1in,includefoot,includehead,headheight=13.6pt]{geometry}
+\usepackage[left=1.3in,right=1.1in,top=1.1in,bottom=1.1in]{geometry}
 \renewcommand{\baselinestretch}{1.05}
 
 % Table of contents for each chapter
-\usepackage[nottoc, notlof, notlot]{tocbibind}
+\usepackage{tocbibind}
 \usepackage{minitoc}
 \setcounter{minitocdepth}{2}
 \mtcindent=15pt
@@ -169,10 +169,10 @@ urlcolor=linkcol %couleur des liens pour les url
 %\renewcommand{\sectionmark}[1]{         % Lower case Section marker style
 %  \markright{\thesection.\ #1}}         %
 
-\fancyhead[LE,RO]{\bfseries\thepage}    % Page number (boldface) in left on even
+\fancyhead[LE,RO]{\small\bfseries\thepage}    % Page number (boldface) in left on even
 % pages and right on odd pages
-\fancyhead[RE]{\bfseries\nouppercase{\leftmark}}      % Chapter in the right on even pages
-\fancyhead[LO]{\bfseries\nouppercase{\rightmark}}     % Section in the left on odd pages
+\fancyhead[RE]{\scriptsize\bfseries\nouppercase{\leftmark}}      % Chapter in the right on even pages
+\fancyhead[LO]{\scriptsize\bfseries\nouppercase{\rightmark}}     % Section in the left on odd pages
 
 \let\headruleORIG\headrule
 \renewcommand{\headrule}{\color{black} \headruleORIG}

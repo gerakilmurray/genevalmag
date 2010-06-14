@@ -16,7 +16,7 @@ La solución obtenida se apoya en la utilización de un framework reconocido mun
 
 Se puede resumir que el proceso de análisis sintáctico, en este framework, se componen de cuatro partes como lo muestra la figura \ref{fig:procesoSpirit}.
 
-\begin{figure}[h!]\centering
+\begin{figure}[!ht]\centering
 \includegraphics[width=450pt, height=180pt]{./spirit.png}
 \caption{Procesos dentro de \spirit}\label{fig:procesoSpirit}
 \end{figure}
@@ -49,7 +49,7 @@ struct my_grammar: public grammar <my_grammar>
 
 Para definirla, disponemos de un amplio conjunto de herramientas. Primero, los operadores de metalenguaje listados en la tabla \ref{ope_spirit}, los cuales permiten construir nuevas reglas combinando reglas ya definidas, parsers y constantes permitidas en el framework.
 
-\begin{table}[h!]\centering\scriptsize
+\begin{table}[!ht]\centering\scriptsize
 \begin{tabular}{| c | p{7cm} |}
 \hline
 
@@ -59,7 +59,7 @@ A $=$                  B  & Definición de A en base a B \\ \hline
 A $|$                  B  & Unión, acepta A o B, también llamada ``alternativa''\\ \hline
 A $\&$                 B  & Intersección, acepta A y B \\ \hline
 A $-$                  B  & Diferencia, acepta A pero no a B  \\ \hline
-A $\textasciicircum$   B  & Disyunción exclusiva, acepta A o B, pero no a ambos \\ \hline
+A \textasciicircum     B  & Disyunción exclusiva, acepta A o B, pero no a ambos \\ \hline
 A $>>$                 B  & Secuencia, acepta A seguido de B \\ \hline
 \multirow{2}{*}{A $\%$ B} & Lista, acepta A separados por ocurrencias de B.\\
                           & Es equivalente a: A $>>$ *(B $>n$ A)\\ \hline
@@ -72,7 +72,7 @@ $!$                    A  & Opcional, 0 o 1 vez \\ \hline
 
 Por otra parte, \spirit\ dispone de un gran conjunto de parsers que abarcan la mayoría de los tipos básicos, representación de datos y valores utilizados en el común de los lenguajes (ver tabla \ref{parsers}).
 
-\begin{table}[h!]\centering\scriptsize
+\begin{table}[!ht]\centering\scriptsize
 \begin{tabular}{| l | l |}
 \hline
 
@@ -101,7 +101,7 @@ end\_p     & Carácter de fin de archivo (EOF) \\ \hline
 
 Además posee varias directivas que modifican el comportamiento de los parsers, encapsulándose en una expresión definida por el usuario (ver tabla \ref{directivas}).
 
-\begin{table}[h!]\centering\scriptsize
+\begin{table}[!ht]\centering\scriptsize
 \begin{tabular}{| l | p{7cm} |}
 \hline
 
@@ -141,7 +141,7 @@ Lo primero que se tuvo que realizar, fue definir los componentes básicos que se
 \begin{description}
 \item [Identificadores] son los nombres de sorts, funciones, atributos, símbolos no terminales y reglas, permitidos por \maggen\ y se basan en el común de los estándares. Debido a que el lenguaje del evaluador generado es C++, todas las palabras reservadas de ese lenguaje, son de la misma clase para nuestra herramienta.
 
-\begin{lstlisting}[float=h!, language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=11cm]
+\begin{lstlisting}[float=!ht, language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=11cm]
 r_ident = lexeme_d[(alpha_p|'_')>>*(alnum_p|'_')]-r_reserved_word;
 
 r_reserved_word = str_p("compute")|"end"
@@ -395,7 +395,7 @@ Además, debido a una restricción de \spirit, se tuvo que reescribir toda regla
 
 Logrando la siguiente gramática de expresiones, que luego fue codificada en \spirit.
 
-\begin{lstlisting}[float=h!, backgroundcolor=\color{white}, columns=fullflexible, linewidth=7cm]
+\begin{lstlisting}[float=!ht, backgroundcolor=\color{white}, columns=fullflexible, linewidth=7cm]
 E := T (op_infix E)*
 
 T := F (op_postfix)*
@@ -415,7 +415,7 @@ literal := real
 
 Dentro de las expresiones se tenía que ir resolviendo la precedencia de los operadores declarados por el usuario. Además, la utilización de paréntesis crea distintos niveles de precedencia. Cada vez que se utiliza la producción que genera \texttt{( E )}, la precedencia de los operadores que se utilicen en la expresión \texttt{E}, se resolverán en ese nivel.
 
-\begin{lstlisting}[float=h!, language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=13cm]
+\begin{lstlisting}[float=!ht, language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=13cm]
 r_expression = r_expr_prime>>*(r_op_infix_st[&create_operator][&create_func_node]>>
                       r_expr_prime[&create_root_infix_node]);
 
@@ -439,7 +439,7 @@ Las funciones aceptan expresiones como parámetros, así que, la asociatividad y
 
 Al completar esta regla se creará una \texttt{Expr\_function} dentro de la gramática.
 
-\begin{lstlisting}[float=h!, language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=11cm]
+\begin{lstlisting}[float=!ht, language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=11cm]
 r_function = r_function_st[&create_function][&create_func_node]>>
                    ch_p('(')[&push_mark][&increment_level]>>
                    !(r_expression%', ')>>
@@ -586,19 +586,19 @@ Existen dos grandes casos a considerar:
 
 Existen dos variantes, las cuales son presentadas en los diagramas \ref{rotacion1} y \ref{rotacion2}.
 
-\begin{figure}[h!]\centering
+\begin{figure}[!ht]\centering
 \includegraphics[width=250pt, height=82pt]{./rotacion1.png}
 \caption{\label{rotacion1} Caso de rotación cuando la operación de la izquierda tiene menor precedencia.}
 \end{figure}
 
-\begin{figure}[h!]\centering
+\begin{figure}[!ht]\centering
 \includegraphics[width=250pt, height=85pt]{./rotacion2.png}
 \caption{\label{rotacion2} Caso de rotación cuando la operación de la derecha tiene menor precedencia.}
 \end{figure}
 
 \item En cambio, cuando se inserta cualquier operación como hija de una operación prefija (raíz) y la insertada tiene mejor precedencia que la raíz, no se resuelve instantáneamente el error, dado que se alteraría el orden sintáctico de la expresión. Para ello se prende una bandera, a la cual se le asigna el valor de precedencia que tiene la operación recién insertada. Entonces cuando en el siguiente paso se agregue una nueva raíz, si tiene mayor precedencia que su ``nieto'' en el árbol, se realiza la siguiente rotación mostrada en el diagrama \ref{rotacion3}.
 
-\begin{figure}[h!]\centering
+\begin{figure}[!ht]\centering
 \includegraphics[width=250pt, height=107pt]{./rotacion3.png}
 \caption{\label{rotacion3} Caso de rotación cuando se detectó un conflicto sin resolver.}
 \end{figure}
@@ -824,7 +824,7 @@ unsigned short build_plans()
 El proceso de construir un plan es complejo, la heurística seguida respeta el algoritmo para computar planes presentado por Wuu Yang (\cite{wuu-yang1}).
 
 Por lo que se implementaron las funciones y elementos involucrados que se pueden analizar en la tabla \ref{table:map-comp-plan}.
-\begin{table}[h!]
+\begin{table}[!ht]
 \begin{tabular}{| p{4.5cm} | p{10.5cm} |}
 \hline
 Lista de trabajos \textbf{WL} & \texttt{vector <Item\_work>\ work\_list} \\ \hline

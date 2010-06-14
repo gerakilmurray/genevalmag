@@ -128,14 +128,14 @@ A continuación observemos algunos ejemplo de invocación de \maggen.
 \begin{itemize}
 \item Si invocamos:\\ \texttt{./maggen -h} obtenemos el siguiente mensaje de ayuda:
 
-\begin{figure}[h!]\centering
+\begin{figure}[!ht]\centering
 \includegraphics[width=350pt,height=60pt]{help.png}
 \caption{\label{fig:outhelp} Información de ayuda de \maggen.}
 \end{figure}
 
 \item Si invocamos: \\ \texttt{./maggen -fo ./Out\_wuu\_yang -o evalmag -f ./examples/ag\_wuu\_yang/ag\_wuu\_yang.input}. \\ Especificamos como archivo de entrada a \texttt{ag\_wuu\_yang.input}, como directorio de salida \texttt{./Out\_wuu\_yang} y el nombre de la clase (y archivo) generada con el nombre \texttt{evalmag}. La figura \ref{fig:outnormal} muestra la salida de esta invocación.
 
-\begin{figure}[h!]\centering
+\begin{figure}[!ht]\centering
 \includegraphics[width=350pt,height=70pt]{normal.png}
 \caption{\label{fig:outnormal} Usando \maggen\ con opciones.}
 \end{figure}
@@ -148,11 +148,11 @@ La salida de \maggen\ esta ordenada a través de directorio bien definidos que m
 
 \small\texttt{./maggen -fo ./Out\_wuu\_yang -o maggen -f ./examples/ag\_wuu\_yang/ag\_wuu\_yang.input}.\\
 
-La totalidad de la información generada por la herramienta es mostrada en la figura \ref{fig:outmagegn}.
+La totalidad de la información generada por la herramienta es mostrada en la figura \ref{fig:outmaggen}.
 
-\begin{figure}[h!]\centering
+\begin{figure}[!ht]\centering
 \includegraphics[width=350pt,height=229pt]{out_all.png}
-\caption{\label{fig:outmagegn} Salida de \maggen: Directorios y archivos.}
+\caption{\label{fig:outmaggen} Salida de \maggen: Directorios y archivos.}
 \end{figure}
 
 Dicha información es almacenada en la ruta \texttt{./Out\_wuu\_yang}, dentro de la cual podemos observar:
@@ -237,7 +237,7 @@ Analicemos los valores de los atributos de cada símbolo en la siguiente tabla:
 
 Tal como analizamos en el ejemplo anterior, el evaluador generado por \maggen\ podría ser utilizado con todos lo AST posibles. Esto es, debido a que el evaluador contiene las secuencias de visita previamente computadas para hacer la tarea de evaluación con una notoria ganancia de tiempo. Entonces podríamos invocar al evaluador, además, con los demás AST que se desprenden con la gramática del ejemplo de Wuu Yang. En la figura \ref{fig:allast} podemos ver la totalidad de AST.
 
-\begin{figure}[h!]\centering
+\begin{figure}[!ht]\centering
 \includegraphics[width=350pt,height=257pt]{ast-all.png}
 \caption{\label{fig:allast} AST para ejemplo de Wuu Yang.}
 \end{figure}
