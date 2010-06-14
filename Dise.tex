@@ -458,14 +458,14 @@ El funcionamiento de \maggen\ esta dado por una instancia de la estructura llama
  
 En la figura \ref{fig:disen} se presenta un diagrama que muestra la interacción de esta estructura en el funcionamiento de \maggen.
 
-\begin{figure}[h!]\centering
+\begin{figure}[!ht]\centering
 \includegraphics[width=450pt,height=180pt]{Disen.png}
 \caption{\label{fig:disen}Interacción de Attr\_grammar en \maggen}
 \end{figure}
 
 Analicemos ahora el diseño de los paquetes nombrados arriba, y con ellos la estructura \texttt{Attr\_grammar}.  En la figura \ref{fig:disen2} se muestra un diagrama con la representación interna de una gramática dentro de \maggen.
 
-\begin{figure}[h!]\centering
+\begin{figure}[!ht]\centering
 \includegraphics[width=450pt,height=297pt]{Disen2.png}
 \caption{\label{fig:disen2}Diseño interno de una gramática de atributos en \maggen}
 \end{figure}
@@ -535,25 +535,25 @@ La construcción de grafos se realiza en el modulo \texttt{builder\_graphs}. \ma
 
 \begin{itemize}
 \item Grafo DP, ver \ref{dpgraph}.
-  \begin{figure}[h!]\centering
+  \begin{figure}[!ht]\centering
     \includegraphics[width=200pt,height=77pt]{graph/dp.png}
   \caption{\label{dpgraph} Grafo DP.}
   \end{figure}
 
 \item Grafo Down, ver \ref{downgraph}.
-  \begin{figure}[h!]\centering
+  \begin{figure}[!ht]\centering
     \includegraphics[width=75pt,height=97pt]{graph/down.png}
   \caption{\label{downgraph} Grafo Down.}
   \end{figure}
 
 \item Grafo DCG, ver \ref{dcggraph}.
-  \begin{figure}[h!]\centering
+  \begin{figure}[!ht]\centering
     \includegraphics[width=200pt,height=101pt]{graph/dcg.png}
   \caption{\label{dcggraph} Grafo DCG.}
   \end{figure}
 
 \item Grafo ADP, ver \ref{adpgraph}.
-  \begin{figure}[h!]\centering
+  \begin{figure}[!ht]\centering
     \includegraphics[width=200pt,height=209pt]{graph/adp.png}
   \caption{\label{adpgraph} Grafo ADP.}
   \end{figure}
@@ -581,7 +581,7 @@ Un \textbf{plan} se compone de lista de números de ecuaciones a computar. Todo 
 
 Estos se obtienen a partir de los planes analizados anteriormente, proyectando el plan para cada símbolo de la parte derecha de la regla. La importancia de estos planes radica en la construcción de las secuencias de visita y además en el algoritmo principal de evaluación en la generación de código.
 
-\begin{figure}[h!]\centering
+\begin{figure}[!ht]\centering
  \includegraphics[width=250pt,height=139pt]{plans/plan.png}
 \caption{\label{fig:plan}Plan obtenido por \maggen\ para la regla R1}
 \end{figure}
@@ -663,14 +663,14 @@ Notar que en los dos puntos anteriores, nos quedan los casos de dependencia pert
 
 Para mas detalle observemos la figura \ref{fig:simul}.
 
-\begin{figure}[h!]\centering
+\begin{figure}[!ht]\centering
 \includegraphics[width=228pt,height=400pt]{simu.png}
 \caption{\label{fig:simul}Heurística cómputo de secuencia de visita}
 \end{figure}
 
 El resultado del ejemplo, aplicando los pasos tratados arriba, es presentado en el diagrama \ref{fig:resul_vis}.
 
-\begin{figure}[h!]\centering
+\begin{figure}[!ht]\centering
 \includegraphics[width=300pt,height=160pt]{plan2seq.png}
 \caption{\label{fig:resul_vis} Ejemplo de Secuencia de visita}
 \end{figure}
