@@ -4,9 +4,9 @@
 
 En las ciencias de la computación los lenguajes juegan un rol muy importante en muchas disciplinas. Desde los comienzos se buscaron mecanismos para describirlos y manejarlos.
 
-Dentro de los mecanismos desarrollados, las gramáticas han logrado ocupar unos de los lugares más destacados. La continua evolución y descubrimientos de nuevas gramáticas necesitó que se las organizara, y no fue hasta 1956 que Noam Chomsky propuso una jerarquía sobre las gramáticas, en 4 niveles (figura \ref{chomsky}).
+Dentro de los mecanismos desarrollados, las gramáticas han logrado ocupar unos de los lugares más destacados. La continua evolución y descubrimientos de nuevas gramáticas necesitó que se las organizara, y no fue hasta 1956 que Noam Chomsky propuso una jerarquía sobre las gramáticas, en 4 niveles (cuadro \ref{chomsky}).
 
-\begin{figure}[h!]\centering 
+\begin{table}[h!]\centering 
 \begin{tabular}{| c | p{3.5cm} | p{3.5cm} | p{2.4cm} | p{2.9cm}|}
 \hline
 
@@ -24,7 +24,7 @@ Dentro de los mecanismos desarrollados, las gramáticas han logrado ocupar unos 
 \multirow{2}{*}{\textbf{3}} & \multirow{2}{*}{Regular (RL)} & \multirow{2}{*}{Autómata finito} & \multirow{2}{*}{Regular} &$A \rightarrow aB$ \\ 
                             &              &                 & & $A \rightarrow a$ \\ \hline
 \end{tabular}\caption{\label{chomsky} Jerarquía de Chomsky}
-\end{figure}
+\end{table}
 
 Desde que D. Knuth introdujo en 1966 las gramáticas de atributos (GA), estas se han utilizado ampliamente para el desarrollo de herramientas de procesamiento de lenguajes formales como compiladores, intérpretes, traductores como también para especificar la semántica de lenguajes de programación.
 
@@ -34,7 +34,7 @@ En el desarrollo de este capítulo, introductorio, abordaremos un amplio numero 
 
 \section{Gramática libre de contexto}
 \label{sec:def-CFG}
-En el nivel 2 de la jerarquía de Chomsky (Ver figura \ref{chomsky}) se encuentran los lenguajes libres de contexto. Las gramáticas libres de contexto (CFG) son un formalismo que permite expresar cadenas de este tipo de lenguajes.
+En el nivel 2 de la jerarquía de Chomsky (cuadro \ref{chomsky}) se encuentran los lenguajes libres de contexto. Las gramáticas libres de contexto (CFG) son un formalismo que permite expresar cadenas de este tipo de lenguajes.
 
 Las CFG han tomado gran importancia en la descripción de formatos de documentos\footnote{DTD - Document-Type Definition.}, como XML (eXtensible Markup Language) y también en tecnología de compilación, mediante la construcción de \textit{parser} de lenguajes (Ver \cite{compiladores}).  
 

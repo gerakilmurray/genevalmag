@@ -49,7 +49,7 @@ struct my_grammar: public grammar <my_grammar>
 
 Para definirla, disponemos de un amplio conjunto de herramientas. Primero, los operadores de metalenguaje listados en la tabla \ref{ope_spirit}, los cuales permiten construir nuevas reglas combinando reglas ya definidas, parsers y constantes permitidas en el framework.
 
-\begin{figure}[h!]\centering\scriptsize
+\begin{table}[h!]\centering\scriptsize
 \begin{tabular}{| c | p{7cm} |}
 \hline
 
@@ -68,11 +68,11 @@ $+$                    A  & Positivo, 1 o más veces \\ \hline
 $!$                    A  & Opcional, 0 o 1 vez \\ \hline
 \end{tabular}
 \caption{Operadores de \spirit\ utilizados}\label{ope_spirit}
-\end{figure}
+\end{table}
 
 Por otra parte, \spirit\ dispone de un gran conjunto de parsers que abarcan la mayoría de los tipos básicos, representación de datos y valores utilizados en el común de los lenguajes (ver tabla \ref{parsers}).
 
-\begin{figure}[h!]\centering\scriptsize
+\begin{table}[h!]\centering\scriptsize
 \begin{tabular}{| l | l |}
 \hline
 
@@ -97,11 +97,11 @@ eps\_p     & Cadena vacía (épsilon) \\ \hline
 end\_p     & Carácter de fin de archivo (EOF) \\ \hline
 \end{tabular}
 \caption{\label{parsers} Parsers predefinidos de \spirit\ utilizados} 
-\end{figure}
+\end{table}
 
 Además posee varias directivas que modifican el comportamiento de los parsers, encapsulándose en una expresión definida por el usuario (ver tabla \ref{directivas}).
 
-\begin{figure}[h!]\centering\scriptsize
+\begin{table}[h!]\centering\scriptsize
 \begin{tabular}{| l | p{7cm} |}
 \hline
 
@@ -114,7 +114,7 @@ as\_lower\_d & Convierte en minúscula lo aceptado por la expresión\\ \hline
                             & cia más larga aceptada \\ \hline
 \end{tabular}
 \caption{\label{directivas} Directivas de \spirit\ aplicadas}
-\end{figure}
+\end{table}
 
 Para el manejo de los símbolos válidos dentro de la definición de la gramática, \spirit\ soporta nativamente, el concepto de ``Tablas de símbolos''. Lo que permite registrar de manera dinámica nuevos símbolos, en particular dentro de nuestra herramienta nos ayudó a manejar los conjuntos de nombres válidos para los \texttt{sorts}, los símbolos no terminales permitidos en las ecuaciones, entre otros usos.
 
@@ -823,8 +823,8 @@ unsigned short build_plans()
 
 El proceso de construir un plan es complejo, la heurística seguida respeta el algoritmo para computar planes presentado por Wuu Yang (\cite{wuu-yang1}).
 
-Por lo que se implementaron las funciones y elementos involucrados con lo siguiente:\\
-
+Por lo que se implementaron las funciones y elementos involucrados que se pueden analizar en la tabla \ref{table:map-comp-plan}.
+\begin{table}[h!]
 \begin{tabular}{| p{4.5cm} | p{10.5cm} |}
 \hline
 Lista de trabajos \textbf{WL} & \texttt{vector <Item\_work>\ work\_list} \\ \hline
@@ -840,7 +840,9 @@ Planes de evaluación {\LARGE\textbf{$\Theta$}} & \texttt{map <Key\_plan, unsign
 Planes de evaluación \hspace{1cm}proyectados {\LARGE\textbf{$\gamma$}} & \texttt{map <Key\_plan\_project, unsigned short>\ plans\_project} \\
 \hline
 \end{tabular}
-\vspace{0.3cm}
+\caption{\label{table:map-comp-plan} Implementación de funciones en Compute Plan}
+\end{table}
+% \vspace{0.3cm}
 
 Para la función \texttt{compute\_order} se debe considerar el orden de evaluación de los atributos establecido por el \texttt{index\_order}, el cual es el índice de un plan proyectado. Por lo que, primero se crea un grafo ADP copiando el grafo referenciado por \texttt{graph\_adp}, luego se le insertan los vértices necesarios, utilizando la función \texttt{return\_vertex}\footnote{Función que dado un atributo retorna un \texttt{vertex\_descriptor} de un vértice existente dentro del grafo o sino lo inserta y retorna un nuevo descriptor.} y se insertan las aristas entre los atributos consecutivos.
 
