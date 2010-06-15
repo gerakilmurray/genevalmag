@@ -459,14 +459,14 @@ El funcionamiento de \maggen\ esta dado por una instancia de la estructura llama
 En la figura \ref{fig:disen} se presenta un diagrama que muestra la interacción de esta estructura en el funcionamiento de \maggen.
 
 \begin{figure}[!ht]\centering
-\includegraphics[width=450pt,height=180pt]{Disen.png}
+\includegraphics[width=400pt,height=158pt]{Disen.png}
 \caption{\label{fig:disen}Interacción de Attr\_grammar en \maggen}
 \end{figure}
 
 Analicemos ahora el diseño de los paquetes nombrados arriba, y con ellos la estructura \texttt{Attr\_grammar}.  En la figura \ref{fig:disen2} se muestra un diagrama con la representación interna de una gramática dentro de \maggen.
 
 \begin{figure}[!ht]\centering
-\includegraphics[width=450pt,height=297pt]{Disen2.png}
+\includegraphics[width=400pt,height=264pt]{Disen2.png}
 \caption{\label{fig:disen2}Diseño interno de una gramática de atributos en \maggen}
 \end{figure}
 
@@ -586,16 +586,16 @@ Estos se obtienen a partir de los planes analizados anteriormente, proyectando e
 \caption{\label{fig:plan}Plan obtenido por \maggen\ para la regla R1}
 \end{figure}
 
-En la figura\footnote{Figura obtenida con la herramienta \textit{graphviz} sobre el archivo \texttt{.dot} generado por \maggen.} \ref{fig:plan} observamos un plan obtenido por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}. Este plan contiene el orden de los números de ecuación que pertenecen a la regla del plan, los planes proyectados son computados sobre el plan total, es decir con todas las dependencias. Para aclarar este echo, observemos los planes proyectados obtenidos:\\
+En la figura\footnote{Figura obtenida con la herramienta \textit{graphviz} sobre el archivo \texttt{.dot} generado por \maggen.} \ref{fig:plan} observamos un plan obtenido por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}. Este plan contiene el orden de los números de ecuación que pertenecen a la regla del plan, los planes proyectados son computados sobre el plan total, es decir con todas las dependencias. Para aclarar este echo, observemos los planes proyectados obtenidos en la figura \ref{fig:plan_project}.
 
+\begin{figure}[!ht]\centering
 \begin{tabular}{l l}
-\includegraphics[width=220pt,height=35pt]{plans/plan_proj1.png} &
-\includegraphics[width=220pt,height=73pt]{plans/plan_proj2.png} 
+\includegraphics[width=180pt,height=34pt]{plans/plan_proj1.png} &
+\includegraphics[width=180pt,height=68pt]{plans/plan_proj2.png}\\ 
+\multicolumn{2}{c}{\includegraphics[width=180pt,height=34pt]{plans/plan_proj3.png}}\\
 \end{tabular}
-
-\begin{center}
- \includegraphics[width=220pt,height=36pt]{plans/plan_proj3.png}
-\end{center}
+\caption{\label{fig:plan_project}Planes proyectados obtenido por \maggen\ para R1.}
+\end{figure}
 
 Notar que cada plan proyectado ha capturado las ecuaciones de cada símbolo de la parte derecha para el cómputo de sus atributos, dependiendo del contexto. Es decir, en el caso del símbolo ``Y'' su orden ha sido computado observando las dependencias de la regla R2. Estas dependencias son necesarias para el cálculo del plan completo en las ecuaciones 2 y 4. 
 
