@@ -1,0 +1,90 @@
+\hypertarget{classgenevalmag_1_1Maglib}{
+\section{genevalmag::Maglib Class Reference}
+\label{classgenevalmag_1_1Maglib}\index{genevalmag::Maglib@{genevalmag::Maglib}}
+}
+{\tt \#include $<$Maglib.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+\hyperlink{classgenevalmag_1_1Maglib_aba45ec8699f82e6d483a53e14a3466a}{Maglib} ()
+\item 
+virtual \hyperlink{classgenevalmag_1_1Maglib_43af6f1f2439a9bb50f6fb273b48739c}{$\sim$Maglib} ()
+\item 
+int \hyperlink{classgenevalmag_1_1Maglib_b6c7b296368fe019f7e7fcf690b5e241}{gen\_\-evaluator} (const string path\_\-input\_\-file, const string path\_\-folder\_\-output, const string name\_\-library, const vector$<$ string $>$ \&headers) const 
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 19 of file Maglib.h.
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classgenevalmag_1_1Maglib_aba45ec8699f82e6d483a53e14a3466a}{
+\index{genevalmag::Maglib@{genevalmag::Maglib}!Maglib@{Maglib}}
+\index{Maglib@{Maglib}!genevalmag::Maglib@{genevalmag::Maglib}}
+\subsubsection[{Maglib}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Maglib::Maglib ()}}
+\label{classgenevalmag_1_1Maglib_aba45ec8699f82e6d483a53e14a3466a}
+
+
+Contructor empty of Mag\_\-lib. 
+
+Definition at line 26 of file Maglib.cpp.\hypertarget{classgenevalmag_1_1Maglib_43af6f1f2439a9bb50f6fb273b48739c}{
+\index{genevalmag::Maglib@{genevalmag::Maglib}!$\sim$Maglib@{$\sim$Maglib}}
+\index{$\sim$Maglib@{$\sim$Maglib}!genevalmag::Maglib@{genevalmag::Maglib}}
+\subsubsection[{$\sim$Maglib}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Maglib::$\sim$Maglib ()\hspace{0.3cm}{\tt  \mbox{[}virtual\mbox{]}}}}
+\label{classgenevalmag_1_1Maglib_43af6f1f2439a9bb50f6fb273b48739c}
+
+
+Destructor empty of Mag\_\-lib. 
+
+Definition at line 33 of file Maglib.cpp.
+
+\subsection{Member Function Documentation}
+\hypertarget{classgenevalmag_1_1Maglib_b6c7b296368fe019f7e7fcf690b5e241}{
+\index{genevalmag::Maglib@{genevalmag::Maglib}!gen\_\-evaluator@{gen\_\-evaluator}}
+\index{gen\_\-evaluator@{gen\_\-evaluator}!genevalmag::Maglib@{genevalmag::Maglib}}
+\subsubsection[{gen\_\-evaluator}]{\setlength{\rightskip}{0pt plus 5cm}int genevalmag::Maglib::gen\_\-evaluator (const string {\em path\_\-input\_\-file}, \/  const string {\em path\_\-folder\_\-output}, \/  const string {\em name\_\-library}, \/  const vector$<$ string $>$ \& {\em headers}) const}}
+\label{classgenevalmag_1_1Maglib_b6c7b296368fe019f7e7fcf690b5e241}
+
+
+Generates the static evaluator's files for the \hyperlink{classgenevalmag_1_1Attribute}{Attribute} grammar specificated in the input\_\-path\_\-file passed as parameter. All outputs of the library be saved in the path\_\-folder\_\-output. The evaluator classname is defined by name\_\-library. The user could include somes headers for uses externs functions to evaluator.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em path\_\-input\_\-file}]\item[{\em path\_\-folder\_\-output}]\item[{\em name\_\-library}]\item[{\em headers}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Generates the static evaluator's files for the \hyperlink{classgenevalmag_1_1Attribute}{Attribute} grammar specificated in the input\_\-path\_\-file passed as parameter. All outputs of the library be saved in the path\_\-folder\_\-output. The evaluator classname is defined by name\_\-library. The user could include somes headers for uses externs functions to evaluator. 
+
+Definition at line 45 of file Maglib.cpp.
+
+References utilities::clean\_\-output\_\-folder(), genevalmag::Parser\_\-AG::get\_\-attr\_\-grammar(), genevalmag::Parser\_\-AG::parse\_\-grammar(), and genevalmag::Parser\_\-AG::save\_\-grammar\_\-file().
+
+Referenced by main().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Maglib_b6c7b296368fe019f7e7fcf690b5e241_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=144pt]{classgenevalmag_1_1Maglib_b6c7b296368fe019f7e7fcf690b5e241_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+include/\hyperlink{Maglib_8h}{Maglib.h}\item 
+src/\hyperlink{Maglib_8cpp}{Maglib.cpp}\end{CompactItemize}

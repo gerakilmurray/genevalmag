@@ -1,0 +1,656 @@
+\hypertarget{classgenevalmag_1_1Equation}{
+\section{genevalmag::Equation Class Reference}
+\label{classgenevalmag_1_1Equation}\index{genevalmag::Equation@{genevalmag::Equation}}
+}
+{\tt \#include $<$Equation.h$>$}
+
+Collaboration diagram for genevalmag::Equation:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{classgenevalmag_1_1Equation__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+\hyperlink{classgenevalmag_1_1Equation_76d5ce9bfc75bcf3cee68e133d1d4faf}{Equation} ()
+\item 
+\hyperlink{classgenevalmag_1_1Equation_82897cc7187c5c6f8cf1552387856f0f}{Equation} (const \hyperlink{classgenevalmag_1_1Equation}{Equation} \&other)
+\item 
+virtual \hyperlink{classgenevalmag_1_1Equation_6b4b11ce2cb5bb1f6dfaa2257ef0fe97}{$\sim$Equation} ()
+\item 
+\hyperlink{classgenevalmag_1_1Equation}{Equation} \& \hyperlink{classgenevalmag_1_1Equation_eca9e6078293ec3897c64925307d2d71}{operator=} (const \hyperlink{classgenevalmag_1_1Equation}{Equation} \&other)
+\item 
+const \hyperlink{classgenevalmag_1_1Expr__instance}{Expr\_\-instance} $\ast$ \hyperlink{classgenevalmag_1_1Equation_357a3dbd9331f2c7acb70fce221b3d2a}{get\_\-l\_\-value} () const 
+\item 
+const \hyperlink{classgenevalmag_1_1Expression}{Expression} $\ast$ \hyperlink{classgenevalmag_1_1Equation_875d86207681edfa874a5fca11a671be}{get\_\-r\_\-value} () const 
+\item 
+const unsigned short \hyperlink{classgenevalmag_1_1Equation_8cd98a3f0a5e2037431b4d31f55b0fbf}{get\_\-id} () const 
+\item 
+void \hyperlink{classgenevalmag_1_1Equation_651c8c1bee79e950801a2344fea7cedb}{set\_\-id} (const unsigned short id)
+\item 
+void \hyperlink{classgenevalmag_1_1Equation_640c6b66f92e52b3554e75f9f9d18243}{set\_\-l\_\-value} (const \hyperlink{classgenevalmag_1_1Expr__instance}{Expr\_\-instance} \&lvalue)
+\item 
+void \hyperlink{classgenevalmag_1_1Equation_227f26570cf37fe0a3ea83855aaaa423}{set\_\-r\_\-value} (const \hyperlink{classgenevalmag_1_1Expression}{Expression} $\ast$rvalue)
+\item 
+void \hyperlink{classgenevalmag_1_1Equation_bcc00948998a3828cd1f107afda796b1}{inorder\_\-only\_\-leaf} (const \hyperlink{classgenevalmag_1_1Expression}{Expression} $\ast$head, vector$<$ const \hyperlink{classgenevalmag_1_1Expr__leaf}{Expr\_\-leaf} $\ast$ $>$ \&result) const 
+\item 
+const vector$<$ const \hyperlink{classgenevalmag_1_1Expr__instance}{Expr\_\-instance} $\ast$ $>$ \hyperlink{classgenevalmag_1_1Equation_81ce870d6ecab8e37d59ed929562e4c8}{get\_\-instance\_\-right\_\-side} () const 
+\item 
+const string \hyperlink{classgenevalmag_1_1Equation_1daad7e8abb06ec02999ce3e9fc38322}{to\_\-string} () const 
+\item 
+const bool \hyperlink{classgenevalmag_1_1Equation_ea30f41bb039e1665cdf1a2075435010}{equals} (const \hyperlink{classgenevalmag_1_1Equation}{Equation} \&other) const 
+\item 
+const string \hyperlink{classgenevalmag_1_1Equation_2aa74b8b1df5b16dd9cc7d457cd7e370}{key} () const 
+\end{CompactItemize}
+\subsection*{Private Member Functions}
+\begin{CompactItemize}
+\item 
+void \hyperlink{classgenevalmag_1_1Equation_25cb4f7a1a49ac1d1408fc54e1d1378e}{copy} (const \hyperlink{classgenevalmag_1_1Equation}{Equation} \&other)
+\item 
+void \hyperlink{classgenevalmag_1_1Equation_3314fa8459cfd0f0316daa6d38a895ee}{destroy} ()
+\item 
+unsigned short $\ast$ \hyperlink{classgenevalmag_1_1Equation_b900ac60c5c2b4427970f7d68361db20}{\_\-get\_\-count\_\-ref} () const 
+\item 
+void \hyperlink{classgenevalmag_1_1Equation_34b874554d9ed47d37473ae4dab5d16e}{inorder\_\-only\_\-instance} (const \hyperlink{classgenevalmag_1_1Expression}{Expression} $\ast$head, vector$<$ const \hyperlink{classgenevalmag_1_1Expr__instance}{Expr\_\-instance} $\ast$ $>$ \&result) const 
+\end{CompactItemize}
+\subsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+unsigned short \hyperlink{classgenevalmag_1_1Equation_bcf149aeb80efa3ccb5c41886570e215}{eq\_\-id}
+\begin{CompactList}\small\item\em Equation's identifier. \item\end{CompactList}\item 
+\hyperlink{classgenevalmag_1_1Expr__instance}{Expr\_\-instance} \hyperlink{classgenevalmag_1_1Equation_f6dfdfddb6eff2b61a359ff5d58c5144}{l\_\-value}
+\item 
+const \hyperlink{classgenevalmag_1_1Expression}{Expression} $\ast$ \hyperlink{classgenevalmag_1_1Equation_bdc49df03becf19ea7f5aa1b89b749c0}{r\_\-value}
+\item 
+unsigned short $\ast$ \hyperlink{classgenevalmag_1_1Equation_96ea50e0ed15373e6246fd00d8c79ac4}{count\_\-ref}
+\begin{CompactList}\small\item\em Similar to a Smart Pointer to manage the release of the memory tree. When this is 0, all memory is freed from the tree. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 19 of file Equation.h.
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classgenevalmag_1_1Equation_76d5ce9bfc75bcf3cee68e133d1d4faf}{
+\index{genevalmag::Equation@{genevalmag::Equation}!Equation@{Equation}}
+\index{Equation@{Equation}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{Equation}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Equation::Equation ()}}
+\label{classgenevalmag_1_1Equation_76d5ce9bfc75bcf3cee68e133d1d4faf}
+
+
+Constructor empty of equation. 
+
+Definition at line 21 of file Equation.cpp.
+
+References count\_\-ref.\hypertarget{classgenevalmag_1_1Equation_82897cc7187c5c6f8cf1552387856f0f}{
+\index{genevalmag::Equation@{genevalmag::Equation}!Equation@{Equation}}
+\index{Equation@{Equation}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{Equation}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Equation::Equation (const {\bf Equation} \& {\em other})}}
+\label{classgenevalmag_1_1Equation_82897cc7187c5c6f8cf1552387856f0f}
+
+
+Contructor copy of \hyperlink{classgenevalmag_1_1Equation}{Equation}. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em other}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Contructor copy of \hyperlink{classgenevalmag_1_1Equation}{Equation}. 
+
+Definition at line 30 of file Equation.cpp.
+
+References copy().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{classgenevalmag_1_1Equation_82897cc7187c5c6f8cf1552387856f0f_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Equation_6b4b11ce2cb5bb1f6dfaa2257ef0fe97}{
+\index{genevalmag::Equation@{genevalmag::Equation}!$\sim$Equation@{$\sim$Equation}}
+\index{$\sim$Equation@{$\sim$Equation}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{$\sim$Equation}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Equation::$\sim$Equation ()\hspace{0.3cm}{\tt  \mbox{[}virtual\mbox{]}}}}
+\label{classgenevalmag_1_1Equation_6b4b11ce2cb5bb1f6dfaa2257ef0fe97}
+
+
+Destructor of equation. 
+
+Definition at line 38 of file Equation.cpp.
+
+References destroy().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=198pt]{classgenevalmag_1_1Equation_6b4b11ce2cb5bb1f6dfaa2257ef0fe97_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classgenevalmag_1_1Equation_b900ac60c5c2b4427970f7d68361db20}{
+\index{genevalmag::Equation@{genevalmag::Equation}!\_\-get\_\-count\_\-ref@{\_\-get\_\-count\_\-ref}}
+\index{\_\-get\_\-count\_\-ref@{\_\-get\_\-count\_\-ref}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{\_\-get\_\-count\_\-ref}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short $\ast$ genevalmag::Equation::\_\-get\_\-count\_\-ref () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Equation_b900ac60c5c2b4427970f7d68361db20}
+
+
+Returns the count reference. \begin{Desc}
+\item[Returns:]\end{Desc}
+Return the count reference. 
+
+Definition at line 91 of file Equation.cpp.
+
+References count\_\-ref.
+
+Referenced by copy().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=300pt]{classgenevalmag_1_1Equation_b900ac60c5c2b4427970f7d68361db20_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Equation_25cb4f7a1a49ac1d1408fc54e1d1378e}{
+\index{genevalmag::Equation@{genevalmag::Equation}!copy@{copy}}
+\index{copy@{copy}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{copy}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Equation::copy (const {\bf Equation} \& {\em other})\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Equation_25cb4f7a1a49ac1d1408fc54e1d1378e}
+
+
+Method of copy the equation, STL-like C++. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em other}]Method of copy the equation, STL-like C++. \end{description}
+\end{Desc}
+
+
+Definition at line 62 of file Equation.cpp.
+
+References \_\-get\_\-count\_\-ref(), count\_\-ref, eq\_\-id, get\_\-id(), get\_\-l\_\-value(), get\_\-r\_\-value(), l\_\-value, and r\_\-value.
+
+Referenced by Equation(), and operator=().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{classgenevalmag_1_1Equation_25cb4f7a1a49ac1d1408fc54e1d1378e_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{classgenevalmag_1_1Equation_25cb4f7a1a49ac1d1408fc54e1d1378e_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Equation_3314fa8459cfd0f0316daa6d38a895ee}{
+\index{genevalmag::Equation@{genevalmag::Equation}!destroy@{destroy}}
+\index{destroy@{destroy}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{destroy}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Equation::destroy ()\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Equation_3314fa8459cfd0f0316daa6d38a895ee}
+
+
+Method destroy equation, STL-like C++. 
+
+Definition at line 76 of file Equation.cpp.
+
+References count\_\-ref, and r\_\-value.
+
+Referenced by operator=(), and $\sim$Equation().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=198pt]{classgenevalmag_1_1Equation_3314fa8459cfd0f0316daa6d38a895ee_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Equation_ea30f41bb039e1665cdf1a2075435010}{
+\index{genevalmag::Equation@{genevalmag::Equation}!equals@{equals}}
+\index{equals@{equals}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{equals}]{\setlength{\rightskip}{0pt plus 5cm}const bool genevalmag::Equation::equals (const {\bf Equation} \& {\em other}) const}}
+\label{classgenevalmag_1_1Equation_ea30f41bb039e1665cdf1a2075435010}
+
+
+Compares the equation with other. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em other}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Compares the equation with other. 
+
+Definition at line 247 of file Equation.cpp.
+
+References key().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=388pt]{classgenevalmag_1_1Equation_ea30f41bb039e1665cdf1a2075435010_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Equation_8cd98a3f0a5e2037431b4d31f55b0fbf}{
+\index{genevalmag::Equation@{genevalmag::Equation}!get\_\-id@{get\_\-id}}
+\index{get\_\-id@{get\_\-id}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{get\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned short genevalmag::Equation::get\_\-id () const}}
+\label{classgenevalmag_1_1Equation_8cd98a3f0a5e2037431b4d31f55b0fbf}
+
+
+Returns the id of the equation. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the id of the equation. 
+
+Definition at line 115 of file Equation.cpp.
+
+References eq\_\-id.
+
+Referenced by copy().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=281pt]{classgenevalmag_1_1Equation_8cd98a3f0a5e2037431b4d31f55b0fbf_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Equation_81ce870d6ecab8e37d59ed929562e4c8}{
+\index{genevalmag::Equation@{genevalmag::Equation}!get\_\-instance\_\-right\_\-side@{get\_\-instance\_\-right\_\-side}}
+\index{get\_\-instance\_\-right\_\-side@{get\_\-instance\_\-right\_\-side}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{get\_\-instance\_\-right\_\-side}]{\setlength{\rightskip}{0pt plus 5cm}const vector$<$ const {\bf Expr\_\-instance} $\ast$ $>$ genevalmag::Equation::get\_\-instance\_\-right\_\-side () const}}
+\label{classgenevalmag_1_1Equation_81ce870d6ecab8e37d59ed929562e4c8}
+
+
+Returns the pointer of the \hyperlink{classgenevalmag_1_1Expression}{Expression}. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the pointer of the \hyperlink{classgenevalmag_1_1Expression}{Expression}. 
+
+Definition at line 215 of file Equation.cpp.
+
+References inorder\_\-only\_\-instance(), and r\_\-value.
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=362pt]{classgenevalmag_1_1Equation_81ce870d6ecab8e37d59ed929562e4c8_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Equation_357a3dbd9331f2c7acb70fce221b3d2a}{
+\index{genevalmag::Equation@{genevalmag::Equation}!get\_\-l\_\-value@{get\_\-l\_\-value}}
+\index{get\_\-l\_\-value@{get\_\-l\_\-value}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{get\_\-l\_\-value}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Expr\_\-instance} $\ast$ genevalmag::Equation::get\_\-l\_\-value () const}}
+\label{classgenevalmag_1_1Equation_357a3dbd9331f2c7acb70fce221b3d2a}
+
+
+Returns the l\_\-value of the equation. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the l\_\-value of the equation. 
+
+Definition at line 99 of file Equation.cpp.
+
+References l\_\-value.
+
+Referenced by copy(), genevalmag::Rule::defined\_\-equation(), genevalmag::Attr\_\-grammar::get\_\-eq\_\-l\_\-value(), and genevalmag::save\_\-rvalue().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Equation_357a3dbd9331f2c7acb70fce221b3d2a_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Equation_875d86207681edfa874a5fca11a671be}{
+\index{genevalmag::Equation@{genevalmag::Equation}!get\_\-r\_\-value@{get\_\-r\_\-value}}
+\index{get\_\-r\_\-value@{get\_\-r\_\-value}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{get\_\-r\_\-value}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Expression} $\ast$ genevalmag::Equation::get\_\-r\_\-value () const}}
+\label{classgenevalmag_1_1Equation_875d86207681edfa874a5fca11a671be}
+
+
+Returns the r\_\-value of the equation. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the r\_\-value of the equation. 
+
+Definition at line 107 of file Equation.cpp.
+
+References r\_\-value.
+
+Referenced by copy().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=293pt]{classgenevalmag_1_1Equation_875d86207681edfa874a5fca11a671be_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Equation_34b874554d9ed47d37473ae4dab5d16e}{
+\index{genevalmag::Equation@{genevalmag::Equation}!inorder\_\-only\_\-instance@{inorder\_\-only\_\-instance}}
+\index{inorder\_\-only\_\-instance@{inorder\_\-only\_\-instance}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{inorder\_\-only\_\-instance}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Equation::inorder\_\-only\_\-instance (const {\bf Expression} $\ast$ {\em head}, \/  vector$<$ const {\bf Expr\_\-instance} $\ast$ $>$ \& {\em result}) const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Equation_34b874554d9ed47d37473ae4dab5d16e}
+
+
+Traverse the equation tree while saves only the \hyperlink{classgenevalmag_1_1Expr__instance}{Expr\_\-instance} nodes in the vector result. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em head}]\item[{\em result}]Traverse the equation tree while saves only the \hyperlink{classgenevalmag_1_1Expr__instance}{Expr\_\-instance} nodes in the vector result. \end{description}
+\end{Desc}
+
+
+Definition at line 178 of file Equation.cpp.
+
+References genevalmag::Expr\_\-node::get\_\-child(), and genevalmag::Expr\_\-node::get\_\-childs().
+
+Referenced by get\_\-instance\_\-right\_\-side().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{classgenevalmag_1_1Equation_34b874554d9ed47d37473ae4dab5d16e_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{classgenevalmag_1_1Equation_34b874554d9ed47d37473ae4dab5d16e_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Equation_bcc00948998a3828cd1f107afda796b1}{
+\index{genevalmag::Equation@{genevalmag::Equation}!inorder\_\-only\_\-leaf@{inorder\_\-only\_\-leaf}}
+\index{inorder\_\-only\_\-leaf@{inorder\_\-only\_\-leaf}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{inorder\_\-only\_\-leaf}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Equation::inorder\_\-only\_\-leaf (const {\bf Expression} $\ast$ {\em head}, \/  vector$<$ const {\bf Expr\_\-leaf} $\ast$ $>$ \& {\em result}) const}}
+\label{classgenevalmag_1_1Equation_bcc00948998a3828cd1f107afda796b1}
+
+
+Traverse the equation tree while saves only the \hyperlink{classgenevalmag_1_1Expr__leaf}{Expr\_\-leaf} nodes in the vector result. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em head}]\item[{\em result}]Traverse the equation tree while saves only the \hyperlink{classgenevalmag_1_1Expr__leaf}{Expr\_\-leaf} nodes in the vector result. \end{description}
+\end{Desc}
+
+
+Definition at line 147 of file Equation.cpp.
+
+References genevalmag::Expr\_\-node::get\_\-child(), and genevalmag::Expr\_\-node::get\_\-childs().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{classgenevalmag_1_1Equation_bcc00948998a3828cd1f107afda796b1_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Equation_2aa74b8b1df5b16dd9cc7d457cd7e370}{
+\index{genevalmag::Equation@{genevalmag::Equation}!key@{key}}
+\index{key@{key}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{key}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::Equation::key () const}}
+\label{classgenevalmag_1_1Equation_2aa74b8b1df5b16dd9cc7d457cd7e370}
+
+
+Generates and returns the string key that identifies an \hyperlink{classgenevalmag_1_1Equation}{Equation} definitely.\par
+ \par
+ Result = $<$l\_\-value$>$$<$r\_\-value$>$\par
+ \par
+ where $<$l\_\-value$>$ = \char`\"{}instance\_\-attr\char`\"{} and $<$r\_\-value$>$ is= \char`\"{}list of node\_\-ast\char`\"{}\par
+
+
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Generate and return the string key that identifies an \hyperlink{classgenevalmag_1_1Equation}{Equation} definitely.
+
+Result = $<$l\_\-value$>$$<$r\_\-value$>$
+
+where $<$l\_\-value$>$ = \char`\"{}instance\_\-attr\char`\"{} and $<$r\_\-value$>$ is= \char`\"{}list of node\_\-ast\char`\"{} 
+
+Definition at line 259 of file Equation.cpp.
+
+References l\_\-value, r\_\-value, genevalmag::Expression::to\_\-string(), and genevalmag::Expr\_\-instance::to\_\-string().
+
+Referenced by equals().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{classgenevalmag_1_1Equation_2aa74b8b1df5b16dd9cc7d457cd7e370_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=182pt]{classgenevalmag_1_1Equation_2aa74b8b1df5b16dd9cc7d457cd7e370_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Equation_eca9e6078293ec3897c64925307d2d71}{
+\index{genevalmag::Equation@{genevalmag::Equation}!operator=@{operator=}}
+\index{operator=@{operator=}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Equation} \& genevalmag::Equation::operator= (const {\bf Equation} \& {\em other})}}
+\label{classgenevalmag_1_1Equation_eca9e6078293ec3897c64925307d2d71}
+
+
+Operator assign(=) of \hyperlink{classgenevalmag_1_1Equation}{Equation}. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em other}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Operator assign(=) of \hyperlink{classgenevalmag_1_1Equation}{Equation}. 
+
+Definition at line 49 of file Equation.cpp.
+
+References copy(), and destroy().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{classgenevalmag_1_1Equation_eca9e6078293ec3897c64925307d2d71_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Equation_651c8c1bee79e950801a2344fea7cedb}{
+\index{genevalmag::Equation@{genevalmag::Equation}!set\_\-id@{set\_\-id}}
+\index{set\_\-id@{set\_\-id}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{set\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Equation::set\_\-id (const unsigned short {\em id})}}
+\label{classgenevalmag_1_1Equation_651c8c1bee79e950801a2344fea7cedb}
+
+
+Sets the id of the equation. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em id}]Sets the id of the equation. \end{description}
+\end{Desc}
+
+
+Definition at line 123 of file Equation.cpp.
+
+References eq\_\-id.
+
+Referenced by genevalmag::Rule::add\_\-eq().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{classgenevalmag_1_1Equation_651c8c1bee79e950801a2344fea7cedb_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Equation_640c6b66f92e52b3554e75f9f9d18243}{
+\index{genevalmag::Equation@{genevalmag::Equation}!set\_\-l\_\-value@{set\_\-l\_\-value}}
+\index{set\_\-l\_\-value@{set\_\-l\_\-value}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{set\_\-l\_\-value}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Equation::set\_\-l\_\-value (const {\bf Expr\_\-instance} \& {\em lvalue})}}
+\label{classgenevalmag_1_1Equation_640c6b66f92e52b3554e75f9f9d18243}
+
+
+Sets the left value of the equation. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em lvalue}]Set the left value of the equation. \end{description}
+\end{Desc}
+
+
+Definition at line 131 of file Equation.cpp.
+
+References l\_\-value.
+
+Referenced by genevalmag::create\_\-equation().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=335pt]{classgenevalmag_1_1Equation_640c6b66f92e52b3554e75f9f9d18243_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Equation_227f26570cf37fe0a3ea83855aaaa423}{
+\index{genevalmag::Equation@{genevalmag::Equation}!set\_\-r\_\-value@{set\_\-r\_\-value}}
+\index{set\_\-r\_\-value@{set\_\-r\_\-value}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{set\_\-r\_\-value}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Equation::set\_\-r\_\-value (const {\bf Expression} $\ast$ {\em rvalue})}}
+\label{classgenevalmag_1_1Equation_227f26570cf37fe0a3ea83855aaaa423}
+
+
+Sets the rigth value of the equation: is a tree. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em rvalue}]Set the left value of the equation. \end{description}
+\end{Desc}
+
+
+Definition at line 139 of file Equation.cpp.
+
+References r\_\-value.
+
+Referenced by genevalmag::save\_\-rvalue().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=328pt]{classgenevalmag_1_1Equation_227f26570cf37fe0a3ea83855aaaa423_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Equation_1daad7e8abb06ec02999ce3e9fc38322}{
+\index{genevalmag::Equation@{genevalmag::Equation}!to\_\-string@{to\_\-string}}
+\index{to\_\-string@{to\_\-string}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{to\_\-string}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::Equation::to\_\-string () const}}
+\label{classgenevalmag_1_1Equation_1daad7e8abb06ec02999ce3e9fc38322}
+
+
+Generates and returns a string reprensentation of an \hyperlink{classgenevalmag_1_1Equation}{Equation}.\par
+ \par
+ Result = $<$l\_\-value$>$ \char`\"{}=\char`\"{} $<$r\_\-value$>$ \char`\"{};\char`\"{}\par
+ \par
+ where $<$l\_\-value$>$ = \char`\"{}instance\_\-attr\char`\"{} and $<$r\_\-value$>$ is= \char`\"{}list of node\_\-ast\char`\"{}\par
+
+
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Generate and return a string reprensentation of an \hyperlink{classgenevalmag_1_1Equation}{Equation}.
+
+Result= $<$l\_\-value$>$ \char`\"{}=\char`\"{} $<$r\_\-value$>$ \char`\"{};\char`\"{}
+
+where $<$l\_\-value$>$ = \char`\"{}instance\_\-attr\char`\"{} and $<$r\_\-value$>$ is= \char`\"{}list of node\_\-ast\char`\"{} 
+
+Definition at line 229 of file Equation.cpp.
+
+References eq\_\-id, l\_\-value, r\_\-value, genevalmag::Expression::to\_\-string(), and genevalmag::Expr\_\-instance::to\_\-string().
+
+Referenced by genevalmag::save\_\-rvalue().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{classgenevalmag_1_1Equation_1daad7e8abb06ec02999ce3e9fc38322_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=321pt]{classgenevalmag_1_1Equation_1daad7e8abb06ec02999ce3e9fc38322_icgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classgenevalmag_1_1Equation_96ea50e0ed15373e6246fd00d8c79ac4}{
+\index{genevalmag::Equation@{genevalmag::Equation}!count\_\-ref@{count\_\-ref}}
+\index{count\_\-ref@{count\_\-ref}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{count\_\-ref}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Equation::count\_\-ref}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Equation_96ea50e0ed15373e6246fd00d8c79ac4}
+
+
+Similar to a Smart Pointer to manage the release of the memory tree. When this is 0, all memory is freed from the tree. 
+
+
+
+Definition at line 43 of file Equation.h.
+
+Referenced by \_\-get\_\-count\_\-ref(), copy(), destroy(), and Equation().\hypertarget{classgenevalmag_1_1Equation_bcf149aeb80efa3ccb5c41886570e215}{
+\index{genevalmag::Equation@{genevalmag::Equation}!eq\_\-id@{eq\_\-id}}
+\index{eq\_\-id@{eq\_\-id}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{eq\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Equation::eq\_\-id}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Equation_bcf149aeb80efa3ccb5c41886570e215}
+
+
+Equation's identifier. 
+
+Equation's tree expression.
+
+Equation's left value. 
+
+Definition at line 26 of file Equation.h.
+
+Referenced by copy(), get\_\-id(), set\_\-id(), and to\_\-string().\hypertarget{classgenevalmag_1_1Equation_f6dfdfddb6eff2b61a359ff5d58c5144}{
+\index{genevalmag::Equation@{genevalmag::Equation}!l\_\-value@{l\_\-value}}
+\index{l\_\-value@{l\_\-value}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{l\_\-value}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Expr\_\-instance} {\bf genevalmag::Equation::l\_\-value}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Equation_f6dfdfddb6eff2b61a359ff5d58c5144}
+
+
+
+
+Definition at line 31 of file Equation.h.
+
+Referenced by copy(), get\_\-l\_\-value(), key(), set\_\-l\_\-value(), and to\_\-string().\hypertarget{classgenevalmag_1_1Equation_bdc49df03becf19ea7f5aa1b89b749c0}{
+\index{genevalmag::Equation@{genevalmag::Equation}!r\_\-value@{r\_\-value}}
+\index{r\_\-value@{r\_\-value}!genevalmag::Equation@{genevalmag::Equation}}
+\subsubsection[{r\_\-value}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Expression}$\ast$ {\bf genevalmag::Equation::r\_\-value}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Equation_bdc49df03becf19ea7f5aa1b89b749c0}
+
+
+
+
+Definition at line 36 of file Equation.h.
+
+Referenced by copy(), destroy(), get\_\-instance\_\-right\_\-side(), get\_\-r\_\-value(), key(), set\_\-r\_\-value(), and to\_\-string().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+include/Attr\_\-grammar/\hyperlink{Equation_8h}{Equation.h}\item 
+src/Attr\_\-grammar/\hyperlink{Equation_8cpp}{Equation.cpp}\end{CompactItemize}

@@ -1,0 +1,2992 @@
+\hypertarget{namespacegenevalmag}{
+\section{genevalmag Namespace Reference}
+\label{namespacegenevalmag}\index{genevalmag@{genevalmag}}
+}
+\subsection*{Classes}
+\begin{CompactItemize}
+\item 
+class \hyperlink{classgenevalmag_1_1Attr__grammar}{Attr\_\-grammar}
+\item 
+class \hyperlink{classgenevalmag_1_1Attribute}{Attribute}
+\item 
+class \hyperlink{classgenevalmag_1_1Equation}{Equation}
+\item 
+class \hyperlink{classgenevalmag_1_1Function}{Function}
+\item 
+class \hyperlink{classgenevalmag_1_1Rule}{Rule}
+\item 
+class \hyperlink{classgenevalmag_1_1Sort}{Sort}
+\item 
+class \hyperlink{classgenevalmag_1_1Symbol}{Symbol}
+\item 
+class \hyperlink{classgenevalmag_1_1Builder__code}{Builder\_\-code}
+\item 
+struct \hyperlink{structgenevalmag_1_1vertex__data__t}{vertex\_\-data\_\-t}
+\item 
+class \hyperlink{classgenevalmag_1_1Builder__graphs}{Builder\_\-graphs}
+\item 
+struct \hyperlink{structgenevalmag_1_1c__rule}{c\_\-rule}
+\item 
+struct \hyperlink{structgenevalmag_1_1k__w}{k\_\-w}
+\item 
+struct \hyperlink{structgenevalmag_1_1i__w}{i\_\-w}
+\item 
+struct \hyperlink{structgenevalmag_1_1k__plan}{k\_\-plan}
+\item 
+struct \hyperlink{structgenevalmag_1_1k__p__project}{k\_\-p\_\-project}
+\item 
+class \hyperlink{classgenevalmag_1_1Builder__plans}{Builder\_\-plans}
+\item 
+class \hyperlink{classgenevalmag_1_1Builder__visit__sequences}{Builder\_\-visit\_\-sequences}
+\item 
+class \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}
+\item 
+class \hyperlink{classgenevalmag_1_1Expr__instance}{Expr\_\-instance}
+\item 
+class \hyperlink{classgenevalmag_1_1Expr__leaf}{Expr\_\-leaf}
+\item 
+class \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}
+\item 
+class \hyperlink{classgenevalmag_1_1Expr__node}{Expr\_\-node}
+\item 
+class \hyperlink{classgenevalmag_1_1Expression}{Expression}
+\item 
+class \hyperlink{classgenevalmag_1_1Maglib}{Maglib}
+\item 
+class \hyperlink{classgenevalmag_1_1Parser__AG}{Parser\_\-AG}
+\item 
+class \hyperlink{classgenevalmag_1_1Semantics__checks}{Semantics\_\-checks}
+\item 
+struct \hyperlink{structgenevalmag_1_1cycle__detector}{cycle\_\-detector}
+\item 
+struct \hyperlink{structgenevalmag_1_1skip__parser}{skip\_\-parser}
+\item 
+struct \hyperlink{structgenevalmag_1_1attritute__grammar}{attritute\_\-grammar}
+\item 
+struct \hyperlink{structgenevalmag_1_1decl__attribute}{decl\_\-attribute}
+\end{CompactItemize}
+\subsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+typedef adjacency\_\-list$<$ hash\_\-setS, vecS, directedS, property\_\-vertex\_\-dp $>$ \hyperlink{namespacegenevalmag_4a96de9ebfc7d48233406ab9cad55cb5}{Graph}
+\item 
+typedef Graph::vertex\_\-descriptor \hyperlink{namespacegenevalmag_2aae7b018fc2a9afae131bbf639181b5}{Vertex}
+\item 
+typedef vector$<$ unsigned short $>$ \hyperlink{namespacegenevalmag_0bb2e8b0fa1b07b873f0363719de7b64}{Order\_\-eval\_\-eq}
+\item 
+typedef vector$<$ unsigned short $>$ \hyperlink{namespacegenevalmag_ed20da32fb9692645ae53d911d274fd5}{Order\_\-rule}
+\item 
+typedef struct \hyperlink{structgenevalmag_1_1c__rule}{genevalmag::c\_\-rule} \hyperlink{namespacegenevalmag_59ad19d59075a158ceb18d55009ce9a7}{Context\_\-rule}
+\item 
+typedef struct \hyperlink{structgenevalmag_1_1k__w}{genevalmag::k\_\-w} \hyperlink{namespacegenevalmag_457ae083d404303792f6086cf82a1c59}{Key\_\-work\_\-list}
+\item 
+typedef struct \hyperlink{structgenevalmag_1_1i__w}{genevalmag::i\_\-w} \hyperlink{namespacegenevalmag_bb601d42781f0764762a8e5a8ded19c6}{Item\_\-work}
+\item 
+typedef struct \hyperlink{structgenevalmag_1_1k__plan}{genevalmag::k\_\-plan} \hyperlink{namespacegenevalmag_9cb3d5a3c6e368bf7a12efbc09f71048}{Key\_\-plan}
+\item 
+typedef struct \hyperlink{structgenevalmag_1_1k__p__project}{genevalmag::k\_\-p\_\-project} \hyperlink{namespacegenevalmag_ce502fedfb5a14e31d5d20b0d35b807d}{Key\_\-plan\_\-project}
+\item 
+typedef vector$<$ int $>$ \hyperlink{namespacegenevalmag_7720677d79b33ecca4db21cdbcf7908f}{Visit\_\-seq}
+\item 
+typedef char \hyperlink{namespacegenevalmag_63d49b2e7b123ae54a8fdc03bcbde116}{char\_\-t}
+\item 
+typedef file\_\-iterator$<$ \hyperlink{namespacegenevalmag_63d49b2e7b123ae54a8fdc03bcbde116}{char\_\-t} $>$ \hyperlink{namespacegenevalmag_068de0c39bd97e0f3fe3e3c805632e4b}{iterator\_\-f}
+\item 
+typedef position\_\-iterator$<$ \hyperlink{namespacegenevalmag_068de0c39bd97e0f3fe3e3c805632e4b}{iterator\_\-f} $>$ \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t}
+\end{CompactItemize}
+\subsection*{Enumerations}
+\begin{CompactItemize}
+\item 
+enum \hyperlink{namespacegenevalmag_0ae71e3da3851df63075a93820da40af}{type\_\-attr} \{ \hyperlink{namespacegenevalmag_0ae71e3da3851df63075a93820da40afdab09b74118524cf39af82012b2a106f}{k\_\-inherit}, 
+\hyperlink{namespacegenevalmag_0ae71e3da3851df63075a93820da40af15c3e71b1d6d4bb754427989b1685fe9}{k\_\-synthetize}
+ \}
+\item 
+enum \hyperlink{namespacegenevalmag_8e412eca3897f0532c6f1997af777ba4}{oper\_\-mode} \{ \hyperlink{namespacegenevalmag_8e412eca3897f0532c6f1997af777ba49a449fbd259a4139292cc6774277924d}{k\_\-prefix}, 
+\hyperlink{namespacegenevalmag_8e412eca3897f0532c6f1997af777ba4539d2bdb2c17253a4862c35e2434e16d}{k\_\-infix}, 
+\hyperlink{namespacegenevalmag_8e412eca3897f0532c6f1997af777ba4e9a7219d08ec640f69717c8277320118}{k\_\-postfix}
+ \}
+\item 
+enum \hyperlink{namespacegenevalmag_ed96782841eb4586b9e32ce72721d64b}{oper\_\-assoc} \{ \hyperlink{namespacegenevalmag_ed96782841eb4586b9e32ce72721d64bc048f692d4f83c1a25640ab1b0c473cb}{k\_\-left}, 
+\hyperlink{namespacegenevalmag_ed96782841eb4586b9e32ce72721d64b3c53d98737826847326f2383d325352c}{k\_\-right}, 
+\hyperlink{namespacegenevalmag_ed96782841eb4586b9e32ce72721d64b0c5c27fb77ec1ddebd5ce7ab07ffc27f}{k\_\-non\_\-assoc}
+ \}
+\item 
+enum \hyperlink{namespacegenevalmag_4c1cf205cb145b09e46df5277bcc70c6}{symbol\_\-type} \{ \hyperlink{namespacegenevalmag_4c1cf205cb145b09e46df5277bcc70c69529bc3a3a874777649497ef8dfccf1d}{k\_\-terminal}, 
+\hyperlink{namespacegenevalmag_4c1cf205cb145b09e46df5277bcc70c60d5b10929042fdd00485ae2a98454665}{k\_\-non\_\-terminal}
+ \}
+\item 
+enum \hyperlink{namespacegenevalmag_054e5e9167597919bb2fe12ba999fb31}{literal\_\-type} \{ \par
+\hyperlink{namespacegenevalmag_054e5e9167597919bb2fe12ba999fb319a267b68fe67d8b5af87e04f5a24e1e4}{k\_\-int}, 
+\hyperlink{namespacegenevalmag_054e5e9167597919bb2fe12ba999fb31eba0193876196d98c59cc74a2d2f921f}{k\_\-float}, 
+\hyperlink{namespacegenevalmag_054e5e9167597919bb2fe12ba999fb3132b06dd5827f582f9819cd6f1b43918e}{k\_\-char}, 
+\hyperlink{namespacegenevalmag_054e5e9167597919bb2fe12ba999fb31f92cb0787d735ed8a5c33b6544340141}{k\_\-string}, 
+\par
+\hyperlink{namespacegenevalmag_054e5e9167597919bb2fe12ba999fb319ad2ce591e5697b458f8d13f0c8a2e80}{k\_\-bool}
+ \}
+\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+const bool \hyperlink{namespacegenevalmag_29dbe8034050c247526ecae47ff95529}{IS\_\-OPERATOR} (true)
+\item 
+void \hyperlink{namespacegenevalmag_e77bed22019c46ef3b6d11c18c87a85f}{set\_\-attr\_\-grammar} (\hyperlink{classgenevalmag_1_1Attr__grammar}{Attr\_\-grammar} $\ast$at\_\-grammar)
+\item 
+void \hyperlink{namespacegenevalmag_b68c3ea3b4064fbd96451dd2a094ad34}{set\_\-sem\_\-check} (\hyperlink{classgenevalmag_1_1Semantics__checks}{Semantics\_\-checks} $\ast$s\_\-check)
+\item 
+void \hyperlink{namespacegenevalmag_8fe47e97e9f000f1eb35ee9e86b2a5c0}{create\_\-sort} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_815257dc75d0f8a85662cdfc618c2187}{inic\_\-func} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_ff5e0f0cff477c34b63116d99dfbe9b0}{add\_\-function} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_f3954dcbe7a20818880776138409f413}{save\_\-name\_\-func} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_e333368e344fd2e4542788afb8d9990e}{save\_\-domain\_\-func} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_6c5fe5628b5ac4b3e2d9c4fc93985abe}{save\_\-image\_\-func} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_5651e2842c6f77725d4c10f46655ead4}{add\_\-operator} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_6c04408088fac02746a5a14e9b10f304}{save\_\-mode\_\-op} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_76626584a4d067440fb992103081af8a}{save\_\-prec\_\-op} (int const prec)
+\item 
+void \hyperlink{namespacegenevalmag_3aa0e95a99ace1f802a226e24366f4fb}{save\_\-assoc\_\-op} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_92edf3022d197c1c9587126d1aea5c9f}{add\_\-attribute} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_48c1d5796cdb99233cf2dfe9d2224618}{save\_\-sort\_\-attr} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_9669d56acdb87bd7130c7da9d810b53a}{save\_\-type\_\-attr} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_8d8548aa085e3c04a2cb7abc9f5deacc}{save\_\-member\_\-list\_\-attr} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_640285acc8edfe19e082795784dbbd51}{create\_\-attributes} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_6d8584e0b692b4a20384e0742b22630a}{create\_\-new\_\-non\_\-terminal} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_3ab01d2c2dc547707d49394c59211460}{create\_\-new\_\-terminal} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_38a9e6cd331b8e5caad524d12229d71e}{create\_\-rule} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_b3b5ed3e86e091b48713f1e3a0065d9c}{save\_\-right\_\-side\_\-rule} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_bd826b7a45bf0c29f45dc8f8c64c0805}{create\_\-abbreviated\_\-rule} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_b100c06acfd394415ddcf909a5c9490f}{save\_\-rule} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_61de26b3fdfcf0998039df573a3ec6f0}{create\_\-instance} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_8f0dbc1c191c7c3e357c9930692e180e}{save\_\-index\_\-ins} (int const index)
+\item 
+void \hyperlink{namespacegenevalmag_741fa074f83ccbe1fc90a53eb3635ba8}{save\_\-attr\_\-ins} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_380b107e4dbce952517d6aac470e7ce7}{create\_\-lit\_\-number} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_48bc87a884f21e2f39a19b6ef43bedf9}{create\_\-lit\_\-ch} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} ch, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_474728745db913b81459a7267bb28222}{create\_\-lit\_\-str} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_b6467a68d84550ca5d16d15c247499f4}{create\_\-bool} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_166358b221cbf34ec512b137326d6c44}{create\_\-function} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_fa1b5eab4ae88dcc8cdea82c8a94042e}{create\_\-operator} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_c0759c1555b62ec188a704ee700aac2a}{create\_\-equation} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_5c23096b7d1c0ef8a09f03de8c4b8e68}{save\_\-rvalue} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_411fcac88bb0937d75b54d20601b6b33}{push\_\-mark} (char name)
+\item 
+void \hyperlink{namespacegenevalmag_5acc69c06c112cad864e048a095396c5}{create\_\-literal\_\-node} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_931db9fc9546a03ac92ae77ca4ad9f21}{create\_\-instance\_\-node} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_2f41a8b96eb7d5bdca16a4924dcd020f}{create\_\-func\_\-node} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_2a5aaaff7c3b3b8efc446903121a62c6}{create\_\-root\_\-infix\_\-node} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_bf7e87f4c01eacdac90dd0875d9e1f0a}{create\_\-root\_\-function\_\-node} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_d2e6e0ea9f03843a2adb23ea4c43453f}{create\_\-root\_\-postfix\_\-node} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_2947fff1246a0fbe137217896a658a5b}{create\_\-root\_\-prefix\_\-node} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_c8f04dfdf39c964f9219cc5a7fb7197b}{check\_\-well\_\-defined} (const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} str, const \hyperlink{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{iterator\_\-t} end)
+\item 
+void \hyperlink{namespacegenevalmag_0cd76ff96d0edddb2332eb74a4085ab5}{increment\_\-level} (char name)
+\item 
+void \hyperlink{namespacegenevalmag_c34c135063b809b19dafd05aa81297c8}{decrement\_\-level} (char name)
+\item 
+{\footnotesize template$<$class K , class T $>$ }\\const bool \hyperlink{namespacegenevalmag_95d75ecfcb4371b57086093c66a96bd4}{add} (const T \&elem, map$<$ K, T $>$ \&map\_\-elem)
+\item 
+{\footnotesize template$<$class K , class T $>$ }\\const string \hyperlink{namespacegenevalmag_bdfa348edf2ec215b8dce63ebeab02e9}{to\_\-string\_\-map} (const map$<$ K, T $>$ \&map\_\-elem)
+\item 
+const bool \hyperlink{namespacegenevalmag_9cb36d1a43794afa2b45c729c6c87170}{belong} (const \hyperlink{classgenevalmag_1_1Symbol}{Symbol} \&symb, const string \&expr\_\-attrs)
+\item 
+{\footnotesize template$<$class T $>$ }\\string \hyperlink{namespacegenevalmag_f74af87309332e02ec5d55c14ab1fa97}{write\_\-vector\_\-with\_\-inic} (string \&text\_\-buffer, const string name\_\-vec, const size\_\-t index, const vector$<$ T $>$ \&vec, const string type\_\-vec, const string type\_\-array)
+\item 
+string \hyperlink{namespacegenevalmag_c58f50a004a774ce4256b86a16fb96c0}{generate\_\-key\_\-plan} (string \&text, const string \&n\_\-key, const int \&num\_\-key, const \hyperlink{structgenevalmag_1_1k__plan}{Key\_\-plan} \&k\_\-p)
+\item 
+string \hyperlink{namespacegenevalmag_d027bb2060fc75b17da08a22c9be3b9a}{generate\_\-return\_\-index\_\-context} ()
+\item 
+string \hyperlink{namespacegenevalmag_5935695d2ab4f63ea670911809399ce0}{generate\_\-expr\_\-text} (const \hyperlink{classgenevalmag_1_1Expression}{Expression} $\ast$node, const \hyperlink{classgenevalmag_1_1Rule}{Rule} \&rule)
+\item 
+const string \hyperlink{namespacegenevalmag_306e982e69207c606c1d6f236259b4e1}{PATH\_\-OUTPUT\_\-GRAPHS} (\char`\"{}graphs/\char`\"{})
+\item 
+const string \hyperlink{namespacegenevalmag_6d797bb23dc6e170ede7178c9ddb3f08}{PATH\_\-OUTPUT\_\-DP} (\char`\"{}1\_\-DP\_\-graphs/\char`\"{})
+\item 
+const string \hyperlink{namespacegenevalmag_fce5456f0ffc52ff62202b4c185d453c}{PATH\_\-OUTPUT\_\-DOWN} (\char`\"{}2\_\-DOWN\_\-graphs/\char`\"{})
+\item 
+const string \hyperlink{namespacegenevalmag_85c614ca01eca9ab0edd6bdf400259fd}{PATH\_\-OUTPUT\_\-DCG} (\char`\"{}3\_\-DCG\_\-graphs/\char`\"{})
+\item 
+const string \hyperlink{namespacegenevalmag_609ccdf53fd8e4f1526ef4a396323d7d}{PATH\_\-OUTPUT\_\-ADP} (\char`\"{}4\_\-ADP\_\-graphs/\char`\"{})
+\item 
+const string \hyperlink{namespacegenevalmag_401d9cc13c246072071c64015b3716c8}{PATH\_\-OUTPUT\_\-CYCLIC} (\char`\"{}CYCLIC\_\-graphs/\char`\"{})
+\item 
+const string \hyperlink{namespacegenevalmag_705fcd9aaf32cd0052ad7909df8994ca}{FILE\_\-DP\_\-GRAPH} (\char`\"{}\_\-dp\_\-graph\char`\"{})
+\item 
+const string \hyperlink{namespacegenevalmag_bc175fb26b27cb9f1ec2b56cfc390bbe}{FILE\_\-DOWN\_\-GRAPH} (\char`\"{}\_\-down\_\-graph\char`\"{})
+\item 
+const string \hyperlink{namespacegenevalmag_009f31ef1d07f4ca8786f9e2cc813279}{FILE\_\-DCG\_\-GRAPH} (\char`\"{}\_\-dcg\_\-graph\char`\"{})
+\item 
+const string \hyperlink{namespacegenevalmag_c89f8e579ae12e809a074364a2aced0c}{FILE\_\-ADP\_\-GRAPH} (\char`\"{}\_\-adp\_\-graph\char`\"{})
+\item 
+const string \hyperlink{namespacegenevalmag_418104f5a0e7464632745f28884c8017}{FILE\_\-ADP\_\-SUBGRAPH\_\-CYCLIC} (\char`\"{}\_\-adp\_\-subgraph\_\-with\_\-cyclic\char`\"{})
+\item 
+const string \hyperlink{namespacegenevalmag_605c56dc4a9a367c9da7c7759c7f6b65}{PATH\_\-OUT\_\-PLAN} (\char`\"{}plans/\char`\"{})
+\item 
+const string \hyperlink{namespacegenevalmag_345f3ac168618479f16dbd899562685e}{PATH\_\-OUT\_\-PLAN\_\-PROJECT} (\char`\"{}plans\_\-project/\char`\"{})
+\item 
+void \hyperlink{namespacegenevalmag_ce0b7e67565040ba64e1710d0029026b}{purge\_\-plan\_\-with} (const \hyperlink{classgenevalmag_1_1Rule}{Rule} \&rule, const \hyperlink{namespacegenevalmag_0bb2e8b0fa1b07b873f0363719de7b64}{Order\_\-eval\_\-eq} \&order\_\-eq, \hyperlink{namespacegenevalmag_0bb2e8b0fa1b07b873f0363719de7b64}{Order\_\-eval\_\-eq} \&purged\_\-order)
+\item 
+bool \hyperlink{namespacegenevalmag_d89277e822c1a4d635c554e8c6698e76}{defined\_\-work} (const vector$<$ \hyperlink{structgenevalmag_1_1i__w}{Item\_\-work} $>$ \&list, const \hyperlink{structgenevalmag_1_1i__w}{Item\_\-work} \&item\_\-work)
+\item 
+unsigned short \hyperlink{namespacegenevalmag_4c59332bf08ed52e98321fe6b6340f29}{return\_\-index\_\-vec} (const \hyperlink{namespacegenevalmag_0bb2e8b0fa1b07b873f0363719de7b64}{Order\_\-eval\_\-eq} \&order, vector$<$ \hyperlink{namespacegenevalmag_0bb2e8b0fa1b07b873f0363719de7b64}{Order\_\-eval\_\-eq} $>$ \&vec)
+\item 
+const unsigned short \hyperlink{namespacegenevalmag_48db0c2de005498a27cd549338a38cdd}{LEAVE} (0)
+\item 
+bool \hyperlink{namespacegenevalmag_bf07d8c3d3faf1a57304337d32ff0f29}{ins\_\-attr\_\-computed} (const \hyperlink{classgenevalmag_1_1Expr__instance}{Expr\_\-instance} $\ast$ins, const vector$<$ \hyperlink{classgenevalmag_1_1Expr__instance}{Expr\_\-instance} $>$ \&vec)
+\item 
+void \hyperlink{namespacegenevalmag_e77f9a26f51553fb1419a41295da521a}{get\_\-inherits\_\-of} (const \hyperlink{classgenevalmag_1_1Symbol}{Symbol} $\ast$symb, const vector$<$ \hyperlink{classgenevalmag_1_1Expr__instance}{Expr\_\-instance} $>$ \&computed, vector$<$ \hyperlink{classgenevalmag_1_1Expr__instance}{Expr\_\-instance} $>$ \&rec\_\-child)
+\item 
+bool \hyperlink{namespacegenevalmag_d52b23b8c38d8b9ef4c91820a512c963}{belong\_\-it} (const map$<$ \hyperlink{structgenevalmag_1_1k__plan}{Key\_\-plan}, unsigned short $>$::const\_\-iterator it, const vector$<$ map$<$ \hyperlink{structgenevalmag_1_1k__plan}{Key\_\-plan}, unsigned short $>$::const\_\-iterator $>$ \&vec)
+\item 
+void \hyperlink{namespacegenevalmag_3d48cfd13c4608c5235a6968c63855da}{merge\_\-vec} (const vector$<$ map$<$ \hyperlink{structgenevalmag_1_1k__plan}{Key\_\-plan}, unsigned short $>$::const\_\-iterator $>$ \&vec\_\-source, vector$<$ map$<$ \hyperlink{structgenevalmag_1_1k__plan}{Key\_\-plan}, unsigned short $>$::const\_\-iterator $>$ \&vec\_\-targed)
+\item 
+void \hyperlink{namespacegenevalmag_036ececec487ad3d0674f8e5e0c62f6a}{merge\_\-vec\_\-without\_\-plan} (const vector$<$ map$<$ \hyperlink{structgenevalmag_1_1k__plan}{Key\_\-plan}, unsigned short $>$::const\_\-iterator $>$ \&vec\_\-source, vector$<$ map$<$ \hyperlink{structgenevalmag_1_1k__plan}{Key\_\-plan}, unsigned short $>$::const\_\-iterator $>$ \&vec\_\-targed, const map$<$ \hyperlink{structgenevalmag_1_1k__plan}{Key\_\-plan}, unsigned short $>$::const\_\-iterator \&plan)
+\item 
+void \hyperlink{namespacegenevalmag_22c7e9c74db3b8c0f0b7a3a1cbf5a978}{plan\_\-family\_\-computed} (const vector$<$ map$<$ \hyperlink{structgenevalmag_1_1k__plan}{Key\_\-plan}, unsigned short $>$::const\_\-iterator $>$ \&plans\_\-computed, vector$<$ unsigned short $>$ \&visit\_\-seq\_\-computed)
+\item 
+const string \hyperlink{namespacegenevalmag_7bb640f537df129ffe4ed8cc5f703d90}{DEFAULT\_\-PATH} (\char`\"{}./out\_\-maggen/\char`\"{})
+\item 
+const string \hyperlink{namespacegenevalmag_a939bb88a9eee5dd79de6b2c0d9dc27b}{DEFAULT\_\-FILE\_\-NAME} (\char`\"{}mag\_\-eval\char`\"{})
+\item 
+const string \hyperlink{namespacegenevalmag_c01c19863afca7ad5f021857f24032c3}{DEFAULT\_\-INPUT\_\-FILE} (\char`\"{}/tmp/.input\_\-maggen\_\-default\char`\"{})
+\item 
+double \hyperlink{namespacegenevalmag_885d7859db4dd91f78bb7081be6ceacb}{timeval\_\-diff} (struct timeval $\ast$a, struct timeval $\ast$b)
+\item 
+bool \hyperlink{namespacegenevalmag_8d54caf5e5830cd48bf3265345928c3a}{check\_\-file\_\-exist} (const string \&strFilename)
+\item 
+bool \hyperlink{namespacegenevalmag_3bc888ab3b44c41a536427cf386f8c3d}{check\_\-name} (const string \&strFilename)
+\item 
+void \hyperlink{namespacegenevalmag_fe9d3ca44e4de7e9ebe9f47a62ed7aa5}{show\_\-help\_\-information} ()
+\item 
+bool \hyperlink{namespacegenevalmag_d3dcc8f1c112c2fee686c837e5250124}{parse\_\-parameters} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]}, string \&path\_\-input\_\-file, string \&path\_\-folder\_\-output, string \&name\_\-library, vector$<$ string $>$ \&headers)
+\item 
+const string \hyperlink{namespacegenevalmag_dd88c73415b1eb5c506b9d66b294b7cf}{FILE\_\-GRAMMAR} (\char`\"{}Grammar\_\-mag.log\char`\"{})
+\item 
+std::ostream \& \hyperlink{namespacegenevalmag_4093becff20c4564db790c08c1189aaf}{operator$<$$<$} (std::ostream \&out, file\_\-position const \&lc)
+\item 
+int \hyperlink{namespacegenevalmag_5132358a5088f64e976aa18643cff4d8}{swap\_\-root\_\-child} (\hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function} $\ast$$\ast$old\_\-root, int i\_\-new\_\-root)
+\item 
+int \hyperlink{namespacegenevalmag_18228f21bca4decde649041801026a35}{swap\_\-root\_\-grandson} (\hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function} $\ast$$\ast$old\_\-root)
+\item 
+void \hyperlink{namespacegenevalmag_311f0385029ff37574bbf0189064f310}{warshall\_\-algorithm} (const unsigned int size, bool $\ast$matrix\_\-plain)
+\item 
+int \hyperlink{namespacegenevalmag_6442b82b3f1265663c5bdb2bc80f4421}{get\_\-index} (string name\_\-symb, vector$<$ string $>$ non\_\-term)
+\item 
+bool \hyperlink{namespacegenevalmag_d0ec9b7706a340d2e674f3b4859afa2d}{check\_\-eq\_\-defines\_\-it} (const \hyperlink{classgenevalmag_1_1Symbol}{Symbol} $\ast$symb, const int index, const \hyperlink{classgenevalmag_1_1Attribute}{Attribute} $\ast$attr, const map$<$ unsigned short, \hyperlink{classgenevalmag_1_1Equation}{Equation} $>$ eqs)
+\end{CompactItemize}
+\subsection*{Variables}
+\begin{CompactItemize}
+\item 
+vector$<$ \hyperlink{classgenevalmag_1_1Equation}{Equation} $\ast$ $>$ \hyperlink{namespacegenevalmag_4bc1208b99175d15ec86291f80f5428f}{index\_\-access\_\-eq}
+\item 
+\hyperlink{classgenevalmag_1_1Attr__grammar}{Attr\_\-grammar} $\ast$ \hyperlink{namespacegenevalmag_85aabf29d2f206619e2d128154283336}{attr\_\-grammar}
+\item 
+\hyperlink{classgenevalmag_1_1Semantics__checks}{Semantics\_\-checks} $\ast$ \hyperlink{namespacegenevalmag_d93efa78140ac10eefb71fdb44c48b6b}{sem\_\-check}
+\item 
+\hyperlink{classgenevalmag_1_1Function}{Function} $\ast$ \hyperlink{namespacegenevalmag_910b57b31dc9d8772d89a082d88f0c50}{current\_\-func}
+\item 
+struct \hyperlink{structgenevalmag_1_1decl__attribute}{genevalmag::decl\_\-attribute} $\ast$ \hyperlink{namespacegenevalmag_3564619b24ff1e9243dee9e501181679}{new\_\-attrs}
+\item 
+\hyperlink{classgenevalmag_1_1Rule}{Rule} $\ast$ \hyperlink{namespacegenevalmag_fc4896526f13792a5f56fa1c254759d4}{current\_\-rule}
+\item 
+\hyperlink{classgenevalmag_1_1Expr__instance}{Expr\_\-instance} $\ast$ \hyperlink{namespacegenevalmag_4e01071642cc57ba91fe84d929195c7c}{current\_\-instance}
+\item 
+\hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal} $\ast$ \hyperlink{namespacegenevalmag_09a13d15a03643602e801cf36685ede0}{current\_\-literal}
+\item 
+\hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function} $\ast$ \hyperlink{namespacegenevalmag_5d3b27c53cfad3c612dc56f1750c44a2}{current\_\-ast\_\-function}
+\item 
+\hyperlink{classgenevalmag_1_1Equation}{Equation} $\ast$ \hyperlink{namespacegenevalmag_d81ea3b166738b52ec4a3b7ac291e64b}{current\_\-eq}
+\item 
+vector$<$ \hyperlink{classgenevalmag_1_1Expression}{Expression} $\ast$ $>$ \hyperlink{namespacegenevalmag_47998af84055c40ecfcdfe156f71be04}{stack\_\-node}
+\item 
+vector$<$ \hyperlink{classgenevalmag_1_1Expr__node}{Expr\_\-node} $\ast$ $>$ \hyperlink{namespacegenevalmag_0b445db6f5f211e8d78b693596cbda3c}{stack\_\-inner\_\-node}
+\end{CompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{namespacegenevalmag_63d49b2e7b123ae54a8fdc03bcbde116}{
+\index{genevalmag@{genevalmag}!char\_\-t@{char\_\-t}}
+\index{char\_\-t@{char\_\-t}!genevalmag@{genevalmag}}
+\subsubsection[{char\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef char {\bf genevalmag::char\_\-t}}}
+\label{namespacegenevalmag_63d49b2e7b123ae54a8fdc03bcbde116}
+
+
+Type definitions to report parsing errors, showing row and column. 
+
+Definition at line 27 of file Parser\_\-AG.h.\hypertarget{namespacegenevalmag_59ad19d59075a158ceb18d55009ce9a7}{
+\index{genevalmag@{genevalmag}!Context\_\-rule@{Context\_\-rule}}
+\index{Context\_\-rule@{Context\_\-rule}!genevalmag@{genevalmag}}
+\subsubsection[{Context\_\-rule}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf genevalmag::c\_\-rule}  {\bf genevalmag::Context\_\-rule}}}
+\label{namespacegenevalmag_59ad19d59075a158ceb18d55009ce9a7}
+
+
+This struct represent a Context\_\-rule, that is a father rule and the context of rule. \hypertarget{namespacegenevalmag_4a96de9ebfc7d48233406ab9cad55cb5}{
+\index{genevalmag@{genevalmag}!Graph@{Graph}}
+\index{Graph@{Graph}!genevalmag@{genevalmag}}
+\subsubsection[{Graph}]{\setlength{\rightskip}{0pt plus 5cm}typedef adjacency\_\-list$<$hash\_\-setS, vecS, directedS, property\_\-vertex\_\-dp$>$ {\bf genevalmag::Graph}}}
+\label{namespacegenevalmag_4a96de9ebfc7d48233406ab9cad55cb5}
+
+
+
+
+Definition at line 35 of file Builder\_\-graphs.h.\hypertarget{namespacegenevalmag_bb601d42781f0764762a8e5a8ded19c6}{
+\index{genevalmag@{genevalmag}!Item\_\-work@{Item\_\-work}}
+\index{Item\_\-work@{Item\_\-work}!genevalmag@{genevalmag}}
+\subsubsection[{Item\_\-work}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf genevalmag::i\_\-w}  {\bf genevalmag::Item\_\-work}}}
+\label{namespacegenevalmag_bb601d42781f0764762a8e5a8ded19c6}
+
+
+This struct represents an Item work, that is an Key\_\-work\_\-list and an equations order evaluation. \hypertarget{namespacegenevalmag_068de0c39bd97e0f3fe3e3c805632e4b}{
+\index{genevalmag@{genevalmag}!iterator\_\-f@{iterator\_\-f}}
+\index{iterator\_\-f@{iterator\_\-f}!genevalmag@{genevalmag}}
+\subsubsection[{iterator\_\-f}]{\setlength{\rightskip}{0pt plus 5cm}typedef file\_\-iterator$<${\bf char\_\-t}$>$ {\bf genevalmag::iterator\_\-f}}}
+\label{namespacegenevalmag_068de0c39bd97e0f3fe3e3c805632e4b}
+
+
+
+
+Definition at line 28 of file Parser\_\-AG.h.\hypertarget{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}{
+\index{genevalmag@{genevalmag}!iterator\_\-t@{iterator\_\-t}}
+\index{iterator\_\-t@{iterator\_\-t}!genevalmag@{genevalmag}}
+\subsubsection[{iterator\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef position\_\-iterator$<${\bf iterator\_\-f}$>$ {\bf genevalmag::iterator\_\-t}}}
+\label{namespacegenevalmag_64946721fb97e58be670a468bf8e7056}
+
+
+
+
+Definition at line 29 of file Parser\_\-AG.h.\hypertarget{namespacegenevalmag_9cb3d5a3c6e368bf7a12efbc09f71048}{
+\index{genevalmag@{genevalmag}!Key\_\-plan@{Key\_\-plan}}
+\index{Key\_\-plan@{Key\_\-plan}!genevalmag@{genevalmag}}
+\subsubsection[{Key\_\-plan}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf genevalmag::k\_\-plan}  {\bf genevalmag::Key\_\-plan}}}
+\label{namespacegenevalmag_9cb3d5a3c6e368bf7a12efbc09f71048}
+
+
+This structs represent a Key\_\-plan, that is an id and an equations order evaluation. \hypertarget{namespacegenevalmag_ce502fedfb5a14e31d5d20b0d35b807d}{
+\index{genevalmag@{genevalmag}!Key\_\-plan\_\-project@{Key\_\-plan\_\-project}}
+\index{Key\_\-plan\_\-project@{Key\_\-plan\_\-project}!genevalmag@{genevalmag}}
+\subsubsection[{Key\_\-plan\_\-project}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf genevalmag::k\_\-p\_\-project}  {\bf genevalmag::Key\_\-plan\_\-project}}}
+\label{namespacegenevalmag_ce502fedfb5a14e31d5d20b0d35b807d}
+
+
+This struct represent a Key\_\-plan\_\-project, that is a Key\_\-plan, the symbol and ocurrence, by which project. \hypertarget{namespacegenevalmag_457ae083d404303792f6086cf82a1c59}{
+\index{genevalmag@{genevalmag}!Key\_\-work\_\-list@{Key\_\-work\_\-list}}
+\index{Key\_\-work\_\-list@{Key\_\-work\_\-list}!genevalmag@{genevalmag}}
+\subsubsection[{Key\_\-work\_\-list}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf genevalmag::k\_\-w}  {\bf genevalmag::Key\_\-work\_\-list}}}
+\label{namespacegenevalmag_457ae083d404303792f6086cf82a1c59}
+
+
+This struct represents a Key\_\-work\_\-list, that is a father rule and id-rule of the current rule. \hypertarget{namespacegenevalmag_0bb2e8b0fa1b07b873f0363719de7b64}{
+\index{genevalmag@{genevalmag}!Order\_\-eval\_\-eq@{Order\_\-eval\_\-eq}}
+\index{Order\_\-eval\_\-eq@{Order\_\-eval\_\-eq}!genevalmag@{genevalmag}}
+\subsubsection[{Order\_\-eval\_\-eq}]{\setlength{\rightskip}{0pt plus 5cm}typedef vector$<$ unsigned short $>$ {\bf genevalmag::Order\_\-eval\_\-eq}}}
+\label{namespacegenevalmag_0bb2e8b0fa1b07b873f0363719de7b64}
+
+
+Vector for order of equation. Each number represent an equation. 
+
+Definition at line 28 of file Builder\_\-plans.h.\hypertarget{namespacegenevalmag_ed20da32fb9692645ae53d911d274fd5}{
+\index{genevalmag@{genevalmag}!Order\_\-rule@{Order\_\-rule}}
+\index{Order\_\-rule@{Order\_\-rule}!genevalmag@{genevalmag}}
+\subsubsection[{Order\_\-rule}]{\setlength{\rightskip}{0pt plus 5cm}typedef vector$<$ unsigned short $>$ {\bf genevalmag::Order\_\-rule}}}
+\label{namespacegenevalmag_ed20da32fb9692645ae53d911d274fd5}
+
+
+Vector that represents the inferior context of rule. Each number represent a rule. 
+
+Definition at line 34 of file Builder\_\-plans.h.\hypertarget{namespacegenevalmag_2aae7b018fc2a9afae131bbf639181b5}{
+\index{genevalmag@{genevalmag}!Vertex@{Vertex}}
+\index{Vertex@{Vertex}!genevalmag@{genevalmag}}
+\subsubsection[{Vertex}]{\setlength{\rightskip}{0pt plus 5cm}typedef Graph::vertex\_\-descriptor {\bf genevalmag::Vertex}}}
+\label{namespacegenevalmag_2aae7b018fc2a9afae131bbf639181b5}
+
+
+
+
+Definition at line 38 of file Builder\_\-graphs.h.\hypertarget{namespacegenevalmag_7720677d79b33ecca4db21cdbcf7908f}{
+\index{genevalmag@{genevalmag}!Visit\_\-seq@{Visit\_\-seq}}
+\index{Visit\_\-seq@{Visit\_\-seq}!genevalmag@{genevalmag}}
+\subsubsection[{Visit\_\-seq}]{\setlength{\rightskip}{0pt plus 5cm}typedef vector$<$int$>$ {\bf genevalmag::Visit\_\-seq}}}
+\label{namespacegenevalmag_7720677d79b33ecca4db21cdbcf7908f}
+
+
+Where: item $>$ 0 represent to visit to this rule number. item == 0 represent to leave. item $<$ 0 represent to compute this equation number. 
+
+Definition at line 28 of file Builder\_\-visit\_\-sequences.h.
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{namespacegenevalmag_054e5e9167597919bb2fe12ba999fb31}{
+\index{genevalmag@{genevalmag}!literal\_\-type@{literal\_\-type}}
+\index{literal\_\-type@{literal\_\-type}!genevalmag@{genevalmag}}
+\subsubsection[{literal\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf genevalmag::literal\_\-type}}}
+\label{namespacegenevalmag_054e5e9167597919bb2fe12ba999fb31}
+
+
+Type of basics literals. \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{k\_\-int@{k\_\-int}!genevalmag@{genevalmag}}\index{genevalmag@{genevalmag}!k\_\-int@{k\_\-int}}\item[{\em 
+\hypertarget{namespacegenevalmag_054e5e9167597919bb2fe12ba999fb319a267b68fe67d8b5af87e04f5a24e1e4}{
+k\_\-int}
+\label{namespacegenevalmag_054e5e9167597919bb2fe12ba999fb319a267b68fe67d8b5af87e04f5a24e1e4}
+}]\index{k\_\-float@{k\_\-float}!genevalmag@{genevalmag}}\index{genevalmag@{genevalmag}!k\_\-float@{k\_\-float}}\item[{\em 
+\hypertarget{namespacegenevalmag_054e5e9167597919bb2fe12ba999fb31eba0193876196d98c59cc74a2d2f921f}{
+k\_\-float}
+\label{namespacegenevalmag_054e5e9167597919bb2fe12ba999fb31eba0193876196d98c59cc74a2d2f921f}
+}]\index{k\_\-char@{k\_\-char}!genevalmag@{genevalmag}}\index{genevalmag@{genevalmag}!k\_\-char@{k\_\-char}}\item[{\em 
+\hypertarget{namespacegenevalmag_054e5e9167597919bb2fe12ba999fb3132b06dd5827f582f9819cd6f1b43918e}{
+k\_\-char}
+\label{namespacegenevalmag_054e5e9167597919bb2fe12ba999fb3132b06dd5827f582f9819cd6f1b43918e}
+}]\index{k\_\-string@{k\_\-string}!genevalmag@{genevalmag}}\index{genevalmag@{genevalmag}!k\_\-string@{k\_\-string}}\item[{\em 
+\hypertarget{namespacegenevalmag_054e5e9167597919bb2fe12ba999fb31f92cb0787d735ed8a5c33b6544340141}{
+k\_\-string}
+\label{namespacegenevalmag_054e5e9167597919bb2fe12ba999fb31f92cb0787d735ed8a5c33b6544340141}
+}]\index{k\_\-bool@{k\_\-bool}!genevalmag@{genevalmag}}\index{genevalmag@{genevalmag}!k\_\-bool@{k\_\-bool}}\item[{\em 
+\hypertarget{namespacegenevalmag_054e5e9167597919bb2fe12ba999fb319ad2ce591e5697b458f8d13f0c8a2e80}{
+k\_\-bool}
+\label{namespacegenevalmag_054e5e9167597919bb2fe12ba999fb319ad2ce591e5697b458f8d13f0c8a2e80}
+}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 20 of file Expr\_\-literal.h.\hypertarget{namespacegenevalmag_ed96782841eb4586b9e32ce72721d64b}{
+\index{genevalmag@{genevalmag}!oper\_\-assoc@{oper\_\-assoc}}
+\index{oper\_\-assoc@{oper\_\-assoc}!genevalmag@{genevalmag}}
+\subsubsection[{oper\_\-assoc}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf genevalmag::oper\_\-assoc}}}
+\label{namespacegenevalmag_ed96782841eb4586b9e32ce72721d64b}
+
+
+Enumeration of operation's associative modes. \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{k\_\-left@{k\_\-left}!genevalmag@{genevalmag}}\index{genevalmag@{genevalmag}!k\_\-left@{k\_\-left}}\item[{\em 
+\hypertarget{namespacegenevalmag_ed96782841eb4586b9e32ce72721d64bc048f692d4f83c1a25640ab1b0c473cb}{
+k\_\-left}
+\label{namespacegenevalmag_ed96782841eb4586b9e32ce72721d64bc048f692d4f83c1a25640ab1b0c473cb}
+}]\index{k\_\-right@{k\_\-right}!genevalmag@{genevalmag}}\index{genevalmag@{genevalmag}!k\_\-right@{k\_\-right}}\item[{\em 
+\hypertarget{namespacegenevalmag_ed96782841eb4586b9e32ce72721d64b3c53d98737826847326f2383d325352c}{
+k\_\-right}
+\label{namespacegenevalmag_ed96782841eb4586b9e32ce72721d64b3c53d98737826847326f2383d325352c}
+}]\index{k\_\-non\_\-assoc@{k\_\-non\_\-assoc}!genevalmag@{genevalmag}}\index{genevalmag@{genevalmag}!k\_\-non\_\-assoc@{k\_\-non\_\-assoc}}\item[{\em 
+\hypertarget{namespacegenevalmag_ed96782841eb4586b9e32ce72721d64b0c5c27fb77ec1ddebd5ce7ab07ffc27f}{
+k\_\-non\_\-assoc}
+\label{namespacegenevalmag_ed96782841eb4586b9e32ce72721d64b0c5c27fb77ec1ddebd5ce7ab07ffc27f}
+}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 33 of file Function.h.\hypertarget{namespacegenevalmag_8e412eca3897f0532c6f1997af777ba4}{
+\index{genevalmag@{genevalmag}!oper\_\-mode@{oper\_\-mode}}
+\index{oper\_\-mode@{oper\_\-mode}!genevalmag@{genevalmag}}
+\subsubsection[{oper\_\-mode}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf genevalmag::oper\_\-mode}}}
+\label{namespacegenevalmag_8e412eca3897f0532c6f1997af777ba4}
+
+
+Enumeration of operation's mode. \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{k\_\-prefix@{k\_\-prefix}!genevalmag@{genevalmag}}\index{genevalmag@{genevalmag}!k\_\-prefix@{k\_\-prefix}}\item[{\em 
+\hypertarget{namespacegenevalmag_8e412eca3897f0532c6f1997af777ba49a449fbd259a4139292cc6774277924d}{
+k\_\-prefix}
+\label{namespacegenevalmag_8e412eca3897f0532c6f1997af777ba49a449fbd259a4139292cc6774277924d}
+}]\index{k\_\-infix@{k\_\-infix}!genevalmag@{genevalmag}}\index{genevalmag@{genevalmag}!k\_\-infix@{k\_\-infix}}\item[{\em 
+\hypertarget{namespacegenevalmag_8e412eca3897f0532c6f1997af777ba4539d2bdb2c17253a4862c35e2434e16d}{
+k\_\-infix}
+\label{namespacegenevalmag_8e412eca3897f0532c6f1997af777ba4539d2bdb2c17253a4862c35e2434e16d}
+}]\index{k\_\-postfix@{k\_\-postfix}!genevalmag@{genevalmag}}\index{genevalmag@{genevalmag}!k\_\-postfix@{k\_\-postfix}}\item[{\em 
+\hypertarget{namespacegenevalmag_8e412eca3897f0532c6f1997af777ba4e9a7219d08ec640f69717c8277320118}{
+k\_\-postfix}
+\label{namespacegenevalmag_8e412eca3897f0532c6f1997af777ba4e9a7219d08ec640f69717c8277320118}
+}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 23 of file Function.h.\hypertarget{namespacegenevalmag_4c1cf205cb145b09e46df5277bcc70c6}{
+\index{genevalmag@{genevalmag}!symbol\_\-type@{symbol\_\-type}}
+\index{symbol\_\-type@{symbol\_\-type}!genevalmag@{genevalmag}}
+\subsubsection[{symbol\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf genevalmag::symbol\_\-type}}}
+\label{namespacegenevalmag_4c1cf205cb145b09e46df5277bcc70c6}
+
+
+Enumeration of symbol's type. \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{k\_\-terminal@{k\_\-terminal}!genevalmag@{genevalmag}}\index{genevalmag@{genevalmag}!k\_\-terminal@{k\_\-terminal}}\item[{\em 
+\hypertarget{namespacegenevalmag_4c1cf205cb145b09e46df5277bcc70c69529bc3a3a874777649497ef8dfccf1d}{
+k\_\-terminal}
+\label{namespacegenevalmag_4c1cf205cb145b09e46df5277bcc70c69529bc3a3a874777649497ef8dfccf1d}
+}]\index{k\_\-non\_\-terminal@{k\_\-non\_\-terminal}!genevalmag@{genevalmag}}\index{genevalmag@{genevalmag}!k\_\-non\_\-terminal@{k\_\-non\_\-terminal}}\item[{\em 
+\hypertarget{namespacegenevalmag_4c1cf205cb145b09e46df5277bcc70c60d5b10929042fdd00485ae2a98454665}{
+k\_\-non\_\-terminal}
+\label{namespacegenevalmag_4c1cf205cb145b09e46df5277bcc70c60d5b10929042fdd00485ae2a98454665}
+}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 23 of file Symbol.h.\hypertarget{namespacegenevalmag_0ae71e3da3851df63075a93820da40af}{
+\index{genevalmag@{genevalmag}!type\_\-attr@{type\_\-attr}}
+\index{type\_\-attr@{type\_\-attr}!genevalmag@{genevalmag}}
+\subsubsection[{type\_\-attr}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf genevalmag::type\_\-attr}}}
+\label{namespacegenevalmag_0ae71e3da3851df63075a93820da40af}
+
+
+Enumeration of the attribute's type: Inherit or Synthetize. \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{k\_\-inherit@{k\_\-inherit}!genevalmag@{genevalmag}}\index{genevalmag@{genevalmag}!k\_\-inherit@{k\_\-inherit}}\item[{\em 
+\hypertarget{namespacegenevalmag_0ae71e3da3851df63075a93820da40afdab09b74118524cf39af82012b2a106f}{
+k\_\-inherit}
+\label{namespacegenevalmag_0ae71e3da3851df63075a93820da40afdab09b74118524cf39af82012b2a106f}
+}]\index{k\_\-synthetize@{k\_\-synthetize}!genevalmag@{genevalmag}}\index{genevalmag@{genevalmag}!k\_\-synthetize@{k\_\-synthetize}}\item[{\em 
+\hypertarget{namespacegenevalmag_0ae71e3da3851df63075a93820da40af15c3e71b1d6d4bb754427989b1685fe9}{
+k\_\-synthetize}
+\label{namespacegenevalmag_0ae71e3da3851df63075a93820da40af15c3e71b1d6d4bb754427989b1685fe9}
+}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 20 of file Attribute.h.
+
+\subsection{Function Documentation}
+\hypertarget{namespacegenevalmag_95d75ecfcb4371b57086093c66a96bd4}{
+\index{genevalmag@{genevalmag}!add@{add}}
+\index{add@{add}!genevalmag@{genevalmag}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class K , class T $>$ const bool genevalmag::add (const T \& {\em elem}, \/  map$<$ K, T $>$ \& {\em map\_\-elem})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{namespacegenevalmag_95d75ecfcb4371b57086093c66a96bd4}
+
+
+Operation template that insert an object type T in the parameter map.
+
+Returns true if insert succesfully. In other case, return false. 
+
+Definition at line 42 of file Attr\_\-grammar.cpp.\hypertarget{namespacegenevalmag_92edf3022d197c1c9587126d1aea5c9f}{
+\index{genevalmag@{genevalmag}!add\_\-attribute@{add\_\-attribute}}
+\index{add\_\-attribute@{add\_\-attribute}!genevalmag@{genevalmag}}
+\subsubsection[{add\_\-attribute}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::add\_\-attribute (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_92edf3022d197c1c9587126d1aea5c9f}
+
+
+Methods and functions for parse \hyperlink{classgenevalmag_1_1Attribute}{Attribute} class. 
+
+Definition at line 161 of file Semantics\_\-actions.cpp.
+
+References genevalmag::decl\_\-attribute::d\_\-member\_\-symbol, genevalmag::decl\_\-attribute::d\_\-mod\_\-type, genevalmag::decl\_\-attribute::d\_\-names, k\_\-synthetize, and new\_\-attrs.
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=227pt]{namespacegenevalmag_92edf3022d197c1c9587126d1aea5c9f_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_ff5e0f0cff477c34b63116d99dfbe9b0}{
+\index{genevalmag@{genevalmag}!add\_\-function@{add\_\-function}}
+\index{add\_\-function@{add\_\-function}!genevalmag@{genevalmag}}
+\subsubsection[{add\_\-function}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::add\_\-function (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_ff5e0f0cff477c34b63116d99dfbe9b0}
+
+
+
+
+Definition at line 104 of file Semantics\_\-actions.cpp.
+
+References genevalmag::Attr\_\-grammar::add\_\-function(), attr\_\-grammar, current\_\-func, and genevalmag::Function::to\_\-string().
+
+Referenced by add\_\-operator(), and genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{namespacegenevalmag_ff5e0f0cff477c34b63116d99dfbe9b0_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=310pt]{namespacegenevalmag_ff5e0f0cff477c34b63116d99dfbe9b0_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_5651e2842c6f77725d4c10f46655ead4}{
+\index{genevalmag@{genevalmag}!add\_\-operator@{add\_\-operator}}
+\index{add\_\-operator@{add\_\-operator}!genevalmag@{genevalmag}}
+\subsubsection[{add\_\-operator}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::add\_\-operator (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_5651e2842c6f77725d4c10f46655ead4}
+
+
+Methods and functions for parse Operator. 
+
+Definition at line 135 of file Semantics\_\-actions.cpp.
+
+References add\_\-function(), current\_\-func, IS\_\-OPERATOR(), and genevalmag::Function::set\_\-is\_\-operator().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=416pt]{namespacegenevalmag_5651e2842c6f77725d4c10f46655ead4_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=227pt]{namespacegenevalmag_5651e2842c6f77725d4c10f46655ead4_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_9cb36d1a43794afa2b45c729c6c87170}{
+\index{genevalmag@{genevalmag}!belong@{belong}}
+\index{belong@{belong}!genevalmag@{genevalmag}}
+\subsubsection[{belong}]{\setlength{\rightskip}{0pt plus 5cm}const bool genevalmag::belong (const Symbol \& {\em symb}, \/  const string \& {\em expr\_\-attrs})}}
+\label{namespacegenevalmag_9cb36d1a43794afa2b45c729c6c87170}
+
+
+Interprets the expression of sets and returns true if the symbol belongs to that set. 
+
+Definition at line 94 of file Attr\_\-grammar.cpp.
+
+References genevalmag::Symbol::get\_\-name().
+
+Referenced by genevalmag::Attr\_\-grammar::load\_\-attributes().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{namespacegenevalmag_9cb36d1a43794afa2b45c729c6c87170_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_9cb36d1a43794afa2b45c729c6c87170_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_d52b23b8c38d8b9ef4c91820a512c963}{
+\index{genevalmag@{genevalmag}!belong\_\-it@{belong\_\-it}}
+\index{belong\_\-it@{belong\_\-it}!genevalmag@{genevalmag}}
+\subsubsection[{belong\_\-it}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::belong\_\-it (const map$<$ {\bf Key\_\-plan}, unsigned short $>$::const\_\-iterator {\em it}, \/  const vector$<$ map$<$ {\bf Key\_\-plan}, unsigned short $>$::const\_\-iterator $>$ \& {\em vec})}}
+\label{namespacegenevalmag_d52b23b8c38d8b9ef4c91820a512c963}
+
+
+Returns true if the iterator belongs to the vector passed as parameter. 
+
+Definition at line 78 of file Builder\_\-visit\_\-sequences.cpp.
+
+Referenced by genevalmag::Builder\_\-visit\_\-sequences::gen\_\-visit\_\-seq(), merge\_\-vec(), and merge\_\-vec\_\-without\_\-plan().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_d52b23b8c38d8b9ef4c91820a512c963_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_d0ec9b7706a340d2e674f3b4859afa2d}{
+\index{genevalmag@{genevalmag}!check\_\-eq\_\-defines\_\-it@{check\_\-eq\_\-defines\_\-it}}
+\index{check\_\-eq\_\-defines\_\-it@{check\_\-eq\_\-defines\_\-it}!genevalmag@{genevalmag}}
+\subsubsection[{check\_\-eq\_\-defines\_\-it}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::check\_\-eq\_\-defines\_\-it (const Symbol $\ast$ {\em symb}, \/  const int {\em index}, \/  const Attribute $\ast$ {\em attr}, \/  const map$<$ unsigned short, Equation $>$ {\em eqs})}}
+\label{namespacegenevalmag_d0ec9b7706a340d2e674f3b4859afa2d}
+
+
+Checks if exist an equation that define the instance formed with the parameters. 
+
+Definition at line 469 of file Semantics\_\-checks.cpp.
+
+References genevalmag::Attribute::equals(), and genevalmag::Symbol::equals().
+
+Referenced by genevalmag::Semantics\_\-checks::check\_\-well\_\-defined\_\-AG().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=369pt]{namespacegenevalmag_d0ec9b7706a340d2e674f3b4859afa2d_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_d0ec9b7706a340d2e674f3b4859afa2d_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_8d54caf5e5830cd48bf3265345928c3a}{
+\index{genevalmag@{genevalmag}!check\_\-file\_\-exist@{check\_\-file\_\-exist}}
+\index{check\_\-file\_\-exist@{check\_\-file\_\-exist}!genevalmag@{genevalmag}}
+\subsubsection[{check\_\-file\_\-exist}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::check\_\-file\_\-exist (const string \& {\em strFilename})}}
+\label{namespacegenevalmag_8d54caf5e5830cd48bf3265345928c3a}
+
+
+
+
+Definition at line 116 of file maggen.cpp.
+
+Referenced by parse\_\-parameters().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=227pt]{namespacegenevalmag_8d54caf5e5830cd48bf3265345928c3a_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_3bc888ab3b44c41a536427cf386f8c3d}{
+\index{genevalmag@{genevalmag}!check\_\-name@{check\_\-name}}
+\index{check\_\-name@{check\_\-name}!genevalmag@{genevalmag}}
+\subsubsection[{check\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::check\_\-name (const string \& {\em strFilename})}}
+\label{namespacegenevalmag_3bc888ab3b44c41a536427cf386f8c3d}
+
+
+
+
+Definition at line 128 of file maggen.cpp.
+
+Referenced by parse\_\-parameters().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{namespacegenevalmag_3bc888ab3b44c41a536427cf386f8c3d_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_c8f04dfdf39c964f9219cc5a7fb7197b}{
+\index{genevalmag@{genevalmag}!check\_\-well\_\-defined@{check\_\-well\_\-defined}}
+\index{check\_\-well\_\-defined@{check\_\-well\_\-defined}!genevalmag@{genevalmag}}
+\subsubsection[{check\_\-well\_\-defined}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::check\_\-well\_\-defined (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_c8f04dfdf39c964f9219cc5a7fb7197b}
+
+
+
+
+Definition at line 654 of file Semantics\_\-actions.cpp.
+
+References attr\_\-grammar, genevalmag::Semantics\_\-checks::check\_\-all\_\-defined\_\-non\_\-terminal(), genevalmag::Semantics\_\-checks::check\_\-reachability(), genevalmag::Semantics\_\-checks::check\_\-well\_\-defined\_\-AG(), genevalmag::Attr\_\-grammar::get\_\-initial\_\-symb(), genevalmag::Attr\_\-grammar::get\_\-non\_\-terminal\_\-symbols(), genevalmag::Attr\_\-grammar::get\_\-rules(), and sem\_\-check.
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_c8f04dfdf39c964f9219cc5a7fb7197b_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{namespacegenevalmag_c8f04dfdf39c964f9219cc5a7fb7197b_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_bd826b7a45bf0c29f45dc8f8c64c0805}{
+\index{genevalmag@{genevalmag}!create\_\-abbreviated\_\-rule@{create\_\-abbreviated\_\-rule}}
+\index{create\_\-abbreviated\_\-rule@{create\_\-abbreviated\_\-rule}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-abbreviated\_\-rule}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-abbreviated\_\-rule (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_bd826b7a45bf0c29f45dc8f8c64c0805}
+
+
+
+
+Definition at line 253 of file Semantics\_\-actions.cpp.
+
+References current\_\-rule, genevalmag::Rule::get\_\-left\_\-symbol(), and genevalmag::Rule::set\_\-left\_\-symbol().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{namespacegenevalmag_bd826b7a45bf0c29f45dc8f8c64c0805_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{namespacegenevalmag_bd826b7a45bf0c29f45dc8f8c64c0805_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_640285acc8edfe19e082795784dbbd51}{
+\index{genevalmag@{genevalmag}!create\_\-attributes@{create\_\-attributes}}
+\index{create\_\-attributes@{create\_\-attributes}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-attributes}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-attributes (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_640285acc8edfe19e082795784dbbd51}
+
+
+
+
+Definition at line 204 of file Semantics\_\-actions.cpp.
+
+References genevalmag::Attr\_\-grammar::add\_\-attribute(), attr\_\-grammar, genevalmag::decl\_\-attribute::d\_\-member\_\-symbol, genevalmag::decl\_\-attribute::d\_\-mod\_\-type, genevalmag::decl\_\-attribute::d\_\-names, genevalmag::decl\_\-attribute::d\_\-sort\_\-type, new\_\-attrs, genevalmag::Attr\_\-grammar::return\_\-sort(), genevalmag::Attribute::set\_\-member\_\-symbol(), genevalmag::Attribute::set\_\-mod\_\-type(), genevalmag::Attribute::set\_\-name(), and genevalmag::Attribute::set\_\-sort\_\-type().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=325pt]{namespacegenevalmag_640285acc8edfe19e082795784dbbd51_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{namespacegenevalmag_640285acc8edfe19e082795784dbbd51_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_b6467a68d84550ca5d16d15c247499f4}{
+\index{genevalmag@{genevalmag}!create\_\-bool@{create\_\-bool}}
+\index{create\_\-bool@{create\_\-bool}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-bool}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-bool (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_b6467a68d84550ca5d16d15c247499f4}
+
+
+
+
+Definition at line 361 of file Semantics\_\-actions.cpp.
+
+References current\_\-literal, k\_\-bool, genevalmag::Expr\_\-literal::set\_\-type(), genevalmag::Expression::set\_\-type\_\-synthetized(), and genevalmag::Expr\_\-literal::set\_\-value().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{namespacegenevalmag_b6467a68d84550ca5d16d15c247499f4_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=224pt]{namespacegenevalmag_b6467a68d84550ca5d16d15c247499f4_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_c0759c1555b62ec188a704ee700aac2a}{
+\index{genevalmag@{genevalmag}!create\_\-equation@{create\_\-equation}}
+\index{create\_\-equation@{create\_\-equation}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-equation}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-equation (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_c0759c1555b62ec188a704ee700aac2a}
+
+
+
+
+Definition at line 385 of file Semantics\_\-actions.cpp.
+
+References current\_\-eq, current\_\-instance, and genevalmag::Equation::set\_\-l\_\-value().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{namespacegenevalmag_c0759c1555b62ec188a704ee700aac2a_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{namespacegenevalmag_c0759c1555b62ec188a704ee700aac2a_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_2f41a8b96eb7d5bdca16a4924dcd020f}{
+\index{genevalmag@{genevalmag}!create\_\-func\_\-node@{create\_\-func\_\-node}}
+\index{create\_\-func\_\-node@{create\_\-func\_\-node}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-func\_\-node}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-func\_\-node (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_2f41a8b96eb7d5bdca16a4924dcd020f}
+
+
+
+
+Definition at line 459 of file Semantics\_\-actions.cpp.
+
+References current\_\-ast\_\-function, current\_\-func, genevalmag::Semantics\_\-checks::get\_\-index\_\-syntax\_\-order(), genevalmag::Semantics\_\-checks::get\_\-precedence\_\-level(), genevalmag::Semantics\_\-checks::increment\_\-index\_\-syntax\_\-order(), sem\_\-check, genevalmag::Expr\_\-function::set\_\-function(), genevalmag::Expr\_\-function::set\_\-precedence\_\-level(), genevalmag::Expr\_\-function::set\_\-syntax\_\-order(), and stack\_\-inner\_\-node.
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=265pt]{namespacegenevalmag_2f41a8b96eb7d5bdca16a4924dcd020f_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{namespacegenevalmag_2f41a8b96eb7d5bdca16a4924dcd020f_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_166358b221cbf34ec512b137326d6c44}{
+\index{genevalmag@{genevalmag}!create\_\-function@{create\_\-function}}
+\index{create\_\-function@{create\_\-function}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-function}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-function (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_166358b221cbf34ec512b137326d6c44}
+
+
+
+
+Definition at line 373 of file Semantics\_\-actions.cpp.
+
+References current\_\-func, and save\_\-name\_\-func().
+
+Referenced by create\_\-operator(), and genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=285pt]{namespacegenevalmag_166358b221cbf34ec512b137326d6c44_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=321pt]{namespacegenevalmag_166358b221cbf34ec512b137326d6c44_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_61de26b3fdfcf0998039df573a3ec6f0}{
+\index{genevalmag@{genevalmag}!create\_\-instance@{create\_\-instance}}
+\index{create\_\-instance@{create\_\-instance}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-instance}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-instance (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_61de26b3fdfcf0998039df573a3ec6f0}
+
+
+Methods and functions for parse \hyperlink{classgenevalmag_1_1Equation}{Equation} class of \hyperlink{classgenevalmag_1_1Rule}{Rule}. 
+
+Definition at line 268 of file Semantics\_\-actions.cpp.
+
+References attr\_\-grammar, genevalmag::Rule::belongs\_\-non\_\-terminal(), utilities::cleaning\_\-tabs(), current\_\-instance, current\_\-rule, genevalmag::Attr\_\-grammar::get\_\-symbol(), genevalmag::Expr\_\-instance::set\_\-symb(), and genevalmag::Rule::to\_\-string\_\-not\_\-eqs().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=389pt]{namespacegenevalmag_61de26b3fdfcf0998039df573a3ec6f0_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{namespacegenevalmag_61de26b3fdfcf0998039df573a3ec6f0_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_931db9fc9546a03ac92ae77ca4ad9f21}{
+\index{genevalmag@{genevalmag}!create\_\-instance\_\-node@{create\_\-instance\_\-node}}
+\index{create\_\-instance\_\-node@{create\_\-instance\_\-node}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-instance\_\-node}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-instance\_\-node (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_931db9fc9546a03ac92ae77ca4ad9f21}
+
+
+
+
+Definition at line 450 of file Semantics\_\-actions.cpp.
+
+References current\_\-instance, genevalmag::Expr\_\-instance::get\_\-attr(), genevalmag::Sort::get\_\-name(), genevalmag::Attribute::get\_\-sort\_\-type(), genevalmag::Expression::set\_\-type\_\-synthetized(), and stack\_\-node.
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{namespacegenevalmag_931db9fc9546a03ac92ae77ca4ad9f21_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{namespacegenevalmag_931db9fc9546a03ac92ae77ca4ad9f21_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_48bc87a884f21e2f39a19b6ef43bedf9}{
+\index{genevalmag@{genevalmag}!create\_\-lit\_\-ch@{create\_\-lit\_\-ch}}
+\index{create\_\-lit\_\-ch@{create\_\-lit\_\-ch}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-lit\_\-ch}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-lit\_\-ch (const iterator\_\-t {\em ch}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_48bc87a884f21e2f39a19b6ef43bedf9}
+
+
+
+
+Definition at line 333 of file Semantics\_\-actions.cpp.
+
+References current\_\-literal, k\_\-char, genevalmag::Expr\_\-literal::set\_\-type(), genevalmag::Expression::set\_\-type\_\-synthetized(), and genevalmag::Expr\_\-literal::set\_\-value().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{namespacegenevalmag_48bc87a884f21e2f39a19b6ef43bedf9_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{namespacegenevalmag_48bc87a884f21e2f39a19b6ef43bedf9_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_380b107e4dbce952517d6aac470e7ce7}{
+\index{genevalmag@{genevalmag}!create\_\-lit\_\-number@{create\_\-lit\_\-number}}
+\index{create\_\-lit\_\-number@{create\_\-lit\_\-number}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-lit\_\-number}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-lit\_\-number (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_380b107e4dbce952517d6aac470e7ce7}
+
+
+
+
+Definition at line 309 of file Semantics\_\-actions.cpp.
+
+References current\_\-literal, k\_\-float, k\_\-int, genevalmag::Expr\_\-literal::set\_\-type(), genevalmag::Expression::set\_\-type\_\-synthetized(), and genevalmag::Expr\_\-literal::set\_\-value().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=227pt]{namespacegenevalmag_380b107e4dbce952517d6aac470e7ce7_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{namespacegenevalmag_380b107e4dbce952517d6aac470e7ce7_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_474728745db913b81459a7267bb28222}{
+\index{genevalmag@{genevalmag}!create\_\-lit\_\-str@{create\_\-lit\_\-str}}
+\index{create\_\-lit\_\-str@{create\_\-lit\_\-str}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-lit\_\-str}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-lit\_\-str (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_474728745db913b81459a7267bb28222}
+
+
+
+
+Definition at line 347 of file Semantics\_\-actions.cpp.
+
+References current\_\-literal, k\_\-string, genevalmag::Expr\_\-literal::set\_\-type(), genevalmag::Expression::set\_\-type\_\-synthetized(), and genevalmag::Expr\_\-literal::set\_\-value().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=217pt]{namespacegenevalmag_474728745db913b81459a7267bb28222_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=227pt]{namespacegenevalmag_474728745db913b81459a7267bb28222_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_5acc69c06c112cad864e048a095396c5}{
+\index{genevalmag@{genevalmag}!create\_\-literal\_\-node@{create\_\-literal\_\-node}}
+\index{create\_\-literal\_\-node@{create\_\-literal\_\-node}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-literal\_\-node}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-literal\_\-node (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_5acc69c06c112cad864e048a095396c5}
+
+
+Creation expression nodes. 
+
+Definition at line 443 of file Semantics\_\-actions.cpp.
+
+References current\_\-literal, and stack\_\-node.
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{namespacegenevalmag_5acc69c06c112cad864e048a095396c5_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_6d8584e0b692b4a20384e0742b22630a}{
+\index{genevalmag@{genevalmag}!create\_\-new\_\-non\_\-terminal@{create\_\-new\_\-non\_\-terminal}}
+\index{create\_\-new\_\-non\_\-terminal@{create\_\-new\_\-non\_\-terminal}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-new\_\-non\_\-terminal}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-new\_\-non\_\-terminal (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_6d8584e0b692b4a20384e0742b22630a}
+
+
+Methods and functions for parse \hyperlink{classgenevalmag_1_1Symbol}{Symbol} class. 
+
+Definition at line 223 of file Semantics\_\-actions.cpp.
+
+References genevalmag::Attr\_\-grammar::add\_\-symbol(), attr\_\-grammar, and k\_\-non\_\-terminal.
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_6d8584e0b692b4a20384e0742b22630a_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=254pt]{namespacegenevalmag_6d8584e0b692b4a20384e0742b22630a_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_3ab01d2c2dc547707d49394c59211460}{
+\index{genevalmag@{genevalmag}!create\_\-new\_\-terminal@{create\_\-new\_\-terminal}}
+\index{create\_\-new\_\-terminal@{create\_\-new\_\-terminal}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-new\_\-terminal}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-new\_\-terminal (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_3ab01d2c2dc547707d49394c59211460}
+
+
+
+
+Definition at line 230 of file Semantics\_\-actions.cpp.
+
+References genevalmag::Attr\_\-grammar::add\_\-symbol(), attr\_\-grammar, and k\_\-terminal.
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_3ab01d2c2dc547707d49394c59211460_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{namespacegenevalmag_3ab01d2c2dc547707d49394c59211460_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_fa1b5eab4ae88dcc8cdea82c8a94042e}{
+\index{genevalmag@{genevalmag}!create\_\-operator@{create\_\-operator}}
+\index{create\_\-operator@{create\_\-operator}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-operator}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-operator (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_fa1b5eab4ae88dcc8cdea82c8a94042e}
+
+
+
+
+Definition at line 379 of file Semantics\_\-actions.cpp.
+
+References create\_\-function(), current\_\-func, IS\_\-OPERATOR(), and genevalmag::Function::set\_\-is\_\-operator().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=396pt]{namespacegenevalmag_fa1b5eab4ae88dcc8cdea82c8a94042e_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{namespacegenevalmag_fa1b5eab4ae88dcc8cdea82c8a94042e_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_bf7e87f4c01eacdac90dd0875d9e1f0a}{
+\index{genevalmag@{genevalmag}!create\_\-root\_\-function\_\-node@{create\_\-root\_\-function\_\-node}}
+\index{create\_\-root\_\-function\_\-node@{create\_\-root\_\-function\_\-node}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-root\_\-function\_\-node}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-root\_\-function\_\-node (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_bf7e87f4c01eacdac90dd0875d9e1f0a}
+
+
+
+
+Definition at line 524 of file Semantics\_\-actions.cpp.
+
+References attr\_\-grammar, genevalmag::Attr\_\-grammar::get\_\-function(), stack\_\-inner\_\-node, and stack\_\-node.
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{namespacegenevalmag_bf7e87f4c01eacdac90dd0875d9e1f0a_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{namespacegenevalmag_bf7e87f4c01eacdac90dd0875d9e1f0a_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_2a5aaaff7c3b3b8efc446903121a62c6}{
+\index{genevalmag@{genevalmag}!create\_\-root\_\-infix\_\-node@{create\_\-root\_\-infix\_\-node}}
+\index{create\_\-root\_\-infix\_\-node@{create\_\-root\_\-infix\_\-node}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-root\_\-infix\_\-node}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-root\_\-infix\_\-node (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_2a5aaaff7c3b3b8efc446903121a62c6}
+
+
+
+
+Definition at line 477 of file Semantics\_\-actions.cpp.
+
+References attr\_\-grammar, genevalmag::Semantics\_\-checks::correct\_\-precedence(), genevalmag::Attr\_\-grammar::get\_\-function(), sem\_\-check, stack\_\-inner\_\-node, and stack\_\-node.
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_2a5aaaff7c3b3b8efc446903121a62c6_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=248pt]{namespacegenevalmag_2a5aaaff7c3b3b8efc446903121a62c6_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_d2e6e0ea9f03843a2adb23ea4c43453f}{
+\index{genevalmag@{genevalmag}!create\_\-root\_\-postfix\_\-node@{create\_\-root\_\-postfix\_\-node}}
+\index{create\_\-root\_\-postfix\_\-node@{create\_\-root\_\-postfix\_\-node}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-root\_\-postfix\_\-node}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-root\_\-postfix\_\-node (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_d2e6e0ea9f03843a2adb23ea4c43453f}
+
+
+
+
+Definition at line 574 of file Semantics\_\-actions.cpp.
+
+References attr\_\-grammar, genevalmag::Semantics\_\-checks::correct\_\-precedence(), genevalmag::Attr\_\-grammar::get\_\-function(), sem\_\-check, stack\_\-inner\_\-node, and stack\_\-node.
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_d2e6e0ea9f03843a2adb23ea4c43453f_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{namespacegenevalmag_d2e6e0ea9f03843a2adb23ea4c43453f_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_2947fff1246a0fbe137217896a658a5b}{
+\index{genevalmag@{genevalmag}!create\_\-root\_\-prefix\_\-node@{create\_\-root\_\-prefix\_\-node}}
+\index{create\_\-root\_\-prefix\_\-node@{create\_\-root\_\-prefix\_\-node}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-root\_\-prefix\_\-node}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-root\_\-prefix\_\-node (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_2947fff1246a0fbe137217896a658a5b}
+
+
+
+
+Definition at line 614 of file Semantics\_\-actions.cpp.
+
+References attr\_\-grammar, genevalmag::Semantics\_\-checks::correct\_\-precedence(), genevalmag::Attr\_\-grammar::get\_\-function(), sem\_\-check, stack\_\-inner\_\-node, and stack\_\-node.
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_2947fff1246a0fbe137217896a658a5b_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=251pt]{namespacegenevalmag_2947fff1246a0fbe137217896a658a5b_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_38a9e6cd331b8e5caad524d12229d71e}{
+\index{genevalmag@{genevalmag}!create\_\-rule@{create\_\-rule}}
+\index{create\_\-rule@{create\_\-rule}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-rule}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-rule (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_38a9e6cd331b8e5caad524d12229d71e}
+
+
+Methods and functions for parse \hyperlink{classgenevalmag_1_1Rule}{Rule} class. 
+
+Definition at line 240 of file Semantics\_\-actions.cpp.
+
+References attr\_\-grammar, current\_\-rule, genevalmag::Attr\_\-grammar::get\_\-symbol(), and genevalmag::Rule::set\_\-left\_\-symbol().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=197pt]{namespacegenevalmag_38a9e6cd331b8e5caad524d12229d71e_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{namespacegenevalmag_38a9e6cd331b8e5caad524d12229d71e_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_8fe47e97e9f000f1eb35ee9e86b2a5c0}{
+\index{genevalmag@{genevalmag}!create\_\-sort@{create\_\-sort}}
+\index{create\_\-sort@{create\_\-sort}!genevalmag@{genevalmag}}
+\subsubsection[{create\_\-sort}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::create\_\-sort (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_8fe47e97e9f000f1eb35ee9e86b2a5c0}
+
+
+Methods and functions for parse \hyperlink{classgenevalmag_1_1Sort}{Sort} class. 
+
+Definition at line 85 of file Semantics\_\-actions.cpp.
+
+References genevalmag::Attr\_\-grammar::add\_\-sort(), attr\_\-grammar, and genevalmag::Sort::to\_\-string().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=289pt]{namespacegenevalmag_8fe47e97e9f000f1eb35ee9e86b2a5c0_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{namespacegenevalmag_8fe47e97e9f000f1eb35ee9e86b2a5c0_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_c34c135063b809b19dafd05aa81297c8}{
+\index{genevalmag@{genevalmag}!decrement\_\-level@{decrement\_\-level}}
+\index{decrement\_\-level@{decrement\_\-level}!genevalmag@{genevalmag}}
+\subsubsection[{decrement\_\-level}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::decrement\_\-level (char {\em name})}}
+\label{namespacegenevalmag_c34c135063b809b19dafd05aa81297c8}
+
+
+
+
+Definition at line 668 of file Semantics\_\-actions.cpp.
+
+References genevalmag::Semantics\_\-checks::decrement\_\-precedence\_\-level(), and sem\_\-check.
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=259pt]{namespacegenevalmag_c34c135063b809b19dafd05aa81297c8_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{namespacegenevalmag_c34c135063b809b19dafd05aa81297c8_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_a939bb88a9eee5dd79de6b2c0d9dc27b}{
+\index{genevalmag@{genevalmag}!DEFAULT\_\-FILE\_\-NAME@{DEFAULT\_\-FILE\_\-NAME}}
+\index{DEFAULT\_\-FILE\_\-NAME@{DEFAULT\_\-FILE\_\-NAME}!genevalmag@{genevalmag}}
+\subsubsection[{DEFAULT\_\-FILE\_\-NAME}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::DEFAULT\_\-FILE\_\-NAME (\char`\"{}mag\_\-eval\char`\"{})}}
+\label{namespacegenevalmag_a939bb88a9eee5dd79de6b2c0d9dc27b}
+
+
+Default name of the files generated by the library. 
+
+Referenced by main().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=148pt]{namespacegenevalmag_a939bb88a9eee5dd79de6b2c0d9dc27b_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_c01c19863afca7ad5f021857f24032c3}{
+\index{genevalmag@{genevalmag}!DEFAULT\_\-INPUT\_\-FILE@{DEFAULT\_\-INPUT\_\-FILE}}
+\index{DEFAULT\_\-INPUT\_\-FILE@{DEFAULT\_\-INPUT\_\-FILE}!genevalmag@{genevalmag}}
+\subsubsection[{DEFAULT\_\-INPUT\_\-FILE}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::DEFAULT\_\-INPUT\_\-FILE (\char`\"{}/tmp/.input\_\-maggen\_\-default\char`\"{})}}
+\label{namespacegenevalmag_c01c19863afca7ad5f021857f24032c3}
+
+
+Default input file. 
+
+Referenced by main().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=148pt]{namespacegenevalmag_c01c19863afca7ad5f021857f24032c3_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_7bb640f537df129ffe4ed8cc5f703d90}{
+\index{genevalmag@{genevalmag}!DEFAULT\_\-PATH@{DEFAULT\_\-PATH}}
+\index{DEFAULT\_\-PATH@{DEFAULT\_\-PATH}!genevalmag@{genevalmag}}
+\subsubsection[{DEFAULT\_\-PATH}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::DEFAULT\_\-PATH (\char`\"{}./out\_\-maggen/\char`\"{})}}
+\label{namespacegenevalmag_7bb640f537df129ffe4ed8cc5f703d90}
+
+
+Default output path of the generation code. 
+
+Referenced by main().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=133pt]{namespacegenevalmag_7bb640f537df129ffe4ed8cc5f703d90_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_d89277e822c1a4d635c554e8c6698e76}{
+\index{genevalmag@{genevalmag}!defined\_\-work@{defined\_\-work}}
+\index{defined\_\-work@{defined\_\-work}!genevalmag@{genevalmag}}
+\subsubsection[{defined\_\-work}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::defined\_\-work (const vector$<$ {\bf Item\_\-work} $>$ \& {\em list}, \/  const {\bf Item\_\-work} \& {\em item\_\-work})}}
+\label{namespacegenevalmag_d89277e822c1a4d635c554e8c6698e76}
+
+
+Searchs in the list the item work that passed as parameter, if it find return true, otherwise false. 
+
+Definition at line 338 of file Builder\_\-plans.cpp.
+
+Referenced by genevalmag::Builder\_\-plans::generate\_\-plans().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=321pt]{namespacegenevalmag_d89277e822c1a4d635c554e8c6698e76_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_c89f8e579ae12e809a074364a2aced0c}{
+\index{genevalmag@{genevalmag}!FILE\_\-ADP\_\-GRAPH@{FILE\_\-ADP\_\-GRAPH}}
+\index{FILE\_\-ADP\_\-GRAPH@{FILE\_\-ADP\_\-GRAPH}!genevalmag@{genevalmag}}
+\subsubsection[{FILE\_\-ADP\_\-GRAPH}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::FILE\_\-ADP\_\-GRAPH (\char`\"{}\_\-adp\_\-graph\char`\"{})}}
+\label{namespacegenevalmag_c89f8e579ae12e809a074364a2aced0c}
+
+
+
+
+Referenced by genevalmag::Builder\_\-graphs::save\_\-adp\_\-graphs().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_c89f8e579ae12e809a074364a2aced0c_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_418104f5a0e7464632745f28884c8017}{
+\index{genevalmag@{genevalmag}!FILE\_\-ADP\_\-SUBGRAPH\_\-CYCLIC@{FILE\_\-ADP\_\-SUBGRAPH\_\-CYCLIC}}
+\index{FILE\_\-ADP\_\-SUBGRAPH\_\-CYCLIC@{FILE\_\-ADP\_\-SUBGRAPH\_\-CYCLIC}!genevalmag@{genevalmag}}
+\subsubsection[{FILE\_\-ADP\_\-SUBGRAPH\_\-CYCLIC}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::FILE\_\-ADP\_\-SUBGRAPH\_\-CYCLIC (\char`\"{}\_\-adp\_\-subgraph\_\-with\_\-cyclic\char`\"{})}}
+\label{namespacegenevalmag_418104f5a0e7464632745f28884c8017}
+
+
+
+
+Referenced by genevalmag::Builder\_\-graphs::save\_\-cyclic\_\-graphs().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=398pt]{namespacegenevalmag_418104f5a0e7464632745f28884c8017_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_009f31ef1d07f4ca8786f9e2cc813279}{
+\index{genevalmag@{genevalmag}!FILE\_\-DCG\_\-GRAPH@{FILE\_\-DCG\_\-GRAPH}}
+\index{FILE\_\-DCG\_\-GRAPH@{FILE\_\-DCG\_\-GRAPH}!genevalmag@{genevalmag}}
+\subsubsection[{FILE\_\-DCG\_\-GRAPH}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::FILE\_\-DCG\_\-GRAPH (\char`\"{}\_\-dcg\_\-graph\char`\"{})}}
+\label{namespacegenevalmag_009f31ef1d07f4ca8786f9e2cc813279}
+
+
+
+
+Referenced by genevalmag::Builder\_\-graphs::save\_\-dcg\_\-graphs().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_009f31ef1d07f4ca8786f9e2cc813279_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_bc175fb26b27cb9f1ec2b56cfc390bbe}{
+\index{genevalmag@{genevalmag}!FILE\_\-DOWN\_\-GRAPH@{FILE\_\-DOWN\_\-GRAPH}}
+\index{FILE\_\-DOWN\_\-GRAPH@{FILE\_\-DOWN\_\-GRAPH}!genevalmag@{genevalmag}}
+\subsubsection[{FILE\_\-DOWN\_\-GRAPH}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::FILE\_\-DOWN\_\-GRAPH (\char`\"{}\_\-down\_\-graph\char`\"{})}}
+\label{namespacegenevalmag_bc175fb26b27cb9f1ec2b56cfc390bbe}
+
+
+
+
+Referenced by genevalmag::Builder\_\-graphs::save\_\-down\_\-graphs().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_bc175fb26b27cb9f1ec2b56cfc390bbe_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_705fcd9aaf32cd0052ad7909df8994ca}{
+\index{genevalmag@{genevalmag}!FILE\_\-DP\_\-GRAPH@{FILE\_\-DP\_\-GRAPH}}
+\index{FILE\_\-DP\_\-GRAPH@{FILE\_\-DP\_\-GRAPH}!genevalmag@{genevalmag}}
+\subsubsection[{FILE\_\-DP\_\-GRAPH}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::FILE\_\-DP\_\-GRAPH (\char`\"{}\_\-dp\_\-graph\char`\"{})}}
+\label{namespacegenevalmag_705fcd9aaf32cd0052ad7909df8994ca}
+
+
+
+
+Referenced by genevalmag::Builder\_\-graphs::save\_\-dp\_\-graphs().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_705fcd9aaf32cd0052ad7909df8994ca_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_dd88c73415b1eb5c506b9d66b294b7cf}{
+\index{genevalmag@{genevalmag}!FILE\_\-GRAMMAR@{FILE\_\-GRAMMAR}}
+\index{FILE\_\-GRAMMAR@{FILE\_\-GRAMMAR}!genevalmag@{genevalmag}}
+\subsubsection[{FILE\_\-GRAMMAR}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::FILE\_\-GRAMMAR (\char`\"{}Grammar\_\-mag.log\char`\"{})}}
+\label{namespacegenevalmag_dd88c73415b1eb5c506b9d66b294b7cf}
+
+
+
+
+Referenced by genevalmag::Parser\_\-AG::save\_\-grammar\_\-file().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=362pt]{namespacegenevalmag_dd88c73415b1eb5c506b9d66b294b7cf_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_5935695d2ab4f63ea670911809399ce0}{
+\index{genevalmag@{genevalmag}!generate\_\-expr\_\-text@{generate\_\-expr\_\-text}}
+\index{generate\_\-expr\_\-text@{generate\_\-expr\_\-text}!genevalmag@{genevalmag}}
+\subsubsection[{generate\_\-expr\_\-text}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::generate\_\-expr\_\-text (const {\bf Expression} $\ast$ {\em node}, \/  const {\bf Rule} \& {\em rule})}}
+\label{namespacegenevalmag_5935695d2ab4f63ea670911809399ce0}
+
+
+Generates the plain text of a equation of this rule. 
+
+Definition at line 643 of file Builder\_\-code.cpp.
+
+References genevalmag::Symbol::equals(), genevalmag::Expr\_\-instance::get\_\-attr(), genevalmag::Expr\_\-node::get\_\-child(), genevalmag::Expr\_\-node::get\_\-childs(), genevalmag::Expr\_\-function::get\_\-function(), genevalmag::Rule::get\_\-left\_\-symbol(), genevalmag::Attribute::get\_\-name(), genevalmag::Symbol::get\_\-name(), genevalmag::Function::get\_\-name(), genevalmag::Rule::get\_\-non\_\-terminals\_\-right\_\-side(), genevalmag::Expr\_\-instance::get\_\-num(), genevalmag::Expr\_\-instance::get\_\-symb(), genevalmag::Expr\_\-function::is\_\-infix(), genevalmag::Function::is\_\-operator(), genevalmag::Expr\_\-function::is\_\-postfix(), genevalmag::Expr\_\-function::is\_\-prefix(), and genevalmag::Expr\_\-literal::to\_\-string().
+
+Referenced by genevalmag::Builder\_\-code::generate\_\-all\_\-methods\_\-eqs().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=332pt]{namespacegenevalmag_5935695d2ab4f63ea670911809399ce0_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_5935695d2ab4f63ea670911809399ce0_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_c58f50a004a774ce4256b86a16fb96c0}{
+\index{genevalmag@{genevalmag}!generate\_\-key\_\-plan@{generate\_\-key\_\-plan}}
+\index{generate\_\-key\_\-plan@{generate\_\-key\_\-plan}!genevalmag@{genevalmag}}
+\subsubsection[{generate\_\-key\_\-plan}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::generate\_\-key\_\-plan (string \& {\em text}, \/  const string \& {\em n\_\-key}, \/  const int \& {\em num\_\-key}, \/  const {\bf Key\_\-plan} \& {\em k\_\-p})}}
+\label{namespacegenevalmag_c58f50a004a774ce4256b86a16fb96c0}
+
+
+Generate a key plan with the parameters. 
+
+Definition at line 306 of file Builder\_\-code.cpp.
+
+References genevalmag::k\_\-plan::id\_\-plan, and genevalmag::k\_\-plan::plan.
+
+Referenced by genevalmag::Builder\_\-code::generate\_\-initialize\_\-plan\_\-proj(), and genevalmag::Builder\_\-code::generate\_\-initialize\_\-plans().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_c58f50a004a774ce4256b86a16fb96c0_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_d027bb2060fc75b17da08a22c9be3b9a}{
+\index{genevalmag@{genevalmag}!generate\_\-return\_\-index\_\-context@{generate\_\-return\_\-index\_\-context}}
+\index{generate\_\-return\_\-index\_\-context@{generate\_\-return\_\-index\_\-context}!genevalmag@{genevalmag}}
+\subsubsection[{generate\_\-return\_\-index\_\-context}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::generate\_\-return\_\-index\_\-context ()}}
+\label{namespacegenevalmag_d027bb2060fc75b17da08a22c9be3b9a}
+
+
+Generates the return\_\-index\_\-context method, for get the index of a context rule. 
+
+Definition at line 569 of file Builder\_\-code.cpp.
+
+Referenced by genevalmag::Builder\_\-code::generate\_\-methods().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=372pt]{namespacegenevalmag_d027bb2060fc75b17da08a22c9be3b9a_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_6442b82b3f1265663c5bdb2bc80f4421}{
+\index{genevalmag@{genevalmag}!get\_\-index@{get\_\-index}}
+\index{get\_\-index@{get\_\-index}!genevalmag@{genevalmag}}
+\subsubsection[{get\_\-index}]{\setlength{\rightskip}{0pt plus 5cm}int genevalmag::get\_\-index (string {\em name\_\-symb}, \/  vector$<$ string $>$ {\em non\_\-term})}}
+\label{namespacegenevalmag_6442b82b3f1265663c5bdb2bc80f4421}
+
+
+Returns the index in the vector of the symbol with these name. 
+
+Definition at line 387 of file Semantics\_\-checks.cpp.
+
+Referenced by genevalmag::Semantics\_\-checks::check\_\-reachability().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_6442b82b3f1265663c5bdb2bc80f4421_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_e77f9a26f51553fb1419a41295da521a}{
+\index{genevalmag@{genevalmag}!get\_\-inherits\_\-of@{get\_\-inherits\_\-of}}
+\index{get\_\-inherits\_\-of@{get\_\-inherits\_\-of}!genevalmag@{genevalmag}}
+\subsubsection[{get\_\-inherits\_\-of}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::get\_\-inherits\_\-of (const {\bf Symbol} $\ast$ {\em symb}, \/  const vector$<$ {\bf Expr\_\-instance} $>$ \& {\em computed}, \/  vector$<$ {\bf Expr\_\-instance} $>$ \& {\em rec\_\-child})}}
+\label{namespacegenevalmag_e77f9a26f51553fb1419a41295da521a}
+
+
+Obtains the instances of inherit attributes that this symbol. 
+
+Definition at line 61 of file Builder\_\-visit\_\-sequences.cpp.
+
+Referenced by genevalmag::Builder\_\-visit\_\-sequences::gen\_\-visit\_\-seq().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{namespacegenevalmag_e77f9a26f51553fb1419a41295da521a_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_0cd76ff96d0edddb2332eb74a4085ab5}{
+\index{genevalmag@{genevalmag}!increment\_\-level@{increment\_\-level}}
+\index{increment\_\-level@{increment\_\-level}!genevalmag@{genevalmag}}
+\subsubsection[{increment\_\-level}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::increment\_\-level (char {\em name})}}
+\label{namespacegenevalmag_0cd76ff96d0edddb2332eb74a4085ab5}
+
+
+
+
+Definition at line 663 of file Semantics\_\-actions.cpp.
+
+References genevalmag::Semantics\_\-checks::increment\_\-precedence\_\-level(), and sem\_\-check.
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{namespacegenevalmag_0cd76ff96d0edddb2332eb74a4085ab5_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{namespacegenevalmag_0cd76ff96d0edddb2332eb74a4085ab5_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_815257dc75d0f8a85662cdfc618c2187}{
+\index{genevalmag@{genevalmag}!inic\_\-func@{inic\_\-func}}
+\index{inic\_\-func@{inic\_\-func}!genevalmag@{genevalmag}}
+\subsubsection[{inic\_\-func}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::inic\_\-func (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_815257dc75d0f8a85662cdfc618c2187}
+
+
+Methods and functions for parse \hyperlink{classgenevalmag_1_1Function}{Function}. 
+
+Definition at line 98 of file Semantics\_\-actions.cpp.
+
+References current\_\-func.
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{namespacegenevalmag_815257dc75d0f8a85662cdfc618c2187_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_bf07d8c3d3faf1a57304337d32ff0f29}{
+\index{genevalmag@{genevalmag}!ins\_\-attr\_\-computed@{ins\_\-attr\_\-computed}}
+\index{ins\_\-attr\_\-computed@{ins\_\-attr\_\-computed}!genevalmag@{genevalmag}}
+\subsubsection[{ins\_\-attr\_\-computed}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::ins\_\-attr\_\-computed (const {\bf Expr\_\-instance} $\ast$ {\em ins}, \/  const vector$<$ {\bf Expr\_\-instance} $>$ \& {\em vec})}}
+\label{namespacegenevalmag_bf07d8c3d3faf1a57304337d32ff0f29}
+
+
+Searches this instance on the list passed as parameter. If found the instance return true. 
+
+Definition at line 46 of file Builder\_\-visit\_\-sequences.cpp.
+
+Referenced by genevalmag::Builder\_\-visit\_\-sequences::gen\_\-visit\_\-seq().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=409pt]{namespacegenevalmag_bf07d8c3d3faf1a57304337d32ff0f29_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_29dbe8034050c247526ecae47ff95529}{
+\index{genevalmag@{genevalmag}!IS\_\-OPERATOR@{IS\_\-OPERATOR}}
+\index{IS\_\-OPERATOR@{IS\_\-OPERATOR}!genevalmag@{genevalmag}}
+\subsubsection[{IS\_\-OPERATOR}]{\setlength{\rightskip}{0pt plus 5cm}const bool genevalmag::IS\_\-OPERATOR (true)}}
+\label{namespacegenevalmag_29dbe8034050c247526ecae47ff95529}
+
+
+This constant is used for set a function on operator. 
+
+Referenced by add\_\-operator(), and create\_\-operator().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{namespacegenevalmag_29dbe8034050c247526ecae47ff95529_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_48db0c2de005498a27cd549338a38cdd}{
+\index{genevalmag@{genevalmag}!LEAVE@{LEAVE}}
+\index{LEAVE@{LEAVE}!genevalmag@{genevalmag}}
+\subsubsection[{LEAVE}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned short genevalmag::LEAVE (0)}}
+\label{namespacegenevalmag_48db0c2de005498a27cd549338a38cdd}
+
+
+
+
+Referenced by genevalmag::Builder\_\-visit\_\-sequences::gen\_\-visit\_\-seq().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=384pt]{namespacegenevalmag_48db0c2de005498a27cd549338a38cdd_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_3d48cfd13c4608c5235a6968c63855da}{
+\index{genevalmag@{genevalmag}!merge\_\-vec@{merge\_\-vec}}
+\index{merge\_\-vec@{merge\_\-vec}!genevalmag@{genevalmag}}
+\subsubsection[{merge\_\-vec}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::merge\_\-vec (const vector$<$ map$<$ {\bf Key\_\-plan}, unsigned short $>$::const\_\-iterator $>$ \& {\em vec\_\-source}, \/  vector$<$ map$<$ {\bf Key\_\-plan}, unsigned short $>$::const\_\-iterator $>$ \& {\em vec\_\-targed})}}
+\label{namespacegenevalmag_3d48cfd13c4608c5235a6968c63855da}
+
+
+Merge two vector in the vec\_\-target argument. 
+
+Definition at line 93 of file Builder\_\-visit\_\-sequences.cpp.
+
+References belong\_\-it().
+
+Referenced by genevalmag::Builder\_\-visit\_\-sequences::gen\_\-visit\_\-seq(), and genevalmag::Builder\_\-visit\_\-sequences::generate\_\-visit\_\-sequences().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=159pt]{namespacegenevalmag_3d48cfd13c4608c5235a6968c63855da_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=393pt]{namespacegenevalmag_3d48cfd13c4608c5235a6968c63855da_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_036ececec487ad3d0674f8e5e0c62f6a}{
+\index{genevalmag@{genevalmag}!merge\_\-vec\_\-without\_\-plan@{merge\_\-vec\_\-without\_\-plan}}
+\index{merge\_\-vec\_\-without\_\-plan@{merge\_\-vec\_\-without\_\-plan}!genevalmag@{genevalmag}}
+\subsubsection[{merge\_\-vec\_\-without\_\-plan}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::merge\_\-vec\_\-without\_\-plan (const vector$<$ map$<$ {\bf Key\_\-plan}, unsigned short $>$::const\_\-iterator $>$ \& {\em vec\_\-source}, \/  vector$<$ map$<$ {\bf Key\_\-plan}, unsigned short $>$::const\_\-iterator $>$ \& {\em vec\_\-targed}, \/  const map$<$ {\bf Key\_\-plan}, unsigned short $>$::const\_\-iterator \& {\em plan})}}
+\label{namespacegenevalmag_036ececec487ad3d0674f8e5e0c62f6a}
+
+
+Merge two vector in the vec\_\-target argument without the iterator passed as parameter. 
+
+Definition at line 117 of file Builder\_\-visit\_\-sequences.cpp.
+
+References belong\_\-it().
+
+Referenced by genevalmag::Builder\_\-visit\_\-sequences::gen\_\-visit\_\-seq().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=188pt]{namespacegenevalmag_036ececec487ad3d0674f8e5e0c62f6a_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_036ececec487ad3d0674f8e5e0c62f6a_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_4093becff20c4564db790c08c1189aaf}{
+\index{genevalmag@{genevalmag}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!genevalmag@{genevalmag}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std::ostream\& genevalmag::operator$<$$<$ (std::ostream \& {\em out}, \/  file\_\-position const \& {\em lc})}}
+\label{namespacegenevalmag_4093becff20c4564db790c08c1189aaf}
+
+
+Our error reporting parsers 
+
+Definition at line 54 of file Parser\_\-AG.cpp.\hypertarget{namespacegenevalmag_d3dcc8f1c112c2fee686c837e5250124}{
+\index{genevalmag@{genevalmag}!parse\_\-parameters@{parse\_\-parameters}}
+\index{parse\_\-parameters@{parse\_\-parameters}!genevalmag@{genevalmag}}
+\subsubsection[{parse\_\-parameters}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::parse\_\-parameters (int {\em argc}, \/  char $\ast$ {\em argv}\mbox{[}$\,$\mbox{]}, \/  string \& {\em path\_\-input\_\-file}, \/  string \& {\em path\_\-folder\_\-output}, \/  string \& {\em name\_\-library}, \/  vector$<$ string $>$ \& {\em headers})}}
+\label{namespacegenevalmag_d3dcc8f1c112c2fee686c837e5250124}
+
+
+maggen \mbox{[}OPTIONS\mbox{]} where OPTIONS include: -f file Define the input file of the tool. Othercase, uses the standart input (cin). -i header Including header '.h' or '.hpp' file for resolve externs variables in generated code. -fo folder Defines the folder output for output generated information. Othercase, uses \char`\"{}./out\_\-maggen/\char`\"{}. -o name Defines the names files generated tool. Otherwise, uses \char`\"{}mag\_\-eval\char`\"{}. -h Show this help message. 
+
+Definition at line 165 of file maggen.cpp.
+
+References check\_\-file\_\-exist(), check\_\-name(), and show\_\-help\_\-information().
+
+Referenced by main().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{namespacegenevalmag_d3dcc8f1c112c2fee686c837e5250124_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=136pt]{namespacegenevalmag_d3dcc8f1c112c2fee686c837e5250124_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_605c56dc4a9a367c9da7c7759c7f6b65}{
+\index{genevalmag@{genevalmag}!PATH\_\-OUT\_\-PLAN@{PATH\_\-OUT\_\-PLAN}}
+\index{PATH\_\-OUT\_\-PLAN@{PATH\_\-OUT\_\-PLAN}!genevalmag@{genevalmag}}
+\subsubsection[{PATH\_\-OUT\_\-PLAN}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::PATH\_\-OUT\_\-PLAN (\char`\"{}plans/\char`\"{})}}
+\label{namespacegenevalmag_605c56dc4a9a367c9da7c7759c7f6b65}
+
+
+Defaults path to saves evaluation plans y their projections. 
+
+Referenced by genevalmag::Builder\_\-plans::save\_\-all\_\-plans().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{namespacegenevalmag_605c56dc4a9a367c9da7c7759c7f6b65_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_345f3ac168618479f16dbd899562685e}{
+\index{genevalmag@{genevalmag}!PATH\_\-OUT\_\-PLAN\_\-PROJECT@{PATH\_\-OUT\_\-PLAN\_\-PROJECT}}
+\index{PATH\_\-OUT\_\-PLAN\_\-PROJECT@{PATH\_\-OUT\_\-PLAN\_\-PROJECT}!genevalmag@{genevalmag}}
+\subsubsection[{PATH\_\-OUT\_\-PLAN\_\-PROJECT}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::PATH\_\-OUT\_\-PLAN\_\-PROJECT (\char`\"{}plans\_\-project/\char`\"{})}}
+\label{namespacegenevalmag_345f3ac168618479f16dbd899562685e}
+
+
+
+
+Referenced by genevalmag::Builder\_\-plans::save\_\-all\_\-plans\_\-project().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=263pt]{namespacegenevalmag_345f3ac168618479f16dbd899562685e_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_609ccdf53fd8e4f1526ef4a396323d7d}{
+\index{genevalmag@{genevalmag}!PATH\_\-OUTPUT\_\-ADP@{PATH\_\-OUTPUT\_\-ADP}}
+\index{PATH\_\-OUTPUT\_\-ADP@{PATH\_\-OUTPUT\_\-ADP}!genevalmag@{genevalmag}}
+\subsubsection[{PATH\_\-OUTPUT\_\-ADP}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::PATH\_\-OUTPUT\_\-ADP (\char`\"{}4\_\-ADP\_\-graphs/\char`\"{})}}
+\label{namespacegenevalmag_609ccdf53fd8e4f1526ef4a396323d7d}
+
+
+
+
+Referenced by genevalmag::Builder\_\-graphs::save\_\-adp\_\-graphs().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_609ccdf53fd8e4f1526ef4a396323d7d_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_401d9cc13c246072071c64015b3716c8}{
+\index{genevalmag@{genevalmag}!PATH\_\-OUTPUT\_\-CYCLIC@{PATH\_\-OUTPUT\_\-CYCLIC}}
+\index{PATH\_\-OUTPUT\_\-CYCLIC@{PATH\_\-OUTPUT\_\-CYCLIC}!genevalmag@{genevalmag}}
+\subsubsection[{PATH\_\-OUTPUT\_\-CYCLIC}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::PATH\_\-OUTPUT\_\-CYCLIC (\char`\"{}CYCLIC\_\-graphs/\char`\"{})}}
+\label{namespacegenevalmag_401d9cc13c246072071c64015b3716c8}
+
+
+
+
+Referenced by genevalmag::Builder\_\-graphs::save\_\-cyclic\_\-graphs().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=379pt]{namespacegenevalmag_401d9cc13c246072071c64015b3716c8_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_85c614ca01eca9ab0edd6bdf400259fd}{
+\index{genevalmag@{genevalmag}!PATH\_\-OUTPUT\_\-DCG@{PATH\_\-OUTPUT\_\-DCG}}
+\index{PATH\_\-OUTPUT\_\-DCG@{PATH\_\-OUTPUT\_\-DCG}!genevalmag@{genevalmag}}
+\subsubsection[{PATH\_\-OUTPUT\_\-DCG}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::PATH\_\-OUTPUT\_\-DCG (\char`\"{}3\_\-DCG\_\-graphs/\char`\"{})}}
+\label{namespacegenevalmag_85c614ca01eca9ab0edd6bdf400259fd}
+
+
+
+
+Referenced by genevalmag::Builder\_\-graphs::save\_\-dcg\_\-graphs().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_85c614ca01eca9ab0edd6bdf400259fd_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_fce5456f0ffc52ff62202b4c185d453c}{
+\index{genevalmag@{genevalmag}!PATH\_\-OUTPUT\_\-DOWN@{PATH\_\-OUTPUT\_\-DOWN}}
+\index{PATH\_\-OUTPUT\_\-DOWN@{PATH\_\-OUTPUT\_\-DOWN}!genevalmag@{genevalmag}}
+\subsubsection[{PATH\_\-OUTPUT\_\-DOWN}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::PATH\_\-OUTPUT\_\-DOWN (\char`\"{}2\_\-DOWN\_\-graphs/\char`\"{})}}
+\label{namespacegenevalmag_fce5456f0ffc52ff62202b4c185d453c}
+
+
+
+
+Referenced by genevalmag::Builder\_\-graphs::save\_\-down\_\-graphs().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_fce5456f0ffc52ff62202b4c185d453c_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_6d797bb23dc6e170ede7178c9ddb3f08}{
+\index{genevalmag@{genevalmag}!PATH\_\-OUTPUT\_\-DP@{PATH\_\-OUTPUT\_\-DP}}
+\index{PATH\_\-OUTPUT\_\-DP@{PATH\_\-OUTPUT\_\-DP}!genevalmag@{genevalmag}}
+\subsubsection[{PATH\_\-OUTPUT\_\-DP}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::PATH\_\-OUTPUT\_\-DP (\char`\"{}1\_\-DP\_\-graphs/\char`\"{})}}
+\label{namespacegenevalmag_6d797bb23dc6e170ede7178c9ddb3f08}
+
+
+
+
+Referenced by genevalmag::Builder\_\-graphs::save\_\-dp\_\-graphs().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_6d797bb23dc6e170ede7178c9ddb3f08_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_306e982e69207c606c1d6f236259b4e1}{
+\index{genevalmag@{genevalmag}!PATH\_\-OUTPUT\_\-GRAPHS@{PATH\_\-OUTPUT\_\-GRAPHS}}
+\index{PATH\_\-OUTPUT\_\-GRAPHS@{PATH\_\-OUTPUT\_\-GRAPHS}!genevalmag@{genevalmag}}
+\subsubsection[{PATH\_\-OUTPUT\_\-GRAPHS}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::PATH\_\-OUTPUT\_\-GRAPHS (\char`\"{}graphs/\char`\"{})}}
+\label{namespacegenevalmag_306e982e69207c606c1d6f236259b4e1}
+
+
+
+
+Referenced by genevalmag::Builder\_\-graphs::save\_\-all\_\-graphs(), and genevalmag::Builder\_\-graphs::save\_\-cyclic\_\-graphs().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=383pt]{namespacegenevalmag_306e982e69207c606c1d6f236259b4e1_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_22c7e9c74db3b8c0f0b7a3a1cbf5a978}{
+\index{genevalmag@{genevalmag}!plan\_\-family\_\-computed@{plan\_\-family\_\-computed}}
+\index{plan\_\-family\_\-computed@{plan\_\-family\_\-computed}!genevalmag@{genevalmag}}
+\subsubsection[{plan\_\-family\_\-computed}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::plan\_\-family\_\-computed (const vector$<$ map$<$ {\bf Key\_\-plan}, unsigned short $>$::const\_\-iterator $>$ \& {\em plans\_\-computed}, \/  vector$<$ unsigned short $>$ \& {\em visit\_\-seq\_\-computed})}}
+\label{namespacegenevalmag_22c7e9c74db3b8c0f0b7a3a1cbf5a978}
+
+
+Converts the vector of iterators over evaluations plans, in their indexs inside of plans uniques. 
+
+Definition at line 144 of file Builder\_\-visit\_\-sequences.cpp.
+
+References utilities::belong\_\-index().
+
+Referenced by genevalmag::Builder\_\-visit\_\-sequences::gen\_\-visit\_\-seq(), and genevalmag::Builder\_\-visit\_\-sequences::generate\_\-visit\_\-sequences().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{namespacegenevalmag_22c7e9c74db3b8c0f0b7a3a1cbf5a978_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=417pt]{namespacegenevalmag_22c7e9c74db3b8c0f0b7a3a1cbf5a978_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_ce0b7e67565040ba64e1710d0029026b}{
+\index{genevalmag@{genevalmag}!purge\_\-plan\_\-with@{purge\_\-plan\_\-with}}
+\index{purge\_\-plan\_\-with@{purge\_\-plan\_\-with}!genevalmag@{genevalmag}}
+\subsubsection[{purge\_\-plan\_\-with}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::purge\_\-plan\_\-with (const {\bf Rule} \& {\em rule}, \/  const Order\_\-eval\_\-eq \& {\em order\_\-eq}, \/  Order\_\-eval\_\-eq \& {\em purged\_\-order})}}
+\label{namespacegenevalmag_ce0b7e67565040ba64e1710d0029026b}
+
+
+Copy in the result vector all equations belonging to the rule passed as parameter. 
+
+Definition at line 321 of file Builder\_\-plans.cpp.
+
+References utilities::belong\_\-index(), and genevalmag::Rule::get\_\-eq().
+
+Referenced by genevalmag::Builder\_\-plans::generate\_\-plans().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=177pt]{namespacegenevalmag_ce0b7e67565040ba64e1710d0029026b_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{namespacegenevalmag_ce0b7e67565040ba64e1710d0029026b_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_411fcac88bb0937d75b54d20601b6b33}{
+\index{genevalmag@{genevalmag}!push\_\-mark@{push\_\-mark}}
+\index{push\_\-mark@{push\_\-mark}!genevalmag@{genevalmag}}
+\subsubsection[{push\_\-mark}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::push\_\-mark (char {\em name})}}
+\label{namespacegenevalmag_411fcac88bb0937d75b54d20601b6b33}
+
+
+
+
+Definition at line 429 of file Semantics\_\-actions.cpp.
+
+References current\_\-literal, genevalmag::Expression::set\_\-type\_\-synthetized(), genevalmag::Expr\_\-literal::set\_\-value(), and stack\_\-node.
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{namespacegenevalmag_411fcac88bb0937d75b54d20601b6b33_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{namespacegenevalmag_411fcac88bb0937d75b54d20601b6b33_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_4c59332bf08ed52e98321fe6b6340f29}{
+\index{genevalmag@{genevalmag}!return\_\-index\_\-vec@{return\_\-index\_\-vec}}
+\index{return\_\-index\_\-vec@{return\_\-index\_\-vec}!genevalmag@{genevalmag}}
+\subsubsection[{return\_\-index\_\-vec}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short genevalmag::return\_\-index\_\-vec (const Order\_\-eval\_\-eq \& {\em order}, \/  vector$<$ Order\_\-eval\_\-eq $>$ \& {\em vec})}}
+\label{namespacegenevalmag_4c59332bf08ed52e98321fe6b6340f29}
+
+
+Returns the index in the vector, or inserts in the last position. 
+
+Definition at line 370 of file Builder\_\-plans.cpp.
+
+Referenced by genevalmag::Builder\_\-plans::return\_\-index\_\-plan(), and genevalmag::Builder\_\-plans::return\_\-index\_\-plan\_\-p().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_4c59332bf08ed52e98321fe6b6340f29_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_3aa0e95a99ace1f802a226e24366f4fb}{
+\index{genevalmag@{genevalmag}!save\_\-assoc\_\-op@{save\_\-assoc\_\-op}}
+\index{save\_\-assoc\_\-op@{save\_\-assoc\_\-op}!genevalmag@{genevalmag}}
+\subsubsection[{save\_\-assoc\_\-op}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::save\_\-assoc\_\-op (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_3aa0e95a99ace1f802a226e24366f4fb}
+
+
+
+
+Definition at line 152 of file Semantics\_\-actions.cpp.
+
+References current\_\-func, and genevalmag::Function::set\_\-oper\_\-assoc().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=206pt]{namespacegenevalmag_3aa0e95a99ace1f802a226e24366f4fb_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{namespacegenevalmag_3aa0e95a99ace1f802a226e24366f4fb_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_741fa074f83ccbe1fc90a53eb3635ba8}{
+\index{genevalmag@{genevalmag}!save\_\-attr\_\-ins@{save\_\-attr\_\-ins}}
+\index{save\_\-attr\_\-ins@{save\_\-attr\_\-ins}!genevalmag@{genevalmag}}
+\subsubsection[{save\_\-attr\_\-ins}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::save\_\-attr\_\-ins (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_741fa074f83ccbe1fc90a53eb3635ba8}
+
+
+
+
+Definition at line 298 of file Semantics\_\-actions.cpp.
+
+References current\_\-instance, genevalmag::Expr\_\-instance::get\_\-attr(), genevalmag::Symbol::get\_\-attribute(), genevalmag::Expr\_\-instance::get\_\-symb(), and genevalmag::Expr\_\-instance::set\_\-attr().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{namespacegenevalmag_741fa074f83ccbe1fc90a53eb3635ba8_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=228pt]{namespacegenevalmag_741fa074f83ccbe1fc90a53eb3635ba8_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_e333368e344fd2e4542788afb8d9990e}{
+\index{genevalmag@{genevalmag}!save\_\-domain\_\-func@{save\_\-domain\_\-func}}
+\index{save\_\-domain\_\-func@{save\_\-domain\_\-func}!genevalmag@{genevalmag}}
+\subsubsection[{save\_\-domain\_\-func}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::save\_\-domain\_\-func (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_e333368e344fd2e4542788afb8d9990e}
+
+
+
+
+Definition at line 120 of file Semantics\_\-actions.cpp.
+
+References genevalmag::Function::add\_\-domain(), attr\_\-grammar, current\_\-func, and genevalmag::Attr\_\-grammar::return\_\-sort().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{namespacegenevalmag_e333368e344fd2e4542788afb8d9990e_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{namespacegenevalmag_e333368e344fd2e4542788afb8d9990e_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_6c5fe5628b5ac4b3e2d9c4fc93985abe}{
+\index{genevalmag@{genevalmag}!save\_\-image\_\-func@{save\_\-image\_\-func}}
+\index{save\_\-image\_\-func@{save\_\-image\_\-func}!genevalmag@{genevalmag}}
+\subsubsection[{save\_\-image\_\-func}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::save\_\-image\_\-func (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_6c5fe5628b5ac4b3e2d9c4fc93985abe}
+
+
+
+
+Definition at line 126 of file Semantics\_\-actions.cpp.
+
+References attr\_\-grammar, current\_\-func, genevalmag::Attr\_\-grammar::return\_\-sort(), and genevalmag::Function::set\_\-image().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{namespacegenevalmag_6c5fe5628b5ac4b3e2d9c4fc93985abe_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{namespacegenevalmag_6c5fe5628b5ac4b3e2d9c4fc93985abe_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_8f0dbc1c191c7c3e357c9930692e180e}{
+\index{genevalmag@{genevalmag}!save\_\-index\_\-ins@{save\_\-index\_\-ins}}
+\index{save\_\-index\_\-ins@{save\_\-index\_\-ins}!genevalmag@{genevalmag}}
+\subsubsection[{save\_\-index\_\-ins}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::save\_\-index\_\-ins (int const  {\em index})}}
+\label{namespacegenevalmag_8f0dbc1c191c7c3e357c9930692e180e}
+
+
+
+
+Definition at line 288 of file Semantics\_\-actions.cpp.
+
+References genevalmag::Rule::count\_\-non\_\-terminal(), current\_\-instance, current\_\-rule, genevalmag::Symbol::get\_\-name(), genevalmag::Expr\_\-instance::get\_\-symb(), and genevalmag::Expr\_\-instance::set\_\-num().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=376pt]{namespacegenevalmag_8f0dbc1c191c7c3e357c9930692e180e_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{namespacegenevalmag_8f0dbc1c191c7c3e357c9930692e180e_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_8d8548aa085e3c04a2cb7abc9f5deacc}{
+\index{genevalmag@{genevalmag}!save\_\-member\_\-list\_\-attr@{save\_\-member\_\-list\_\-attr}}
+\index{save\_\-member\_\-list\_\-attr@{save\_\-member\_\-list\_\-attr}!genevalmag@{genevalmag}}
+\subsubsection[{save\_\-member\_\-list\_\-attr}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::save\_\-member\_\-list\_\-attr (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_8d8548aa085e3c04a2cb7abc9f5deacc}
+
+
+
+
+Definition at line 195 of file Semantics\_\-actions.cpp.
+
+References genevalmag::decl\_\-attribute::d\_\-member\_\-symbol, and new\_\-attrs.
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=248pt]{namespacegenevalmag_8d8548aa085e3c04a2cb7abc9f5deacc_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_6c04408088fac02746a5a14e9b10f304}{
+\index{genevalmag@{genevalmag}!save\_\-mode\_\-op@{save\_\-mode\_\-op}}
+\index{save\_\-mode\_\-op@{save\_\-mode\_\-op}!genevalmag@{genevalmag}}
+\subsubsection[{save\_\-mode\_\-op}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::save\_\-mode\_\-op (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_6c04408088fac02746a5a14e9b10f304}
+
+
+
+
+Definition at line 141 of file Semantics\_\-actions.cpp.
+
+References current\_\-func, and genevalmag::Function::set\_\-mode().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=192pt]{namespacegenevalmag_6c04408088fac02746a5a14e9b10f304_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{namespacegenevalmag_6c04408088fac02746a5a14e9b10f304_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_f3954dcbe7a20818880776138409f413}{
+\index{genevalmag@{genevalmag}!save\_\-name\_\-func@{save\_\-name\_\-func}}
+\index{save\_\-name\_\-func@{save\_\-name\_\-func}!genevalmag@{genevalmag}}
+\subsubsection[{save\_\-name\_\-func}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::save\_\-name\_\-func (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_f3954dcbe7a20818880776138409f413}
+
+
+
+
+Definition at line 114 of file Semantics\_\-actions.cpp.
+
+References current\_\-func, and genevalmag::Function::set\_\-name().
+
+Referenced by create\_\-function(), and genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{namespacegenevalmag_f3954dcbe7a20818880776138409f413_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=414pt]{namespacegenevalmag_f3954dcbe7a20818880776138409f413_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_76626584a4d067440fb992103081af8a}{
+\index{genevalmag@{genevalmag}!save\_\-prec\_\-op@{save\_\-prec\_\-op}}
+\index{save\_\-prec\_\-op@{save\_\-prec\_\-op}!genevalmag@{genevalmag}}
+\subsubsection[{save\_\-prec\_\-op}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::save\_\-prec\_\-op (int const  {\em prec})}}
+\label{namespacegenevalmag_76626584a4d067440fb992103081af8a}
+
+
+
+
+Definition at line 147 of file Semantics\_\-actions.cpp.
+
+References current\_\-func, and genevalmag::Function::set\_\-prec().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=186pt]{namespacegenevalmag_76626584a4d067440fb992103081af8a_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{namespacegenevalmag_76626584a4d067440fb992103081af8a_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_b3b5ed3e86e091b48713f1e3a0065d9c}{
+\index{genevalmag@{genevalmag}!save\_\-right\_\-side\_\-rule@{save\_\-right\_\-side\_\-rule}}
+\index{save\_\-right\_\-side\_\-rule@{save\_\-right\_\-side\_\-rule}!genevalmag@{genevalmag}}
+\subsubsection[{save\_\-right\_\-side\_\-rule}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::save\_\-right\_\-side\_\-rule (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_b3b5ed3e86e091b48713f1e3a0065d9c}
+
+
+
+
+Definition at line 247 of file Semantics\_\-actions.cpp.
+
+References genevalmag::Rule::add\_\-right\_\-symbol(), attr\_\-grammar, current\_\-rule, and genevalmag::Attr\_\-grammar::get\_\-symbol().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=217pt]{namespacegenevalmag_b3b5ed3e86e091b48713f1e3a0065d9c_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{namespacegenevalmag_b3b5ed3e86e091b48713f1e3a0065d9c_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_b100c06acfd394415ddcf909a5c9490f}{
+\index{genevalmag@{genevalmag}!save\_\-rule@{save\_\-rule}}
+\index{save\_\-rule@{save\_\-rule}!genevalmag@{genevalmag}}
+\subsubsection[{save\_\-rule}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::save\_\-rule (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_b100c06acfd394415ddcf909a5c9490f}
+
+
+
+
+Definition at line 259 of file Semantics\_\-actions.cpp.
+
+References genevalmag::Attr\_\-grammar::add\_\-rule(), attr\_\-grammar, and current\_\-rule.
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_b100c06acfd394415ddcf909a5c9490f_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{namespacegenevalmag_b100c06acfd394415ddcf909a5c9490f_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_5c23096b7d1c0ef8a09f03de8c4b8e68}{
+\index{genevalmag@{genevalmag}!save\_\-rvalue@{save\_\-rvalue}}
+\index{save\_\-rvalue@{save\_\-rvalue}!genevalmag@{genevalmag}}
+\subsubsection[{save\_\-rvalue}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::save\_\-rvalue (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_5c23096b7d1c0ef8a09f03de8c4b8e68}
+
+
+
+
+Definition at line 393 of file Semantics\_\-actions.cpp.
+
+References genevalmag::Rule::add\_\-eq(), utilities::cleaning\_\-tabs(), genevalmag::Semantics\_\-checks::correct\_\-associativity(), current\_\-eq, current\_\-rule, genevalmag::Expr\_\-instance::get\_\-attr(), genevalmag::Equation::get\_\-l\_\-value(), genevalmag::Sort::get\_\-name(), genevalmag::Attribute::get\_\-sort\_\-type(), genevalmag::Semantics\_\-checks::reset\_\-semantic\_\-context(), sem\_\-check, genevalmag::Equation::set\_\-r\_\-value(), stack\_\-node, genevalmag::Expr\_\-instance::to\_\-string(), genevalmag::Equation::to\_\-string(), and genevalmag::Rule::to\_\-string\_\-not\_\-eqs().
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_5c23096b7d1c0ef8a09f03de8c4b8e68_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=225pt]{namespacegenevalmag_5c23096b7d1c0ef8a09f03de8c4b8e68_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_48c1d5796cdb99233cf2dfe9d2224618}{
+\index{genevalmag@{genevalmag}!save\_\-sort\_\-attr@{save\_\-sort\_\-attr}}
+\index{save\_\-sort\_\-attr@{save\_\-sort\_\-attr}!genevalmag@{genevalmag}}
+\subsubsection[{save\_\-sort\_\-attr}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::save\_\-sort\_\-attr (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_48c1d5796cdb99233cf2dfe9d2224618}
+
+
+
+
+Definition at line 180 of file Semantics\_\-actions.cpp.
+
+References genevalmag::decl\_\-attribute::d\_\-sort\_\-type, and new\_\-attrs.
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{namespacegenevalmag_48c1d5796cdb99233cf2dfe9d2224618_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_9669d56acdb87bd7130c7da9d810b53a}{
+\index{genevalmag@{genevalmag}!save\_\-type\_\-attr@{save\_\-type\_\-attr}}
+\index{save\_\-type\_\-attr@{save\_\-type\_\-attr}!genevalmag@{genevalmag}}
+\subsubsection[{save\_\-type\_\-attr}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::save\_\-type\_\-attr (const iterator\_\-t {\em str}, \/  const iterator\_\-t {\em end})}}
+\label{namespacegenevalmag_9669d56acdb87bd7130c7da9d810b53a}
+
+
+
+
+Definition at line 186 of file Semantics\_\-actions.cpp.
+
+References genevalmag::decl\_\-attribute::d\_\-mod\_\-type, k\_\-inherit, and new\_\-attrs.
+
+Referenced by genevalmag::attritute\_\-grammar::attritute\_\-grammar::definition$<$ ScannerT $>$::definition().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=231pt]{namespacegenevalmag_9669d56acdb87bd7130c7da9d810b53a_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_e77bed22019c46ef3b6d11c18c87a85f}{
+\index{genevalmag@{genevalmag}!set\_\-attr\_\-grammar@{set\_\-attr\_\-grammar}}
+\index{set\_\-attr\_\-grammar@{set\_\-attr\_\-grammar}!genevalmag@{genevalmag}}
+\subsubsection[{set\_\-attr\_\-grammar}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::set\_\-attr\_\-grammar ({\bf Attr\_\-grammar} $\ast$ {\em at\_\-grammar})}}
+\label{namespacegenevalmag_e77bed22019c46ef3b6d11c18c87a85f}
+
+
+Sets attribute attr\_\-grammar. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em at\_\-grammar}]Sets attribute attr\_\-grammar. \end{description}
+\end{Desc}
+
+
+Definition at line 33 of file Semantics\_\-actions.cpp.
+
+References attr\_\-grammar.
+
+Referenced by genevalmag::Parser\_\-AG::parse\_\-grammar().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=354pt]{namespacegenevalmag_e77bed22019c46ef3b6d11c18c87a85f_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_b68c3ea3b4064fbd96451dd2a094ad34}{
+\index{genevalmag@{genevalmag}!set\_\-sem\_\-check@{set\_\-sem\_\-check}}
+\index{set\_\-sem\_\-check@{set\_\-sem\_\-check}!genevalmag@{genevalmag}}
+\subsubsection[{set\_\-sem\_\-check}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::set\_\-sem\_\-check ({\bf Semantics\_\-checks} $\ast$ {\em s\_\-check})}}
+\label{namespacegenevalmag_b68c3ea3b4064fbd96451dd2a094ad34}
+
+
+Sets attribute sem\_\-check. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em s\_\-check}]Sets attribute sem\_\-check. \end{description}
+\end{Desc}
+
+
+Definition at line 41 of file Semantics\_\-actions.cpp.
+
+References sem\_\-check.
+
+Referenced by genevalmag::Parser\_\-AG::parse\_\-grammar().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacegenevalmag_b68c3ea3b4064fbd96451dd2a094ad34_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_fe9d3ca44e4de7e9ebe9f47a62ed7aa5}{
+\index{genevalmag@{genevalmag}!show\_\-help\_\-information@{show\_\-help\_\-information}}
+\index{show\_\-help\_\-information@{show\_\-help\_\-information}!genevalmag@{genevalmag}}
+\subsubsection[{show\_\-help\_\-information}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::show\_\-help\_\-information ()}}
+\label{namespacegenevalmag_fe9d3ca44e4de7e9ebe9f47a62ed7aa5}
+
+
+
+
+Definition at line 144 of file maggen.cpp.
+
+Referenced by main(), and parse\_\-parameters().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{namespacegenevalmag_fe9d3ca44e4de7e9ebe9f47a62ed7aa5_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_5132358a5088f64e976aa18643cff4d8}{
+\index{genevalmag@{genevalmag}!swap\_\-root\_\-child@{swap\_\-root\_\-child}}
+\index{swap\_\-root\_\-child@{swap\_\-root\_\-child}!genevalmag@{genevalmag}}
+\subsubsection[{swap\_\-root\_\-child}]{\setlength{\rightskip}{0pt plus 5cm}int genevalmag::swap\_\-root\_\-child (Expr\_\-function $\ast$$\ast$ {\em old\_\-root}, \/  int {\em i\_\-new\_\-root})}}
+\label{namespacegenevalmag_5132358a5088f64e976aa18643cff4d8}
+
+
+Precedence Section. Swaps the root for a left/right child with the correspondent rotations.
+
+Case 1 A(op) B(op) / $\backslash$ / $\backslash$ B C --------$>$ D A / $\backslash$ / $\backslash$ D E E C
+
+Case 2 A(op) C(op) / $\backslash$ / $\backslash$ B C --------$>$ A E / $\backslash$ / $\backslash$ D E B D 
+
+Definition at line 107 of file Semantics\_\-checks.cpp.
+
+Referenced by genevalmag::Semantics\_\-checks::correct\_\-associativity(), genevalmag::Semantics\_\-checks::correct\_\-precedence(), and genevalmag::Semantics\_\-checks::correct\_\-subtree().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_5132358a5088f64e976aa18643cff4d8_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_18228f21bca4decde649041801026a35}{
+\index{genevalmag@{genevalmag}!swap\_\-root\_\-grandson@{swap\_\-root\_\-grandson}}
+\index{swap\_\-root\_\-grandson@{swap\_\-root\_\-grandson}!genevalmag@{genevalmag}}
+\subsubsection[{swap\_\-root\_\-grandson}]{\setlength{\rightskip}{0pt plus 5cm}int genevalmag::swap\_\-root\_\-grandson (Expr\_\-function $\ast$$\ast$ {\em old\_\-root})}}
+\label{namespacegenevalmag_18228f21bca4decde649041801026a35}
+
+
+Swaps the root for left-most grandson.
+
+A (op) B(op) / $\backslash$ / $\backslash$ B C --------$>$ D E / $\backslash$ $\backslash$ D E(op) A $\backslash$ / $\backslash$ F F C 
+
+Definition at line 145 of file Semantics\_\-checks.cpp.
+
+Referenced by genevalmag::Semantics\_\-checks::correct\_\-precedence().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_18228f21bca4decde649041801026a35_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_885d7859db4dd91f78bb7081be6ceacb}{
+\index{genevalmag@{genevalmag}!timeval\_\-diff@{timeval\_\-diff}}
+\index{timeval\_\-diff@{timeval\_\-diff}!genevalmag@{genevalmag}}
+\subsubsection[{timeval\_\-diff}]{\setlength{\rightskip}{0pt plus 5cm}double genevalmag::timeval\_\-diff (struct timeval $\ast$ {\em a}, \/  struct timeval $\ast$ {\em b})}}
+\label{namespacegenevalmag_885d7859db4dd91f78bb7081be6ceacb}
+
+
+
+
+Definition at line 109 of file maggen.cpp.
+
+Referenced by main().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=121pt]{namespacegenevalmag_885d7859db4dd91f78bb7081be6ceacb_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_bdfa348edf2ec215b8dce63ebeab02e9}{
+\index{genevalmag@{genevalmag}!to\_\-string\_\-map@{to\_\-string\_\-map}}
+\index{to\_\-string\_\-map@{to\_\-string\_\-map}!genevalmag@{genevalmag}}
+\subsubsection[{to\_\-string\_\-map}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class K , class T $>$ const string genevalmag::to\_\-string\_\-map (const map$<$ K, T $>$ \& {\em map\_\-elem})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{namespacegenevalmag_bdfa348edf2ec215b8dce63ebeab02e9}
+
+
+Operation template that print each element type T of the parameter map.
+
+Returns the string representation of all elements of the map. 
+
+Definition at line 54 of file Attr\_\-grammar.cpp.\hypertarget{namespacegenevalmag_311f0385029ff37574bbf0189064f310}{
+\index{genevalmag@{genevalmag}!warshall\_\-algorithm@{warshall\_\-algorithm}}
+\index{warshall\_\-algorithm@{warshall\_\-algorithm}!genevalmag@{genevalmag}}
+\subsubsection[{warshall\_\-algorithm}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::warshall\_\-algorithm (const unsigned int {\em size}, \/  bool $\ast$ {\em matrix\_\-plain})}}
+\label{namespacegenevalmag_311f0385029ff37574bbf0189064f310}
+
+
+Computes the closure transitive with the Warshall algorithm. 
+
+Definition at line 367 of file Semantics\_\-checks.cpp.
+
+Referenced by genevalmag::Semantics\_\-checks::check\_\-reachability().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespacegenevalmag_311f0385029ff37574bbf0189064f310_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{namespacegenevalmag_f74af87309332e02ec5d55c14ab1fa97}{
+\index{genevalmag@{genevalmag}!write\_\-vector\_\-with\_\-inic@{write\_\-vector\_\-with\_\-inic}}
+\index{write\_\-vector\_\-with\_\-inic@{write\_\-vector\_\-with\_\-inic}!genevalmag@{genevalmag}}
+\subsubsection[{write\_\-vector\_\-with\_\-inic}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ string genevalmag::write\_\-vector\_\-with\_\-inic (string \& {\em text\_\-buffer}, \/  const string {\em name\_\-vec}, \/  const size\_\-t {\em index}, \/  const vector$<$ T $>$ \& {\em vec}, \/  const string {\em type\_\-vec}, \/  const string {\em type\_\-array})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{namespacegenevalmag_f74af87309332e02ec5d55c14ab1fa97}
+
+
+Generates the initialice of an array of type T, with the elements of the vector, and create a new vector with this array. 
+
+Definition at line 227 of file Builder\_\-code.cpp.
+
+\subsection{Variable Documentation}
+\hypertarget{namespacegenevalmag_85aabf29d2f206619e2d128154283336}{
+\index{genevalmag@{genevalmag}!attr\_\-grammar@{attr\_\-grammar}}
+\index{attr\_\-grammar@{attr\_\-grammar}!genevalmag@{genevalmag}}
+\subsubsection[{attr\_\-grammar}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Attr\_\-grammar}$\ast$ {\bf genevalmag::attr\_\-grammar}}}
+\label{namespacegenevalmag_85aabf29d2f206619e2d128154283336}
+
+
+
+
+Definition at line 26 of file Semantics\_\-actions.cpp.
+
+Referenced by add\_\-function(), check\_\-well\_\-defined(), create\_\-attributes(), create\_\-instance(), create\_\-new\_\-non\_\-terminal(), create\_\-new\_\-terminal(), create\_\-root\_\-function\_\-node(), create\_\-root\_\-infix\_\-node(), create\_\-root\_\-postfix\_\-node(), create\_\-root\_\-prefix\_\-node(), create\_\-rule(), create\_\-sort(), genevalmag::Builder\_\-visit\_\-sequences::gen\_\-visit\_\-seq(), save\_\-domain\_\-func(), save\_\-image\_\-func(), save\_\-right\_\-side\_\-rule(), save\_\-rule(), and set\_\-attr\_\-grammar().\hypertarget{namespacegenevalmag_5d3b27c53cfad3c612dc56f1750c44a2}{
+\index{genevalmag@{genevalmag}!current\_\-ast\_\-function@{current\_\-ast\_\-function}}
+\index{current\_\-ast\_\-function@{current\_\-ast\_\-function}!genevalmag@{genevalmag}}
+\subsubsection[{current\_\-ast\_\-function}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Expr\_\-function}$\ast$ {\bf genevalmag::current\_\-ast\_\-function}}}
+\label{namespacegenevalmag_5d3b27c53cfad3c612dc56f1750c44a2}
+
+
+
+
+Definition at line 72 of file Semantics\_\-actions.cpp.
+
+Referenced by create\_\-func\_\-node().\hypertarget{namespacegenevalmag_d81ea3b166738b52ec4a3b7ac291e64b}{
+\index{genevalmag@{genevalmag}!current\_\-eq@{current\_\-eq}}
+\index{current\_\-eq@{current\_\-eq}!genevalmag@{genevalmag}}
+\subsubsection[{current\_\-eq}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Equation}$\ast$ {\bf genevalmag::current\_\-eq}}}
+\label{namespacegenevalmag_d81ea3b166738b52ec4a3b7ac291e64b}
+
+
+
+
+Definition at line 73 of file Semantics\_\-actions.cpp.
+
+Referenced by create\_\-equation(), and save\_\-rvalue().\hypertarget{namespacegenevalmag_910b57b31dc9d8772d89a082d88f0c50}{
+\index{genevalmag@{genevalmag}!current\_\-func@{current\_\-func}}
+\index{current\_\-func@{current\_\-func}!genevalmag@{genevalmag}}
+\subsubsection[{current\_\-func}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Function}$\ast$ {\bf genevalmag::current\_\-func}}}
+\label{namespacegenevalmag_910b57b31dc9d8772d89a082d88f0c50}
+
+
+Pointer that reference a new function in the grammar. 
+
+Definition at line 49 of file Semantics\_\-actions.cpp.
+
+Referenced by add\_\-function(), add\_\-operator(), create\_\-func\_\-node(), create\_\-function(), create\_\-operator(), inic\_\-func(), save\_\-assoc\_\-op(), save\_\-domain\_\-func(), save\_\-image\_\-func(), save\_\-mode\_\-op(), save\_\-name\_\-func(), and save\_\-prec\_\-op().\hypertarget{namespacegenevalmag_4e01071642cc57ba91fe84d929195c7c}{
+\index{genevalmag@{genevalmag}!current\_\-instance@{current\_\-instance}}
+\index{current\_\-instance@{current\_\-instance}!genevalmag@{genevalmag}}
+\subsubsection[{current\_\-instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Expr\_\-instance}$\ast$ {\bf genevalmag::current\_\-instance}}}
+\label{namespacegenevalmag_4e01071642cc57ba91fe84d929195c7c}
+
+
+Pointer to the last instance of attribute to parse successfully. 
+
+Definition at line 70 of file Semantics\_\-actions.cpp.
+
+Referenced by create\_\-equation(), create\_\-instance(), create\_\-instance\_\-node(), save\_\-attr\_\-ins(), and save\_\-index\_\-ins().\hypertarget{namespacegenevalmag_09a13d15a03643602e801cf36685ede0}{
+\index{genevalmag@{genevalmag}!current\_\-literal@{current\_\-literal}}
+\index{current\_\-literal@{current\_\-literal}!genevalmag@{genevalmag}}
+\subsubsection[{current\_\-literal}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Expr\_\-literal}$\ast$ {\bf genevalmag::current\_\-literal}}}
+\label{namespacegenevalmag_09a13d15a03643602e801cf36685ede0}
+
+
+
+
+Definition at line 71 of file Semantics\_\-actions.cpp.
+
+Referenced by create\_\-bool(), create\_\-lit\_\-ch(), create\_\-lit\_\-number(), create\_\-lit\_\-str(), create\_\-literal\_\-node(), and push\_\-mark().\hypertarget{namespacegenevalmag_fc4896526f13792a5f56fa1c254759d4}{
+\index{genevalmag@{genevalmag}!current\_\-rule@{current\_\-rule}}
+\index{current\_\-rule@{current\_\-rule}!genevalmag@{genevalmag}}
+\subsubsection[{current\_\-rule}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Rule}$\ast$ {\bf genevalmag::current\_\-rule}}}
+\label{namespacegenevalmag_fc4896526f13792a5f56fa1c254759d4}
+
+
+Pointer that reference a current rule parsed in the grammar. 
+
+Definition at line 65 of file Semantics\_\-actions.cpp.
+
+Referenced by genevalmag::Builder\_\-graphs::compute\_\-adp\_\-graph(), genevalmag::Builder\_\-graphs::compute\_\-dcg(), genevalmag::Builder\_\-graphs::compute\_\-down\_\-graph(), create\_\-abbreviated\_\-rule(), create\_\-instance(), create\_\-rule(), genevalmag::Builder\_\-graphs::save\_\-dcg\_\-graphs(), genevalmag::Builder\_\-graphs::save\_\-dp\_\-graphs(), save\_\-index\_\-ins(), save\_\-right\_\-side\_\-rule(), save\_\-rule(), and save\_\-rvalue().\hypertarget{namespacegenevalmag_4bc1208b99175d15ec86291f80f5428f}{
+\index{genevalmag@{genevalmag}!index\_\-access\_\-eq@{index\_\-access\_\-eq}}
+\index{index\_\-access\_\-eq@{index\_\-access\_\-eq}!genevalmag@{genevalmag}}
+\subsubsection[{index\_\-access\_\-eq}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Equation}$\ast$$>$ {\bf genevalmag::index\_\-access\_\-eq}}}
+\label{namespacegenevalmag_4bc1208b99175d15ec86291f80f5428f}
+
+
+
+
+Definition at line 20 of file Rule.cpp.\hypertarget{namespacegenevalmag_3564619b24ff1e9243dee9e501181679}{
+\index{genevalmag@{genevalmag}!new\_\-attrs@{new\_\-attrs}}
+\index{new\_\-attrs@{new\_\-attrs}!genevalmag@{genevalmag}}
+\subsubsection[{new\_\-attrs}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf genevalmag::decl\_\-attribute} $\ast$ {\bf genevalmag::new\_\-attrs}}}
+\label{namespacegenevalmag_3564619b24ff1e9243dee9e501181679}
+
+
+Type that represent the structure of a full declaration of one \hyperlink{classgenevalmag_1_1Attribute}{Attribute}. 
+
+Referenced by add\_\-attribute(), create\_\-attributes(), save\_\-member\_\-list\_\-attr(), save\_\-sort\_\-attr(), and save\_\-type\_\-attr().\hypertarget{namespacegenevalmag_d93efa78140ac10eefb71fdb44c48b6b}{
+\index{genevalmag@{genevalmag}!sem\_\-check@{sem\_\-check}}
+\index{sem\_\-check@{sem\_\-check}!genevalmag@{genevalmag}}
+\subsubsection[{sem\_\-check}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Semantics\_\-checks}$\ast$ {\bf genevalmag::sem\_\-check}}}
+\label{namespacegenevalmag_d93efa78140ac10eefb71fdb44c48b6b}
+
+
+
+
+Definition at line 28 of file Semantics\_\-actions.cpp.
+
+Referenced by check\_\-well\_\-defined(), create\_\-func\_\-node(), create\_\-root\_\-infix\_\-node(), create\_\-root\_\-postfix\_\-node(), create\_\-root\_\-prefix\_\-node(), decrement\_\-level(), increment\_\-level(), save\_\-rvalue(), and set\_\-sem\_\-check().\hypertarget{namespacegenevalmag_0b445db6f5f211e8d78b693596cbda3c}{
+\index{genevalmag@{genevalmag}!stack\_\-inner\_\-node@{stack\_\-inner\_\-node}}
+\index{stack\_\-inner\_\-node@{stack\_\-inner\_\-node}!genevalmag@{genevalmag}}
+\subsubsection[{stack\_\-inner\_\-node}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Expr\_\-node}$\ast$$>$ {\bf genevalmag::stack\_\-inner\_\-node}}}
+\label{namespacegenevalmag_0b445db6f5f211e8d78b693596cbda3c}
+
+
+
+
+Definition at line 79 of file Semantics\_\-actions.cpp.
+
+Referenced by create\_\-func\_\-node(), create\_\-root\_\-function\_\-node(), create\_\-root\_\-infix\_\-node(), create\_\-root\_\-postfix\_\-node(), and create\_\-root\_\-prefix\_\-node().\hypertarget{namespacegenevalmag_47998af84055c40ecfcdfe156f71be04}{
+\index{genevalmag@{genevalmag}!stack\_\-node@{stack\_\-node}}
+\index{stack\_\-node@{stack\_\-node}!genevalmag@{genevalmag}}
+\subsubsection[{stack\_\-node}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Expression}$\ast$$>$ {\bf genevalmag::stack\_\-node}}}
+\label{namespacegenevalmag_47998af84055c40ecfcdfe156f71be04}
+
+
+Stacks for expression precedence manager. 
+
+Definition at line 78 of file Semantics\_\-actions.cpp.
+
+Referenced by create\_\-instance\_\-node(), create\_\-literal\_\-node(), create\_\-root\_\-function\_\-node(), create\_\-root\_\-infix\_\-node(), create\_\-root\_\-postfix\_\-node(), create\_\-root\_\-prefix\_\-node(), push\_\-mark(), and save\_\-rvalue().

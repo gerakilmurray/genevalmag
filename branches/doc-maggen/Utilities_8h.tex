@@ -1,0 +1,79 @@
+\hypertarget{Utilities_8h}{
+\section{include/Util/Utilities.h File Reference}
+\label{Utilities_8h}\index{include/Util/Utilities.h@{include/Util/Utilities.h}}
+}
+Header of \hyperlink{namespaceutilities}{utilities} module, where are methods and function used by many class.  
+
+
+{\tt \#include $<$string$>$}\par
+{\tt \#include \char`\"{}../Expression\_\-tree/Expr\_\-leaf.h\char`\"{}}\par
+{\tt \#include \char`\"{}../Attr\_\-grammar/Symbol.h\char`\"{}}\par
+{\tt \#include \char`\"{}../Builders/Builder\_\-graphs.h\char`\"{}}\par
+
+
+Include dependency graph for Utilities.h:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{Utilities_8h__incl}
+\end{center}
+\end{figure}
+
+
+This graph shows which files directly or indirectly include this file:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{Utilities_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Namespaces}
+\begin{CompactItemize}
+\item 
+namespace \hyperlink{namespaceutilities}{utilities}
+\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+bool \hyperlink{namespaceutilities_87fbb9605f1b59c54b95e708e1e9935b}{utilities::create\_\-folder} (const string path)
+\item 
+bool \hyperlink{namespaceutilities_28f2ace508b6ea5bc7af05b84f0b2487}{utilities::clean\_\-output\_\-folder} (const string path)
+\item 
+bool \hyperlink{namespaceutilities_931de9beaef867d11a8695efa2e13e56}{utilities::copy\_\-static\_\-code} (const string path)
+\item 
+void \hyperlink{namespaceutilities_0e49bfde1f01bb5567770fc492e6929f}{utilities::generate\_\-names\_\-instance} (const Graph \&graph, string datas\mbox{[}$\,$\mbox{]}, size\_\-t size\_\-d)
+\item 
+void \hyperlink{namespaceutilities_c88e50b1c88f16e0d052555d773b7be5}{utilities::generate\_\-names\_\-attr} (const Graph \&graph, string datas\mbox{[}$\,$\mbox{]}, size\_\-t size\_\-d)
+\item 
+void \hyperlink{namespaceutilities_e0c73d526799122fa0d85cd45b6d4fbb}{utilities::print\_\-graph} (const Graph \&graph, const string path, const string name\_\-file, const string name\_\-graph, const string names\mbox{[}$\,$\mbox{]}, string shape\_\-vertex)
+\item 
+void \hyperlink{namespaceutilities_bef7212b8948ccd35dcfa554508f9b1d}{utilities::print\_\-graph\_\-txt} (const Graph \&graph)
+\item 
+Vertex \hyperlink{namespaceutilities_13764073c6966781a6680ab58d88c1b5}{utilities::return\_\-vertex} (const Graph \&graph, const \hyperlink{classgenevalmag_1_1Expr__leaf}{Expr\_\-leaf} $\ast$node)
+\item 
+void \hyperlink{namespaceutilities_d0de56d624d099e4d9a5f605ca80b2e5}{utilities::merge\_\-graph} (const Graph \&graph1, const Graph \&graph2, Graph \&graph\_\-merged)
+\item 
+void \hyperlink{namespaceutilities_f78e9e1ebc91d6896a01f45d611cca0a}{utilities::project\_\-graph} (const \hyperlink{classgenevalmag_1_1Symbol}{Symbol} $\ast$symb, Graph \&graph)
+\item 
+string \hyperlink{namespaceutilities_644dfdb507e47adf60e6984d28e080fd}{utilities::cleaning\_\-tabs} (const string str)
+\item 
+string \hyperlink{namespaceutilities_21bbcd26f651d4ceb798b50af71c7b29}{utilities::write\_\-inf\_\-context} (const vector$<$ unsigned short $>$ \&context\_\-vec)
+\item 
+bool \hyperlink{namespaceutilities_a452cf7f1132b5d667bdeefffb33425f}{utilities::belong\_\-index} (const unsigned short \&index, const vector$<$ unsigned short $>$ \&vec)
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Header of \hyperlink{namespaceutilities}{utilities} module, where are methods and function used by many class. 
+
+Implementation of \hyperlink{namespaceutilities}{utilities} module, where are methods and function used by many class.
+
+\begin{Desc}
+\item[Date:]09/03/2010 \end{Desc}
+\begin{Desc}
+\item[Author:]Kilmurray, Gerardo Luis $<$\href{mailto:gerakilmurray@gmail.com}{\tt gerakilmurray@gmail.com}$>$ 
+
+Picco, Gonzalo Martín $<$\href{mailto:gonzalopicco@gmail.com}{\tt gonzalopicco@gmail.com}$>$ \end{Desc}
+
+
+Definition in file \hyperlink{Utilities_8h-source}{Utilities.h}.

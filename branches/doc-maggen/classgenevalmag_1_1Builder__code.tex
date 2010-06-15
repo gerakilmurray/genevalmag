@@ -1,0 +1,835 @@
+\hypertarget{classgenevalmag_1_1Builder__code}{
+\section{genevalmag::Builder\_\-code Class Reference}
+\label{classgenevalmag_1_1Builder__code}\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}}
+}
+{\tt \#include $<$Builder\_\-code.h$>$}
+
+Collaboration diagram for genevalmag::Builder\_\-code:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{classgenevalmag_1_1Builder__code__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+\hyperlink{classgenevalmag_1_1Builder__code_0d3743b15ad07d8e8cbe40a8fece97bf}{Builder\_\-code} (const string \&path\_\-folder\_\-output, const string \&name\_\-file, const \hyperlink{classgenevalmag_1_1Attr__grammar}{Attr\_\-grammar} \&attribute\_\-grammar, const \hyperlink{classgenevalmag_1_1Builder__plans}{Builder\_\-plans} \&builder\_\-plan, const \hyperlink{classgenevalmag_1_1Builder__visit__sequences}{Builder\_\-visit\_\-sequences} \&builder\_\-v\_\-seq)
+\item 
+virtual \hyperlink{classgenevalmag_1_1Builder__code_9e6e4ec3399e378cc691e69d7ab5c278}{$\sim$Builder\_\-code} ()
+\item 
+bool \hyperlink{classgenevalmag_1_1Builder__code_9f79ad68269841d1149eeca4a19b4747}{generate\_\-code} (const vector$<$ string $>$ \&headers\_\-file) const 
+\end{CompactItemize}
+\subsection*{Private Member Functions}
+\begin{CompactItemize}
+\item 
+void \hyperlink{classgenevalmag_1_1Builder__code_62d38d96676f0a11a377c19991bf4e90}{generate\_\-header\_\-file} () const 
+\item 
+void \hyperlink{classgenevalmag_1_1Builder__code_5f3ad7619822680e0f2a79d7c26af776}{generate\_\-footer\_\-header} () const 
+\item 
+void \hyperlink{classgenevalmag_1_1Builder__code_67439b5f2c7cd855e17a0fb91317a1d2}{generate\_\-code\_\-file} (const vector$<$ string $>$ \&headers\_\-file) const 
+\item 
+void \hyperlink{classgenevalmag_1_1Builder__code_5dcd144389b5612a328fede4317d414f}{generate\_\-structs} () const 
+\item 
+void \hyperlink{classgenevalmag_1_1Builder__code_c390149dae2358dda72ff8360f30c693}{generate\_\-constructor} () const 
+\item 
+void \hyperlink{classgenevalmag_1_1Builder__code_81b67543752446840e23c8b8fd3b9e7a}{generate\_\-methods} () const 
+\item 
+void \hyperlink{classgenevalmag_1_1Builder__code_f334d372096a958000bd0b53360223ab}{generate\_\-footer\_\-code} () const 
+\item 
+string \hyperlink{classgenevalmag_1_1Builder__code_d88294497280bb904ff3269b00446bc8}{generate\_\-print} () const 
+\item 
+string \hyperlink{classgenevalmag_1_1Builder__code_b8a711e35ef2a06238854398ce9ed0e6}{generate\_\-translate} () const 
+\item 
+string \hyperlink{classgenevalmag_1_1Builder__code_1b3412a660f7d69345932171709cf6d6}{generate\_\-traverse} () const 
+\item 
+string \hyperlink{classgenevalmag_1_1Builder__code_8052b85fae1b226af5fb65c2d548f432}{generate\_\-all\_\-compute\_\-eq} () const 
+\item 
+string \hyperlink{classgenevalmag_1_1Builder__code_ab8e30a2b842ad236a2bd70149839004}{generate\_\-evaluator} () const 
+\item 
+string \hyperlink{classgenevalmag_1_1Builder__code_d40103cc1f4217fdba2924ed1e29efdc}{generate\_\-eval\_\-visiter} () const 
+\item 
+string \hyperlink{classgenevalmag_1_1Builder__code_f62cdc4b1ad2302cd368e1b3c4fb99d9}{generate\_\-add\_\-plan} () const 
+\item 
+string \hyperlink{classgenevalmag_1_1Builder__code_16c49d69826f56e892f3580cdc7fa610}{generate\_\-add\_\-plan\_\-project} () const 
+\item 
+string \hyperlink{classgenevalmag_1_1Builder__code_a13031885f7de51469cc9e1ea5a4b9e6}{generate\_\-all\_\-methods\_\-eqs} () const 
+\item 
+string \hyperlink{classgenevalmag_1_1Builder__code_5b244721c0c026570512c5e92acf3c7c}{generate\_\-initialize\_\-rules} () const 
+\item 
+string \hyperlink{classgenevalmag_1_1Builder__code_a22bd086103a19a4d6dade0cab84b62d}{generate\_\-initialize\_\-v\_\-seq} () const 
+\item 
+string \hyperlink{classgenevalmag_1_1Builder__code_eb44411cbae61fe53b734486945ab7f4}{generate\_\-initialize\_\-context} () const 
+\item 
+string \hyperlink{classgenevalmag_1_1Builder__code_4ff44b4aeb0d64f987f58754b997dbef}{generate\_\-initialize\_\-plans} () const 
+\item 
+string \hyperlink{classgenevalmag_1_1Builder__code_76c0b81220998ec7e604184fab7a15fe}{generate\_\-initialize\_\-plan\_\-proj} () const 
+\end{CompactItemize}
+\subsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+const \hyperlink{classgenevalmag_1_1Attr__grammar}{Attr\_\-grammar} \& \hyperlink{classgenevalmag_1_1Builder__code_94e3c41b0c77596acfb34c731c17f001}{attr\_\-grammar}
+\begin{CompactList}\small\item\em References to the attribute grammar. \item\end{CompactList}\item 
+const \hyperlink{classgenevalmag_1_1Builder__plans}{Builder\_\-plans} \& \hyperlink{classgenevalmag_1_1Builder__code_ba5b99353b3ec17c3b788c7baa2ae4ce}{b\_\-plans}
+\begin{CompactList}\small\item\em References to all plans generates. \item\end{CompactList}\item 
+const \hyperlink{classgenevalmag_1_1Builder__visit__sequences}{Builder\_\-visit\_\-sequences} \& \hyperlink{classgenevalmag_1_1Builder__code_4440af64f703eb71fd4df162f39fdcc6}{b\_\-v\_\-seq}
+\begin{CompactList}\small\item\em References to all visit sequences generates. \item\end{CompactList}\item 
+string \hyperlink{classgenevalmag_1_1Builder__code_7e921a42176e2397ec0a34308408ab4c}{path\_\-output}
+\begin{CompactList}\small\item\em Defines the path where the files generated be saved. \item\end{CompactList}\item 
+string \hyperlink{classgenevalmag_1_1Builder__code_ba028c9ecb9918cd3371b2838b70a639}{file\_\-name}
+\begin{CompactList}\small\item\em Defines the name of the files and the evaluator's class name. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 19 of file Builder\_\-code.h.
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classgenevalmag_1_1Builder__code_0d3743b15ad07d8e8cbe40a8fece97bf}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!Builder\_\-code@{Builder\_\-code}}
+\index{Builder\_\-code@{Builder\_\-code}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{Builder\_\-code}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Builder\_\-code::Builder\_\-code (const string \& {\em path\_\-folder\_\-output}, \/  const string \& {\em name\_\-file}, \/  const {\bf Attr\_\-grammar} \& {\em attribute\_\-grammar}, \/  const {\bf Builder\_\-plans} \& {\em builder\_\-plan}, \/  const {\bf Builder\_\-visit\_\-sequences} \& {\em builder\_\-v\_\-seq})}}
+\label{classgenevalmag_1_1Builder__code_0d3743b15ad07d8e8cbe40a8fece97bf}
+
+
+Contructor with the path and name of output files to be generated. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em path\_\-folder\_\-output}]\item[{\em name\_\-file}]\item[{\em attribute\_\-grammar}]\item[{\em builder\_\-plan}]\item[{\em builder\_\-v\_\-seq}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Contructor with the path and name of output files to be generated. 
+
+Definition at line 33 of file Builder\_\-code.cpp.\hypertarget{classgenevalmag_1_1Builder__code_9e6e4ec3399e378cc691e69d7ab5c278}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!$\sim$Builder\_\-code@{$\sim$Builder\_\-code}}
+\index{$\sim$Builder\_\-code@{$\sim$Builder\_\-code}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{$\sim$Builder\_\-code}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Builder\_\-code::$\sim$Builder\_\-code ()\hspace{0.3cm}{\tt  \mbox{[}virtual\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_9e6e4ec3399e378cc691e69d7ab5c278}
+
+
+Destructor of the \hyperlink{classgenevalmag_1_1Builder__code}{Builder\_\-code}. \begin{Desc}
+\item[Returns:]\end{Desc}
+Destructor of the \hyperlink{classgenevalmag_1_1Builder__code}{Builder\_\-code}. 
+
+Definition at line 52 of file Builder\_\-code.cpp.
+
+\subsection{Member Function Documentation}
+\hypertarget{classgenevalmag_1_1Builder__code_f62cdc4b1ad2302cd368e1b3c4fb99d9}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-add\_\-plan@{generate\_\-add\_\-plan}}
+\index{generate\_\-add\_\-plan@{generate\_\-add\_\-plan}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-add\_\-plan}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::Builder\_\-code::generate\_\-add\_\-plan () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_f62cdc4b1ad2302cd368e1b3c4fb99d9}
+
+
+Generates and inserts the class method that insert a new plan. \begin{Desc}
+\item[Returns:]\end{Desc}
+Generates and inserts the class method that insert a new plan. 
+
+Definition at line 888 of file Builder\_\-code.cpp.
+
+References file\_\-name.
+
+Referenced by generate\_\-methods().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=378pt]{classgenevalmag_1_1Builder__code_f62cdc4b1ad2302cd368e1b3c4fb99d9_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_16c49d69826f56e892f3580cdc7fa610}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-add\_\-plan\_\-project@{generate\_\-add\_\-plan\_\-project}}
+\index{generate\_\-add\_\-plan\_\-project@{generate\_\-add\_\-plan\_\-project}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-add\_\-plan\_\-project}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::Builder\_\-code::generate\_\-add\_\-plan\_\-project () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_16c49d69826f56e892f3580cdc7fa610}
+
+
+Generates and inserts the class method that insert a new projected plan. \begin{Desc}
+\item[Returns:]\end{Desc}
+Generates and inserts the class method that insert a new projected plan. 
+
+Definition at line 903 of file Builder\_\-code.cpp.
+
+References file\_\-name.
+
+Referenced by generate\_\-methods().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=395pt]{classgenevalmag_1_1Builder__code_16c49d69826f56e892f3580cdc7fa610_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_8052b85fae1b226af5fb65c2d548f432}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-all\_\-compute\_\-eq@{generate\_\-all\_\-compute\_\-eq}}
+\index{generate\_\-all\_\-compute\_\-eq@{generate\_\-all\_\-compute\_\-eq}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-all\_\-compute\_\-eq}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::Builder\_\-code::generate\_\-all\_\-compute\_\-eq () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_8052b85fae1b226af5fb65c2d548f432}
+
+
+Generates a method with a large switch with all equations, invoking in each case, the method that computes. \begin{Desc}
+\item[Returns:]\end{Desc}
+Generates a method with a large switch with all equations, invoking in each case, the method that computes. 
+
+Definition at line 806 of file Builder\_\-code.cpp.
+
+References attr\_\-grammar, file\_\-name, and genevalmag::Attr\_\-grammar::get\_\-count\_\-eqs().
+
+Referenced by generate\_\-methods().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=266pt]{classgenevalmag_1_1Builder__code_8052b85fae1b226af5fb65c2d548f432_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=392pt]{classgenevalmag_1_1Builder__code_8052b85fae1b226af5fb65c2d548f432_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_a13031885f7de51469cc9e1ea5a4b9e6}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-all\_\-methods\_\-eqs@{generate\_\-all\_\-methods\_\-eqs}}
+\index{generate\_\-all\_\-methods\_\-eqs@{generate\_\-all\_\-methods\_\-eqs}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-all\_\-methods\_\-eqs}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::Builder\_\-code::generate\_\-all\_\-methods\_\-eqs () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_a13031885f7de51469cc9e1ea5a4b9e6}
+
+
+Generates one method for each equation in the grammar, that computes it's value. \begin{Desc}
+\item[Returns:]\end{Desc}
+Generates one method for each equation in the grammar, that computes it's value. 
+
+Definition at line 736 of file Builder\_\-code.cpp.
+
+References attr\_\-grammar, utilities::cleaning\_\-tabs(), genevalmag::generate\_\-expr\_\-text(), and genevalmag::Attr\_\-grammar::get\_\-rules().
+
+Referenced by generate\_\-methods().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__code_a13031885f7de51469cc9e1ea5a4b9e6_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=395pt]{classgenevalmag_1_1Builder__code_a13031885f7de51469cc9e1ea5a4b9e6_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_9f79ad68269841d1149eeca4a19b4747}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-code@{generate\_\-code}}
+\index{generate\_\-code@{generate\_\-code}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-code}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Builder\_\-code::generate\_\-code (const vector$<$ string $>$ \& {\em headers\_\-file}) const}}
+\label{classgenevalmag_1_1Builder__code_9f79ad68269841d1149eeca4a19b4747}
+
+
+Generates the header and source code of the static evaluator of the grammar passed as parameter, alog with their evaluations plans, visit sequence and headers for uses user functions defined. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em headers\_\-file}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Generates the header and source code of the static evaluator of the grammar passed as parameter, alog with their evaluations plans, visit sequence and headers for uses user functions defined. 
+
+Definition at line 1096 of file Builder\_\-code.cpp.
+
+References utilities::copy\_\-static\_\-code(), generate\_\-code\_\-file(), generate\_\-constructor(), generate\_\-footer\_\-code(), generate\_\-footer\_\-header(), generate\_\-header\_\-file(), generate\_\-methods(), generate\_\-structs(), and path\_\-output.
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__code_9f79ad68269841d1149eeca4a19b4747_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_67439b5f2c7cd855e17a0fb91317a1d2}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-code\_\-file@{generate\_\-code\_\-file}}
+\index{generate\_\-code\_\-file@{generate\_\-code\_\-file}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-code\_\-file}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Builder\_\-code::generate\_\-code\_\-file (const vector$<$ string $>$ \& {\em headers\_\-file}) const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_67439b5f2c7cd855e17a0fb91317a1d2}
+
+
+Create the source code file of the evaluator with some information. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em headers\_\-file}]Create the source code file of the evaluator with some information. \end{description}
+\end{Desc}
+
+
+Definition at line 111 of file Builder\_\-code.cpp.
+
+References file\_\-name, and path\_\-output.
+
+Referenced by generate\_\-code().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=251pt]{classgenevalmag_1_1Builder__code_67439b5f2c7cd855e17a0fb91317a1d2_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_c390149dae2358dda72ff8360f30c693}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-constructor@{generate\_\-constructor}}
+\index{generate\_\-constructor@{generate\_\-constructor}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-constructor}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Builder\_\-code::generate\_\-constructor () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_c390149dae2358dda72ff8360f30c693}
+
+
+Generates and inserts the evaluator class's constructor. With all initializations of Evaluation Plans, Evaluation Plans Project, Visit Sequences and Rules. 
+
+Definition at line 479 of file Builder\_\-code.cpp.
+
+References file\_\-name, generate\_\-initialize\_\-context(), generate\_\-initialize\_\-plan\_\-proj(), generate\_\-initialize\_\-plans(), generate\_\-initialize\_\-rules(), generate\_\-initialize\_\-v\_\-seq(), and path\_\-output.
+
+Referenced by generate\_\-code().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__code_c390149dae2358dda72ff8360f30c693_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=255pt]{classgenevalmag_1_1Builder__code_c390149dae2358dda72ff8360f30c693_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_d40103cc1f4217fdba2924ed1e29efdc}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-eval\_\-visiter@{generate\_\-eval\_\-visiter}}
+\index{generate\_\-eval\_\-visiter@{generate\_\-eval\_\-visiter}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-eval\_\-visiter}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::Builder\_\-code::generate\_\-eval\_\-visiter () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_d40103cc1f4217fdba2924ed1e29efdc}
+
+
+Generates the evaluator method, which following the visit sequences drawn, visit the nodes of the tree until computes it completely. \begin{Desc}
+\item[Returns:]\end{Desc}
+Generates the evaluator method, which following the visit sequences drawn, visit the nodes of the tree until computes it completely. 
+
+Definition at line 834 of file Builder\_\-code.cpp.
+
+References file\_\-name.
+
+Referenced by generate\_\-methods().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=383pt]{classgenevalmag_1_1Builder__code_d40103cc1f4217fdba2924ed1e29efdc_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_ab8e30a2b842ad236a2bd70149839004}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-evaluator@{generate\_\-evaluator}}
+\index{generate\_\-evaluator@{generate\_\-evaluator}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-evaluator}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::Builder\_\-code::generate\_\-evaluator () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_ab8e30a2b842ad236a2bd70149839004}
+
+
+Generates the evaluating method, which performs the method invocations to be computed all the attributes of the AST. \begin{Desc}
+\item[Returns:]\end{Desc}
+Generates the evaluating method, which performs the method invocations to be computed all the attributes of the AST. 
+
+Definition at line 866 of file Builder\_\-code.cpp.
+
+References b\_\-plans, file\_\-name, and genevalmag::Builder\_\-plans::get\_\-init\_\-order().
+
+Referenced by generate\_\-methods().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{classgenevalmag_1_1Builder__code_ab8e30a2b842ad236a2bd70149839004_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=378pt]{classgenevalmag_1_1Builder__code_ab8e30a2b842ad236a2bd70149839004_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_f334d372096a958000bd0b53360223ab}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-footer\_\-code@{generate\_\-footer\_\-code}}
+\index{generate\_\-footer\_\-code@{generate\_\-footer\_\-code}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-footer\_\-code}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Builder\_\-code::generate\_\-footer\_\-code () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_f334d372096a958000bd0b53360223ab}
+
+
+Insert the source code file's footer of the evaluator. 
+
+Definition at line 210 of file Builder\_\-code.cpp.
+
+References file\_\-name, and path\_\-output.
+
+Referenced by generate\_\-code().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=257pt]{classgenevalmag_1_1Builder__code_f334d372096a958000bd0b53360223ab_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_5f3ad7619822680e0f2a79d7c26af776}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-footer\_\-header@{generate\_\-footer\_\-header}}
+\index{generate\_\-footer\_\-header@{generate\_\-footer\_\-header}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-footer\_\-header}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Builder\_\-code::generate\_\-footer\_\-header () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_5f3ad7619822680e0f2a79d7c26af776}
+
+
+Insert the header file's footer of the evaluator. 
+
+Definition at line 162 of file Builder\_\-code.cpp.
+
+References file\_\-name, and path\_\-output.
+
+Referenced by generate\_\-code().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{classgenevalmag_1_1Builder__code_5f3ad7619822680e0f2a79d7c26af776_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_62d38d96676f0a11a377c19991bf4e90}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-header\_\-file@{generate\_\-header\_\-file}}
+\index{generate\_\-header\_\-file@{generate\_\-header\_\-file}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-header\_\-file}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Builder\_\-code::generate\_\-header\_\-file () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_62d38d96676f0a11a377c19991bf4e90}
+
+
+Create the header file of the evaluator with some information. 
+
+Definition at line 59 of file Builder\_\-code.cpp.
+
+References file\_\-name, and path\_\-output.
+
+Referenced by generate\_\-code().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=255pt]{classgenevalmag_1_1Builder__code_62d38d96676f0a11a377c19991bf4e90_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_eb44411cbae61fe53b734486945ab7f4}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-initialize\_\-context@{generate\_\-initialize\_\-context}}
+\index{generate\_\-initialize\_\-context@{generate\_\-initialize\_\-context}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-initialize\_\-context}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::Builder\_\-code::generate\_\-initialize\_\-context () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_eb44411cbae61fe53b734486945ab7f4}
+
+
+Generates the initialization of all contexts rules uniques. \begin{Desc}
+\item[Returns:]\end{Desc}
+Generates the initialization of all contexts rules uniques. 
+
+Definition at line 330 of file Builder\_\-code.cpp.
+
+References b\_\-plans, and genevalmag::Builder\_\-plans::get\_\-contexts\_\-uniques().
+
+Referenced by generate\_\-constructor().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=283pt]{classgenevalmag_1_1Builder__code_eb44411cbae61fe53b734486945ab7f4_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=399pt]{classgenevalmag_1_1Builder__code_eb44411cbae61fe53b734486945ab7f4_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_76c0b81220998ec7e604184fab7a15fe}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-initialize\_\-plan\_\-proj@{generate\_\-initialize\_\-plan\_\-proj}}
+\index{generate\_\-initialize\_\-plan\_\-proj@{generate\_\-initialize\_\-plan\_\-proj}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-initialize\_\-plan\_\-proj}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::Builder\_\-code::generate\_\-initialize\_\-plan\_\-proj () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_76c0b81220998ec7e604184fab7a15fe}
+
+
+Generates the initialization of all evaluation plan projects. \begin{Desc}
+\item[Returns:]\end{Desc}
+Generates the initialization of all evaluation plan projects. 
+
+Definition at line 388 of file Builder\_\-code.cpp.
+
+References b\_\-plans, genevalmag::generate\_\-key\_\-plan(), and genevalmag::Builder\_\-plans::get\_\-plans\_\-project().
+
+Referenced by generate\_\-constructor().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{classgenevalmag_1_1Builder__code_76c0b81220998ec7e604184fab7a15fe_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=403pt]{classgenevalmag_1_1Builder__code_76c0b81220998ec7e604184fab7a15fe_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_4ff44b4aeb0d64f987f58754b997dbef}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-initialize\_\-plans@{generate\_\-initialize\_\-plans}}
+\index{generate\_\-initialize\_\-plans@{generate\_\-initialize\_\-plans}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-initialize\_\-plans}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::Builder\_\-code::generate\_\-initialize\_\-plans () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_4ff44b4aeb0d64f987f58754b997dbef}
+
+
+Generates the initialization of all evaluations plans. \begin{Desc}
+\item[Returns:]\end{Desc}
+Generates the initialization of all evaluations plans. 
+
+Definition at line 356 of file Builder\_\-code.cpp.
+
+References b\_\-plans, genevalmag::generate\_\-key\_\-plan(), and genevalmag::Builder\_\-plans::get\_\-plans().
+
+Referenced by generate\_\-constructor().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{classgenevalmag_1_1Builder__code_4ff44b4aeb0d64f987f58754b997dbef_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=395pt]{classgenevalmag_1_1Builder__code_4ff44b4aeb0d64f987f58754b997dbef_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_5b244721c0c026570512c5e92acf3c7c}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-initialize\_\-rules@{generate\_\-initialize\_\-rules}}
+\index{generate\_\-initialize\_\-rules@{generate\_\-initialize\_\-rules}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-initialize\_\-rules}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::Builder\_\-code::generate\_\-initialize\_\-rules () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_5b244721c0c026570512c5e92acf3c7c}
+
+
+Generates the initialization of all rules. \begin{Desc}
+\item[Returns:]\end{Desc}
+Generates the initialization of all rules. 
+
+Definition at line 435 of file Builder\_\-code.cpp.
+
+References attr\_\-grammar, and genevalmag::Attr\_\-grammar::get\_\-rules().
+
+Referenced by generate\_\-constructor().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=251pt]{classgenevalmag_1_1Builder__code_5b244721c0c026570512c5e92acf3c7c_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=394pt]{classgenevalmag_1_1Builder__code_5b244721c0c026570512c5e92acf3c7c_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_a22bd086103a19a4d6dade0cab84b62d}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-initialize\_\-v\_\-seq@{generate\_\-initialize\_\-v\_\-seq}}
+\index{generate\_\-initialize\_\-v\_\-seq@{generate\_\-initialize\_\-v\_\-seq}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-initialize\_\-v\_\-seq}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::Builder\_\-code::generate\_\-initialize\_\-v\_\-seq () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_a22bd086103a19a4d6dade0cab84b62d}
+
+
+Generates the initialization of all visit sequences. \begin{Desc}
+\item[Returns:]\end{Desc}
+Generates the initialization of all visit sequences. 
+
+Definition at line 280 of file Builder\_\-code.cpp.
+
+References b\_\-v\_\-seq, and genevalmag::Builder\_\-visit\_\-sequences::get\_\-visit\_\-seq().
+
+Referenced by generate\_\-constructor().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=285pt]{classgenevalmag_1_1Builder__code_a22bd086103a19a4d6dade0cab84b62d_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=396pt]{classgenevalmag_1_1Builder__code_a22bd086103a19a4d6dade0cab84b62d_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_81b67543752446840e23c8b8fd3b9e7a}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-methods@{generate\_\-methods}}
+\index{generate\_\-methods@{generate\_\-methods}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-methods}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Builder\_\-code::generate\_\-methods () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_81b67543752446840e23c8b8fd3b9e7a}
+
+
+Generates and inserts all class methods, includind traverse, visit evaluator and the main evaluator. This methods are based on the article by Wuu Yang. 
+
+Definition at line 919 of file Builder\_\-code.cpp.
+
+References file\_\-name, generate\_\-add\_\-plan(), generate\_\-add\_\-plan\_\-project(), generate\_\-all\_\-compute\_\-eq(), generate\_\-all\_\-methods\_\-eqs(), generate\_\-eval\_\-visiter(), generate\_\-evaluator(), generate\_\-print(), genevalmag::generate\_\-return\_\-index\_\-context(), generate\_\-translate(), generate\_\-traverse(), and path\_\-output.
+
+Referenced by generate\_\-code().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__code_81b67543752446840e23c8b8fd3b9e7a_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{classgenevalmag_1_1Builder__code_81b67543752446840e23c8b8fd3b9e7a_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_d88294497280bb904ff3269b00446bc8}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-print@{generate\_\-print}}
+\index{generate\_\-print@{generate\_\-print}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-print}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::Builder\_\-code::generate\_\-print () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_d88294497280bb904ff3269b00446bc8}
+
+
+Generates the print method, for show the all visit sequences. \begin{Desc}
+\item[Returns:]\end{Desc}
+Generates the print method, for show the all visit sequences. 
+
+Definition at line 509 of file Builder\_\-code.cpp.
+
+References file\_\-name.
+
+Referenced by generate\_\-methods().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=367pt]{classgenevalmag_1_1Builder__code_d88294497280bb904ff3269b00446bc8_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_5dcd144389b5612a328fede4317d414f}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-structs@{generate\_\-structs}}
+\index{generate\_\-structs@{generate\_\-structs}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-structs}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Builder\_\-code::generate\_\-structs () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_5dcd144389b5612a328fede4317d414f}
+
+
+Generates and inserts all structs for represent each symbol of the grammar. With constructor and to\_\-string methods.
+
+For symbol S, with attrs s1 $<$syn$>$ int, inserts:\par
+ \par
+ typedef struct Symbol\_\-S: Node\par
+ \{\par
+ int s0;\par
+ \par
+ Symbol\_\-S(unsgned short r\_\-id);\par
+ \par
+ string to\_\-string() const;\par
+ \} S ;\par
+
+
+Generates and inserts all structs for represent each symbol of the grammar. With constructor and to\_\-string methods.
+
+For symbol S, with attrs s1 $<$syn$>$ int, inserts:
+
+typedef struct Symbol\_\-S: Node \{ int s0;
+
+Symbol\_\-S(unsgned short r\_\-id);
+
+string to\_\-string() const; \} S ; 
+
+Definition at line 966 of file Builder\_\-code.cpp.
+
+References attr\_\-grammar, file\_\-name, genevalmag::Attr\_\-grammar::get\_\-non\_\-terminal\_\-symbols(), and path\_\-output.
+
+Referenced by generate\_\-code().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=273pt]{classgenevalmag_1_1Builder__code_5dcd144389b5612a328fede4317d414f_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{classgenevalmag_1_1Builder__code_5dcd144389b5612a328fede4317d414f_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_b8a711e35ef2a06238854398ce9ed0e6}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-translate@{generate\_\-translate}}
+\index{generate\_\-translate@{generate\_\-translate}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-translate}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::Builder\_\-code::generate\_\-translate () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_b8a711e35ef2a06238854398ce9ed0e6}
+
+
+Generates the print method, for show the all visit sequences in a format more descriptive. \begin{Desc}
+\item[Returns:]\end{Desc}
+Generates the print method, for show the all visit sequences in a format more descriptive. 
+
+Definition at line 534 of file Builder\_\-code.cpp.
+
+References file\_\-name.
+
+Referenced by generate\_\-methods().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=377pt]{classgenevalmag_1_1Builder__code_b8a711e35ef2a06238854398ce9ed0e6_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__code_1b3412a660f7d69345932171709cf6d6}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!generate\_\-traverse@{generate\_\-traverse}}
+\index{generate\_\-traverse@{generate\_\-traverse}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{generate\_\-traverse}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::Builder\_\-code::generate\_\-traverse () const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_1b3412a660f7d69345932171709cf6d6}
+
+
+Generates the method that crosses the AST and sets the evaluation plan that corresponds to each node. \begin{Desc}
+\item[Returns:]\end{Desc}
+Generates the method that crosses the AST and sets the evaluation plan that corresponds to each node. 
+
+Definition at line 588 of file Builder\_\-code.cpp.
+
+References file\_\-name.
+
+Referenced by generate\_\-methods().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=376pt]{classgenevalmag_1_1Builder__code_1b3412a660f7d69345932171709cf6d6_icgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classgenevalmag_1_1Builder__code_94e3c41b0c77596acfb34c731c17f001}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!attr\_\-grammar@{attr\_\-grammar}}
+\index{attr\_\-grammar@{attr\_\-grammar}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{attr\_\-grammar}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-code::attr\_\-grammar}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_94e3c41b0c77596acfb34c731c17f001}
+
+
+References to the attribute grammar. 
+
+
+
+Definition at line 26 of file Builder\_\-code.h.
+
+Referenced by generate\_\-all\_\-compute\_\-eq(), generate\_\-all\_\-methods\_\-eqs(), generate\_\-initialize\_\-rules(), and generate\_\-structs().\hypertarget{classgenevalmag_1_1Builder__code_ba5b99353b3ec17c3b788c7baa2ae4ce}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!b\_\-plans@{b\_\-plans}}
+\index{b\_\-plans@{b\_\-plans}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{b\_\-plans}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-code::b\_\-plans}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_ba5b99353b3ec17c3b788c7baa2ae4ce}
+
+
+References to all plans generates. 
+
+
+
+Definition at line 32 of file Builder\_\-code.h.
+
+Referenced by generate\_\-evaluator(), generate\_\-initialize\_\-context(), generate\_\-initialize\_\-plan\_\-proj(), and generate\_\-initialize\_\-plans().\hypertarget{classgenevalmag_1_1Builder__code_4440af64f703eb71fd4df162f39fdcc6}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!b\_\-v\_\-seq@{b\_\-v\_\-seq}}
+\index{b\_\-v\_\-seq@{b\_\-v\_\-seq}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{b\_\-v\_\-seq}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-code::b\_\-v\_\-seq}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_4440af64f703eb71fd4df162f39fdcc6}
+
+
+References to all visit sequences generates. 
+
+
+
+Definition at line 38 of file Builder\_\-code.h.
+
+Referenced by generate\_\-initialize\_\-v\_\-seq().\hypertarget{classgenevalmag_1_1Builder__code_ba028c9ecb9918cd3371b2838b70a639}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!file\_\-name@{file\_\-name}}
+\index{file\_\-name@{file\_\-name}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{file\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-code::file\_\-name}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_ba028c9ecb9918cd3371b2838b70a639}
+
+
+Defines the name of the files and the evaluator's class name. 
+
+
+
+Definition at line 50 of file Builder\_\-code.h.
+
+Referenced by generate\_\-add\_\-plan(), generate\_\-add\_\-plan\_\-project(), generate\_\-all\_\-compute\_\-eq(), generate\_\-code\_\-file(), generate\_\-constructor(), generate\_\-eval\_\-visiter(), generate\_\-evaluator(), generate\_\-footer\_\-code(), generate\_\-footer\_\-header(), generate\_\-header\_\-file(), generate\_\-methods(), generate\_\-print(), generate\_\-structs(), generate\_\-translate(), and generate\_\-traverse().\hypertarget{classgenevalmag_1_1Builder__code_7e921a42176e2397ec0a34308408ab4c}{
+\index{genevalmag::Builder\_\-code@{genevalmag::Builder\_\-code}!path\_\-output@{path\_\-output}}
+\index{path\_\-output@{path\_\-output}!genevalmag::Builder_code@{genevalmag::Builder\_\-code}}
+\subsubsection[{path\_\-output}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-code::path\_\-output}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__code_7e921a42176e2397ec0a34308408ab4c}
+
+
+Defines the path where the files generated be saved. 
+
+
+
+Definition at line 44 of file Builder\_\-code.h.
+
+Referenced by generate\_\-code(), generate\_\-code\_\-file(), generate\_\-constructor(), generate\_\-footer\_\-code(), generate\_\-footer\_\-header(), generate\_\-header\_\-file(), generate\_\-methods(), and generate\_\-structs().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+include/Builders/\hyperlink{Builder__code_8h}{Builder\_\-code.h}\item 
+src/Builders/\hyperlink{Builder__code_8cpp}{Builder\_\-code.cpp}\end{CompactItemize}

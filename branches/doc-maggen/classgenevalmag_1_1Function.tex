@@ -1,0 +1,868 @@
+\hypertarget{classgenevalmag_1_1Function}{
+\section{genevalmag::Function Class Reference}
+\label{classgenevalmag_1_1Function}\index{genevalmag::Function@{genevalmag::Function}}
+}
+{\tt \#include $<$Function.h$>$}
+
+Collaboration diagram for genevalmag::Function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=400pt]{classgenevalmag_1_1Function__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+\hyperlink{classgenevalmag_1_1Function_88af7b2a3947048e53e0bc9c1d071ad9}{Function} ()
+\item 
+\hyperlink{classgenevalmag_1_1Function_e598ad6ba742b5d73567c41c3cd4d7bd}{Function} (const \hyperlink{classgenevalmag_1_1Function}{Function} \&other)
+\item 
+virtual \hyperlink{classgenevalmag_1_1Function_318a1979861665429179979f9d678f3e}{$\sim$Function} ()
+\item 
+\hyperlink{classgenevalmag_1_1Function}{Function} \& \hyperlink{classgenevalmag_1_1Function_917f09b6aa99038bcae21de7e9e99ad1}{operator=} (const \hyperlink{classgenevalmag_1_1Function}{Function} \&other)
+\item 
+string \hyperlink{classgenevalmag_1_1Function_ec65653267a5d4cb93f2ce7b5e1c542b}{get\_\-name} () const 
+\item 
+const vector$<$ const \hyperlink{classgenevalmag_1_1Sort}{Sort} $\ast$ $>$ \& \hyperlink{classgenevalmag_1_1Function_cffc8f2df4197f05e095bc427fb13331}{get\_\-domain} () const 
+\item 
+const \hyperlink{classgenevalmag_1_1Sort}{Sort} $\ast$ \hyperlink{classgenevalmag_1_1Function_3a0dc4e1734623f53021f0b647c3b0cc}{get\_\-image} () const 
+\item 
+const \hyperlink{namespacegenevalmag_8e412eca3897f0532c6f1997af777ba4}{oper\_\-mode} \hyperlink{classgenevalmag_1_1Function_6db7c2695f9cce41c24e5cfea7406dd6}{get\_\-mode} () const 
+\item 
+const unsigned short \hyperlink{classgenevalmag_1_1Function_31272821c5ad532ada3b3d8a988f5891}{get\_\-prec} () const 
+\item 
+const \hyperlink{namespacegenevalmag_ed96782841eb4586b9e32ce72721d64b}{oper\_\-assoc} \hyperlink{classgenevalmag_1_1Function_e3338db71a289ae4649936bea49dfa5f}{get\_\-oper\_\-assoc} () const 
+\item 
+const int \hyperlink{classgenevalmag_1_1Function_30fc3347320a9cbeb37b8d45aac3737e}{get\_\-arity} () const 
+\item 
+void \hyperlink{classgenevalmag_1_1Function_09a0403fa5eac256e223802d6328041e}{set\_\-name} (const string name)
+\item 
+void \hyperlink{classgenevalmag_1_1Function_b82067b5dfd6d143a12defbf6eb52d56}{set\_\-image} (const \hyperlink{classgenevalmag_1_1Sort}{Sort} $\ast$image)
+\item 
+void \hyperlink{classgenevalmag_1_1Function_90ff82b99ca7a8bd4795a8c7b6a26ac9}{set\_\-mode} (const string mode)
+\item 
+void \hyperlink{classgenevalmag_1_1Function_56dbc3c8050d207b3fb5542d227326b7}{set\_\-prec} (const unsigned short prec)
+\item 
+void \hyperlink{classgenevalmag_1_1Function_5bf49ede4083dc9621eae9ff8e8b9418}{set\_\-oper\_\-assoc} (const string mod)
+\item 
+void \hyperlink{classgenevalmag_1_1Function_0814d3aa8b3034c5e415b0dacd65a059}{set\_\-is\_\-operator} (const bool value)
+\item 
+void \hyperlink{classgenevalmag_1_1Function_283f269af558ded12c3dd51a7edb774a}{add\_\-domain} (const \hyperlink{classgenevalmag_1_1Sort}{Sort} $\ast$sort)
+\item 
+const string \hyperlink{classgenevalmag_1_1Function_e730b6f7f0108383e1acbdde13813585}{to\_\-string} () const 
+\item 
+const string \hyperlink{classgenevalmag_1_1Function_13bd09282fcdf0edec0b8881939d6928}{signature} () const 
+\item 
+const bool \hyperlink{classgenevalmag_1_1Function_011d344c0a5d6fc3d1d851967028010a}{is\_\-operator} () const 
+\item 
+const bool \hyperlink{classgenevalmag_1_1Function_4a9007a5fc8a9e4781144b580e127109}{equals} (const \hyperlink{classgenevalmag_1_1Function}{Function} \&other) const 
+\item 
+const string \hyperlink{classgenevalmag_1_1Function_b1928425174bc0856db6a7d700061fca}{key} () const 
+\end{CompactItemize}
+\subsection*{Private Member Functions}
+\begin{CompactItemize}
+\item 
+void \hyperlink{classgenevalmag_1_1Function_3a30e9b7d22c2426c34b025bc460ecda}{copy} (const \hyperlink{classgenevalmag_1_1Function}{Function} \&other)
+\item 
+void \hyperlink{classgenevalmag_1_1Function_280800ca78b087d0d098bc89fe7b5190}{destroy} ()
+\end{CompactItemize}
+\subsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+string \hyperlink{classgenevalmag_1_1Function_dab115bdcdc014b30b2b9c9e2da07109}{f\_\-name}
+\begin{CompactList}\small\item\em Function's name. \item\end{CompactList}\item 
+vector$<$ const \hyperlink{classgenevalmag_1_1Sort}{Sort} $\ast$ $>$ \hyperlink{classgenevalmag_1_1Function_e8e057eeebfabdc524e10e42e54da43c}{f\_\-domain}
+\begin{CompactList}\small\item\em Function's sort domain. \item\end{CompactList}\item 
+const \hyperlink{classgenevalmag_1_1Sort}{Sort} $\ast$ \hyperlink{classgenevalmag_1_1Function_4abfbb9239231cf2a586935546a585f8}{f\_\-image}
+\begin{CompactList}\small\item\em Function's sort image. \item\end{CompactList}\item 
+\hyperlink{namespacegenevalmag_8e412eca3897f0532c6f1997af777ba4}{oper\_\-mode} \hyperlink{classgenevalmag_1_1Function_63645db8078f5c96b2c24d4873ee0fcd}{f\_\-mod}
+\begin{CompactList}\small\item\em Function's notation. Functions are always prefix. Operators can be anyone. \item\end{CompactList}\item 
+unsigned short \hyperlink{classgenevalmag_1_1Function_24cd8c438fe7af6c23d91a83587acce9}{f\_\-prec}
+\begin{CompactList}\small\item\em Function's precedence. \item\end{CompactList}\item 
+\hyperlink{namespacegenevalmag_ed96782841eb4586b9e32ce72721d64b}{oper\_\-assoc} \hyperlink{classgenevalmag_1_1Function_20f4e51ba6a747b7422406b6af6b40a1}{f\_\-assoc}
+\begin{CompactList}\small\item\em Function's associativity. \item\end{CompactList}\item 
+bool \hyperlink{classgenevalmag_1_1Function_681af241838253c6b001e92541be7b4c}{f\_\-is\_\-operator}
+\begin{CompactList}\small\item\em If that value is TRUE then the object function is a operator. This can be: prefix, infix or postfix. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 40 of file Function.h.
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classgenevalmag_1_1Function_88af7b2a3947048e53e0bc9c1d071ad9}{
+\index{genevalmag::Function@{genevalmag::Function}!Function@{Function}}
+\index{Function@{Function}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{Function}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Function::Function ()}}
+\label{classgenevalmag_1_1Function_88af7b2a3947048e53e0bc9c1d071ad9}
+
+
+Contructor empty of function.
+
+Contructor empty of \hyperlink{classgenevalmag_1_1Function}{Function}. 
+
+Definition at line 21 of file Function.cpp.
+
+References f\_\-assoc, f\_\-is\_\-operator, f\_\-mod, f\_\-prec, genevalmag::k\_\-left, and genevalmag::k\_\-prefix.\hypertarget{classgenevalmag_1_1Function_e598ad6ba742b5d73567c41c3cd4d7bd}{
+\index{genevalmag::Function@{genevalmag::Function}!Function@{Function}}
+\index{Function@{Function}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{Function}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Function::Function (const {\bf Function} \& {\em other})}}
+\label{classgenevalmag_1_1Function_e598ad6ba742b5d73567c41c3cd4d7bd}
+
+
+Contructor copy of function. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em other}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Contructor copy of \hyperlink{classgenevalmag_1_1Function}{Function}. 
+
+Definition at line 32 of file Function.cpp.
+
+References copy().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=300pt]{classgenevalmag_1_1Function_e598ad6ba742b5d73567c41c3cd4d7bd_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_318a1979861665429179979f9d678f3e}{
+\index{genevalmag::Function@{genevalmag::Function}!$\sim$Function@{$\sim$Function}}
+\index{$\sim$Function@{$\sim$Function}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{$\sim$Function}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Function::$\sim$Function ()\hspace{0.3cm}{\tt  \mbox{[}virtual\mbox{]}}}}
+\label{classgenevalmag_1_1Function_318a1979861665429179979f9d678f3e}
+
+
+Destructor of the function.
+
+Destructor of the \hyperlink{classgenevalmag_1_1Function}{Function}. 
+
+Definition at line 40 of file Function.cpp.
+
+References destroy().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{classgenevalmag_1_1Function_318a1979861665429179979f9d678f3e_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classgenevalmag_1_1Function_283f269af558ded12c3dd51a7edb774a}{
+\index{genevalmag::Function@{genevalmag::Function}!add\_\-domain@{add\_\-domain}}
+\index{add\_\-domain@{add\_\-domain}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{add\_\-domain}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Function::add\_\-domain (const {\bf Sort} $\ast$ {\em sort})}}
+\label{classgenevalmag_1_1Function_283f269af558ded12c3dd51a7edb774a}
+
+
+Enqueues a sort in the domain of the \hyperlink{classgenevalmag_1_1Function}{Function}. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em sort}]Enqueue a sort in the domain of the \hyperlink{classgenevalmag_1_1Function}{Function}. \end{description}
+\end{Desc}
+
+
+Definition at line 230 of file Function.cpp.
+
+References f\_\-domain.
+
+Referenced by genevalmag::save\_\-domain\_\-func().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{classgenevalmag_1_1Function_283f269af558ded12c3dd51a7edb774a_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_3a30e9b7d22c2426c34b025bc460ecda}{
+\index{genevalmag::Function@{genevalmag::Function}!copy@{copy}}
+\index{copy@{copy}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{copy}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Function::copy (const {\bf Function} \& {\em other})\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Function_3a30e9b7d22c2426c34b025bc460ecda}
+
+
+Method of copy the function, STL-like C++. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em other}]Method of copy the \hyperlink{classgenevalmag_1_1Function}{Function}, STL-like C++. \end{description}
+\end{Desc}
+
+
+Definition at line 61 of file Function.cpp.
+
+References f\_\-assoc, f\_\-domain, f\_\-image, f\_\-is\_\-operator, f\_\-mod, f\_\-name, f\_\-prec, get\_\-domain(), get\_\-image(), get\_\-mode(), get\_\-name(), get\_\-oper\_\-assoc(), get\_\-prec(), and is\_\-operator().
+
+Referenced by Function(), and operator=().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{classgenevalmag_1_1Function_3a30e9b7d22c2426c34b025bc460ecda_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{classgenevalmag_1_1Function_3a30e9b7d22c2426c34b025bc460ecda_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_280800ca78b087d0d098bc89fe7b5190}{
+\index{genevalmag::Function@{genevalmag::Function}!destroy@{destroy}}
+\index{destroy@{destroy}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{destroy}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Function::destroy ()\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Function_280800ca78b087d0d098bc89fe7b5190}
+
+
+Method destroy function, STL-like C++.
+
+Method destroy \hyperlink{classgenevalmag_1_1Function}{Function}, STL-like C++. 
+
+Definition at line 75 of file Function.cpp.
+
+Referenced by operator=(), and $\sim$Function().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{classgenevalmag_1_1Function_280800ca78b087d0d098bc89fe7b5190_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_4a9007a5fc8a9e4781144b580e127109}{
+\index{genevalmag::Function@{genevalmag::Function}!equals@{equals}}
+\index{equals@{equals}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{equals}]{\setlength{\rightskip}{0pt plus 5cm}const bool genevalmag::Function::equals (const {\bf Function} \& {\em other}) const}}
+\label{classgenevalmag_1_1Function_4a9007a5fc8a9e4781144b580e127109}
+
+
+Compares the \hyperlink{classgenevalmag_1_1Function}{Function} with other. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em other}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Compares the \hyperlink{classgenevalmag_1_1Function}{Function} with other. 
+
+Definition at line 346 of file Function.cpp.
+
+References key().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=282pt]{classgenevalmag_1_1Function_4a9007a5fc8a9e4781144b580e127109_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_30fc3347320a9cbeb37b8d45aac3737e}{
+\index{genevalmag::Function@{genevalmag::Function}!get\_\-arity@{get\_\-arity}}
+\index{get\_\-arity@{get\_\-arity}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{get\_\-arity}]{\setlength{\rightskip}{0pt plus 5cm}const int genevalmag::Function::get\_\-arity () const}}
+\label{classgenevalmag_1_1Function_30fc3347320a9cbeb37b8d45aac3737e}
+
+
+Returns the arity of \hyperlink{classgenevalmag_1_1Function}{Function}. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the arity of \hyperlink{classgenevalmag_1_1Function}{Function}. 
+
+Definition at line 130 of file Function.cpp.
+
+References f\_\-domain.\hypertarget{classgenevalmag_1_1Function_cffc8f2df4197f05e095bc427fb13331}{
+\index{genevalmag::Function@{genevalmag::Function}!get\_\-domain@{get\_\-domain}}
+\index{get\_\-domain@{get\_\-domain}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{get\_\-domain}]{\setlength{\rightskip}{0pt plus 5cm}const vector$<$ const {\bf Sort} $\ast$ $>$ \& genevalmag::Function::get\_\-domain () const}}
+\label{classgenevalmag_1_1Function_cffc8f2df4197f05e095bc427fb13331}
+
+
+Returns the domain of the \hyperlink{classgenevalmag_1_1Function}{Function}. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the domain of the \hyperlink{classgenevalmag_1_1Function}{Function}. 
+
+Definition at line 90 of file Function.cpp.
+
+References f\_\-domain.
+
+Referenced by copy().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{classgenevalmag_1_1Function_cffc8f2df4197f05e095bc427fb13331_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_3a0dc4e1734623f53021f0b647c3b0cc}{
+\index{genevalmag::Function@{genevalmag::Function}!get\_\-image@{get\_\-image}}
+\index{get\_\-image@{get\_\-image}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{get\_\-image}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Sort} $\ast$ genevalmag::Function::get\_\-image () const}}
+\label{classgenevalmag_1_1Function_3a0dc4e1734623f53021f0b647c3b0cc}
+
+
+Returns the image of the \hyperlink{classgenevalmag_1_1Function}{Function}. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the image of the \hyperlink{classgenevalmag_1_1Function}{Function}. 
+
+Definition at line 98 of file Function.cpp.
+
+References f\_\-image.
+
+Referenced by copy().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=290pt]{classgenevalmag_1_1Function_3a0dc4e1734623f53021f0b647c3b0cc_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_6db7c2695f9cce41c24e5cfea7406dd6}{
+\index{genevalmag::Function@{genevalmag::Function}!get\_\-mode@{get\_\-mode}}
+\index{get\_\-mode@{get\_\-mode}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{get\_\-mode}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf oper\_\-mode} genevalmag::Function::get\_\-mode () const}}
+\label{classgenevalmag_1_1Function_6db7c2695f9cce41c24e5cfea7406dd6}
+
+
+Returns the mode of the operator. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the mode of the operator. 
+
+Definition at line 106 of file Function.cpp.
+
+References f\_\-mod.
+
+Referenced by copy(), genevalmag::Expr\_\-function::is\_\-infix(), genevalmag::Expr\_\-function::is\_\-postfix(), genevalmag::Expr\_\-function::is\_\-prefix(), and genevalmag::Expr\_\-function::to\_\-string().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Function_6db7c2695f9cce41c24e5cfea7406dd6_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_ec65653267a5d4cb93f2ce7b5e1c542b}{
+\index{genevalmag::Function@{genevalmag::Function}!get\_\-name@{get\_\-name}}
+\index{get\_\-name@{get\_\-name}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{get\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::Function::get\_\-name () const}}
+\label{classgenevalmag_1_1Function_ec65653267a5d4cb93f2ce7b5e1c542b}
+
+
+Returns the name of the \hyperlink{classgenevalmag_1_1Function}{Function}. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the name of the \hyperlink{classgenevalmag_1_1Function}{Function}. 
+
+Definition at line 82 of file Function.cpp.
+
+References f\_\-name.
+
+Referenced by copy(), genevalmag::generate\_\-expr\_\-text(), key(), signature(), genevalmag::Expr\_\-function::to\_\-string(), and to\_\-string().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Function_ec65653267a5d4cb93f2ce7b5e1c542b_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_e3338db71a289ae4649936bea49dfa5f}{
+\index{genevalmag::Function@{genevalmag::Function}!get\_\-oper\_\-assoc@{get\_\-oper\_\-assoc}}
+\index{get\_\-oper\_\-assoc@{get\_\-oper\_\-assoc}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{get\_\-oper\_\-assoc}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf oper\_\-assoc} genevalmag::Function::get\_\-oper\_\-assoc () const}}
+\label{classgenevalmag_1_1Function_e3338db71a289ae4649936bea49dfa5f}
+
+
+Returns the associativity of the operator. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the associativity of the operator. 
+
+Definition at line 122 of file Function.cpp.
+
+References f\_\-assoc.
+
+Referenced by copy().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=302pt]{classgenevalmag_1_1Function_e3338db71a289ae4649936bea49dfa5f_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_31272821c5ad532ada3b3d8a988f5891}{
+\index{genevalmag::Function@{genevalmag::Function}!get\_\-prec@{get\_\-prec}}
+\index{get\_\-prec@{get\_\-prec}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{get\_\-prec}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned short genevalmag::Function::get\_\-prec () const}}
+\label{classgenevalmag_1_1Function_31272821c5ad532ada3b3d8a988f5891}
+
+
+Returns the precedence of the operator. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the precedence of the operator. 
+
+Definition at line 114 of file Function.cpp.
+
+References f\_\-prec.
+
+Referenced by genevalmag::Expr\_\-function::compare\_\-precedence(), copy(), and genevalmag::Semantics\_\-checks::correct\_\-precedence().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Function_31272821c5ad532ada3b3d8a988f5891_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_011d344c0a5d6fc3d1d851967028010a}{
+\index{genevalmag::Function@{genevalmag::Function}!is\_\-operator@{is\_\-operator}}
+\index{is\_\-operator@{is\_\-operator}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{is\_\-operator}]{\setlength{\rightskip}{0pt plus 5cm}const bool genevalmag::Function::is\_\-operator () const}}
+\label{classgenevalmag_1_1Function_011d344c0a5d6fc3d1d851967028010a}
+
+
+Returns true if the \hyperlink{classgenevalmag_1_1Function}{Function} is a Operator. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns true if the \hyperlink{classgenevalmag_1_1Function}{Function} is a Operator. 
+
+Definition at line 338 of file Function.cpp.
+
+References f\_\-is\_\-operator.
+
+Referenced by copy(), genevalmag::generate\_\-expr\_\-text(), key(), signature(), genevalmag::Expr\_\-function::to\_\-string(), and to\_\-string().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Function_011d344c0a5d6fc3d1d851967028010a_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_b1928425174bc0856db6a7d700061fca}{
+\index{genevalmag::Function@{genevalmag::Function}!key@{key}}
+\index{key@{key}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{key}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::Function::key () const}}
+\label{classgenevalmag_1_1Function_b1928425174bc0856db6a7d700061fca}
+
+
+Generates and returns the string key that identifies a \hyperlink{classgenevalmag_1_1Function}{Function} definitely.\par
+ \par
+ Result = $<$name$>$ $<$domain$>$ $<$image$>$\par
+ \par
+ where $<$domain$>$ is = sort\_\-1 ... sort\_\-n\par
+ \begin{Desc}
+\item[Returns:]\end{Desc}
+Generates and returns the string key that identifies a \hyperlink{classgenevalmag_1_1Function}{Function} definitely.
+
+Result = $<$name$>$ $<$domain$>$ $<$image$>$
+
+where $<$domain$>$ is = sort\_\-1 ... sort\_\-n 
+
+Definition at line 358 of file Function.cpp.
+
+References f\_\-domain, f\_\-mod, f\_\-name, get\_\-name(), is\_\-operator(), genevalmag::k\_\-infix, genevalmag::k\_\-postfix, and genevalmag::k\_\-prefix.
+
+Referenced by equals().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{classgenevalmag_1_1Function_b1928425174bc0856db6a7d700061fca_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{classgenevalmag_1_1Function_b1928425174bc0856db6a7d700061fca_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_917f09b6aa99038bcae21de7e9e99ad1}{
+\index{genevalmag::Function@{genevalmag::Function}!operator=@{operator=}}
+\index{operator=@{operator=}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Function} \& genevalmag::Function::operator= (const {\bf Function} \& {\em other})}}
+\label{classgenevalmag_1_1Function_917f09b6aa99038bcae21de7e9e99ad1}
+
+
+Operator assign(=) of function. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em other}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Operator assign(=) of \hyperlink{classgenevalmag_1_1Function}{Function}. 
+
+Definition at line 48 of file Function.cpp.
+
+References copy(), and destroy().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=307pt]{classgenevalmag_1_1Function_917f09b6aa99038bcae21de7e9e99ad1_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_b82067b5dfd6d143a12defbf6eb52d56}{
+\index{genevalmag::Function@{genevalmag::Function}!set\_\-image@{set\_\-image}}
+\index{set\_\-image@{set\_\-image}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{set\_\-image}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Function::set\_\-image (const {\bf Sort} $\ast$ {\em image})}}
+\label{classgenevalmag_1_1Function_b82067b5dfd6d143a12defbf6eb52d56}
+
+
+Sets the sort image of the \hyperlink{classgenevalmag_1_1Function}{Function}. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em image}]Sets the sort image of the \hyperlink{classgenevalmag_1_1Function}{Function}. \end{description}
+\end{Desc}
+
+
+Definition at line 146 of file Function.cpp.
+
+References f\_\-image.
+
+Referenced by genevalmag::save\_\-image\_\-func().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{classgenevalmag_1_1Function_b82067b5dfd6d143a12defbf6eb52d56_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_0814d3aa8b3034c5e415b0dacd65a059}{
+\index{genevalmag::Function@{genevalmag::Function}!set\_\-is\_\-operator@{set\_\-is\_\-operator}}
+\index{set\_\-is\_\-operator@{set\_\-is\_\-operator}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{set\_\-is\_\-operator}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Function::set\_\-is\_\-operator (const bool {\em value})}}
+\label{classgenevalmag_1_1Function_0814d3aa8b3034c5e415b0dacd65a059}
+
+
+Sets the boolean attribute with the parameter. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em value}]Sets the boolean attribute with the parameter. \end{description}
+\end{Desc}
+
+
+Definition at line 222 of file Function.cpp.
+
+References f\_\-is\_\-operator.
+
+Referenced by genevalmag::add\_\-operator(), and genevalmag::create\_\-operator().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{classgenevalmag_1_1Function_0814d3aa8b3034c5e415b0dacd65a059_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_90ff82b99ca7a8bd4795a8c7b6a26ac9}{
+\index{genevalmag::Function@{genevalmag::Function}!set\_\-mode@{set\_\-mode}}
+\index{set\_\-mode@{set\_\-mode}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{set\_\-mode}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Function::set\_\-mode (const string {\em mode})}}
+\label{classgenevalmag_1_1Function_90ff82b99ca7a8bd4795a8c7b6a26ac9}
+
+
+Sets the mode of the operator. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em mode}]Sets the mode of the operator. \end{description}
+\end{Desc}
+
+
+Definition at line 154 of file Function.cpp.
+
+References f\_\-mod, genevalmag::k\_\-infix, genevalmag::k\_\-postfix, and genevalmag::k\_\-prefix.
+
+Referenced by genevalmag::save\_\-mode\_\-op().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=331pt]{classgenevalmag_1_1Function_90ff82b99ca7a8bd4795a8c7b6a26ac9_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_09a0403fa5eac256e223802d6328041e}{
+\index{genevalmag::Function@{genevalmag::Function}!set\_\-name@{set\_\-name}}
+\index{set\_\-name@{set\_\-name}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{set\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Function::set\_\-name (const string {\em name})}}
+\label{classgenevalmag_1_1Function_09a0403fa5eac256e223802d6328041e}
+
+
+Sets the name of the \hyperlink{classgenevalmag_1_1Function}{Function}. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em name}]Sets the name of the \hyperlink{classgenevalmag_1_1Function}{Function}. \end{description}
+\end{Desc}
+
+
+Definition at line 138 of file Function.cpp.
+
+References f\_\-name.
+
+Referenced by genevalmag::save\_\-name\_\-func().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Function_09a0403fa5eac256e223802d6328041e_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_5bf49ede4083dc9621eae9ff8e8b9418}{
+\index{genevalmag::Function@{genevalmag::Function}!set\_\-oper\_\-assoc@{set\_\-oper\_\-assoc}}
+\index{set\_\-oper\_\-assoc@{set\_\-oper\_\-assoc}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{set\_\-oper\_\-assoc}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Function::set\_\-oper\_\-assoc (const string {\em mod})}}
+\label{classgenevalmag_1_1Function_5bf49ede4083dc9621eae9ff8e8b9418}
+
+
+Sets the associativity of the operator. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em mod}]Sets the associativity of the operator. \end{description}
+\end{Desc}
+
+
+Definition at line 192 of file Function.cpp.
+
+References f\_\-assoc, genevalmag::k\_\-left, genevalmag::k\_\-non\_\-assoc, and genevalmag::k\_\-right.
+
+Referenced by genevalmag::save\_\-assoc\_\-op().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=345pt]{classgenevalmag_1_1Function_5bf49ede4083dc9621eae9ff8e8b9418_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_56dbc3c8050d207b3fb5542d227326b7}{
+\index{genevalmag::Function@{genevalmag::Function}!set\_\-prec@{set\_\-prec}}
+\index{set\_\-prec@{set\_\-prec}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{set\_\-prec}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Function::set\_\-prec (const unsigned short {\em prec})}}
+\label{classgenevalmag_1_1Function_56dbc3c8050d207b3fb5542d227326b7}
+
+
+Sets the precedence of the operator. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em prec}]Sets the precedence of the operator. \end{description}
+\end{Desc}
+
+
+Definition at line 184 of file Function.cpp.
+
+References f\_\-prec.
+
+Referenced by genevalmag::save\_\-prec\_\-op().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=325pt]{classgenevalmag_1_1Function_56dbc3c8050d207b3fb5542d227326b7_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_13bd09282fcdf0edec0b8881939d6928}{
+\index{genevalmag::Function@{genevalmag::Function}!signature@{signature}}
+\index{signature@{signature}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{signature}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::Function::signature () const}}
+\label{classgenevalmag_1_1Function_13bd09282fcdf0edec0b8881939d6928}
+
+
+Generates and returns a string with the signature of a \hyperlink{classgenevalmag_1_1Function}{Function}.\par
+ \par
+ Result = $<$image$>$ $<$name$>$ \char`\"{}(\char`\"{} $<$domain$>$ \char`\"{});\char`\"{}\par
+ \par
+ or if is an operator:\par
+ \par
+ Result = $<$image$>$ \char`\"{}operator\char`\"{}$<$name$>$ \char`\"{}(\char`\"{} $<$domain$>$ \char`\"{});\char`\"{}\par
+ \par
+ where $<$domain$>$ is = sort\_\-1 P1\char`\"{},\char`\"{} ... \char`\"{},\char`\"{} sort\_\-n Pn\par
+
+
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Generates and returns a string with the signature of a \hyperlink{classgenevalmag_1_1Function}{Function}.
+
+Result = $<$image$>$ $<$name$>$ \char`\"{}(\char`\"{} $<$domain$>$ \char`\"{});\char`\"{}
+
+or if is an operator:
+
+Result = $<$image$>$ \char`\"{}operator\char`\"{}$<$name$>$ \char`\"{}(\char`\"{} $<$domain$>$ \char`\"{});\char`\"{}
+
+where $<$domain$>$ is= sort\_\-1 P1\char`\"{},\char`\"{} ... \char`\"{},\char`\"{} sort\_\-n Pn 
+
+Definition at line 308 of file Function.cpp.
+
+References f\_\-domain, f\_\-image, f\_\-name, get\_\-name(), genevalmag::Sort::get\_\-name(), and is\_\-operator().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{classgenevalmag_1_1Function_13bd09282fcdf0edec0b8881939d6928_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Function_e730b6f7f0108383e1acbdde13813585}{
+\index{genevalmag::Function@{genevalmag::Function}!to\_\-string@{to\_\-string}}
+\index{to\_\-string@{to\_\-string}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{to\_\-string}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::Function::to\_\-string () const}}
+\label{classgenevalmag_1_1Function_e730b6f7f0108383e1acbdde13813585}
+
+
+Generates and returns a string reprensentation of a \hyperlink{classgenevalmag_1_1Function}{Function}.\par
+ \par
+ Result = \char`\"{}function\char`\"{} $<$name$>$ \char`\"{}:\char`\"{} $<$domain$>$ \char`\"{} $\rightarrow$ \char`\"{} $<$image$>$ \char`\"{};\char`\"{}\par
+ \par
+ where $<$domain$>$ is= sort\_\-1 \mbox{[}\char`\"{}(\char`\"{} $<$instance$>$ \char`\"{})\char`\"{} IF DEBUG IS ON\mbox{]} \char`\"{},\char`\"{} ... \char`\"{},\char`\"{} sort\_\-n \mbox{[}\char`\"{}(\char`\"{} $<$instance$>$ \char`\"{})\char`\"{} IF DEBUG IS ON\mbox{]}\par
+
+
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Generates and returns a string reprensentation of a \hyperlink{classgenevalmag_1_1Function}{Function}.
+
+Result = \char`\"{}function\char`\"{} $<$name$>$ \char`\"{}:\char`\"{} $<$domain$>$ \char`\"{} $\rightarrow$ \char`\"{} $<$image$>$ \char`\"{};\char`\"{}
+
+where $<$domain$>$ is= sort\_\-1 \mbox{[}\char`\"{}(\char`\"{} $<$instance$>$ \char`\"{})\char`\"{} IF DEBUG IS ON\mbox{]} \char`\"{},\char`\"{} ... \char`\"{},\char`\"{} sort\_\-n \mbox{[}\char`\"{}(\char`\"{} $<$instance$>$ \char`\"{})\char`\"{} IF DEBUG IS ON\mbox{]} 
+
+Definition at line 242 of file Function.cpp.
+
+References f\_\-assoc, f\_\-domain, f\_\-image, f\_\-mod, f\_\-name, f\_\-prec, genevalmag::Sort::get\_\-name(), get\_\-name(), is\_\-operator(), genevalmag::k\_\-infix, genevalmag::k\_\-left, genevalmag::k\_\-non\_\-assoc, genevalmag::k\_\-postfix, genevalmag::k\_\-prefix, and genevalmag::k\_\-right.
+
+Referenced by genevalmag::add\_\-function().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=201pt]{classgenevalmag_1_1Function_e730b6f7f0108383e1acbdde13813585_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=406pt]{classgenevalmag_1_1Function_e730b6f7f0108383e1acbdde13813585_icgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classgenevalmag_1_1Function_20f4e51ba6a747b7422406b6af6b40a1}{
+\index{genevalmag::Function@{genevalmag::Function}!f\_\-assoc@{f\_\-assoc}}
+\index{f\_\-assoc@{f\_\-assoc}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{f\_\-assoc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Function::f\_\-assoc}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Function_20f4e51ba6a747b7422406b6af6b40a1}
+
+
+Function's associativity. 
+
+
+
+Definition at line 72 of file Function.h.
+
+Referenced by copy(), Function(), get\_\-oper\_\-assoc(), set\_\-oper\_\-assoc(), and to\_\-string().\hypertarget{classgenevalmag_1_1Function_e8e057eeebfabdc524e10e42e54da43c}{
+\index{genevalmag::Function@{genevalmag::Function}!f\_\-domain@{f\_\-domain}}
+\index{f\_\-domain@{f\_\-domain}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{f\_\-domain}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Function::f\_\-domain}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Function_e8e057eeebfabdc524e10e42e54da43c}
+
+
+Function's sort domain. 
+
+
+
+Definition at line 52 of file Function.h.
+
+Referenced by add\_\-domain(), copy(), get\_\-arity(), get\_\-domain(), key(), signature(), and to\_\-string().\hypertarget{classgenevalmag_1_1Function_4abfbb9239231cf2a586935546a585f8}{
+\index{genevalmag::Function@{genevalmag::Function}!f\_\-image@{f\_\-image}}
+\index{f\_\-image@{f\_\-image}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{f\_\-image}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Function::f\_\-image}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Function_4abfbb9239231cf2a586935546a585f8}
+
+
+Function's sort image. 
+
+
+
+Definition at line 57 of file Function.h.
+
+Referenced by copy(), get\_\-image(), set\_\-image(), signature(), and to\_\-string().\hypertarget{classgenevalmag_1_1Function_681af241838253c6b001e92541be7b4c}{
+\index{genevalmag::Function@{genevalmag::Function}!f\_\-is\_\-operator@{f\_\-is\_\-operator}}
+\index{f\_\-is\_\-operator@{f\_\-is\_\-operator}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{f\_\-is\_\-operator}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Function::f\_\-is\_\-operator}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Function_681af241838253c6b001e92541be7b4c}
+
+
+If that value is TRUE then the object function is a operator. This can be: prefix, infix or postfix. 
+
+
+
+Definition at line 78 of file Function.h.
+
+Referenced by copy(), Function(), is\_\-operator(), and set\_\-is\_\-operator().\hypertarget{classgenevalmag_1_1Function_63645db8078f5c96b2c24d4873ee0fcd}{
+\index{genevalmag::Function@{genevalmag::Function}!f\_\-mod@{f\_\-mod}}
+\index{f\_\-mod@{f\_\-mod}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{f\_\-mod}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Function::f\_\-mod}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Function_63645db8078f5c96b2c24d4873ee0fcd}
+
+
+Function's notation. Functions are always prefix. Operators can be anyone. 
+
+
+
+Definition at line 62 of file Function.h.
+
+Referenced by copy(), Function(), get\_\-mode(), key(), set\_\-mode(), and to\_\-string().\hypertarget{classgenevalmag_1_1Function_dab115bdcdc014b30b2b9c9e2da07109}{
+\index{genevalmag::Function@{genevalmag::Function}!f\_\-name@{f\_\-name}}
+\index{f\_\-name@{f\_\-name}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{f\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Function::f\_\-name}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Function_dab115bdcdc014b30b2b9c9e2da07109}
+
+
+Function's name. 
+
+
+
+Definition at line 47 of file Function.h.
+
+Referenced by copy(), get\_\-name(), key(), set\_\-name(), signature(), and to\_\-string().\hypertarget{classgenevalmag_1_1Function_24cd8c438fe7af6c23d91a83587acce9}{
+\index{genevalmag::Function@{genevalmag::Function}!f\_\-prec@{f\_\-prec}}
+\index{f\_\-prec@{f\_\-prec}!genevalmag::Function@{genevalmag::Function}}
+\subsubsection[{f\_\-prec}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Function::f\_\-prec}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Function_24cd8c438fe7af6c23d91a83587acce9}
+
+
+Function's precedence. 
+
+
+
+Definition at line 67 of file Function.h.
+
+Referenced by copy(), Function(), get\_\-prec(), set\_\-prec(), and to\_\-string().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+include/Attr\_\-grammar/\hyperlink{Function_8h}{Function.h}\item 
+src/Attr\_\-grammar/\hyperlink{Function_8cpp}{Function.cpp}\end{CompactItemize}

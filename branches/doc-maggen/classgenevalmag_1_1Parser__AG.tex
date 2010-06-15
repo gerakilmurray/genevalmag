@@ -1,0 +1,195 @@
+\hypertarget{classgenevalmag_1_1Parser__AG}{
+\section{genevalmag::Parser\_\-AG Class Reference}
+\label{classgenevalmag_1_1Parser__AG}\index{genevalmag::Parser\_\-AG@{genevalmag::Parser\_\-AG}}
+}
+{\tt \#include $<$Parser\_\-AG.h$>$}
+
+Collaboration diagram for genevalmag::Parser\_\-AG:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=400pt]{classgenevalmag_1_1Parser__AG__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+\hyperlink{classgenevalmag_1_1Parser__AG_107da8e92db8c44204471982619ff339}{Parser\_\-AG} ()
+\item 
+\hyperlink{classgenevalmag_1_1Parser__AG_834ddbb83e5822f485d16cdc432762cf}{$\sim$Parser\_\-AG} ()
+\item 
+const \hyperlink{classgenevalmag_1_1Attr__grammar}{Attr\_\-grammar} \& \hyperlink{classgenevalmag_1_1Parser__AG_c6b25c2c2cb50461c50ba50c186a3b42}{get\_\-attr\_\-grammar} ()
+\item 
+bool \hyperlink{classgenevalmag_1_1Parser__AG_2eda33cb61d0bb2430557ebcad714a10}{parse\_\-grammar} (const string \&path\_\-file\_\-input)
+\item 
+void \hyperlink{classgenevalmag_1_1Parser__AG_f583d86ffaf791aced12471108590890}{save\_\-grammar\_\-file} (const string path\_\-output) const 
+\end{CompactItemize}
+\subsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+\hyperlink{classgenevalmag_1_1Attr__grammar}{Attr\_\-grammar} \hyperlink{classgenevalmag_1_1Parser__AG_f806906189d19d98132d94b2fdf4a7d1}{attr\_\-grammar}
+\begin{CompactList}\small\item\em Internal structure of grammar. \item\end{CompactList}\item 
+\hyperlink{classgenevalmag_1_1Semantics__checks}{Semantics\_\-checks} \hyperlink{classgenevalmag_1_1Parser__AG_0ae8c86d8db3e9e354377588754559fe}{sem\_\-check}
+\begin{CompactList}\small\item\em Semantics control for grammar: Well define grammar. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 32 of file Parser\_\-AG.h.
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classgenevalmag_1_1Parser__AG_107da8e92db8c44204471982619ff339}{
+\index{genevalmag::Parser\_\-AG@{genevalmag::Parser\_\-AG}!Parser\_\-AG@{Parser\_\-AG}}
+\index{Parser\_\-AG@{Parser\_\-AG}!genevalmag::Parser_AG@{genevalmag::Parser\_\-AG}}
+\subsubsection[{Parser\_\-AG}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Parser\_\-AG::Parser\_\-AG ()}}
+\label{classgenevalmag_1_1Parser__AG_107da8e92db8c44204471982619ff339}
+
+
+Constructor of \hyperlink{classgenevalmag_1_1Parser__AG}{Parser\_\-AG}. 
+
+Definition at line 33 of file Parser\_\-AG.cpp.\hypertarget{classgenevalmag_1_1Parser__AG_834ddbb83e5822f485d16cdc432762cf}{
+\index{genevalmag::Parser\_\-AG@{genevalmag::Parser\_\-AG}!$\sim$Parser\_\-AG@{$\sim$Parser\_\-AG}}
+\index{$\sim$Parser\_\-AG@{$\sim$Parser\_\-AG}!genevalmag::Parser_AG@{genevalmag::Parser\_\-AG}}
+\subsubsection[{$\sim$Parser\_\-AG}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Parser\_\-AG::$\sim$Parser\_\-AG ()}}
+\label{classgenevalmag_1_1Parser__AG_834ddbb83e5822f485d16cdc432762cf}
+
+
+Destructor of \hyperlink{classgenevalmag_1_1Parser__AG}{Parser\_\-AG}. 
+
+Definition at line 39 of file Parser\_\-AG.cpp.
+
+\subsection{Member Function Documentation}
+\hypertarget{classgenevalmag_1_1Parser__AG_c6b25c2c2cb50461c50ba50c186a3b42}{
+\index{genevalmag::Parser\_\-AG@{genevalmag::Parser\_\-AG}!get\_\-attr\_\-grammar@{get\_\-attr\_\-grammar}}
+\index{get\_\-attr\_\-grammar@{get\_\-attr\_\-grammar}!genevalmag::Parser_AG@{genevalmag::Parser\_\-AG}}
+\subsubsection[{get\_\-attr\_\-grammar}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Attr\_\-grammar} \& genevalmag::Parser\_\-AG::get\_\-attr\_\-grammar ()}}
+\label{classgenevalmag_1_1Parser__AG_c6b25c2c2cb50461c50ba50c186a3b42}
+
+
+Returns att\_\-grammar of parser. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns att\_\-grammar of parser. 
+
+Definition at line 46 of file Parser\_\-AG.cpp.
+
+References attr\_\-grammar.
+
+Referenced by genevalmag::Maglib::gen\_\-evaluator().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=265pt]{classgenevalmag_1_1Parser__AG_c6b25c2c2cb50461c50ba50c186a3b42_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Parser__AG_2eda33cb61d0bb2430557ebcad714a10}{
+\index{genevalmag::Parser\_\-AG@{genevalmag::Parser\_\-AG}!parse\_\-grammar@{parse\_\-grammar}}
+\index{parse\_\-grammar@{parse\_\-grammar}!genevalmag::Parser_AG@{genevalmag::Parser\_\-AG}}
+\subsubsection[{parse\_\-grammar}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Parser\_\-AG::parse\_\-grammar (const string \& {\em path\_\-file\_\-input})}}
+\label{classgenevalmag_1_1Parser__AG_2eda33cb61d0bb2430557ebcad714a10}
+
+
+This method invokes the method 'parse' of the library Spirit included in Boost. Returns true if could parse all the input. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em path\_\-file\_\-input}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+This method invokes the method 'parse' of the library Spitir included in Boost. Returns true if could parse all the input. 
+
+Definition at line 399 of file Parser\_\-AG.cpp.
+
+References attr\_\-grammar, sem\_\-check, genevalmag::set\_\-attr\_\-grammar(), and genevalmag::set\_\-sem\_\-check().
+
+Referenced by genevalmag::Maglib::gen\_\-evaluator().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{classgenevalmag_1_1Parser__AG_2eda33cb61d0bb2430557ebcad714a10_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=260pt]{classgenevalmag_1_1Parser__AG_2eda33cb61d0bb2430557ebcad714a10_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Parser__AG_f583d86ffaf791aced12471108590890}{
+\index{genevalmag::Parser\_\-AG@{genevalmag::Parser\_\-AG}!save\_\-grammar\_\-file@{save\_\-grammar\_\-file}}
+\index{save\_\-grammar\_\-file@{save\_\-grammar\_\-file}!genevalmag::Parser_AG@{genevalmag::Parser\_\-AG}}
+\subsubsection[{save\_\-grammar\_\-file}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Parser\_\-AG::save\_\-grammar\_\-file (const string {\em path\_\-output}) const}}
+\label{classgenevalmag_1_1Parser__AG_f583d86ffaf791aced12471108590890}
+
+
+This method saves all parsed string in a file. The file output is in argument path\_\-output. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em path\_\-output}]This method saves all parsed string in a file. The file output is in argument path\_\-output. \end{description}
+\end{Desc}
+
+
+Definition at line 447 of file Parser\_\-AG.cpp.
+
+References attr\_\-grammar, genevalmag::FILE\_\-GRAMMAR(), and genevalmag::Attr\_\-grammar::to\_\-string().
+
+Referenced by genevalmag::Maglib::gen\_\-evaluator().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=331pt]{classgenevalmag_1_1Parser__AG_f583d86ffaf791aced12471108590890_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=268pt]{classgenevalmag_1_1Parser__AG_f583d86ffaf791aced12471108590890_icgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classgenevalmag_1_1Parser__AG_f806906189d19d98132d94b2fdf4a7d1}{
+\index{genevalmag::Parser\_\-AG@{genevalmag::Parser\_\-AG}!attr\_\-grammar@{attr\_\-grammar}}
+\index{attr\_\-grammar@{attr\_\-grammar}!genevalmag::Parser_AG@{genevalmag::Parser\_\-AG}}
+\subsubsection[{attr\_\-grammar}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Parser\_\-AG::attr\_\-grammar}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Parser__AG_f806906189d19d98132d94b2fdf4a7d1}
+
+
+Internal structure of grammar. 
+
+
+
+Definition at line 39 of file Parser\_\-AG.h.
+
+Referenced by get\_\-attr\_\-grammar(), parse\_\-grammar(), and save\_\-grammar\_\-file().\hypertarget{classgenevalmag_1_1Parser__AG_0ae8c86d8db3e9e354377588754559fe}{
+\index{genevalmag::Parser\_\-AG@{genevalmag::Parser\_\-AG}!sem\_\-check@{sem\_\-check}}
+\index{sem\_\-check@{sem\_\-check}!genevalmag::Parser_AG@{genevalmag::Parser\_\-AG}}
+\subsubsection[{sem\_\-check}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Parser\_\-AG::sem\_\-check}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Parser__AG_0ae8c86d8db3e9e354377588754559fe}
+
+
+Semantics control for grammar: Well define grammar. 
+
+
+
+Definition at line 44 of file Parser\_\-AG.h.
+
+Referenced by parse\_\-grammar().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+include/Parser/\hyperlink{Parser__AG_8h}{Parser\_\-AG.h}\item 
+src/Parser/\hyperlink{Parser__AG_8cpp}{Parser\_\-AG.cpp}\end{CompactItemize}

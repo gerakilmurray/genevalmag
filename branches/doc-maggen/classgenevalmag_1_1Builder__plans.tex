@@ -1,0 +1,804 @@
+\hypertarget{classgenevalmag_1_1Builder__plans}{
+\section{genevalmag::Builder\_\-plans Class Reference}
+\label{classgenevalmag_1_1Builder__plans}\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}}
+}
+{\tt \#include $<$Builder\_\-plans.h$>$}
+
+Collaboration diagram for genevalmag::Builder\_\-plans:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=400pt]{classgenevalmag_1_1Builder__plans__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+\hyperlink{classgenevalmag_1_1Builder__plans_bd168919b4dfc51ed9c400f5afac0043}{Builder\_\-plans} (const \hyperlink{classgenevalmag_1_1Attr__grammar}{Attr\_\-grammar} \&attribute\_\-grammar)
+\item 
+\hyperlink{classgenevalmag_1_1Builder__plans_f19ca3bf57580ee40b317e119cacdc66}{$\sim$Builder\_\-plans} ()
+\item 
+unsigned short \hyperlink{classgenevalmag_1_1Builder__plans_3337ccac1c358d9b0a1de456ff74b0cb}{build\_\-plans} ()
+\item 
+bool \hyperlink{classgenevalmag_1_1Builder__plans_a15ea4156613c75cfca5ecc0bd6a5193}{save\_\-all\_\-plans} (const string path\_\-output) const 
+\item 
+bool \hyperlink{classgenevalmag_1_1Builder__plans_7017816e03c141df9dbdb55f3f8f896c}{save\_\-all\_\-plans\_\-project} (const string path\_\-output) const 
+\item 
+const \hyperlink{namespacegenevalmag_ed20da32fb9692645ae53d911d274fd5}{Order\_\-rule} \& \hyperlink{classgenevalmag_1_1Builder__plans_72ef4716a24888c994c1b0a5c70b88a8}{get\_\-context\_\-unique} (const unsigned short i\_\-context) const 
+\item 
+const vector$<$ \hyperlink{namespacegenevalmag_ed20da32fb9692645ae53d911d274fd5}{Order\_\-rule} $>$ \& \hyperlink{classgenevalmag_1_1Builder__plans_72a79884798342895b1b0779a1938031}{get\_\-contexts\_\-uniques} () const 
+\item 
+const map$<$ \hyperlink{structgenevalmag_1_1k__plan}{Key\_\-plan}, unsigned short $>$ \& \hyperlink{classgenevalmag_1_1Builder__plans_75890521873bd1f8bee15799d820d755}{get\_\-plans} () const 
+\item 
+const vector$<$ \hyperlink{namespacegenevalmag_0bb2e8b0fa1b07b873f0363719de7b64}{Order\_\-eval\_\-eq} $>$ \& \hyperlink{classgenevalmag_1_1Builder__plans_d5d96d5e07170749447ff69b3282cd3d}{get\_\-plans\_\-uniques} () const 
+\item 
+const map$<$ \hyperlink{structgenevalmag_1_1k__p__project}{Key\_\-plan\_\-project}, unsigned short $>$ \& \hyperlink{classgenevalmag_1_1Builder__plans_011e4668e269c69022cae075075a0087}{get\_\-plans\_\-project} () const 
+\item 
+const vector$<$ \hyperlink{namespacegenevalmag_0bb2e8b0fa1b07b873f0363719de7b64}{Order\_\-eval\_\-eq} $>$ \& \hyperlink{classgenevalmag_1_1Builder__plans_a4f340be44a4b2592c8f5aaabf88305e}{get\_\-plans\_\-project\_\-uniques} () const 
+\item 
+const unsigned short \& \hyperlink{classgenevalmag_1_1Builder__plans_52157d41e3998900e61ab90eda9e4e91}{get\_\-init\_\-order} () const 
+\item 
+const unsigned short \hyperlink{classgenevalmag_1_1Builder__plans_7748b68109c6c6aa805bbd1886dd6029}{get\_\-index\_\-plan} (const map$<$ \hyperlink{structgenevalmag_1_1k__plan}{Key\_\-plan}, unsigned short $>$::const\_\-iterator it\_\-plan) const 
+\item 
+const map$<$ \hyperlink{structgenevalmag_1_1k__p__project}{Key\_\-plan\_\-project}, unsigned short $>$::const\_\-iterator \hyperlink{classgenevalmag_1_1Builder__plans_2aecc3840ac5d583959073e5d7657b34}{get\_\-plan\_\-project} (const \hyperlink{structgenevalmag_1_1k__p__project}{Key\_\-plan\_\-project} \&key) const 
+\item 
+void \hyperlink{classgenevalmag_1_1Builder__plans_3b70a30427aa135641a75d0d42e23500}{save\_\-all\_\-graphs} (const string path\_\-output) const 
+\item 
+void \hyperlink{classgenevalmag_1_1Builder__plans_c9502627f9433c4cab7d03678e507a66}{save\_\-cyclic\_\-graphs} (const string path\_\-output) const 
+\end{CompactItemize}
+\subsection*{Private Member Functions}
+\begin{CompactItemize}
+\item 
+void \hyperlink{classgenevalmag_1_1Builder__plans_9293c2318f2a323616fc49505a44e4e3}{generates\_\-topological\_\-order} (const \hyperlink{namespacegenevalmag_4a96de9ebfc7d48233406ab9cad55cb5}{Graph} \&graph, \hyperlink{namespacegenevalmag_0bb2e8b0fa1b07b873f0363719de7b64}{Order\_\-eval\_\-eq} \&result\_\-order, const \hyperlink{structgenevalmag_1_1c__rule}{Context\_\-rule} \&context\_\-rule) const 
+\item 
+\hyperlink{namespacegenevalmag_0bb2e8b0fa1b07b873f0363719de7b64}{Order\_\-eval\_\-eq} \hyperlink{classgenevalmag_1_1Builder__plans_86e05ee91d27e62d16d77ecbdec05bf7}{compute\_\-order} (const \hyperlink{namespacegenevalmag_4a96de9ebfc7d48233406ab9cad55cb5}{Graph} \&graph\_\-adp, unsigned short index\_\-order, const \hyperlink{structgenevalmag_1_1c__rule}{Context\_\-rule} \&context\_\-rule)
+\item 
+bool \hyperlink{classgenevalmag_1_1Builder__plans_5002819447c17a1f81c197da66bd3e56}{generate\_\-plans} ()
+\item 
+bool \hyperlink{classgenevalmag_1_1Builder__plans_9552dcef13af0de0f3f2ff59a330d15c}{generate\_\-graphs} ()
+\item 
+unsigned short \hyperlink{classgenevalmag_1_1Builder__plans_e44e39bd410967f7f882100b33fb3405}{return\_\-index\_\-context} (const \hyperlink{namespacegenevalmag_ed20da32fb9692645ae53d911d274fd5}{Order\_\-rule} \&order)
+\item 
+unsigned short \hyperlink{classgenevalmag_1_1Builder__plans_0a0fba0d3630f02c280f9d3997c6bd80}{return\_\-index\_\-plan} (const \hyperlink{namespacegenevalmag_0bb2e8b0fa1b07b873f0363719de7b64}{Order\_\-eval\_\-eq} \&order)
+\item 
+unsigned short \hyperlink{classgenevalmag_1_1Builder__plans_08c73ceb7e4bbd71732cac943ccfbaa9}{return\_\-index\_\-plan\_\-p} (const \hyperlink{namespacegenevalmag_0bb2e8b0fa1b07b873f0363719de7b64}{Order\_\-eval\_\-eq} \&order)
+\end{CompactItemize}
+\subsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+const \hyperlink{classgenevalmag_1_1Attr__grammar}{Attr\_\-grammar} \& \hyperlink{classgenevalmag_1_1Builder__plans_247759aafc18133de19c8c95afb9c2d5}{attr\_\-grammar}
+\begin{CompactList}\small\item\em References to the attribute grammar. \item\end{CompactList}\item 
+vector$<$ \hyperlink{namespacegenevalmag_ed20da32fb9692645ae53d911d274fd5}{Order\_\-rule} $>$ \hyperlink{classgenevalmag_1_1Builder__plans_ac38711883bb0acd21483d2a918e0f0d}{contexts\_\-uniques}
+\begin{CompactList}\small\item\em Store all different context rule generates in the grammar. \item\end{CompactList}\item 
+map$<$ \hyperlink{structgenevalmag_1_1k__plan}{Key\_\-plan}, unsigned short $>$ \hyperlink{classgenevalmag_1_1Builder__plans_02c97bab7b3561f4dde009b974255dfe}{eval\_\-plans}
+\begin{CompactList}\small\item\em Store all evaluation plans of the grammar. Saves index of plans\_\-uniques vector. \char`\"{}ro\char`\"{} function. Wuu Yang's paper. \item\end{CompactList}\item 
+vector$<$ \hyperlink{namespacegenevalmag_0bb2e8b0fa1b07b873f0363719de7b64}{Order\_\-eval\_\-eq} $>$ \hyperlink{classgenevalmag_1_1Builder__plans_9cb3fc77b164a22cf37a0ec3e8f78bf7}{plans\_\-uniques}
+\item 
+map$<$ \hyperlink{structgenevalmag_1_1k__p__project}{Key\_\-plan\_\-project}, unsigned short $>$ \hyperlink{classgenevalmag_1_1Builder__plans_b353b4b6e3b9c72a8fb61ee376a4f76c}{plans\_\-project}
+\begin{CompactList}\small\item\em Store all evaluation plans projects of the grammar.Saves index of plans\_\-project\_\-uniques vector. \char`\"{}theta\char`\"{} function. Wuu Yang's paper. \item\end{CompactList}\item 
+vector$<$ \hyperlink{namespacegenevalmag_0bb2e8b0fa1b07b873f0363719de7b64}{Order\_\-eval\_\-eq} $>$ \hyperlink{classgenevalmag_1_1Builder__plans_6a64fd58a3ce6c2f4b6c69df14ffee6e}{plans\_\-project\_\-uniques}
+\item 
+unsigned short \hyperlink{classgenevalmag_1_1Builder__plans_be50c9e30276ceaeea344f6a95f23db8}{init\_\-order\_\-ag}
+\begin{CompactList}\small\item\em Store the initial evaluation order of the attributes of the initial symbol. \item\end{CompactList}\item 
+\hyperlink{classgenevalmag_1_1Builder__graphs}{Builder\_\-graphs} \hyperlink{classgenevalmag_1_1Builder__plans_c1d890f07dc50cc1d7383a73bb5bb5af}{build\_\-graphs}
+\begin{CompactList}\small\item\em Stores all graphs DP, DOWN, DCG and ADP, generated for the grammar's analisys. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 254 of file Builder\_\-plans.h.
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classgenevalmag_1_1Builder__plans_bd168919b4dfc51ed9c400f5afac0043}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!Builder\_\-plans@{Builder\_\-plans}}
+\index{Builder\_\-plans@{Builder\_\-plans}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{Builder\_\-plans}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Builder\_\-plans::Builder\_\-plans (const {\bf Attr\_\-grammar} \& {\em attribute\_\-grammar})}}
+\label{classgenevalmag_1_1Builder__plans_bd168919b4dfc51ed9c400f5afac0043}
+
+
+Constructor empty of Builder plans. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em attribute\_\-grammar}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Constructor empty of Builder plan. 
+
+Definition at line 34 of file Builder\_\-plans.cpp.\hypertarget{classgenevalmag_1_1Builder__plans_f19ca3bf57580ee40b317e119cacdc66}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!$\sim$Builder\_\-plans@{$\sim$Builder\_\-plans}}
+\index{$\sim$Builder\_\-plans@{$\sim$Builder\_\-plans}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{$\sim$Builder\_\-plans}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Builder\_\-plans::$\sim$Builder\_\-plans ()}}
+\label{classgenevalmag_1_1Builder__plans_f19ca3bf57580ee40b317e119cacdc66}
+
+
+Destructor of Builder plans. \begin{Desc}
+\item[Returns:]\end{Desc}
+Destructor of Builder plan. 
+
+Definition at line 43 of file Builder\_\-plans.cpp.
+
+\subsection{Member Function Documentation}
+\hypertarget{classgenevalmag_1_1Builder__plans_3337ccac1c358d9b0a1de456ff74b0cb}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!build\_\-plans@{build\_\-plans}}
+\index{build\_\-plans@{build\_\-plans}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{build\_\-plans}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short genevalmag::Builder\_\-plans::build\_\-plans ()}}
+\label{classgenevalmag_1_1Builder__plans_3337ccac1c358d9b0a1de456ff74b0cb}
+
+
+Generates and saves all evaluation's plans for the \hyperlink{classgenevalmag_1_1Attribute}{Attribute} Grammar.
+
+Return: 0: when all success process. 1: when detects cilcyc graph. 2: when detects error in the graph generation. \begin{Desc}
+\item[Returns:]\end{Desc}
+Return: 0: when all success process. 1: when detects cilcyc graph. 2: when detects error in the graph generation. 
+
+Definition at line 521 of file Builder\_\-plans.cpp.
+
+References build\_\-graphs, genevalmag::Builder\_\-graphs::check\_\-cyclic\_\-adp\_\-dependencies(), generate\_\-graphs(), and generate\_\-plans().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__plans_3337ccac1c358d9b0a1de456ff74b0cb_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__plans_86e05ee91d27e62d16d77ecbdec05bf7}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!compute\_\-order@{compute\_\-order}}
+\index{compute\_\-order@{compute\_\-order}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{compute\_\-order}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Order\_\-eval\_\-eq} genevalmag::Builder\_\-plans::compute\_\-order (const {\bf Graph} \& {\em graph\_\-adp}, \/  unsigned short {\em index\_\-order}, \/  const {\bf Context\_\-rule} \& {\em context\_\-rule})\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__plans_86e05ee91d27e62d16d77ecbdec05bf7}
+
+
+Compute the rule's order. The changes are applies about paramenter \char`\"{}result\_\-order\char`\"{}. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em graph\_\-adp}]\item[{\em index\_\-order}]\item[{\em context\_\-rule}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Compute the rule's order. The changes are applies about paramenter \char`\"{}result\_\-order\char`\"{}. 
+
+Definition at line 134 of file Builder\_\-plans.cpp.
+
+References attr\_\-grammar, generates\_\-topological\_\-order(), genevalmag::Attr\_\-grammar::get\_\-eq\_\-l\_\-value(), plans\_\-project\_\-uniques, and utilities::return\_\-vertex().
+
+Referenced by generate\_\-plans().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__plans_86e05ee91d27e62d16d77ecbdec05bf7_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=357pt]{classgenevalmag_1_1Builder__plans_86e05ee91d27e62d16d77ecbdec05bf7_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__plans_9552dcef13af0de0f3f2ff59a330d15c}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!generate\_\-graphs@{generate\_\-graphs}}
+\index{generate\_\-graphs@{generate\_\-graphs}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{generate\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Builder\_\-plans::generate\_\-graphs ()\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__plans_9552dcef13af0de0f3f2ff59a330d15c}
+
+
+Generates all graphs for attribute grammar: DP, DOWN, DCG and ADP. \begin{Desc}
+\item[Returns:]\end{Desc}
+Generates all graphs for attribute grammar: DP, DOWN, DCG and ADP. 
+
+Definition at line 66 of file Builder\_\-plans.cpp.
+
+References build\_\-graphs, genevalmag::Builder\_\-graphs::compute\_\-adp\_\-graph(), genevalmag::Builder\_\-graphs::compute\_\-dcg(), genevalmag::Builder\_\-graphs::compute\_\-dependency\_\-graphs(), and genevalmag::Builder\_\-graphs::compute\_\-down\_\-graph().
+
+Referenced by build\_\-plans().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__plans_9552dcef13af0de0f3f2ff59a330d15c_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{classgenevalmag_1_1Builder__plans_9552dcef13af0de0f3f2ff59a330d15c_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__plans_5002819447c17a1f81c197da66bd3e56}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!generate\_\-plans@{generate\_\-plans}}
+\index{generate\_\-plans@{generate\_\-plans}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{generate\_\-plans}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Builder\_\-plans::generate\_\-plans ()\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__plans_5002819447c17a1f81c197da66bd3e56}
+
+
+Generates and saves all evaluation's plans for the \hyperlink{classgenevalmag_1_1Attribute}{Attribute} Grammar. \begin{Desc}
+\item[Returns:]\end{Desc}
+Generates and saves all evaluation's plans for the \hyperlink{classgenevalmag_1_1Attribute}{Attribute} Grammar. 
+
+Definition at line 403 of file Builder\_\-plans.cpp.
+
+References attr\_\-grammar, build\_\-graphs, compute\_\-order(), genevalmag::c\_\-rule::context, genevalmag::defined\_\-work(), eval\_\-plans, genevalmag::k\_\-w::father, genevalmag::c\_\-rule::father, generates\_\-topological\_\-order(), genevalmag::Builder\_\-graphs::get\_\-adp\_\-graphs(), genevalmag::Builder\_\-graphs::get\_\-dcg\_\-graph(), genevalmag::Attr\_\-grammar::get\_\-rule(), genevalmag::Attr\_\-grammar::get\_\-rules(), genevalmag::k\_\-plan::id\_\-plan, genevalmag::k\_\-p\_\-project::id\_\-plan\_\-project, genevalmag::k\_\-w::id\_\-rule, genevalmag::k\_\-p\_\-project::index\_\-ocurrence, init\_\-order\_\-ag, genevalmag::i\_\-w::item, genevalmag::i\_\-w::order\_\-attr, genevalmag::k\_\-plan::plan, plans\_\-project, genevalmag::purge\_\-plan\_\-with(), return\_\-index\_\-context(), return\_\-index\_\-plan(), return\_\-index\_\-plan\_\-p(), and genevalmag::k\_\-p\_\-project::symbol\_\-project.
+
+Referenced by build\_\-plans().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__plans_5002819447c17a1f81c197da66bd3e56_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{classgenevalmag_1_1Builder__plans_5002819447c17a1f81c197da66bd3e56_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__plans_9293c2318f2a323616fc49505a44e4e3}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!generates\_\-topological\_\-order@{generates\_\-topological\_\-order}}
+\index{generates\_\-topological\_\-order@{generates\_\-topological\_\-order}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{generates\_\-topological\_\-order}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Builder\_\-plans::generates\_\-topological\_\-order (const {\bf Graph} \& {\em graph}, \/  {\bf Order\_\-eval\_\-eq} \& {\em result\_\-order}, \/  const {\bf Context\_\-rule} \& {\em context\_\-rule}) const\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__plans_9293c2318f2a323616fc49505a44e4e3}
+
+
+Applies a topological order at graph. The changes are applies about paramenter \char`\"{}result\_\-order\char`\"{}. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em graph}]\item[{\em result\_\-order}]\item[{\em context\_\-rule}]Applies a topological order at graph. The changes are applies about paramenter \char`\"{}result\_\-order\char`\"{}. \end{description}
+\end{Desc}
+
+
+Definition at line 90 of file Builder\_\-plans.cpp.
+
+References attr\_\-grammar, genevalmag::c\_\-rule::context, genevalmag::Symbol::equals(), genevalmag::c\_\-rule::father, genevalmag::Expr\_\-instance::get\_\-attr(), genevalmag::Attr\_\-grammar::get\_\-index\_\-eq\_\-with\_\-context(), genevalmag::Rule::get\_\-left\_\-symbol(), genevalmag::Attr\_\-grammar::get\_\-rule(), genevalmag::Expr\_\-instance::get\_\-symb(), and genevalmag::Attribute::is\_\-inherit().
+
+Referenced by compute\_\-order(), and generate\_\-plans().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=408pt]{classgenevalmag_1_1Builder__plans_9293c2318f2a323616fc49505a44e4e3_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__plans_9293c2318f2a323616fc49505a44e4e3_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__plans_72ef4716a24888c994c1b0a5c70b88a8}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!get\_\-context\_\-unique@{get\_\-context\_\-unique}}
+\index{get\_\-context\_\-unique@{get\_\-context\_\-unique}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{get\_\-context\_\-unique}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Order\_\-rule} \& genevalmag::Builder\_\-plans::get\_\-context\_\-unique (const unsigned short {\em i\_\-context}) const}}
+\label{classgenevalmag_1_1Builder__plans_72ef4716a24888c994c1b0a5c70b88a8}
+
+
+Returns the context rule unique in this index.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em i\_\-context}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the context rule unique in this index. 
+
+Definition at line 543 of file Builder\_\-plans.cpp.
+
+References contexts\_\-uniques.
+
+Referenced by genevalmag::Builder\_\-visit\_\-sequences::generate\_\-visit\_\-sequences().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=302pt]{classgenevalmag_1_1Builder__plans_72ef4716a24888c994c1b0a5c70b88a8_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__plans_72a79884798342895b1b0779a1938031}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!get\_\-contexts\_\-uniques@{get\_\-contexts\_\-uniques}}
+\index{get\_\-contexts\_\-uniques@{get\_\-contexts\_\-uniques}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{get\_\-contexts\_\-uniques}]{\setlength{\rightskip}{0pt plus 5cm}const vector$<$ {\bf Order\_\-rule} $>$ \& genevalmag::Builder\_\-plans::get\_\-contexts\_\-uniques () const}}
+\label{classgenevalmag_1_1Builder__plans_72a79884798342895b1b0779a1938031}
+
+
+Returns all contexts rule uniques. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns all contexts rule uniques. 
+
+Definition at line 551 of file Builder\_\-plans.cpp.
+
+References contexts\_\-uniques.
+
+Referenced by genevalmag::Builder\_\-code::generate\_\-initialize\_\-context().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__plans_72a79884798342895b1b0779a1938031_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__plans_7748b68109c6c6aa805bbd1886dd6029}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!get\_\-index\_\-plan@{get\_\-index\_\-plan}}
+\index{get\_\-index\_\-plan@{get\_\-index\_\-plan}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{get\_\-index\_\-plan}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned short genevalmag::Builder\_\-plans::get\_\-index\_\-plan (const map$<$ {\bf Key\_\-plan}, unsigned short $>$::const\_\-iterator {\em it\_\-plan}) const}}
+\label{classgenevalmag_1_1Builder__plans_7748b68109c6c6aa805bbd1886dd6029}
+
+
+Returns the index inside the map of the plan that passed as parameter. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em it\_\-plan}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the index inside the map of the plan that passed as parameter. 
+
+Definition at line 599 of file Builder\_\-plans.cpp.
+
+References eval\_\-plans.\hypertarget{classgenevalmag_1_1Builder__plans_52157d41e3998900e61ab90eda9e4e91}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!get\_\-init\_\-order@{get\_\-init\_\-order}}
+\index{get\_\-init\_\-order@{get\_\-init\_\-order}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{get\_\-init\_\-order}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned short \& genevalmag::Builder\_\-plans::get\_\-init\_\-order () const}}
+\label{classgenevalmag_1_1Builder__plans_52157d41e3998900e61ab90eda9e4e91}
+
+
+Returns the intial order of attributes of the initial symbol. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the intial order of attributes of the initial symbol. 
+
+Definition at line 591 of file Builder\_\-plans.cpp.
+
+References init\_\-order\_\-ag.
+
+Referenced by genevalmag::Builder\_\-code::generate\_\-evaluator().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__plans_52157d41e3998900e61ab90eda9e4e91_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__plans_2aecc3840ac5d583959073e5d7657b34}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!get\_\-plan\_\-project@{get\_\-plan\_\-project}}
+\index{get\_\-plan\_\-project@{get\_\-plan\_\-project}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{get\_\-plan\_\-project}]{\setlength{\rightskip}{0pt plus 5cm}const map$<$ {\bf Key\_\-plan\_\-project}, unsigned short $>$::const\_\-iterator genevalmag::Builder\_\-plans::get\_\-plan\_\-project (const {\bf Key\_\-plan\_\-project} \& {\em key}) const}}
+\label{classgenevalmag_1_1Builder__plans_2aecc3840ac5d583959073e5d7657b34}
+
+
+Returns an constant iterator of a project plan with key equals at the key that passed as parameter. Always finds the element. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em key}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Returns an constant iterator of a project plan with key equals at the key that passed as parameter. Always finds the element. 
+
+Definition at line 618 of file Builder\_\-plans.cpp.
+
+References plans\_\-project.\hypertarget{classgenevalmag_1_1Builder__plans_75890521873bd1f8bee15799d820d755}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!get\_\-plans@{get\_\-plans}}
+\index{get\_\-plans@{get\_\-plans}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{get\_\-plans}]{\setlength{\rightskip}{0pt plus 5cm}const map$<$ {\bf Key\_\-plan}, unsigned short $>$ \& genevalmag::Builder\_\-plans::get\_\-plans () const}}
+\label{classgenevalmag_1_1Builder__plans_75890521873bd1f8bee15799d820d755}
+
+
+Returns all evaluations plans. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns all evaluations plans. 
+
+Definition at line 559 of file Builder\_\-plans.cpp.
+
+References eval\_\-plans.
+
+Referenced by genevalmag::Builder\_\-code::generate\_\-initialize\_\-plans(), and genevalmag::Builder\_\-visit\_\-sequences::generate\_\-visit\_\-sequences().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__plans_75890521873bd1f8bee15799d820d755_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__plans_011e4668e269c69022cae075075a0087}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!get\_\-plans\_\-project@{get\_\-plans\_\-project}}
+\index{get\_\-plans\_\-project@{get\_\-plans\_\-project}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{get\_\-plans\_\-project}]{\setlength{\rightskip}{0pt plus 5cm}const map$<$ {\bf Key\_\-plan\_\-project}, unsigned short $>$ \& genevalmag::Builder\_\-plans::get\_\-plans\_\-project () const}}
+\label{classgenevalmag_1_1Builder__plans_011e4668e269c69022cae075075a0087}
+
+
+Returns all evaluations plans project. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns all evaluations plans project. 
+
+Definition at line 575 of file Builder\_\-plans.cpp.
+
+References plans\_\-project.
+
+Referenced by genevalmag::Builder\_\-code::generate\_\-initialize\_\-plan\_\-proj().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__plans_011e4668e269c69022cae075075a0087_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__plans_a4f340be44a4b2592c8f5aaabf88305e}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!get\_\-plans\_\-project\_\-uniques@{get\_\-plans\_\-project\_\-uniques}}
+\index{get\_\-plans\_\-project\_\-uniques@{get\_\-plans\_\-project\_\-uniques}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{get\_\-plans\_\-project\_\-uniques}]{\setlength{\rightskip}{0pt plus 5cm}const vector$<$ {\bf Order\_\-eval\_\-eq} $>$ \& genevalmag::Builder\_\-plans::get\_\-plans\_\-project\_\-uniques () const}}
+\label{classgenevalmag_1_1Builder__plans_a4f340be44a4b2592c8f5aaabf88305e}
+
+
+Returns all evaluations plans project uniques. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns all evaluations plans project uniques. 
+
+Definition at line 583 of file Builder\_\-plans.cpp.
+
+References plans\_\-project\_\-uniques.\hypertarget{classgenevalmag_1_1Builder__plans_d5d96d5e07170749447ff69b3282cd3d}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!get\_\-plans\_\-uniques@{get\_\-plans\_\-uniques}}
+\index{get\_\-plans\_\-uniques@{get\_\-plans\_\-uniques}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{get\_\-plans\_\-uniques}]{\setlength{\rightskip}{0pt plus 5cm}const vector$<$ {\bf Order\_\-eval\_\-eq} $>$ \& genevalmag::Builder\_\-plans::get\_\-plans\_\-uniques () const}}
+\label{classgenevalmag_1_1Builder__plans_d5d96d5e07170749447ff69b3282cd3d}
+
+
+Returns all evaluations plans uniques. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns all evaluations plans uniques. 
+
+Definition at line 567 of file Builder\_\-plans.cpp.
+
+References plans\_\-uniques.
+
+Referenced by genevalmag::Builder\_\-visit\_\-sequences::generate\_\-visit\_\-sequences().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=300pt]{classgenevalmag_1_1Builder__plans_d5d96d5e07170749447ff69b3282cd3d_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__plans_e44e39bd410967f7f882100b33fb3405}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!return\_\-index\_\-context@{return\_\-index\_\-context}}
+\index{return\_\-index\_\-context@{return\_\-index\_\-context}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{return\_\-index\_\-context}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short genevalmag::Builder\_\-plans::return\_\-index\_\-context (const {\bf Order\_\-rule} \& {\em order})\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__plans_e44e39bd410967f7f882100b33fb3405}
+
+
+Returns the index in the vector of context, or inserts in the last position. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em order}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the index in the vector of context, or inserts in the last position. 
+
+Definition at line 353 of file Builder\_\-plans.cpp.
+
+References contexts\_\-uniques.
+
+Referenced by generate\_\-plans().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=370pt]{classgenevalmag_1_1Builder__plans_e44e39bd410967f7f882100b33fb3405_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__plans_0a0fba0d3630f02c280f9d3997c6bd80}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!return\_\-index\_\-plan@{return\_\-index\_\-plan}}
+\index{return\_\-index\_\-plan@{return\_\-index\_\-plan}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{return\_\-index\_\-plan}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short genevalmag::Builder\_\-plans::return\_\-index\_\-plan (const {\bf Order\_\-eval\_\-eq} \& {\em order})\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__plans_0a0fba0d3630f02c280f9d3997c6bd80}
+
+
+Returns the index in the vector of plans, or inserts in the last position. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em order}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the index in the vector of plans, or inserts in the last position. 
+
+Definition at line 387 of file Builder\_\-plans.cpp.
+
+References plans\_\-uniques, and genevalmag::return\_\-index\_\-vec().
+
+Referenced by generate\_\-plans().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{classgenevalmag_1_1Builder__plans_0a0fba0d3630f02c280f9d3997c6bd80_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=363pt]{classgenevalmag_1_1Builder__plans_0a0fba0d3630f02c280f9d3997c6bd80_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__plans_08c73ceb7e4bbd71732cac943ccfbaa9}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!return\_\-index\_\-plan\_\-p@{return\_\-index\_\-plan\_\-p}}
+\index{return\_\-index\_\-plan\_\-p@{return\_\-index\_\-plan\_\-p}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{return\_\-index\_\-plan\_\-p}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short genevalmag::Builder\_\-plans::return\_\-index\_\-plan\_\-p (const {\bf Order\_\-eval\_\-eq} \& {\em order})\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__plans_08c73ceb7e4bbd71732cac943ccfbaa9}
+
+
+Returns the index in the vector of plans projects, or inserts in the last position. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em order}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the index in the vector of plans projects, or inserts in the last position. 
+
+Definition at line 395 of file Builder\_\-plans.cpp.
+
+References plans\_\-project\_\-uniques, and genevalmag::return\_\-index\_\-vec().
+
+Referenced by generate\_\-plans().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=228pt]{classgenevalmag_1_1Builder__plans_08c73ceb7e4bbd71732cac943ccfbaa9_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=368pt]{classgenevalmag_1_1Builder__plans_08c73ceb7e4bbd71732cac943ccfbaa9_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__plans_3b70a30427aa135641a75d0d42e23500}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!save\_\-all\_\-graphs@{save\_\-all\_\-graphs}}
+\index{save\_\-all\_\-graphs@{save\_\-all\_\-graphs}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{save\_\-all\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Builder\_\-plans::save\_\-all\_\-graphs (const string {\em path\_\-output}) const}}
+\label{classgenevalmag_1_1Builder__plans_3b70a30427aa135641a75d0d42e23500}
+
+
+Saves all graphs generated as the analysis of the dependencies between attributes. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em path\_\-output}]Saves all graphs generated as the analysis of the dependencies between attributes. \end{description}
+\end{Desc}
+
+
+Definition at line 50 of file Builder\_\-plans.cpp.
+
+References build\_\-graphs, and genevalmag::Builder\_\-graphs::save\_\-all\_\-graphs().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__plans_3b70a30427aa135641a75d0d42e23500_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__plans_a15ea4156613c75cfca5ecc0bd6a5193}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!save\_\-all\_\-plans@{save\_\-all\_\-plans}}
+\index{save\_\-all\_\-plans@{save\_\-all\_\-plans}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{save\_\-all\_\-plans}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Builder\_\-plans::save\_\-all\_\-plans (const string {\em path\_\-output}) const}}
+\label{classgenevalmag_1_1Builder__plans_a15ea4156613c75cfca5ecc0bd6a5193}
+
+
+Saves all plans. Creates a graph that represents the plan and uses print\_\-graph with dot. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em path\_\-output}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Saves all plans. Creates a graph that represents the plan and uses print\_\-graph with dot. 
+
+Definition at line 171 of file Builder\_\-plans.cpp.
+
+References attr\_\-grammar, utilities::clean\_\-output\_\-folder(), utilities::cleaning\_\-tabs(), contexts\_\-uniques, eval\_\-plans, genevalmag::Attr\_\-grammar::get\_\-eq(), genevalmag::Attr\_\-grammar::get\_\-rules(), genevalmag::PATH\_\-OUT\_\-PLAN(), plans\_\-project\_\-uniques, plans\_\-uniques, utilities::print\_\-graph(), genevalmag::Rule::to\_\-string\_\-not\_\-eqs(), and utilities::write\_\-inf\_\-context().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=328pt]{classgenevalmag_1_1Builder__plans_a15ea4156613c75cfca5ecc0bd6a5193_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__plans_7017816e03c141df9dbdb55f3f8f896c}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!save\_\-all\_\-plans\_\-project@{save\_\-all\_\-plans\_\-project}}
+\index{save\_\-all\_\-plans\_\-project@{save\_\-all\_\-plans\_\-project}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{save\_\-all\_\-plans\_\-project}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Builder\_\-plans::save\_\-all\_\-plans\_\-project (const string {\em path\_\-output}) const}}
+\label{classgenevalmag_1_1Builder__plans_7017816e03c141df9dbdb55f3f8f896c}
+
+
+Saves all proyected's plans. Creates a graph that represents the plan and uses print\_\-graph with dot. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em path\_\-output}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Saves all proyected's plans. Creates a graph that represents the plan and uses print\_\-graph with dot. 
+
+Definition at line 242 of file Builder\_\-plans.cpp.
+
+References attr\_\-grammar, utilities::clean\_\-output\_\-folder(), utilities::cleaning\_\-tabs(), contexts\_\-uniques, genevalmag::Attr\_\-grammar::get\_\-eq(), genevalmag::Attr\_\-grammar::get\_\-rules(), genevalmag::PATH\_\-OUT\_\-PLAN\_\-PROJECT(), plans\_\-project, plans\_\-project\_\-uniques, utilities::print\_\-graph(), genevalmag::Rule::to\_\-string\_\-not\_\-eqs(), and utilities::write\_\-inf\_\-context().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=359pt]{classgenevalmag_1_1Builder__plans_7017816e03c141df9dbdb55f3f8f896c_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__plans_c9502627f9433c4cab7d03678e507a66}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!save\_\-cyclic\_\-graphs@{save\_\-cyclic\_\-graphs}}
+\index{save\_\-cyclic\_\-graphs@{save\_\-cyclic\_\-graphs}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{save\_\-cyclic\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Builder\_\-plans::save\_\-cyclic\_\-graphs (const string {\em path\_\-output}) const}}
+\label{classgenevalmag_1_1Builder__plans_c9502627f9433c4cab7d03678e507a66}
+
+
+Saves the graphs generated as the analysis of the dependencies between attributes, which demonstrate cyclicity. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em path\_\-output}]Saves the graphs generated as the analysis of the dependencies between attributes, which demonstrate cyclicity. \end{description}
+\end{Desc}
+
+
+Definition at line 58 of file Builder\_\-plans.cpp.
+
+References build\_\-graphs, and genevalmag::Builder\_\-graphs::save\_\-cyclic\_\-graphs().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__plans_c9502627f9433c4cab7d03678e507a66_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classgenevalmag_1_1Builder__plans_247759aafc18133de19c8c95afb9c2d5}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!attr\_\-grammar@{attr\_\-grammar}}
+\index{attr\_\-grammar@{attr\_\-grammar}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{attr\_\-grammar}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-plans::attr\_\-grammar}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__plans_247759aafc18133de19c8c95afb9c2d5}
+
+
+References to the attribute grammar. 
+
+
+
+Definition at line 261 of file Builder\_\-plans.h.
+
+Referenced by compute\_\-order(), generate\_\-plans(), generates\_\-topological\_\-order(), save\_\-all\_\-plans(), and save\_\-all\_\-plans\_\-project().\hypertarget{classgenevalmag_1_1Builder__plans_c1d890f07dc50cc1d7383a73bb5bb5af}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!build\_\-graphs@{build\_\-graphs}}
+\index{build\_\-graphs@{build\_\-graphs}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{build\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-plans::build\_\-graphs}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__plans_c1d890f07dc50cc1d7383a73bb5bb5af}
+
+
+Stores all graphs DP, DOWN, DCG and ADP, generated for the grammar's analisys. 
+
+
+
+Definition at line 295 of file Builder\_\-plans.h.
+
+Referenced by build\_\-plans(), generate\_\-graphs(), generate\_\-plans(), save\_\-all\_\-graphs(), and save\_\-cyclic\_\-graphs().\hypertarget{classgenevalmag_1_1Builder__plans_ac38711883bb0acd21483d2a918e0f0d}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!contexts\_\-uniques@{contexts\_\-uniques}}
+\index{contexts\_\-uniques@{contexts\_\-uniques}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{contexts\_\-uniques}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-plans::contexts\_\-uniques}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__plans_ac38711883bb0acd21483d2a918e0f0d}
+
+
+Store all different context rule generates in the grammar. 
+
+
+
+Definition at line 267 of file Builder\_\-plans.h.
+
+Referenced by get\_\-context\_\-unique(), get\_\-contexts\_\-uniques(), return\_\-index\_\-context(), save\_\-all\_\-plans(), and save\_\-all\_\-plans\_\-project().\hypertarget{classgenevalmag_1_1Builder__plans_02c97bab7b3561f4dde009b974255dfe}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!eval\_\-plans@{eval\_\-plans}}
+\index{eval\_\-plans@{eval\_\-plans}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{eval\_\-plans}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-plans::eval\_\-plans}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__plans_02c97bab7b3561f4dde009b974255dfe}
+
+
+Store all evaluation plans of the grammar. Saves index of plans\_\-uniques vector. \char`\"{}ro\char`\"{} function. Wuu Yang's paper. 
+
+
+
+Definition at line 274 of file Builder\_\-plans.h.
+
+Referenced by generate\_\-plans(), get\_\-index\_\-plan(), get\_\-plans(), and save\_\-all\_\-plans().\hypertarget{classgenevalmag_1_1Builder__plans_be50c9e30276ceaeea344f6a95f23db8}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!init\_\-order\_\-ag@{init\_\-order\_\-ag}}
+\index{init\_\-order\_\-ag@{init\_\-order\_\-ag}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{init\_\-order\_\-ag}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-plans::init\_\-order\_\-ag}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__plans_be50c9e30276ceaeea344f6a95f23db8}
+
+
+Store the initial evaluation order of the attributes of the initial symbol. 
+
+
+
+Definition at line 289 of file Builder\_\-plans.h.
+
+Referenced by generate\_\-plans(), and get\_\-init\_\-order().\hypertarget{classgenevalmag_1_1Builder__plans_b353b4b6e3b9c72a8fb61ee376a4f76c}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!plans\_\-project@{plans\_\-project}}
+\index{plans\_\-project@{plans\_\-project}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{plans\_\-project}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-plans::plans\_\-project}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__plans_b353b4b6e3b9c72a8fb61ee376a4f76c}
+
+
+Store all evaluation plans projects of the grammar.Saves index of plans\_\-project\_\-uniques vector. \char`\"{}theta\char`\"{} function. Wuu Yang's paper. 
+
+
+
+Definition at line 282 of file Builder\_\-plans.h.
+
+Referenced by generate\_\-plans(), get\_\-plan\_\-project(), get\_\-plans\_\-project(), and save\_\-all\_\-plans\_\-project().\hypertarget{classgenevalmag_1_1Builder__plans_6a64fd58a3ce6c2f4b6c69df14ffee6e}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!plans\_\-project\_\-uniques@{plans\_\-project\_\-uniques}}
+\index{plans\_\-project\_\-uniques@{plans\_\-project\_\-uniques}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{plans\_\-project\_\-uniques}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ {\bf Order\_\-eval\_\-eq} $>$ {\bf genevalmag::Builder\_\-plans::plans\_\-project\_\-uniques}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__plans_6a64fd58a3ce6c2f4b6c69df14ffee6e}
+
+
+
+
+Definition at line 283 of file Builder\_\-plans.h.
+
+Referenced by compute\_\-order(), get\_\-plans\_\-project\_\-uniques(), return\_\-index\_\-plan\_\-p(), save\_\-all\_\-plans(), and save\_\-all\_\-plans\_\-project().\hypertarget{classgenevalmag_1_1Builder__plans_9cb3fc77b164a22cf37a0ec3e8f78bf7}{
+\index{genevalmag::Builder\_\-plans@{genevalmag::Builder\_\-plans}!plans\_\-uniques@{plans\_\-uniques}}
+\index{plans\_\-uniques@{plans\_\-uniques}!genevalmag::Builder_plans@{genevalmag::Builder\_\-plans}}
+\subsubsection[{plans\_\-uniques}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ {\bf Order\_\-eval\_\-eq} $>$ {\bf genevalmag::Builder\_\-plans::plans\_\-uniques}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__plans_9cb3fc77b164a22cf37a0ec3e8f78bf7}
+
+
+
+
+Definition at line 275 of file Builder\_\-plans.h.
+
+Referenced by get\_\-plans\_\-uniques(), return\_\-index\_\-plan(), and save\_\-all\_\-plans().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+include/Builders/\hyperlink{Builder__plans_8h}{Builder\_\-plans.h}\item 
+src/Builders/\hyperlink{Builder__plans_8cpp}{Builder\_\-plans.cpp}\end{CompactItemize}

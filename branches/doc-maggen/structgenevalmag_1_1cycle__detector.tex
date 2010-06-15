@@ -1,0 +1,101 @@
+\hypertarget{structgenevalmag_1_1cycle__detector}{
+\section{genevalmag::cycle\_\-detector Struct Reference}
+\label{structgenevalmag_1_1cycle__detector}\index{genevalmag::cycle\_\-detector@{genevalmag::cycle\_\-detector}}
+}
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+\hyperlink{structgenevalmag_1_1cycle__detector_d33c61b557029f98461f984f43a25e2d}{cycle\_\-detector} (bool \&has\_\-cycle, \hyperlink{namespacegenevalmag_4a96de9ebfc7d48233406ab9cad55cb5}{Graph} \&graph)
+\item 
+{\footnotesize template$<$class Edge , class G $>$ }\\void \hyperlink{structgenevalmag_1_1cycle__detector_44fccd4a457ae19a0b9fb61cad4f40a7}{examine\_\-edge} (Edge u, const G \&g)
+\item 
+{\footnotesize template$<$class Edge , class G $>$ }\\void \hyperlink{structgenevalmag_1_1cycle__detector_9c656f2de80c65c02f061bc75268ea32}{back\_\-edge} (Edge u, const G \&g)
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+bool \& \hyperlink{structgenevalmag_1_1cycle__detector_fbb82ee351ec3962b57fcf2b0d21b3b4}{\_\-has\_\-cycle}
+\item 
+\hyperlink{namespacegenevalmag_4a96de9ebfc7d48233406ab9cad55cb5}{Graph} \& \hyperlink{structgenevalmag_1_1cycle__detector_7ea4fce7ca4725c4734493281f3742b0}{\_\-graph\_\-cycle}
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 392 of file Builder\_\-graphs.cpp.
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structgenevalmag_1_1cycle__detector_d33c61b557029f98461f984f43a25e2d}{
+\index{genevalmag::cycle\_\-detector@{genevalmag::cycle\_\-detector}!cycle\_\-detector@{cycle\_\-detector}}
+\index{cycle\_\-detector@{cycle\_\-detector}!genevalmag::cycle_detector@{genevalmag::cycle\_\-detector}}
+\subsubsection[{cycle\_\-detector}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::cycle\_\-detector::cycle\_\-detector (bool \& {\em has\_\-cycle}, \/  {\bf Graph} \& {\em graph})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{structgenevalmag_1_1cycle__detector_d33c61b557029f98461f984f43a25e2d}
+
+
+
+
+Definition at line 395 of file Builder\_\-graphs.cpp.
+
+\subsection{Member Function Documentation}
+\hypertarget{structgenevalmag_1_1cycle__detector_9c656f2de80c65c02f061bc75268ea32}{
+\index{genevalmag::cycle\_\-detector@{genevalmag::cycle\_\-detector}!back\_\-edge@{back\_\-edge}}
+\index{back\_\-edge@{back\_\-edge}!genevalmag::cycle_detector@{genevalmag::cycle\_\-detector}}
+\subsubsection[{back\_\-edge}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Edge , class G $>$ void genevalmag::cycle\_\-detector::back\_\-edge (Edge {\em u}, \/  const G \& {\em g})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{structgenevalmag_1_1cycle__detector_9c656f2de80c65c02f061bc75268ea32}
+
+
+
+
+Definition at line 430 of file Builder\_\-graphs.cpp.
+
+References \_\-has\_\-cycle.\hypertarget{structgenevalmag_1_1cycle__detector_44fccd4a457ae19a0b9fb61cad4f40a7}{
+\index{genevalmag::cycle\_\-detector@{genevalmag::cycle\_\-detector}!examine\_\-edge@{examine\_\-edge}}
+\index{examine\_\-edge@{examine\_\-edge}!genevalmag::cycle_detector@{genevalmag::cycle\_\-detector}}
+\subsubsection[{examine\_\-edge}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Edge , class G $>$ void genevalmag::cycle\_\-detector::examine\_\-edge (Edge {\em u}, \/  const G \& {\em g})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{structgenevalmag_1_1cycle__detector_44fccd4a457ae19a0b9fb61cad4f40a7}
+
+
+Re-define method for detect circle when examine each edge: Save ciclic subgraph. 
+
+Definition at line 401 of file Builder\_\-graphs.cpp.
+
+References \_\-graph\_\-cycle, \_\-has\_\-cycle, and utilities::return\_\-vertex().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=390pt]{structgenevalmag_1_1cycle__detector_44fccd4a457ae19a0b9fb61cad4f40a7_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{structgenevalmag_1_1cycle__detector_7ea4fce7ca4725c4734493281f3742b0}{
+\index{genevalmag::cycle\_\-detector@{genevalmag::cycle\_\-detector}!\_\-graph\_\-cycle@{\_\-graph\_\-cycle}}
+\index{\_\-graph\_\-cycle@{\_\-graph\_\-cycle}!genevalmag::cycle_detector@{genevalmag::cycle\_\-detector}}
+\subsubsection[{\_\-graph\_\-cycle}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Graph}\& {\bf genevalmag::cycle\_\-detector::\_\-graph\_\-cycle}\hspace{0.3cm}{\tt  \mbox{[}protected\mbox{]}}}}
+\label{structgenevalmag_1_1cycle__detector_7ea4fce7ca4725c4734493281f3742b0}
+
+
+
+
+Definition at line 437 of file Builder\_\-graphs.cpp.
+
+Referenced by examine\_\-edge().\hypertarget{structgenevalmag_1_1cycle__detector_fbb82ee351ec3962b57fcf2b0d21b3b4}{
+\index{genevalmag::cycle\_\-detector@{genevalmag::cycle\_\-detector}!\_\-has\_\-cycle@{\_\-has\_\-cycle}}
+\index{\_\-has\_\-cycle@{\_\-has\_\-cycle}!genevalmag::cycle_detector@{genevalmag::cycle\_\-detector}}
+\subsubsection[{\_\-has\_\-cycle}]{\setlength{\rightskip}{0pt plus 5cm}bool\& {\bf genevalmag::cycle\_\-detector::\_\-has\_\-cycle}\hspace{0.3cm}{\tt  \mbox{[}protected\mbox{]}}}}
+\label{structgenevalmag_1_1cycle__detector_fbb82ee351ec3962b57fcf2b0d21b3b4}
+
+
+
+
+Definition at line 436 of file Builder\_\-graphs.cpp.
+
+Referenced by back\_\-edge(), and examine\_\-edge().
+
+The documentation for this struct was generated from the following file:\begin{CompactItemize}
+\item 
+src/Builders/\hyperlink{Builder__graphs_8cpp}{Builder\_\-graphs.cpp}\end{CompactItemize}

@@ -1,0 +1,762 @@
+\hypertarget{classgenevalmag_1_1Builder__graphs}{
+\section{genevalmag::Builder\_\-graphs Class Reference}
+\label{classgenevalmag_1_1Builder__graphs}\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}}
+}
+{\tt \#include $<$Builder\_\-graphs.h$>$}
+
+Collaboration diagram for genevalmag::Builder\_\-graphs:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=400pt]{classgenevalmag_1_1Builder__graphs__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+\hyperlink{classgenevalmag_1_1Builder__graphs_6220015a296aed77686fd9382e2917e3}{Builder\_\-graphs} (const \hyperlink{classgenevalmag_1_1Attr__grammar}{Attr\_\-grammar} \&attribute\_\-grammar)
+\item 
+\hyperlink{classgenevalmag_1_1Builder__graphs_1185fa86f07038e594e0292a7d6c5f36}{$\sim$Builder\_\-graphs} ()
+\item 
+const map$<$ vector$<$ unsigned short $>$, \hyperlink{namespacegenevalmag_4a96de9ebfc7d48233406ab9cad55cb5}{Graph} $>$ \& \hyperlink{classgenevalmag_1_1Builder__graphs_96271a5edae352ea39ad4f627877d8a4}{get\_\-adp\_\-graphs} () const 
+\item 
+const map$<$ vector$<$ unsigned short $>$, \hyperlink{namespacegenevalmag_4a96de9ebfc7d48233406ab9cad55cb5}{Graph} $>$ \& \hyperlink{classgenevalmag_1_1Builder__graphs_4abbda95aa3d42fc06328c31ff5d63e1}{get\_\-cyclic\_\-graphs} () const 
+\item 
+const \hyperlink{namespacegenevalmag_4a96de9ebfc7d48233406ab9cad55cb5}{Graph} \& \hyperlink{classgenevalmag_1_1Builder__graphs_5850a6c7a2248394ead2b63aeca7ff9b}{get\_\-dcg\_\-graph} (unsigned short index\_\-rule) const 
+\item 
+bool \hyperlink{classgenevalmag_1_1Builder__graphs_cd8de1287317a25e559f4aede929fe66}{compute\_\-dependency\_\-graphs} ()
+\item 
+bool \hyperlink{classgenevalmag_1_1Builder__graphs_dc8ee86b8d769a7b42c43361fa7076cb}{compute\_\-down\_\-graph} ()
+\item 
+bool \hyperlink{classgenevalmag_1_1Builder__graphs_f41d4e9683653a0d47fa45406a2ca594}{compute\_\-dcg} ()
+\item 
+bool \hyperlink{classgenevalmag_1_1Builder__graphs_497bbd54a1f3197e22743dcf2ad27da3}{compute\_\-adp\_\-graph} ()
+\item 
+bool \hyperlink{classgenevalmag_1_1Builder__graphs_278e4c659e6fd91e1f3fc8d37a0edea9}{check\_\-cyclic\_\-adp\_\-dependencies} ()
+\item 
+bool \hyperlink{classgenevalmag_1_1Builder__graphs_95525c606a1189a5fe0096f72938555d}{save\_\-all\_\-graphs} (const string path\_\-output) const 
+\item 
+bool \hyperlink{classgenevalmag_1_1Builder__graphs_81bf79709c133320f4d40cdee1f61466}{save\_\-cyclic\_\-graphs} (const string path\_\-output) const 
+\item 
+bool \hyperlink{classgenevalmag_1_1Builder__graphs_525d16f83c419ec6751379b860c625d6}{save\_\-dp\_\-graphs} (const string path\_\-output) const 
+\item 
+bool \hyperlink{classgenevalmag_1_1Builder__graphs_18516e61124884d50ee9fb14f833ca01}{save\_\-down\_\-graphs} (const string path\_\-output) const 
+\item 
+bool \hyperlink{classgenevalmag_1_1Builder__graphs_572e65e40e16066f068c82af178c22c2}{save\_\-dcg\_\-graphs} (const string path\_\-output) const 
+\item 
+bool \hyperlink{classgenevalmag_1_1Builder__graphs_af2e8aa86ea96212833d769110eeaebd}{save\_\-adp\_\-graphs} (const string path\_\-output) const 
+\end{CompactItemize}
+\subsection*{Private Member Functions}
+\begin{CompactItemize}
+\item 
+void \hyperlink{classgenevalmag_1_1Builder__graphs_a59af10c4b00c93e0bd95c1a17166ea5}{compute\_\-attr\_\-vertex} ()
+\item 
+void \hyperlink{classgenevalmag_1_1Builder__graphs_6517d3d908a698316f76ac647b587982}{complete\_\-dp\_\-graphs} ()
+\item 
+bool \hyperlink{classgenevalmag_1_1Builder__graphs_e8827b596ff808331a1d6e8005e7f71b}{combined\_\-inf\_\-contexts} (const \hyperlink{classgenevalmag_1_1Rule}{Rule} $\ast$rule, \hyperlink{namespacegenevalmag_4a96de9ebfc7d48233406ab9cad55cb5}{Graph} \&graph, vector$<$ vector$<$ unsigned short $>$ $>$ \&inf\_\-context, size\_\-t index\_\-to\_\-combine)
+\end{CompactItemize}
+\subsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+const \hyperlink{classgenevalmag_1_1Attr__grammar}{Attr\_\-grammar} \& \hyperlink{classgenevalmag_1_1Builder__graphs_10e4acb76015aeea26cf61980a3c6e33}{attr\_\-grammar}
+\begin{CompactList}\small\item\em References to the attribute grammar. \item\end{CompactList}\item 
+map$<$ unsigned short, \hyperlink{namespacegenevalmag_4a96de9ebfc7d48233406ab9cad55cb5}{Graph} $>$ \hyperlink{classgenevalmag_1_1Builder__graphs_2f001cd797840683731d524214cd6d13}{p\_\-Dp\_\-graphs}
+\begin{CompactList}\small\item\em Store the DP graphs. The key corresponds to the key \hyperlink{classgenevalmag_1_1Rule}{Rule}.. \item\end{CompactList}\item 
+map$<$ string, \hyperlink{namespacegenevalmag_4a96de9ebfc7d48233406ab9cad55cb5}{Graph} $>$ \hyperlink{classgenevalmag_1_1Builder__graphs_e5a3713f467704d2e3dc67da86ded862}{attr\_\-vertex\_\-graphs}
+\begin{CompactList}\small\item\em Store the vertex-attr graphs. The key corresponds to the key \hyperlink{classgenevalmag_1_1Symbol}{Symbol}. \item\end{CompactList}\item 
+map$<$ string, \hyperlink{namespacegenevalmag_4a96de9ebfc7d48233406ab9cad55cb5}{Graph} $>$ \hyperlink{classgenevalmag_1_1Builder__graphs_05fcf30d7286884794303103544979c4}{p\_\-Down\_\-graphs}
+\begin{CompactList}\small\item\em Store the down graphs. The key corresponds to the key \hyperlink{classgenevalmag_1_1Symbol}{Symbol}. \item\end{CompactList}\item 
+map$<$ unsigned short, \hyperlink{namespacegenevalmag_4a96de9ebfc7d48233406ab9cad55cb5}{Graph} $>$ \hyperlink{classgenevalmag_1_1Builder__graphs_fe54574f0045851288fae27ce01a8f4f}{p\_\-Dcg\_\-graphs}
+\begin{CompactList}\small\item\em Store the dcg graphs. The key corresponds to the key \hyperlink{classgenevalmag_1_1Rule}{Rule}. \item\end{CompactList}\item 
+map$<$ vector$<$ unsigned short $>$, \hyperlink{namespacegenevalmag_4a96de9ebfc7d48233406ab9cad55cb5}{Graph} $>$ \hyperlink{classgenevalmag_1_1Builder__graphs_75e37bb5a6f499fdd57f97061e313ec5}{p\_\-Adp\_\-graphs}
+\begin{CompactList}\small\item\em Store the adp graphs. The key corresponds to the key \hyperlink{classgenevalmag_1_1Rule}{Rule} with the inferior context. \item\end{CompactList}\item 
+map$<$ vector$<$ unsigned short $>$, \hyperlink{namespacegenevalmag_4a96de9ebfc7d48233406ab9cad55cb5}{Graph} $>$ \hyperlink{classgenevalmag_1_1Builder__graphs_54a45b424086582d4ed7bb99b948a956}{p\_\-Adp\_\-subgraphs\_\-cyclics}
+\begin{CompactList}\small\item\em Store the adp graphs. The key corresponds to the key \hyperlink{classgenevalmag_1_1Rule}{Rule} with the inferior context. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 40 of file Builder\_\-graphs.h.
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classgenevalmag_1_1Builder__graphs_6220015a296aed77686fd9382e2917e3}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!Builder\_\-graphs@{Builder\_\-graphs}}
+\index{Builder\_\-graphs@{Builder\_\-graphs}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{Builder\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Builder\_\-graphs::Builder\_\-graphs (const {\bf Attr\_\-grammar} \& {\em attribute\_\-grammar})}}
+\label{classgenevalmag_1_1Builder__graphs_6220015a296aed77686fd9382e2917e3}
+
+
+Constructor empty of Builder graphs. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em attribute\_\-grammar}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Constructor empty of Builder graphs. 
+
+Definition at line 56 of file Builder\_\-graphs.cpp.\hypertarget{classgenevalmag_1_1Builder__graphs_1185fa86f07038e594e0292a7d6c5f36}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!$\sim$Builder\_\-graphs@{$\sim$Builder\_\-graphs}}
+\index{$\sim$Builder\_\-graphs@{$\sim$Builder\_\-graphs}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{$\sim$Builder\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Builder\_\-graphs::$\sim$Builder\_\-graphs ()}}
+\label{classgenevalmag_1_1Builder__graphs_1185fa86f07038e594e0292a7d6c5f36}
+
+
+Destructor empty of Builder graphs. \begin{Desc}
+\item[Returns:]\end{Desc}
+Destructor empty of Builder graphs. 
+
+Definition at line 63 of file Builder\_\-graphs.cpp.
+
+\subsection{Member Function Documentation}
+\hypertarget{classgenevalmag_1_1Builder__graphs_278e4c659e6fd91e1f3fc8d37a0edea9}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!check\_\-cyclic\_\-adp\_\-dependencies@{check\_\-cyclic\_\-adp\_\-dependencies}}
+\index{check\_\-cyclic\_\-adp\_\-dependencies@{check\_\-cyclic\_\-adp\_\-dependencies}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{check\_\-cyclic\_\-adp\_\-dependencies}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Builder\_\-graphs::check\_\-cyclic\_\-adp\_\-dependencies ()}}
+\label{classgenevalmag_1_1Builder__graphs_278e4c659e6fd91e1f3fc8d37a0edea9}
+
+
+Checks if the graph contains cycle. Utilities a deph-firts-seach for traverse the graphs. \begin{Desc}
+\item[Returns:]\end{Desc}
+Checks if the graph contains cycle. Utilities a deph-firts-seach for traverse the graphs. 
+
+Definition at line 444 of file Builder\_\-graphs.cpp.
+
+References p\_\-Adp\_\-graphs, and p\_\-Adp\_\-subgraphs\_\-cyclics.
+
+Referenced by genevalmag::Builder\_\-plans::build\_\-plans().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{classgenevalmag_1_1Builder__graphs_278e4c659e6fd91e1f3fc8d37a0edea9_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__graphs_e8827b596ff808331a1d6e8005e7f71b}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!combined\_\-inf\_\-contexts@{combined\_\-inf\_\-contexts}}
+\index{combined\_\-inf\_\-contexts@{combined\_\-inf\_\-contexts}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{combined\_\-inf\_\-contexts}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Builder\_\-graphs::combined\_\-inf\_\-contexts (const {\bf Rule} $\ast$ {\em rule}, \/  {\bf Graph} \& {\em graph}, \/  vector$<$ vector$<$ unsigned short $>$ $>$ \& {\em inf\_\-context}, \/  size\_\-t {\em index\_\-to\_\-combine})\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__graphs_e8827b596ff808331a1d6e8005e7f71b}
+
+
+Generate all combinations of the rules and saves a graph ADP for each of them. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em rule}]\item[{\em graph}]\item[{\em inf\_\-context}]\item[{\em index\_\-to\_\-combine}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Generate all combinations of the rules and saves a graph ADP for each of them. 
+
+Definition at line 301 of file Builder\_\-graphs.cpp.
+
+References genevalmag::Rule::key(), utilities::merge\_\-graph(), p\_\-Adp\_\-graphs, and p\_\-Dcg\_\-graphs.
+
+Referenced by compute\_\-adp\_\-graph().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__graphs_e8827b596ff808331a1d6e8005e7f71b_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__graphs_e8827b596ff808331a1d6e8005e7f71b_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__graphs_6517d3d908a698316f76ac647b587982}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!complete\_\-dp\_\-graphs@{complete\_\-dp\_\-graphs}}
+\index{complete\_\-dp\_\-graphs@{complete\_\-dp\_\-graphs}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{complete\_\-dp\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Builder\_\-graphs::complete\_\-dp\_\-graphs ()\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__graphs_6517d3d908a698316f76ac647b587982}
+
+
+Completes dp-graph with the vertex of low on instances. 
+
+Definition at line 469 of file Builder\_\-graphs.cpp.
+
+References attr\_\-grammar, attr\_\-vertex\_\-graphs, genevalmag::Attr\_\-grammar::get\_\-rules(), utilities::merge\_\-graph(), and p\_\-Dp\_\-graphs.
+
+Referenced by compute\_\-down\_\-graph().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__graphs_6517d3d908a698316f76ac647b587982_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__graphs_6517d3d908a698316f76ac647b587982_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__graphs_497bbd54a1f3197e22743dcf2ad27da3}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!compute\_\-adp\_\-graph@{compute\_\-adp\_\-graph}}
+\index{compute\_\-adp\_\-graph@{compute\_\-adp\_\-graph}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{compute\_\-adp\_\-graph}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Builder\_\-graphs::compute\_\-adp\_\-graph ()}}
+\label{classgenevalmag_1_1Builder__graphs_497bbd54a1f3197e22743dcf2ad27da3}
+
+
+Algorithm ADP Builds the graphs ADP for each rule of the grammar. Ex: ADP(1): (1) E:= E + T. graph G: DP(1) U Dcg E (J1..JN) U Dcg T (K1..KM) Where Ji y ki are rule with left-symbol E and T respectly. \begin{Desc}
+\item[Returns:]\end{Desc}
+Algorithm ADP Builds the graphs ADP for each rule of the grammar. Ex: ADP(1): (1) E:= E + T. graph G: DP(1) U Dcg E (J1..JN) U Dcg T (K1..KM) Where Ji y ki are rule with left-symbol E and T respectly. 
+
+Definition at line 360 of file Builder\_\-graphs.cpp.
+
+References attr\_\-grammar, combined\_\-inf\_\-contexts(), genevalmag::current\_\-rule, genevalmag::Rule::get\_\-non\_\-terminals\_\-right\_\-side(), genevalmag::Attr\_\-grammar::get\_\-rules(), genevalmag::Attr\_\-grammar::get\_\-rules\_\-with\_\-left\_\-symbol(), and p\_\-Dp\_\-graphs.
+
+Referenced by genevalmag::Builder\_\-plans::generate\_\-graphs().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__graphs_497bbd54a1f3197e22743dcf2ad27da3_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=375pt]{classgenevalmag_1_1Builder__graphs_497bbd54a1f3197e22743dcf2ad27da3_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__graphs_a59af10c4b00c93e0bd95c1a17166ea5}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!compute\_\-attr\_\-vertex@{compute\_\-attr\_\-vertex}}
+\index{compute\_\-attr\_\-vertex@{compute\_\-attr\_\-vertex}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{compute\_\-attr\_\-vertex}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Builder\_\-graphs::compute\_\-attr\_\-vertex ()\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__graphs_a59af10c4b00c93e0bd95c1a17166ea5}
+
+
+Builds a graph for each symbol of the grammar with all atributes. The graph only has vertexs. It hasn't edges. Ex: \hyperlink{classgenevalmag_1_1Symbol}{Symbol} E ; attributes: s,i graph: vertex: E.s, E.i 
+
+Definition at line 155 of file Builder\_\-graphs.cpp.
+
+References attr\_\-grammar, attr\_\-vertex\_\-graphs, genevalmag::Attr\_\-grammar::get\_\-non\_\-terminal\_\-symbols(), p\_\-Dp\_\-graphs, utilities::return\_\-vertex(), genevalmag::Expr\_\-instance::set\_\-attr(), genevalmag::Expr\_\-instance::set\_\-num(), and genevalmag::Expr\_\-instance::set\_\-symb().
+
+Referenced by compute\_\-down\_\-graph().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__graphs_a59af10c4b00c93e0bd95c1a17166ea5_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__graphs_a59af10c4b00c93e0bd95c1a17166ea5_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__graphs_f41d4e9683653a0d47fa45406a2ca594}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!compute\_\-dcg@{compute\_\-dcg}}
+\index{compute\_\-dcg@{compute\_\-dcg}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{compute\_\-dcg}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Builder\_\-graphs::compute\_\-dcg ()}}
+\label{classgenevalmag_1_1Builder__graphs_f41d4e9683653a0d47fa45406a2ca594}
+
+
+Algorithm DCG Builds the graph Dcg for each rule of the grammar. Ex: Dcg E(1) : (1) E:= E + T. graph G: DP(1) U Down(E) U Down(T) Project(G,\{attributes of E\}) \begin{Desc}
+\item[Returns:]\end{Desc}
+Algorithm DCG Builds the graph Dcg for each rule of the grammar. Ex: Dcg E(1) : (1) E:= E + T. graph G: DP(1) U Down(E) U Down(T) Project(G,\{attributes of E\}) 
+
+Definition at line 262 of file Builder\_\-graphs.cpp.
+
+References attr\_\-grammar, genevalmag::current\_\-rule, genevalmag::Rule::get\_\-left\_\-symbol(), genevalmag::Rule::get\_\-non\_\-terminals\_\-right\_\-side(), genevalmag::Attr\_\-grammar::get\_\-rules(), genevalmag::Rule::key(), utilities::merge\_\-graph(), p\_\-Dcg\_\-graphs, p\_\-Down\_\-graphs, p\_\-Dp\_\-graphs, and utilities::project\_\-graph().
+
+Referenced by genevalmag::Builder\_\-plans::generate\_\-graphs().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__graphs_f41d4e9683653a0d47fa45406a2ca594_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=360pt]{classgenevalmag_1_1Builder__graphs_f41d4e9683653a0d47fa45406a2ca594_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__graphs_cd8de1287317a25e559f4aede929fe66}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!compute\_\-dependency\_\-graphs@{compute\_\-dependency\_\-graphs}}
+\index{compute\_\-dependency\_\-graphs@{compute\_\-dependency\_\-graphs}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{compute\_\-dependency\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Builder\_\-graphs::compute\_\-dependency\_\-graphs ()}}
+\label{classgenevalmag_1_1Builder__graphs_cd8de1287317a25e559f4aede929fe66}
+
+
+Algorithm DP Builds a graph dp for each rule of the grammar. Ex: E:= E + T graph: vertex: E,T Edges: E --$>$ E T---$>$ E \begin{Desc}
+\item[Returns:]\end{Desc}
+Algorithm DP Builds a graph dp for each rule of the grammar. Ex: E:= E + T graph: vertex: E,T Edges: E --$>$ E T---$>$ E 
+
+Definition at line 99 of file Builder\_\-graphs.cpp.
+
+References attr\_\-grammar, genevalmag::Rule::get\_\-eqs(), genevalmag::Attr\_\-grammar::get\_\-rules(), genevalmag::Rule::key(), p\_\-Dp\_\-graphs, and utilities::return\_\-vertex().
+
+Referenced by genevalmag::Builder\_\-plans::generate\_\-graphs().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__graphs_cd8de1287317a25e559f4aede929fe66_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=396pt]{classgenevalmag_1_1Builder__graphs_cd8de1287317a25e559f4aede929fe66_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__graphs_dc8ee86b8d769a7b42c43361fa7076cb}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!compute\_\-down\_\-graph@{compute\_\-down\_\-graph}}
+\index{compute\_\-down\_\-graph@{compute\_\-down\_\-graph}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{compute\_\-down\_\-graph}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Builder\_\-graphs::compute\_\-down\_\-graph ()}}
+\label{classgenevalmag_1_1Builder__graphs_dc8ee86b8d769a7b42c43361fa7076cb}
+
+
+Algorithm Down Builds the graphs down for each symbol of the grammar. Ex: Down(E) : (1) E:= E + T. graph G: DP(1) U Down(E) U Down(T) Project(G,\{attributes of E\}) \begin{Desc}
+\item[Returns:]\end{Desc}
+Algorithm Down Builds the graphs down for each symbol of the grammar. Ex: Down(E) : (1) E:= E + T. graph G: DP(1) U Down(E) U Down(T) Project(G,\{attributes of E\}) 
+
+Definition at line 201 of file Builder\_\-graphs.cpp.
+
+References attr\_\-grammar, attr\_\-vertex\_\-graphs, complete\_\-dp\_\-graphs(), compute\_\-attr\_\-vertex(), genevalmag::current\_\-rule, genevalmag::Rule::get\_\-left\_\-symbol(), genevalmag::Rule::get\_\-non\_\-terminals\_\-right\_\-side(), genevalmag::Attr\_\-grammar::get\_\-rules(), genevalmag::Symbol::key(), utilities::merge\_\-graph(), p\_\-Down\_\-graphs, p\_\-Dp\_\-graphs, and utilities::project\_\-graph().
+
+Referenced by genevalmag::Builder\_\-plans::generate\_\-graphs().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__graphs_dc8ee86b8d769a7b42c43361fa7076cb_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=378pt]{classgenevalmag_1_1Builder__graphs_dc8ee86b8d769a7b42c43361fa7076cb_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__graphs_96271a5edae352ea39ad4f627877d8a4}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!get\_\-adp\_\-graphs@{get\_\-adp\_\-graphs}}
+\index{get\_\-adp\_\-graphs@{get\_\-adp\_\-graphs}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{get\_\-adp\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}const map$<$ vector$<$ unsigned short $>$, {\bf Graph} $>$ \& genevalmag::Builder\_\-graphs::get\_\-adp\_\-graphs () const}}
+\label{classgenevalmag_1_1Builder__graphs_96271a5edae352ea39ad4f627877d8a4}
+
+
+Returns the map with all ADP graphs creates. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the map with all ADP graphs creates. 
+
+Definition at line 70 of file Builder\_\-graphs.cpp.
+
+References p\_\-Adp\_\-graphs.
+
+Referenced by genevalmag::Builder\_\-plans::generate\_\-plans().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=362pt]{classgenevalmag_1_1Builder__graphs_96271a5edae352ea39ad4f627877d8a4_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__graphs_4abbda95aa3d42fc06328c31ff5d63e1}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!get\_\-cyclic\_\-graphs@{get\_\-cyclic\_\-graphs}}
+\index{get\_\-cyclic\_\-graphs@{get\_\-cyclic\_\-graphs}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{get\_\-cyclic\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}const map$<$ vector$<$ unsigned short $>$, {\bf Graph} $>$ \& genevalmag::Builder\_\-graphs::get\_\-cyclic\_\-graphs () const}}
+\label{classgenevalmag_1_1Builder__graphs_4abbda95aa3d42fc06328c31ff5d63e1}
+
+
+Returns the map with all ADP with cycle graphs creates. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the map with all ADP graphs creates. 
+
+Definition at line 78 of file Builder\_\-graphs.cpp.
+
+References p\_\-Adp\_\-subgraphs\_\-cyclics.\hypertarget{classgenevalmag_1_1Builder__graphs_5850a6c7a2248394ead2b63aeca7ff9b}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!get\_\-dcg\_\-graph@{get\_\-dcg\_\-graph}}
+\index{get\_\-dcg\_\-graph@{get\_\-dcg\_\-graph}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{get\_\-dcg\_\-graph}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Graph} \& genevalmag::Builder\_\-graphs::get\_\-dcg\_\-graph (unsigned short {\em index\_\-rule}) const}}
+\label{classgenevalmag_1_1Builder__graphs_5850a6c7a2248394ead2b63aeca7ff9b}
+
+
+Returns the down graph of the symbol. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em index\_\-rule}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the down graph of the symbol. 
+
+Definition at line 86 of file Builder\_\-graphs.cpp.
+
+References p\_\-Dcg\_\-graphs.
+
+Referenced by genevalmag::Builder\_\-plans::generate\_\-plans().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=360pt]{classgenevalmag_1_1Builder__graphs_5850a6c7a2248394ead2b63aeca7ff9b_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__graphs_af2e8aa86ea96212833d769110eeaebd}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!save\_\-adp\_\-graphs@{save\_\-adp\_\-graphs}}
+\index{save\_\-adp\_\-graphs@{save\_\-adp\_\-graphs}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{save\_\-adp\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Builder\_\-graphs::save\_\-adp\_\-graphs (const string {\em path\_\-output}) const}}
+\label{classgenevalmag_1_1Builder__graphs_af2e8aa86ea96212833d769110eeaebd}
+
+
+Saves all adp-graphs generates \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em path\_\-output}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Saves all adp-graphs generates. 
+
+Definition at line 570 of file Builder\_\-graphs.cpp.
+
+References attr\_\-grammar, utilities::clean\_\-output\_\-folder(), utilities::cleaning\_\-tabs(), genevalmag::FILE\_\-ADP\_\-GRAPH(), utilities::generate\_\-names\_\-instance(), genevalmag::Attr\_\-grammar::get\_\-rules(), p\_\-Adp\_\-graphs, genevalmag::PATH\_\-OUTPUT\_\-ADP(), utilities::print\_\-graph(), genevalmag::Rule::to\_\-string\_\-not\_\-eqs(), and utilities::write\_\-inf\_\-context().
+
+Referenced by save\_\-all\_\-graphs().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{classgenevalmag_1_1Builder__graphs_af2e8aa86ea96212833d769110eeaebd_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=382pt]{classgenevalmag_1_1Builder__graphs_af2e8aa86ea96212833d769110eeaebd_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__graphs_95525c606a1189a5fe0096f72938555d}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!save\_\-all\_\-graphs@{save\_\-all\_\-graphs}}
+\index{save\_\-all\_\-graphs@{save\_\-all\_\-graphs}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{save\_\-all\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Builder\_\-graphs::save\_\-all\_\-graphs (const string {\em path\_\-output}) const}}
+\label{classgenevalmag_1_1Builder__graphs_95525c606a1189a5fe0096f72938555d}
+
+
+Saves all graphs generates: DP, Down, DCG and ADP. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em path\_\-output}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Saves all graphs generates: DP, Down, DCG and ADP. 
+
+Definition at line 602 of file Builder\_\-graphs.cpp.
+
+References utilities::clean\_\-output\_\-folder(), genevalmag::PATH\_\-OUTPUT\_\-GRAPHS(), save\_\-adp\_\-graphs(), save\_\-dcg\_\-graphs(), save\_\-down\_\-graphs(), and save\_\-dp\_\-graphs().
+
+Referenced by genevalmag::Builder\_\-plans::save\_\-all\_\-graphs().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__graphs_95525c606a1189a5fe0096f72938555d_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{classgenevalmag_1_1Builder__graphs_95525c606a1189a5fe0096f72938555d_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__graphs_81bf79709c133320f4d40cdee1f61466}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!save\_\-cyclic\_\-graphs@{save\_\-cyclic\_\-graphs}}
+\index{save\_\-cyclic\_\-graphs@{save\_\-cyclic\_\-graphs}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{save\_\-cyclic\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Builder\_\-graphs::save\_\-cyclic\_\-graphs (const string {\em path\_\-output}) const}}
+\label{classgenevalmag_1_1Builder__graphs_81bf79709c133320f4d40cdee1f61466}
+
+
+Saves all graphs graph cycles. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em path\_\-output}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+
+
+Definition at line 620 of file Builder\_\-graphs.cpp.
+
+References attr\_\-grammar, utilities::clean\_\-output\_\-folder(), utilities::cleaning\_\-tabs(), genevalmag::FILE\_\-ADP\_\-SUBGRAPH\_\-CYCLIC(), utilities::generate\_\-names\_\-instance(), genevalmag::Attr\_\-grammar::get\_\-rules(), p\_\-Adp\_\-subgraphs\_\-cyclics, genevalmag::PATH\_\-OUTPUT\_\-CYCLIC(), genevalmag::PATH\_\-OUTPUT\_\-GRAPHS(), utilities::print\_\-graph(), genevalmag::Rule::to\_\-string\_\-not\_\-eqs(), and utilities::write\_\-inf\_\-context().
+
+Referenced by genevalmag::Builder\_\-plans::save\_\-cyclic\_\-graphs().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=363pt]{classgenevalmag_1_1Builder__graphs_81bf79709c133320f4d40cdee1f61466_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=269pt]{classgenevalmag_1_1Builder__graphs_81bf79709c133320f4d40cdee1f61466_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__graphs_572e65e40e16066f068c82af178c22c2}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!save\_\-dcg\_\-graphs@{save\_\-dcg\_\-graphs}}
+\index{save\_\-dcg\_\-graphs@{save\_\-dcg\_\-graphs}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{save\_\-dcg\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Builder\_\-graphs::save\_\-dcg\_\-graphs (const string {\em path\_\-output}) const}}
+\label{classgenevalmag_1_1Builder__graphs_572e65e40e16066f068c82af178c22c2}
+
+
+Saves all dcg-graphs generates \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em path\_\-output}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Saves all dcg-graphs generates. 
+
+Definition at line 540 of file Builder\_\-graphs.cpp.
+
+References attr\_\-grammar, utilities::clean\_\-output\_\-folder(), utilities::cleaning\_\-tabs(), genevalmag::current\_\-rule, genevalmag::FILE\_\-DCG\_\-GRAPH(), utilities::generate\_\-names\_\-instance(), genevalmag::Rule::get\_\-left\_\-symbol(), genevalmag::Symbol::get\_\-name(), genevalmag::Attr\_\-grammar::get\_\-rules(), p\_\-Dcg\_\-graphs, genevalmag::PATH\_\-OUTPUT\_\-DCG(), utilities::print\_\-graph(), and genevalmag::Rule::to\_\-string\_\-not\_\-eqs().
+
+Referenced by save\_\-all\_\-graphs().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{classgenevalmag_1_1Builder__graphs_572e65e40e16066f068c82af178c22c2_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=382pt]{classgenevalmag_1_1Builder__graphs_572e65e40e16066f068c82af178c22c2_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__graphs_18516e61124884d50ee9fb14f833ca01}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!save\_\-down\_\-graphs@{save\_\-down\_\-graphs}}
+\index{save\_\-down\_\-graphs@{save\_\-down\_\-graphs}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{save\_\-down\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Builder\_\-graphs::save\_\-down\_\-graphs (const string {\em path\_\-output}) const}}
+\label{classgenevalmag_1_1Builder__graphs_18516e61124884d50ee9fb14f833ca01}
+
+
+Saves all down-graphs generates \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em path\_\-output}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Saves all down-graphs generates. 
+
+Definition at line 514 of file Builder\_\-graphs.cpp.
+
+References utilities::clean\_\-output\_\-folder(), genevalmag::FILE\_\-DOWN\_\-GRAPH(), utilities::generate\_\-names\_\-attr(), p\_\-Down\_\-graphs, genevalmag::PATH\_\-OUTPUT\_\-DOWN(), and utilities::print\_\-graph().
+
+Referenced by save\_\-all\_\-graphs().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=317pt]{classgenevalmag_1_1Builder__graphs_18516e61124884d50ee9fb14f833ca01_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=385pt]{classgenevalmag_1_1Builder__graphs_18516e61124884d50ee9fb14f833ca01_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Builder__graphs_525d16f83c419ec6751379b860c625d6}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!save\_\-dp\_\-graphs@{save\_\-dp\_\-graphs}}
+\index{save\_\-dp\_\-graphs@{save\_\-dp\_\-graphs}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{save\_\-dp\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Builder\_\-graphs::save\_\-dp\_\-graphs (const string {\em path\_\-output}) const}}
+\label{classgenevalmag_1_1Builder__graphs_525d16f83c419ec6751379b860c625d6}
+
+
+Saves all dp-graphs generates \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em path\_\-output}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Saves all dp-graphs generates 
+
+Definition at line 486 of file Builder\_\-graphs.cpp.
+
+References attr\_\-grammar, utilities::clean\_\-output\_\-folder(), utilities::cleaning\_\-tabs(), genevalmag::current\_\-rule, genevalmag::FILE\_\-DP\_\-GRAPH(), utilities::generate\_\-names\_\-instance(), genevalmag::Attr\_\-grammar::get\_\-rules(), p\_\-Dp\_\-graphs, genevalmag::PATH\_\-OUTPUT\_\-DP(), utilities::print\_\-graph(), and genevalmag::Rule::to\_\-string\_\-not\_\-eqs().
+
+Referenced by save\_\-all\_\-graphs().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{classgenevalmag_1_1Builder__graphs_525d16f83c419ec6751379b860c625d6_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=379pt]{classgenevalmag_1_1Builder__graphs_525d16f83c419ec6751379b860c625d6_icgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classgenevalmag_1_1Builder__graphs_10e4acb76015aeea26cf61980a3c6e33}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!attr\_\-grammar@{attr\_\-grammar}}
+\index{attr\_\-grammar@{attr\_\-grammar}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{attr\_\-grammar}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-graphs::attr\_\-grammar}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__graphs_10e4acb76015aeea26cf61980a3c6e33}
+
+
+References to the attribute grammar. 
+
+
+
+Definition at line 47 of file Builder\_\-graphs.h.
+
+Referenced by complete\_\-dp\_\-graphs(), compute\_\-adp\_\-graph(), compute\_\-attr\_\-vertex(), compute\_\-dcg(), compute\_\-dependency\_\-graphs(), compute\_\-down\_\-graph(), save\_\-adp\_\-graphs(), save\_\-cyclic\_\-graphs(), save\_\-dcg\_\-graphs(), and save\_\-dp\_\-graphs().\hypertarget{classgenevalmag_1_1Builder__graphs_e5a3713f467704d2e3dc67da86ded862}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!attr\_\-vertex\_\-graphs@{attr\_\-vertex\_\-graphs}}
+\index{attr\_\-vertex\_\-graphs@{attr\_\-vertex\_\-graphs}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{attr\_\-vertex\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-graphs::attr\_\-vertex\_\-graphs}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__graphs_e5a3713f467704d2e3dc67da86ded862}
+
+
+Store the vertex-attr graphs. The key corresponds to the key \hyperlink{classgenevalmag_1_1Symbol}{Symbol}. 
+
+
+
+Definition at line 58 of file Builder\_\-graphs.h.
+
+Referenced by complete\_\-dp\_\-graphs(), compute\_\-attr\_\-vertex(), and compute\_\-down\_\-graph().\hypertarget{classgenevalmag_1_1Builder__graphs_75e37bb5a6f499fdd57f97061e313ec5}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!p\_\-Adp\_\-graphs@{p\_\-Adp\_\-graphs}}
+\index{p\_\-Adp\_\-graphs@{p\_\-Adp\_\-graphs}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{p\_\-Adp\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-graphs::p\_\-Adp\_\-graphs}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__graphs_75e37bb5a6f499fdd57f97061e313ec5}
+
+
+Store the adp graphs. The key corresponds to the key \hyperlink{classgenevalmag_1_1Rule}{Rule} with the inferior context. 
+
+
+
+Definition at line 74 of file Builder\_\-graphs.h.
+
+Referenced by check\_\-cyclic\_\-adp\_\-dependencies(), combined\_\-inf\_\-contexts(), get\_\-adp\_\-graphs(), and save\_\-adp\_\-graphs().\hypertarget{classgenevalmag_1_1Builder__graphs_54a45b424086582d4ed7bb99b948a956}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!p\_\-Adp\_\-subgraphs\_\-cyclics@{p\_\-Adp\_\-subgraphs\_\-cyclics}}
+\index{p\_\-Adp\_\-subgraphs\_\-cyclics@{p\_\-Adp\_\-subgraphs\_\-cyclics}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{p\_\-Adp\_\-subgraphs\_\-cyclics}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-graphs::p\_\-Adp\_\-subgraphs\_\-cyclics}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__graphs_54a45b424086582d4ed7bb99b948a956}
+
+
+Store the adp graphs. The key corresponds to the key \hyperlink{classgenevalmag_1_1Rule}{Rule} with the inferior context. 
+
+
+
+Definition at line 79 of file Builder\_\-graphs.h.
+
+Referenced by check\_\-cyclic\_\-adp\_\-dependencies(), get\_\-cyclic\_\-graphs(), and save\_\-cyclic\_\-graphs().\hypertarget{classgenevalmag_1_1Builder__graphs_fe54574f0045851288fae27ce01a8f4f}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!p\_\-Dcg\_\-graphs@{p\_\-Dcg\_\-graphs}}
+\index{p\_\-Dcg\_\-graphs@{p\_\-Dcg\_\-graphs}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{p\_\-Dcg\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-graphs::p\_\-Dcg\_\-graphs}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__graphs_fe54574f0045851288fae27ce01a8f4f}
+
+
+Store the dcg graphs. The key corresponds to the key \hyperlink{classgenevalmag_1_1Rule}{Rule}. 
+
+
+
+Definition at line 69 of file Builder\_\-graphs.h.
+
+Referenced by combined\_\-inf\_\-contexts(), compute\_\-dcg(), get\_\-dcg\_\-graph(), and save\_\-dcg\_\-graphs().\hypertarget{classgenevalmag_1_1Builder__graphs_05fcf30d7286884794303103544979c4}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!p\_\-Down\_\-graphs@{p\_\-Down\_\-graphs}}
+\index{p\_\-Down\_\-graphs@{p\_\-Down\_\-graphs}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{p\_\-Down\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-graphs::p\_\-Down\_\-graphs}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__graphs_05fcf30d7286884794303103544979c4}
+
+
+Store the down graphs. The key corresponds to the key \hyperlink{classgenevalmag_1_1Symbol}{Symbol}. 
+
+
+
+Definition at line 63 of file Builder\_\-graphs.h.
+
+Referenced by compute\_\-dcg(), compute\_\-down\_\-graph(), and save\_\-down\_\-graphs().\hypertarget{classgenevalmag_1_1Builder__graphs_2f001cd797840683731d524214cd6d13}{
+\index{genevalmag::Builder\_\-graphs@{genevalmag::Builder\_\-graphs}!p\_\-Dp\_\-graphs@{p\_\-Dp\_\-graphs}}
+\index{p\_\-Dp\_\-graphs@{p\_\-Dp\_\-graphs}!genevalmag::Builder_graphs@{genevalmag::Builder\_\-graphs}}
+\subsubsection[{p\_\-Dp\_\-graphs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-graphs::p\_\-Dp\_\-graphs}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__graphs_2f001cd797840683731d524214cd6d13}
+
+
+Store the DP graphs. The key corresponds to the key \hyperlink{classgenevalmag_1_1Rule}{Rule}.. 
+
+
+
+Definition at line 53 of file Builder\_\-graphs.h.
+
+Referenced by complete\_\-dp\_\-graphs(), compute\_\-adp\_\-graph(), compute\_\-attr\_\-vertex(), compute\_\-dcg(), compute\_\-dependency\_\-graphs(), compute\_\-down\_\-graph(), and save\_\-dp\_\-graphs().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+include/Builders/\hyperlink{Builder__graphs_8h}{Builder\_\-graphs.h}\item 
+src/Builders/\hyperlink{Builder__graphs_8cpp}{Builder\_\-graphs.cpp}\end{CompactItemize}

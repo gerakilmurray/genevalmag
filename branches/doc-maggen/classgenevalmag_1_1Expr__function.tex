@@ -1,0 +1,658 @@
+\hypertarget{classgenevalmag_1_1Expr__function}{
+\section{genevalmag::Expr\_\-function Class Reference}
+\label{classgenevalmag_1_1Expr__function}\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}}
+}
+{\tt \#include $<$Expr\_\-function.h$>$}
+
+Inherits \hyperlink{classgenevalmag_1_1Expr__node}{genevalmag::Expr\_\-node}.
+
+Collaboration diagram for genevalmag::Expr\_\-function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=400pt]{classgenevalmag_1_1Expr__function__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+\hyperlink{classgenevalmag_1_1Expr__function_11842df1439746a952704518f5e1df1e}{Expr\_\-function} ()
+\item 
+\hyperlink{classgenevalmag_1_1Expr__function_2e4a1518e004d243a209e5c9ca0e54b4}{Expr\_\-function} (const \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function} \&other)
+\item 
+virtual \hyperlink{classgenevalmag_1_1Expr__function_e7de6c473686005994a3444e6d953e52}{$\sim$Expr\_\-function} ()
+\item 
+\hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function} \& \hyperlink{classgenevalmag_1_1Expr__function_eac7341725e1953e65f251314fde4f54}{operator=} (const \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function} \&other)
+\item 
+const \hyperlink{classgenevalmag_1_1Function}{Function} $\ast$ \hyperlink{classgenevalmag_1_1Expr__function_7f1fedb3efc2c8eaf07877a8e72a2579}{get\_\-function} () const 
+\item 
+unsigned short \hyperlink{classgenevalmag_1_1Expr__function_25e611b881f5e74cd37d968c128a4f1b}{get\_\-precedence\_\-level} () const 
+\item 
+unsigned short \hyperlink{classgenevalmag_1_1Expr__function_f80357473c344ff776ec298d4424cbc0}{get\_\-syntax\_\-order} () const 
+\item 
+void \hyperlink{classgenevalmag_1_1Expr__function_9d3e5b95868a98b9014d0f1de4ac8ae8}{set\_\-function} (const \hyperlink{classgenevalmag_1_1Function}{Function} $\ast$function)
+\item 
+void \hyperlink{classgenevalmag_1_1Expr__function_9ad92c765b202584cc0d5b4648b2e44b}{set\_\-precedence\_\-level} (unsigned short p\_\-level)
+\item 
+void \hyperlink{classgenevalmag_1_1Expr__function_4d7c89c116c5f5f081f3527aa76b5e97}{set\_\-syntax\_\-order} (unsigned short s\_\-order)
+\item 
+bool \hyperlink{classgenevalmag_1_1Expr__function_0534ddcde21e3bd35fe12e85f6d8251f}{is\_\-prefix} () const 
+\item 
+bool \hyperlink{classgenevalmag_1_1Expr__function_f5a16ffe850f268df142c625205961dc}{is\_\-infix} () const 
+\item 
+bool \hyperlink{classgenevalmag_1_1Expr__function_8ef52d8fec97d084be0b24e5207a0551}{is\_\-postfix} () const 
+\item 
+bool \hyperlink{classgenevalmag_1_1Expr__function_24aaf520c742fde5eff5c8c596549009}{is\_\-comparable} (const \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function} $\ast$other) const 
+\item 
+int \hyperlink{classgenevalmag_1_1Expr__function_83c21a4b327d045d8da159d6079dd99c}{compare\_\-precedence} (const \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function} $\ast$other) const 
+\item 
+int \hyperlink{classgenevalmag_1_1Expr__function_4608528d2e116c0794eb78f2724b6a18}{compare\_\-order} (const \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function} $\ast$other) const 
+\item 
+string \hyperlink{classgenevalmag_1_1Expr__function_daaebd5427337bb2288c47a16af804d8}{to\_\-string} () const 
+\end{CompactItemize}
+\subsection*{Private Member Functions}
+\begin{CompactItemize}
+\item 
+void \hyperlink{classgenevalmag_1_1Expr__function_4cae50a094103bbfe2c6dba9b1350946}{copy} (const \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function} \&other)
+\item 
+void \hyperlink{classgenevalmag_1_1Expr__function_3d90bbd7e17670edc01ba21d8a753315}{destroy} ()
+\end{CompactItemize}
+\subsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+const \hyperlink{classgenevalmag_1_1Function}{Function} $\ast$ \hyperlink{classgenevalmag_1_1Expr__function_8248bebb1840bf2d2fcb2e818ba5a3eb}{func}
+\begin{CompactList}\small\item\em \hyperlink{classgenevalmag_1_1Function}{Function} associates with \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. \item\end{CompactList}\item 
+unsigned short \hyperlink{classgenevalmag_1_1Expr__function_98a74d7ae5aaeb4b0d69c79845f8ce8f}{precedence\_\-level}
+\begin{CompactList}\small\item\em Level precedence of the function. \item\end{CompactList}\item 
+unsigned short \hyperlink{classgenevalmag_1_1Expr__function_dfde16cebcb1963e540a8f92eddb69a1}{syntax\_\-order}
+\begin{CompactList}\small\item\em Syntax order in the parse. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 23 of file Expr\_\-function.h.
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classgenevalmag_1_1Expr__function_11842df1439746a952704518f5e1df1e}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!Expr\_\-function@{Expr\_\-function}}
+\index{Expr\_\-function@{Expr\_\-function}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{Expr\_\-function}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Expr\_\-function::Expr\_\-function ()}}
+\label{classgenevalmag_1_1Expr__function_11842df1439746a952704518f5e1df1e}
+
+
+Constructor empty of \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. \begin{Desc}
+\item[Returns:]\end{Desc}
+Constructor empty of \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. 
+
+Definition at line 24 of file Expr\_\-function.cpp.
+
+References precedence\_\-level, and syntax\_\-order.\hypertarget{classgenevalmag_1_1Expr__function_2e4a1518e004d243a209e5c9ca0e54b4}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!Expr\_\-function@{Expr\_\-function}}
+\index{Expr\_\-function@{Expr\_\-function}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{Expr\_\-function}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Expr\_\-function::Expr\_\-function (const {\bf Expr\_\-function} \& {\em other})}}
+\label{classgenevalmag_1_1Expr__function_2e4a1518e004d243a209e5c9ca0e54b4}
+
+
+Constructor copy of \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em other}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Constructor copy of \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. 
+
+Definition at line 37 of file Expr\_\-function.cpp.
+
+References copy().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=358pt]{classgenevalmag_1_1Expr__function_2e4a1518e004d243a209e5c9ca0e54b4_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expr__function_e7de6c473686005994a3444e6d953e52}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!$\sim$Expr\_\-function@{$\sim$Expr\_\-function}}
+\index{$\sim$Expr\_\-function@{$\sim$Expr\_\-function}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{$\sim$Expr\_\-function}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Expr\_\-function::$\sim$Expr\_\-function ()\hspace{0.3cm}{\tt  \mbox{[}virtual\mbox{]}}}}
+\label{classgenevalmag_1_1Expr__function_e7de6c473686005994a3444e6d953e52}
+
+
+Destructor of \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. \begin{Desc}
+\item[Returns:]\end{Desc}
+Destructor of \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. 
+
+Definition at line 49 of file Expr\_\-function.cpp.
+
+References destroy().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=231pt]{classgenevalmag_1_1Expr__function_e7de6c473686005994a3444e6d953e52_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classgenevalmag_1_1Expr__function_4608528d2e116c0794eb78f2724b6a18}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!compare\_\-order@{compare\_\-order}}
+\index{compare\_\-order@{compare\_\-order}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{compare\_\-order}]{\setlength{\rightskip}{0pt plus 5cm}int genevalmag::Expr\_\-function::compare\_\-order (const {\bf Expr\_\-function} $\ast$ {\em other}) const}}
+\label{classgenevalmag_1_1Expr__function_4608528d2e116c0794eb78f2724b6a18}
+
+
+Returns:\par
+ $\backslash$= O when is same order\par
+ $<$ 0 when other have great order\par
+ $>$ 0 when other have small order\par
+ \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em other}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Return: = O when is same order $<$ 0 when other have great order $>$ 0 when other have small order 
+
+Definition at line 193 of file Expr\_\-function.cpp.
+
+References get\_\-syntax\_\-order(), and syntax\_\-order.
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=251pt]{classgenevalmag_1_1Expr__function_4608528d2e116c0794eb78f2724b6a18_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expr__function_83c21a4b327d045d8da159d6079dd99c}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!compare\_\-precedence@{compare\_\-precedence}}
+\index{compare\_\-precedence@{compare\_\-precedence}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{compare\_\-precedence}]{\setlength{\rightskip}{0pt plus 5cm}int genevalmag::Expr\_\-function::compare\_\-precedence (const {\bf Expr\_\-function} $\ast$ {\em other}) const}}
+\label{classgenevalmag_1_1Expr__function_83c21a4b327d045d8da159d6079dd99c}
+
+
+Returns:\par
+ $\backslash$= O when is same precedence\par
+ $<$ 0 when other have great precedence\par
+ $>$ 0 when other have small precedence\par
+ \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em other}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Return: = O when is same precedence $<$ 0 when other have great precedence $>$ 0 when other have small precedence 
+
+Definition at line 182 of file Expr\_\-function.cpp.
+
+References func, get\_\-function(), and genevalmag::Function::get\_\-prec().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=254pt]{classgenevalmag_1_1Expr__function_83c21a4b327d045d8da159d6079dd99c_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expr__function_4cae50a094103bbfe2c6dba9b1350946}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!copy@{copy}}
+\index{copy@{copy}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{copy}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Expr\_\-function::copy (const {\bf Expr\_\-function} \& {\em other})\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Expr__function_4cae50a094103bbfe2c6dba9b1350946}
+
+
+Method of copy the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}, STL-like C++. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em other}]Method of copy the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}, STL-like C++. \end{description}
+\end{Desc}
+
+
+Definition at line 78 of file Expr\_\-function.cpp.
+
+References genevalmag::Expr\_\-node::childs, genevalmag::Expression::conflict, func, genevalmag::Expr\_\-node::get\_\-childs(), genevalmag::Expression::get\_\-conflict(), get\_\-function(), genevalmag::Expression::get\_\-parent(), get\_\-precedence\_\-level(), get\_\-syntax\_\-order(), genevalmag::Expression::get\_\-type\_\-synthetized(), genevalmag::Expression::parent, precedence\_\-level, syntax\_\-order, and genevalmag::Expression::type\_\-synthetized.
+
+Referenced by Expr\_\-function(), and operator=().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{classgenevalmag_1_1Expr__function_4cae50a094103bbfe2c6dba9b1350946_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{classgenevalmag_1_1Expr__function_4cae50a094103bbfe2c6dba9b1350946_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expr__function_3d90bbd7e17670edc01ba21d8a753315}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!destroy@{destroy}}
+\index{destroy@{destroy}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{destroy}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Expr\_\-function::destroy ()\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Expr__function_3d90bbd7e17670edc01ba21d8a753315}
+
+
+Method destroy \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}, STL-like C++. 
+
+Definition at line 92 of file Expr\_\-function.cpp.
+
+Referenced by operator=(), and $\sim$Expr\_\-function().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=231pt]{classgenevalmag_1_1Expr__function_3d90bbd7e17670edc01ba21d8a753315_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expr__function_7f1fedb3efc2c8eaf07877a8e72a2579}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!get\_\-function@{get\_\-function}}
+\index{get\_\-function@{get\_\-function}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{get\_\-function}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Function} $\ast$ genevalmag::Expr\_\-function::get\_\-function () const}}
+\label{classgenevalmag_1_1Expr__function_7f1fedb3efc2c8eaf07877a8e72a2579}
+
+
+Returns the function pointer of the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the function pointer of the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. 
+
+Definition at line 99 of file Expr\_\-function.cpp.
+
+References func.
+
+Referenced by compare\_\-precedence(), copy(), genevalmag::Semantics\_\-checks::correct\_\-associativity(), genevalmag::Semantics\_\-checks::correct\_\-precedence(), and genevalmag::generate\_\-expr\_\-text().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Expr__function_7f1fedb3efc2c8eaf07877a8e72a2579_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expr__function_25e611b881f5e74cd37d968c128a4f1b}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!get\_\-precedence\_\-level@{get\_\-precedence\_\-level}}
+\index{get\_\-precedence\_\-level@{get\_\-precedence\_\-level}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{get\_\-precedence\_\-level}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short genevalmag::Expr\_\-function::get\_\-precedence\_\-level () const}}
+\label{classgenevalmag_1_1Expr__function_25e611b881f5e74cd37d968c128a4f1b}
+
+
+Returns the precedence level of the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the precedence level of the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. 
+
+Definition at line 107 of file Expr\_\-function.cpp.
+
+References precedence\_\-level.
+
+Referenced by copy(), and is\_\-comparable().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=379pt]{classgenevalmag_1_1Expr__function_25e611b881f5e74cd37d968c128a4f1b_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expr__function_f80357473c344ff776ec298d4424cbc0}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!get\_\-syntax\_\-order@{get\_\-syntax\_\-order}}
+\index{get\_\-syntax\_\-order@{get\_\-syntax\_\-order}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{get\_\-syntax\_\-order}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short genevalmag::Expr\_\-function::get\_\-syntax\_\-order () const}}
+\label{classgenevalmag_1_1Expr__function_f80357473c344ff776ec298d4424cbc0}
+
+
+Returns the syntax order of the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the syntax order of the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. 
+
+Definition at line 115 of file Expr\_\-function.cpp.
+
+References syntax\_\-order.
+
+Referenced by compare\_\-order(), and copy().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=370pt]{classgenevalmag_1_1Expr__function_f80357473c344ff776ec298d4424cbc0_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expr__function_24aaf520c742fde5eff5c8c596549009}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!is\_\-comparable@{is\_\-comparable}}
+\index{is\_\-comparable@{is\_\-comparable}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{is\_\-comparable}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Expr\_\-function::is\_\-comparable (const {\bf Expr\_\-function} $\ast$ {\em other}) const}}
+\label{classgenevalmag_1_1Expr__function_24aaf520c742fde5eff5c8c596549009}
+
+
+Returns if both Expr\_\-functions are in the same precedence level. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em other}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Returns if both Expr\_\-functions are in the same precedence level. 
+
+Definition at line 171 of file Expr\_\-function.cpp.
+
+References get\_\-precedence\_\-level(), and precedence\_\-level.
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=260pt]{classgenevalmag_1_1Expr__function_24aaf520c742fde5eff5c8c596549009_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expr__function_f5a16ffe850f268df142c625205961dc}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!is\_\-infix@{is\_\-infix}}
+\index{is\_\-infix@{is\_\-infix}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{is\_\-infix}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Expr\_\-function::is\_\-infix () const}}
+\label{classgenevalmag_1_1Expr__function_f5a16ffe850f268df142c625205961dc}
+
+
+Returns if the function of \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function} is infix. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns if the function of \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function} is infix. 
+
+Definition at line 155 of file Expr\_\-function.cpp.
+
+References func, genevalmag::Function::get\_\-mode(), and genevalmag::k\_\-infix.
+
+Referenced by genevalmag::generate\_\-expr\_\-text().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{classgenevalmag_1_1Expr__function_f5a16ffe850f268df142c625205961dc_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Expr__function_f5a16ffe850f268df142c625205961dc_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expr__function_8ef52d8fec97d084be0b24e5207a0551}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!is\_\-postfix@{is\_\-postfix}}
+\index{is\_\-postfix@{is\_\-postfix}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{is\_\-postfix}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Expr\_\-function::is\_\-postfix () const}}
+\label{classgenevalmag_1_1Expr__function_8ef52d8fec97d084be0b24e5207a0551}
+
+
+Returns if the function of \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function} is postfix. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns if the function of \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function} is postfix. 
+
+Definition at line 163 of file Expr\_\-function.cpp.
+
+References func, genevalmag::Function::get\_\-mode(), and genevalmag::k\_\-postfix.
+
+Referenced by genevalmag::Semantics\_\-checks::correct\_\-precedence(), and genevalmag::generate\_\-expr\_\-text().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{classgenevalmag_1_1Expr__function_8ef52d8fec97d084be0b24e5207a0551_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Expr__function_8ef52d8fec97d084be0b24e5207a0551_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expr__function_0534ddcde21e3bd35fe12e85f6d8251f}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!is\_\-prefix@{is\_\-prefix}}
+\index{is\_\-prefix@{is\_\-prefix}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{is\_\-prefix}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Expr\_\-function::is\_\-prefix () const}}
+\label{classgenevalmag_1_1Expr__function_0534ddcde21e3bd35fe12e85f6d8251f}
+
+
+Returns if the function of \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function} is prefix. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns if the function of \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function} is prefix. 
+
+Definition at line 147 of file Expr\_\-function.cpp.
+
+References func, genevalmag::Function::get\_\-mode(), and genevalmag::k\_\-prefix.
+
+Referenced by genevalmag::Semantics\_\-checks::correct\_\-precedence(), and genevalmag::generate\_\-expr\_\-text().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=210pt]{classgenevalmag_1_1Expr__function_0534ddcde21e3bd35fe12e85f6d8251f_cgraph}
+\end{center}
+\end{figure}
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Expr__function_0534ddcde21e3bd35fe12e85f6d8251f_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expr__function_eac7341725e1953e65f251314fde4f54}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!operator=@{operator=}}
+\index{operator=@{operator=}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Expr\_\-function} \& genevalmag::Expr\_\-function::operator= (const {\bf Expr\_\-function} \& {\em other})}}
+\label{classgenevalmag_1_1Expr__function_eac7341725e1953e65f251314fde4f54}
+
+
+Operator assign(=) of \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em other}]\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]\end{Desc}
+Operator assign(=) of \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. 
+
+Definition at line 65 of file Expr\_\-function.cpp.
+
+References copy(), and destroy().
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=354pt]{classgenevalmag_1_1Expr__function_eac7341725e1953e65f251314fde4f54_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expr__function_9d3e5b95868a98b9014d0f1de4ac8ae8}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!set\_\-function@{set\_\-function}}
+\index{set\_\-function@{set\_\-function}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{set\_\-function}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Expr\_\-function::set\_\-function (const {\bf Function} $\ast$ {\em function})}}
+\label{classgenevalmag_1_1Expr__function_9d3e5b95868a98b9014d0f1de4ac8ae8}
+
+
+Sets the function pointer of the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em function}]Sets the function pointer of the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. \end{description}
+\end{Desc}
+
+
+Definition at line 123 of file Expr\_\-function.cpp.
+
+References func.
+
+Referenced by genevalmag::create\_\-func\_\-node().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=352pt]{classgenevalmag_1_1Expr__function_9d3e5b95868a98b9014d0f1de4ac8ae8_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expr__function_9ad92c765b202584cc0d5b4648b2e44b}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!set\_\-precedence\_\-level@{set\_\-precedence\_\-level}}
+\index{set\_\-precedence\_\-level@{set\_\-precedence\_\-level}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{set\_\-precedence\_\-level}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Expr\_\-function::set\_\-precedence\_\-level (unsigned short {\em p\_\-level})}}
+\label{classgenevalmag_1_1Expr__function_9ad92c765b202584cc0d5b4648b2e44b}
+
+
+Sets the precedence level of the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em p\_\-level}]Sets the precedence level of the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. \end{description}
+\end{Desc}
+
+
+Definition at line 131 of file Expr\_\-function.cpp.
+
+References precedence\_\-level.
+
+Referenced by genevalmag::create\_\-func\_\-node().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=373pt]{classgenevalmag_1_1Expr__function_9ad92c765b202584cc0d5b4648b2e44b_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expr__function_4d7c89c116c5f5f081f3527aa76b5e97}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!set\_\-syntax\_\-order@{set\_\-syntax\_\-order}}
+\index{set\_\-syntax\_\-order@{set\_\-syntax\_\-order}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{set\_\-syntax\_\-order}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Expr\_\-function::set\_\-syntax\_\-order (unsigned short {\em s\_\-order})}}
+\label{classgenevalmag_1_1Expr__function_4d7c89c116c5f5f081f3527aa76b5e97}
+
+
+Sets the syntax order of the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em s\_\-order}]Sets the syntax order of the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. \end{description}
+\end{Desc}
+
+
+Definition at line 139 of file Expr\_\-function.cpp.
+
+References syntax\_\-order.
+
+Referenced by genevalmag::create\_\-func\_\-node().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=363pt]{classgenevalmag_1_1Expr__function_4d7c89c116c5f5f081f3527aa76b5e97_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expr__function_daaebd5427337bb2288c47a16af804d8}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!to\_\-string@{to\_\-string}}
+\index{to\_\-string@{to\_\-string}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{to\_\-string}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::Expr\_\-function::to\_\-string () const\hspace{0.3cm}{\tt  \mbox{[}virtual\mbox{]}}}}
+\label{classgenevalmag_1_1Expr__function_daaebd5427337bb2288c47a16af804d8}
+
+
+Generate and return a string reprensentation of a \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}.\par
+ \par
+ If is a pure function:\par
+ Result= $<$func\_\-name$>$ \char`\"{}(\char`\"{} child\mbox{[}0\mbox{]}, ... , child\mbox{[}n\mbox{]} \char`\"{})\char`\"{}\par
+ \par
+ If is an infix binary operator:\par
+ Result= \char`\"{}(\char`\"{} child\mbox{[}0\mbox{]} $<$op\_\-name$>$ child\mbox{[}1\mbox{]} \char`\"{})\char`\"{}\par
+ \par
+ If is an prefix unary operator:\par
+ Result= $<$op\_\-name$>$ \char`\"{}(\char`\"{} child\mbox{[}0\mbox{]} \char`\"{})\char`\"{}\par
+ \par
+ If is an postfix unary operator:\par
+ Result= \char`\"{}(\char`\"{} child\mbox{[}0\mbox{]} \char`\"{})\char`\"{} $<$op\_\-name$>$\par
+ \begin{Desc}
+\item[Returns:]\end{Desc}
+Generate and return a string reprensentation of a \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}.
+
+If is a pure function: Result= $<$func\_\-name$>$ \char`\"{}(\char`\"{} child\mbox{[}0\mbox{]}, ... , child\mbox{[}n\mbox{]} \char`\"{})\char`\"{}
+
+If is an infix binary operator: Result= \char`\"{}(\char`\"{} child\mbox{[}0\mbox{]} $<$op\_\-name$>$ child\mbox{[}1\mbox{]} \char`\"{})\char`\"{}
+
+If is an prefix unary operator: Result= $<$op\_\-name$>$ \char`\"{}(\char`\"{} child\mbox{[}0\mbox{]} \char`\"{})\char`\"{}
+
+If is an postfix unary operator: Result= \char`\"{}(\char`\"{} child\mbox{[}0\mbox{]} \char`\"{})\char`\"{} $<$op\_\-name$>$ 
+
+Implements \hyperlink{classgenevalmag_1_1Expr__node_dea1d8fbc1b01f018e18cedad871f6a7}{genevalmag::Expr\_\-node}.
+
+Definition at line 213 of file Expr\_\-function.cpp.
+
+References genevalmag::Expr\_\-node::childs, func, genevalmag::Function::get\_\-mode(), genevalmag::Function::get\_\-name(), genevalmag::Function::is\_\-operator(), genevalmag::k\_\-infix, genevalmag::k\_\-postfix, and genevalmag::k\_\-prefix.
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{classgenevalmag_1_1Expr__function_daaebd5427337bb2288c47a16af804d8_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classgenevalmag_1_1Expr__function_8248bebb1840bf2d2fcb2e818ba5a3eb}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!func@{func}}
+\index{func@{func}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{func}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Expr\_\-function::func}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Expr__function_8248bebb1840bf2d2fcb2e818ba5a3eb}
+
+
+\hyperlink{classgenevalmag_1_1Function}{Function} associates with \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. 
+
+
+
+Definition at line 30 of file Expr\_\-function.h.
+
+Referenced by compare\_\-precedence(), copy(), get\_\-function(), is\_\-infix(), is\_\-postfix(), is\_\-prefix(), set\_\-function(), and to\_\-string().\hypertarget{classgenevalmag_1_1Expr__function_98a74d7ae5aaeb4b0d69c79845f8ce8f}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!precedence\_\-level@{precedence\_\-level}}
+\index{precedence\_\-level@{precedence\_\-level}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{precedence\_\-level}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Expr\_\-function::precedence\_\-level}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Expr__function_98a74d7ae5aaeb4b0d69c79845f8ce8f}
+
+
+Level precedence of the function. 
+
+
+
+Definition at line 35 of file Expr\_\-function.h.
+
+Referenced by copy(), Expr\_\-function(), get\_\-precedence\_\-level(), is\_\-comparable(), and set\_\-precedence\_\-level().\hypertarget{classgenevalmag_1_1Expr__function_dfde16cebcb1963e540a8f92eddb69a1}{
+\index{genevalmag::Expr\_\-function@{genevalmag::Expr\_\-function}!syntax\_\-order@{syntax\_\-order}}
+\index{syntax\_\-order@{syntax\_\-order}!genevalmag::Expr_function@{genevalmag::Expr\_\-function}}
+\subsubsection[{syntax\_\-order}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Expr\_\-function::syntax\_\-order}\hspace{0.3cm}{\tt  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Expr__function_dfde16cebcb1963e540a8f92eddb69a1}
+
+
+Syntax order in the parse. 
+
+
+
+Definition at line 40 of file Expr\_\-function.h.
+
+Referenced by compare\_\-order(), copy(), Expr\_\-function(), get\_\-syntax\_\-order(), and set\_\-syntax\_\-order().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+include/Expression\_\-tree/\hyperlink{Expr__function_8h}{Expr\_\-function.h}\item 
+src/Expression\_\-tree/\hyperlink{Expr__function_8cpp}{Expr\_\-function.cpp}\end{CompactItemize}

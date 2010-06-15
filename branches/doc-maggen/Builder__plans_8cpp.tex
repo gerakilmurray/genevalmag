@@ -1,0 +1,53 @@
+\hypertarget{Builder__plans_8cpp}{
+\section{src/Builders/Builder\_\-plans.cpp File Reference}
+\label{Builder__plans_8cpp}\index{src/Builders/Builder\_\-plans.cpp@{src/Builders/Builder\_\-plans.cpp}}
+}
+Implementation of the methods the \hyperlink{Builder__plans_8h}{Builder\_\-plans.h}.  
+
+
+{\tt \#include $<$iostream$>$}\par
+{\tt \#include $<$boost/graph/topological\_\-sort.hpp$>$}\par
+{\tt \#include $<$boost/graph/transitive\_\-closure.hpp$>$}\par
+{\tt \#include \char`\"{}../../include/Builders/Builder\_\-plans.h\char`\"{}}\par
+{\tt \#include \char`\"{}../../include/Util/Utilities.h\char`\"{}}\par
+
+
+Include dependency graph for Builder\_\-plans.cpp:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{Builder__plans_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Namespaces}
+\begin{CompactItemize}
+\item 
+namespace \hyperlink{namespacegenevalmag}{genevalmag}
+\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+const string \hyperlink{namespacegenevalmag_605c56dc4a9a367c9da7c7759c7f6b65}{genevalmag::PATH\_\-OUT\_\-PLAN} (\char`\"{}plans/\char`\"{})
+\item 
+const string \hyperlink{namespacegenevalmag_345f3ac168618479f16dbd899562685e}{genevalmag::PATH\_\-OUT\_\-PLAN\_\-PROJECT} (\char`\"{}plans\_\-project/\char`\"{})
+\item 
+void \hyperlink{namespacegenevalmag_ce0b7e67565040ba64e1710d0029026b}{genevalmag::purge\_\-plan\_\-with} (const \hyperlink{classgenevalmag_1_1Rule}{Rule} \&rule, const Order\_\-eval\_\-eq \&order\_\-eq, Order\_\-eval\_\-eq \&purged\_\-order)
+\item 
+bool \hyperlink{namespacegenevalmag_d89277e822c1a4d635c554e8c6698e76}{genevalmag::defined\_\-work} (const vector$<$ \hyperlink{structgenevalmag_1_1i__w}{Item\_\-work} $>$ \&list, const \hyperlink{structgenevalmag_1_1i__w}{Item\_\-work} \&item\_\-work)
+\item 
+unsigned short \hyperlink{namespacegenevalmag_4c59332bf08ed52e98321fe6b6340f29}{genevalmag::return\_\-index\_\-vec} (const Order\_\-eval\_\-eq \&order, vector$<$ Order\_\-eval\_\-eq $>$ \&vec)
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of the methods the \hyperlink{Builder__plans_8h}{Builder\_\-plans.h}. 
+
+\begin{Desc}
+\item[Date:]18/02/2010 \end{Desc}
+\begin{Desc}
+\item[Author:]Kilmurray, Gerardo Luis $<$\href{mailto:gerakilmurray@gmail.com}{\tt gerakilmurray@gmail.com}$>$ 
+
+Picco, Gonzalo Martín $<$\href{mailto:gonzalopicco@gmail.com}{\tt gonzalopicco@gmail.com}$>$ \end{Desc}
+
+
+Definition in file \hyperlink{Builder__plans_8cpp-source}{Builder\_\-plans.cpp}.

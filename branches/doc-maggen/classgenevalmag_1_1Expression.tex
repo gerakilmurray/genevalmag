@@ -1,0 +1,324 @@
+\hypertarget{classgenevalmag_1_1Expression}{
+\section{genevalmag::Expression Class Reference}
+\label{classgenevalmag_1_1Expression}\index{genevalmag::Expression@{genevalmag::Expression}}
+}
+{\tt \#include $<$Expression.h$>$}
+
+Inherited by \hyperlink{classgenevalmag_1_1Expr__leaf}{genevalmag::Expr\_\-leaf}, and \hyperlink{classgenevalmag_1_1Expr__node}{genevalmag::Expr\_\-node}.
+
+Collaboration diagram for genevalmag::Expression:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{classgenevalmag_1_1Expression__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+\hyperlink{classgenevalmag_1_1Expression_249f080918dd3203c7dfc8e9e691bc50}{Expression} ()
+\item 
+virtual \hyperlink{classgenevalmag_1_1Expression_9ab15992e6a819e8e683745069bcf15b}{$\sim$Expression} ()
+\item 
+const \hyperlink{classgenevalmag_1_1Expression}{Expression} $\ast$ \hyperlink{classgenevalmag_1_1Expression_21b78e4077b2c9d41076f8c798996f34}{get\_\-parent} () const 
+\item 
+const string \hyperlink{classgenevalmag_1_1Expression_70ea402fd43f8c588c83196bc4a10183}{get\_\-type\_\-synthetized} () const 
+\item 
+int \hyperlink{classgenevalmag_1_1Expression_feaeebdfea5e8422299d152f8334034a}{get\_\-conflict} () const 
+\item 
+void \hyperlink{classgenevalmag_1_1Expression_cba3103fd864eacfefdecb88e597de1f}{set\_\-parent} (const \hyperlink{classgenevalmag_1_1Expression}{Expression} $\ast$new\_\-parent)
+\item 
+void \hyperlink{classgenevalmag_1_1Expression_22920a0309ce122eb22553898ec0108f}{set\_\-type\_\-synthetized} (string new\_\-type\_\-synthetized)
+\item 
+void \hyperlink{classgenevalmag_1_1Expression_bfc415a5ddd5ae05b1e9610a2f347203}{delete\_\-parent} ()
+\item 
+void \hyperlink{classgenevalmag_1_1Expression_6c1265f335e85346c23556cc361c4aad}{active\_\-conflict} (int prec\_\-conflict)
+\item 
+void \hyperlink{classgenevalmag_1_1Expression_a851daf99e3e04b3cf2bb2c7d53811f8}{desactive\_\-conflict} ()
+\item 
+virtual string \hyperlink{classgenevalmag_1_1Expression_8685f44429501da942b1fe76880af6fe}{to\_\-string} () const =0
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+const \hyperlink{classgenevalmag_1_1Expression}{Expression} $\ast$ \hyperlink{classgenevalmag_1_1Expression_2de0ee2801347dfd9e7b8a3a99d93233}{parent}
+\begin{CompactList}\small\item\em Father of \hyperlink{classgenevalmag_1_1Expression}{Expression}. \item\end{CompactList}\item 
+string \hyperlink{classgenevalmag_1_1Expression_449dcb5bce7eb0d3c61ef6d468e6460b}{type\_\-synthetized}
+\begin{CompactList}\small\item\em Type of node: Obtains of parse. \item\end{CompactList}\item 
+int \hyperlink{classgenevalmag_1_1Expression_2770b2edf303704e36bfecfea77fb177}{conflict}
+\begin{CompactList}\small\item\em Mark when conflicted node.\par
+ This conflict is a conflict in the parse.\par
+ Used for define the precedence of function.\par
+. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 21 of file Expression.h.
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classgenevalmag_1_1Expression_249f080918dd3203c7dfc8e9e691bc50}{
+\index{genevalmag::Expression@{genevalmag::Expression}!Expression@{Expression}}
+\index{Expression@{Expression}!genevalmag::Expression@{genevalmag::Expression}}
+\subsubsection[{Expression}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Expression::Expression ()}}
+\label{classgenevalmag_1_1Expression_249f080918dd3203c7dfc8e9e691bc50}
+
+
+Constructor of \hyperlink{classgenevalmag_1_1Expression}{Expression}. \begin{Desc}
+\item[Returns:]\end{Desc}
+Contructor of \hyperlink{classgenevalmag_1_1Expression}{Expression}. 
+
+Definition at line 17 of file Expression.cpp.
+
+References conflict, parent, and type\_\-synthetized.\hypertarget{classgenevalmag_1_1Expression_9ab15992e6a819e8e683745069bcf15b}{
+\index{genevalmag::Expression@{genevalmag::Expression}!$\sim$Expression@{$\sim$Expression}}
+\index{$\sim$Expression@{$\sim$Expression}!genevalmag::Expression@{genevalmag::Expression}}
+\subsubsection[{$\sim$Expression}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Expression::$\sim$Expression ()\hspace{0.3cm}{\tt  \mbox{[}virtual\mbox{]}}}}
+\label{classgenevalmag_1_1Expression_9ab15992e6a819e8e683745069bcf15b}
+
+
+Destructor of \hyperlink{classgenevalmag_1_1Expression}{Expression}. \begin{Desc}
+\item[Returns:]\end{Desc}
+Destructor of \hyperlink{classgenevalmag_1_1Expression}{Expression}. 
+
+Definition at line 27 of file Expression.cpp.
+
+\subsection{Member Function Documentation}
+\hypertarget{classgenevalmag_1_1Expression_6c1265f335e85346c23556cc361c4aad}{
+\index{genevalmag::Expression@{genevalmag::Expression}!active\_\-conflict@{active\_\-conflict}}
+\index{active\_\-conflict@{active\_\-conflict}!genevalmag::Expression@{genevalmag::Expression}}
+\subsubsection[{active\_\-conflict}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Expression::active\_\-conflict (int {\em prec\_\-conflict})}}
+\label{classgenevalmag_1_1Expression_6c1265f335e85346c23556cc361c4aad}
+
+
+Turn on the conflict flag with the precendence wath produces. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em prec\_\-conflict}]Turn on the conflict flag with the precendence wath produces. \end{description}
+\end{Desc}
+
+
+Definition at line 80 of file Expression.cpp.
+
+References conflict.\hypertarget{classgenevalmag_1_1Expression_bfc415a5ddd5ae05b1e9610a2f347203}{
+\index{genevalmag::Expression@{genevalmag::Expression}!delete\_\-parent@{delete\_\-parent}}
+\index{delete\_\-parent@{delete\_\-parent}!genevalmag::Expression@{genevalmag::Expression}}
+\subsubsection[{delete\_\-parent}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Expression::delete\_\-parent ()}}
+\label{classgenevalmag_1_1Expression_bfc415a5ddd5ae05b1e9610a2f347203}
+
+
+Sets the parent pointer of the \hyperlink{classgenevalmag_1_1Expression}{Expression} in NULL. 
+
+Definition at line 72 of file Expression.cpp.
+
+References parent.\hypertarget{classgenevalmag_1_1Expression_a851daf99e3e04b3cf2bb2c7d53811f8}{
+\index{genevalmag::Expression@{genevalmag::Expression}!desactive\_\-conflict@{desactive\_\-conflict}}
+\index{desactive\_\-conflict@{desactive\_\-conflict}!genevalmag::Expression@{genevalmag::Expression}}
+\subsubsection[{desactive\_\-conflict}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Expression::desactive\_\-conflict ()}}
+\label{classgenevalmag_1_1Expression_a851daf99e3e04b3cf2bb2c7d53811f8}
+
+
+Turn off the conflict flag with negative precendence. 
+
+Definition at line 88 of file Expression.cpp.
+
+References conflict.\hypertarget{classgenevalmag_1_1Expression_feaeebdfea5e8422299d152f8334034a}{
+\index{genevalmag::Expression@{genevalmag::Expression}!get\_\-conflict@{get\_\-conflict}}
+\index{get\_\-conflict@{get\_\-conflict}!genevalmag::Expression@{genevalmag::Expression}}
+\subsubsection[{get\_\-conflict}]{\setlength{\rightskip}{0pt plus 5cm}int genevalmag::Expression::get\_\-conflict () const}}
+\label{classgenevalmag_1_1Expression_feaeebdfea5e8422299d152f8334034a}
+
+
+Returns the precendence wath produces the conflict. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the precendence wath produces the conflict. 
+
+Definition at line 48 of file Expression.cpp.
+
+References conflict.
+
+Referenced by genevalmag::Expr\_\-literal::copy(), genevalmag::Expr\_\-instance::copy(), and genevalmag::Expr\_\-function::copy().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=333pt]{classgenevalmag_1_1Expression_feaeebdfea5e8422299d152f8334034a_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expression_21b78e4077b2c9d41076f8c798996f34}{
+\index{genevalmag::Expression@{genevalmag::Expression}!get\_\-parent@{get\_\-parent}}
+\index{get\_\-parent@{get\_\-parent}!genevalmag::Expression@{genevalmag::Expression}}
+\subsubsection[{get\_\-parent}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Expression} $\ast$ genevalmag::Expression::get\_\-parent () const}}
+\label{classgenevalmag_1_1Expression_21b78e4077b2c9d41076f8c798996f34}
+
+
+Returns the parent pointer of the \hyperlink{classgenevalmag_1_1Expression}{Expression}. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the parent pointer of the \hyperlink{classgenevalmag_1_1Expression}{Expression}. 
+
+Definition at line 32 of file Expression.cpp.
+
+References parent.
+
+Referenced by genevalmag::Expr\_\-literal::copy(), genevalmag::Expr\_\-instance::copy(), and genevalmag::Expr\_\-function::copy().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=331pt]{classgenevalmag_1_1Expression_21b78e4077b2c9d41076f8c798996f34_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expression_70ea402fd43f8c588c83196bc4a10183}{
+\index{genevalmag::Expression@{genevalmag::Expression}!get\_\-type\_\-synthetized@{get\_\-type\_\-synthetized}}
+\index{get\_\-type\_\-synthetized@{get\_\-type\_\-synthetized}!genevalmag::Expression@{genevalmag::Expression}}
+\subsubsection[{get\_\-type\_\-synthetized}]{\setlength{\rightskip}{0pt plus 5cm}const string genevalmag::Expression::get\_\-type\_\-synthetized () const}}
+\label{classgenevalmag_1_1Expression_70ea402fd43f8c588c83196bc4a10183}
+
+
+Returns the type synthetized of the \hyperlink{classgenevalmag_1_1Expression}{Expression}. \begin{Desc}
+\item[Returns:]\end{Desc}
+Returns the type synthetized of the \hyperlink{classgenevalmag_1_1Expression}{Expression}. 
+
+Definition at line 40 of file Expression.cpp.
+
+References type\_\-synthetized.
+
+Referenced by genevalmag::Expr\_\-literal::copy(), genevalmag::Expr\_\-instance::copy(), and genevalmag::Expr\_\-function::copy().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=354pt]{classgenevalmag_1_1Expression_70ea402fd43f8c588c83196bc4a10183_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expression_cba3103fd864eacfefdecb88e597de1f}{
+\index{genevalmag::Expression@{genevalmag::Expression}!set\_\-parent@{set\_\-parent}}
+\index{set\_\-parent@{set\_\-parent}!genevalmag::Expression@{genevalmag::Expression}}
+\subsubsection[{set\_\-parent}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Expression::set\_\-parent (const {\bf Expression} $\ast$ {\em new\_\-parent})}}
+\label{classgenevalmag_1_1Expression_cba3103fd864eacfefdecb88e597de1f}
+
+
+Sets the parent pointer of the \hyperlink{classgenevalmag_1_1Expression}{Expression}. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em new\_\-parent}]Sets the parent pointer of the \hyperlink{classgenevalmag_1_1Expression}{Expression}. \end{description}
+\end{Desc}
+
+
+Definition at line 56 of file Expression.cpp.
+
+References parent.
+
+Referenced by genevalmag::Expr\_\-node::add\_\-child(), and genevalmag::Expr\_\-node::replace\_\-child().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{classgenevalmag_1_1Expression_cba3103fd864eacfefdecb88e597de1f_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expression_22920a0309ce122eb22553898ec0108f}{
+\index{genevalmag::Expression@{genevalmag::Expression}!set\_\-type\_\-synthetized@{set\_\-type\_\-synthetized}}
+\index{set\_\-type\_\-synthetized@{set\_\-type\_\-synthetized}!genevalmag::Expression@{genevalmag::Expression}}
+\subsubsection[{set\_\-type\_\-synthetized}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Expression::set\_\-type\_\-synthetized (string {\em new\_\-type\_\-synthetized})}}
+\label{classgenevalmag_1_1Expression_22920a0309ce122eb22553898ec0108f}
+
+
+Returns the type synthetized of the \hyperlink{classgenevalmag_1_1Expression}{Expression}. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em new\_\-type\_\-synthetized}]Returns the type synthetized of the \hyperlink{classgenevalmag_1_1Expression}{Expression}. \end{description}
+\end{Desc}
+
+
+Definition at line 64 of file Expression.cpp.
+
+References type\_\-synthetized.
+
+Referenced by genevalmag::create\_\-bool(), genevalmag::create\_\-instance\_\-node(), genevalmag::create\_\-lit\_\-ch(), genevalmag::create\_\-lit\_\-number(), genevalmag::create\_\-lit\_\-str(), and genevalmag::push\_\-mark().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=375pt]{classgenevalmag_1_1Expression_22920a0309ce122eb22553898ec0108f_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classgenevalmag_1_1Expression_8685f44429501da942b1fe76880af6fe}{
+\index{genevalmag::Expression@{genevalmag::Expression}!to\_\-string@{to\_\-string}}
+\index{to\_\-string@{to\_\-string}!genevalmag::Expression@{genevalmag::Expression}}
+\subsubsection[{to\_\-string}]{\setlength{\rightskip}{0pt plus 5cm}virtual string genevalmag::Expression::to\_\-string () const\hspace{0.3cm}{\tt  \mbox{[}pure virtual\mbox{]}}}}
+\label{classgenevalmag_1_1Expression_8685f44429501da942b1fe76880af6fe}
+
+
+Generate and return a string reprensentation of a \hyperlink{classgenevalmag_1_1Expression}{Expression}. \begin{Desc}
+\item[Returns:]\end{Desc}
+
+
+Implemented in \hyperlink{classgenevalmag_1_1Expr__function_daaebd5427337bb2288c47a16af804d8}{genevalmag::Expr\_\-function}, \hyperlink{classgenevalmag_1_1Expr__instance_2186bb2f69173f709cfb75435b32da94}{genevalmag::Expr\_\-instance}, \hyperlink{classgenevalmag_1_1Expr__leaf_96854f59a155b173b6e79007d87bdad5}{genevalmag::Expr\_\-leaf}, \hyperlink{classgenevalmag_1_1Expr__literal_2e023f432f0a46b75f65cb0e36ac6583}{genevalmag::Expr\_\-literal}, and \hyperlink{classgenevalmag_1_1Expr__node_dea1d8fbc1b01f018e18cedad871f6a7}{genevalmag::Expr\_\-node}.
+
+Referenced by genevalmag::Equation::key(), and genevalmag::Equation::to\_\-string().
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Expression_8685f44429501da942b1fe76880af6fe_icgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classgenevalmag_1_1Expression_2770b2edf303704e36bfecfea77fb177}{
+\index{genevalmag::Expression@{genevalmag::Expression}!conflict@{conflict}}
+\index{conflict@{conflict}!genevalmag::Expression@{genevalmag::Expression}}
+\subsubsection[{conflict}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Expression::conflict}\hspace{0.3cm}{\tt  \mbox{[}protected\mbox{]}}}}
+\label{classgenevalmag_1_1Expression_2770b2edf303704e36bfecfea77fb177}
+
+
+Mark when conflicted node.\par
+ This conflict is a conflict in the parse.\par
+ Used for define the precedence of function.\par
+. 
+
+
+
+Definition at line 40 of file Expression.h.
+
+Referenced by active\_\-conflict(), genevalmag::Expr\_\-literal::copy(), genevalmag::Expr\_\-instance::copy(), genevalmag::Expr\_\-function::copy(), desactive\_\-conflict(), Expression(), and get\_\-conflict().\hypertarget{classgenevalmag_1_1Expression_2de0ee2801347dfd9e7b8a3a99d93233}{
+\index{genevalmag::Expression@{genevalmag::Expression}!parent@{parent}}
+\index{parent@{parent}!genevalmag::Expression@{genevalmag::Expression}}
+\subsubsection[{parent}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Expression::parent}\hspace{0.3cm}{\tt  \mbox{[}protected\mbox{]}}}}
+\label{classgenevalmag_1_1Expression_2de0ee2801347dfd9e7b8a3a99d93233}
+
+
+Father of \hyperlink{classgenevalmag_1_1Expression}{Expression}. 
+
+
+
+Definition at line 28 of file Expression.h.
+
+Referenced by genevalmag::Expr\_\-literal::copy(), genevalmag::Expr\_\-instance::copy(), genevalmag::Expr\_\-function::copy(), delete\_\-parent(), Expression(), get\_\-parent(), and set\_\-parent().\hypertarget{classgenevalmag_1_1Expression_449dcb5bce7eb0d3c61ef6d468e6460b}{
+\index{genevalmag::Expression@{genevalmag::Expression}!type\_\-synthetized@{type\_\-synthetized}}
+\index{type\_\-synthetized@{type\_\-synthetized}!genevalmag::Expression@{genevalmag::Expression}}
+\subsubsection[{type\_\-synthetized}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Expression::type\_\-synthetized}\hspace{0.3cm}{\tt  \mbox{[}protected\mbox{]}}}}
+\label{classgenevalmag_1_1Expression_449dcb5bce7eb0d3c61ef6d468e6460b}
+
+
+Type of node: Obtains of parse. 
+
+
+
+Definition at line 33 of file Expression.h.
+
+Referenced by genevalmag::Expr\_\-literal::copy(), genevalmag::Expr\_\-instance::copy(), genevalmag::Expr\_\-function::copy(), Expression(), get\_\-type\_\-synthetized(), and set\_\-type\_\-synthetized().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+include/Expression\_\-tree/\hyperlink{Expression_8h}{Expression.h}\item 
+src/Expression\_\-tree/\hyperlink{Expression_8cpp}{Expression.cpp}\end{CompactItemize}
