@@ -263,10 +263,10 @@ Notar que el ejemplo Wuu yang analizado es considerablemente sencillo, pero pode
 
 En los cuadros \ref{table:mensajes-err} y \ref{table:mensajes-av} analizamos la descripción de los posibles errores y avisos que se deben tener en cuenta cuando usamos \maggen.
 
-{
-\begin{small}
-\begin{longtable}{| p{5cm} || p{5cm} | p{5cm} |}
 
+\begin{small}
+\begin{longtable}{| p{4.5cm} || p{4.5cm} | p{4.5cm} |}
+\hline
 \hline
 
 \rowcolor{gris} \textbf{Mensaje} & \textbf{Descripción} & \textbf{Ayuda} \\ \hline \hline
@@ -312,11 +312,15 @@ ERROR: Path non exist: \textit{PATH}. & Ruta errónea o inaccesible. & Modifique
 ERROR: maggen wrong uses. & Mal uso de \maggen, uno de los argumentos es erróneo, en la invocación. & Modifique los argumentos. Para mas detalle chequee sección \ref{sec:uso-maggen} \\ \hline
 
 ERROR: Index out bounds: combined ADP graphs.& Error fatal en la generación de contextos para la construcción de ADP. & Chequee la entrada a \maggen.\\ 
-\hline \hline
+\hline
+\hline
 \caption{Tabla con mensajes de error en \maggen.}\label{table:mensajes-err}
 \end{longtable}
-\begin{longtable}{| p{5cm} || p{5cm} | p{5cm} |}
+\end{small}
 
+\begin{small}
+\begin{longtable}{| p{4.5cm} || p{4.5cm} | p{4.5cm} |}
+\hline
 \hline
 
 \rowcolor{gris} \textbf{Mensaje} & \textbf{Descripción} & \textbf{Ayuda} \\ \hline \hline
@@ -327,10 +331,13 @@ WARNING: Sort duplicate was ignored: $-->$ \textit{S} & La declaración del sort
 
 WARNING: Declaration duplicate was ignored: $-->$ \textit{F} & La declaración de la función \textit{F} esta duplicada. \maggen\ ignora dicha línea. & Elimine la declaración de la función \textit{F} o modifique la misma en caso de declaración de función distinta. \\ \hline
 
-WARNING: Ignores the eq \textit{E} duplicate definition for \textit{IN} in rule: $-->$ \textit{R} & La ecuación \textit{E} para la instancia \textit{IN} en la regla \textit{R} es ignorada por \maggen, debido a que la instancia \textit{IN} ya tiene ecuación que la defina. & Chequee las ecuaciones que definen la instancia \textit{IN} y elimine una o verifique posibles errores en la ecuación. \\ \hline
+WARNING: Ignores the eq \textit{E} duplicate definition for \textit{IN} in rule: $-->$ \textit{R} & La ecuación \textit{E} para la instancia \textit{IN} en la regla \textit{R} es ignorada por \maggen, debido a que la instancia \textit{IN} ya tiene ecuación que la defina. & Chequee las ecuaciones que definen la instancia \textit{IN} y elimine una o verifique posibles errores en la ecuación. \\
+\hline
+\hline
 \caption{Tabla con mensajes de avisos en \maggen.}\label{table:mensajes-av}
 \end{longtable}
-\end{small}}
+\end{small}
+
 \normalsize
 
 En los cuadros anteriores se pudo analizar los errores y los avisos en el uso de \maggen. Esta diferencia en los mensajes, se hace en el sentido de que, los avisos, no son considerados errores fatales en el proceso de la herramienta y por ende no es necesario abortar el funcionamiento. Los errores considerados avisos, \textbf{son ignorados} dentro del funcionamiento interno de \maggen.
@@ -339,9 +346,9 @@ Al igual como analizamos para \maggen, a continuación veamos los mensajes de er
 
 \begin{table}[!ht]
 \begin{small}
-\begin{tabular}{| p{5cm} || p{5cm} | p{5cm} |}
-
-\hline \hline
+\begin{longtable}{| p{4.5cm} || p{4.5cm} | p{4.5cm} |}
+\hline
+\hline
 
 \rowcolor{gris} \textbf{Mensaje} & \textbf{Descripción} & \textbf{Ayuda} \\ \hline
 
@@ -349,9 +356,11 @@ ERROR: the AST input is wrong create. Context rule does not exist. & Los nodos d
 
 ERROR: the AST input is wrong create. Evaluation plan does not exist. & El orden de evaluación impuesto al nodo no corresponde. & Revise si la gramática esta bien especificada. \\ \hline
 
-ERROR: Fatal action. & Se desea invocar a la computación de una ecuación errónea e inexistente. & Chequee el AST de entrada al evaluador. \\ \hline
-\end{tabular}
-\caption{Mensajes de error del evaluador generado por \maggen.}
+ERROR: Fatal action. & Se desea invocar a la computación de una ecuación errónea e inexistente. & Chequee el AST de entrada al evaluador. \\
+\hline
+\hline
+\caption{Mensajes de error del evaluador generado.}
+\end{longtable}
 \end{small}
 \end{table}
 
