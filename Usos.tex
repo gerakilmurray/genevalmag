@@ -2,9 +2,9 @@
 \label{chap:usos}
 \minitoc
 
-Para usar \maggen\ debemos invocar la herramienta mediante la línea de comando, es decir, debemos contar con una terminal\footnote{En sistemas \textit{Windows} compatible: \textbf{Win+R} y luego \texttt{cmd} y en sistemas \textit{Unix}: \textbf{Alt+F2} y luego \texttt{xterm}} para su ejecución. Por cuestiones de simplicidad y flexibilidad de la herramienta, no se consideró el desarrollo de un \textit{front-end} para \maggen. Además, debemos tener en cuenta, que el usuario presentara interés en el resultado generado de \maggen\ y no de una innecesaria interfaz gráfica, que entorpecería su comportamiento combinatorio con otros comandos.
+Para usar \maggen\ debemos invocar la herramienta mediante la línea de comando, es decir, debemos contar con una terminal\footnote{En sistemas \textit{Windows} compatible: \textbf{Win+R} y luego \texttt{cmd} y en sistemas \textit{Unix}: \textbf{Alt+F2} y luego \texttt{xterm}} para su ejecución. Por cuestiones de simplicidad y flexibilidad de la herramienta, no se consideró el desarrollo de un \textit{front-end} para \maggen. Además, debemos tener en cuenta, que el usuario presentará interés en el resultado generado de \maggen\ y no de una innecesaria interfaz gráfica, que entorpecería su comportamiento combinatorio con otros comandos.
   
-\maggen\ puede ser invocado utilizando una serie de parámetros que inciden directamente sobre el resultados producido por la herramienta. En el desarrollo de este capítulo trataremos estos temas en detalles y además analizaremos el uso del evaluador generado por \maggen. En la sección siguiente abordaremos detalles en la compilación e instalación de la herramienta.
+\maggen\ puede ser invocado utilizando una serie de parámetros que inciden directamente sobre el resultados producido por la herramienta. En el desarrollo de este capítulo trataremos estos temas en detalles y además analizaremos el uso del evaluador generado por \maggen. Comenzaremos con la sección, a continuación, de compilación e instalación de la herramienta.
 
 \section{Compilación e Instalación de \maggen}
 \maggen\ puede ser descargado desde el repositorio svn (\cite{svn-book}) utilizando el siguiente comando:
@@ -15,14 +15,14 @@ Para usar \maggen\ debemos invocar la herramienta mediante la línea de comando,
 Una vez descargado \maggen\ contaremos con un directorio llamado {\sf maggen/}
 
 Para compilar e instalar \maggen\ se deberán ejecutar en una terminal los siguientes comandos desde la carpeta {\sf /maggen} :
-\begin{verbatim}
+{\small\begin{verbatim}
 1.- maggen$ ./configure
 2.- maggen$ make clean
 3.- maggen$ make
 4.- maggen$ sudo make install
-\end{verbatim}
+\end{verbatim}}
 
-\subsection*{Directorio {\sf maggen}}
+\subsection{Directorio {\sf maggen}}
 Luego de la compilación e instalación, el directorio raíz de \maggen\ se compone de lo siguiente:
 \begin{itemize}
 \item \textbf{/bin} Directorio que contiene módulos estáticos necesarios para la generación de código y uso del evaluador obtenido.
@@ -39,16 +39,20 @@ Luego de la compilación e instalación, el directorio raíz de \maggen\ se comp
 {\footnotesize \begin{verbatim}
 maggen$ ls -R src/ 
 src/:
-Attr_grammar  Builders  Expression_tree  maggen.cpp  Maglib.cpp  Parser  Util
+Attr_grammar  Builders  Expression_tree  maggen.cpp  Maglib.cpp  
+Parser  Util
 
 src/Attr_grammar:
-Attr_grammar.cpp  Attribute.cpp  Equation.cpp  Function.cpp  Rule.cpp  Sort.cpp  Symbol.cpp
+Attr_grammar.cpp  Attribute.cpp  Equation.cpp  Function.cpp  
+Rule.cpp  Sort.cpp  Symbol.cpp
 
 src/Builders:
-Builder_code.cpp  Builder_graphs.cpp  Builder_plans.cpp  Builder_visit_sequences.cpp
+Builder_code.cpp  Builder_graphs.cpp  Builder_plans.cpp  
+Builder_visit_sequences.cpp
 
 src/Expression_tree:
-Expression.cpp  Expr_function.cpp  Expr_instance.cpp  Expr_leaf.cpp  Expr_literal.cpp  Expr_node.cpp
+Expression.cpp  Expr_function.cpp  Expr_instance.cpp  
+Expr_leaf.cpp  Expr_literal.cpp  Expr_node.cpp
 
 src/Parser:
 Parser_AG.cpp  Semantics_actions.cpp  Semantics_checks.cpp
@@ -62,16 +66,20 @@ Utilities.cpp
 {\footnotesize \begin{verbatim}
 maggen$ ls -R include/
 include/:
-Attr_grammar  Builders  Expression_tree  Maglib.h  Parser  Util
+Attr_grammar  Builders  Expression_tree  Maglib.h  
+Parser  Util
 
 include/Attr_grammar:
-Attr_grammar.h  Attribute.h  Equation.h  Function.h  Rule.h  Sort.h  Symbol.h
+Attr_grammar.h  Attribute.h  Equation.h  Function.h  
+Rule.h  Sort.h  Symbol.h
 
 include/Builders:
-Builder_code.h  Builder_graphs.h  Builder_plans.h  Builder_visit_sequences.h
+Builder_code.h  Builder_graphs.h  Builder_plans.h  
+Builder_visit_sequences.h
 
 include/Expression_tree:
-Expression.h  Expr_function.h  Expr_instance.h  Expr_leaf.h  Expr_literal.h  Expr_node.h
+Expression.h  Expr_function.h  Expr_instance.h  
+Expr_leaf.h  Expr_literal.h  Expr_node.h
 
 include/Parser:
 Parser_AG.h  Semantics_actions.h  Semantics_checks.h
@@ -87,7 +95,7 @@ Utilities.h
  dot2png.sh
 \end{verbatim} }
  
-\item \textbf{/examples} En este directorio se encuentran tres ejemplos de gramáticas para probar la herramienta.
+\item \textbf{/examples} En este directorio se encuentran tres ejemplos de gramáticas para probar la herramienta. Uno de ellos es el tratado en el desarrollo de este informe, presentado en el apéndice \ref{append:agwuuyang}. 
 {\footnotesize \begin{verbatim}
  maggen$ ls -R examples/
  examples/:
@@ -118,22 +126,28 @@ Las opciones son las siguientes:
 
 \begin{description}
 \item [-f  file] Definir el archivo de entrada de \maggen\ como \texttt{file}. Si omitimos esta opción \maggen\ espera la entrada por la entrada estándar (\texttt{cin}) hasta leer el carácter \texttt{EOF} (end of file)\footnote{En sistemas Unix el carácter \texttt{EOF} puede ser producido con \textbf{Ctrl+D} dentro de una consola de comandos.}.
+
 \item [-i  header] Incluir \texttt{header} en la generación de código. Genera un \texttt{\#include ``header''} del archivo que referencia esa ruta. Dicha linea, \maggen\ la agrega al archivo generado.
+
 \item [-fo folder] Define \texttt{folder} como el directorio de salida para \maggen. Si omitimos esta opción, \maggen\ usa el folder por defecto ``\textit{./out\_maggen/}''.
+
 \item [-o  name] Define a \texttt{name} como el nombre de la clase y del archivo generado por \maggen. Si omitimos esta opción, \maggen\ usa por defecto el nombre ``\textbf{mag\_eval}''.
+
 \item [-h] Muestra mensaje de ayuda.
 \end{description}
 
 A continuación observemos algunos ejemplo de invocación de \maggen.
 \begin{itemize}
-\item Si invocamos:\\ \texttt{./maggen -h} obtenemos el siguiente mensaje de ayuda:
+\item Si invocamos:
+\begin{center} {\small\texttt{./maggen -h}}\end{center} obtenemos el siguiente mensaje de ayuda:
 
 \begin{figure}[!ht]\centering
 \includegraphics[width=350pt,height=60pt]{help.png}
 \caption{\label{fig:outhelp} Información de ayuda de \maggen.}
 \end{figure}
 
-\item Si invocamos: \\ \texttt{./maggen -fo ./Out\_wuu\_yang -o evalmag -f ./examples/ag\_wuu\_yang/ag\_wuu\_yang.input}. \\ Especificamos como archivo de entrada a \texttt{ag\_wuu\_yang.input}, como directorio de salida \texttt{./Out\_wuu\_yang} y el nombre de la clase (y archivo) generada con el nombre \texttt{evalmag}. La figura \ref{fig:outnormal} muestra la salida de esta invocación.
+\item Si invocamos:  \begin{center}
+{\scriptsize\texttt{./maggen -fo ./Out\_wuu\_yang -o evalmag -f ./examples/ag\_wuu\_yang/ag\_wuu\_yang.input}}                                                                                                                                   \end{center} Especificamos como archivo de entrada a \texttt{ag\_wuu\_yang.input}, como directorio de salida \texttt{./Out\_wuu\_yang} y el nombre de la clase (y archivo) generada con el nombre \texttt{evalmag}. La figura \ref{fig:outnormal} muestra la salida de esta invocación.
 
 \begin{figure}[!ht]\centering
 \includegraphics[width=350pt,height=70pt]{normal.png}
@@ -144,9 +158,10 @@ A continuación observemos algunos ejemplo de invocación de \maggen.
 
 \end{itemize}
 
-La salida de \maggen\ esta ordenada a través de directorio bien definidos que marcan el proceso de funcionamiento de la herramienta en casa etapa. A continuación analizaremos la salida de \maggen\ para la invocación:\\
+La salida de \maggen\ esta ordenada a través de directorio bien definidos que marcan el proceso de funcionamiento de la herramienta en casa etapa. A continuación analizaremos la salida de \maggen\ para la invocación:
 
-\small\texttt{./maggen -fo ./Out\_wuu\_yang -o maggen -f ./examples/ag\_wuu\_yang/ag\_wuu\_yang.input}.\\
+\begin{center}
+{\scriptsize\texttt{./maggen -fo ./Out\_wuu\_yang -o maggen -f ./examples/ag\_wuu\_yang/ag\_wuu\_yang.input}}\end{center}
 
 La totalidad de la información generada por la herramienta es mostrada en la figura \ref{fig:outmaggen}.
 
@@ -158,9 +173,9 @@ La totalidad de la información generada por la herramienta es mostrada en la fi
 Dicha información es almacenada en la ruta \texttt{./Out\_wuu\_yang}, dentro de la cual podemos observar:
 
 \begin{description}
-\item [Archivos maggen.cpp y maggen.cpp] Código C++ del evaluador estático. Es la \textbf{salida principal de} \maggen.
+\item [Archivos maggen.cpp y maggen.cpp] Código C++ del evaluador estático. Es la \emph{salida principal} de \maggen.
 
-\item [Archivos Plan.hpp y Node.hpp] Código C++ con definiciones y declaraciones necesarias para la ejecución de ``maggen''.
+\item [Archivos Plan.hpp y Node.hpp] Código C++ con definiciones y declaraciones necesarias para la ejecución de ``\maggen''.
 
 \item [Archivo ``Grammar\_mag.log''] Este contiene la gramática parseada. Se debe tener en cuenta el análisis de este archivo, esto permite encontrar posibles errores en la interpretación del archivo de entrada a \maggen. Tal como se muestra la gramática en este archivo, es la que la herramienta a utilizado para la generación del evaluador.
 
@@ -173,7 +188,7 @@ Dicha información es almacenada en la ruta \texttt{./Out\_wuu\_yang}, dentro de
 
 \section{Uso del evaluador generado}
 
-Para el usos del evaluador generado por \maggen\ necesitamos los 4 archivos generados en el directorio de salida, siguiendo con la salida de la sección anterior, ellos son:
+Para el usos del evaluador generado por \maggen\ necesitamos los 4 archivos generados en el directorio de salida. Tomando una de las salidas de la sección anterior, ellos son:
 \begin{itemize}
 \item maggen.hpp.
 \item maggen.cpp.
@@ -235,19 +250,19 @@ Analicemos los valores de los atributos de cada símbolo en la siguiente tabla:
 \hline \hline
 \end{tabular}\end{center}
 
-Tal como analizamos en el ejemplo anterior, el evaluador generado por \maggen\ podría ser utilizado con todos lo AST posibles. Esto es, debido a que el evaluador contiene las secuencias de visita previamente computadas para hacer la tarea de evaluación con una notoria ganancia de tiempo. Entonces podríamos invocar al evaluador, además, con los demás AST que se desprenden con la gramática del ejemplo de Wuu Yang. En la figura \ref{fig:allast} podemos ver la totalidad de AST.
+Tal como analizamos en el ejemplo anterior, el evaluador generado por \maggen\ podría ser utilizado con todos lo AST posibles. Esto es, debido a que el evaluador contiene las secuencias de visita previamente computadas para hacer la tarea de evaluación con una notoria ganancia de tiempo. Entonces podríamos invocar al evaluador, además, con los demás AST que se desprenden con la gramática del ejemplo de Wuu Yang. En la figura \ref{fig:allast} podemos ver la totalidad de ASTs.
 
 \begin{figure}[!ht]\centering
 \includegraphics[width=350pt,height=266pt]{ast-all.png}
 \caption{\label{fig:allast} AST para ejemplo de Wuu Yang.}
 \end{figure}
 
-Notar que el ejemplo Wuu yang analizado es considerablemente simple, pero podemos encontrar gramáticas muy simples en la cual los posibles AST sea una cantidad considerable, es en este punto donde el evaluador generado por \maggen\ adquiere mayor potencial y utilidad.
+Notar que el ejemplo Wuu yang analizado es considerablemente sencillo, pero podemos encontrar gramáticas muy simples en la cual los posibles AST sea una cantidad considerable, es en este punto donde el evaluador generado por \maggen\ adquiere mayor potencial y utilidad.
 
 \section{Mensajes y avisos}
 
 En los cuadros \ref{table:mensajes-err} y \ref{table:mensajes-av} analizamos la descripción de los posibles errores y avisos que se deben tener en cuenta cuando usamos \maggen.
-% \newpage
+
 {
 \begin{small}
 \begin{longtable}{| p{5cm} || p{5cm} | p{5cm} |}
