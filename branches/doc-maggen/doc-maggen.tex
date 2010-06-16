@@ -1,5 +1,5 @@
-\documentclass[a4paper,11pt]{book}
-\usepackage{a4wide}
+\documentclass[a4paper,10pt]{book}
+\usepackage{a4}
 \usepackage{makeidx}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
@@ -10,7 +10,7 @@
 % \usepackage{times}
 \usepackage{ifpdf}
 
-\usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
+\usepackage[left=1in,right=1in,top=1in,bottom=1in,headheight=15pt,includehead,includefoot]{geometry}
 
 \ifpdf
 \usepackage[pdftex,
@@ -48,7 +48,7 @@ pdftitle="Documentation of magGen",
 pdfauthor="Kilmurray - Picco", 
 pdfsubject="Generator of Static Evaluators of Multi-plans Attribute Grammars", %subject of the document
 pdftoolbar=false, % toolbar hidden
-pdfmenubar=true, %menubar shown
+pdfmenubar=false, %menubar shown
 pdfhighlight=/l, %effect of clicking on a link
 colorlinks=true, %couleurs sur les liens hypertextes
 pdfpagemode=None, %aucun mode de page
