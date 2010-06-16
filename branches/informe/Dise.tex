@@ -75,7 +75,7 @@ list_sort = , NAME_SORT list_sort
 \vspace{0.2cm}
 Esta línea declara el tipo ``\texttt{int}''.
 
-\subsubsection*{Tipos predefinidos por el lenguaje}
+\subsubsection{Tipos predefinidos por el lenguaje}
 \label{sec:typepredefined}
 
 El lenguaje de especificación contempla los siguiente tipos básicos:
@@ -413,8 +413,8 @@ El parser del lenguaje de especificación se llevó a cabo utilizando las librer
 
 En esta sección nos encargaremos de algunas consideraciones del parser desde el punto de vista de su funcionamiento, algunos detalles en la representación interna y de los chequeos realizados sobre la entrada de \maggen\ para asegurar características de gramática bien definida.
 
-\subsection*{Parser del lenguaje}
-
+\subsection{Parser del lenguaje}
+\label{subsec:parsers-leng}
 El parser de la entrada de \maggen\ esta dado por un recorrido secuencial y ante cualquier error sintáctico, la herramienta finaliza su ejecución indicando el error correspondiente. 
 
 Supongamos la siguiente porción de una entrada de \maggen:
@@ -447,7 +447,7 @@ La línea 15 presenta un error de sintaxis (falta de paréntesis), entonces \mag
 
 Notar que, la línea y columna donde se indica el error corresponde al inicio de la zona donde la interpretación fue fallida. Podría suceder en varios casos que el error no se detecte específicamente en la línea y columna que se indica, entonces lo conveniente es buscar el error a partir del punto especificado. Para este caso particular, se indica línea:17 y columna:5, este punto se encuentra sobre \texttt{op}, pero el error se observa seguido de \texttt{infix}.
 
-\subsection*{Representación interna}
+\subsection{Representación interna}
 
 Las estructuras creadas para la representación interna de la gramática se encuentran dentro de los paquetes \texttt{Attr\_grammar} y \texttt{Expression\_tree} de \maggen. Detalles de implementación sobre estos paquete serán tratando en el capítulo siguiente. 
 
@@ -478,7 +478,7 @@ Notemos algunas observaciones del diseño que muestra el diagrama:
 \item Toda la información de una gramática de atributos esta representada en la clase \texttt{Attr\_grammar} y por ende, el ciclo de vida de cada uno de sus componentes es administrado por esta clase, durante todo el funcionamiento de \maggen. 
 \end{itemize}
 
-\subsection*{Chequeos}
+\subsection{Chequeos}
 \label{subsec:check}
 
 El conjuntos de chequeos que se realizan sobre la gramática de entrada a \maggen, están directamente relacionados con el concepto de gramática bien definida analizado en la sección \ref{sec:well-defined}. Además, se aplican una serie de chequeos extras para evitar cálculos inconsistentes en las etapas posteriores. La totalidad de los chequeos, son realizados sobre el bloque de reglas de la gramática\footnote{En su mayoría los chequeos se realizan sobre las ecuaciones de las reglas.}, debido a que este, es el más significativo y sobre el cual se apoyan los cálculos posteriores (en particular, el cálculo de planes).
@@ -526,7 +526,7 @@ Cuando se utilizan paréntesis en la expresión, \maggen\ asume la asociatividad
 
 En la figura \ref{fig:disen} pudimos analizar el funcionamiento de \maggen, teniendo en cuenta la estructura \texttt{Attr\_grammar}, en esta sección abordaremos detalles en el diseño del paquete \texttt{Builder}, específicamente la construcción de grafos, de planes y de secuencias de visita. Un detalle a tener en cuenta es que, a partir de esta etapa, todas las manipulaciones son realizadas sobre la sección de ecuaciónes de cada reglas.
 
-\subsection*{Construcción de grafos}
+\subsection{Construcción de grafos}
 \label{subsec:graph}
 
 Detalles de implementación serán analizando en la sección \ref{subsec:const-graf}, ahora tomaremos un par de minutos para mencionar algunas consideración con respecto al funcionamiento de los grafos en \maggen.\\
@@ -565,7 +565,7 @@ La construcción de cada tipo de grafo respeta los principios analizados en el c
 
 De de los 4 tipos de grafos analizados, los necesarios para el cómputo de etapas siguientes, son los ``ADP graph''. Los demás, son requeridos como cálculo previo para la construcción de estos.
 
-\subsection*{Construcción de planes}
+\subsection{Construcción de planes}
 \label{subsec:conts-plan-dise}
 La etapa de construcción de planes, tal como lo muestra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``Builder''. El cálculo de planes en \maggen\ se basa en lo analizado en el capítulo \ref{chap:eval_est} (Ver sección \ref{sec:comp-planes}) y teniendo en cuenta estos dos puntos:
 
@@ -577,7 +577,7 @@ La etapa de construcción de planes, tal como lo muestra el diagrama de la figur
 En la sección \ref{sec:obtplaneval} se tratan detalles de implementación, en donde podemos analizar el funcionamientos de lo tratado anteriormente, en especial el punto 2.
 Un \textbf{plan} se compone de lista de números de ecuaciones a computar. Todo plan nos marca un orden de evaluación interpretando la lista de números de ecuaciones, de izquierda a derecha.
 
-\subsubsection*{Planes proyectados}
+\subsubsection{Planes proyectados}
 
 Estos se obtienen a partir de los planes analizados anteriormente, proyectando el plan para cada símbolo de la parte derecha de la regla. La importancia de estos planes radica en la construcción de las secuencias de visita y además en el algoritmo principal de evaluación en la generación de código.
 
@@ -599,7 +599,7 @@ En la figura\footnote{Figura obtenida con la herramienta \textit{graphviz} sobre
 
 Notar que cada plan proyectado ha capturado las ecuaciones de cada símbolo de la parte derecha para el cómputo de sus atributos, dependiendo del contexto. Es decir, en el caso del símbolo ``Y'' su orden ha sido computado observando las dependencias de la regla R2. Estas dependencias son necesarias para el cálculo del plan completo en las ecuaciones 2 y 4. 
 
-\subsection*{Construcción de secuencias de visita}
+\subsection{Construcción de secuencias de visita}
 \label{sec:constseqvisit}
 
 La etapa de construcción de secuencias de visita, tal como lo muestra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``Builder''. Las mismas, son computados a partir de los diferentes planes obtenidos en el sección anterior.
@@ -635,7 +635,7 @@ A modo de ejemplo observemos las siguientes secuencias de visita generada por \m
 
 Cabe aclarar que todas las secuencias de visita tienen un \textbf{leave} implícito al final, es decir, cuando se completo la computación de la secuencia se retorna a su ámbito de invocación.
 
-\subsubsection*{Heurística de la simulación}
+\subsubsection{Heurística de la simulación}
 \label{subsec:heuris-simul}
 El punto principal en el cual se basa la heurística es, evaluar el plan buscando las dependencias de cada ecuación en el contexto del mismo. Veamos los pasos básicos a tener en cuenta con el siguiente ejemplo:\\
 

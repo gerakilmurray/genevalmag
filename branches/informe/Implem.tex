@@ -4,28 +4,28 @@
 
 En esta sección se aclararan y expondrán decisiones que se realizaron a lo largo de la implementación de esta herramienta.
 
-Primero, como ya se menciona en el capítulo anterior, el lenguaje sobre el cual se realizó el desarrollo de \maggen\ es C++, con lo que todo el código es principalmente característico de un modelo de programación Orientado a Objetos, aunque posee secciones de Programación Imperativa, para lograr ciertas optimizaciones y poder integrar componentes de externos a la herramienta.
+Primero, como ya se menciona en el capítulo anterior, el lenguaje sobre el cual se realizó el desarrollo de \maggen\ es C++, con lo que todo el código es principalmente característico de un modelo de ``Programación Orientado a Objetos'', aunque posee secciones de ``Programación Imperativa'', para lograr optimizaciones y poder integrar componentes externos.
 
 \section{Parsing usando \boost\ \spirit}
 \label{sec:par-spirit}
-El primer desafío de codificación, fue que se debía conseguir parsear el archivo de entrada de la herramienta, en el cual vendría la especificación de una Gramática de Atributos, respetando la sintaxis presentada anteriormente, o no.
+El primer desafío de codificación, fue parsear el archivo de entrada de la herramienta, en el cual vendría la especificación de una Gramática de Atributos. Dicho parser debía respetar las condiciones ya analizadas en el capítulo anterior (Ver sección \ref{sec:lenguajeMAG}). 
 
-La solución obtenida se apoya en la utilización de un framework reconocido mundialmente, denominado \spirit, perteneciente a la biblioteca de C++ llamada \boost. Esta decisión trajo dos grandes beneficios; la confiabilidad de el parser obtenido y la rápida obtención del mismo, ya que la gran ventaja de \spirit, es que permite escribir la definición de la gramática en lenguaje \textbf{C++}.
+La solución obtenida se apoya en la utilización de un framework reconocido mundialmente, denominado \spirit, perteneciente a la biblioteca de C++ llamada \boost. Esta decisión trajo dos grandes beneficios; la confiabilidad del parser obtenido y la rápida obtención del mismo, ya que, la gran ventaja de \spirit es permitir escribir la definición de la gramática en lenguaje \textbf{C++}.
 
 \spirit\ es un framework generador de analizadores sintácticos, o parsers, descendentes recursivos orientado a objetos implementado usando técnicas de meta-programación con plantillas. Las expresiones mediante plantillas, permiten aproximar la sintaxis de una ``\textit{\textit{Forma Backus Normal Extendida}}'' (\textbf{EBNF}) completamente en C++.
 
-Se puede resumir que el proceso de análisis sintáctico, en este framework, se componen de cuatro partes como lo muestra la figura \ref{fig:procesoSpirit}.
+\spirit es un producto en continua evolución y desarrollo; actualmente se encuentra en la versión $2.3$. A partir de la $2.0$, se integraron todas los componentes anteriores dentro de ``\spirit.\textit{Classic}''. Demás componentes son encapsulados en dos nuevas capas\footnote{Detalles sobre las mismas pueden ser encontradas en \urllink{http://www.boost.org/doc/libs/1\_43\_0/libs/spirit/doc/html/index.html}}: \textit{Qi} y \textit{Karma}. Para el desarrollo del parser de \maggen\ se utilizaron componentes propios de \spirit.\textit{Classic}, por cuestiones de simplicidad y compatibilidad. 
+
+Se puede resumir el proceso de análisis sintáctico, en este framework, en cuatro componentes, como lo muestra la figura \ref{fig:procesoSpirit}.
 
 \begin{figure}[!ht]\centering
 \includegraphics[width=400pt, height=160pt]{./spirit.png}
 \caption{Procesos dentro de \spirit}\label{fig:procesoSpirit}
 \end{figure}
 
-El usuario es el responsable de definir las ``\texttt{semantic actions}'' para lograr capturar los resultados intermedios, producidos durante la etapa de parsing y no sólo obtener un valor lógico sobre si se pudo o no, consumir toda la cadena de entrada.
+El usuario es el responsable de definir las ``\texttt{semantic actions}'' para lograr capturar los resultados intermedios, producidos durante la etapa de parsing y no sólo obtener un valor lógico, sobre si se pudo o no consumir toda la cadena de entrada.
 
 Para comenzar a definir una gramática hay que crear una estructura que herede de la clase \texttt{grammar}. Dentro de ella se debe definir a su vez otra estructura templatizada denominada \texttt{definition}. En donde realmente estará la definición de la gramática.
-
-% \newpage
 
 \begin{lstlisting}[float, language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=8cm]
 struct my_grammar: public grammar <my_grammar>
@@ -220,7 +220,7 @@ Los \texttt{sorts} serán los tipos que se podrán utilizar para definir los dom
 Teniendo en cuenta lo analizado en la sección \ref{subsec:bloq-sem}, a continuación se analizan algunas consideraciones de implementación.
 
 \begin{description}
-\item [\texttt{sorts}] Exigimos que luego del identificador ``\texttt{sort}'' halla un espacio\footnote{\label{foot:espacio} Ver definición de \texttt{space\_p} \ref{parsers}}. El nombre leído, se usará para crear un nuevo Sort dentro de la GA y también se insertará en la tabla de símbolos de sorts. Se acepta una lista de nombres de sorts para comodidad del usuario.
+\item [\texttt{sorts}] Exigimos que luego del identificador ``\texttt{sort}'' halla un espacio\footnote{\label{foot:espacio} Ver definición de \texttt{space\_p} en \ref{parsers}}. El nombre leído, se usará para crear un nuevo Sort dentro de la GA y también se insertará en la tabla de símbolos de sorts. Se acepta una lista de nombres de sorts para comodidad del usuario.
 
 \begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=9cm]
 r_decl_sort = lexeme_d[str_p("sort")>>space_p]>>
@@ -310,7 +310,7 @@ r_type_attr = str_p("inh")|"syn";
 
 En la definición de una gramática las reglas son los pilares, por eso en esta sección se debía brindar la mayor flexibilidad al usuario.
 
-El bloque de reglas comienza con el identificador ``\texttt{rules}'', seguida de un espacio$^{\ref{foot:espacio}}$ y una lista de reglas. Cada una de las mismas son enumeradas desde 1 para mantener una indexación interna. Una vez consumido el bloque se realizan los chequeos que determinan si la GA es MAG o no.
+El bloque de reglas comienza con el identificador ``\texttt{rules}'', seguida de un espacio$^{\ref{foot:espacio}}$ y una lista de reglas. Cada una de las mismas son enumeradas desde 1 para mantener una indexación interna. Una vez consumido el bloque se realizan los chequeos que determinan si la GA es MAG o no\footnote{Detalle sobre MAG, ver capítulo \ref{chap:mag}.}.
 
 \begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=9cm]
 r_rules = lexeme_d[str_p("rules")>>space_p]>>
@@ -366,7 +366,7 @@ r_equation = r_instance[&create_equation]n>
                     ';';
 \end{lstlisting}
 
-La herramienta acepta cualquier tipo de expresión, ya que se permite que se definan nuevos operadores y funciones según las necesidades de la gramática para la cual se generará el evaluador. Se utilizó la gramática de expresiones ambiguas que figura en la mayoría de los libros de análisis de lenguajes.
+La herramienta acepta cualquier tipo de expresión, ya que se permite que se definan nuevos operadores y funciones según las necesidades de la gramática para la cual se generará el evaluador. Se utilizó la gramática de expresiones ambiguas que figura en la mayoría de los libros de análisis de lenguajes (Ver \cite{gramatica} y \cite{compiladores}).
 
 \begin{lstlisting}[backgroundcolor=\color{white}, columns=fullflexible, linewidth=7cm]
 E := E op E
@@ -446,7 +446,7 @@ r_function = r_function_st[&create_function][&create_func_node]>>
                    ch_p(')')[&decrement_level];
 \end{lstlisting}
 
-Aprovechando las funcionalidades de \spirit, se resolvió una ambigüedad al momento de parser un número entero y un flotante, exigiendo que se quede con la cadena más larga que pudiese coincidir en la gramática. Para ello se codificó lo siguiente:
+Aprovechando las funcionalidades de \spirit, se resolvió una ambigüedad al momento de parsear un número entero y un flotante, exigiendo que se quede con la cadena más larga que pudiese coincidir en la gramática. Para ello se codificó lo siguiente:
 
 \begin{center}\textbf{\large{\texttt{longest\_d\ [\ real\_p\ |\ int\_p\ ]}}}\end{center}
 
@@ -475,7 +475,7 @@ r_instance = lexeme_d[
                     ];
 \end{lstlisting}
 
-En este punto se encuentran definidas todas las reglas necesarias para declarar la regla que define a una \textbf{Gramática de Atributos}. Es decir, un dominio semántico, un bloque de atributos y un bloque de reglas. El parser \texttt{end\_p} se necesita para que consuma los espacios restantes hasta el fin del archivo de entrada.
+En este punto se encuentran definidas todas las reglas necesarias para declarar la regla que define a una \textbf{Gramática de Atributos}. Es decir, un dominio semántico, un bloque de atributos y un bloque de reglas. El parser \texttt{end\_p} (Ver tabla \ref{parsers}) se necesita para que consuma los espacios restantes hasta el fin del archivo de entrada.
 
 \begin{lstlisting}[language=C++, basicstyle=\scriptsize, columns=fullflexible, linewidth=7cm]
 r_att_grammar = r_semantic_domain >>
@@ -536,9 +536,9 @@ parse_info<iterator_t> info(parse<iterator_t>(begin, end, attr_grammar_decl, ski
 
 \subsection{Manejo de errores}
 
-Para informar los errores durante el análisis sintáctico, teníamos que utilizar los mecanismos que \spirit\ nos brindaba. Lamentablemente este es un punto débil del framework.
+Para informar los errores durante el análisis sintáctico, se tenía que utilizar los mecanismos que \spirit\ nos brindaba. Lamentablemente este es un punto débil del framework.
 
-Lo que se implementó, fue mostrar la línea y columna desde donde no se pudo consumir del archivo de entrada.
+Lo que se implementó, fue mostrar la línea y columna desde donde no se pudo consumir del archivo de entrada, tal como se muestra en la seccion \ref{subsec:parsers-leng} del capitulo anterior.
 
 Primero, para aceptar archivos como entrada de la herramienta, se tiene que hacer que \spirit\ no utilice un iterador estándar, sino que un \texttt{file\_iterator} instanciado con caracteres. Luego definir un \texttt{position\_iterator} sobre el recién mencionado.
 
@@ -559,7 +559,7 @@ Toda la implementación del analizador sintáctico de \maggen\ está dentro del 
 
 \item [Semantics\_actions.cpp] Aquí se implementaron todas las acciones semánticas que se utilizan durante el análisis sintáctico para ir creando los objetos que internamente representan y componen a una Gramática de Atributos.
 
-\item [Semantics\_checks.cpp] Simultáneamente con el parser, se realizan chequeos de propiedades sobre las reglas que se consumieron completamente. Dichos algoritmos se encuentran implementados en este archivo. Ahora se mencionarán detalles sobre los mismos.
+\item [Semantics\_checks.cpp] Simultáneamente con el parser, se realizan chequeos de propiedades sobre las reglas que se consumieron completamente. Dichos algoritmos se encuentran implementados en este archivo. En la sección siguiente se mencionarán detalles sobre los mismos.
 \end{description}
 
 \section{Chequeos semánticos durante el parsing}
@@ -567,7 +567,7 @@ Toda la implementación del analizador sintáctico de \maggen\ está dentro del 
 
 Dentro de este módulo se mantienen las variables que almacenan el nivel de precedencia corriente durante el parsing. El mismo es inicializado en 0 (cero), se incrementa en 1 (uno) cada vez que se detecta un paréntesis que abre y se decrementa al encontrar uno que cierra.
 
-Además, para enumerar los símbolos que van apareciendo dentro de las reglas, se mantiene un índice se aparición sintáctico. Comienza en 0 (cero) y se incrementa cada vez que se consume un símbolo dentro de la declaración de la regla.
+Además, para enumerar los símbolos que van apareciendo dentro de las reglas, se mantiene un índice de aparición sintáctico. Comienza en 0 (cero) y se incrementa cada vez que se consume un símbolo dentro de la declaración de la regla.
 
 Ambos valores numéricos son reseteados cada vez que se comienza a analizar una nueva regla.
 
@@ -577,7 +577,7 @@ Mientras se parsea una expresión se busca mantener la propiedad de que los \tex
 
 Cuando se presenta un problema de precedencia, se realizan rotaciones que se aplican recursivamente en todo el árbol. 
 
-Los cambios mantienen invariante la propiedad de que no se afecta al orden sintáctico de la expresión, es decir, el aplanamiento del árbol de izquierda a derecha (in-order) es el mismo antes y después de las permutaciones.
+Los cambios mantienen invariante la propiedad de \textit{no afectar el orden sintáctico de la expresión}, es decir, el aplanamiento del árbol de izquierda a derecha (in-order) es el mismo antes y después de las permutaciones.
 
 Existen dos grandes casos a considerar:
 
@@ -614,17 +614,17 @@ Además, cuando se detectan dos operadores no asociativos se genera un error por
 
 \subsection{Alcanzabilidad de símbolos y reglas}
 
-En la especificación pueden existir de símbolos y reglas declaradas que no pueden ser alcanzados desde el símbolo inicial de la gramática. Los mismos no son útiles en la gramática ya que nunca producirán cadenas del lenguaje. Los mismos no son considerados errores pero son informados mediante alertas (\texttt{warnings}).
+En la especificación pueden existir símbolos y reglas declaradas que no pueden ser alcanzados desde el símbolo inicial de la gramática. Los mismos no son útiles en la gramática ya que nunca producirán cadenas del lenguaje. Los mismos no son considerados errores pero son informados mediante alertas (\texttt{warnings}).
 
-Este chequeo se implementó con una versión del algoritmo de Warshall\footnote{En honor a Stephen Warshall (1935-2006)}, que calcula la ``Clausura Transitiva'' de un grafo.
+Este chequeo se implementó con una versión del algoritmo de Warshall\footnote{En honor a Stephen Warshall (1935-2006)}, que calcula la ``\textit{Clausura Transitiva}'' de un grafo.
 
 Para aplicarlo, primero se construye una matriz de valores lógicos reflejando todas las reglas declaradas. Luego de computar la clausura, se recorre la fila del símbolo inicial, que pertenece a la \textbf{única} regla inicial de la gramática por ser \textbf{extendida}. Todo símbolo que se encuentra con valor falso es inalcanzable.
 
 \subsection{Consistencia de bloque de atributos y bloque de reglas}
 
-Este chequeo consiste en verificar que no existan símbolos declarados en el bloque de atributos, que no hallan sido involucrados en ninguna regla. Esto puede suceder se crearon los símbolos de la expresión de conjuntos que define la pertenencia de un atributo.
+Este chequeo consiste en verificar que no existan símbolos declarados en el bloque de atributos, que no hallan sido involucrados en ninguna regla. Esto puede suceder cuando se crearon los símbolos de la expresión de conjuntos que define la pertenencia de un atributo.
 
-La heurística utilizada, consiste en recorrer el \texttt{map} de símbolos no terminales y verificando que existe al menos una regla que lo tenga como parte izquierda.
+La heurística utilizada, consiste en recorrer el \texttt{map} de símbolos no terminales y verificar que existe al menos una regla que lo tenga como parte izquierda.
 
 \subsection{Gramática bien definida}
 
@@ -651,9 +651,9 @@ Cada vez que se detectaba un error, se lo informa mediante alguno de los siguien
 \section{Obtención de planes de evaluación}
 \label{sec:obtplaneval}
 
-El propósito final de \maggen\ es obtener todos los planes posibles de la gramática de entrada. En la sección \ref{subsec:conts-plan-dise}, se analizaron algunas consideracions a tener en cuenta, en esta seccion las retomamos desde el punto de vista de la implementación. 
+El propósito final de \maggen\ es obtener todos los planes posibles de la gramática de entrada. En la sección \ref{subsec:conts-plan-dise}, se analizaron algunas consideraciones a tener en cuenta, en esta sección las retomamos desde el punto de vista de la implementación. 
 
-Teóricamente un plan es una secuencia de atributos, que indica un orden de evaluación total y consistentes de los mismos. Dentro de \maggen, se optó para su representación una secuencia de identificadores de ecuaciones. Ya que cada ecuación tiene solamente \textbf{un} \texttt{l-value}, que es precisamente un atributo. Se utiliza la clase \texttt{vector} de la STL, para su almacenamiento y están enumeradas de forma tal que pueden ser identificadas de manera univoca.
+Teóricamente un plan es una secuencia de instancias, que indica un orden de evaluación total y consistentes de las mismas. Dentro de \maggen, se optó para su representación una secuencia de identificadores de ecuaciones. Ya que cada ecuación tiene solamente \textbf{un} \texttt{l-value}, que es precisamente una instancia. Se utiliza la clase \texttt{vector} de la STL, para su almacenamiento y están enumeradas de forma tal que pueden ser identificadas de manera univoca.
 
 Como en general, se iban a generar en muchos casos los mismos planes, se decidió mantener un \texttt{vector} con todos los planes diferentes, así solo generaríamos la mínima cantidad de planes únicos.
 
@@ -680,7 +680,7 @@ Los dos primeros valores, corresponden a un \texttt{key} de un plan de evaluaci�
 
 \subsection{Construcción de grafos}
 \label{subsec:const-graf}
-Para la representación de los grafos utilizamos la \boost\ \textit{\textbf{Graph Library}} (\textbf{BGL}). Ya que la misma presentaba muchas funcionalidades y ya se encontraba como una dependencia externa de la herramienta.
+Para la representación de los grafos utilizamos la \boost\ \textit{\textbf{Graph Library}} (\textbf{BGL}). Ya que la misma presentaba muchas funcionalidades y ya se encontraba como una dependencia externa de la herramienta (debido a que \spirit\ forma parte de \boost, como ya mencionamos al principio del capítulo).
 
 Como en la mayoría de los componentes de esta biblioteca, los mismos eran plantillas que necesitaban ser instanciados.
 
@@ -709,7 +709,7 @@ map <vector<unsigned short>, Graph> p_Adp_graphs;
 map <vector<unsigned short>, Graph> p_Adp_subgraphs_cyclics;
 \end{lstlisting}
 
-\subsection*{Ciclicidad}
+\subsection{Ciclicidad}
 
 El chequeo de ciclicidad sobre los grafos ADP, se implementó utilizando el algoritmo de búsqueda en profundidad (Depth-first search) de \boost\ combinado con la creación de un ``visitador'' especializado. El cual a medida que recorre el grafo, va guardado los nodos y aristas visitadas mientras no se halla detectado un ciclo. Ese subgrafo es mostrado al usuario en caso de error, sino es descartado.
 
@@ -747,11 +747,11 @@ struct cycle_detector: public dfs_visitor<>
 };
 \end{lstlisting}
 
-\subsection*{Contextos}
+\subsection{Contextos}
 
-Para cada regla, se tienen que considerar todos los posibles contextos inferiores posibles de acuerdo a las reglas que tengan los símbolos no terminales de su parte derecha. Se implementó un método que recursivamente genera un contexto diferente y guarda la regla cuando ya no quedan más variantes.
+Para cada regla, se tienen que considerar todos los posibles contextos inferiores de acuerdo a las reglas que tengan los símbolos no terminales de su parte derecha. Se implementó un método que recursivamente genera un contexto diferente y guarda la regla cuando ya no quedan más variantes.
 
-\subsection*{Unicidad de contextos, planes y planes proyectados}
+\subsubsection{Unicidad de contextos, planes y planes proyectados}
 
 Al igual que con los planes, los contextos de las reglas se repiten mucho, así que se utilizaron índices indirectos sobre un \texttt{vector} que almacena únicamente los contextos diferentes.
 
@@ -763,11 +763,11 @@ vector <Order_eval_eq> plans_project_uniques;
 
 Antes de insertar un elemento en cualquiera de estos repositorios se verifica que no exista. En caso de que ya se encuentre, se devuelve el índice correspondiente dentro del vector, sino se insertará al final y se devolverá el índice del último elemento.
 
-\subsection*{Representación en Dot}
+\subsection{Representación en Dot}
 
-Una vez que se generaron todos los tipos de grafos, los mismos son guardados en distintos directorios en formato \textbf{dot}\cite{dot}. Para ello utilizamos la función \texttt{write\_graphviz} perteneciente a al módulo Graphviz de \boost.
+Una vez que se generaron todos los tipos de grafos, los mismos son guardados en distintos directorios en formato \textbf{dot}\cite{dot} (detalles sobre las salidas de \maggen pueden analizarse en el capitulo \ref{chap:usos}). Para ello utilizamos la función \texttt{write\_graphviz} perteneciente a al módulo Graphviz de \boost.
 
-\subsection*{Generación de grafos}
+\subsection{Generación de grafos}
 
 La generación de grafos es incremental, partiendo de la computación de los grafos DP, siguiendo los Down, DCG y por último los grafos ADP. Ante cualquier fallo, la generación se considerará incompleta.
 
@@ -794,10 +794,10 @@ bool generate_graphs()
 \end{lstlisting}
 \vspace{0.3cm}
 
-\subsection*{Generación de planes}
+\subsection{Generación de planes}
 \label{sec:genplanes}
 
-Una vez que se concluyó la generación de grafos, se construyen los planes, se prosigue con el chequeo de ciclicidad de los grafos ADP. Si se supera con éxito, se generarán los planes, sino se abortará el proceso.
+Una vez que se concluyó la generación de grafos, se prosigue con el chequeo de ciclicidad de los grafos ADP. Si se supera con éxito, se generarán los planes, sino se abortará el proceso.
 
 \begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible, linewidth=11cm]
 unsigned short build_plans()
@@ -897,6 +897,8 @@ typedef vector < int > Visit_seq;
 vector < Visit_seq > all_visit_seqs;
 \end{lstlisting}
 
+\subsection{Heurística de la simulación: Detalles de implementación}
+
 Como ya se analizó en la sección \ref{subsec:heuris-simul}, con la heuristica utilizada,  basta con lanzar el proceso de simulación sobre él o los planes asociados a la regla inicial. Además es correcto, porque toda evaluación comenzará desde ese punto.
 
 El algoritmo que se diseñó es recursivo y se apoya en ciertas listas que llevan información de contextos anteriores que son utilizados para realizar podas\footnote{Heurística que permite descartar ramas completas en problemas sobre decisión en árboles y grafos análogamente. \urllink{http://en.wikipedia.org/wiki/Branch\_and\_cut}} y cálculos innecesarios. Estos son:
@@ -954,7 +956,7 @@ bool generate_visit_sequences()
 }
 \end{lstlisting}
 
-Dentro de \texttt{gen\_visit\_seq}, se recorre el plan de evaluación respetando los criterios explicados en \ref{sec:constseqvisit}. Además se debe asegurar que sólo se actualice la secuencia de visita correspondiente al plan actual,s i no se produjo ningún \texttt{leave}. Para ello se lleva una variable lógica (flag) que indica la ausencia de \texttt{leaves}, además una secuencia de visita y un listado de instancias de atributos computados a nivel local.
+Dentro de \texttt{gen\_visit\_seq}, se recorre el plan de evaluación respetando los criterios explicados en \ref{sec:constseqvisit}. Además se debe asegurar que sólo se actualice la secuencia de visita correspondiente al plan actual,si no se produjo ningún \texttt{leave}. Para ello se lleva una variable lógica (flag) que indica la ausencia de \texttt{leaves}, además una secuencia de visita y un listado de instancias de atributos computados a nivel local.
 
 Durante su funcionamiento se cumplen las siguientes condiciones:
 \begin{itemize}
@@ -980,7 +982,7 @@ La actualización se lleva a cabo mediante la función \texttt{update\_visit\_se
 
 \item Si un plan se recorrió en su totalidad, se inserta en \texttt{plans\_computed}.
 
-\item El instancia de atributo que se encuentra en el \texttt{l-value} de la ecuación, será marcado con un \texttt{compute} solamente cuando se haya podido consumir el \texttt{r-value} de la ecuación y no se haya dado un \texttt{leave}.
+\item La instancia que se encuentra en el \texttt{l-value} de la ecuación, será marcada con un \texttt{compute} solamente cuando se haya podido consumir el \texttt{r-value} de la ecuación y no se haya dado un \texttt{leave}.
 
 \item Cuando se debe realizar un \texttt{visit}
 
@@ -989,7 +991,7 @@ La actualización se lleva a cabo mediante la función \texttt{update\_visit\_se
 
 \item Una vez localizado, se busca el plan proyectado para ese símbolo bajo el contexto actual.
 
-\item Luego se inserta en la secuencia de visita de visita local el \texttt{visit}.
+\item Luego se inserta en la secuencia de visita local el \texttt{visit}.
 
 \item Se invoca recursivamente a \texttt{gen\_visit\_seq} con:
 
@@ -1001,7 +1003,7 @@ La actualización se lleva a cabo mediante la función \texttt{update\_visit\_se
 \item \texttt{v\_seq\_child}: inicialmente está vacío para la recursión del primer plan seleccionado, pero es acumulativo para las demás llamadas. Indica las secuencias de visita ya calculadas.
 \end{items}
 
-\item Al terminar la volver de la llamada a \texttt{gen\_visit\_seq}, se extraen los resultados útiles para este contexto.
+\item Al terminar la recursión, la \texttt{gen\_visit\_seq} (invocación), se extraen los resultados útiles para este contexto.
 
 \begin{items}
 \item Nuevos planes computados a partir de la llamada sobre el nodo hijo, exceptuando la ``computada virtual'' del plan actual. Insertados en \texttt{plans\_computed}.
@@ -1021,7 +1023,7 @@ Esta es la última etapa de \maggen\ y la que produce el resultado esperado por 
 
 Es un proceso que debe dejar plasmado en código estático todos los resultados obtenidos durante las anteriores etapas.
 
-Para obtener un diseño dentro de los estándares de C++, se crean dos archivos: una cabecera \texttt{.hpp} y un fuente \texttt{.cpp}. Ambos archivos son creados con el nombre proporcionado por el usuario mediante la opción \texttt{maggen -o name} o sino con el nombre por defecto: \texttt{mag\_eval}.
+Para obtener un diseño dentro de los estándares de C++, se crean dos archivos: una cabecera \texttt{.hpp} y un fuente \texttt{.cpp}. Ambos archivos son creados con el nombre proporcionado por el usuario mediante la opción \texttt{maggen -o name} o sino con el nombre por defecto: \texttt{mag\_eval}\footnote{Para mas detalles sobre usos, ver capítulo \ref{chap:usos}.}.
 
 También se copian al directorio de salida de \maggen, dos archivos utilizados por el evaluador:
 \begin{items}
@@ -1086,7 +1088,7 @@ typedef struct Symbol_Y: Node
 
 Luego de realizar ciertos análisis, se determinó que realmente varias estructuras que eran vitales en fases anteriores, ahora en el contexto y funcionamiento del evaluador eran innecesarias. Por ejemplo, de los planes de evaluación y planes proyectados, únicamente se utilizan los índices de los mismos. Esto sucede ya que debido a la optimización de generar sólo planes diferentes e indexarlos, no existe necesidad de tener en forma estática la definición de cada uno de ellos.
 
-En cambio, las secuencias de visitas son imprescindibles para la evaluación, como así también una versión reducida de las definiciones de las reglas, incluyendo solamente un arreglo con los nombres de cada símbolo no terminal que participa en la misma, en donde la posición cero corresponde al símbolo \texttt{head}\footnote{Ver \ref{sec:def-CFG}}.
+En cambio, las secuencias de visitas son imprescindibles para la evaluación, como así también una versión reducida de las definiciones de las reglas, incluyendo solamente un arreglo con los nombres de cada símbolo no terminal que participa en la misma, en donde la posición cero corresponde al símbolo \texttt{head} y las demas posiciones al \textit{body}\footnote{Ver \ref{sec:def-CFG}}.
 
 Aquí se incluyen los perfiles de los métodos públicos y privados mencionados en \ref{sec:gencodigo}.
 
@@ -1170,10 +1172,10 @@ rules.push_back(rule_non_terminal_0);
 
 La mayor parte de los algoritmos utilizados dentro del evaluador generado, se encuentran escritos dentro de la herramienta y son transcritos al archivos fuente directamente.
 
-\subsection*{Algoritmo de evaluación}
+\subsection{Algoritmo de evaluación}
 \label{sec:codcppalgeval}
 
-El algoritmo que implementamos para poder evaluar un AST, es el propuesto por Wuu Yang en \ref{sec:algevalattr}. El cual realiza en dos etapas bien definidas:
+El algoritmo que se implementó para poder evaluar un AST, es el propuesto por Wuu Yang en \ref{sec:algevalattr}. El cual realiza dos etapas bien definidas:
 
 \begin{description}
 \item [Primera recorrida del AST] se invoca a la función
@@ -1187,7 +1189,7 @@ El algoritmo que implementamos para poder evaluar un AST, es el propuesto por Wu
 \end{items}
 \end{description}
 
-El código del evaluador es reducido por su gran nivel de modularización. Recibe como parámetro la raíz del AST a evaluar. El orden inicial de evaluación para los atributos del símbolo inicial y que por ser una gramática extendida no ocurre en ningún otro lado de la misma, siempre se encuentra en la posición cero del arreglo de planes de evaluación únicos.
+El código del evaluador es reducido por su gran nivel de modularización. Recibe como parámetro la raíz del AST a evaluar. El orden inicial de evaluación para los atributos del símbolo inicial y, que por ser una gramática extendida no ocurre en ningún otro lado de la misma, siempre se encuentra en la posición cero del arreglo de planes de evaluación únicos.
 
 \vspace*{0.2cm}
 \begin{lstlisting}[language=C++, basicstyle=\scriptsize, numbers=left, columns=fullflexible, linewidth=6cm]
@@ -1199,16 +1201,16 @@ void evaluator_mag(struct Node *root)
 }
 \end{lstlisting}
 \vspace*{0.2cm}
-
-\subsection*{\fbox{\texttt{\textbf{void traverse (struct Node *node, unsigned short order)}}}}
+\subsubsection{Función Traverse}
+\fbox{\texttt{\textbf{void traverse (struct Node *node, unsigned short order)}}}
 
 Esta función a partir del identificador de regla que posee cada nodo AST, construye un \texttt{Order\_rule}, es decir, su contexto de invocación. Luego, mediante la función \texttt{return\_index\_context} se obtiene su índice relativo dentro del arreglo que contiene a todos los contextos únicos computados por \maggen. Si no lo encuentra, produce un error ya que el AST de entrada posee un contexto incorrecto para la gramática para la cual se generó el evaluador.
 
-Después se arma un \texttt{Key\_plan} con dicho índice y el parámetro \texttt{order}, que es el índice del plan proyectado que es el orden de evaluación de sus ecuaciones, impuesto por su contexto superior.
+Después se arma un \texttt{Key\_plan} con dicho índice y el parámetro \texttt{order}, que es el índice del plan proyectado que se corresponde con el orden de evaluación de sus ecuaciones, impuesto por su contexto superior.
 
 Por último se busca el plan de evaluación correspondiente al nodo visitado y se lo guarda en la estructura del nodo en el campo \texttt{visit\_seq\_index}.
 
-Ahora se debe visitar a cada uno hijos, imponiéndole a los mismos un orden específico para que evalúen sus atributos según nuestras dependencias.
+Ahora se debe visitar a cada uno de los hijos, imponiéndole a los mismos un orden específico para que evalúen sus atributos según nuestras dependencias.
 
 Para lo cual tenemos que elegir el plan proyectado con nuestro plan seleccionado, el identificador de regla de nuestro hijo y el símbolo no terminal que representa en nuestro \textbf{body}\footnote{Ver \ref{sec:def-CFG} definición de \textbf{CFG}.}
 
@@ -1223,10 +1225,10 @@ Con lo cual se realiza la llamada recursiva de la función:
 \begin{center}\texttt{traverse(node->childs[i], eval\_plans\_project[j].second);}\end{center}
 
 donde ``\texttt{j}'' corresponde al índice del plan proyectado del hijo a visitar.
+\subsubsection{Función Eval}
+\fbox{\texttt{\textbf{void eval\_visiter(struct Node *root)}}}
 
-\subsection*{\fbox{\texttt{\textbf{void eval\_visiter(struct Node *root)}}}}
-
-Esta función sigue los lineamientos de la secuencia de visita referenciada por cada nodo. Arrancando desde la raíz el algoritmo dirige la evaluación del AST, para lograr el AST decorado.
+Esta función sigue los lineamientos de la secuencia de visita referenciada por cada nodo. Arrancando desde la raíz, el algoritmo dirige la evaluación del AST para lograr el AST decorado.
 
 \vspace*{0.2cm}
 
@@ -1254,11 +1256,11 @@ void eval_visiter(struct Node *root)
 }
 \end{lstlisting}
 
-Notar que cuando se debe realizar un \texttt{visit}, sólo consiste en llamar a el evaluador sobre el hijo. Si en cambio, estamos ante un \texttt{compute} se llama a la función \texttt{compute\_eq}, que será explicada a continuación. Y cada vez que sucede un \texttt{leave}, se debe guardar en el nodo actual la siguiente posición de última visitada, para que en la siguiente visita, el evaluador continue omitiendo al \texttt{leave}.
+Notar que cuando se debe realizar un \texttt{visit}, esto, sólo consiste en llamar a el evaluador sobre el hijo. Si en cambio, estamos ante un \texttt{compute} se llama a la función \texttt{compute\_eq}, que será explicada a continuación. Y cada vez que sucede un \texttt{leave}, se debe guardar en el nodo actual la siguiente posición de la última visitada, para que en la siguiente visita, el evaluador continúe omitiendo al \texttt{leave}\footnote{Con el guardado del estado de cada secuencia de visita para cada nodo, se pudo omitir el índice $i$, que presentamos en las operaciones en la sección \ref{sec:sec-visit} del capítulo introductorio.}.
 
 \subsection{Cómputo de ecuaciones}
 
-El cálculo de una ecuación es definida por el usuario y se debe respetar al momento de generar código C++. Por lo que para cada ecuación se inserta un método que tiene toda la semántica involucrada, es decir, llamadas a funciones externas, uso de operadores declarados, entre otros.
+El cálculo de una ecuación es definida por el usuario y se debe respetar al momento de generar código C++. Por lo que, para cada ecuación se inserta un método que tiene toda la semántica involucrada, es decir, llamadas a funciones externas, uso de operadores declarados, entre otros.
 
 Lo primero que se hace es la conversión explícita del tipo\footnote{Type casting - \urllink{http://en.wikipedia.org/wiki/Type\_conversion}.} de cada nodo a su respectivo tipo, para poder acceder a sus atributos. Ya que todos los nodos son en una primera instancia del tipo \texttt{Node}\footnote{Declarado en \texttt{Node.hpp}.} y debe ser convertido a alguno de los tipos estructurados que se declararon para cada uno de los símbolos no terminales.
 

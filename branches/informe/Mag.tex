@@ -52,6 +52,7 @@ El ejemplo es presentado en la figura \ref{ag-no-ANCAG}. El mismo es trabajo, lu
 \end{AG}
 
 \subsection{Grafo \textit{DP}}
+\label{subsec:graph-dp-def}
 Los grafos \textit{DP} denotan las relaciones de dependencias directas entre las instancias de la gramática. 
 
 Un grafo \textit{DP} esta definido (\cite{estruc-algorit}) con las siguientes consideraciones: 
@@ -75,6 +76,7 @@ En la figura \ref{dp-wuu-yang} se observan los grafos $DP$ para la gramática de
 En la sección \ref{subsec:alg-DP} se presenta el algoritmo para la construcción de este tipo de grafos.
 
 \subsection{Grafo \textit{Down}}
+\label{subsec:graph-down-def}
 Los grafos \textit{Down} denotan las relaciones de los atributos de un símbolo. 
 
 Un grafo \textit{Down} esta definido (\cite{estruc-algorit}) con las siguientes consideraciones: 
@@ -96,7 +98,7 @@ En la figura \ref{down-wuu-yang} se muestran los grafos $Down(X)$ y $Down(Y)$ pa
 En la sección \ref{subsec:alg-DOWN} se presenta el algoritmo para la construcción de este tipo de grafos.
 
 \subsection{Grafo \textit{DCG}}
-
+\label{subsec:graph-dcg-def}
 \textit{DCG} significa \textit{Downward Characteristic Graphs}, los mismos contienen las dependencias entre instancias de la gramática para una producción \textit{p}, teniendo en cuenta un símbolo en la gramática.
 \begin{definition}
 Dado q una producción de la forma $X_{0}\rightarrow \alpha_{0} X_{1} \alpha_{1} X_{2} \dots X_{k} \alpha_{k}$, el \textit{Downward Characteristic graph} of $X_{0}$ en los subárboles derivados vía la producción \textit{q}, denotado como $DCG_{X_{0}}(q)$, es un grafo donde: 
