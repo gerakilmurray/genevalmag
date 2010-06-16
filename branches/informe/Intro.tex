@@ -5,10 +5,10 @@
 
 En las ciencias de la computación los lenguajes juegan un rol muy importante en muchas disciplinas. Desde los comienzos se buscaron mecanismos para describirlos y manejarlos.
 
-Dentro de los mecanismos desarrollados, las gramáticas han logrado ocupar unos de los lugares más destacados. La continua evolución y descubrimientos de nuevas gramáticas necesitó que se las organizara, y no fue hasta 1956 que Noam Chomsky propuso una jerarquía sobre las gramáticas, en 4 niveles (cuadro \ref{chomsky}).
+Dentro de los mecanismos desarrollados, las gramáticas han logrado ocupar unos de los lugares más destacados. La continua evolución y descubrimientos de nuevas gramáticas necesitó que se las organizara, y no fue hasta 1956 que Noam Chomsky propuso una jerarquía sobre las gramáticas, estableciendo 4 niveles bien distinguibles, como se observa en el cuadro \ref{chomsky}.
 
-\begin{table}[!ht]\centering 
-\begin{tabular}{| c | p{3.5cm} | p{3.5cm} | p{2.4cm} | p{2.9cm}|}
+\begin{table}[!ht]\centering\small
+\begin{tabular}{| c | p{3.1cm} | p{3.2cm} | p{2.4cm} | p{2.9cm}|}
 \hline
 
 \rowcolor{gris} \textbf{Tipo} & \textbf{Lenguaje} & \textbf{Autómata} & \textbf{Gramática} &  \textbf{Restricciones} \\ \hline
@@ -27,36 +27,36 @@ Dentro de los mecanismos desarrollados, las gramáticas han logrado ocupar unos 
 \end{tabular}\caption{\label{chomsky} Jerarquía de Chomsky}
 \end{table}
 
-Desde que D. Knuth introdujo en 1966 las gramáticas de atributos (GA), estas se han utilizado ampliamente para el desarrollo de herramientas de procesamiento de lenguajes formales como compiladores, intérpretes, traductores como también para especificar la semántica de lenguajes de programación.
+Desde que D. Knuth introdujo en 1966 las gramáticas de atributos (GA), estas se han utilizado ampliamente para el desarrollo de herramientas de procesamiento de lenguajes formales, como compiladores, intérpretes, traductores, así  como también para especificar la semántica de lenguajes de programación.
 
-En el desarrollo de este capítulo, introductorio, abordaremos un amplio numero de conceptos, a partir del capítulo 2 hasta el 4 inclusive se analizaran algunas familias de gramáticas de atributos y los siguientes capítulos estarán destinados al desarrollo de \maggen. 
+En el desarrollo de este capítulo, introduciremos y abordaremos un amplio número de conceptos, luego a partir del capítulo 2 hasta el 4 inclusive se analizaran algunas familias de gramáticas de atributos y los siguientes capítulos estarán destinados al desarrollo de \maggen. 
 
-\maggen\ es el objetivo principal del proyecto y su denominación esta dada por la combinación de las silabas \textbf{mag}, que significa \textit{multi-plans attribute grammar} y \textbf{Gen} por \textit{generator}. Estas dos silabas dan significado a \maggen\ como ``Generador de Evaluadores Estáticos para MAG''.
+\maggen\ es el objetivo principal del proyecto y su denominación esta dada por la combinación de las sílabas \textbf{mag}, que significa \textit{Multi-plans Attribute Grammar} y \textbf{Gen} por \textit{generator}. Estas dos abreviaturas dan significado a \maggen\ como ``Generador de Evaluadores Estáticos para MAG''.
 
 \section{Gramática libre de contexto}
 \label{sec:def-CFG}
-En el nivel 2 de la jerarquía de Chomsky (cuadro \ref{chomsky}) se encuentran los lenguajes libres de contexto. Las gramáticas libres de contexto (CFG) son un formalismo que permite expresar cadenas de este tipo de lenguajes.
+En el nivel 2 de la jerarquía de Chomsky (cuadro \ref{chomsky}) se encuentran los \textit{Lenguajes Libres de Contexto}. Las Gramáticas Libres de Contexto (CFG) son un formalismo que permite expresar cadenas de este tipo de lenguajes.
 
-Las CFG han tomado gran importancia en la descripción de formatos de documentos\footnote{DTD - Document-Type Definition.}, como XML (eXtensible Markup Language) y también en tecnología de compilación, mediante la construcción de \textit{parser} de lenguajes (Ver \cite{compiladores}).  
+Las CFG han tomado gran importancia en la descripción de formatos de documentos\footnote{Document-Type Definition (DTD).}, como \textit{XML} (eXtensible Markup Language) y también en tecnología de compilación, mediante la construcción de \textit{parsers} de lenguajes (Ver \cite{compiladores}).  
 
 \begin{definition}
-Una gramática libre de contexto se conforma de 4 componentes necesarios para la descripción de un lenguaje:
+Una CFG se conforma de 4 componentes necesarios para la descripción de un lenguaje:
 
 \begin{enumerate}
-\item Un conjunto finito de símbolos que son los \textit{string} que definen el lenguaje. Este conjunto es denominado ``\textbf{alfabeto de terminales}'' o simplemente \textit{\textbf{símbolos terminales}}.
+\item Un conjunto finito de símbolos que son los \textit{string} que definen el lenguaje. Este conjunto es denominado ``\textbf{alfabeto de terminales}'' o simplemente \textit{\textbf{Símbolos Terminales}}.
 
-\item Un conjunto finito de variables llamados \textit{\textbf{símbolos no terminales}} o ``categorías sintácticas'. Cada uno de estos define un lenguaje, es decir un conjunto de \textit{strings}.
+\item Un conjunto finito de variables llamados \textit{\textbf{Símbolos No Terminales}} o ``Categorías Sintácticas'. Cada uno de estos define un lenguaje, es decir un conjunto de \textit{strings}.
 
-\item Una variable que representa el comienzo del lenguaje, que se denomina \textit{\textbf{símbolo inicial}}. Dicha variable pertenece al conjunto del punto 2.
+\item Una variable que representa el comienzo del lenguaje, que se denomina \textit{\textbf{Símbolo Inicial}}. Dicha variable pertenece al conjunto del punto 2.
 
 \item Un conjunto finito de \textit{\textbf{producciones o reglas}} que representan la definición recursiva de un lenguaje. Cada producción consiste de las siguientes partes:
 
 \begin{enumerate}
 \item Un símbolo no terminal perteneciente al conjunto del punto 2, denominado \textit{\textbf{head}} de la producción.
 
-\item El símbolo \textbf{$\rightarrow$}.
+\item El símbolo \textbf{$\rightarrow$}, que indica la relación ``produce''.
 
-\item Una secuencia de $0$ o mas símbolos no terminales y terminales. Este, es denominado \textit{\textbf{body}} de la producción y representa el \textit{string} formado por el \textit{head}.
+\item Una secuencia de $0$ o más símbolos no terminales y terminales. Este, es denominado \textit{\textbf{body}} de la producción y representa el \textit{string} producido por el \textit{head}.
 \end{enumerate}
 \end{enumerate}
 
@@ -64,14 +64,14 @@ Estos cuatro componentes pueden ser representados por una tupla \textbf{<V,T,S,P
 \end{definition}
 
 \underline{Nota:}
-En todo el desarrollo del trabajo se denotara a los símbolos no terminales con letras en mayúscula y a los símbolos terminales con letras en minúscula para mayor claridad.
+De aquí en adelante, en el desarrollo del trabajo, se denotarán a los símbolos no terminales con letras en \textit{mayúscula} y a los símbolos terminales con letras en \textit{minúscula}, para mayor claridad.
 
 Veamos dos ejemplos desarrollados en \cite{gramatica} (cap. 5).
 
 \begin{enumerate}
 \item \underline{Ejemplo:} palíndromo:
-Definimos la gramática $G_{pal}$ para definir el lenguaje de palíndromos\footnote{Un palíndromo (del griego \textit{palin dromein}, volver a ir hacia atrás) es una palabra, número o frase que se lee igual hacia adelante que hacia atrás. Si se trata de un número, se llama capicúa (\urllink{http://es.wikipedia.org/wiki/Palíndromo}).}: \\
-$G_{pal} = (\{P\},\{0,1\},P,A)$
+Definimos la gramática $G_{pal}$ para definir el lenguaje de palíndromos\footnote{Un palíndromo (del griego \textit{palin dromein}, ``\textit{volver a ir hacia atrás}''.) es una palabra, número o frase que se lee igual hacia adelante que hacia atrás. Cuando se trata de un número, se denomina capicúa (\urllink{http://es.wikipedia.org/wiki/Palíndromo}).}: \\
+$G_{pal} = (\{P\},\{0,1\}, P, A)$
 donde A es el siguiente conjunto de producciones:
 \begin{enumerate}
 \item $P \rightarrow \lambda$
@@ -90,7 +90,7 @@ Ejemplos de cadenas del lenguaje $G_{pal}$:
 \end{items}
 
 \item \underline{Ejemplo:} Gramática de expresiones:\\
-\textbf{$G_{exp}$ = (\{E,I\}, \{+,*,(,),a,b,0,1\}, E, P)} donde P es el conjunto de producciones siguiente:
+\textbf{$G_{exp} = (\{E,I\}, \{+,*,(,),a,b,0,1\}, E, P)$} donde P es el siguiente conjunto de producciones:
 \begin{enumerate}
 \item $E \rightarrow I$
 \item $E \rightarrow E + E$
@@ -111,22 +111,22 @@ Ejemplos de cadenas del lenguaje $G_{pal}$:
 \end{items}
 \end{enumerate}
 
-\underline{Abreviación de reglas}: Cuando denotamos una producción podemos utilizar una abreviación para agrupar aquellas producciones con el mismo \textit{head}. Para ello utilizamos el meta-símbolo ``|''. Por ejemplo el conjunto de producciones de $G_{pal}$ podríamos escribirlas como: $P \rightarrow \lambda | 0 | 1 | 0P0 | 1P1$.
+\underline{Abreviación de reglas}: Cuando denotamos una producción podemos utilizar una abreviación para agrupar aquellas producciones con el mismo \textit{head}. Para ello utilizamos el meta-símbolo ``|''. Por ejemplo el conjunto de producciones de $G_{pal}$ podríamos escribirlas como: $P \rightarrow \lambda | 0 | 1 | 0P0 | 1P1$.\\
+
 
 \underline{Observación:}
+De aquí en adelante se asumirá que el símbolo de comienzo $S$ aparece en la parte izquierda (\textit{head}) de una única producción y no puede aparecer en la parte derecha (\textit{body}) de ninguna producción\footnote{Esta forma se denomina \emph{Forma Normal} o también \textit{Gramática Extendida}.}. \\
 
-De aquí en adelante se asumirá que el símbolo de comienzo $S$  aparece en la parte izquierda (\textit{head}) de una única producción y no puede aparecer en la parte derecha (\textit{body}) de ninguna producción\footnote{Esta forma se denomina \emph{forma normal} o también \textit{Gramática extendida}.}. \\
 
-
-\begin{definition} Se dice que una CFG $G=<V,T,S,P>$
-es \textbf{reducida} si
+\begin{definition} Se dice que una CFG $G = < V,T,S,P>$
+es \textbf{reducida} si\\
 $\forall B \in V$ , $\exists \alpha , \gamma \in \Sigma^{*} : S \clausderiva{G} \alpha B \gamma$ y $\exists \tau \in T^{*} : B \clausderiva{G} \tau$\footnote{ $\clausderiva{G}$: deriva en $0$ o más pasos; es detallada en \cite{tesismarcelo}}.
 \label{def:reducida}
 \end{definition}
 
 \section{Árbol sintáctico}
 
-Un árbol sintáctico abstracto (AST) es una forma condensada de un árbol de análisis sintáctico. Estos son sumamente útiles para representar construcciones del lenguajes.
+Un árbol sintáctico abstracto (AST) es una forma condensada de un árbol de análisis sintáctico. Estos son sumamente útiles para representar construcciones del lenguaje.
 
 Por ejemplo una producción de la forma:
 \begin{center}\large
@@ -140,19 +140,20 @@ puede representarse en un árbol sintáctico como:
 
 \begin{definition}
 \label{def:arbolderivacion}
-Dado una gramática G= \textbf{<V,T,S,P>}\, definimos $ST = (K,D)$ como un árbol de derivación (o parse tree) donde $K$ es un conjunto de nodos y $D$ es una relación no reflexiva sobre $K$, con $k_0$ como raíz; si cumple las siguientes condiciones:
+Dado una gramática $G = < V,T,S,P>$, definimos $ST = (K,D)$ como un árbol de derivación (o parse tree) donde $K$ es un conjunto de nodos y $D$ es una relación no reflexiva sobre $K$, con $k_0$ como raíz; si cumple las siguientes condiciones:
 
 \begin{items}
 \item $ K \subseteq (V \cup T \cup \lambda) $
 \item $k_{0}$ es un rótulo raíz para el símbolo S.
-\item $ S \rightarrow k_{1} \ldots k_{n} $ donde $k_{1} \ldots k_{n}$ son rótulos para los símbolos de la parte derecha de la producción.
+\item $ S \rightarrow k_{1} \ldots k_{n} $ donde $k_{1} \ldots k_{n}$ son rótulos para los símbolos del \textit{body} de la producción.
 \item Si $k_{i} \in T \cup \{\lambda\}$, ($1 \leq i \leq n$), entonces $k_{i}$ es un \textbf{Nodo Hoja} de $ST$. 
 \item Si $k_{i} \in V$,  ($1 \leq i \leq n$), entonces $k_{i}$ es la raíz del 
       sub-árbol sintáctico para la CFG $<V_{i},T_{i},P_{i},K_I>$, donde $K_{I}$ es un rótulo para $k_{i}$, denominado \textbf{Nodo Interno} de ST.
 \end{items}
 \end{definition}
 
-\underline{Observación:} Para una producción $p\in P_{i}$ de la forma $A\rightarrow \alpha_{0}X_{1}\alpha_{1}X_{2}\alpha_{2} \ldots X_{k}\alpha_{k}$ el nodo interno \textbf{A} tendrá a $X_{1}, X_{2},\dots, X_{k}$ como hijos internos y como hojas $\alpha_{0}, \alpha_{1}, \alpha_{2} \ldots \alpha_{k}$.
+\underline{Observación:} Para una producción $p\in P_{i}$ de la forma\\
+$A\rightarrow \alpha_{0}X_{1}\alpha_{1}X_{2}\alpha_{2} \ldots X_{k}\alpha_{k}$ el nodo interno \textbf{A} tendrá a $X_{1}, X_{2},\dots, X_{k}$ como hijos internos y como hojas $\alpha_{0}, \alpha_{1}, \alpha_{2} \ldots \alpha_{k}$.
 
 En la figura \ref{fig:ejePala-st} se observa un árbol de derivación para la cadena \textit{0110} del lenguaje de palíndromos dado por $G_{pal}$.
 
@@ -172,7 +173,7 @@ La notación usada tanto en el desarrollo del proyecto, comunicación entre los 
 
 \section{Gramática de Atributos}
 
-Las Gramáticas de Atributos (GA) son un formalismo simple para la especificación de la semántica de lenguajes formales, como los lenguajes de programación o de especificación. Integran la modularidad que brindan las gramáticas libres de contexto y la expresividad de un lenguaje funcional.
+Las Gramáticas de Atributos (GA) son un formalismo simple para la especificación de la semántica de lenguajes formales, como los lenguajes de programación o de especificación. Integran la modularidad que brindan las CFG y la expresividad de un lenguaje funcional.
 
 En una GA, se relaciona con cada símbolo de una CFG un conjunto de atributos. Cada regla o producción tiene asociados un conjunto de reglas semánticas que toman la forma de asignación a atributos de valores denotados por la aplicación de una función, la cual puede tomar como argumentos instancias de atributos pertenecientes a los símbolos que aparecen en la producción.
 
@@ -182,23 +183,26 @@ Una ecuación se podrá evaluar cuando las instancias de los atributos que apare
 
 \begin{definition}
 \label{def:grammarattr}
-Una gramática de atributos es una tupla GA = (G, A, V, Dom, F, R) donde:
+Una gramática de atributos es una tupla\\
+ $GA\ =\ <\ G,A,V,Dom,F,R\ >$ donde:
 \begin{itemize}
-\item G = (VN , VT , S, P ) es una CFG reducida y no ambigua (Ver definiciones \ref{def:arbolderivacion} y \ref{def:reducida}).
-\item A = $\cup_{X\in(VN \cup VT)} A(X)$, es el conjunto finito de atributos (A(X) es el conjunto de atributos asociados al símbolo X)
+\item $G\ =\ <\ VN,VT,S,P\ >$ es una CFG reducida y no ambigua (ver definiciones \ref{def:arbolderivacion} y \ref{def:reducida}).
+\item A = $\cup_{X\in(VN \cup VT)} A(X)$, es el conjunto finito de atributos (A(X) es el conjunto de atributos asociados al símbolo X).
 
 \item V es el conjunto finito de dominios de valores de los atributos.
-\item Dom : $A\rightarrow V$ asocia a cada atributo un dominio o conjunto de valores d $\in$ V .
+
+\item Dom : $A\rightarrow V$ asocia a cada atributo un dominio o conjunto de valores d $\in$ V.
+
 \item F es un conjunto finito de funciones semánticas de la forma:
 \begin{equation}
 f \subseteq (\bigotimes\limits_{j=0}^{k}{ Dom(a_{j} ))\rightarrow Dom(a_{0})}
 \end{equation}
 
-\item R = $\bigcup _{p \in P} R^{p}$ es el conjunto finito de reglas de atribución o ecuaciones asociadas a cada producción p $\in$ P , donde
+\item R = $\bigcup _{p \in P} R^{p}$ es el conjunto finito de reglas de atribución o ecuaciones asociadas a cada producción p $\in$ P, donde
 \begin{equation}
 R^{p} = \bigcup\limits_{j=0}^{m^{p}}{\{r_{j}^{p}\}}\ \ \ \ \ \ (\#(R^{p} ) = m^{p} \geq 0)
 \end{equation}
-y cada regla $r_{j}^{p} \in R^{p}$ , con 0 $\leq$ j $\leq$ $m^{p}$ es de la forma
+y cada regla $r_{j}^{p} \in R^{p}$, con 0 $\leq$ j $\leq$ $m^{p}$ es de la forma:
 
 \begin{equation}
 r_{j}^{p}: X_{0}.a_{0} = f(X_{1}.a_{1} ,\dots , X_{k}.a_{k})
@@ -211,7 +215,7 @@ donde cada $X_{i}$ es un símbolo que ocurre en la producción \textit{p} , $a_{
 \begin{definition} Un atributo $a$ está asociado al símbolo $X$ si y sólo si $a \in A(X)$. 
 \end{definition}
 \underline{Nota:}
-Se utilizará la notación \textbf{X.a} para significar que el atributo \texttt{a} está asociado al símbolo \texttt{X} (a $\in$ A(X)) y para denotar el valor de una ocurrencia o instancia del atributo \texttt{a} del símbolo \texttt{X} en una regla de atribución.
+Se utilizará la notación \textbf{X.a} para simplificar que el atributo \texttt{a} está asociado al símbolo \texttt{X} (a $\in$ A(X)) y para denotar el valor de una ocurrencia o instancia del atributo \texttt{a} del símbolo \texttt{X} en una regla de atribución.
 
 \subsection{Árbol Sintáctico Atribuido}
 
@@ -222,41 +226,36 @@ Diremos que en un nodo $n = (X_{0}._{a0}, (X_{1}.a_{1}, X_{2}.a_{2}, \ldots, X_{
 
 \begin{definition} 
 \label{def:ast-attr}
-El árbol atribuido, sobre el cual las instancias de los atributos en cada nodo han sido definidas (es decir, cada instancia se ha asociado a un valor de su dominio), se
-denomina \textbf{árbol decorado}.
+El árbol atribuido, sobre el cual las instancias de los atributos en cada nodo han sido definidas (es decir, cada instancia se ha asociado a un valor de su dominio), se denomina \textbf{árbol decorado}.
 \end{definition}
 
 \begin{definition} Para un árbol sintáctico atribuido $T(GA)$, su grafo de dependencias $GD(T)$ es el grafo construido a partir de la composición de los grafos de dependencias $GD(p)$ de cada producción aplicada durante la construcción de $T$. Formalmente,
 
-$GD(T)=(V_{GD}(T),E_{GD}(T))$
+\begin{center}$GD(T)=(V_{GD}(T),E_{GD}(T))$\end{center}
 
 donde:
 
 \begin{enumerate}
-\item $ V_{GD}(T) = \{ X.a \mid \exists n, $ un nodo de T(GA) con 
-      rótulo $ X $ y $a \in A(X)$..
+\item $ V_{GD}(T) = \{ X.a \mid \exists n, $ un nodo de T(GA) con rótulo $ X $ y $a \in A(X)$.
       
-\item La relación $ E_{GD}(T) $ (arcos de $ GD(T) $) cumple con la siguiente 
-      propiedad:
+\item La relación $ E_{GD}(T) $ (arcos de $ GD(T) $) cumple con la siguiente propiedad:
 
-      Sea $n$ un nodo de $T(GA)$ con rótulo $X_0$, cuyos hijos son los nodos
-      $ n_1, n_2, \ldots ,n_k $, con $ k \geq 0 $ con rótulos 
-      $ X_1 $, $ X_2 $, $\ldots$, $ X_k $, respectivamente, y sea 
-      $p:X_0 \rightarrow X_1 X_2 \ldots X_k$ una producción de GA, entonces,
+      Sea $n$ un nodo de $T(GA)$ con rótulo $X_0$, cuyos hijos son los nodos $ n_1, n_2, \ldots ,n_k $, con $ k \geq 0 $ con rótulos $ X_1 $, $ X_2 $, $\ldots$, $ X_k $, respectivamente, y sea $p:X_0 \rightarrow X_1 X_2 \ldots X_k$ una producción de GA, entonces,
       
-      $ (X_{i}.a,X_{j}.b) \in E_{GD}(T) \Leftrightarrow 
-         (X_{i}.a,X_{j}.b) \in DP(p) \hspace{0.5cm} 0 \leq i, \: j \leq k $
+      $ (X_{i}.a,X_{j}.b) \in E_{GD}(T) \Leftrightarrow (X_{i}.a,X_{j}.b) \in DP(p) \hspace{0.5cm} 0 \leq i, \: j \leq k $
 donde DP(p) se define como:
 
-$DP(p) = \{(X_{i}.a,X_{j}.b) \mid X_{j}.b \rightarrow X_{i}.a \in R^{p}\}$
+\begin{center}$DP(p) = \{(X_{i}.a,X_{j}.b) \mid X_{j}.b \rightarrow X_{i}.a \in R^{p}\}$\end{center}
 
 \end{enumerate}
 \end{definition}
 
 \section{Métodos de Evaluación}
 \label{sec:met_eval}
-Un evaluador de gramáticas de atributos debe tener en cuenta las dependencias entre las instancias de atributos para seguir un orden consistente de evaluación de los mismos.
+Un evaluador de gramáticas de atributos debe tener en cuenta las dependencias entre las instancias de atributos para seguir un orden consistente de evaluación de las mismas.
+
 \begin{definition} Un orden de evaluación consistente, con respecto a las dependencias entre los atributos de una gramática de atributos $GA$, es una secuencia (orden parcial) de instancias de atributos con la siguiente restricción:
+
 Dada una regla $r_{j}^{p} : X_{0}.a_{0} = f(\ldots, X_{i}.a_{i}, \ldots)$ en una producción $p$, 
 $X_{i}.a_{i}$ deberá preceder a $X_{0}.a_{0}$.
 \end{definition}
@@ -267,9 +266,9 @@ Una gramática de atributos $GA$ es circular si y solo si existe un árbol sint�
 
 Si una GA contiene dependencias circulares no podría ser evaluada ya que no se encontraría un orden de evaluación. Esto se conoce como el problema de la circularidad, el cual se ha demostrado ser intrínsecamente exponencial\cite{intri-exc}. El problema de la circularidad ha motivado que muchos investigadores hayan realizado esfuerzos en la búsqueda e identificación de familias o subgrupos de gramáticas de atributos, para las cuales puedan detectarse circularidades con algoritmos de menor complejidad (polinomial o lineal).
 
-En 1980, Uwe Kastens\cite{kastens} caracterizó las gramáticas de atributos ordenadas y propuso un método para su evaluación, denominado secuencias de visita. Estas son, secuencias de operaciones que conducen el recorrido del árbol sintáctico atribuido y realizan la evaluación de las instancias de los atributos. Kastens propone un método para generar las secuencias de visita en tiempo polinomial para la familia OAG. Esta familia y otras como las absolutamente no circulares (ANCAG) son tratadas en el capítulo 2.
+En 1980, Uwe Kastens\cite{kastens} caracterizó las ``\textit{Gramáticas de Atributos Ordenadas}'' (OAG) y propuso un método para su evaluación, denominado secuencias de visita. Estas son, secuencias de operaciones que conducen el recorrido del árbol sintáctico atribuido y realizan la evaluación de las instancias de los atributos. Kastens propone un método para generar las secuencias de visita en tiempo polinomial para la familia OAG. Esta familia y otras como las ``\textit{Absolutamente No Circulares}'' (ANCAG) son tratadas en el capítulo 2.
 
-Luego, en 1998, Wuu-Yang en \cite{wuu-yang1} caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multi-plans}, presentando una algoritmo de evaluación basado en secuencia de visita en tiempo polinomial en el numero de símbolos y producciones. Esta familia, es presentada en el capítulo \ref{chap:mag} y son en las que se basa el funcionamiento de \maggen.  
+Luego, en 1998, Wuu-Yang en \cite{wuu-yang1} caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multi-planes}, presentando una algoritmo de evaluación basado en secuencias de visita en tiempo polinomial en el numero de símbolos y producciones. Esta familia, es presentada en el capítulo \ref{chap:mag} y son en las que se basa el funcionamiento de \maggen.  
 
 \subsection{Evaluación dinámica}
 
@@ -277,7 +276,7 @@ Un evaluador dinámico tiene como ventajas su simplicidad y la posibilidad de de
 
 La realidad es que, los evaluadores dinámicos no han tenido mucho interés en el desarrollo de herramientas de generación de procesadores de lenguajes (como por ejemplo los compiladores) debido a que uno de los principales requisitos de un compilador es que sea eficiente, ya que durante un desarrollo un programador generalmente necesita recompilar un número muy importante de veces hasta obtener una versión final del programa requerido.
 
-Las principales desventajas son que generalmente es necesario mantener el árbol sintáctico y el grafo de dependencias. La construcción del grafo de dependencias consume tiempo y memoria; y a su vez, el tiempo de procesamiento insumido en la construcción del grafo de dependencias puede ser mayor que el proceso de evaluación en sí mismo. En la practica, si tomamos una GA de un tamaño normalmente usado, los requerimientos de memoria pueden ser considerables.  
+Las principales desventajas son que generalmente es necesario mantener el árbol sintáctico y el grafo de dependencias. La construcción del grafo de dependencias consume tiempo y memoria; y a su vez, el tiempo de procesamiento insumido en la construcción del grafo de dependencias puede ser mayor que el proceso de evaluación en sí mismo. En la práctica, si tomamos una GA de un tamaño normalmente usado, los requerimientos de memoria pueden ser considerables.  
 
 Razón por la cual \maggen\ genera un evaluador estático y debido a esto no profundizaremos demasiado en este tipo de evaluadores.
 
@@ -287,9 +286,8 @@ Los métodos estáticos deben tener en cuenta todos los árboles sintácticos po
 
 Un concepto relevante a tener en cuenta es el \textit{contexto de una produccion}, con respecto al mismo no referimos a continuación.
 
-Un árbol sintáctico se construye a partir de la aplicación sucesiva de producciones de la
-gramática. Una instancia de una producción en un árbol sintáctico tiene como
-\emph{contexto inferior} a las instancias de las producciones aplicadas a los no terminales de la parte derecha.
+Un árbol sintáctico se construye a partir de la aplicación sucesiva de producciones de la gramática. Una instancia de una producción en un árbol sintáctico tiene como \emph{contexto inferior} a las instancias de las producciones aplicadas a los no terminales de la parte derecha.
+
 Dada una producción $p$ se deben tomar en cuenta tres tipos de dependencias que definen el contexto de la misma:
 \begin{enumerate}
 \item Directas obtenidas por las ecuaciones de $p$.
@@ -318,34 +316,32 @@ Una secuencia de visitas en el nodo $n$ es una secuencia de tres operaciones o a
 \begin{description}
 \item La acción \emph{visit(child,i)} indica que el evaluador debe moverse (visitar) el nodo hijo \emph{child} de $n$ y corresponde a la \emph{i-ésima} visita al nodo hijo.
 
-\item La acción \emph{compute(at)} indica que debe evaluarse la ecuación que define 
-$at$ en la producción $p$ aplicada correspondiente al nodo $n$.
+\item La acción \emph{compute(at)} indica que debe evaluarse la ecuación que define $at$ en la producción $p$ aplicada correspondiente al nodo $n$.
 
-\item La acción \emph{leave(i)} indica que ha finalizado la visita \emph{i-ésima} en
-el nodo corriente y que se debe visitar al nodo padre.
+\item La acción \emph{leave(i)} indica que ha finalizado la visita \emph{i-ésima} en el nodo corriente y que se debe visitar al nodo padre.
 \end{description}
+
 \underline{\textit{Nota:}}
 
-En la capítulo de implementación de \maggen\ (Ver cap. \ref{chap:implem}) se abordaran detalles sobre el funcionamiento de estas tres operaciones, tanto para el algoritmo de generación de secuencias, como así también para el evaluador generado. Uno de los principales cambios, con respecto a lo visto en los puntos de arriba, es que el índice $i$ es omitido (en visit y leave) debido a que cada nodo lleva un propio contador de invocaciones y mantiene los cambios estado en cada una de ellas.  
+En el capítulo de implementación de \maggen\ (Ver cap. \ref{chap:implem}) se abordarán detalles sobre el funcionamiento de estas tres operaciones, tanto para el algoritmo de generación de secuencias, como así también para el evaluador generado. Uno de los principales cambios, con respecto a lo visto en los puntos de arriba, es que el índice $i$ es omitido (en \texttt{visit} y \texttt{leave}) debido a que cada nodo lleva un propio contador de invocaciones y mantiene los cambios estados en cada una de ellas.  
 
 Un evaluador basado en secuencias de visita, comienza ejecutando las operaciones en el nodo raíz del árbol. En cada visita a un nodo, se ejecutan las operaciones en secuencia hasta la ejecución de una operación \emph{leave(i)}.
 En su próxima visita ($i+1$), se continúa con la operación que sigue a \emph{leave(i)}.
 
-Cada secuencia de visitas finaliza con una operación \emph{leave}\footnote{La mayoría de las veces implícita, es decir este \emph{leave} esta dado por el fin de la secuencia.}. La evaluación termina cuando se ejecutaron todas las operaciones del nodo raíz del árbol
-sintáctico.
+Cada secuencia de visitas finaliza con una operación \emph{leave}\footnote{La mayoría de las veces implícita, es decir este \emph{leave} esta dado por el fin de la secuencia.}. La evaluación termina cuando se ejecutaron todas las operaciones del nodo raíz del árbol sintáctico.
 
-Los evaluadores basados en secuencias de visita pertenecen a una familia denominada  \emph{evaluadores multivisita}, ya que el proceso de evaluación puede requerir múltiples visitas a cada nodo.
+Los evaluadores basados en secuencias de visita pertenecen a una familia denominada \emph{Evaluadores Multivisita}, ya que el proceso de evaluación puede requerir múltiples visitas a cada nodo para evaluarlo.
 
-Se pueden generar secuencias de visita a partir de los grafos de dependencias inducidas de cada producción. Cada subsecuencia de instancias de atributos heredados del símbolo \textit{head} de la producción se reemplazan por una operación \emph{leave}, cada ocurrencias de un atributo definido en la producción (sintetizados del símbolo \textit{head} o heredados de un símbolo del \textit{body}) se reemplazan por la correspondiente operación \emph{compute} y cada subsecuencia de instancias de atributos sintetizados de el símbolo $X_i$ del \textit{body} de la producción se reemplaza por una  operación \emph{visit(i)}.
+Se pueden generar secuencias de visita a partir de los grafos de dependencias inducidos de cada producción. Cada subsecuencia de instancias de atributos heredados del símbolo \textit{head} de la producción se reemplazarán por operaciones \emph{leaves}, cada ocurrencia de un atributo definido en la producción (sintetizados del símbolo \textit{head} o heredados de un símbolo del \textit{body}) se reemplazarán por la correspondiente operación \emph{compute} y cada subsecuencia de instancias de atributos sintetizados del símbolo $X_i$ del \textit{body} de la producción se reemplazarán por operaciones \emph{visit(i)}.
 
 En la sección \ref{sec:algseqvisit} se presenta el algoritmo para obtener las secuencias de visita usado en la herramienta \maggen.
 
 \section{Generación de evaluadores para GA bien definidas}
 
-Tal como analizamos en las secciones anteriores para evaluar un GA debemos computar dependencias entre los atributos, obtener planes y crear secuencias de visitas, teniendo en cuenta posibles problemas de circularidad. En la generación de un evaluador, estas etapas también deben ser realizadas, teniendo en cuenta que una producción (de una GA) puede tener asociada mas de un plan, dependiendo del contexto de su aplicación (Ver \ref{subsec:eval-est}). 
+Tal como analizamos en las secciones anteriores para evaluar un GA debemos computar dependencias entre los atributos, obtener planes y crear secuencias de visitas, teniendo en cuenta posibles problemas de circularidad. En la generación de un evaluador, estas etapas también deben ser realizadas, teniendo en cuenta que una producción (de una GA) puede tener asociada más de un plan, dependiendo del contexto de su aplicación (ver \ref{subsec:eval-est}). 
 
-Un evaluador para una GA bien definida deberá realizar una previa selección del plan correspondiente a cada nodo del árbol sintáctico. Para dicha selección, el evaluador necesitará realizar un recorrido ascendente del árbol sintáctico para \emph{marcar} los nodos con la información sobre las dependencias \emph{actuales} transitivas en base al subárbol.
+Un evaluador para una GA bien definida deberá realizar una previa selección del plan correspondiente a cada nodo del árbol sintáctico. Para dicha selección, el evaluador necesitará realizar un recorrido descendente del árbol sintáctico para \emph{marcar} los nodos con la información sobre las dependencias \emph{actuales} transitivas en base al subárbol.
 
 En la sección \ref{sec:algevalattr} presentamos algoritmos \texttt{eval} y \texttt{traverse}, teniendo en cuenta heurísticas utilizadas por Wuu Yang en \cite{wuu-yang1}.
 
-Además, en los capítulos \ref{chap:disen_} y \ref{chap:implem} se pueden analizar detalles sobre la generación de un evaluador, específicamente, los utilizados para el desarrollo de \maggen.
+Además, en los capítulos \ref{chap:disen_} y \ref{chap:implem} se pueden analizar detalles sobre la generación de un evaluador, específicamente, el utilizado para el desarrollo de \maggen.
