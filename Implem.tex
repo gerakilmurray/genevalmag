@@ -1202,7 +1202,7 @@ void evaluator_mag(struct Node *root)
 \end{lstlisting}
 \vspace*{0.2cm}
 \subsubsection{Función Traverse}
-\fbox{\texttt{\textbf{void traverse (struct Node *node, unsigned short order)}}}
+\fbox{\texttt{\textbf{void traverse (struct Node *node, unsigned short order)}}}\\
 
 Esta función a partir del identificador de regla que posee cada nodo AST, construye un \texttt{Order\_rule}, es decir, su contexto de invocación. Luego, mediante la función \texttt{return\_index\_context} se obtiene su índice relativo dentro del arreglo que contiene a todos los contextos únicos computados por \maggen. Si no lo encuentra, produce un error ya que el AST de entrada posee un contexto incorrecto para la gramática para la cual se generó el evaluador.
 
@@ -1226,7 +1226,7 @@ Con lo cual se realiza la llamada recursiva de la función:
 
 donde ``\texttt{j}'' corresponde al índice del plan proyectado del hijo a visitar.
 \subsubsection{Función Eval}
-\fbox{\texttt{\textbf{void eval\_visiter(struct Node *root)}}}
+\fbox{\texttt{\textbf{void eval\_visiter(struct Node *root)}}}\\
 
 Esta función sigue los lineamientos de la secuencia de visita referenciada por cada nodo. Arrancando desde la raíz, el algoritmo dirige la evaluación del AST para lograr el AST decorado.
 
