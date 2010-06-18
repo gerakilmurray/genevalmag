@@ -602,7 +602,7 @@
 \DeclareRobustCommand*\mit{\@fontswitch\relax\mathnormal}
 \newcommand\@pnumwidth{1.55em}
 \newcommand\@tocrmarg{2.55em}
-\newcommand\@dotsep{4.5}
+\newcommand\@dotsep{0.5}
 \setcounter{tocdepth}{2}
 \newcommand\tableofcontents{%
     \if@twocolumn
@@ -635,7 +635,7 @@
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
     \vskip 1.0em \@plus\p@
-    \setlength\@tempdima{1.5em}%
+    \setlength\@tempdima{2em}%
     \begingroup
       \parindent \z@ \rightskip \@pnumwidth
       \parfillskip -\@pnumwidth
@@ -646,11 +646,11 @@
       \penalty\@highpenalty
     \endgroup
   \fi}
-\newcommand*\l@section{\@dottedtocline{1}{1.5em}{2.3em}}
-\newcommand*\l@subsection{\@dottedtocline{2}{3.8em}{3.2em}}
-\newcommand*\l@subsubsection{\@dottedtocline{3}{7.0em}{4.1em}}
-\newcommand*\l@paragraph{\@dottedtocline{4}{10em}{5em}}
-\newcommand*\l@subparagraph{\@dottedtocline{5}{12em}{6em}}
+\newcommand*\l@section{\@dottedtocline{1}{1.5em}{2.8em}}
+\newcommand*\l@subsection{\@dottedtocline{2}{3.8em}{3.7em}}
+\newcommand*\l@subsubsection{\@dottedtocline{3}{7.0em}{4.6em}}
+\newcommand*\l@paragraph{\@dottedtocline{4}{10em}{5.5em}}
+\newcommand*\l@subparagraph{\@dottedtocline{5}{12em}{6.5em}}
 \newcommand\listoffigures{%
     \if@twocolumn
       \@restonecoltrue\onecolumn
