@@ -46,24 +46,26 @@ Como bibliografía principal del lenguaje destacamos \cite{c++1} y \cite{c++2}
 
 \section{Herramientas}
 \label{sec:metoherram}
-La lista de herramientas que se detallan a continuación fueron utilizadas con resultados muy positivos en cada una de las etapas del desarrollo de sistema. Es de destacar que las herramientas son ``free software''.
+La lista de herramientas que se detallan a continuación fueron utilizadas con resultados muy positivos en cada una de las etapas del desarrollo de sistema. Es de destacar que las herramientas son ``Free Software''.
 
 \begin{description}
-\item [Eclipse]\footnote{\urllink{http://www.eclipse.org}} es un entorno de desarrollo integrado de código abierto multiplataforma para desarrollar lo que el proyecto llama ``Aplicaciones de Cliente Enriquecido'', opuesto a las aplicaciones ``Cliente-liviano'' basadas en navegadores. Esta plataforma, típicamente ha sido usada para desarrollar entornos de desarrollo integrados (del inglés IDE). La versión utilizada fue ``Galileo'' (lanzada el 24 de junio del 2009).
+\item [Eclipse]\footnote{\urllink{http://www.eclipse.org}} es un entorno de desarrollo integrado de código abierto multiplataforma para desarrollar lo que el proyecto llama ``Aplicaciones de Cliente Enriquecido'', opuesto a las aplicaciones ``Cliente-liviano'' basadas en navegadores. Esta plataforma, típicamente ha sido usada para desarrollar entornos de desarrollo integrados (del inglés IDE). La versión utilizada fue ``Galileo'', lanzada el 24 de junio del 2009.
 
 \item [Subversion]\footnote{\urllink{http://subversion.apache.org}} es un software de sistema de control de versiones. Es software libre bajo una licencia de tipo \textbf{Apache/BSD}\footnote{\urllink{http://en.wikipedia.org/wiki/Apache\_License} y \urllink{http://en.wikipedia.org/wiki/BSD\_licenses}} y se le conoce también como \textit{\textbf{svn}} por ser ese el nombre del comando que se utiliza. Esta herramienta fue de vital importancia para llevar a cabo la coordinación, comunicación y elaboración controlada entre los desarrolladores-autores del trabajo.
 
-\item [\LaTeXe]\footnote{\urllink{http://www.latex-project.org}} es una herramienta para sistema de composición de textos, orientado especialmente a la creación de libros, documentos científicos y técnicos que contengan fórmulas matemáticas. Este documento en su totalidad se escribió utilizando \LaTeXe.
+\item [\LaTeXe]\footnote{\urllink{http://www.latex-project.org}} es una herramienta para sistema de composición de textos, orientado especialmente a la creación de libros, documentos científicos y técnicos que contengan fórmulas matemáticas. Este documento en su totalidad se escribió utilizando \LaTeXe\cite{latex}.
 
-\item [kile]\footnote{\urllink{http://kile.sourceforge.net}} es un editor de Tex/LaTeX. Funciona conjuntamente con KDE en varios sistemas operativos.
+\item [kile]\footnote{\urllink{http://kile.sourceforge.net}} es un editor \TeX/\LaTeX diseñado para el entorno de escritorios KDE, permite editar documentos mediante comandos \LaTeX, además de visualizar, convertir o compilar documentos \LaTeX. Incorpora corrector ortográfico, resaltado de sintáxis, autocompletado, plantillas y patrones predefinidos y plegado de código, entre los más destacados y facilitando las tareas de edición.
 
-\item [Graphviz]\footnote{\urllink{http://www.graphviz.org}} es una herramienta de visualización de grafos de código abierto. Genera una gran variedad de formatos de salida.
+\item [Graphviz]\footnote{\urllink{http://www.graphviz.org}} es una aplicación de visualización de gráficos de código abierto que incluye un gran número de programas de trazado de gráficos. Además cuenta con interfaces interactivas y vía web, así como herramientas auxiliares y bibliotecas de funciones, existiendo versiones tanto para Windows como para Linux. Los gráficos son descriptos en archivos de texto plano con el lenguaje DOT\footnote{\urllink{http://en.wikipedia.org/wiki/DOT\_language}.} y pueden ser generados en múltiples formatos de salida como JPG, PNG o SVG (Scalable Vector Graphics). Dentro del paquete Graphviz se encuentran distintos programas: dot, neato, fdp y twopi.
 
-\item [Nemiver]\footnote{\urllink{http://projects.gnome.org/nemiver}} es una herramienta de debugger que se integra perfectamente en el entorno de escritorio GNOME. En la actualidad cuenta con un motor que utiliza el conocido \texttt{GNU gdb debugger}\footnote{\urllink{http://www.gnu.org/software/gdb}} para depurar programas C/C++.
+\item [Nemiver]\footnote{\urllink{http://projects.gnome.org/nemiver}} es una interfaz gráfica para el depurador \texttt{GNU gdb debugger}\footnote{\urllink{http://www.gnu.org/software/gdb}}. Permite disponer de un entorno gráfico para depurar programas C/C++, visualizando el código fuente, el estado de las variables en memoria, entre otras funcionalidades.
 
-\item [Dia]\footnote{\urllink{http://live.gnome.org/Dia}} es una herramienta para la creación de cualquier tipo de diagrama.
+\item [Dia]\footnote{\urllink{http://live.gnome.org/Dia}} es un programa de creación de diagramas basado en GTK+ bajo la licencia GPL. Puede ser usado para dibujar muchos tipos diferentes de diagramas. Dispone de una serie de extensiones para ayudar en la elaboración de diagramas entidad-interrelación, UML, flujo de datos, diagramas de red, entre otros.
 
-\item[Bouml]\footnote{\urllink{http://bouml.free.fr}} es una herramienta para la creación de diagramas UML.
+\item[Bouml]\footnote{\urllink{http://bouml.free.fr}} es un programa OpenSource y multiplataforma, prácticamente para cualquier distribución Unix/Linux/Solaris, Mac y windows. Además es realmente potente en cuanto a la generación automática de código a partir de los diagramas. Es una aplicación \textbf{UML2} que permite definir y generar código en C++, Java, Idl y PHP.
+
+\item[Cmake]\footnote{\urllink{http://www.cmake.org/}} es una herramienta que sirve para generar tanto proyectos y soluciones de \textit{Visual Studio}\footnote{\urllink{http://www.microsoft.com/visualstudio/en-us/products}}, como \texttt{makefiles} de \textit{Unix}. Permite gestionar un proyecto multiplayaforma de forma muy sencilla, o centralizar la creación de nuevos proyectos de forma consistente. Otro conjunto de herramientas muy parecidas son las \textbf{GNU build system}\footnote{Comprende los programas de utilidad \textbf{GNU Autoconf}, \textbf{Automake} y \textbf{Libtool}.} conocidas también como \textbf{Autotools}. CMake es, a juicio de muchos, más sencillo de utilizar que las Autotools siendo, además, muy versátil, potente y escalable.
 
 \item [Análisis estático de código] entre los que se encuentran:
 
