@@ -393,7 +393,7 @@
         \if@mainmatter
 %          \huge\bfseries 
 %           {\Large \scshape \@chapapp\space \thechapter}
-\Huge \textbf{\thechapter}
+\Huge \textbf{\sffamily\fontsize{4em}{4em}\selectfont\thechapter}
           \par\nobreak
 %        \vskip 0\p@
         \fi
