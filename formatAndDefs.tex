@@ -5,6 +5,12 @@
 \usepackage[spanish]{babel}% division de silabas en spanish
 \usepackage[utf8]{inputenc}
 
+\usepackage[format=plain,labelfont=bf,up,textfont=it,up]{caption}
+
+\makeatletter
+\renewcommand{\@pnumwidth}{1.75em}
+\renewcommand{\@tocrmarg}{2.75em}
+\makeatother
 
 \usepackage[titletoc]{appendix}
 \renewcommand\appendixtocname{Ap\'endices}
@@ -34,16 +40,17 @@
   morestring=[d]{"}
 }
 
-
+% \renewcommand{\baselinestretch}{0.97}
 \lstset{
     backgroundcolor=\color{lbcolor},
     tabsize=2,
 %   rulecolor=,
-%   language=matlab,
-%   basicstyle=\tiny,
-%   basicstyle=\renewcommand{\baselinestretch}{0.97}\small\tt
+    rulesepcolor=\color{azul},
+    language=C++,
+    basicstyle=\footnotesize,
+%     basicstyle=\renewcommand{\baselinestretch}{0.97}\small\tt,
     upquote=true,
-%     aboveskip={1\baselineskip},
+    aboveskip={1\baselineskip},
     columns=[c]fixed,
     showstringspaces=false,
     extendedchars=true,
@@ -89,6 +96,7 @@
 \newcommand{\boost}{\textit{\textbf{Boost}}}
 \newcommand{\spirit}{\textit{\textbf{Spirit}}}
 \newcommand{\flecha}{$\hfill \Longrightarrow \hfill$}
+\newcommand{\textttb}[1]{\texttt{\textbf{#1}}}
 
 \makenomenclature
 

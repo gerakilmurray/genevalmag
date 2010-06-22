@@ -393,13 +393,15 @@
         \if@mainmatter
 %          \huge\bfseries 
 %           {\Large \scshape \@chapapp\space \thechapter}
-\Huge \textbf{\sffamily\fontsize{4em}{4em}\selectfont\thechapter}
+
+% \reset@font\sffamily\fontsize{8em}{8em}\selectfont\white 
+\textbf{\reset@font\fontsize{8em}{8em}\selectfont\thechapter}
           \par\nobreak
 %        \vskip 0\p@
         \fi
       \fi
       \interlinepenalty\@M
-      \Huge \bfseries #1\par\nobreak
+      \Huge \reset@font\bfseries #1\par\nobreak
       \hrulefill
     \end{flushright}
     \vskip 20\p@

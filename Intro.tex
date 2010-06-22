@@ -29,7 +29,7 @@ Dentro de los mecanismos desarrollados, las gramáticas han logrado ocupar unos 
 
 Desde que D. Knuth introdujo en 1966 las gramáticas de atributos (GA)\cite{Knuth}, estas se han utilizado ampliamente para el desarrollo de herramientas de procesamiento de lenguajes formales, como compiladores, intérpretes, traductores, así  como también para especificar la semántica de lenguajes de programación.
 
-En el desarrollo de este capítulo, introduciremos y abordaremos un amplio número de conceptos, luego a partir del capítulo 2 hasta el 4 inclusive se analizaran algunas familias de gramáticas de atributos y los siguientes capítulos estarán destinados al desarrollo de \maggen. 
+En el desarrollo de este capítulo, se introducirán un amplio número de conceptos, luego a partir del capítulo 2 hasta el 4 inclusive se analizarán algunas familias de gramáticas de atributos y los siguientes capítulos estarán destinados al desarrollo de \maggen. 
 
 \maggen\ es el objetivo principal del proyecto y su denominación esta dada por la combinación de las sílabas \textbf{mag}, que significa \textit{Multi-plans Attribute Grammar} y \textbf{Gen} por \textit{generator}. Estas dos abreviaturas dan significado a \maggen\ como ``Generador de Evaluadores Estáticos para MAG''.
 
@@ -66,11 +66,11 @@ Estos cuatro componentes pueden ser representados por una tupla \textbf{<V,T,S,P
 \underline{Nota:}
 De aquí en adelante, en el desarrollo del trabajo, se denotarán a los símbolos no terminales con letras en \textit{mayúscula} y a los símbolos terminales con letras en \textit{minúscula}, para mayor claridad.
 
-Veamos dos ejemplos desarrollados en \cite{gramatica} (cap. 5).
+A continuación dos ejemplos desarrollados en el capítulo 5 de \cite{gramatica}.
 
 \begin{enumerate}
 \item \underline{Ejemplo:} palíndromo:
-Definimos la gramática $G_{pal}$ para definir el lenguaje de palíndromos\footnote{Un palíndromo (del griego \textit{palin dromein}, ``\textit{volver a ir hacia atrás}''.) es una palabra, número o frase que se lee igual hacia adelante que hacia atrás. Cuando se trata de un número, se denomina capicúa (\urllink{http://es.wikipedia.org/wiki/Palíndromo}).}: \\
+Se define la gramática $G_{pal}$ para el lenguaje de palíndromos\footnote{Un palíndromo (del griego \textit{palin dromein}, ``\textit{volver a ir hacia atrás}''.) es una palabra, número o frase que se lee igual hacia adelante que hacia atrás. Cuando se trata de un número, se denomina capicúa (\urllink{http://es.wikipedia.org/wiki/Palíndromo}).}: \\
 $G_{pal} = (\{P\},\{0,1\}, P, A)$
 donde A es el siguiente conjunto de producciones:
 \begin{enumerate}
@@ -111,7 +111,7 @@ Ejemplos de cadenas del lenguaje $G_{pal}$:
 \end{items}
 \end{enumerate}
 
-\underline{Abreviación de reglas}: Cuando denotamos una producción podemos utilizar una abreviación para agrupar aquellas producciones con el mismo \textit{head}. Para ello utilizamos el meta-símbolo ``|''. Por ejemplo el conjunto de producciones de $G_{pal}$ podríamos escribirlas como: $P \rightarrow \lambda | 0 | 1 | 0P0 | 1P1$.\\
+\underline{Abreviación de reglas}: Cuando se denota una producción se puede utilizar una abreviación para agrupar aquellas producciones con el mismo \textit{head}. Para ello se utiliza el meta-símbolo ``|''. Por ejemplo el conjunto de producciones de $G_{pal}$ se podrían escribir de la siguiente manera: $P \rightarrow \lambda | 0 | 1 | 0P0 | 1P1$.\\
 
 
 \underline{Observación:}
@@ -140,7 +140,7 @@ puede representarse en un árbol sintáctico como:
 
 \begin{definition}
 \label{def:arbolderivacion}
-Dado una gramática $G = < V,T,S,P>$, definimos $ST = (K,D)$ como un árbol de derivación (o parse tree) donde $K$ es un conjunto de nodos y $D$ es una relación no reflexiva sobre $K$, con $k_0$ como raíz; si cumple las siguientes condiciones:
+Dado una gramática $G = < V,T,S,P>$, se define $ST = (K,D)$ como un árbol de derivación (o parse tree) donde $K$ es un conjunto de nodos y $D$ es una relación no reflexiva sobre $K$, con $k_0$ como raíz; si cumple las siguientes condiciones:
 
 \begin{items}
 \item $ K \subseteq (V \cup T \cup \lambda) $
@@ -220,9 +220,10 @@ Se utilizará la notación \textbf{X.a} para simplificar que el atributo \texttt
 \subsection{Árbol Sintáctico Atribuido}
 
 Un árbol sintáctico atribuido es un AST que agrega información a los nodos, para almacenar los atributos de cada símbolo.
-Para una mayor claridad, definimos un nodo del árbol como una tupla $(X_{0}.a_{0}, (X_{1}.a_{1}, X_{2}.a_{2}, \ldots , X_{k}.a_{k}))$ donde $(X_{0}.a_{0})$ es el rótulo y $(X_{1}.a_{1}, X_{2}.a_{2}, \ldots , X_{k}.a_{k})$ son los nodos hijos.
 
-Diremos que en un nodo $n = (X_{0}._{a0}, (X_{1}.a_{1}, X_{2}.a_{2}, \ldots, X_{k}.a_{k}))$ cada $X_{i}.a_{i}$, $(1 \leq i \leq k)$, es una instancia del atributo $X_{i}.a_{i}$, en la gramática.
+Para una mayor claridad, se define un nodo del árbol como una tupla $(X_{0}.a_{0}, (X_{1}.a_{1}, X_{2}.a_{2}, \ldots , X_{k}.a_{k}))$ donde $(X_{0}.a_{0})$ es el rótulo y $(X_{1}.a_{1}, X_{2}.a_{2}, \ldots , X_{k}.a_{k})$ son los nodos hijos.
+
+Se dirá que en un nodo $n = (X_{0}._{a0}, (X_{1}.a_{1}, X_{2}.a_{2}, \ldots, X_{k}.a_{k}))$ cada $X_{i}.a_{i}$, $(1 \leq i \leq k)$, es una instancia del atributo $X_{i}.a_{i}$, en la gramática.
 
 \begin{definition} 
 \label{def:ast-attr}
@@ -276,15 +277,15 @@ Un evaluador dinámico tiene como ventajas su simplicidad y la posibilidad de de
 
 La realidad es que, los evaluadores dinámicos no han tenido mucho interés en el desarrollo de herramientas de generación de procesadores de lenguajes (como por ejemplo los compiladores) debido a que uno de los principales requisitos de un compilador es que sea eficiente, ya que durante un desarrollo un programador generalmente necesita recompilar un número muy importante de veces hasta obtener una versión final del programa requerido.
 
-Las principales desventajas son que generalmente es necesario mantener el árbol sintáctico y el grafo de dependencias. La construcción del grafo de dependencias consume tiempo y memoria; y a su vez, el tiempo de procesamiento insumido en la construcción del grafo de dependencias puede ser mayor que el proceso de evaluación en sí mismo. En la práctica, si tomamos una GA de un tamaño normalmente usado, los requerimientos de memoria pueden ser considerables.  
+Las principales desventajas son que generalmente es necesario mantener el árbol sintáctico y el grafo de dependencias. La construcción del grafo de dependencias consume tiempo y memoria; y a su vez, el tiempo de procesamiento insumido en la construcción del grafo de dependencias puede ser mayor que el proceso de evaluación en sí mismo. En la práctica, si se toma una GA de un tamaño típico, los requerimientos de memoria pueden ser bastante considerables.  
 
-Razón por la cual \maggen\ genera un evaluador estático y debido a esto no profundizaremos demasiado en este tipo de evaluadores.
+Razón por la cual \maggen\ genera un evaluador estático y debido a esto no se profundizará demasiado en este tipo de evaluadores.
 
 \subsection{Evaluación estática}
 \label{subsec:eval-est}
 Los métodos estáticos deben tener en cuenta todos los árboles sintácticos posibles a ser generados por la gramática y calcular las dependencias, entre las instancias de los atributos, para cada uno de ellos. 
 
-Un concepto relevante a tener en cuenta es el \textit{contexto de una produccion}, con respecto al mismo no referimos a continuación.
+Un concepto relevante a tener en cuenta es el \textit{contexto de una produccion}, el cual será explicado a continuación.
 
 Un árbol sintáctico se construye a partir de la aplicación sucesiva de producciones de la gramática. Una instancia de una producción en un árbol sintáctico tiene como \emph{contexto inferior} a las instancias de las producciones aplicadas a los no terminales de la parte derecha.
 
@@ -338,10 +339,10 @@ En la sección \ref{sec:algseqvisit} se presenta el algoritmo para obtener las s
 
 \section{Generación de evaluadores para GA bien definidas}
 
-Tal como analizamos en las secciones anteriores para evaluar un GA debemos computar dependencias entre los atributos, obtener planes y crear secuencias de visitas, teniendo en cuenta posibles problemas de circularidad. En la generación de un evaluador, estas etapas también deben ser realizadas, teniendo en cuenta que una producción (de una GA) puede tener asociada más de un plan, dependiendo del contexto de su aplicación (ver \ref{subsec:eval-est}). 
+Tal como se analizó en las secciones anteriores para evaluar un GA se deben computar todas las dependencias entre los atributos, obtener planes y crear secuencias de visitas, teniendo en cuenta posibles problemas de circularidad. En la generación de un evaluador, estas etapas también deben ser realizadas, teniendo en cuenta que una producción (de una GA) puede tener asociada más de un plan, dependiendo del contexto de su aplicación (ver \ref{subsec:eval-est}). 
 
 Un evaluador para una GA bien definida deberá realizar una previa selección del plan correspondiente a cada nodo del árbol sintáctico. Para dicha selección, el evaluador necesitará realizar un recorrido descendente del árbol sintáctico para \emph{marcar} los nodos con la información sobre las dependencias \emph{actuales} transitivas en base al subárbol.
 
-En la sección \ref{sec:algevalattr} presentamos algoritmos \texttt{eval} y \texttt{traverse}, teniendo en cuenta heurísticas utilizadas por Wuu Yang en \cite{wuu-yang1}.
+En la sección \ref{sec:algevalattr} se presentarán los algoritmos \texttt{eval} y \texttt{traverse}, teniendo en cuenta heurísticas utilizadas por Wuu Yang en \cite{wuu-yang1}.
 
 Además, en los capítulos \ref{chap:disen_} y \ref{chap:implem} se pueden analizar detalles sobre la generación de un evaluador, específicamente, el utilizado para el desarrollo de \maggen.
