@@ -2,15 +2,15 @@
 \label{chap:mag}
 \minitoc
 
-Tal como lo presenta Wuu Yang en \cite{wuu-yang1} y como lo analizamos en el capítulo anterior (Ver sec. \ref{sec:relfamag}), la familia de \textit{gramática de atributos multi-planes} es una clase que se encuentra dentro de las WDAG y si tomamos la jerarquía $NC$ (Wuu Yang) se corresponde con la clase $NC(1)$.
+Tal como lo presenta Wuu Yang en \cite{wuu-yang1} y como se analizó en el capítulo anterior (Ver sec. \ref{sec:relfamag}), la familia de \textit{Gramática de Atributos Multi-planes} (\textbf{MAG}) es una clase que se encuentra dentro de las \textbf{WDAG} y si se toma la jerarquía $NC$ (Wuu Yang) se corresponde con la clase $NC(1)$.
 
-La familia de las MAG es estrictamente mayor que las ANCAG. La importancia de esta familia radica en que el procedimiento de computación de planes de evaluación estáticos toma \textbf{tiempo polinomial} en el numero de símbolos y producciones.
+La familia de las \textbf{MAG} es estrictamente mayor que las \textbf{ANCAG}. La importancia de esta familia radica en que el procedimiento de computación de planes de evaluación estáticos toma \textbf{tiempo polinomial} en el numero de símbolos y producciones.
 
-A continuación trataremos en detalle la familia de las MAG y en el capítulo siguiente abordaremos el mecanismo de evaluación de las mismas.
+A continuación se tratarán en detalle la familia \textbf{MAG} y en el capítulo siguiente se abordará el mecanismo de evaluación de las mismas.
 
 \section{Preliminares}
 \label{sec:pre-grafos}
-Antes de llegar a la definición de la familia de \textit{gramáticas multi-plans}, presentaremos un ejemplo de gramática de atributos que servirá para estudiar conceptos previos, como lo son, la construcción de una serie de grafos necesarios para el análisis de los integrantes de dicha familia.
+Antes de llegar a la definición de la familia \textbf{MAG}, se presentará un ejemplo de GA que servirá para estudiar conceptos previos, como lo son, la construcción de una serie de grafos necesarios para el análisis de los integrantes de dicha familia.
 
 El ejemplo es presentado en la figura \ref{ag-no-ANCAG}. El mismo es trabajo, luego, en las etapas consideradas para el diseño de \maggen.
 
@@ -107,7 +107,7 @@ Dado q una producción de la forma $X_{0}\rightarrow \alpha_{0} X_{1} \alpha_{1}
 \item Una arista, $X.a \rightarrow X.b$, denota una dependencia (transitiva) de X.b sobre X.a en algún subárbol derivado desde $X_{0}$ vía \textit{q}.
 \end{itemize}
 \end{definition}
-Tomemos el siguiente teorema presentado por Wuu-Yang en \cite{wuu-yang1}:
+El siguiente teorema fue presentado por Wuu-Yang en \cite{wuu-yang1}:
 \begin{theorem}
 $\bigcup\limits_{\textit{todo p}}{DCG_{X} (p) = Down (X)}$
 \end{theorem}
@@ -175,7 +175,7 @@ De los conceptos analizado arriba surgen la siguiente definición y los siguient
 
 \begin{definition}
 \label{def:ancag}
- Sea una \textit{q} una producción de la forma $X_{0}\rightarrow \alpha_{0} X_{1} \alpha_{1} X_{2} \dots X_{k} \alpha_{k}$ definimos:
+ Sea una \textit{q} una producción de la forma $X_{0}\rightarrow \alpha_{0} X_{1} \alpha_{1} X_{2} \dots X_{k} \alpha_{k}$ se define:
 \begin{equation}
  IDP-ANCAG(q) = DP(q) \bigcup\limits_{k}^{i=1}{Down(X_{i})}
 \end{equation}
