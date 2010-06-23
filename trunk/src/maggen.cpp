@@ -168,7 +168,6 @@ bool parse_parameters(int argc, char *argv[], string &path_input_file, string &p
 	bool folder_output_setup(false);
 	bool name_file_output_setup(false);
 
-
 	/* Singular option case: Help info */
 	if (argc == 2)
 	{
@@ -241,6 +240,8 @@ int main
 	struct timeval t_ini, t_fin;
 	double secs;
 	gettimeofday(&t_ini, NULL);
+	string path(argv[0]);
+    string path_only(path.begin(), path.end()-6);
 
 	string path_input_file(DEFAULT_INPUT_FILE);
 	string path_folder_output(DEFAULT_PATH);
@@ -269,7 +270,7 @@ int main
 	}
 
 	Maglib gen;
-	int exit_code = gen.gen_evaluator(path_input_file, path_folder_output, name_library, headers);
+	int exit_code = gen.gen_evaluator(path_input_file, path_folder_output, name_library, headers, path_only);
 
 	if (exit_code == 0)
 	{

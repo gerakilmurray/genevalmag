@@ -54,12 +54,13 @@ bool clean_output_folder(const string path)
 /**
   * Copies the static file to the generation path.
   */
-bool copy_static_code(const string path)
+bool copy_static_code(const string path_d, const string path_s)
 {
 	/* Copies files. */
 	string command_cp_("cp -f ");
-	command_cp_.append("./bin/lib/* ");
-	command_cp_.append(path);
+	command_cp_.append(path_s);
+	command_cp_.append("/lib/* ");
+	command_cp_.append(path_d);
 
 	if (system (command_cp_.c_str()) != 0)
 	{

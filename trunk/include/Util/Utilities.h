@@ -41,7 +41,7 @@ bool clean_output_folder(const string path);
   * @param path
   * @return
   */
-bool copy_static_code(const string path);
+bool copy_static_code(const string path_d, const string path_s);
 
 /**
   * Generates the names of vertex. (The vertex's name is an instance).

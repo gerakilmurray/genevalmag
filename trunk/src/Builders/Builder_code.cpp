@@ -1093,7 +1093,7 @@ void Builder_code::generate_structs() const
   * Generates the header and source code of the static evaluator of the grammar passed as parameter,
   * alog with their evaluations plans, visit sequence and headers for uses user functions defined.
   */
-bool Builder_code::generate_code(const vector<string> &headers_file) const
+bool Builder_code::generate_code(const vector<string> &headers_file, const string path) const
 {
 	generate_header_file();
 	generate_code_file(headers_file);
@@ -1105,7 +1105,7 @@ bool Builder_code::generate_code(const vector<string> &headers_file) const
 	generate_footer_header();
 	generate_footer_code();
 
-	if (!copy_static_code(path_output))
+	if (!copy_static_code(path_output, path))
 	{
 		cout << "* Generation code ---------- [ FAIL ]" << endl;
 		return false;

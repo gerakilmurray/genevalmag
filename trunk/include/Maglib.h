@@ -47,7 +47,8 @@ class Maglib
 			const string path_input_file,
 			const string path_folder_output,
 			const string name_library,
-			const vector<string> &headers
+			const vector<string> &headers,
+			const string path
 		) const;
 };
 

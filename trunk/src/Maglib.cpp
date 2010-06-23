@@ -46,7 +46,8 @@ int Maglib::gen_evaluator
 	const string path_input_file,
 	const string path_folder_output,
 	const string name_library,
-	const vector<string> &headers
+	const vector<string> &headers,
+	const string path
 ) const
 {
 	string path_output(path_folder_output);
@@ -87,7 +88,7 @@ int Maglib::gen_evaluator
 			{
 				/* Success, the last step is code generation. */
 				Builder_code b_gen(path_output, name_library, p_mag.get_attr_grammar(), b_plans, b_visit_seq);
-				if(b_gen.generate_code(headers))
+				if(b_gen.generate_code(headers, path))
 				{
 					/* Success, the evaluator is completed. */
 					return 0;
