@@ -12,11 +12,11 @@ La secciones que conforman la descripción de una gramática de atributos (MAG),
 Informalmente, el lenguaje de especificación se conforma de las siguientes partes:
 
 \begin{description}
-\item [Bloque Dominio Semántico] Destinando a la declaración de sort, operadores y funciones que se utilizarán en los otros dos bloques. Este bloque es denominado ``\texttt{semantic domain}''.
+\item [Bloque Dominio Semántico] Destinando a la declaración de sort, operadores y funciones que se utilizarán en los otros dos bloques. Este bloque es denominado ``\textbtt{semantic domain}''.
 
-\item [Bloque de Atributos] Destinando a la declaración y definición de los atributos asociados a cada símbolo. Este bloque es denominado ``\texttt{attributes}''.
+\item [Bloque de Atributos] Destinando a la declaración y definición de los atributos asociados a cada símbolo. Este bloque es denominado ``\textbtt{attributes}''.
 
-\item [Bloque de Reglas] Destinado a la declaración y definición de las reglas sintácticas de la gramática con sus correspondientes ecuaciones semánticas para cada atributo asociado a cada símbolo. Este bloque es denominado ``\texttt{rules}''.
+\item [Bloque de Reglas] Destinado a la declaración y definición de las reglas sintácticas de la gramática con sus correspondientes ecuaciones semánticas para cada atributo asociado a cada símbolo. Este bloque es denominado ``\textbtt{rules}''.
 \end{description}
 
 Los tres bloques analizados anteriormente, pueden ser clasificados según su comportamiento o funcionalidad dentro del lenguaje la especificación.
@@ -39,7 +39,7 @@ En las secciones siguientes se presentarán los símbolos \textit{decl\_Sd}, \te
 
 \subsection{Bloque Dominio semántico}
 \label{subsec:bloq-sem}
-El bloque ``\texttt{semantic domain}'' es el encargado de la definición de elementos que serán necesarios para los bloques siguientes, el mismo esta subdividido en 3 secciones, que se corresponden con la definición de sort, operadores y funciones, cada una con su sintaxis propia. 
+El bloque ``\textbtt{semantic domain}'' es el encargado de la definición de elementos que serán necesarios para los bloques siguientes, el mismo esta subdividido en 3 secciones, que se corresponden con la definición de sort, operadores y funciones, cada una con su sintaxis propia. 
 
 Entonces se define el símbolo \textit{decl\_Sd} como:
 
@@ -49,14 +49,14 @@ decl_Sd = (decl_sort)*
         | (decl_function)*
 \end{lstlisting}
 
-El uso de ``\texttt{*}'' (``0 o más veces'') en cada subsección y no de ``\texttt{+}'', esta dado, debido a que cada una de estas secciones son opcionales, es decir, no se obliga a la existencia de cada sección. Por ejemplo, podría interesar la definición de una gramática que no cuente con funciones.
+El uso de ``\textbtt{*}'' (``0 o más veces'') en cada subsección y no de ``\textbtt{+}'', esta dado, debido a que cada una de estas secciones son opcionales, es decir, no se obliga a la existencia de cada sección. Por ejemplo, podría interesar la definición de una gramática que no cuente con funciones.
 
 La sintaxis particular de cada sección se analiza individualmente a continuación.
 
 \subsubsection{Declaración de sort}
-La subsección de ``\texttt{sort}'' declara todos los posibles tipos que serán necesarios para las declaraciones siguientes. Todo \texttt{sort} es distinguible en el lenguaje mediante un nombre.
+La subsección de ``\textbtt{sort}'' declara todos los posibles tipos que serán necesarios para las declaraciones siguientes. Todo \textbtt{sort} es distinguible en el lenguaje mediante un nombre.
 
-A continuación se define el símbolo \texttt{decl\_sort}
+A continuación se define el símbolo \textbtt{decl\_sort}
 
 \begin{lstlisting}[frame=shadowbox, language=specmag, linewidth=8cm]
 decl_sort = sort NAME_SORT  list_sort;
@@ -67,9 +67,9 @@ list_sort = , NAME_SORT list_sort
 
 \textit{``NAME\_SORT''} representa el nombre del sort o tipo. El mismo, se corresponde con la definición de un identificador en el común de los lenguajes de programación. Es decir, acepta caracteres alfanuméricos y guiones bajos, restringiendo a los caracteres numéricos como primer carácter, como también palabras reservadas definidas por la especificación (para más detalles ver Apéndice \ref{append:grammarspirit} de implementación en \spirit).\\
 
-\underline{Ejemplo:} \begin{center} \fbox{\texttt{\ sort int;\ }} \end{center}
+\underline{Ejemplo:} \begin{center} \fbox{\textbtt{\ sort int;\ }} \end{center}
 \vspace{0.2cm}
-Esta línea declara el tipo ``\texttt{int}''.
+Esta línea declara el tipo ``\textbtt{int}''.
 
 \subsubsection{Tipos predefinidos por el lenguaje}
 \label{sec:typepredefined}
@@ -81,7 +81,7 @@ El lenguaje de especificación contempla los siguiente tipos básicos:
 
 \item [float] Tipo real en punto flotante de 32 bits.
 
-\item [bool] Tiene en cuenta los valores \texttt{true} y \texttt{false}.
+\item [bool] Tiene en cuenta los valores \textbtt{true} y \textbtt{false}.
 
 \item [char] Tipo char en el común de los lenguajes (encerrado entre comillas simples).
 
@@ -91,19 +91,19 @@ El lenguaje de especificación contempla los siguiente tipos básicos:
 En caso de declaración explícita de cualquiera de ellos, en la especificación, la línea no es reflejada en el funcionamiento interno de \maggen.
 
 \subsubsection{Declaración de operadores}
-La sección destinada a la declaración de \texttt{operadores} acepta 3 tipos de operadores, los cuales, difieren en su forma de uso y cantidad de operandos. Denominados, \textit{infijo, prefijo y posfijo}. 
+La sección destinada a la declaración de \textbtt{operadores} acepta 3 tipos de operadores, los cuales, difieren en su forma de uso y cantidad de operandos. Denominados, \textit{infijo, prefijo y posfijo}. 
 
 La interpretación de cada uno, esta dada por la interpretación natural común a todos los lenguajes de programación, a modo de ejemplo se muestran un operador de cada tipo para evitar inconsistencias en las definiciones:
 
 \begin{itemize}
-\item \underline{Operador \texttt{prefijo}:} \textit{Ejemplo:} \textbf{-2}. Operador de menos unario. 
+\item \underline{Operador \textbtt{prefijo}:} \textit{Ejemplo:} \textbf{-2}. Operador de menos unario. 
 
-\item \underline{Operador \texttt{posfijo}:} \textit{Ejemplo:} \textbf{i++}. Operador de auto-incremento en lenguaje C y C++.
+\item \underline{Operador \textbtt{posfijo}:} \textit{Ejemplo:} \textbf{i++}. Operador de auto-incremento en lenguaje C y C++.
 
-\item \underline{Operador \texttt{infijo}:} \textit{Ejemplo: \textbf{2 + 3}}. Operador ``suma''.
+\item \underline{Operador \textbtt{infijo}:} \textit{Ejemplo: \textbf{2 + 3}}. Operador ``suma''.
 \end{itemize}
 
-A continuación se define el símbolo \texttt{decl\_operator}:
+A continuación se define el símbolo \textbtt{decl\_operator}:
 
 \begin{lstlisting}[frame=shadowbox, language=specmag, linewidth=11cm]
 decl_operator = op infix  mode_op NAME_OP:
@@ -139,14 +139,14 @@ Para estos casos especiales se utilizarán los siguientes valores por defecto:
 
 \begin{description}
 \label{desc:default}
-\item [Precedencia] = \texttt{USHRT\_MAX}.
+\item [Precedencia] = \textbtt{USHRT\_MAX}.
 
-\item [Asociatividad] = \texttt{left}.
+\item [Asociatividad] = \textbtt{left}.
 
-\item [Tipo de operador] = \texttt{prefix}.
+\item [Tipo de operador] = \textbtt{prefix}.
 \end{description}
 
-Otro caso a tener cuenta es el uso de \texttt{non\_assoc} como asociatividad del operador. Este caso define que el operador no tiene asociatividad, con lo que el uso del mismo en las ecuaciones debe respetar esta condición, en caso contrario se observará un error por mal uso.
+Otro caso a tener cuenta es el uso de \textbtt{non\_assoc} como asociatividad del operador. Este caso define que el operador no tiene asociatividad, con lo que el uso del mismo en las ecuaciones debe respetar esta condición, en caso contrario se observará un error por mal uso.
 
 \subsection*{Ejemplos}
 
@@ -154,35 +154,35 @@ Otro caso a tener cuenta es el uso de \texttt{non\_assoc} como asociatividad del
 
 \item 
 \begin{center}
-\fbox{\texttt{\ op infix (\_,right) *: int, int -> int;\ }}\end{center}
+\fbox{\textbtt{\ op infix (\_,right) *: int, int -> int;\ }}\end{center}
 \vspace{0.2cm}
-Esta línea declara el operador infijo ``\texttt{*}'' con precedencia por defecto y asociatividad \texttt{right}. Esta línea también podría haber sido definida como:
+Esta línea declara el operador infijo ``\textbtt{*}'' con precedencia por defecto y asociatividad \textbtt{right}. Esta línea también podría haber sido definida como:
 \vspace{0.2cm}
 \begin{center}
-\fbox{\texttt{\ op infix *: int, int -> int;\ }}\end{center}
+\fbox{\textbtt{\ op infix *: int, int -> int;\ }}\end{center}
 \vspace{0.2cm}
 donde se usan valores por defecto para precedencia y asociatividad.
 
 \item 
 \begin{center}
-\fbox{\texttt{\ op prefix (60,non\_assoc) \%: int -> int;\ }}\end{center}
+\fbox{\textbtt{\ op prefix (60,non\_assoc) \%: int -> int;\ }}\end{center}
 \vspace{0.2cm}
-Esta línea declara el operador prefijo ``\texttt{\%}'' con precedencia \texttt{60} y asociatividad \texttt{non\_assoc}. Esta línea también podría haber sido definida como:
+Esta línea declara el operador prefijo ``\textbtt{\%}'' con precedencia \textbtt{60} y asociatividad \textbtt{non\_assoc}. Esta línea también podría haber sido definida como:
 \vspace{0.2cm}
 
 \begin{center}
-\fbox{\texttt{\ op (60, non\_assoc) \%: int -> int;\ }}\end{center}
+\fbox{\textbtt{\ op (60, non\_assoc) \%: int -> int;\ }}\end{center}
 \vspace{0.2cm}
 y en el caso que se desee usar valores de asociatividad y precedencia por defecto así:
 \vspace{0.2cm}
 
 \begin{center}
-\fbox{\texttt{\ op \%: int -> int;\ }}\end{center}
+\fbox{\textbtt{\ op \%: int -> int;\ }}\end{center}
 \end{enumerate}
 \subsubsection{Declaración de funciones}
 La noción de funciones dentro de la especificación es tomada con la noción natural de función matemática. Es decir, toda función esta definida mediante un identificador, un dominio y una imagen.
 
-Se define \texttt{decl\_function} como:
+Se define \textbtt{decl\_function} como:
 
 \begin{lstlisting}[frame=shadowbox, language=specmag, linewidth=13cm]
 decl_function = function NAME_FUNC: decl_domain -> NAME_SORT;
@@ -197,9 +197,9 @@ decl_domain = NAME_SORT, decl_domain
 Es importante tener en cuenta que las funciones son tomadas con los valores por defecto de operador para asociatividad y precedencia \ref{desc:default}.\\
 
 \underline{Ejemplo:}\ \begin{center}
-\fbox{\texttt{\ function f:int, int, int, int -> real;\ }}                                                                           \end{center}
+\fbox{\textbtt{\ function f:int, int, int, int -> real;\ }}                                                                           \end{center}
 \vspace{0.2cm}
-Esta línea declara la función ``\texttt{f}'' que tiene como entrada 4 elementos de tipo ``\texttt{int}'' y como salida un elemento de tipo ``\texttt{real}''.
+Esta línea declara la función ``\textbtt{f}'' que tiene como entrada 4 elementos de tipo ``\textbtt{int}'' y como salida un elemento de tipo ``\textbtt{real}''.
 
 \subsection{Bloque de Atributos}
 En esta sección se presentará el bloque ``attributes'' en detalle. La información que define un atributo dentro del lenguaje esta dado por: 
@@ -207,14 +207,14 @@ En esta sección se presentará el bloque ``attributes'' en detalle. La informac
 \begin{description}
 \item [Nombre:] representa el nombre del atributo, el mismo respeta los requisitos de identificador analizados anteriormente.
 
-\item [Clase de atributo:] está dado por la clase del atributo, esto es sintetizado (\texttt{syn}) o heredado (\texttt{inh}).
+\item [Clase de atributo:] está dado por la clase del atributo, esto es sintetizado (\textbtt{syn}) o heredado (\textbtt{inh}).
 
 \item [Tipo:] está dado por el tipo del atributo. El mismo corresponde a un tipo básico (ver \ref{sec:typepredefined}) o a un sort definido en la sección de \textit{Sort}.
 
 \item [Símbolos de pertenencia:] hace referencia a los símbolos a los cuales se asocia el atributo.
 \end{description}
 
-A continuación se define el símbolo \texttt{decl\_attrs} como:
+A continuación se define el símbolo \textbtt{decl\_attrs} como:
 
 \begin{lstlisting}[frame=shadowbox, language=specmag, linewidth=11cm]
 decl_attrs = (d_attr)+
@@ -242,7 +242,7 @@ list_symbol = SYMB_NON_TERMINAL , list_symbol
 \subsubsection*{Consideraciones}
 
 \begin{itemize}
-\item En la declaración de los símbolos a los cuales pertenece el atributos, ``\texttt{all}'' se interpreta como ``todos los símbolos'', es decir, el atributo declarado se asocia a todos los símbolos de la gramática. Además es posible utilizar el operado ``diferencia'' de conjuntos ``\texttt{-}'' para especificar el conjunto de símbolos a los cuales perteneces el atributo, como una expresión.
+\item En la declaración de los símbolos a los cuales pertenece el atributos, ``\textbtt{all}'' se interpreta como ``todos los símbolos'', es decir, el atributo declarado se asocia a todos los símbolos de la gramática. Además es posible utilizar el operado ``diferencia'' de conjuntos ``\textbtt{-}'' para especificar el conjunto de símbolos a los cuales perteneces el atributo, como una expresión.
 
 \item Si no se especifica la clase del atributo (sintetizado o heredado) el mismo es tomado como el caso por defecto a sintetizado.
 \end{itemize}
@@ -252,37 +252,37 @@ list_symbol = SYMB_NON_TERMINAL , list_symbol
 
 \item 
 \begin{center}
-\fbox{\texttt{\ lex: syn <string>\ of all - {T};\ }}\end{center}
+\fbox{\textbtt{\ lex: syn <string>\ of all - {T};\ }}\end{center}
 \vspace{0.2cm}
-Se define el atributo ``\texttt{lex}'' sintetizado de tipo ``\texttt{string}'' para todos los símbolos excepto para el símbolo ``\texttt{T}''.
+Se define el atributo ``\textbtt{lex}'' sintetizado de tipo ``\textbtt{string}'' para todos los símbolos excepto para el símbolo ``\textbtt{T}''.
 
 \item
 
 \begin{center}
-\fbox{\texttt{\ type: inh <string>\ of all;\ }}\end{center}
+\fbox{\textbtt{\ type: inh <string>\ of all;\ }}\end{center}
 \vspace{0.2cm}
-Se define el atributo ``\texttt{type}'' heredado de tipo ``\texttt{string}'' para todos los símbolos de la gramática.
+Se define el atributo ``\textbtt{type}'' heredado de tipo ``\textbtt{string}'' para todos los símbolos de la gramática.
 
 \item 
 
 \begin{center}
-\fbox{\texttt{\ grade: <int>\ of {E, T};\ }}\end{center}
+\fbox{\textbtt{\ grade: <int>\ of {E, T};\ }}\end{center}
 \vspace{0.2cm}
-Se define el atributo ``\texttt{grade}'' sintetizado (por defecto) de tipo ``\texttt{int}'' para los símbolos ``\texttt{E}'' y ``\texttt{T}''.\\
+Se define el atributo ``\textbtt{grade}'' sintetizado (por defecto) de tipo ``\textbtt{int}'' para los símbolos ``\textbtt{E}'' y ``\textbtt{T}''.\\
 \end{enumerate}
 
 \subsection{Bloque de reglas}
 Por último el bloque de reglas. La interpretación de las reglas dentro del lenguaje esta dada por la definición de gramática libre de contexto (Ver definición \ref{sec:def-CFG}).          
 
-El símbolo terminal se considera un símbolo entre comillas simples (\texttt{'}).\\ 
+El símbolo terminal se considera un símbolo entre comillas simples (\textbtt{'}).\\ 
 
-\underline{Ejemplo:}\ \fbox{\ \texttt{'literal'}\ }\\
+\underline{Ejemplo:}\ \fbox{\ \textbtt{'literal'}\ }\\
 \vspace{0.2cm}
 
 Las ecuaciones describen las reglas semánticas que definen la sintaxis de la gramática. Cada ecuación define la interpretación semántica de los atributos de cada símbolo; esta definición se realiza mediante una expresión constituida por \textbf{instancias}, \textbf{literales} o aplicación de operadores y funciones a subexpresiones.
 En este punto se deben tener en cuenta los requisitos necesarios de una gramática bien definida (Ver sección \ref{sec:well-defined}).
 
-A continuación se define el símbolo \texttt{decl\_rules}:
+A continuación se define el símbolo \textbtt{decl\_rules}:
 
 \begin{lstlisting}[frame=shadowbox, language=specmag, linewidth=11cm]
 decl_rules = (d_rule)+ 
@@ -310,7 +310,7 @@ instance = SYMB_NON_TERMINAL[NUM_INS].NAME_ATTR
 
 \textit{``SYMB\_NON\_TERMINAL''} y \textit{``SYMB\_TERMINAL''} describen símbolos no terminales y terminales respectivamente. En este punto, se tiene en cuenta la diferenciación entre estos tipos de símbolos como se analizó en el párrafo anterior (a través de \' para los terminales).
  
-\textit{``OP\_NAME''} y  \textit{``NAME\_FUNC''} describen identificadores de operadores infijos, prefijos y posfijos (según su uso) y el de función respectivamente. Tanto los operadores como las funciones se asumen definidos en la sección ``\texttt{semantic domain}''.
+\textit{``OP\_NAME''} y  \textit{``NAME\_FUNC''} describen identificadores de operadores infijos, prefijos y posfijos (según su uso) y el de función respectivamente. Tanto los operadores como las funciones se asumen definidos en la sección ``\textbtt{semantic domain}''.
 
 \textit{``NUM\_INS''} corresponde con un número mayor que cero que identifica la ocurrencia del símbolo (para más detalle ver \ref{subsec:consirule} punto 4).
 
@@ -321,13 +321,13 @@ instance = SYMB_NON_TERMINAL[NUM_INS].NAME_ATTR
 \item [Real] es considerado un número en punto flotante de 32 bits. La separación de decimales se da mediante el punto (.).
 \item [Carácter] es considerado un carácter cualquiera entre comillas simples (').
 \item [String] es considerado una cadena de caracteres entre comillas dobles (`` '').
-\item [Bool] representa los valores \texttt{true} y \texttt{false}.
+\item [Bool] representa los valores \textbtt{true} y \textbtt{false}.
 \end{description}
 
 \subsubsection*{Consideraciones}
 \label{subsec:consirule}
 \begin{enumerate}
-\item Es posible definir una regla de la gramática sin sección de ecuaciones, para ello se debe omitir la sección de ``\texttt{compute}'' en la definición. Si se define la sección de ``\texttt{compute}'' el lenguaje obliga a definir \textbf{al menos una ecuación}.
+\item Es posible definir una regla de la gramática sin sección de ecuaciones, para ello se debe omitir la sección de ``\textbtt{compute}'' en la definición. Si se define la sección de ``\textbtt{compute}'' el lenguaje obliga a definir \textbf{al menos una ecuación}.
 
 \item La sintaxis para el uso de los operadores esta dada por el tipo del operador: infijo, prefijo o posfijo. Para las funciones se utiliza la manera natural de invocación de una función en el común de los lenguajes de programación. Esto es, mediante el nombre de la función y los parámetros entre paréntesis.
 
@@ -358,14 +358,14 @@ Asocia al símbolo ``E'' con el atributo ``type'' en la ocurrencia 3 del símbol
                        E[0].valor = E[1].valor + E[2].valor; 
                        end;\ }\end{center}
 
-El ejemplo muestra una regla del símbolo ``E'' que contiene una ecuación que define al atributo \texttt{valor}. Si se considera, una ``Gramática Bien Definida'' (ver \ref{sec:well-defined}), \texttt{valor} es un atributo sintetizado de ``E''. Otra consideración a tener en cuenta, es la enumeración sintáctica de cada símbolo; en este ejemplo cada símbolo ``E'' presenta su índice sintáctico que asocia a los atributos con cada símbolo. Es decir, cada símbolo ``E'' es reconocido como un nuevo símbolo. A modo de aclaración, se podría definir la ecuación de la siguiente, obteniendo el mismo poder expresivo para la regla:
+El ejemplo muestra una regla del símbolo ``E'' que contiene una ecuación que define al atributo \textbtt{valor}. Si se considera, una ``Gramática Bien Definida'' (ver \ref{sec:well-defined}), \textbtt{valor} es un atributo sintetizado de ``E''. Otra consideración a tener en cuenta, es la enumeración sintáctica de cada símbolo; en este ejemplo cada símbolo ``E'' presenta su índice sintáctico que asocia a los atributos con cada símbolo. Es decir, cada símbolo ``E'' es reconocido como un nuevo símbolo. A modo de aclaración, se podría definir la ecuación de la siguiente, obteniendo el mismo poder expresivo para la regla:
 
 \begin{center}
 \fbox{\ E ::= T '+' F \ compute\ 
       E[0].valor = T[0].valor + F[0].valor; 
       end;\ }\end{center}
 
-Cabe aclarar que \texttt{valor} debe ser atributo de ``T'' y ``F''.
+Cabe aclarar que \textbtt{valor} debe ser atributo de ``T'' y ``F''.
 \vspace{0.2cm}
 
 \item
@@ -429,16 +429,16 @@ La línea 15 presenta un error de sintaxis (falta de paréntesis), entonces \mag
    Col:  5
 \end{lstlisting}
 
-Notar que, la línea y columna donde se indica el error corresponde al inicio de la zona donde la interpretación fue fallida. Podría suceder en varios casos que el error no se detecte específicamente en la línea y columna que se indica, entonces lo conveniente es buscar el error a partir del punto especificado. Para este caso particular, se indica línea: 17 y columna: 5, este punto se encuentra sobre \texttt{op}, pero el error se observa seguido de \texttt{infix}.
+Notar que, la línea y columna donde se indica el error corresponde al inicio de la zona donde la interpretación fue fallida. Podría suceder en varios casos que el error no se detecte específicamente en la línea y columna que se indica, entonces lo conveniente es buscar el error a partir del punto especificado. Para este caso particular, se indica línea: 17 y columna: 5, este punto se encuentra sobre \textbtt{op}, pero el error se observa seguido de \textbtt{infix}.
 
 \subsection{Representación interna}
 
-Las estructuras creadas para la representación interna de la gramática se encuentran dentro de los paquetes \texttt{Attr\_grammar} y \texttt{Expression\_tree} de \maggen. Detalles de implementación sobre estos paquete serán tratando en el capítulo siguiente. 
+Las estructuras creadas para la representación interna de la gramática se encuentran dentro de los paquetes \textbtt{Attr\_grammar} y \textbtt{Expression\_tree} de \maggen. Detalles de implementación sobre estos paquete serán tratando en el capítulo siguiente. 
 
 Ahora se presentarán detalles respecto al diseño.
-\texttt{Expression\_tree} agrupa módulos para la representación de las expresiones de las ecuaciones y \texttt{Attr\_grammar}, encapsula los demás componentes de la gramática.
+\textbtt{Expression\_tree} agrupa módulos para la representación de las expresiones de las ecuaciones y \textbtt{Attr\_grammar}, encapsula los demás componentes de la gramática.
 
-El funcionamiento de \maggen\ esta dado por una instancia de la estructura llamada \texttt{Attr\_grammar}, la cual encapsula toda la información de la gramática de atributos parseada. La misma contiene los elementos que se agrupan en los paquetes anteriormente nombrados y es la que desencadena el cálculo de planes, secuencias de visita y, por último, la generación de código. 
+El funcionamiento de \maggen\ esta dado por una instancia de la estructura llamada \textbtt{Attr\_grammar}, la cual encapsula toda la información de la gramática de atributos parseada. La misma contiene los elementos que se agrupan en los paquetes anteriormente nombrados y es la que desencadena el cálculo de planes, secuencias de visita y, por último, la generación de código. 
  
 En la figura \ref{fig:disen} se presenta un diagrama que muestra la interacción de esta estructura en el funcionamiento de \maggen.
 
@@ -447,7 +447,7 @@ En la figura \ref{fig:disen} se presenta un diagrama que muestra la interacción
 \caption{\label{fig:disen}Interacción de Attr\_grammar en \maggen}
 \end{figure}
 
-A continuación se analizan cuestiones de diseño de los paquetes mencionados arriba, y con ellos la estructura \texttt{Attr\_grammar}.  En la figura \ref{fig:disen2} se muestra un diagrama con la representación interna de una gramática dentro de \maggen.
+A continuación se analizan cuestiones de diseño de los paquetes mencionados arriba, y con ellos la estructura \textbtt{Attr\_grammar}.  En la figura \ref{fig:disen2} se muestra un diagrama con la representación interna de una gramática dentro de \maggen.
 
 \begin{figure}[!ht]\centering
 \includegraphics[width=400pt,height=264pt]{Disen2.png}
@@ -457,9 +457,9 @@ A continuación se analizan cuestiones de diseño de los paquetes mencionados ar
 Algunas observaciones sobre el diseño realizado en la figura \ref{fig:disen2}:
 
 \begin{itemize}
-\item La relación entre los paquetes se produce por un lado, mediante la clase \texttt{Rule}, en el sentido de que toda regla contiene un conjunto de ecuaciones y cada una de estas, está definida a través de un \textit{l\_value:}\texttt{Expr\_instance} y un \textit{r\_value:}\texttt{Expression}. Por otro lado, \texttt{Expr\_instance} se vincula con \texttt{Symbol} y \texttt{Attribute} y \texttt{Expr\_function} con \texttt{Function}.
+\item La relación entre los paquetes se produce por un lado, mediante la clase \textbtt{Rule}, en el sentido de que toda regla contiene un conjunto de ecuaciones y cada una de estas, está definida a través de un \textit{l\_value:}\textbtt{Expr\_instance} y un \textit{r\_value:}\textbtt{Expression}. Por otro lado, \textbtt{Expr\_instance} se vincula con \textbtt{Symbol} y \textbtt{Attribute} y \textbtt{Expr\_function} con \textbtt{Function}.
 
-\item Toda la información de una gramática de atributos esta representada en la clase \texttt{Attr\_grammar} y por ende, el ciclo de vida de cada uno de sus componentes es administrado por esta clase, durante todo el funcionamiento de \maggen. 
+\item Toda la información de una gramática de atributos esta representada en la clase \textbtt{Attr\_grammar} y por ende, el ciclo de vida de cada uno de sus componentes es administrado por esta clase, durante todo el funcionamiento de \maggen. 
 \end{itemize}
 
 \subsection{Chequeos}
@@ -469,7 +469,7 @@ El conjuntos de chequeos que se realizan sobre la gramática de entrada a \magge
 
 Los chequeos realizados son clasificados en sintácticos y semánticos, los primeros, en su mayoría, son realizados durante el parser, en cambio, los chequeos semánticos se realizan luego del parser de cada regla, aplicando escaneos específicos. Estos últimos son los explicados en esta sección.
 
-El módulo que agrupa estos chequeos, se ubica en el paquete \texttt{Parser} de \maggen\ y se denomina \texttt{Semantics\_checks}.
+El módulo que agrupa estos chequeos, se ubica en el paquete \textbtt{Parser} de \maggen\ y se denomina \textbtt{Semantics\_checks}.
 
 A continuación se detallan dichos chequeos\footnote{Detalles sobre la implementación de cada uno de los chequeos, ver sección \ref{sec:checksem}}:
 
@@ -480,7 +480,7 @@ A continuación se detallan dichos chequeos\footnote{Detalles sobre la implement
  \fbox{ E[0].valor = E[1].valor + E[2].valor * E[2].valor }
 \end{center}
 
-Su interpretación está dada por la definición de la precedencia de los operadores \texttt{+} y \texttt{*}(se asume que los dos operadores son infijos y están bien usado). Si se toma \texttt{*} con mayor precedencia que \texttt{+}, \maggen\ interpreta implícitamente como si la ecuación tuviera paréntesis:
+Su interpretación está dada por la definición de la precedencia de los operadores \textbtt{+} y \textbtt{*}(se asume que los dos operadores son infijos y están bien usado). Si se toma \textbtt{*} con mayor precedencia que \textbtt{+}, \maggen\ interpreta implícitamente como si la ecuación tuviera paréntesis:
 
 \begin{center}
  \fbox{ E[0].valor = E[1].valor + (E[2].valor * E[2].valor) }
@@ -489,7 +489,7 @@ Su interpretación está dada por la definición de la precedencia de los operad
 El uso de paréntesis en las expresiones define explícitamente la prioridad de los operadores, por lo que, \maggen\ asume esa precedencia. Por ejemplo, si en la ecuación vista arriba se la define utilizando paréntesis, es decir:\  
  \fbox{E[0].valor = (E[1].valor + E[2].valor) * E[2].valor}\ la interpretación es tomada en ese sentido.
 
-\item [Asociatividad] El chequeo de asociatividad realiza un análisis sobre las expresiones de las ecuaciones, para asegurar la asociatividad definida de cada operador. Por ejemplo, si se ha definido un operador \texttt{non\_assoc}, se espera que el uso del mismo sea consistente con esa definición, es decir, no se considere una posible asociación del mismo. 
+\item [Asociatividad] El chequeo de asociatividad realiza un análisis sobre las expresiones de las ecuaciones, para asegurar la asociatividad definida de cada operador. Por ejemplo, si se ha definido un operador \textbtt{non\_assoc}, se espera que el uso del mismo sea consistente con esa definición, es decir, no se considere una posible asociación del mismo. 
 
 Cuando se utilizan paréntesis en la expresión, \maggen\ asume la asociatividad que se especifica explícitamente.
 
@@ -502,21 +502,21 @@ Cuando se utilizan paréntesis en la expresión, \maggen\ asume la asociatividad
 \item Cada regla debe definir todos los atributos heredados de los símbolos de la parte derecha.
 \item Cada regla sólo define los atributos de los símbolos que participan en dicha regla.
 \item En caso de redefinición alguna instancia en la regla, la misma es ignorada.
-\item Los índices de las instancias deben ser consistente con la cantidad de apariciones del símbolo, en la regla. Ejemplo: \\En la siguiente regla:\ \fbox{ S ::= S T }\ los índices posibles de las instancias son \texttt{0} y \texttt{1} para el símbolo ``S'' y \texttt{0} para el símbolo ``T''.
+\item Los índices de las instancias deben ser consistente con la cantidad de apariciones del símbolo, en la regla. Ejemplo: \\En la siguiente regla:\ \fbox{ S ::= S T }\ los índices posibles de las instancias son \textbtt{0} y \textbtt{1} para el símbolo ``S'' y \textbtt{0} para el símbolo ``T''.
 \item La gramática debe respetar las condiciones exigidas para una gramática extendida. 
 \end{itemize}
 \end{description}
 
 \section{Construcción de grafos, planes y secuencias de visita}
 
-En la figura \ref{fig:disen} se puede visualizar el funcionamiento de \maggen, teniendo en cuenta la estructura \texttt{Attr\_grammar}, en esta sección se abordan detalles sobre el diseño del paquete \texttt{Builder}, específicamente en la construcción de grafos, de planes y de secuencias de visita. Un detalle a tener en cuenta es que, a partir de esta etapa, todas las manipulaciones son realizadas sobre las ecuaciónes de cada regla.
+En la figura \ref{fig:disen} se puede visualizar el funcionamiento de \maggen, teniendo en cuenta la estructura \textbtt{Attr\_grammar}, en esta sección se abordan detalles sobre el diseño del paquete \textbtt{Builder}, específicamente en la construcción de grafos, de planes y de secuencias de visita. Un detalle a tener en cuenta es que, a partir de esta etapa, todas las manipulaciones son realizadas sobre las ecuaciónes de cada regla.
 
 \subsection{Construcción de grafos}
 \label{subsec:graph}
 
 Detalles de implementación serán analizados en la sección \ref{subsec:const-graf}, ahora se mencionarán las consideraciones más relevantes con respecto al funcionamiento de los grafos en \maggen.\\
 
-La construcción de grafos se realiza en el módulo \texttt{builder\_graphs}. \maggen\ crea 4 tipos de grafos, que se corresponden con los detallados en \ref{sec:pre-grafos}:
+La construcción de grafos se realiza en el módulo \textbtt{builder\_graphs}. \maggen\ crea 4 tipos de grafos, que se corresponden con los detallados en \ref{sec:pre-grafos}:
 
 \begin{itemize}
 \item Grafo DP, ver \ref{dpgraph}.
@@ -544,7 +544,7 @@ La construcción de grafos se realiza en el módulo \texttt{builder\_graphs}. \m
   \end{figure}
 \end{itemize}
 
-Las figuras\footnote{\label{foot:graph} Imagen generada utilizando la herramienta \textit{graphviz} sobre el archivo \texttt{.dot} generado por \maggen.} muestran un ejemplo de cada tipo de grafo, generadas a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
+Las figuras\footnote{\label{foot:graph} Imagen generada utilizando la herramienta \textit{graphviz} sobre el archivo \textbtt{.dot} generado por \maggen.} muestran un ejemplo de cada tipo de grafo, generadas a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
 
 La construcción de cada tipo de grafo respeta los principios analizados en el capítulo \ref{chap:mag} y los algoritmos respectivo analizados en el capítulo  \ref{chap:eval_est}. 
 
@@ -572,7 +572,7 @@ Estos se obtienen a partir de los planes analizados anteriormente, proyectando e
 \caption{\label{fig:plan}Plan obtenido por \maggen\ para la regla R1}
 \end{figure}
 
-En la figura\footnote{Figura obtenida con la herramienta \textit{graphviz} sobre el archivo \texttt{.dot} generado por \maggen.} \ref{fig:plan} se observa un plan obtenido por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}. Este plan contiene el orden de los números de ecuación que pertenecen a la regla del plan, los planes proyectados son computados sobre el plan total, es decir con todas las dependencias.
+En la figura\footnote{Figura obtenida con la herramienta \textit{graphviz} sobre el archivo \textbtt{.dot} generado por \maggen.} \ref{fig:plan} se observa un plan obtenido por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}. Este plan contiene el orden de los números de ecuación que pertenecen a la regla del plan, los planes proyectados son computados sobre el plan total, es decir con todas las dependencias.
 
 Para clarificar este concepto, se pueden observar los planes proyectados obtenidos en la figura \ref{fig:plan_project}, para el plan de evaluación anterior.
 
@@ -603,7 +603,7 @@ El funcionamiento para la construcción de las secuencias, esta dado por la apli
 A modo de ejemplo, se muestran las secuencias de visita generadas por \maggen\ para el ejemplo analizado en el apéndice \ref{append:agwuuyang}:
 
 \begin{description}
-\item [\{-7,0,-8\}] Secuencia de visita para la regla \texttt{R3} (sin contexto inferior). En este caso, la secuencia de visita se traduce a lo siguiente:
+\item [\{-7,0,-8\}] Secuencia de visita para la regla \textbtt{R3} (sin contexto inferior). En este caso, la secuencia de visita se traduce a lo siguiente:
 
 \begin{enumerate}
 \item \textbf{Computar} la ecuación 7.
@@ -611,11 +611,11 @@ A modo de ejemplo, se muestran las secuencias de visita generadas por \maggen\ p
 \item \textbf{Computar} la ecuación 8.
 \end{enumerate}
 
-\item [\{-11,1,-12,-10\}] Secuencia de visita para la regla \texttt{R5} con el contexto de \texttt{P2}. En este caso, la secuencia de visita se traduce a lo siguiente:
+\item [\{-11,1,-12,-10\}] Secuencia de visita para la regla \textbtt{R5} con el contexto de \textbtt{P2}. En este caso, la secuencia de visita se traduce a lo siguiente:
 
 \begin{enumerate}
 \item \textbf{Computar} la ecuación 11.
-\item \textbf{Visitar} el nodo hijo 1, es decir \texttt{Y}, como el contexto es \texttt{P2}, significa visitar a R2.
+\item \textbf{Visitar} el nodo hijo 1, es decir \textbtt{Y}, como el contexto es \textbtt{P2}, significa visitar a R2.
 \item \textbf{Computar} la ecuación 12.
 \item \textbf{Computar} la ecuación 10.
 \end{enumerate}
@@ -634,19 +634,19 @@ Si se toma uno de los planes\footnote{Es importante notar el hecho de que cada p
 \begin{enumerate}
 \item Se recorre el plan tomando en cada paso una de las ecuaciones. Para este caso particular se comienza con la ecuación 2.
 
-\item Dada la ecuación \texttt{i}\footnote{Para este caso particular \textit{i} toma los valores 1,2,3,4.}, en el plan, se debe computar todo el \textit{l\_value} de la ecuación. Para ello se deben resolver todas las dependencias dadas por \textit{r\_value}.
+\item Dada la ecuación \textbtt{i}\footnote{Para este caso particular \textit{i} toma los valores 1,2,3,4.}, en el plan, se debe computar todo el \textit{l\_value} de la ecuación. Para ello se deben resolver todas las dependencias dadas por \textit{r\_value}.
 
 \item Dada una dependencia de la ecuación, primero se chequea si la misma fue computada en algún paso anterior, sino, se analizan los siguientes casos:
 
 \begin{itemize}
-\item Si la dependencia proviene de una instancia que pertenece al \textbf{símbolo de la parte izquierda de la regla} y además contiene un \textbf{atributo heredado}, entonces se debe realizar un ``\texttt{leave}''.
+\item Si la dependencia proviene de una instancia que pertenece al \textbf{símbolo de la parte izquierda de la regla} y además contiene un \textbf{atributo heredado}, entonces se debe realizar un ``\textbtt{leave}''.
 
-\item Si la dependencia proviene de una instancia que pertenece a un \textbf{símbolo de la parte derecha de la regla} y además contiene un \textbf{atributo sintetizado}, entonces se debe de realizar un ``\texttt{visit}''. En este caso, se debe analizar, según el contexto, cuál es el plan se debe visitar, es decir, a cuál nodo hijo. 
+\item Si la dependencia proviene de una instancia que pertenece a un \textbf{símbolo de la parte derecha de la regla} y además contiene un \textbf{atributo sintetizado}, entonces se debe de realizar un ``\textbtt{visit}''. En este caso, se debe analizar, según el contexto, cuál es el plan se debe visitar, es decir, a cuál nodo hijo. 
 \end{itemize}
 
 Notar que en los dos puntos anteriores, no se incluyen los casos de dependencia perteneciente al símbolo de la parte izquierda con atributo sintetizado y dependencia de símbolo de la parte derecha con atributo heredado, pero estos casos, son los que deben definirse en este ambiente y como se parte del plan evaluación, el orden de dependencias es consistente con la demanda de las mismas.
 
-\item Luego de la obtención de todas las dependencias, se realiza un \textbf{compute} del \textit{l\_value} y se marca a este como \texttt{evaluado}. El paso siguiente es avanzar una ecuación en la lista que impone el plan y realizar los mismos tratamientos.
+\item Luego de la obtención de todas las dependencias, se realiza un \textbf{compute} del \textit{l\_value} y se marca a este como \textbtt{evaluado}. El paso siguiente es avanzar una ecuación en la lista que impone el plan y realizar los mismos tratamientos.
 \end{enumerate} 
 
 Para más detalle en la figura \ref{fig:simul} se grafica este proceso.
@@ -668,7 +668,7 @@ Notar que para el cómputo de las secuencias de visitas totales, solamente basta
 \section{Generación de Código}
 \label{sec:gencodigo}
 
-La etapa final de \maggen\ esta dada por la generación de código para el evaluador estático. Como se ha analizado en el diagrama visto en la figura \ref{fig:disen}, esta etapa se realiza en el paquete ``Builder'', específicamente en el módulo \texttt{Builder\_code}.
+La etapa final de \maggen\ esta dada por la generación de código para el evaluador estático. Como se ha analizado en el diagrama visto en la figura \ref{fig:disen}, esta etapa se realiza en el paquete ``Builder'', específicamente en el módulo \textbtt{Builder\_code}.
 
 La etapa de generación de código produce dos archivos: \textit{interface} (.hpp) e \textit{implementación} (.cpp). En el apéndice \ref{append:agwuuyangcode} se puede observar el código generado para el ejemplo de Wuu Yang ya analizado durante todo este capítulo.
 
@@ -690,7 +690,7 @@ vector <Plan_project>   eval_plans_project;
 vector <Rule>           rules;
 \end{lstlisting}
 
-Estos, son usados por los métodos del evaluador generado por \maggen. Se puede hacer una diferencia en el hecho de que, \texttt{v\_seq} es usado directamente por el algoritmo de evaluación, en cambio los demás son usados por algoritmos previos a este. Cada uno de los tipos usados para estos atributos son definidos en otro módulo, el cual se analizará más adelante.
+Estos, son usados por los métodos del evaluador generado por \maggen. Se puede hacer una diferencia en el hecho de que, \textbtt{v\_seq} es usado directamente por el algoritmo de evaluación, en cambio los demás son usados por algoritmos previos a este. Cada uno de los tipos usados para estos atributos son definidos en otro módulo, el cual se analizará más adelante.
 
 \item [Métodos] Es necesario distinguirlos según su visibilidad:
 
@@ -708,11 +708,11 @@ void eval_visiter(struct Node *root);
 \end{lstlisting}
 
 Estos métodos son usados internamente por el evaluador generado por \maggen\ teniendo en cuenta lo siguiente:\\
-\texttt{compute\_eq} tiene la responsabilidad de invocar a los \textbf{compute} de cada ecuación y \texttt{eval\_visiter} tiene la responsabilidad de los \textbf{visit} a nodos. Notar que, estos métodos trabajan sobre las secuencias de visita.
+\textbtt{compute\_eq} tiene la responsabilidad de invocar a los \textbf{compute} de cada ecuación y \textbtt{eval\_visiter} tiene la responsabilidad de los \textbf{visit} a nodos. Notar que, estos métodos trabajan sobre las secuencias de visita.
 
-El método \texttt{traverse} recorre el AST de entrada al evaluador y asigna a cada nodo un plan de evaluación\footnote{Los planes que asigna el método traverse son los generados estáticamente por \maggen.} y con ello una secuencia de visita correspondiente.
+El método \textbtt{traverse} recorre el AST de entrada al evaluador y asigna a cada nodo un plan de evaluación\footnote{Los planes que asigna el método traverse son los generados estáticamente por \maggen.} y con ello una secuencia de visita correspondiente.
 
-\texttt{add\_plan} y \texttt{add\_plan\_project} agregan planes y planes proyectados respectivamente, los mismos son usados en la inicialización del evaluador (constructor de clase).
+\textbtt{add\_plan} y \textbtt{add\_plan\_project} agregan planes y planes proyectados respectivamente, los mismos son usados en la inicialización del evaluador (constructor de clase).
 
 \item Públicos:
 
@@ -723,38 +723,38 @@ void translates_visit_seqs();
 void evaluator_mag(struct Node *root);
 \end{lstlisting}
 
-Estos, son los servicios públicos que ofrece el evaluador generado por \maggen. El método más importante, es \texttt{evaluator\_mag}, el cual pone en funcionamiento el evaluador generado por \maggen. El parámetro tomado por el método representa la raíz del AST que se desea evaluar.
+Estos, son los servicios públicos que ofrece el evaluador generado por \maggen. El método más importante, es \textbtt{evaluator\_mag}, el cual pone en funcionamiento el evaluador generado por \maggen. El parámetro tomado por el método representa la raíz del AST que se desea evaluar.
 
 El constructor de clase\footnote{El nombre de la clase y por ende el del constructor de la misma depende de los parámetros con los cuales se invocó a \maggen\ (Ver capítulo \ref{chap:usos}).} realiza la inicialización de los atributos de la misma. Los valores de inicialización de los atributos son obtenidos por los cómputos de cada etapa de \maggen\ vistas en todo este capítulo.
 
-Los dos métodos anexos, \texttt{print\_visit\_seqs} y \texttt{translates\_visit\_seqs} pueden ser usados para visualizar las secuencias de visita del evaluador. Los dos realizan la misma funcionalidad, pero muestran las secuencias de visita de manera diferente, como lista de valores o como secuencia de \texttt{compute}, \texttt{visit} o \texttt{leave}.
+Los dos métodos anexos, \textbtt{print\_visit\_seqs} y \textbtt{translates\_visit\_seqs} pueden ser usados para visualizar las secuencias de visita del evaluador. Los dos realizan la misma funcionalidad, pero muestran las secuencias de visita de manera diferente, como lista de valores o como secuencia de \textbtt{compute}, \textbtt{visit} o \textbtt{leave}.
 \end{itemize}
 \end{description}
 
-Además de la clase, \maggen\ genera \texttt{struct} para cada uno de los símbolos de la gramática y para cada uno implementa el método \texttt{to\_string()} que se responsabiliza de como mostrar por pantalla cada símbolo, teniendo en cuenta sus atributos. Para más detalles analizar en el apéndice \ref{append:agwuuyangcode}, específicamente los \texttt{struct} para los símbolos \texttt{S, X, Y, Z}.
+Además de la clase, \maggen\ genera \textbtt{struct} para cada uno de los símbolos de la gramática y para cada uno implementa el método \textbtt{to\_string()} que se responsabiliza de como mostrar por pantalla cada símbolo, teniendo en cuenta sus atributos. Para más detalles analizar en el apéndice \ref{append:agwuuyangcode}, específicamente los \textbtt{struct} para los símbolos \textbtt{S, X, Y, Z}.
 
-Los dos módulos analizados arriba, generados por \maggen, se apoyan sobre dos módulos más, que son anexados de manera estática por la herramienta, ellos son: \texttt{Node.hpp} y \texttt{Plan.hpp}.
+Los dos módulos analizados arriba, generados por \maggen, se apoyan sobre dos módulos más, que son anexados de manera estática por la herramienta, ellos son: \textbtt{Node.hpp} y \textbtt{Plan.hpp}.
 
 Los mismos contienen definiciones de ``tipos'' y ``métodos'' necesarios por el el evaluador generado.
 
-\subsection{Cabecera: \texttt{Node.hpp}}
+\subsection{Cabecera: \textbtt{Node.hpp}}
 
 El tipo de datos nodo de un AST, se encuentra definido en este archivo. Los campos del mismo son:
 \begin{items}
-\item \texttt{struct Node *parent:} referencia al nodo superior.
+\item \textbtt{struct Node *parent:} referencia al nodo superior.
 
-\item \texttt{vector <struct Node*>\ childs:} listado de referencias a los hijos.
+\item \textbtt{vector <struct Node*>\ childs:} listado de referencias a los hijos.
 
-\item \texttt{unsigned short rule\_id:} identificador de la regla que representa el nodo.
+\item \textbtt{unsigned short rule\_id:} identificador de la regla que representa el nodo.
 
-\item \texttt{unsigned short visit\_seq\_index:} índice de la secuencia de visita que le corresponde al nodo para su evaluación.
+\item \textbtt{unsigned short visit\_seq\_index:} índice de la secuencia de visita que le corresponde al nodo para su evaluación.
 
-\item \texttt{unsigned short pos\_visit\_seq:} posición desde donde debe comenzar a recorrerse la secuencia de visita.
+\item \textbtt{unsigned short pos\_visit\_seq:} posición desde donde debe comenzar a recorrerse la secuencia de visita.
 \end{items}
 
 Además se encuentra su constructor y una funcionalidad para agregar hijos.
 
-\subsection{Cabecera: \texttt{Plan.hpp}}
+\subsection{Cabecera: \textbtt{Plan.hpp}}
 
 Aquí se encuentran las definiciones de tipos necesarios para el evaluador:
 

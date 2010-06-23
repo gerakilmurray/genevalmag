@@ -404,7 +404,7 @@
       \Huge \reset@font\bfseries #1\par\nobreak
       \hrulefill
     \end{flushright}
-    \vskip 20\p@
+%     \vskip 20\p@
   }}
 \def\@schapter#1{\if@twocolumn
                    \@topnewpage[\@makeschapterhead{#1}]%
