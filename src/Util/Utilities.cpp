@@ -59,7 +59,7 @@ bool copy_static_code(const string path_d, const string path_s)
 	/* Copies files. */
 	string command_cp_("cp -f ");
 	command_cp_.append(path_s);
-	command_cp_.append("/lib/* ");
+	command_cp_.append("lib/* ");
 	command_cp_.append(path_d);
 
 	if (system (command_cp_.c_str()) != 0)
