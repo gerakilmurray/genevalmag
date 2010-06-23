@@ -14,15 +14,24 @@ Para usar \maggen\ se debe invocar la herramienta mediante la línea de comando,
 
 Una vez descargado la última versión de \maggen, se dispondrá de un directorio llamado ``\textbtt{maggen/}'', dentro del cual se alojan todos los archivos de la herramienta.
 
-Para compilar e instalar \maggen, primero el usuario deberá posicionarse dentro del directorio ``\textbtt{maggen/}'', mediante las funciones de la terminal, y luego deberá ejecutar los siguientes comandos:
+Para compilar \maggen, primero el usuario deberá posicionarse dentro del directorio ``\textbtt{maggen/}'', mediante las funciones de la terminal, y luego deberá ejecutar los siguientes comandos:
 {\small\begin{verbatim}
-1.- user@pc:~/maggen$ cmake
-2.- user@pc:~/maggen$ ./configure
-3.- user@pc:~/maggen$ make clean
-4.- user@pc:~/maggen$ make
-5.- user@pc:~/maggen$ sudo make install
+1.- user@pc:~/maggen$ cmake .
+2.- user@pc:~/maggen$ make clean
+3.- user@pc:~/maggen$ make
 \end{verbatim}}
+La compilación de \maggen\ se realiza mediante ``cmake'', detalles sobre esta herramienta fueron presentados en la sección \ref{sec:metoherram}. 
+En la figura \ref{fig:cmake_maggen} y \ref{fig:make_maggen} podemos ver la ejecución de los comandos 1 y 3.
+\begin{figure}[!ht]\centering
+\includegraphics[width=300pt,height=81pt]{cmake_maggen.png}
+\caption{\label{fig:cmake_maggen} Ejecución de ``cmake'' en la terminal de comandos.}
+\end{figure}
 
+\begin{figure}[!ht]\centering
+\includegraphics[width=300pt,height=289pt]{make_maggen.png}
+\caption{\label{fig:make_maggen} Ejecución de ``make'' en la terminal de comandos..}
+\end{figure}
+ 
 \subsection{Directorio \textbtt{maggen}}
 Luego de la compilación e instalación, el directorio raíz de \maggen\ se compone de lo siguiente:
 \begin{itemize}
@@ -41,25 +50,26 @@ Luego de la compilación e instalación, el directorio raíz de \maggen\ se comp
 user@pc:~/maggen$ ls -R src/ 
 src/:
 Attr_grammar  Builders  Expression_tree  maggen.cpp  Maglib.cpp  
-Parser  Util
+Parser  Util CMakeLists.txt
 
 src/Attr_grammar:
 Attr_grammar.cpp  Attribute.cpp  Equation.cpp  Function.cpp  
-Rule.cpp  Sort.cpp  Symbol.cpp
+Rule.cpp  Sort.cpp  Symbol.cpp CMakeLists.txt
 
 src/Builders:
 Builder_code.cpp  Builder_graphs.cpp  Builder_plans.cpp  
-Builder_visit_sequences.cpp
+Builder_visit_sequences.cpp CMakeLists.txt
 
 src/Expression_tree:
 Expression.cpp  Expr_function.cpp  Expr_instance.cpp  
-Expr_leaf.cpp  Expr_literal.cpp  Expr_node.cpp
+Expr_leaf.cpp  Expr_literal.cpp  Expr_node.cpp CMakeLists.txt
 
 src/Parser:
 Parser_AG.cpp  Semantics_actions.cpp  Semantics_checks.cpp
+CMakeLists.txt
 
 src/Util:
-Utilities.cpp
+Utilities.cpp CMakeLists.txt
 \end{verbatim} }
 
 \item \textbf{/include} Directorio raíz en el que se encuentran todos los archivos de cabecera.
@@ -113,8 +123,8 @@ Utilities.h
 \end{verbatim} }
 
 \item \textbf{/doc} Directorio que contiene la documentación de la herramienta (doxygen).
-\item \textbf{/Release} Directorio con los archivos compilados.
-\item Archivos usados por \textbtt{automake} y \textbtt{autoconf} para generar los archivos \textbtt{Makefile} y el script \textbtt{configure} que permiten automatizar el proceso de compilación, empaquetado e instalación del proyecto.
+% \item \textbf{/Release} Directorio con los archivos compilados.
+\item Archivo \texttt{CMakeLists.txt} usados por \textbtt{cmake} para generar los archivos \textbtt{Makefile} que permiten automatizar el proceso de compilación, empaquetado el proyecto.
 \end{itemize}
 
 Ahora ya esta listo para empezar a usar \maggen, en las siguientes secciones se analiza como usar la herramienta.
