@@ -10,12 +10,12 @@ A continuación se tratarán en detalle la familia \textbf{MAG} y en el capítul
 
 \section{Preliminares}
 \label{sec:pre-grafos}
+
 Antes de llegar a la definición de la familia \textbf{MAG}, se presentará un ejemplo de GA que servirá para estudiar conceptos previos, como lo son, la construcción de una serie de grafos necesarios para el análisis de los integrantes de dicha familia.
 
 El ejemplo es presentado en la figura \ref{ag-no-ANCAG}. El mismo es trabajo, luego, en las etapas consideradas para el diseño de \maggen.
 
 \begin{AG}
-
 \newproduction{S}{XYZ}
     \begin{Attribution}
         \attribution{S.s0 := f(X.s1,Y.s2,Y.s3,Z.s4)}
@@ -47,8 +47,8 @@ El ejemplo es presentado en la figura \ref{ag-no-ANCAG}. El mismo es trabajo, lu
         \attribution{Y.i2 := 3}
         \attribution{Y.i3 := Y.s2}
     \end{Attribution}
-\caption{Una gramática de atributos no ANCAG}
 \label{ag-no-ANCAG}
+\caption{Una gramática de atributos no ANCAG}
 \end{AG}
 
 \subsection{Grafo \textit{DP}}
@@ -83,10 +83,10 @@ Un grafo \textit{Down} esta definido (\cite{estruc-algorit}) con las siguientes 
 
 \begin{itemize}
 \item Los nodos denotan \textit{atributos} de un símbolo.
-\item Las aristas denotan la dependencia entre los atributos de un símbolo. Dado los atributos $a$ y $b\in A(X)$ del símbolo $X\in VN$, una arista $a\rightarrow b$, denota que la evaluación del atributo \texttt{a} depende de la evaluación de \texttt{b}. 
+\item Las aristas denotan la dependencia entre los atributos de un símbolo. Dado los atributos $a$ y $b\in A(X)$ del símbolo $X\in VN$, una arista $a\rightarrow b$, denota que la evaluación del atributo \textbtt{a} depende de la evaluación de \textbtt{b}. 
 \end{itemize}
 El conjunto de dependencias entre los atributos de un símbolo se denota como  
-\texttt{Down(X)}($X\in VN$ de una gramática $G$) y se define:
+\textbtt{Down(X)}($X\in VN$ de una gramática $G$) y se define:
 \begin{definition}
 Dada un símbolo X de una gramática de atributos definida como en \ref{def:grammarattr}, entonces
 \begin{equation}
@@ -111,7 +111,7 @@ El siguiente teorema fue presentado por Wuu-Yang en \cite{wuu-yang1}:
 \begin{theorem}
 $\bigcup\limits_{\textit{todo p}}{DCG_{X} (p) = Down (X)}$
 \end{theorem}
-\underline{Nota:} $DCG_{X}(p)$ contiene las dependencias, entre las instancias de la gramática, para el símbolo \texttt{X}, acotando el análisis para la producción \textit{p} y los posibles contextos inferiores.
+\underline{Nota:} $DCG_{X}(p)$ contiene las dependencias, entre las instancias de la gramática, para el símbolo \textbtt{X}, acotando el análisis para la producción \textit{p} y los posibles contextos inferiores.
 
 En la sección \ref{subsec:alg-DCG} se analiza el algoritmo para construir los grafos DCG.
 

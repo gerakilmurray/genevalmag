@@ -23,14 +23,14 @@ Se puede resumir el proceso de análisis sintáctico, en este framework, en cuat
 \caption{Procesos dentro de \spirit}\label{fig:procesoSpirit}
 \end{figure}
 
-El usuario es el responsable de definir las ``\textttb{semantic actions}'' para lograr capturar los resultados intermedios, producidos durante la etapa de parsing y no sólo obtener un valor lógico, sobre si se pudo o no consumir toda la cadena de entrada.
+El usuario es el responsable de definir las ``\textbtt{semantic actions}'' para lograr capturar los resultados intermedios, producidos durante la etapa de parsing y no sólo obtener un valor lógico, sobre si se pudo o no consumir toda la cadena de entrada.
 
-Para comenzar a definir una gramática hay que crear una estructura que herede de la clase \textttb{grammar}. Dentro de ella se debe definir a su vez otra estructura templatizada denominada \textttb{definition}. En donde realmente estará la definición de la gramática.
+Para comenzar a definir una gramática hay que crear una estructura que herede de la clase \textbtt{grammar}. Dentro de ella se debe definir a su vez otra estructura templatizada denominada \textbtt{definition}. En donde realmente estará la definición de la gramática.
 
 Para definirla, se dispone de un amplio conjunto de herramientas. Primero, los operadores de metalenguaje listados en la tabla \ref{ope_spirit}, los cuales permiten construir nuevas reglas combinando reglas ya definidas, parsers y constantes permitidas en el framework.
 
-\begin{table}[!ht]\centering\scriptsize
-\begin{tabular}{| c | p{7cm} |}
+\begin{table}[!ht]\centering
+\begin{tabular}{| c | l |}
 \hline
 
 \rowcolor{gris} \textbf{Operador} & \textbf{Semántica} \\ \hline
@@ -42,7 +42,7 @@ A $-$                  B  & Diferencia, acepta A pero no a B  \\ \hline
 A \textasciicircum     B  & Disyunción exclusiva, acepta A o B, pero no a ambos \\ \hline
 A $>>$                 B  & Secuencia, acepta A seguido de B \\ \hline
 \multirow{2}{*}{A $\%$ B} & Lista, acepta A separados por ocurrencias de B.\\
-                          & Es equivalente a: A $>>$ *(B $>n$ A)\\ \hline
+                          & Es equivalente a: A $>>$ *(B $>>$ A)\\ \hline
 $*$                    A  & Estrella de Kleene, 0 o más veces \\ \hline
 $+$                    A  & Positivo, 1 o más veces \\ \hline
 $!$                    A  & Opcional, 0 o 1 vez \\ \hline
@@ -52,7 +52,7 @@ $!$                    A  & Opcional, 0 o 1 vez \\ \hline
 
 Por otra parte, \spirit\ dispone de un gran conjunto de parsers que abarcan la mayoría de los tipos básicos, representación de datos y valores utilizados en el común de los lenguajes (ver tabla \ref{parsers}).
 
-\begin{table}[!ht]\centering\scriptsize
+\begin{table}[!ht]\centering
 \begin{tabular}{| l | l |}
 \hline
 
@@ -74,20 +74,20 @@ uint\_p    & Número entero sin signo de 32 bits \\ \hline
 int\_p     & Número entero 32 bits \\ \hline
 real\_p    & Número flotante 32 bits \\ \hline
 eps\_p     & Cadena vacía (épsilon) \\ \hline
-end\_p     & Carácter de fin de archivo (EOF) \\ \hline
+end\_p     & Carácter de fin de archivo (\textbtt{EOF}) \\ \hline
 \end{tabular}
 \caption{\label{parsers} Parsers predefinidos de \spirit\ utilizados} 
 \end{table}
 
 Además posee varias directivas que modifican el comportamiento de los parsers, encapsulándose en una expresión definida por el usuario (ver tabla \ref{directivas}).
 
-\begin{table}[!ht]\centering\scriptsize
-\begin{tabular}{| l | p{7.5cm} |}
+\begin{table}[!ht]\centering
+\begin{tabular}{| l | l |}
 \hline
 
 \rowcolor{gris} \textbf{Directiva} & \textbf{Efecto} \\ \hline
 
-lexeme\_d    & Deshabilita la omisión de espacios en blanco (space\_p)\\ \hline
+lexeme\_d    & Deshabilita la omisión de espacios en blanco (\textbtt{space\_p})\\ \hline
 as\_lower\_d & Convierte en minúscula lo aceptado por la expresión\\ \hline
 \multirow{3}{*}{longest\_d} & Deshabilita el corto circuito, manda al analizador que\\
                             & pruebe todas las alternativas posibles y elija la secuen-\\
@@ -118,7 +118,7 @@ struct my_grammar: public grammar <my_grammar>
 };
 \end{lstlisting}
 
-Para el manejo de los símbolos válidos dentro de la definición de la gramática, \spirit\ soporta nativamente, el concepto de ``Tablas de símbolos''. Lo que permite registrar de manera dinámica nuevos símbolos, en particular dentro de la herramienta permitió manejar los conjuntos de nombres válidos para los \textttb{sorts}, los símbolos no terminales permitidos en las ecuaciones, entre otros usos.
+Para el manejo de los símbolos válidos dentro de la definición de la gramática, \spirit\ soporta nativamente, el concepto de ``Tablas de símbolos''. Lo que permite registrar de manera dinámica nuevos símbolos, en particular dentro de la herramienta permitió manejar los conjuntos de nombres válidos para los \textbtt{sorts}, los símbolos no terminales permitidos en las ecuaciones, entre otros usos.
 
 Para comenzar a interactuar con el framework, el usuario debe declarar un objeto de la estructura definida y pasarlo como parámetro a una función específica de \spirit.
 
@@ -213,23 +213,23 @@ symbols <> st_attributes;
 symbols <> st_non_terminal;
 \end{lstlisting}
 
-\subsection{\textttb{``semantic domain''} en \spirit}
+\subsection{\textbtt{``semantic domain''} en \spirit}
 
-En esta sección de la especificación se debían aceptar tres tipos de elementos: \textttb{sorts}, \textttb{operators} y \textttb{functions}.
+En esta sección de la especificación se debían aceptar tres tipos de elementos: \textbtt{sorts}, \textbtt{operators} y \textbtt{functions}.
 
-Los \textttb{sorts} serán los tipos que se podrán utilizar para definir los dominios e imágenes de los operadores y funciones.
+Los \textbtt{sorts} serán los tipos que se podrán utilizar para definir los dominios e imágenes de los operadores y funciones.
 
 Teniendo en cuenta lo analizado en la sección \ref{subsec:bloq-sem}, a continuación se analizan algunas consideraciones de implementación.
 
 \begin{description}
-\item [\textttb{sorts}] Se exige que luego del identificador ``\textttb{sort}'' existe un espacio\footnote{\label{foot:espacio}Ver definición de \textttb{space\_p} en \ref{parsers}}. El nombre leído, se usará para crear un nuevo Sort dentro de la GA y también se insertará en la tabla de símbolos de sorts. Se acepta una lista de nombres de sorts para comodidad del usuario.
+\item [\textbtt{sorts}] Se exige que luego del identificador ``\textbtt{sort}'' existe un espacio\footnote{\label{foot:espacio}Ver definición de \textbtt{space\_p} en \ref{parsers}}. El nombre leído, se usará para crear un nuevo Sort dentro de la GA y también se insertará en la tabla de símbolos de sorts. Se acepta una lista de nombres de sorts para comodidad del usuario.
 
 \begin{lstlisting}[columns=fullflexible, linewidth=11cm]
 r_decl_sort = lexeme_d[str_p("sort")>>space_p]>>
                         (r_ident[&create_sort][st_sorts.add]%', ')>>';';
 \end{lstlisting}
 
-\item [\textttb{operators}] Para los operadores también se exige el espacio$^{\ref{foot:espacio}}$ luego de la cadena ``\textttb{op}''. Por definición se aceptan tres tipos: infijos, prefijos y posfijos, por lo que se hizo una regla para cada uno, solamente discriminado los dominios, ya que todos poseen una sóla imagen. Notar que los sorts permitidos, son sacados directamente de las tablas de símbolos destinadas para ese propósito.
+\item [\textbtt{operators}] Para los operadores también se exige el espacio$^{\ref{foot:espacio}}$ luego de la cadena ``\textbtt{op}''. Por definición se aceptan tres tipos: infijos, prefijos y posfijos, por lo que se hizo una regla para cada uno, solamente discriminado los dominios, ya que todos poseen una sóla imagen. Notar que los sorts permitidos, son sacados directamente de las tablas de símbolos destinadas para ese propósito.
 
 \begin{lstlisting}[columns=fullflexible, linewidth=12.5cm]
 r_decl_oper = lexeme_d[str_p("op")>>space_p][&inic_func]>>
@@ -261,7 +261,7 @@ r_oper_mode = '('>>
 r_oper_assoc = str_p("left")|"right"|"non_assoc";
 \end{lstlisting}
 
-\item [\textttb{functions}] Para las funciones se permiten como dominio listas de sorts, los cuales serán agregados incrementalmente a la función que se está declarando. La utilización de acciones semánticas facilitan la modularización. La declaración comienza con la cadena ``\textttb{function}'' seguida de una espacio$^{\ref{foot:espacio}}$.
+\item [\textbtt{functions}] Para las funciones se permiten como dominio listas de sorts, los cuales serán agregados incrementalmente a la función que se está declarando. La utilización de acciones semánticas facilitan la modularización. La declaración comienza con la cadena ``\textbtt{function}'' seguida de una espacio$^{\ref{foot:espacio}}$.
 
 \begin{lstlisting}[columns=fullflexible, linewidth=12.7cm]
 r_decl_func = lexeme_d[str_p("function")>>space_p]>>
@@ -276,13 +276,13 @@ r_dom_func = r_sort_st[&save_domain_func]%', ';
 \end{lstlisting}
 \end{description}
 
-\subsection{\textttb{``attributes''} en \spirit }
+\subsection{\textbtt{``attributes''} en \spirit }
 
 Para la codificación de esta sección la funcionalidad buscada era que el usuario mediante una expresión en términos de conjuntos definiera la pertenencia de cada atributo. Por lo que se tuvo que implementar un ``mini-intérprete'' sobre expresiones de conjuntos.
 
 Un detalle a tener en cuenta, en este punto, es que no se encuentra declarado ningún símbolo no terminal'', así que todo símbolo mencionado dentro de la expresión será creado bajo demanda.
 
-La vinculación de los atributos con sus respectivos dueños, se realizará más adelante, debido a que existe la posibilidad de declarar un atributo para todo símbolo, mediante la sentencia \textttb{all}, antes de tener totalmente definido el conjunto de símbolos no terminales de la gramática.
+La vinculación de los atributos con sus respectivos dueños, se realizará más adelante, debido a que existe la posibilidad de declarar un atributo para todo símbolo, mediante la sentencia \textbtt{all}, antes de tener totalmente definido el conjunto de símbolos no terminales de la gramática.
 
 \begin{lstlisting}[columns=fullflexible, linewidth=12cm]
 r_attributes = lexeme_d[str_p("attributes")>>space_p]>>
@@ -303,18 +303,18 @@ r_conj_symb = '{'>>(r_ident%', ')>>'}';
 r_type_attr = str_p("inh")|"syn";
 \end{lstlisting}
 
-\subsection{\textttb{``rules''} en \spirit}
+\subsection{\textbtt{``rules''} en \spirit}
 
 En la definición de una gramática las reglas son los pilares, por eso en esta sección se debía brindar la mayor flexibilidad al usuario.
 
-El bloque de reglas comienza con el identificador ``\textttb{rules}'', seguida de un espacio$^{\ref{foot:espacio}}$ y una lista de reglas. Cada una de las mismas son enumeradas desde 1 para mantener una indexación interna. Una vez consumido el bloque se realizan los chequeos que determinan si la GA es MAG o no\footnote{Detalle sobre MAG, ver capítulo \ref{chap:mag}.}.
+El bloque de reglas comienza con el identificador ``\textbtt{rules}'', seguida de un espacio$^{\ref{foot:espacio}}$ y una lista de reglas. Cada una de las mismas son enumeradas desde 1 para mantener una indexación interna. Una vez consumido el bloque se realizan los chequeos que determinan si la GA es MAG o no\footnote{Detalle sobre MAG, ver capítulo \ref{chap:mag}.}.
 
 \begin{lstlisting}[columns=fullflexible, linewidth=10cm]
 r_rules = lexeme_d[str_p("rules")>>space_p]>>
                  (+r_decl_rule)>>eps_p[&check_well_defined];
 \end{lstlisting}
 
-Una regla individualmente esta representada por un identificador y los caracteres ``\textttb{::=}'' y una lista de símbolos, dejando también la posibilidad de escribir reglas abreviadas mediante el uso del operador ``|'' junto a una nueva lista de símbolos, evitando repetir el lado izquierdo de la regla.
+Una regla individualmente esta representada por un identificador y los caracteres ``\textbtt{::=}'' y una lista de símbolos, dejando también la posibilidad de escribir reglas abreviadas mediante el uso del operador ``|'' junto a una nueva lista de símbolos, evitando repetir el lado izquierdo de la regla.
 
 \begin{lstlisting}[columns=fullflexible]
 r_decl_rule = r_ident[&create_new_non_terminal][&create_rule][st_non_terminal.add]>>
@@ -340,7 +340,7 @@ r_right_rule = +( r_ident[&create_new_non_terminal][st_non_terminal.add]
 r_terminal = lexeme_d[ch_p('\'')>>r_string_lit>>ch_p('\'')];
 \end{lstlisting}
 
-El mismo estará delimitado por las cadenas ``\textttb{compute}'' y ``\textttb{end}'', en su interior se aceptará una lista con \textbf{al menos una} ecuación.
+El mismo estará delimitado por las cadenas ``\textbtt{compute}'' y ``\textbtt{end}'', en su interior se aceptará una lista con \textbf{al menos una} ecuación.
 
 Dentro de la definición sólo se podrán utilizar instancias de atributos de los símbolos no terminales que aparecen en la declaración de la regla. Además se debe especificar el índice de ocurrencia, el cual debe cumplir las siguientes condiciones:
 
@@ -350,7 +350,7 @@ Dentro de la definición sólo se podrán utilizar instancias de atributos de lo
 \item Los símbolos no terminales de la parte derecha de la regla, están numerados de izquierda a derecha arrancando en 0 para cada símbolo diferente.
 \end{enumerate}
 
-Cada ecuación tiene una instancia de atributo, como ``\textttb{l-value}'', el carácter ``\textttb{=}'' y una expresión como ``\textttb{r-value}''.
+Cada ecuación tiene una instancia de atributo, como ``\textbtt{l\_value}'', el carácter ``\textbtt{=}'' y una expresión como ``\textbtt{r\_value}''.
 
 \begin{lstlisting}[columns=fullflexible, linewidth=10cm]
 r_compute_eq = lexeme_d[str_p("compute")>>space_p]>>
@@ -410,7 +410,7 @@ literal := real
              |  bool
 \end{lstlisting}
 
-Dentro de las expresiones se tenía que ir resolviendo la precedencia de los operadores declarados por el usuario. Además, la utilización de paréntesis crea distintos niveles de precedencia. Cada vez que se utiliza la producción que genera \textttb{( E )}, la precedencia de los operadores que se utilicen en la expresión \textttb{E}, se resolverán en ese nivel.
+Dentro de las expresiones se tenía que ir resolviendo la precedencia de los operadores declarados por el usuario. Además, la utilización de paréntesis crea distintos niveles de precedencia. Cada vez que se utiliza la producción que genera \textbtt{( E )}, la precedencia de los operadores que se utilicen en la expresión \textbtt{E}, se resolverán en ese nivel.
 
 \begin{lstlisting}[columns=fullflexible, linewidth=13.5cm]
 r_expression = r_expr_prime>>
@@ -435,7 +435,7 @@ Las definiciones de los tres tipos de literales son coherentes con el estilo de 
 
 Las funciones aceptan expresiones como parámetros, así que, la asociatividad y precedencia de esas expresiones se resuelve entre los paréntesis explícitos que se exigen en la invocación a una función.
 
-Al completar esta regla se creará una \textttb{Expr\_function} dentro de la gramática.
+Al completar esta regla se creará una \textbtt{Expr\_function} dentro de la gramática.
 
 \begin{lstlisting}[float=!ht, columns=fullflexible, linewidth=12.5cm]
 r_function = r_function_st[&create_function][&create_func_node]>>
@@ -446,13 +446,13 @@ r_function = r_function_st[&create_function][&create_func_node]>>
 
 Aprovechando las funcionalidades de \spirit, se resolvió una ambigüedad al momento de parsear un número entero y un flotante, exigiendo que se quede con la cadena más larga que pudiese coincidir en la gramática. Para ello se codificó lo siguiente:
 
-\begin{center}\textbf{\large{\textttb{longest\_d\ [\ real\_p\ |\ int\_p\ ]}}}\end{center}
+\begin{center}\textbf{\large{\textbtt{longest\_d\ [\ real\_p\ |\ int\_p\ ]}}}\end{center}
 
-Utilizando la directiva \textttb{longest\_d} sobre la unión de ambos parsers predefinidos para dichos valores numéricos.
+Utilizando la directiva \textbtt{longest\_d} sobre la unión de ambos parsers predefinidos para dichos valores numéricos.
 
 Para los demás literales se usaron las reglas definidas en un comienzo de la gramática.
 
-Luego de parsear cada uno de los literales se crean los respectivos objetos dentro del ambiente de tipo \textttb{Expr\_literal}.
+Luego de parsear cada uno de los literales se crean los respectivos objetos dentro del ambiente de tipo \textbtt{Expr\_literal}.
 
 \begin{lstlisting}[columns=fullflexible, linewidth=10.5cm]
 r_literal = longest_d[real_p|int_p][&create_lit_number]
@@ -461,9 +461,9 @@ r_literal = longest_d[real_p|int_p][&create_lit_number]
                   | r_boolean[&create_bool];
 \end{lstlisting}
 
-Una instancia debe ser un bloque que contenga una ocurrencia de un símbolo y un atributo del mismo. Por lo que no se aceptan espacios intermedios. Se utilizó la directiva \textttb{lexeme\_d}.
+Una instancia debe ser un bloque que contenga una ocurrencia de un símbolo y un atributo del mismo. Por lo que no se aceptan espacios intermedios. Se utilizó la directiva \textbtt{lexeme\_d}.
 
-Con los datos obtenidos se crea un objeto de tipo \textttb{Expr\_instance}.
+Con los datos obtenidos se crea un objeto de tipo \textbtt{Expr\_instance}.
 
 \begin{lstlisting}[columns=fullflexible, linewidth=9.5cm]
 r_instance = lexeme_d[
@@ -473,7 +473,7 @@ r_instance = lexeme_d[
                        ];
 \end{lstlisting}
 
-En este punto se encuentran definidas todas las reglas necesarias para declarar la regla que define a una \textbf{Gramática de Atributos}. Es decir, un dominio semántico, un bloque de atributos y un bloque de reglas. El parser \textttb{end\_p} (Ver tabla \ref{parsers}) se necesita para que consuma los espacios restantes hasta el fin del archivo de entrada.
+En este punto se encuentran definidas todas las reglas necesarias para declarar la regla que define a una \textbf{Gramática de Atributos}. Es decir, un dominio semántico, un bloque de atributos y un bloque de reglas. El parser \textbtt{end\_p} (Ver tabla \ref{parsers}) se necesita para que consuma los espacios restantes hasta el fin del archivo de entrada.
 
 \begin{lstlisting}[columns=fullflexible, linewidth=7cm]
 r_att_grammar = r_semantic_domain >>
@@ -484,7 +484,7 @@ r_att_grammar = r_semantic_domain >>
 
 Por cuestiones de diseño de \spirit, no se podían aplicar acciones semánticas a las tablas de símbolos, por lo que se crearon reglas auxiliares para mediar de puente.
 
-A excepción de la regla que se utilizó para definir los identificadores válidos para un \textttb{sort}, a la que se le agregaron los tipos básicos soportados por \maggen.
+A excepción de la regla que se utilizó para definir los identificadores válidos para un \textbtt{sort}, a la que se le agregaron los tipos básicos soportados por \maggen.
 
 \begin{lstlisting}[linewidth=9.5cm]
 r_sort_st       = st_sorts | r_cpp_basic_types;
@@ -523,7 +523,7 @@ struct skip_parser: public grammar <skip_parser>
 };
 \end{lstlisting}
 
-La invocación a la funcionalidad de \spirit\ se realiza con una instancia de \textttb{attritute\_grammar}, como gramática objetivo, y otra de \textttb{skip\_parser}, como parser de omisión.
+La invocación a la funcionalidad de \spirit\ se realiza con una instancia de \textbtt{attritute\_grammar}, como gramática objetivo, y otra de \textbtt{skip\_parser}, como parser de omisión.
 
 \begin{lstlisting}[columns=fullflexible, linewidth=12cm]
 attritute_grammar            attr_grammar_decl;
@@ -539,7 +539,7 @@ Para informar los errores durante el análisis sintáctico, se tenía que utiliz
 
 Lo que se implementó, fue mostrar la línea y columna desde donde no se pudo consumir del archivo de entrada, tal como se muestra en la seccion \ref{subsec:parsers-leng} del capítulo anterior.
 
-Primero, para aceptar archivos como entrada de la herramienta, se tiene que hacer que \spirit\ no utilice un iterador estándar, sino que un \textttb{file\_iterator} instanciado con caracteres. Luego definir un \textttb{position\_iterator} sobre el recién mencionado.
+Primero, para aceptar archivos como entrada de la herramienta, se tiene que hacer que \spirit\ no utilice un iterador estándar, sino que un \textbtt{file\_iterator} instanciado con caracteres. Luego definir un \textbtt{position\_iterator} sobre el recién mencionado.
 
 De esta forma, el parser que se invocará para que analice la entrada de \maggen, lo hará moviéndose mediante este iterador y ante cualquier error, se podrá obtener la última posición parseada correctamente.
 
@@ -613,7 +613,7 @@ Además, cuando se detectan dos operadores no asociativos se genera un error por
 
 \subsection{Alcanzabilidad de símbolos y reglas}
 
-En la especificación pueden existir símbolos y reglas declaradas que no pueden ser alcanzados desde el símbolo inicial de la gramática. Los mismos no son útiles en la gramática ya que nunca producirán cadenas del lenguaje. Los mismos no son considerados errores pero son informados mediante alertas (\textttb{warnings}).
+En la especificación pueden existir símbolos y reglas declaradas que no pueden ser alcanzados desde el símbolo inicial de la gramática. Los mismos no son útiles en la gramática ya que nunca producirán cadenas del lenguaje. Los mismos no son considerados errores pero son informados mediante alertas (\textbtt{warnings}).
 
 Este chequeo se implementó con una versión del algoritmo de Warshall\footnote{En honor a Stephen Warshall (1935-2006)}, que calcula la ``\textit{Clausura Transitiva}'' de un grafo.
 
@@ -623,7 +623,7 @@ Para aplicarlo, primero se construye una matriz de valores lógicos reflejando t
 
 Este chequeo consiste en verificar que no existan símbolos declarados en el bloque de atributos, que no hallan sido involucrados en ninguna regla. Esto puede suceder cuando se crearon los símbolos de la expresión de conjuntos que define la pertenencia de un atributo.
 
-La heurística utilizada, consiste en recorrer el \textttb{map} de símbolos no terminales y verificar que existe al menos una regla que lo tenga como parte izquierda.
+La heurística utilizada, consiste en recorrer el \textbtt{map} de símbolos no terminales y verificar que existe al menos una regla que lo tenga como parte izquierda.
 
 \subsection{Gramática bien definida}
 
@@ -631,7 +631,7 @@ Este control es uno de los más importantes, ya que si la gramática por más qu
 
 Como ya se mencionó en la sección \ref{subsec:check}, varias son las condiciones que se deben chequear.
 
-La heurística aplicada fue recorrer el \textttb{map} de reglas, donde para cada una se verificaba que estuviesen definidas dentro de su \textttb{map} de ecuaciones, una para cada uno de sus atributos sintetizados. Y a su vez, una ecuación para cada atributo heredado de sus símbolos de la parte derecha.
+La heurística aplicada fue recorrer el \textbtt{map} de reglas, donde para cada una se verificaba que estuviesen definidas dentro de su \textbtt{map} de ecuaciones, una para cada uno de sus atributos sintetizados. Y a su vez, una ecuación para cada atributo heredado de sus símbolos de la parte derecha.
 
 Además, también se controlara que no existieran ecuaciones incorrectas, es decir:
 \begin{itemize}
@@ -640,7 +640,7 @@ Además, también se controlara que no existieran ecuaciones incorrectas, es dec
 \end{itemize}
 
 Cada vez que se detectaba un error, se lo informa mediante alguno de los siguientes mensajes según corresponda.
-\footnotesize{\textttb{\begin{items}
+\footnotesize{\textbtt{\begin{items}
 \item ERROR: ``E[1].syn1'' type synthetized, haven't an equation that defines it.
 \item ERROR: ``S[0].inh1'' type inherited, is defined outside his scope.
 \item ERROR: ``E[1].inh2'' type inherited, haven't an equation that defines it.
@@ -652,21 +652,21 @@ Cada vez que se detectaba un error, se lo informa mediante alguno de los siguien
 
 El propósito final de \maggen\ es obtener todos los planes posibles de la gramática de entrada. En la sección \ref{subsec:conts-plan-dise}, se analizaron algunas consideraciones a tener en cuenta, en esta sección las se retoman desde el punto de vista de la implementación. 
 
-Teóricamente un plan es una secuencia de instancias, que indica un orden de evaluación total y consistentes de las mismas. Dentro de \maggen, se optó para su representación una secuencia de identificadores de ecuaciones. Ya que cada ecuación tiene solamente \textbf{un} \textttb{l-value}, que es precisamente una instancia. Se utiliza la clase \textttb{vector} de la STL, para su almacenamiento y están enumeradas de forma tal que pueden ser identificadas de manera univoca.
+Teóricamente un plan es una secuencia de instancias, que indica un orden de evaluación total y consistentes de las mismas. Dentro de \maggen, se optó para su representación una secuencia de identificadores de ecuaciones. Ya que cada ecuación tiene solamente \textbf{un} \textbtt{l\_value}, que es precisamente una instancia. Se utiliza la clase \textbtt{vector} de la STL, para su almacenamiento y están enumeradas de forma tal que pueden ser identificadas de manera univoca.
 
-Como en general, se iban a generar en muchos casos los mismos planes, se decidió mantener un \textttb{vector} con todos los planes diferentes, así solo se generarían la \textbf{mínima cantidad de planes}, es decir, únicos necesarios.
+Como en general, se iban a generar en muchos casos los mismos planes, se decidió mantener un \textbtt{vector} con todos los planes diferentes, así solo se generarían la \textbf{mínima cantidad de planes}, es decir, únicos necesarios.
 
-Como en el algoritmo que se presenta en el artículo de Wuu Yang (\cite{wuu-yang1}), a cada plan se lo asocia con un \textttb{key}, primero se implementó esa clave como una estructura con los siguientes datos:
+Como en el algoritmo que se presenta en el artículo de Wuu Yang (\cite{wuu-yang1}), a cada plan se lo asocia con un \textbtt{key}, primero se implementó esa clave como una estructura con los siguientes datos:
 \begin{itemize}
 \item La regla a la cual pertenece el plan
 \item Una secuencia para computar sus atributos
 \end{itemize}
 
-Esa secuencia se representó de igual manera que un plan, ya que computar un atributo es equivalente a saber el identificador de la ecuación que lo tiene como \textttb{l-value}.
+Esa secuencia se representó de igual manera que un plan, ya que computar un atributo es equivalente a saber el identificador de la ecuación que lo tiene como \textbtt{l\_value}.
 
 El conjunto de estas secuencias, son los planes proyectados, es decir, las exigencias que se le imponen a una regla desde un contexto superior que la invoca a que se compute. Para el símbolo inicial, esta secuencia es obtenida como el orden topológico de su grafo DCG, ya que este contiene todas las dependencias entre los atributos de la regla, el cual si o si, será un orden de computación consistente para sus ecuaciones.
 
-Al igual que con los planes de evaluación, los planes proyectados también sufrían de muchas repeticiones, por lo cual se usaron índices indirectos a un repositorio de los mismos almacenados en un \textttb{vector}.
+Al igual que con los planes de evaluación, los planes proyectados también sufrían de muchas repeticiones, por lo cual se usaron índices indirectos a un repositorio de los mismos almacenados en un \textbtt{vector}.
 
 Cada plan proyectado estaba bajo una clave particular, la cual según el algoritmo debía contener:
 \begin{itemize}
@@ -675,7 +675,7 @@ Cada plan proyectado estaba bajo una clave particular, la cual según el algorit
 \item El símbolo con el cual se proyectó el plan de evaluación
 \end{itemize}
 
-Los dos primeros valores, corresponden a un \textttb{key} de un plan de evaluación, así que se usó directamente esa estructura.
+Los dos primeros valores, corresponden a un \textbtt{key} de un plan de evaluación, así que se usó directamente esa estructura.
 
 \subsection{Construcción de grafos}
 \label{subsec:const-graf}
@@ -697,7 +697,7 @@ typedef adjacency_list <hash_setS, vecS, directedS, property_vertex_dp> Graph;
 typedef Graph::vertex_descriptor Vertex;
 \end{lstlisting}
 
-Se mantienen dentro de la herramienta un \textttb{map} para cada uno de los tipos de grafos necesarios y además para los subgrafos ADP cíclicos que eventualmente se detecten y para optimizar la construcción de los otros, los grafos que contienen todas las instancias de cada regla sin aristas entre si.
+Se mantienen dentro de la herramienta un \textbtt{map} para cada uno de los tipos de grafos necesarios y además para los subgrafos ADP cíclicos que eventualmente se detecten y para optimizar la construcción de los otros, los grafos que contienen todas las instancias de cada regla sin aristas entre si.
 
 \begin{lstlisting}[basicstyle=\scriptsize, linewidth=10.7cm]
 map <string, Graph>                 attr_vertex_graphs;
@@ -712,7 +712,7 @@ map <vector<unsigned short>, Graph> p_Adp_subgraphs_cyclics;
 
 El chequeo de ciclicidad sobre los grafos ADP, se implementó utilizando el algoritmo de búsqueda en profundidad (Depth-first search) de \boost\ combinado con la creación de un ``visitador'' especializado. El cual a medida que recorre el grafo, va guardado los nodos y aristas visitadas mientras no se halla detectado un ciclo. Ese subgrafo es mostrado al usuario en caso de error, sino es descartado.
 
-La detección de ciclos, se ejectua cuando el algoritmo de visite, invoca a la función \textttb{back\_edge}, en el cual es activada la bandera que indice este suceso.
+La detección de ciclos, se ejectua cuando el algoritmo de visite, invoca a la función \textbtt{back\_edge}, en el cual es activada la bandera que indice este suceso.
 
 Tanto el grafo como la variable lógica, usada como bandera, son pasadas en el constructor y utilizadas internamente mediante referencias.
 
@@ -752,7 +752,7 @@ Para cada regla, se tienen que considerar todos los posibles contextos inferiore
 
 \subsubsection{Unicidad de contextos, planes y planes proyectados}
 
-Al igual que con los planes, los contextos de las reglas se repiten mucho, así que se utilizaron índices indirectos sobre un \textttb{vector} que almacena únicamente los contextos diferentes.
+Al igual que con los planes, los contextos de las reglas se repiten mucho, así que se utilizaron índices indirectos sobre un \textbtt{vector} que almacena únicamente los contextos diferentes.
 
 \begin{lstlisting}[numbers=left, linewidth=9cm]
 vector <Order_rule>    contexts_uniques;
@@ -764,7 +764,7 @@ Antes de insertar un elemento en cualquiera de estos repositorios se verifica qu
 
 \subsection{Representación en Dot}
 
-Una vez que se generaron todos los tipos de grafos, los mismos son guardados en distintos directorios en formato \textbf{DOT}\cite{dot} (detalles sobre las salidas de \maggen pueden analizarse en el capítulo \ref{chap:usos}). Para generar las especificaciones en el lenguaje DOT se utilizó la función \textttb{write\_graphviz} perteneciente al módulo Graphviz de \boost.
+Una vez que se generaron todos los tipos de grafos, los mismos son guardados en distintos directorios en formato \textbf{DOT}\cite{dot} (detalles sobre las salidas de \maggen pueden analizarse en el capítulo \ref{chap:usos}). Para generar las especificaciones en el lenguaje DOT se utilizó la función \textbtt{write\_graphviz} perteneciente al módulo Graphviz de \boost.
 
 \subsection{Generación de grafos}
 
@@ -824,23 +824,23 @@ Por lo que se implementaron las funciones y elementos involucrados que se pueden
 \begin{table}[!ht]
 \begin{tabular}{| p{4.5cm} | p{9.5cm} |}
 \hline
-Lista de trabajos \textbf{WL} & \textttb{vector <Item\_work>\ work\_list} \\ \hline
+Lista de trabajos \textbf{WL} & \textbtt{vector <Item\_work>\ work\_list} \\ \hline
 
-Trabajos realizados {\LARGE\textbf{$\Delta$}} & \textttb{vector <Item\_work>\ defined\_item\_work} \\ \hline
+Trabajos realizados {\LARGE\textbf{$\Delta$}} & \textbtt{vector <Item\_work>\ defined\_item\_work} \\ \hline
 
-Función \textbf{ComputeOrder} de ecuaciones & \textttb{compute\_order (const Graph \&graph\_adp, unsigned short index\_order, const Context\_rule \&context\_rule)} \\ \hline
+Función \textbf{ComputeOrder} de ecuaciones & \textbtt{compute\_order (const Graph \&graph\_adp, unsigned short index\_order, const Context\_rule \&context\_rule)} \\ \hline
 
-Función \textbf{Project} orden de ecuaciones para un símbolo & \textttb{purge\_plan\_with (const Rule \&rule, const Order\_eval\_eq \&order\_eq, Order\_eval\_eq \&purged\_order)} \\ \hline
+Función \textbf{Project} orden de ecuaciones para un símbolo & \textbtt{purge\_plan\_with (const Rule \&rule, const Order\_eval\_eq \&order\_eq, Order\_eval\_eq \&purged\_order)} \\ \hline
 
-Planes de evaluación {\LARGE\textbf{$\Theta$}} & \textttb{map <Key\_plan, unsigned short>\ eval\_plans} \\ \hline
+Planes de evaluación {\LARGE\textbf{$\Theta$}} & \textbtt{map <Key\_plan, unsigned short>\ eval\_plans} \\ \hline
 
-Planes de evaluación \hspace{1cm}proyectados {\LARGE\textbf{$\gamma$}} & \textttb{map <Key\_plan\_project, unsigned short>\ plans\_project} \\
+Planes de evaluación \hspace{1cm}proyectados {\LARGE\textbf{$\gamma$}} & \textbtt{map <Key\_plan\_project, unsigned short>\ plans\_project} \\
 \hline
 \end{tabular}
 \caption{\label{table:map-comp-plan} Implementación de funciones en Compute Plan}
 \end{table}
 
-Para la función \textttb{compute\_order} se debe considerar el orden de evaluación de los atributos establecido por el \textttb{index\_order}, el cual es el índice de un plan proyectado. Por lo que, primero se crea un grafo ADP copiando el grafo referenciado por \textttb{graph\_adp}, luego se le insertan los vértices necesarios, utilizando la función \textttb{return\_vertex}\footnote{Función que dado un atributo retorna un \textttb{vertex\_descriptor} de un vértice existente dentro del grafo o sino lo inserta y retorna un nuevo descriptor.} y se insertan las aristas entre los atributos consecutivos.
+Para la función \textbtt{compute\_order} se debe considerar el orden de evaluación de los atributos establecido por el \textbtt{index\_order}, el cual es el índice de un plan proyectado. Por lo que, primero se crea un grafo ADP copiando el grafo referenciado por \textbtt{graph\_adp}, luego se le insertan los vértices necesarios, utilizando la función \textbtt{return\_vertex}\footnote{Función que dado un atributo retorna un \textbtt{vertex\_descriptor} de un vértice existente dentro del grafo o sino lo inserta y retorna un nuevo descriptor.} y se insertan las aristas entre los atributos consecutivos.
 
 Por ejemplo para este orden de atributos:
 \vspace{0.1cm}
@@ -855,28 +855,28 @@ Se insertarán las siguientes 6 aristas, que podían ya existir dentro del grafo
 \end{center}
 \vspace{0.2cm}
 
-Luego se le aplica la función \textttb{warshall\_transitive\_closure}, que computa la clausura transitiva del grafo, perteneciente a la \textbf{BGL} de \boost. Esto causa que ese orden inducido por los atributos repercuta en todos los componentes del grafo.
+Luego se le aplica la función \textbtt{warshall\_transitive\_closure}, que computa la clausura transitiva del grafo, perteneciente a la \textbf{BGL} de \boost. Esto causa que ese orden inducido por los atributos repercuta en todos los componentes del grafo.
 
-Por último, mediante la función \textttb{generates\_topological\_order}, que como su nombre lo indica calcula el orden topológico del grafo, se obtiene el orden de evaluación consistente de las ecuaciones de la regla actual.
+Por último, mediante la función \textbtt{generates\_topological\_order}, que como su nombre lo indica calcula el orden topológico del grafo, se obtiene el orden de evaluación consistente de las ecuaciones de la regla actual.
 
-La función \textttb{purge\_plan\_with}, dado un plan de evaluación de ecuaciones, para una cierta regla, y otra regla, devuelve un nuevo plan, conteniendo las ecuaciones de ese plan que pertenecen a la otra regla pasada como parámetro.
+La función \textbtt{purge\_plan\_with}, dado un plan de evaluación de ecuaciones, para una cierta regla, y otra regla, devuelve un nuevo plan, conteniendo las ecuaciones de ese plan que pertenecen a la otra regla pasada como parámetro.
 
 \section{Construcción de Secuencias de Visita}
 
 Este proceso como se explicó en la sección \ref{sec:constseqvisit}, consiste en lograr a partir de cada plan de evaluación, su correspondiente traducción a una secuencia de visita consistente, que permita navegar el árbol al momento de la evaluación. La misma esta compuesta, básicamente, por tres valores:
 
 \begin{itemize}
-\item \textttb{Visit}: visitar a un nodo hijo debido a que necesita que le compute algún atributo sintetizado.
-\item \textttb{Leave}: vuelve a su ancestro (padre), debido a que necesita que le calculen algún atributo heredado.
-\item \textttb{Compute}: se encuentra en condiciones de computar uno de sus atributos sintetizados o heredado de sus hijos.
+\item \textbtt{Visit}: visitar a un nodo hijo debido a que necesita que le compute algún atributo sintetizado.
+\item \textbtt{Leave}: vuelve a su ancestro (padre), debido a que necesita que le calculen algún atributo heredado.
+\item \textbtt{Compute}: se encuentra en condiciones de computar uno de sus atributos sintetizados o heredado de sus hijos.
 \end{itemize}
 
 Por la forma de los mismos, se decidió como forma de representación un arreglo de enteros, con el siguiente criterio:
 
 \begin{itemize}
-\item $\textttb{Visit}\ \ \ \  \Rightarrow \ \ \textbf{>0}$: Números positivos indican que nodo hijo se debe visitar, arrancando en 1 para el primero.
-\item $\textttb{Leave}\ \ \ \  \Rightarrow \ \ \textbf{=0}$: El cero indica que se tiene que volver al padre del nodo.
-\item $\textttb{Compute} \Rightarrow \ \textbf{<0}$: Números negativos indican que ecuación debe computarse, tomando obviamente el valor absoluto y respetando la numeración global de las mismas.
+\item $\textbtt{Visit}\ \ \ \  \Rightarrow \ \ \textbf{>0}$: Números positivos indican que nodo hijo se debe visitar, arrancando en 1 para el primero.
+\item $\textbtt{Leave}\ \ \ \  \Rightarrow \ \ \textbf{=0}$: El cero indica que se tiene que volver al padre del nodo.
+\item $\textbtt{Compute} \Rightarrow \ \textbf{<0}$: Números negativos indican que ecuación debe computarse, tomando obviamente el valor absoluto y respetando la numeración global de las mismas.
 \end{itemize}
 
 La cantidad de secuencias de visitas es la misma que la de los planes de evaluación generados, y como este proceso se apoya en una ``\textbf{simulación}'', la construcción de las secuencias se da en forma incremental. Por eso se inicializan todas las estructuras de almacenamiento con secuencias de visitas vacías, que luego serán modificadas mediante indexación sobre el repositorio.
@@ -916,7 +916,7 @@ vector<unsigned short> &v_seq_computed
 \end{lstlisting}
 \end{description}
 
-El algoritmo principal, \textttb{generate\_visit\_sequences}, es más bien un invocador de la función \textttb{gen\_visit\_seq}, que es la que realmente lleva a cabo las llamadas que simulan la evaluación.
+El algoritmo principal, \textbtt{generate\_visit\_sequences}, es más bien un invocador de la función \textbtt{gen\_visit\_seq}, que es la que realmente lleva a cabo las llamadas que simulan la evaluación.
 
 \begin{lstlisting}[numbers=left, columns=fullflexible]
 bool generate_visit_sequences()
@@ -952,21 +952,21 @@ bool generate_visit_sequences()
 }
 \end{lstlisting}
 
-Dentro de \textttb{gen\_visit\_seq}, se recorre el plan de evaluación respetando los criterios explicados en \ref{sec:constseqvisit}. Además se debe asegurar que sólo se actualice la secuencia de visita correspondiente al plan actual,si no se produjo ningún \textttb{leave}. Para ello se lleva una variable lógica (flag) que indica la ausencia de \textttb{leaves}, además una secuencia de visita y un listado de instancias de atributos computados a nivel local.
+Dentro de \textbtt{gen\_visit\_seq}, se recorre el plan de evaluación respetando los criterios explicados en \ref{sec:constseqvisit}. Además se debe asegurar que sólo se actualice la secuencia de visita correspondiente al plan actual,si no se produjo ningún \textbtt{leave}. Para ello se lleva una variable lógica (flag) que indica la ausencia de \textbtt{leaves}, además una secuencia de visita y un listado de instancias de atributos computados a nivel local.
 
 Durante su funcionamiento se cumplen las siguientes condiciones:
 \begin{itemize}
-\item Los atributos sintetizados del símbolo de la izquierda de la regla, son informados a nodo padre, mediante su inserción en \textttb{ins\_computed} pasado como referencia.
+\item Los atributos sintetizados del símbolo de la izquierda de la regla, son informados a nodo padre, mediante su inserción en \textbtt{ins\_computed} pasado como referencia.
 
-\item Los atributos ya sean sintetizados del símbolo de la izquierda o heredados de algún símbolo de la derecha, son insertados en \textttb{ins\_computed\_own}.
+\item Los atributos ya sean sintetizados del símbolo de la izquierda o heredados de algún símbolo de la derecha, son insertados en \textbtt{ins\_computed\_own}.
 
-\item Siempre que se termina de recorrer un plan, se actualiza la secuencia de visita del plan actual siempre y cuando no pertenezca a \textttb{v\_seq\_computed}.
+\item Siempre que se termina de recorrer un plan, se actualiza la secuencia de visita del plan actual siempre y cuando no pertenezca a \textbtt{v\_seq\_computed}.
 
-La actualización se lleva a cabo mediante la función \textttb{update\_visit\_sequence}, la cual:
+La actualización se lleva a cabo mediante la función \textbtt{update\_visit\_sequence}, la cual:
 \begin{items}
 \item Recibe un índice que representa tanto a un plan como a su secuencia de visita y una secuencia de visita ``nueva''.
 
-\item Empareja la vieja secuencia, verificando posición a posición que sean iguales, pero si en la secuencia ya guardada existe un \textttb{leave}, es decir, un cero, vuelve a avanzar.
+\item Empareja la vieja secuencia, verificando posición a posición que sean iguales, pero si en la secuencia ya guardada existe un \textbtt{leave}, es decir, un cero, vuelve a avanzar.
 
 \item Termina cuando encuentra diferencias o cuando llega al final de alguna de las dos secuencias.
 
@@ -976,37 +976,37 @@ La actualización se lleva a cabo mediante la función \textttb{update\_visit\_s
 \underline{Por ejemplo:}\hspace*{1cm} \textbf{[-7, 0]} update con \textbf{[-7, -8]}\\
 \hspace*{2.8cm} da como resultado: \textbf{[-7, 0, -8]}\footnote{Secuencia de visita del ejemplo del apéndice \ref{append:agwuuyang}}.
 
-\item Si un plan se recorrió en su totalidad, se inserta en \textttb{plans\_computed}.
+\item Si un plan se recorrió en su totalidad, se inserta en \textbtt{plans\_computed}.
 
-\item La instancia que se encuentra en el \textttb{l-value} de la ecuación, será marcada con un \textttb{compute} solamente cuando se haya podido consumir el \textttb{r-value} de la ecuación y no se haya dado un \textttb{leave}.
+\item La instancia que se encuentra en el \textbtt{l\_value} de la ecuación, será marcada con un \textbtt{compute} solamente cuando se haya podido consumir el \textbtt{r\_value} de la ecuación y no se haya dado un \textbtt{leave}.
 
-\item Cuando se debe realizar un \textttb{visit}
+\item Cuando se debe realizar un \textbtt{visit}
 
 \begin{items}
 \item Se obtiene de la instancia de atributo, es número de ocurrencia, que sirve para identificar al nodo hijo a visitar.
 
 \item Una vez localizado, se busca el plan proyectado para ese símbolo bajo el contexto actual.
 
-\item Luego se inserta en la secuencia de visita local el \textttb{visit}.
+\item Luego se inserta en la secuencia de visita local el \textbtt{visit}.
 
-\item Se invoca recursivamente a \textttb{gen\_visit\_seq} con:
+\item Se invoca recursivamente a \textbtt{gen\_visit\_seq} con:
 
 \begin{items}
-\item \textttb{ins\_computed\_child}: inicializado con todos los atributos heredados del símbolo a recursar, calculados hasta el momento.
+\item \textbtt{ins\_computed\_child}: inicializado con todos los atributos heredados del símbolo a recursar, calculados hasta el momento.
 
-\item \textttb{p\_computed\_child}: inicializado con todos los planes computados hasta el momento, más el índice del plan actual ``virtualmente'' ya computado para evitar ciclos de llamadas recursivas.
+\item \textbtt{p\_computed\_child}: inicializado con todos los planes computados hasta el momento, más el índice del plan actual ``virtualmente'' ya computado para evitar ciclos de llamadas recursivas.
 
-\item \textttb{v\_seq\_child}: inicialmente está vacío para la recursión del primer plan seleccionado, pero es acumulativo para las demás llamadas. Indica las secuencias de visita ya calculadas.
+\item \textbtt{v\_seq\_child}: inicialmente está vacío para la recursión del primer plan seleccionado, pero es acumulativo para las demás llamadas. Indica las secuencias de visita ya calculadas.
 \end{items}
 
-\item Al terminar la recursión, la \textttb{gen\_visit\_seq} (invocación), se extraen los resultados útiles para este contexto.
+\item Al terminar la recursión, la \textbtt{gen\_visit\_seq} (invocación), se extraen los resultados útiles para este contexto.
 
 \begin{items}
-\item Nuevos planes computados a partir de la llamada sobre el nodo hijo, exceptuando la ``computada virtual'' del plan actual. Insertados en \textttb{plans\_computed}.
+\item Nuevos planes computados a partir de la llamada sobre el nodo hijo, exceptuando la ``computada virtual'' del plan actual. Insertados en \textbtt{plans\_computed}.
 
-\item Nuevos atributos sintetizados calculados del nodo hijo. Insertados en \textttb{ins\_computed\_own}.
+\item Nuevos atributos sintetizados calculados del nodo hijo. Insertados en \textbtt{ins\_computed\_own}.
 
-\item Nuevas secuencias de visitas obtenidas completamente. Insertados en \textttb{v\_seq\_child}.
+\item Nuevas secuencias de visitas obtenidas completamente. Insertados en \textbtt{v\_seq\_child}.
 \end{items}
 \end{items}
 
@@ -1019,19 +1019,19 @@ Esta es la última etapa de \maggen\ y la que produce el resultado esperado por 
 
 Es un proceso que debe dejar plasmado en código estático todos los resultados obtenidos durante las anteriores etapas.
 
-Para obtener un diseño dentro de los estándares de C++, se crean dos archivos: una cabecera \textttb{.hpp} y un fuente \textttb{.cpp}. Ambos archivos son creados con el nombre proporcionado por el usuario mediante la opción \textttb{maggen -o name} o sino con el nombre por defecto: \textttb{mag\_eval}\footnote{Para más detalles sobre usos, ver capítulo \ref{chap:usos}.}.
+Para obtener un diseño dentro de los estándares de C++, se crean dos archivos: una cabecera \textbtt{.hpp} y un fuente \textbtt{.cpp}. Ambos archivos son creados con el nombre proporcionado por el usuario mediante la opción \textbtt{maggen -o name} o sino con el nombre por defecto: \textbtt{mag\_eval}\footnote{Para más detalles sobre usos, ver capítulo \ref{chap:usos}.}.
 
 También se copian al directorio de salida de \maggen, dos archivos utilizados por el evaluador:
 \begin{items}
-\item \textttb{Node.hpp:} ver código fuente en apéndice \ref{append:nodehpp}
-\item \textttb{Plan.hpp:} ver código fuente en apéndice \ref{append:planhpp}
+\item \textbtt{Node.hpp:} ver código fuente en apéndice \ref{append:nodehpp}
+\item \textbtt{Plan.hpp:} ver código fuente en apéndice \ref{append:planhpp}
 \end{items}
 
 \vspace*{0.2cm}
 
 La generación de código es un proceso reiterativo sobre cada elemento almacenado en los repositorios de la herramienta. Por ejemplo, la función que produce el código que representa a un símbolo, se aplicará sobre cada uno de ellos.
 
-La función principal es \textttb{generate\_code}, en donde se invocan a las demás funciones para generar los fuentes del evaluador.
+La función principal es \textbtt{generate\_code}, en donde se invocan a las demás funciones para generar los fuentes del evaluador.
 
 \begin{lstlisting}[numbers=left, columns=fullflexible, linewidth=11.5cm]
 bool generate_code(const vector<string> &headers_file) const
@@ -1057,14 +1057,14 @@ bool generate_code(const vector<string> &headers_file) const
 }
 \end{lstlisting}
 
-Notar que recibe como parámetro una referencia a los ``\textttb{headers}'' que el usuario proporcionó en el momento de la invocación de \maggen \footnote{Ver sección \ref{sec:uso-maggen} para obtener detalles sobre parametros de invocación.}. Los mismos serán incluidos en el archivo \textttb{.cpp}.
+Notar que recibe como parámetro una referencia a los ``\textbtt{headers}'' que el usuario proporcionó en el momento de la invocación de \maggen \footnote{Ver sección \ref{sec:uso-maggen} para obtener detalles sobre parametros de invocación.}. Los mismos serán incluidos en el archivo \textbtt{.cpp}.
 
 \subsection{Cabecera del evaluador}
 
-Dentro de este archivo, se definen para cada \textbf{símbolo no terminal} una tipo en base a una estructura que incluye a sus atributos, un constructor y un método \textttb{to\_string()} que genera una cadena con su estado actual.
+Dentro de este archivo, se definen para cada \textbf{símbolo no terminal} una tipo en base a una estructura que incluye a sus atributos, un constructor y un método \textbtt{to\_string()} que genera una cadena con su estado actual.
 
 \underline{Por ejemplo:} símbolo Y, del ejemplo de Wuu Yang en el apéndice \ref{append:agwuuyang}.
-\begin{center}\textttb{symbol Y  NonTerminal Attributes: i2, i3, s2, s3;}\end{center}
+\begin{center}\textbtt{symbol Y  NonTerminal Attributes: i2, i3, s2, s3;}\end{center}
 se define lo siguiente:
 \begin{lstlisting}[columns=fullflexible, linewidth=7.3cm]
 typedef struct Symbol_Y: Node
@@ -1082,13 +1082,13 @@ typedef struct Symbol_Y: Node
 
 Luego de realizar ciertos análisis, se determinó que realmente varias estructuras que eran vitales en fases anteriores, ahora en el contexto y funcionamiento del evaluador eran innecesarias. Por ejemplo, de los planes de evaluación y planes proyectados, únicamente se utilizan los índices de los mismos. Esto sucede ya que debido a la optimización de generar sólo planes diferentes e indexarlos, no existe necesidad de tener en forma estática la definición de cada uno de ellos.
 
-En cambio, las secuencias de visitas son imprescindibles para la evaluación, como así también una versión reducida de las definiciones de las reglas, incluyendo solamente un arreglo con los nombres de cada símbolo no terminal que participa en la misma, en donde la posición cero corresponde al símbolo \textttb{head} y las demas posiciones al \textit{body}\footnote{Ver \ref{sec:def-CFG}}.
+En cambio, las secuencias de visitas son imprescindibles para la evaluación, como así también una versión reducida de las definiciones de las reglas, incluyendo solamente un arreglo con los nombres de cada símbolo no terminal que participa en la misma, en donde la posición cero corresponde al símbolo \textbtt{head} y las demas posiciones al \textit{body}\footnote{Ver \ref{sec:def-CFG}}.
 
 Aquí se incluyen los perfiles de los métodos públicos y privados mencionados en \ref{sec:gencodigo}.
 
 \subsection{Fuente del evaluador}
 
-Lo primero que el ``desarrollador\footnote{Un usuario que se interesa en indagar el código del evaluador.}'' se encuentra al abrir este archivo, es la implementación del constructor y del método \textttb{to\_string()} de cada uno de los símbolos no terminales. Por cuestiones del diseño realizado, cada nodo del AST tiene un identificador de regla, que debe ser un \textbf{número positivo mayor que cero}.
+Lo primero que el ``desarrollador\footnote{Un usuario que se interesa en indagar el código del evaluador.}'' se encuentra al abrir este archivo, es la implementación del constructor y del método \textbtt{to\_string()} de cada uno de los símbolos no terminales. Por cuestiones del diseño realizado, cada nodo del AST tiene un identificador de regla, que debe ser un \textbf{número positivo mayor que cero}.
 
 A modo de ejemplo, se muestra el código C++ generado para el símbolo Y, del ejemplo de Wuu Yang en el apéndice \ref{append:agwuuyang}.
 
@@ -1174,12 +1174,12 @@ El algoritmo que se implementó para poder evaluar un AST, es el propuesto por W
 \begin{description}
 \item [Primera recorrida del AST] se invoca a la función
 \begin{items}
-\item \textttb{traverse}: responsable de seleccionar el plan de evaluación para cada nodo no terminal.
+\item \textbtt{traverse}: responsable de seleccionar el plan de evaluación para cada nodo no terminal.
 \end{items}
 
 \item [Segunda recorrida del AST] se invoca a la función
 \begin{items}
-\item \textttb{eval\_visiter}: es un evaluador orientado a visitas, que debe computar los valores de los atributos de los nodos.
+\item \textbtt{eval\_visiter}: es un evaluador orientado a visitas, que debe computar los valores de los atributos de los nodos.
 \end{items}
 \end{description}
 
@@ -1195,13 +1195,13 @@ void evaluator_mag(struct Node *root)
 \end{lstlisting}
 
 \subsubsection{Función Traverse}
-\fbox{\textttb{\textbf{void traverse (struct Node *node, unsigned short order)}}}\\
+\fbox{\textbtt{\textbf{void traverse (struct Node *node, unsigned short order)}}}\\
 
-Esta función a partir del identificador de regla que posee cada nodo AST, construye un \textttb{Order\_rule}, es decir, su contexto de invocación. Luego, mediante la función \textttb{return\_index\_context} se obtiene su índice relativo dentro del arreglo que contiene a todos los contextos únicos computados por \maggen. Si no lo encuentra, produce un error ya que el AST de entrada posee un contexto incorrecto para la gramática para la cual se generó el evaluador.
+Esta función a partir del identificador de regla que posee cada nodo AST, construye un \textbtt{Order\_rule}, es decir, su contexto de invocación. Luego, mediante la función \textbtt{return\_index\_context} se obtiene su índice relativo dentro del arreglo que contiene a todos los contextos únicos computados por \maggen. Si no lo encuentra, produce un error ya que el AST de entrada posee un contexto incorrecto para la gramática para la cual se generó el evaluador.
 
-Después se arma un \textttb{Key\_plan} con dicho índice y el parámetro \textttb{order}, que es el índice del plan proyectado que se corresponde con el orden de evaluación de sus ecuaciones, impuesto por su contexto superior.
+Después se arma un \textbtt{Key\_plan} con dicho índice y el parámetro \textbtt{order}, que es el índice del plan proyectado que se corresponde con el orden de evaluación de sus ecuaciones, impuesto por su contexto superior.
 
-Por último se busca el plan de evaluación correspondiente al nodo visitado y se lo guarda en la estructura del nodo en el campo \textttb{visit\_seq\_index}.
+Por último se busca el plan de evaluación correspondiente al nodo visitado y se lo guarda en la estructura del nodo en el campo \textbtt{visit\_seq\_index}.
 
 Ahora se debe visitar a cada uno de los hijos, imponiéndole a los mismos un orden específico para que evalúen sus atributos según dependencias que inducen dicho orden.
 
@@ -1209,17 +1209,17 @@ Para lo cual se tiene que elegir el plan proyectado utilizando el plan seleccion
 
 Por lo cual se construye lo siguiente para buscarlo dentro del vector de planes proyectados únicos:
 
-\begin{center}\textttb{Key\_plan\_project k\_plan\_proj(k\_plan, rule[i+1], i)}\end{center}
+\begin{center}\textbtt{Key\_plan\_project k\_plan\_proj(k\_plan, rule[i+1], i)}\end{center}
 
-donde la variable ``\textttb{i}'' se desplazará desde 1 a la cantidad de hijos\footnote{La cantidad de hijos es idéntica a la longitud de la regla que representa al nodo.}.\\
+donde la variable ``\textbtt{i}'' se desplazará desde 1 a la cantidad de hijos\footnote{La cantidad de hijos es idéntica a la longitud de la regla que representa al nodo.}.\\
 
 Con lo cual se realiza la llamada recursiva de la función:
 
-\begin{center}\textttb{traverse(node->childs[i], eval\_plans\_project[j].second);}\end{center}
+\begin{center}\textbtt{traverse(node->childs[i], eval\_plans\_project[j].second);}\end{center}
 
-donde ``\textttb{j}'' corresponde al índice del plan proyectado del hijo a visitar.
+donde ``\textbtt{j}'' corresponde al índice del plan proyectado del hijo a visitar.
 \subsubsection{Función Eval}
-\fbox{\textttb{\textbf{void eval\_visiter(struct Node *root)}}}\\
+\fbox{\textbtt{\textbf{void eval\_visiter(struct Node *root)}}}\\
 
 Esta función sigue los lineamientos de la secuencia de visita referenciada por cada nodo. Arrancando desde la raíz, el algoritmo dirige la evaluación del AST para lograr el AST decorado.
 
@@ -1247,13 +1247,13 @@ void eval_visiter(struct Node *root)
 }
 \end{lstlisting}
 
-Notar que cuando se debe realizar un \textttb{visit}, sólo consiste en llamar a el evaluador sobre el hijo indicado. Si en cambio, se debe hacer un \textttb{compute}, se llama a la función \textttb{compute\_eq}, que será explicada a continuación. Y cada vez que sucede un \textttb{leave}, se debe guardar en el nodo actual la próxima posición de la última visitada, para que en la siguiente visita, el evaluador continúe desde ese punto, omitiendo al \textttb{leave}\footnote{Con el guardado del estado de cada secuencia de visita para cada nodo, se pudo omitir el índice $i$, que se presentó en las operaciones en la sección \ref{sec:sec-visit} del capítulo introductorio.}.
+Notar que cuando se debe realizar un \textbtt{visit}, sólo consiste en llamar a el evaluador sobre el hijo indicado. Si en cambio, se debe hacer un \textbtt{compute}, se llama a la función \textbtt{compute\_eq}, que será explicada a continuación. Y cada vez que sucede un \textbtt{leave}, se debe guardar en el nodo actual la próxima posición de la última visitada, para que en la siguiente visita, el evaluador continúe desde ese punto, omitiendo al \textbtt{leave}\footnote{Con el guardado del estado de cada secuencia de visita para cada nodo, se pudo omitir el índice $i$, que se presentó en las operaciones en la sección \ref{sec:sec-visit} del capítulo introductorio.}.
 
 \subsection{Cómputo de ecuaciones}
 
 El cálculo de una ecuación es definida por el usuario y se debe respetar al momento de generar código C++. Por lo que, para cada ecuación se inserta un método que tiene toda la semántica involucrada, es decir, llamadas a funciones externas, uso de operadores declarados, entre otros.
 
-Lo primero que se hace es la conversión explícita del tipo\footnote{Type casting - \urllink{http://en.wikipedia.org/wiki/Type\_conversion}.} de cada nodo a su respectivo tipo, para poder acceder a sus atributos. Ya que todos los nodos son en una primera instancia del tipo \textttb{Node}\footnote{Declarado en \textttb{Node.hpp}.} y debe ser convertido a alguno de los tipos estructurados que se declararon para cada uno de los símbolos no terminales.
+Lo primero que se hace es la conversión explícita del tipo\footnote{Type casting - \urllink{http://en.wikipedia.org/wiki/Type\_conversion}.} de cada nodo a su respectivo tipo, para poder acceder a sus atributos. Ya que todos los nodos son en una primera instancia del tipo \textbtt{Node}\footnote{Declarado en \textbtt{Node.hpp}.} y debe ser convertido a alguno de los tipos estructurados que se declararon para cada uno de los símbolos no terminales.
 
 Siguiendo con el ejemplo del apéndice \ref{append:agwuuyang}, para las ecuaciones de la regla inicial:
 
@@ -1300,11 +1300,11 @@ void compute_eq_4(struct Node *root)
 }
 \end{lstlisting}
 
-Cuando el algoritmo \textttb{eval\_visiter} invoca a que se compute una ecuación, el responsable de llamar al método correcto es:
+Cuando el algoritmo \textbtt{eval\_visiter} invoca a que se compute una ecuación, el responsable de llamar al método correcto es:
 
-\begin{center}\textttb{compute\_eq(int num\_eq, struct Node *root)}\end{center}
+\begin{center}\textbtt{compute\_eq(int num\_eq, struct Node *root)}\end{center}
 
-Que en resumidas palabras, es una gran sentencia de selección múltiple (\textttb{switch}) en base al identificador de la ecuación, que determina unívocamente la función a invocar.
+Que en resumidas palabras, es una gran sentencia de selección múltiple (\textbtt{switch}) en base al identificador de la ecuación, que determina unívocamente la función a invocar.
 
 En el caso del ejemplo, existen 12 ecuaciones, por lo que el método generado es el siguiente:
 

@@ -4,13 +4,13 @@
 \section{Especificación completa en \spirit}
 \label{append:grammarspirit}
 
-\lstinputlisting[basicstyle=\tiny, numbers=left]{input_file_code/full_grammar.cpp}
+\lstinputlisting[basicstyle=\scriptsize, numbers=left]{input_file_code/full_grammar.cpp}
 
 \section{Ejemplo: MAG presentada por Wuu Yang}
 \label{append:agwuuyang}
 
 \subsection{Pseudocódigo}
-\begin{lstlisting}[basicstyle=\scriptsize, backgroundcolor=\color{white}]
+\begin{lstlisting}[backgroundcolor=\color{white}]
      (R1)   S `$\rightarrow$` XYZ      
               S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
               X.i1 := Y.s3  
@@ -32,11 +32,11 @@
 
 \subsection{Con lenguaje de especificación de \maggen}
 
-\subsubsection{Archivo de input: \texttt{ag\_wuu\_yang.input}}
-\lstinputlisting[basicstyle=\tiny, numbers=left, columns=fullflexible, language=specmag]{input_file_code/ag_wuu_yang.input}
+\subsubsection{Archivo de input: \textbtt{ag\_wuu\_yang.input}}
+\lstinputlisting[basicstyle=\scriptsize, numbers=left, columns=fullflexible, language=specmag]{input_file_code/ag_wuu_yang.input}
 
-\subsubsection{Archivo de output: \texttt{Grammar\_mag.log}}
-\lstinputlisting[basicstyle=\tiny, numbers=left, columns=fullflexible, language=specmag]{input_file_code/Grammar_mag.log}
+\subsubsection{Archivo de output: \textbtt{Grammar\_mag.log}}
+\lstinputlisting[basicstyle=\scriptsize, numbers=left, columns=fullflexible, language=specmag]{input_file_code/Grammar_mag.log}
 
 \section{Código generado por \maggen: Ejemplo Wuu Yang.}
 \label{append:agwuuyangcode}
@@ -45,24 +45,24 @@ Los archivos fueron obtenidos invocando a \maggen\ de la siguiente forma:
 
 \begin{center}
 \footnotesize
-\texttt{\maggen\ -fo ../Out\_wuu\_yang -o maggen -f  ../examples/ag\_wuu\_yang/ag\_wuu\_yang.input}
+\textbtt{\maggen\ -fo ../Out\_wuu\_yang -o maggen -f  ../examples/ag\_wuu\_yang/ag\_wuu\_yang.input}
 \end{center}
 
-\subsection{Archivo interface: \texttt{maggen.hpp}}
+\subsection{Archivo interface: \textbtt{maggen.hpp}}
 \label{append:maggenhpp}
-\lstinputlisting[basicstyle=\tiny, columns=fullflexible, numbers=left]{input_file_code/maggen.hpp}
+\lstinputlisting[basicstyle=\scriptsize, columns=fullflexible, numbers=left]{input_file_code/maggen.hpp}
 
-\subsection{Archivo implementación: \texttt{maggen.cpp}}
+\subsection{Archivo implementación: \textbtt{maggen.cpp}}
 \label{append:maggencpp}
-\lstinputlisting[basicstyle=\tiny, columns=fullflexible, numbers=left]{input_file_code/maggen.cpp}
+\lstinputlisting[basicstyle=\scriptsize, columns=fullflexible, numbers=left]{input_file_code/maggen.cpp}
 
-\subsection{Archivo cabecera: \texttt{Node.hpp}}
+\subsection{Archivo cabecera: \textbtt{Node.hpp}}
 \label{append:nodehpp}
-\lstinputlisting[basicstyle=\tiny, numbers=left, columns=fullflexible]{input_file_code/Node.hpp}
+\lstinputlisting[basicstyle=\scriptsize, numbers=left, columns=fullflexible]{input_file_code/Node.hpp}
 
-\subsection{Archivo cabecera: \texttt{Plan.hpp}}
+\subsection{Archivo cabecera: \textbtt{Plan.hpp}}
 \label{append:planhpp}
-\lstinputlisting[basicstyle=\tiny, numbers=left, columns=fullflexible]{input_file_code/Plan.hpp}
+\lstinputlisting[basicstyle=\scriptsize, numbers=left, columns=fullflexible]{input_file_code/Plan.hpp}
 
 \normalsize
 \chapter{Apéndice: Documentación completa de \maggen.}

@@ -215,7 +215,7 @@ donde cada $X_{i}$ es un símbolo que ocurre en la producción \textit{p} , $a_{
 \begin{definition} Un atributo $a$ está asociado al símbolo $X$ si y sólo si $a \in A(X)$. 
 \end{definition}
 \underline{Nota:}
-Se utilizará la notación \textbf{X.a} para simplificar que el atributo \texttt{a} está asociado al símbolo \texttt{X} (a $\in$ A(X)) y para denotar el valor de una ocurrencia o instancia del atributo \texttt{a} del símbolo \texttt{X} en una regla de atribución.
+Se utilizará la notación \textbf{X.a} para simplificar que el atributo \textbtt{a} está asociado al símbolo \textbtt{X} (a $\in$ A(X)) y para denotar el valor de una ocurrencia o instancia del atributo \textbtt{a} del símbolo \textbtt{X} en una regla de atribución.
 
 \subsection{Árbol Sintáctico Atribuido}
 
@@ -324,7 +324,7 @@ Una secuencia de visitas en el nodo $n$ es una secuencia de tres operaciones o a
 
 \underline{\textit{Nota:}}
 
-En el capítulo de implementación de \maggen\ (Ver cap. \ref{chap:implem}) se abordarán detalles sobre el funcionamiento de estas tres operaciones, tanto para el algoritmo de generación de secuencias, como así también para el evaluador generado. Uno de los principales cambios, con respecto a lo visto en los puntos de arriba, es que el índice $i$ es omitido (en \texttt{visit} y \texttt{leave}) debido a que cada nodo lleva un propio contador de invocaciones y mantiene los cambios estados en cada una de ellas.  
+En el capítulo de implementación de \maggen\ (Ver cap. \ref{chap:implem}) se abordarán detalles sobre el funcionamiento de estas tres operaciones, tanto para el algoritmo de generación de secuencias, como así también para el evaluador generado. Uno de los principales cambios, con respecto a lo visto en los puntos de arriba, es que el índice $i$ es omitido (en \textbtt{visit} y \textbtt{leave}) debido a que cada nodo lleva un propio contador de invocaciones y mantiene los cambios estados en cada una de ellas.  
 
 Un evaluador basado en secuencias de visita, comienza ejecutando las operaciones en el nodo raíz del árbol. En cada visita a un nodo, se ejecutan las operaciones en secuencia hasta la ejecución de una operación \emph{leave(i)}.
 En su próxima visita ($i+1$), se continúa con la operación que sigue a \emph{leave(i)}.
@@ -343,6 +343,6 @@ Tal como se analizó en las secciones anteriores para evaluar un GA se deben com
 
 Un evaluador para una GA bien definida deberá realizar una previa selección del plan correspondiente a cada nodo del árbol sintáctico. Para dicha selección, el evaluador necesitará realizar un recorrido descendente del árbol sintáctico para \emph{marcar} los nodos con la información sobre las dependencias \emph{actuales} transitivas en base al subárbol.
 
-En la sección \ref{sec:algevalattr} se presentarán los algoritmos \texttt{eval} y \texttt{traverse}, teniendo en cuenta heurísticas utilizadas por Wuu Yang en \cite{wuu-yang1}.
+En la sección \ref{sec:algevalattr} se presentarán los algoritmos \textbtt{eval} y \textbtt{traverse}, teniendo en cuenta heurísticas utilizadas por Wuu Yang en \cite{wuu-yang1}.
 
 Además, en los capítulos \ref{chap:disen_} y \ref{chap:implem} se pueden analizar detalles sobre la generación de un evaluador, específicamente, el utilizado para el desarrollo de \maggen.
