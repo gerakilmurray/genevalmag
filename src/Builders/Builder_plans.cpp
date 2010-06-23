@@ -7,7 +7,7 @@
   */
 
 #include <iostream>
-
+#include <limits.h>
 #include <boost/graph/topological_sort.hpp>
 #include <boost/graph/transitive_closure.hpp>
 

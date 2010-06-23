@@ -216,7 +216,7 @@ class Builder_code
 		  * @param headers_file
 		  * @return
 		  */
-		bool generate_code(const vector<string> &headers_file) const;
+		bool generate_code(const vector<string> &headers_file, const string path) const;
 };
 
 } /* end genevalmag */
