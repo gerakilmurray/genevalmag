@@ -11,14 +11,12 @@ if (Boost_FOUND)
 
   add_executable (maggen maggen.cpp)
 
-  set(PROJECT_BINARY_DIR ../bin/)
-
   target_link_libraries (maggen _maglib _parser_ag _util _expres_tree _builders _att_grammar)
 
   target_link_libraries(maggen ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
 
 else (Boost_FOUND) 
 
-  message(FATAL_ERROR "No se encontro Librerias BOOST. Las librerias son requeridas para la compilacion de maggen.")
+  message(FATAL_ERROR "BOOST LIBRARIES NOT FOUND. The libraries are required for the compilation of de maggen.")
 
 endif (Boost_FOUND)
