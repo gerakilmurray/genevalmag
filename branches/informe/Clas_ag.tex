@@ -79,7 +79,7 @@ Ahora se analizarán algunas de las clases en la jerarquía \emph{NC}:
 
 \begin{description}
 \item [NC(0)] Esta clase (sin $lookahead$) se corresponde con la familia ANCAG, debido que no observa contexto inferiores. 
-\item [NC(1)] Las gramáticas $NC(1)$ mantienen un $lookahead$ de 1 y un resultado importante es que la familia $NC(1)$ contiene a las ANCAG. Wuu Yang en \cite{wuu-yang1} presenta la familia de las MAG y las asocia con esta subfamilia dentro de la jerarquía $NC(1)$. Es por ello que en el capítulo siguiente es tratada en detalles esta familia de gramáticas.
+\item [NC(1)] Las gramáticas $NC(1)$ mantienen un $lookahead$ de 1 y un resultado importante es que la familia $NC(1)$ contiene a las ANCAG. Wuu Yang en \cite{wuu-yang1} presenta la familia de las MAG y las asocia con esta subfamilia dentro de la jerarquía $NC$. En el capítulo siguiente es tratada en detalles esta familia de gramáticas.
 \item[NC(k)] Esta clase tiene en cuenta un $k>1$, es decir un $lookahead$ de $k$. La clase $NC(k)$ consiste de aquellas GA's para las cuales existe un conjunto de planes de evaluación para cada producción, que quedan determinados analizando $k$ niveles de producciones descendientes. Es decir $k$ niveles de observación en los posibles contextos inferiores.
 \item[NC($\infty$)] Existen gramáticas de atributos que no pertenecen a la familia $NC(k)$ para ningún $k$. Esto sucede cuando la gramática tiene producciones que son mutuamente recursivas. Un árbol sintáctico podría contener derivaciones de la forma $X \rightarrow Y \rightarrow X$ para cualquier número de repeticiones y si existiera un ciclo en las dependencias no podría determinarse estáticamente para ningún número finito de descendientes $k$.
 
