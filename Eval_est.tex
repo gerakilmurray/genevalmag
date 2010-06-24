@@ -14,7 +14,7 @@ Todos estos algoritmos tienen una característica en común, expresan las depend
 \label{subsec:alg-DP}
 Se debe generar un grafo DP por cada regla de la gramática, representando las dependencias directas entre los atributos de los símbolos que participan en la producción, tal como se analizó en el capítulo anterior en la sección \ref{subsec:graph-dp-def}.
 
-Es el más directo de construir, ya que por cada ecuación de la regla actual, se agrega una arista entre cada uno de los símbolos del \textbtt{r\_value} con destino el \textbtt{l\_value} de la ecuación. Obviamente se deben agregan los nodos necesarios y sin repeticiones, para cada una de las instancias de atributos. Ver algoritmo \ref{alg:graphdp}.
+Es el más directo de construir, ya que por cada ecuación de la regla actual, se agrega una arista entre cada uno de los símbolos de \textbtt{r\_value} con destino al \textbtt{l\_value} de la ecuación. Obviamente se deben agregar los nodos necesarios y sin repeticiones, para cada una de las instancias de atributos. Ver algoritmo \ref{alg:graphdp}.
 
 \begin{algorithm}[!ht]
 \lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_dp_wuu_yang}
@@ -23,14 +23,14 @@ Es el más directo de construir, ya que por cada ecuación de la regla actual, s
 
 \subsection{Cómputo de Down}
 \label{subsec:alg-DOWN}
-Este tipo de grafo, se debe crear para cada uno de los símbolos no terminales de la gramática. Representan las relaciones de dependencia entre solamente sus atributos, considerando todas las reglas en las que participan (Ver sección \ref{subsec:graph-down-def} del capítulo anterior). Ver algoritmo \ref{alg:graphdown}.
+Este tipo de grafo, se debe crear para cada uno de los símbolos no terminales de la gramática. Representan las relaciones de dependencia entre solamente sus atributos, considerando todas las reglas en las que participan (Ver sección \ref{subsec:graph-down-def} del capítulo anterior). Para más detalle, ver algoritmo \ref{alg:graphdown}.
 
 \begin{algorithm}[!ht]
 \lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_down_wuu_yang}
 \caption{\label{alg:graphdown} Cómputo de grafos \textit{Down}}
 \end{algorithm}
 
-La función \textbtt{project} recibe un grafo, del cual debe eliminar todos los nodos y aristas relacionadas que no pertenecen al conjunto de atributos que le pasan como segundo parámetro. Pero para evitar que al eliminar nodos y aristas el grafo pierda información sobre las dependencias entre los atributos, se calcula previamente la clausura transitiva del grafo. Ver algoritmo \ref{alg:graphproj}.
+La función \textbtt{project} recibe un grafo, del cual debe eliminar todos los nodos y aristas relacionadas que no pertenecen al conjunto de atributos que le pasan como segundo parámetro. Pero para evitar que al eliminar nodos y aristas el grafo pierda información sobre las dependencias entre los atributos, se calcula previamente la clausura transitiva del grafo. La implementación de \textbtt{project} se presenta en el algoritmo \ref{alg:graphproj}.
 
 \begin{algorithm}[!ht]
 \lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/project_wuu_yang}
@@ -39,7 +39,7 @@ La función \textbtt{project} recibe un grafo, del cual debe eliminar todos los 
 
 \subsection{Cómputo de DCG}
 \label{subsec:alg-DCG}
-Estos grafos se generan para cada regla de la gramática y considerando las dependencias entre los atributos del símbolo de la parte izquierda de la producción (\textbtt{head}). Para computarlo, tal como se lo definió en la sección \ref{subsec:graph-dcg-def}, se deben unir el grafo \textit{DP} de la regla junto a todos los grafos \textit{Down} de los símbolos de la parte derecha de la regla (\textbtt{body}). Se utiliza nuevamente la función \textbtt{project}. Ver algoritmo \ref{alg:graphdcg}.
+Estos grafos se generan para cada regla de la gramática y considerando las dependencias entre los atributos del símbolo de la parte izquierda de la producción (\textbtt{head}). Para computarlo, tal como se lo definió en la sección \ref{subsec:graph-dcg-def}, se deben unir el grafo \textit{DP} de la regla junto a todos los grafos \textit{Down} de los símbolos de la parte derecha de la regla (\textbtt{body}) y luego se utiliza, nuevamente, la función \textbtt{project}. Para más detalle, ver algoritmo \ref{alg:graphdcg}.
 
 \begin{algorithm}[!ht]
 \lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_dcg_wuu_yang}
@@ -50,7 +50,7 @@ Estos grafos se generan para cada regla de la gramática y considerando las depe
 \label{subsec:alg-ADP} 
 Para generar estos grafos, Wuu Yang no plantea un algoritmo preciso aunque no es necesario ya que toda la heurística necesaria se encuentra en la definición de los mismos (ver \ref{mag:adpdef}).
 
-Un grafo ADP corresponde a una regla bajo una cierta combinación de producciones para cada uno de sus hijos. Es decir, que para una misma regla pueden existir varios grafos ADP, ya que sus hijos pueden producir más de un contexto. Ver algoritmo \ref{alg:graphadp}.
+Un grafo ADP corresponde a una regla bajo una cierta combinación de producciones para cada uno de sus hijos. Es decir, que para una misma regla pueden existir varios grafos ADP, ya que sus hijos pueden producir más de un contexto. El computo de grafos ADP es presentado en el algoritmo \ref{alg:graphadp}.
 
 \begin{algorithm}[!ht]
 \lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_adp_wuu_yang}
@@ -59,13 +59,13 @@ Un grafo ADP corresponde a una regla bajo una cierta combinación de produccione
 
 \section{Algoritmo de cómputo de planes}
 \label{sec:comp-planes}
-Luego de verificar que la gramática es MAG\footnote{Ver \ref{def:MAG}.}, se deben generar los planes de evaluación para la gramática. Cada ADP producirá un plan de evaluación, por lo que ambos tendrán el mismo identificador, es decir, la regla a la cual pertenece y el contexto que se aplicó a los símbolos no terminales de la misma.
+Luego de verificar que la gramática es MAG\footnote{Ver \ref{def:MAG}.}, se deben generar los planes de evaluación para la gramática. Cada ADP producirá un plan de evaluación, por lo que ambos tendrán el mismo identificador, es decir, la regla a la cual pertenecen y el contexto que se aplicó a los símbolos no terminales de la misma.
 
-Este algoritmo propuesto por Wuu Yang, es detallado en profundidad. La correctitud del algoritmo es abordado por Wuu Yang en \cite{wuu-yang1}.
+Este algoritmo propuesto por Wuu Yang, es detallado en profundidad en esta sección y la correctitud del algoritmo es abordado por Wuu Yang en \cite{wuu-yang1}.
 
 La idea principal es utilizar una cola de trabajos, en la cual se insertan pares que contienen una regla y un orden de evaluación para sus instancias. Para cada uno de los grafos ADP asociados a la regla, se le computa su orden de evaluación para el contexto especificado por el grafo.
 
-Luego, para cada uno de los símbolos no terminales de la parte derecha de la regla, considerando la producción que le corresponde según el contexto, se obtiene el plan proyectado. Ese nuevo par, se intenta insertar en la cola de trabajos para seguir con el cómputo de planes. Ver algoritmo \ref{alg:planeval}.
+Luego, para cada uno de los símbolos no terminales de la parte derecha de la regla, considerando la producción que le corresponde según el contexto, se obtiene el plan proyectado. Ese nuevo par, se intenta insertar en la cola de trabajos para seguir con el cómputo de planes (Ver algoritmo \ref{alg:planeval}).
 
 \begin{algorithm}[!ht]
 \lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_plan_wuu_yang}
@@ -74,14 +74,14 @@ Luego, para cada uno de los símbolos no terminales de la parte derecha de la re
 
 La función \textbtt{compute\_order}, debe agregarle al grafo ADP la información inducida por el orden para evaluar los atributos del símbolo \textbf{head} de la regla a la que pertenece el grafo.
 
-Para ello, como todo orden se puede ver como una secuencia, se agregan al grafo un nodo por cada elementos del orden y las aristas para todos los pares posibles\footnote{Ver más detalles en \ref{sec:genplanes}}. Ver algoritmo \ref{alg:compord}.
+Para ello, como todo orden se puede ver como una secuencia, se agregan al grafo un nodo por cada elementos del orden y las aristas para todos los pares posibles\footnote{Ver más detalles en \ref{sec:genplanes}} (Ver algoritmo \ref{alg:compord}).
 
 \begin{algorithm}[!ht]
 \lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_order_wuu_yang}
 \caption{\label{alg:compord}Cómputo de orden de evaluación}
 \end{algorithm}
 
-La funcionalidad que cumple \textbtt{project}, es dado un orden de evaluación purgarlo de todo elemento ajeno a el conjunto de ocurrencias de atributos especificados como parámetro. Previamente se debe aplicarle la clausura transitiva para conservar las relaciones de precedencia entre las ocurrencias. Ver algoritmo \ref{alg:projordeval}.
+La funcionalidad que cumple \textbtt{project} (en el cómputo de planes), es dado un orden de evaluación purgarlo de todo elemento ajeno a el conjunto de ocurrencias de atributos especificados como parámetro. Previamente se debe aplicarle la clausura transitiva para conservar las relaciones de precedencia entre las ocurrencias (Ver algoritmo \ref{alg:projordeval}).
 
 \begin{algorithm}[!ht]
 \lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/project2_wuu_yang}
@@ -91,20 +91,18 @@ La funcionalidad que cumple \textbtt{project}, es dado un orden de evaluación p
 \section{Algoritmo de cómputo de secuencias de visita}
 \label{sec:algseqvisit}
 
-Las secuencias de visitas, son traducciones de los planes de evaluación en secuencias compuestas por tres comandos\footnote{\textbtt{compute}, \textbtt{leave} y \textbtt{visit}, ver más detalles en \ref{sec:sec-visit}.} que permitan la navegación por el AST para su evaluación.
+Las secuencias de visitas, son traducciones de los planes de evaluación en secuencias compuestas por tres comandos\footnote{\textbtt{compute}, \textbtt{leave} y \textbtt{visit}, ver más detalles en \ref{sec:sec-visit}.} que permiten la navegación por el AST para su evaluación.
 
-Este proceso fue diseñado e implementado para el desarrollo de \maggen. La generación se dividió en dos algoritmos, el primero se encarga de la inicialización de todas las secuencias de visitas y la invocación del segundo solamente para los planes de evaluación que pertenecen a la producción inicial de la gramática.
+Este proceso fue diseñado e implementado para el desarrollo de \maggen. La generación se dividió en dos algoritmos, uno encargado de la inicialización de todas las secuencias de visitas y la invocación del otro, solamente, para los planes de evaluación que pertenecen a la producción inicial de la gramática. Este último algoritmo calcula las secuencias de visitas totales.
 
-La traducción bajo demanda de los planes de evaluación, permite realizar optimizaciones como se explicará en el capítulo \ref{chap:implem} de implementación. Ver algoritmo \ref{alg:genvisitseq}.
+La traducción bajo demanda de los planes de evaluación, permiten realizar optimizaciones como se explicará en el capítulo \ref{chap:implem} de implementación. El cómputo de secuencias de visita es presentado en el algoritmo \ref{alg:genvisitseq}.
 
 \begin{algorithm}[!ht]
 \lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/generate_visit_sequences}
 \caption{\label{alg:genvisitseq} Generador de secuencias de visitas}
 \end{algorithm}
 
-El segundo realiza un proceso recursivo para lograr la traducción. Se lo puede considerar como una simulación del recorrido sobre el árbol en tiempo de evaluación. En la sección \ref{sec:constseqvisit} se ampliará este funcionamiento.
-
-Por lo que se debe llevar una secuencia de visita local, a la cual se le insertarán los distintos comandos. Además, será necesario una función que lleve las instancias de atributos ya calculadas.
+El algoritmo que realiza el computo de las secuencias de visita totales realiza un proceso recursivo para lograr la traducción. Se lo puede considerar como una simulación del recorrido sobre el árbol en tiempo de evaluación \footnote{En la sección \ref{sec:constseqvisit} se ampliará este funcionamiento.}. Por lo que se debe llevar una secuencia de visita local, a la cual se le insertarán los distintos comandos. Además, será necesario una función que lleve las instancias de atributos ya calculadas.
 
 De esta forma, cuando se detecta un \textbtt{visit}, se debe localizar a que hijo tiene que recursar en base al plan actual, el cual tiene un contexto establecido. Además se debe determinar el plan proyectado que actuará de orden de evaluación impuesto en la recursión. Al volver se debe actualizar todas las instancias de atributos que fueron computadas en el contexto inferior, para evitar futuras visitas innecesarias.
 
@@ -112,7 +110,7 @@ Con el mismo criterio, al producirse un \textbtt{leave} por la necesidad de requ
 
 Una ecuación se podrá computar solamente cuando todo su \textbtt{r\_value} halla sido marcado como computado, ya sea mediante un \textbtt{visit} o \textbtt{leave}.
 
-Por último, es necesario una función que combine y actualice la secuencia de visita global, con la que se calculó a nivel local. Esto es, ya que, una secuencia de visita puede ser completada en más de una visita. Ver algoritmo \ref{alg:genvisitseqrec}.
+Por último, es necesario una función que combine y actualice la secuencia de visita global, con la que se calculó a nivel local. Esto es, ya que, una secuencia de visita puede ser completada en más de una visita. Todo el proceso analizado anteriormente es presentado en el algoritmo \ref{alg:genvisitseqrec}.
 
 \begin{algorithm}[!ht]
 \lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/gen_visit_seq}
@@ -128,18 +126,23 @@ Se basa en dos etapas bien definidas y con propósitos diferentes. En las cuales
 
 El primero es una barrida descendente en la que se seleccionan los planes de evaluación para cada nodo, para lo cual se debe armar su contexto en base a la regla referenciada por el nodo actual y la que poseen cada uno de sus hijos. El orden de evaluación de atributos para la raíz del AST es aleatoria, ya que sólo contiene símbolos sintetizados y no pueden ser utilizados en otro contexto por ser una gramática extendida.
 
-En el segundo recorrido, no precisamente se realiza en un sentido uniforme, sino que se navega descendente y ascendentemente, de acuerdo a la secuencia de visita correspondiente al plan seleccionado en la primera etapa. Este algoritmo, Wuu Yang no lo presenta y lo deja a libre elección del usuario. En \ref{sec:codcppalgeval} se presenta el evaluador guiado por visita implementado para \maggen. Ver algoritmo \ref{alg:evalattr}.
+En el segundo recorrido, no precisamente se realiza en un sentido uniforme, sino que se navega descendente y ascendentemente, de acuerdo a la secuencia de visita correspondiente al plan seleccionado en la primera etapa. 
 
-\begin{algorithm}[!ht]
-\lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/eval_attribute_wuu_yang}
-\caption{\label{alg:evalattr} Evaluación de atributos}
-\end{algorithm}
-
-Esta función, tiene toda la información necesaria ya precargada, gracias al procesamiento previo de los anteriores algoritmos. Debe determinar el plan de evaluación, almacenado en $\Gamma$, armando la clave con la regla asociada al nodo corriente y las reglas asociadas de todos los hijos. El orden de evaluación de atributos $\omega$, le viene como parámetro, el cual corresponde con un plan de evaluación proyectado, que desde el contexto superior le impusieron. Una vez seleccionado el plan, también queda establecida la secuencia de visita, para el nodo.
+La primera etapa es realizada en la funcion \textbtt{traverse}. Esta, tiene toda la información necesaria ya precargada, gracias al procesamiento previo de los anteriores algoritmos. Debe determinar el plan de evaluación, almacenado en $\Gamma$, armando la clave con la regla asociada al nodo corriente y las reglas asociadas de todos los hijos. El orden de evaluación de atributos $\omega$, le viene como parámetro, el cual corresponde con un plan de evaluación proyectado, que desde el contexto superior le impusieron. Una vez seleccionado el plan, también queda establecida la secuencia de visita, para el nodo.
 
 Para continuar con el proceso, se debe seleccionar para cada hijo el plan proyectado desde $\Theta$, que será el orden que le imponen para la evaluación de sus atributos. Ver algoritmo \ref{alg:traverse}.
 
 \begin{algorithm}[!ht]
 \lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/traverse_wuu_yang}
 \caption{\label{alg:traverse} Función Traverse}
+\end{algorithm}
+
+La segunda etapa es realizada por la función \textbtt{eval_visiter}. Esta implementa la evaluación guiada por la secuencia de visita. Este algoritmo, Wuu Yang no lo presenta y lo deja a libre elección del usuario. En \ref{sec:codcppalgeval} se presenta el evaluador guiado por visita implementado para \maggen. 
+
+
+Las dos etapas anteriores son realizadas en el algoritmo \ref{alg:evalattr} denominado \textbtt{eval}. 
+
+\begin{algorithm}[!ht]
+\lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/eval_attribute_wuu_yang}
+\caption{\label{alg:evalattr} Evaluación de atributos}
 \end{algorithm}

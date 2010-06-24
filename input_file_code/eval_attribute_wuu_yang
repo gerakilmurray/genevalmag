@@ -3,6 +3,7 @@ procedure eval (T)
   /* Selecciona un plan de evaluacion para cada nodo no terminal en T. */
   /* `$\mu$` es un orden de evaluacion de los atributos del simbolo inicial. */
   traverse(root of T, `$\mu$`)
-  Usar un Evaluador Orientado a Visita tradicional para evaluar las instancias de atributos de T.
+  /* Evaluador Orientado a Visita tradicional para evaluar las instancias de atributos de T.*/
+  eval_visiter 
   /* T es ahora un AST decorado*/
 end procedure
