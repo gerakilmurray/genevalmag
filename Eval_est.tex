@@ -50,7 +50,7 @@ Estos grafos se generan para cada regla de la gramática y considerando las depe
 \label{subsec:alg-ADP} 
 Para generar estos grafos, Wuu Yang no plantea un algoritmo preciso aunque no es necesario ya que toda la heurística necesaria se encuentra en la definición de los mismos (ver \ref{mag:adpdef}).
 
-Un grafo ADP corresponde a una regla bajo una cierta combinación de producciones para cada uno de sus hijos. Es decir, que para una misma regla pueden existir varios grafos ADP, ya que sus hijos pueden producir más de un contexto. El computo de grafos ADP es presentado en el algoritmo \ref{alg:graphadp}.
+Un grafo ADP corresponde a una regla bajo una cierta combinación de producciones para cada uno de sus hijos. Es decir, que para una misma regla pueden existir varios grafos ADP, ya que sus hijos pueden producir más de un contexto. El cómputo de grafos ADP es presentado en el algoritmo \ref{alg:graphadp}.
 
 \begin{algorithm}[!ht]
 \lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_adp_wuu_yang}
@@ -102,7 +102,7 @@ La traducción bajo demanda de los planes de evaluación, permiten realizar opti
 \caption{\label{alg:genvisitseq} Generador de secuencias de visitas}
 \end{algorithm}
 
-El algoritmo que realiza el computo de las secuencias de visita totales realiza un proceso recursivo para lograr la traducción. Se lo puede considerar como una simulación del recorrido sobre el árbol en tiempo de evaluación \footnote{En la sección \ref{sec:constseqvisit} se ampliará este funcionamiento.}. Por lo que se debe llevar una secuencia de visita local, a la cual se le insertarán los distintos comandos. Además, será necesario una función que lleve las instancias de atributos ya calculadas.
+El algoritmo que realiza el cómputo de las secuencias de visita totales realiza un proceso recursivo para lograr la traducción. Se lo puede considerar como una simulación del recorrido sobre el árbol en tiempo de evaluación \footnote{En la sección \ref{sec:constseqvisit} se ampliará este funcionamiento.}. Por lo que se debe llevar una secuencia de visita local, a la cual se le insertarán los distintos comandos. Además, será necesario una función que lleve las instancias de atributos ya calculadas.
 
 De esta forma, cuando se detecta un \textbtt{visit}, se debe localizar a que hijo tiene que recursar en base al plan actual, el cual tiene un contexto establecido. Además se debe determinar el plan proyectado que actuará de orden de evaluación impuesto en la recursión. Al volver se debe actualizar todas las instancias de atributos que fueron computadas en el contexto inferior, para evitar futuras visitas innecesarias.
 
@@ -137,7 +137,7 @@ Para continuar con el proceso, se debe seleccionar para cada hijo el plan proyec
 \caption{\label{alg:traverse} Función Traverse}
 \end{algorithm}
 
-La segunda etapa es realizada por la función \textbtt{eval_visiter}. Esta implementa la evaluación guiada por la secuencia de visita. Este algoritmo, Wuu Yang no lo presenta y lo deja a libre elección del usuario. En \ref{sec:codcppalgeval} se presenta el evaluador guiado por visita implementado para \maggen. 
+La segunda etapa es realizada por la función \textbtt{eval\_visiter}. Esta implementa la evaluación guiada por la secuencia de visita. Este algoritmo, Wuu Yang no lo presenta y lo deja a libre elección del usuario. En \ref{sec:codcppalgeval} se presenta el evaluador guiado por visita implementado para \maggen. 
 
 
 Las dos etapas anteriores son realizadas en el algoritmo \ref{alg:evalattr} denominado \textbtt{eval}. 
