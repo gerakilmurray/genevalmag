@@ -23,24 +23,20 @@ El ejemplo es presentado en la figura \ref{ag-no-ANCAG}. El mismo es trabajado, 
         \attribution{Y.i2 := X.s1}
         \attribution{Y.i3 := Y.s2}
     \end{Attribution}
-
 \newproduction{Y}{m}    
     \begin{Attribution}
         \attribution{Y.s2 := Y.i2}
         \attribution{Y.s3 := 1}
     \end{Attribution}
-    
 \newproduction{Y}{n}
     \begin{Attribution}
         \attribution{Y.s2 := 2}
         \attribution{Y.s3 := Y.i3}
     \end{Attribution}
-    
 \newproduction{X}{m}
     \begin{Attribution}
         \attribution{X.s1 := X.i1}
     \end{Attribution}
-    
 \newproduction{Z}{Y}
     \begin{Attribution}
         \attribution{Z.s4 := Y.s3}
@@ -57,10 +53,10 @@ Los grafos \textit{DP} denotan las relaciones de dependencias directas entre las
 
 Un grafo \textit{DP} esta definido (\cite{estruc-algorit}) con las siguientes consideraciones: 
 
-\begin{itemize}
+\begin{items}
 \item Los nodos denotan \textit{instancias} de una producción.
 \item Las aristas denotan la dependencia entre las instancias. Una arista $X_{i}.a\rightarrow X{j}.b$, \footnote{con \textit{i} y \textit{j} índices de ocurrencias consistentes con alguna ecuación de la gramática} denota que la evaluación de la instancia \textit{$X_{i}.a$} depende de la evaluación de \textit{$Y_{i}.b$} 
-\end{itemize}
+\end{items}
 
 El conjunto de dependencias directas de una producción, de la gramática, se denota como \textit{DP(p)}(\textit{p} producción de la gramática) y se define como:
 \begin{definition}
@@ -81,10 +77,10 @@ Los grafos \textit{Down} denotan las relaciones de los atributos de un símbolo.
 
 Un grafo \textit{Down} esta definido (\cite{estruc-algorit}) con las siguientes consideraciones: 
 
-\begin{itemize}
+\begin{items}
 \item Los nodos denotan \textit{atributos} de un símbolo.
 \item Las aristas denotan la dependencia entre los atributos de un símbolo. Dado los atributos $a$ y $b\in A(X)$ del símbolo $X\in VN$, una arista $a\rightarrow b$, denota que la evaluación del atributo \textbtt{a} depende de la evaluación de \textbtt{b}. 
-\end{itemize}
+\end{items}
 El conjunto de dependencias entre los atributos de un símbolo se denota como  
 \textbtt{Down(X)}($X\in VN$ de una gramática $G$) y se define:
 \begin{definition}
@@ -102,10 +98,10 @@ En la sección \ref{subsec:alg-DOWN} se presenta el algoritmo para la construcci
 \textit{DCG} significa \textit{Downward Characteristic Graphs}, los mismos contienen las dependencias entre instancias de la gramática para una producción \textit{p}, teniendo en cuenta un símbolo en la gramática.
 \begin{definition}
 Dado q una producción de la forma $X_{0}\rightarrow \alpha_{0} X_{1} \alpha_{1} X_{2} \dots X_{k} \alpha_{k}$, el \textit{Downward Characteristic graph} of $X_{0}$ en los subárboles derivados vía la producción \textit{q}, denotado como $DCG_{X_{0}}(q)$, es un grafo donde: 
-\begin{itemize}
+\begin{items}
 \item Los nodos son atributos del símbolo $X_{0}$.
 \item Una arista, $X.a \rightarrow X.b$, denota una dependencia (transitiva) de X.b sobre X.a en algún subárbol derivado desde $X_{0}$ vía \textit{q}.
-\end{itemize}
+\end{items}
 \end{definition}
 El siguiente teorema fue presentado por Wuu-Yang en \cite{wuu-yang1}:
 \begin{theorem}
@@ -165,11 +161,10 @@ Una gramática \textit{G} de la forma \ref{def:grammarattr} es una \textit{gram�
 \end{equation}
 
 Las \textit{gramáticas multi-plans} mantienen propiedades deseables como:
-\begin{itemize}
+\begin{items}
 \item La clases de gramáticas MAG cumplen la propiedad de que todas las gramáticas de atributos en dicha clase son \textbf{no circulares}.
 \item Toda gramática MAG cumple con las propiedades de gramática bien definida\footnote{Es importante tener en cuenta las condiciones para gramática completa, detallada en \ref{def:gacompleta}} (WDAG), esto es, todo árbol sintáctico derivado sobre una MAG contiene dependencias no circulares.
-\end{itemize}
-
+\end{items}
 
 De los conceptos analizado arriba surgen la siguiente definición y los siguientes 2 teoremas:
 
@@ -193,13 +188,13 @@ Toda gramática ANCAG es una gramática MAG, pero no viceversa.
 \end{theorem}
 
 \begin{figure}\centering
-\includegraphics[width=350pt,height=129pt]{ej-grafos2.png}
+\includegraphics[width=320pt,height=118pt]{ej-grafos2.png}
 \caption{\label{idp-wuu-yang}Grafo IDP-ANCAG(P0) para el ejemplo \ref{ag-no-ANCAG}.}
 \end{figure}
 
 Un resultado que muestra la veracidad del teorema anterior se observa en la gramática de la figura \ref{ag-no-ANCAG}, la cual es gramática MAG, pero la misma no es ANCAG. Este resultado se puede notar en la figura \ref{ancag-circle}, donde se marca la dependencia circular en el grafo.
 
 \begin{figure}[!ht]\centering
-\includegraphics[width=350pt,height=129pt]{ej-grafos2-circle.png}
+\includegraphics[width=320pt,height=118pt]{ej-grafos2-circle.png}
 \caption{\label{ancag-circle} Grafo IDP-ANCAG(P0) marcando ciclo.}
 \end{figure}
