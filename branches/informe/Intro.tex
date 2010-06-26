@@ -33,9 +33,20 @@ En el desarrollo de este capítulo, se introducirán un amplio número de concep
 
 \maggen\ es el objetivo principal del proyecto y su denominación esta dada por la combinación de las sílabas \textbf{mag}, que significa \textit{Multi-plans Attribute Grammar} y \textbf{Gen} por \textit{generator}. Estas dos abreviaturas dan significado a \maggen\ como ``Generador de Evaluadores Estáticos para MAG''.
 
-\section{Que hace y la diferecia con otro}
+\section{Que es \maggen\, que hace y que lo distingue de los demás}
 
-Resaltar que acepta, que hace con las MAG, y que lo diferecia del resto. en tiempo de ejecución no hay overhead, ya que todo el trabajo se hizo en tiempo de compilacion del evaluador.
+\maggen\ es una herramienta generadora de evaluadores estáticos para gramáticas atribuidas multiplanes (MAG). Al momento no hay herramientas basadas esta familia de Gramáticas de Atributos. 
+
+\maggen\ se encuadra en un conjunto de herramientas complementarias (por ejemplo, generadores de parsers) con el objetivo de desarrollo de un framework para el procesamiento de lenguajes basado en especificaciones.
+
+La importancia que adquiere \maggen, además de basarse en la familia de gramaticas multiplanes, radica en los siguientes puntos: 
+\begin{itemize}
+ \item No genera planes denominados \textit{espurios}. Es decir, para cada plan generado podemos encontrar un arbol de derivacion. Esta caracteristica hace que todos los planes generados sean plausibles.
+ \item El evaluador generado es \textit{estatico}, lo que garantiza que no hay overhead. Esto, debido a que todo el cálculo y procesamiento se realiza en tiempo de compilación.
+\end{itemize}
+
+
+% Resaltar que acepta, que hace con las MAG, y que lo diferecia del resto. en tiempo de ejecución no hay overhead, ya que todo el trabajo se hizo en tiempo de compilacion del evaluador.
 
 
 \section{Gramática libre de contexto}
