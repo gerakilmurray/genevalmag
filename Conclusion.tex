@@ -11,27 +11,34 @@ En esta sección se expondrán las conclusiones obtenidas luego del desarrollo d
 
 Durante todo el desarrollo de este trabajo se ha estudiado e introducido conocimientos sobre \textit{Gramáticas de Atributos}, desde el punto de vista de definiciones, como así también de problemáticas y estado actual de desarrollo de las mismas. Además, se ha trabajado con una familia de GA, relativamente nuevas, como lo son las Multi-planes (MAG), presentas por Wuu Yang (1998). Sobre estas es posible desarrollar evaluadores estáticos mediante técnicas que se apoyan en secuencias de visitas. El aporte y contribución principal del trabajo realizado, fue desarrollar una herramienta, denominada \maggen, que automáticamente genera evaluadores estáticos para MAG.
 
-Como conclusiones específicas sobre \maggen, se obtuvo una herramienta modularizable, eficiente y completamente desarrollada en C++, que cumplió los objetivos propuestos tanto de parte del grupo de desarrollo, como de la directiva del proyecto. Además de que no se conocen herramientas que trabajen sobre MAG, en este sentido, \maggen\ toma un auge aún mayor.\\
-
 Finalmente se puede decir que, los autores, aparte de tener en mente la culminación de la carrera, nunca perdieron la motivación y entusiasmo en el desarrollo de la herramienta de una manera eficiente.
 
 \section{Resultados obtenidos}
 
+Como conclusiones específicas sobre \maggen, se obtuvo una herramienta modularizable, eficiente y completamente desarrollada en C++, que cumplió los objetivos propuestos tanto de parte del grupo de desarrollo, como de la directiva del proyecto. Además de que no se conocen herramientas que trabajen sobre MAG, en este sentido, \maggen\ toma un auge aún mayor.\\
+
 Esta herramienta no genera planes ``\textbf{espurios}'', es decir, planes que nunca se podrían dar en un AST concreto, como sucede en las ANCAG, evitando de este modo informar circularidades sobre los mismos.
 
-\section{Trabajos futuros}
-Como trabajos a futuro o extensiones de \maggen\ se encuentran:
+
+\section{Extensiones}
+Algunas de las posibles extensiones que se tienen en cuenta para \maggen\ se detallan a continuación:
 \begin{itemize}
-\item Rediseñar la herramienta mediante plugings para la generación de código para diferentes lenguajes.
-\item Integración con otras herramientas de parsing
-\item Mayores optimizaciones
 \item Definir una API para herramientas externas de entrada y salida de árboles. A-Terms como ejemplo.
-\item Extensiones al lenguaje de especificación, como módulos a través de \#include, disponer de espacios de nombres, y operadores que permitan referirse a esos espacios de nombres.
+\item Extensiones al lenguaje de especificación, como módulos a través de \texttt{\#include}, disponer de espacios de nombres, y operadores que permitan referirse a esos espacios de nombres.
 \item Redefición o extensión de reglas incluídas, un estilo de sobrecarga.
 \item Agregarle atributos a símbolos.
-\item Mayores pruebas de rendimiento
-        - Comparación con otras herramientas similares (Sylver, definir sintaxis y semantica, es modular, puede que genere evaluador dinámico)
-\item Atributos de alto orden, un atributo puede ser un arbol, que tambien puede decorarse
-\item Implementar los atributos con templates.
+\end{itemize}
+
+\section{Trabajos futuros}
+Entre los principales trabajos a futuro para \maggen\ se encuentran:
+\begin{itemize}
+\item Permitir el adicionado de plugings para la generación de código para diferentes lenguajes.
+% \item Integración con otras herramientas de parsing
+% \item Mayores optimizaciones
+\item Definir una API para herramientas externas de entrada y salida de árboles. A-Terms como ejemplo.
+\item Pruebas de rendimiento como comparaciónes con otras herramientas similares (Sylver, definir sintaxis y semantica, es modular, puede que genere evaluador dinámico)
+
+\item Permitir definir atributos de alto orden, un atributo puede ser un arbol, que tambien puede decorarse.
+\item Implementar como especies de templates para los atributos.
 
 \end{itemize}
