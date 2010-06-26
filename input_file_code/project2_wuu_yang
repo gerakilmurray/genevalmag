@@ -1,5 +1,5 @@
 function project (`$\Psi$`, N) 
-  /* `$\Psi$` es un orden parcial o total, de un conjunto de ocurrencias de atributos de un simbolo. */
+  /* `$\Psi$`: orden parcial o total, de un conjunto de ocurrencias de atributos de un simbolo. */
   /* N es un subconjunto de las ocurrencias de atributos que aparecen en `$\Psi$`. */
   `$\Phi$` := computo de la clausura transitiva de `$\Psi$`
   Remover de `$\Phi$`, todas las ocurrencias de atributos que no pertenezcan a N.

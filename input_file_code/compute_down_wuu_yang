@@ -1,7 +1,7 @@
 procedure compute_down_graphs()
-  /* Inicialmente Down(X) = un grafo con solamente los atributos del simbolo X como nodos. */
+  /* Inicialmente Down(X) = grafo con solamente los atributos del simbolo X como nodos. */
   for cada simbolo X do
-    Down(X) := un grafo donde los nodos son los atributos del simbolo X sin ninguna arista
+    Down(X) := grafo donde los nodos son los atributos del simbolo X sin ninguna arista
   end for
   repeat
     changed := false
