@@ -10,11 +10,10 @@
  \cleardoublepage
 \chapter*{Resumen}
 
-\noindent\rule[2pt]{\textwidth}{0.5pt}
-{\small
-El tratamientos de lenguajes es uno de los temas más estudiados en los últimos años.
+% \noindent\rule[2pt]{\textwidth}{0.5pt}
+El tratamiento de lenguajes es uno de los temas más estudiados en los últimos años.
 
-Las gramáticas de atributos son un formalismo que permiten utilizar el poder descriptivo de las Gramáticas Libres de Contexto y la expresividad de los lenguajes funcionales.\\ 
+Las gramáticas de atributos son un formalismo que permiten utilizar el poder descriptivo de las Gramáticas Libres de Contexto y la expresividad de los lenguajes funcionales. Permitiendo definir la semántica de un lenguaje.
 
 En una \textbf{Gramática de Atributos}, se relaciona cada símbolo de una \textit{Gramática Libre de Contexto} con un conjunto de atributos. Cada regla o producción tiene asociado un \textit{conjunto de reglas semánticas}, denominadas también \textit{ecuaciones}, que establecen la forma de asignación a \textit{atributos} de valores denotados por la aplicación de una función, la cual, puede tomar como argumentos instancias de atributos pertenecientes a los símbolos que aparecen en la producción.
 
@@ -24,19 +23,16 @@ Si una gramática de atributos contiene \textit{dependencias circulares} no podr
 
 Estas familias imponen restricciones sobre la gramática de atributos o sobre las dependencias entre sus atributos, para garantizar la no circularidad, pero, con el costo de restringir el poder expresivo.
 
-En 1998, Wuu Yang caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multi-planes} (MAG), presentando un algoritmo de evaluación, basado en secuencias de visita, en tiempo polinomial respecto al número de símbolos y producciones.\\ 
+En 1998, Wuu Yang caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multi-planes} (MAG), que permiten una mayor expresividad, presentando un algoritmo para su evaluación, basado en secuencias de visita, en tiempo polinomial respecto al número de símbolos y producciones.
 
 \maggen\ es una herramienta que genera, de manera automática, evaluadores para esta familia de gramáticas de atributos, basando su funcionamiento en la teória presentada por Wuu Yang. La salida de \maggen\ es un módulo C++ que se corresponde con un evaluador estático de una gramática MAG. El mismo, contiene las secuencias de visita para todos los planes de evaluación existentes en los posibles contextos. Además incorpora los algoritmos necesarios para llevar a cabo la evaluación de un árbol sintáctico atribuido (AST).
-
-El desarrollo de \maggen\ es el principal aporte de este trabajo. La herramienta fue desarrollada teniendo en cuenta, la capacidad de integración y combinación con otros módulos de un ambiente de tratamientos de lenguajes.
+El desarrollo de \maggen\ es el principal aporte de este trabajo. La herramienta fue desarrollada teniendo en cuenta, la capacidad de integración y combinación con otros módulos de un ambiente de tratamientos de lenguajes. 
 
 % {\large\textbf{Palabras claves:}}
 % 
 % Gramáticas, Atributos, Multi-planes, AG, MAG, Generador, Evaluadores, C++, Estáticos\\
 
-\noindent\rule[2pt]{\textwidth}{0.5pt}
-
-}
+% \noindent\rule[2pt]{\textwidth}{0.5pt}
 
 \cleardoublepage
 

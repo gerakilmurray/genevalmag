@@ -1,4 +1,4 @@
-\chapter{Conclusión}
+\chapter{Conclusión y trabajos futuros}
 \label{chap:conclusiones}
 
 \minitoc
@@ -15,13 +15,23 @@ Como conclusiones específicas sobre \maggen, se obtuvo una herramienta modulari
 
 Finalmente se puede decir que, los autores, aparte de tener en mente la culminación de la carrera, nunca perdieron la motivación y entusiasmo en el desarrollo de la herramienta de una manera eficiente.
 
-% \section{Aportes}
-% 
-% bla bla
+\section{Resultados obtenidos}
+
+Esta herramienta no genera planes ``\textbf{espurios}'', es decir, planes que nunca se podrían dar en un AST concreto, como sucede en las ANCAG, evitando de este modo informar circularidades sobre los mismos.
 
 \section{Trabajos futuros}
 Como trabajos a futuro o extensiones de \maggen\ se encuentran:
 \begin{itemize}
-\item BLALA
-\item BLALA
+\item Rediseñar la herramienta mediante plugings para la generación de código para diferentes lenguajes.
+\item Integración con otras herramientas de parsing
+\item Mayores optimizaciones
+\item Definir una API para herramientas externas de entrada y salida de árboles. A-Terms como ejemplo.
+\item Extensiones al lenguaje de especificación, como módulos a través de \#include, disponer de espacios de nombres, y operadores que permitan referirse a esos espacios de nombres.
+\item Redefición o extensión de reglas incluídas, un estilo de sobrecarga.
+\item Agregarle atributos a símbolos.
+\item Mayores pruebas de rendimiento
+        - Comparación con otras herramientas similares (Sylver, definir sintaxis y semantica, es modular, puede que genere evaluador dinámico)
+\item Atributos de alto orden, un atributo puede ser un arbol, que tambien puede decorarse
+\item Implementar los atributos con templates.
+
 \end{itemize}
