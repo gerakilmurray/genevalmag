@@ -33,6 +33,11 @@ En el desarrollo de este capítulo, se introducirán un amplio número de concep
 
 \maggen\ es el objetivo principal del proyecto y su denominación esta dada por la combinación de las sílabas \textbf{mag}, que significa \textit{Multi-plans Attribute Grammar} y \textbf{Gen} por \textit{generator}. Estas dos abreviaturas dan significado a \maggen\ como ``Generador de Evaluadores Estáticos para MAG''.
 
+\section{Que hace y la diferecia con otro}
+
+Resaltar que acepta, que hace con las MAG, y que lo diferecia del resto. en tiempo de ejecución no hay overhead, ya que todo el trabajo se hizo en tiempo de compilacion del evaluador.
+
+
 \section{Gramática libre de contexto}
 \label{sec:def-CFG}
 En el nivel 2 de la jerarquía de Chomsky (cuadro \ref{chomsky}) se encuentran los \textit{Lenguajes Libres de Contexto}. Las Gramáticas Libres de Contexto (CFG) son un formalismo que permite expresar cadenas de este tipo de lenguajes.
@@ -279,7 +284,7 @@ La realidad es que, los evaluadores dinámicos no han tenido mucho interés en e
 
 Las principales desventajas son que generalmente es necesario mantener el árbol sintáctico y el grafo de dependencias. La construcción del grafo de dependencias consume tiempo y memoria; y a su vez, el tiempo de procesamiento insumido en la construcción del grafo de dependencias puede ser mayor que el proceso de evaluación en sí mismo. En la práctica, si se toma una GA de un tamaño típico, los requerimientos de memoria pueden ser bastante considerables.  
 
-Razón por la cual \maggen\ genera un evaluador estático y debido a esto no se profundizará demasiado en este tipo de evaluadores.
+Razón por la cual \maggen\ genera evaluadores estáticos,y no se profundizará demasiado en el otro tipo de evaluadores.
 
 \subsection{Evaluación estática}
 \label{subsec:eval-est}
