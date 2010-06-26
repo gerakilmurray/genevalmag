@@ -1,4 +1,5 @@
-find_package(Boost REQUIRED)
+set (Boost_MINIMUM_VERSION  "1.35")
+find_package(Boost ${Boost_MINIMUM_VERSION} REQUIRED)
 
 if (Boost_FOUND)
   ADD_SUBDIRECTORY(Attr_grammar)
