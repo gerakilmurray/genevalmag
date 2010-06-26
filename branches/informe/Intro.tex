@@ -33,20 +33,20 @@ En el desarrollo de este capítulo, se introducirán un amplio número de concep
 
 \maggen\ es el objetivo principal del proyecto y su denominación esta dada por la combinación de las sílabas \textbf{mag}, que significa \textit{Multi-plans Attribute Grammar} y \textbf{Gen} por \textit{generator}. Estas dos abreviaturas dan significado a \maggen\ como ``Generador de Evaluadores Estáticos para MAG''.
 
-\section{Que es \maggen\, que hace y que lo distingue de los demás}
+\section{\textquestiondown Qué es \maggen, qué hace y qué lo distingue de los demás?}
 
 \maggen\ es una herramienta generadora de evaluadores estáticos para gramáticas atribuidas multiplanes (MAG). Al momento no hay herramientas basadas esta familia de Gramáticas de Atributos. 
 
 \maggen\ se encuadra en un conjunto de herramientas complementarias (por ejemplo, generadores de parsers) con el objetivo de desarrollo de un framework para el procesamiento de lenguajes basado en especificaciones.
 
-La importancia que adquiere \maggen, además de basarse en la familia de gramaticas multiplanes, radica en los siguientes puntos: 
+La importancia que adquiere \maggen, además de basarse en la familia de gramáticas multiplanes, radica en los siguientes puntos: 
 \begin{itemize}
- \item No genera planes denominados \textit{espurios}. Es decir, para cada plan generado podemos encontrar un arbol de derivacion. Esta caracteristica hace que todos los planes generados sean plausibles.
- \item El evaluador generado es \textit{estatico}, lo que garantiza que no hay overhead. Esto, debido a que todo el cálculo y procesamiento se realiza en tiempo de compilación.
+ \item No genera planes denominados \textit{espurios}. Es decir, para cada plan generado podemos encontrar un árbol de derivación. Esta característica hace que todos los planes generados sean plausibles.
+ \item El evaluador generado es \textit{estático}, lo que garantiza que no hay overhead. Esto, debido a que todo el cálculo y procesamiento se realiza en tiempo de compilación.
 \end{itemize}
 
 
-% Resaltar que acepta, que hace con las MAG, y que lo diferecia del resto. en tiempo de ejecución no hay overhead, ya que todo el trabajo se hizo en tiempo de compilacion del evaluador.
+% Resaltar que acepta, que hace con las MAG, y que lo diferencia del resto. en tiempo de ejecución no hay overhead, ya que todo el trabajo se hizo en tiempo de compilación del evaluador.
 
 
 \section{Gramática libre de contexto}
@@ -89,13 +89,13 @@ A continuación dos ejemplos desarrollados en el capítulo 5 de \cite{gramatica}
 Se define la gramática $G_{pal}$ para el lenguaje de palíndromos\footnote{Un palíndromo (del griego \textit{palin dromein}, ``\textit{volver a ir hacia atrás}''.) es una palabra, número o frase que se lee igual hacia adelante que hacia atrás. Cuando se trata de un número, se denomina capicúa (\urllink{http://es.wikipedia.org/wiki/Palíndromo}).}: \\
 $G_{pal} = (\{P\},\{0,1\}, P, A)$
 donde A es el siguiente conjunto de producciones:
-\begin{enumerate}
+\begin{items}
 \item $P \rightarrow \lambda$
 \item $P \rightarrow 0$
 \item $P \rightarrow 1$
 \item $P \rightarrow 0 P 0$
 \item $P \rightarrow 1 P 1$
-\end{enumerate}
+\end{items}
 
 Ejemplos de cadenas del lenguaje $G_{pal}$:
 \begin{items}
@@ -107,7 +107,7 @@ Ejemplos de cadenas del lenguaje $G_{pal}$:
 
 \item \underline{Ejemplo:} Gramática de expresiones:\\
 \textbf{$G_{exp} = (\{E,I\}, \{+,*,(,),a,b,0,1\}, E, P)$} donde P es el siguiente conjunto de producciones:
-\begin{enumerate}
+\begin{items}
 \item $E \rightarrow I$
 \item $E \rightarrow E + E$
 \item $E \rightarrow E * E$
@@ -118,13 +118,16 @@ Ejemplos de cadenas del lenguaje $G_{pal}$:
 \item $I \rightarrow Ib$
 \item $I \rightarrow I0$
 \item $I \rightarrow I1$
-\end{enumerate}
+\end{items}
+
+Ejemplos de cadenas del lenguaje $G_{exp}$:
 \begin{items}
 \item a
 \item b00
 \item a*(a+b00)
 \item etc.
 \end{items}
+
 \end{enumerate}
 
 \underline{Abreviación de reglas}: Cuando se denota una producción se puede utilizar una abreviación para agrupar aquellas producciones con el mismo \textit{head}. Para ello se utiliza el meta-símbolo ``|''. Por ejemplo el conjunto de producciones de $G_{pal}$ se podrían escribir de la siguiente manera: $P \rightarrow \lambda | 0 | 1 | 0P0 | 1P1$.\\
@@ -331,16 +334,16 @@ Una secuencia de visitas en el nodo $n$ es una secuencia de tres operaciones o a
 \emph{visit(child,i)}, \emph{compute(at)} y \emph{leave(i)}.
 
 \begin{description}
-\item La acción \emph{visit(child,i)} indica que el evaluador debe moverse (visitar) el nodo hijo \emph{child} de $n$ y corresponde a la \emph{i-ésima} visita al nodo hijo.
+\item La acción \emph{\textbf{visit(child,i)}} indica que el evaluador debe moverse (visitar) el nodo hijo \emph{child} de $n$ y corresponde a la \emph{i-ésima} visita al nodo hijo.
 
-\item La acción \emph{compute(at)} indica que debe evaluarse la ecuación que define $at$ en la producción $p$ aplicada correspondiente al nodo $n$.
+\item La acción \emph{\textbf{compute(at)}} indica que debe evaluarse la ecuación que define $at$ en la producción $p$ aplicada correspondiente al nodo $n$.
 
-\item La acción \emph{leave(i)} indica que ha finalizado la visita \emph{i-ésima} en el nodo corriente y que se debe visitar al nodo padre.
+\item La acción \emph{\textbf{leave(i)}} indica que ha finalizado la visita \emph{i-ésima} en el nodo corriente y que se debe visitar al nodo padre.
 \end{description}
 
-\underline{\textit{Nota:}}
+\underline{\textit{\textbf{Nota:}}}
 
-En el capítulo de implementación de \maggen\ (Ver cap. \ref{chap:implem}) se abordarán detalles sobre el funcionamiento de estas tres operaciones, tanto para el algoritmo de generación de secuencias, como así también para el evaluador generado. Uno de los principales cambios, con respecto a lo visto en los puntos de arriba, es que el índice $i$ es omitido (en \emph{visit} y \emph{leave}) debido a que cada nodo lleva un propio contador de invocaciones y mantiene los cambios de estados en cada una de ellas.  
+En el capítulo de implementación de \maggen\ (Ver capítulo \ref{chap:implem}) se abordarán detalles sobre el funcionamiento de estas tres operaciones, tanto para el algoritmo de generación de secuencias, como así también para el evaluador generado. Uno de los principales cambios, con respecto a lo visto en los puntos de arriba, es que el índice $i$ es omitido (en \emph{visit} y \emph{leave}) debido a que cada nodo lleva un propio contador de invocaciones y mantiene los cambios de estados en cada una de ellas.  
 
 Un evaluador basado en secuencias de visita, comienza ejecutando las operaciones en el nodo raíz del árbol. En cada visita a un nodo, se ejecutan las operaciones en secuencia hasta la ejecución de una operación \emph{leave(i)}.
 En su próxima visita ($i+1$), se continúa con la operación que sigue a \emph{leave(i)}.

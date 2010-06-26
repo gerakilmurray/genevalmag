@@ -153,19 +153,22 @@ Otro caso a tener cuenta es el uso de \textbtt{non\_assoc} como asociatividad de
 \begin{enumerate}
 
 \item 
-\begin{center}
-\fbox{\textbtt{\ op infix (\_,right) *: int, int -> int;\ }}\end{center}
+% \begin{center}
+\fbox{\textbtt{\ op infix (\_,right) *: int, int -> int;\ }}
+% \end{center}
 \vspace{0.2cm}
 Esta línea declara el operador infijo ``\textbtt{*}'' con precedencia por defecto y asociatividad \textbtt{right}. Esta línea también podría haber sido definida como:
 \vspace{0.2cm}
 \begin{center}
-\fbox{\textbtt{\ op infix *: int, int -> int;\ }}\end{center}
+\fbox{\textbtt{\ op infix *: int, int -> int;\ }}
+\end{center}
 \vspace{0.2cm}
 donde se usan valores por defecto para precedencia y asociatividad.
 
 \item 
-\begin{center}
-\fbox{\textbtt{\ op prefix (60,non\_assoc) \%: int -> int;\ }}\end{center}
+% \begin{center}
+\fbox{\textbtt{\ op prefix (60,non\_assoc) \%: int -> int;\ }}
+% \end{center}
 \vspace{0.2cm}
 Esta línea declara el operador prefijo ``\textbtt{\%}'' con precedencia \textbtt{60} y asociatividad \textbtt{non\_assoc}. Esta línea también podría haber sido definida como:
 \vspace{0.2cm}
@@ -251,22 +254,23 @@ list_symbol = SYMB_NON_TERMINAL , list_symbol
 \begin{enumerate}
 
 \item 
-\begin{center}
-\fbox{\textbtt{\ lex: syn <string>\ of all - {T};\ }}\end{center}
+% \begin{center}
+\fbox{\textbtt{\ lex: syn <string>\ of all - {T};\ }}
+% \end{center}
 \vspace{0.2cm}
 Se define el atributo ``\textbtt{lex}'' sintetizado de tipo ``\textbtt{string}'' para todos los símbolos excepto para el símbolo ``\textbtt{T}''.
 
 \item
-
-\begin{center}
-\fbox{\textbtt{\ type: inh <string>\ of all;\ }}\end{center}
+% \begin{center}
+\fbox{\textbtt{\ type: inh <string>\ of all;\ }}
+% \end{center}
 \vspace{0.2cm}
 Se define el atributo ``\textbtt{type}'' heredado de tipo ``\textbtt{string}'' para todos los símbolos de la gramática.
 
 \item 
-
-\begin{center}
-\fbox{\textbtt{\ grade: <int>\ of {E, T};\ }}\end{center}
+% \begin{center}
+\fbox{\textbtt{\ grade: <int>\ of {E, T};\ }}
+% \end{center}
 \vspace{0.2cm}
 Se define el atributo ``\textbtt{grade}'' sintetizado (por defecto) de tipo ``\textbtt{int}'' para los símbolos ``\textbtt{E}'' y ``\textbtt{T}''.\\
 \end{enumerate}
@@ -274,9 +278,13 @@ Se define el atributo ``\textbtt{grade}'' sintetizado (por defecto) de tipo ``\t
 \subsection{Bloque de reglas}
 Por último el bloque de reglas. La interpretación de las reglas dentro del lenguaje esta dada por la definición de gramática libre de contexto (Ver definición \ref{sec:def-CFG}).          
 
-El símbolo terminal se considera un símbolo entre comillas simples (\textbtt{'}).\\ 
+El símbolo terminal se considera un símbolo entre comillas simples (\textbtt{'}).
 
-\underline{Ejemplo:}\ \fbox{\ \textbtt{'literal'}\ }\\
+\underline{Ejemplo:}
+\vspace{0.2cm}
+\begin{center}
+\fbox{\ \textbtt{'literal'}\ }\\
+\end{center}
 \vspace{0.2cm}
 
 Las ecuaciones describen las reglas semánticas que definen la sintaxis de la gramática. Cada ecuación define la interpretación semántica de los atributos de cada símbolo; esta definición se realiza mediante una expresión constituida por \textbf{instancias}, \textbf{literales} o aplicación de operadores y funciones a subexpresiones.
@@ -341,8 +349,11 @@ Se compone de tres partes\footnote{Estas partes se corresponden con las usadas p
 \item Índice sintáctico, comenzando de 0 para la primera ocurrencia.
 \item Atributo.
 \end{itemize}
-\begin{center} \underline{Ejemplo:}\  
-\fbox{\ E[2].type\ }\end{center} 
+\underline{Ejemplo:}
+\vspace{0.2cm}
+\begin{center}
+\fbox{\ \textbtt{E[2].type}\ }
+\end{center} 
 
 Asocia al símbolo ``E'' con el atributo ``type'' en la ocurrencia 3 del símbolo.
 
@@ -352,28 +363,24 @@ Asocia al símbolo ``E'' con el atributo ``type'' en la ocurrencia 3 del símbol
 \begin{enumerate}
 
 \item 
-\begin{center}
-
 \fbox{\ E ::= E '+' E \ compute\ 
                        E[0].valor = E[1].valor + E[2].valor; 
-                       end;\ }\end{center}
+                       end;\ }
 
-El ejemplo muestra una regla del símbolo ``E'' que contiene una ecuación que define al atributo \textbtt{valor}. Si se considera, una ``Gramática Bien Definida'' (ver \ref{sec:well-defined}), \textbtt{valor} es un atributo sintetizado de ``E''. Otra consideración a tener en cuenta, es la enumeración sintáctica de cada símbolo; en este ejemplo cada símbolo ``E'' presenta su índice sintáctico que asocia a los atributos con cada símbolo. Es decir, cada símbolo ``E'' es reconocido como un nuevo símbolo. A modo de aclaración, se podría definir la ecuación de la siguiente, obteniendo el mismo poder expresivo para la regla:
-
+El ejemplo muestra una regla del símbolo ``\textbtt{E}'' que contiene una ecuación que define al atributo sintetizado \textbtt{valor}, asumiendo que no tiene atributos heredados. Si se considera, una ``Gramática Bien Definida'' (Ver \ref{sec:well-defined}), \textbtt{valor} es un atributo sintetizado de ``\textbtt{E}''. Otra consideración a tener en cuenta, es la enumeración sintáctica de cada símbolo; en este ejemplo cada símbolo ``\textbtt{E}'' presenta su índice sintáctico que asocia a los atributos con cada símbolo. Es decir, cada símbolo ``\textbtt{E}'' es reconocido como un nuevo símbolo. A modo de aclaración, se podría definir la ecuación de la siguiente, obteniendo el mismo poder expresivo para la regla:
 \begin{center}
 \fbox{\ E ::= T '+' F \ compute\ 
       E[0].valor = T[0].valor + F[0].valor; 
-      end;\ }\end{center}
+      end;\ }
+\end{center}
 
-Cabe aclarar que \textbtt{valor} debe ser atributo de ``T'' y ``F''.
+Cabe aclarar que \textbtt{valor} debe ser atributo de ``\textbtt{T}'' y ``\textbtt{F}''.
 \vspace{0.2cm}
 
 \item
+\fbox{\ \textbtt{digit ::= '1';}\ }
 
-\begin{center}
-\fbox{\ digit ::= '1';\ }\end{center}
-
-Se observa una regla para el símbolo no terminal ``digit'' sin ecuaciones semánticas. 
+Se observa una regla para el símbolo no terminal ``\textbtt{digit}'' sin ecuaciones semánticas. 
 \vspace{0.2cm}
 \end{enumerate}
 
@@ -382,15 +389,15 @@ Se observa una regla para el símbolo no terminal ``digit'' sin ecuaciones semá
 La especificación permite agregar comentarios. Para una mejor familiarización con el usuario se han utilizado las mismas reglas sintácticas que C y C++ para el adicionado de líneas o bloques de comentarios. Las cuales se detallan a continuación:
 
 \begin{description}
-\item [$\textbf{/*}$ comment $\textbf{*/}$] es la forma de inserción de bloques de comentarios.
-\item [$\textbf{//}$ line comment] es comentario de una línea.
+\item [$\textbf{/*}$ comment $\textbf{*/}$] Forma de inserción de bloques de comentarios.
+\item [$\textbf{//}$ line comment] Comentario de una línea.
 \end{description} 
 
 \subsection{Ejemplo}
 
 En el apéndice \ref{append:agwuuyang} se puede observar uno de los casos de prueba desarrollado para la fase de testing de \maggen. El mismo es presentado en pseudocódigo y luego escrito en el lenguaje de especificación. 
 
-Una característica que motivó el desarrollo de este ejemplo es que se trata de una gramática MAG pero no ANCAG. Además, el mismo, es un caso de estudio analizado en una de las principales bases teóricas que han sido usadas para el desarrollo de \maggen\ (\cite{wuu-yang1}). 
+Una característica que motivó el desarrollo de este ejemplo es que se trata de una gramática \textbf{MAG} pero no \textbf{ANCAG}. Además, el mismo, es un caso de estudio analizado en una de las principales bases teóricas que han sido usadas para el desarrollo de \maggen\ (\cite{wuu-yang1}). 
 
 En la presentación del ejemplo en el lenguaje de especificación, se observa en principio (línea 1 a 7) un bloque de comentario y luego los bloques que definen la gramática como se ha analizado en las secciones anteriores; bloque semántico de la línea 8 a 13 luego el de atributos y a partir de la línea 25 el bloque de reglas con sus respectivas ecuaciones.
 
@@ -477,17 +484,17 @@ A continuación se detallan dichos chequeos\footnote{Detalles sobre la implement
 \item [Precedencia] El chequeo de precedencia consiste en preservar la precedencia definida de cada operador. Dicho chequeo, es realizado sobre cada una de las ecuaciones definidas en la gramática. Por ejemplo:\\ Dada la siguiente ecuación:
 
 \begin{center}
- \fbox{ E[0].valor = E[1].valor + E[2].valor * E[2].valor }
+ \fbox{\ \textbtt{E[0].valor = E[1].valor + E[2].valor * E[2].valor}\ }
 \end{center}
 
 Su interpretación está dada por la definición de la precedencia de los operadores \textbtt{+} y \textbtt{*}(se asume que los dos operadores son infijos y están bien usado). Si se toma \textbtt{*} con mayor precedencia que \textbtt{+}, \maggen\ interpreta implícitamente como si la ecuación tuviera paréntesis:
 
 \begin{center}
- \fbox{ E[0].valor = E[1].valor + (E[2].valor * E[2].valor) }
+ \fbox{\ \textbtt{E[0].valor = E[1].valor + (E[2].valor * E[2].valor)}\ }
 \end{center}
 
 El uso de paréntesis en las expresiones define explícitamente la prioridad de los operadores, por lo que, \maggen\ asume esa precedencia. Por ejemplo, si en la ecuación vista arriba se la define utilizando paréntesis, es decir:\  
- \fbox{E[0].valor = (E[1].valor + E[2].valor) * E[2].valor}\ la interpretación es tomada en ese sentido.
+ \fbox{\ \textbtt{E[0].valor = (E[1].valor + E[2].valor) * E[2].valor}\ }\ la interpretación es tomada en ese sentido.
 
 \item [Asociatividad] El chequeo de asociatividad realiza un análisis sobre las expresiones de las ecuaciones, para asegurar la asociatividad definida de cada operador. Por ejemplo, si se ha definido un operador \textbtt{non\_assoc}, se espera que el uso del mismo sea consistente con esa definición, es decir, no se considere una posible asociación del mismo. 
 
@@ -502,7 +509,8 @@ Cuando se utilizan paréntesis en la expresión, \maggen\ asume la asociatividad
 \item Cada regla debe definir todos los atributos heredados de los símbolos de la parte derecha.
 \item Cada regla sólo define los atributos de los símbolos que participan en dicha regla.
 \item En caso de redefinición alguna instancia en la regla, la misma es ignorada.
-\item Los índices de las instancias deben ser consistente con la cantidad de apariciones del símbolo, en la regla. Ejemplo: \\En la siguiente regla:\ \fbox{ S ::= S T }\ los índices posibles de las instancias son \textbtt{0} y \textbtt{1} para el símbolo ``S'' y \textbtt{0} para el símbolo ``T''.
+\item Los índices de las instancias deben ser consistentes con la cantidad de apariciones del símbolo en la regla.\\ \underline{\textbf{Ejemplo:}}\\
+En la siguiente regla:\ \fbox{\ \textbtt{S ::= S T}\ }\ los índices posibles de las instancias son \textbtt{0} y \textbtt{1} para el símbolo ``\textbtt{S}'' y \textbtt{0} para el símbolo ``\textbtt{T}''.
 \item La gramática debe respetar las condiciones exigidas para una gramática extendida. 
 \end{itemize}
 \end{description}
@@ -544,18 +552,18 @@ La construcción de grafos se realiza en el módulo \textbtt{builder\_graphs}. \
   \end{figure}
 \end{itemize}
 
-Las figuras\footnote{\label{foot:graph} Imagen generada utilizando la herramienta \textit{graphviz} sobre el archivo \textbtt{.dot} generado por \maggen.} muestran un ejemplo de cada tipo de grafo, generadas a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
+Las figuras\footnote{\label{foot:graph} Imagen generada utilizando la herramienta \textbtt{graphviz} sobre el archivo \textbtt{.dot} generado por \maggen.} muestran un ejemplo de cada tipo de grafo, generadas a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
 
-La construcción de cada tipo de grafo respeta los principios analizados en el capítulo \ref{chap:mag} y los algoritmos respectivo analizados en el capítulo  \ref{chap:eval_est}. 
+La construcción de cada tipo de grafo respeta los principios analizados en el capítulo \ref{chap:mag} y los algoritmos respectivo analizados en el capítulo \ref{chap:eval_est}. 
 
-De de los 4 tipos de grafos analizados, los necesarios para el cómputo de etapas siguientes, son los ``ADP graph''. Los demás, son requeridos como cálculo previo para la construcción de estos.
+De de los 4 tipos de grafos analizados, los necesarios para el cómputo de etapas siguientes, son los ``\textbtt{ADP graph}''. Los demás, son requeridos como cálculo previo para la construcción de estos.
 
 \subsection{Construcción de planes}
 \label{subsec:conts-plan-dise}
-La etapa de construcción de planes, tal como lo muestra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``Builder''. El cálculo de planes en \maggen\ se basa en lo analizado en el capítulo \ref{chap:eval_est} (Ver sección \ref{sec:comp-planes}) y teniendo en cuenta estos dos puntos:
+La etapa de construcción de planes, tal como lo muestra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``\textbtt{Builder}''. El cálculo de planes en \maggen\ se basa en lo analizado en el capítulo \ref{chap:eval_est} (Ver sección \ref{sec:comp-planes}) y teniendo en cuenta estos dos puntos:
 
 \begin{enumerate}
-\item El punto de entrada para el cálculo de los planes esta dado sobre los grafos ADP. 
+\item El punto de entrada para el cálculo de los planes esta dado sobre los grafos \textbf{ADP}. 
 \item El cálculo de planes se basa en un orden topológico de la evaluación de los atributos de los símbolos, teniendo en cuenta los distintos contextos posibles.
 \end{enumerate}
 
@@ -572,7 +580,7 @@ Estos se obtienen a partir de los planes analizados anteriormente, proyectando e
 \caption{\label{fig:plan}Plan obtenido por \maggen\ para la regla R1}
 \end{figure}
 
-En la figura\footnote{Figura obtenida con la herramienta \textit{graphviz} sobre el archivo \textbtt{.dot} generado por \maggen.} \ref{fig:plan} se observa un plan obtenido por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}. Este plan contiene el orden de los números de ecuación que pertenecen a la regla del plan, los planes proyectados son computados sobre el plan total, es decir con todas las dependencias.
+En la figura\footnote{Figura obtenida con la herramienta \textbtt{graphviz} sobre el archivo \textbtt{.dot} generado por \maggen.} \ref{fig:plan} se observa un plan obtenido por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}. Este plan contiene el orden de los números de ecuación que pertenecen a la regla del plan, los planes proyectados son computados sobre el plan total, es decir con todas las dependencias.
 
 Para clarificar este concepto, se pueden observar los planes proyectados obtenidos en la figura \ref{fig:plan_project}, para el plan de evaluación anterior.
 
@@ -585,19 +593,19 @@ Para clarificar este concepto, se pueden observar los planes proyectados obtenid
 \caption{\label{fig:plan_project}Planes proyectados obtenido por \maggen\ para R1.}
 \end{figure}
 
-Notar que cada plan proyectado ha capturado las ecuaciones de cada símbolo de la parte derecha para el cómputo de sus atributos, dependiendo del contexto. Es decir, en el caso del símbolo ``Y'' su orden ha sido computado observando las dependencias de la regla R2. Estas dependencias son necesarias para el cálculo del plan completo en las ecuaciones 2 y 4. 
+Notar que cada plan proyectado ha capturado las ecuaciones de cada símbolo de la parte derecha para el cómputo de sus atributos, dependiendo del contexto. Es decir, en el caso del símbolo ``\textbtt{Y}'' su orden ha sido computado observando las dependencias de la regla R2. Estas dependencias son necesarias para el cálculo del plan completo en las ecuaciones 2 y 4. 
 
 \subsection{Construcción de secuencias de visita}
 \label{sec:constseqvisit}
 
-La etapa de construcción de secuencias de visita, tal como lo muestra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``Builder''. Las mismas, son computados a partir de los diferentes planes obtenidos en el sección anterior.
+La etapa de construcción de secuencias de visita, tal como lo muestra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``\textbtt{Builder}''. Las mismas, son computados a partir de los diferentes planes obtenidos en el sección anterior.
 
 El funcionamiento para la construcción de las secuencias, esta dado por la aplicación de una especie de \textit{simulación}, para la evaluación de cada atributo de los símbolos. El resultado de esta simulación, son los valores que conforman la secuencia de visita, tal como se ha analizado en la sección \ref{sec:sec-visit}. Estos valores siguen la siguiente interpretación: 
 
 \begin{description}
 \item [Compute] Valor mayor que cero que representa el número de la ecuación a resolver\footnote{La ecuación a computar pertenece a la regla del plan corriente.}.
 \item [Visit] valor menor que cero que representa el número nodo hijo a visitar\footnote{El nodo hijo esta dado por el contexto de la regla del plan corriente.}.
-\item [Leave] valor ``0''.
+\item [Leave] valor ``\textbtt{0}''.
 \end{description}
 
 A modo de ejemplo, se muestran las secuencias de visita generadas por \maggen\ para el ejemplo analizado en el apéndice \ref{append:agwuuyang}:

@@ -18,7 +18,7 @@ La solución obtenida se apoya en la utilización de un framework reconocido mun
 
 Se puede resumir el proceso de análisis sintáctico, en este framework, en cuatro componentes, como lo muestra la figura \ref{fig:procesoSpirit}.
 
-\begin{figure}[!ht]\centering
+\begin{figure}\centering
 \includegraphics[width=400pt, height=160pt]{./spirit.png}
 \caption{Procesos dentro de \spirit}\label{fig:procesoSpirit}
 \end{figure}
@@ -98,7 +98,7 @@ as\_lower\_d & Convierte en minúscula lo aceptado por la expresión\\ \hline
 
 El prototipo para la gramática es el siguiente:
 
-\begin{lstlisting}[float=!ht, columns=fullflexible, linewidth=9cm]
+\begin{lstlisting}[columns=fullflexible, linewidth=9cm]
 struct my_grammar: public grammar <my_grammar>
 {
     template <typename ScannerT>
@@ -122,7 +122,7 @@ Para el manejo de los símbolos válidos dentro de la definición de la gramáti
 
 Para comenzar a interactuar con el framework, el usuario debe declarar un objeto de la estructura definida y pasarlo como parámetro a una función específica de \spirit.
 
-\begin{lstlisting}[float=!ht, columns=fullflexible, linewidth=7cm]
+\begin{lstlisting}[columns=fullflexible, linewidth=7cm]
 my_grammar g;
 
 if (parse(first, last, g, space_p).full)
@@ -143,7 +143,7 @@ Lo primero que se tuvo que realizar, fue definir los componentes básicos que se
 \begin{description}
 \item [Identificadores] son los nombres de sorts, funciones, atributos, símbolos no terminales y reglas, permitidos por \maggen\ y se definen como en el común de los lenguajes. Debido a que el lenguaje del evaluador generado es C++, todas las palabras reservadas de ese lenguaje, son de la misma clase para \maggen.
 
-\begin{lstlisting}[float=!ht, columns=fullflexible, linewidth=12.6cm]
+\begin{lstlisting}[columns=fullflexible, linewidth=12.6cm]
 r_ident = lexeme_d[(alpha_p|'_')>>*(alnum_p|'_')]-r_reserved_word;
 
 r_reserved_word = str_p("compute")|"end"
@@ -263,7 +263,7 @@ r_oper_assoc = str_p("left")|"right"|"non_assoc";
 
 \item [\textbtt{functions}] Para las funciones se permiten como dominio listas de sorts, los cuales serán agregados incrementalmente a la función que se está declarando. La utilización de acciones semánticas facilitan la modularización. La declaración comienza con la cadena ``\textbtt{function}'' seguida de una espacio$^{\ref{foot:espacio}}$.
 
-\begin{lstlisting}[columns=fullflexible, linewidth=12.7cm]
+\begin{lstlisting}[columns=fullflexible, linewidth=13cm]
 r_decl_func = lexeme_d[str_p("function")>>space_p]>>
                         r_oper[&inic_func][&save_name_func][st_functions.add]>>
                         ':'>>
@@ -373,7 +373,7 @@ E := E op E
 
 Donde ``op'' se interpreta como cualquier operador. Esta gramática presentaba el problema de la ``recursión a izquierda'', por lo que se la quitó obteniendo lo siguiente.
 
-\begin{lstlisting}[basicstyle=\normalsize, float=!ht, backgroundcolor=\color{white}, columns=fullflexible, linewidth=7cm]
+\begin{lstlisting}[basicstyle=\normalsize, backgroundcolor=\color{white}, columns=fullflexible, linewidth=7cm]
 E := T op1 E
     |  T
 
@@ -437,7 +437,7 @@ Las funciones aceptan expresiones como parámetros, así que, la asociatividad y
 
 Al completar esta regla se creará una \textbtt{Expr\_function} dentro de la gramática.
 
-\begin{lstlisting}[float=!ht, columns=fullflexible, linewidth=12.5cm]
+\begin{lstlisting}[columns=fullflexible, linewidth=12.5cm]
 r_function = r_function_st[&create_function][&create_func_node]>>
                        ch_p('(')[&push_mark][&increment_level]>>
                        !(r_expression%', ')>>
@@ -585,19 +585,19 @@ Existen dos grandes casos a considerar:
 
 Existen dos variantes, las cuales son presentadas en los diagramas \ref{rotacion1} y \ref{rotacion2}.
 
-\begin{figure}[!ht]\centering
+\begin{figure}\centering
 \includegraphics[width=250pt, height=82pt]{./rotacion1.png}
 \caption{\label{rotacion1} Caso de rotación cuando la operación de la izquierda tiene menor precedencia.}
 \end{figure}
 
-\begin{figure}[!ht]\centering
+\begin{figure}\centering
 \includegraphics[width=250pt, height=85pt]{./rotacion2.png}
 \caption{\label{rotacion2} Caso de rotación cuando la operación de la derecha tiene menor precedencia.}
 \end{figure}
 
 \item En cambio, cuando se inserta cualquier operación como hija de una operación prefija (raíz) y la insertada tiene mejor precedencia que la raíz, no se resuelve instantáneamente el error, dado que se alteraría el orden sintáctico de la expresión. Para ello se prende una bandera, a la cual se le asigna el valor de precedencia que tiene la operación recién insertada. Entonces cuando en el siguiente paso se agregue una nueva raíz, si tiene mayor precedencia que su ``nieto'' en el árbol, se realiza la siguiente rotación mostrada en el diagrama \ref{rotacion3}.
 
-\begin{figure}[!ht]\centering
+\begin{figure}\centering
 \includegraphics[width=250pt, height=107pt]{./rotacion3.png}
 \caption{\label{rotacion3} Caso de rotación cuando se detectó un conflicto sin resolver.}
 \end{figure}
