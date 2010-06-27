@@ -18,6 +18,6 @@ if (Boost_FOUND)
 
 else (Boost_FOUND) 
 
-  message(FATAL_ERROR "BOOST LIBRARIES NOT FOUND. The libraries are required for the compilation of de maggen.")
+  message(FATAL_ERROR "BOOST LIBRARIES NOT FOUND. The libraries are required for the compilation of de magGen.")
 
 endif (Boost_FOUND)
