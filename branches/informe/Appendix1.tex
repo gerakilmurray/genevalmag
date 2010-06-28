@@ -66,12 +66,12 @@ maggen -fo ../Out\_wuu\_yang -o maggen -f ../examples/ag\_wuu\_yang/ag\_wuu\_yan
 \lstinputlisting[basicstyle=\scriptsize, numbers=left, columns=fullflexible]{input_file_code/Plan.hpp}
 
 \chapter{Apéndice: Diagramas de \maggen.}
-\label{chap:appendisemaggen}
+\label{append:disemaggen}
 La arquitectura completa de \maggen\ se pueden visualizar en 4 capas bien definidas, con funciones y responsabilidades que fueron explicadas en los capítulos específicos de cada uno.
 
 \begin{itemize}
 \item Parsing.
-\item Representación interna: GA y AST.
+\item Representación interna: GA y expresiones.
 \item Construcciones de grafos, planes y secuencias de visitas.
 \item Generación de código del evaluador.
 \end{itemize}
@@ -95,7 +95,7 @@ Los siguientes diagramas corresponden a cada capa.
 
 \begin{figure}[!ht]\centering
 \includegraphics[width=505pt, height=300pt, angle=90]{diagramas/Builder.png}
-\caption{\label{fig:dia-builders}Paquete de constructores de grafos, planes, secuencias de visita y código, de \maggen.}
+\caption{\label{fig:dia-builders}Paquete de constructores de grafos, planes, secuencias de visita y generación código, de \maggen.}
 \end{figure}
 
 \begin{figure}[!ht]\centering
@@ -113,7 +113,7 @@ Los siguientes diagramas corresponden a cada capa.
 
 % \normalsize
 \chapter{Apéndice: Documentación completa de \maggen.}
-\label{chap:appendix-b}
+\label{chap:appendix-doxy}
 La documentación completa de \maggen\ puede ser encontrada en el CD que acompaña este documento. La misma cuenta con más de 400 páginas (Documentación generada con \textit{Doxygen}), por lo que no fue conveniente incluirla en este informe. 
 
 Además, de contar con detalles de implementación de cada clase, cuenta con diagramas auto-generados, que muestran el acoplamiento entre cada módulo.

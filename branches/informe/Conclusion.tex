@@ -17,26 +17,31 @@ Finalmente se puede decir que, los autores, aparte de tener en mente la culminac
 
 Como conclusiones específicas sobre \maggen, se obtuvo una herramienta modularizable, eficiente y completamente desarrollada en C++, que cumplió los objetivos propuestos tanto de parte del grupo de desarrollo, como de la directiva del proyecto. Además de que no se conocen herramientas que trabajen sobre MAG, en este sentido, \maggen\ toma un auge aún mayor.\\
 
-Esta herramienta no genera planes ``\textbf{espurios}'', es decir, planes que nunca se podrían dar en un AST concreto, como sucede en las ANCAG, evitando de este modo informar circularidades sobre los mismos.
+Esta herramienta no genera planes ``\textbf{espurios}'', es decir, planes que nunca se podrían dar en un AST concreto, como sucede en las ANCAG, evitando de este modo informar circularidades absurdas a efectos prácticos.
 
 
 \section{Extensiones}
 Algunas de las posibles extensiones que se tienen en cuenta para \maggen\ se detallan a continuación:
 \begin{itemize}
 \item Definir una API para herramientas externas de entrada y salida de árboles. A-Terms como ejemplo.
-\item Extensiones al lenguaje de especificación, como módulos a través de \texttt{\#include}, disponer de espacios de nombres, y operadores que permitan referirse a esos espacios de nombres.
+\item Extensiones al lenguaje de especificación, como módulos a través de \texttt{\#include}. Esto engloba los puntos siguientes:
+\begin{itemize}
+\item Disponer de espacios de nombres, y operadores que permitan referirse a estos espacios de nombres.
 \item Redefinición o extensión de reglas incluidas, un estilo de sobrecarga.
-\item Agregarle atributos a símbolos.
+\item Permitir el adicionado de atributos a símbolos pertenecientes a otros modulos.
+\end{itemize}
+
 \end{itemize}
 
 \section{Trabajos futuros}
 Entre los principales trabajos a futuro para \maggen\ se encuentran:
 \begin{itemize}
-\item Permitir el adicionado de plugins para la generación de código para diferentes lenguajes.
-% \item Integración con otras herramientas de parsing
-% \item Mayores optimizaciones
-\item Definir una API para herramientas externas de entrada y salida de árboles. A-Terms como ejemplo.
-\item Pruebas de rendimiento como comparaciones con otras herramientas similares (Silver, definir sintaxis y semántica, es modular, puede que genere evaluador dinámico)
+\item Implementar la generación de código al estilo ``\textit{plugins}''. Lo que permitiría extensiones varias, transparentes y elegantes para generar código en diferentes lenguajes. Esto implicaría la definicion de una pequeña API.
+
+\item Definir una API para la construccion de los AST de entrada al evaluador generado, lo que permitiria que herramientas externas puedan generar los AST entrada. 
+% Este puntos podria ser analizado teniendo en cuenta los A-Terms como ejemplo.
+\item Pruebas de rendimiento como comparaciones con otras herramientas similares 
+% (Silver, definir sintaxis y semántica, es modular, puede que genere evaluador dinámico)
 
 \item Permitir definir atributos de alto orden, un atributo puede ser un árbol, que también puede decorarse.
 \item Implementar como especies de templates para los atributos.

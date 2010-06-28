@@ -41,10 +41,11 @@ En el desarrollo de este capítulo, se introducirán un amplio número de concep
 
 La importancia que adquiere \maggen, además de basarse en la familia MAG, radica en los siguientes puntos: 
 \begin{itemize}
- \item No genera planes denominados \textit{espurios}. Es decir, para cada plan generado podemos encontrar un árbol de derivación. Esta característica hace que todos los planes generados sean plausibles.
- \item El evaluador generado es \textit{estático}, lo que garantiza que no hay overhead. Esto, debido a que todo el cálculo y procesamiento se realiza en tiempo de compilación.
+ \item No genera planes denominados \textit{espurios} (Ver def. \ref{def:plan_espurios}). Es decir, planes que nunca se podrían dar en un árbol de derivación. Esta característica hace que todos los planes generados sean plausibles (Ver def. \ref{def:plan_plausible}).
+ \item El evaluador generado es \textit{estático} (Sección \ref{subsec:eval-est}), lo que garantiza que no hay procesamiento ``overhead'' en la evaluacion. Esto, debido a que todo el cálculo y tratamiento se realiza en tiempo de compilación.
 \end{itemize}
 
+En el desarrollo de este informe se presentaran en detalle los conceptos y puntos que fueron analizados en esta sección. Principalmente, en la sección \ref{Teorema} se desarrolla un teorema que demuestra que \maggen\ genera la mínima cantidad de planes de evaluación y, además, en los capítulos \ref{chap:disen_} y \ref{chap:implem} se analizaran aspectos relevantes al diseño e implementación de \maggen.
 
 % Resaltar que acepta, que hace con las MAG, y que lo diferencia del resto. en tiempo de ejecución no hay overhead, ya que todo el trabajo se hizo en tiempo de compilación del evaluador.
 
