@@ -1,76 +1,517 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Bouml (http://bouml.free.fr/) -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="838" height="440" version="1.1" xmlns="http://www.w3.org/2000/svg">
-<g>
-	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="20" y="15" width="73" height="36" />
-	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="20" y="51" width="185" height="113" />
-	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="113" y="75">Attr_grammar</text>
-</g>
-<g>
-	<rect fill="#808080" stroke="none" stroke-opacity="1" x="555" y="286" width="5" height="134" />
-	<rect fill="#808080" stroke="none" stroke-opacity="1" x="258" y="415" width="302" height="5" />
-	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="252" y="280" width="303" height="135" />
-	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="404" y="302">Semantic_check</text>
-	<line stroke="black" stroke-opacity="1" x1="252" y1="317" x2="555" y2="317" />
-	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="260" y="339">-</text>
-	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="289" y="339">precedence_level</text>
-	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" x="260" y="372">-</text>
-	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="289" y="372">index_syntax_order</text>
-</g>
-<g>
-	<rect fill="#808080" stroke="none" stroke-opacity="1" x="820" y="28" width="5" height="105" />
-	<rect fill="#808080" stroke="none" stroke-opacity="1" x="640" y="128" width="185" height="5" />
-	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="634" y="22" width="186" height="106" />
-	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="727" y="44">&lt;&lt;typedef&gt;&gt;</text>
-	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="727" y="81">iterator_t</text>
-	<line stroke="black" stroke-opacity="1" x1="634" y1="96" x2="820" y2="96" />
-</g>
-<g>
-	<rect fill="#808080" stroke="none" stroke-opacity="1" x="508" y="36" width="5" height="118" />
-	<rect fill="#808080" stroke="none" stroke-opacity="1" x="307" y="149" width="206" height="5" />
-	<rect fill="#90e990" stroke="black" stroke-width="1" stroke-opacity="1" x="301" y="30" width="207" height="119" />
-	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="405" y="52">Parser_AG</text>
-	<line stroke="black" stroke-opacity="1" x1="301" y1="67" x2="508" y2="67" />
-</g>
-<g>
-	<line stroke="black" stroke-opacity="1" x1="406" y1="279" x2="412" y2="273" />
-	<line stroke="black" stroke-opacity="1" x1="406" y1="279" x2="400" y2="273" />
-	<line stroke="black" stroke-opacity="1" x1="406" y1="155" x2="406" y2="279" />
-	<polygon fill="#000000" stroke="black" stroke-opacity="1" points="406,155 412,161 406,167 400,161" />
-</g>
-<g>
-	<line stroke="black" stroke-opacity="1" x1="205" y1="90" x2="211" y2="96" />
-	<line stroke="black" stroke-opacity="1" x1="205" y1="90" x2="211" y2="84" />
-	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="300" y1="90" x2="205" y2="90" />
-</g>
-<g>
-	<rect fill="#808080" stroke="none" stroke-opacity="1" x="820" y="176" width="5" height="105" />
-	<rect fill="#808080" stroke="none" stroke-opacity="1" x="640" y="276" width="185" height="5" />
-	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="634" y="170" width="186" height="106" />
-	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="727" y="192">&lt;&lt;typedef&gt;&gt;</text>
-	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="727" y="229">iterator_f</text>
-	<line stroke="black" stroke-opacity="1" x1="634" y1="244" x2="820" y2="244" />
-</g>
-<g>
-	<line stroke="black" stroke-opacity="1" x1="730" y1="169" x2="736" y2="163" />
-	<line stroke="black" stroke-opacity="1" x1="730" y1="169" x2="724" y2="163" />
-	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="730" y1="134" x2="730" y2="169" />
-</g>
-<g>
-	<rect fill="#808080" stroke="none" stroke-opacity="1" x="820" y="322" width="5" height="105" />
-	<rect fill="#808080" stroke="none" stroke-opacity="1" x="640" y="422" width="185" height="5" />
-	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="634" y="316" width="186" height="106" />
-	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="727" y="338">&lt;&lt;typedef&gt;&gt;</text>
-	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="727" y="375">char_t</text>
-	<line stroke="black" stroke-opacity="1" x1="634" y1="390" x2="820" y2="390" />
-</g>
-<g>
-	<line stroke="black" stroke-opacity="1" x1="730" y1="315" x2="736" y2="309" />
-	<line stroke="black" stroke-opacity="1" x1="730" y1="315" x2="724" y2="309" />
-	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="730" y1="282" x2="730" y2="315" />
-</g>
-<g>
-	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" x="422" y="248">sem_check</text>
-</g>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="838"
+   height="440"
+   version="1.1"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="Parser.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="/home/gera/tesisLic/thesis/branches/informe/images/diagramas/svg/Parser.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <metadata
+     id="metadata127">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs125">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 220 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="838 : 220 : 1"
+       inkscape:persp3d-origin="419 : 146.66667 : 1"
+       id="perspective129" />
+  </defs>
+  <sodipodi:namedview
+     inkscape:window-height="750"
+     inkscape:window-width="1280"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showgrid="false"
+     inkscape:zoom="0.6646778"
+     inkscape:cx="419"
+     inkscape:cy="220"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:current-layer="svg2" />
+  <rect
+     style="fill:#6c5353;stroke:#000000;stroke-width:1;stroke-opacity:1"
+     id="rect6"
+     height="36"
+     width="73"
+     y="15"
+     x="20" />
+  <rect
+     style="fill:#916f6f;stroke:#000000;stroke-width:1;stroke-opacity:1"
+     id="rect8"
+     height="113"
+     width="185"
+     y="51"
+     x="20" />
+  <text
+     style="font-size:18px;text-anchor:middle;fill:#000000;font-family:Sans Serif"
+     id="text10"
+     y="75"
+     x="113"
+     xml:space="preserve"
+     font-size="18">Attr_grammar</text>
+  <g
+     id="g12">
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="555"
+       y="286"
+       width="5"
+       height="134"
+       id="rect14" />
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="258"
+       y="415"
+       width="302"
+       height="5"
+       id="rect16" />
+    <rect
+       fill="#ffffc0"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="252"
+       y="280"
+       width="303"
+       height="135"
+       id="rect18" />
+    <text
+       font-family="Sans Serif"
+       font-size="18"
+       fill="#000000"
+       xml:space="preserve"
+       font-weight="bold"
+       text-anchor="middle"
+       x="404"
+       y="302"
+       id="text20">Semantic_check</text>
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="252"
+       y1="317"
+       x2="555"
+       y2="317"
+       id="line22" />
+    <text
+       font-family="Sans Serif"
+       font-size="18"
+       fill="#000000"
+       xml:space="preserve"
+       font-weight="bold"
+       x="260"
+       y="339"
+       id="text24">-</text>
+    <text
+       font-family="Sans Serif"
+       font-size="18"
+       fill="#000000"
+       xml:space="preserve"
+       x="289"
+       y="339"
+       id="text26">precedence_level</text>
+    <text
+       font-family="Sans Serif"
+       font-size="18"
+       fill="#000000"
+       xml:space="preserve"
+       font-weight="bold"
+       x="260"
+       y="372"
+       id="text28">-</text>
+    <text
+       font-family="Sans Serif"
+       font-size="18"
+       fill="#000000"
+       xml:space="preserve"
+       x="289"
+       y="372"
+       id="text30">index_syntax_order</text>
+  </g>
+  <g
+     id="g32">
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="820"
+       y="28"
+       width="5"
+       height="105"
+       id="rect34" />
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="640"
+       y="128"
+       width="185"
+       height="5"
+       id="rect36" />
+    <rect
+       fill="#ffffc0"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="634"
+       y="22"
+       width="186"
+       height="106"
+       id="rect38" />
+    <text
+       font-family="Sans Serif"
+       font-size="18"
+       fill="#000000"
+       xml:space="preserve"
+       text-anchor="middle"
+       x="727"
+       y="44"
+       id="text40">&lt;&lt;typedef&gt;&gt;</text>
+    <text
+       font-family="Sans Serif"
+       font-size="18"
+       fill="#000000"
+       xml:space="preserve"
+       font-weight="bold"
+       text-anchor="middle"
+       x="727"
+       y="81"
+       id="text42">iterator_t</text>
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="634"
+       y1="96"
+       x2="820"
+       y2="96"
+       id="line44" />
+  </g>
+  <g
+     id="g46">
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="508"
+       y="36"
+       width="5"
+       height="118"
+       id="rect48" />
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="307"
+       y="149"
+       width="206"
+       height="5"
+       id="rect50" />
+    <rect
+       fill="#90e990"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="301"
+       y="30"
+       width="207"
+       height="119"
+       id="rect52" />
+    <text
+       font-family="Sans Serif"
+       font-size="18"
+       fill="#000000"
+       xml:space="preserve"
+       font-weight="bold"
+       text-anchor="middle"
+       x="405"
+       y="52"
+       id="text54">Parser_AG</text>
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="301"
+       y1="67"
+       x2="508"
+       y2="67"
+       id="line56" />
+  </g>
+  <g
+     id="g58">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="406"
+       y1="279"
+       x2="412"
+       y2="273"
+       id="line60" />
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="406"
+       y1="279"
+       x2="400"
+       y2="273"
+       id="line62" />
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="406"
+       y1="155"
+       x2="406"
+       y2="279"
+       id="line64" />
+    <polygon
+       fill="#000000"
+       stroke="black"
+       stroke-opacity="1"
+       points="406,155 412,161 406,167 400,161"
+       id="polygon66" />
+  </g>
+  <g
+     id="g68">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="205"
+       y1="90"
+       x2="211"
+       y2="96"
+       id="line70" />
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="205"
+       y1="90"
+       x2="211"
+       y2="84"
+       id="line72" />
+    <line
+       stroke-dasharray="4,4"
+       stroke="black"
+       stroke-opacity="1"
+       x1="300"
+       y1="90"
+       x2="205"
+       y2="90"
+       id="line74" />
+  </g>
+  <g
+     id="g76">
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="820"
+       y="176"
+       width="5"
+       height="105"
+       id="rect78" />
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="640"
+       y="276"
+       width="185"
+       height="5"
+       id="rect80" />
+    <rect
+       fill="#ffffc0"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="634"
+       y="170"
+       width="186"
+       height="106"
+       id="rect82" />
+    <text
+       font-family="Sans Serif"
+       font-size="18"
+       fill="#000000"
+       xml:space="preserve"
+       text-anchor="middle"
+       x="727"
+       y="192"
+       id="text84">&lt;&lt;typedef&gt;&gt;</text>
+    <text
+       font-family="Sans Serif"
+       font-size="18"
+       fill="#000000"
+       xml:space="preserve"
+       font-weight="bold"
+       text-anchor="middle"
+       x="727"
+       y="229"
+       id="text86">iterator_f</text>
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="634"
+       y1="244"
+       x2="820"
+       y2="244"
+       id="line88" />
+  </g>
+  <g
+     id="g90">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="730"
+       y1="169"
+       x2="736"
+       y2="163"
+       id="line92" />
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="730"
+       y1="169"
+       x2="724"
+       y2="163"
+       id="line94" />
+    <line
+       stroke-dasharray="4,4"
+       stroke="black"
+       stroke-opacity="1"
+       x1="730"
+       y1="134"
+       x2="730"
+       y2="169"
+       id="line96" />
+  </g>
+  <g
+     id="g98">
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="820"
+       y="322"
+       width="5"
+       height="105"
+       id="rect100" />
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="640"
+       y="422"
+       width="185"
+       height="5"
+       id="rect102" />
+    <rect
+       fill="#ffffc0"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="634"
+       y="316"
+       width="186"
+       height="106"
+       id="rect104" />
+    <text
+       font-family="Sans Serif"
+       font-size="18"
+       fill="#000000"
+       xml:space="preserve"
+       text-anchor="middle"
+       x="727"
+       y="338"
+       id="text106">&lt;&lt;typedef&gt;&gt;</text>
+    <text
+       font-family="Sans Serif"
+       font-size="18"
+       fill="#000000"
+       xml:space="preserve"
+       font-weight="bold"
+       text-anchor="middle"
+       x="727"
+       y="375"
+       id="text108">char_t</text>
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="634"
+       y1="390"
+       x2="820"
+       y2="390"
+       id="line110" />
+  </g>
+  <g
+     id="g112">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="730"
+       y1="315"
+       x2="736"
+       y2="309"
+       id="line114" />
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="730"
+       y1="315"
+       x2="724"
+       y2="309"
+       id="line116" />
+    <line
+       stroke-dasharray="4,4"
+       stroke="black"
+       stroke-opacity="1"
+       x1="730"
+       y1="282"
+       x2="730"
+       y2="315"
+       id="line118" />
+  </g>
+  <g
+     id="g120">
+    <text
+       font-family="Sans Serif"
+       font-size="18"
+       fill="#000000"
+       xml:space="preserve"
+       x="422"
+       y="248"
+       id="text122">sem_check</text>
+  </g>
 </svg>
