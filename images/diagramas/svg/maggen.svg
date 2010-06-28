@@ -1,90 +1,478 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Bouml (http://bouml.free.fr/) -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="1026" height="508" version="1.1" xmlns="http://www.w3.org/2000/svg">
-<g>
-	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="552" y="274" width="82" height="36" />
-	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="552" y="310" width="208" height="113" />
-	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="656" y="334">Expression_tree</text>
-</g>
-<g>
-	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="260" y="274" width="86" height="36" />
-	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="260" y="310" width="217" height="121" />
-	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="369" y="334">Attr_grammar</text>
-</g>
-<g>
-	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="829" y="273" width="73" height="36" />
-	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="829" y="309" width="185" height="117" />
-	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="922" y="333">Builders</text>
-</g>
-<g>
-	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="3" y="274" width="65" height="36" />
-	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="3" y="310" width="165" height="121" />
-	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" text-anchor="middle" x="86" y="334">Parser</text>
-</g>
-<g>
-	<rect fill="#808080" stroke="none" stroke-opacity="1" x="576" y="17" width="5" height="138" />
-	<rect fill="#808080" stroke="none" stroke-opacity="1" x="383" y="150" width="198" height="5" />
-	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="377" y="11" width="199" height="139" />
-	<text font-family="Sans Serif" font-size="18" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="477" y="33">Maglib</text>
-	<line stroke="black" stroke-opacity="1" x1="377" y1="48" x2="576" y2="48" />
-</g>
-<g>
-	<line stroke="black" stroke-opacity="1" x1="259" y1="352" x2="253" y2="346" />
-	<line stroke="black" stroke-opacity="1" x1="259" y1="352" x2="253" y2="358" />
-	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="168" y1="352" x2="259" y2="352" />
-</g>
-<g>
-	<line stroke="black" stroke-opacity="1" x1="304" y1="273" x2="312" y2="273" />
-	<line stroke="black" stroke-opacity="1" x1="304" y1="273" x2="304" y2="264" />
-	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="447" y1="156" x2="304" y2="273" />
-</g>
-<g>
-	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="582" y1="112" x2="850" y2="189" />
-</g>
-<g>
-	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="917" y1="426" x2="916" y2="462" />
-</g>
-<g>
-	<line stroke="black" stroke-opacity="1" x1="592" y1="273" x2="594" y2="264" />
-	<line stroke="black" stroke-opacity="1" x1="592" y1="273" x2="583" y2="270" />
-	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="527" y1="156" x2="592" y2="273" />
-</g>
-<g>
-	<line stroke="black" stroke-opacity="1" x1="551" y1="351" x2="545" y2="344" />
-	<line stroke="black" stroke-opacity="1" x1="551" y1="351" x2="544" y2="356" />
-	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="477" y1="350" x2="551" y2="351" />
-</g>
-<g>
-	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="85" y1="431" x2="86" y2="488" />
-</g>
-<g>
-	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="376" y1="110" x2="36" y2="203" />
-</g>
-<g>
-	<line stroke="black" stroke-opacity="1" x1="653" y1="423" x2="646" y2="428" />
-	<line stroke="black" stroke-opacity="1" x1="653" y1="423" x2="658" y2="429" />
-	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="652" y1="488" x2="653" y2="423" />
-</g>
-<g>
-	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="916" y1="462" x2="366" y2="462" />
-</g>
-<g>
-	<line stroke="black" stroke-opacity="1" x1="36" y1="273" x2="42" y2="267" />
-	<line stroke="black" stroke-opacity="1" x1="36" y1="273" x2="30" y2="267" />
-	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="36" y1="203" x2="36" y2="273" />
-</g>
-<g>
-	<line stroke="black" stroke-opacity="1" x1="850" y1="272" x2="856" y2="266" />
-	<line stroke="black" stroke-opacity="1" x1="850" y1="272" x2="844" y2="266" />
-	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="850" y1="189" x2="850" y2="272" />
-</g>
-<g>
-	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="86" y1="488" x2="652" y2="488" />
-</g>
-<g>
-	<line stroke="black" stroke-opacity="1" x1="366" y1="431" x2="360" y2="437" />
-	<line stroke="black" stroke-opacity="1" x1="366" y1="431" x2="372" y2="437" />
-	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="366" y1="462" x2="366" y2="431" />
-</g>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1026"
+   height="508"
+   version="1.1"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="maggen.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="/home/gera/tesisLic/thesis/branches/informe/images/diagramas/svg/maggen.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <metadata
+     id="metadata139">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs137">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 254 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="1026 : 254 : 1"
+       inkscape:persp3d-origin="513 : 169.33333 : 1"
+       id="perspective141" />
+  </defs>
+  <sodipodi:namedview
+     inkscape:window-height="750"
+     inkscape:window-width="1280"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showgrid="false"
+     inkscape:zoom="0.54288499"
+     inkscape:cx="191.20097"
+     inkscape:cy="360.54869"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:current-layer="svg2" />
+  <rect
+     style="fill:#6c5353;stroke:#000000;stroke-width:1;stroke-opacity:1"
+     id="rect6"
+     height="36"
+     width="82"
+     y="274"
+     x="552" />
+  <rect
+     style="fill:#916f6f;stroke:#000000;stroke-width:1;stroke-opacity:1"
+     id="rect8"
+     height="113"
+     width="208"
+     y="310"
+     x="552" />
+  <text
+     style="font-size:18px;text-anchor:middle;fill:#000000;font-family:Sans Serif"
+     id="text10"
+     y="334"
+     x="656"
+     xml:space="preserve"
+     font-size="18">Expression_tree</text>
+  <rect
+     style="fill:#6c5353;stroke:#000000;stroke-width:1;stroke-opacity:1"
+     id="rect14"
+     height="36"
+     width="86"
+     y="274"
+     x="260" />
+  <rect
+     style="fill:#916f6f;stroke:#000000;stroke-width:1;stroke-opacity:1"
+     id="rect16"
+     height="121"
+     width="217"
+     y="310"
+     x="260" />
+  <text
+     style="font-size:18px;text-anchor:middle;fill:#000000;font-family:Sans Serif"
+     id="text18"
+     y="334"
+     x="369"
+     xml:space="preserve"
+     font-size="18">Attr_grammar</text>
+  <rect
+     style="fill:#6c5353;stroke:#000000;stroke-width:1;stroke-opacity:1"
+     id="rect22"
+     height="36"
+     width="73"
+     y="273"
+     x="829" />
+  <rect
+     style="fill:#916f6f;stroke:#000000;stroke-width:1;stroke-opacity:1"
+     id="rect24"
+     height="117"
+     width="185"
+     y="309"
+     x="829" />
+  <text
+     style="font-size:18px;text-anchor:middle;fill:#000000;font-family:Sans Serif"
+     id="text26"
+     y="333"
+     x="922"
+     xml:space="preserve"
+     font-size="18">Builders</text>
+  <rect
+     style="fill:#6c5353;stroke:#000000;stroke-width:1;stroke-opacity:1"
+     id="rect30"
+     height="36"
+     width="65"
+     y="274"
+     x="3" />
+  <rect
+     style="fill:#916f6f;stroke:#000000;stroke-width:1;stroke-opacity:1"
+     id="rect32"
+     height="121"
+     width="165"
+     y="310"
+     x="3" />
+  <text
+     style="font-size:18px;text-anchor:middle;fill:#000000;font-family:Sans Serif"
+     id="text34"
+     y="334"
+     x="86"
+     xml:space="preserve"
+     font-size="18">Parser</text>
+  <rect
+     style="fill:#808080;stroke:none;stroke-opacity:1"
+     id="rect38"
+     height="138"
+     width="5"
+     y="17"
+     x="576" />
+  <rect
+     style="fill:#808080;stroke:none;stroke-opacity:1"
+     id="rect40"
+     height="5"
+     width="198"
+     y="150"
+     x="383" />
+  <rect
+     style="fill:#a0892c;stroke:#000000;stroke-width:1;stroke-opacity:1"
+     id="rect42"
+     height="139"
+     width="199"
+     y="11"
+     x="377" />
+  <text
+     style="font-size:18px;font-weight:bold;text-anchor:middle;fill:#000000;font-family:Sans Serif"
+     id="text44"
+     y="33"
+     x="477"
+     font-weight="bold"
+     xml:space="preserve"
+     font-size="18">Maglib</text>
+  <line
+     style="stroke:#000000;stroke-opacity:1"
+     id="line46"
+     y2="48"
+     x2="576"
+     y1="48"
+     x1="377" />
+  <g
+     id="g48">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="259"
+       y1="352"
+       x2="253"
+       y2="346"
+       id="line50" />
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="259"
+       y1="352"
+       x2="253"
+       y2="358"
+       id="line52" />
+    <line
+       stroke-dasharray="4,4"
+       stroke="black"
+       stroke-opacity="1"
+       x1="168"
+       y1="352"
+       x2="259"
+       y2="352"
+       id="line54" />
+  </g>
+  <g
+     id="g56">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="304"
+       y1="273"
+       x2="312"
+       y2="273"
+       id="line58" />
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="304"
+       y1="273"
+       x2="304"
+       y2="264"
+       id="line60" />
+    <line
+       stroke-dasharray="4,4"
+       stroke="black"
+       stroke-opacity="1"
+       x1="447"
+       y1="156"
+       x2="304"
+       y2="273"
+       id="line62" />
+  </g>
+  <g
+     id="g64">
+    <line
+       stroke-dasharray="4,4"
+       stroke="black"
+       stroke-opacity="1"
+       x1="582"
+       y1="112"
+       x2="850"
+       y2="189"
+       id="line66" />
+  </g>
+  <g
+     id="g68">
+    <line
+       stroke-dasharray="4,4"
+       stroke="black"
+       stroke-opacity="1"
+       x1="917"
+       y1="426"
+       x2="916"
+       y2="462"
+       id="line70" />
+  </g>
+  <g
+     id="g72">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="592"
+       y1="273"
+       x2="594"
+       y2="264"
+       id="line74" />
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="592"
+       y1="273"
+       x2="583"
+       y2="270"
+       id="line76" />
+    <line
+       stroke-dasharray="4,4"
+       stroke="black"
+       stroke-opacity="1"
+       x1="527"
+       y1="156"
+       x2="592"
+       y2="273"
+       id="line78" />
+  </g>
+  <g
+     id="g80">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="551"
+       y1="351"
+       x2="545"
+       y2="344"
+       id="line82" />
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="551"
+       y1="351"
+       x2="544"
+       y2="356"
+       id="line84" />
+    <line
+       stroke-dasharray="4,4"
+       stroke="black"
+       stroke-opacity="1"
+       x1="477"
+       y1="350"
+       x2="551"
+       y2="351"
+       id="line86" />
+  </g>
+  <g
+     id="g88">
+    <line
+       stroke-dasharray="4,4"
+       stroke="black"
+       stroke-opacity="1"
+       x1="85"
+       y1="431"
+       x2="86"
+       y2="488"
+       id="line90" />
+  </g>
+  <g
+     id="g92">
+    <line
+       stroke-dasharray="4,4"
+       stroke="black"
+       stroke-opacity="1"
+       x1="376"
+       y1="110"
+       x2="36"
+       y2="203"
+       id="line94" />
+  </g>
+  <g
+     id="g96">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="653"
+       y1="423"
+       x2="646"
+       y2="428"
+       id="line98" />
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="653"
+       y1="423"
+       x2="658"
+       y2="429"
+       id="line100" />
+    <line
+       stroke-dasharray="4,4"
+       stroke="black"
+       stroke-opacity="1"
+       x1="652"
+       y1="488"
+       x2="653"
+       y2="423"
+       id="line102" />
+  </g>
+  <g
+     id="g104">
+    <line
+       stroke-dasharray="4,4"
+       stroke="black"
+       stroke-opacity="1"
+       x1="916"
+       y1="462"
+       x2="366"
+       y2="462"
+       id="line106" />
+  </g>
+  <g
+     id="g108">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="36"
+       y1="273"
+       x2="42"
+       y2="267"
+       id="line110" />
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="36"
+       y1="273"
+       x2="30"
+       y2="267"
+       id="line112" />
+    <line
+       stroke-dasharray="4,4"
+       stroke="black"
+       stroke-opacity="1"
+       x1="36"
+       y1="203"
+       x2="36"
+       y2="273"
+       id="line114" />
+  </g>
+  <g
+     id="g116">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="850"
+       y1="272"
+       x2="856"
+       y2="266"
+       id="line118" />
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="850"
+       y1="272"
+       x2="844"
+       y2="266"
+       id="line120" />
+    <line
+       stroke-dasharray="4,4"
+       stroke="black"
+       stroke-opacity="1"
+       x1="850"
+       y1="189"
+       x2="850"
+       y2="272"
+       id="line122" />
+  </g>
+  <g
+     id="g124">
+    <line
+       stroke-dasharray="4,4"
+       stroke="black"
+       stroke-opacity="1"
+       x1="86"
+       y1="488"
+       x2="652"
+       y2="488"
+       id="line126" />
+  </g>
+  <g
+     id="g128">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="366"
+       y1="431"
+       x2="360"
+       y2="437"
+       id="line130" />
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="366"
+       y1="431"
+       x2="372"
+       y2="437"
+       id="line132" />
+    <line
+       stroke-dasharray="4,4"
+       stroke="black"
+       stroke-opacity="1"
+       x1="366"
+       y1="462"
+       x2="366"
+       y2="431"
+       id="line134" />
+  </g>
 </svg>
