@@ -24,11 +24,11 @@ Esta herramienta no genera planes ``\textbf{espurios}'', es decir, planes que nu
 Algunas de las posibles extensiones que se tienen en cuenta para \maggen\ se detallan a continuación:
 \begin{itemize}
 \item Definir una API para herramientas externas de entrada y salida de árboles. A-Terms como ejemplo.
-\item Extensiones al lenguaje de especificación, como módulos a través de \texttt{\#include}. Esto engloba los puntos siguientes:
+\item Extensiones al lenguaje de especificación, como módulos a través de \textbtt{\#include}. Esto engloba los puntos siguientes:
 \begin{itemize}
 \item Disponer de espacios de nombres, y operadores que permitan referirse a estos espacios de nombres.
 \item Redefinición o extensión de reglas incluidas, un estilo de sobrecarga.
-\item Permitir el adicionado de atributos a símbolos pertenecientes a otros modulos.
+\item Permitir el adicionado de atributos a símbolos pertenecientes a otros módulos.
 \end{itemize}
 
 \end{itemize}
@@ -36,14 +36,14 @@ Algunas de las posibles extensiones que se tienen en cuenta para \maggen\ se det
 \section{Trabajos futuros}
 Entre los principales trabajos a futuro para \maggen\ se encuentran:
 \begin{itemize}
-\item Implementar la generación de código al estilo ``\textit{plugins}''. Lo que permitiría extensiones varias, transparentes y elegantes para generar código en diferentes lenguajes. Esto implicaría la definicion de una pequeña API.
+\item Implementar la generación de código al estilo ``\textit{plugins}''. Lo que permitiría extensiones varias, transparentes y elegantes para generar código en diferentes lenguajes. Esto implicaría la definición de una API del motor de generación de código.
 
-\item Definir una API para la construccion de los AST de entrada al evaluador generado, lo que permitiria que herramientas externas puedan generar los AST entrada. 
-% Este puntos podria ser analizado teniendo en cuenta los A-Terms como ejemplo.
-\item Pruebas de rendimiento como comparaciones con otras herramientas similares 
+\item Definir una API para la construcción de los AST de entrada al evaluador generado, lo que permitiría que herramientas externas puedan generar los AST entrada. 
+% Este puntos podría ser analizado teniendo en cuenta los A-Terms como ejemplo.
+\item Pruebas de rendimiento como comparaciones con otras herramientas similares.
 % (Silver, definir sintaxis y semántica, es modular, puede que genere evaluador dinámico)
 
-\item Permitir definir atributos de alto orden, un atributo puede ser un árbol, que también puede decorarse.
+\item Permitir definir atributos de \textbf{alto orden}, es decir, atributos que pueden ser un árbol. Para los cuales, su evaluación supondría un nuevo proceso de igual complejidad que el necesario para decorar al AST de entrada.
 \item Implementar como especies de templates para los atributos.
 
 \end{itemize}
