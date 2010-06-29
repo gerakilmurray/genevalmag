@@ -9,15 +9,22 @@ En el desarrollo del presente capítulo se presentarán comentarios finales del 
 
 En esta sección se expondrán las conclusiones obtenidas luego del desarrollo de este proyecto.\\
 
-Durante todo el desarrollo de este trabajo se ha estudiado e introducido conocimientos sobre \textit{Gramáticas de Atributos}, desde el punto de vista de definiciones, como así también de problemáticas y estado actual de desarrollo de las mismas. Además, se ha trabajado con una familia de GA, relativamente nuevas, como lo son las Multi-planes (MAG), presentas por Wuu Yang (1998). Sobre estas es posible desarrollar evaluadores estáticos mediante técnicas que se apoyan en secuencias de visitas. El aporte y contribución principal del trabajo realizado, fue desarrollar una herramienta, denominada \maggen, que automáticamente genera evaluadores estáticos para MAG.
+Durante el desarrollo de este trabajo se ha estudiado e introducido conocimientos sobre \textit{Gramáticas de Atributos} (GA), desde el punto de vista de definiciones, como así también de problemáticas y estado actual de de las mismas. Dentro de las GA, se ha trabajado con una familia, nueva y en desarrollo, como lo son las Multi-planes (MAG), presentadas por Wuu Yang (1998). Una de las características principales de estas GAs radica en su poder expresivo  y además, la posibilidad de desarrollar evaluadores estáticos mediante técnicas que se apoyan en secuencias de visitas (evaluadores orientado a visita con múltiples pasadas). 
 
-Finalmente se puede decir que, los autores, aparte de tener en mente la culminación de la carrera, nunca perdieron la motivación y entusiasmo en el desarrollo de la herramienta de una manera eficiente.
+El aporte y contribución principal de este trabajo, es el desarrollo de una herramienta, denominada \maggen, que automáticamente genera evaluadores estáticos para MAG.
+
+En la siguiente sección abordaremos aspectos importantes relacionados a los resultados obtenidos sobre \maggen. Finalmente se puede decir que, los autores, aparte de tener en mente la culminación de la carrera, nunca perdieron la motivación y entusiasmo en el desarrollo de la herramienta de una manera eficiente.
 
 \section{Resultados obtenidos}
 
-Como conclusiones específicas sobre \maggen, se obtuvo una herramienta modularizable, eficiente y completamente desarrollada en C++, que cumplió los objetivos propuestos tanto de parte del grupo de desarrollo, como de la directiva del proyecto. Además de que no se conocen herramientas que trabajen sobre MAG, en este sentido, \maggen\ toma un auge aún mayor.\\
+Como conclusiones específicas sobre \maggen, se obtuvo una herramienta modularizada, eficiente y completamente desarrollada en C++, que cumplió los objetivos propuestos tanto de parte del grupo de desarrollo, como de la directiva del proyecto. Además de que no se conocen herramientas que trabajen sobre MAG, en este sentido, \maggen\ adquiere mayor utilidad. Se pueden resumir las características de \maggen\ en los siguientes puntos:
 
-Esta herramienta no genera planes ``\textbf{espurios}'', es decir, planes que nunca se podrían dar en un AST concreto, como sucede en las ANCAG, evitando de este modo informar circularidades absurdas a efectos prácticos.
+\begin{itemize}
+ \item El lenguaje de especificación de \maggen\ para la MAG entrada, se basa en una sintaxis simple y amplia que permite lograr extensiones para el propio lenguaje. 
+ \item La herramienta fue desarrollada íntegramente en C++ y el evaluador, también es generado como un modulo C++. 
+ \item Esta herramienta no genera planes ``\textbf{espurios}'', es decir, planes que nunca se podrían dar en un AST concreto, como sucede en las ANCAG, evitando de este modo informar circularidades absurdas a efectos prácticos.
+ \item El evaluador generado es estadico, lo que asegura que no existe un ``overhead'' en el computo de la evaluacion.
+\end{itemize}
 
 
 \section{Extensiones}
