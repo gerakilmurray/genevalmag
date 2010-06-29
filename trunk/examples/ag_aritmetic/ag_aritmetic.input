@@ -35,9 +35,9 @@ rules
             end;
 
     E ::= E '+' E
-    		compute
-    			E[0].valor = E[1].valor + E[2].valor; 
-    		end;
+        		compute
+        			E[0].valor = E[1].valor + E[2].valor; 
+        		end;
     		
     E ::= E '-' E
             compute
@@ -79,11 +79,11 @@ rules
                 num[0].valor = real[0].valor; 
             end
 
-         |  digit
+       |  digit
             compute
                 num[0].valor = digit[0].valor; 
             end
-         ;
+       ;
          
    digit ::= '1'
             compute
@@ -141,4 +141,3 @@ rules
             compute
                 real[0].valor = digit[0].valor + (digit[1].valor / 10.0);
             end;
-    

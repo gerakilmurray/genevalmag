@@ -242,28 +242,28 @@ En la siguiente tabla se analizan los valores de los atributos de cada símbolo:
                            &                     & \textbf{S.s0 = 4} \\ \hline
 
 \multirow{4}{*}{\textbf{X}} & \multirow{2}{*}{i1} & \textbtt{(eq 2) X.i1 = Y.s3} \\ 
-                           &                     & \textbf{X.i1 = 1.} \\ \cline{2-3}
-                           & \multirow{2}{*}{s1} & \textbtt{(eq 9) X.s1 = X.i1} \\ 
-                           &                     & \textbf{X.s1 = 1.} \\ \hline
+                            &                     & \textbf{X.i1 = 1.} \\ \cline{2-3}
+                            & \multirow{2}{*}{s1} & \textbtt{(eq 9) X.s1 = X.i1} \\ 
+                            &                     & \textbf{X.s1 = 1.} \\ \hline
 
 \multirow{7}{*}{\textbf{Y}} &                 s3  & \textbtt{(eq 6)} \textbf{Y.s3 = 1} \\ \cline{2-3}
-                           & \multirow{2}{*}{s2} &    \textbtt{(eq 5) Y.s2 = Y.i2} \\
-                           &                     & \textbf{Y.s2 = 1} \\ \cline{2-3}
-                           & \multirow{2}{*}{i2} & \textbtt{(eq 3) Y.i2 = X.s1} \\
-                           &                     & \textbf{Y.i2 = 1} \\ \cline{2-3}
-                           & \multirow{2}{*}{i3} & \textbtt{(eq 4) Y.i3 = Y.s2} \\
-                           &                     & \textbf{Y.i3 = 1} \\ \hline
+                            & \multirow{2}{*}{s2} &    \textbtt{(eq 5) Y.s2 = Y.i2} \\
+                            &                     & \textbf{Y.s2 = 1} \\ \cline{2-3}
+                            & \multirow{2}{*}{i2} & \textbtt{(eq 3) Y.i2 = X.s1} \\
+                            &                     & \textbf{Y.i2 = 1} \\ \cline{2-3}
+                            & \multirow{2}{*}{i3} & \textbtt{(eq 4) Y.i3 = Y.s2} \\
+                            &                     & \textbf{Y.i3 = 1} \\ \hline
 
 \multirow{2}{*}{\textbf{Z}} & \multirow{2}{*}{S4} & \textbtt{(eq 10) Z.s4 = Y.s3} \\
-                           &                     & \textbf{Z.s4 = 1} \\ \hline
+                            &                     & \textbf{Z.s4 = 1} \\ \hline
 
 \multirow{7}{*}{\textbf{Y}} &                  s3 & \textbtt{(eq 6)} \textbf{Y.s3 = 1} \\ \cline{2-3}
-                           & \multirow{2}{*}{s2} &    \textbtt{(eq 5) Y.s2 = Y.i2} \\
-                           &                     & \textbf{Y.s2 = 3} \\ \cline{2-3}
-                           & \multirow{2}{*}{i2} & \textbtt{(eq 3) Y.i2 = X.s1} \\
-                           &                     & \textbf{Y.i2 = 3} \\ \cline{2-3}
-                           & \multirow{2}{*}{i3} & \textbtt{(eq 4) Y.i3 = Y.s2} \\
-                           &                     & \textbf{Y.i3 = 3} \\
+                            & \multirow{2}{*}{s2} &    \textbtt{(eq 5) Y.s2 = Y.i2} \\
+                            &                     & \textbf{Y.s2 = 3} \\ \cline{2-3}
+                            & \multirow{2}{*}{i2} & \textbtt{(eq 3) Y.i2 = X.s1} \\
+                            &                     & \textbf{Y.i2 = 3} \\ \cline{2-3}
+                            & \multirow{2}{*}{i3} & \textbtt{(eq 4) Y.i3 = Y.s2} \\
+                            &                     & \textbf{Y.i3 = 3} \\
 \hline \hline
 \end{tabular}\end{center}
 
@@ -280,7 +280,7 @@ Notar que el ejemplo Wuu Yang analizado es considerablemente sencillo, pero se p
 
 En los cuadros \ref{table:mensajes-err} y \ref{table:mensajes-av} se analizaron la descripción de los posibles errores y avisos que se deben tener en cuenta cuando se usa \maggen.
 
-
+% \begin{table}
 \begin{small}
 \begin{longtable}{| p{4.5cm} || p{4.5cm} | p{4.5cm} |}
 \hline
@@ -331,10 +331,14 @@ ERROR: maggen wrong uses. & Mal uso de \maggen, uno de los argumentos es erróne
 ERROR: Index out bounds: combined ADP graphs.& Error fatal en la generación de contextos para la construcción de ADP. & Chequee la entrada a \maggen.\\ 
 \hline
 \hline
-\caption{Tabla con mensajes de error en \maggen.}\label{table:mensajes-err}
+\caption{\label{table:mensajes-err}Tabla con mensajes de error en \maggen.}
 \end{longtable}
 \end{small}
+% \end{table}
 
+\vspace{2cm}
+
+% \begin{table}
 \begin{small}
 \begin{longtable}{| p{4.5cm} || p{4.5cm} | p{4.5cm} |}
 \hline
@@ -351,17 +355,18 @@ WARNING: Declaration duplicate was ignored: $-->$ \textit{F} & La declaración d
 WARNING: Ignores the eq \textit{E} duplicate definition for \textit{IN} in rule: $-->$ \textit{R} & La ecuación \textit{E} para la instancia \textit{IN} en la regla \textit{R} es ignorada por \maggen, debido a que la instancia \textit{IN} ya tiene ecuación que la defina. & Chequee las ecuaciones que definen la instancia \textit{IN} y elimine una o verifique posibles errores en la ecuación. \\
 \hline
 \hline
-\caption{Tabla con mensajes de avisos en \maggen.}\label{table:mensajes-av}
+\caption{\label{table:mensajes-av}Tabla con mensajes de avisos en \maggen.}
 \end{longtable}
 \end{small}
+% \end{table}
 
-\normalsize
+% \normalsize
 
-En los cuadros anteriores se pudo analizar los errores y los avisos en el uso de \maggen. Esta diferencia en los mensajes, se hace en el sentido de que, los avisos, no son considerados errores fatales en el proceso de la herramienta y por ende no es necesario abortar el funcionamiento. Los errores considerados avisos, \textbf{son ignorados} dentro del funcionamiento interno de \maggen.
+En los cuadros anteriores se pudo analizar los errores y avisos en el uso de \maggen. Esta diferencia en los mensajes, se hace en el sentido de que, los avisos, no son considerados errores fatales en el proceso de la herramienta y por ende no es necesario abortar el funcionamiento. Los errores considerados avisos, \textbf{son ignorados} dentro del funcionamiento interno de \maggen.
 
-Al igual como se analizó para \maggen, a continuación se mostrarán los mensajes de error que pueden aparecer con en el uso del evaluador generado:
+Al igual como se analizó para \maggen, en la tabla \ref{table:mensajes-err-eval} se mostrarán los mensajes de error que pueden aparecer con en el uso del evaluador generado.
 
-\begin{table}[!ht]
+% \begin{table}
 \begin{small}
 \begin{longtable}{| p{4.5cm} || p{4.5cm} | p{4.5cm} |}
 \hline
@@ -376,9 +381,9 @@ ERROR: the AST input is wrong create. Evaluation plan does not exist. & El orden
 ERROR: Fatal action. & Se desea invocar a la computación de una ecuación errónea e inexistente. & Chequee el AST de entrada al evaluador. \\
 \hline
 \hline
-\caption{Mensajes de error del evaluador generado.}
+\caption{\label{table:mensajes-err-eval}Mensajes de error del evaluador generado.}
 \end{longtable}
 \end{small}
-\end{table}
+% \end{table}
 
 El error más importante y común cuando se usa el evaluador generado por \maggen\ esta dado por el AST de entrada. Es aconsejable que se chequee de manera exhaustiva la creación de estos AST para evitar complicaciones.

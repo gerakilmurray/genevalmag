@@ -5,33 +5,26 @@
   *  \author    Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
   *  \author    Picco, Gonzalo Martin <gonzalopicco@gmail.com>
 */
-
 #include <vector>
 #include <iostream>
-
 #include "maggen.hpp"
 
 using namespace evalmag;
-
 /**
   * Main method.
   */
 int main()
 {
-    maggen eval_mag;
+  maggen eval_mag;
 
-    S node_s1(1);
+  S node_s1(1);
 	X node_s1_x(4);
 	Y node_s1_y2(2);
 	Z node_s1_z(5);
 	Y node_s1_z_y3(2);
-
 	node_s1.add(&node_s1_x).add(&node_s1_y2).add(&(node_s1_z.add(&node_s1_z_y3)));
-	
-    eval_mag.evaluator_mag(&node_s1);
-
-    cout << " After evaluation." << endl;
-    cout << node_s1.to_string() << endl;
-
-    return 0;
+  eval_mag.evaluator_mag(&node_s1);
+  cout << " After evaluation." << endl;
+  cout << node_s1.to_string() << endl;
+  return 0;
 }

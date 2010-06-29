@@ -16,10 +16,10 @@ semantic domain
      *********************/
     op infix    (10, left) +: int, int -> int;
 
-/***********************
- * Block of Attributes *
- ***********************/
-attributes
+    /***********************
+     * Block of Attributes *
+     ***********************/
+    attributes
     longi : syn <int>  of {S,T,T2};
     
 /******************
