@@ -21,12 +21,12 @@ int main()
     maggen eval_mag;
 
     S node_s1(1);
-	X node_s1_x(4);
-	Y node_s1_y2(2);
-	Z node_s1_z(5);
-	Y node_s1_z_y3(2);
+	  X node_s1_x(4);
+	  Y node_s1_y2(2);
+	  Z node_s1_z(5);
+	  Y node_s1_z_y3(2);
 
-	node_s1.add(&node_s1_x).add(&node_s1_y2).add(&(node_s1_z.add(&node_s1_z_y3)));
+	  node_s1.add(&node_s1_x).add(&node_s1_y2).add(&(node_s1_z.add(&node_s1_z_y3)));
 	
     eval_mag.evaluator_mag(&node_s1);
 
