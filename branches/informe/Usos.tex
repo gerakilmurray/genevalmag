@@ -16,19 +16,19 @@ Una vez descargado la última versión de \maggen, se dispondrá de un directori
 
 Para compilar \maggen, primero el usuario deberá posicionarse dentro del directorio ``\textbtt{maggen/}'', mediante las funciones de la terminal, y luego deberá ejecutar los siguientes comandos:
 {\small\begin{verbatim}
-1.- user@pc:~/maggen$ cmake .
-2.- user@pc:~/maggen$ make clean
-3.- user@pc:~/maggen$ make
+ 1.- user@pc:~/maggen$ cmake .
+ 2.- user@pc:~/maggen$ make clean
+ 3.- user@pc:~/maggen$ make
 \end{verbatim}}
 La compilación de \maggen\ se realiza mediante ``\textbtt{cmake}'', detalles sobre esta herramienta fueron presentados en la sección \ref{sec:metoherram}. 
 En la figura \ref{fig:cmake_maggen} y \ref{fig:make_maggen} podemos ver la ejecución de los comandos 1 y 3.
 \begin{figure}[!ht]\centering
-\includegraphics[width=300pt,height=83pt]{cmake_maggen.png}
+\includegraphics[width=300pt,height=105pt]{cmake_maggen.png}
 \caption{\label{fig:cmake_maggen} Ejecución de ``\textbtt{cmake}'' en la terminal de comandos.}
 \end{figure}
 
 \begin{figure}[!ht]\centering
-\includegraphics[width=300pt,height=289pt]{make_maggen.png}
+\includegraphics[width=300pt,height=301pt]{make_maggen.png}
 \caption{\label{fig:make_maggen} Ejecución de ``\textbtt{make}'' en la terminal de comandos..}
 \end{figure}
  
@@ -47,56 +47,56 @@ Luego de la compilación e instalación, el directorio raíz de \maggen\ se comp
  
 \item \textbtt{/src} Directorio raíz en el que se encuentran todos los archivos fuentes.
 {\footnotesize \begin{verbatim}
-user@pc:~/maggen$ ls -R src/ 
-src/:
-Attr_grammar  Builders  Expression_tree  maggen.cpp  Maglib.cpp  
-Parser  Util CMakeLists.txt
+ user@pc:~/maggen$ ls -R src/ 
+ src/:
+ Attr_grammar  Builders  Expression_tree  maggen.cpp  Maglib.cpp  
+ Parser  Util CMakeLists.txt
 
-src/Attr_grammar:
-Attr_grammar.cpp  Attribute.cpp  Equation.cpp  Function.cpp  
-Rule.cpp  Sort.cpp  Symbol.cpp CMakeLists.txt
+ src/Attr_grammar:
+ Attr_grammar.cpp  Attribute.cpp  Equation.cpp  Function.cpp  
+ Rule.cpp  Sort.cpp  Symbol.cpp CMakeLists.txt
 
-src/Builders:
-Builder_code.cpp  Builder_graphs.cpp  Builder_plans.cpp  
-Builder_visit_sequences.cpp CMakeLists.txt
+ src/Builders:
+ Builder_code.cpp  Builder_graphs.cpp  Builder_plans.cpp  
+ Builder_visit_sequences.cpp CMakeLists.txt
 
-src/Expression_tree:
-Expression.cpp  Expr_function.cpp  Expr_instance.cpp  
-Expr_leaf.cpp  Expr_literal.cpp  Expr_node.cpp CMakeLists.txt
+ src/Expression_tree:
+ Expression.cpp  Expr_function.cpp  Expr_instance.cpp  
+ Expr_leaf.cpp  Expr_literal.cpp  Expr_node.cpp CMakeLists.txt
 
-src/Parser:
-Parser_AG.cpp  Semantics_actions.cpp  Semantics_checks.cpp
-CMakeLists.txt
+ src/Parser:
+ Parser_AG.cpp  Semantics_actions.cpp  Semantics_checks.cpp
+ CMakeLists.txt
 
-src/Util:
-Utilities.cpp CMakeLists.txt
+ src/Util:
+ Utilities.cpp CMakeLists.txt
 \end{verbatim} }
 
 \item \textbtt{/include} Directorio raíz en el que se encuentran todos los archivos de cabecera.
 
 {\footnotesize \begin{verbatim}
-user@pc:~/maggen$ ls -R include/
-include/:
-Attr_grammar  Builders  Expression_tree  Maglib.h  
-Parser  Util
+ user@pc:~/maggen$ ls -R include/
+ include/:
+ Attr_grammar  Builders  Expression_tree  Maglib.h  
+ Parser  Util
 
-include/Attr_grammar:
-Attr_grammar.h  Attribute.h  Equation.h  Function.h  
-Rule.h  Sort.h  Symbol.h
+ include/Attr_grammar:
+ Attr_grammar.h  Attribute.h  Equation.h  Function.h  
+ Rule.h  Sort.h  Symbol.h
 
-include/Builders:
-Builder_code.h  Builder_graphs.h  Builder_plans.h  
-Builder_visit_sequences.h
+ include/Builders:
+ Builder_code.h  Builder_graphs.h  Builder_plans.h  
+ Builder_visit_sequences.h
 
-include/Expression_tree:
-Expression.h  Expr_function.h  Expr_instance.h  
-Expr_leaf.h  Expr_literal.h  Expr_node.h
+ include/Expression_tree:
+ Expression.h  Expr_function.h  Expr_instance.h  
+ Expr_leaf.h  Expr_literal.h  Expr_node.h
 
-include/Parser:
-Parser_AG.h  Semantics_actions.h  Semantics_checks.h
+ include/Parser:
+ Parser_AG.h  Semantics_actions.h  Semantics_checks.h
 
-include/Util:
-Utilities.h
+ include/Util:
+ Utilities.h
 \end{verbatim}}
 
 \item \textbtt{/scripts} Directorio que contiene scripts útiles para el usuario, por ejemplo: \textbtt{dot2png.sh} para convertir a imagen \textit{png} los archivos de grafos y planes generados por \maggen.
@@ -152,7 +152,7 @@ Las opciones son las siguientes:
 A continuación se observan algunos ejemplos de invocación de \maggen.
 \begin{itemize}
 \item Si se invoca:
-\begin{center} {\textbtt{./maggen -h}}\end{center} se obtiene el siguiente mensaje de ayuda:
+\begin{center}{\textbtt{./maggen -h}}\end{center} se obtiene el siguiente mensaje de ayuda:
 
 \begin{figure}[!ht]\centering
 \includegraphics[width=350pt,height=60pt]{help.png}
@@ -163,13 +163,13 @@ A continuación se observan algunos ejemplos de invocación de \maggen.
 {\scriptsize\textbtt{./maggen -fo ./out\_wuu\_yang -o evalmag -f ./examples/ag\_wuu\_yang/ag\_wuu\_yang.input}}                                                                                                                                   \end{center} Si se Especifica como archivo de entrada a \textbtt{ag\_wuu\_yang.input}, como directorio de salida \textbtt{./Out\_wuu\_yang} y el nombre de la clase (y archivo) generada con el nombre \textbtt{evalmag}. La figura \ref{fig:outnormal} muestra la salida de esta invocación.
 
 \begin{figure}[!ht]\centering
-\includegraphics[width=350pt,height=70pt]{normal.png}
+\includegraphics[width=350pt,height=69pt]{normal.png}
 \caption{\label{fig:outnormal} Usando \maggen\ con opciones.}
 \end{figure}
 
-\item Si se invoca a \maggen\ sin la opción \textbtt{-f} (independientemente que se usen, o no, las demás opciones) se espera la entrada por entrada estándar. Esto permite poder utilizar a \maggen\ en conjunto con otros comandos de forma encadenada. Por ejemplo:\\
+\item Si se invoca a \maggen\ sin la opción \textbtt{-f} (independientemente que se usen, o no, las demás opciones) se espera la entrada por entrada estándar. Esto permite poder utilizar a \maggen\ en conjunto con otros comandos de forma encadenada. Por ejemplo:
 
-\textbtt{cat file | maggen -fo ./out/}.\\
+\begin{center}\textbtt{cat file | maggen -fo ./out/}.\end{center}
 
 Esto muestra a \maggen\ en conjunto con \textbtt{cat} usando una tubería (\textbtt{pipe}, en ambientes \textit{Unix} mediante el operador ``\textbtt{|}'').
 
@@ -177,8 +177,7 @@ Esto muestra a \maggen\ en conjunto con \textbtt{cat} usando una tubería (\text
 
 La salida de \maggen\ esta ordenada a través de directorio bien definidos que marcan el proceso de funcionamiento de la herramienta en casa etapa. A continuación se analizarán la salida de \maggen\ para siguiente invocación:
 
-\begin{center}
-{\scriptsize\textbtt{./maggen -fo ./Out\_wuu\_yang -o maggen -f ./examples/ag\_wuu\_yang/ag\_wuu\_yang.input}}\end{center}
+\begin{center}{\scriptsize\textbtt{./maggen -fo ./Out\_wuu\_yang -o maggen -f ./examples/ag\_wuu\_yang/ag\_wuu\_yang.input}}\end{center}
 
 La totalidad de la información generada por la herramienta es mostrada en la figura \ref{fig:outmaggen}.
 
@@ -196,7 +195,7 @@ Dicha información es almacenada en la ruta \textbtt{./Out\_wuu\_yang}, dentro d
 
 \item [Archivo ``\textbtt{Grammar\_mag.log}''] Este contiene la gramática parseada. Se debe tener en cuenta el análisis de este archivo, esto permite encontrar posibles errores en la interpretación del archivo de entrada a \maggen. Tal como se muestra la gramática en este archivo, es la que la herramienta a utilizado para la generación del evaluador.
 
-\item [Directorio ``\textbtt{graphs}''] Contiene los 4 tipos de grafos construidos por \maggen\ en el proceso visto en la sección \ref{subsec:graph}. Los mismos están ordenados por 4 directorios diferentes denominados: \textit{1\_DP\_graphs}, \textit{2\_DOWN\_graphs}, \textit{3\_DCG\_graphs}, \textit{4\_ADP\_graphs}. Cada unos de ellos contiene archivos \textbtt{.dot} para cada grafo creado. Este directorio, además, es utilizado para el caso que se detecte planes cíclicos, donde se almacenan los grafos que producen dependencias cíclicas en un solo directorio y se omiten los demás grafos.
+\item [Directorio ``\textbtt{graphs}''] Contiene los 4 tipos de grafos construidos por \maggen\ en el proceso visto en la sección \ref{subsec:graph}. Los mismos están ordenados por 4 directorios diferentes denominados: \textbtt{1\_DP\_graphs}, \textbtt{2\_DOWN\_graphs}, \textbtt{3\_DCG\_graphs}, \textbtt{4\_ADP\_graphs}. Cada unos de ellos contiene archivos \textbtt{.dot} para cada grafo creado. Este directorio, además, es utilizado para el caso que se detecte planes cíclicos, donde se almacenan los grafos que producen dependencias cíclicas en un solo directorio y se omiten los demás grafos.
 
 \item [Directorio ``\textbtt{plans}''] Contiene archivos \textbtt{.dot} con los planes generados por \maggen.
 
@@ -206,12 +205,12 @@ Dicha información es almacenada en la ruta \textbtt{./Out\_wuu\_yang}, dentro d
 \section{Uso del evaluador generado}
 
 Para el uso del evaluador generado por \maggen\ se necesitan los 4 archivos generados en el directorio de salida. Tomando una de las salidas de la sección anterior, ellos son:
-\begin{itemize}
+\begin{items}
 \item \textbtt{maggen.hpp}.
 \item \textbtt{maggen.cpp}.
 \item \textbtt{Plan.hpp}.
 \item \textbtt{Node.hpp}.
-\end{itemize}
+\end{items}
 
 El evaluador generado por \maggen\ puede ser usado como un módulo C++ dentro de otro proyecto. En esta sección se continuará con un ejemplo de Wuu Yang, el cual ya se ha tratado en los capítulos anteriores (Ver especificación de entrada a \maggen\ en el apéndice \ref{append:agwuuyang}).
 
