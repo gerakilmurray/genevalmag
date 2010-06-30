@@ -20,21 +20,27 @@ En la siguiente sección abordaremos aspectos importantes relacionados a los res
 Como conclusiones específicas sobre \maggen, se obtuvo una herramienta modularizada, eficiente y completamente desarrollada en C++, que cumplió los objetivos propuestos tanto de parte del grupo de desarrollo, como de la directiva del proyecto. Además de que no se conocen herramientas que trabajen sobre MAG, en este sentido, \maggen\ adquiere mayor utilidad. Se pueden resumir las características de \maggen\ en los siguientes puntos:
 
 \begin{itemize}
- \item El lenguaje de especificación de \maggen\ para la MAG entrada, se basa en una sintaxis simple y amplia que permite lograr extensiones para el propio lenguaje. 
- \item La herramienta fue desarrollada íntegramente en C++ y el evaluador, también es generado como un modulo C++. 
- \item Esta herramienta no genera planes ``\textbf{espurios}'', es decir, planes que nunca se podrían dar en un AST concreto, como sucede en las ANCAG, evitando de este modo informar circularidades absurdas a efectos prácticos.
- \item El evaluador generado es estadico, lo que asegura que no existe un ``overhead'' en el computo de la evaluacion.
-\end{itemize}
+\item El lenguaje de especificación de \maggen\ para la MAG entrada, se basa en una sintaxis simple y amplia que permite lograr extensiones para el propio lenguaje.
 
+\item La herramienta fue desarrollada íntegramente en C++ y el evaluador, también es generado como un modulo C++. 
+
+\item Esta herramienta no genera planes ``\textbf{espurios}'', es decir, planes que nunca se podrían dar en un AST concreto, como sucede en las \textbf{ANCAG}, evitando de este modo informar circularidades absurdas a efectos prácticos.
+
+\item El evaluador generado es estático, lo que asegura que no existe un ``\textbf{overhead}'' en el cómputo de la evaluacion, ya que el mismo se llevó a cabo mientras se generaba el evaluador propiamente.
+\end{itemize}
 
 \section{Extensiones}
 Algunas de las posibles extensiones que se tienen en cuenta para \maggen\ se detallan a continuación:
 \begin{itemize}
-\item Definir una API para herramientas externas de entrada y salida de árboles. A-Terms como ejemplo.
+\item Definir una API para herramientas externas de entrada y salida de árboles. \textbf{A-Terms} como ejemplo.
+
 \item Extensiones al lenguaje de especificación, como módulos a través de \textbtt{\#include}. Esto engloba los puntos siguientes:
+
 \begin{itemize}
 \item Disponer de espacios de nombres, y operadores que permitan referirse a estos espacios de nombres.
+
 \item Redefinición o extensión de reglas incluidas, un estilo de sobrecarga.
+
 \item Permitir el adicionado de atributos a símbolos pertenecientes a otros módulos.
 \end{itemize}
 
@@ -45,12 +51,14 @@ Entre los principales trabajos a futuro para \maggen\ se encuentran:
 \begin{itemize}
 \item Implementar la generación de código al estilo ``\textit{plugins}''. Lo que permitiría extensiones varias, transparentes y elegantes para generar código en diferentes lenguajes. Esto implicaría la definición de una API del motor de generación de código.
 
-\item Definir una API para la construcción de los AST de entrada al evaluador generado, lo que permitiría que herramientas externas puedan generar los AST entrada. 
+\item Definir una API para la construcción de los AST de entrada al evaluador generado, lo que permitiría que herramientas externas puedan generar los AST entrada.
 % Este puntos podría ser analizado teniendo en cuenta los A-Terms como ejemplo.
+
 \item Pruebas de rendimiento como comparaciones con otras herramientas similares.
 % (Silver, definir sintaxis y semántica, es modular, puede que genere evaluador dinámico)
 
 \item Permitir definir atributos de \textbf{alto orden}, es decir, atributos que pueden ser un árbol. Para los cuales, su evaluación supondría un nuevo proceso de igual complejidad que el necesario para decorar al AST de entrada.
+
 \item Implementar como especies de templates para los atributos.
 
 \end{itemize}
