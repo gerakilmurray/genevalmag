@@ -10,11 +10,11 @@ Primero, como ya se menciona en el capítulo anterior, el lenguaje sobre el cual
 \label{sec:par-spirit}
 El primer desafío de codificación, fue parsear el archivo de entrada de la herramienta, en el cual vendría la especificación de una Gramática de Atributos. Dicho parser debía respetar las condiciones ya analizadas en el capítulo anterior (Ver sección \ref{sec:lenguajeMAG}). 
 
-La solución obtenida se apoya en la utilización de un framework reconocido mundialmente, denominado \spirit, perteneciente a la biblioteca de C++ llamada \boost. Esta decisión trajo dos grandes beneficios; la confiabilidad del parser obtenido y la rápida obtención del mismo, ya que, la gran ventaja de \spirit es permitir escribir la definición de la gramática en lenguaje \textbf{C++}.
+La solución obtenida se apoya en la utilización de un framework reconocido mundialmente, denominado \spirit, perteneciente a la biblioteca de C++ llamada \boost. Esta decisión trajo dos grandes beneficios; la confiabilidad del parser obtenido y la rápida obtención del mismo, ya que, la gran ventaja de \spirit\ es permitir escribir la definición de la gramática en lenguaje \textbf{C++}.
 
 \spirit\ es un framework generador de analizadores sintácticos, o parsers, descendentes recursivos orientado a objetos implementado usando técnicas de meta-programación con plantillas. Las expresiones mediante plantillas, permiten aproximar la sintaxis de una ``\textit{\textit{Forma Backus Normal Extendida}}'' (\textbf{EBNF}) completamente en C++.
 
-\spirit es un producto en continua evolución y desarrollo; actualmente se encuentra en la versión $2.3$. A partir de la $2.0$, se integraron todas los componentes anteriores dentro de ``\spirit.\textit{Classic}''. Demás componentes son encapsulados en dos nuevas capas\footnote{Detalles sobre las mismas pueden ser encontradas en\\ \urllink{http://www.boost.org/doc/libs/1\_43\_0/libs/spirit/doc/html/index.html}}: \textit{Qi} y \textit{Karma}. Para el desarrollo del parser de \maggen\ se utilizaron componentes propios de \spirit.\textit{Classic}, por cuestiones de simplicidad y compatibilidad. 
+\spirit\ es un producto en continua evolución y desarrollo; actualmente se encuentra en la versión \textbtt{2.3}. A partir de la \textbtt{2.0}, se integraron todas los componentes anteriores dentro de ``\spirit.\textit{Classic}''. Demás componentes son encapsulados en dos nuevas capas\footnote{Detalles sobre las mismas pueden ser encontradas en\\ \urllink{http://www.boost.org/doc/libs/1\_43\_0/libs/spirit/doc/html/index.html}}: \textit{Qi} y \textit{Karma}. Para el desarrollo del parser de \maggen\ se utilizaron componentes propios de \spirit.\textit{Classic}, por cuestiones de simplicidad y compatibilidad. A partir de la versión \textbtt{1.36} de \boost, se incluye la versión \textbtt{2.0} de \spirit.
 
 Se puede resumir el proceso de análisis sintáctico, en este framework, en cuatro componentes, como lo muestra la figura \ref{fig:procesoSpirit}.
 
@@ -276,7 +276,7 @@ r_dom_func = r_sort_st[&save_domain_func]%', ';
 \end{lstlisting}
 \end{description}
 
-\subsection{\textbtt{``attributes''} en \spirit }
+\subsection{\textbtt{``attributes''} en \spirit}
 
 Para la codificación de esta sección la funcionalidad buscada era que el usuario mediante una expresión en términos de conjuntos definiera la pertenencia de cada atributo. Por lo que se tuvo que implementar un ``mini-intérprete'' sobre expresiones de conjuntos.
 
