@@ -14,9 +14,9 @@
    id="svg2"
    sodipodi:version="0.32"
    inkscape:version="0.46"
-   sodipodi:docname="clases.svg"
+   sodipodi:docname="clasesLayer.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="/home/gera/tesisLic/thesis/branches/informe/images/diagramas/clases.png"
+   inkscape:export-filename="/home/gera/tesisLic/thesis/branches/informe/images/diagramas/svg/clases.png"
    inkscape:export-xdpi="90.008011"
    inkscape:export-ydpi="90.008011">
   <metadata
@@ -53,9 +53,9 @@
      pagecolor="#ffffff"
      id="base"
      showgrid="false"
-     inkscape:zoom="5.0009491"
-     inkscape:cx="1184.7116"
-     inkscape:cy="3117.0291"
+     inkscape:zoom="0.31255932"
+     inkscape:cx="1252.5301"
+     inkscape:cy="2582.0828"
      inkscape:window-x="0"
      inkscape:window-y="25"
      inkscape:current-layer="svg2" />
@@ -150,27 +150,6 @@
        y="725"
        id="text18">unsigned short count_eqs</text>
   </g>
-  <rect
-     style="fill:#808080;stroke:none;stroke-opacity:1"
-     id="rect22"
-     height="151"
-     width="5"
-     y="147"
-     x="2361" />
-  <rect
-     style="fill:#808080;stroke:none;stroke-opacity:1"
-     id="rect24"
-     height="5"
-     width="2347"
-     y="293"
-     x="19" />
-  <rect
-     style="fill:#ff8000;stroke:#000000;stroke-width:1;stroke-opacity:1"
-     id="rect26"
-     height="152"
-     width="2348"
-     y="141"
-     x="13" />
   <text
      style="font-size:18px;font-weight:bold;text-anchor:middle;fill:#000000;font-family:Sans Serif"
      id="text28"
@@ -179,20 +158,45 @@
      font-weight="bold"
      xml:space="preserve"
      font-size="18">Maglib</text>
-  <line
-     style="stroke:#000000;stroke-opacity:1"
-     id="line30"
-     y2="178"
-     x2="2361"
-     y1="178"
-     x1="13" />
-  <line
-     style="stroke:#000000;stroke-opacity:1"
-     id="line32"
-     y2="194"
-     x2="2361"
-     y1="194"
-     x1="13" />
+  <g
+     id="g3426"
+     transform="matrix(0.7024918,0,0,1,3.718853,0)">
+    <rect
+       x="2361"
+       y="147"
+       width="5"
+       height="151"
+       id="rect22"
+       style="fill:#808080;stroke:none;stroke-opacity:1" />
+    <rect
+       x="19"
+       y="293"
+       width="2347"
+       height="5"
+       id="rect24"
+       style="fill:#808080;stroke:none;stroke-opacity:1" />
+    <rect
+       x="13"
+       y="141"
+       width="2348"
+       height="152"
+       id="rect26"
+       style="fill:#ff8000;stroke:#000000;stroke-width:1;stroke-opacity:1" />
+    <line
+       x1="13"
+       y1="178"
+       x2="2361"
+       y2="178"
+       id="line30"
+       style="stroke:#000000;stroke-opacity:1" />
+    <line
+       x1="13"
+       y1="194"
+       x2="2361"
+       y2="194"
+       id="line32"
+       style="stroke:#000000;stroke-opacity:1" />
+  </g>
   <text
      style="font-size:18px;font-weight:bold;fill:#000000;font-family:Sans Serif"
      id="text34"
@@ -208,180 +212,6 @@
      x="50"
      xml:space="preserve"
      font-size="18">int gen_evaluator(const string path_input_file, const string path_folder_output, const string name_library, const vector&lt;string&gt; &amp; headers, const string path)</text>
-  <g
-     id="g38">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="1819"
-       y="407"
-       width="5"
-       height="114"
-       id="rect40" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="1602"
-       y="516"
-       width="222"
-       height="5"
-       id="rect42" />
-    <rect
-       fill="#90ccff"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="1596"
-       y="401"
-       width="223"
-       height="115"
-       id="rect44" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="1708"
-       y="423"
-       id="text46">&lt;&lt;typedef&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="1708"
-       y="460"
-       id="text48">iterator_t</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1596"
-       y1="475"
-       x2="1819"
-       y2="475"
-       id="line50" />
-  </g>
-  <g
-     id="g52">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="1056"
-       y="2654"
-       width="5"
-       height="105"
-       id="rect54" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="876"
-       y="2754"
-       width="185"
-       height="5"
-       id="rect56" />
-    <rect
-       fill="#60d460"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="870"
-       y="2648"
-       width="186"
-       height="106"
-       id="rect58" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="963"
-       y="2670"
-       id="text60">&lt;&lt;typedef&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="963"
-       y="2707"
-       id="text62">Context_rule</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="870"
-       y1="2722"
-       x2="1056"
-       y2="2722"
-       id="line64" />
-  </g>
-  <g
-     id="g66">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="2082"
-       y="407"
-       width="5"
-       height="114"
-       id="rect68" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="1865"
-       y="516"
-       width="222"
-       height="5"
-       id="rect70" />
-    <rect
-       fill="#90ccff"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="1859"
-       y="401"
-       width="223"
-       height="115"
-       id="rect72" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="1971"
-       y="423"
-       id="text74">&lt;&lt;typedef&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="1971"
-       y="460"
-       id="text76">iterator_f</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1859"
-       y1="475"
-       x2="2082"
-       y2="475"
-       id="line78" />
-  </g>
   <g
      id="g80">
     <rect
@@ -637,34 +467,6 @@
        id="line144" />
   </g>
   <g
-     id="g146">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1858"
-       y1="461"
-       x2="1852"
-       y2="455"
-       id="line148" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1858"
-       y1="461"
-       x2="1852"
-       y2="467"
-       id="line150" />
-    <line
-       stroke-dasharray="4,4"
-       stroke="black"
-       stroke-opacity="1"
-       x1="1825"
-       y1="461"
-       x2="1858"
-       y2="461"
-       id="line152" />
-  </g>
-  <g
      id="g154">
     <line
        stroke="black"
@@ -862,64 +664,6 @@
        id="text206">bool generate_plans()</text>
   </g>
   <g
-     id="g208">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="2350"
-       y="407"
-       width="5"
-       height="114"
-       id="rect210" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="2133"
-       y="516"
-       width="222"
-       height="5"
-       id="rect212" />
-    <rect
-       fill="#90ccff"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="2127"
-       y="401"
-       width="223"
-       height="115"
-       id="rect214" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="2239"
-       y="423"
-       id="text216">&lt;&lt;typedef&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="2239"
-       y="460"
-       id="text218">char_t</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="2127"
-       y1="475"
-       x2="2350"
-       y2="475"
-       id="line220" />
-  </g>
-  <g
      id="g222">
     <line
        stroke="black"
@@ -940,34 +684,6 @@
        x2="1518"
        y2="2254"
        id="line228" />
-  </g>
-  <g
-     id="g230">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="2126"
-       y1="461"
-       x2="2120"
-       y2="455"
-       id="line232" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="2126"
-       y1="461"
-       x2="2120"
-       y2="467"
-       id="line234" />
-    <line
-       stroke-dasharray="4,4"
-       stroke="black"
-       stroke-opacity="1"
-       x1="2088"
-       y1="461"
-       x2="2126"
-       y2="461"
-       id="line236" />
   </g>
   <g
      id="g238">
@@ -1055,64 +771,6 @@
        id="line264" />
   </g>
   <g
-     id="g266">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="1059"
-       y="2342"
-       width="5"
-       height="105"
-       id="rect268" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="879"
-       y="2442"
-       width="185"
-       height="5"
-       id="rect270" />
-    <rect
-       fill="#60d460"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="873"
-       y="2336"
-       width="186"
-       height="106"
-       id="rect272" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="966"
-       y="2358"
-       id="text274">&lt;&lt;typedef&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="966"
-       y="2395"
-       id="text276">Order_rule</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="873"
-       y1="2410"
-       x2="1059"
-       y2="2410"
-       id="line278" />
-  </g>
-  <g
      id="g280">
     <line
        stroke="black"
@@ -1138,17 +796,6 @@
        x2="2008"
        y2="781"
        id="line286" />
-  </g>
-  <g
-     id="g288">
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="933"
-       y="2298"
-       id="text290">&lt;&lt;vector&gt;&gt;</text>
   </g>
   <g
      id="g292">
@@ -1179,239 +826,6 @@
        id="line298" />
   </g>
   <g
-     id="g300">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="901"
-       y1="2335"
-       x2="907"
-       y2="2329"
-       id="line302" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="901"
-       y1="2335"
-       x2="895"
-       y2="2329"
-       id="line304" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="901"
-       y1="2273"
-       x2="901"
-       y2="2335"
-       id="line306" />
-    <polygon
-       fill="#000000"
-       stroke="black"
-       stroke-opacity="1"
-       points="901,2273 907,2279 901,2285 895,2279"
-       id="polygon308" />
-  </g>
-  <g
-     id="g310">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="1119"
-       y="2512"
-       width="5"
-       height="125"
-       id="rect312" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="821"
-       y="2632"
-       width="303"
-       height="5"
-       id="rect314" />
-    <rect
-       fill="#60d460"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="815"
-       y="2506"
-       width="304"
-       height="126"
-       id="rect316" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="967"
-       y="2528"
-       id="text318">&lt;&lt;struct&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="967"
-       y="2565"
-       id="text320">c_rule</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="815"
-       y1="2580"
-       x2="1119"
-       y2="2580"
-       id="line322" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="823"
-       y="2602"
-       id="text324">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="852"
-       y="2602"
-       id="text326">unsigned short father</text>
-  </g>
-  <g
-     id="g328">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="969"
-       y1="2448"
-       x2="963"
-       y2="2454"
-       id="line330" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="969"
-       y1="2448"
-       x2="975"
-       y2="2454"
-       id="line332" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="969"
-       y1="2505"
-       x2="969"
-       y2="2448"
-       id="line334" />
-    <polygon
-       fill="#000000"
-       stroke="black"
-       stroke-opacity="1"
-       points="969,2505 963,2499 969,2493 975,2499"
-       id="polygon336" />
-  </g>
-  <g
-     id="g338">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="796"
-       y="2465"
-       width="5"
-       height="159"
-       id="rect340" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="484"
-       y="2619"
-       width="317"
-       height="5"
-       id="rect342" />
-    <rect
-       fill="#60d460"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="478"
-       y="2459"
-       width="318"
-       height="160"
-       id="rect344" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="637"
-       y="2481"
-       id="text346">&lt;&lt;struct&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="637"
-       y="2518"
-       id="text348">k_plan</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="478"
-       y1="2533"
-       x2="796"
-       y2="2533"
-       id="line350" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="486"
-       y="2555"
-       id="text352">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="515"
-       y="2555"
-       id="text354">unsigned short id_plan</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="486"
-       y="2588"
-       id="text356">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="515"
-       y="2588"
-       id="text358">unsigned short plan</text>
-  </g>
-  <g
      id="g360">
     <text
        font-family="Sans Serif"
@@ -1432,17 +846,6 @@
        x="379"
        y="1180"
        id="text366">-f_domain</text>
-  </g>
-  <g
-     id="g368">
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="1099"
-       y="1224"
-       id="text370">-a_mod_type</text>
   </g>
   <g
      id="g372">
@@ -1522,28 +925,6 @@
        id="text398">-f_image {readOnly}</text>
   </g>
   <g
-     id="g400">
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="451"
-       y="2690"
-       id="text402">+item</text>
-  </g>
-  <g
-     id="g404">
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="1708"
-       y="1703"
-       id="text406">-type</text>
-  </g>
-  <g
      id="g408">
     <text
        font-family="Sans Serif"
@@ -1586,17 +967,6 @@
        x="1501"
        y="819"
        id="text422">-ag_initial_symb {readOnly}</text>
-  </g>
-  <g
-     id="g424">
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="139"
-       y="1224"
-       id="text426">-f_mod</text>
   </g>
   <g
      id="g428">
@@ -1643,28 +1013,6 @@
        id="text442">-i_symb {readOnly}</text>
   </g>
   <g
-     id="g444">
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="331"
-       y="1224"
-       id="text446">-f_assoc</text>
-  </g>
-  <g
-     id="g448">
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="911"
-       y="2321"
-       id="text450">-contexts_uniques</text>
-  </g>
-  <g
      id="g452">
     <text
        font-family="Sans Serif"
@@ -1698,17 +1046,6 @@
        id="text462">-p_Down_graphs</text>
   </g>
   <g
-     id="g464">
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="975"
-       y="2477"
-       id="text466">+context</text>
-  </g>
-  <g
      id="g468">
     <text
        font-family="Sans Serif"
@@ -1718,28 +1055,6 @@
        x="838"
        y="1536"
        id="text470">-i_attr {readOnly}</text>
-  </g>
-  <g
-     id="g472">
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="1453"
-       y="1224"
-       id="text474">-symb_type</text>
-  </g>
-  <g
-     id="g476">
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="173"
-       y="2321"
-       id="text478">-plans_project</text>
   </g>
   <g
      id="g480">
@@ -1784,17 +1099,6 @@
        x="2060"
        y="2485"
        id="text494">-p_Dcg_graphs</text>
-  </g>
-  <g
-     id="g496">
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="1132"
-       y="2517"
-       id="text498">-plans_uniques</text>
   </g>
   <g
      id="g500">
@@ -1850,17 +1154,6 @@
        x="1572"
        y="1108"
        id="text518">-r_right_side</text>
-  </g>
-  <g
-     id="g520">
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="330"
-       y="2376"
-       id="text522">+id_plan_project</text>
   </g>
   <g
      id="g524">
@@ -1929,17 +1222,6 @@
        id="text546">-l_value</text>
   </g>
   <g
-     id="g548">
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="1222"
-       y="2321"
-       id="text550">-plans_project_uniques</text>
-  </g>
-  <g
      id="g552">
     <text
        font-family="Sans Serif"
@@ -1949,17 +1231,6 @@
        x="561"
        y="441"
        id="text554">-sem_check</text>
-  </g>
-  <g
-     id="g556">
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="649"
-       y="2321"
-       id="text558">-eval_plans</text>
   </g>
   <g
      id="g560">
@@ -2084,64 +1355,6 @@
        id="text590">bool s_type_basic</text>
   </g>
   <g
-     id="g592">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="1382"
-       y="2342"
-       width="5"
-       height="105"
-       id="rect594" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="1182"
-       y="2442"
-       width="205"
-       height="5"
-       id="rect596" />
-    <rect
-       fill="#60d460"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="1176"
-       y="2336"
-       width="206"
-       height="106"
-       id="rect598" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="1279"
-       y="2358"
-       id="text600">&lt;&lt;typedef&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="1279"
-       y="2395"
-       id="text602">Order_eval_eq</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1176"
-       y1="2410"
-       x2="1382"
-       y2="2410"
-       id="line604" />
-  </g>
-  <g
      id="g606">
     <rect
        fill="#808080"
@@ -2225,64 +1438,6 @@
        id="text624">unsigned short index_syntax_order</text>
   </g>
   <g
-     id="g626">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="281"
-       y="2342"
-       width="5"
-       height="105"
-       id="rect628" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="45"
-       y="2442"
-       width="241"
-       height="5"
-       id="rect630" />
-    <rect
-       fill="#60d460"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="39"
-       y="2336"
-       width="242"
-       height="106"
-       id="rect632" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="160"
-       y="2358"
-       id="text634">&lt;&lt;typedef&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="160"
-       y="2395"
-       id="text636">Key_plan_project</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="39"
-       y1="2410"
-       x2="281"
-       y2="2410"
-       id="line638" />
-  </g>
-  <g
      id="g640">
     <rect
        fill="#808080"
@@ -2357,92 +1512,6 @@
        id="text656">bool generate_visit_sequences()</text>
   </g>
   <g
-     id="g658">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="729"
-       y="2342"
-       width="5"
-       height="105"
-       id="rect660" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="549"
-       y="2442"
-       width="185"
-       height="5"
-       id="rect662" />
-    <rect
-       fill="#60d460"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="543"
-       y="2336"
-       width="186"
-       height="106"
-       id="rect664" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="636"
-       y="2358"
-       id="text666">&lt;&lt;typedef&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="636"
-       y="2395"
-       id="text668">Key_plan</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="543"
-       y1="2410"
-       x2="729"
-       y2="2410"
-       id="line670" />
-  </g>
-  <g
-     id="g672">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1157"
-       y1="2273"
-       x2="1157"
-       y2="2474"
-       id="line674" />
-    <polygon
-       fill="#000000"
-       stroke="black"
-       stroke-opacity="1"
-       points="1157,2273 1163,2279 1157,2285 1151,2279"
-       id="polygon676" />
-  </g>
-  <g
-     id="g678">
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="1143"
-       y="2494"
-       id="text680">&lt;&lt;vector&gt;&gt;</text>
-  </g>
-  <g
      id="g682">
     <text
        font-family="Sans Serif"
@@ -2487,39 +1556,6 @@
        id="polygon694" />
   </g>
   <g
-     id="g696">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="163"
-       y1="2335"
-       x2="169"
-       y2="2329"
-       id="line698" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="163"
-       y1="2335"
-       x2="157"
-       y2="2329"
-       id="line700" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="163"
-       y1="2273"
-       x2="163"
-       y2="2335"
-       id="line702" />
-    <polygon
-       fill="#000000"
-       stroke="black"
-       stroke-opacity="1"
-       points="163,2273 169,2279 163,2285 157,2279"
-       id="polygon704" />
-  </g>
-  <g
      id="g706">
     <line
        stroke="black"
@@ -2542,17 +1578,6 @@
        id="line712" />
   </g>
   <g
-     id="g714">
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="192"
-       y="2294"
-       id="text716">&lt;&lt;map&gt;&gt;</text>
-  </g>
-  <g
      id="g718">
     <line
        stroke-dasharray="4,4"
@@ -2563,50 +1588,6 @@
        x2="2405"
        y2="189"
        id="line720" />
-  </g>
-  <g
-     id="g722">
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="1267"
-       y="2298"
-       id="text724">&lt;&lt;vector&gt;&gt;</text>
-  </g>
-  <g
-     id="g726">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1214"
-       y1="2335"
-       x2="1220"
-       y2="2329"
-       id="line728" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1214"
-       y1="2335"
-       x2="1208"
-       y2="2329"
-       id="line730" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1214"
-       y1="2273"
-       x2="1214"
-       y2="2335"
-       id="line732" />
-    <polygon
-       fill="#000000"
-       stroke="black"
-       stroke-opacity="1"
-       points="1214,2273 1220,2279 1214,2285 1208,2279"
-       id="polygon734" />
   </g>
   <g
      id="g736">
@@ -2634,50 +1615,6 @@
        x2="1178"
        y2="3026"
        id="line742" />
-  </g>
-  <g
-     id="g744">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="639"
-       y1="2335"
-       x2="645"
-       y2="2329"
-       id="line746" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="639"
-       y1="2335"
-       x2="633"
-       y2="2329"
-       id="line748" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="639"
-       y1="2273"
-       x2="639"
-       y2="2335"
-       id="line750" />
-    <polygon
-       fill="#000000"
-       stroke="black"
-       stroke-opacity="1"
-       points="639,2273 645,2279 639,2285 633,2279"
-       id="polygon752" />
-  </g>
-  <g
-     id="g754">
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="656"
-       y="2294"
-       id="text756">&lt;&lt;map&gt;&gt;</text>
   </g>
   <g
      id="g758">
@@ -2722,17 +1659,6 @@
        x2="28"
        y2="2112"
        id="line770" />
-  </g>
-  <g
-     id="g772">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1157"
-       y1="2474"
-       x2="1280"
-       y2="2474"
-       id="line774" />
   </g>
   <g
      id="g776">
@@ -2817,33 +1743,6 @@
        x2="560"
        y2="3141"
        id="line802" />
-  </g>
-  <g
-     id="g804">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1280"
-       y1="2448"
-       x2="1274"
-       y2="2454"
-       id="line806" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1280"
-       y1="2448"
-       x2="1286"
-       y2="2454"
-       id="line808" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1280"
-       y1="2474"
-       x2="1280"
-       y2="2448"
-       id="line810" />
   </g>
   <g
      id="g812">
@@ -2990,102 +1889,102 @@
   <g
      id="g846">
     <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
        x="370"
        y="909"
        width="5"
        height="155"
-       id="rect848" />
-    <rect
-       fill="#808080"
-       stroke="none"
+       id="rect848"
        stroke-opacity="1"
+       stroke="none"
+       fill="#808080" />
+    <rect
        x="70"
        y="1059"
        width="305"
        height="5"
-       id="rect850" />
-    <rect
-       fill="#ffeb60"
-       stroke="black"
-       stroke-width="1"
+       id="rect850"
        stroke-opacity="1"
+       stroke="none"
+       fill="#808080" />
+    <rect
        x="64"
        y="903"
        width="306"
        height="156"
-       id="rect852" />
+       id="rect852"
+       stroke-opacity="1"
+       stroke-width="1"
+       stroke="black"
+       fill="#ffeb60" />
     <text
-       font-family="Sans Serif"
        font-size="18"
-       fill="#000000"
        xml:space="preserve"
        font-weight="bold"
-       text-anchor="middle"
        x="217"
        y="925"
-       id="text854">Function</text>
+       id="text854"
+       text-anchor="middle"
+       font-family="Sans Serif"
+       fill="#000000">Function</text>
     <line
-       stroke="black"
-       stroke-opacity="1"
        x1="64"
        y1="940"
        x2="370"
        y2="940"
-       id="line856" />
+       id="line856"
+       stroke-opacity="1"
+       stroke="black" />
     <text
-       font-family="Sans Serif"
        font-size="18"
-       fill="#000000"
        xml:space="preserve"
        font-weight="bold"
        x="72"
        y="962"
-       id="text858">-</text>
-    <text
+       id="text858"
        font-family="Sans Serif"
+       fill="#000000">-</text>
+    <text
        font-size="18"
-       fill="#000000"
        xml:space="preserve"
        x="101"
        y="962"
-       id="text860">string f_name</text>
-    <text
+       id="text860"
        font-family="Sans Serif"
+       fill="#000000">string f_name</text>
+    <text
        font-size="18"
-       fill="#000000"
        xml:space="preserve"
        font-weight="bold"
        x="72"
        y="995"
-       id="text862">-</text>
-    <text
+       id="text862"
        font-family="Sans Serif"
+       fill="#000000">-</text>
+    <text
        font-size="18"
-       fill="#000000"
        xml:space="preserve"
        x="101"
        y="995"
-       id="text864">unsigned short f_prec</text>
-    <text
+       id="text864"
        font-family="Sans Serif"
+       fill="#000000">unsigned short f_prec</text>
+    <text
        font-size="18"
-       fill="#000000"
        xml:space="preserve"
        font-weight="bold"
        x="72"
        y="1028"
-       id="text866">-</text>
-    <text
+       id="text866"
        font-family="Sans Serif"
+       fill="#000000">-</text>
+    <text
        font-size="18"
-       fill="#000000"
        xml:space="preserve"
        x="101"
        y="1028"
-       id="text868">bool f_is_operator</text>
+       id="text868"
+       font-family="Sans Serif"
+       fill="#000000">bool f_is_operator</text>
   </g>
   <g
      id="g870">
@@ -3169,64 +2068,6 @@
        x="868"
        y="994"
        id="text888">string a_member_symbol</text>
-  </g>
-  <g
-     id="g890">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="334"
-       y="2654"
-       width="5"
-       height="105"
-       id="rect892" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="154"
-       y="2754"
-       width="185"
-       height="5"
-       id="rect894" />
-    <rect
-       fill="#60d460"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="148"
-       y="2648"
-       width="186"
-       height="106"
-       id="rect896" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="241"
-       y="2670"
-       id="text898">&lt;&lt;typedef&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="241"
-       y="2707"
-       id="text900">Item_work</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="148"
-       y1="2722"
-       x2="334"
-       y2="2722"
-       id="line902" />
   </g>
   <g
      id="g904">
@@ -3546,64 +2387,6 @@
        id="line1000" />
   </g>
   <g
-     id="g1002">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="2026"
-       y="2824"
-       width="5"
-       height="105"
-       id="rect1004" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="1846"
-       y="2924"
-       width="185"
-       height="5"
-       id="rect1006" />
-    <rect
-       fill="#60d460"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="1840"
-       y="2818"
-       width="186"
-       height="106"
-       id="rect1008" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="1933"
-       y="2840"
-       id="text1010">&lt;&lt;typedef&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="1933"
-       y="2877"
-       id="text1012">Vertex</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1840"
-       y1="2892"
-       x2="2026"
-       y2="2892"
-       id="line1014" />
-  </g>
-  <g
      id="g1016">
     <line
        stroke="black"
@@ -3866,115 +2649,6 @@
        id="text1090">unsigned short symb_id</text>
   </g>
   <g
-     id="g1092">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="207"
-       y="1251"
-       width="5"
-       height="191"
-       id="rect1094" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="49"
-       y="1437"
-       width="163"
-       height="5"
-       id="rect1096" />
-    <rect
-       fill="#ffeb60"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="43"
-       y="1245"
-       width="164"
-       height="192"
-       id="rect1098" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="125"
-       y="1267"
-       id="text1100">&lt;&lt;enum&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="125"
-       y="1304"
-       id="text1102">oper_mode</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="43"
-       y1="1319"
-       x2="207"
-       y2="1319"
-       id="line1104" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="51"
-       y="1341"
-       id="text1106">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="80"
-       y="1341"
-       id="text1108">k_prefix</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="51"
-       y="1374"
-       id="text1110">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="80"
-       y="1374"
-       id="text1112">k_infix</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="51"
-       y="1407"
-       id="text1114">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="80"
-       y="1407"
-       id="text1116">k_postfix</text>
-  </g>
-  <g
      id="g1118">
     <rect
        fill="#808080"
@@ -4031,207 +2705,6 @@
        x2="2026"
        y2="2484"
        id="line1130" />
-  </g>
-  <g
-     id="g1132">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="423"
-       y="1251"
-       width="5"
-       height="191"
-       id="rect1134" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="233"
-       y="1437"
-       width="195"
-       height="5"
-       id="rect1136" />
-    <rect
-       fill="#ffeb60"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="227"
-       y="1245"
-       width="196"
-       height="192"
-       id="rect1138" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="325"
-       y="1267"
-       id="text1140">&lt;&lt;enum&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="325"
-       y="1304"
-       id="text1142">oper_assoc</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="227"
-       y1="1319"
-       x2="423"
-       y2="1319"
-       id="line1144" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="235"
-       y="1341"
-       id="text1146">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="264"
-       y="1341"
-       id="text1148">k_left</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="235"
-       y="1374"
-       id="text1150">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="264"
-       y="1374"
-       id="text1152">k_right</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="235"
-       y="1407"
-       id="text1154">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="264"
-       y="1407"
-       id="text1156">k_non_assoc</text>
-  </g>
-  <g
-     id="g1158">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="1185"
-       y="1251"
-       width="5"
-       height="159"
-       id="rect1160" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="995"
-       y="1405"
-       width="195"
-       height="5"
-       id="rect1162" />
-    <rect
-       fill="#ffeb60"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="989"
-       y="1245"
-       width="196"
-       height="160"
-       id="rect1164" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="1087"
-       y="1267"
-       id="text1166">&lt;&lt;enum&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="1087"
-       y="1304"
-       id="text1168">type_attr</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="989"
-       y1="1319"
-       x2="1185"
-       y2="1319"
-       id="line1170" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="997"
-       y="1341"
-       id="text1172">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="1026"
-       y="1341"
-       id="text1174">k_inherit</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="997"
-       y="1374"
-       id="text1176">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="1026"
-       y="1374"
-       id="text1178">k_synthetize</text>
   </g>
   <g
      id="g1180">
@@ -4409,105 +2882,6 @@
        stroke-opacity="1"
        points="1817,2369 1823,2375 1817,2381 1811,2375"
        id="polygon1238" />
-  </g>
-  <g
-     id="g1240">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="124"
-       y1="1244"
-       x2="131"
-       y2="1240"
-       id="line1242" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="124"
-       y1="1244"
-       x2="120"
-       y2="1236"
-       id="line1244" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="198"
-       y1="1065"
-       x2="124"
-       y2="1244"
-       id="line1246" />
-    <polygon
-       fill="#000000"
-       stroke="black"
-       stroke-opacity="1"
-       points="198,1065 201,1072 193,1076 190,1068"
-       id="polygon1248" />
-  </g>
-  <g
-     id="g1250">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1089"
-       y1="1244"
-       x2="1095"
-       y2="1238"
-       id="line1252" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1089"
-       y1="1244"
-       x2="1083"
-       y2="1238"
-       id="line1254" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1089"
-       y1="1030"
-       x2="1089"
-       y2="1244"
-       id="line1256" />
-    <polygon
-       fill="#000000"
-       stroke="black"
-       stroke-opacity="1"
-       points="1089,1030 1095,1036 1089,1042 1083,1036"
-       id="polygon1258" />
-  </g>
-  <g
-     id="g1260">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="326"
-       y1="1244"
-       x2="328"
-       y2="1236"
-       id="line1262" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="326"
-       y1="1244"
-       x2="318"
-       y2="1241"
-       id="line1264" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="244"
-       y1="1065"
-       x2="326"
-       y2="1244"
-       id="line1266" />
-    <polygon
-       fill="#000000"
-       stroke="black"
-       stroke-opacity="1"
-       points="244,1065 251,1067 248,1075 241,1072"
-       id="polygon1268" />
   </g>
   <g
      id="g1270">
@@ -4954,231 +3328,6 @@
        id="text1404">unsigned short r_offset</text>
   </g>
   <g
-     id="g1406">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="1635"
-       y="1251"
-       width="5"
-       height="159"
-       id="rect1408" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="1413"
-       y="1405"
-       width="227"
-       height="5"
-       id="rect1410" />
-    <rect
-       fill="#ffeb60"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="1407"
-       y="1245"
-       width="228"
-       height="160"
-       id="rect1412" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="1521"
-       y="1267"
-       id="text1414">&lt;&lt;enum&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="1521"
-       y="1304"
-       id="text1416">symbol_type</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1407"
-       y1="1319"
-       x2="1635"
-       y2="1319"
-       id="line1418" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="1415"
-       y="1341"
-       id="text1420">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="1444"
-       y="1341"
-       id="text1422">k_terminal</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="1415"
-       y="1374"
-       id="text1424">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="1444"
-       y="1374"
-       id="text1426">k_non_terminal</text>
-  </g>
-  <g
-     id="g1428">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="467"
-       y="2464"
-       width="5"
-       height="125"
-       id="rect1430" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="41"
-       y="2584"
-       width="431"
-       height="5"
-       id="rect1432" />
-    <rect
-       fill="#60d460"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="35"
-       y="2458"
-       width="432"
-       height="126"
-       id="rect1434" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="251"
-       y="2480"
-       id="text1436">&lt;&lt;struct&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="251"
-       y="2517"
-       id="text1438">k_p_project</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="35"
-       y1="2532"
-       x2="467"
-       y2="2532"
-       id="line1440" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="43"
-       y="2554"
-       id="text1442">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="72"
-       y="2554"
-       id="text1444">unsigned short index_ocurrence</text>
-  </g>
-  <g
-     id="g1446">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="2071"
-       y="2568"
-       width="5"
-       height="105"
-       id="rect1448" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="1801"
-       y="2668"
-       width="275"
-       height="5"
-       id="rect1450" />
-    <rect
-       fill="#60d460"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="1795"
-       y="2562"
-       width="276"
-       height="106"
-       id="rect1452" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="1933"
-       y="2584"
-       id="text1454">&lt;&lt;typedef&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="1933"
-       y="2621"
-       id="text1456">property_vertex_dp</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1795"
-       y1="2636"
-       x2="2071"
-       y2="2636"
-       id="line1458" />
-  </g>
-  <g
      id="g1460">
     <line
        stroke="black"
@@ -5256,50 +3405,6 @@
        id="polygon1484" />
   </g>
   <g
-     id="g1486">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1442"
-       y1="1244"
-       x2="1448"
-       y2="1238"
-       id="line1488" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1442"
-       y1="1244"
-       x2="1436"
-       y2="1238"
-       id="line1490" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1442"
-       y1="1030"
-       x2="1442"
-       y2="1244"
-       id="line1492" />
-    <polygon
-       fill="#000000"
-       stroke="black"
-       stroke-opacity="1"
-       points="1442,1030 1448,1036 1442,1042 1436,1036"
-       id="polygon1494" />
-  </g>
-  <g
-     id="g1496">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="252"
-       y1="2590"
-       x2="252"
-       y2="2628"
-       id="line1498" />
-  </g>
-  <g
      id="g1500">
     <line
        stroke="black"
@@ -5328,34 +3433,6 @@
        id="line1506" />
   </g>
   <g
-     id="g1508">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="374"
-       y1="2457"
-       x2="374"
-       y2="2392"
-       id="line1510" />
-    <polygon
-       fill="#000000"
-       stroke="black"
-       stroke-opacity="1"
-       points="374,2457 368,2451 374,2445 380,2451"
-       id="polygon1512" />
-  </g>
-  <g
-     id="g1514">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="252"
-       y1="2628"
-       x2="8"
-       y2="2628"
-       id="line1516" />
-  </g>
-  <g
      id="g1518">
     <line
        stroke="black"
@@ -5376,33 +3453,6 @@
        x2="1534"
        y2="1136"
        id="line1524" />
-  </g>
-  <g
-     id="g1526">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="542"
-       y1="2392"
-       x2="536"
-       y2="2386"
-       id="line1528" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="542"
-       y1="2392"
-       x2="536"
-       y2="2398"
-       id="line1530" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="374"
-       y1="2392"
-       x2="542"
-       y2="2392"
-       id="line1532" />
   </g>
   <g
      id="g1534">
@@ -5497,17 +3547,6 @@
        id="line1560" />
   </g>
   <g
-     id="g1562">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="8"
-       y1="2628"
-       x2="8"
-       y2="2088"
-       id="line1564" />
-  </g>
-  <g
      id="g1566">
     <rect
        fill="#808080"
@@ -5591,139 +3630,6 @@
        id="text1584">unsigned short * count_ref</text>
   </g>
   <g
-     id="g1586">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="419"
-       y="2774"
-       width="5"
-       height="125"
-       id="rect1588" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="73"
-       y="2894"
-       width="351"
-       height="5"
-       id="rect1590" />
-    <rect
-       fill="#60d460"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="67"
-       y="2768"
-       width="352"
-       height="126"
-       id="rect1592" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="243"
-       y="2790"
-       id="text1594">&lt;&lt;struct&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="243"
-       y="2827"
-       id="text1596">i_w</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="67"
-       y1="2842"
-       x2="419"
-       y2="2842"
-       id="line1598" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="75"
-       y="2864"
-       id="text1600">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="104"
-       y="2864"
-       id="text1602">unsigned short order_attr</text>
-  </g>
-  <g
-     id="g1604">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="2031"
-       y="2706"
-       width="5"
-       height="105"
-       id="rect1606" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="1841"
-       y="2806"
-       width="195"
-       height="5"
-       id="rect1608" />
-    <rect
-       fill="#60d460"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="1835"
-       y="2700"
-       width="196"
-       height="106"
-       id="rect1610" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="1933"
-       y="2722"
-       id="text1612">&lt;&lt;struct&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="1933"
-       y="2759"
-       id="text1614">vertex_data_t</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1835"
-       y1="2774"
-       x2="2031"
-       y2="2774"
-       id="line1616" />
-  </g>
-  <g
      id="g1618">
     <text
        font-family="Sans Serif"
@@ -5768,45 +3674,6 @@
        id="polygon1630" />
   </g>
   <g
-     id="g1632">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1936"
-       y1="2699"
-       x2="1942"
-       y2="2693"
-       id="line1634" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1936"
-       y1="2699"
-       x2="1930"
-       y2="2693"
-       id="line1636" />
-    <line
-       stroke-dasharray="4,4"
-       stroke="black"
-       stroke-opacity="1"
-       x1="1936"
-       y1="2674"
-       x2="1936"
-       y2="2699"
-       id="line1638" />
-  </g>
-  <g
-     id="g1640">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="8"
-       y1="2088"
-       x2="2308"
-       y2="2088"
-       id="line1642" />
-  </g>
-  <g
      id="g1644">
     <line
        stroke="black"
@@ -5816,64 +3683,6 @@
        x2="2308"
        y2="1514"
        id="line1646" />
-  </g>
-  <g
-     id="g1648">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="734"
-       y="2660"
-       width="5"
-       height="105"
-       id="rect1650" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="542"
-       y="2760"
-       width="197"
-       height="5"
-       id="rect1652" />
-    <rect
-       fill="#60d460"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="536"
-       y="2654"
-       width="198"
-       height="106"
-       id="rect1654" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="635"
-       y="2676"
-       id="text1656">&lt;&lt;typedef&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="635"
-       y="2713"
-       id="text1658">Key_work_list</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="536"
-       y1="2728"
-       x2="734"
-       y2="2728"
-       id="line1660" />
   </g>
   <g
      id="g1662">
@@ -5971,23 +3780,6 @@
        id="line1684" />
   </g>
   <g
-     id="g1686">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="386"
-       y1="2767"
-       x2="386"
-       y2="2710"
-       id="line1688" />
-    <polygon
-       fill="#000000"
-       stroke="black"
-       stroke-opacity="1"
-       points="386,2767 380,2761 386,2755 392,2761"
-       id="polygon1690" />
-  </g>
-  <g
      id="g1692">
     <line
        stroke="black"
@@ -6037,33 +3829,6 @@
        id="line1706" />
   </g>
   <g
-     id="g1708">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="535"
-       y1="2710"
-       x2="529"
-       y2="2704"
-       id="line1710" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="535"
-       y1="2710"
-       x2="529"
-       y2="2716"
-       id="line1712" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="386"
-       y1="2710"
-       x2="535"
-       y2="2710"
-       id="line1714" />
-  </g>
-  <g
      id="g1716">
     <line
        stroke="black"
@@ -6089,98 +3854,6 @@
        x2="1122"
        y2="1987"
        id="line1722" />
-  </g>
-  <g
-     id="g1724">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="794"
-       y="2781"
-       width="5"
-       height="159"
-       id="rect1726" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="486"
-       y="2935"
-       width="313"
-       height="5"
-       id="rect1728" />
-    <rect
-       fill="#60d460"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="480"
-       y="2775"
-       width="314"
-       height="160"
-       id="rect1730" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="637"
-       y="2797"
-       id="text1732">&lt;&lt;struct&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="637"
-       y="2834"
-       id="text1734">k_w</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="480"
-       y1="2849"
-       x2="794"
-       y2="2849"
-       id="line1736" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="488"
-       y="2871"
-       id="text1738">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="517"
-       y="2871"
-       id="text1740">unsigned short father</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="488"
-       y="2904"
-       id="text1742">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="517"
-       y="2904"
-       id="text1744">unsigned short id_rule</text>
   </g>
   <g
      id="g1746">
@@ -6742,149 +4415,6 @@
        id="text1896">unsigned short i_num</text>
   </g>
   <g
-     id="g1898">
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="1947"
-       y="1679"
-       width="5"
-       height="257"
-       id="rect1900" />
-    <rect
-       fill="#808080"
-       stroke="none"
-       stroke-opacity="1"
-       x="1787"
-       y="1931"
-       width="165"
-       height="5"
-       id="rect1902" />
-    <rect
-       fill="#ffc0ff"
-       stroke="black"
-       stroke-width="1"
-       stroke-opacity="1"
-       x="1781"
-       y="1673"
-       width="166"
-       height="258"
-       id="rect1904" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       text-anchor="middle"
-       x="1864"
-       y="1695"
-       id="text1906">&lt;&lt;enum&gt;&gt;</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       text-anchor="middle"
-       x="1864"
-       y="1732"
-       id="text1908">literal_type</text>
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1781"
-       y1="1747"
-       x2="1947"
-       y2="1747"
-       id="line1910" />
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="1789"
-       y="1769"
-       id="text1912">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="1818"
-       y="1769"
-       id="text1914">k_int</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="1789"
-       y="1802"
-       id="text1916">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="1818"
-       y="1802"
-       id="text1918">k_float</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="1789"
-       y="1835"
-       id="text1920">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="1818"
-       y="1835"
-       id="text1922">k_char</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="1789"
-       y="1868"
-       id="text1924">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="1818"
-       y="1868"
-       id="text1926">k_string</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       font-weight="bold"
-       x="1789"
-       y="1901"
-       id="text1928">+</text>
-    <text
-       font-family="Sans Serif"
-       font-size="18"
-       fill="#000000"
-       xml:space="preserve"
-       x="1818"
-       y="1901"
-       id="text1930">k_bool</text>
-  </g>
-  <g
      id="g1932">
     <line
        stroke="black"
@@ -6943,39 +4473,6 @@
        x2="113"
        y2="902"
        id="line1950" />
-  </g>
-  <g
-     id="g1952">
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1780"
-       y1="1723"
-       x2="1774"
-       y2="1717"
-       id="line1954" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1780"
-       y1="1723"
-       x2="1774"
-       y2="1729"
-       id="line1956" />
-    <line
-       stroke="black"
-       stroke-opacity="1"
-       x1="1685"
-       y1="1723"
-       x2="1780"
-       y2="1723"
-       id="line1958" />
-    <polygon
-       fill="#000000"
-       stroke="black"
-       stroke-opacity="1"
-       points="1685,1723 1691,1717 1697,1723 1691,1729"
-       id="polygon1960" />
   </g>
   <g
      id="g1962">
@@ -7143,27 +4640,6 @@
        y2="1673"
        id="line2012" />
   </g>
-  <rect
-     style="fill:#808080;stroke:none;stroke-opacity:1"
-     id="rect4661"
-     height="115.72542"
-     width="5"
-     y="15.814548"
-     x="2360.3245" />
-  <rect
-     style="fill:#808080;stroke:none;stroke-opacity:1"
-     id="rect4663"
-     height="3.8319676"
-     width="2347"
-     y="113.708"
-     x="18.32436" />
-  <rect
-     style="fill:#6c5353;stroke:#000000;stroke-width:0.81979066;stroke-opacity:1"
-     id="rect4665"
-     height="102.15019"
-     width="2348.0557"
-     y="11.188362"
-     x="12.296535" />
   <text
      style="font-size:22.38795853px;font-weight:bold;text-anchor:middle;fill:#000000;font-family:Sans Serif"
      id="text4667"
@@ -7174,19 +4650,47 @@
      font-size="18"
      transform="scale(1.1460943,0.8725286)"><tspan
        style="font-size:28px;font-style:normal;font-weight:bold;writing-mode:lr-tb"
-       id="tspan4703">magGen</tspan></text>
-  <line
-     style="stroke:#000000;stroke-opacity:1"
-     id="line4693"
-     y2="47.970886"
-     x2="2361.0132"
-     y1="47.970886"
-     x1="13.012" />
-  <line
-     style="stroke:#000000;stroke-opacity:1"
-     id="line4695"
-     y2="63.970886"
-     x2="2361.0132"
-     y1="63.970886"
-     x1="13.012" />
+       id="tspan4703">maglib</tspan></text>
+  <g
+     id="g3418"
+     transform="matrix(0.7024004,0,0,1,3.5356588,0)">
+    <g
+       id="g3413">
+      <rect
+         style="fill:#808080;stroke:none;stroke-opacity:1"
+         id="rect4661"
+         height="99.728455"
+         width="5"
+         y="15.814548"
+         x="2360.3245" />
+      <rect
+         style="fill:#808080;stroke:none;stroke-opacity:1"
+         id="rect4663"
+         height="3.8319676"
+         width="2347"
+         y="113.708"
+         x="18.32436" />
+      <rect
+         style="fill:#6c5353;stroke:#000000;stroke-width:0.81979066;stroke-opacity:1"
+         id="rect4665"
+         height="102.15019"
+         width="2348.0557"
+         y="11.188362"
+         x="12.296535" />
+    </g>
+    <line
+       x1="13.012"
+       y1="47.970886"
+       x2="2361.0132"
+       y2="47.970886"
+       id="line4693"
+       style="stroke:#000000;stroke-opacity:1" />
+    <line
+       x1="13.012"
+       y1="63.970886"
+       x2="2361.0132"
+       y2="63.970886"
+       id="line4695"
+       style="stroke:#000000;stroke-opacity:1" />
+  </g>
 </svg>
