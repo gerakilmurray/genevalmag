@@ -712,7 +712,7 @@ map <vector<unsigned short>, Graph> p_Adp_subgraphs_cyclics;
 
 El chequeo de ciclicidad sobre los grafos ADP, se implementó utilizando el algoritmo de búsqueda en profundidad (Depth-first search) de \boost\ combinado con la creación de un ``visitador'' especializado. El cual a medida que recorre el grafo, va guardado los nodos y aristas visitadas mientras no se halla detectado un ciclo. Ese subgrafo es mostrado al usuario en caso de error, sino es descartado.
 
-La detección de ciclos, se ejectua cuando el algoritmo de visite, invoca a la función \textbtt{back\_edge}, en el cual es activada la bandera que indice este suceso.
+La detección de ciclos, se efectua cuando el algoritmo de visita, invoca a la función \textbtt{back\_edge}, en la cual es activada la bandera que indice este suceso.
 
 Tanto el grafo como la variable lógica, usada como bandera, son pasadas en el constructor y utilizadas internamente mediante referencias.
 
