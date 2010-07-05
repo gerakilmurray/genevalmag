@@ -35,7 +35,9 @@
 \definecolor{azul}{rgb}{0.0,0.3,0.6}
 
 \lstdefinelanguage{specmag}{
-  keywords={compute, end, all, semantic, domain, attributes, rules, sort, op, function, infix, prefix, postfix, syn, inh, left, right, non_assoc, and, and_eq, asm, auto, bitand, bitor, break, case, catch, class, compl, const, const_cast, continue, default, delete, do, double, dynamic_cast, else, enum, explicit, export, extern, false, for, friend, goto, if, inline, long, mutable, namespace, new, not, not_eq, operator, or, or_eq, private, protected, public, register, reinterpret_cast, return, short, signed, sizeof, static, static_cast, struct, switch, template, this, throw, true, try, typedef, typeid, typename, union, unsigned, using, virtual, void, volatile, wchar_t, while, xor, xor_eq, bool, char, float, int, string, repeat, until, procedure, then, from},
+  keywords={compute, end, all, semantic, domain, attributes, rules, sort, op, function, infix, prefix, postfix, syn, inh, left, right, non_assoc, and, and_eq, asm, auto, bitand, bitor, break, case, catch, class, compl, const, const_cast, continue, default, delete, do, double, dynamic_cast, else, enum, explicit, export, extern, false, for, friend, goto, if, inline, long, mutable, namespace, new, not, not_eq, operator, or, or_eq, private, protected, public, register, reinterpret_cast, return, short, signed, sizeof, static, static_cast, struct, switch, template, this, throw, true, try, typedef, typeid, typename, union, unsigned, using, virtual, void, volatile, wchar_t, while, xor, xor_eq, bool, char, float, int, string
+%   ,repeat, until, procedure, then, from
+  },
   sensitive=true,
   morecomment=[s]{/*}{*/},
   morecomment=[l]{\//},
@@ -54,7 +56,8 @@
                   lexeme_d, as_lower_d, longest_d,
                   \!, \+, \*, \>\>, \-, \&, \|, \=, \%,
                   anychar_p, alnum_p, alpha_p, digit_p, lower_p, upper_p, space_p, ch_p, str_p, oct_p, hex_p, uint_p, int_p, real_p, eps_p, end_p,
-                  symbols, add},
+                  symbols, add,
+                  end},
     basicstyle=\footnotesize,
 %     basicstyle=\renewcommand{\baselinestretch}{0.97}\small\tt,
     upquote=true,

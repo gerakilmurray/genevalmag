@@ -17,8 +17,9 @@ Se debe generar un grafo DP por cada regla de la gramática, representando las d
 Es el más directo de construir, ya que por cada ecuación de la regla actual, se agrega una arista entre cada uno de los símbolos de \textbtt{r\_value} con destino al \textbtt{l\_value} de la ecuación. Obviamente se deben agregar los nodos necesarios y sin repeticiones, para cada una de las instancias de atributos. Ver algoritmo \ref{alg:graphdp}.
 
 \begin{algorithm}[!ht]
-\lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_dp_wuu_yang}
-\caption{\label{alg:graphdp} Cómputo de grafos \textit{DP}}
+\lstinputlisting[numbers=left, columns=fullflexible]{input_file_code/compute_dp_wuu_yang}
+\vspace{-0.5cm}
+\caption{\label{alg:graphdp}Cómputo de grafos \textit{DP}.}
 \end{algorithm}
 
 \subsection{Cómputo de Down}
@@ -26,15 +27,17 @@ Es el más directo de construir, ya que por cada ecuación de la regla actual, s
 Este tipo de grafo, se debe crear para cada uno de los símbolos no terminales de la gramática. Representan las relaciones de dependencia entre solamente sus atributos, considerando todas las reglas en las que participan (Ver sección \ref{subsec:graph-down-def} del capítulo anterior). Para más detalle, ver algoritmo \ref{alg:graphdown}.
 
 \begin{algorithm}[!ht]
-\lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_down_wuu_yang}
-\caption{\label{alg:graphdown} Cómputo de grafos \textit{Down}}
+\lstinputlisting[numbers=left, columns=fullflexible]{input_file_code/compute_down_wuu_yang}
+\vspace{-0.5cm}
+\caption{\label{alg:graphdown}Cómputo de grafos \textit{Down}.}
 \end{algorithm}
 
 La función \textbtt{project} recibe un grafo, del cual debe eliminar todos los nodos y aristas relacionadas que no pertenecen al conjunto de atributos que le pasan como segundo parámetro. Pero para evitar que al eliminar nodos y aristas el grafo pierda información sobre las dependencias entre los atributos, se calcula previamente la clausura transitiva del grafo. La implementación de \textbtt{project} se presenta en el algoritmo \ref{alg:graphproj}.
 
 \begin{algorithm}[!ht]
-\lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/project_wuu_yang}
-\caption{\label{alg:graphproj} Proyección sobre grafos}
+\lstinputlisting[numbers=left, columns=fullflexible]{input_file_code/project_wuu_yang}
+\vspace{-0.5cm}
+\caption{\label{alg:graphproj}Proyección sobre grafos.}
 \end{algorithm}
 
 \subsection{Cómputo de DCG}
@@ -42,8 +45,9 @@ La función \textbtt{project} recibe un grafo, del cual debe eliminar todos los 
 Estos grafos se generan para cada regla de la gramática y considerando las dependencias entre los atributos del símbolo de la parte izquierda de la producción (\textbtt{head}). Para computarlo, tal como se lo definió en la sección \ref{subsec:graph-dcg-def}, se deben unir el grafo \textit{DP} de la regla junto a todos los grafos \textit{Down} de los símbolos de la parte derecha de la regla (\textbtt{body}) y luego se utiliza, nuevamente, la función \textbtt{project}. Para más detalle, ver algoritmo \ref{alg:graphdcg}.
 
 \begin{algorithm}[!ht]
-\lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_dcg_wuu_yang}
-\caption{\label{alg:graphdcg} Cómputo de grafos \textit{DCG}}
+\lstinputlisting[numbers=left, columns=fullflexible]{input_file_code/compute_dcg_wuu_yang}
+\vspace{-0.5cm}
+\caption{\label{alg:graphdcg}Cómputo de grafos \textit{DCG}.}
 \end{algorithm}
 
 \subsection{Cómputo de ADP}
@@ -53,8 +57,9 @@ Para generar estos grafos, Wuu Yang no plantea un algoritmo preciso aunque no es
 Un grafo ADP corresponde a una regla bajo una cierta combinación de producciones para cada uno de sus hijos. Es decir, que para una misma regla pueden existir varios grafos ADP, ya que sus hijos pueden producir más de un contexto. El cómputo de grafos ADP es presentado en el algoritmo \ref{alg:graphadp}.
 
 \begin{algorithm}[!ht]
-\lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_adp_wuu_yang}
-\caption{\label{alg:graphadp} Cómputo de grafos \textit{ADP}}
+\lstinputlisting[numbers=left, columns=fullflexible]{input_file_code/compute_adp_wuu_yang}
+\vspace{-0.5cm}
+\caption{\label{alg:graphadp}Cómputo de grafos \textit{ADP}.}
 \end{algorithm}
 
 \section{Algoritmo de cómputo de planes}
@@ -68,8 +73,9 @@ La idea principal es utilizar una cola de trabajos, en la cual se insertan pares
 Luego, para cada uno de los símbolos no terminales de la parte derecha de la regla, considerando la producción que le corresponde según el contexto, se obtiene el plan proyectado. Ese nuevo par, se intenta insertar en la cola de trabajos para seguir con el cómputo de planes (Ver algoritmo \ref{alg:planeval}).
 
 \begin{algorithm}[!ht]
-\lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_plan_wuu_yang}
-\caption{\label{alg:planeval} Cómputo de planes de evaluación}
+\lstinputlisting[numbers=left, columns=fullflexible]{input_file_code/compute_plan_wuu_yang}
+\vspace{-0.5cm}
+\caption{\label{alg:planeval}Cómputo de planes de evaluación.}
 \end{algorithm}
 
 La función \textbtt{compute\_order}, debe agregarle al grafo ADP la información inducida por el orden para evaluar los atributos del símbolo \textbf{head} de la regla a la que pertenece el grafo.
@@ -77,15 +83,17 @@ La función \textbtt{compute\_order}, debe agregarle al grafo ADP la informació
 Para ello, como todo orden se puede ver como una secuencia, se agregan al grafo un nodo por cada elementos del orden y las aristas para todos los pares posibles\footnote{Ver más detalles en \ref{sec:genplanes}} (Ver algoritmo \ref{alg:compord}).
 
 \begin{algorithm}[!ht]
-\lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/compute_order_wuu_yang}
-\caption{\label{alg:compord}Cómputo de orden de evaluación}
+\lstinputlisting[numbers=left, columns=fullflexible]{input_file_code/compute_order_wuu_yang}
+\vspace{-0.5cm}
+\caption{\label{alg:compord}Cómputo de orden de evaluación.}
 \end{algorithm}
 
 La funcionalidad que cumple \textbtt{project} (en el cómputo de planes), es dado un orden de evaluación purgarlo de todo elemento ajeno a el conjunto de ocurrencias de atributos especificados como parámetro. Previamente se debe aplicarle la clausura transitiva para conservar las relaciones de precedencia entre las ocurrencias (Ver algoritmo \ref{alg:projordeval}).
 
 \begin{algorithm}[!ht]
-\lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/project2_wuu_yang}
-\caption{\label{alg:projordeval} Proyección sobre orden de evaluación}
+\lstinputlisting[numbers=left, columns=fullflexible]{input_file_code/project2_wuu_yang}
+\vspace{-0.5cm}
+\caption{\label{alg:projordeval}Proyección sobre orden de evaluación.}
 \end{algorithm}
 
 Un resultado muy importante a tener en cuenta es el echo de que el algoritmo \ref{alg:planeval} genera la minima cantidad de planes que son necesarios para la evaluacion de una gramatica.
@@ -135,8 +143,9 @@ Este proceso fue diseñado e implementado para el desarrollo de \maggen. La gene
 La traducción bajo demanda de los planes de evaluación, permiten realizar optimizaciones como se explicará en el capítulo \ref{chap:implem} de implementación. El cómputo de secuencias de visita es presentado en el algoritmo \ref{alg:genvisitseq}.
 
 \begin{algorithm}[!ht]
-\lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/generate_visit_sequences}
-\caption{\label{alg:genvisitseq} Generador de secuencias de visitas}
+\lstinputlisting[numbers=left, columns=fullflexible]{input_file_code/generate_visit_sequences}
+\vspace{-0.5cm}
+\caption{\label{alg:genvisitseq}Generador de secuencias de visitas.}
 \end{algorithm}
 
 El algoritmo que realiza el cómputo de las secuencias de visita totales realiza un proceso recursivo para lograr la traducción. Se lo puede considerar como una simulación del recorrido sobre el árbol en tiempo de evaluación \footnote{En la sección \ref{sec:constseqvisit} se ampliará este funcionamiento.}. Por lo que se debe llevar una secuencia de visita local, a la cual se le insertarán los distintos comandos. Además, será necesario una función que lleve las instancias de atributos ya calculadas.
@@ -150,8 +159,9 @@ Una ecuación se podrá computar solamente cuando todo su \textbtt{r\_value} hal
 Por último, es necesario una función que combine y actualice la secuencia de visita global, con la que se calculó a nivel local. Esto es, ya que, una secuencia de visita puede ser completada en más de una visita. Todo el proceso analizado anteriormente es presentado en el algoritmo \ref{alg:genvisitseqrec}.
 
 \begin{algorithm}[!ht]
-\lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/gen_visit_seq}
-\caption{\label{alg:genvisitseqrec} Función recursiva de generación de secuencias de visita}
+\lstinputlisting[numbers=left, columns=fullflexible]{input_file_code/gen_visit_seq}
+\vspace{-0.5cm}
+\caption{\label{alg:genvisitseqrec}Función recursiva de generación de secuencias de visita.}
 \end{algorithm}
 
 \section{Algoritmo de evaluación de atributos}
@@ -170,16 +180,25 @@ La primera etapa es realizada en la funcion \textbtt{traverse}. Esta, tiene toda
 Para continuar con el proceso, se debe seleccionar para cada hijo el plan proyectado desde $\Theta$, que será el orden que le imponen para la evaluación de sus atributos. Ver algoritmo \ref{alg:traverse}.
 
 \begin{algorithm}[!ht]
-\lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/traverse_wuu_yang}
-\caption{\label{alg:traverse} Función Traverse}
+\lstinputlisting[numbers=left, columns=fullflexible]{input_file_code/traverse_wuu_yang}
+\vspace{-0.5cm}
+\caption{\label{alg:traverse}Función Traverse.}
 \end{algorithm}
 
 La segunda etapa es realizada por la función \textbtt{eval\_visiter}. Esta implementa la evaluación guiada por la secuencia de visita. Este algoritmo, Wuu Yang no lo presenta y lo deja a libre elección del usuario. En \ref{sec:codcppalgeval} se presenta el evaluador guiado por visita implementado para \maggen. 
 
+El algoritmo teórico que escogido es el mostrado en \ref{alg:evalvisiter}.
+
+\begin{algorithm}[!ht]
+\lstinputlisting[numbers=left, columns=fullflexible]{input_file_code/eval_visiter_wuu_yang}
+\vspace{-0.5cm}
+\caption{\label{alg:evalvisiter}Evaluador guiado por secuencia de visita.}
+\end{algorithm}
 
 Las dos etapas anteriores son realizadas en el algoritmo \ref{alg:evalattr} denominado \textbtt{eval}. 
 
 \begin{algorithm}[!ht]
-\lstinputlisting[language=specmag, numbers=left, columns=fullflexible]{input_file_code/eval_attribute_wuu_yang}
-\caption{\label{alg:evalattr} Evaluación de atributos}
+\lstinputlisting[numbers=left, columns=fullflexible]{input_file_code/eval_attribute_wuu_yang}
+\vspace{-0.5cm}
+\caption{\label{alg:evalattr}Evaluación de atributos.}
 \end{algorithm}
