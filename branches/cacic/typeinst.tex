@@ -144,13 +144,15 @@ La familia MAG es la clase más grande conocida de GA No Circulares que pueden s
 \section{Introducción}
 Desde que D. Knuth introdujo en 1966 las Gramáticas de Atributos (GA)\cite{Knuth}, estas se han utilizado ampliamente para el desarrollo de herramientas de procesamiento de lenguajes formales, como compiladores, intérpretes, traductores, así  como también para especificar la semántica de lenguajes de programación.
 
-En el desarrollo de esta sección, se introducirán algunos conceptos, las siguientes secciones estarán destinadas al desarrollo de \maggen. 
+% En el desarrollo de esta sección, se introducirán algunos conceptos, las siguientes secciones estarán destinadas al desarrollo de \maggen. 
 
 \maggen\ es el aporte principal de este trabajo, su denominación esta dada por la combinación de las sílabas \textbf{mag}, abreviatura de \textit{Multi-plans Attribute Grammar} y \textbf{Gen} por \textit{generator}. Agregando el hecho de que los evaluadores son estáticos, se obtiene un significado completo como ``Generador de Evaluadores Estáticos para MAG''.
 
 \subsection{\textquestiondown Qué es \maggen, qué hace y qué lo distingue de los demás?}
 
-\maggen\ es una herramienta generadora de evaluadores estáticos para la familia MAG. Hasta momento no hay herramientas basadas esta familia de GA. Se la puede encuadrar en un conjunto de herramientas complementarias, como generadores de parsers, con el objetivo de desarrollar de un framework para el procesamiento de lenguajes basado en especificaciones.
+\maggen\ es una herramienta generadora de evaluadores estáticos para la familia MAG. Hasta el momento no existen herramientas basadas en esta familia de GA. 
+
+\maggen\ se encuadra dentro de un conjunto de herramientas complementarias, como generadores de parsers, con el objetivo de desarrollar un framework para el procesamiento de lenguajes basado en especificaciones.
 
 La importancia que adquiere \maggen, además de basarse en la familia MAG, radica en los siguientes puntos: 
 \begin{itemize}
@@ -159,105 +161,108 @@ La importancia que adquiere \maggen, además de basarse en la familia MAG, radic
  \item El evaluador generado es \textit{estático} (Sección \ref{subsec:eval-est}), lo que garantiza que no hay procesamiento ``overhead'' en la evaluacion, sino que el mismo se realizó en tiempo de generación del evaluador propiamente.
 \end{itemize}
 
-En lo que resta de este informe se presentarán detalle teóricos, de diseño e implementación de la herramienta. Principalmente, en la sección \ref{sec:comp-planes} se desarrolla un teorema que demuestra que \maggen\ genera la mínima cantidad de planes de evaluación. En las secciones \ref{chap:disen_} y \ref{chap:implem} se analizarán aspectos relevantes al diseño e implementación de \maggen.
+En lo que resta de este informe se presentarán detalles sobre la herramienta. Principalmente, en la sección \ref{sec:comp-planes} se desarrolla un teorema que demuestra que \maggen\ genera la mínima cantidad de planes de evaluación. En las secciones \ref{chap:disen_} y \ref{chap:implem} se analizarán aspectos relevantes al diseño e implementación de \maggen.
 
-\subsection{Definiciones}
+\subsection{Preliminares}
 
-\begin{definition}
-Una CFG es una tupla \textbf{$<V,T,S,P>$}\ donde \textbf{V} es el conjunto de no terminales, \textbf{T} el conjunto de terminales, \textbf{S} es el símbolo inicial ($ S \in V$) y \textbf{P} es el conjunto de producciones. Cada producción consiste de las siguientes partes:
+% \begin{definition}
+% Una CFG es una tupla \textbf{$<V,T,S,P>$}\ donde \textbf{V} es el conjunto de no terminales, \textbf{T} el conjunto de terminales, \textbf{S} es el símbolo inicial ($ S \in V$) y \textbf{P} es el conjunto de producciones. Cada producción consiste de las siguientes partes:
+% 
+% \begin{enumerate}
+% \item Un símbolo no terminal perteneciente al conjunto del punto 2, denominado \textit{\textbf{head}} de la producción.
+% 
+% \item El símbolo \textbf{$\rightarrow$}, que indica la relación ``produce''.
+% 
+% \item Una secuencia de $0$ o más símbolos no terminales y terminales. Este, es denominado \textit{\textbf{body}} de la producción y representa el \textit{string} producido por el \textit{head}.
+% \end{enumerate}
+% \end{definition}
+% 
+% \underline{\textbf{Nota:}}
+% De aquí en adelante, en el desarrollo del trabajo, se denotarán a los símbolos no terminales con letras en \textit{mayúscula} y a los símbolos terminales con letras en \textit{minúscula}, para mayor claridad.
+% 
+% 
+% \begin{definition}
+% \label{def:arbolderivacion}
+% Dado una gramática $G = <V,T,S,P>$, se define $ST=(K,D)$ como un Árbol de Derivación, o Parse Tree, donde $K$ es un conjunto de nodos y $D$ es una relación no reflexiva sobre $K$, con $k_0$ como raíz; si cumple las siguientes condiciones:
+% 
+% \begin{itemize}
+% \item $ K \subseteq (V \cup T \cup \lambda) $
+% \item $k_{0}$ es un rótulo raíz para el símbolo S.
+% \item $ S \rightarrow k_{1} \ldots k_{n} $ donde $k_{1} \ldots k_{n}$ son rótulos para los símbolos del \textit{body} de la producción.
+% \item Si $k_{i} \in T \cup \{\lambda\}$, ($1 \leq i \leq n$), entonces $k_{i}$ es un \textbf{Nodo Hoja} de $ST$. 
+% \item Si $k_{i} \in V$,  ($1 \leq i \leq n$), entonces $k_{i}$ es la raíz del 
+%       sub-árbol sintáctico para la CFG $<V_{i},T_{i},P_{i},K_I>$, donde $K_{I}$ es un rótulo para $k_{i}$, denominado \textbf{Nodo Interno} de ST.
+% \end{itemize}
+% \end{definition}
+% 
+% \underline{Observación:} Para una producción $p\in P_{i}$ de la forma\\
+% $A\rightarrow \alpha_{0}X_{1}\alpha_{1}X_{2}\alpha_{2} \ldots X_{k}\alpha_{k}$ el nodo interno \textbf{A} tendrá a $X_{1}, X_{2},\dots, X_{k}$ como hijos internos y como hojas $\alpha_{0}, \alpha_{1}, \alpha_{2} \ldots \alpha_{k}$.
 
-\begin{enumerate}
-\item Un símbolo no terminal perteneciente al conjunto del punto 2, denominado \textit{\textbf{head}} de la producción.
 
-\item El símbolo \textbf{$\rightarrow$}, que indica la relación ``produce''.
+% \begin{definition}
+% \label{def:grammarattr}
+% Una gramática de atributos es una tupla\\
+%  $GA\ =\ <\ G,A,V,Dom,F,R\ >$ donde:
+% \begin{itemize}
+% \item $G\ =\ <\ VN,VT,S,P\ >$ es una CFG reducida y no ambigua.
+% \item A = $\cup_{X\in(VN \cup VT)} A(X)$, es el conjunto finito de atributos (A(X) es el conjunto de atributos asociados al símbolo X).
+% 
+% \item V es el conjunto finito de dominios de valores de los atributos.
+% 
+% \item Dom : $A\rightarrow V$ asocia a cada atributo un dominio o conjunto de valores d $\in$ V.
+% 
+% \item F es un conjunto finito de funciones semánticas de la forma:
+% \begin{equation}
+% f \subseteq (\bigotimes\limits_{j=0}^{k}{ Dom(a_{j} ))\rightarrow Dom(a_{0})}
+% \end{equation}
+% 
+% \item R = $\bigcup _{p \in P} R^{p}$ es el conjunto finito de reglas de atribución o ecuaciones asociadas a cada producción p $\in$ P, donde
+% \begin{equation}
+% R^{p} = \bigcup\limits_{j=0}^{m^{p}}{\{r_{j}^{p}\}}\ \ \ \ \ \ (\#(R^{p} ) = m^{p} \geq 0)
+% \end{equation}
+% y cada regla $r_{j}^{p} \in R^{p}$, con 0 $\leq$ j $\leq$ $m^{p}$ es de la forma:
+% 
+% \begin{equation}
+% r_{j}^{p}: X_{0}.a_{0} = f(X_{1}.a_{1} ,\dots , X_{k}.a_{k})
+% \end{equation} 
+% donde cada $X_{i}$ es un símbolo que ocurre en la producción \textit{p} , $a_{i} \in A(X_{i})$, ($0 \leqslant i \leqslant k$) y $f \in F$.
+% 
+% \end{itemize}
+% \end{definition}
+% 
+% \begin{definition} Un atributo $a$ está asociado al símbolo $X$ si y sólo si $a \in A(X)$. 
+% \end{definition}
+% \underline{Nota:}
+% Se utilizará la notación \textbf{X.a} para simplificar que el atributo \textbtt{a} está asociado al símbolo \textbtt{X} (a $\in$ A(X)) y para denotar el valor de una ocurrencia o instancia del atributo \textbtt{a} del símbolo \textbtt{X} en una regla de atribución.
+% 
+% \begin{definition} 
+% \label{def:ast-attr}
+% El árbol atribuido, sobre el cual las instancias de los atributos en cada nodo han sido definidas (es decir, cada instancia se ha asociado a un valor de su dominio), se denomina \textbf{árbol decorado}.
+% \end{definition}
+% 
+% \begin{definition} Para un árbol sintáctico atribuido $T(GA)$, su grafo de dependencias $GD(T)$ es el grafo construido a partir de la composición de los grafos de dependencias $GD(p)$ de cada producción aplicada durante la construcción de $T$. Formalmente,
+% 
+% \begin{center}$GD(T)=(V_{GD}(T),E_{GD}(T))$\end{center}
+% 
+% donde:
+% 
+% \begin{enumerate}
+% \item $ V_{GD}(T) = \{ X.a \mid \exists n, $ un nodo de T(GA) con rótulo $ X $ y $a \in A(X)$.
+%       
+% \item La relación $ E_{GD}(T) $ (arcos de $ GD(T) $) cumple con la siguiente propiedad:
+% 
+%       Sea $n$ un nodo de $T(GA)$ con rótulo $X_0$, cuyos hijos son los nodos $ n_1, n_2, \ldots ,n_k $, con $ k \geq 0 $ con rótulos $ X_1 $, $ X_2 $, $\ldots$, $ X_k $, respectivamente, y sea $p:X_0 \rightarrow X_1 X_2 \ldots X_k$ una producción de GA, entonces,
+%       
+%       $ (X_{i}.a,X_{j}.b) \in E_{GD}(T) \Leftrightarrow (X_{i}.a,X_{j}.b) \in DP(p) \hspace{0.5cm} 0 \leq i, \: j \leq k $
+% donde DP(p) se define como:
+% 
+% \begin{center}$DP(p) = \{(X_{i}.a,X_{j}.b) \mid X_{j}.b \rightarrow X_{i}.a \in R^{p}\}$\end{center}
+% 
+% \end{enumerate}
+% \end{definition}
 
-\item Una secuencia de $0$ o más símbolos no terminales y terminales. Este, es denominado \textit{\textbf{body}} de la producción y representa el \textit{string} producido por el \textit{head}.
-\end{enumerate}
-\end{definition}
+En una \textbf{Gramática de Atributos} (GA), se relaciona cada símbolo de una \textit{Gramática Libre de Contexto} con un conjunto de atributos. Cada regla o producción tiene asociado un \textit{conjunto de reglas semánticas}, denominadas también \textit{ecuaciones}, que establecen la forma de asignación a \textit{atributos} de valores denotados por la aplicación de una función, la cual, puede tomar como argumentos instancias de atributos pertenecientes a los símbolos que aparecen en la producción.
 
-\underline{\textbf{Nota:}}
-De aquí en adelante, en el desarrollo del trabajo, se denotarán a los símbolos no terminales con letras en \textit{mayúscula} y a los símbolos terminales con letras en \textit{minúscula}, para mayor claridad.
-
-
-\begin{definition}
-\label{def:arbolderivacion}
-Dado una gramática $G = <V,T,S,P>$, se define $ST=(K,D)$ como un Árbol de Derivación, o Parse Tree, donde $K$ es un conjunto de nodos y $D$ es una relación no reflexiva sobre $K$, con $k_0$ como raíz; si cumple las siguientes condiciones:
-
-\begin{itemize}
-\item $ K \subseteq (V \cup T \cup \lambda) $
-\item $k_{0}$ es un rótulo raíz para el símbolo S.
-\item $ S \rightarrow k_{1} \ldots k_{n} $ donde $k_{1} \ldots k_{n}$ son rótulos para los símbolos del \textit{body} de la producción.
-\item Si $k_{i} \in T \cup \{\lambda\}$, ($1 \leq i \leq n$), entonces $k_{i}$ es un \textbf{Nodo Hoja} de $ST$. 
-\item Si $k_{i} \in V$,  ($1 \leq i \leq n$), entonces $k_{i}$ es la raíz del 
-      sub-árbol sintáctico para la CFG $<V_{i},T_{i},P_{i},K_I>$, donde $K_{I}$ es un rótulo para $k_{i}$, denominado \textbf{Nodo Interno} de ST.
-\end{itemize}
-\end{definition}
-
-\underline{Observación:} Para una producción $p\in P_{i}$ de la forma\\
-$A\rightarrow \alpha_{0}X_{1}\alpha_{1}X_{2}\alpha_{2} \ldots X_{k}\alpha_{k}$ el nodo interno \textbf{A} tendrá a $X_{1}, X_{2},\dots, X_{k}$ como hijos internos y como hojas $\alpha_{0}, \alpha_{1}, \alpha_{2} \ldots \alpha_{k}$.
-
-
-\begin{definition}
-\label{def:grammarattr}
-Una gramática de atributos es una tupla\\
- $GA\ =\ <\ G,A,V,Dom,F,R\ >$ donde:
-\begin{itemize}
-\item $G\ =\ <\ VN,VT,S,P\ >$ es una CFG reducida y no ambigua.
-\item A = $\cup_{X\in(VN \cup VT)} A(X)$, es el conjunto finito de atributos (A(X) es el conjunto de atributos asociados al símbolo X).
-
-\item V es el conjunto finito de dominios de valores de los atributos.
-
-\item Dom : $A\rightarrow V$ asocia a cada atributo un dominio o conjunto de valores d $\in$ V.
-
-\item F es un conjunto finito de funciones semánticas de la forma:
-\begin{equation}
-f \subseteq (\bigotimes\limits_{j=0}^{k}{ Dom(a_{j} ))\rightarrow Dom(a_{0})}
-\end{equation}
-
-\item R = $\bigcup _{p \in P} R^{p}$ es el conjunto finito de reglas de atribución o ecuaciones asociadas a cada producción p $\in$ P, donde
-\begin{equation}
-R^{p} = \bigcup\limits_{j=0}^{m^{p}}{\{r_{j}^{p}\}}\ \ \ \ \ \ (\#(R^{p} ) = m^{p} \geq 0)
-\end{equation}
-y cada regla $r_{j}^{p} \in R^{p}$, con 0 $\leq$ j $\leq$ $m^{p}$ es de la forma:
-
-\begin{equation}
-r_{j}^{p}: X_{0}.a_{0} = f(X_{1}.a_{1} ,\dots , X_{k}.a_{k})
-\end{equation} 
-donde cada $X_{i}$ es un símbolo que ocurre en la producción \textit{p} , $a_{i} \in A(X_{i})$, ($0 \leqslant i \leqslant k$) y $f \in F$.
-
-\end{itemize}
-\end{definition}
-
-\begin{definition} Un atributo $a$ está asociado al símbolo $X$ si y sólo si $a \in A(X)$. 
-\end{definition}
-\underline{Nota:}
-Se utilizará la notación \textbf{X.a} para simplificar que el atributo \textbtt{a} está asociado al símbolo \textbtt{X} (a $\in$ A(X)) y para denotar el valor de una ocurrencia o instancia del atributo \textbtt{a} del símbolo \textbtt{X} en una regla de atribución.
-
-\begin{definition} 
-\label{def:ast-attr}
-El árbol atribuido, sobre el cual las instancias de los atributos en cada nodo han sido definidas (es decir, cada instancia se ha asociado a un valor de su dominio), se denomina \textbf{árbol decorado}.
-\end{definition}
-
-\begin{definition} Para un árbol sintáctico atribuido $T(GA)$, su grafo de dependencias $GD(T)$ es el grafo construido a partir de la composición de los grafos de dependencias $GD(p)$ de cada producción aplicada durante la construcción de $T$. Formalmente,
-
-\begin{center}$GD(T)=(V_{GD}(T),E_{GD}(T))$\end{center}
-
-donde:
-
-\begin{enumerate}
-\item $ V_{GD}(T) = \{ X.a \mid \exists n, $ un nodo de T(GA) con rótulo $ X $ y $a \in A(X)$.
-      
-\item La relación $ E_{GD}(T) $ (arcos de $ GD(T) $) cumple con la siguiente propiedad:
-
-      Sea $n$ un nodo de $T(GA)$ con rótulo $X_0$, cuyos hijos son los nodos $ n_1, n_2, \ldots ,n_k $, con $ k \geq 0 $ con rótulos $ X_1 $, $ X_2 $, $\ldots$, $ X_k $, respectivamente, y sea $p:X_0 \rightarrow X_1 X_2 \ldots X_k$ una producción de GA, entonces,
-      
-      $ (X_{i}.a,X_{j}.b) \in E_{GD}(T) \Leftrightarrow (X_{i}.a,X_{j}.b) \in DP(p) \hspace{0.5cm} 0 \leq i, \: j \leq k $
-donde DP(p) se define como:
-
-\begin{center}$DP(p) = \{(X_{i}.a,X_{j}.b) \mid X_{j}.b \rightarrow X_{i}.a \in R^{p}\}$\end{center}
-
-\end{enumerate}
-\end{definition}
 
 \subsection{Métodos de Evaluación}
 \label{sec:met_eval}
@@ -300,7 +305,7 @@ Entonces, cada plan de evaluación que computa las dependencias impuestas en una
 
 Además, se deberán detectar las posibles dependencias circulares, para informar la viabilidad de su evaluación.
 
-De ahora en adelante, cada vez que se hable de evaluador, se hará referencia a evaluadores estáticos.
+% De ahora en adelante, cada vez que se hable de evaluador, se hará referencia a evaluadores estáticos.
 
 \subsection{Secuencia de visita}
 \label{sec:sec-visit}
@@ -321,7 +326,7 @@ Una secuencia de visita en el nodo $n$ es una secuencia de tres operaciones o ac
 \end{description}
 
 \underline{\textit{\textbf{Nota:}}}
-Teniendo en cuenta la implementación de \maggen, uno de los principales cambios, con respecto a lo visto en los puntos de arriba, es que el índice $i$ es omitido (en \emph{visit} y \emph{leave}) debido a que cada nodo lleva un propio contador de invocaciones y mantiene los cambios de estados en cada una de ellas.  
+Teniendo en cuenta la implementación de \maggen, uno de los principales cambios, con respecto a lo visto en los puntos de arriba, es que el índice $i$ es omitido (en \emph{visit} y \emph{leave}) debido a que cada nodo lleva un propio contador de invocaciones y mantiene los cambios de estados en cada una de ellas.\\  
 
 Un evaluador basado en secuencias de visita, comienza ejecutando las operaciones en el nodo raíz del árbol. En cada visita a un nodo, se ejecutan las operaciones en secuencia hasta la ejecución de una operación \emph{leave(i)}. En su próxima visita ($i+1$), se continúa con la operación que sigue a \emph{leave(i)}.
 
@@ -333,18 +338,20 @@ Se pueden generar secuencias de visita a partir de los grafos de dependencias in
 
 En la sección \ref{seubsec:seq-visit} se analiza la contrucción de secuencias de visita para \maggen.
 
-\subsection{Generación de evaluadores para GA bien definidas}
-
-En el proceso de generación de un evaluador, se deben computar todas las dependencias entre los atributos de una producción, los planes de evalución y secuencias de visitas correspondientes, asumiendo que puede tener asociado más de un plan, dependiendo del contexto de su aplicación (ver \ref{subsec:eval-est}). 
-
-Para la evaluación de una GA bien definida se debe realizar una previa selección del plan correspondiente a cada nodo del AST. La misma, el evaluador necesitará realizar un recorrido descendente del árbol sintáctico para \emph{marcar} los nodos con la información sobre las dependencias \emph{actuales} transitivas en base al subárbol.
+% \subsection{Generación de evaluadores para GA bien definidas}
+% 
+% En el proceso de generación de un evaluador, se deben computar todas las dependencias entre los atributos de una producción, los planes de evalución y secuencias de visitas correspondientes, asumiendo que puede tener asociado más de un plan, dependiendo del contexto de su aplicación (ver \ref{subsec:eval-est}). 
+% 
+% Para la evaluación de una GA bien definida se debe realizar una previa selección del plan correspondiente a cada nodo del AST. La misma, el evaluador necesitará realizar un recorrido descendente del árbol sintáctico para \emph{marcar} los nodos con la información sobre las dependencias \emph{actuales} transitivas en base al subárbol.
 
 \subsection{Gramaticas de Atributos Multi-planes}
 \label{def:MAG}
 
 El conjunto de dependencias directas de una producción, de la gramática, se denota como \textit{DP(p)}(\textit{p} producción de la gramática) y se define como:
 \begin{definition}
-Dada una producción p de una gramática de atributos definida como en \ref{def:grammarattr}, entonces
+Dada una producción p de una gramática de atributos 
+% definida como en \ref{def:grammarattr}
+, entonces
 \begin{equation}
 DP(p) = \{(X_{i}.a, X_{j}.b) | X_{i}.a \rightarrow Y_{j}.b \in R^{p} \}
 \end{equation}
@@ -352,7 +359,9 @@ DP(p) = \{(X_{i}.a, X_{j}.b) | X_{i}.a \rightarrow Y_{j}.b \in R^{p} \}
 
 
 \begin{definition}
-Dada un símbolo X de una gramática de atributos definida como en \ref{def:grammarattr}, entonces
+Dada un símbolo X de una gramática de atributos definida como en 
+% \ref{def:grammarattr}
+, entonces
 \begin{equation}
 Down(X) = \{(a,b) | a \rightarrow b \} con\ a,b \in A(X)
 \end{equation}
