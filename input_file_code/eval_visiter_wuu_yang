@@ -1,0 +1,20 @@
+procedure eval_visiter(n)
+  /* n es un nodo no terminal de un AST. */
+  /* Donde n contiene: */
+  /*   - v_seq es la secuencia de visita para el nodo n. */
+  /*   - index es el ultimo elemento tratado de la secuencia. */
+  for cada operacion op `$\in$` `$\textbf{v\_seq}$` mayor a `$\textbf{index}$` do
+    if (op == visit m) then
+      /* m es el hijo a visitar. */
+      eval_visiter(m);
+    else if (op == compute eq) then
+      /* eq es la ecuacion a computar. */
+      compute(eq);
+    else
+       /* Se produce un leave. */
+       /* Se actualiza el indice del nodo actual. */
+       index = get_index(op);
+       break;
+    end if
+  end for
+end procedure
