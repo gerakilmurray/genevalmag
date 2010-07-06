@@ -22,11 +22,11 @@
 \usepackage{amssymb}
 \usepackage{listings}
 \usepackage{color}
+\def\theoremname{Teorema}
 \def\definitionname{Definici\'on}
 \definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
 \definecolor{gris}{rgb}{0.8,0.8,0.8}
 \definecolor{azul}{rgb}{0.0,0.3,0.6}
-
 \lstset{
     backgroundcolor=\color{lbcolor},
     tabsize=2,
@@ -38,7 +38,7 @@
                   anychar_p, alnum_p, alpha_p, digit_p, lower_p, upper_p, space_p, ch_p, str_p, oct_p, hex_p, uint_p, int_p, real_p, eps_p, end_p,
                   symbols, add,
                   end},
-    basicstyle=\footnotesize,
+    basicstyle=\tiny,
     aboveskip={1\baselineskip},
     columns=[c]fixed,
     showstringspaces=false,
@@ -56,7 +56,28 @@
     keepspaces=true,
     escapeinside=``,
     numbersep=5pt,
-    numberstyle=\tiny
+    numberstyle=\scriptsize
+}
+
+\definecolor{linkcol}{rgb}{0,0,0.4} 
+\definecolor{citecol}{rgb}{0.5,0,0} 
+
+\hypersetup
+{
+bookmarksopen=true,
+pdftitle="Art\'iculo CACIC: magGen",
+pdfauthor="Arroyo - Kilmurray - Picco", 
+pdfsubject="Generador de Evaluadores est\'aticos para MAG.", %subject of the document
+pdftoolbar=false, % toolbar hidden
+pdfmenubar=true, %menubar shown
+pdfhighlight=/O, %effect of clicking on a link
+colorlinks=true, %couleurs sur les liens hypertextes
+pdfpagemode=UseNone, %aucun mode de page
+pdfpagelayout=SinglePage, %ouverture en simple page
+pdffitwindow=true, %pages ouvertes entierement dans toute la fenetre
+linkcolor=linkcol, %couleur des liens hypertextes internes
+citecolor=citecol, %couleur des liens pour les citations
+urlcolor=linkcol %couleur des liens pour les url
 }
 
 \lstdefinelanguage{specmag}{
@@ -75,9 +96,6 @@
 \newcommand{\spirit}{\textit{\textbf{Spirit}}}
 
 \usepackage{url}
-% \urldef{\mailsa}\path|{alfred.hofmann, ursula.barth, ingrid.haas, frank.holzwarth,|
-% \urldef{\mailsb}\path|anna.kramer, leonie.kunz, christine.reiss, nicole.sator,|
-% \urldef{\mailsc}\path|erika.siebert-cole, peter.strasser, lncs}@springer.com|    
 \newcommand{\keywords}[1]{\par\addvspace\baselineskip \noindent\keywordname\enspace\ignorespaces#1}
 
 \begin{document}
@@ -96,8 +114,8 @@
 % their surnames. This ensures that the names appear correctly in
 % the running heads and the author index.
 %
-\author{ Arroyo Marcelo Daniel,
-Kilmurray, Gerardo Luis, %
+\author{Arroyo, Marcelo Daniel;
+Kilmurray, Gerardo Luis; %
 Picco, Gonzalo Martín}
 %
 \authorrunning{Arroyo - Kilmurray - Picco}
@@ -157,12 +175,12 @@ Desde que D. Knuth introdujo en 1966 las Gramáticas de Atributos (GA)\cite{Knut
 
 \maggen\ se encuadra dentro de un conjunto de herramientas complementarias, como generadores de parsers, con el objetivo de desarrollar un framework para el procesamiento de lenguajes basado en especificaciones.
 
-La importancia que adquiere \maggen, además de basarse en la familia MAG, radica en que genera la mínima cantidad de planes necesarios y plausibles para evaluar la gramática, y en que el evaluador generado es \textit{estático}, lo que garantiza que no hay procesamiento ``overhead'' durante la evaluacion, sino que el mismo se realizó en tiempo de generación y compilación del evaluador propiamente.
+La importancia que adquiere \maggen, además de basarse en la familia MAG, radica en que genera la mínima cantidad de planes necesarios y plausibles para evaluar la gramática, y en que el evaluador generado es \textit{estático}, lo que garantiza que no hay procesamiento ``overhead'' durante la evaluación, sino que el mismo se realizó en tiempo de generación y compilación del evaluador propiamente.
 
 % \begin{itemize}
 % \item No genera planes \textit{espurios} (Ver \ref{def:plan_espurios}). Esta característica hace que todos los planes generados sean plausibles (Ver \ref{def:plan_plausible}) para algún AST de la gramática.
 %  
-% \item El evaluador generado es \textit{estático} (Sección \ref{subsec:eval-est}), lo que garantiza que no hay procesamiento ``overhead'' en la evaluacion, sino que el mismo se realizó en tiempo de generación del evaluador propiamente.
+% \item El evaluador generado es \textit{estático} (Sección \ref{subsec:eval-est}), lo que garantiza que no hay procesamiento ``overhead'' en la evaluación, sino que el mismo se realizó en tiempo de generación del evaluador propiamente.
 % \end{itemize}
 
 % En lo que resta de este informe se presentarán detalles sobre la herramienta. Principalmente, en la sección \ref{sec:comp-planes} se desarrolla un teorema que demuestra que \maggen\ genera la mínima cantidad de planes de evaluación. En las secciones \ref{chap:disen_} y \ref{chap:implem} se analizarán aspectos relevantes al diseño e implementación de \maggen.
@@ -274,8 +292,7 @@ Un evaluador de gramáticas de atributos debe tener en cuenta las dependencias e
 
 \begin{definition} Un orden de evaluación consistente, con respecto a las dependencias entre los atributos de una gramática de atributos $GA$, es una secuencia (orden parcial) de instancias de atributos con la siguiente restricción:
 
-Dada una regla $r_{j}^{p} : X_{0}.a_{0} = f(\ldots, X_{i}.a_{i}, \ldots)$ en una producción $p$, 
-$X_{i}.a_{i}$ deberá preceder a $X_{0}.a_{0}$.
+Dada una regla $r_{j}^{p} : X_{0}.a_{0} = f(\ldots, X_{i}.a_{i}, \ldots)$ en una producción $p$,$X_{i}.a_{i}$ deberá preceder a $X_{0}.a_{0}$.
 \end{definition}
 
 \begin{definition} 
@@ -286,7 +303,7 @@ Si una GA contiene dependencias circulares no podría ser evaluada ya que no se 
 
 En 1980, Uwe Kastens\cite{kastens} caracterizó las ``\textit{Gramáticas de Atributos Ordenadas}'' (OAG) y propuso un método para su evaluación, denominado secuencias de visita. Estas son, secuencias de operaciones que conducen el recorrido del AST, para realizar la evaluación de las instancias de los atributos. Kastens propone un método para generar las secuencias de visita en tiempo polinomial para la familia OAG.
 
-Luego, en 1998, Wuu-Yang en \cite{wuu-yang1} caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multi-planes}, presentando una algoritmo de evaluación basado en secuencias de visita en tiempo polinomial en el numero de símbolos y producciones. Esta familia, es presentada en la sección \ref{def:MAG} y son en las que se basa el funcionamiento de \maggen.
+Luego, en 1998, Wuu-Yang en \cite{wuu-yang1} caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multi-planes}\footnote{La familia de las MAG contiene a la familia de las OAG.}, presentando un algoritmo de evaluación basado en secuencias de visita en tiempo polinomial en el numero de símbolos y producciones. Esta familia, es presentada en la sección \ref{def:MAG} y son en las que se basa el funcionamiento de \maggen.
 
 \subsection{Evaluación estática}
 \label{subsec:eval-est}
@@ -297,17 +314,18 @@ Un concepto relevante a tener en cuenta es el \textit{Contexto de una producció
 Un árbol sintáctico se construye a partir de la aplicación sucesiva de producciones de la gramática. Una instancia de una producción en un árbol sintáctico tiene como \emph{contexto inferior} a las instancias de las producciones aplicadas a los símbolos no terminales de la parte derecha.
 
 Dada una producción $p$ se deben tomar en cuenta tres tipos de dependencias que definen el contexto de la misma:
-\begin{enumerate}
+\begin{itemize}
 \item Directas obtenidas por las ecuaciones de $p$.
 \item Impuestas por el contexto superior.
 \item Impuestas en el contexto inferior.
-\end{enumerate}
+\end{itemize}
 
 Instancias diferentes de una producción $p$ tendrán las mismas dependencias directas, pero podrán tener diferentes dependencias impuestas por los contextos inferiores y superiores. Es necesario entonces, determinar todas las \emph{dependencias posibles} entre las instancias de los atributos que ocurren en una producción para luego poder determinar todas los \emph{planes de evaluación posibles} entre los atributos que ocurren en una producción.
 
-Entonces, cada plan de evaluación que computa las dependencias impuestas en una producción va acompañado con el \textit{contexto} en el cual el mismo se efectúa.
-
-Además, se deberán detectar las posibles dependencias circulares, para informar la viabilidad de su evaluación.
+Cada plan de evaluación se vincula con su correspondiente contexto de aplicación.
+% Entonces, cada plan de evaluación que computa las dependencias impuestas en una producción va acompañado con el \textit{contexto} en el cual el mismo se efectúa.
+% Además, se deberán detectar las posibles dependencias circulares, para informar la viabilidad de su evaluación. 
+En la sección \ref{subsec:const-planes} se analiza la construcción de planes en \maggen.
 
 % De ahora en adelante, cada vez que se hable de evaluador, se hará referencia a evaluadores estáticos.
 
@@ -344,11 +362,11 @@ Los evaluadores basados en secuencias de visita pertenecen a una familia denomin
 
 % \subsection{Generación de evaluadores para GA bien definidas}
 % 
-% En el proceso de generación de un evaluador, se deben computar todas las dependencias entre los atributos de una producción, los planes de evalución y secuencias de visitas correspondientes, asumiendo que puede tener asociado más de un plan, dependiendo del contexto de su aplicación (ver \ref{subsec:eval-est}). 
+% En el proceso de generación de un evaluador, se deben computar todas las dependencias entre los atributos de una producción, los planes de evaluación y secuencias de visitas correspondientes, asumiendo que puede tener asociado más de un plan, dependiendo del contexto de su aplicación (ver \ref{subsec:eval-est}). 
 % 
 % Para la evaluación de una GA bien definida se debe realizar una previa selección del plan correspondiente a cada nodo del AST. La misma, el evaluador necesitará realizar un recorrido descendente del árbol sintáctico para \emph{marcar} los nodos con la información sobre las dependencias \emph{actuales} transitivas en base al subárbol.
 
-\subsection{Gramaticas de Atributos Multi-planes}
+\subsection{Gramáticas de Atributos Multi-planes}
 \label{def:MAG}
 
 El conjunto de dependencias directas de una producción, de la gramática, se denota como \textit{DP(p)}(\textit{p} producción de la gramática) y se define como:
@@ -444,7 +462,7 @@ Un caso alternativo de salida, se da cuando \maggen\ detecta planes cíclicos, v
 
 El lenguaje de especificación utilizado para la descripción de una MAG de entrada para \maggen, fue definido en el marco del proyecto.
  
-La secciones que conforman la descripción de una MAG, se corresponden con las características se mencionan en la definición terórica \ref{def:MAG}.
+La secciones que conforman la descripción de una MAG, se corresponden con las características se mencionan en la definición teórica \ref{def:MAG}.
  
 %Informalmente, el lenguaje de especificación se conforma de las siguientes partes:
 
@@ -458,15 +476,15 @@ La secciones que conforman la descripción de una MAG, se corresponden con las c
 
 Los tres bloques analizados anteriormente, pueden ser clasificados según su comportamiento o funcionalidad dentro del lenguaje la especificación.
 
-Los dos primeros, son bloques puramente declarativos o dedicados a la definición de elementos que serán utilizados en el tercer bloque. La seccion de reglas es considerado el de mayor importancia, ya que marca la sintaxis y semántica de la gramática.
+Los dos primeros, son bloques puramente declarativos o dedicados a la definición de elementos que serán utilizados en el tercer bloque. La sección de reglas es considerado el de mayor importancia, ya que marca la sintaxis y semántica de la gramática.
 
-Cada bloque del lenguaje de especificación contiene su sintaxis propia para su definición\footnote{En la documentacion completa de \maggen\ se pueden encontrar con detalles el lenguaje de especificación.}.
+Cada bloque del lenguaje de especificación contiene su sintaxis propia para su definición\footnote{En la documentación completa de \maggen\ se pueden encontrar con detalles el lenguaje de especificación.}.
 
-En el apendice \ref{append:agwuuyang} se presenta un ejemplo de una gramática de atributos multiplanes presentada por Wuu Yang en \cite{wuu-yang1} codificada en el lenguaje de especificación de \maggen.
+En el apéndice \ref{append:agwuuyang} se presenta un ejemplo de una gramática de atributos multiplanes presentada por Wuu Yang en \cite{wuu-yang1} codificada en el lenguaje de especificación de \maggen.
 
 \subsection{Parser}
 
-El parser del lenguaje se apoya en la utilización de un framework reconocido mundialmente, denominado \spirit, perteneciente a la biblioteca de C++ llamada \boost. Esta decisión trajo dos grandes beneficios; la confiabilidad del parser obtenido y la rápida obtención del mismo, ya que, la gran ventaja de \spirit es permitir escribir la definición de la gramática en lenguaje \textbf{C++}.
+El parser del lenguaje se apoya en la utilización de un framework reconocido mundialmente, denominado \spirit, perteneciente a la biblioteca de C++ llamada \boost. Esta decisión trajo dos grandes beneficios; la confiabilidad del parser obtenido y la rápida obtención del mismo, ya que, la gran ventaja de \spirit\ es permitir escribir la definición de la gramática en lenguaje \textbf{C++}.
 
 \spirit\ es un framework generador de analizadores sintácticos, o parsers, descendentes recursivos orientado a objetos implementado usando técnicas de meta-programación con plantillas. Las expresiones mediante plantillas, permiten aproximar la sintaxis de una ``\textit{\textit{Forma Backus Normal Extendida}}'' (\textbf{EBNF}) completamente en C++.
 
@@ -474,7 +492,7 @@ El parser del lenguaje se apoya en la utilización de un framework reconocido mu
 
 El chequeo de ciclicidad sobre los grafos ADP, se implementó utilizando el algoritmo de búsqueda en profundidad (Depth-first search) de \boost\ combinado con la creación de un ``visitador'' especializado. El cual a medida que recorre el grafo, va guardado los nodos y aristas visitadas mientras no se halla detectado un ciclo. Ese subgrafo es mostrado al usuario en caso de error, sino es descartado.
 
-%La detección de ciclos, se efectua cuando el algoritmo de visita, invoca a la función \textbtt{back\_edge}, en la cual es activada la bandera que indice este suceso.
+%La detección de ciclos, se efectúa cuando el algoritmo de visita, invoca a la función \textbtt{back\_edge}, en la cual es activada la bandera que índice este suceso.
 
 %Tanto el grafo como la variable lógica, usada como bandera, son pasadas en el constructor y utilizadas internamente mediante referencias.
 
@@ -509,7 +527,7 @@ El chequeo de ciclicidad sobre los grafos ADP, se implementó utilizando el algo
 %\end{lstlisting}
 
 \subsection{Construcción de planes}
-
+\label{subsec:const-planes}
 La etapa de construcción de planes en \maggen\ se basa en dos puntos:
 
 \begin{enumerate}
@@ -519,9 +537,9 @@ La etapa de construcción de planes en \maggen\ se basa en dos puntos:
 
 Un \textbf{plan} se compone de una lista de números de ecuaciones a computar. Todo plan determina un orden de evaluación, realizándose la evaluación de izquierda a derecha.
 
-El algoritmo para la generacion de planes se desarrollo teniendo de base los resultados de Wuu Yang en \cite{wuu-yang1}.
+% El algoritmo para la generación de planes se desarrollo teniendo de base los resultados de Wuu Yang en \cite{wuu-yang1}.
 
-Para el ejemplo presentado en el apéndice \ref{append:agwuuyang} se computan 7 planes (uno por cada ADP). Cada plan guarda, ademas del orden de evaluación de las ecuaciones, el contexto de la producción. Este, permite, en el proceso de evaluación, poder asignar dicho plan a un nodo del AST a decorar.
+Para el ejemplo presentado en el apéndice \ref{append:agwuuyang} se computan 7 planes (uno por cada ADP). Cada plan guarda, además del orden de evaluación de las ecuaciones, el contexto de la producción. Este, permite, en el proceso de evaluación, poder asignar dicho plan a un nodo del AST a decorar.
 
 \begin{tabular}{p{6cm}p{6cm}}
 \begin{itemize}
@@ -537,11 +555,11 @@ Para el ejemplo presentado en el apéndice \ref{append:agwuuyang} se computan 7 
 \end{itemize}\\
 \end{tabular}
 
-Donde la notación ($\alpha | P | \beta$) especifica: el contexto superior ($\alpha$), la regla corriente($P$) y el contexto inferior($\beta$).
+Donde la notación ($\alpha | P | \beta$) especifica: el contexto superior ($\alpha$), la regla corriente ($P$) y el contexto inferior ($\beta$).
 
 \subsection{Construcción Secuencias de Visita}
 \label{seubsec:seq-visit}
-El funcionamiento para la construcción de las secuencias, esta dado por la aplicación de una especie de \textit{simulación}, para la evaluación de cada atributo de los símbolos. El resultado de esta simulación, son los valores que conforman la secuencia de visita, tal como se ha analizado en la sección \ref{sec:sec-visit}. Estos valores siguen la siguiente interpretación: 
+El funcionamiento para la construcción de las secuencias, esta dado por la aplicación de una \textit{simulación}, para la evaluación de cada atributo de los símbolos. El resultado de esta simulación, son los valores que conforman la secuencia de visita, tal como se ha analizado en la sección \ref{sec:sec-visit}. Estos valores siguen la siguiente interpretación: 
 
 \begin{description}
 \item [Compute] Valor menor que cero que representa el número de la ecuación a resolver\footnote{La ecuación a computar pertenece a la regla del plan corriente.}.
@@ -549,24 +567,27 @@ El funcionamiento para la construcción de las secuencias, esta dado por la apli
 \item [Leave] valor ``\textbtt{0}''.
 \end{description}
 
-A modo de ejemplo, se muestra una secuencia de visita generada por \maggen\ para el ejemplo analizado en el apéndice \ref{append:agwuuyang}\footnote{Esta secuancia de visita es computada a partir del plan \{7,4,8,3\} con  ($ 1 | 3 | \lambda$)}:
+A modo de ejemplo, se muestra una secuencia de visita generada por \maggen\ para el ejemplo analizado en el apéndice \ref{append:agwuuyang}:
 
 \begin{description}
-\item [\{-7,0,-8\}] Secuencia de visita para la regla \textbtt{R3} (sin contexto inferior). En este caso, la secuencia de visita se traduce a lo siguiente:
+\item [\{-7,0,-8\}] Secuencia de visita computada a partir del plan \{7,4,8,3\} con  ($ 1 | 3 | \lambda$). En este caso, se traduce a lo siguiente:
 
 \begin{enumerate}
-\item \textbf{Computar} la ecuación 7.
-\item \textbf{Leave}\footnote{El leave retorna el control a la secuencia de visita de contexto superior, es decir, desde donde se invocó a esta secuencia.}.
-\item \textbf{Computar} la ecuación 8.
+\item \textbf{Compute} computar la ecuación 7.
+\item \textbf{Leave} retornar el control al ambiente de invocación.
+% \footnote{El leave retorna el control a la secuencia de visita de contexto superior, es decir, desde donde se invocó a esta secuencia.}.
+\item \textbf{Compute} computar la ecuación 8.
 \end{enumerate}
 
 \end{description}
 
 \subsubsection{Heurística de la simulación}
 \label{subsec:heuris-simul}
-El punto principal en el cual se basa la heurística, es evaluar el plan buscando las dependencias de cada ecuación en el contexto del mismo. A continuación se muestran los pasos básicos a tener en cuenta con un ejemplo:\\
 
-Si se toma uno de los planes\footnote{Es importante notar el hecho de que cada plan se conforma de los números de ecuaciones a computar.} calculados por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}:\\
+Consiste en evaluar el plan buscando las dependencias de cada ecuación en el contexto del mismo. A continuación se muestran los pasos básicos a tener en cuenta con un ejemplo:\\
+% El punto principal en el cual se basa la heurística, es evaluar el plan buscando las dependencias de cada ecuación en el contexto del mismo. A continuación se muestran los pasos básicos a tener en cuenta con un ejemplo:\\
+
+Si se toma uno de los planes calculados por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}:\\
 
 Tomamos el plan \{6,2,9,3,5,4,10,1\} con ($\lambda| 1 | 4,2,5$), el cual es purgado a sólo las ecuaciones de la regla corriente (1):\{ 2, 3, 4, 1 \}.
 
@@ -593,9 +614,9 @@ Para el cómputo de las secuencias de visitas, solamente alcanza con lanzar la s
 
 \subsection{Generación de código}
 
-La etapa final de \maggen\ esta dada por la generación de código para el evaluador estático. Esta, produce dos archivos: \textit{interface} (.hpp) e \textit{implementación} (.cpp). Los archivos generados se vinculan con dos modulos estaticos, \texttt{Node.hpp} y \texttt{Node.cpp}.
+La etapa final de \maggen\ esta dada por la generación de código para el evaluador estático. Esta, produce dos archivos: \textit{interface} (.hpp) e \textit{implementación} (.cpp). Los archivos generados se vinculan con dos módulos estáticos, \texttt{Node.hpp} y \texttt{Node.cpp}.
 
-La generación de código es un proceso reiterativo sobre cada elemento almacenado en los repositorios de la herramienta. En los archivos antes mencionados se reflejan las reglas de la gramatica, los planes de evaluacion computados, las secuencias de visita y un conjunto de metodos para la manipular esta información. Dos de estos metodos son los encargados de la evaluacion de un AST. En las seccion siguiente analizamos la evaluación de un AST.
+La generación de código es un proceso reiterativo sobre cada elemento almacenado en los repositorios de la herramienta. En los archivos antes mencionados se reflejan las reglas de la gramatica, los planes de evaluación computados, las secuencias de visita y un conjunto de métodos para la manipular esta información. Dos de estos métodos son los encargados de la evaluación de un AST. En las sección siguiente analizamos la evaluación de un AST.
 
 \subsection{Algoritmo de evaluación}
 \label{sec:codcppalgeval}
@@ -619,8 +640,8 @@ El código del evaluador es reducido por su gran nivel de modularización. Recib
 \begin{lstlisting}[numbers=left, columns=fullflexible]
 procedure eval (T)
   /* T es un AST no evaluado. */
-  /* `$\mu$` es un orden de evaluacion de los atributos del simbolo inicial. */
-  /* Selecciona un plan de evaluacion para cada nodo no terminal en T. */
+  /* `$\mu$` es un orden de evaluación de los atributos del simbolo inicial. */
+  /* Selecciona un plan de evaluación para cada nodo no terminal en T. */
   traverse(root of T, `$\mu$`)
   /* Evaluador Orientado a Visita tradicional para evaluar las instancias de atributos de T.*/
   eval_visiter 
@@ -632,14 +653,14 @@ end procedure
 
 Esta función a partir del identificador de regla que posee cada nodo AST, construye su contexto de invocación y teniendo en cuenta el orden superior impuesto selecciona el plan ha asignar a dicho nodo.
 
-Luego de la asignacion de un plan\footnote{A efectos de implementacion es un indice que referencia al contenedor de secuencia de visita} al nodo, se prosigue con el tratamiento a los nodos hijos.
+Luego de la asignación de un plan\footnote{A efectos de implementación es un índice que referencia al contenedor de secuencia de visita} al nodo, se prosigue con el tratamiento a los nodos hijos.
 
 La función \texttt{traverse} teórica, es presentada a continuación:
 
 \begin{lstlisting}[numbers=left, columns=fullflexible]
 procedure traverse (n, `$\omega$`)
   /* n es un nodo no terminal node de un AST. */
-  /* `$\omega$` es un orden de evaluacion de los atributos del simbolo no terminal de mas a izquierda localizado en n. */
+  /* `$\omega$` es un orden de evaluación de los atributos del simbolo no terminal de mas a izquierda localizado en n. */
   q := la produccion aplicada al nodo n
   Sean p`$_{1}$`, p`$_{2}$`, `$\ldots$` , p`$_{k}$` las producciones aplicadas a los nodos hijos no terminales de n.
   plan [n] := `$\Gamma$`[q, `$\omega$`, p`$_{1}$`, p`$_{2}$`, `$\ldots$` , p`$_{k}$`]
@@ -668,7 +689,7 @@ procedure eval_visiter(n)
       compute(eq);
     else
       /* Se produce un leave. */
-      /* Se actualiza el indice del nodo actual. */
+      /* Se actualiza el índice del nodo actual. */
       index = get_index(op);
       break;
     end if
@@ -689,9 +710,9 @@ Se pueden resumir las características de \maggen\ en los siguientes puntos:
 
 \item La herramienta fue desarrollada íntegramente en C++ y el evaluador, también es generado como un modulo C++. 
 
-\item Esta herramienta no genera planes ``\textbf{espurios}'', es decir, planes que nunca se podrían dar en un AST concreto, como sucede en las \textbf gramáticas absolutamente no circulares{ANCAG}, evitando de este modo informar circularidades absurdas a efectos prácticos.
+\item Esta herramienta no genera planes ``\textbf{espurios}'', es decir, planes que nunca se podrían dar en un AST concreto, como sucede en las ``\textbf{Gramáticas Absolutamente No Circulares}'' (ANCAG), evitando de este modo informar circularidades absurdas a efectos prácticos.
 
-\item El evaluador generado es estático, lo que asegura que no existe un ``\textbf{overhead}'' en el cómputo de la evaluacion, ya que el mismo se llevó a cabo mientras se generaba el evaluador propiamente.
+\item El evaluador generado es estático, lo que asegura que no existe un ``\textbf{overhead}'' en el cómputo de la evaluación, ya que el mismo se llevó a cabo mientras se generaba el evaluador propiamente.
 \end{itemize}
 
 \bibliographystyle{unsrt}
@@ -767,6 +788,6 @@ Chiao-Tung University, Hsin-Chu, Taiwan.
 
 \subsection{Con lenguaje de especificación de \maggen}
 
-\lstinputlisting[basicstyle=\scriptsize, numbers=left, columns=fullflexible, language=specmag]{ag_wuu_yang.input}
+\lstinputlisting[numbers=left, columns=fullflexible, language=specmag]{ag_wuu_yang.input}
 
 \end{document}
