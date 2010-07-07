@@ -1,4 +1,4 @@
-set (Boost_MINIMUM_VERSION  "1.35")
+set (Boost_MINIMUM_VERSION  "1.37")
 find_package(Boost ${Boost_MINIMUM_VERSION} REQUIRED)
 
 if (Boost_FOUND)
@@ -12,7 +12,7 @@ if (Boost_FOUND)
 
   add_executable (maggen maggen.cpp)
 
-  target_link_libraries (maggen _maglib _parser_ag _util _expres_tree _builders _att_grammar)
+  target_link_libraries (maggen _maglib _parser_ag _util _expr_tree _builders _att_grammar)
 
   target_link_libraries(maggen ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
 

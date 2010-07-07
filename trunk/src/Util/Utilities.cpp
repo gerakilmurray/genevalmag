@@ -132,30 +132,6 @@ void print_graph(const Graph &graph, const string path, const string name_file, 
 }
 
 /**
-  * Prints a graph in the standart output (std:cout).
-  */
-void print_graph_txt(const Graph &graph)
-{
-	size_t count_vertex(num_vertices(graph));
-	cout << "<< Vertex >> " << count_vertex << endl;
-	/* Arrays of node's name. */
-	property_map<Graph, vertex_data_t>::const_type props(get(vertex_data_t(), graph));
-	for(size_t i(0); i < count_vertex; i++)
-	{
-		cout << props[i]->to_string() << endl;;
-	}
-	cout << "<< Edges >> " << num_edges(graph) << endl;
-	graph_traits<Graph>::edge_iterator ei, ei_end;
-	for(tie(ei,ei_end) = edges(graph); ei != ei_end; ++ei)
-	{
-		Vertex source_vertex(source(*ei, graph));
-		Vertex target_vertex(target(*ei, graph));
-
-		cout << props[source_vertex]->to_string() << "---->" << props[target_vertex]->to_string() << endl;
-	}
-}
-
-/**
   * Given a graph and node, returns the vertex descriptor of node in the graph.
   * If not search it, so returns USHRT_MAX.
   */
