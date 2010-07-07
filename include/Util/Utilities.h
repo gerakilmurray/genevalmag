@@ -69,11 +69,6 @@ void generate_names_attr(const Graph &graph, string datas[], size_t size_d);
   * @param shape_vertex
   */
 void print_graph(const Graph &graph,const string path ,const string name_file, const string name_graph, const string names[], string shape_vertex);
-/**
-  * Prints a graph in the standart output (std:cout).
-  * @param graph
-  */
-void print_graph_txt(const Graph &graph);
 
 /**
   * Given a graph and node, returns the vertex descriptor of node in the graph.
