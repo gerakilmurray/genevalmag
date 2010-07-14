@@ -64,6 +64,7 @@
   morestring=[d]{"}
 }
 
+\newcommand{\urllink}[1]{\htmladdnormallink{#1}{#1}}
 \definecolor{linkcol}{rgb}{0,0,0.4} 
 \definecolor{citecol}{rgb}{0.5,0,0} 
 \setbeamercovered{transparent=5}
@@ -141,25 +142,32 @@
 \begin{frame}[fragile]
     \frametitle{Ejemplo GA}
 
-    \begin{lstlisting}
-         (R1)   S `$\rightarrow$` XYZ      
-                  S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
-                  X.i1 := Y.s3  
-                  Y.i2 := X.s1
-                  Y.i3 := Y.s2
-         (R2)   Y `$\rightarrow$` m        
-                  Y.s2 := Y.i2
-                  Y.s3 := 1
-         (R3)   Y `$\rightarrow$` n        
-                  Y.s2 := 2
-                  Y.s3 := Y.i3
-         (R4)   X `$\rightarrow$` m        
-                  X.s1 := X.i1
-         (R5)   Z `$\rightarrow$` Y        
-                  Z.s4 := Y.s3
-                  Y.i2 := 3
-                  Y.i3 := Y.s2
-    \end{lstlisting} 
+
+\begin{figure}[h]
+\begin{center}
+\begin{tabular}{c}
+\begin{lstlisting}[backgroundcolor=\color{white}, basicstyle=\scriptsize, language=, linewidth=7.5cm]
+(R1)    S `$\rightarrow$` XYZ      
+            S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
+            X.i1 := Y.s3  
+            Y.i2 := X.s1
+            Y.i3 := Y.s2
+(R2)    Y `$\rightarrow$` m        
+            Y.s2 := Y.i2
+            Y.s3 := 1
+(R3)    Y `$\rightarrow$` n        
+            Y.s2 := 2
+            Y.s3 := Y.i3
+(R4)    X `$\rightarrow$` m        
+            X.s1 := X.i1
+(R5)    Z `$\rightarrow$` Y        
+            Z.s4 := Y.s3
+            Y.i2 := 3
+            Y.i3 := Y.s2
+\end{lstlisting} 
+\end{tabular}
+\end{center}
+\end{figure}
 
     \begin{block}{Ejemplo instancia}
         Y.i3 $\Leftrightarrow$ Ocurrencia del simbolo $Y$ asociado al atributo $i3$.
@@ -285,6 +293,38 @@
 
 \section{maggen}
 
+\frame{
+    \frametitle{\maggen: Herramientas usadas}
+
+    \begin{tabular}{p{4.5cm}p{6.5cm}}
+    \begin{itemize}
+	    \item C++%\footnote{http://public.research.att.com/~bs/C++.html}.
+		\item Boost C++ Libraries%\footnote{http://www.boost.org/}.
+		    \begin{itemize}
+			\item Spirit Parser Framework%\footnote{http://boost-spirit.com/home/}.
+			\item The Boost Graph Library (BGL)%\footnote{http://www.boost.org/doc/libs/release/libs/graph/}.
+		    \end{itemize}
+		\item GraphViz% \footnote{http://www.graphviz.org/}.
+        \item Eclipse
+		\item Subversion
+		\item \LaTeXe
+	\end{itemize}&
+	\begin{itemize}
+		\item kile 
+		\item Graphviz
+		\item Nemiver
+		\item Dia
+		\item Bouml
+		\item Cmake
+		\item Análisis estático de código:
+		\begin{itemize}
+			\item CCCC
+			\item gcov
+		\end{itemize}
+	\end{itemize}\\
+	\end{tabular}
+}
+
 \subsection{Diseño}
 
 \frame{
@@ -306,115 +346,145 @@
 
     La salida normal de \maggen\ que indica que se han realizado todas las etapas correctamente, es la siguiente:
 
-%    \vspace{0.3cm}
-    \begin{lstlisting}[backgroundcolor=\color{white}, basicstyle=\scriptsize, language=]
-        * Parsing grammar ---------- [  OK  ]
-        * Generate graphs ---------- [  OK  ]
-        * Build plans -------------- [  OK  ]
-        * Build visit sequence ----- [  OK  ]
-        * Generation code ---------- [  OK  ]
 
-        Generation complete in: 0.372814 seconds.
-    \end{lstlisting}
-%    \vspace{0.3cm}
+\begin{figure}[h]
+\begin{center}
+\begin{tabular}{c}
+\begin{lstlisting}[backgroundcolor=\color{white}, basicstyle=\scriptsize, language=, linewidth=7cm]
+* Parsing grammar ---------- [  OK  ]
+* Generate graphs ---------- [  OK  ]
+* Build plans -------------- [  OK  ]
+* Build visit sequence ----- [  OK  ]
+* Generation code ---------- [  OK  ]
+
+Generation complete in: 0.372814 seconds.
+\end{lstlisting}
+\end{tabular}
+\end{center}
+\end{figure}
 \end{frame}
 
-\frame{
-    \frametitle{Tesis}
-
-    \begin{block}{Tema seleccionado}
-        Gram\'aticas de Atributos con Multiplanes de Evaluaci\'on (MAG)
-        \footnote{WUU YANG. - http://www.cis.nctu.edu.tw/~wuuyang/./papers/magAPSEC.ps}.
-    \end{block}
-    \pause
-
-    \begin{exampleblock}{Objetivo Espec\'ifico}
-        \begin{center}
-            \textbf{\\Generador de Evaluadores Est\'aticos de MAG.}
-            \vspace{0.3cm}
-        \end{center}
-    \end{exampleblock}
-}
-
-\frame{
-    \frametitle{magGen: Herramientas usadas}
-
-    \begin{tabular}{p{4.5cm}p{6.5cm}}
-    \begin{itemize}
-	    \item C++%\footnote{http://public.research.att.com/~bs/C++.html}.
-		\item Boost C++ Libraries%\footnote{http://www.boost.org/}.
-		    \begin{itemize}
-			\item Spirit Parser Framework%\footnote{http://boost-spirit.com/home/}.
-			\item The Boost Graph Library (BGL)%\footnote{http://www.boost.org/doc/libs/release/libs/graph/}.
-		    \end{itemize}
-		\item GraphViz% \footnote{http://www.graphviz.org/}.
-        \item Eclipse 
-		\item Subversion 
-		\item \LaTeXe 
-	\end{itemize}&
-	\begin{itemize}
-		\item kile 
-		\item Graphviz 
-		\item Nemiver 
-		\item Dia 
-		\item Bouml 
-		\item Cmake 
-		\item Análisis estático de código:
-		\begin{itemize}
-			\item CCCC 
-			\item gcov 
-		\end{itemize}
-	\end{itemize}\\
-	\end{tabular}
-}
-
-\frame{
-    \frametitle{magGen}
-
-    \begin{block}{Proceso de generaci\'on}
-	    \begin{itemize}
-    		\item Parsing de la MAG.
-    		\pause
-    		\item Generaci\'on de estructuras internas.
-    		\pause
-    		\item Verificaci\'on de propiedades inherentes a gram\'aticas.
-    		\pause
-    		\item Generaci\'on de grafos de DP, Down, DCG y ADP para cada regla y s\'imbolo.
-    		\pause
-    		\item Comprobaci\'on de ciclicidad sobre cada tipo de grafo.
-    		\pause
-    		\item Generaci\'on de Planes de Evaluaci\'on.
-    		\pause
-    		\item Generaci\'on de Secuencias de Visitas.
-    		\pause
-    		\item Generaci\'on de c\'odigo fuente del evaluador.
-	    \end{itemize}
-    \end{block}
-}
-
 \begin{frame}[fragile]
-    \frametitle{magGen}
-
-    \begin{block}{Informaci\'on de input del generador}
-        Especificaci\'on de una MAG:
+    \frametitle{Lenguaje especificación de MAG}
+    \begin{block}{Especificación}
+    La secciones que conforman la descripción de una MAG, se corresponden con las características de una gramatica en esta familia.
     \end{block}
-        
-    \begin{lstlisting}[language=specmag, basicstyle=\small]
-        semantic domain
+    
+\begin{figure}[h]
+\begin{center}
+\begin{tabular}{c}
+ \begin{lstlisting}[language=specmag, basicstyle=\small, linewidth=7cm]
+    semantic domain
             <sorts>
             <operators>
             <functions>
-        attributes
+    attributes
             <attrs>
-        rules
-            <r0>
-                <eqs>
+    rules
+            <rule0>
+                    <equations>
             `$\ldots$`
-            <rN>
-                <eqs>
-    \end{lstlisting} 
+            <ruleN>
+                    <equations>
+\end{lstlisting} 
+\end{tabular}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Gramática MAG presentada por Wuu Yang}
+\begin{figure}[h]
+\begin{center}
+\begin{tabular}{c}
+\begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7.5cm]
+(R1)    S `$\rightarrow$` XYZ      
+            S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
+            X.i1 := Y.s3  
+            Y.i2 := X.s1
+            Y.i3 := Y.s2
+(R2)    Y `$\rightarrow$` m        
+            Y.s2 := Y.i2
+            Y.s3 := 1
+(R3)    Y `$\rightarrow$` n        
+            Y.s2 := 2
+            Y.s3 := Y.i3
+(R4)    X `$\rightarrow$` m        
+            X.s1 := X.i1
+(R5)    Z `$\rightarrow$` Y        
+            Z.s4 := Y.s3
+            Y.i2 := 3
+            Y.i3 := Y.s2
+\end{lstlisting} 
+\end{tabular}
+\end{center}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Especificación en lenguaje de \maggen}
+
+\begin{lstlisting}[basicstyle=\scriptsize, language=specmag, linewidth=10cm]
+semantic domain
+    op infix  (10, left) +: int, int -> int;
+
+attributes
+    s0: syn <int> of {S};
+    s1: syn <int> of {X};
+    s2: syn <int> of {Y};
+    s3: syn <int> of {Y};
+    s4: syn <int> of {Z};
+    i1: inh <int> of {X};
+    i2: inh <int> of {Y};
+    i3: inh <int> of {Y};
+
+rules
+    S ::= X Y Z
+        compute
+            S[0].s0 = X[0].s1 + Y[0].s2 + Y[0].s3 + Z[0].s4;
+            X[0].i1 = Y[0].s3;
+            Y[0].i2 = X[0].s1;
+            Y[0].i3 = Y[0].s2;
+        end;
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Especificación en lenguaje de \maggen\ (cont.)}
+
+\begin{lstlisting}[basicstyle=\scriptsize, language=specmag, linewidth=10cm]
+    Y ::= 'm'
+        compute
+            Y[0].s2 = Y[0].i2;
+            Y[0].s3 = 1;
+        end;
+    Y ::= 'n'
+        compute
+            Y[0].s2 = 2;
+            Y[0].s3 = Y[0].i3;
+        end;
+    X ::= 'm'
+        compute
+            X[0].s1 = X[0].i1;
+        end;
+    Z ::= Y
+        compute
+            Z[0].s4 = Y[0].s3;
+            Y[0].i2 = 3;
+            Y[0].i3 = Y[0].s2;
+        end;
+
+
+\end{lstlisting}
 
 \end{frame}
+
+\frame{
+    \frametitle{magGen}
+    Blabal
+}
 
 \frame{
         \frametitle{magGen - Grafo DP}
@@ -542,18 +612,55 @@
 }
 
 \section{Bibliografía}
-   \begin{frame}
-   \small{Bibliografía} 
-   \begin{thebibliography}{66}
-    \scriptsize{
-    \bibitem{1} \textbf{\textit{``Calculo de Programas''}}\\  - J. Blanco, S. Smith y Damián Barsotti.
-    \bibitem{2} \textbf{\textit{``An axiomatic basis for computer programming''}}\\ - Charles Antony Richard Hoare.
-    \bibitem{3} \textbf{\textit{``Guarded commands, nondeterminacy and formal derivation of program''}}\\ - Edsger W. Dijkstra
-    \bibitem{3} \textbf{\textit{``Assigning meanings to programs''}}\\ - Robert W. Floyd.
-    \bibitem{4} \textbf{\textit{``Communicating sequential processes''}}\\  - Charles Antony Richard Hoare.
-    \bibitem{5} www.wikipedia.org
+    \frame{
+	\frametitle{Bibliografía}
+    \scriptsize
+	\begin{thebibliography}{66}
+	    \bibitem {wuu-yang1} Wuu Yang. 1998. \textit{Multi-Plan Attribute Grammars}. Department of Computer Information Science. National Chiao-Tung University, Hsin-Chu, Taiwan.
+
+	    \bibitem {wuu-yang2} Wuu Yang. 1999. \textit{A Classification of Non Circular Attribute Grammars based on Lookahead behavior}. Department of Computer and Information Science. National Chiao-Tung University, Hsin-Chu, Taiwan.
+
+	    \bibitem {wuu-yang3} Wuu Yang. 1998. \textit{Conditional Evaluation in Simple Multi-Visit Attribute Grammar Evaluators}. Department of Computer and Information Science. National
+	    Chiao-Tung University, Hsin-Chu, Taiwan.
+
+	    %\bibitem{wuu-yang4} Wuu Yang, W. C. Cheng. \emph{A Polynomial Time Extension to Ordered Attribute Grammars}. Department of Computer and Information Science.National Chiao-Tung University, Hsin-Chu, Taiwan.
+
+	    %\bibitem {gramatica} John E. Hopcroft, Rajeev Montwani, Jefrey D. Ullman.\textit{Introduction to Automata theory, languajes, and computation}. Addison-Wesley (2001) second edition.
+
+	    \bibitem {compiladores} Alfred V. Aho, Ravi Sethi, Jeffrey D. ullman.\textit{Compilers: Principles, Techniques and Tools}. Addison-Wesley (1985)  Iberoamericana, S.A. Wilmington, Delaware, E.U.A.
+
+	    \bibitem {tesismarcelo} Arroyo, Marcelo Daniel. \textit{Gramáticas de atributos, clasificación y aportes en técnicas de evaluación}. Tesis de carrera de Magister en Ciencias de la Computación. Universidad Nacional del Sur. Bahía Blanca - Argentina.
+
+	    \bibitem {kastens} U. Kastens. 1980. \textit{Ordered Attribute Grammars}. Acta Informatica. Vol. 13, pp. 229-256.
+
+	    \bibitem{intri-exc} Jazayeri, Ogden and Rounds. 1975. \emph{The intrinsically exponential complexity of the circularity problem for attribute grammars}. Comm. ACM 18. December 2, Pag: 697-706.
+	\end{thebibliography}
     }
-    \end{thebibliography}
-    \end{frame}
+
+    \frame{
+	\frametitle{Bibliografía (Cont.)}
+    \scriptsize
+	\begin{thebibliography}{66}
+	    %\bibitem {meyer} Bertrand, Meyer (1997). \textit{Object-Oriented Software Construction}. Segunda edición. Prentice Hall Professional Technical Reference. Santa Barbara (California).
+
+	    %\bibitem {estruc-algorit} Alfred V. Aho, John E. Hopcroft, Jefrey D. Ullman. \textit{Data Structures and Algorithms}. Addison-Wesley publishing Company, Reading, Massachusetts, E. U. A.(1983).
+
+	    %\bibitem {valen} Valentin David. \textit{Attribute Grammars for C++ Disambiguation}. LRDE, 2004.
+
+	    \bibitem {Knuth} D. Knuth. 1968. \textit{Semantics of context free languages}. Math Systems Theory 2.June 2.Pag: 127-145.
+
+	    %\bibitem {eclipse} \textbf{eclipse}. \textit{Multi-language software development environment.} URL:\urllink{http://www.eclipse.org/}.
+	    
+	    %\bibitem {doxy} \textbf{doxygen}. \textit{A documentation generator for C++, C, Java, Objective-C, Python, IDL (CORBA and Microsoft flavors), Fortran, VHDL, PHP and C\#}. URL: \urllink{www.doxygen.org}.
+
+	    \bibitem{c++1} \textbf{C++}. \textit{C++ Annotations Version 8.2.0.} URL: \urllink{http://www.icce.rug.nl/documents/cplusplus/}. 
+
+	    \bibitem{c++2} \textbf{C++}. \textit{C++ reference} URL: \urllink{http://www.cppreference.com/wiki/es/start}. 
+
+	    \bibitem{latex} \textbf{\LaTeX}. \textit{A document preparation system} URL: \urllink{http://www.latex-project.org/}.
+
+	    \bibitem{boost} \textbf{Boost}. \textit{Boost C++ Libraries}. URL: \urllink{http://www.boost.org/}.
+	\end{thebibliography}
+    }
 
 \end{document}
