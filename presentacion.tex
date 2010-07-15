@@ -13,6 +13,7 @@
 \usepackage[spanish]{babel}% division de silabas en spanish
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
+\usepackage{multirow}
 %\usepackage{amsfonts}
 %\usepackage{amssymb}
 %\usepackage{stmaryrd}
@@ -482,25 +483,117 @@ rules
 \end{frame}
 
 \frame{
-    \frametitle{magGen}
-    Blabal
+    \frametitle{\maggen: Chequeos}
+
+    Sobre la MAG de entrada se verifican:
+    \begin{itemize}
+        \item Precedencia y Asociatividad de operadores dentro de expresiones.
+        \item Alcanzabilidad de símbolos y reglas.
+        \item Consistencia de bloque de atributos y bloque de reglas.
+        \item Gramática bien definida
+        \begin{itemize}
+            \item Atributos sintetizados del símbolo de la parte izquierda.
+            \item Atributos heredados de símbolos de la parte derecha.
+            \item Ecuaciones sólo de los atributos de los símbolos de la regla.
+            \item Inexistencia de ecuaciones para atributos heredados del símbolo de la izquierda y para atributos sintetizados de símbolos de la parte derecha.
+            \item Múltiples ecuaciones para un atributo.
+            \item Consistencia de los índices de las instancias que aparecen en las ecuaciones.
+            \item Condiciones de una gramática extendida.
+        \end{itemize}
+    \end{itemize}
 }
 
 \frame{
+    \frametitle{\maggen: Generate graphs}
+    Luego de los chequeos semánticos sobre la gramatica de entrada, se construyen los siguientes grafos:
+    \begin{itemize}
+    \item Grafos DP: Dependencias directas de cada produccion.
+    \item Grafos Down: Dependencias entre atributos de cada simbolo.
+    \item Grafos DCG: Dependencias entre atributos de cada simbolos acotado a una producción.
+    \item Grafos ADP: Grafos de dependecias aumentadas.
+    \end{itemize}
+    \begin{block}{}
+    La cronstrucción de los grafos permite realizar chequeos de ciclicidad y servir de base (grafos ADP) para la contrucción de planes de evaluación.
+    \end{block}
+}
+
+\begin{frame}[fragile]
         \frametitle{magGen - Grafo DP}
-	    \begin{center}
-% 		\includegraphics[scale=0.5]{./1_dp_graph.png}
-		% 1_dp_graph.png: 568x188 pixel, 72dpi, 20.04x6.63 cm, bb=0 0 568 188
-	    \end{center}
-}
+		\begin{figure}[h]
+		\begin{center}
+		\begin{tabular}{c}
+\begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7.5cm]
+(R1)    S `$\rightarrow$` XYZ
+            S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
+            X.i1 := Y.s3  
+            Y.i2 := X.s1
+            Y.i3 := Y.s2
+\end{lstlisting}
+		\end{tabular}
+		\end{center}
+		\end{figure}
+		\begin{center}
+ 		\includegraphics[width=175px, height=58px]{./1_dp_graph.png}
+				\end{center}
+\end{frame}
 
-\frame{
+\begin{frame}[fragile]
         \frametitle{magGen - Grafo Down}
-	    \begin{center}
-% 		\includegraphics[scale=0.6]{./6_down_graph.png}
-		% 6_down_graph.png: 176x92 pixel, 72dpi, 6.21x3.25 cm, bb=0 0 176 92
-	    \end{center}
-}
+
+\begin{tabular}{c c}
+\begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7cm]
+(R1) S `$\rightarrow$` XYZ
+       S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
+       X.i1 := Y.s3
+       Y.i2 := X.s1
+       Y.i3 := Y.s2
+(R2) Y `$\rightarrow$` m
+       Y.s2 := Y.i2
+       Y.s3 := 1
+(R3) Y `$\rightarrow$` n
+       Y.s2 := 2
+       Y.s3 := Y.i3
+(R4) X `$\rightarrow$` m
+       X.s1 := X.i1
+(R5) Z `$\rightarrow$` Y
+       Z.s4 := Y.s3
+       Y.i2 := 3
+       Y.i3 := Y.s2
+\end{lstlisting}
+
+& \hspace{1cm}\includegraphics[width=75px, height=82px]{./8_down_graph.png}\\
+\end{tabular}
+
+\end{frame}
+
+\begin{frame}[fragile]
+        \frametitle{magGen - Grafo Down}
+
+\begin{tabular}{c c}
+\begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7cm]
+(R1) S `$\rightarrow$` XYZ
+       S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
+       X.i1 := Y.s3
+       Y.i2 := X.s1
+       Y.i3 := Y.s2
+(R2) Y `$\rightarrow$` m
+       Y.s2 := Y.i2
+       Y.s3 := 1
+(R3) Y `$\rightarrow$` n
+       Y.s2 := 2
+       Y.s3 := Y.i3
+(R4) X `$\rightarrow$` m
+       X.s1 := X.i1
+(R5) Z `$\rightarrow$` Y
+       Z.s4 := Y.s3
+       Y.i2 := 3
+       Y.i3 := Y.s2
+\end{lstlisting}
+
+& \hspace{1cm}\includegraphics[width=75px, height=82px]{./7_down_graph.png}\\
+\end{tabular}
+
+\end{frame}
 
 \frame{
         \frametitle{magGen - Grafo DCG}
