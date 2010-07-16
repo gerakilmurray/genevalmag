@@ -23,6 +23,9 @@
 \definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
 \definecolor{gris}{rgb}{0.8,0.8,0.8}
 \definecolor{azul}{rgb}{0.0,0.3,0.6}
+
+\newcommand{\textbtt}[1]{\texttt{\textbf{#1}}}
+
 \lstset{
     backgroundcolor=\color{lbcolor},
     tabsize=2,
@@ -276,7 +279,7 @@
 }
 
 \frame{
-    \frametitle{Secuancia de Visita (cont)}
+    \frametitle{Secuencia de Visita (cont.)}
 
 	\begin{block}{Definición}
     	Sea $n$ un nodo de un árbol atribuido $T$. Una secuencia de visita en el nodo $n$ \textbf{es una secuencia de tres operaciones o acciones}: 
@@ -507,10 +510,10 @@ rules
     \frametitle{\maggen: Generate graphs}
     Luego de los chequeos semánticos sobre la gramatica de entrada, se construyen los siguientes grafos:
     \begin{itemize}
-    \item Grafos DP: Dependencias directas de cada produccion.
-    \item Grafos Down: Dependencias entre atributos de cada simbolo.
-    \item Grafos DCG: Dependencias entre atributos de cada simbolos acotado a una producción.
-    \item Grafos ADP: Grafos de dependecias aumentadas.
+    \item Grafos \textbf{DP}: Dependencias directas de cada produccion.
+    \item Grafos \textbf{Down}: Dependencias entre atributos de cada simbolo.
+    \item Grafos \textbf{DCG}: Dependencias entre atributos de cada simbolos acotado a una producción.
+    \item Grafos \textbf{ADP}: Grafos de dependecias aumentadas.
     \end{itemize}
     \begin{block}{}
     La cronstrucción de los grafos permite realizar chequeos de ciclicidad y servir de base (grafos ADP) para la contrucción de planes de evaluación.
@@ -561,7 +564,7 @@ rules
        Y.i3 := Y.s2
 \end{lstlisting}
 
-& \hspace{1cm}\includegraphics[width=75px, height=82px]{./8_down_graph.png}\\
+& \hspace{1cm}\parbox[c]{1em}{\includegraphics[width=75px, height=82px]{./8_down_graph.png}}\\
 \end{tabular}
 
 \end{frame}
@@ -590,41 +593,165 @@ rules
        Y.i3 := Y.s2
 \end{lstlisting}
 
-& \hspace{1cm}\includegraphics[width=75px, height=82px]{./7_down_graph.png}\\
+& \hspace{1cm}\parbox[c]{1em}{\includegraphics[width=75px, height=82px]{./7_down_graph.png}}\\
 \end{tabular}
 
 \end{frame}
 
-\frame{
+\begin{frame}[fragile]
         \frametitle{magGen - Grafo DCG}
-	    \begin{center}
-% 		\includegraphics[scale=0.5]{./10_dcg_graph.png}
-		% 10_dcg_graph.png: 485x92 pixel, 72dpi, 17.11x3.25 cm, bb=0 0 485 92
-	    \end{center}
-}
+\begin{center}        
+\begin{tabular}{p{6cm}}
+\begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7cm]
+...
+(R2) Y `$\rightarrow$` m
+       Y.s2 := Y.i2
+       Y.s3 := 1
+(R3) Y `$\rightarrow$` n
+       Y.s2 := 2
+       Y.s3 := Y.i3
+...
+\end{lstlisting}
+\end{tabular}
+\end{center}
+\begin{center}\includegraphics[width=160px, height=76px]{./11_dcg_graph.png}\end{center}
+\end{frame}
 
-\frame{
-        \frametitle{magGen - Grafo ADP}
-	    \begin{center}
-% 		\includegraphics[scale=0.35]{./15_adp_graph.png}
-		% 15_adp_graph.png: 676x572 pixel, 72dpi, 23.85x20.18 cm, bb=0 0 676 572
-	    \end{center}
-}
+\begin{frame}[fragile]
+        \frametitle{magGen - Grafo DCG}
+\begin{center}        
+\begin{tabular}{p{6cm}}
+\begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7cm]
+...
+(R2) Y `$\rightarrow$` m
+       Y.s2 := Y.i2
+       Y.s3 := 1
+(R3) Y `$\rightarrow$` n
+       Y.s2 := 2
+       Y.s3 := Y.i3
+...
+\end{lstlisting}
+\end{tabular}
+\end{center}
+\begin{center}\includegraphics[width=160px, height=77px]{./12_dcg_graph.png}\end{center}
+\end{frame}
 
-\frame{
+
+\begin{frame}[fragile]
         \frametitle{magGen - Grafo ADP}
-	    \begin{center}
-% 		\includegraphics[scale=0.35]{./16_adp_graph.png}
-		% 16_adp_graph.png: 676x572 pixel, 72dpi, 23.85x20.18 cm, bb=0 0 676 572
-	    \end{center}
-}
+\begin{tabular}{cp{4.5cm}}
+\hspace{-0.5cm}\begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=6.6cm]
+(R1) S `$\rightarrow$` XYZ
+       S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
+       X.i1 := Y.s3
+       Y.i2 := X.s1
+       Y.i3 := Y.s2
+(R2) Y `$\rightarrow$` m
+       Y.s2 := Y.i2
+       Y.s3 := 1
+(R3) Y `$\rightarrow$` n
+       Y.s2 := 2
+       Y.s3 := Y.i3
+(R4) X `$\rightarrow$` m
+       X.s1 := X.i1
+(R5) Z `$\rightarrow$` Y
+       Z.s4 := Y.s3
+       Y.i2 := 3
+       Y.i3 := Y.s2
+\end{lstlisting}
+&\hspace{0.2cm}\parbox[c]{1em}{\includegraphics[width=149px, height=150px]{./15_adp_graph.png}}
+\end{tabular}
+
+\end{frame}
+
+\begin{frame}[fragile]
+        \frametitle{magGen - Grafo ADP}
+\begin{tabular}{cp{4.5cm}}
+\hspace{-0.5cm}\begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=6.6cm]
+(R1) S `$\rightarrow$` XYZ
+       S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
+       X.i1 := Y.s3
+       Y.i2 := X.s1
+       Y.i3 := Y.s2
+(R2) Y `$\rightarrow$` m
+       Y.s2 := Y.i2
+       Y.s3 := 1
+(R3) Y `$\rightarrow$` n
+       Y.s2 := 2
+       Y.s3 := Y.i3
+(R4) X `$\rightarrow$` m
+       X.s1 := X.i1
+(R5) Z `$\rightarrow$` Y
+       Z.s4 := Y.s3
+       Y.i2 := 3
+       Y.i3 := Y.s2
+\end{lstlisting}
+&\hspace{0.2cm}\parbox[c]{1em}{\includegraphics[width=149px, height=150px]{./16_adp_graph.png}}
+\end{tabular}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Ciclicidad}
+
+\begin{block}{}
+\begin{itemize}
+\item El chequeo de ciclicidad es realiza sobre los grafos ADP.
+\item Esta basado en el algoritmo de búsqueda en profundidad (Depth-first search) de \textbf{boost} combinado con la creación de un ``visitador'' especializado.
+\item El subgrafo es mostrado al usuario en caso de deteccion de ciclo, sino es descartado.
+\end{itemize}
+\end{block}
+
+La salida de \maggen\ cuando se detecta ciclicidad, es:
+
+\begin{lstlisting}[backgroundcolor=\color{white}, basicstyle=\small, language=] 
+   * Parsing grammar ---------- [  OK  ]
+   * Generate graphs ---------- [  OK  ]
+   * Build plans -------------- [ ABORT ]
+
+   ERROR: One o more graph ADP has an cycle in its dependencies. Look the folder ./out_maggen/graphs/CYCLIC_graphs/ for more details.
+\end{lstlisting}
+
+\end{frame}
+
 
 \frame{
         \frametitle{magGen - Plan de evaluaci\'on}
-	    \begin{center}
-% 		\includegraphics[scale=0.32]{./22_plan_graph.png}
-		% 22_plan_graph.png: 987x380 pixel, 72dpi, 34.82x13.41 cm, bb=0 0 987 380
-	    \end{center}
+
+        \begin{block}{Unicidad}
+            Para ADP generado se computará un plan de evaluación.
+        \end{block}
+        
+        \begin{block}{Algoritmo \textbtt{compute\_plans}}
+            \begin{itemize}
+                \item Propuesto por Wuu Yang en \cite{wuu-yang1}.
+                \item Generación de planes y planes projectados de evaluación.
+            \end{itemize}
+        \end{block}
+
+    \begin{exampleblock}{Plan de evaluación}
+        Lista de números de ecuaciones a computar, dirigiendo la evaluación de izquierda a derecha.
+    \end{exampleblock}
+    
+    \begin{exampleblock}{Plan de evaluación proyectado}
+        Plan de evaluación considerando sólo los números de ecuaciones para los atributos de un símbolo particular.
+    \end{exampleblock}
+}
+
+\frame{
+    \frametitle{Algoritmo \textbtt{compute\_plans}}
+    
+    \begin{itemize}
+        \item Cálculo de los planes esta dado sobre los grafos ADP.
+        \item 
+        \item Orden topológico sobre el grafo ADP obtenido.
+posibles
+
+    \end{itemize}
+    
+%	    \begin{center}
+%    		\includegraphics[scale=0.32]{./22_plan_graph.png}
+%	    \end{center}
 }
 
 \frame{
@@ -634,6 +761,20 @@ rules
 		% 23_plan_graph.png: 987x380 pixel, 72dpi, 34.82x13.41 cm, bb=0 0 987 380
 	    \end{center}
 }
+
+\frame{
+\frametitle{\maggen: Secuencia de visita}
+\begin{block}{}
+\begin{itemize}
+\item Traduccion de planes de evaluacion a secuancia de visita: \textbtt{compute}, \textbtt{visit}, \textbtt{leave}.
+\item Se basa en la aplicacion de una simulación recorriendo los planes de evaluación.
+\end{itemize}
+\end{block}
+
+\begin{center}\includegraphics[width=150px, height=80px]{./plan2seq.png}\end{center}
+
+}
+
 
 \frame{
         \frametitle{magGen - Secuencia de visita}
