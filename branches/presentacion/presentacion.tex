@@ -767,14 +767,59 @@ posibles
 \begin{block}{}
 \begin{itemize}
 \item Traduccion de planes de evaluacion a secuancia de visita: \textbtt{compute}, \textbtt{visit}, \textbtt{leave}.
-\item Se basa en la aplicacion de una simulación recorriendo los planes de evaluación.
+\item Se basa en la aplicacion de una simulación recorriendo los planes de evaluación buscando las dependencias.
 \end{itemize}
 \end{block}
-
-\begin{center}\includegraphics[width=150px, height=80px]{./plan2seq.png}\end{center}
+\begin{exampleblock}{}
+\begin{tabular}{p{4cm}cp{5cm}}
+Plan de evaluación \textbf{$\{ Eq_{1}, Eq_{2}, \ldots Eq_{n}\}$}& $\Longrightarrow$ &Acciones capaces de moverse sobre un AST; \textbf{\{visit($node_{1}$), compute($Eq_{1}$),$\ldots$,  compute($Eq_{n}$)\}}
+\end{tabular}
+\end{exampleblock}
 
 }
 
+\frame{
+\frametitle{Heurística de la Simulación}
+\begin{enumerate}
+\item Se recorre el plan tomando en cada paso una de las ecuaciones.
+
+\item Dada la ecuación \textbtt{i}, en el plan, se debe computar todo el \textit{l\_value} de la ecuación. Para ello se deben resolver todas las dependencias dadas por \textit{r\_value}.
+
+\item Dada una dependencia de la ecuación, primero se chequea si la misma fue computada en algún paso anterior, sino, se analiza:
+
+\begin{itemize}
+\item \textbf{Símbolo de la parte izquierda de la regla} asociado a un \textbf{atributo heredado}, realizar un ``\textbtt{leave}''.
+
+\item \textbf{Símbolo de la parte derecha de la regla} y además contiene un \textbf{atributo sintetizado}, realizar un ``\textbtt{visit}''. \textbf{Elección de plan}. 
+\end{itemize}
+
+\item Luego de la obtención de todas las dependencias, se realiza un \texttt{compute} del \textit{l\_value} y se marca a este como \textbtt{evaluado}.
+\end{enumerate} 
+
+}
+
+\begin{frame}[fragile]
+        \begin{figure}[h]
+        \begin{center}
+        \begin{tabular}{c}
+
+\begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7.6cm]
+(R1) S `$\rightarrow$` XYZ
+       (1) S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
+       (2) X.i1 := Y.s3
+       (3) Y.i2 := X.s1
+       (4) Y.i3 := Y.s2
+...
+\end{lstlisting}
+\end{tabular}
+\end{center}
+\end{figure}
+\begin{tabular}{cc}
+\includegraphics[width=200px, height=107px]{./plan2seq.png}&
+\hspace{0.2cm}\includegraphics[width=100px, height=76px]{./ast.png}
+
+\end{tabular}
+\end{frame}
 
 \frame{
         \frametitle{magGen - Secuencia de visita}
@@ -839,6 +884,40 @@ posibles
 
 
 \section{Comentarios Finales}
+\frame{
+\frametitle{Trabajos Futuros}
+\begin{itemize}
+\item Implementar la generación de código al estilo ``\textit{plugins}''. Lo que permitiría extensiones varias, transparentes y elegantes para generar código en diferentes lenguajes. Esto implicaría la definición de una API del motor de generación de código.
+
+\item Definir una API para la construcción de los AST de entrada al evaluador generado, lo que permitiría que herramientas externas puedan generar los AST entrada.
+% Este puntos podría ser analizado teniendo en cuenta los A-Terms como ejemplo.
+
+\item Pruebas de rendimiento como comparaciones con otras herramientas similares.
+% (Silver, definir sintaxis y semántica, es modular, puede que genere evaluador dinámico)
+
+\item Permitir definir atributos de \textbf{alto orden}, es decir, atributos que pueden ser un árbol. Para los cuales, su evaluación supondría un nuevo proceso de igual complejidad que el necesario para decorar al AST de entrada.
+
+\item Implementar como especies de templates para los atributos.
+\end{itemize}
+}
+
+\frame{
+\frametitle{Extensiones}
+\begin{itemize}
+ \item Extensiones al lenguaje de especificación, como módulos a través de \texttt{\#include}. Esto engloba los puntos siguientes:
+
+\begin{itemize}
+\item Disponer de espacios de nombres, y operadores que permitan referirse a estos \textbf{espacios de nombres}.
+
+\item Redefinición o extensión de reglas incluidas, un estilo de \textbf{sobrecarga}.
+
+\item Permitir el \textbf{adicionado de atributos} a símbolos pertenecientes a otros módulos.
+\end{itemize}
+\end{itemize}
+
+}
+
+
 \frame {
 	\begin{block}{}
 		bla bla
