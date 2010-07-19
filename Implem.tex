@@ -652,9 +652,9 @@ Cada vez que se detectaba un error, se lo informa mediante alguno de los siguien
 
 El propósito final de \maggen\ es obtener todos los planes posibles de la gramática de entrada. En la sección \ref{subsec:conts-plan-dise}, se analizaron algunas consideraciones a tener en cuenta, en esta sección las se retoman desde el punto de vista de la implementación. 
 
-Teóricamente un plan es una secuencia de instancias, que indica un orden de evaluación total y consistentes de las mismas. Dentro de \maggen, se optó para su representación una secuencia de identificadores de ecuaciones. Ya que cada ecuación tiene solamente \textbf{un} \textbtt{l\_value}, que es precisamente una instancia. Se utiliza la clase \textbtt{vector} de la STL, para su almacenamiento y están enumeradas de forma tal que pueden ser identificadas de manera univoca.
+Teóricamente un plan es una secuencia de instancias, que indica un orden de evaluación total y consistentes de las mismas. Dentro de \maggen, se optó para su representación una secuencia de identificadores de ecuaciones. Ya que cada ecuación tiene solamente \textbf{un} \textbtt{l\_value}, que es precisamente una instancia. Se utiliza la clase \textbtt{vector} de la STL, para su almacenamiento y están enumeradas de forma tal que pueden ser identificadas de manera unívoca.
 
-Como en general, se iban a generar en muchos casos los mismos planes, se decidió mantener un \textbtt{vector} con todos los planes diferentes, así solo se generarían la \textbf{mínima cantidad de planes}, es decir, únicos necesarios.
+Como en general, se iban a generar en muchos casos los mismos planes, se decidió mantener un \textbtt{vector} con todos los planes diferentes, así solo se generarían la \textbf{mínima cantidad de planes}, es decir, los únicos necesarios.
 
 Como en el algoritmo que se presenta en el artículo de Wuu Yang (\cite{wuu-yang1}), a cada plan se lo asocia con un \textbtt{key}, primero se implementó esa clave como una estructura con los siguientes datos:
 \begin{itemize}
