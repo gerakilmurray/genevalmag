@@ -10,7 +10,7 @@
 %\usefonttheme{professionalfonts}
 \useinnertheme{rounded}
 \newcommand{\maggen}{\textbf{magGen}}
-\usepackage[spanish]{babel}% division de silabas en spanish
+\usepackage[spanish]{babel}% división de silabas en spanish
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{multirow}
@@ -95,15 +95,17 @@
 \section{\textquestiondown Qué es magGen?}
 
 \frame{
-\frametitle{\textquestiondown Qué es magGen?}
+\frametitle{\textquestiondown Qué es \maggen?}
     \begin{block}{}
         \maggen\ es una herramienta generadora de evaluadores estáticos para la familia MAG. 
     \end{block}
-    
+    \pause
+
     \begin{center}
         {\huge \textbf{mag} + \textbf{Gen}}\\
         \textit{Multi-plans Attribute Grammar} - \textit{Generator}
     \end{center}
+    \pause
 
     Características distinguibles:
     \begin{itemize}
@@ -118,14 +120,17 @@
     \begin{block}{}
         En las ciencias de la computación los lenguajes juegan un rol muy importante en muchas disciplinas. Desde los comienzos se buscaron \textit{mecanismos} para describirlos y manejarlos.
     \end{block}
+    \pause
     
     \begin{block}{}
         Desde que D. Knuth introdujo en 1966 las \textbf{gramáticas de atributos} (GA), estas se han utilizado ampliamente para el desarrollo de herramientas de procesamiento de lenguajes formales, como compiladores, intérpretes, traductores, así  como también para especificar la semántica de lenguajes de programación.
     \end{block}
+    \pause
     
     \begin{block}{}
-        En 1998, Wuu-Yang caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multi-planes}. 
+        En 1998, Wuu Yang caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multi-planes}. 
     \end{block}
+    \pause
     
     \begin{center}
         \textbf{Al momento no existían herramientas basadas en esta familia de Gramáticas de Atributos}
@@ -136,16 +141,16 @@
 
 \frame{
     \frametitle{Notación}
-    \begin{block}{Gramatica de atributos (Informal)}
+    \begin{block}{Gramática de atributos (Informal)}
         En una \textbf{Gramática de Atributos} (GA), se relaciona cada símbolo de una \textit{Gramática Libre de Contexto} con un conjunto de atributos. Cada regla o producción tiene asociado un \textit{conjunto de reglas semánticas}, denominadas también \textit{ecuaciones}.
     \end{block}
+    \pause
 
-    \textbf{Instancia:} Ocurrencia de un símbolo de la gramatica asociado a un atributo. 
+    \textbf{Instancia:} Ocurrencia de un símbolo de la gramática asociado a un atributo. 
 }
 
 \begin{frame}[fragile]
     \frametitle{Ejemplo GA}
-
 
 \begin{figure}[h]
 \begin{center}
@@ -173,8 +178,10 @@
 \end{center}
 \end{figure}
 
+    \pause
+
     \begin{block}{Ejemplo instancia}
-        Y.i3 $\Leftrightarrow$ Ocurrencia del simbolo $Y$ asociado al atributo $i3$.
+        Y.i3 $\Leftrightarrow$ Ocurrencia del símbolo $Y$ asociado al atributo $i3$.
     \end{block}
 \end{frame}
 
@@ -183,12 +190,13 @@
 \frame{
     \frametitle{Gramáticas de Atributos Multiplanes}
 
-	\begin{block}{Dependencias directas de una producción}
+    \begin{block}{Dependencias directas de una producción}
         Se denota como \textbf{DP(p)}	
         $$
           DP(p) = \{(X_{i}.a, X_{j}.b) | X_{i}.a \rightarrow Y_{j}.b \in R^{p} \}
         $$
     \end{block}
+    \pause
     
     Dado un símbolo X de una gramática de atributos
 
@@ -205,6 +213,7 @@
         $$
         se denota como $\textbf{ADP (q $|$ p}_{\textbf{1}}\textbf{, p}_{\textbf{2}}\textbf{, \dots , p}_{\textbf{k}}\textbf{)} $
     \end{block}
+    \pause
     
     $\textbf{DCG}_{\textbf{X}}\textbf{(p)}$ contiene las dependencias, entre las instancias de la gramática, para el símbolo \texttt{X}, acotando el análisis para la producción \textit{p} y los posibles contextos inferiores.
     $$
@@ -214,17 +223,19 @@
 
 \frame{
     \frametitle{Gramáticas de Atributos Multiplanes (cont.)}
-    El conjunto de todas las posibles dependencias aumentadas para una producción q se define como:
+
+    El conjunto de todas las posibles dependencias aumentadas para una producción \textbtt{q} se define como:
     $$
     SADP(q) = \bigcup\limits_{q\in P}{ADP (q | p_{1}, p_{2}, \dots, p_{k})} 
     $$
+    \pause
 
-    \begin{block}{Gramatica de atributos Multiplanes}
-        Una gramática \textit{G} es una \textit{gramática de atributos multi-planes} si y solo si 
+    \begin{alertblock}{Gramática de Atributos Multiplanes}
+        Una gramática \textit{G} es una \textit{Gramática de Atributos Multi-planes} si y solo si 
         $$
         \forall q : q \in P: (\forall g:g\ es\ un\ grafo\ de\ q \wedge g \in SADP(q) : g\ es\ no\ circular) 
         $$
-    \end{block}
+    \end{alertblock}
 }
 
 \subsection{Evaluador estático}
@@ -232,9 +243,10 @@
 \frame{
     \frametitle{Evaluador estático}
     
-	\begin{block}{}
-    	Los métodos estáticos deben tener en cuenta todos los árboles sintácticos posibles a ser generados por la gramática y calcular las dependencias, entre las instancias de los atributos, para cada uno de ellos. 
-	\end{block}
+    \begin{block}{}
+	Los métodos estáticos deben tener en cuenta todos los árboles sintácticos posibles a ser generados por la gramática y calcular las dependencias, entre las instancias de los atributos, para cada uno de ellos. 
+    \end{block}
+    \pause
 
     \begin{block}{Contexto de una producción}
         Dada una producción $p$ se deben tener en cuenta tres tipos de dependencias que definen el \textit{contexto} de la misma:
@@ -245,6 +257,7 @@
             \item Impuestas en el contexto inferior.
         \end{itemize}
     \end{block}
+    \pause
 
     Instancias diferentes de una producción $p$ tendrán las mismas dependencias directas, pero podrán tener diferentes dependencias impuestas por los contextos inferiores y superiores. 
 }
@@ -257,45 +270,51 @@
     \begin{block}{}
         Luego del análisis de las dependencias, se conocen que ecuaciones tienen que computarse antes que otras.
     \end{block}
+    \pause
 
     \begin{block}{}
         Este proceso se realizó sobre las estructuras abstractas de la gramática, así que los resultados obtenidos se aplican a \textbf{todas} las cadenas que se pueden producir, más concretamente, a todos los AST válidos en la gramática.
     \end{block}
+    \pause
 
-	\begin{block}{Plan de Evaluación}
-    	Un plan de evaluación esta dado por un orden consistente con las dependencias para la computación de las ecuaciones que definen a cada instancia de la gramatica.
-	\end{block}
+    \begin{block}{Plan de Evaluación}
+    	Un plan de evaluación esta dado por un orden consistente con las dependencias para la computación de las ecuaciones que definen a cada instancia de la gramática.
+    \end{block}
 }
 
 \subsection{Secuencias de visitas}
 \frame{
-	\frametitle{Secuencia de Visita}
+    \frametitle{Secuencia de Visita}
 	
-	\begin{block}{}
+    \begin{block}{}
 	El concepto de \emph{Secuencias de Visita} fue presentado en 1980, por \textbf{Uwe Kastens}  como un método de evaluación para la familia $OAG$.
-	\end{block}
+    \end{block}
+    \pause
 	
-	Basa su funcionamientos en la visita de los nodos de los arboles de derivacion para lograr la evaluacion del arbol. Este metodo se apoya en los planes de evaluacion de la gramatica.
+    Basa su funcionamiento en la visita de los nodos de los árboles de derivación para lograr la evaluación del árbol. Este método se apoya en los planes de evaluación de la gramática.
 }
 
 \frame{
     \frametitle{Secuencia de Visita (cont.)}
 
-	\begin{block}{Definición}
+    \begin{block}{Definición}
     	Sea $n$ un nodo de un árbol atribuido $T$. Una secuencia de visita en el nodo $n$ \textbf{es una secuencia de tres operaciones o acciones}: 
     	\emph{visit(child,i)}, \emph{compute(at)} y \emph{leave(i)}.
     \end{block}
+    \pause
 
-	\begin{description}
+    \begin{description}
     	\item [visit(child,i)] indica que el evaluador debe moverse (visitar) el nodo hijo \emph{child} de $n$ y corresponde a la \emph{i-ésima} visita al nodo hijo.
+	\pause
 
     	\item [compute(at)] indica que debe evaluarse la ecuación que define $at$ en la producción $p$ aplicada correspondiente al nodo $n$.
+	\pause
 
     	\item[leave(i)] indica que ha finalizado la visita \emph{i-ésima} en el nodo corriente y que se debe visitar al nodo padre.
-	\end{description}
+    \end{description}
 }
 
-\section{maggen}
+\section{magGen}
 
 \frame{
     \frametitle{\maggen: Herramientas usadas}
@@ -337,10 +356,14 @@
     El funcionamiento de \maggen\ esta dado por la integración de 4 etapas, consideradas principales, que marcaron el proceso de desarrollo de la herramienta:
     \begin{itemize}
         \item Lenguaje especificación de MAG.
+	\pause
         \item Parser del lenguaje,representación interna y chequeos.
+	\pause
         \item Construcción de grafos y aplicación de algoritmos de cómputo de planes y secuencias de visita.
+	\pause
         \item Generación de código.
     \end{itemize}
+    \pause
 
     El cómputo de \maggen\ se realiza atravesando cada una de estas etapas secuencialmente, es decir, la terminación exitosa de una, habilita la siguiente; por lo tanto cada etapa mantiene su salida de errores de manera independiente. 
 }
@@ -349,7 +372,6 @@
     \frametitle{\maggen: Funcionamiento (cont.)}
 
     La salida normal de \maggen\ que indica que se han realizado todas las etapas correctamente, es la siguiente:
-
 
 \begin{figure}[h]
 \begin{center}
@@ -370,8 +392,9 @@ Generation complete in: 0.372814 seconds.
 
 \begin{frame}[fragile]
     \frametitle{Lenguaje especificación de MAG}
+
     \begin{block}{Especificación}
-    La secciones que conforman la descripción de una MAG, se corresponden con las características de una gramatica en esta familia.
+    La secciones que conforman la descripción de una MAG, se corresponden con las características de una gramática en esta familia.
     \end{block}
     
 \begin{figure}[h]
@@ -398,6 +421,7 @@ Generation complete in: 0.372814 seconds.
 
 \begin{frame}[fragile]
 \frametitle{Gramática MAG presentada por Wuu Yang}
+
 \begin{figure}[h]
 \begin{center}
 \begin{tabular}{c}
@@ -424,7 +448,6 @@ Generation complete in: 0.372814 seconds.
 \end{center}
 \end{figure}
 \end{frame}
-
 
 \begin{frame}[fragile]
 \frametitle{Especificación en lenguaje de \maggen}
@@ -453,7 +476,6 @@ rules
         end;
 \end{lstlisting}
 \end{frame}
-
 
 \begin{frame}[fragile]
 \frametitle{Especificación en lenguaje de \maggen\ (cont.)}
@@ -491,16 +513,26 @@ rules
     Sobre la MAG de entrada se verifican:
     \begin{itemize}
         \item Precedencia y Asociatividad de operadores dentro de expresiones.
-        \item Alcanzabilidad de símbolos y reglas.
+	\pause
+	\item Alcanzabilidad de símbolos y reglas.
+	\pause
         \item Consistencia de bloque de atributos y bloque de reglas.
+	\pause
         \item Gramática bien definida
+	\pause
         \begin{itemize}
             \item Atributos sintetizados del símbolo de la parte izquierda.
+	    \pause
             \item Atributos heredados de símbolos de la parte derecha.
+	    \pause
             \item Ecuaciones sólo de los atributos de los símbolos de la regla.
+	    \pause
             \item Inexistencia de ecuaciones para atributos heredados del símbolo de la izquierda y para atributos sintetizados de símbolos de la parte derecha.
+	    \pause
             \item Múltiples ecuaciones para un atributo.
+	    \pause
             \item Consistencia de los índices de las instancias que aparecen en las ecuaciones.
+	    \pause
             \item Condiciones de una gramática extendida.
         \end{itemize}
     \end{itemize}
@@ -508,23 +540,31 @@ rules
 
 \frame{
     \frametitle{\maggen: Generate graphs}
-    Luego de los chequeos semánticos sobre la gramatica de entrada, se construyen los siguientes grafos:
+    
+    Luego de los chequeos semánticos sobre la gramática de entrada, se construyen los siguientes grafos:
+    \pause
     \begin{itemize}
-    \item Grafos \textbf{DP}: Dependencias directas de cada produccion.
-    \item Grafos \textbf{Down}: Dependencias entre atributos de cada simbolo.
-    \item Grafos \textbf{DCG}: Dependencias entre atributos de cada simbolos acotado a una producción.
-    \item Grafos \textbf{ADP}: Grafos de dependecias aumentadas.
+	\item Grafos \textbf{DP}: Dependencias directas de cada producción.
+	\pause
+	\item Grafos \textbf{Down}: Dependencias entre atributos de cada símbolo.
+	\pause
+	\item Grafos \textbf{DCG}: Dependencias entre atributos de cada símbolos acotado a una producción.
+	\pause
+	\item Grafos \textbf{ADP}: Grafos de dependencias aumentadas.
     \end{itemize}
+    \pause
+
     \begin{block}{}
-    La cronstrucción de los grafos permite realizar chequeos de ciclicidad y servir de base (grafos ADP) para la contrucción de planes de evaluación.
+	La construcción de los grafos permite realizar chequeos de ciclicidad y servir de base (grafos ADP) para la construcción de planes de evaluación.
     \end{block}
 }
 
 \begin{frame}[fragile]
-        \frametitle{magGen - Grafo DP}
-		\begin{figure}[h]
-		\begin{center}
-		\begin{tabular}{c}
+    \frametitle{magGen - Grafo DP}
+
+\begin{figure}[h]
+\begin{center}
+\begin{tabular}{c}
 \begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7.5cm]
 (R1)    S `$\rightarrow$` XYZ
             S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
@@ -532,16 +572,18 @@ rules
             Y.i2 := X.s1
             Y.i3 := Y.s2
 \end{lstlisting}
-		\end{tabular}
-		\end{center}
-		\end{figure}
-		\begin{center}
- 		\includegraphics[width=175px, height=58px]{./1_dp_graph.png}
-				\end{center}
+\end{tabular}
+\end{center}
+\end{figure}
+
+\begin{center}
+    \includegraphics[width=175px, height=58px]{./1_dp_graph.png}
+\end{center}
+
 \end{frame}
 
 \begin{frame}[fragile]
-        \frametitle{magGen - Grafo Down}
+    \frametitle{magGen - Grafo Down}
 
 \begin{tabular}{c c}
 \begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7cm]
@@ -563,14 +605,13 @@ rules
        Y.i2 := 3
        Y.i3 := Y.s2
 \end{lstlisting}
-
 & \hspace{1cm}\parbox[c]{1em}{\includegraphics[width=75px, height=82px]{./8_down_graph.png}}\\
 \end{tabular}
 
 \end{frame}
 
 \begin{frame}[fragile]
-        \frametitle{magGen - Grafo Down}
+    \frametitle{magGen - Grafo Down}
 
 \begin{tabular}{c c}
 \begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7cm]
@@ -592,14 +633,13 @@ rules
        Y.i2 := 3
        Y.i3 := Y.s2
 \end{lstlisting}
-
 & \hspace{1cm}\parbox[c]{1em}{\includegraphics[width=75px, height=82px]{./7_down_graph.png}}\\
 \end{tabular}
 
 \end{frame}
 
 \begin{frame}[fragile]
-        \frametitle{magGen - Grafo DCG}
+    \frametitle{magGen - Grafo DCG}
 \begin{center}        
 \begin{tabular}{p{6cm}}
 \begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7cm]
@@ -618,7 +658,7 @@ rules
 \end{frame}
 
 \begin{frame}[fragile]
-        \frametitle{magGen - Grafo DCG}
+    \frametitle{magGen - Grafo DCG}
 \begin{center}        
 \begin{tabular}{p{6cm}}
 \begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7cm]
@@ -636,10 +676,10 @@ rules
 \begin{center}\includegraphics[width=160px, height=77px]{./12_dcg_graph.png}\end{center}
 \end{frame}
 
-
 \begin{frame}[fragile]
-        \frametitle{magGen - Grafo ADP}
-\begin{tabular}{cp{4.5cm}}
+    \frametitle{magGen - Grafo ADP}
+
+\begin{tabular}{c p{4.5cm}}
 \hspace{-0.5cm}\begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=6.6cm]
 (R1) S `$\rightarrow$` XYZ
        S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
@@ -665,8 +705,8 @@ rules
 \end{frame}
 
 \begin{frame}[fragile]
-        \frametitle{magGen - Grafo ADP}
-\begin{tabular}{cp{4.5cm}}
+    \frametitle{magGen - Grafo ADP}
+\begin{tabular}{c p{4.5cm}}
 \hspace{-0.5cm}\begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=6.6cm]
 (R1) S `$\rightarrow$` XYZ
        S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
@@ -692,15 +732,18 @@ rules
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Ciclicidad}
+    \frametitle{Ciclicidad}
 
-\begin{block}{}
-\begin{itemize}
-\item El chequeo de ciclicidad es realiza sobre los grafos ADP.
-\item Esta basado en el algoritmo de búsqueda en profundidad (Depth-first search) de \textbf{boost} combinado con la creación de un ``visitador'' especializado.
-\item El subgrafo es mostrado al usuario en caso de deteccion de ciclo, sino es descartado.
-\end{itemize}
-\end{block}
+    \begin{block}{}
+	\begin{itemize}
+	    \item El chequeo de ciclicidad es realiza sobre los grafos ADP.
+	    \pause
+	    \item Esta basado en el algoritmo de búsqueda en profundidad (Depth-first search) de \textbf{boost} combinado con la creación de un ``visitador'' especializado.
+	    \pause
+	    \item El subgrafo es mostrado al usuario en caso de detección de ciclo, sino es descartado.
+	\end{itemize}
+    \end{block}
+    \pause
 
 La salida de \maggen\ cuando se detecta ciclicidad, es:
 
@@ -711,98 +754,117 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
 
    ERROR: One o more graph ADP has an cycle in its dependencies. Look the folder ./out_maggen/graphs/CYCLIC_graphs/ for more details.
 \end{lstlisting}
-
 \end{frame}
 
+\frame{
+    \frametitle{\maggen - Plan de evaluacion}
+
+    \begin{block}{Unicidad}
+	Para ADP generado se computará un plan de evaluación.
+    \end{block}
+    \pause
+        
+    \begin{block}{Algoritmo \textbtt{compute\_plans}}
+	\begin{itemize}
+	    \item Propuesto por Wuu Yang en \cite{wuu-yang1}.
+	    \item Generación de planes y planes proyectados de evaluación.
+	\end{itemize}
+    \end{block}
+}
 
 \frame{
-        \frametitle{magGen - Plan de evaluaci\'on}
-
-        \begin{block}{Unicidad}
-            Para ADP generado se computará un plan de evaluación.
-        \end{block}
-        
-        \begin{block}{Algoritmo \textbtt{compute\_plans}}
-            \begin{itemize}
-                \item Propuesto por Wuu Yang en \cite{wuu-yang1}.
-                \item Generación de planes y planes projectados de evaluación.
-            \end{itemize}
-        \end{block}
+    \frametitle{\maggen - Plan de evaluacion (cont.)}
 
     \begin{exampleblock}{Plan de evaluación}
         Lista de números de ecuaciones a computar, dirigiendo la evaluación de izquierda a derecha.
     \end{exampleblock}
+    \pause
     
     \begin{exampleblock}{Plan de evaluación proyectado}
         Plan de evaluación considerando sólo los números de ecuaciones para los atributos de un símbolo particular.
     \end{exampleblock}
+    \pause
+
+    \begin{center}
+        ``Los planes proyectados juegan el rol de orden de evaluación impuesto como contexto superior.''
+    \end{center}
 }
 
 \frame{
     \frametitle{Algoritmo \textbtt{compute\_plans}}
     
     \begin{itemize}
-        \item Cálculo de los planes esta dado sobre los grafos ADP.
-        \item 
-        \item Orden topológico sobre el grafo ADP obtenido.
-posibles
-
+        \item Se mantiene una cola de trabajos con pares de identificador de producción y un ordén de evalución de sus atributos.
+        \pause
+        \item Cada vez que se saca un elemento de la lista, se marca como realizado.
+        \pause
+        \item Se toma cada uno de los distintos grafos ADP asociados a la producción.
+        \pause
+        \item Se combina la dependencia inducida por el orden con el grafo ADP.
+        \pause
+        \item Se calcula la clausura transitiva del nuevo grafo.
+        \pause
+        \item Se computa el orden topológico del grafo.
+        \pause
+        \item Se guarda el plan si es diferentes a los ya generados.
+        \pause
+        \item Se generan los planes proyectados para cada símbolo de la parte derecha.
     \end{itemize}
     
-%	    \begin{center}
-%    		\includegraphics[scale=0.32]{./22_plan_graph.png}
-%	    \end{center}
+%   \begin{center}
+%	\includegraphics[scale=0.32]{./22_plan_graph.png}
+%   \end{center}
 }
 
 \frame{
-        \frametitle{magGen - Plan de evaluaci\'on}
-            \begin{center}
-% 		\includegraphics[scale=0.32]{./23_plan_graph.png}
-		% 23_plan_graph.png: 987x380 pixel, 72dpi, 34.82x13.41 cm, bb=0 0 987 380
-	    \end{center}
+    \frametitle{magGen - Plan de evaluaci\'on}
+
+    \begin{center}
+%	\includegraphics[scale=0.32]{./23_plan_graph.png}
+    \end{center}
 }
 
 \frame{
-\frametitle{\maggen: Secuencia de visita}
-\begin{block}{}
-\begin{itemize}
-\item Traduccion de planes de evaluacion a secuancia de visita: \textbtt{compute}, \textbtt{visit}, \textbtt{leave}.
-\item Se basa en la aplicacion de una simulación recorriendo los planes de evaluación buscando las dependencias.
-\end{itemize}
-\end{block}
-\begin{exampleblock}{}
-\begin{tabular}{p{4cm}cp{5cm}}
-Plan de evaluación \textbf{$\{ Eq_{1}, Eq_{2}, \ldots Eq_{n}\}$}& $\Longrightarrow$ &Acciones capaces de moverse sobre un AST; \textbf{\{visit($node_{1}$), compute($Eq_{1}$),$\ldots$,  compute($Eq_{n}$)\}}
-\end{tabular}
-\end{exampleblock}
+  \frametitle{\maggen: Secuencia de visita}
 
+  \begin{block}{}
+    \begin{itemize}
+      \item Traducción de planes de evaluación a secuencia de visita: \textbtt{compute}, \textbtt{visit}, \textbtt{leave}.
+      \item Se basa en la aplicación de una simulación recorriendo los planes de evaluación buscando las dependencias.
+    \end{itemize}
+  \end{block}
+
+  \begin{exampleblock}{}
+    \begin{tabular}{p{4cm} c p{5cm}}
+    Plan de evaluación \textbf{$\{ Eq_{1}, Eq_{2}, \ldots Eq_{n}\}$}& $\Longrightarrow$ & Acciones capaces de moverse sobre un AST; \textbf{\{visit($node_{1}$), compute($Eq_{1}$),$\ldots$,  compute($Eq_{n}$)\}}
+    \end{tabular}
+  \end{exampleblock}
 }
 
 \frame{
-\frametitle{Heurística de la Simulación}
-\begin{enumerate}
-\item Se recorre el plan tomando en cada paso una de las ecuaciones.
+  \frametitle{Heurística de la Simulación}
+  \begin{enumerate}
+    \item Se recorre el plan tomando en cada paso una de las ecuaciones.
 
-\item Dada la ecuación \textbtt{i}, en el plan, se debe computar todo el \textit{l\_value} de la ecuación. Para ello se deben resolver todas las dependencias dadas por \textit{r\_value}.
+    \item Dada la ecuación \textbtt{i}, en el plan, se debe computar todo el \textit{l\_value} de la ecuación. Para ello se deben resolver todas las dependencias dadas por \textit{r\_value}.
 
-\item Dada una dependencia de la ecuación, primero se chequea si la misma fue computada en algún paso anterior, sino, se analiza:
+    \item Dada una dependencia de la ecuación, primero se chequea si la misma fue computada en algún paso anterior, sino, se analiza:
 
-\begin{itemize}
-\item \textbf{Símbolo de la parte izquierda de la regla} asociado a un \textbf{atributo heredado}, realizar un ``\textbtt{leave}''.
+      \begin{itemize}
+	\item \textbf{Símbolo de la parte izquierda de la regla} asociado a un \textbf{atributo heredado}, realizar un ``\textbtt{leave}''.
 
-\item \textbf{Símbolo de la parte derecha de la regla} y además contiene un \textbf{atributo sintetizado}, realizar un ``\textbtt{visit}''. \textbf{Elección de plan}. 
-\end{itemize}
+	\item \textbf{Símbolo de la parte derecha de la regla} y además contiene un \textbf{atributo sintetizado}, realizar un ``\textbtt{visit}''. \textbf{Elección de plan}. 
+      \end{itemize}
 
-\item Luego de la obtención de todas las dependencias, se realiza un \texttt{compute} del \textit{l\_value} y se marca a este como \textbtt{evaluado}.
-\end{enumerate} 
-
+    \item Luego de la obtención de todas las dependencias, se realiza un \texttt{compute} del \textit{l\_value} y se marca a este como \textbtt{evaluado}.
+  \end{enumerate}
 }
 
 \begin{frame}[fragile]
-        \begin{figure}[h]
-        \begin{center}
-        \begin{tabular}{c}
 
+\begin{figure}[h]
+\begin{center}
+\begin{tabular}{c}
 \begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7.6cm]
 (R1) S `$\rightarrow$` XYZ
        (1) S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
@@ -814,120 +876,132 @@ Plan de evaluación \textbf{$\{ Eq_{1}, Eq_{2}, \ldots Eq_{n}\}$}& $\Longrightar
 \end{tabular}
 \end{center}
 \end{figure}
-\begin{tabular}{cc}
-\includegraphics[width=200px, height=107px]{./plan2seq.png}&
-\hspace{0.2cm}\includegraphics[width=100px, height=76px]{./ast.png}
 
-\end{tabular}
+  \begin{tabular}{cc}
+    \includegraphics[width=200px, height=107px]{./plan2seq.png}&
+    \hspace{0.2cm}\includegraphics[width=100px, height=76px]{./ast.png}
+  \end{tabular}
+
 \end{frame}
 
 \frame{
-        \frametitle{magGen - Secuencia de visita}
-	
-        \begin{block}{Secuencia de visita generada para el plan\\ R1 $\rightarrow$ R2 R3 R4}
-	    \begin{center}
-		\vspace{0.1cm}
-		\textbf{Visit R2 $\Rightarrow$\\
-			\vspace{0.1cm}
-			Compute X[0].i1 $\Rightarrow$\\
-			\vspace{0.1cm}
-			Visit R4 $\Rightarrow$\\
-			\vspace{0.1cm}
-			Compute Y[0].i2 $\Rightarrow$\\
-			\vspace{0.1cm}
-			Visit R2 $\Rightarrow$\\
-			\vspace{0.1cm}
-			Compute Y[0].i3 $\Rightarrow$\\
-			\vspace{0.1cm}
-			Visit R5 $\Rightarrow$\\
-			\vspace{0.1cm}
-			Compute S[0].s1} 
-	    \end{center}
-	\end{block}
+    \frametitle{magGen - Secuencia de visita}
+    
+    \begin{block}{Secuencia de visita generada para el plan\\ R1 $\rightarrow$ R2 R3 R4}
+	\begin{center}
+	    \vspace{0.1cm}
+	    \textbf{Visit R2 $\Rightarrow$\\
+		    \vspace{0.1cm}
+		    Compute X[0].i1 $\Rightarrow$\\
+		    \vspace{0.1cm}
+		    Visit R4 $\Rightarrow$\\
+		    \vspace{0.1cm}
+		    Compute Y[0].i2 $\Rightarrow$\\
+		    \vspace{0.1cm}
+		    Visit R2 $\Rightarrow$\\
+		    \vspace{0.1cm}
+		    Compute Y[0].i3 $\Rightarrow$\\
+		    \vspace{0.1cm}
+		    Visit R5 $\Rightarrow$\\
+		    \vspace{0.1cm}
+		    Compute S[0].s1} 
+	\end{center}
+    \end{block}
 }
 
 \frame{
-        \frametitle{magGen}
+    \frametitle{magGen}
 
-        \begin{block}{Informaci\'on de input del evaluador}
-            \'Arboles Atribu\'idos representados con AST\footnote{Attribute Syntax Tree}.
-        \end{block}
-        \pause
+    \begin{block}{Informaci\'on de input del evaluador}
+	\'Arboles Atribuidos representados con AST\footnote{Attribute Syntax Tree}.
+    \end{block}
+    \pause
 
-        \begin{block}{Informaci\'on de output del evaluador}
-            El AST decorado\footnote{Cada uno de sus atributos se encuentran calculados}.
-        \end{block}
+    \begin{block}{Informaci\'on de output del evaluador}
+	El AST decorado\footnote{Cada uno de sus atributos se encuentran calculados}.
+    \end{block}
 }
 
 \frame{
-        \frametitle{magGen}
+    \frametitle{magGen}
 
-        \begin{block}{Objetivo Subyacente}
-            Implementar Lenguages de Prop\'ositos Espec\'ificos para problemas puntuales.
-        \end{block}
+    \begin{block}{Objetivo Subyacente}
+	Implementar Lenguajes de Prop\'ositos Espec\'ificos para problemas puntuales.
+    \end{block}
 }
 
 \subsection{Detalles de implementación}
+
 \frame {
-	\begin{block}{}
-		bla bla
-	\end{block}
+    \frametitle{Detalles de implementación}
+
+    \begin{block}{}
+	    bla bla
+    \end{block}
 }
 
 
 \subsection{Evaluador generado}
 \frame {
-	\begin{block}{}
-		bla bla
-	\end{block}
+    \frametitle{Evaluador generado}
+
+    \begin{block}{}
+	    bla bla
+    \end{block}
 }
 
 
 \section{Comentarios Finales}
+
 \frame{
-\frametitle{Trabajos Futuros}
-\begin{itemize}
-\item Implementar la generación de código al estilo ``\textit{plugins}''. Lo que permitiría extensiones varias, transparentes y elegantes para generar código en diferentes lenguajes. Esto implicaría la definición de una API del motor de generación de código.
+    \frametitle{Trabajos Futuros}
 
-\item Definir una API para la construcción de los AST de entrada al evaluador generado, lo que permitiría que herramientas externas puedan generar los AST entrada.
-% Este puntos podría ser analizado teniendo en cuenta los A-Terms como ejemplo.
+    \begin{itemize}
+	\item Implementar la generación de código al estilo ``\textit{plugins}''. Lo que permitiría extensiones varias, transparentes y elegantes para generar código en diferentes lenguajes. Esto implicaría la definición de una API del motor de generación de código.
+	\pause
 
-\item Pruebas de rendimiento como comparaciones con otras herramientas similares.
-% (Silver, definir sintaxis y semántica, es modular, puede que genere evaluador dinámico)
+	\item Definir una API para la construcción de los AST de entrada al evaluador generado, lo que permitiría que herramientas externas puedan generar los AST entrada.
+	% Este puntos podría ser analizado teniendo en cuenta los A-Terms como ejemplo.
+	\pause
 
-\item Permitir definir atributos de \textbf{alto orden}, es decir, atributos que pueden ser un árbol. Para los cuales, su evaluación supondría un nuevo proceso de igual complejidad que el necesario para decorar al AST de entrada.
+	\item Pruebas de rendimiento como comparaciones con otras herramientas similares.
+	% (Silver, definir sintaxis y semántica, es modular, puede que genere evaluador dinámico)
+	\pause
 
-\item Implementar como especies de templates para los atributos.
-\end{itemize}
+	\item Permitir definir atributos de \textbf{alto orden}, es decir, atributos que pueden ser un árbol. Para los cuales, su evaluación supondría un nuevo proceso de igual complejidad que el necesario para decorar al AST de entrada.
+	\pause
+
+	\item Implementar como especies de templates para los atributos.
+    \end{itemize}
 }
 
 \frame{
-\frametitle{Extensiones}
-\begin{itemize}
- \item Extensiones al lenguaje de especificación, como módulos a través de \texttt{\#include}. Esto engloba los puntos siguientes:
+    \frametitle{Extensiones}
 
-\begin{itemize}
-\item Disponer de espacios de nombres, y operadores que permitan referirse a estos \textbf{espacios de nombres}.
+    \begin{itemize}
+	\item Extensiones al lenguaje de especificación, como módulos a través de \texttt{\#include}. Esto engloba los puntos siguientes:
 
-\item Redefinición o extensión de reglas incluidas, un estilo de \textbf{sobrecarga}.
+	    \begin{itemize}
+		\item Disponer de espacios de nombres, y operadores que permitan referirse a estos \textbf{espacios de nombres}.
 
-\item Permitir el \textbf{adicionado de atributos} a símbolos pertenecientes a otros módulos.
-\end{itemize}
-\end{itemize}
+		\item Redefinición o extensión de reglas incluidas, un estilo de \textbf{sobrecarga}.
 
+		\item Permitir el \textbf{adicionado de atributos} a símbolos pertenecientes a otros módulos.
+	    \end{itemize}
+    \end{itemize}
 }
 
 
 \frame {
-	\begin{block}{}
-		bla bla
-	\end{block}
+    \begin{block}{}
+	bla bla
+    \end{block}
 }
 
 \section{Bibliografía}
     \frame{
-	\frametitle{Bibliografía}
-    \scriptsize
+	\frametitle{Bibliografía}\scriptsize
+
 	\begin{thebibliography}{66}
 	    \bibitem {wuu-yang1} Wuu Yang. 1998. \textit{Multi-Plan Attribute Grammars}. Department of Computer Information Science. National Chiao-Tung University, Hsin-Chu, Taiwan.
 
@@ -938,13 +1012,13 @@ Plan de evaluación \textbf{$\{ Eq_{1}, Eq_{2}, \ldots Eq_{n}\}$}& $\Longrightar
 
 	    %\bibitem{wuu-yang4} Wuu Yang, W. C. Cheng. \emph{A Polynomial Time Extension to Ordered Attribute Grammars}. Department of Computer and Information Science.National Chiao-Tung University, Hsin-Chu, Taiwan.
 
-	    %\bibitem {gramatica} John E. Hopcroft, Rajeev Montwani, Jefrey D. Ullman.\textit{Introduction to Automata theory, languajes, and computation}. Addison-Wesley (2001) second edition.
+	    %\bibitem {gramática} John E. Hopcroft, Rajeev Montwani, Jefrey D. Ullman.\textit{Introduction to Automata theory, languajes, and computation}. Addison-Wesley (2001) second edition.
 
 	    \bibitem {compiladores} Alfred V. Aho, Ravi Sethi, Jeffrey D. ullman.\textit{Compilers: Principles, Techniques and Tools}. Addison-Wesley (1985)  Iberoamericana, S.A. Wilmington, Delaware, E.U.A.
 
-	    \bibitem {tesismarcelo} Arroyo, Marcelo Daniel. \textit{Gramáticas de atributos, clasificación y aportes en técnicas de evaluación}. Tesis de carrera de Magister en Ciencias de la Computación. Universidad Nacional del Sur. Bahía Blanca - Argentina.
+	    \bibitem {tesismarcelo} Arroyo, Marcelo Daniel. \textit{Gramáticas de atributos, clasificación y aportes en técnicas de evaluación}. Tesis de carrera de Magíster en Ciencias de la Computación. Universidad Nacional del Sur. Bahía Blanca - Argentina.
 
-	    \bibitem {kastens} U. Kastens. 1980. \textit{Ordered Attribute Grammars}. Acta Informatica. Vol. 13, pp. 229-256.
+	    \bibitem {kastens} U. Kastens. 1980. \textit{Ordered Attribute Grammars}. Acta Informática. Vol. 13, pp. 229-256.
 
 	    \bibitem{intri-exc} Jazayeri, Ogden and Rounds. 1975. \emph{The intrinsically exponential complexity of the circularity problem for attribute grammars}. Comm. ACM 18. December 2, Pag: 697-706.
 	\end{thebibliography}
