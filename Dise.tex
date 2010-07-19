@@ -602,7 +602,7 @@ Notar que cada plan proyectado ha capturado las ecuaciones de cada símbolo de l
 
 La etapa de construcción de secuencias de visita, tal como lo muestra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``\textbtt{Builder}''. Las mismas, son computados a partir de los diferentes planes obtenidos en el sección anterior.
 
-El funcionamiento para la construcción de las secuencias, esta dado por la aplicación de una especie de \textit{simulación}, para la evaluación de cada atributo de los símbolos. El resultado de esta simulación, son los valores que conforman la secuencia de visita, tal como se ha analizado en la sección \ref{sec:sec-visit}. Estos valores siguen la siguiente interpretación: 
+El funcionamiento para la construcción de las secuencias, esta dado por la aplicación de un recorrido recursivo sobre los contextos de las reglas, para la evaluación de cada atributo de los símbolos. El resultado de este algoritmo, son los valores que conforman la secuencia de visita, tal como se ha analizado en la sección \ref{sec:sec-visit}. Estos valores siguen la siguiente interpretación: 
 
 \begin{description}
 \item [Compute] Valor menor que cero que representa el número de la ecuación a resolver\footnote{La ecuación a computar pertenece a la regla del plan corriente.}.
@@ -633,7 +633,7 @@ A modo de ejemplo, se muestran las secuencias de visita generadas por \maggen\ p
 
 Cabe aclarar que todas las secuencias de visita tienen un \textbf{leave} implícito al final, es decir, cuando se completo la computación de la secuencia se retorna a su ámbito de invocación.
 
-\subsubsection{Heurística de la simulación}
+\subsubsection{Heurística del algoritmo}
 \label{subsec:heuris-simul}
 El punto principal en el cual se basa la heurística, es evaluar el plan buscando las dependencias de cada ecuación en el contexto del mismo. A continuación se muestran los pasos básicos a tener en cuenta con un ejemplo:\\
 
@@ -673,7 +673,7 @@ El resultado del ejemplo, aplicando los pasos tratados arriba, es presentado en 
 \caption{\label{fig:resul_vis} Ejemplo de Secuencia de visita}
 \end{figure}
 
-Notar que para el cómputo de las secuencias de visitas totales, solamente basta con lanzar la simulación analizada anteriormente para los planes iniciales\footnote{Los planes iniciales son aquellos que provienen de regla inicial.}. La explicación de esto se sustenta en las propiedades garantizadas con los chequeos en la gramática, principalmente la propiedad de alcanzabilidad. De esta forma, los planes iniciales lanzan los demás planes necesarios para el cómputo total de las secuencias.
+Notar que para el cómputo de las secuencias de visitas totales, solamente basta con lanzar el algortimo, analizado anteriormente, para los planes iniciales\footnote{Los planes iniciales son aquellos que provienen de regla inicial.}. La explicación de esto se sustenta en las propiedades garantizadas con los chequeos en la gramática, principalmente la propiedad de alcanzabilidad. De esta forma, los planes iniciales lanzan los demás planes necesarios para el cómputo total de las secuencias.
 
 \section{Generación de Código}
 \label{sec:gencodigo}

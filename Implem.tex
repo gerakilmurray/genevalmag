@@ -879,7 +879,7 @@ Por la forma de los mismos, se decidió como forma de representación un arreglo
 \item $\textbtt{Compute} \Rightarrow \ \textbf{<0}$: Números negativos indican que ecuación debe computarse, tomando obviamente el valor absoluto y respetando la numeración global de las mismas.
 \end{itemize}
 
-La cantidad de secuencias de visitas es la misma que la de los planes de evaluación generados, y como este proceso se apoya en una ``\textbf{simulación}'', la construcción de las secuencias se da en forma incremental. Por eso se inicializan todas las estructuras de almacenamiento con secuencias de visitas vacías, que luego serán modificadas mediante indexación sobre el repositorio.
+La cantidad de secuencias de visitas es la misma que la de los planes de evaluación generados. La construcción de las secuencias se da en forma incremental, aplicando el algoritmo sólo para los planes iniciales, y luego recursivamente se aplica bajo demanda sobre las reglas que integran los distintos contextos de la regla. Por eso se inicializan todas las estructuras de almacenamiento con secuencias de visitas vacías, que serán modificadas mediante indexación sobre el repositorio.
 
 Aquí queda claro la optimización realizada mediante la creación de planes únicos, es decir, no existen dentro de \maggen\ planes repetidos. Por lo tanto, sólo se crearán una cantidad mínima de secuencias de visita también. 
 
@@ -893,9 +893,9 @@ typedef vector < int > Visit_seq;
 vector < Visit_seq > all_visit_seqs;
 \end{lstlisting}
 
-\subsection{Heurística de la simulación: Detalles de implementación}
+\subsection{Heurística del algoritmo: Detalles de implementación}
 
-Como ya se analizó en la sección \ref{subsec:heuris-simul}, con la heuristica utilizada,  basta con lanzar el proceso de simulación sobre él o los planes asociados a la regla inicial. Además es correcto, porque toda evaluación comenzará desde ese punto.
+Como ya se analizó en la sección \ref{subsec:heuris-simul}, con la heuristica utilizada, basta con lanzar el proceso sobre él o los planes asociados a la regla inicial. Además es correcto, porque toda evaluación comenzará desde ese punto.
 
 El algoritmo que se diseñó es recursivo y se apoya en ciertas listas que llevan información de contextos anteriores que son utilizados para realizar podas\footnote{Heurística que permite descartar ramas completas en problemas sobre decisión en árboles y grafos análogamente. \urllink{http://en.wikipedia.org/wiki/Branch\_and\_cut}} y cálculos innecesarios. Estos son:
 
@@ -916,7 +916,7 @@ vector<unsigned short> &v_seq_computed
 \end{lstlisting}
 \end{description}
 
-El algoritmo principal, \textbtt{generate\_visit\_sequences}, es más bien un invocador de la función \textbtt{gen\_visit\_seq}, que es la que realmente lleva a cabo las llamadas que simulan la evaluación.
+El algoritmo principal, \textbtt{generate\_visit\_sequences}, es más bien un invocador de la función \textbtt{gen\_visit\_seq}, que es la que realmente lleva a cabo las llamadas recursivas necesarias para la evaluación.
 
 \begin{lstlisting}[numbers=left, columns=fullflexible]
 bool generate_visit_sequences()
