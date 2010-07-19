@@ -9,7 +9,7 @@ SET (CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -Wno-deprecated")
 
 SET (CMAKE_INSTALL_PREFIX ./bin/)
 
-SET (LIBRARY_OUTPUT_PATH    ${MAGGEN_BINARY_DIR}/bin
+SET (LIBRARY_OUTPUT_PATH    ${MAGGEN_BINARY_DIR}/bin/share/
 	CACHE PATH "Directory for Libraries")
 SET (EXECUTABLE_OUTPUT_PATH ${MAGGEN_BINARY_DIR}/bin
 	CACHE PATH "Directory for Executables")

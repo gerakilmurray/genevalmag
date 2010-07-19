@@ -148,7 +148,7 @@ La traducción bajo demanda de los planes de evaluación, permiten realizar opti
 \caption{\label{alg:genvisitseq}Generador de secuencias de visitas.}
 \end{algorithm}
 
-El algoritmo que realiza el cómputo de las secuencias de visita totales realiza un proceso recursivo para lograr la traducción. Se lo puede considerar como una simulación del recorrido sobre el árbol en tiempo de evaluación \footnote{En la sección \ref{sec:constseqvisit} se ampliará este funcionamiento.}. Por lo que se debe llevar una secuencia de visita local, a la cual se le insertarán los distintos comandos. Además, será necesario una función que lleve las instancias de atributos ya calculadas.
+El algoritmo que realiza el cómputo de las secuencias de visita totales realiza un proceso recursivo para lograr la traducción. Se lo puede considerar como un recorrido sobre los posibles contextos\footnote{En la sección \ref{sec:constseqvisit} se ampliará esta heurística.}. Por lo que se debe llevar una secuencia de visita local, a la cual se le insertarán los distintos comandos. Además, será necesario una función que lleve las instancias de atributos ya calculadas.
 
 De esta forma, cuando se detecta un \textbtt{visit}, se debe localizar a que hijo tiene que recursar en base al plan actual, el cual tiene un contexto establecido. Además se debe determinar el plan proyectado que actuará de orden de evaluación impuesto en la recursión. Al volver se debe actualizar todas las instancias de atributos que fueron computadas en el contexto inferior, para evitar futuras visitas innecesarias.
 

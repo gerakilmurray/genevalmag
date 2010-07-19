@@ -61,6 +61,7 @@
 \lstdefinelanguage{specmag}{
   keywords={compute, end, all, semantic, domain, attributes, rules, sort, op, function, infix, prefix, postfix, syn, inh, left, right, non_assoc, and, and_eq, asm, auto, bitand, bitor, break, case, catch, class, compl, const, const_cast, continue, default, delete, do, double, dynamic_cast, else, enum, explicit, export, extern, false, for, friend, goto, if, inline, long, mutable, namespace, new, not, not_eq, operator, or, or_eq, private, protected, public, register, reinterpret_cast, return, short, signed, sizeof, static, static_cast, struct, switch, template, this, throw, true, try, typedef, typeid, typename, union, unsigned, using, virtual, void, volatile, wchar_t, while, xor, xor_eq, bool, char, float, int, string
 %   ,repeat, until, procedure, then, from
+  ,cout, endl
   },
   sensitive=true,
   morecomment=[s]{/*}{*/},
@@ -230,12 +231,20 @@
     $$
     \pause
 
-    \begin{alertblock}{Gramática de Atributos Multiplanes}
+    \begin{exampleblock}{Gramática de Atributos Multiplanes}
         Una gramática \textit{G} es una \textit{Gramática de Atributos Multi-planes} si y solo si 
         $$
         \forall q : q \in P: (\forall g:g\ es\ un\ grafo\ de\ q \wedge g \in SADP(q) : g\ es\ no\ circular) 
         $$
-    \end{alertblock}
+    \end{exampleblock}
+}
+
+\frame{
+    \frametitle{Familias de gramáticas de atributos}
+
+    \begin{center}
+        \includegraphics[width=192px, height=200px]{./familias_ag.png}
+    \end{center}
 }
 
 \subsection{Evaluador estático}
@@ -376,7 +385,7 @@
 \begin{figure}[h]
 \begin{center}
 \begin{tabular}{c}
-\begin{lstlisting}[backgroundcolor=\color{white}, basicstyle=\scriptsize, language=, linewidth=7cm]
+\begin{lstlisting}[backgroundcolor=\color{white}, basicstyle=\footnotesize, language=, linewidth=8cm]
 * Parsing grammar ---------- [  OK  ]
 * Generate graphs ---------- [  OK  ]
 * Build plans -------------- [  OK  ]
@@ -747,7 +756,7 @@ rules
 
 La salida de \maggen\ cuando se detecta ciclicidad, es:
 
-\begin{lstlisting}[backgroundcolor=\color{white}, basicstyle=\small, language=] 
+\begin{lstlisting}[backgroundcolor=\color{white}, basicstyle=\footnotesize, language=] 
    * Parsing grammar ---------- [  OK  ]
    * Generate graphs ---------- [  OK  ]
    * Build plans -------------- [ ABORT ]
@@ -775,18 +784,18 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
 \frame{
     \frametitle{\maggen - Plan de evaluacion (cont.)}
 
-    \begin{exampleblock}{Plan de evaluación}
+    \begin{block}{Plan de evaluación}
         Lista de números de ecuaciones a computar, dirigiendo la evaluación de izquierda a derecha.
-    \end{exampleblock}
+    \end{block}
     \pause
     
-    \begin{exampleblock}{Plan de evaluación proyectado}
+    \begin{block}{Plan de evaluación proyectado}
         Plan de evaluación considerando sólo los números de ecuaciones para los atributos de un símbolo particular.
-    \end{exampleblock}
+    \end{block}
     \pause
 
     \begin{center}
-        ``Los planes proyectados juegan el rol de orden de evaluación impuesto como contexto superior.''
+        ``Los planes proyectados juegan un rol restrictivo sobre el orden de evaluación impuesto a contexto inferior.''
     \end{center}
 }
 
@@ -830,7 +839,7 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
   \begin{block}{}
     \begin{itemize}
       \item Traducción de planes de evaluación a secuencia de visita: \textbtt{compute}, \textbtt{visit}, \textbtt{leave}.
-      \item Se basa en la aplicación de una simulación recorriendo los planes de evaluación buscando las dependencias.
+      \item Se basa en la aplicación de un recorrido sobre los planes de evaluación resolviendo las dependencias para evaluar los atributos.
     \end{itemize}
   \end{block}
 
@@ -842,7 +851,7 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
 }
 
 \frame{
-  \frametitle{Heurística de la Simulación}
+  \frametitle{Heurística del algoritmo}
   \begin{enumerate}
     \item Se recorre el plan tomando en cada paso una de las ecuaciones.
 
@@ -883,6 +892,104 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
   \end{tabular}
 
 \end{frame}
+
+\frame{
+\frametitle{Generación de código}
+\begin{block}{}
+ La etapa final de \maggen\ esta dada por la generación de código para el evaluador estático. Esta, produce dos archivos: \textit{interface} (.hpp) e \textit{implementación} (.cpp). Los archivos generados se vinculan con dos módulos estáticos, \texttt{Node.hpp} y \texttt{Node.cpp}.
+\end{block}
+Los módulos generados contienen:
+\begin{itemize}
+\item Los planes de evaluación.
+\item Las secuencias de visita.
+\item Las reglas de la gramatica.
+\item Cada símbolo de la gramatica es implementado mediante \texttt{structs} de C++.
+\item Conjunto de métodos para la evaluación.
+\end{itemize}
+}
+\frame{
+\frametitle{Algoritmo de evalución}
+
+Se basa en dos etapas bien definidas:
+
+\begin{description}
+\item [Primera recorrida del AST] se invoca a la función
+\begin{itemize}
+\item \textbtt{traverse}: responsable de seleccionar el plan de evaluación para cada nodo no terminal.
+\end{itemize}
+
+\item [Segunda recorrida del AST] se invoca a la función
+\begin{itemize}
+\item \textbtt{eval\_visiter}: es un evaluador orientado a visitas, que debe computar los valores de los atributos de los nodos.
+\end{itemize}
+\end{description}
+}
+
+\frame{
+\frametitle{Usando \maggen}
+\begin{block}{}
+ Luego de la instalacion, \maggen\ puede ser invocado desde la linea de comandos.
+\end{block}
+
+\begin{exampleblock}{Argumentos de \maggen}
+\begin{description}
+\item [\textbtt{-f  file}] Entrada de \maggen\ como \textbtt{file}. Por defecto, (\textbtt{cin}) hasta \textbtt{EOF} (End Of File).
+
+\item [\textbtt{-i  header}] Incluir \textbtt{header} en la generación de código.
+
+\item [\textbtt{-fo folder}] Directorio de salida para \maggen. Por defecto ``\textit{./out\_maggen/}''.
+
+\item [\textbtt{-o  name}] Define a \textbtt{name} como el nombre de la clase y del archivo generado por \maggen. Por defecto el nombre ``\textbf{mag\_eval}''.
+
+\item [\textbtt{-h}] Muestra mensaje de ayuda.
+\end{description}
+ \end{exampleblock}
+}
+\frame{
+\underline{Ejemplo}: {\scriptsize\textbtt{./maggen -fo ./out\_wuu\_yang -o evalmag -f ./examples/ag\_wuu\_yang/ag\_wuu\_yang.input}}
+}
+
+
+\frame{
+\frametitle{Evaluador generado}
+Para el uso del evaluador generado por \maggen\ se necesitan los 4 archivos generados en el directorio de salida:
+\begin{itemize}
+\item \textbtt{maggen.hpp}.
+\item \textbtt{maggen.cpp}.
+\item \textbtt{Plan.hpp}.
+\item \textbtt{Node.hpp}.
+\end{itemize}
+  \begin{exampleblock}{}
+   \begin{center}
+    AST \hspace{1cm} $\Longrightarrow$ \hspace{1cm} \maggen \hspace{1cm} $\Longrightarrow$ \hspace{1cm} AST decorado.
+ \end{center}
+  \end{exampleblock}
+}
+
+\begin{frame}[fragile]
+\frametitle{Construcción de AST de entrada}
+
+\begin{lstlisting}[columns=fullflexible, basicstyle=\scriptsize, language=c++]
+...     
+    `\textbf{maggen eval\_mag;}`
+    `\textbf{S node\_s1({\color{red}1});}`
+    `\textbf{X node\_s1\_x({\color{red}4});}`
+    `\textbf{Y node\_s1\_y2({\color{red}2});}`
+    `\textbf{Z node\_s1\_z({\color{red}5});}`
+    `\textbf{Y node\_s1\_z\_y3({\color{red}2});}`
+    `\color{red}\textbf{node\_s1.add(\&node\_s1\_x).add(\&node\_s1\_y2).add(\&(node\_s1\_z.add(\&node\_s1\_z\_y3)));}`
+    `\color{blue}\textbf{eval\_mag.evaluator\_mag(\&node\_s1);}`
+    cout << " After evaluation." << endl;
+    cout << node_s1.to_string() << endl;
+...
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=100px, height=76px]{./ast.png}
+\end{center}
+
+\end{frame}
+
 
 \frame{
     \frametitle{magGen - Secuencia de visita}
@@ -948,6 +1055,31 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
     \begin{block}{}
 	    bla bla
     \end{block}
+}
+
+
+\frame{
+\frametitle{Medidas de performance: Version de Boost}
+\begin{block}{Ejemplo Wuu Yang}
+\begin{tabular}{|c|c|c|}
+\hline
+Conf.             & \textbf{Boost 1.37} & \textbf{Boost 1.43} \\ \hline
+\textbtt{g++}     & 1                   & 3                   \\ \hline
+\textbtt{g++ -O3} & 2                   & 4                   \\ \hline
+\end{tabular}
+\end{block}
+}
+
+\frame{
+\frametitle{Medidas de performance: Optimización de secuancias de visita}
+\begin{block}{Ejemplo Aritmetica}
+\begin{tabular}{|c|c|c|}
+\hline
+Conf.             & \textbf{Boost 1.37} & \textbf{Boost 1.43} \\ \hline
+\textbtt{g++}     & 1                   & 3                   \\ \hline
+\textbtt{g++ -O3} & 2                   & 4                   \\ \hline
+\end{tabular}
+\end{block}
 }
 
 

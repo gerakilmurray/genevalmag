@@ -40,7 +40,8 @@
                   end},
     basicstyle=\tiny,
     aboveskip={1\baselineskip},
-    columns=[c]fixed,
+%     columns=[c]fixed,
+    columns=fullflexible,
     showstringspaces=false,
     extendedchars=true,
     breaklines=true,
@@ -56,7 +57,7 @@
     keepspaces=true,
     escapeinside=``,
     numbersep=5pt,
-    numberstyle=\scriptsize
+    numberstyle=\tiny
 }
 
 \definecolor{linkcol}{rgb}{0,0,0.4} 
@@ -430,9 +431,12 @@ El funcionamiento de \maggen\ esta dado por la integración de 4 etapas, conside
 El cómputo de \maggen\ se realiza atravesando cada una de estas etapas secuencialmente, es decir, la terminación exitosa de una, habilita la siguiente; por lo tanto cada etapa mantiene su salida de errores de manera independiente. 
 
 La salida normal de \maggen\ que indica que se han realizado todas las etapas correctamente, es la siguiente:
-{\scriptsize
-\vspace{0.3cm}
-\begin{lstlisting}[backgroundcolor=\color{white}, language=]
+
+\vspace{-0.5cm}
+\begin{figure}[h]
+\begin{center}
+\begin{tabular}{c}
+\begin{lstlisting}[backgroundcolor=\color{white}, basicstyle=\footnotesize, language=, linewidth=9cm]
    * Parsing grammar ---------- [  OK  ]
    * Generate graphs ---------- [  OK  ]
    * Build plans -------------- [  OK  ]
@@ -441,21 +445,30 @@ La salida normal de \maggen\ que indica que se han realizado todas las etapas co
 
    Generation complete in: 0.372814 seconds.
 \end{lstlisting}
-\vspace{0.3cm}}
+\end{tabular}
+\end{center}
+\end{figure}
+\vspace{-0.9cm}
 
 En caso de funcionamiento anormal de alguna de las etapas, se detectará un \textbf{FAIL} en la etapa correspondiente y se indicará la información del mismo.
 
 Un caso alternativo de salida, se da cuando \maggen\ detecta planes cíclicos, visualizándose un \textbf{ABORT} en la etapa de creación de planes:
-{\scriptsize
-\vspace{0.3cm}
-\begin{lstlisting}[backgroundcolor=\color{white}, language=] 
+
+\vspace{-0.5cm}
+\begin{figure}[h]
+\begin{center}
+\begin{tabular}{c}
+\begin{lstlisting}[backgroundcolor=\color{white}, language=, basicstyle=\footnotesize, linewidth=12cm] 
    * Parsing grammar ---------- [  OK  ]
    * Generate graphs ---------- [  OK  ]
    * Build plans -------------- [ ABORT ]
 
     ERROR: One o more graph ADP has an cycle in its dependencies. Look the folder ./out_maggen/graphs/CYCLIC_graphs/ for more details.
 \end{lstlisting}
-\vspace{0.3cm}}
+\end{tabular}
+\end{center}
+\end{figure}
+\vspace{-0.9cm}
 
 \subsection{Lenguaje de especificación de las MAG}
 \label{sec:lenguajeMAG}
@@ -480,7 +493,7 @@ Los dos primeros, son bloques puramente declarativos o dedicados a la definició
 
 Cada bloque del lenguaje de especificación contiene su sintaxis propia para su definición\footnote{En la documentación completa de \maggen\ se pueden encontrar con detalles el lenguaje de especificación.}.
 
-En el apéndice \ref{append:agwuuyang} se presenta un ejemplo de una gramática de atributos multiplanes presentada por Wuu Yang en \cite{wuu-yang1} codificada en el lenguaje de especificación de \maggen.
+En la sección \ref{ej:agwuuyang} se presenta un ejemplo de una gramática de atributos multiplanes presentada por Wuu Yang en \cite{wuu-yang1} codificada en el lenguaje de especificación de \maggen.
 
 \subsection{Parser}
 
@@ -539,7 +552,7 @@ Un \textbf{plan} se compone de una lista de números de ecuaciones a computar. T
 
 % El algoritmo para la generación de planes se desarrollo teniendo de base los resultados de Wuu Yang en \cite{wuu-yang1}.
 
-Para el ejemplo presentado en el apéndice \ref{append:agwuuyang} se computan 7 planes (uno por cada ADP). Cada plan guarda, además del orden de evaluación de las ecuaciones, el contexto de la producción. Este, permite, en el proceso de evaluación, poder asignar dicho plan a un nodo del AST a decorar.
+Para el ejemplo presentado en la sección \ref{ej:agwuuyang} se computan 7 planes (uno por cada ADP). Cada plan guarda, además del orden de evaluación de las ecuaciones, el contexto de la producción. Este, permite, en el proceso de evaluación, poder asignar dicho plan a un nodo del AST a decorar.
 
 \begin{tabular}{p{6cm}p{6cm}}
 \begin{itemize}
@@ -559,7 +572,7 @@ Donde la notación ($\alpha | P | \beta$) especifica: el contexto superior ($\al
 
 \subsection{Construcción Secuencias de Visita}
 \label{seubsec:seq-visit}
-El funcionamiento para la construcción de las secuencias, esta dado por la aplicación de una \textit{simulación}, para la evaluación de cada atributo de los símbolos. El resultado de esta simulación, son los valores que conforman la secuencia de visita, tal como se ha analizado en la sección \ref{sec:sec-visit}. Estos valores siguen la siguiente interpretación: 
+El funcionamiento para la construcción de las secuencias, esta dado por la aplicación de un \textit{recorrido sobre los contextos de las reglas}, para la evaluación de cada atributo de los símbolos. El resultado, son los valores que conforman la secuencia de visita, tal como se ha analizado en la sección \ref{sec:sec-visit}. Estos valores siguen la siguiente interpretación: 
 
 \begin{description}
 \item [Compute] Valor menor que cero que representa el número de la ecuación a resolver\footnote{La ecuación a computar pertenece a la regla del plan corriente.}.
@@ -567,7 +580,7 @@ El funcionamiento para la construcción de las secuencias, esta dado por la apli
 \item [Leave] valor ``\textbtt{0}''.
 \end{description}
 
-A modo de ejemplo, se muestra una secuencia de visita generada por \maggen\ para el ejemplo analizado en el apéndice \ref{append:agwuuyang}:
+A modo de ejemplo, se muestra una secuencia de visita generada por \maggen\ para el ejemplo analizado en la sección \ref{ej:agwuuyang}:
 
 \begin{description}
 \item [\{-7,0,-8\}] Secuencia de visita computada a partir del plan \{7,4,8,3\} con  ($ 1 | 3 | \lambda$). En este caso, se traduce a lo siguiente:
@@ -581,13 +594,13 @@ A modo de ejemplo, se muestra una secuencia de visita generada por \maggen\ para
 
 \end{description}
 
-\subsubsection{Heurística de la simulación}
+\subsubsection{Heurística del algoritmo}
 \label{subsec:heuris-simul}
 
 Consiste en evaluar el plan buscando las dependencias de cada ecuación en el contexto del mismo. A continuación se muestran los pasos básicos a tener en cuenta con un ejemplo:\\
 % El punto principal en el cual se basa la heurística, es evaluar el plan buscando las dependencias de cada ecuación en el contexto del mismo. A continuación se muestran los pasos básicos a tener en cuenta con un ejemplo:\\
 
-Si se toma uno de los planes calculados por \maggen\ para el ejemplo del apéndice \ref{append:agwuuyang}:\\
+Si se toma uno de los planes calculados por \maggen\ para el ejemplo de la sección \ref{ej:agwuuyang}:\\
 
 Tomamos el plan \{6,2,9,3,5,4,10,1\} con ($\lambda| 1 | 4,2,5$), el cual es purgado a sólo las ecuaciones de la regla corriente (1):\{ 2, 3, 4, 1 \}.
 
@@ -609,7 +622,7 @@ El caso de cómputo de atributos sintetizados de símbolos de la parte izquierda
 \item Luego de la obtención de todas las dependencias, se realiza un \textbf{compute} del \textit{l\_value} y se marca a este como \textbtt{evaluado}. El paso siguiente es avanzar una ecuación en la lista que impone el plan y realizar los mismos tratamientos.
 \end{enumerate}
 
-Para el cómputo de las secuencias de visitas, solamente alcanza con lanzar la simulación para los planes iniciales\footnote{Planes asociados a la regla inicial.}. Esto se sustenta con las propiedades de la gramática, principalmente la alcanzabilidad. De esta forma, los planes iniciales lanzan los demás planes necesarios para el cómputo total de las secuencias.
+Para el cómputo de las secuencias de visitas, solamente alcanza con lanzar el algoritmo para los planes iniciales\footnote{Planes asociados a la regla inicial.}. Esto se sustenta con las propiedades de la gramática, principalmente la alcanzabilidad. De esta forma, los planes iniciales lanzan los demás planes necesarios para el cómputo total de las secuencias.
 
 
 \subsection{Generación de código}
@@ -637,7 +650,7 @@ El algoritmo que se implementó para poder evaluar un AST se basa en dos etapas 
 
 El código del evaluador es reducido por su gran nivel de modularización. Recibe como parámetro la raíz del AST a evaluar. El orden inicial de evaluación para los atributos del símbolo inicial y, que por ser una gramática extendida no ocurre en ningún otro lado de la misma, siempre se encuentra en la posición cero del arreglo de planes de evaluación únicos.
 
-\begin{lstlisting}[numbers=left, columns=fullflexible]
+\begin{lstlisting}[numbers=left]
 procedure eval (T)
   /* T es un AST no evaluado. */
   /* `$\mu$` es un orden de evaluación de los atributos del simbolo inicial. */
@@ -657,7 +670,7 @@ Luego de la asignación de un plan\footnote{A efectos de implementación es un �
 
 La función \texttt{traverse} teórica, es presentada a continuación:
 
-\begin{lstlisting}[numbers=left, columns=fullflexible]
+\begin{lstlisting}[numbers=left]
 procedure traverse (n, `$\omega$`)
   /* n es un nodo no terminal node de un AST. */
   /* `$\omega$` es un orden de evaluación de los atributos del simbolo no terminal de mas a izquierda localizado en n. */
@@ -674,7 +687,7 @@ end procedure
 
 Esta función sigue los lineamientos de la secuencia de visita referenciada por cada nodo. Arrancando desde la raíz, el algoritmo dirige la evaluación del AST para lograr el AST decorado.
 
-\begin{lstlisting}[numbers=left, columns=fullflexible]
+\begin{lstlisting}[numbers=left]
 procedure eval_visiter(n)
   /* n es un nodo no terminal de un AST. */
   /* Donde n contiene: */
@@ -714,6 +727,34 @@ Se pueden resumir las características de \maggen\ en los siguientes puntos:
 
 \item El evaluador generado es estático, lo que asegura que no existe un ``\textbf{overhead}'' en el cómputo de la evaluación, ya que el mismo se llevó a cabo mientras se generaba el evaluador propiamente.
 \end{itemize}
+
+\section{Ejemplo de MAG especificada en el lenguaje de especificación de \maggen.}
+\label{ej:agwuuyang}
+
+\subsection{Pseudocódigo}
+\begin{lstlisting}[backgroundcolor=\color{white}]
+     (R1)   S `$\rightarrow$` XYZ      
+              S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
+              X.i1 := Y.s3  
+              Y.i2 := X.s1
+              Y.i3 := Y.s2
+     (R2)   Y `$\rightarrow$` m        
+              Y.s2 := Y.i2
+              Y.s3 := 1
+     (R3)   Y `$\rightarrow$` n        
+              Y.s2 := 2
+              Y.s3 := Y.i3
+     (R4)   X `$\rightarrow$` m        
+              X.s1 := X.i1
+     (R5)   Z `$\rightarrow$` Y        
+              Z.s4 := Y.s3
+              Y.i2 := 3
+              Y.i3 := Y.s2
+\end{lstlisting} 
+
+\subsection{Con lenguaje de especificación de \maggen}
+
+\lstinputlisting[numbers=left, language=specmag]{ag_wuu_yang.input}
 
 \bibliographystyle{unsrt}
 \begin{thebibliography}{10}
@@ -760,34 +801,5 @@ Chiao-Tung University, Hsin-Chu, Taiwan.
 \bibitem{boost} \textbf{Boost}. \textit{Boost C++ Libraries}. URL: \urllink{http://www.boost.org/}. 
  
 \end{thebibliography}
-
-
-\section{Apéndice: MAG especificada en el lenguaje de especificación de \maggen.}
-\label{append:agwuuyang}
-
-\subsection{Pseudocódigo}
-\begin{lstlisting}[backgroundcolor=\color{white}]
-     (R1)   S `$\rightarrow$` XYZ      
-              S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
-              X.i1 := Y.s3  
-              Y.i2 := X.s1
-              Y.i3 := Y.s2
-     (R2)   Y `$\rightarrow$` m        
-              Y.s2 := Y.i2
-              Y.s3 := 1
-     (R3)   Y `$\rightarrow$` n        
-              Y.s2 := 2
-              Y.s3 := Y.i3
-     (R4)   X `$\rightarrow$` m        
-              X.s1 := X.i1
-     (R5)   Z `$\rightarrow$` Y        
-              Z.s4 := Y.s3
-              Y.i2 := 3
-              Y.i3 := Y.s2
-\end{lstlisting} 
-
-\subsection{Con lenguaje de especificación de \maggen}
-
-\lstinputlisting[numbers=left, columns=fullflexible, language=specmag]{ag_wuu_yang.input}
 
 \end{document}
