@@ -1,4 +1,4 @@
-\documentclass[10pt]{beamer}
+\documentclass[10pt, xcolor=table]{beamer}
 
 \usetheme{Warsaw}
 %%%%%\usecolortheme{crane}
@@ -14,6 +14,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{multirow}
+\usepackage[table]{xcolor}
 %\usepackage{amsfonts}
 %\usepackage{amssymb}
 %\usepackage{stmaryrd}
@@ -21,7 +22,7 @@
 %\usepackage[all]{xy}
 \usepackage{listings}
 \definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
-\definecolor{gris}{rgb}{0.8,0.8,0.8}
+\definecolor{gris}{RGB}{124,129,140}
 \definecolor{azul}{rgb}{0.0,0.3,0.6}
 
 \newcommand{\textbtt}[1]{\texttt{\textbf{#1}}}
@@ -1057,31 +1058,102 @@ Para el uso del evaluador generado por \maggen\ se necesitan los 4 archivos gene
     \end{block}
 }
 
-
 \frame{
-\frametitle{Medidas de performance: Version de Boost}
-\begin{block}{Ejemplo Wuu Yang}
-\begin{tabular}{|c|c|c|}
-\hline
-Conf.             & \textbf{Boost 1.37} & \textbf{Boost 1.43} \\ \hline
-\textbtt{g++}     & 1                   & 3                   \\ \hline
-\textbtt{g++ -O3} & 2                   & 4                   \\ \hline
-\end{tabular}
-\end{block}
+    \frametitle{Medidas de performance: Unicidad de planes}
+
+    En un principio cada plan contenía el contexto y la lista de ecuaciones que lo definían. Esto llevo a una \textbf{saturación en la cantidad de planes}.
+
+    \begin{exampleblock}{}
+        En la mayoria de los casos la explosión de planes se producía por la cantidad de contextos: \textbf{Planes repetidos}
+    \end{exampleblock}
+
+    \begin{block}{}
+        \begin{itemize}
+            \item La unicidad de los planes permitió una \textbf{reducción notable} en la cantidad de planes.
+            \item Optimización destacable en la generación de código del evaluador.
+        \end{itemize}
+    \end{block}
 }
 
 \frame{
-\frametitle{Medidas de performance: Optimización de secuancias de visita}
-\begin{block}{Ejemplo Aritmetica}
-\begin{tabular}{|c|c|c|}
-\hline
-Conf.             & \textbf{Boost 1.37} & \textbf{Boost 1.43} \\ \hline
-\textbtt{g++}     & 1                   & 3                   \\ \hline
-\textbtt{g++ -O3} & 2                   & 4                   \\ \hline
-\end{tabular}
-\end{block}
+    \frametitle{Medidas de performance: Unicidad de planes (cont.)}
+
+    \begin{block}{Ejemplo Aritmetica de expresiones}
+        \begin{figure}[h]
+        \begin{center}
+        \begin{tabular}{|l||c|c|}
+            \hline
+            \rowcolor{gris}\textbf{Variable/Unicidad}&\textbf{Sin} & \textbf{Con} \\ \hline
+
+            \textbf{Cant. de planes}           & 371                        & 371                         \\ \hline
+            \textbf{Cant. de planes proy.}     & 687                        & 687                         \\ \hline
+            \textbf{Cant. de sec. de visita }  & \color{red}371             & \color{blue}22              \\ \hline
+            \textbf{Generación del evaluador}  & \color{red} $\sim$1.44 sec & \color{blue} $\sim$0.47 sec \\ \hline
+			\textbf{Cant. de líneas (eval.)}   & \color{red}17464           & \color{blue}5974            \\ \hline
+        \end{tabular}
+        \end{center}
+        \end{figure}
+    \end{block}
 }
 
+\frame{
+\frametitle{Medidas de performance: Versión de Boost}
+
+    \begin{block}{}
+        {\footnotesize
+        \underline{\textbf{Computadora}}: Microprocesador Intel Core 2 Duo T5550 1.83 GHz, 2 MB memoria caché L2, 3 GB memoria RAM a 667 MHz.\\
+        \underline{\textbf{Sistema operativo}}: GNU/Linux Ubuntu 10.04, Kernel 2.6.32-23, GNU g++ 4.4.3.}
+    \end{block}
+
+    \begin{block}{Tiempos de generación de evaluadores de \maggen}
+
+
+        \begin{figure}[h]
+        \begin{center}
+        \begin{tabular}{|l||c|c|}
+            \hline
+            \rowcolor{gris}
+            Input / Spirit           & \textbf{1.8x}   & \textbf{2.1}    \\ \hline
+            \textbtt{MAG Wuu Yang}   & $\sim$0.087 sec & $\sim$0.084 sec \\ \hline
+            \textbtt{MAG Aritmetica} & $\sim$0.590 sec & $\sim$0.470 sec \\ \hline
+        \end{tabular}
+        \end{center}
+        \end{figure}
+
+    \end{block}
+}
+
+\frame{
+    \frametitle{Medidas de performance: Compilación evaluador}
+
+    \begin{block}{Tiempos de compilación del evaluador generado}
+        \begin{figure}[h]
+        \begin{center}
+        \begin{tabular}{|l||c|c|}
+            \hline
+            \rowcolor{gris}
+            Input / g++          & \textbf{sin -O3} & \textbf{con -O3}             \\ \hline
+            \textbtt{Wuu Yang}   & $\sim$1.51 sec   & $\sim$2.55 sec               \\ \hline
+            \textbtt{Aritmetica} & $\sim$5.98 sec   & \textbf{$\sim$1 min 5.6 sec} \\ \hline
+        \end{tabular}
+        \end{center}
+        \end{figure}
+    \end{block}
+
+    \begin{block}{Tamaños del ejecutable del evaluador generado}
+        \begin{figure}[h]
+        \begin{center}
+        \begin{tabular}{|l||c|c|}
+            \hline
+            \rowcolor{gris}
+            Input / g++          & \textbf{sin -O3} & \textbf{con -O3} \\ \hline
+            \textbtt{Wuu Yang}   & 104 Kb           & \ 48 Kb          \\ \hline
+            \textbtt{Aritmetica} & 516 Kb           & 384 Kb           \\ \hline
+        \end{tabular}
+        \end{center}
+        \end{figure}
+    \end{block}
+}
 
 \section{Comentarios Finales}
 
@@ -1089,21 +1161,21 @@ Conf.             & \textbf{Boost 1.37} & \textbf{Boost 1.43} \\ \hline
     \frametitle{Trabajos Futuros}
 
     \begin{itemize}
-	\item Implementar la generación de código al estilo ``\textit{plugins}''. Lo que permitiría extensiones varias, transparentes y elegantes para generar código en diferentes lenguajes. Esto implicaría la definición de una API del motor de generación de código.
-	\pause
+	    \item Implementar la generación de código al estilo ``\textit{plugins}''. Lo que permitiría extensiones varias, transparentes y elegantes para generar código en diferentes lenguajes. Esto implicaría la definición de una API del motor de generación de código.
+	    \pause
 
-	\item Definir una API para la construcción de los AST de entrada al evaluador generado, lo que permitiría que herramientas externas puedan generar los AST entrada.
-	% Este puntos podría ser analizado teniendo en cuenta los A-Terms como ejemplo.
-	\pause
+	    \item Definir una API para la construcción de los AST de entrada al evaluador generado, lo que permitiría que herramientas externas puedan generar los AST entrada.
+	    % Este puntos podría ser analizado teniendo en cuenta los A-Terms como ejemplo.
+	    \pause
 
-	\item Pruebas de rendimiento como comparaciones con otras herramientas similares.
-	% (Silver, definir sintaxis y semántica, es modular, puede que genere evaluador dinámico)
-	\pause
+	    \item Pruebas de rendimiento como comparaciones con otras herramientas similares.
+	    % (Silver, definir sintaxis y semántica, es modular, puede que genere evaluador dinámico)
+	    \pause
 
-	\item Permitir definir atributos de \textbf{alto orden}, es decir, atributos que pueden ser un árbol. Para los cuales, su evaluación supondría un nuevo proceso de igual complejidad que el necesario para decorar al AST de entrada.
-	\pause
+	    \item Permitir definir atributos de \textbf{alto orden}, es decir, atributos que pueden ser un árbol. Para los cuales, su evaluación supondría un nuevo proceso de igual complejidad que el necesario para decorar al AST de entrada.
+	    \pause
 
-	\item Implementar como especies de templates para los atributos.
+	    \item Implementar como especies de templates para los atributos.
     \end{itemize}
 }
 
@@ -1111,22 +1183,22 @@ Conf.             & \textbf{Boost 1.37} & \textbf{Boost 1.43} \\ \hline
     \frametitle{Extensiones}
 
     \begin{itemize}
-	\item Extensiones al lenguaje de especificación, como módulos a través de \texttt{\#include}. Esto engloba los puntos siguientes:
+	    \item Extensiones al lenguaje de especificación, como módulos a través de \texttt{\#include}. Esto engloba los puntos siguientes:
 
-	    \begin{itemize}
-		\item Disponer de espacios de nombres, y operadores que permitan referirse a estos \textbf{espacios de nombres}.
+	        \begin{itemize}
+		        \item Disponer de espacios de nombres, y operadores que permitan referirse a estos \textbf{espacios de nombres}.
 
-		\item Redefinición o extensión de reglas incluidas, un estilo de \textbf{sobrecarga}.
+		        \item Redefinición o extensión de reglas incluidas, un estilo de \textbf{sobrecarga}.
 
-		\item Permitir el \textbf{adicionado de atributos} a símbolos pertenecientes a otros módulos.
-	    \end{itemize}
+		        \item Permitir el \textbf{adicionado de atributos} a símbolos pertenecientes a otros módulos.
+	        \end{itemize}
     \end{itemize}
 }
 
 
 \frame {
     \begin{block}{}
-	bla bla
+	    bla bla
     \end{block}
 }
 
