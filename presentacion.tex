@@ -119,13 +119,15 @@
 
 \subsection{Motivación}
 \frame{
+    \frametitle{Motivación}
+    
     \begin{block}{}
         En las ciencias de la computación los lenguajes juegan un rol muy importante en muchas disciplinas. Desde los comienzos se buscaron \textit{mecanismos} para describirlos y manejarlos.
     \end{block}
     \pause
     
     \begin{block}{}
-        Desde que D. Knuth introdujo en 1966 las \textbf{gramáticas de atributos} (GA), estas se han utilizado ampliamente para el desarrollo de herramientas de procesamiento de lenguajes formales, como compiladores, intérpretes, traductores, así  como también para especificar la semántica de lenguajes de programación.
+        D. Knuth introdujo en 1966 las \textbf{gramáticas de atributos} (GA), estas se han utilizado ampliamente para el desarrollo de herramientas de procesamiento de lenguajes formales y, además, para especificar la semántica de lenguajes de programación.
     \end{block}
     \pause
     
@@ -135,7 +137,7 @@
     \pause
     
     \begin{center}
-        \textbf{Al momento no existían herramientas basadas en esta familia de Gramáticas de Atributos}
+        {\large\textbf{Al momento no existían herramientas basadas en esta familia de Gramáticas de Atributos}}
     \end{center} 
 }
 
@@ -181,13 +183,13 @@
 \end{figure}
 
     \pause
-
-    \begin{block}{Ejemplo instancia}
+    \vspace{-0.5cm}
+    \begin{block}{Ejemplo de instancia}
         Y.i3 $\Leftrightarrow$ Ocurrencia del símbolo $Y$ asociado al atributo $i3$.
     \end{block}
 \end{frame}
 
-\subsection{Familia de Gramáticas de Atributos Multiplanes (MAG)}
+\subsection{Gramáticas de Atributos Multiplanes (MAG)}
 
 \frame{
     \frametitle{Gramáticas de Atributos Multiplanes}
@@ -232,8 +234,8 @@
     $$
     \pause
 
-    \begin{exampleblock}{Gramática de Atributos Multiplanes}
-        Una gramática \textit{G} es una \textit{Gramática de Atributos Multi-planes} si y solo si 
+    \begin{exampleblock}{Gramática de Atributos Multiplanes (MAG)}
+        Una gramática \textit{G} es una \textit{Gramática de Atributos Multiplanes} si y solo si 
         $$
         \forall q : q \in P: (\forall g:g\ es\ un\ grafo\ de\ q \wedge g \in SADP(q) : g\ es\ no\ circular) 
         $$
@@ -259,7 +261,7 @@
     \pause
 
     \begin{block}{Contexto de una producción}
-        Dada una producción $p$ se deben tener en cuenta tres tipos de dependencias que definen el \textit{contexto} de la misma:
+        Tres tipos de dependencias definen el \textit{contexto} de una producción:
 
         \begin{itemize}
             \item Directas obtenidas por las ecuaciones de $p$.
@@ -278,13 +280,18 @@
     \frametitle{Planes de evaluación}
 
     \begin{block}{}
-        Luego del análisis de las dependencias, se conocen que ecuaciones tienen que computarse antes que otras.
+        Luego del análisis de las dependencias, los grafos ADP acícliclos inducen un orden entre las ecuaciones que deben computarse.
     \end{block}
     \pause
 
     \begin{block}{}
-        Este proceso se realizó sobre las estructuras abstractas de la gramática, así que los resultados obtenidos se aplican a \textbf{todas} las cadenas que se pueden producir, más concretamente, a todos los AST válidos en la gramática.
-    \end{block}
+        El proceso de construcción de planes, considera el tres factores:
+            \begin{itemize}
+                \item Orden inducido por las dependencias.
+                \item Orden superior para la evaluación de las instancias.
+                \item El contexto de aplicación.
+            \end{itemize}
+     \end{block}
     \pause
 
     \begin{block}{Plan de Evaluación}
@@ -297,11 +304,18 @@
     \frametitle{Secuencia de Visita}
 	
     \begin{block}{}
-	El concepto de \emph{Secuencias de Visita} fue presentado en 1980, por \textbf{Uwe Kastens}  como un método de evaluación para la familia $OAG$.
+	El concepto de \emph{Secuencias de Visita} fue presentado en 1980, por \textbf{Uwe Kastens}  como un método de evaluación polinomial para la familia $OAG$.
     \end{block}
     \pause
 	
-    Basa su funcionamiento en la visita de los nodos de los árboles de derivación para lograr la evaluación del árbol. Este método se apoya en los planes de evaluación de la gramática.
+	\begin{block}{}
+        Su funcionamiento se basa en la visita de los nodos de los árboles de derivación para lograr la evaluación del árbol. Este método se apoya en los planes de evaluación de la gramática.
+    \end{block}
+    \pause
+    
+    \begin{exampleblock}{}
+        Los evaluadores basados en secuencias de visita pertenecen a una familia denominada \textbf{Evaluadores Multivisita}, ya que el proceso de evaluación puede requerir múltiples visitas a cada nodo para evaluarlo.
+    \end{exampleblock}
 }
 
 \frame{
@@ -325,7 +339,7 @@
 }
 
 \section{magGen}
-
+\subsection{Herramientas}
 \frame{
     \frametitle{\maggen: Herramientas usadas}
 
@@ -344,8 +358,7 @@
 	\end{itemize}&
 	\begin{itemize}
 		\item kile 
-		\item Graphviz
-		\item Nemiver
+		\item Nemiver + gbd
 		\item Dia
 		\item Bouml
 		\item Cmake
@@ -358,7 +371,7 @@
 	\end{tabular}
 }
 
-\subsection{Diseño}
+\subsection{Funcionamiento}
 
 \frame{
     \frametitle{\maggen: Funcionamiento}
@@ -400,6 +413,15 @@ Generation complete in: 0.372814 seconds.
 \end{figure}
 \end{frame}
 
+\frame{
+    \frametitle{Arquitectura}
+    
+    \begin{center}
+        \includegraphics[width=204px, height=200px]{./arquitectura.png}
+    \end{center}
+}
+
+\subsection{Lenguaje de Especificación}
 \begin{frame}[fragile]
     \frametitle{Lenguaje especificación de MAG}
 
@@ -547,7 +569,7 @@ rules
         \end{itemize}
     \end{itemize}
 }
-
+\subsection{Builders}
 \frame{
     \frametitle{\maggen: Generate graphs}
     
@@ -804,7 +826,7 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
     \frametitle{Algoritmo \textbtt{compute\_plans}}
     
     \begin{itemize}
-        \item Se mantiene una cola de trabajos con pares de identificador de producción y un ordén de evalución de sus atributos.
+        \item Se mantiene una cola de trabajos con pares de identificador de producción y un orden de evaluación de sus atributos.
         \pause
         \item Cada vez que se saca un elemento de la lista, se marca como realizado.
         \pause
@@ -819,6 +841,8 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
         \item Se guarda el plan si es diferentes a los ya generados.
         \pause
         \item Se generan los planes proyectados para cada símbolo de la parte derecha.
+        \pause
+        \item Se agregan a la cola de trabajos, el par con el símbolo y su plan proyectado.
     \end{itemize}
     
 %   \begin{center}
@@ -887,88 +911,97 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
 \end{center}
 \end{figure}
 
-  \begin{tabular}{cc}
-    \includegraphics[width=200px, height=107px]{./plan2seq.png}&
-    \hspace{0.2cm}\includegraphics[width=100px, height=76px]{./ast.png}
-  \end{tabular}
+    \begin{tabular}{cc}
+        \includegraphics[width=200px, height=107px]{./plan2seq.png}&
+        \hspace{0.2cm}\includegraphics[width=100px, height=76px]{./ast.png}
+    \end{tabular}
 
 \end{frame}
+\subsection{Generacion de código}
 
 \frame{
-\frametitle{Generación de código}
-\begin{block}{}
- La etapa final de \maggen\ esta dada por la generación de código para el evaluador estático. Esta, produce dos archivos: \textit{interface} (.hpp) e \textit{implementación} (.cpp). Los archivos generados se vinculan con dos módulos estáticos, \texttt{Node.hpp} y \texttt{Node.cpp}.
-\end{block}
-Los módulos generados contienen:
-\begin{itemize}
-\item Los planes de evaluación.
-\item Las secuencias de visita.
-\item Las reglas de la gramatica.
-\item Cada símbolo de la gramatica es implementado mediante \texttt{structs} de C++.
-\item Conjunto de métodos para la evaluación.
-\end{itemize}
+    \frametitle{Generación de código}
+    
+    \begin{block}{}
+         La etapa final de \maggen\ esta dada por la generación de código para el evaluador estático. Esta, produce dos archivos: \textit{interface} (.hpp) e \textit{implementación} (.cpp). Los archivos generados se vinculan con dos módulos estáticos, \texttt{Node.hpp} y \texttt{Node.cpp}.
+    \end{block}
+    
+    Los módulos generados contienen:
+    
+    \begin{itemize}
+        \item Los planes de evaluación.
+        \item Las secuencias de visita.
+        \item Las reglas de la gramatica.
+        \item Cada símbolo de la gramatica es implementado mediante \texttt{structs} de C++.
+        \item Conjunto de métodos para la evaluación.
+    \end{itemize}
 }
 \frame{
-\frametitle{Algoritmo de evalución}
+    \frametitle{Algoritmo de evaluación}
 
-Se basa en dos etapas bien definidas:
+    Se basa en dos etapas bien definidas:
 
-\begin{description}
-\item [Primera recorrida del AST] se invoca a la función
-\begin{itemize}
-\item \textbtt{traverse}: responsable de seleccionar el plan de evaluación para cada nodo no terminal.
-\end{itemize}
+    \begin{description}
+        \item [Primera recorrida del AST] se invoca a la función
+            \begin{itemize}
+                \item \textbtt{traverse}: responsable de seleccionar el plan de evaluación para cada nodo no terminal.
+            \end{itemize}
 
-\item [Segunda recorrida del AST] se invoca a la función
-\begin{itemize}
-\item \textbtt{eval\_visiter}: es un evaluador orientado a visitas, que debe computar los valores de los atributos de los nodos.
-\end{itemize}
-\end{description}
+        \item [Segunda recorrida del AST] se invoca a la función
+            \begin{itemize}
+                \item \textbtt{eval\_visiter}: es un evaluador orientado a visitas, que debe computar los valores de los atributos de los nodos.
+            \end{itemize}
+    \end{description}
 }
 
 \frame{
-\frametitle{Usando \maggen}
-\begin{block}{}
- Luego de la instalacion, \maggen\ puede ser invocado desde la linea de comandos.
-\end{block}
+    \frametitle{Usando \maggen}
+    \begin{block}{}
+     Luego de la instalacion, \maggen\ puede ser invocado desde la linea de comandos.
+    \end{block}
 
-\begin{exampleblock}{Argumentos de \maggen}
-\begin{description}
-\item [\textbtt{-f  file}] Entrada de \maggen\ como \textbtt{file}. Por defecto, (\textbtt{cin}) hasta \textbtt{EOF} (End Of File).
+    \begin{exampleblock}{Argumentos de \maggen}
+        \begin{description}
+            \item [\textbtt{-f  file}] Entrada de \maggen\ como \textbtt{file}. Por defecto, (\textbtt{cin}) hasta \textbtt{EOF} (End Of File).
 
-\item [\textbtt{-i  header}] Incluir \textbtt{header} en la generación de código.
+            \item [\textbtt{-i  header}] Incluir \textbtt{header} en la generación de código.
 
-\item [\textbtt{-fo folder}] Directorio de salida para \maggen. Por defecto ``\textit{./out\_maggen/}''.
+            \item [\textbtt{-fo folder}] Directorio de salida para \maggen. Por defecto ``\textit{./out\_maggen/}''.
 
-\item [\textbtt{-o  name}] Define a \textbtt{name} como el nombre de la clase y del archivo generado por \maggen. Por defecto el nombre ``\textbf{mag\_eval}''.
+            \item [\textbtt{-o  name}] Define a \textbtt{name} como el nombre de la clase y del archivo generado por \maggen. Por defecto el nombre ``\textbf{mag\_eval}''.
 
-\item [\textbtt{-h}] Muestra mensaje de ayuda.
-\end{description}
- \end{exampleblock}
-}
-\frame{
-\underline{Ejemplo}: {\scriptsize\textbtt{./maggen -fo ./out\_wuu\_yang -o evalmag -f ./examples/ag\_wuu\_yang/ag\_wuu\_yang.input}}
+            \item [\textbtt{-h}] Muestra mensaje de ayuda.
+        \end{description}
+    \end{exampleblock}
 }
 
+\frame{
+    \underline{Ejemplo}: {\scriptsize\textbtt{./maggen -fo ./out\_wuu\_yang -o evalmag -f ./examples/ag\_wuu\_yang/ag\_wuu\_yang.input}}
+}
+
+\section{Evaluador generado}
 
 \frame{
-\frametitle{Evaluador generado}
-Para el uso del evaluador generado por \maggen\ se necesitan los 4 archivos generados en el directorio de salida:
-\begin{itemize}
-\item \textbtt{maggen.hpp}.
-\item \textbtt{maggen.cpp}.
-\item \textbtt{Plan.hpp}.
-\item \textbtt{Node.hpp}.
-\end{itemize}
-  \begin{exampleblock}{}
-   \begin{center}
-    AST \hspace{1cm} $\Longrightarrow$ \hspace{1cm} \maggen \hspace{1cm} $\Longrightarrow$ \hspace{1cm} AST decorado.
- \end{center}
-  \end{exampleblock}
+    \frametitle{Evaluador generado}
+    
+    Para el uso del evaluador generado por \maggen\ se necesitan los 4 archivos generados en el directorio de salida:
+    
+    \begin{itemize}
+        \item \textbtt{maggen.hpp}.
+        \item \textbtt{maggen.cpp}.
+        \item \textbtt{Plan.hpp}.
+        \item \textbtt{Node.hpp}.
+    \end{itemize}
+    
+    \begin{exampleblock}{}
+        \begin{center}
+            AST \hspace{1cm} $\Longrightarrow$ \hspace{1cm} \maggen \hspace{1cm} $\Longrightarrow$ \hspace{1cm} AST decorado.
+        \end{center}
+    \end{exampleblock}
 }
 
 \begin{frame}[fragile]
-\frametitle{Construcción de AST de entrada}
+    \frametitle{Construcción de AST de entrada}
 
 \begin{lstlisting}[columns=fullflexible, basicstyle=\scriptsize, language=c++]
 ...     
@@ -985,60 +1018,60 @@ Para el uso del evaluador generado por \maggen\ se necesitan los 4 archivos gene
 ...
 \end{lstlisting}
 
-\begin{center}
-\includegraphics[width=100px, height=76px]{./ast.png}
-\end{center}
+    \begin{center}
+        \includegraphics[width=100px, height=76px]{./ast.png}
+    \end{center}
 
 \end{frame}
 
 
-\frame{
-    \frametitle{magGen - Secuencia de visita}
+%\frame{
+%    \frametitle{magGen - Secuencia de visita}
     
-    \begin{block}{Secuencia de visita generada para el plan\\ R1 $\rightarrow$ R2 R3 R4}
-	\begin{center}
-	    \vspace{0.1cm}
-	    \textbf{Visit R2 $\Rightarrow$\\
-		    \vspace{0.1cm}
-		    Compute X[0].i1 $\Rightarrow$\\
-		    \vspace{0.1cm}
-		    Visit R4 $\Rightarrow$\\
-		    \vspace{0.1cm}
-		    Compute Y[0].i2 $\Rightarrow$\\
-		    \vspace{0.1cm}
-		    Visit R2 $\Rightarrow$\\
-		    \vspace{0.1cm}
-		    Compute Y[0].i3 $\Rightarrow$\\
-		    \vspace{0.1cm}
-		    Visit R5 $\Rightarrow$\\
-		    \vspace{0.1cm}
-		    Compute S[0].s1} 
-	\end{center}
-    \end{block}
-}
+%   \begin{block}{Secuencia de visita generada para el plan\\ R1 $\rightarrow$ R2 R3 R4}
+%	    \begin{center}
+%	        \vspace{0.1cm}
+%	        \textbf{Visit R2 $\Rightarrow$\\
+%	        \vspace{0.1cm}
+%	        Compute X[0].i1 $\Rightarrow$\\
+%	        \vspace{0.1cm}
+%	        Visit R4 $\Rightarrow$\\
+%	        \vspace{0.1cm}
+%	        Compute Y[0].i2 $\Rightarrow$\\
+%	        \vspace{0.1cm}
+%	        Visit R2 $\Rightarrow$\\
+%	        \vspace{0.1cm}
+%	        Compute Y[0].i3 $\Rightarrow$\\
+%	        \vspace{0.1cm}
+%	        Visit R5 $\Rightarrow$\\
+%	        \vspace{0.1cm}
+%	        Compute S[0].s1} 
+%	    \end{center}
+%    \end{block}
+%}
 
-\frame{
-    \frametitle{magGen}
+%\frame{
+%    \frametitle{magGen}
+%
+%    \begin{block}{Informaci\'on de input del evaluador}
+%	    \'Arboles Atribuidos representados con AST\footnote{Attribute Syntax Tree}.
+%    \end{block}
+%    \pause
 
-    \begin{block}{Informaci\'on de input del evaluador}
-	\'Arboles Atribuidos representados con AST\footnote{Attribute Syntax Tree}.
-    \end{block}
-    \pause
+%    \begin{block}{Informaci\'on de output del evaluador}
+%	    El AST decorado\footnote{Cada uno de sus atributos se encuentran calculados}.
+%    \end{block}
+%}
 
-    \begin{block}{Informaci\'on de output del evaluador}
-	El AST decorado\footnote{Cada uno de sus atributos se encuentran calculados}.
-    \end{block}
-}
+%\frame{
+%    \frametitle{magGen}
 
-\frame{
-    \frametitle{magGen}
+%    \begin{block}{Objetivo Subyacente}
+%	    Implementar Lenguajes de Propósitos Específicos para problemas puntuales.
+%    \end{block}
+%}
 
-    \begin{block}{Objetivo Subyacente}
-	Implementar Lenguajes de Prop\'ositos Espec\'ificos para problemas puntuales.
-    \end{block}
-}
-
-\subsection{Detalles de implementación}
+%\subsection{Detalles de implementación}
 
 \frame {
     \frametitle{Detalles de implementación}
@@ -1049,7 +1082,8 @@ Para el uso del evaluador generado por \maggen\ se necesitan los 4 archivos gene
 }
 
 
-\subsection{Evaluador generado}
+%\subsection{Evaluador generado}
+
 \frame {
     \frametitle{Evaluador generado}
 
@@ -1058,6 +1092,7 @@ Para el uso del evaluador generado por \maggen\ se necesitan los 4 archivos gene
     \end{block}
 }
 
+\section{Performance}
 \frame{
     \frametitle{Medidas de performance: Unicidad de planes}
 
@@ -1078,26 +1113,27 @@ Para el uso del evaluador generado por \maggen\ se necesitan los 4 archivos gene
 \frame{
     \frametitle{Medidas de performance: Unicidad de planes (cont.)}
 
-    \begin{block}{Ejemplo Aritmetica de expresiones}
+   \begin{block}{Ejemplo Aritmetica de expresiones}
         \begin{figure}[h]
         \begin{center}
+        \setlength{\doublerulesep}{0mm}
+        \setlength{\arrayrulewidth}{0.9pt}
         \begin{tabular}{|l||c|c|}
             \hline
-            \rowcolor{gris}\textbf{Variable/Unicidad}&\textbf{Sin} & \textbf{Con} \\ \hline
-
-            \textbf{Cant. de planes}           & 371                        & 371                         \\ \hline
-            \textbf{Cant. de planes proy.}     & 687                        & 687                         \\ \hline
-            \textbf{Cant. de sec. de visita }  & \color{red}371             & \color{blue}22              \\ \hline
-            \textbf{Generación del evaluador}  & \color{red} $\sim$1.44 sec & \color{blue} $\sim$0.47 sec \\ \hline
-			\textbf{Cant. de líneas (eval.)}   & \color{red}17464           & \color{blue}5974            \\ \hline
+            \rowcolor{gris} \textbf{Variable/Unicidad}&\textbf{Sin} & \textbf{Con} \\ \hline
+            \rowcolor{white}\textbf{Cant. de planes}           & 371                        & 371                         \\ \hline
+            \rowcolor{white}\textbf{Cant. de planes proy.}     & 687                        & 687                         \\ \hline
+            \rowcolor{white}\textbf{Cant. de sec. de visita }  & \color{red}371             & \color{blue}22              \\ \hline
+            \rowcolor{white}\textbf{Generación del evaluador}  & \color{red} $\sim$1.44 sec & \color{blue} $\sim$0.47 sec \\ \hline
+			\rowcolor{white}\textbf{Cant. de líneas (eval.)}   & \color{red}17464           & \color{blue}5974            \\ \hline
         \end{tabular}
         \end{center}
         \end{figure}
-    \end{block}
+   \end{block}
 }
 
 \frame{
-\frametitle{Medidas de performance: Versión de Boost}
+    \frametitle{Medidas de performance: Versión de Boost}
 
     \begin{block}{}
         {\footnotesize
@@ -1106,20 +1142,18 @@ Para el uso del evaluador generado por \maggen\ se necesitan los 4 archivos gene
     \end{block}
 
     \begin{block}{Tiempos de generación de evaluadores de \maggen}
-
-
         \begin{figure}[h]
         \begin{center}
+        \setlength{\doublerulesep}{0mm}
+        \setlength{\arrayrulewidth}{0.9pt}
         \begin{tabular}{|l||c|c|}
             \hline
-            \rowcolor{gris}
-            Input / Spirit           & \textbf{1.8x}   & \textbf{2.1}    \\ \hline
-            \textbtt{MAG Wuu Yang}   & $\sim$0.087 sec & $\sim$0.084 sec \\ \hline
-            \textbtt{MAG Aritmetica} & $\sim$0.590 sec & $\sim$0.470 sec \\ \hline
+            \rowcolor{gris} Input / Spirit           & \textbf{1.8.X}   & \textbf{2.3}    \\ \hline
+            \rowcolor{white}\textbtt{MAG Wuu Yang}   & $\sim$0.087 sec & $\sim$0.084 sec \\ \hline
+            \rowcolor{white}\textbtt{MAG Aritmetica} & $\sim$0.590 sec & $\sim$0.470 sec \\ \hline
         \end{tabular}
         \end{center}
         \end{figure}
-
     \end{block}
 }
 
@@ -1129,12 +1163,13 @@ Para el uso del evaluador generado por \maggen\ se necesitan los 4 archivos gene
     \begin{block}{Tiempos de compilación del evaluador generado}
         \begin{figure}[h]
         \begin{center}
+        \setlength{\doublerulesep}{0mm}
+        \setlength{\arrayrulewidth}{0.9pt}
         \begin{tabular}{|l||c|c|}
             \hline
-            \rowcolor{gris}
-            Input / g++          & \textbf{sin -O3} & \textbf{con -O3}             \\ \hline
-            \textbtt{Wuu Yang}   & $\sim$1.51 sec   & $\sim$2.55 sec               \\ \hline
-            \textbtt{Aritmetica} & $\sim$5.98 sec   & \textbf{$\sim$1 min 5.6 sec} \\ \hline
+            \rowcolor{gris} Input / g++          & \textbf{sin -O3} & \textbf{con -O3}             \\ \hline
+            \rowcolor{white}\textbtt{Wuu Yang}   & $\sim$1.51 sec   & $\sim$2.55 sec               \\ \hline
+            \rowcolor{white}\textbtt{Aritmetica} & $\sim$5.98 sec   & \textbf{$\sim$1 min 5.6 sec} \\ \hline
         \end{tabular}
         \end{center}
         \end{figure}
@@ -1143,12 +1178,13 @@ Para el uso del evaluador generado por \maggen\ se necesitan los 4 archivos gene
     \begin{block}{Tamaños del ejecutable del evaluador generado}
         \begin{figure}[h]
         \begin{center}
+        \setlength{\doublerulesep}{0mm}
+        \setlength{\arrayrulewidth}{0.9pt}      
         \begin{tabular}{|l||c|c|}
             \hline
-            \rowcolor{gris}
-            Input / g++          & \textbf{sin -O3} & \textbf{con -O3} \\ \hline
-            \textbtt{Wuu Yang}   & 104 Kb           & \ 48 Kb          \\ \hline
-            \textbtt{Aritmetica} & 516 Kb           & 384 Kb           \\ \hline
+            \rowcolor{gris} Input / g++          & \textbf{sin -O3} & \textbf{con -O3} \\ \hline
+            \rowcolor{white}\textbtt{Wuu Yang}   & 104 Kb           & \ 48 Kb          \\ \hline
+            \rowcolor{white}\textbtt{Aritmetica} & 516 Kb           & 384 Kb           \\ \hline
         \end{tabular}
         \end{center}
         \end{figure}
