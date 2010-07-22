@@ -1,15 +1,19 @@
-\documentclass[10pt, xcolor=table]{beamer}
+\documentclass[10pt, xcolor=table, xcolor=dvipsnames]{beamer}
+
+\definecolor{azull}{rgb}{.10,.20,.3}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\definecolor{gris}{RGB}{124,129,140}
+\definecolor{azul}{rgb}{0.0,0.3,0.6}
 
 \usetheme{Warsaw}
-%%%%%\usecolortheme{crane}
-%%%%%\usecolortheme{orchid}
-% \usecolortheme{orchid}
-\definecolor{azull}{rgb}{.10,.20,.3}
+\useoutertheme{infolines}
+\setbeamersize{sidebar width left=0.2cm}
+\setbeamersize{sidebar width right=0.2cm}
+\setbeamercolor*{sidebar}{fg=white,bg=white}
+\setbeamertemplate{navigation symbols}{}
 \usecolortheme[named=azull]{structure}
 \usefonttheme{structurebold}
-%\usefonttheme{professionalfonts}
 \useinnertheme{rounded}
-\newcommand{\maggen}{\textbf{magGen}}
 \usepackage[spanish]{babel}% división de silabas en spanish
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
@@ -19,12 +23,11 @@
 %\usepackage{amssymb}
 %\usepackage{stmaryrd}
 \usepackage{graphicx}
-%\usepackage[all]{xy}
 \usepackage{listings}
-\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
-\definecolor{gris}{RGB}{124,129,140}
-\definecolor{azul}{rgb}{0.0,0.3,0.6}
 
+\logo{\vspace{-0.2cm}\includegraphics[height=1cm]{./unrc.png}}
+
+\newcommand{\maggen}{\textbf{magGen}}
 \newcommand{\textbtt}[1]{\texttt{\textbf{#1}}}
 
 \lstset{
@@ -78,7 +81,7 @@
 \subtitle[Generador de Evaluadores Estáticos para MAG]{Generador de Evaluadores Estáticos para MAG}
 \title[Generador de Evaluadores Estáticos para MAG]{\maggen}
 %\subtitle{Abstracci\'on: Acciones y Funciones}
-\author{Gerardo Luis Kilmurray - Gonzalo Martín Picco}
+\author[Gerardo Kilmurray - Gonzalo Picco]{Gerardo Luis Kilmurray - Gonzalo Martín Picco}
 \institute[U.N.R.C.]{
     Departamento de Computaci\'on\\
     Facultad de Ciencias Exactas, F\'isico-Qu\'imicas y Naturales\\
@@ -87,14 +90,21 @@
 
 \begin{document}
 
-\frame{\titlepage}
+\frame{ \titlepage}
+
+\section*{Temario}
 
 \frame{
-    \frametitle{Temario:}
+    \frametitle{Temario}
     \tableofcontents
 }
 
 \section{\textquestiondown Qué es magGen?}
+
+\frame{
+    \frametitle{Temario}
+    \tableofcontents[currentsection]
+}
 
 \frame{
 \frametitle{\textquestiondown Qué es \maggen?}
@@ -109,15 +119,19 @@
     \end{center}
     \pause
 
-    Características distinguibles:
+    Características destables:
     \begin{itemize}
-        \item Basa su funcionamiento en gramática MAG.
+        \pause
+        \item Funciona sobre la familia MAG.
+        \pause
         \item Generación de mínima cantidad de planes.
+        \pause
         \item Generación de Evaluadores estáticos.
     \end{itemize}
 }
 
 \subsection{Motivación}
+
 \frame{
     \frametitle{Motivación}
     
@@ -132,7 +146,7 @@
     \pause
     
     \begin{block}{}
-        En 1998, Wuu Yang caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multi-planes}. 
+        En 1998, Wuu Yang caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multiplanes}. 
     \end{block}
     \pause
     
@@ -141,7 +155,33 @@
     \end{center} 
 }
 
+\subsection{Objetivos}
+
+\frame{
+    \frametitle{Objetivos}
+
+    \pause
+    \begin{block}{}\Large
+        \begin{center}Estudio de la familia MAG.\end{center}
+    \end{block}
+    \vspace{1cm}
+
+    \pause
+    \begin{block}{Objetivo Principal}\Large
+        \begin{center}\textbf{Desarrollar una herramienta en C++ que\\
+        genere evaluadores estáticos.}\end{center}
+    \end{block}
+
+}
+
 \section{Preliminares}
+
+\frame{
+    \frametitle{Temario}
+    \tableofcontents[currentsection]
+}
+
+\subsection*{Notación}
 
 \frame{
     \frametitle{Notación}
@@ -152,6 +192,8 @@
 
     \textbf{Instancia:} Ocurrencia de un símbolo de la gramática asociado a un atributo. 
 }
+
+\subsection*{Ejemplo GA}
 
 \begin{frame}[fragile]
     \frametitle{Ejemplo GA}
@@ -190,7 +232,6 @@
 \end{frame}
 
 \subsection{Gramáticas de Atributos Multiplanes (MAG)}
-
 \frame{
     \frametitle{Gramáticas de Atributos Multiplanes}
 
@@ -237,10 +278,12 @@
     \begin{exampleblock}{Gramática de Atributos Multiplanes (MAG)}
         Una gramática \textit{G} es una \textit{Gramática de Atributos Multiplanes} si y solo si 
         $$
-        \forall q : q \in P: (\forall g:g\ es\ un\ grafo\ de\ q \wedge g \in SADP(q) : g\ es\ no\ circular) 
+        \forall q: q \in P: (\forall g: g\ es\ un\ grafo\ de\ q \wedge g \in SADP(q): g\ es\ no\ circular) 
         $$
     \end{exampleblock}
 }
+
+\subsection*{Familias de gramáticas de atributos}
 
 \frame{
     \frametitle{Familias de gramáticas de atributos}
@@ -264,8 +307,11 @@
         Tres tipos de dependencias definen el \textit{contexto} de una producción:
 
         \begin{itemize}
+            \pause
             \item Directas obtenidas por las ecuaciones de $p$.
+            \pause
             \item Impuestas por el contexto superior.
+            \pause
             \item Impuestas en el contexto inferior.
         \end{itemize}
     \end{block}
@@ -287,8 +333,11 @@
     \begin{block}{}
         El proceso de construcción de planes, considera el tres factores:
             \begin{itemize}
+                \pause
                 \item Orden inducido por las dependencias.
+                \pause
                 \item Orden superior para la evaluación de las instancias.
+                \pause
                 \item El contexto de aplicación.
             \end{itemize}
      \end{block}
@@ -299,9 +348,9 @@
     \end{block}
 }
 
-\subsection{Secuencias de visitas}
+\subsection{Secuencias de visita}
 \frame{
-    \frametitle{Secuencia de Visita}
+    \frametitle{Secuencias de Visita}
 	
     \begin{block}{}
 	El concepto de \emph{Secuencias de Visita} fue presentado en 1980, por \textbf{Uwe Kastens}  como un método de evaluación polinomial para la familia $OAG$.
@@ -339,11 +388,18 @@
 }
 
 \section{magGen}
-\subsection{Herramientas}
+
+\frame{
+    \frametitle{Temario}
+    \tableofcontents[currentsection]
+}
+
+\subsection{Herramientas usadas}
+
 \frame{
     \frametitle{\maggen: Herramientas usadas}
 
-    \begin{tabular}{p{4.5cm}p{6.5cm}}
+    \begin{tabular}{p{6cm}p{5.5cm}}
     \begin{itemize}
 	    \item C++%\footnote{http://public.research.att.com/~bs/C++.html}.
 		\item Boost C++ Libraries%\footnote{http://www.boost.org/}.
@@ -351,17 +407,17 @@
 			\item Spirit Parser Framework%\footnote{http://boost-spirit.com/home/}.
 			\item The Boost Graph Library (BGL)%\footnote{http://www.boost.org/doc/libs/release/libs/graph/}.
 		    \end{itemize}
-		\item GraphViz% \footnote{http://www.graphviz.org/}.
-        \item Eclipse
 		\item Subversion
-		\item \LaTeXe
+		\item Bouml
+		\item Cmake
+        \item Eclipse
 	\end{itemize}&
 	\begin{itemize}
 		\item kile 
-		\item Nemiver + gbd
+		\item \LaTeXe
+		\item GraphViz% \footnote{http://www.graphviz.org/}.
 		\item Dia
-		\item Bouml
-		\item Cmake
+		\item Nemiver + gbd
 		\item Análisis estático de código:
 		\begin{itemize}
 			\item CCCC
@@ -380,7 +436,7 @@
     \begin{itemize}
         \item Lenguaje especificación de MAG.
 	\pause
-        \item Parser del lenguaje,representación interna y chequeos.
+        \item Parser del lenguaje, representación interna y chequeos.
 	\pause
         \item Construcción de grafos y aplicación de algoritmos de cómputo de planes y secuencias de visita.
 	\pause
@@ -413,6 +469,8 @@ Generation complete in: 0.372814 seconds.
 \end{figure}
 \end{frame}
 
+\subsection*{Arquitectura}
+
 \frame{
     \frametitle{Arquitectura}
     
@@ -422,6 +480,7 @@ Generation complete in: 0.372814 seconds.
 }
 
 \subsection{Lenguaje de Especificación}
+
 \begin{frame}[fragile]
     \frametitle{Lenguaje especificación de MAG}
 
@@ -452,7 +511,7 @@ Generation complete in: 0.372814 seconds.
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Gramática MAG presentada por Wuu Yang}
+    \frametitle{Gramática MAG presentada por Wuu Yang}
 
 \begin{figure}[h]
 \begin{center}
@@ -539,6 +598,8 @@ rules
 
 \end{frame}
 
+\subsection*{Chequeos}
+
 \frame{
     \frametitle{\maggen: Chequeos}
 
@@ -569,9 +630,13 @@ rules
         \end{itemize}
     \end{itemize}
 }
-\subsection{Builders}
+
+\subsection{Análisis estático}
+
+\subsection*{Generación de grafos}
+
 \frame{
-    \frametitle{\maggen: Generate graphs}
+    \frametitle{\maggen: Generación de grafos}
     
     Luego de los chequeos semánticos sobre la gramática de entrada, se construyen los siguientes grafos:
     \pause
@@ -592,7 +657,7 @@ rules
 }
 
 \begin{frame}[fragile]
-    \frametitle{magGen - Grafo DP}
+    \frametitle{\maggen: Grafo DP}
 
 \begin{figure}[h]
 \begin{center}
@@ -615,7 +680,7 @@ rules
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{magGen - Grafo Down}
+    \frametitle{\maggen: Grafo Down}
 
 \begin{tabular}{c c}
 \begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7cm]
@@ -643,7 +708,7 @@ rules
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{magGen - Grafo Down}
+    \frametitle{\maggen: Grafo Down}
 
 \begin{tabular}{c c}
 \begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7cm]
@@ -671,7 +736,7 @@ rules
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{magGen - Grafo DCG}
+    \frametitle{\maggen: Grafo DCG}
 \begin{center}        
 \begin{tabular}{p{6cm}}
 \begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7cm]
@@ -690,7 +755,7 @@ rules
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{magGen - Grafo DCG}
+    \frametitle{\maggen: Grafo DCG}
 \begin{center}        
 \begin{tabular}{p{6cm}}
 \begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7cm]
@@ -709,10 +774,11 @@ rules
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{magGen - Grafo ADP}
+    \frametitle{\maggen: Grafo ADP}
 
 \begin{tabular}{c p{4.5cm}}
-\hspace{-0.5cm}\begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=6.6cm]
+\hspace{-0.3cm}
+\begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=6.6cm]
 (R1) S `$\rightarrow$` XYZ
        S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
        X.i1 := Y.s3
@@ -737,9 +803,10 @@ rules
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{magGen - Grafo ADP}
+    \frametitle{\maggen: Grafo ADP}
 \begin{tabular}{c p{4.5cm}}
-\hspace{-0.5cm}\begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=6.6cm]
+\hspace{-0.3cm}
+\begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=6.6cm]
 (R1) S `$\rightarrow$` XYZ
        S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
        X.i1 := Y.s3
@@ -763,14 +830,17 @@ rules
 
 \end{frame}
 
+\subsection*{Ciclicidad}
+
 \begin{frame}[fragile]
     \frametitle{Ciclicidad}
 
+    \vspace{-0.5cm}
     \begin{block}{}
 	\begin{itemize}
 	    \item El chequeo de ciclicidad es realiza sobre los grafos ADP.
 	    \pause
-	    \item Esta basado en el algoritmo de búsqueda en profundidad (Depth-first search) de \textbf{boost} combinado con la creación de un ``visitador'' especializado.
+	    \item Esta basado en el algoritmo de búsqueda en profundidad (Depth-first search) de \textbf{Boost} combinado con la creación de un ``visitador'' especializado.
 	    \pause
 	    \item El subgrafo es mostrado al usuario en caso de detección de ciclo, sino es descartado.
 	\end{itemize}
@@ -788,8 +858,10 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
 \end{lstlisting}
 \end{frame}
 
+\subsection*{Plan de evaluación}
+
 \frame{
-    \frametitle{\maggen - Plan de evaluacion}
+    \frametitle{\maggen: Plan de evaluación}
 
     \begin{block}{Unicidad}
 	Para ADP generado se computará un plan de evaluación.
@@ -805,7 +877,7 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
 }
 
 \frame{
-    \frametitle{\maggen - Plan de evaluacion (cont.)}
+    \frametitle{\maggen: Plan de evaluación (cont.)}
 
     \begin{block}{Plan de evaluación}
         Lista de números de ecuaciones a computar, dirigiendo la evaluación de izquierda a derecha.
@@ -821,6 +893,8 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
         ``Los planes proyectados juegan un rol restrictivo sobre el orden de evaluación impuesto a contexto inferior.''
     \end{center}
 }
+
+\subsection*{Algoritmo compute\_plans}
 
 \frame{
     \frametitle{Algoritmo \textbtt{compute\_plans}}
@@ -850,13 +924,17 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
 %   \end{center}
 }
 
+\subsection*{Ejemplo de plan de evaluaci\'on}
+
 \frame{
-    \frametitle{magGen - Plan de evaluaci\'on}
+    \frametitle{\maggen: Ejemplo de plan de evaluaci\'on}
 
     \begin{center}
-%	\includegraphics[scale=0.32]{./23_plan_graph.png}
+    	\includegraphics[scale=0.32]{./23_plan_graph.png}
     \end{center}
 }
+
+\subsection*{Secuencia de visita}
 
 \frame{
   \frametitle{\maggen: Secuencia de visita}
@@ -874,6 +952,8 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
     \end{tabular}
   \end{exampleblock}
 }
+
+\subsection*{Heurística del algoritmo}
 
 \frame{
   \frametitle{Heurística del algoritmo}
@@ -917,7 +997,8 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
     \end{tabular}
 
 \end{frame}
-\subsection{Generacion de código}
+
+\subsection{Generación de código}
 
 \frame{
     \frametitle{Generación de código}
@@ -936,6 +1017,9 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
         \item Conjunto de métodos para la evaluación.
     \end{itemize}
 }
+
+\subsection*{Algoritmo de evaluación}
+
 \frame{
     \frametitle{Algoritmo de evaluación}
 
@@ -953,6 +1037,8 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
             \end{itemize}
     \end{description}
 }
+
+\subsection*{Usando magGen}
 
 \frame{
     \frametitle{Usando \maggen}
@@ -976,10 +1062,31 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
 }
 
 \frame{
-    \underline{Ejemplo}: {\scriptsize\textbtt{./maggen -fo ./out\_wuu\_yang -o evalmag -f ./examples/ag\_wuu\_yang/ag\_wuu\_yang.input}}
+    \frametitle{Usando \maggen}
+    
+    \begin{itemize}
+        \item Se especifica en un archivo la MAG deseada.
+        \pause
+        \item Se invoca a \maggen\ con los parámetros adecuados desde la línea de comandos
+        \vspace{0.2cm}
+        \par{\underline{Ejemplo}: \textbtt{./maggen -f ./mag.input -fo ./out\_folder -o nameEval}}
+        \vspace{0.1cm}
+        \pause
+        \item Se construye el AST de entrada a evaluar en un archivo C++, junto con la función \texttt{main} invocando la evaluación
+        \pause
+        \item Se ejecuta el binario para lograr los resultados.
+    \end{itemize}
+    
 }
 
 \section{Evaluador generado}
+
+\frame{
+    \frametitle{Temario}
+    \tableofcontents[currentsection]
+}
+
+\subsection*{Evaluador generado}
 
 \frame{
     \frametitle{Evaluador generado}
@@ -999,6 +1106,26 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
         \end{center}
     \end{exampleblock}
 }
+
+\frame{
+\frametitle{Salida completa de \maggen}
+\begin{block}{}
+Al ejecutar \maggen\ se generan, en la carpeta de salida, lo siguiente:
+\begin{itemize}
+\item Archivos Node.hpp, Node.cpp, $<eval>.cpp$, $<eval>.hpp$
+\item Archivo \textbf{grammar.log} con la gramatica parseada.
+\item Carpeta \textbf{plan\_project} con los planes proyectados.
+\item Carpeta \textbf{plans}, con los planes calculados.
+\item Carpeta \textbf{graph}, que contiene subcarpetas con los tipos de grafos contruidos.
+
+\end{itemize}
+\end{block}
+
+Tanto los planes como los grafos son generados en formato \texttt{dot}. Los mismo pueden ser convertido a imagen (png) utilizando el script que se encuentra en el paquete de la herramienta. 
+
+}
+
+\subsection*{Construcción de AST de entrada}
 
 \begin{frame}[fragile]
     \frametitle{Construcción de AST de entrada}
@@ -1026,7 +1153,7 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
 
 
 %\frame{
-%    \frametitle{magGen - Secuencia de visita}
+%    \frametitle{\maggen: Secuencia de visita}
     
 %   \begin{block}{Secuencia de visita generada para el plan\\ R1 $\rightarrow$ R2 R3 R4}
 %	    \begin{center}
@@ -1071,18 +1198,18 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
 %    \end{block}
 %}
 
-%\subsection{Detalles de implementación}
+%\subsection*{Detalles de implementación}
 
-\frame {
-    \frametitle{Detalles de implementación}
+%\frame {
+%    \frametitle{Detalles de implementación}
 
-    \begin{block}{}
-	    bla bla
-    \end{block}
-}
+%    \begin{block}{}
+%	    bla bla
+%    \end{block}
+%}
 
 
-%\subsection{Evaluador generado}
+\subsection*{Evaluador generado}
 
 \frame {
     \frametitle{Evaluador generado}
@@ -1093,6 +1220,14 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
 }
 
 \section{Performance}
+
+\frame{
+    \frametitle{Temario}
+    \tableofcontents[currentsection]
+}
+
+\subsection*{Unicidad de planes}
+
 \frame{
     \frametitle{Medidas de performance: Unicidad de planes}
 
@@ -1109,6 +1244,8 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
         \end{itemize}
     \end{block}
 }
+
+\subsection*{Unicidad de planes}
 
 \frame{
     \frametitle{Medidas de performance: Unicidad de planes (cont.)}
@@ -1132,6 +1269,8 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
    \end{block}
 }
 
+\subsection*{Versión de Boost}
+
 \frame{
     \frametitle{Medidas de performance: Versión de Boost}
 
@@ -1148,7 +1287,7 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
         \setlength{\arrayrulewidth}{0.9pt}
         \begin{tabular}{|l||c|c|}
             \hline
-            \rowcolor{gris} Input / Spirit           & \textbf{1.8.X}   & \textbf{2.3}    \\ \hline
+            \rowcolor{gris} Input / Spirit           & \textbf{1.8.X}   & \textbf{2.3}   \\ \hline
             \rowcolor{white}\textbtt{MAG Wuu Yang}   & $\sim$0.087 sec & $\sim$0.084 sec \\ \hline
             \rowcolor{white}\textbtt{MAG Aritmetica} & $\sim$0.590 sec & $\sim$0.470 sec \\ \hline
         \end{tabular}
@@ -1156,6 +1295,8 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
         \end{figure}
     \end{block}
 }
+
+\subsection*{Compilación evaluador}
 
 \frame{
     \frametitle{Medidas de performance: Compilación evaluador}
@@ -1194,6 +1335,13 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
 \section{Comentarios Finales}
 
 \frame{
+    \frametitle{Temario}
+    \tableofcontents[currentsection]
+}
+
+\subsection*{Trabajos Futuros}
+
+\frame{
     \frametitle{Trabajos Futuros}
 
     \begin{itemize}
@@ -1214,6 +1362,8 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
 	    \item Implementar como especies de templates para los atributos.
     \end{itemize}
 }
+
+\subsection*{Extensiones}
 
 \frame{
     \frametitle{Extensiones}
@@ -1239,7 +1389,8 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
 }
 
 \section{Bibliografía}
-    \frame{
+
+\frame{
 	\frametitle{Bibliografía}\scriptsize
 
 	\begin{thebibliography}{66}
@@ -1250,9 +1401,9 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
 	    \bibitem {wuu-yang3} Wuu Yang. 1998. \textit{Conditional Evaluation in Simple Multi-Visit Attribute Grammar Evaluators}. Department of Computer and Information Science. National
 	    Chiao-Tung University, Hsin-Chu, Taiwan.
 
-	    %\bibitem{wuu-yang4} Wuu Yang, W. C. Cheng. \emph{A Polynomial Time Extension to Ordered Attribute Grammars}. Department of Computer and Information Science.National Chiao-Tung University, Hsin-Chu, Taiwan.
+	    \bibitem{wuu-yang4} Wuu Yang, W. C. Cheng. \emph{A Polynomial Time Extension to Ordered Attribute Grammars}. Department of Computer and Information Science.National Chiao-Tung University, Hsin-Chu, Taiwan.
 
-	    %\bibitem {gramática} John E. Hopcroft, Rajeev Montwani, Jefrey D. Ullman.\textit{Introduction to Automata theory, languajes, and computation}. Addison-Wesley (2001) second edition.
+	    \bibitem {gramatica} John E. Hopcroft, Rajeev Montwani, Jefrey D. Ullman.\textit{Introduction to Automata theory, languajes, and computation}. Addison-Wesley (2001) second edition.
 
 	    \bibitem {compiladores} Alfred V. Aho, Ravi Sethi, Jeffrey D. ullman.\textit{Compilers: Principles, Techniques and Tools}. Addison-Wesley (1985)  Iberoamericana, S.A. Wilmington, Delaware, E.U.A.
 
@@ -1260,25 +1411,26 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
 
 	    \bibitem {kastens} U. Kastens. 1980. \textit{Ordered Attribute Grammars}. Acta Informática. Vol. 13, pp. 229-256.
 
-	    \bibitem{intri-exc} Jazayeri, Ogden and Rounds. 1975. \emph{The intrinsically exponential complexity of the circularity problem for attribute grammars}. Comm. ACM 18. December 2, Pag: 697-706.
 	\end{thebibliography}
-    }
+}
 
-    \frame{
+\frame{
 	\frametitle{Bibliografía (Cont.)}
     \scriptsize
 	\begin{thebibliography}{66}
-	    %\bibitem {meyer} Bertrand, Meyer (1997). \textit{Object-Oriented Software Construction}. Segunda edición. Prentice Hall Professional Technical Reference. Santa Barbara (California).
+	    \bibitem{intri-exc} Jazayeri, Ogden and Rounds. 1975. \emph{The intrinsically exponential complexity of the circularity problem for attribute grammars}. Comm. ACM 18. December 2, Pag: 697-706.
+	    
+	    \bibitem {meyer} Bertrand, Meyer (1997). \textit{Object-Oriented Software Construction}. Segunda edición. Prentice Hall Professional Technical Reference. Santa Barbara (California).
 
-	    %\bibitem {estruc-algorit} Alfred V. Aho, John E. Hopcroft, Jefrey D. Ullman. \textit{Data Structures and Algorithms}. Addison-Wesley publishing Company, Reading, Massachusetts, E. U. A.(1983).
+	    \bibitem {estruc-algorit} Alfred V. Aho, John E. Hopcroft, Jefrey D. Ullman. \textit{Data Structures and Algorithms}. Addison-Wesley publishing Company, Reading, Massachusetts, E. U. A.(1983).
 
-	    %\bibitem {valen} Valentin David. \textit{Attribute Grammars for C++ Disambiguation}. LRDE, 2004.
+	    \bibitem {valen} Valentin David. \textit{Attribute Grammars for C++ Disambiguation}. LRDE, 2004.
 
 	    \bibitem {Knuth} D. Knuth. 1968. \textit{Semantics of context free languages}. Math Systems Theory 2.June 2.Pag: 127-145.
 
-	    %\bibitem {eclipse} \textbf{eclipse}. \textit{Multi-language software development environment.} URL:\urllink{http://www.eclipse.org/}.
+	    \bibitem {eclipse} \textbf{eclipse}. \textit{Multi-language software development environment.} URL:\urllink{http://www.eclipse.org/}.
 	    
-	    %\bibitem {doxy} \textbf{doxygen}. \textit{A documentation generator for C++, C, Java, Objective-C, Python, IDL (CORBA and Microsoft flavors), Fortran, VHDL, PHP and C\#}. URL: \urllink{www.doxygen.org}.
+	    \bibitem {doxy} \textbf{doxygen}. \textit{A documentation generator for C++, C, Java, Objective-C, Python, IDL (CORBA and Microsoft flavors), Fortran, VHDL, PHP and C\#}. URL: \urllink{www.doxygen.org}.
 
 	    \bibitem{c++1} \textbf{C++}. \textit{C++ Annotations Version 8.2.0.} URL: \urllink{http://www.icce.rug.nl/documents/cplusplus/}. 
 
@@ -1288,6 +1440,6 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
 
 	    \bibitem{boost} \textbf{Boost}. \textit{Boost C++ Libraries}. URL: \urllink{http://www.boost.org/}.
 	\end{thebibliography}
-    }
+}
 
 \end{document}
