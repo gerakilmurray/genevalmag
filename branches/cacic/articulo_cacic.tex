@@ -21,6 +21,8 @@
 \usepackage[a4paper,pagebackref,hyperindex=true]{hyperref}
 \usepackage{amssymb}
 \usepackage{listings}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
 \usepackage{color}
 \def\theoremname{Teorema}
 \def\definitionname{Definici\'on}
@@ -436,7 +438,7 @@ La salida normal de \maggen\ que indica que se han realizado todas las etapas co
 \begin{figure}[h]
 \begin{center}
 \begin{tabular}{c}
-\begin{lstlisting}[backgroundcolor=\color{white}, basicstyle=\footnotesize, language=, linewidth=9cm]
+\begin{lstlisting}[columns=fixed, backgroundcolor=\color{white}, basicstyle=\scriptsize, language=, linewidth=9cm]
    * Parsing grammar ---------- [  OK  ]
    * Generate graphs ---------- [  OK  ]
    * Build plans -------------- [  OK  ]
@@ -458,7 +460,7 @@ Un caso alternativo de salida, se da cuando \maggen\ detecta planes cíclicos, v
 \begin{figure}[h]
 \begin{center}
 \begin{tabular}{c}
-\begin{lstlisting}[backgroundcolor=\color{white}, language=, basicstyle=\footnotesize, linewidth=12cm] 
+\begin{lstlisting}[columns=fixed, backgroundcolor=\color{white}, language=, basicstyle=\scriptsize, linewidth=12cm] 
    * Parsing grammar ---------- [  OK  ]
    * Generate graphs ---------- [  OK  ]
    * Build plans -------------- [ ABORT ]
@@ -494,6 +496,54 @@ Los dos primeros, son bloques puramente declarativos o dedicados a la definició
 Cada bloque del lenguaje de especificación contiene su sintaxis propia para su definición\footnote{En la documentación completa de \maggen\ se pueden encontrar con detalles el lenguaje de especificación.}.
 
 En la sección \ref{ej:agwuuyang} se presenta un ejemplo de una gramática de atributos multiplanes presentada por Wuu Yang en \cite{wuu-yang1} codificada en el lenguaje de especificación de \maggen.
+
+\section{Ejemplo de MAG especificada en el lenguaje de especificación de \maggen.}
+\label{ej:agwuuyang}
+
+\subsection{Pseudocódigo}
+\begin{minipage}{0.45\textwidth}
+\begin{center} 
+\begin{lstlisting}[columns=fullflexible, backgroundcolor=\color{white}]
+
+(R1)   S `$\rightarrow$` XYZ      
+         S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
+         X.i1 := Y.s3  
+         Y.i2 := X.s1
+         Y.i3 := Y.s2
+(R2)   Y `$\rightarrow$` m        
+         Y.s2 := Y.i2
+         Y.s3 := 1
+
+\end{lstlisting} 
+\end{center}
+\end{minipage}
+\hspace{0.6cm}\begin{minipage}{0.45\textwidth}
+\begin{center}
+\begin{lstlisting}[columns=fullflexible, backgroundcolor=\color{white}]
+(R3)   Y `$\rightarrow$` n        
+         Y.s2 := 2
+         Y.s3 := Y.i3
+(R4)   X `$\rightarrow$` m        
+         X.s1 := X.i1
+(R5)   Z `$\rightarrow$` Y        
+         Z.s4 := Y.s3
+         Y.i2 := 3
+         Y.i3 := Y.s2
+\end{lstlisting} 
+\end{center}
+\end{minipage}
+
+\subsection{Con lenguaje de especificación de \maggen}
+\begin{minipage}{0.45\textwidth}
+  \begin{center}
+\lstinputlisting[numbers=left, language=specmag]{ag_wuu_yang1.input}
+  \end{center}
+\end{minipage}
+\hspace{0.6cm}\begin{minipage}{0.45\textwidth}
+  \begin{center}
+\lstinputlisting[firstnumber=22, numbers=left, language=specmag]{ag_wuu_yang2.input}
+  \end{center}
+\end{minipage}
 
 \subsection{Parser}
 
@@ -712,6 +762,72 @@ end procedure
 
 Notar que cuando se debe realizar un \textbtt{visit}, sólo consiste en llamar a el evaluador sobre el hijo indicado. Si en cambio, se debe hacer un \textbtt{compute}, se llama a la función \textbtt{compute\_eq}, que está encargada de procesar la ecuación. Y cada vez que sucede un \textbtt{leave}, se debe guardar en el nodo actual la próxima posición de la última visitada, para que en la siguiente visita, el evaluador continúe desde ese punto, omitiendo al \textbtt{leave}\footnote{Con el guardado del estado de cada secuencia de visita para cada nodo, se pudo omitir el índice $i$, que se presentó en las operaciones en la sección \ref{sec:sec-visit} del capítulo introductorio.}.
 
+
+\section{Medidas de performance}
+Algunas de las medidas que se han aplicado a \maggen\ ayudan al grupo de desarrollo a lograr estadisticas para obtener mayor eficiencia en la herramienta.
+En las figuras siguientes se muestran algunas de las medidas realizadas sobre dos ejemplos, unos de los cuales es el trabajado en la seccion \ref{XX} y el otro denominado aritmetica, es la gramatica de expresiones.
+
+\begin{figure}[h]
+        \begin{center}
+        \setlength{\doublerulesep}{0mm}
+        \setlength{\arrayrulewidth}{0.9pt}
+        \begin{tabular}{|l||c|c|}
+            \hline
+            \rowcolor{gris} Input / Spirit           & \textbf{1.8.X}   & \textbf{2.3}   \\ \hline
+            \rowcolor{white}\textbtt{MAG Wuu Yang}   & $\sim$0.087 sec & $\sim$0.084 sec \\ \hline
+            \rowcolor{white}\textbtt{MAG Aritmetica} & $\sim$0.590 sec & $\sim$0.450 sec \\ \hline
+        \end{tabular}
+        \end{center}
+\caption{Medidas de performance: Versión de Spirit Boost}
+\end{figure}
+
+\begin{figure}[h]
+        \begin{center}
+        \setlength{\doublerulesep}{0mm}
+        \setlength{\arrayrulewidth}{0.9pt}
+        \begin{tabular}{|l||c|c|}
+            \hline
+            \rowcolor{gris} Input / g++          & \textbf{sin -O3} & \textbf{con -O3}             \\ \hline
+            \rowcolor{white}\textbtt{Wuu Yang}   & $\sim$1.51 sec   & $\sim$2.55 sec               \\ \hline
+            \rowcolor{white}\textbtt{Aritmetica} & $\sim$5.98 sec   & \textbf{$\sim$1 min 5.6 sec} \\ \hline
+        \end{tabular}
+        \end{center}
+\caption{Tiempos de compilación del evaluador generado}
+        \end{figure}
+
+\begin{figure}[h]
+        \begin{center}
+        \setlength{\doublerulesep}{0mm}
+        \setlength{\arrayrulewidth}{0.9pt}      
+        \begin{tabular}{|l||c|c|}
+            \hline
+            \rowcolor{gris} Input / g++          & \textbf{sin -O3} & \textbf{con -O3} \\ \hline
+            \rowcolor{white}\textbtt{Wuu Yang}   & 104 Kb           & \ 48 Kb          \\ \hline
+            \rowcolor{white}\textbtt{Aritmetica} & 516 Kb           & 384 Kb           \\ \hline
+        \end{tabular}
+        \end{center}
+\caption{Tamaños del ejecutable del evaluador generado}
+        \end{figure}
+
+\subsection{Unicidad de planes}
+La unicidad de planes se trata de no asociar cada plan con su dependencias, sino usar una indexación a planes únicos. Esto permite que distintos contextos se asocien al mismo plan, lo que permite una notable optimización tanto en el procesamiento como en la generación de código.
+        \begin{figure}[h]
+        \begin{center}
+        \setlength{\doublerulesep}{0mm}
+        \setlength{\arrayrulewidth}{0.9pt}
+        \begin{tabular}{|l||c|c|}
+            \hline
+            \rowcolor{gris} \textbf{Variable/Unicidad}&\textbf{Sin} & \textbf{Con} \\ \hline
+            \rowcolor{white}\textbf{Cant. de planes}           & 371                        & 371                         \\ \hline
+            \rowcolor{white}\textbf{Cant. de planes proy.}     & 687                        & 687                         \\ \hline
+            \rowcolor{white}\textbf{Cant. de sec. de visita }  & \color{red}371             & \color{blue}22              \\ \hline
+            \rowcolor{white}\textbf{Generación del evaluador}  & \color{red} $\sim$1.44 sec & \color{blue} $\sim$0.47 sec \\ \hline
+            \rowcolor{white}\textbf{Cant. de líneas (eval.)}   & \color{red}17464           & \color{blue}5974            \\ \hline
+        \end{tabular}
+        \end{center}
+\caption{Unicidad de planes. Ejemplo expresiones aritmeticas}
+        \end{figure}
+
 \section{Conclusión}
 
 Se logró obtener una herramienta modularizada, eficiente y completamente desarrollada en C++. Además, no se conocen herramientas que trabajen sobre MAG, en este sentido, \maggen\ adquiere mayor utilidad. 
@@ -727,34 +843,6 @@ Se pueden resumir las características de \maggen\ en los siguientes puntos:
 
 \item El evaluador generado es estático, lo que asegura que no existe un ``\textbf{overhead}'' en el cómputo de la evaluación, ya que el mismo se llevó a cabo mientras se generaba el evaluador propiamente.
 \end{itemize}
-
-\section{Ejemplo de MAG especificada en el lenguaje de especificación de \maggen.}
-\label{ej:agwuuyang}
-
-\subsection{Pseudocódigo}
-\begin{lstlisting}[backgroundcolor=\color{white}]
-     (R1)   S `$\rightarrow$` XYZ      
-              S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
-              X.i1 := Y.s3  
-              Y.i2 := X.s1
-              Y.i3 := Y.s2
-     (R2)   Y `$\rightarrow$` m        
-              Y.s2 := Y.i2
-              Y.s3 := 1
-     (R3)   Y `$\rightarrow$` n        
-              Y.s2 := 2
-              Y.s3 := Y.i3
-     (R4)   X `$\rightarrow$` m        
-              X.s1 := X.i1
-     (R5)   Z `$\rightarrow$` Y        
-              Z.s4 := Y.s3
-              Y.i2 := 3
-              Y.i3 := Y.s2
-\end{lstlisting} 
-
-\subsection{Con lenguaje de especificación de \maggen}
-
-\lstinputlisting[numbers=left, language=specmag]{ag_wuu_yang.input}
 
 \bibliographystyle{unsrt}
 \begin{thebibliography}{10}
