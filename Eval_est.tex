@@ -96,42 +96,56 @@ La funcionalidad que cumple \textbtt{project} (en el cómputo de planes), es dad
 \caption{\label{alg:projordeval}Proyección sobre orden de evaluación.}
 \end{algorithm}
 
-Un resultado muy importante a tener en cuenta es el echo de que el algoritmo \ref{alg:planeval} genera la minima cantidad de planes que son necesarios para la evaluacion de una gramatica.
-
-Este resultado es expresado mediante un teorema (teorema \ref{teo:planes_plausibles}), pero antes de llegar al mismo es recomendable tener en cuenta algunos aspectos y definiciones.
-
-En primer lugar, en todo grafo ADP se almacenan las dependencias entre instancias de atributos, segun; las \textit{dependencias directas}, las dependencias impuestas por el \textit{contexto superior} y las del \textit{contexto inferior}. Entonces, instancias diferentes de una producción $p$ tendrán las mismas dependencias directas (Grafo DP), pero podrán tener diferentes dependencias impuestas por los contextos inferiores y superiores. Estas, y demás observaciones deben tenerse en cuenta para la construcción de un plan de evaluacion. En consecuencia, es necesario determinar todas las \emph{dependencias posibles} entre las instancias de los atributos que ocurren en una producción para luego poder determinar todas las \emph{dependencias plausibles} entre los atributos que ocurren en una producción. 
-
-\begin{definition} Una partición posible de un grafo de dependencias $G\_T=<V\_N,A>$ es una partición sobre $V\_N$ tal que dados dos instancias de atributos $X.a$ y $Y.b$, si $(X.a,Y.b) \in A$, entonces $[X.a] = [X.b]$ (están en la misma clase).
-\end{definition}
-
-\begin{definition} Sea $\pi$ una partición posible de un grafo de dependencias $G_T=<V_N,A>$. Sea $V_{N_X}$ un nodo rotulado $X$ en el árbol sintáctico $T$. La proyección de $\pi$ en las instancias de los atributos de $X$ es una partición posible de los atributos de $X$.
-\end{definition}
-
-Una \textit{partición plausible} es un refinamiento de una partición posible, dado que las restricciones impuestas por algún contexto superior puede que dos clases de una partición plausible se unan en una partición posible (en el caso de una dependencia transitiva entre dos instancias de atributos impuesta por el contexto superior). Para el símbolo de comienzo la partición plausible coincide con una partición posible (ya que no tiene contexto superior). \\
+\subsection*{Resultados}
 
 
-\begin{definition}
-\label{def:plan_espurios}
-Dada una MAG, se define \textbf{plan espurio} a aquel plan de evaluación para el cual no es posible encontrar un AST para dicho plan.
 
-NOTA: podriamos ver como: proviene de una particion posible que no puede ser plausible.
-\end{definition}
-
-\begin{definition}
-\label{def:plan_plausible}
-Dada una MAG, se define \textbf{plan plausible} a aquel plan de evaluación para el cual existe al menos un AST para dicho plan.
-
-NOTA: lo podriamos ver como: un plan es plausible si proviene de la union de particiones plausibles.
-\end{definition}
+% Un resultado muy importante a tener en cuenta es el echo de que el algoritmo \ref{alg:planeval} genera la minima cantidad de planes que son necesarios para la evaluacion de una gramatica.
+% 
+% Este resultado es expresado mediante un teorema (teorema \ref{teo:planes_plausibles}), pero antes de llegar al mismo es recomendable tener en cuenta algunos aspectos y definiciones.
+% 
+% En primer lugar, en todo grafo ADP se almacenan las dependencias entre instancias de atributos, segun; las \textit{dependencias directas}, las dependencias impuestas por el \textit{contexto superior} y las del \textit{contexto inferior}. Entonces, instancias diferentes de una producción $p$ tendrán las mismas dependencias directas (Grafo DP), pero podrán tener diferentes dependencias impuestas por los contextos inferiores y superiores. Estas, y demás observaciones deben tenerse en cuenta para la construcción de un plan de evaluacion. En consecuencia, es necesario determinar todas las \emph{dependencias posibles} entre las instancias de los atributos que ocurren en una producción para luego poder determinar todas las \emph{dependencias plausibles} entre los atributos que ocurren en una producción. 
+% 
+% \begin{definition} Una partición posible de un grafo de dependencias $G\_T=<V\_N,A>$ es una partición sobre $V\_N$ tal que dados dos instancias de atributos $X.a$ y $Y.b$, si $(X.a,Y.b) \in A$, entonces $[X.a] = [X.b]$ (están en la misma clase).
+% \end{definition}
+% 
+% \begin{definition} Sea $\pi$ una partición posible de un grafo de dependencias $G_T=<V_N,A>$. Sea $V_{N_X}$ un nodo rotulado $X$ en el árbol sintáctico $T$. La proyección de $\pi$ en las instancias de los atributos de $X$ es una partición posible de los atributos de $X$.
+% \end{definition}
+% 
+% Una \textit{partición plausible} es un refinamiento de una partición posible, dado que las restricciones impuestas por algún contexto superior puede que dos clases de una partición plausible se unan en una partición posible (en el caso de una dependencia transitiva entre dos instancias de atributos impuesta por el contexto superior). Para el símbolo de comienzo la partición plausible coincide con una partición posible (ya que no tiene contexto superior). \\
+% 
+% 
+% \begin{definition}
+% \label{def:plan_espurios}
+% Dada una MAG, se define \textbf{plan espurio} a aquel plan de evaluación para el cual no es posible encontrar un AST para dicho plan.
+% 
+% NOTA: podriamos ver como: proviene de una particion posible que no puede ser plausible.
+% \end{definition}
+% 
+% \begin{definition}
+% \label{def:plan_plausible}
+% Dada una MAG, se define \textbf{plan plausible} a aquel plan de evaluación para el cual existe al menos un AST para dicho plan.
+% 
+% NOTA: lo podriamos ver como: un plan es plausible si proviene de la union de particiones plausibles.
+% \end{definition}
 
 
 \subsection{Teorema}
 \label{teo:planes_plausibles}
-El algoritmo \ref{alg:planeval} genera la minima cantidad de planes o dicho en otras palabras, genera solamente planes plausibles.
+El algoritmo \ref{alg:planeval} genera planes consistentes con los ADP construidos.
+
+% El algoritmo \ref{alg:planeval} genera la minima cantidad de planes o dicho en otras palabras, genera solamente planes plausibles.
 
 \underline{\emph{Demostración:}}
 
+% SACAR ESTE Y EL ANTERIOR DESDE EL PAPER DE WUU YANG DE CLASIFICACION.
+\subsection{Teorema}
+\label{teo:ciclo_compute}
+El algoritmo \ref{alg:compord} no introduce ciclos en los planes.
+
+\subsection{Teorema}
+\label{teo:reglas_alcan}
+El algoritmo \ref{alg:planeval} genera planes para todas las producciones alcanzables de la gramatica y tiene en cuenta todos los ordenes \omega necesarios.
 
 \section{Algoritmo de cómputo de secuencias de visita}
 \label{sec:algseqvisit}
