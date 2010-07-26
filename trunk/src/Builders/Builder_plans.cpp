@@ -73,13 +73,13 @@ bool Builder_plans::generate_graphs()
 			{
 				if(build_graphs.compute_adp_graph())
 				{
-					cout << "* Generate graphs ---------- [  OK  ]" << endl;
+					cout << "* Generation graphs -------- [  OK  ]" << endl;
 					return true;
 				}
 			}
 		}
 	}
-	cout << "* Generate graphs ---------- [ FAIL ]\n" << endl;
+	cout << "* Generation graphs -------- [ FAIL ]\n" << endl;
 	return false;
 }
 
@@ -156,7 +156,7 @@ Order_eval_eq Builder_plans::compute_order(const Graph &graph_adp, unsigned shor
 		add_edge(v1, v2, graph);
 	}
 	/* Applies transitive function over graph. */
-	warshall_transitive_closure(graph);
+//	warshall_transitive_closure(graph);
 
 	Order_eval_eq result;
 	/* Applies topological order over graph. */

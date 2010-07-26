@@ -27,9 +27,9 @@ La salida normal de \maggen\ que indica que se han realizado todas las etapas co
 \vspace{0.3cm}
 \begin{lstlisting}[backgroundcolor=\color{white}, language=]
    * Parsing grammar ---------- [  OK  ]
-   * Generate graphs ---------- [  OK  ]
+   * Generation graphs -------- [  OK  ]
    * Build plans -------------- [  OK  ]
-   * Build visit sequence ----- [  OK  ]
+   * Build visit sequences ---- [  OK  ]
    * Generation code ---------- [  OK  ]
 
    Generation complete in: 0.372814 seconds.
@@ -43,7 +43,7 @@ Un caso alternativo de salida, se da cuando \maggen\ detecta planes cíclicos, v
 \vspace{0.3cm}
 \begin{lstlisting}[backgroundcolor=\color{white}, language=] 
    * Parsing grammar ---------- [  OK  ]
-   * Generate graphs ---------- [  OK  ]
+   * Generation graphs -------- [  OK  ]
    * Build plans -------------- [ ABORT ]
 
    ERROR: One o more graph ADP has an cycle in its dependencies. Look the folder ./out_maggen/graphs/CYCLIC_graphs/ for more details.
