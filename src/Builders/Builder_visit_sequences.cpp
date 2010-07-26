@@ -383,7 +383,7 @@ bool Builder_visit_sequences::generate_visit_sequences()
             }
         }
     }
-	cout << "* Build visit sequence ----- [  OK  ]" << endl;
+	cout << "* Build visit sequences ---- [  OK  ]" << endl;
     return true;
 }
 
