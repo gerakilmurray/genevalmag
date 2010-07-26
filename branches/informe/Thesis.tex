@@ -24,14 +24,14 @@ Si una gramática de atributos contiene \textit{dependencias circulares} no podr
 
 Estas familias imponen restricciones sobre la gramática de atributos o sobre las dependencias entre sus atributos, para garantizar la no circularidad, pero, con el costo de restringir el poder expresivo.
 
-En 1998, Wuu Yang caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multi-planes} (MAG), que permiten una mayor expresividad, presentando un algoritmo para su evaluación, basado en secuencias de visita, en tiempo polinomial respecto al número de símbolos y producciones.
+En 1998, Wuu Yang caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multiplanes} (MAG), que permiten una mayor expresividad, presentando un algoritmo para su evaluación, basado en secuencias de visita, en tiempo polinomial respecto al número de símbolos y producciones.
 
 \maggen\ es una herramienta que genera, de manera automática, evaluadores para esta familia de gramáticas de atributos, basando su funcionamiento en la teória presentada por Wuu Yang. La salida de \maggen\ es un módulo C++ que se corresponde con un evaluador estático de una gramática MAG. El mismo, contiene las secuencias de visita para todos los planes de evaluación existentes en los posibles contextos. Además incorpora los algoritmos necesarios para llevar a cabo la evaluación de un árbol sintáctico atribuido (AST).
 El desarrollo de \maggen\ es el principal aporte de este trabajo. La herramienta fue desarrollada teniendo en cuenta, la capacidad de integración y combinación con otros módulos de un ambiente de tratamientos de lenguajes. 
 \noindent\rule[2pt]{\textwidth}{0.5pt}
 % {\large\textbf{Palabras claves:}}
 % 
-% Gramáticas, Atributos, Multi-planes, AG, MAG, Generador, Evaluadores, C++, Estáticos\\
+% Gramáticas, Atributos, Multiplanes, AG, MAG, Generador, Evaluadores, C++, Estáticos\\
 
 % \noindent\rule[2pt]{\textwidth}{0.5pt}
 
@@ -60,7 +60,7 @@ Además, un agradecimiento destacable, a nuestros amigos a quienes no nos atreve
 
 \include{Intro}      % Introduccion.
 \include{Clas_ag}    % Clasificación de AG.
-\include{Mag}        % Gramáticas de atributos multi-planes.
+\include{Mag}        % Gramáticas de atributos multiplanes.
 \include{Eval_est}   % Evaluadores estáticos.
 \include{Meto_trab}  % Metodología de trabajo.
 \include{acercade}   % Acercade maggen.

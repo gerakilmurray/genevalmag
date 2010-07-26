@@ -1,8 +1,8 @@
-\chapter{Gramática de Atributos Multi-planes (MAG)}
+\chapter{Gramática de Atributos Multiplanes (MAG)}
 \label{chap:mag}
 \minitoc
 
-Tal como lo presenta Wuu Yang en \cite{wuu-yang1} y como se analizó en el capítulo anterior (Ver sec. \ref{sec:relfamag}), la familia de \textit{Gramática de Atributos Multi-planes} (\textbf{MAG}) es una clase que se encuentra dentro de las \textbf{WDAG} y si se toma la jerarquía \textbf{NC} (Wuu Yang) se corresponde con la clase \textbf{NC(1)}.
+Tal como lo presenta Wuu Yang en \cite{wuu-yang1} y como se analizó en el capítulo anterior (Ver sec. \ref{sec:relfamag}), la familia de \textit{Gramática de Atributos Multiplanes} (\textbf{MAG}) es una clase que se encuentra dentro de las \textbf{WDAG} y si se toma la jerarquía \textbf{NC} (Wuu Yang) se corresponde con la clase \textbf{NC(1)}.
 
 La familia de las \textbf{MAG} es estrictamente mayor que las \textbf{ANCAG}. La importancia de esta familia radica en que el procedimiento de desición de pertenencia y de computación de planes de evaluación estáticos toman \textbf{tiempo polinomial} en el numero de símbolos y producciones.
 
@@ -43,8 +43,7 @@ El ejemplo es presentado en la figura \ref{ag-no-ANCAG}. El mismo es trabajado, 
         \attribution{Y.i2 := 3}
         \attribution{Y.i3 := Y.s2}
     \end{Attribution}
-\label{ag-no-ANCAG}
-\caption{Una gramática de atributos no ANCAG}
+\caption{\label{ag-no-ANCAG}Una gramática de atributos no ANCAG}
 \end{AG}
 
 \subsection{Grafo \textit{DP}}
@@ -155,12 +154,12 @@ En la sección \ref{subsec:alg-ADP} se presenta el algoritmo para la construcci�
 
 \section{Definición MAG}
 \label{def:MAG}
-Una gramática \textit{G} de la forma \ref{def:grammarattr} es una \textit{gramática de atributos multi-planes} si y solo si 
+Una gramática \textit{G} de la forma \ref{def:grammarattr} es una \textit{Gramática de Atributos Multiplanes} si y sólo si 
 \begin{equation}
 \forall q : q \in P: (\forall g:g\ es\ un\ grafo\ de\ q \wedge g \in SADP(q) : g\ es\ no\ circular) 
 \end{equation}
 
-Las \textit{Gramáticas de Atributos Multi-planes} mantienen propiedades deseables como:
+Las \textit{Gramáticas de Atributos Multiplanes} mantienen propiedades deseables como:
 \begin{items}
 \item La clases de gramáticas MAG cumplen la propiedad de que todas las gramáticas de atributos en dicha clase son \textbf{no circulares}.
 \item Toda gramática MAG cumple con las propiedades de gramática bien definida\footnote{Es importante tener en cuenta las condiciones para gramática completa, detallada en \ref{def:gacompleta}} (WDAG), esto es, todo árbol sintáctico derivado sobre una MAG contiene dependencias no circulares.
