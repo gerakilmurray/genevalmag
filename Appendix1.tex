@@ -11,20 +11,20 @@
 
 \subsection{Pseudocódigo}
 \begin{lstlisting}[backgroundcolor=\color{white}]
-     (R1)   S `$\rightarrow$` XYZ      
+    (R1)  S `$\rightarrow$` XYZ
               S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
-              X.i1 := Y.s3  
+              X.i1 := Y.s3
               Y.i2 := X.s1
               Y.i3 := Y.s2
-     (R2)   Y `$\rightarrow$` m        
+    (R2)  Y `$\rightarrow$` m
               Y.s2 := Y.i2
               Y.s3 := 1
-     (R3)   Y `$\rightarrow$` n        
+    (R3)  Y `$\rightarrow$` n
               Y.s2 := 2
               Y.s3 := Y.i3
-     (R4)   X `$\rightarrow$` m        
+    (R4)  X `$\rightarrow$` m
               X.s1 := X.i1
-     (R5)   Z `$\rightarrow$` Y        
+    (R5)  Z `$\rightarrow$` Y
               Z.s4 := Y.s3
               Y.i2 := 3
               Y.i3 := Y.s2
@@ -36,7 +36,7 @@
 \lstinputlisting[basicstyle=\scriptsize, numbers=left, columns=fullflexible, language=specmag]{input_file_code/ag_wuu_yang.input}
 
 \subsubsection{Archivo de output: \textbtt{Grammar\_mag.log}}
-\lstinputlisting[basicstyle=\scriptsize, numbers=left, columns=fullflexible, language=specmag]{input_file_code/Grammar_mag.log}
+\lstinputlisting[basicstyle=\scriptsize, numbers=left, columns=fullflexible, language=specmag]{input_file_code/Grammar_mag_wuu.log}
 
 \section{Código generado por \maggen: Ejemplo Wuu Yang.}
 \label{append:agwuuyangcode}
@@ -64,6 +64,66 @@ maggen -fo ../Out\_wuu\_yang -o maggen -f ../examples/ag\_wuu\_yang/ag\_wuu\_yan
 \subsection{Archivo cabecera: \textbtt{Plan.hpp}}
 \label{append:planhpp}
 \lstinputlisting[basicstyle=\scriptsize, numbers=left, columns=fullflexible]{input_file_code/Plan.hpp}
+
+\section{Ejemplo: MAG Expresiones aritméticas}
+\label{append:expr_arit}
+
+\subsection{Pseudocódigo}
+\begin{lstlisting}[backgroundcolor=\color{white}]
+    (1)  M ::= E
+                M.valor = E.valor
+    (2)  E ::= E '+' E
+                E.valor = E.valor + E.valor
+    (3)      | E '-' E
+                E.valor = E.valor - E.valor
+    (4)      | E '*' E
+                E.valor = E.valor * E.valor
+    (5)      | E '/' E
+                E.valor = E.valor / E.valor
+    (6)      | '(' E ')'
+                E.valor = E.valor
+    (7)      | '-'E
+                E.valor = E.valor * (-1.0)
+    (8)      | num
+                E.valor = num.valor
+    (9)  num ::= digit num
+                    num.valor = (digit.valor * 10.0) + num.valor
+    (10)       | real
+                    num.valor = real.valor
+    (11)       | digit
+                    num.valor = digit.valor
+    (12) digit ::= '1'
+                    digit.valor = 1.0
+    (13)         | '2'
+                    digit.valor = 2.0
+    (14)         | '3'
+                    digit.valor = 3.0
+    (15)         | '4'
+                    digit.valor = 4.0
+    (16)         | '5'
+                    digit.valor = 5.0
+    (17)         | '6'
+                    digit.valor = 6.0
+    (18)         | '7'
+                    digit.valor = 7.0
+    (19)         | '8'
+                    digit.valor = 8.0
+    (20)         | '9'
+                    digit.valor = 9.0
+    (21)         | '0'
+                    digit.valor = 0.0
+    (22) real ::= digit '.' digit
+                    real.valor = digit.valor + (digit.valor / 10.0)
+\end{lstlisting} 
+
+\subsection{Con lenguaje de especificación de \maggen}
+
+\subsubsection{Archivo de input: \textbtt{ag\_aritmetic.input}}
+\lstinputlisting[basicstyle=\scriptsize, numbers=left, columns=fullflexible, language=specmag]{input_file_code/ag_aritmetic.input}
+
+\subsubsection{Archivo de output: \textbtt{Grammar\_mag.log}}
+\lstinputlisting[basicstyle=\scriptsize, numbers=left, columns=fullflexible, language=specmag]{input_file_code/Grammar_mag_arit.log}
+
 
 \chapter{Apéndice: Diagramas de \maggen.}
 \label{append:disemaggen}

@@ -41,11 +41,24 @@ En el desarrollo de este capítulo, se introducirán un amplio número de concep
 
 La importancia que adquiere \maggen, además de basarse en la familia MAG, radica en los siguientes puntos: 
 \begin{itemize}
- \item No genera planes denominados \textit{espurios} (Ver def. \ref{def:plan_espurios}). Es decir, planes que nunca se podrían dar en un árbol de derivación. Esta característica hace que todos los planes generados sean plausibles (Ver def. \ref{def:plan_plausible}).
+\item La construcción de planes mantiene la propiedad de ``unicidad de planes'' es decir, más de un contexto posible puede estar asociado al mismo plan de evaluación.
+
+\item Tanto el algoritmo de contrucción de planes, como el de secuencia de visitas mantienen propiedades de compatiblidad y consistencia con los grafos de dependecia aumentados (ADP).
+
+\item La construcción de planes se efectua exhaustivamente sólo sobre las reglas alcanzables de la gramática.
+
+% \item No genera planes denominados \textit{espurios} (Ver def. \ref{def:plan_espurios}). Es decir, planes que nunca se podrían dar en un árbol de derivación. Esta característica hace que todos los planes generados sean plausibles (Ver def. \ref{def:plan_plausible}).
+ 
  \item El evaluador generado es \textit{estático} (Sección \ref{subsec:eval-est}), lo que garantiza que no hay procesamiento ``overhead'' en la evaluacion. Esto, debido a que todo el cálculo y tratamiento se realiza en tiempo de compilación.
+ 
+ \item La generación de codigo produce una representación compacta de cada estructura necesaria para la evaluación. Un ejemplo de ello, es que los planes no son generados en su totalidad, sino sólo sus contextos, esto debido a que la evaluación se realiza a través de las secuencias de visita.
+ 
 \end{itemize}
 
-En el desarrollo de este informe se presentaran en detalle los conceptos y puntos que fueron analizados en esta sección. Principalmente, en la sección \ref{sec:comp-planes} se desarrolla un teorema que demuestra que \maggen\ genera la mínima cantidad de planes de evaluación y, además, en los capítulos \ref{chap:disen_} y \ref{chap:implem} se analizaran aspectos relevantes al diseño e implementación de \maggen.
+En el desarrollo de este informe se presentaran en detalle los conceptos y puntos que fueron analizados en esta sección. En el capítulo \ref{chap:eval_est} se presentan el algoritmo de creación de planes para MAG y, ademas, resultados que expresan la consistencia del mismo. Luego, en los capítulos \ref{chap:disen_} y \ref{chap:implem} se analizarán aspectos relevantes al diseño e implementación de \maggen 
+
+
+%Principalmente, en la sección \ref{sec:comp-planes} se desarrolla un teorema que demuestra que \maggen\ genera la mínima cantidad de planes de evaluación y, además, en los capítulos \ref{chap:disen_} y \ref{chap:implem} se analizaran aspectos relevantes al diseño e implementación de \maggen.
 
 % Resaltar que acepta, que hace con las MAG, y que lo diferencia del resto. en tiempo de ejecución no hay overhead, ya que todo el trabajo se hizo en tiempo de compilación del evaluador.
 
