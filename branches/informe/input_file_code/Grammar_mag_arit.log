@@ -1,0 +1,158 @@
+/**
+  * \file    Grammar_mag.log
+  * \brief   Specification of the parsed grammar mag.
+  * \date    Mon Jul 19 16:31:15 2010
+  * \author  Kilmurray, Gerardo Luis <gerakilmurray@gmail.com>
+  * \author  Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+*/
+
+semantic domain
+    //sort float; -> Type Basic
+
+    op infix (6, left) *: float, float -> float;
+    op infix (5, left) +: float, float -> float;
+    op infix (5, left) -: float, float -> float;
+    op infix (6, left) /: float, float -> float;
+
+attributes
+    valor : syn <float> of all;
+
+/*
+symbols
+    symbol E NonTerminal -> Attributes: valor;
+    symbol M NonTerminal -> Attributes: valor;
+    symbol digit NonTerminal -> Attributes: valor;
+    symbol num NonTerminal -> Attributes: valor;
+    symbol real NonTerminal -> Attributes: valor;
+    symbol '(' Terminal;
+    symbol ')' Terminal;
+    symbol '*' Terminal;
+    symbol '+' Terminal;
+    symbol '-' Terminal;
+    symbol '.' Terminal;
+    symbol '/' Terminal;
+    symbol '0' Terminal;
+    symbol '1' Terminal;
+    symbol '2' Terminal;
+    symbol '3' Terminal;
+    symbol '4' Terminal;
+    symbol '5' Terminal;
+    symbol '6' Terminal;
+    symbol '7' Terminal;
+    symbol '8' Terminal;
+    symbol '9' Terminal;
+*/
+/* >>>>>>>>>> Initial Symbol of Grammar is M <<<<<<<<<< */
+
+rules
+    /*R1*/ M ::= E
+            compute
+                /*1*/ M[0].valor = E[0].valor;
+            end;
+
+    /*R2*/ E ::= E '+' E
+            compute
+                /*2*/ E[0].valor = (E[1].valor + E[2].valor);
+            end;
+
+    /*R3*/ E ::= E '-' E
+            compute
+                /*3*/ E[0].valor = (E[1].valor - E[2].valor);
+            end;
+
+    /*R4*/ E ::= E '*' E
+            compute
+                /*4*/ E[0].valor = (E[1].valor * E[2].valor);
+            end;
+
+    /*R5*/ E ::= E '/' E
+            compute
+                /*5*/ E[0].valor = (E[1].valor / E[2].valor);
+            end;
+
+    /*R6*/ E ::= '(' E ')'
+            compute
+                /*6*/ E[0].valor = E[1].valor;
+            end;
+
+    /*R7*/ E ::= '-' E
+            compute
+                /*7*/ E[0].valor = (E[1].valor * -1.0);
+            end;
+
+    /*R8*/ E ::= num
+            compute
+                /*8*/ E[0].valor = num[0].valor;
+            end;
+
+    /*R9*/ num ::= digit num
+            compute
+                /*9*/ num[0].valor = ((digit[0].valor * 10.0) + num[1].valor);
+            end;
+
+    /*R10*/ num ::= real
+            compute
+                /*10*/ num[0].valor = real[0].valor;
+            end;
+
+    /*R11*/ num ::= digit
+            compute
+                /*11*/ num[0].valor = digit[0].valor;
+            end;
+
+    /*R12*/ digit ::= '1'
+            compute
+                /*12*/ digit[0].valor = 1.0;
+            end;
+
+    /*R13*/ digit ::= '2'
+            compute
+                /*13*/ digit[0].valor = 2.0;
+            end;
+
+    /*R14*/ digit ::= '3'
+            compute
+                /*14*/ digit[0].valor = 3.0;
+            end;
+
+    /*R15*/ digit ::= '4'
+            compute
+                /*15*/ digit[0].valor = 4.0;
+            end;
+
+    /*R16*/ digit ::= '5'
+            compute
+                /*16*/ digit[0].valor = 5.0;
+            end;
+
+    /*R17*/ digit ::= '6'
+            compute
+                /*17*/ digit[0].valor = 6.0;
+            end;
+
+    /*R18*/ digit ::= '7'
+            compute
+                /*18*/ digit[0].valor = 7.0;
+            end;
+
+    /*R19*/ digit ::= '8'
+            compute
+                /*19*/ digit[0].valor = 8.0;
+            end;
+
+    /*R20*/ digit ::= '9'
+            compute
+                /*20*/ digit[0].valor = 9.0;
+            end;
+
+    /*R21*/ digit ::= '0'
+            compute
+                /*21*/ digit[0].valor = 0.0;
+            end;
+
+    /*R22*/ real ::= digit '.' digit
+            compute
+                /*22*/ real[0].valor = (digit[0].valor + (digit[1].valor / 10.0));
+            end;
+
+

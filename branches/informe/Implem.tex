@@ -748,11 +748,19 @@ struct cycle_detector: public dfs_visitor<>
 
 \subsection{Contextos}
 
-Para cada regla, se tienen que considerar todos los posibles contextos inferiores de acuerdo a las reglas que tengan los símbolos no terminales de su parte derecha. Se implementó un método que recursivamente genera un contexto diferente y guarda la regla cuando ya no quedan más variantes.
+Para cada regla, se tienen que considerar todos los posibles contextos inferiores de acuerdo a las reglas que tengan los símbolos no terminales de su parte derecha.
 
-\subsubsection{Unicidad de contextos, planes y planes proyectados}
+Se implementó un método que recursivamente genera combinaciones de reglas, hasta que satura los posibles AST. Se trata de un backtracking sobre la profundidad de las diferentas ramas posibles de un AST.
 
-Al igual que con los planes, los contextos de las reglas se repiten mucho, así que se utilizaron índices indirectos sobre un \textbtt{vector} que almacena únicamente los contextos diferentes.
+Cuando no existen símbolos no terminales para seguir navegando, se guarda el contexto.
+
+Los contextos de las reglas se repiten mucho, por lo que su almacenamiento es similar al de los planes. A continuación se presentan detalles sobre lo realizado.
+
+\subsection{Unicidad de contextos y planes}
+
+Cada estructura mantiene un repositorio indexado para impedir elementos repetidos. Es decir, varias estructuras pueden asociarse al mismo índice. Este hecho optimiza de manera notable el funcionamiento de \maggen\ tanto en tiempo como en espacio.
+
+En concreto, se mantienen 3 \textbtt{vectores}:
 
 \begin{lstlisting}[numbers=left, linewidth=9cm]
 vector <Order_rule>    contexts_uniques;
@@ -761,6 +769,30 @@ vector <Order_eval_eq> plans_project_uniques;
 \end{lstlisting}
 
 Antes de insertar un elemento en cualquiera de estos repositorios se verifica que no exista. En caso de que ya se encuentre, se devuelve el índice correspondiente dentro del vector, sino se insertará al final y se devolverá el índice del último elemento.
+
+Veamos la repretacion de una plan dentro de \maggen\ para analizar los efectos usar ``unicidad'':
+
+\begin{lstlisting}[numbers=left, linewidth=9cm, language=c++]
+    typedef struct k_plan
+    {
+	    unsigned short  id_plan;
+	    unsigned short	plan;
+        ...
+    } Key_plan;
+
+	map <Key_plan, unsigned short> eval_plans;
+\end{lstlisting}
+
+
+Entonces, el \textbtt{map} es el repositorio indexado de planes, que se conforma de dos tipos de información:
+\begin{description}
+\item [Contexto del plan] La estrucuta \textbtt{Key\_plan} mantiene dos componentes:
+\begin{description}
+\item [id\_plan] Contexto de reglas en el cual se produce el plan. Este se conforma de la regla a la que pertenece el plan, junto con su contexto inferior. Ejemplo, un \textbtt{id\_plan} de la forma \{1,2,5,8\} representa el plan de la regla 1 con contexto inferior las reglas 2,5,8.
+\item [plan] Orden superior impuesto por el contexto superior del plan.
+\end{description}
+\item [Índice del plan] Corresponde al índice del vector de planes únicos.
+\end{description}
 
 \subsection{Representación en Dot}
 
