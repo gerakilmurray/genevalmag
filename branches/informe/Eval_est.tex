@@ -115,7 +115,7 @@ Sea q la producción X$_{0}$ $\rightarrow$ $\alpha_{0}$ X $_{1}$ $\alpha_{1}$ X 
 
 \end{theorem}
 
-\begin{proof}
+\begin{proof}[\textbf{Demostración}]
 
 Notar que en \textbtt{compute\_order}($ADP (q | p_{1}, p_{2}, \dots, p_{k})$, $\omega$), el orden total $\omega$ es representado por el conjunto de aristas \{a$_{i}$ $\rightarrow$ a$_{i+1}$ | i = 1, $\ldots$ , m-1\}, donde \{a$_{i}$ | i = 1, $\ldots$ , m\} son las ocurrencias de atributos de X$_{0}$. Si la intrucción de aristas \{a$_{i}$ $\rightarrow$ a$_{i+1}$ | i = 1, $\ldots$ , m-1\} introduce un ciclo dentro de $ADP (q | p_{1}, p_{2}, \dots, p_{k})$, $\omega$ es incompatible con la proyección de $ADP (q | p_{1}, p_{2}, \dots, p_{k})$ sobre las ocurrencias de atributos de X$_{0}$, que es un subgrafo $DCG_{X_{0}}(q)$. Por lo tanto, $\omega$ debe ser incompatible con $DCG_{X_{0}}(q)$, lo cual contradice lo supuesto en el teorema. Esto prueba el punto \ref{th1:p1} del teorema.
 
@@ -128,7 +128,7 @@ El orden total $\Psi$ computado por la función \textbtt{compute\_order} es comp
 El algoritmo \textbtt{compute\_plans} (ver \ref{alg:planeval}) computa correctamente un conjunto de ordenes de evaluación para todas las producciones alcanzables.
 \end{theorem}
 
-\begin{proof}
+\begin{proof}[\textbf{Demostración}]
 Es suficiente probar los siguientes puntos:
 \begin{enumerate}
     \item \label{th:p1}Todo $ADP (q | p_{1}, p_{2}, \dots, p_{k})$ no contiene ciclos.

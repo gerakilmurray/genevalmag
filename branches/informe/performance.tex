@@ -1,0 +1,125 @@
+\chapter{Medidas de performance}
+\label{chap:performance}
+\minitoc
+
+En la etapa de prueba de \maggen\ se han analizado una serie de medidas performance que permitieron observar números concretos sobre el funcionamiento de la herramienta. En la figura \ref{fig:version_boot} se muestran los tiempos en la compilación de la herramienta, teniendo en cuenta dos versiones de \spirit\ \boost \footnote{Se uso la mínima versión compatible (\boost\ 1.37) y la actual versión (\boost\ 1.43).}. Se detecta un incremento de performance con el uso de la Spirit Boost actual.
+En las figuras \ref{fug:med_eval_gen} se presentan medidas sobre los tiempos y tamaños logrados en el binario obtenido del evaluador generado por \maggen. Estas medidas son aplicadas a dos de los ejemplos corrientes en el desarrollo de la herramienta como lo son, \textbtt{Wuu Yang} (presentado en el apendice \ref{append:agwuuyang}) y \textbtt{Expresiones aritmética} presentado en la figura \ref{fig:eje_expresion}. 
+
+\begin{figure}[h!]
+    \begin{center}
+        \setlength{\doublerulesep}{0mm}
+        \setlength{\arrayrulewidth}{0.9pt}
+        \begin{tabular}{|l||c|c|}
+            \hline
+            \rowcolor{gris} Input / Spirit           & \textbf{1.8.X}   & \textbf{2.3}   \\ \hline
+            \rowcolor{white}\textbtt{MAG Wuu Yang}   & $\sim$0.087 sec & $\sim$0.084 sec \\ \hline
+            \rowcolor{white}\textbtt{MAG Aritmetica} & $\sim$0.590 sec & $\sim$0.450 sec \\ \hline
+        \end{tabular}
+    \end{center}
+    \caption{\label{fig:version_boot}Medidas de performance: Versión de \spirit\ \boost}
+\end{figure}
+
+\begin{figure}[h!]
+    
+    \subfigure[Tiempos de compilación]{
+        \setlength{\doublerulesep}{0mm}
+        \setlength{\arrayrulewidth}{0.9pt}
+        \begin{tabular}{|l||c|c|}
+            \hline
+            \rowcolor{gris} Input / g++          & \textbf{sin -O3} & \textbf{con -O3}          \\ \hline
+            \rowcolor{white}\textbtt{Wuu Yang}   & $\sim$1.51 sec   & $\sim$2.55 sec            \\ \hline
+            \rowcolor{white}\textbtt{Aritmetica} & $\sim$5.98 sec   & \textbf{$\sim$1m 5.6 sec} \\ \hline
+        \end{tabular}
+    }\subfigure[Tamaños del ejecutable]{
+        \setlength{\doublerulesep}{0mm}
+        \setlength{\arrayrulewidth}{0.9pt}      
+        \begin{tabular}{|l||c|c|}
+            \hline
+            \rowcolor{gris} Input / g++          & \textbf{sin -O3} & \textbf{con -O3} \\ \hline
+            \rowcolor{white}\textbtt{Wuu Yang}   & 104 Kb           & \ 48 Kb          \\ \hline
+            \rowcolor{white}\textbtt{Aritmetica} & 516 Kb           & 384 Kb           \\ \hline
+        \end{tabular}
+    }
+    \caption{\label{fug:med_eval_gen}Medidas para el evaluador generado}
+    
+\end{figure}
+
+\section{Unicidad de planes}
+La unicidad de planes se trata de no asociar cada plan con su dependencias, sino usar una indexación a planes únicos. Esto permite que distintos contextos se asocien al mismo plan, lo que permite una notable optimización tanto en el procesamiento como en la generación de código. En la figura \ref{fig:uni_plan} se presenta una comparación de \maggen\ utilizando unicidad de planes y sin el uso de la misma para el ejemplo de \textbtt{aritmética}. Notar que la eficiencia es notable tanto en la generación de código como en la cantidad de secuencias de visita.
+
+\begin{figure}[h!]
+\begin{minipage}{0.47\textwidth}
+\begin{center} 
+\begin{lstlisting}[columns=fullflexible, backgroundcolor=\color{white}]
+(1) M ::= E
+        M.valor = E.valor
+(2) E ::= E '+' E
+        E.valor = E.valor + E.valor 
+(3) | E '-' E
+        E.valor = E.valor - E.valor 
+(4) | E '*' E
+        E.valor = E.valor * E.valor 
+(5) | E '/' E
+        E.valor = E.valor / E.valor 
+(6) | '(' E ')'
+        E.valor = E.valor 
+(7) | '-'E
+        E.valor = E.valor * (-1.0)
+(8) | num
+        E.valor = num.valor
+(9) num ::= digit num
+            num.valor = (digit.valor * 10.0) + num.valor
+(10)| real
+            num.valor = real.valor
+(11)| digit
+            num.valor = digit.valor
+\end{lstlisting} 
+\end{center}
+\end{minipage}
+\hspace{0.28cm}\begin{minipage}{0.49\textwidth}
+\begin{center}
+\begin{lstlisting}[columns=fullflexible, backgroundcolor=\color{white}]
+(12) digit ::= '1'
+            digit.valor = 1.0
+(13)  | '2'
+            digit.valor = 2.0
+(14)  | '3'
+            digit.valor = 3.0
+(15)  | '4'
+            digit.valor = 4.0
+(16)  | '5'
+            digit.valor = 5.0
+(17)  | '6'
+            digit.valor = 6.0
+(18)  | '7'
+            digit.valor = 7.0
+(19)  | '8'
+            digit.valor = 8.0
+(20)  | '9'
+            digit.valor = 9.0
+(21)  | '0'
+            digit.valor = 0.0
+(22)  real ::= digit '.' digit
+            real.valor = digit.valor + (digit.valor / 10.0)
+\end{lstlisting} 
+\end{center}
+\end{minipage}
+\caption{\label{fig:eje_expresion} GA de Expresiones.}
+\end{figure}
+
+\begin{figure}[h!]
+    \begin{center}
+        \setlength{\doublerulesep}{0mm}
+        \setlength{\arrayrulewidth}{0.9pt}
+        \begin{tabular}{|l||c|c|}
+            \hline
+            \rowcolor{gris} \textbf{Variable/Unicidad}&\textbf{Sin} & \textbf{Con} \\ \hline
+            \rowcolor{white}\textbf{Cant. de planes}           & 371                        & 371                         \\ \hline
+            \rowcolor{white}\textbf{Cant. de planes proy.}     & 687                        & 687                         \\ \hline
+            \rowcolor{white}\textbf{Cant. de sec. de visita }  & \color{red}371             & \color{blue}22              \\ \hline
+            \rowcolor{white}\textbf{Generación del evaluador}  & \color{red} $\sim$1.44 sec & \color{blue} $\sim$0.47 sec \\ \hline
+            \rowcolor{white}\textbf{Cant. de líneas (eval.)}   & \color{red}17464           & \color{blue}5974            \\ \hline
+        \end{tabular}
+    \end{center}
+    \caption{\label{fig:uni_plan}Unicidad de planes. Ejemplo expresiones aritmeticas}
+\end{figure}
