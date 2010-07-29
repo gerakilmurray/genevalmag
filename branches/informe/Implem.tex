@@ -229,7 +229,7 @@ r_decl_sort = lexeme_d[str_p("sort")>>space_p]>>
                         (r_ident[&create_sort][st_sorts.add]%', ')>>';';
 \end{lstlisting}
 
-\item [\textbtt{operators}] Para los operadores también se exige el espacio$^{\ref{foot:espacio}}$ luego de la cadena ``\textbtt{op}''. Por definición se aceptan tres tipos: infijos, prefijos y posfijos, por lo que se hizo una regla para cada uno, solamente discriminado los dominios, ya que todos poseen una sóla imagen. Notar que los sorts permitidos, son sacados directamente de las tablas de símbolos destinadas para ese propósito.
+\item [\textbtt{operators}] Para los operadores también se exige el espacio$^{\ref{foot:espacio}}$ luego de la cadena ``\textbtt{op}''. Por definición se aceptan tres tipos: infijos, prefijos y posfijos, por lo que se hizo una regla para cada uno, solamente discriminado los dominios, ya que todos poseen una sola imagen. Notar que los sorts permitidos, son sacados directamente de las tablas de símbolos destinadas para ese propósito.
 
 \begin{lstlisting}[columns=fullflexible, linewidth=12.5cm]
 r_decl_oper = lexeme_d[str_p("op")>>space_p][&inic_func]>>
@@ -537,7 +537,7 @@ info = parse<iterator_t>(begin, end, attr_grammar_decl, skip_p);
 
 Para informar los errores durante el análisis sintáctico, se tenía que utilizar los mecanismos que \spirit\ disponía. Lamentablemente este es un punto débil del framework.
 
-Lo que se implementó, fue mostrar la línea y columna desde donde no se pudo consumir del archivo de entrada, tal como se muestra en la seccion \ref{subsec:parsers-leng} del capítulo anterior.
+Lo que se implementó, fue mostrar la línea y columna desde donde no se pudo consumir del archivo de entrada, tal como se muestra en la sección \ref{subsec:parsers-leng} del capítulo anterior.
 
 Primero, para aceptar archivos como entrada de la herramienta, se tiene que hacer que \spirit\ no utilice un iterador estándar, sino que un \textbtt{file\_iterator} instanciado con caracteres. Luego definir un \textbtt{position\_iterator} sobre el recién mencionado.
 
@@ -712,7 +712,7 @@ map <vector<unsigned short>, Graph> p_Adp_subgraphs_cyclics;
 
 El chequeo de ciclicidad sobre los grafos ADP, se implementó utilizando el algoritmo de búsqueda en profundidad (Depth-first search) de \boost\ combinado con la creación de un ``visitador'' especializado. El cual a medida que recorre el grafo, va guardado los nodos y aristas visitadas mientras no se halla detectado un ciclo. Ese subgrafo es mostrado al usuario en caso de error, sino es descartado.
 
-La detección de ciclos, se efectua cuando el algoritmo de visita, invoca a la función \textbtt{back\_edge}, en la cual es activada la bandera que indice este suceso.
+La detección de ciclos, se efectúa cuando el algoritmo de visita, invoca a la función \textbtt{back\_edge}, en la cual es activada la bandera que indica este suceso.
 
 Tanto el grafo como la variable lógica, usada como bandera, son pasadas en el constructor y utilizadas internamente mediante referencias.
 
@@ -750,7 +750,7 @@ struct cycle_detector: public dfs_visitor<>
 
 Para cada regla, se tienen que considerar todos los posibles contextos inferiores de acuerdo a las reglas que tengan los símbolos no terminales de su parte derecha.
 
-Se implementó un método que recursivamente genera combinaciones de reglas, hasta que satura los posibles AST. Se trata de un backtracking sobre la profundidad de las diferentas ramas posibles de un AST.
+Se implementó un método que recursivamente genera combinaciones de reglas, hasta que satura los posibles AST. Se trata de un ``Backtracking''\footnote{Estrategia para encontrar soluciones a problemas que satisfacen restricciones. La técnica va creando todas las posibles combinaciones de elementos para obtener una solución. Ver \urllink{http://en.wikipedia.org/wiki/Backtracking}} sobre la profundidad de las diferentes ramas posibles de un AST.
 
 Cuando no existen símbolos no terminales para seguir navegando, se guarda el contexto.
 
@@ -770,7 +770,7 @@ vector <Order_eval_eq> plans_project_uniques;
 
 Antes de insertar un elemento en cualquiera de estos repositorios se verifica que no exista. En caso de que ya se encuentre, se devuelve el índice correspondiente dentro del vector, sino se insertará al final y se devolverá el índice del último elemento.
 
-Veamos la repretacion de una plan dentro de \maggen\ para analizar los efectos usar ``unicidad'':
+A continuación se observa la representación de una plan dentro de \maggen\ para analizar los efectos usar ``unicidad'':
 
 \begin{lstlisting}[numbers=left, linewidth=9cm, language=c++]
     typedef struct k_plan
@@ -786,7 +786,7 @@ Veamos la repretacion de una plan dentro de \maggen\ para analizar los efectos u
 
 Entonces, el \textbtt{map} es el repositorio indexado de planes, que se conforma de dos tipos de información:
 \begin{description}
-\item [Contexto del plan] La estrucuta \textbtt{Key\_plan} mantiene dos componentes:
+\item [Contexto del plan] La estructura \textbtt{Key\_plan} mantiene dos componentes:
 \begin{description}
 \item [id\_plan] Contexto de reglas en el cual se produce el plan. Este se conforma de la regla a la que pertenece el plan, junto con su contexto inferior. Ejemplo, un \textbtt{id\_plan} de la forma \{1,2,5,8\} representa el plan de la regla 1 con contexto inferior las reglas 2,5,8.
 \item [plan] Orden superior impuesto por el contexto superior del plan.
@@ -927,7 +927,7 @@ vector < Visit_seq > all_visit_seqs;
 
 \subsection{Heurística del algoritmo: Detalles de implementación}
 
-Como ya se analizó en la sección \ref{subsec:heuris-simul}, con la heuristica utilizada, basta con lanzar el proceso sobre él o los planes asociados a la regla inicial. Además es correcto, porque toda evaluación comenzará desde ese punto.
+Como ya se analizó en la sección \ref{subsec:heuris-simul}, con la heurística utilizada, basta con lanzar el proceso sobre él o los planes asociados a la regla inicial. Además es correcto, porque toda evaluación comenzará desde ese punto.
 
 El algoritmo que se diseñó es recursivo y se apoya en ciertas listas que llevan información de contextos anteriores que son utilizados para realizar podas\footnote{Heurística que permite descartar ramas completas en problemas sobre decisión en árboles y grafos análogamente. \urllink{http://en.wikipedia.org/wiki/Branch\_and\_cut}} y cálculos innecesarios. Estos son:
 
@@ -1089,7 +1089,7 @@ bool generate_code(const vector<string> &headers_file) const
 }
 \end{lstlisting}
 
-Notar que recibe como parámetro una referencia a los ``\textbtt{headers}'' que el usuario proporcionó en el momento de la invocación de \maggen \footnote{Ver sección \ref{sec:uso-maggen} para obtener detalles sobre parametros de invocación.}. Los mismos serán incluidos en el archivo \textbtt{.cpp}.
+Notar que recibe como parámetro una referencia a los ``\textbtt{headers}'' que el usuario proporcionó en el momento de la invocación de \maggen \footnote{Ver sección \ref{sec:uso-maggen} para obtener detalles sobre parámetros de invocación.}. Los mismos serán incluidos en el archivo \textbtt{.cpp}.
 
 \subsection{Cabecera del evaluador}
 
@@ -1114,7 +1114,7 @@ typedef struct Symbol_Y: Node
 
 Luego de realizar ciertos análisis, se determinó que realmente varias estructuras que eran vitales en fases anteriores, ahora en el contexto y funcionamiento del evaluador eran innecesarias. Por ejemplo, de los planes de evaluación y planes proyectados, únicamente se utilizan los índices de los mismos. Esto sucede ya que debido a la optimización de generar sólo planes diferentes e indexarlos, no existe necesidad de tener en forma estática la definición de cada uno de ellos.
 
-En cambio, las secuencias de visitas son imprescindibles para la evaluación, como así también una versión reducida de las definiciones de las reglas, incluyendo solamente un arreglo con los nombres de cada símbolo no terminal que participa en la misma, en donde la posición cero corresponde al símbolo \textbtt{head} y las demas posiciones al \textit{body}\footnote{Ver \ref{sec:def-CFG}}.
+En cambio, las secuencias de visitas son imprescindibles para la evaluación, como así también una versión reducida de las definiciones de las reglas, incluyendo solamente un arreglo con los nombres de cada símbolo no terminal que participa en la misma, en donde la posición cero corresponde al símbolo \textbtt{head} y las demás posiciones al \textit{body}\footnote{Ver \ref{sec:def-CFG}}.
 
 Aquí se incluyen los perfiles de los métodos públicos y privados mencionados en \ref{sec:gencodigo}.
 

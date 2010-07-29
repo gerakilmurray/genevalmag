@@ -1,5 +1,4 @@
-
-%%%%%%%%%%%%%%%%%%%%%%% file typeinst.tex %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% file articulo_cacic.tex %%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % This is the LaTeX source for the instructions to authors using
 % the LaTeX document class 'llncs.cls' for contributions to
@@ -26,7 +25,7 @@
 \usepackage[table]{xcolor}
 \usepackage{color}
 \def\theoremname{Teorema}
-\def\definitionname{Definici\'on}
+\def\definitionname{Definición}
 \definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
 \definecolor{gris}{rgb}{0.8,0.8,0.8}
 \definecolor{azul}{rgb}{0.0,0.3,0.6}
@@ -69,9 +68,9 @@
 \hypersetup
 {
 bookmarksopen=true,
-pdftitle="Art\'iculo CACIC: magGen",
+pdftitle="Artículo CACIC: magGen",
 pdfauthor="Arroyo - Kilmurray - Picco", 
-pdfsubject="Generador de Evaluadores est\'aticos para MAG.", %subject of the document
+pdfsubject="Generador de Evaluadores estáticos para MAG.", %subject of the document
 pdftoolbar=false, % toolbar hidden
 pdfmenubar=true, %menubar shown
 pdfhighlight=/O, %effect of clicking on a link
@@ -113,17 +112,11 @@ urlcolor=linkcol %couleur des liens pour les url
 \titlerunning{magGen: Generador de Evaluadores para MAG.}
 
 % the name(s) of the author(s) follow(s) next
-%
-% NB: Chinese authors should write their first names(s) in front of
-% their surnames. This ensures that the names appear correctly in
-% the running heads and the author index.
-%
 \author{Arroyo, Marcelo Daniel;
         Kilmurray, Gerardo Luis; %
         Picco, Gonzalo Martín}
 %
 \authorrunning{Arroyo - Kilmurray - Picco}
-% (feature abused for this document to repeat the title also on left hand pages)
 
 % the affiliations are given next; don't give your e-mail address
 % unless you accept that it will be published
@@ -160,7 +153,7 @@ En 1998, Wuu Yang caracteriza una nueva familia de GA, denominada \textbf{Gramá
 
 La familia MAG, también denominada NC(1), pertenece a las GA No Circulares que pueden ser computadas con planes de evaluación estáticos.%20
 
-\maggen\ es una herramienta que genera, de manera automática, evalua-dores estáticos para la familia MAG, basada en la teória presentada por Wuu Yang. La salida de \maggen\ es un conjunto de módulos C++ optimizados para su directa utilización o integración con otras herramientas.%40
+\maggen\ es una herramienta que genera, de manera automática, evalua-dores estáticos para la familia MAG, basada en la teoría presentada por Wuu Yang. La salida de \maggen\ es un conjunto de módulos C++ optimizados para su directa utilización o integración con otras herramientas.%40
  
 \end{abstract}
 
@@ -357,7 +350,7 @@ Estos evaluadores pertenecen a una familia denominada \emph{Evaluadores Multivis
 
 %Las secuencias de visita se pueden generar  a partir de los grafos de dependencias inducidos de cada producción. Para instancias de atributos heredados del símbolo \textit{head} de la producción, se introducen un \emph{leave}, para atributos sintetizados del símbolo \textit{head} o heredados de un símbolo del \textit{body}), se introducen un \emph{compute} y para instancias de atributos sintetizados del símbolo $X_i$ del \textit{body}, se introducen operaciones \emph{visit(i)}.
 
-%En la sección \ref{seubsec:seq-visit} se analiza la contrucción de secuencias de visita para \maggen.
+%En la sección \ref{seubsec:seq-visit} se analiza la construcción de secuencias de visita para \maggen.
 
 % \subsection{Generación de evaluadores para GA bien definidas}
 % 
@@ -492,7 +485,7 @@ En la sección \ref{ej:agwuuyang} se presenta un ejemplo de una gramática de at
 \subsection{Ejemplo de MAG especificada en el lenguaje de especificación de \maggen.}
 \label{ej:agwuuyang}
 \vspace{-0.22cm}
-En la figura \ref{fig:mag_wuu_yang} se presenta un ejemplo de una MAG y en la figura \ref{fig:MAG_traducida} se presenta la traduccion de la gramática en el lenguaje de especificación de \maggen.
+En la figura \ref{fig:mag_wuu_yang} se presenta un ejemplo de una MAG y en la figura \ref{fig:MAG_traducida} se presenta la traducción de la gramática en el lenguaje de especificación de \maggen.
 
 \begin{figure}[!ht]
 \vspace{-0.5cm}
@@ -684,7 +677,7 @@ Para el cómputo de las secuencias de visitas, solamente alcanza con lanzar el a
 \vspace{-0.22cm}
 La etapa final de \maggen\ esta dada por la generación de código para el evaluador estático. Esta, produce dos archivos: \textit{interface} (.hpp) e \textit{implementación} (.cpp). Los archivos generados se vinculan con dos módulos estáticos, \texttt{Node.hpp} y \texttt{Node.cpp}.
 
-La generación de código es un proceso reiterativo sobre cada elemento almacenado en los repositorios de la herramienta. En los archivos antes mencionados se reflejan las reglas de la gramatica, los planes de evaluación computados, las secuencias de visita y un conjunto de métodos para la manipular esta información. Dos de estos métodos son los encargados de la evaluación de un AST.
+La generación de código es un proceso reiterativo sobre cada elemento almacenado en los repositorios de la herramienta. En los archivos antes mencionados se reflejan las reglas de la gramática, los planes de evaluación computados, las secuencias de visita y un conjunto de métodos para la manipular esta información. Dos de estos métodos son los encargados de la evaluación de un AST.
 
 \subsection{Algoritmo de evaluación}
 \label{sec:codcppalgeval}
@@ -784,7 +777,7 @@ En las figuras \ref{fug:med_eval_gen} se presentan medidas sobre los tiempos y t
             \hline
             \rowcolor{gris} Input / Spirit           & \textbf{1.8.X}   & \textbf{2.3}   \\ \hline
             \rowcolor{white}\textbtt{MAG Wuu Yang}   & $\sim$0.087 sec & $\sim$0.084 sec \\ \hline
-            \rowcolor{white}\textbtt{MAG Aritmetica} & $\sim$0.590 sec & $\sim$0.450 sec \\ \hline
+            \rowcolor{white}\textbtt{MAG Aritmética} & $\sim$0.590 sec & $\sim$0.450 sec \\ \hline
         \end{tabular}
     \end{center}
     \vspace{-0,5cm}
@@ -800,7 +793,7 @@ En las figuras \ref{fug:med_eval_gen} se presentan medidas sobre los tiempos y t
             \hline
             \rowcolor{gris} Input / g++          & \textbf{sin -O3} & \textbf{con -O3}          \\ \hline
             \rowcolor{white}\textbtt{Wuu Yang}   & $\sim$1.51 sec   & $\sim$2.55 sec            \\ \hline
-            \rowcolor{white}\textbtt{Aritmetica} & $\sim$5.98 sec   & \textbf{$\sim$1m 5.6 sec} \\ \hline
+            \rowcolor{white}\textbtt{Aritmética} & $\sim$5.98 sec   & \textbf{$\sim$1m 5.6 sec} \\ \hline
         \end{tabular}
     }\subfigure[Tamaños del ejecutable]{
         \setlength{\doublerulesep}{0mm}
@@ -809,7 +802,7 @@ En las figuras \ref{fug:med_eval_gen} se presentan medidas sobre los tiempos y t
             \hline
             \rowcolor{gris} Input / g++          & \textbf{sin -O3} & \textbf{con -O3} \\ \hline
             \rowcolor{white}\textbtt{Wuu Yang}   & 104 Kb           & \ 48 Kb          \\ \hline
-            \rowcolor{white}\textbtt{Aritmetica} & 516 Kb           & 384 Kb           \\ \hline
+            \rowcolor{white}\textbtt{Aritmética} & 516 Kb           & 384 Kb           \\ \hline
         \end{tabular}
     }
     \vspace{-0,3cm}
@@ -899,7 +892,7 @@ real ::= digit '.' digit
         \end{tabular}
     \end{center}
     \vspace{-0,5cm}
-    \caption{\label{fig:uni_plan}Unicidad de planes. Ejemplo expresiones aritmeticas}
+    \caption{\label{fig:uni_plan}Unicidad de planes. Ejemplo expresiones aritméticas}
 \end{figure}
 
 \section{Conclusión}
@@ -935,9 +928,9 @@ Se pueden resumir las características de \maggen\ en los siguientes puntos:
 
 % \bibitem {compiladores} Alfred V. Aho, Ravi Sethi, Jeffrey D. ullman.\textit{Compilers: Principles, Techniques and Tools}. Addison-Wesley (1985)  Iberoamericana, S.A. Wilmington, Delaware, E.U.A.
 
-\bibitem {tesismarcelo} Arroyo, Marcelo Daniel. \textit{Gramáticas de atributos, clasificación y aportes en técnicas de evaluación}. Tesis de carrera de Magister en Ciencias de la Computación. Universidad Nacional del Sur. Bahía Blanca - Argentina.
+\bibitem {tesismarcelo} Arroyo, Marcelo Daniel. \textit{Gramáticas de atributos, clasificación y aportes en técnicas de evaluación}. Tesis de carrera de Magíster en Ciencias de la Computación. Universidad Nacional del Sur. Bahía Blanca - Argentina.
 
-\bibitem {kastens} U. Kastens. 1980. \textit{Ordered Attribute Grammars}. Acta Informatica. Vol. 13, pp. 229-256.
+\bibitem {kastens} U. Kastens. 1980. \textit{Ordered Attribute Grammars}. Acta Informática. Vol. 13, pp. 229-256.
 
 \bibitem{intri-exc} Jazayeri, Ogden and Rounds. 1975. \emph{The intrinsically exponential complexity of the circularity problem for attribute grammars}. Comm. ACM 18. December 2, Pag: 697-706.
 

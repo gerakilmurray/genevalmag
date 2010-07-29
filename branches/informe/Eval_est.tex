@@ -117,7 +117,7 @@ Sea q la producción X$_{0}$ $\rightarrow$ $\alpha_{0}$ X $_{1}$ $\alpha_{1}$ X 
 
 \begin{proof}[\textbf{Demostración}]
 
-Notar que en \textbtt{compute\_order}($ADP (q | p_{1}, p_{2}, \dots, p_{k})$, $\omega$), el orden total $\omega$ es representado por el conjunto de aristas \{a$_{i}$ $\rightarrow$ a$_{i+1}$ | i = 1, $\ldots$ , m-1\}, donde \{a$_{i}$ | i = 1, $\ldots$ , m\} son las ocurrencias de atributos de X$_{0}$. Si la intrucción de aristas \{a$_{i}$ $\rightarrow$ a$_{i+1}$ | i = 1, $\ldots$ , m-1\} introduce un ciclo dentro de $ADP (q | p_{1}, p_{2}, \dots, p_{k})$, $\omega$ es incompatible con la proyección de $ADP (q | p_{1}, p_{2}, \dots, p_{k})$ sobre las ocurrencias de atributos de X$_{0}$, que es un subgrafo $DCG_{X_{0}}(q)$. Por lo tanto, $\omega$ debe ser incompatible con $DCG_{X_{0}}(q)$, lo cual contradice lo supuesto en el teorema. Esto prueba el punto \ref{th1:p1} del teorema.
+Notar que en \textbtt{compute\_order}($ADP (q | p_{1}, p_{2}, \dots, p_{k})$, $\omega$), el orden total $\omega$ es representado por el conjunto de aristas \{a$_{i}$ $\rightarrow$ a$_{i+1}$ | i = 1, $\ldots$ , m-1\}, donde \{a$_{i}$ | i = 1, $\ldots$ , m\} son las ocurrencias de atributos de X$_{0}$. Si la instrucción de aristas \{a$_{i}$ $\rightarrow$ a$_{i+1}$ | i = 1, $\ldots$ , m-1\} introduce un ciclo dentro de $ADP (q | p_{1}, p_{2}, \dots, p_{k})$, $\omega$ es incompatible con la proyección de $ADP (q | p_{1}, p_{2}, \dots, p_{k})$ sobre las ocurrencias de atributos de X$_{0}$, que es un subgrafo $DCG_{X_{0}}(q)$. Por lo tanto, $\omega$ debe ser incompatible con $DCG_{X_{0}}(q)$, lo cual contradice lo supuesto en el teorema. Esto prueba el punto \ref{th1:p1} del teorema.
 
 El orden total $\Psi$ computado por la función \textbtt{compute\_order} es compatible con $ADP (q | p_{1}, p_{2}, \dots, p_{k})$. Notar que el grafo $DCG_{X_{i}}(p_{i})$, de cada símbolo no terminal X$_{i}$ de la parte derecha, es un subgrafo de $ADP (q | p_{1}, p_{2}, \dots, p_{k})$. Por lo tanto, $\Psi$ es compatible con $DCG_{X_{i}}(p_{i})$, para cada símbolo no terminal X$_{i}$ del \textbtt{body}, que es, a su vez \textbtt{head} de la producción p$_{i}$.
 
@@ -141,17 +141,17 @@ $$
 Si\ (q,\omega)\in WL\ entonces\ \omega\ es\ compatible\ con\ DCG_{X_{0}}(q)
 $$
 
-El algoritmo \textbtt{compute\_plans} es un método iterativo, donde el primer $\omega$ es un orden $\mu$ arbitrario para los atributos del símbolo inicial $S$. Dado que no existe dependencias en los atributos del símbolo inicial, $\mu$ es trivialmente compatible con $DCG_{S}(q)$. Las iteraciones posteriores del algortimo \textbtt{compute\_plans} se aplican a ordenes $\omega$ que son proyeccciones de $\Psi$ para atributos de los símbolos no terminales $X_{i}$ del \textbtt{body} de la producción $p$, donde $p$ $\in$ al contexto inferior de la producción $q$ (teniendo en cuenta los posibles árboles sintácticos). Notar que $X_{i}$ es símbolo no terminal de la parte derecha de la producción $p$ y el símbolo \textbtt{head} de la producción $q$ y $\Psi$ es un orden de evaluación para las ocurrencias de los atributos en la producción $p$. Por el teorema \ref{th1} se cumple que los ordenes de las proyecciones de $\Psi$ son compatibles con $DCG_{X_{i}}(q)$.
+El algoritmo \textbtt{compute\_plans} es un método iterativo, donde el primer $\omega$ es un orden $\mu$ arbitrario para los atributos del símbolo inicial $S$. Dado que no existe dependencias en los atributos del símbolo inicial, $\mu$ es trivialmente compatible con $DCG_{S}(q)$. Las iteraciones posteriores del algoritmo \textbtt{compute\_plans} se aplican a ordenes $\omega$ que son proyecciones de $\Psi$ para atributos de los símbolos no terminales $X_{i}$ del \textbtt{body} de la producción $p$, donde $p$ $\in$ al contexto inferior de la producción $q$ (teniendo en cuenta los posibles árboles sintácticos). Notar que $X_{i}$ es símbolo no terminal de la parte derecha de la producción $p$ y el símbolo \textbtt{head} de la producción $q$ y $\Psi$ es un orden de evaluación para las ocurrencias de los atributos en la producción $p$. Por el teorema \ref{th1} se cumple que los ordenes de las proyecciones de $\Psi$ son compatibles con $DCG_{X_{i}}(q)$.
 
-De los puntos \ref{th:p1} y \ref{th:p2}, todos los ordenes de evaluación $\Psi$ computados por \textbtt{compute\_order} son compatibles con los ordenes parciales para $ADP (q | p_{1}, p_{2}, \dots, p_{k})$ $\cup$ $\omega$, por lo tanto, la evaluación es consistente para la producción $q$ cuando los atributos del símbolo \textbtt{head} de $q$ son evaluados en el orden $\omega$ y $p_{1}, p_{2}, \dots, p_{k}$ son producciones aplicadas a los símbolos no terminales del \textbtt{body} de $q$. Como el algoritmo es un método exaustivo, podemos afirmar que todas las producciones alcanzables $q$ y todos los ordenes $\omega$ necesarios son examinados por el algoritmo.
+De los puntos \ref{th:p1} y \ref{th:p2}, todos los ordenes de evaluación $\Psi$ computados por \textbtt{compute\_order} son compatibles con los ordenes parciales para $ADP (q | p_{1}, p_{2}, \dots, p_{k})$ $\cup$ $\omega$, por lo tanto, la evaluación es consistente para la producción $q$ cuando los atributos del símbolo \textbtt{head} de $q$ son evaluados en el orden $\omega$ y $p_{1}, p_{2}, \dots, p_{k}$ son producciones aplicadas a los símbolos no terminales del \textbtt{body} de $q$. Como el algoritmo es un método exhaustivo, se puede afirmar que todas las producciones alcanzables $q$ y todos los ordenes $\omega$ necesarios son examinados por el algoritmo.
 
 \end{proof}
 
-% Un resultado muy importante a tener en cuenta es el echo de que el algoritmo \ref{alg:planeval} genera la minima cantidad de planes que son necesarios para la evaluacion de una gramatica.
+% Un resultado muy importante a tener en cuenta es el hecho de que el algoritmo \ref{alg:planeval} genera la mínima cantidad de planes que son necesarios para la evaluación de una gramática.
 % 
 % Este resultado es expresado mediante un teorema (teorema \ref{teo:planes_plausibles}), pero antes de llegar al mismo es recomendable tener en cuenta algunos aspectos y definiciones.
 % 
-% En primer lugar, en todo grafo ADP se almacenan las dependencias entre instancias de atributos, segun; las \textit{dependencias directas}, las dependencias impuestas por el \textit{contexto superior} y las del \textit{contexto inferior}. Entonces, instancias diferentes de una producción $p$ tendrán las mismas dependencias directas (Grafo DP), pero podrán tener diferentes dependencias impuestas por los contextos inferiores y superiores. Estas, y demás observaciones deben tenerse en cuenta para la construcción de un plan de evaluacion. En consecuencia, es necesario determinar todas las \emph{dependencias posibles} entre las instancias de los atributos que ocurren en una producción para luego poder determinar todas las \emph{dependencias plausibles} entre los atributos que ocurren en una producción. 
+% En primer lugar, en todo grafo ADP se almacenan las dependencias entre instancias de atributos, según; las \textit{dependencias directas}, las dependencias impuestas por el \textit{contexto superior} y las del \textit{contexto inferior}. Entonces, instancias diferentes de una producción $p$ tendrán las mismas dependencias directas (Grafo DP), pero podrán tener diferentes dependencias impuestas por los contextos inferiores y superiores. Estas, y demás observaciones deben tenerse en cuenta para la construcción de un plan de evaluación. En consecuencia, es necesario determinar todas las \emph{dependencias posibles} entre las instancias de los atributos que ocurren en una producción para luego poder determinar todas las \emph{dependencias plausibles} entre los atributos que ocurren en una producción. 
 % 
 % \begin{definition} Una partición posible de un grafo de dependencias $G\_T=<V\_N,A>$ es una partición sobre $V\_N$ tal que dados dos instancias de atributos $X.a$ y $Y.b$, si $(X.a,Y.b) \in A$, entonces $[X.a] = [X.b]$ (están en la misma clase).
 % \end{definition}
@@ -166,14 +166,14 @@ De los puntos \ref{th:p1} y \ref{th:p2}, todos los ordenes de evaluación $\Psi$
 % \label{def:plan_espurios}
 % Dada una MAG, se define \textbf{plan espurio} a aquel plan de evaluación para el cual no es posible encontrar un AST para dicho plan.
 % 
-% NOTA: podriamos ver como: proviene de una particion posible que no puede ser plausible.
+% NOTA: Se podría ver como: proviene de una partición posible que no puede ser plausible.
 % \end{definition}
 % 
 % \begin{definition}
 % \label{def:plan_plausible}
 % Dada una MAG, se define \textbf{plan plausible} a aquel plan de evaluación para el cual existe al menos un AST para dicho plan.
 % 
-% NOTA: lo podriamos ver como: un plan es plausible si proviene de la union de particiones plausibles.
+% NOTA: se lo podría ver como: un plan es plausible si proviene de la union de particiones plausibles.
 % \end{definition}
 
 
@@ -181,18 +181,18 @@ De los puntos \ref{th:p1} y \ref{th:p2}, todos los ordenes de evaluación $\Psi$
 %\label{teo:planes_plausibles}
 %El algoritmo \ref{alg:planeval} genera planes consistentes con los ADP construidos.
 
-% El algoritmo \ref{alg:planeval} genera la minima cantidad de planes o dicho en otras palabras, genera solamente planes plausibles.
+% El algoritmo \ref{alg:planeval} genera la mínima cantidad de planes o dicho en otras palabras, genera solamente planes plausibles.
 
 %\underline{\emph{Demostración:}}
 
-% SACAR ESTE Y EL ANTERIOR DESDE EL PAPER DE WUU YANG DE CLASIFICACION.
+% SACAR ESTE Y EL ANTERIOR DESDE EL PAPER DE WUU YANG DE CLASIFICACIÓN.
 %\subsection{Teorema2}
 %\label{teo:ciclo_compute}
 %El algoritmo \ref{alg:compord} no introduce ciclos en los planes.
 
 %\subsection{Teorema3}
 %\label{teo:reglas_alcan}
-%El algoritmo \ref{alg:planeval} genera planes para todas las producciones alcanzables de la gramatica y tiene en cuenta todos los ordenes $\omega$ necesarios.
+%El algoritmo \ref{alg:planeval} genera planes para todas las producciones alcanzables de la gramática y tiene en cuenta todos los ordenes $\omega$ necesarios.
 
 \section{Algoritmo de cómputo de secuencias de visita}
 \label{sec:algseqvisit}
@@ -236,7 +236,7 @@ El primero es una barrida descendente en la que se seleccionan los planes de eva
 
 En el segundo recorrido, no precisamente se realiza en un sentido uniforme, sino que se navega descendente y ascendentemente, de acuerdo a la secuencia de visita correspondiente al plan seleccionado en la primera etapa. 
 
-La primera etapa es realizada en la funcion \textbtt{traverse}. Esta, tiene toda la información necesaria ya precargada, gracias al procesamiento previo de los anteriores algoritmos. Debe determinar el plan de evaluación, almacenado en $\Gamma$, armando la clave con la regla asociada al nodo corriente y las reglas asociadas de todos los hijos. El orden de evaluación de atributos $\omega$, le viene como parámetro, el cual corresponde con un plan de evaluación proyectado, que desde el contexto superior le impusieron. Una vez seleccionado el plan, también queda establecida la secuencia de visita, para el nodo.
+La primera etapa es realizada en la función \textbtt{traverse}. Esta, tiene toda la información necesaria ya precargada, gracias al procesamiento previo de los anteriores algoritmos. Debe determinar el plan de evaluación, almacenado en $\Gamma$, armando la clave con la regla asociada al nodo corriente y las reglas asociadas de todos los hijos. El orden de evaluación de atributos $\omega$, le viene como parámetro, el cual corresponde con un plan de evaluación proyectado, que desde el contexto superior le impusieron. Una vez seleccionado el plan, también queda establecida la secuencia de visita, para el nodo.
 
 Para continuar con el proceso, se debe seleccionar para cada hijo el plan proyectado desde $\Theta$, que será el orden que le imponen para la evaluación de sus atributos. Ver algoritmo \ref{alg:traverse}.
 
