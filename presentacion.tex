@@ -119,15 +119,21 @@
     \end{center}
     \pause
 
-    Características destables:
+    Características destacables:
     \begin{itemize}
         \pause
         \item Funciona sobre la familia MAG.
         \pause
-        \item Generación de mínima cantidad de planes.
+        \item La construcción de planes mantiene la propiedad de ``unicidad de planes''.
+        \pause
+        \item Construcción de planes solo para reglas alcanzables.
         \pause
         \item Generación de Evaluadores estáticos.
+        \pause
+        \item La generación de código produce una representación compacta de cada estructura. 
     \end{itemize}
+
+% \item Tanto el algoritmo de contrucción de planes, como el de secuencia de visitas mantienen propiedades de compatiblidad y consistencia con los grafos de dependecia aumentados (ADP).
 }
 
 \subsection{Motivación}
@@ -326,7 +332,7 @@
     \frametitle{Planes de evaluación}
 
     \begin{block}{}
-        Luego del análisis de las dependencias, los grafos ADP acícliclos inducen un orden entre las ecuaciones que deben computarse.
+        Luego del análisis de las dependencias, los grafos ADP acíclicos inducen un orden entre las ecuaciones que deben computarse.
     \end{block}
     \pause
 
@@ -485,7 +491,7 @@ Generation complete in: 0.372814 seconds.
     \frametitle{Lenguaje especificación de MAG}
 
     \begin{block}{Especificación}
-    La secciones que conforman la descripción de una MAG, se corresponden con las características de una gramática en esta familia.
+    La secciones que conforman la descripción de una MAG, se corresponden con las características de una gramática de atributos.
     \end{block}
     
 \begin{figure}[h]
@@ -838,7 +844,7 @@ rules
     \vspace{-0.5cm}
     \begin{block}{}
 	\begin{itemize}
-	    \item El chequeo de ciclicidad es realiza sobre los grafos ADP.
+	    \item El chequeo de ciclicidad es realizado sobre los grafos ADP.
 	    \pause
 	    \item Esta basado en el algoritmo de búsqueda en profundidad (Depth-first search) de \textbf{Boost} combinado con la creación de un ``visitador'' especializado.
 	    \pause
@@ -863,8 +869,14 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
 \frame{
     \frametitle{\maggen: Plan de evaluación}
 
+    Los grafos ADP, generados, son la entrada para la construcción de \textbf{planes de evaluación}.
+
     \begin{block}{Unicidad}
-	Para ADP generado se computará un plan de evaluación.
+    \begin{itemize}
+     \item Se mantiene un repositorio indexado para impedir elementos repetidos.
+     \item Cada índice de plan referencia a una posición de un \textit{vector de planes únicos}.
+     \item Optimización notable tanto en tiempo como en espacio.
+    \end{itemize}
     \end{block}
     \pause
         
@@ -945,7 +957,7 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
       \item Se basa en la aplicación de un recorrido sobre los planes de evaluación resolviendo las dependencias para evaluar los atributos.
     \end{itemize}
   \end{block}
-
+\pause
   \begin{exampleblock}{}
     \begin{tabular}{p{4cm} c p{5cm}}
     Plan de evaluación \textbf{$\{ Eq_{1}, Eq_{2}, \ldots Eq_{n}\}$}& $\Longrightarrow$ & Acciones capaces de moverse sobre un AST; \textbf{\{visit($node_{1}$), compute($Eq_{1}$),$\ldots$,  compute($Eq_{n}$)\}}
@@ -1006,7 +1018,7 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
     \begin{block}{}
          La etapa final de \maggen\ esta dada por la generación de código para el evaluador estático. Esta, produce dos archivos: \textit{interface} (.hpp) e \textit{implementación} (.cpp). Los archivos generados se vinculan con dos módulos estáticos, \texttt{Node.hpp} y \texttt{Node.cpp}.
     \end{block}
-    
+    \pause
     Los módulos generados contienen:
     
     \begin{itemize}
@@ -1030,7 +1042,7 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
             \begin{itemize}
                 \item \textbtt{traverse}: responsable de seleccionar el plan de evaluación para cada nodo no terminal.
             \end{itemize}
-
+\pause
         \item [Segunda recorrida del AST] se invoca a la función
             \begin{itemize}
                 \item \textbtt{eval\_visiter}: es un evaluador orientado a visitas, que debe computar los valores de los atributos de los nodos.
@@ -1038,12 +1050,13 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
     \end{description}
 }
 
-\subsection*{Usando magGen}
+
+\subsection{Usando magGen}
 
 \frame{
     \frametitle{Usando \maggen}
     \begin{block}{}
-     Luego de la instalacion, \maggen\ puede ser invocado desde la linea de comandos.
+     Luego de la instalación, \maggen\ puede ser invocado desde la linea de comandos.
     \end{block}
 
     \begin{exampleblock}{Argumentos de \maggen}
@@ -1086,8 +1099,6 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
     \tableofcontents[currentsection]
 }
 
-\subsection*{Evaluador generado}
-
 \frame{
     \frametitle{Evaluador generado}
     
@@ -1099,7 +1110,7 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
         \item \textbtt{Plan.hpp}.
         \item \textbtt{Node.hpp}.
     \end{itemize}
-    
+\pause  
     \begin{exampleblock}{}
         \begin{center}
             AST \hspace{1cm} $\Longrightarrow$ \hspace{1cm} \maggen \hspace{1cm} $\Longrightarrow$ \hspace{1cm} AST decorado.
@@ -1112,15 +1123,15 @@ La salida de \maggen\ cuando se detecta ciclicidad, es:
 \begin{block}{}
 Al ejecutar \maggen\ se generan, en la carpeta de salida, lo siguiente:
 \begin{itemize}
-\item Archivos Node.hpp, Node.cpp, $<eval>.cpp$, $<eval>.hpp$
+\item Archivos \textbf{Node.hpp}, \textbf{Node.cpp}, $\langle \textbf{eval}\rangle.\textbf{cpp}$, $\langle \textbf{eval}\rangle.\textbf{hpp}$
 \item Archivo \textbf{grammar.log} con la gramatica parseada.
 \item Carpeta \textbf{plan\_project} con los planes proyectados.
 \item Carpeta \textbf{plans}, con los planes calculados.
-\item Carpeta \textbf{graph}, que contiene subcarpetas con los tipos de grafos contruidos.
-
+\item Carpeta \textbf{graph}, que contiene subcarpetas con los tipos de grafos construidos.
 \end{itemize}
 \end{block}
 
+\pause
 Tanto los planes como los grafos son generados en formato \texttt{dot}. Los mismo pueden ser convertido a imagen (png) utilizando el script que se encuentra en el paquete de la herramienta. 
 
 }
@@ -1208,16 +1219,15 @@ Tanto los planes como los grafos son generados en formato \texttt{dot}. Los mism
 %    \end{block}
 %}
 
-
-\subsection*{Evaluador generado}
-
-\frame {
-    \frametitle{Evaluador generado}
-
-    \begin{block}{}
-	    bla bla
-    \end{block}
-}
+% \subsection*{Evaluador generado}
+% 
+% \frame {
+%     \frametitle{Evaluador generado}
+% 
+%     \begin{block}{}
+% 	    bla bla
+%     \end{block}
+% }
 
 \section{Performance}
 
@@ -1234,9 +1244,9 @@ Tanto los planes como los grafos son generados en formato \texttt{dot}. Los mism
     En un principio cada plan contenía el contexto y la lista de ecuaciones que lo definían. Esto llevo a una \textbf{saturación en la cantidad de planes}.
 
     \begin{exampleblock}{}
-        En la mayoria de los casos la explosión de planes se producía por la cantidad de contextos: \textbf{Planes repetidos}
+        En la mayoría de los casos la explosión de planes se producía por la cantidad de contextos: \textbf{Planes repetidos}
     \end{exampleblock}
-
+\pause
     \begin{block}{}
         \begin{itemize}
             \item La unicidad de los planes permitió una \textbf{reducción notable} en la cantidad de planes.
@@ -1250,7 +1260,7 @@ Tanto los planes como los grafos son generados en formato \texttt{dot}. Los mism
 \frame{
     \frametitle{Medidas de performance: Unicidad de planes (cont.)}
 
-   \begin{block}{Ejemplo Aritmetica de expresiones}
+   \begin{block}{Ejemplo Aritmética de expresiones}
         \begin{figure}[h]
         \begin{center}
         \setlength{\doublerulesep}{0mm}
@@ -1279,7 +1289,7 @@ Tanto los planes como los grafos son generados en formato \texttt{dot}. Los mism
         \underline{\textbf{Computadora}}: Microprocesador Intel Core 2 Duo T5550 1.83 GHz, 2 MB memoria caché L2, 3 GB memoria RAM a 667 MHz.\\
         \underline{\textbf{Sistema operativo}}: GNU/Linux Ubuntu 10.04, Kernel 2.6.32-23, GNU g++ 4.4.3.}
     \end{block}
-
+\pause
     \begin{block}{Tiempos de generación de evaluadores de \maggen}
         \begin{figure}[h]
         \begin{center}
@@ -1289,7 +1299,7 @@ Tanto los planes como los grafos son generados en formato \texttt{dot}. Los mism
             \hline
             \rowcolor{gris} Input / Spirit           & \textbf{1.8.X}   & \textbf{2.3}   \\ \hline
             \rowcolor{white}\textbtt{MAG Wuu Yang}   & $\sim$0.087 sec & $\sim$0.084 sec \\ \hline
-            \rowcolor{white}\textbtt{MAG Aritmetica} & $\sim$0.590 sec & $\sim$0.450 sec \\ \hline
+            \rowcolor{white}\textbtt{MAG Aritmética} & $\sim$0.590 sec & $\sim$0.450 sec \\ \hline
         \end{tabular}
         \end{center}
         \end{figure}
@@ -1310,12 +1320,12 @@ Tanto los planes como los grafos son generados en formato \texttt{dot}. Los mism
             \hline
             \rowcolor{gris} Input / g++          & \textbf{sin -O3} & \textbf{con -O3}             \\ \hline
             \rowcolor{white}\textbtt{Wuu Yang}   & $\sim$1.51 sec   & $\sim$2.55 sec               \\ \hline
-            \rowcolor{white}\textbtt{Aritmetica} & $\sim$5.98 sec   & \textbf{$\sim$1 min 5.6 sec} \\ \hline
+            \rowcolor{white}\textbtt{Aritmética} & $\sim$5.98 sec   & \textbf{$\sim$1 min 5.6 sec} \\ \hline
         \end{tabular}
         \end{center}
         \end{figure}
     \end{block}
-
+\pause
     \begin{block}{Tamaños del ejecutable del evaluador generado}
         \begin{figure}[h]
         \begin{center}
@@ -1325,7 +1335,7 @@ Tanto los planes como los grafos son generados en formato \texttt{dot}. Los mism
             \hline
             \rowcolor{gris} Input / g++          & \textbf{sin -O3} & \textbf{con -O3} \\ \hline
             \rowcolor{white}\textbtt{Wuu Yang}   & 104 Kb           & \ 48 Kb          \\ \hline
-            \rowcolor{white}\textbtt{Aritmetica} & 516 Kb           & 384 Kb           \\ \hline
+            \rowcolor{white}\textbtt{Aritmética} & 516 Kb           & 384 Kb           \\ \hline
         \end{tabular}
         \end{center}
         \end{figure}
@@ -1369,6 +1379,8 @@ Tanto los planes como los grafos son generados en formato \texttt{dot}. Los mism
     \frametitle{Extensiones}
 
     \begin{itemize}
+        \item Extender \maggen\ para gramáticas dentro de la familia $NC(K)$.
+        \pause 
 	    \item Extensiones al lenguaje de especificación, como módulos a través de \texttt{\#include}. Esto engloba los puntos siguientes:
 
 	        \begin{itemize}
@@ -1381,16 +1393,9 @@ Tanto los planes como los grafos son generados en formato \texttt{dot}. Los mism
     \end{itemize}
 }
 
+\section*{Bibliografía}
 
-\frame {
-    \begin{block}{}
-	    bla bla
-    \end{block}
-}
-
-\section{Bibliografía}
-
-\frame{
+\frame[allowframebreaks]{
 	\frametitle{Bibliografía}\scriptsize
 
 	\begin{thebibliography}{66}
@@ -1411,13 +1416,13 @@ Tanto los planes como los grafos son generados en formato \texttt{dot}. Los mism
 
 	    \bibitem {kastens} U. Kastens. 1980. \textit{Ordered Attribute Grammars}. Acta Informática. Vol. 13, pp. 229-256.
 
-	\end{thebibliography}
-}
-
-\frame{
-	\frametitle{Bibliografía (Cont.)}
-    \scriptsize
-	\begin{thebibliography}{66}
+% 	\end{thebibliography}
+% }
+% 
+% \frame{
+% 	\frametitle{Bibliografía (Cont.)}
+%     \scriptsize
+% 	\begin{thebibliography}{66}
 	    \bibitem{intri-exc} Jazayeri, Ogden and Rounds. 1975. \emph{The intrinsically exponential complexity of the circularity problem for attribute grammars}. Comm. ACM 18. December 2, Pag: 697-706.
 	    
 	    \bibitem {meyer} Bertrand, Meyer (1997). \textit{Object-Oriented Software Construction}. Segunda edición. Prentice Hall Professional Technical Reference. Santa Barbara (California).
@@ -1441,5 +1446,12 @@ Tanto los planes como los grafos son generados en formato \texttt{dot}. Los mism
 	    \bibitem{boost} \textbf{Boost}. \textit{Boost C++ Libraries}. URL: \urllink{http://www.boost.org/}.
 	\end{thebibliography}
 }
+    \frame {
+        \centerline{\Huge{\textbf{?`Preguntas?}}}
+    }
+
+    \frame {
+        \centerline{\Huge{\textbf{Gracias}}}
+    }
 
 \end{document}
