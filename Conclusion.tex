@@ -20,13 +20,21 @@ En la siguiente sección se abordarán aspectos importantes relacionados a los r
 Como conclusiones específicas sobre \maggen, se obtuvo una herramienta modularizada, eficiente y completamente desarrollada en C++, que cumplió los objetivos propuestos tanto de parte del grupo de desarrollo, como de la directiva del proyecto. Además de que no se conocen herramientas que trabajen sobre MAG, en este sentido, \maggen\ adquiere mayor utilidad. Se pueden resumir las características de \maggen\ en los siguientes puntos:
 
 \begin{itemize}
-\item El lenguaje de especificación de \maggen\ para la MAG entrada, se basa en una sintaxis simple y amplia que permite lograr extensiones para el propio lenguaje.
+\item El lenguaje de especificación de \maggen\ para una AG tiene sintaxis transparente, concisa y amplia, facilitando la traducción de cualquier gramática de atributos.
 
-\item La herramienta fue desarrollada íntegramente en C++ y el evaluador, también es generado como un modulo C++. 
+\item La herramienta fue desarrollada íntegramente en C++, como así también el evaluador generado. 
 
-\item Esta herramienta no genera planes ``\textbf{espurios}'', es decir, planes que nunca se podrían dar en un AST concreto, como sucede en las \textbf{ANCAG}, evitando de este modo informar circularidades absurdas a efectos prácticos.
+\item La construcción de secuencias de visitas se logro mediante un algoritmo simple y eficiente que genera la mínima cantidad de secuencias visita.
 
-\item El evaluador generado es estático, lo que asegura que no existe un ``\textbf{overhead}'' en el cómputo de la evaluación, ya que el mismo se llevó a cabo mientras se generaba el evaluador propiamente.
+\item Tanto el algoritmo de contrucción de planes, como el de secuencia de visitas mantienen propiedades de compatibilidad y consistencia con los grafos de dependencia aumentados (ADP).
+
+\item La construcción de planes se efectúa exhaustivamente sólo sobre las reglas alcanzables de la gramática.
+
+
+ \item El evaluador generado es \textit{estático}, lo que garantiza que no hay procesamiento ``overhead'' en la evaluación, ya que el proceso de cómputo de planes de evaluación fue realizado por \maggen.
+ 
+ \item La generación de código produce una representación compacta de cada estructura necesaria para la evaluación. Un ejemplo de ello, es que los planes no son generados en su totalidad, sino sólo sus contextos, esto debido a que la evaluación se realiza a través de las secuencias de visita.
+
 \end{itemize}
 
 \section{Extensiones}
@@ -34,17 +42,12 @@ Algunas de las posibles extensiones que se tienen en cuenta para \maggen\ se det
 \begin{itemize}
 \item Extender \maggen\ para gramáticas dentro de la familia $NC(K)$.
 
-\item Definir una API para herramientas externas de entrada y salida de árboles. \textbf{A-Terms} como ejemplo.
-
-\item Extensiones al lenguaje de especificación, como módulos a través de \textbtt{\#include}. Esto engloba los puntos siguientes:
-
-\begin{itemize}
-\item Disponer de espacios de nombres, y operadores que permitan referirse a estos espacios de nombres.
-
-\item Redefinición o extensión de reglas incluidas, un estilo de sobrecarga.
-
-\item Permitir el adicionado de atributos a símbolos pertenecientes a otros módulos.
-\end{itemize}
+\item Desarrollo de bibliotecas de funciones de utilidad de uso común en especificaciones, 
+como manejo de ambientes, algoritmos de análisis estático (interpretación abstracta) y
+generación de código.
+\item Extensión de especificaciones, al estilo de las GA orientadas a objetos con mecanismos como redefinición o delegación (forwarding) de reglas para permitir un lenguaje de especificación más modular.
+\item Introducción de sentencias de acceso no local de atributos para simplificar las
+especificaciones.
 
 \end{itemize}
 
@@ -54,14 +57,17 @@ Entre los principales trabajos a futuro para \maggen\ se encuentran:
 
 \item Implementar la generación de código al estilo ``\textit{plugins}''. Lo que permitiría extensiones varias, transparentes y elegantes para generar código en diferentes lenguajes. Esto implicaría la definición de una API del motor de generación de código.
 
-\item Definir una API para la construcción de los AST de entrada al evaluador generado, lo que permitiría que herramientas externas puedan generar los AST entrada.
+\item Definir una API para la construcción de los AST de entrada al evaluador generado, lo que permitiría que herramientas externas puedan generar los AST entrada (al estilo A-terms).
 % Este puntos podría ser analizado teniendo en cuenta los A-Terms como ejemplo.
 
-\item Pruebas de rendimiento como comparaciones con otras herramientas similares.
+% \item Pruebas de rendimiento como comparaciones con otras herramientas similares.
 % (Silver, definir sintaxis y semántica, es modular, puede que genere evaluador dinámico)
 
 \item Permitir definir atributos de \textbf{alto orden}, es decir, atributos que pueden ser un árbol. Para los cuales, su evaluación supondría un nuevo proceso de igual complejidad que el necesario para decorar al AST de entrada.
 
-\item Implementar como especies de templates para los atributos.
+\item Permitir definiciones de plantillas de atributos para lograr mayor genericidad en las especificaciones.
 
 \end{itemize}
+
+
+\maggen\ se encuentra disponible en \urllink{http://genevalmag.googlecode.com/}
