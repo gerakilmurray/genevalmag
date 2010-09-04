@@ -1,0 +1,13 @@
+<map id="G" name="G">
+<area shape="rect" href="$namespaceutilities.html#a28f2ace508b6ea5bc7af05b84f0b2487" title="utilities::clean_output_folder" alt="" coords="377,5,561,35"/>
+<area shape="rect" href="$namespaceutilities.html#a644dfdb507e47adf60e6984d28e080fd" title="utilities::cleaning_tabs" alt="" coords="395,59,544,88"/>
+<area shape="rect" href="$namespacegenevalmag.html#a009f31ef1d07f4ca8786f9e2cc813279" title="genevalmag::FILE_DCG_GRAPH" alt="" coords="361,112,577,141"/>
+<area shape="rect" href="$namespaceutilities.html#a0e49bfde1f01bb5567770fc492e6929f" title="utilities::generate_names_instance" alt="" coords="359,165,580,195"/>
+<area shape="rect" href="$classgenevalmag_1_1Rule.html#a4d67205ef292350a440a10f7bbdda0e1" title="genevalmag::Rule::get_left_symbol" alt="" coords="357,219,581,248"/>
+<area shape="rect" href="$classgenevalmag_1_1Symbol.html#afcd9c46fe546ec9f1b62caeb99377917" title="genevalmag::Symbol::get_name" alt="" coords="637,376,845,405"/>
+<area shape="rect" href="$classgenevalmag_1_1Attr__grammar.html#a41be9d108df7f8159bd989a5c174be87" title="genevalmag::Attr_grammar::get_rules" alt="" coords="349,323,589,352"/>
+<area shape="rect" href="$namespacegenevalmag.html#a85c614ca01eca9ab0edd6bdf400259fd" title="genevalmag::PATH_OUTPUT_DCG" alt="" coords="356,376,583,405"/>
+<area shape="rect" href="$namespaceutilities.html#ae0c73d526799122fa0d85cd45b6d4fbb" title="utilities::print_graph" alt="" coords="403,429,536,459"/>
+<area shape="rect" href="$classgenevalmag_1_1Rule.html#ab29cbf1ccafc2585524ee9cdbe58362b" title="genevalmag::Rule::to_string_not_eqs" alt="" coords="352,483,587,512"/>
+<area shape="rect" href="$namespaceutilities.html#a87fbb9605f1b59c54b95e708e1e9935b" title="utilities::create_folder" alt="" coords="669,5,813,35"/>
+</map>

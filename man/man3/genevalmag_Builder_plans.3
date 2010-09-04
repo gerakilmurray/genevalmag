@@ -1,0 +1,534 @@
+.TH "genevalmag::Builder_plans" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::Builder_plans \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Builder_plans.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBBuilder_plans\fP (const \fBAttr_grammar\fP &attribute_grammar)"
+.br
+.ti -1c
+.RI "\fB~Builder_plans\fP ()"
+.br
+.ti -1c
+.RI "unsigned short \fBbuild_plans\fP ()"
+.br
+.ti -1c
+.RI "bool \fBsave_all_plans\fP (const string path_output) const "
+.br
+.ti -1c
+.RI "bool \fBsave_all_plans_project\fP (const string path_output) const "
+.br
+.ti -1c
+.RI "const \fBOrder_rule\fP & \fBget_context_unique\fP (const unsigned short i_context) const "
+.br
+.ti -1c
+.RI "const vector< \fBOrder_rule\fP > & \fBget_contexts_uniques\fP () const "
+.br
+.ti -1c
+.RI "const map< \fBKey_plan\fP, unsigned short > & \fBget_plans\fP () const "
+.br
+.ti -1c
+.RI "const vector< \fBOrder_eval_eq\fP > & \fBget_plans_uniques\fP () const "
+.br
+.ti -1c
+.RI "const map< \fBKey_plan_project\fP, unsigned short > & \fBget_plans_project\fP () const "
+.br
+.ti -1c
+.RI "const vector< \fBOrder_eval_eq\fP > & \fBget_plans_project_uniques\fP () const "
+.br
+.ti -1c
+.RI "const unsigned short & \fBget_init_order\fP () const "
+.br
+.ti -1c
+.RI "const unsigned short \fBget_index_plan\fP (const map< \fBKey_plan\fP, unsigned short >::const_iterator it_plan) const "
+.br
+.ti -1c
+.RI "const map< \fBKey_plan_project\fP, unsigned short >::const_iterator \fBget_plan_project\fP (const \fBKey_plan_project\fP &key) const "
+.br
+.ti -1c
+.RI "void \fBsave_all_graphs\fP (const string path_output) const "
+.br
+.ti -1c
+.RI "void \fBsave_cyclic_graphs\fP (const string path_output) const "
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBgenerates_topological_order\fP (const \fBGraph\fP &graph, \fBOrder_eval_eq\fP &result_order, const \fBContext_rule\fP &context_rule) const "
+.br
+.ti -1c
+.RI "\fBOrder_eval_eq\fP \fBcompute_order\fP (const \fBGraph\fP &graph_adp, unsigned short index_order, const \fBContext_rule\fP &context_rule)"
+.br
+.ti -1c
+.RI "bool \fBgenerate_plans\fP ()"
+.br
+.ti -1c
+.RI "bool \fBgenerate_graphs\fP ()"
+.br
+.ti -1c
+.RI "unsigned short \fBreturn_index_context\fP (const \fBOrder_rule\fP &order)"
+.br
+.ti -1c
+.RI "unsigned short \fBreturn_index_plan\fP (const \fBOrder_eval_eq\fP &order)"
+.br
+.ti -1c
+.RI "unsigned short \fBreturn_index_plan_p\fP (const \fBOrder_eval_eq\fP &order)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "const \fBAttr_grammar\fP & \fBattr_grammar\fP"
+.br
+.RI "\fIReferences to the attribute grammar. \fP"
+.ti -1c
+.RI "vector< \fBOrder_rule\fP > \fBcontexts_uniques\fP"
+.br
+.RI "\fIStore all different context rule generates in the grammar. \fP"
+.ti -1c
+.RI "map< \fBKey_plan\fP, unsigned short > \fBeval_plans\fP"
+.br
+.RI "\fIStore all evaluation plans of the grammar. Saves index of plans_uniques vector. 'ro' function. Wuu Yang's paper. \fP"
+.ti -1c
+.RI "vector< \fBOrder_eval_eq\fP > \fBplans_uniques\fP"
+.br
+.ti -1c
+.RI "map< \fBKey_plan_project\fP, unsigned short > \fBplans_project\fP"
+.br
+.RI "\fIStore all evaluation plans projects of the grammar.Saves index of plans_project_uniques vector. 'theta' function. Wuu Yang's paper. \fP"
+.ti -1c
+.RI "vector< \fBOrder_eval_eq\fP > \fBplans_project_uniques\fP"
+.br
+.ti -1c
+.RI "unsigned short \fBinit_order_ag\fP"
+.br
+.RI "\fIStore the initial evaluation order of the attributes of the initial symbol. \fP"
+.ti -1c
+.RI "\fBBuilder_graphs\fP \fBbuild_graphs\fP"
+.br
+.RI "\fIStores all graphs DP, DOWN, DCG and ADP, generated for the grammar's analisys. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 254 of file Builder_plans.h.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::Builder_plans::Builder_plans (const \fBAttr_grammar\fP & attribute_grammar)"Constructor empty of Builder plans. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIattribute_grammar\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Constructor empty of Builder plan. 
+.PP
+Definition at line 34 of file Builder_plans.cpp.
+.SS "genevalmag::Builder_plans::~Builder_plans ()"Destructor of Builder plans. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Destructor of Builder plan. 
+.PP
+Definition at line 43 of file Builder_plans.cpp.
+.SH "Member Function Documentation"
+.PP 
+.SS "unsigned short genevalmag::Builder_plans::build_plans ()"Generates and saves all evaluation's plans for the \fBAttribute\fP Grammar.
+.PP
+Return: 0: when all success process. 1: when detects cilcyc graph. 2: when detects error in the graph generation. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Return: 0: when all success process. 1: when detects cilcyc graph. 2: when detects error in the graph generation. 
+.PP
+Definition at line 521 of file Builder_plans.cpp.
+.PP
+References build_graphs, genevalmag::Builder_graphs::check_cyclic_adp_dependencies(), generate_graphs(), and generate_plans().
+.SS "\fBOrder_eval_eq\fP genevalmag::Builder_plans::compute_order (const \fBGraph\fP & graph_adp, unsigned short index_order, const \fBContext_rule\fP & context_rule)\fC [private]\fP"Compute the rule's order. The changes are applies about paramenter 'result_order'. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIgraph_adp\fP 
+.br
+\fIindex_order\fP 
+.br
+\fIcontext_rule\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Compute the rule's order. The changes are applies about paramenter 'result_order'. 
+.PP
+Definition at line 134 of file Builder_plans.cpp.
+.PP
+References attr_grammar, generates_topological_order(), genevalmag::Attr_grammar::get_eq_l_value(), plans_project_uniques, and utilities::return_vertex().
+.PP
+Referenced by generate_plans().
+.SS "bool genevalmag::Builder_plans::generate_graphs ()\fC [private]\fP"Generates all graphs for attribute grammar: DP, DOWN, DCG and ADP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates all graphs for attribute grammar: DP, DOWN, DCG and ADP. 
+.PP
+Definition at line 66 of file Builder_plans.cpp.
+.PP
+References build_graphs, genevalmag::Builder_graphs::compute_adp_graph(), genevalmag::Builder_graphs::compute_dcg(), genevalmag::Builder_graphs::compute_dependency_graphs(), and genevalmag::Builder_graphs::compute_down_graph().
+.PP
+Referenced by build_plans().
+.SS "bool genevalmag::Builder_plans::generate_plans ()\fC [private]\fP"Generates and saves all evaluation's plans for the \fBAttribute\fP Grammar. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates and saves all evaluation's plans for the \fBAttribute\fP Grammar. 
+.PP
+Definition at line 403 of file Builder_plans.cpp.
+.PP
+References attr_grammar, build_graphs, compute_order(), genevalmag::c_rule::context, genevalmag::defined_work(), eval_plans, genevalmag::k_w::father, genevalmag::c_rule::father, generates_topological_order(), genevalmag::Builder_graphs::get_adp_graphs(), genevalmag::Builder_graphs::get_dcg_graph(), genevalmag::Attr_grammar::get_rule(), genevalmag::Attr_grammar::get_rules(), genevalmag::k_plan::id_plan, genevalmag::k_p_project::id_plan_project, genevalmag::k_w::id_rule, genevalmag::k_p_project::index_ocurrence, init_order_ag, genevalmag::i_w::item, genevalmag::i_w::order_attr, genevalmag::k_plan::plan, plans_project, genevalmag::purge_plan_with(), return_index_context(), return_index_plan(), return_index_plan_p(), and genevalmag::k_p_project::symbol_project.
+.PP
+Referenced by build_plans().
+.SS "void genevalmag::Builder_plans::generates_topological_order (const \fBGraph\fP & graph, \fBOrder_eval_eq\fP & result_order, const \fBContext_rule\fP & context_rule) const\fC [private]\fP"Applies a topological order at graph. The changes are applies about paramenter 'result_order'. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIgraph\fP 
+.br
+\fIresult_order\fP 
+.br
+\fIcontext_rule\fP Applies a topological order at graph. The changes are applies about paramenter 'result_order'. 
+.RE
+.PP
+
+.PP
+Definition at line 90 of file Builder_plans.cpp.
+.PP
+References attr_grammar, genevalmag::c_rule::context, genevalmag::Symbol::equals(), genevalmag::c_rule::father, genevalmag::Expr_instance::get_attr(), genevalmag::Attr_grammar::get_index_eq_with_context(), genevalmag::Rule::get_left_symbol(), genevalmag::Attr_grammar::get_rule(), genevalmag::Expr_instance::get_symb(), and genevalmag::Attribute::is_inherit().
+.PP
+Referenced by compute_order(), and generate_plans().
+.SS "const \fBOrder_rule\fP & genevalmag::Builder_plans::get_context_unique (const unsigned short i_context) const"Returns the context rule unique in this index.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIi_context\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Returns the context rule unique in this index. 
+.PP
+Definition at line 543 of file Builder_plans.cpp.
+.PP
+References contexts_uniques.
+.PP
+Referenced by genevalmag::Builder_visit_sequences::generate_visit_sequences().
+.SS "const vector< \fBOrder_rule\fP > & genevalmag::Builder_plans::get_contexts_uniques () const"Returns all contexts rule uniques. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns all contexts rule uniques. 
+.PP
+Definition at line 551 of file Builder_plans.cpp.
+.PP
+References contexts_uniques.
+.PP
+Referenced by genevalmag::Builder_code::generate_initialize_context().
+.SS "const unsigned short genevalmag::Builder_plans::get_index_plan (const map< \fBKey_plan\fP, unsigned short >::const_iterator it_plan) const"Returns the index inside the map of the plan that passed as parameter. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIit_plan\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Returns the index inside the map of the plan that passed as parameter. 
+.PP
+Definition at line 599 of file Builder_plans.cpp.
+.PP
+References eval_plans.
+.SS "const unsigned short & genevalmag::Builder_plans::get_init_order () const"Returns the intial order of attributes of the initial symbol. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the intial order of attributes of the initial symbol. 
+.PP
+Definition at line 591 of file Builder_plans.cpp.
+.PP
+References init_order_ag.
+.PP
+Referenced by genevalmag::Builder_code::generate_evaluator().
+.SS "const map< \fBKey_plan_project\fP, unsigned short >::const_iterator genevalmag::Builder_plans::get_plan_project (const \fBKey_plan_project\fP & key) const"Returns an constant iterator of a project plan with key equals at the key that passed as parameter. Always finds the element. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIkey\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Returns an constant iterator of a project plan with key equals at the key that passed as parameter. Always finds the element. 
+.PP
+Definition at line 618 of file Builder_plans.cpp.
+.PP
+References plans_project.
+.SS "const map< \fBKey_plan\fP, unsigned short > & genevalmag::Builder_plans::get_plans () const"Returns all evaluations plans. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns all evaluations plans. 
+.PP
+Definition at line 559 of file Builder_plans.cpp.
+.PP
+References eval_plans.
+.PP
+Referenced by genevalmag::Builder_code::generate_initialize_plans(), and genevalmag::Builder_visit_sequences::generate_visit_sequences().
+.SS "const map< \fBKey_plan_project\fP, unsigned short > & genevalmag::Builder_plans::get_plans_project () const"Returns all evaluations plans project. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns all evaluations plans project. 
+.PP
+Definition at line 575 of file Builder_plans.cpp.
+.PP
+References plans_project.
+.PP
+Referenced by genevalmag::Builder_code::generate_initialize_plan_proj().
+.SS "const vector< \fBOrder_eval_eq\fP > & genevalmag::Builder_plans::get_plans_project_uniques () const"Returns all evaluations plans project uniques. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns all evaluations plans project uniques. 
+.PP
+Definition at line 583 of file Builder_plans.cpp.
+.PP
+References plans_project_uniques.
+.SS "const vector< \fBOrder_eval_eq\fP > & genevalmag::Builder_plans::get_plans_uniques () const"Returns all evaluations plans uniques. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns all evaluations plans uniques. 
+.PP
+Definition at line 567 of file Builder_plans.cpp.
+.PP
+References plans_uniques.
+.PP
+Referenced by genevalmag::Builder_visit_sequences::generate_visit_sequences().
+.SS "unsigned short genevalmag::Builder_plans::return_index_context (const \fBOrder_rule\fP & order)\fC [private]\fP"Returns the index in the vector of context, or inserts in the last position. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIorder\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Returns the index in the vector of context, or inserts in the last position. 
+.PP
+Definition at line 353 of file Builder_plans.cpp.
+.PP
+References contexts_uniques.
+.PP
+Referenced by generate_plans().
+.SS "unsigned short genevalmag::Builder_plans::return_index_plan (const \fBOrder_eval_eq\fP & order)\fC [private]\fP"Returns the index in the vector of plans, or inserts in the last position. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIorder\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Returns the index in the vector of plans, or inserts in the last position. 
+.PP
+Definition at line 387 of file Builder_plans.cpp.
+.PP
+References plans_uniques, and genevalmag::return_index_vec().
+.PP
+Referenced by generate_plans().
+.SS "unsigned short genevalmag::Builder_plans::return_index_plan_p (const \fBOrder_eval_eq\fP & order)\fC [private]\fP"Returns the index in the vector of plans projects, or inserts in the last position. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIorder\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Returns the index in the vector of plans projects, or inserts in the last position. 
+.PP
+Definition at line 395 of file Builder_plans.cpp.
+.PP
+References plans_project_uniques, and genevalmag::return_index_vec().
+.PP
+Referenced by generate_plans().
+.SS "void genevalmag::Builder_plans::save_all_graphs (const string path_output) const"Saves all graphs generated as the analysis of the dependencies between attributes. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath_output\fP Saves all graphs generated as the analysis of the dependencies between attributes. 
+.RE
+.PP
+
+.PP
+Definition at line 50 of file Builder_plans.cpp.
+.PP
+References build_graphs, and genevalmag::Builder_graphs::save_all_graphs().
+.SS "bool genevalmag::Builder_plans::save_all_plans (const string path_output) const"Saves all plans. Creates a graph that represents the plan and uses print_graph with dot. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath_output\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Saves all plans. Creates a graph that represents the plan and uses print_graph with dot. 
+.PP
+Definition at line 171 of file Builder_plans.cpp.
+.PP
+References attr_grammar, utilities::clean_output_folder(), utilities::cleaning_tabs(), contexts_uniques, eval_plans, genevalmag::Attr_grammar::get_eq(), genevalmag::Attr_grammar::get_rules(), genevalmag::PATH_OUT_PLAN(), plans_project_uniques, plans_uniques, utilities::print_graph(), genevalmag::Rule::to_string_not_eqs(), and utilities::write_inf_context().
+.SS "bool genevalmag::Builder_plans::save_all_plans_project (const string path_output) const"Saves all proyected's plans. Creates a graph that represents the plan and uses print_graph with dot. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath_output\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Saves all proyected's plans. Creates a graph that represents the plan and uses print_graph with dot. 
+.PP
+Definition at line 242 of file Builder_plans.cpp.
+.PP
+References attr_grammar, utilities::clean_output_folder(), utilities::cleaning_tabs(), contexts_uniques, genevalmag::Attr_grammar::get_eq(), genevalmag::Attr_grammar::get_rules(), genevalmag::PATH_OUT_PLAN_PROJECT(), plans_project, plans_project_uniques, utilities::print_graph(), genevalmag::Rule::to_string_not_eqs(), and utilities::write_inf_context().
+.SS "void genevalmag::Builder_plans::save_cyclic_graphs (const string path_output) const"Saves the graphs generated as the analysis of the dependencies between attributes, which demonstrate cyclicity. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath_output\fP Saves the graphs generated as the analysis of the dependencies between attributes, which demonstrate cyclicity. 
+.RE
+.PP
+
+.PP
+Definition at line 58 of file Builder_plans.cpp.
+.PP
+References build_graphs, and genevalmag::Builder_graphs::save_cyclic_graphs().
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::Builder_plans::attr_grammar\fP\fC [private]\fP"
+.PP
+References to the attribute grammar. 
+.PP
+Definition at line 261 of file Builder_plans.h.
+.PP
+Referenced by compute_order(), generate_plans(), generates_topological_order(), save_all_plans(), and save_all_plans_project().
+.SS "\fBgenevalmag::Builder_plans::build_graphs\fP\fC [private]\fP"
+.PP
+Stores all graphs DP, DOWN, DCG and ADP, generated for the grammar's analisys. 
+.PP
+Definition at line 295 of file Builder_plans.h.
+.PP
+Referenced by build_plans(), generate_graphs(), generate_plans(), save_all_graphs(), and save_cyclic_graphs().
+.SS "\fBgenevalmag::Builder_plans::contexts_uniques\fP\fC [private]\fP"
+.PP
+Store all different context rule generates in the grammar. 
+.PP
+Definition at line 267 of file Builder_plans.h.
+.PP
+Referenced by get_context_unique(), get_contexts_uniques(), return_index_context(), save_all_plans(), and save_all_plans_project().
+.SS "\fBgenevalmag::Builder_plans::eval_plans\fP\fC [private]\fP"
+.PP
+Store all evaluation plans of the grammar. Saves index of plans_uniques vector. 'ro' function. Wuu Yang's paper. 
+.PP
+Definition at line 274 of file Builder_plans.h.
+.PP
+Referenced by generate_plans(), get_index_plan(), get_plans(), and save_all_plans().
+.SS "\fBgenevalmag::Builder_plans::init_order_ag\fP\fC [private]\fP"
+.PP
+Store the initial evaluation order of the attributes of the initial symbol. 
+.PP
+Definition at line 289 of file Builder_plans.h.
+.PP
+Referenced by generate_plans(), and get_init_order().
+.SS "\fBgenevalmag::Builder_plans::plans_project\fP\fC [private]\fP"
+.PP
+Store all evaluation plans projects of the grammar.Saves index of plans_project_uniques vector. 'theta' function. Wuu Yang's paper. 
+.PP
+Definition at line 282 of file Builder_plans.h.
+.PP
+Referenced by generate_plans(), get_plan_project(), get_plans_project(), and save_all_plans_project().
+.SS "vector< \fBOrder_eval_eq\fP > \fBgenevalmag::Builder_plans::plans_project_uniques\fP\fC [private]\fP"
+.PP
+Definition at line 283 of file Builder_plans.h.
+.PP
+Referenced by compute_order(), get_plans_project_uniques(), return_index_plan_p(), save_all_plans(), and save_all_plans_project().
+.SS "vector< \fBOrder_eval_eq\fP > \fBgenevalmag::Builder_plans::plans_uniques\fP\fC [private]\fP"
+.PP
+Definition at line 275 of file Builder_plans.h.
+.PP
+Referenced by get_plans_uniques(), return_index_plan(), and save_all_plans().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

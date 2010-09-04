@@ -1,0 +1,70 @@
+.TH "src/Parser/Semantics_checks.cpp" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/Parser/Semantics_checks.cpp \- 
+.PP
+Implementation of the methods the \fBSemantics_checks.h\fP.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio.h>\fP
+.br
+\fC#include <stdlib.h>\fP
+.br
+\fC#include <iostream>\fP
+.br
+\fC#include <map>\fP
+.br
+\fC#include '../../include/Parser/Semantics_checks.h'\fP
+.br
+
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBgenevalmag\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBgenevalmag::swap_root_child\fP (Expr_function **old_root, int i_new_root)"
+.br
+.ti -1c
+.RI "int \fBgenevalmag::swap_root_grandson\fP (Expr_function **old_root)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::warshall_algorithm\fP (const unsigned int size, bool *matrix_plain)"
+.br
+.ti -1c
+.RI "int \fBgenevalmag::get_index\fP (string name_symb, vector< string > non_term)"
+.br
+.ti -1c
+.RI "bool \fBgenevalmag::check_eq_defines_it\fP (const Symbol *symb, const int index, const Attribute *attr, const map< unsigned short, Equation > eqs)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Implementation of the methods the \fBSemantics_checks.h\fP. 
+
+\fBDate:\fP
+.RS 4
+11/02/2010 
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Kilmurray, Gerardo Luis <gerakilmurray@gmail.com> 
+.PP
+Picco, Gonzalo Martin <gonzalopicco@gmail.com> 
+.RE
+.PP
+
+.PP
+Definition in file \fBSemantics_checks.cpp\fP.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

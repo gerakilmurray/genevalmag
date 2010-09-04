@@ -1,0 +1,299 @@
+.TH "genevalmag::Sort" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::Sort \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Sort.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSort\fP ()"
+.br
+.ti -1c
+.RI "\fBSort\fP (const string name)"
+.br
+.ti -1c
+.RI "\fBSort\fP (const \fBSort\fP &other)"
+.br
+.ti -1c
+.RI "virtual \fB~Sort\fP ()"
+.br
+.ti -1c
+.RI "\fBSort\fP & \fBoperator=\fP (const \fBSort\fP &other)"
+.br
+.ti -1c
+.RI "const string \fBget_name\fP () const "
+.br
+.ti -1c
+.RI "void \fBset_name\fP (const string name)"
+.br
+.ti -1c
+.RI "void \fBset_type_basic\fP (const bool type_basic)"
+.br
+.ti -1c
+.RI "const string \fBto_string\fP () const "
+.br
+.ti -1c
+.RI "const bool \fBequals\fP (const \fBSort\fP &other) const "
+.br
+.ti -1c
+.RI "const bool \fBis_type_basic\fP () const "
+.br
+.ti -1c
+.RI "const string \fBkey\fP () const "
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcopy\fP (const \fBSort\fP &other)"
+.br
+.ti -1c
+.RI "void \fBdestroy\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "string \fBs_name\fP"
+.br
+.RI "\fISort's name. \fP"
+.ti -1c
+.RI "unsigned int \fBs_ins\fP"
+.br
+.RI "\fISort's instance. \fP"
+.ti -1c
+.RI "bool \fBs_type_basic\fP"
+.br
+.RI "\fIIs true iff is a type basic of C++. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 19 of file Sort.h.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::Sort::Sort ()"Contructor empty of \fBSort\fP. 
+.PP
+Definition at line 20 of file Sort.cpp.
+.PP
+References s_ins.
+.SS "genevalmag::Sort::Sort (const string name)"Contructor with the name of the \fBSort\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Contructor with the name of the Sosrt. 
+.PP
+Definition at line 28 of file Sort.cpp.
+.PP
+References s_ins, s_name, and s_type_basic.
+.SS "genevalmag::Sort::Sort (const \fBSort\fP & other)"Contructor copy of \fBSort\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Contructor copy of \fBSort\fP. 
+.PP
+Definition at line 38 of file Sort.cpp.
+.PP
+References copy().
+.SS "genevalmag::Sort::~Sort ()\fC [virtual]\fP"Destructor of \fBSort\fP. 
+.PP
+Definition at line 46 of file Sort.cpp.
+.PP
+References destroy().
+.SH "Member Function Documentation"
+.PP 
+.SS "void genevalmag::Sort::copy (const \fBSort\fP & other)\fC [private]\fP"Method of copy the \fBSort\fP, STL-like C++. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP Method of copy the \fBSort\fP, STL-like C++. 
+.RE
+.PP
+
+.PP
+Definition at line 67 of file Sort.cpp.
+.PP
+References get_name(), is_type_basic(), s_ins, s_name, and s_type_basic.
+.PP
+Referenced by operator=(), and Sort().
+.SS "void genevalmag::Sort::destroy ()\fC [private]\fP"Method destroy \fBSort\fP, STL-like C++. 
+.PP
+Definition at line 79 of file Sort.cpp.
+.PP
+Referenced by operator=(), and ~Sort().
+.SS "const bool genevalmag::Sort::equals (const \fBSort\fP & other) const"Compares the \fBSort\fP with other. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Compares the \fBSort\fP with other. 
+.PP
+Definition at line 141 of file Sort.cpp.
+.PP
+References key().
+.SS "const string genevalmag::Sort::get_name () const"Returns the name of the \fBSort\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the name of the \fBSort\fP. 
+.PP
+Definition at line 86 of file Sort.cpp.
+.PP
+References s_name.
+.PP
+Referenced by copy(), genevalmag::create_instance_node(), genevalmag::Attribute::key(), genevalmag::save_rvalue(), genevalmag::Function::signature(), genevalmag::Function::to_string(), and genevalmag::Attribute::to_string().
+.SS "const bool genevalmag::Sort::is_type_basic () const"Returns if the \fBSort\fP is basic. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns if the \fBSort\fP is basic. 
+.PP
+Definition at line 149 of file Sort.cpp.
+.PP
+References s_type_basic.
+.PP
+Referenced by copy(), and to_string().
+.SS "const string genevalmag::Sort::key () const"Generates and returns the string key that identifies a \fBSort\fP definitely.
+.br
+ 
+.br
+ Result = <name>
+.br
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Generates and returns the string key that identifies a \fBSort\fP definitely.
+.PP
+Result = <name> 
+.PP
+Definition at line 159 of file Sort.cpp.
+.PP
+References s_name.
+.PP
+Referenced by equals().
+.SS "\fBSort\fP & genevalmag::Sort::operator= (const \fBSort\fP & other)"Operator assign(=) of \fBSort\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Operator assign(=) of \fBSort\fP. 
+.PP
+Definition at line 54 of file Sort.cpp.
+.PP
+References copy(), and destroy().
+.SS "void genevalmag::Sort::set_name (const string name)"Sets the name of the \fBSort\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname\fP Sets the name of the \fBSort\fP. 
+.RE
+.PP
+
+.PP
+Definition at line 94 of file Sort.cpp.
+.PP
+References s_name.
+.SS "void genevalmag::Sort::set_type_basic (const bool type_basic)"Sets if the \fBSort\fP is basic. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItype_basic\fP Set if the \fBSort\fP is basic. 
+.RE
+.PP
+
+.PP
+Definition at line 101 of file Sort.cpp.
+.PP
+References s_type_basic.
+.PP
+Referenced by genevalmag::Attr_grammar::return_sort().
+.SS "const string genevalmag::Sort::to_string () const"Generates and returns a string reprensentation of a \fBSort\fP.
+.br
+ 
+.br
+ Result = 'sort' <name> ['(' <instance> ')' IF DEBUG IS ON] ';'
+.br
+ 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates and returns a string reprensentation of a \fBSort\fP.
+.PP
+Result = 'sort' <name> ['(' <instance> ')' IF DEBUG IS ON] ';' 
+.PP
+Definition at line 111 of file Sort.cpp.
+.PP
+References is_type_basic(), s_ins, and s_name.
+.PP
+Referenced by genevalmag::create_sort().
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::Sort::s_ins\fP\fC [private]\fP"
+.PP
+Sort's instance. 
+.PP
+Definition at line 31 of file Sort.h.
+.PP
+Referenced by copy(), Sort(), and to_string().
+.SS "\fBgenevalmag::Sort::s_name\fP\fC [private]\fP"
+.PP
+Sort's name. 
+.PP
+Definition at line 26 of file Sort.h.
+.PP
+Referenced by copy(), get_name(), key(), set_name(), Sort(), and to_string().
+.SS "\fBgenevalmag::Sort::s_type_basic\fP\fC [private]\fP"
+.PP
+Is true iff is a type basic of C++. 
+.PP
+Definition at line 36 of file Sort.h.
+.PP
+Referenced by copy(), is_type_basic(), set_type_basic(), and Sort().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

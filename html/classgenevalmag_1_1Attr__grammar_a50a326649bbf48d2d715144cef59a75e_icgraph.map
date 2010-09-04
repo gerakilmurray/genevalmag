@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" href="$namespacegenevalmag.html#ac8f04dfdf39c964f9219cc5a7fb7197b" title="genevalmag::check_well_defined" alt="" coords="445,5,656,35"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__graphs.html#aa59af10c4b00c93e0bd95c1a17166ea5" title="genevalmag::Builder_graphs::compute_attr_vertex" alt="" coords="395,59,707,88"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__code.html#a5dcd144389b5612a328fede4317d414f" title="genevalmag::Builder_code::generate_structs" alt="" coords="411,112,691,141"/>
+<area shape="rect" href="$structgenevalmag_1_1attritute__grammar_1_1definition.html#a77a5f8d316d607055d02312370c825cc" title="genevalmag::attritute_grammar::definition::definition" alt="" coords="756,5,1076,35"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__graphs.html#adc8ee86b8d769a7b42c43361fa7076cb" title="genevalmag::Builder_graphs::compute_down_graph" alt="" coords="757,59,1075,88"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__plans.html#a9552dcef13af0de0f3f2ff59a330d15c" title="genevalmag::Builder_plans::generate_graphs" alt="" coords="1127,59,1407,88"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__plans.html#a3337ccac1c358d9b0a1de456ff74b0cb" title="genevalmag::Builder_plans::build_plans" alt="" coords="1456,59,1707,88"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__code.html#a91fc24c7f3a5f9234cbb6c6497a31351" title="genevalmag::Builder_code::generate_code" alt="" coords="783,112,1049,141"/>
+</map>

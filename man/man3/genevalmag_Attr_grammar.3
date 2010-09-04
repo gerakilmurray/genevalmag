@@ -1,0 +1,591 @@
+.TH "genevalmag::Attr_grammar" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::Attr_grammar \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Attr_grammar.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAttr_grammar\fP ()"
+.br
+.ti -1c
+.RI "virtual \fB~Attr_grammar\fP ()"
+.br
+.ti -1c
+.RI "const bool \fBadd_sort\fP (const \fBSort\fP &sort)"
+.br
+.ti -1c
+.RI "const bool \fBadd_function\fP (const \fBFunction\fP &func)"
+.br
+.ti -1c
+.RI "const bool \fBadd_attribute\fP (const \fBAttribute\fP &attr)"
+.br
+.ti -1c
+.RI "const bool \fBadd_symbol\fP (const \fBSymbol\fP &symb)"
+.br
+.ti -1c
+.RI "const bool \fBadd_rule\fP (\fBRule\fP &rule)"
+.br
+.ti -1c
+.RI "const \fBSort\fP & \fBreturn_sort\fP (const string name_sort)"
+.br
+.ti -1c
+.RI "const map< string, \fBSort\fP > & \fBget_sorts\fP () const "
+.br
+.ti -1c
+.RI "const \fBFunction\fP * \fBget_function\fP (const string key_function) const "
+.br
+.ti -1c
+.RI "const map< string, \fBFunction\fP > & \fBget_functions\fP () const "
+.br
+.ti -1c
+.RI "const \fBSymbol\fP & \fBget_symbol\fP (const string name_symbol) const "
+.br
+.ti -1c
+.RI "const map< unsigned short, \fBRule\fP > & \fBget_rules\fP () const "
+.br
+.ti -1c
+.RI "const \fBRule\fP & \fBget_rule\fP (const unsigned short index) const "
+.br
+.ti -1c
+.RI "const map< string, \fBSymbol\fP > & \fBget_non_terminal_symbols\fP () const "
+.br
+.ti -1c
+.RI "const \fBSymbol\fP * \fBget_initial_symb\fP () const "
+.br
+.ti -1c
+.RI "const vector< unsigned short > \fBget_rules_with_left_symbol\fP (const \fBSymbol\fP *symb) const "
+.br
+.ti -1c
+.RI "const unsigned short \fBget_index_eq_with_context\fP (const \fBExpr_instance\fP *ins, const vector< unsigned short > &context_rule) const "
+.br
+.ti -1c
+.RI "const \fBEquation\fP * \fBget_eq\fP (const unsigned short index) const "
+.br
+.ti -1c
+.RI "const \fBExpr_instance\fP * \fBget_eq_l_value\fP (const unsigned short index) const "
+.br
+.ti -1c
+.RI "const unsigned short \fBget_count_eqs\fP () const "
+.br
+.ti -1c
+.RI "const string \fBto_string\fP () const "
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBload_attributes\fP (\fBSymbol\fP &symb) const "
+.br
+.ti -1c
+.RI "const bool \fBdefined_rule\fP (const \fBRule\fP &rule) const "
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "map< string, \fBSort\fP > \fBag_sort\fP"
+.br
+.ti -1c
+.RI "map< string, \fBFunction\fP > \fBag_func\fP"
+.br
+.ti -1c
+.RI "map< string, \fBAttribute\fP > \fBag_attr\fP"
+.br
+.ti -1c
+.RI "map< string, \fBSymbol\fP > \fBag_symb_terminals\fP"
+.br
+.ti -1c
+.RI "map< string, \fBSymbol\fP > \fBag_symb_non_terminals\fP"
+.br
+.ti -1c
+.RI "map< unsigned short, \fBRule\fP > \fBag_rule\fP"
+.br
+.ti -1c
+.RI "unsigned short \fBcount_eqs\fP"
+.br
+.RI "\fIStore the count of equations in the gramamar. \fP"
+.ti -1c
+.RI "const \fBSymbol\fP * \fBag_initial_symb\fP"
+.br
+.RI "\fISaves the name of the initial symbol of the grammar's attribute. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 25 of file Attr_grammar.h.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::Attr_grammar::Attr_grammar ()"Contructor empty of semantic domain.
+.PP
+Contructor empty of attribute grammar. 
+.PP
+Initialice values. 
+.PP
+Definition at line 22 of file Attr_grammar.cpp.
+.PP
+References ag_initial_symb, and count_eqs.
+.SS "genevalmag::Attr_grammar::~Attr_grammar ()\fC [virtual]\fP"Destructor of the semantic domain.
+.PP
+Destructor of the attribute grammar. 
+.PP
+Definition at line 32 of file Attr_grammar.cpp.
+.SH "Member Function Documentation"
+.PP 
+.SS "const bool genevalmag::Attr_grammar::add_attribute (const \fBAttribute\fP & attr)"Enqueues a attribute in the list of the semantic domain. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIattr\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Enqueues a attribute in the list of the attribute grammar. 
+.PP
+Definition at line 85 of file Attr_grammar.cpp.
+.PP
+References ag_attr.
+.PP
+Referenced by genevalmag::create_attributes().
+.SS "const bool genevalmag::Attr_grammar::add_function (const \fBFunction\fP & func)"Enqueues a function in the list of the semantic domain. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfunc\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Enqueues a function in the list of the attribute grammar. 
+.PP
+Definition at line 77 of file Attr_grammar.cpp.
+.PP
+References ag_func.
+.PP
+Referenced by genevalmag::add_function().
+.SS "const bool genevalmag::Attr_grammar::add_rule (\fBRule\fP & rule)"Enqueues a rule in the list of the semantic domain. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrule\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Enqueues a rule in the list of the attribute grammar. 
+.PP
+Definition at line 183 of file Attr_grammar.cpp.
+.PP
+References ag_initial_symb, ag_rule, genevalmag::Rule::belongs_non_terminal(), count_eqs, defined_rule(), genevalmag::Rule::get_eqs(), genevalmag::Rule::get_left_symbol(), and genevalmag::Rule::set_id().
+.PP
+Referenced by genevalmag::save_rule().
+.SS "const bool genevalmag::Attr_grammar::add_sort (const \fBSort\fP & sort)"Enqueues a sort in the list of the semantic domain. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsort\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Enqueues a sort in the list of the attribute grammar. 
+.PP
+Definition at line 69 of file Attr_grammar.cpp.
+.PP
+References ag_sort.
+.PP
+Referenced by genevalmag::create_sort(), and return_sort().
+.SS "const bool genevalmag::Attr_grammar::add_symbol (const \fBSymbol\fP & symb)"Enqueues a symbol in the list of the semantic domain. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsymb\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Enqueues a symbol in the list of the attribute grammar. 
+.PP
+Definition at line 142 of file Attr_grammar.cpp.
+.PP
+References ag_symb_non_terminals, ag_symb_terminals, genevalmag::Symbol::is_non_terminal(), and load_attributes().
+.PP
+Referenced by genevalmag::create_new_non_terminal(), and genevalmag::create_new_terminal().
+.SS "const bool genevalmag::Attr_grammar::defined_rule (const \fBRule\fP & rule) const\fC [private]\fP"Checks that the rule is not already defined in the grammar. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrule\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Checks that the rule is not already defined in the grammar. 
+.PP
+Definition at line 168 of file Attr_grammar.cpp.
+.PP
+References ag_rule.
+.PP
+Referenced by add_rule().
+.SS "const unsigned short genevalmag::Attr_grammar::get_count_eqs () const"Returns the count of equations in the grammar. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the count of equations in the grammar. 
+.PP
+Definition at line 397 of file Attr_grammar.cpp.
+.PP
+References count_eqs.
+.PP
+Referenced by genevalmag::Builder_code::generate_all_compute_eq().
+.SS "const \fBEquation\fP * genevalmag::Attr_grammar::get_eq (const unsigned short index) const"Returns the equation with this index. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindex\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Returns the equation with this index. 
+.PP
+Definition at line 367 of file Attr_grammar.cpp.
+.PP
+References ag_rule, and count_eqs.
+.PP
+Referenced by get_eq_l_value(), genevalmag::Builder_plans::save_all_plans(), and genevalmag::Builder_plans::save_all_plans_project().
+.SS "const \fBExpr_instance\fP * genevalmag::Attr_grammar::get_eq_l_value (const unsigned short index) const"Returns the l_value of the equation with this index. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindex\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Returns the l_value of the equation with this index. 
+.PP
+Definition at line 387 of file Attr_grammar.cpp.
+.PP
+References get_eq(), and genevalmag::Equation::get_l_value().
+.PP
+Referenced by genevalmag::Builder_plans::compute_order().
+.SS "const \fBFunction\fP * genevalmag::Attr_grammar::get_function (const string key_function) const"Finds in the list of function of the semantic domain and returns the function with that name. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIkey_function\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Finds in the list of function of the attribute grammar and returns the function with that name. 
+.PP
+Definition at line 246 of file Attr_grammar.cpp.
+.PP
+References ag_func.
+.PP
+Referenced by genevalmag::create_root_function_node(), genevalmag::create_root_infix_node(), genevalmag::create_root_postfix_node(), and genevalmag::create_root_prefix_node().
+.SS "const map< string, \fBFunction\fP > & genevalmag::Attr_grammar::get_functions () const"Returns the map with all functions. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the map with all functions. 
+.PP
+Definition at line 259 of file Attr_grammar.cpp.
+.PP
+References ag_func.
+.SS "const unsigned short genevalmag::Attr_grammar::get_index_eq_with_context (const \fBExpr_instance\fP * ins, const vector< unsigned short > & context_rule) const"Returns the index of an equation in this range of rules with l_value equals to ins. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIins\fP 
+.br
+\fIcontext_rule\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Returns the index of an equation in this range of rules with l_value equals to ins. 
+.PP
+Definition at line 329 of file Attr_grammar.cpp.
+.PP
+References ag_rule, genevalmag::Expr_instance::get_attr(), genevalmag::Expr_instance::get_num(), and genevalmag::Attribute::is_synthetize().
+.PP
+Referenced by genevalmag::Builder_plans::generates_topological_order().
+.SS "const \fBSymbol\fP * genevalmag::Attr_grammar::get_initial_symb () const"Returns the initial rule. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the initial symbol. 
+.PP
+Definition at line 304 of file Attr_grammar.cpp.
+.PP
+References ag_initial_symb.
+.PP
+Referenced by genevalmag::check_well_defined(), and genevalmag::Builder_visit_sequences::generate_visit_sequences().
+.SS "const map< string, \fBSymbol\fP > & genevalmag::Attr_grammar::get_non_terminal_symbols () const"Returns the map with all symbols. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the map with all symbols. 
+.PP
+Definition at line 296 of file Attr_grammar.cpp.
+.PP
+References ag_symb_non_terminals.
+.PP
+Referenced by genevalmag::check_well_defined(), genevalmag::Builder_graphs::compute_attr_vertex(), and genevalmag::Builder_code::generate_structs().
+.SS "const \fBRule\fP & genevalmag::Attr_grammar::get_rule (const unsigned short index) const"Returns the rule on paramenter. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindex\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Returns the rule on paramenter. 
+.PP
+Definition at line 288 of file Attr_grammar.cpp.
+.PP
+References ag_rule.
+.PP
+Referenced by genevalmag::Builder_visit_sequences::gen_visit_seq(), genevalmag::Builder_plans::generate_plans(), genevalmag::Builder_visit_sequences::generate_visit_sequences(), and genevalmag::Builder_plans::generates_topological_order().
+.SS "const map< unsigned short, \fBRule\fP > & genevalmag::Attr_grammar::get_rules () const"Returns the map with all rules. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the map with all rules. 
+.PP
+Definition at line 280 of file Attr_grammar.cpp.
+.PP
+References ag_rule.
+.PP
+Referenced by genevalmag::check_well_defined(), genevalmag::Builder_graphs::complete_dp_graphs(), genevalmag::Builder_graphs::compute_adp_graph(), genevalmag::Builder_graphs::compute_dcg(), genevalmag::Builder_graphs::compute_dependency_graphs(), genevalmag::Builder_graphs::compute_down_graph(), genevalmag::Builder_code::generate_all_methods_eqs(), genevalmag::Builder_code::generate_initialize_rules(), genevalmag::Builder_plans::generate_plans(), genevalmag::Builder_graphs::save_adp_graphs(), genevalmag::Builder_plans::save_all_plans(), genevalmag::Builder_plans::save_all_plans_project(), genevalmag::Builder_graphs::save_cyclic_graphs(), genevalmag::Builder_graphs::save_dcg_graphs(), and genevalmag::Builder_graphs::save_dp_graphs().
+.SS "const vector< unsigned short > genevalmag::Attr_grammar::get_rules_with_left_symbol (const \fBSymbol\fP * symb) const"Returns vector with all rules with the left symbol equal that parameter. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsymb\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Returns vector with all rules with the left symbol equal that parameter. 
+.PP
+Definition at line 312 of file Attr_grammar.cpp.
+.PP
+References ag_rule.
+.PP
+Referenced by genevalmag::Builder_graphs::compute_adp_graph().
+.SS "const map< string, \fBSort\fP > & genevalmag::Attr_grammar::get_sorts () const"Returns the map with all sorts. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the map with all sorts. 
+.PP
+Definition at line 238 of file Attr_grammar.cpp.
+.PP
+References ag_sort.
+.SS "const \fBSymbol\fP & genevalmag::Attr_grammar::get_symbol (const string name_symbol) const"Finds in the list of symbol of the semantic domain and returns the symbol with that name. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname_symbol\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Finds in the list of operator of the attribute grammar and returns the operator with that name. 
+.PP
+Definition at line 267 of file Attr_grammar.cpp.
+.PP
+References ag_symb_non_terminals, and ag_symb_terminals.
+.PP
+Referenced by genevalmag::create_instance(), genevalmag::create_rule(), and genevalmag::save_right_side_rule().
+.SS "void genevalmag::Attr_grammar::load_attributes (\fBSymbol\fP & symb) const\fC [private]\fP"Insert the attributes belong the symbol. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsymb\fP Inserts the attributes belong the symbol. 
+.RE
+.PP
+
+.PP
+Definition at line 128 of file Attr_grammar.cpp.
+.PP
+References genevalmag::Symbol::add_attr(), ag_attr, and genevalmag::belong().
+.PP
+Referenced by add_symbol().
+.SS "const \fBSort\fP & genevalmag::Attr_grammar::return_sort (const string name_sort)"Finds in the list of sort of the semantic domain and returns the sort with that name. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname_sort\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Finds in the list of sort of the attribute grammar and returns the sort with that name. 
+.PP
+Definition at line 225 of file Attr_grammar.cpp.
+.PP
+References add_sort(), ag_sort, and genevalmag::Sort::set_type_basic().
+.PP
+Referenced by genevalmag::create_attributes(), genevalmag::save_domain_func(), and genevalmag::save_image_func().
+.SS "const string genevalmag::Attr_grammar::to_string () const"Generates and returns a string reprensentation of a semantic domain.
+.br
+ 
+.br
+ Result = 'semantic domain'
+.br
+ <sorts>
+.br
+ <operators>
+.br
+ <functions>
+.br
+ 
+.br
+ 'attributes'
+.br
+ <attributes>
+.br
+ 
+.br
+ [This section is commented so that it can be parsed again.]
+.br
+ ***********************************************************
+.br
+ 'symbols'
+.br
+ <symbols>
+.br
+ ***********************************************************
+.br
+ 'rules'
+.br
+ <rules>
+.br
+ 
+.br
+ where <sorts>, <operators>, <functions>, <attributes>, <symbols> and <rules>,
+.br
+ are a full representation of each type.
+.br
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Generates and returns a string reprensentation of a attribute grammar. where sorts, operators, functions, attributes, symbols and rules, are full representation of each type. 
+.PP
+Definition at line 407 of file Attr_grammar.cpp.
+.PP
+References ag_attr, ag_func, ag_initial_symb, ag_rule, ag_sort, ag_symb_non_terminals, ag_symb_terminals, and genevalmag::Symbol::get_name().
+.PP
+Referenced by genevalmag::Parser_AG::save_grammar_file().
+.SH "Member Data Documentation"
+.PP 
+.SS "map<string, \fBAttribute\fP> \fBgenevalmag::Attr_grammar::ag_attr\fP\fC [private]\fP"
+.PP
+Definition at line 39 of file Attr_grammar.h.
+.PP
+Referenced by add_attribute(), load_attributes(), and to_string().
+.SS "map<string, \fBFunction\fP> \fBgenevalmag::Attr_grammar::ag_func\fP\fC [private]\fP"
+.PP
+Definition at line 38 of file Attr_grammar.h.
+.PP
+Referenced by add_function(), get_function(), get_functions(), and to_string().
+.SS "\fBgenevalmag::Attr_grammar::ag_initial_symb\fP\fC [private]\fP"
+.PP
+Saves the name of the initial symbol of the grammar's attribute. 
+.PP
+Definition at line 54 of file Attr_grammar.h.
+.PP
+Referenced by add_rule(), Attr_grammar(), get_initial_symb(), and to_string().
+.SS "map<unsigned short, \fBRule\fP> \fBgenevalmag::Attr_grammar::ag_rule\fP\fC [private]\fP"
+.PP
+Definition at line 42 of file Attr_grammar.h.
+.PP
+Referenced by add_rule(), defined_rule(), get_eq(), get_index_eq_with_context(), get_rule(), get_rules(), get_rules_with_left_symbol(), and to_string().
+.SS "map<string, \fBSort\fP> \fBgenevalmag::Attr_grammar::ag_sort\fP\fC [private]\fP"
+.PP
+Definition at line 37 of file Attr_grammar.h.
+.PP
+Referenced by add_sort(), get_sorts(), return_sort(), and to_string().
+.SS "map<string, \fBSymbol\fP> \fBgenevalmag::Attr_grammar::ag_symb_non_terminals\fP\fC [private]\fP"
+.PP
+Definition at line 41 of file Attr_grammar.h.
+.PP
+Referenced by add_symbol(), get_non_terminal_symbols(), get_symbol(), and to_string().
+.SS "map<string, \fBSymbol\fP> \fBgenevalmag::Attr_grammar::ag_symb_terminals\fP\fC [private]\fP"
+.PP
+Definition at line 40 of file Attr_grammar.h.
+.PP
+Referenced by add_symbol(), get_symbol(), and to_string().
+.SS "\fBgenevalmag::Attr_grammar::count_eqs\fP\fC [private]\fP"
+.PP
+Store the count of equations in the gramamar. 
+.PP
+Definition at line 48 of file Attr_grammar.h.
+.PP
+Referenced by add_rule(), Attr_grammar(), get_count_eqs(), and get_eq().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

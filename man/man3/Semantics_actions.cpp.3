@@ -1,0 +1,240 @@
+.TH "src/Parser/Semantics_actions.cpp" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/Parser/Semantics_actions.cpp \- 
+.PP
+Implementation of the methods the \fBSemantics_actions.h\fP.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <iostream>\fP
+.br
+\fC#include <sstream>\fP
+.br
+\fC#include <boost/algorithm/string/erase.hpp>\fP
+.br
+\fC#include '../../include/Parser/Semantics_actions.h'\fP
+.br
+\fC#include '../../include/Expression_tree/Expr_instance.h'\fP
+.br
+\fC#include '../../include/Expression_tree/Expr_literal.h'\fP
+.br
+\fC#include '../../include/Expression_tree/Expr_function.h'\fP
+.br
+\fC#include '../../include/Util/Utilities.h'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBgenevalmag::decl_attribute\fP"
+.br
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBgenevalmag\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBgenevalmag::set_attr_grammar\fP (Attr_grammar *at_grammar)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::set_sem_check\fP (Semantics_checks *s_check)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_sort\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::inic_func\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::add_function\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::save_name_func\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::save_domain_func\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::save_image_func\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::add_operator\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::save_mode_op\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::save_prec_op\fP (int const prec)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::save_assoc_op\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::add_attribute\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::save_sort_attr\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::save_type_attr\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::save_member_list_attr\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_attributes\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_new_non_terminal\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_new_terminal\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_rule\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::save_right_side_rule\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_abbreviated_rule\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::save_rule\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_instance\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::save_index_ins\fP (int const index)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::save_attr_ins\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_lit_number\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_lit_ch\fP (const iterator_t ch, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_lit_str\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_bool\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_function\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_operator\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_equation\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::save_rvalue\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::push_mark\fP (char name)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_literal_node\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_instance_node\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_func_node\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_root_infix_node\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_root_function_node\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_root_postfix_node\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::create_root_prefix_node\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::check_well_defined\fP (const iterator_t str, const iterator_t end)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::increment_level\fP (char name)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::decrement_level\fP (char name)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "Attr_grammar * \fBgenevalmag::attr_grammar\fP"
+.br
+.ti -1c
+.RI "Semantics_checks * \fBgenevalmag::sem_check\fP"
+.br
+.ti -1c
+.RI "Function * \fBgenevalmag::current_func\fP"
+.br
+.ti -1c
+.RI "struct \fBgenevalmag::decl_attribute\fP * \fBgenevalmag::new_attrs\fP"
+.br
+.ti -1c
+.RI "Rule * \fBgenevalmag::current_rule\fP"
+.br
+.ti -1c
+.RI "Expr_instance * \fBgenevalmag::current_instance\fP"
+.br
+.ti -1c
+.RI "Expr_literal * \fBgenevalmag::current_literal\fP"
+.br
+.ti -1c
+.RI "Expr_function * \fBgenevalmag::current_ast_function\fP"
+.br
+.ti -1c
+.RI "Equation * \fBgenevalmag::current_eq\fP"
+.br
+.ti -1c
+.RI "vector< Expression * > \fBgenevalmag::stack_node\fP"
+.br
+.ti -1c
+.RI "vector< Expr_node * > \fBgenevalmag::stack_inner_node\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Implementation of the methods the \fBSemantics_actions.h\fP. 
+
+\fBDate:\fP
+.RS 4
+09/02/2010 
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Kilmurray, Gerardo Luis <gerakilmurray@gmail.com> 
+.PP
+Picco, Gonzalo Martin <gonzalopicco@gmail.com> 
+.RE
+.PP
+
+.PP
+Definition in file \fBSemantics_actions.cpp\fP.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

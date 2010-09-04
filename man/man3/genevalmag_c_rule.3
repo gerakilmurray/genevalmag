@@ -1,0 +1,91 @@
+.TH "genevalmag::c_rule" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::c_rule \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Builder_plans.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBoperator<\fP (const \fBc_rule\fP &other) const "
+.br
+.ti -1c
+.RI "\fBc_rule\fP & \fBoperator=\fP (const \fBc_rule\fP &other)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "unsigned short \fBfather\fP"
+.br
+.RI "\fIIndex context father (rule). \fP"
+.ti -1c
+.RI "\fBOrder_rule\fP \fBcontext\fP"
+.br
+.RI "\fIIndexs contexts inferior (rules). \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+This struct represent a Context_rule, that is a father rule and the context of rule. 
+.PP
+Definition at line 37 of file Builder_plans.h.
+.SH "Member Function Documentation"
+.PP 
+.SS "bool genevalmag::c_rule::operator< (const \fBc_rule\fP & other) const\fC [inline]\fP"operator< 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.PP
+Definition at line 54 of file Builder_plans.h.
+.PP
+References context, and father.
+.SS "\fBc_rule\fP& genevalmag::c_rule::operator= (const \fBc_rule\fP & other)\fC [inline]\fP"operator= 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.PP
+Definition at line 64 of file Builder_plans.h.
+.PP
+References context, and father.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::c_rule::context\fP"
+.PP
+Indexs contexts inferior (rules). 
+.PP
+Definition at line 48 of file Builder_plans.h.
+.PP
+Referenced by genevalmag::Builder_plans::generate_plans(), genevalmag::Builder_plans::generates_topological_order(), operator<(), and operator=().
+.SS "\fBgenevalmag::c_rule::father\fP"
+.PP
+Index context father (rule). 
+.PP
+Definition at line 43 of file Builder_plans.h.
+.PP
+Referenced by genevalmag::Builder_plans::generate_plans(), genevalmag::Builder_plans::generates_topological_order(), operator<(), and operator=().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

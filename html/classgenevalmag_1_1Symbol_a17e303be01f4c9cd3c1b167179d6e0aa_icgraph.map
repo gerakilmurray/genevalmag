@@ -1,0 +1,27 @@
+<map id="G" name="G">
+<area shape="rect" href="$classgenevalmag_1_1Rule.html#a587e49507f553c99c79c82aabe6c470f" title="genevalmag::Rule::belongs_non_terminal" alt="" coords="288,59,547,88"/>
+<area shape="rect" href="$namespacegenevalmag.html#ad0ec9b7706a340d2e674f3b4859afa2d" title="genevalmag::check_eq_defines_it" alt="" coords="308,112,527,141"/>
+<area shape="rect" href="$classgenevalmag_1_1Rule.html#a39eaafed8e0b506686d83175329c1085" title="genevalmag::Rule::count_non_terminal" alt="" coords="717,165,963,195"/>
+<area shape="rect" href="$classgenevalmag_1_1Rule.html#a3e625589d6f1d8575c625a60d1dd210c" title="genevalmag::Rule::equals" alt="" coords="332,216,503,245"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__visit__sequences.html#a81498899f7859f929abb96526f20e4a3" title="genevalmag::Builder_visit_sequences::gen_visit_seq" alt="" coords="253,269,581,299"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__visit__sequences.html#a2721134ffe1c2677b96a46c4b4d184ef" title="genevalmag::Builder_visit_sequences::generate_visit_sequences" alt="" coords="640,281,1040,311"/>
+<area shape="rect" href="$namespacegenevalmag.html#a5935695d2ab4f63ea670911809399ce0" title="genevalmag::generate_expr_text" alt="" coords="312,373,523,403"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__plans.html#a9293c2318f2a323616fc49505a44e4e3" title="genevalmag::Builder_plans::generates_topological_order" alt="" coords="244,427,591,456"/>
+<area shape="rect" href="$namespaceutilities.html#af78e9e1ebc91d6896a01f45d611cca0a" title="utilities::project_graph" alt="" coords="344,505,491,535"/>
+<area shape="rect" href="$classgenevalmag_1_1Attr__grammar.html#aec81306d22cc26b9d7276b70d30d329b" title="genevalmag::Attr_grammar::add_rule" alt="" coords="723,7,957,36"/>
+<area shape="rect" href="$namespacegenevalmag.html#a61de26b3fdfcf0998039df573a3ec6f0" title="genevalmag::create_instance" alt="" coords="1137,59,1329,88"/>
+<area shape="rect" href="$namespacegenevalmag.html#ab100c06acfd394415ddcf909a5c9490f" title="genevalmag::save_rule" alt="" coords="1156,5,1311,35"/>
+<area shape="rect" href="$structgenevalmag_1_1attritute__grammar_1_1definition.html#a77a5f8d316d607055d02312370c825cc" title="genevalmag::attritute_grammar::definition::definition" alt="" coords="1428,85,1748,115"/>
+<area shape="rect" href="$classgenevalmag_1_1Semantics__checks.html#a7234750d25c375989dfc9318e081571d" title="genevalmag::Semantics_checks::check_well_defined_AG" alt="" coords="663,112,1017,141"/>
+<area shape="rect" href="$namespacegenevalmag.html#ac8f04dfdf39c964f9219cc5a7fb7197b" title="genevalmag::check_well_defined" alt="" coords="1128,112,1339,141"/>
+<area shape="rect" href="$namespacegenevalmag.html#a8f0dbc1c191c7c3e357c9930692e180e" title="genevalmag::save_index_ins" alt="" coords="1139,165,1328,195"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__code.html#aa13031885f7de51469cc9e1ea5a4b9e6" title="genevalmag::Builder_code::generate_all_methods_eqs" alt="" coords="672,348,1008,377"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__code.html#a81b67543752446840e23c8b8fd3b9e7a" title="genevalmag::Builder_code::generate_methods" alt="" coords="1089,348,1377,377"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__code.html#a91fc24c7f3a5f9234cbb6c6497a31351" title="genevalmag::Builder_code::generate_code" alt="" coords="1455,348,1721,377"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__plans.html#a86e05ee91d27e62d16d77ecbdec05bf7" title="genevalmag::Builder_plans::compute_order" alt="" coords="704,401,976,431"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__plans.html#a5002819447c17a1f81c197da66bd3e56" title="genevalmag::Builder_plans::generate_plans" alt="" coords="1097,452,1369,481"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__plans.html#a3337ccac1c358d9b0a1de456ff74b0cb" title="genevalmag::Builder_plans::build_plans" alt="" coords="1463,479,1713,508"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__graphs.html#af41d4e9683653a0d47fa45406a2ca594" title="genevalmag::Builder_graphs::compute_dcg" alt="" coords="704,505,976,535"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__graphs.html#adc8ee86b8d769a7b42c43361fa7076cb" title="genevalmag::Builder_graphs::compute_down_graph" alt="" coords="681,559,999,588"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__plans.html#a9552dcef13af0de0f3f2ff59a330d15c" title="genevalmag::Builder_plans::generate_graphs" alt="" coords="1093,505,1373,535"/>
+</map>

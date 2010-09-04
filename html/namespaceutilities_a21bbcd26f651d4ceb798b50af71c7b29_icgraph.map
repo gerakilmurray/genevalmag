@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" href="$classgenevalmag_1_1Builder__graphs.html#aaf2e8aa86ea96212833d769110eeaebd" title="genevalmag::Builder_graphs::save_adp_graphs" alt="" coords="232,5,528,35"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__plans.html#aa15ea4156613c75cfca5ecc0bd6a5193" title="genevalmag::Builder_plans::save_all_plans" alt="" coords="244,59,516,88"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__plans.html#a7017816e03c141df9dbdb55f3f8f896c" title="genevalmag::Builder_plans::save_all_plans_project" alt="" coords="221,112,539,141"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__graphs.html#a81bf79709c133320f4d40cdee1f61466" title="genevalmag::Builder_graphs::save_cyclic_graphs" alt="" coords="227,165,533,195"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__graphs.html#a95525c606a1189a5fe0096f72938555d" title="genevalmag::Builder_graphs::save_all_graphs" alt="" coords="593,5,881,35"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__plans.html#a3b70a30427aa135641a75d0d42e23500" title="genevalmag::Builder_plans::save_all_graphs" alt="" coords="936,5,1216,35"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__plans.html#ac9502627f9433c4cab7d03678e507a66" title="genevalmag::Builder_plans::save_cyclic_graphs" alt="" coords="588,165,887,195"/>
+</map>

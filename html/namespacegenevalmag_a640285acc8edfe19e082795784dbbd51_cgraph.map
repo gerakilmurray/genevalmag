@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" href="$classgenevalmag_1_1Attr__grammar.html#a4ccf3523a20ea3e646942af93a9df7e2" title="genevalmag::Attr_grammar::add_attribute" alt="" coords="259,5,520,35"/>
+<area shape="rect" href="$classgenevalmag_1_1Attr__grammar.html#acfa0b0a6876e33a4f6ab19afd073edf8" title="genevalmag::Attr_grammar::return_sort" alt="" coords="265,59,513,88"/>
+<area shape="rect" href="$classgenevalmag_1_1Attribute.html#a72b9d591826fcd33079edab94855c312" title="genevalmag::Attribute::set_member_symbol" alt="" coords="252,112,527,141"/>
+<area shape="rect" href="$classgenevalmag_1_1Attribute.html#a5145c88f9e2e6e797996e6a31a2492fb" title="genevalmag::Attribute::set_mod_type" alt="" coords="271,165,508,195"/>
+<area shape="rect" href="$classgenevalmag_1_1Attribute.html#a295fa8b9fd96ca034adb8acd0c89b7ce" title="genevalmag::Attribute::set_name" alt="" coords="283,219,496,248"/>
+<area shape="rect" href="$classgenevalmag_1_1Attribute.html#a871202067081b9fa79e53c870fb9c3d2" title="genevalmag::Attribute::set_sort_type" alt="" coords="272,272,507,301"/>
+<area shape="rect" href="$classgenevalmag_1_1Attr__grammar.html#aaa4b67f68b6cdcf70ed5876b63343db7" title="genevalmag::Attr_grammar::add_sort" alt="" coords="577,32,812,61"/>
+<area shape="rect" href="$classgenevalmag_1_1Sort.html#aef4090cc2961e5f9614d1db43386d485" title="genevalmag::Sort::set_type_basic" alt="" coords="585,85,804,115"/>
+</map>

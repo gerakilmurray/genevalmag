@@ -1,0 +1,91 @@
+.TH "genevalmag::i_w" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::i_w \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Builder_plans.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBi_w\fP &other) const "
+.br
+.ti -1c
+.RI "\fBi_w\fP & \fBoperator=\fP (const \fBi_w\fP &other)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBKey_work_list\fP \fBitem\fP"
+.br
+.RI "\fIA key_work_list. \fP"
+.ti -1c
+.RI "unsigned short \fBorder_attr\fP"
+.br
+.RI "\fIOrder of ecuation. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+This struct represents an Item work, that is an Key_work_list and an equations order evaluation. 
+.PP
+Definition at line 114 of file Builder_plans.h.
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBi_w\fP& genevalmag::i_w::operator= (const \fBi_w\fP & other)\fC [inline]\fP"operator= 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.PP
+Definition at line 140 of file Builder_plans.h.
+.PP
+References item, and order_attr.
+.SS "bool genevalmag::i_w::operator== (const \fBi_w\fP & other) const\fC [inline]\fP"operator== 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.PP
+Definition at line 131 of file Builder_plans.h.
+.PP
+References item, and order_attr.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::i_w::item\fP"
+.PP
+A key_work_list. 
+.PP
+Definition at line 120 of file Builder_plans.h.
+.PP
+Referenced by genevalmag::Builder_plans::generate_plans(), operator=(), and operator==().
+.SS "\fBgenevalmag::i_w::order_attr\fP"
+.PP
+Order of ecuation. 
+.PP
+Definition at line 125 of file Builder_plans.h.
+.PP
+Referenced by genevalmag::Builder_plans::generate_plans(), operator=(), and operator==().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

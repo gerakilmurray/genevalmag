@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" href="$classgenevalmag_1_1Attr__grammar.html#aec81306d22cc26b9d7276b70d30d329b" title="genevalmag::Attr_grammar::add_rule" alt="" coords="299,5,533,35"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__graphs.html#acd8de1287317a25e559f4aede929fe66" title="genevalmag::Builder_graphs::compute_dependency_graphs" alt="" coords="233,59,599,88"/>
+<area shape="rect" href="$classgenevalmag_1_1Rule.html#a79dbd2cb842fc959aa78e178daca89e2" title="genevalmag::Rule::copy" alt="" coords="336,112,496,141"/>
+<area shape="rect" href="$namespacegenevalmag.html#ab100c06acfd394415ddcf909a5c9490f" title="genevalmag::save_rule" alt="" coords="712,5,867,35"/>
+<area shape="rect" href="$structgenevalmag_1_1attritute__grammar_1_1definition.html#a77a5f8d316d607055d02312370c825cc" title="genevalmag::attritute_grammar::definition::definition" alt="" coords="980,5,1300,35"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__plans.html#a9552dcef13af0de0f3f2ff59a330d15c" title="genevalmag::Builder_plans::generate_graphs" alt="" coords="649,59,929,88"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__plans.html#a3337ccac1c358d9b0a1de456ff74b0cb" title="genevalmag::Builder_plans::build_plans" alt="" coords="1015,59,1265,88"/>
+<area shape="rect" href="$classgenevalmag_1_1Rule.html#ae274bef9bade4c17cefc5fbf0cfef8ec" title="genevalmag::Rule::operator=" alt="" coords="696,112,883,141"/>
+<area shape="rect" href="$classgenevalmag_1_1Rule.html#afcf6ef1d44e45aef162eff2e42f6d68e" title="genevalmag::Rule::Rule" alt="" coords="711,165,868,195"/>
+</map>

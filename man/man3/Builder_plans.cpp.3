@@ -1,0 +1,72 @@
+.TH "src/Builders/Builder_plans.cpp" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/Builders/Builder_plans.cpp \- 
+.PP
+Implementation of the methods the \fBBuilder_plans.h\fP.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <iostream>\fP
+.br
+\fC#include <limits.h>\fP
+.br
+\fC#include <boost/graph/topological_sort.hpp>\fP
+.br
+\fC#include <boost/graph/transitive_closure.hpp>\fP
+.br
+\fC#include '../../include/Builders/Builder_plans.h'\fP
+.br
+\fC#include '../../include/Util/Utilities.h'\fP
+.br
+
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBgenevalmag\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "const string \fBgenevalmag::PATH_OUT_PLAN\fP ('plans/')"
+.br
+.ti -1c
+.RI "const string \fBgenevalmag::PATH_OUT_PLAN_PROJECT\fP ('plans_project/')"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::purge_plan_with\fP (const Rule &rule, const Order_eval_eq &order_eq, Order_eval_eq &purged_order)"
+.br
+.ti -1c
+.RI "bool \fBgenevalmag::defined_work\fP (const vector< Item_work > &list, const Item_work &item_work)"
+.br
+.ti -1c
+.RI "unsigned short \fBgenevalmag::return_index_vec\fP (const Order_eval_eq &order, vector< Order_eval_eq > &vec)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Implementation of the methods the \fBBuilder_plans.h\fP. 
+
+\fBDate:\fP
+.RS 4
+18/02/2010 
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Kilmurray, Gerardo Luis <gerakilmurray@gmail.com> 
+.PP
+Picco, Gonzalo Martin <gonzalopicco@gmail.com> 
+.RE
+.PP
+
+.PP
+Definition in file \fBBuilder_plans.cpp\fP.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

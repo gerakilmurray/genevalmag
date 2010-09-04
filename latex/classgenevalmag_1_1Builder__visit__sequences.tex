@@ -1,0 +1,280 @@
+\hypertarget{classgenevalmag_1_1Builder__visit__sequences}{
+\section{genevalmag::Builder\_\-visit\_\-sequences Class Reference}
+\label{classgenevalmag_1_1Builder__visit__sequences}\index{genevalmag::Builder\_\-visit\_\-sequences@{genevalmag::Builder\_\-visit\_\-sequences}}
+}
+
+
+{\ttfamily \#include $<$Builder\_\-visit\_\-sequences.h$>$}
+
+
+
+Collaboration diagram for genevalmag::Builder\_\-visit\_\-sequences:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{classgenevalmag_1_1Builder__visit__sequences__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classgenevalmag_1_1Builder__visit__sequences_a14404a9245e81db0b848226b33c4705c}{Builder\_\-visit\_\-sequences} (const \hyperlink{classgenevalmag_1_1Builder__plans}{Builder\_\-plans} \&builder\_\-plan, const \hyperlink{classgenevalmag_1_1Attr__grammar}{Attr\_\-grammar} \&attribute\_\-grammar)
+\item 
+virtual \hyperlink{classgenevalmag_1_1Builder__visit__sequences_a9b86db069a7c5564cf802bef80599a7d}{$\sim$Builder\_\-visit\_\-sequences} ()
+\item 
+bool \hyperlink{classgenevalmag_1_1Builder__visit__sequences_a2721134ffe1c2677b96a46c4b4d184ef}{generate\_\-visit\_\-sequences} ()
+\item 
+const vector$<$ \hyperlink{namespacegenevalmag_a7720677d79b33ecca4db21cdbcf7908f}{Visit\_\-seq} $>$ \& \hyperlink{classgenevalmag_1_1Builder__visit__sequences_acf3c542e09500da73d78ddc757f136ec}{get\_\-visit\_\-seq} () const 
+\item 
+void \hyperlink{classgenevalmag_1_1Builder__visit__sequences_ad3073f1a763bdbd4812f64a16bb6a67d}{print\_\-all\_\-visit\_\-sequences} () const 
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classgenevalmag_1_1Builder__visit__sequences_a81498899f7859f929abb96526f20e4a3}{gen\_\-visit\_\-seq} (const map$<$ \hyperlink{structgenevalmag_1_1k__plan}{Key\_\-plan}, unsigned short $>$::const\_\-iterator \&it\_\-plan, vector$<$ \hyperlink{classgenevalmag_1_1Expr__instance}{Expr\_\-instance} $>$ \&ins\_\-computed, vector$<$ map$<$ \hyperlink{structgenevalmag_1_1k__plan}{Key\_\-plan}, unsigned short $>$::const\_\-iterator $>$ \&plans\_\-computed, const vector$<$ unsigned short $>$ \&v\_\-seq\_\-computed)
+\item 
+void \hyperlink{classgenevalmag_1_1Builder__visit__sequences_aeb3f3076ab75a8869785d98c0c3bcdf2}{update\_\-visit\_\-sequence} (const \hyperlink{namespacegenevalmag_a7720677d79b33ecca4db21cdbcf7908f}{Visit\_\-seq} \&sequence, const size\_\-t i\_\-plan)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{classgenevalmag_1_1Builder__plans}{Builder\_\-plans} \& \hyperlink{classgenevalmag_1_1Builder__visit__sequences_accdb8c83f0540acd32f2ee461c9b2fbe}{b\_\-plans}
+\begin{DoxyCompactList}\small\item\em References to all plans generates. \item\end{DoxyCompactList}\item 
+const \hyperlink{classgenevalmag_1_1Attr__grammar}{Attr\_\-grammar} \& \hyperlink{classgenevalmag_1_1Builder__visit__sequences_a2eb7705741cd581ed968e0bc6127b3fd}{attr\_\-grammar}
+\begin{DoxyCompactList}\small\item\em References to the attribute grammar. \item\end{DoxyCompactList}\item 
+vector$<$ \hyperlink{namespacegenevalmag_a7720677d79b33ecca4db21cdbcf7908f}{Visit\_\-seq} $>$ \hyperlink{classgenevalmag_1_1Builder__visit__sequences_aba229b62df85d994ce9a5da960c1273a}{all\_\-visit\_\-seqs}
+\begin{DoxyCompactList}\small\item\em Stores all visit sequences generates. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 30 of file Builder\_\-visit\_\-sequences.h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classgenevalmag_1_1Builder__visit__sequences_a14404a9245e81db0b848226b33c4705c}{
+\index{genevalmag::Builder\_\-visit\_\-sequences@{genevalmag::Builder\_\-visit\_\-sequences}!Builder\_\-visit\_\-sequences@{Builder\_\-visit\_\-sequences}}
+\index{Builder\_\-visit\_\-sequences@{Builder\_\-visit\_\-sequences}!genevalmag::Builder_visit_sequences@{genevalmag::Builder\_\-visit\_\-sequences}}
+\subsubsection[{Builder\_\-visit\_\-sequences}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Builder\_\-visit\_\-sequences::Builder\_\-visit\_\-sequences (const {\bf Builder\_\-plans} \& {\em builder\_\-plan}, \/  const {\bf Attr\_\-grammar} \& {\em attribute\_\-grammar})}}
+\label{classgenevalmag_1_1Builder__visit__sequences_a14404a9245e81db0b848226b33c4705c}
+Contructor empty of \hyperlink{classgenevalmag_1_1Builder__visit__sequences}{Builder\_\-visit\_\-sequences}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em builder\_\-plan}]\item[{\em attribute\_\-grammar}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Contructor empty of \hyperlink{classgenevalmag_1_1Builder__visit__sequences}{Builder\_\-visit\_\-sequences}. 
+
+Definition at line 26 of file Builder\_\-visit\_\-sequences.cpp.
+
+\hypertarget{classgenevalmag_1_1Builder__visit__sequences_a9b86db069a7c5564cf802bef80599a7d}{
+\index{genevalmag::Builder\_\-visit\_\-sequences@{genevalmag::Builder\_\-visit\_\-sequences}!$\sim$Builder\_\-visit\_\-sequences@{$\sim$Builder\_\-visit\_\-sequences}}
+\index{$\sim$Builder\_\-visit\_\-sequences@{$\sim$Builder\_\-visit\_\-sequences}!genevalmag::Builder_visit_sequences@{genevalmag::Builder\_\-visit\_\-sequences}}
+\subsubsection[{$\sim$Builder\_\-visit\_\-sequences}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Builder\_\-visit\_\-sequences::$\sim$Builder\_\-visit\_\-sequences ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__visit__sequences_a9b86db069a7c5564cf802bef80599a7d}
+Destructor of \hyperlink{classgenevalmag_1_1Builder__visit__sequences}{Builder\_\-visit\_\-sequences}. \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Destructor of \hyperlink{classgenevalmag_1_1Builder__visit__sequences}{Builder\_\-visit\_\-sequences}. 
+
+Definition at line 38 of file Builder\_\-visit\_\-sequences.cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classgenevalmag_1_1Builder__visit__sequences_a81498899f7859f929abb96526f20e4a3}{
+\index{genevalmag::Builder\_\-visit\_\-sequences@{genevalmag::Builder\_\-visit\_\-sequences}!gen\_\-visit\_\-seq@{gen\_\-visit\_\-seq}}
+\index{gen\_\-visit\_\-seq@{gen\_\-visit\_\-seq}!genevalmag::Builder_visit_sequences@{genevalmag::Builder\_\-visit\_\-sequences}}
+\subsubsection[{gen\_\-visit\_\-seq}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Builder\_\-visit\_\-sequences::gen\_\-visit\_\-seq (const map$<$ {\bf Key\_\-plan}, unsigned short $>$::const\_\-iterator \& {\em it\_\-plan}, \/  vector$<$ {\bf Expr\_\-instance} $>$ \& {\em ins\_\-computed}, \/  vector$<$ map$<$ {\bf Key\_\-plan}, unsigned short $>$::const\_\-iterator $>$ \& {\em plans\_\-computed}, \/  const vector$<$ unsigned short $>$ \& {\em v\_\-seq\_\-computed})\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__visit__sequences_a81498899f7859f929abb96526f20e4a3}
+Generates recursively the visit sequence, navigating the tree as indicated by the plans, visiting the children, returning to the parent or generating a compute attribute.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em it\_\-plan}]\item[{\em ins\_\-computed}]\item[{\em plans\_\-computed}]\item[{\em v\_\-seq\_\-computed}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Generates recursively the visit sequence, navigating the tree as indicated by the plans, visiting the children, returning to the parent or generating a compute attribute. 
+
+Definition at line 162 of file Builder\_\-visit\_\-sequences.cpp.
+
+
+
+References genevalmag::attr\_\-grammar, utilities::belong\_\-index(), genevalmag::belong\_\-it(), genevalmag::Symbol::equals(), genevalmag::Expr\_\-instance::get\_\-attr(), genevalmag::Rule::get\_\-eq(), genevalmag::get\_\-inherits\_\-of(), genevalmag::Rule::get\_\-left\_\-symbol(), genevalmag::Rule::get\_\-non\_\-terminals\_\-right\_\-side(), genevalmag::Expr\_\-instance::get\_\-num(), genevalmag::Attr\_\-grammar::get\_\-rule(), genevalmag::Expr\_\-instance::get\_\-symb(), genevalmag::k\_\-p\_\-project::id\_\-plan\_\-project, genevalmag::k\_\-p\_\-project::index\_\-ocurrence, genevalmag::ins\_\-attr\_\-computed(), genevalmag::Attribute::is\_\-inherit(), genevalmag::Attribute::is\_\-synthetize(), genevalmag::LEAVE(), genevalmag::merge\_\-vec(), genevalmag::merge\_\-vec\_\-without\_\-plan(), genevalmag::plan\_\-family\_\-computed(), and genevalmag::k\_\-p\_\-project::symbol\_\-project.
+
+
+
+Referenced by generate\_\-visit\_\-sequences().
+
+
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=359pt]{classgenevalmag_1_1Builder__visit__sequences_a81498899f7859f929abb96526f20e4a3_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=313pt]{classgenevalmag_1_1Builder__visit__sequences_a81498899f7859f929abb96526f20e4a3_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classgenevalmag_1_1Builder__visit__sequences_a2721134ffe1c2677b96a46c4b4d184ef}{
+\index{genevalmag::Builder\_\-visit\_\-sequences@{genevalmag::Builder\_\-visit\_\-sequences}!generate\_\-visit\_\-sequences@{generate\_\-visit\_\-sequences}}
+\index{generate\_\-visit\_\-sequences@{generate\_\-visit\_\-sequences}!genevalmag::Builder_visit_sequences@{genevalmag::Builder\_\-visit\_\-sequences}}
+\subsubsection[{generate\_\-visit\_\-sequences}]{\setlength{\rightskip}{0pt plus 5cm}bool genevalmag::Builder\_\-visit\_\-sequences::generate\_\-visit\_\-sequences ()}}
+\label{classgenevalmag_1_1Builder__visit__sequences_a2721134ffe1c2677b96a46c4b4d184ef}
+Generates a visit sequence for each evaluation plan. \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Generates a visit sequence for each evaluation plan. 
+
+Definition at line 358 of file Builder\_\-visit\_\-sequences.cpp.
+
+
+
+References all\_\-visit\_\-seqs, attr\_\-grammar, b\_\-plans, utilities::belong\_\-index(), genevalmag::Symbol::equals(), gen\_\-visit\_\-seq(), genevalmag::Builder\_\-plans::get\_\-context\_\-unique(), genevalmag::Attr\_\-grammar::get\_\-initial\_\-symb(), genevalmag::Rule::get\_\-left\_\-symbol(), genevalmag::Builder\_\-plans::get\_\-plans(), genevalmag::Builder\_\-plans::get\_\-plans\_\-uniques(), genevalmag::Attr\_\-grammar::get\_\-rule(), genevalmag::merge\_\-vec(), and genevalmag::plan\_\-family\_\-computed().
+
+
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__visit__sequences_a2721134ffe1c2677b96a46c4b4d184ef_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classgenevalmag_1_1Builder__visit__sequences_acf3c542e09500da73d78ddc757f136ec}{
+\index{genevalmag::Builder\_\-visit\_\-sequences@{genevalmag::Builder\_\-visit\_\-sequences}!get\_\-visit\_\-seq@{get\_\-visit\_\-seq}}
+\index{get\_\-visit\_\-seq@{get\_\-visit\_\-seq}!genevalmag::Builder_visit_sequences@{genevalmag::Builder\_\-visit\_\-sequences}}
+\subsubsection[{get\_\-visit\_\-seq}]{\setlength{\rightskip}{0pt plus 5cm}const vector$<$ {\bf Visit\_\-seq} $>$ \& genevalmag::Builder\_\-visit\_\-sequences::get\_\-visit\_\-seq () const}}
+\label{classgenevalmag_1_1Builder__visit__sequences_acf3c542e09500da73d78ddc757f136ec}
+Returns the vector with all visit sequences generates. \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Returns the vector with all visit sequences generates. 
+
+Definition at line 393 of file Builder\_\-visit\_\-sequences.cpp.
+
+
+
+References all\_\-visit\_\-seqs.
+
+
+
+Referenced by genevalmag::Builder\_\-code::generate\_\-initialize\_\-v\_\-seq().
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Builder__visit__sequences_acf3c542e09500da73d78ddc757f136ec_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classgenevalmag_1_1Builder__visit__sequences_ad3073f1a763bdbd4812f64a16bb6a67d}{
+\index{genevalmag::Builder\_\-visit\_\-sequences@{genevalmag::Builder\_\-visit\_\-sequences}!print\_\-all\_\-visit\_\-sequences@{print\_\-all\_\-visit\_\-sequences}}
+\index{print\_\-all\_\-visit\_\-sequences@{print\_\-all\_\-visit\_\-sequences}!genevalmag::Builder_visit_sequences@{genevalmag::Builder\_\-visit\_\-sequences}}
+\subsubsection[{print\_\-all\_\-visit\_\-sequences}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Builder\_\-visit\_\-sequences::print\_\-all\_\-visit\_\-sequences () const}}
+\label{classgenevalmag_1_1Builder__visit__sequences_ad3073f1a763bdbd4812f64a16bb6a67d}
+Print in console, all visit sequences generates. 
+
+Definition at line 401 of file Builder\_\-visit\_\-sequences.cpp.
+
+
+
+References all\_\-visit\_\-seqs.
+
+\hypertarget{classgenevalmag_1_1Builder__visit__sequences_aeb3f3076ab75a8869785d98c0c3bcdf2}{
+\index{genevalmag::Builder\_\-visit\_\-sequences@{genevalmag::Builder\_\-visit\_\-sequences}!update\_\-visit\_\-sequence@{update\_\-visit\_\-sequence}}
+\index{update\_\-visit\_\-sequence@{update\_\-visit\_\-sequence}!genevalmag::Builder_visit_sequences@{genevalmag::Builder\_\-visit\_\-sequences}}
+\subsubsection[{update\_\-visit\_\-sequence}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Builder\_\-visit\_\-sequences::update\_\-visit\_\-sequence (const {\bf Visit\_\-seq} \& {\em sequence}, \/  const size\_\-t {\em i\_\-plan})\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__visit__sequences_aeb3f3076ab75a8869785d98c0c3bcdf2}
+Updates the visit sequence generate, mixing with pre-\/generated visit sequences. 
+\begin{DoxyParams}{Parameters}
+\item[{\em sequence}]\item[{\em i\_\-plan}]Update the visit sequence generate, mixing with pre-\/generated visit sequences. \end{DoxyParams}
+
+
+Definition at line 317 of file Builder\_\-visit\_\-sequences.cpp.
+
+
+
+References all\_\-visit\_\-seqs.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classgenevalmag_1_1Builder__visit__sequences_aba229b62df85d994ce9a5da960c1273a}{
+\index{genevalmag::Builder\_\-visit\_\-sequences@{genevalmag::Builder\_\-visit\_\-sequences}!all\_\-visit\_\-seqs@{all\_\-visit\_\-seqs}}
+\index{all\_\-visit\_\-seqs@{all\_\-visit\_\-seqs}!genevalmag::Builder_visit_sequences@{genevalmag::Builder\_\-visit\_\-sequences}}
+\subsubsection[{all\_\-visit\_\-seqs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-visit\_\-sequences::all\_\-visit\_\-seqs}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__visit__sequences_aba229b62df85d994ce9a5da960c1273a}
+
+
+Stores all visit sequences generates. 
+
+
+
+Definition at line 49 of file Builder\_\-visit\_\-sequences.h.
+
+
+
+Referenced by generate\_\-visit\_\-sequences(), get\_\-visit\_\-seq(), print\_\-all\_\-visit\_\-sequences(), and update\_\-visit\_\-sequence().
+
+\hypertarget{classgenevalmag_1_1Builder__visit__sequences_a2eb7705741cd581ed968e0bc6127b3fd}{
+\index{genevalmag::Builder\_\-visit\_\-sequences@{genevalmag::Builder\_\-visit\_\-sequences}!attr\_\-grammar@{attr\_\-grammar}}
+\index{attr\_\-grammar@{attr\_\-grammar}!genevalmag::Builder_visit_sequences@{genevalmag::Builder\_\-visit\_\-sequences}}
+\subsubsection[{attr\_\-grammar}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-visit\_\-sequences::attr\_\-grammar}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__visit__sequences_a2eb7705741cd581ed968e0bc6127b3fd}
+
+
+References to the attribute grammar. 
+
+
+
+Definition at line 43 of file Builder\_\-visit\_\-sequences.h.
+
+
+
+Referenced by generate\_\-visit\_\-sequences().
+
+\hypertarget{classgenevalmag_1_1Builder__visit__sequences_accdb8c83f0540acd32f2ee461c9b2fbe}{
+\index{genevalmag::Builder\_\-visit\_\-sequences@{genevalmag::Builder\_\-visit\_\-sequences}!b\_\-plans@{b\_\-plans}}
+\index{b\_\-plans@{b\_\-plans}!genevalmag::Builder_visit_sequences@{genevalmag::Builder\_\-visit\_\-sequences}}
+\subsubsection[{b\_\-plans}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Builder\_\-visit\_\-sequences::b\_\-plans}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Builder__visit__sequences_accdb8c83f0540acd32f2ee461c9b2fbe}
+
+
+References to all plans generates. 
+
+
+
+Definition at line 37 of file Builder\_\-visit\_\-sequences.h.
+
+
+
+Referenced by generate\_\-visit\_\-sequences().
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+include/Builders/\hyperlink{Builder__visit__sequences_8h}{Builder\_\-visit\_\-sequences.h}\item 
+src/Builders/\hyperlink{Builder__visit__sequences_8cpp}{Builder\_\-visit\_\-sequences.cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,66 @@
+.TH "genevalmag::Maglib" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::Maglib \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Maglib.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBMaglib\fP ()"
+.br
+.ti -1c
+.RI "virtual \fB~Maglib\fP ()"
+.br
+.ti -1c
+.RI "int \fBgen_evaluator\fP (const string path_input_file, const string path_folder_output, const string name_library, const vector< string > &headers, const string path) const "
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 19 of file Maglib.h.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::Maglib::Maglib ()"Contructor empty of Mag_lib. 
+.PP
+Definition at line 26 of file Maglib.cpp.
+.SS "genevalmag::Maglib::~Maglib ()\fC [virtual]\fP"Destructor empty of Mag_lib. 
+.PP
+Definition at line 33 of file Maglib.cpp.
+.SH "Member Function Documentation"
+.PP 
+.SS "int genevalmag::Maglib::gen_evaluator (const string path_input_file, const string path_folder_output, const string name_library, const vector< string > & headers, const string path) const"Generates the static evaluator's files for the \fBAttribute\fP grammar specificated in the input_path_file passed as parameter. All outputs of the library be saved in the path_folder_output. The evaluator classname is defined by name_library. The user could include somes headers for uses externs functions to evaluator.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath_input_file\fP 
+.br
+\fIpath_folder_output\fP 
+.br
+\fIname_library\fP 
+.br
+\fIheaders\fP 
+.br
+\fIpath\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Generates the static evaluator's files for the \fBAttribute\fP grammar specificated in the input_path_file passed as parameter. All outputs of the library be saved in the path_folder_output. The evaluator classname is defined by name_library. The user could include somes headers for uses externs functions to evaluator. 
+.PP
+Definition at line 45 of file Maglib.cpp.
+.PP
+References utilities::clean_output_folder(), genevalmag::Parser_AG::get_attr_grammar(), genevalmag::Parser_AG::parse_grammar(), and genevalmag::Parser_AG::save_grammar_file().
+.PP
+Referenced by main().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.
