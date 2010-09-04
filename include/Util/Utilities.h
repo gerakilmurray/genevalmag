@@ -38,7 +38,8 @@ bool clean_output_folder(const string path);
 
 /**
   * Copies the static file to the generation path.
-  * @param path
+  * @param path_d
+  * @param path_s  
   * @return
   */
 bool copy_static_code(const string path_d, const string path_s);

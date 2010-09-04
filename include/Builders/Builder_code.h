@@ -212,8 +212,9 @@ class Builder_code
 
 		/**
 		  * Generates the header and source code of the static evaluator of the grammar passed as parameter,
-		  * alog with their evaluations plans, visit sequence and headers for uses user functions defined.
+		  * with their evaluations plans, visit sequence and headers for uses user functions defined.
 		  * @param headers_file
+		  * @param path
 		  * @return
 		  */
 		bool generate_code(const vector<string> &headers_file, const string path) const;
