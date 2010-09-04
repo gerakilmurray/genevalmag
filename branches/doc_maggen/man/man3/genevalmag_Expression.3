@@ -1,0 +1,235 @@
+.TH "genevalmag::Expression" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::Expression \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Expression.h>\fP
+.PP
+Inherited by \fBgenevalmag::Expr_leaf\fP, and \fBgenevalmag::Expr_node\fP.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBExpression\fP ()"
+.br
+.ti -1c
+.RI "virtual \fB~Expression\fP ()"
+.br
+.ti -1c
+.RI "const \fBExpression\fP * \fBget_parent\fP () const "
+.br
+.ti -1c
+.RI "const string \fBget_type_synthetized\fP () const "
+.br
+.ti -1c
+.RI "int \fBget_conflict\fP () const "
+.br
+.ti -1c
+.RI "void \fBset_parent\fP (const \fBExpression\fP *new_parent)"
+.br
+.ti -1c
+.RI "void \fBset_type_synthetized\fP (string new_type_synthetized)"
+.br
+.ti -1c
+.RI "void \fBdelete_parent\fP ()"
+.br
+.ti -1c
+.RI "void \fBactive_conflict\fP (int prec_conflict)"
+.br
+.ti -1c
+.RI "void \fBdesactive_conflict\fP ()"
+.br
+.ti -1c
+.RI "virtual string \fBto_string\fP () const =0"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "const \fBExpression\fP * \fBparent\fP"
+.br
+.RI "\fIFather of \fBExpression\fP. \fP"
+.ti -1c
+.RI "string \fBtype_synthetized\fP"
+.br
+.RI "\fIType of node: Obtains of parse. \fP"
+.ti -1c
+.RI "int \fBconflict\fP"
+.br
+.RI "\fIMark when conflicted node.
+.br
+ This conflict is a conflict in the parse.
+.br
+ Used for define the precedence of function.
+.br
+. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 21 of file Expression.h.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::Expression::Expression ()"Constructor of \fBExpression\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Contructor of \fBExpression\fP. 
+.PP
+Definition at line 17 of file Expression.cpp.
+.PP
+References conflict, parent, and type_synthetized.
+.SS "genevalmag::Expression::~Expression ()\fC [virtual]\fP"Destructor of \fBExpression\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Destructor of \fBExpression\fP. 
+.PP
+Definition at line 27 of file Expression.cpp.
+.SH "Member Function Documentation"
+.PP 
+.SS "void genevalmag::Expression::active_conflict (int prec_conflict)"Turn on the conflict flag with the precendence wath produces. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIprec_conflict\fP Turn on the conflict flag with the precendence wath produces. 
+.RE
+.PP
+
+.PP
+Definition at line 80 of file Expression.cpp.
+.PP
+References conflict.
+.SS "void genevalmag::Expression::delete_parent ()"Sets the parent pointer of the \fBExpression\fP in NULL. 
+.PP
+Definition at line 72 of file Expression.cpp.
+.PP
+References parent.
+.SS "void genevalmag::Expression::desactive_conflict ()"Turn off the conflict flag with negative precendence. 
+.PP
+Definition at line 88 of file Expression.cpp.
+.PP
+References conflict.
+.SS "int genevalmag::Expression::get_conflict () const"Returns the precendence wath produces the conflict. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the precendence wath produces the conflict. 
+.PP
+Definition at line 48 of file Expression.cpp.
+.PP
+References conflict.
+.PP
+Referenced by genevalmag::Expr_literal::copy(), genevalmag::Expr_instance::copy(), and genevalmag::Expr_function::copy().
+.SS "const \fBExpression\fP * genevalmag::Expression::get_parent () const"Returns the parent pointer of the \fBExpression\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the parent pointer of the \fBExpression\fP. 
+.PP
+Definition at line 32 of file Expression.cpp.
+.PP
+References parent.
+.PP
+Referenced by genevalmag::Expr_literal::copy(), genevalmag::Expr_instance::copy(), and genevalmag::Expr_function::copy().
+.SS "const string genevalmag::Expression::get_type_synthetized () const"Returns the type synthetized of the \fBExpression\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the type synthetized of the \fBExpression\fP. 
+.PP
+Definition at line 40 of file Expression.cpp.
+.PP
+References type_synthetized.
+.PP
+Referenced by genevalmag::Expr_literal::copy(), genevalmag::Expr_instance::copy(), and genevalmag::Expr_function::copy().
+.SS "void genevalmag::Expression::set_parent (const \fBExpression\fP * new_parent)"Sets the parent pointer of the \fBExpression\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInew_parent\fP Sets the parent pointer of the \fBExpression\fP. 
+.RE
+.PP
+
+.PP
+Definition at line 56 of file Expression.cpp.
+.PP
+References parent.
+.PP
+Referenced by genevalmag::Expr_node::add_child(), and genevalmag::Expr_node::replace_child().
+.SS "void genevalmag::Expression::set_type_synthetized (string new_type_synthetized)"Returns the type synthetized of the \fBExpression\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInew_type_synthetized\fP Returns the type synthetized of the \fBExpression\fP. 
+.RE
+.PP
+
+.PP
+Definition at line 64 of file Expression.cpp.
+.PP
+References type_synthetized.
+.PP
+Referenced by genevalmag::create_bool(), genevalmag::create_instance_node(), genevalmag::create_lit_ch(), genevalmag::create_lit_number(), genevalmag::create_lit_str(), and genevalmag::push_mark().
+.SS "virtual string genevalmag::Expression::to_string () const\fC [pure virtual]\fP"Generate and return a string reprensentation of a \fBExpression\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+
+.PP
+Implemented in \fBgenevalmag::Expr_function\fP, \fBgenevalmag::Expr_instance\fP, \fBgenevalmag::Expr_leaf\fP, \fBgenevalmag::Expr_literal\fP, and \fBgenevalmag::Expr_node\fP.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::Expression::conflict\fP\fC [protected]\fP"
+.PP
+Mark when conflicted node.
+.br
+ This conflict is a conflict in the parse.
+.br
+ Used for define the precedence of function.
+.br
+. 
+.PP
+Definition at line 40 of file Expression.h.
+.PP
+Referenced by active_conflict(), genevalmag::Expr_literal::copy(), genevalmag::Expr_instance::copy(), genevalmag::Expr_function::copy(), desactive_conflict(), Expression(), and get_conflict().
+.SS "\fBgenevalmag::Expression::parent\fP\fC [protected]\fP"
+.PP
+Father of \fBExpression\fP. 
+.PP
+Definition at line 28 of file Expression.h.
+.PP
+Referenced by genevalmag::Expr_literal::copy(), genevalmag::Expr_instance::copy(), genevalmag::Expr_function::copy(), delete_parent(), Expression(), get_parent(), and set_parent().
+.SS "\fBgenevalmag::Expression::type_synthetized\fP\fC [protected]\fP"
+.PP
+Type of node: Obtains of parse. 
+.PP
+Definition at line 33 of file Expression.h.
+.PP
+Referenced by genevalmag::Expr_literal::copy(), genevalmag::Expr_instance::copy(), genevalmag::Expr_function::copy(), Expression(), get_type_synthetized(), and set_type_synthetized().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

@@ -1,0 +1,93 @@
+.TH "genevalmag::Expr_leaf" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::Expr_leaf \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Expr_leaf.h>\fP
+.PP
+Inherits \fBgenevalmag::Expression\fP.
+.PP
+Inherited by \fBgenevalmag::Expr_instance\fP, and \fBgenevalmag::Expr_literal\fP.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBExpr_leaf\fP ()"
+.br
+.ti -1c
+.RI "virtual \fB~Expr_leaf\fP ()"
+.br
+.ti -1c
+.RI "virtual string \fBto_string\fP () const =0"
+.br
+.ti -1c
+.RI "bool \fBequals\fP (const \fBExpr_leaf\fP *other) const "
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 17 of file Expr_leaf.h.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::Expr_leaf::Expr_leaf ()"Constructor of \fBExpr_leaf\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+
+.PP
+Definition at line 14 of file Expr_leaf.cpp.
+.SS "genevalmag::Expr_leaf::~Expr_leaf ()\fC [virtual]\fP"Destructor of \fBExpr_leaf\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Destructor of \fBExpr_leaf\fP. 
+.PP
+Definition at line 19 of file Expr_leaf.cpp.
+.SH "Member Function Documentation"
+.PP 
+.SS "bool genevalmag::Expr_leaf::equals (const \fBExpr_leaf\fP * other) const"Compares the \fBExpr_leaf\fP with other. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Compares the \fBExpr_leaf\fP with other. 
+.PP
+Definition at line 24 of file Expr_leaf.cpp.
+.PP
+References to_string().
+.PP
+Referenced by utilities::return_vertex().
+.SS "virtual string genevalmag::Expr_leaf::to_string () const\fC [pure virtual]\fP"Generates and returns a string reprensentation of a \fBExpr_leaf\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+
+.PP
+Implements \fBgenevalmag::Expression\fP.
+.PP
+Implemented in \fBgenevalmag::Expr_instance\fP, and \fBgenevalmag::Expr_literal\fP.
+.PP
+Referenced by equals().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

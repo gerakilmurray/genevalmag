@@ -1,0 +1,568 @@
+.TH "genevalmag::Function" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::Function \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Function.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBFunction\fP ()"
+.br
+.ti -1c
+.RI "\fBFunction\fP (const \fBFunction\fP &other)"
+.br
+.ti -1c
+.RI "virtual \fB~Function\fP ()"
+.br
+.ti -1c
+.RI "\fBFunction\fP & \fBoperator=\fP (const \fBFunction\fP &other)"
+.br
+.ti -1c
+.RI "string \fBget_name\fP () const "
+.br
+.ti -1c
+.RI "const vector< const \fBSort\fP * > & \fBget_domain\fP () const "
+.br
+.ti -1c
+.RI "const \fBSort\fP * \fBget_image\fP () const "
+.br
+.ti -1c
+.RI "const \fBoper_mode\fP \fBget_mode\fP () const "
+.br
+.ti -1c
+.RI "const unsigned short \fBget_prec\fP () const "
+.br
+.ti -1c
+.RI "const \fBoper_assoc\fP \fBget_oper_assoc\fP () const "
+.br
+.ti -1c
+.RI "const int \fBget_arity\fP () const "
+.br
+.ti -1c
+.RI "void \fBset_name\fP (const string name)"
+.br
+.ti -1c
+.RI "void \fBset_image\fP (const \fBSort\fP *image)"
+.br
+.ti -1c
+.RI "void \fBset_mode\fP (const string mode)"
+.br
+.ti -1c
+.RI "void \fBset_prec\fP (const unsigned short prec)"
+.br
+.ti -1c
+.RI "void \fBset_oper_assoc\fP (const string mod)"
+.br
+.ti -1c
+.RI "void \fBset_is_operator\fP (const bool value)"
+.br
+.ti -1c
+.RI "void \fBadd_domain\fP (const \fBSort\fP *sort)"
+.br
+.ti -1c
+.RI "const string \fBto_string\fP () const "
+.br
+.ti -1c
+.RI "const string \fBsignature\fP () const "
+.br
+.ti -1c
+.RI "const bool \fBis_operator\fP () const "
+.br
+.ti -1c
+.RI "const bool \fBequals\fP (const \fBFunction\fP &other) const "
+.br
+.ti -1c
+.RI "const string \fBkey\fP () const "
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcopy\fP (const \fBFunction\fP &other)"
+.br
+.ti -1c
+.RI "void \fBdestroy\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "string \fBf_name\fP"
+.br
+.RI "\fIFunction's name. \fP"
+.ti -1c
+.RI "vector< const \fBSort\fP * > \fBf_domain\fP"
+.br
+.RI "\fIFunction's sort domain. \fP"
+.ti -1c
+.RI "const \fBSort\fP * \fBf_image\fP"
+.br
+.RI "\fIFunction's sort image. \fP"
+.ti -1c
+.RI "\fBoper_mode\fP \fBf_mod\fP"
+.br
+.RI "\fIFunction's notation. Functions are always prefix. Operators can be anyone. \fP"
+.ti -1c
+.RI "unsigned short \fBf_prec\fP"
+.br
+.RI "\fIFunction's precedence. \fP"
+.ti -1c
+.RI "\fBoper_assoc\fP \fBf_assoc\fP"
+.br
+.RI "\fIFunction's associativity. \fP"
+.ti -1c
+.RI "bool \fBf_is_operator\fP"
+.br
+.RI "\fIIf that value is TRUE then the object function is a operator. This can be: prefix, infix or postfix. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 40 of file Function.h.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::Function::Function ()"Contructor empty of function.
+.PP
+Contructor empty of \fBFunction\fP. 
+.PP
+Definition at line 21 of file Function.cpp.
+.PP
+References f_assoc, f_is_operator, f_mod, f_prec, genevalmag::k_left, and genevalmag::k_prefix.
+.SS "genevalmag::Function::Function (const \fBFunction\fP & other)"Contructor copy of function. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Contructor copy of \fBFunction\fP. 
+.PP
+Definition at line 32 of file Function.cpp.
+.PP
+References copy().
+.SS "genevalmag::Function::~Function ()\fC [virtual]\fP"Destructor of the function.
+.PP
+Destructor of the \fBFunction\fP. 
+.PP
+Definition at line 40 of file Function.cpp.
+.PP
+References destroy().
+.SH "Member Function Documentation"
+.PP 
+.SS "void genevalmag::Function::add_domain (const \fBSort\fP * sort)"Enqueues a sort in the domain of the \fBFunction\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsort\fP Enqueue a sort in the domain of the \fBFunction\fP. 
+.RE
+.PP
+
+.PP
+Definition at line 230 of file Function.cpp.
+.PP
+References f_domain.
+.PP
+Referenced by genevalmag::save_domain_func().
+.SS "void genevalmag::Function::copy (const \fBFunction\fP & other)\fC [private]\fP"Method of copy the function, STL-like C++. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP Method of copy the \fBFunction\fP, STL-like C++. 
+.RE
+.PP
+
+.PP
+Definition at line 61 of file Function.cpp.
+.PP
+References f_assoc, f_domain, f_image, f_is_operator, f_mod, f_name, f_prec, get_domain(), get_image(), get_mode(), get_name(), get_oper_assoc(), get_prec(), and is_operator().
+.PP
+Referenced by Function(), and operator=().
+.SS "void genevalmag::Function::destroy ()\fC [private]\fP"Method destroy function, STL-like C++.
+.PP
+Method destroy \fBFunction\fP, STL-like C++. 
+.PP
+Definition at line 75 of file Function.cpp.
+.PP
+Referenced by operator=(), and ~Function().
+.SS "const bool genevalmag::Function::equals (const \fBFunction\fP & other) const"Compares the \fBFunction\fP with other. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Compares the \fBFunction\fP with other. 
+.PP
+Definition at line 346 of file Function.cpp.
+.PP
+References key().
+.SS "const int genevalmag::Function::get_arity () const"Returns the arity of \fBFunction\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the arity of \fBFunction\fP. 
+.PP
+Definition at line 130 of file Function.cpp.
+.PP
+References f_domain.
+.SS "const vector< const \fBSort\fP * > & genevalmag::Function::get_domain () const"Returns the domain of the \fBFunction\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the domain of the \fBFunction\fP. 
+.PP
+Definition at line 90 of file Function.cpp.
+.PP
+References f_domain.
+.PP
+Referenced by copy().
+.SS "const \fBSort\fP * genevalmag::Function::get_image () const"Returns the image of the \fBFunction\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the image of the \fBFunction\fP. 
+.PP
+Definition at line 98 of file Function.cpp.
+.PP
+References f_image.
+.PP
+Referenced by copy().
+.SS "const \fBoper_mode\fP genevalmag::Function::get_mode () const"Returns the mode of the operator. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the mode of the operator. 
+.PP
+Definition at line 106 of file Function.cpp.
+.PP
+References f_mod.
+.PP
+Referenced by copy(), genevalmag::Expr_function::is_infix(), genevalmag::Expr_function::is_postfix(), genevalmag::Expr_function::is_prefix(), and genevalmag::Expr_function::to_string().
+.SS "string genevalmag::Function::get_name () const"Returns the name of the \fBFunction\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the name of the \fBFunction\fP. 
+.PP
+Definition at line 82 of file Function.cpp.
+.PP
+References f_name.
+.PP
+Referenced by copy(), genevalmag::generate_expr_text(), key(), signature(), genevalmag::Expr_function::to_string(), and to_string().
+.SS "const \fBoper_assoc\fP genevalmag::Function::get_oper_assoc () const"Returns the associativity of the operator. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the associativity of the operator. 
+.PP
+Definition at line 122 of file Function.cpp.
+.PP
+References f_assoc.
+.PP
+Referenced by copy().
+.SS "const unsigned short genevalmag::Function::get_prec () const"Returns the precedence of the operator. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the precedence of the operator. 
+.PP
+Definition at line 114 of file Function.cpp.
+.PP
+References f_prec.
+.PP
+Referenced by genevalmag::Expr_function::compare_precedence(), copy(), and genevalmag::Semantics_checks::correct_precedence().
+.SS "const bool genevalmag::Function::is_operator () const"Returns true if the \fBFunction\fP is a Operator. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns true if the \fBFunction\fP is a Operator. 
+.PP
+Definition at line 338 of file Function.cpp.
+.PP
+References f_is_operator.
+.PP
+Referenced by copy(), genevalmag::generate_expr_text(), key(), signature(), genevalmag::Expr_function::to_string(), and to_string().
+.SS "const string genevalmag::Function::key () const"Generates and returns the string key that identifies a \fBFunction\fP definitely.
+.br
+ 
+.br
+ Result = <name> <domain> <image>
+.br
+ 
+.br
+ where <domain> is = sort_1 ... sort_n
+.br
+ 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates and returns the string key that identifies a \fBFunction\fP definitely.
+.PP
+Result = <name> <domain> <image>
+.PP
+where <domain> is = sort_1 ... sort_n 
+.PP
+Definition at line 358 of file Function.cpp.
+.PP
+References f_domain, f_mod, f_name, get_name(), is_operator(), genevalmag::k_infix, genevalmag::k_postfix, and genevalmag::k_prefix.
+.PP
+Referenced by equals().
+.SS "\fBFunction\fP & genevalmag::Function::operator= (const \fBFunction\fP & other)"Operator assign(=) of function. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Operator assign(=) of \fBFunction\fP. 
+.PP
+Definition at line 48 of file Function.cpp.
+.PP
+References copy(), and destroy().
+.SS "void genevalmag::Function::set_image (const \fBSort\fP * image)"Sets the sort image of the \fBFunction\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIimage\fP Sets the sort image of the \fBFunction\fP. 
+.RE
+.PP
+
+.PP
+Definition at line 146 of file Function.cpp.
+.PP
+References f_image.
+.PP
+Referenced by genevalmag::save_image_func().
+.SS "void genevalmag::Function::set_is_operator (const bool value)"Sets the boolean attribute with the parameter. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvalue\fP Sets the boolean attribute with the parameter. 
+.RE
+.PP
+
+.PP
+Definition at line 222 of file Function.cpp.
+.PP
+References f_is_operator.
+.PP
+Referenced by genevalmag::add_operator(), and genevalmag::create_operator().
+.SS "void genevalmag::Function::set_mode (const string mode)"Sets the mode of the operator. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImode\fP Sets the mode of the operator. 
+.RE
+.PP
+
+.PP
+Definition at line 154 of file Function.cpp.
+.PP
+References f_mod, genevalmag::k_infix, genevalmag::k_postfix, and genevalmag::k_prefix.
+.PP
+Referenced by genevalmag::save_mode_op().
+.SS "void genevalmag::Function::set_name (const string name)"Sets the name of the \fBFunction\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname\fP Sets the name of the \fBFunction\fP. 
+.RE
+.PP
+
+.PP
+Definition at line 138 of file Function.cpp.
+.PP
+References f_name.
+.PP
+Referenced by genevalmag::save_name_func().
+.SS "void genevalmag::Function::set_oper_assoc (const string mod)"Sets the associativity of the operator. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImod\fP Sets the associativity of the operator. 
+.RE
+.PP
+
+.PP
+Definition at line 192 of file Function.cpp.
+.PP
+References f_assoc, genevalmag::k_left, genevalmag::k_non_assoc, and genevalmag::k_right.
+.PP
+Referenced by genevalmag::save_assoc_op().
+.SS "void genevalmag::Function::set_prec (const unsigned short prec)"Sets the precedence of the operator. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIprec\fP Sets the precedence of the operator. 
+.RE
+.PP
+
+.PP
+Definition at line 184 of file Function.cpp.
+.PP
+References f_prec.
+.PP
+Referenced by genevalmag::save_prec_op().
+.SS "const string genevalmag::Function::signature () const"Generates and returns a string with the signature of a \fBFunction\fP.
+.br
+ 
+.br
+ Result = <image> <name> '(' <domain> ');'
+.br
+ 
+.br
+ or if is an operator:
+.br
+ 
+.br
+ Result = <image> 'operator'<name> '(' <domain> ');'
+.br
+ 
+.br
+ where <domain> is = sort_1 P1',' ... ',' sort_n Pn
+.br
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Generates and returns a string with the signature of a \fBFunction\fP.
+.PP
+Result = <image> <name> '(' <domain> ');'
+.PP
+or if is an operator:
+.PP
+Result = <image> 'operator'<name> '(' <domain> ');'
+.PP
+where <domain> is= sort_1 P1',' ... ',' sort_n Pn 
+.PP
+Definition at line 308 of file Function.cpp.
+.PP
+References f_domain, f_image, f_name, get_name(), genevalmag::Sort::get_name(), and is_operator().
+.SS "const string genevalmag::Function::to_string () const"Generates and returns a string reprensentation of a \fBFunction\fP.
+.br
+ 
+.br
+ Result = 'function' <name> ':' <domain> '->' <image> ';'
+.br
+ 
+.br
+ where <domain> is= sort_1 ['(' <instance> ')' IF DEBUG IS ON] ',' ... ',' sort_n ['(' <instance> ')' IF DEBUG IS ON]
+.br
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Generates and returns a string reprensentation of a \fBFunction\fP.
+.PP
+Result = 'function' <name> ':' <domain> '->' <image> ';'
+.PP
+where <domain> is= sort_1 ['(' <instance> ')' IF DEBUG IS ON] ',' ... ',' sort_n ['(' <instance> ')' IF DEBUG IS ON] 
+.PP
+Definition at line 242 of file Function.cpp.
+.PP
+References f_assoc, f_domain, f_image, f_mod, f_name, f_prec, genevalmag::Sort::get_name(), get_name(), is_operator(), genevalmag::k_infix, genevalmag::k_left, genevalmag::k_non_assoc, genevalmag::k_postfix, genevalmag::k_prefix, and genevalmag::k_right.
+.PP
+Referenced by genevalmag::add_function().
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::Function::f_assoc\fP\fC [private]\fP"
+.PP
+Function's associativity. 
+.PP
+Definition at line 72 of file Function.h.
+.PP
+Referenced by copy(), Function(), get_oper_assoc(), set_oper_assoc(), and to_string().
+.SS "\fBgenevalmag::Function::f_domain\fP\fC [private]\fP"
+.PP
+Function's sort domain. 
+.PP
+Definition at line 52 of file Function.h.
+.PP
+Referenced by add_domain(), copy(), get_arity(), get_domain(), key(), signature(), and to_string().
+.SS "\fBgenevalmag::Function::f_image\fP\fC [private]\fP"
+.PP
+Function's sort image. 
+.PP
+Definition at line 57 of file Function.h.
+.PP
+Referenced by copy(), get_image(), set_image(), signature(), and to_string().
+.SS "\fBgenevalmag::Function::f_is_operator\fP\fC [private]\fP"
+.PP
+If that value is TRUE then the object function is a operator. This can be: prefix, infix or postfix. 
+.PP
+Definition at line 78 of file Function.h.
+.PP
+Referenced by copy(), Function(), is_operator(), and set_is_operator().
+.SS "\fBgenevalmag::Function::f_mod\fP\fC [private]\fP"
+.PP
+Function's notation. Functions are always prefix. Operators can be anyone. 
+.PP
+Definition at line 62 of file Function.h.
+.PP
+Referenced by copy(), Function(), get_mode(), key(), set_mode(), and to_string().
+.SS "\fBgenevalmag::Function::f_name\fP\fC [private]\fP"
+.PP
+Function's name. 
+.PP
+Definition at line 47 of file Function.h.
+.PP
+Referenced by copy(), get_name(), key(), set_name(), signature(), and to_string().
+.SS "\fBgenevalmag::Function::f_prec\fP\fC [private]\fP"
+.PP
+Function's precedence. 
+.PP
+Definition at line 67 of file Function.h.
+.PP
+Referenced by copy(), Function(), get_prec(), set_prec(), and to_string().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

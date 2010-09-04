@@ -1,0 +1,2219 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Creator: Graphviz version 2.20.2 (Tue Mar  2 21:46:26 UTC 2010)
+%%For: (gera) Gerardo Kilmurray,,,
+%%Title: G
+%%Pages: (atend)
+%%BoundingBox: (atend)
+%%EndComments
+save
+%%BeginProlog
+/DotDict 200 dict def
+DotDict begin
+
+/setupLatin1 {
+mark
+/EncodingVector 256 array def
+ EncodingVector 0
+
+ISOLatin1Encoding 0 255 getinterval putinterval
+EncodingVector 45 /hyphen put
+
+% Set up ISO Latin 1 character encoding
+/starnetISO {
+        dup dup findfont dup length dict begin
+        { 1 index /FID ne { def }{ pop pop } ifelse
+        } forall
+        /Encoding EncodingVector def
+        currentdict end definefont
+} def
+/Times-Roman starnetISO def
+/Times-Italic starnetISO def
+/Times-Bold starnetISO def
+/Times-BoldItalic starnetISO def
+/Helvetica starnetISO def
+/Helvetica-Oblique starnetISO def
+/Helvetica-Bold starnetISO def
+/Helvetica-BoldOblique starnetISO def
+/Courier starnetISO def
+/Courier-Oblique starnetISO def
+/Courier-Bold starnetISO def
+/Courier-BoldOblique starnetISO def
+cleartomark
+} bind def
+
+%%BeginResource: procset graphviz 0 0
+/coord-font-family /Times-Roman def
+/default-font-family /Times-Roman def
+/coordfont coord-font-family findfont 8 scalefont def
+
+/InvScaleFactor 1.0 def
+/set_scale {
+       dup 1 exch div /InvScaleFactor exch def
+       scale
+} bind def
+
+% styles
+/solid { [] 0 setdash } bind def
+/dashed { [9 InvScaleFactor mul dup ] 0 setdash } bind def
+/dotted { [1 InvScaleFactor mul 6 InvScaleFactor mul] 0 setdash } bind def
+/invis {/fill {newpath} def /stroke {newpath} def /show {pop newpath} def} bind def
+/bold { 2 setlinewidth } bind def
+/filled { } bind def
+/unfilled { } bind def
+/rounded { } bind def
+/diagonals { } bind def
+
+% hooks for setting color 
+/nodecolor { sethsbcolor } bind def
+/edgecolor { sethsbcolor } bind def
+/graphcolor { sethsbcolor } bind def
+/nopcolor {pop pop pop} bind def
+
+/beginpage {	% i j npages
+	/npages exch def
+	/j exch def
+	/i exch def
+	/str 10 string def
+	npages 1 gt {
+		gsave
+			coordfont setfont
+			0 0 moveto
+			(\() show i str cvs show (,) show j str cvs show (\)) show
+		grestore
+	} if
+} bind def
+
+/set_font {
+	findfont exch
+	scalefont setfont
+} def
+
+% draw text fitted to its expected width
+/alignedtext {			% width text
+	/text exch def
+	/width exch def
+	gsave
+		width 0 gt {
+			[] 0 setdash
+			text stringwidth pop width exch sub text length div 0 text ashow
+		} if
+	grestore
+} def
+
+/boxprim {				% xcorner ycorner xsize ysize
+		4 2 roll
+		moveto
+		2 copy
+		exch 0 rlineto
+		0 exch rlineto
+		pop neg 0 rlineto
+		closepath
+} bind def
+
+/ellipse_path {
+	/ry exch def
+	/rx exch def
+	/y exch def
+	/x exch def
+	matrix currentmatrix
+	newpath
+	x y translate
+	rx ry scale
+	0 0 1 0 360 arc
+	setmatrix
+} bind def
+
+/endpage { showpage } bind def
+/showpage { } def
+
+/layercolorseq
+	[	% layer color sequence - darkest to lightest
+		[0 0 0]
+		[.2 .8 .8]
+		[.4 .8 .8]
+		[.6 .8 .8]
+		[.8 .8 .8]
+	]
+def
+
+/layerlen layercolorseq length def
+
+/setlayer {/maxlayer exch def /curlayer exch def
+	layercolorseq curlayer 1 sub layerlen mod get
+	aload pop sethsbcolor
+	/nodecolor {nopcolor} def
+	/edgecolor {nopcolor} def
+	/graphcolor {nopcolor} def
+} bind def
+
+/onlayer { curlayer ne {invis} if } def
+
+/onlayers {
+	/myupper exch def
+	/mylower exch def
+	curlayer mylower lt
+	curlayer myupper gt
+	or
+	{invis} if
+} def
+
+/curlayer 0 def
+
+%%EndResource
+%%EndProlog
+%%BeginSetup
+14 default-font-family set_font
+1 setmiterlimit
+% /arrowlength 10 def
+% /arrowwidth 5 def
+
+% make sure pdfmark is harmless for PS-interpreters other than Distiller
+/pdfmark where {pop} {userdict /pdfmark /cleartomark load put} ifelse
+% make '<<' and '>>' safe on PS Level 1 devices
+/languagelevel where {pop languagelevel}{1} ifelse
+2 lt {
+    userdict (<<) cvn ([) cvn load put
+    userdict (>>) cvn ([) cvn load put
+} if
+
+%%EndSetup
+setupLatin1
+%%Page: 1 1
+%%PageBoundingBox: 36 36 1360 666
+%%PageOrientation: Portrait
+0 0 1 beginpage
+gsave
+36 36 1324 630 boxprim clip newpath
+1 1 set_scale 0 rotate 40 40 translate
+% Node1
+gsave
+0.000 0.000 0.749 nodecolor
+newpath 1 240 moveto
+1 262 lineto
+202 262 lineto
+202 240 lineto
+closepath fill
+1 setlinewidth
+filled
+0.000 0.000 0.000 nodecolor
+newpath 1 240 moveto
+1 262 lineto
+202 262 lineto
+202 240 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+8.5 249 moveto 185 (genevalmag::Builder_code::generate_code) alignedtext
+grestore
+% Node2
+gsave
+[ /Rect [ 294 540 422 562 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($namespaceutilities.html#a3800a71dd15748ff83861140b4119b24) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 294 540 moveto
+294 562 lineto
+423 562 lineto
+423 540 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+301.5 549 moveto 113 (utilities::copy_static_code) alignedtext
+grestore
+% Node1->Node2
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 103 262 moveto
+110 305 143 460 238 531 curveto
+251 541 267 547 284 550 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 283.7 553.49 moveto
+294 551 lineto
+284.4 546.52 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 283.7 553.49 moveto
+294 551 lineto
+284.4 546.52 lineto
+closepath stroke
+grestore
+% Node3
+gsave
+[ /Rect [ 249 500 467 522 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#a67439b5f2c7cd855e17a0fb91317a1d2) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 249 500 moveto
+249 522 lineto
+468 522 lineto
+468 500 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+256.5 509 moveto 203 (genevalmag::Builder_code::generate_code_file) alignedtext
+grestore
+% Node1->Node3
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 104 262 moveto
+114 301 153 431 238 491 curveto
+240 493 243 494 246 496 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 244.44 499.14 moveto
+255 500 lineto
+247.28 492.74 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 244.44 499.14 moveto
+255 500 lineto
+247.28 492.74 lineto
+closepath stroke
+grestore
+% Node4
+gsave
+[ /Rect [ 244 460 472 482 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#ac390149dae2358dda72ff8360f30c693) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 244 460 moveto
+244 482 lineto
+472 482 lineto
+472 460 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+252 469 moveto 212 (genevalmag::Builder_code::generate_constructor) alignedtext
+grestore
+% Node1->Node4
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 114 262 moveto
+156 298 286 409 337 453 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 335.17 456.05 moveto
+345 460 lineto
+339.78 450.78 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 335.17 456.05 moveto
+345 460 lineto
+339.78 450.78 lineto
+closepath stroke
+grestore
+% Node16
+gsave
+[ /Rect [ 243 220 473 242 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#af334d372096a958000bd0b53360223ab) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 243 220 moveto
+243 242 lineto
+474 242 lineto
+474 220 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+250.5 229 moveto 215 (genevalmag::Builder_code::generate_footer_code) alignedtext
+grestore
+% Node1->Node16
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 202 243 moveto
+212 242 222 241 233 241 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 233.4 244.48 moveto
+243 240 lineto
+232.7 237.51 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 233.4 244.48 moveto
+243 240 lineto
+232.7 237.51 lineto
+closepath stroke
+grestore
+% Node17
+gsave
+[ /Rect [ 239 180 477 202 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#a5f3ad7619822680e0f2a79d7c26af776) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 239 180 moveto
+239 202 lineto
+478 202 lineto
+478 180 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+246.5 189 moveto 223 (genevalmag::Builder_code::generate_footer_header) alignedtext
+grestore
+% Node1->Node17
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 135 240 moveto
+162 231 203 219 238 211 curveto
+249 209 260 206 271 204 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 271.88 207.39 moveto
+281 202 lineto
+270.51 200.53 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 271.88 207.39 moveto
+281 202 lineto
+270.51 200.53 lineto
+closepath stroke
+grestore
+% Node18
+gsave
+[ /Rect [ 245 140 471 162 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#a62d38d96676f0a11a377c19991bf4e90) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 245 140 moveto
+245 162 lineto
+472 162 lineto
+472 140 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+252.5 149 moveto 211 (genevalmag::Builder_code::generate_header_file) alignedtext
+grestore
+% Node1->Node18
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 116 240 moveto
+140 222 190 188 238 171 curveto
+245 168 252 166 260 164 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 260.88 167.39 moveto
+270 162 lineto
+259.51 160.53 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 260.88 167.39 moveto
+270 162 lineto
+259.51 160.53 lineto
+closepath stroke
+grestore
+% Node19
+gsave
+[ /Rect [ 250 260 466 282 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#a81b67543752446840e23c8b8fd3b9e7a) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 250 260 moveto
+250 282 lineto
+467 282 lineto
+467 260 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+257.5 269 moveto 201 (genevalmag::Builder_code::generate_methods) alignedtext
+grestore
+% Node1->Node19
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 202 259 moveto
+215 260 227 261 240 261 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 239.7 264.49 moveto
+250 262 lineto
+240.4 257.52 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 239.7 264.49 moveto
+250 262 lineto
+240.4 257.52 lineto
+closepath stroke
+grestore
+% Node49
+gsave
+[ /Rect [ 253 60 463 82 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#a5dcd144389b5612a328fede4317d414f) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 253 60 moveto
+253 82 lineto
+463 82 lineto
+463 60 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+261 69 moveto 194 (genevalmag::Builder_code::generate_structs) alignedtext
+grestore
+% Node1->Node49
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 112 240 moveto
+134 217 187 165 238 131 curveto
+264 113 297 97 322 86 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 323.28 89.26 moveto
+331 82 lineto
+320.44 82.86 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 323.28 89.26 moveto
+331 82 lineto
+320.44 82.86 lineto
+closepath stroke
+grestore
+% Node5
+gsave
+[ /Rect [ 518 560 770 582 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#aeb44411cbae61fe53b734486945ab7f4) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 518 560 moveto
+518 582 lineto
+770 582 lineto
+770 560 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+526 569 moveto 236 (genevalmag::Builder_code::generate_initialize_context) alignedtext
+grestore
+% Node4->Node5
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 462 482 moveto
+468 485 473 487 478 491 curveto
+504 508 489 533 514 551 curveto
+516 553 519 554 522 556 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 520.44 559.14 moveto
+531 560 lineto
+523.28 552.74 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 520.44 559.14 moveto
+531 560 lineto
+523.28 552.74 lineto
+closepath stroke
+grestore
+% Node7
+gsave
+[ /Rect [ 515 480 773 502 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#a76c0b81220998ec7e604184fab7a15fe) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 515 480 moveto
+515 502 lineto
+774 502 lineto
+774 480 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+522.5 489 moveto 243 (genevalmag::Builder_code::generate_initialize_plan_proj) alignedtext
+grestore
+% Node4->Node7
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 472 479 moveto
+483 480 494 481 505 481 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 504.7 484.49 moveto
+515 482 lineto
+505.4 477.52 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 504.7 484.49 moveto
+515 482 lineto
+505.4 477.52 lineto
+closepath stroke
+grestore
+% Node10
+gsave
+[ /Rect [ 523 520 765 542 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#a4ff44b4aeb0d64f987f58754b997dbef) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 523 520 moveto
+523 542 lineto
+766 542 lineto
+766 520 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+530.5 529 moveto 227 (genevalmag::Builder_code::generate_initialize_plans) alignedtext
+grestore
+% Node4->Node10
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 446 482 moveto
+457 484 468 487 478 491 curveto
+496 497 497 505 514 511 curveto
+522 514 530 516 539 518 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 538.51 521.47 moveto
+549 520 lineto
+539.88 514.61 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 538.51 521.47 moveto
+549 520 lineto
+539.88 514.61 lineto
+closepath stroke
+grestore
+% Node12
+gsave
+[ /Rect [ 524 440 764 462 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#a5b244721c0c026570512c5e92acf3c7c) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 524 440 moveto
+524 462 lineto
+765 462 lineto
+765 440 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+531.5 449 moveto 225 (genevalmag::Builder_code::generate_initialize_rules) alignedtext
+grestore
+% Node4->Node12
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 472 463 moveto
+486 462 500 461 514 460 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 514.4 463.48 moveto
+524 459 lineto
+513.7 456.51 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 514.4 463.48 moveto
+524 459 lineto
+513.7 456.51 lineto
+closepath stroke
+grestore
+% Node14
+gsave
+[ /Rect [ 521 600 767 622 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#aa22bd086103a19a4d6dade0cab84b62d) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 521 600 moveto
+521 622 lineto
+767 622 lineto
+767 600 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+529 609 moveto 230 (genevalmag::Builder_code::generate_initialize_v_seq) alignedtext
+grestore
+% Node4->Node14
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 465 482 moveto
+470 485 474 488 478 491 curveto
+515 521 478 560 514 591 curveto
+516 592 517 593 519 595 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 517.56 598.2 moveto
+528 600 lineto
+520.96 592.08 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 517.56 598.2 moveto
+528 600 lineto
+520.96 592.08 lineto
+closepath stroke
+grestore
+% Node6
+gsave
+[ /Rect [ 815 560 1049 582 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__plans.html#a72a79884798342895b1b0779a1938031) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 815 560 moveto
+815 582 lineto
+1049 582 lineto
+1049 560 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+823 569 moveto 218 (genevalmag::Builder_plans::get_contexts_uniques) alignedtext
+grestore
+% Node5->Node6
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 770 571 moveto
+782 571 793 571 805 571 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 805 574.5 moveto
+815 571 lineto
+805 567.5 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 805 574.5 moveto
+815 571 lineto
+805 567.5 lineto
+closepath stroke
+grestore
+% Node8
+gsave
+[ /Rect [ 854 480 1010 502 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($namespacegenevalmag.html#ac58f50a004a774ce4256b86a16fb96c0) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 854 480 moveto
+854 502 lineto
+1010 502 lineto
+1010 480 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+862 489 moveto 140 (genevalmag::generate_key_plan) alignedtext
+grestore
+% Node7->Node8
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 774 491 moveto
+797 491 822 491 844 491 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 844 494.5 moveto
+854 491 lineto
+844 487.5 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 844 494.5 moveto
+854 491 lineto
+844 487.5 lineto
+closepath stroke
+grestore
+% Node9
+gsave
+[ /Rect [ 824 440 1040 462 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__plans.html#a011e4668e269c69022cae075075a0087) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 824 440 moveto
+824 462 lineto
+1040 462 lineto
+1040 440 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+832 449 moveto 200 (genevalmag::Builder_plans::get_plans_project) alignedtext
+grestore
+% Node7->Node9
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 723 480 moveto
+760 474 804 469 842 463 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 842.4 466.48 moveto
+852 462 lineto
+841.7 459.51 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 842.4 466.48 moveto
+852 462 lineto
+841.7 459.51 lineto
+closepath stroke
+grestore
+% Node10->Node8
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 723 520 moveto
+761 514 805 508 844 503 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 844.4 506.48 moveto
+854 502 lineto
+843.7 499.51 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 844.4 506.48 moveto
+854 502 lineto
+843.7 499.51 lineto
+closepath stroke
+grestore
+% Node11
+gsave
+[ /Rect [ 842 520 1022 542 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__plans.html#a75890521873bd1f8bee15799d820d755) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 842 520 moveto
+842 542 lineto
+1023 542 lineto
+1023 520 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+849.5 529 moveto 165 (genevalmag::Builder_plans::get_plans) alignedtext
+grestore
+% Node10->Node11
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 766 531 moveto
+787 531 810 531 832 531 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 832 534.5 moveto
+842 531 lineto
+832 527.5 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 832 534.5 moveto
+842 531 lineto
+832 527.5 lineto
+closepath stroke
+grestore
+% Node13
+gsave
+[ /Rect [ 842 400 1022 422 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Attr__grammar.html#a41be9d108df7f8159bd989a5c174be87) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 842 400 moveto
+842 422 lineto
+1022 422 lineto
+1022 400 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+850 409 moveto 164 (genevalmag::Attr_grammar::get_rules) alignedtext
+grestore
+% Node12->Node13
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 723 440 moveto
+760 434 804 429 842 423 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 842.4 426.48 moveto
+852 422 lineto
+841.7 419.51 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 842.4 426.48 moveto
+852 422 lineto
+841.7 419.51 lineto
+closepath stroke
+grestore
+% Node15
+gsave
+[ /Rect [ 810 600 1054 622 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__visit__sequences.html#acf3c542e09500da73d78ddc757f136ec) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 810 600 moveto
+810 622 lineto
+1054 622 lineto
+1054 600 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+818 609 moveto 228 (genevalmag::Builder_visit_sequences::get_visit_seq) alignedtext
+grestore
+% Node14->Node15
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 767 611 moveto
+778 611 789 611 800 611 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 800 614.5 moveto
+810 611 lineto
+800 607.5 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 800 614.5 moveto
+810 611 lineto
+800 607.5 lineto
+closepath stroke
+grestore
+% Node20
+gsave
+[ /Rect [ 535 320 753 342 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#af62cdc4b1ad2302cd368e1b3c4fb99d9) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 535 320 moveto
+535 342 lineto
+754 342 lineto
+754 320 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+542.5 329 moveto 203 (genevalmag::Builder_code::generate_add_plan) alignedtext
+grestore
+% Node19->Node20
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 398 282 moveto
+429 291 474 302 514 311 curveto
+528 313 542 316 556 318 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 555.51 321.47 moveto
+566 320 lineto
+556.88 314.61 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 555.51 321.47 moveto
+566 320 lineto
+556.88 314.61 lineto
+closepath stroke
+grestore
+% Node21
+gsave
+[ /Rect [ 518 280 770 302 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#a16c49d69826f56e892f3580cdc7fa610) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 518 280 moveto
+518 302 lineto
+771 302 lineto
+771 280 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+525.5 289 moveto 237 (genevalmag::Builder_code::generate_add_plan_project) alignedtext
+grestore
+% Node19->Node21
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 467 279 moveto
+481 280 494 281 508 281 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 507.7 284.49 moveto
+518 282 lineto
+508.4 277.52 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 507.7 284.49 moveto
+518 282 lineto
+508.4 277.52 lineto
+closepath stroke
+grestore
+% Node22
+gsave
+[ /Rect [ 520 240 768 262 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#a8052b85fae1b226af5fb65c2d548f432) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 520 240 moveto
+520 262 lineto
+768 262 lineto
+768 240 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+528 249 moveto 232 (genevalmag::Builder_code::generate_all_compute_eq) alignedtext
+grestore
+% Node19->Node22
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 467 263 moveto
+481 262 495 261 510 261 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 510.4 264.48 moveto
+520 260 lineto
+509.7 257.51 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 510.4 264.48 moveto
+520 260 lineto
+509.7 257.51 lineto
+closepath stroke
+grestore
+% Node24
+gsave
+[ /Rect [ 518 360 770 382 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#aa13031885f7de51469cc9e1ea5a4b9e6) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 518 360 moveto
+518 382 lineto
+771 382 lineto
+771 360 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+525.5 369 moveto 237 (genevalmag::Builder_code::generate_all_methods_eqs) alignedtext
+grestore
+% Node19->Node24
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 375 282 moveto
+403 300 461 333 514 351 curveto
+522 354 530 356 539 358 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 538.51 361.47 moveto
+549 360 lineto
+539.88 354.61 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 538.51 361.47 moveto
+549 360 lineto
+539.88 354.61 lineto
+closepath stroke
+grestore
+% Node42
+gsave
+[ /Rect [ 530 200 758 222 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#ad40103cc1f4217fdba2924ed1e29efdc) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 530 200 moveto
+530 222 lineto
+759 222 lineto
+759 200 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+537.5 209 moveto 213 (genevalmag::Builder_code::generate_eval_visiter) alignedtext
+grestore
+% Node19->Node42
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 444 260 moveto
+456 258 467 255 478 251 curveto
+496 244 497 236 514 231 curveto
+522 228 529 226 537 224 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 537.88 227.39 moveto
+547 222 lineto
+536.51 220.53 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 537.88 227.39 moveto
+547 222 lineto
+536.51 220.53 lineto
+closepath stroke
+grestore
+% Node43
+gsave
+[ /Rect [ 535 160 753 182 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#aab8e30a2b842ad236a2bd70149839004) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 535 160 moveto
+535 182 lineto
+754 182 lineto
+754 160 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+542.5 169 moveto 203 (genevalmag::Builder_code::generate_evaluator) alignedtext
+grestore
+% Node19->Node43
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 461 260 moveto
+467 257 473 255 478 251 curveto
+504 233 489 208 514 191 curveto
+518 189 522 187 526 184 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 527.28 187.26 moveto
+535 180 lineto
+524.44 180.86 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 527.28 187.26 moveto
+535 180 lineto
+524.44 180.86 lineto
+closepath stroke
+grestore
+% Node45
+gsave
+[ /Rect [ 545 80 743 102 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#ad88294497280bb904ff3269b00446bc8) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 545 80 moveto
+545 102 lineto
+743 102 lineto
+743 80 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+553 89 moveto 182 (genevalmag::Builder_code::generate_print) alignedtext
+grestore
+% Node19->Node45
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 466 260 moveto
+470 257 474 254 478 251 curveto
+526 207 467 155 514 111 curveto
+520 105 528 101 536 98 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 537.28 101.26 moveto
+545 94 lineto
+534.44 94.86 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 537.28 101.26 moveto
+545 94 lineto
+534.44 94.86 lineto
+closepath stroke
+grestore
+% Node46
+gsave
+[ /Rect [ 540 40 748 62 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($namespacegenevalmag.html#ad027bb2060fc75b17da08a22c9be3b9a) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 540 40 moveto
+540 62 lineto
+748 62 lineto
+748 40 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+548 49 moveto 192 (genevalmag::generate_return_index_context) alignedtext
+grestore
+% Node19->Node46
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 467 260 moveto
+471 257 475 254 478 251 curveto
+537 194 456 128 514 71 curveto
+519 66 524 62 531 59 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 532.28 62.26 moveto
+540 55 lineto
+529.44 55.86 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 532.28 62.26 moveto
+540 55 lineto
+529.44 55.86 lineto
+closepath stroke
+grestore
+% Node47
+gsave
+[ /Rect [ 536 400 752 422 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#ab8a711e35ef2a06238854398ce9ed0e6) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 536 400 moveto
+536 422 lineto
+753 422 lineto
+753 400 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+543.5 409 moveto 201 (genevalmag::Builder_code::generate_translate) alignedtext
+grestore
+% Node19->Node47
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 369 282 moveto
+392 306 452 364 514 391 curveto
+520 394 526 396 532 398 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 531.51 401.47 moveto
+542 400 lineto
+532.88 394.61 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 531.51 401.47 moveto
+542 400 lineto
+532.88 394.61 lineto
+closepath stroke
+grestore
+% Node48
+gsave
+[ /Rect [ 537 120 751 142 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__code.html#a1b3412a660f7d69345932171709cf6d6) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 537 120 moveto
+537 142 lineto
+752 142 lineto
+752 120 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+544.5 129 moveto 199 (genevalmag::Builder_code::generate_traverse) alignedtext
+grestore
+% Node19->Node48
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 464 260 moveto
+469 257 474 254 478 251 curveto
+515 220 478 181 514 151 curveto
+518 147 523 144 528 142 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 529.28 145.26 moveto
+537 138 lineto
+526.44 138.86 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 529.28 145.26 moveto
+537 138 lineto
+526.44 138.86 lineto
+closepath stroke
+grestore
+% Node23
+gsave
+[ /Rect [ 830 240 1034 262 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Attr__grammar.html#ad94a52850c818a1f74fc81af99b0d52d) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 830 240 moveto
+830 262 lineto
+1034 262 lineto
+1034 240 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+838 249 moveto 188 (genevalmag::Attr_grammar::get_count_eqs) alignedtext
+grestore
+% Node22->Node23
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 768 251 moveto
+785 251 803 251 820 251 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 820 254.5 moveto
+830 251 lineto
+820 247.5 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 820 254.5 moveto
+830 251 lineto
+820 247.5 lineto
+closepath stroke
+grestore
+% Node24->Node13
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 723 382 moveto
+760 388 804 393 842 399 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 841.7 402.49 moveto
+852 400 lineto
+842.4 395.52 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 841.7 402.49 moveto
+852 400 lineto
+842.4 395.52 lineto
+closepath stroke
+grestore
+% Node25
+gsave
+[ /Rect [ 876 360 988 382 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($namespaceutilities.html#a644dfdb507e47adf60e6984d28e080fd) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 876 360 moveto
+876 382 lineto
+989 382 lineto
+989 360 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+883.5 369 moveto 97 (utilities::cleaning_tabs) alignedtext
+grestore
+% Node24->Node25
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 771 371 moveto
+804 371 838 371 866 371 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 866 374.5 moveto
+876 371 lineto
+866 367.5 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 866 374.5 moveto
+876 371 lineto
+866 367.5 lineto
+closepath stroke
+grestore
+% Node26
+gsave
+[ /Rect [ 853 320 1011 342 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($namespacegenevalmag.html#a5935695d2ab4f63ea670911809399ce0) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 1.000 1.000 nodecolor
+newpath 853 320 moveto
+853 342 lineto
+1011 342 lineto
+1011 320 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+861 329 moveto 142 (genevalmag::generate_expr_text) alignedtext
+grestore
+% Node24->Node26
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 723 360 moveto
+761 354 805 349 843 343 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 843.4 346.48 moveto
+853 342 lineto
+842.7 339.51 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 843.4 346.48 moveto
+853 342 lineto
+842.7 339.51 lineto
+closepath stroke
+grestore
+% Node27
+gsave
+[ /Rect [ 1133 600 1273 622 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Symbol.html#a17e303be01f4c9cd3c1b167179d6e0aa) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 1.000 1.000 nodecolor
+newpath 1133 600 moveto
+1133 622 lineto
+1274 622 lineto
+1274 600 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+1140.5 609 moveto 125 (genevalmag::Symbol::equals) alignedtext
+grestore
+% Node26->Node27
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1011 329 moveto
+1027 332 1043 339 1054 351 curveto
+1130 427 1015 513 1090 591 curveto
+1099 600 1110 606 1123 610 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 1122.51 613.47 moveto
+1133 612 lineto
+1123.88 606.61 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1122.51 613.47 moveto
+1133 612 lineto
+1123.88 606.61 lineto
+closepath stroke
+grestore
+% Node28
+gsave
+[ /Rect [ 1115 560 1291 582 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Expr__instance.html#a18d92b87a30dbf2ca3833e075f76d52e) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 1115 560 moveto
+1115 582 lineto
+1291 582 lineto
+1291 560 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+1123 569 moveto 160 (genevalmag::Expr_instance::get_attr) alignedtext
+grestore
+% Node26->Node28
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1011 330 moveto
+1027 333 1042 339 1054 351 curveto
+1119 414 1027 487 1090 551 curveto
+1094 555 1100 559 1105 562 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 1104.42 565.54 moveto
+1115 566 lineto
+1107.02 559.04 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1104.42 565.54 moveto
+1115 566 lineto
+1107.02 559.04 lineto
+closepath stroke
+grestore
+% Node29
+gsave
+[ /Rect [ 1120 520 1286 542 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Expr__node.html#afd22b5e20b8723e957587aafe4e8e724) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 1120 520 moveto
+1120 542 lineto
+1286 542 lineto
+1286 520 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+1128 529 moveto 150 (genevalmag::Expr_node::get_child) alignedtext
+grestore
+% Node26->Node29
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1011 330 moveto
+1027 333 1042 340 1054 351 curveto
+1108 401 1038 460 1090 511 curveto
+1096 517 1103 521 1111 524 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 1109.44 527.14 moveto
+1120 528 lineto
+1112.28 520.74 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1109.44 527.14 moveto
+1120 528 lineto
+1112.28 520.74 lineto
+closepath stroke
+grestore
+% Node30
+gsave
+[ /Rect [ 1118 480 1288 502 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Expr__node.html#a35298ede3bb76a765ce4367a589383cc) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 1118 480 moveto
+1118 502 lineto
+1289 502 lineto
+1289 480 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+1125.5 489 moveto 155 (genevalmag::Expr_node::get_childs) alignedtext
+grestore
+% Node26->Node30
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1011 331 moveto
+1027 334 1042 340 1054 351 curveto
+1096 387 1049 433 1090 471 curveto
+1095 476 1102 480 1108 482 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 1107.42 485.54 moveto
+1118 486 lineto
+1110.02 479.04 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1107.42 485.54 moveto
+1118 486 lineto
+1110.02 479.04 lineto
+closepath stroke
+grestore
+% Node31
+gsave
+[ /Rect [ 1106 440 1300 462 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Expr__function.html#a7f1fedb3efc2c8eaf07877a8e72a2579) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 1106 440 moveto
+1106 462 lineto
+1300 462 lineto
+1300 440 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+1114 449 moveto 178 (genevalmag::Expr_function::get_function) alignedtext
+grestore
+% Node26->Node31
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1011 332 moveto
+1027 336 1042 341 1054 351 curveto
+1085 374 1060 407 1090 431 curveto
+1092 433 1094 434 1097 436 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 1095.44 439.14 moveto
+1106 440 lineto
+1098.28 432.74 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1095.44 439.14 moveto
+1106 440 lineto
+1098.28 432.74 lineto
+closepath stroke
+grestore
+% Node32
+gsave
+[ /Rect [ 1119 400 1287 422 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Rule.html#a4d67205ef292350a440a10f7bbdda0e1) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 1119 400 moveto
+1119 422 lineto
+1287 422 lineto
+1287 400 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+1127 409 moveto 152 (genevalmag::Rule::get_left_symbol) alignedtext
+grestore
+% Node26->Node32
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1011 336 moveto
+1026 339 1041 344 1054 351 curveto
+1075 362 1070 379 1090 391 curveto
+1096 394 1103 397 1109 399 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 1108.42 402.48 moveto
+1119 402 lineto
+1110.43 395.77 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1108.42 402.48 moveto
+1119 402 lineto
+1110.43 395.77 lineto
+closepath stroke
+grestore
+% Node33
+gsave
+[ /Rect [ 1123 360 1283 382 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Attribute.html#ac44b53232e4656b7e734bcbb942bddfe) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 1123 360 moveto
+1123 382 lineto
+1283 382 lineto
+1283 360 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+1131 369 moveto 144 (genevalmag::Attribute::get_name) alignedtext
+grestore
+% Node26->Node33
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1007 342 moveto
+1042 347 1082 353 1118 358 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 1117.51 361.47 moveto
+1128 360 lineto
+1118.88 354.61 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1117.51 361.47 moveto
+1128 360 lineto
+1118.88 354.61 lineto
+closepath stroke
+grestore
+% Node34
+gsave
+[ /Rect [ 1125 320 1281 342 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Symbol.html#afcd9c46fe546ec9f1b62caeb99377917) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 1125 320 moveto
+1125 342 lineto
+1281 342 lineto
+1281 320 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+1133 329 moveto 140 (genevalmag::Symbol::get_name) alignedtext
+grestore
+% Node26->Node34
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1011 331 moveto
+1044 331 1081 331 1115 331 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 1115 334.5 moveto
+1125 331 lineto
+1115 327.5 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1115 334.5 moveto
+1125 331 lineto
+1115 327.5 lineto
+closepath stroke
+grestore
+% Node35
+gsave
+[ /Rect [ 1123 280 1283 302 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Function.html#aec65653267a5d4cb93f2ce7b5e1c542b) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 1123 280 moveto
+1123 302 lineto
+1283 302 lineto
+1283 280 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+1131 289 moveto 144 (genevalmag::Function::get_name) alignedtext
+grestore
+% Node26->Node35
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1007 320 moveto
+1042 315 1082 309 1118 304 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 1118.88 307.39 moveto
+1128 302 lineto
+1117.51 300.53 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1118.88 307.39 moveto
+1128 302 lineto
+1117.51 300.53 lineto
+closepath stroke
+grestore
+% Node36
+gsave
+[ /Rect [ 1090 240 1316 262 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Rule.html#a639ed428a76f9c389bad3fc7730aaef6) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 1090 240 moveto
+1090 262 lineto
+1316 262 lineto
+1316 240 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+1098 249 moveto 210 (genevalmag::Rule::get_non_terminals_right_side) alignedtext
+grestore
+% Node26->Node36
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 956 320 moveto
+987 306 1042 284 1090 271 curveto
+1099 269 1109 267 1118 264 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 1118.88 267.39 moveto
+1128 262 lineto
+1117.51 260.53 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1118.88 267.39 moveto
+1128 262 lineto
+1117.51 260.53 lineto
+closepath stroke
+grestore
+% Node37
+gsave
+[ /Rect [ 1113 200 1293 222 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Expr__instance.html#a5b5bc716afa9f85418c7f58ed0ac0c01) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 1113 200 moveto
+1113 222 lineto
+1293 222 lineto
+1293 200 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+1121 209 moveto 164 (genevalmag::Expr_instance::get_num) alignedtext
+grestore
+% Node26->Node37
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 962 320 moveto
+988 310 1025 292 1054 271 curveto
+1074 256 1070 242 1090 231 curveto
+1094 229 1099 227 1103 225 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 1105.02 227.96 moveto
+1113 221 lineto
+1102.42 221.46 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1105.02 227.96 moveto
+1113 221 lineto
+1102.42 221.46 lineto
+closepath stroke
+grestore
+% Node38
+gsave
+[ /Rect [ 1111 160 1295 182 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Expr__instance.html#a5327a138bd6dc934ce89d878d973bfb0) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 1111 160 moveto
+1111 182 lineto
+1296 182 lineto
+1296 160 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+1118.5 169 moveto 169 (genevalmag::Expr_instance::get_symb) alignedtext
+grestore
+% Node26->Node38
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 970 320 moveto
+996 311 1031 295 1054 271 curveto
+1082 242 1060 214 1090 191 curveto
+1094 188 1097 185 1102 183 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 1103.28 186.26 moveto
+1111 179 lineto
+1100.44 179.86 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1103.28 186.26 moveto
+1111 179 lineto
+1100.44 179.86 lineto
+closepath stroke
+grestore
+% Node39
+gsave
+[ /Rect [ 1118 120 1288 142 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Expr__function.html#af5a16ffe850f268df142c625205961dc) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 1.000 1.000 nodecolor
+newpath 1118 120 moveto
+1118 142 lineto
+1289 142 lineto
+1289 120 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+1125.5 129 moveto 155 (genevalmag::Expr_function::is_infix) alignedtext
+grestore
+% Node26->Node39
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 974 320 moveto
+1000 311 1033 295 1054 271 curveto
+1090 228 1049 188 1090 151 curveto
+1095 146 1102 142 1108 140 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 1110.02 142.96 moveto
+1118 136 lineto
+1107.42 136.46 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1110.02 142.96 moveto
+1118 136 lineto
+1107.42 136.46 lineto
+closepath stroke
+grestore
+% Node40
+gsave
+[ /Rect [ 1121 80 1285 102 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Function.html#a011d344c0a5d6fc3d1d851967028010a) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 1121 80 moveto
+1121 102 lineto
+1286 102 lineto
+1286 80 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+1128.5 89 moveto 149 (genevalmag::Function::is_operator) alignedtext
+grestore
+% Node26->Node40
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 975 320 moveto
+1002 311 1035 296 1054 271 curveto
+1100 213 1038 162 1090 111 curveto
+1096 105 1103 101 1111 97 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 1112.43 100.23 moveto
+1121 94 lineto
+1110.42 93.52 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1112.43 100.23 moveto
+1121 94 lineto
+1110.42 93.52 lineto
+closepath stroke
+grestore
+% Node41
+gsave
+[ /Rect [ 1112 40 1294 62 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Expr__function.html#a8ef52d8fec97d084be0b24e5207a0551) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 1.000 1.000 nodecolor
+newpath 1112 40 moveto
+1112 62 lineto
+1295 62 lineto
+1295 40 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+1119.5 49 moveto 167 (genevalmag::Expr_function::is_postfix) alignedtext
+grestore
+% Node26->Node41
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 977 320 moveto
+1003 311 1035 296 1054 271 curveto
+1109 198 1027 135 1090 71 curveto
+1094 67 1098 64 1103 61 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 1104.28 64.26 moveto
+1112 57 lineto
+1101.44 57.86 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 1104.28 64.26 moveto
+1112 57 lineto
+1101.44 57.86 lineto
+closepath stroke
+grestore
+% Node44
+gsave
+[ /Rect [ 833 160 1031 182 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Builder__plans.html#a52157d41e3998900e61ab90eda9e4e91) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 833 160 moveto
+833 182 lineto
+1031 182 lineto
+1031 160 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+841 169 moveto 182 (genevalmag::Builder_plans::get_init_order) alignedtext
+grestore
+% Node43->Node44
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 754 171 moveto
+777 171 800 171 823 171 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 823 174.5 moveto
+833 171 lineto
+823 167.5 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 823 174.5 moveto
+833 171 lineto
+823 167.5 lineto
+closepath stroke
+grestore
+% Node50
+gsave
+[ /Rect [ 517 0 771 22 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI ($classgenevalmag_1_1Attr__grammar.html#a50a326649bbf48d2d715144cef59a75e) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+0.000 0.000 0.000 nodecolor
+newpath 517 0 moveto
+517 22 lineto
+772 22 lineto
+772 0 lineto
+closepath stroke
+0.000 0.000 0.000 nodecolor
+10 /FreeSans set_font
+524.5 9 moveto 239 (genevalmag::Attr_grammar::get_non_terminal_symbols) alignedtext
+grestore
+% Node49->Node50
+gsave
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 398 60 moveto
+429 51 474 40 514 31 curveto
+528 29 542 26 556 24 curveto
+stroke
+0.667 0.776 0.439 edgecolor
+newpath 556.88 27.39 moveto
+566 22 lineto
+555.51 20.53 lineto
+closepath fill
+1 setlinewidth
+solid
+0.667 0.776 0.439 edgecolor
+newpath 556.88 27.39 moveto
+566 22 lineto
+555.51 20.53 lineto
+closepath stroke
+grestore
+endpage
+showpage
+grestore
+%%PageTrailer
+%%EndPage: 1
+%%Trailer
+%%Pages: 1
+%%BoundingBox: 36 36 1360 666
+end
+restore
+%%EOF

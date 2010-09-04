@@ -1,0 +1,67 @@
+.TH "genevalmag::cycle_detector" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::cycle_detector \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBcycle_detector\fP (bool &has_cycle, \fBGraph\fP &graph)"
+.br
+.ti -1c
+.RI "template<class Edge , class G > void \fBexamine_edge\fP (Edge u, const G &g)"
+.br
+.ti -1c
+.RI "template<class Edge , class G > void \fBback_edge\fP (Edge u, const G &g)"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "bool & \fB_has_cycle\fP"
+.br
+.ti -1c
+.RI "\fBGraph\fP & \fB_graph_cycle\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 392 of file Builder_graphs.cpp.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::cycle_detector::cycle_detector (bool & has_cycle, \fBGraph\fP & graph)\fC [inline]\fP"
+.PP
+Definition at line 395 of file Builder_graphs.cpp.
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class Edge , class G > void genevalmag::cycle_detector::back_edge (Edge u, const G & g)\fC [inline]\fP"
+.PP
+Definition at line 430 of file Builder_graphs.cpp.
+.PP
+References _has_cycle.
+.SS "template<class Edge , class G > void genevalmag::cycle_detector::examine_edge (Edge u, const G & g)\fC [inline]\fP"Re-define method for detect circle when examine each edge: Save ciclic subgraph. 
+.PP
+Definition at line 401 of file Builder_graphs.cpp.
+.PP
+References _graph_cycle, _has_cycle, and utilities::return_vertex().
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBGraph\fP& \fBgenevalmag::cycle_detector::_graph_cycle\fP\fC [protected]\fP"
+.PP
+Definition at line 437 of file Builder_graphs.cpp.
+.PP
+Referenced by examine_edge().
+.SS "bool& \fBgenevalmag::cycle_detector::_has_cycle\fP\fC [protected]\fP"
+.PP
+Definition at line 436 of file Builder_graphs.cpp.
+.PP
+Referenced by back_edge(), and examine_edge().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

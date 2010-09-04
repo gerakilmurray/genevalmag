@@ -1,0 +1,343 @@
+.TH "genevalmag::Equation" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::Equation \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Equation.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBEquation\fP ()"
+.br
+.ti -1c
+.RI "\fBEquation\fP (const \fBEquation\fP &other)"
+.br
+.ti -1c
+.RI "virtual \fB~Equation\fP ()"
+.br
+.ti -1c
+.RI "\fBEquation\fP & \fBoperator=\fP (const \fBEquation\fP &other)"
+.br
+.ti -1c
+.RI "const \fBExpr_instance\fP * \fBget_l_value\fP () const "
+.br
+.ti -1c
+.RI "const \fBExpression\fP * \fBget_r_value\fP () const "
+.br
+.ti -1c
+.RI "const unsigned short \fBget_id\fP () const "
+.br
+.ti -1c
+.RI "void \fBset_id\fP (const unsigned short id)"
+.br
+.ti -1c
+.RI "void \fBset_l_value\fP (const \fBExpr_instance\fP &lvalue)"
+.br
+.ti -1c
+.RI "void \fBset_r_value\fP (const \fBExpression\fP *rvalue)"
+.br
+.ti -1c
+.RI "void \fBinorder_only_leaf\fP (const \fBExpression\fP *head, vector< const \fBExpr_leaf\fP * > &result) const "
+.br
+.ti -1c
+.RI "const vector< const \fBExpr_instance\fP * > \fBget_instance_right_side\fP () const "
+.br
+.ti -1c
+.RI "const string \fBto_string\fP () const "
+.br
+.ti -1c
+.RI "const bool \fBequals\fP (const \fBEquation\fP &other) const "
+.br
+.ti -1c
+.RI "const string \fBkey\fP () const "
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcopy\fP (const \fBEquation\fP &other)"
+.br
+.ti -1c
+.RI "void \fBdestroy\fP ()"
+.br
+.ti -1c
+.RI "unsigned short * \fB_get_count_ref\fP () const "
+.br
+.ti -1c
+.RI "void \fBinorder_only_instance\fP (const \fBExpression\fP *head, vector< const \fBExpr_instance\fP * > &result) const "
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "unsigned short \fBeq_id\fP"
+.br
+.RI "\fIEquation's identifier. \fP"
+.ti -1c
+.RI "\fBExpr_instance\fP \fBl_value\fP"
+.br
+.ti -1c
+.RI "const \fBExpression\fP * \fBr_value\fP"
+.br
+.ti -1c
+.RI "unsigned short * \fBcount_ref\fP"
+.br
+.RI "\fISimilar to a Smart Pointer to manage the release of the memory tree. When this is 0, all memory is freed from the tree. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 19 of file Equation.h.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::Equation::Equation ()"Constructor empty of equation. 
+.PP
+Definition at line 19 of file Equation.cpp.
+.SS "genevalmag::Equation::Equation (const \fBEquation\fP & other)"Contructor copy of \fBEquation\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Contructor copy of \fBEquation\fP. 
+.PP
+Definition at line 28 of file Equation.cpp.
+.SS "genevalmag::Equation::~Equation ()\fC [virtual]\fP"Destructor of equation. 
+.PP
+Definition at line 36 of file Equation.cpp.
+.SH "Member Function Documentation"
+.PP 
+.SS "unsigned short * genevalmag::Equation::_get_count_ref () const\fC [private]\fP"Returns the count reference. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Return the count reference. 
+.PP
+Definition at line 89 of file Equation.cpp.
+.SS "void genevalmag::Equation::copy (const \fBEquation\fP & other)\fC [private]\fP"Method of copy the equation, STL-like C++. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP Method of copy the equation, STL-like C++. 
+.RE
+.PP
+
+.PP
+Definition at line 60 of file Equation.cpp.
+.SS "void genevalmag::Equation::destroy ()\fC [private]\fP"Method destroy equation, STL-like C++. 
+.PP
+Definition at line 74 of file Equation.cpp.
+.SS "const bool genevalmag::Equation::equals (const \fBEquation\fP & other) const"Compares the equation with other. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Compares the equation with other. 
+.PP
+Definition at line 245 of file Equation.cpp.
+.SS "const unsigned short genevalmag::Equation::get_id () const"Returns the id of the equation. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the id of the equation. 
+.PP
+Definition at line 113 of file Equation.cpp.
+.SS "const vector< const \fBExpr_instance\fP * > genevalmag::Equation::get_instance_right_side () const"Returns the pointer of the \fBExpression\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the pointer of the \fBExpression\fP. 
+.PP
+Definition at line 213 of file Equation.cpp.
+.SS "const \fBExpr_instance\fP * genevalmag::Equation::get_l_value () const"Returns the l_value of the equation. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the l_value of the equation. 
+.PP
+Definition at line 97 of file Equation.cpp.
+.PP
+Referenced by genevalmag::Rule::defined_equation(), genevalmag::Attr_grammar::get_eq_l_value(), and genevalmag::save_rvalue().
+.SS "const \fBExpression\fP * genevalmag::Equation::get_r_value () const"Returns the r_value of the equation. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the r_value of the equation. 
+.PP
+Definition at line 105 of file Equation.cpp.
+.SS "void genevalmag::Equation::inorder_only_instance (const \fBExpression\fP * head, vector< const \fBExpr_instance\fP * > & result) const\fC [private]\fP"Traverse the equation tree while saves only the \fBExpr_instance\fP nodes in the vector result. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIhead\fP 
+.br
+\fIresult\fP Traverse the equation tree while saves only the \fBExpr_instance\fP nodes in the vector result. 
+.RE
+.PP
+
+.PP
+Definition at line 176 of file Equation.cpp.
+.SS "void genevalmag::Equation::inorder_only_leaf (const \fBExpression\fP * head, vector< const \fBExpr_leaf\fP * > & result) const"Traverse the equation tree while saves only the \fBExpr_leaf\fP nodes in the vector result. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIhead\fP 
+.br
+\fIresult\fP Traverse the equation tree while saves only the \fBExpr_leaf\fP nodes in the vector result. 
+.RE
+.PP
+
+.PP
+Definition at line 145 of file Equation.cpp.
+.SS "const string genevalmag::Equation::key () const"Generates and returns the string key that identifies an \fBEquation\fP definitely.
+.br
+ 
+.br
+ Result = <l_value><r_value>
+.br
+ 
+.br
+ where <l_value> = 'instance_attr' and <r_value> is= 'list of node_ast'
+.br
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Generate and return the string key that identifies an \fBEquation\fP definitely.
+.PP
+Result = <l_value><r_value>
+.PP
+where <l_value> = 'instance_attr' and <r_value> is= 'list of node_ast' 
+.PP
+Definition at line 257 of file Equation.cpp.
+.SS "\fBEquation\fP & genevalmag::Equation::operator= (const \fBEquation\fP & other)"Operator assign(=) of \fBEquation\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Operator assign(=) of \fBEquation\fP. 
+.PP
+Definition at line 47 of file Equation.cpp.
+.SS "void genevalmag::Equation::set_id (const unsigned short id)"Sets the id of the equation. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIid\fP Sets the id of the equation. 
+.RE
+.PP
+
+.PP
+Definition at line 121 of file Equation.cpp.
+.PP
+Referenced by genevalmag::Rule::add_eq().
+.SS "void genevalmag::Equation::set_l_value (const \fBExpr_instance\fP & lvalue)"Sets the left value of the equation. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlvalue\fP Set the left value of the equation. 
+.RE
+.PP
+
+.PP
+Definition at line 129 of file Equation.cpp.
+.PP
+Referenced by genevalmag::create_equation().
+.SS "void genevalmag::Equation::set_r_value (const \fBExpression\fP * rvalue)"Sets the rigth value of the equation: is a tree. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrvalue\fP Set the left value of the equation. 
+.RE
+.PP
+
+.PP
+Definition at line 137 of file Equation.cpp.
+.PP
+Referenced by genevalmag::save_rvalue().
+.SS "const string genevalmag::Equation::to_string () const"Generates and returns a string reprensentation of an \fBEquation\fP.
+.br
+ 
+.br
+ Result = <l_value> '=' <r_value> ';'
+.br
+ 
+.br
+ where <l_value> = 'instance_attr' and <r_value> is= 'list of node_ast'
+.br
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Generate and return a string reprensentation of an \fBEquation\fP.
+.PP
+Result= <l_value> '=' <r_value> ';'
+.PP
+where <l_value> = 'instance_attr' and <r_value> is= 'list of node_ast' 
+.PP
+Definition at line 227 of file Equation.cpp.
+.PP
+Referenced by genevalmag::save_rvalue().
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::Equation::count_ref\fP\fC [private]\fP"
+.PP
+Similar to a Smart Pointer to manage the release of the memory tree. When this is 0, all memory is freed from the tree. 
+.PP
+Definition at line 43 of file Equation.h.
+.SS "\fBgenevalmag::Equation::eq_id\fP\fC [private]\fP"
+.PP
+Equation's identifier. Equation's tree expression.
+.PP
+Equation's left value. 
+.PP
+Definition at line 26 of file Equation.h.
+.SS "\fBExpr_instance\fP \fBgenevalmag::Equation::l_value\fP\fC [private]\fP"
+.PP
+Definition at line 31 of file Equation.h.
+.SS "const \fBExpression\fP* \fBgenevalmag::Equation::r_value\fP\fC [private]\fP"
+.PP
+Definition at line 36 of file Equation.h.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

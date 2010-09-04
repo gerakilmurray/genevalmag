@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" href="$structgenevalmag_1_1k__plan.html" title="{genevalmag::k_plan\n|+ id_plan\l+ plan\l|+ operator\&lt;()\l+ operator==()\l+ operator=()\l}" alt="" coords="5,183,141,327"/>
+<area shape="rect" href="$classgenevalmag_1_1Symbol.html" title="{genevalmag::Symbol\n|&#45; symb_name\l&#45; symb_type\l&#45; symb_attrs\l&#45; symb_id\l|+ Symbol()\l+ Symbol()\l+ Symbol()\l+ ~Symbol()\l+ operator=()\l+ get_name()\l+ get_type()\l+ get_id()\l+ get_attrs()\l+ get_attribute()\l+ set_name()\l+ set_type()\l+ set_id()\l+ add_attr()\l+ is_non_terminal()\l+ to_string()\l+ equals()\l+ key()\l&#45; copy()\l&#45; destroy()\l}" alt="" coords="165,5,307,504"/>
+</map>

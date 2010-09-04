@@ -1,0 +1,424 @@
+.TH "genevalmag::Symbol" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::Symbol \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Symbol.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSymbol\fP ()"
+.br
+.ti -1c
+.RI "\fBSymbol\fP (const string &name, const \fBsymbol_type\fP &type)"
+.br
+.ti -1c
+.RI "\fBSymbol\fP (const \fBSymbol\fP &other)"
+.br
+.ti -1c
+.RI "virtual \fB~Symbol\fP ()"
+.br
+.ti -1c
+.RI "\fBSymbol\fP & \fBoperator=\fP (const \fBSymbol\fP &other)"
+.br
+.ti -1c
+.RI "string \fBget_name\fP () const "
+.br
+.ti -1c
+.RI "\fBsymbol_type\fP \fBget_type\fP () const "
+.br
+.ti -1c
+.RI "unsigned short \fBget_id\fP () const "
+.br
+.ti -1c
+.RI "const vector< const \fBAttribute\fP * > & \fBget_attrs\fP () const "
+.br
+.ti -1c
+.RI "const \fBAttribute\fP * \fBget_attribute\fP (const string &name_attr) const "
+.br
+.ti -1c
+.RI "void \fBset_name\fP (const string name)"
+.br
+.ti -1c
+.RI "void \fBset_type\fP (const \fBsymbol_type\fP type)"
+.br
+.ti -1c
+.RI "void \fBset_id\fP (unsigned short id)"
+.br
+.ti -1c
+.RI "void \fBadd_attr\fP (const \fBAttribute\fP *attr)"
+.br
+.ti -1c
+.RI "const bool \fBis_non_terminal\fP () const "
+.br
+.ti -1c
+.RI "string \fBto_string\fP () const "
+.br
+.ti -1c
+.RI "bool \fBequals\fP (const \fBSymbol\fP &other) const "
+.br
+.ti -1c
+.RI "string \fBkey\fP () const "
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcopy\fP (const \fBSymbol\fP &other)"
+.br
+.ti -1c
+.RI "void \fBdestroy\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "string \fBsymb_name\fP"
+.br
+.RI "\fISymbol's name. \fP"
+.ti -1c
+.RI "\fBsymbol_type\fP \fBsymb_type\fP"
+.br
+.RI "\fISymbol's type. \fP"
+.ti -1c
+.RI "vector< const \fBAttribute\fP * > \fBsymb_attrs\fP"
+.br
+.RI "\fISymbol's vector attribute. \fP"
+.ti -1c
+.RI "unsigned short \fBsymb_id\fP"
+.br
+.RI "\fISymbol's identifier. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 29 of file Symbol.h.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::Symbol::Symbol ()"Constructor empty of \fBSymbol\fP. 
+.PP
+Definition at line 19 of file Symbol.cpp.
+.SS "genevalmag::Symbol::Symbol (const string & name, const \fBsymbol_type\fP & type)"Constructor with name and type of \fBSymbol\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname\fP 
+.br
+\fItype\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Constructor with name and type of \fBSymbol\fP. 
+.PP
+Definition at line 26 of file Symbol.cpp.
+.PP
+References symb_id, symb_name, and symb_type.
+.SS "genevalmag::Symbol::Symbol (const \fBSymbol\fP & other)"Constructor copy of \fBSymbol\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Constructor copy of \fBSymbol\fP. 
+.PP
+Definition at line 36 of file Symbol.cpp.
+.PP
+References copy().
+.SS "genevalmag::Symbol::~Symbol ()\fC [virtual]\fP"Destructor of \fBSymbol\fP. 
+.PP
+Definition at line 44 of file Symbol.cpp.
+.PP
+References destroy().
+.SH "Member Function Documentation"
+.PP 
+.SS "void genevalmag::Symbol::add_attr (const \fBAttribute\fP * attr)"Enqueues a attribute in the list of the \fBSymbol\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIattr\fP Enqueues a attribute in the list of the symbol. 
+.RE
+.PP
+
+.PP
+Definition at line 155 of file Symbol.cpp.
+.PP
+References symb_attrs.
+.PP
+Referenced by genevalmag::Attr_grammar::load_attributes().
+.SS "void genevalmag::Symbol::copy (const \fBSymbol\fP & other)\fC [private]\fP"Method of copy the symbol, STL-like C++. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP Method of copy the \fBSymbol\fP, STL-like C++. 
+.RE
+.PP
+
+.PP
+Definition at line 65 of file Symbol.cpp.
+.PP
+References get_attrs(), get_id(), get_name(), get_type(), symb_attrs, symb_id, symb_name, and symb_type.
+.PP
+Referenced by operator=(), and Symbol().
+.SS "void genevalmag::Symbol::destroy ()\fC [private]\fP"Method destroy symbol, STL-like C++. 
+.PP
+Definition at line 76 of file Symbol.cpp.
+.PP
+Referenced by operator=(), and ~Symbol().
+.SS "bool genevalmag::Symbol::equals (const \fBSymbol\fP & other) const"Compares the \fBSymbol\fP with other. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Compares the symbol with other. 
+.PP
+Definition at line 207 of file Symbol.cpp.
+.PP
+References key().
+.PP
+Referenced by genevalmag::Rule::belongs_non_terminal(), genevalmag::check_eq_defines_it(), genevalmag::Rule::count_non_terminal(), genevalmag::Rule::equals(), genevalmag::Builder_visit_sequences::gen_visit_seq(), genevalmag::generate_expr_text(), genevalmag::Builder_visit_sequences::generate_visit_sequences(), genevalmag::Builder_plans::generates_topological_order(), and utilities::project_graph().
+.SS "const \fBAttribute\fP * genevalmag::Symbol::get_attribute (const string & name_attr) const"Finds in the list of attribute of the symbol and
+.br
+ returns the attribute with that name passed as parameter. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname_attr\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Finds in the list of attribute of the symbol and returns the attribute with that name passed as parameter. 
+.PP
+Definition at line 116 of file Symbol.cpp.
+.PP
+References get_name(), and symb_attrs.
+.PP
+Referenced by genevalmag::save_attr_ins().
+.SS "const vector< const \fBAttribute\fP * > & genevalmag::Symbol::get_attrs () const"Returns the list of attributes of the \fBSymbol\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the list of attributes of the symbol. 
+.PP
+Definition at line 107 of file Symbol.cpp.
+.PP
+References symb_attrs.
+.PP
+Referenced by copy().
+.SS "unsigned short genevalmag::Symbol::get_id () const"Returns the id of the \fBSymbol\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the id of the symbol. 
+.PP
+Definition at line 91 of file Symbol.cpp.
+.PP
+References symb_id.
+.PP
+Referenced by copy().
+.SS "string genevalmag::Symbol::get_name () const"Returns the name of the \fBSymbol\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the name of the symbol. 
+.PP
+Definition at line 83 of file Symbol.cpp.
+.PP
+References symb_name.
+.PP
+Referenced by genevalmag::belong(), genevalmag::Semantics_checks::check_reachability(), copy(), genevalmag::Expr_instance::equals_without_index(), genevalmag::generate_expr_text(), get_attribute(), genevalmag::Expr_instance::key(), genevalmag::k_p_project::operator<(), genevalmag::k_p_project::operator==(), genevalmag::Builder_graphs::save_dcg_graphs(), genevalmag::save_index_ins(), genevalmag::Expr_instance::to_string(), to_string(), genevalmag::Attr_grammar::to_string(), and genevalmag::Rule::to_string_not_eqs().
+.SS "\fBsymbol_type\fP genevalmag::Symbol::get_type () const"Returns the type of the \fBSymbol\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the type of the symbol. 
+.PP
+Definition at line 99 of file Symbol.cpp.
+.PP
+References symb_type.
+.PP
+Referenced by copy().
+.SS "const bool genevalmag::Symbol::is_non_terminal () const"Returns true if the Symbol's type is Non Terminal. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns true if the symbol's type is non-terminal. 
+.PP
+Definition at line 163 of file Symbol.cpp.
+.PP
+References genevalmag::k_non_terminal, and symb_type.
+.PP
+Referenced by genevalmag::Attr_grammar::add_symbol().
+.SS "string genevalmag::Symbol::key () const"Generates and returns the string key that identifies a \fBSymbol\fP definitely.
+.br
+ 
+.br
+ Result= <name>
+.br
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Generates and returns the string key that identifies a symbol definitely.
+.PP
+Result = name 
+.PP
+Definition at line 217 of file Symbol.cpp.
+.PP
+References symb_name.
+.PP
+Referenced by genevalmag::Builder_graphs::compute_down_graph(), and equals().
+.SS "\fBSymbol\fP & genevalmag::Symbol::operator= (const \fBSymbol\fP & other)"Operator assign(=) of \fBSymbol\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Operator assign(=) of \fBSymbol\fP. 
+.PP
+Definition at line 52 of file Symbol.cpp.
+.PP
+References copy(), and destroy().
+.SS "void genevalmag::Symbol::set_id (unsigned short id)"Sets the id of the \fBSymbol\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIid\fP Sets the id of the symbol. 
+.RE
+.PP
+
+.PP
+Definition at line 147 of file Symbol.cpp.
+.PP
+References symb_id.
+.SS "void genevalmag::Symbol::set_name (const string name)"Sets the name of the \fBSymbol\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname\fP Sets the name of the symbol. 
+.RE
+.PP
+
+.PP
+Definition at line 131 of file Symbol.cpp.
+.PP
+References symb_name.
+.SS "void genevalmag::Symbol::set_type (const \fBsymbol_type\fP type)"Sets the type of the \fBSymbol\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItype\fP Sets the type of the symbol. 
+.RE
+.PP
+
+.PP
+Definition at line 139 of file Symbol.cpp.
+.PP
+References symb_type.
+.SS "string genevalmag::Symbol::to_string () const"Generates and returns a string reprensentation of a \fBSymbol\fP.
+.br
+ 
+.br
+ Result= 'symbol' <name> <type> ';'
+.br
+ 
+.br
+ where if <type> is Non Terminal, then list the attributes of the symbol.
+.br
+ 
+.br
+ list = 'Attributes:' attr_1 ',' ... ',' attr_n
+.br
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Generates and returns a string reprensentation of a symbol.
+.PP
+Result = 'symbol' name type ';'
+.PP
+where if 'type' is Non Terminal, then list the attributes of the symbol.
+.PP
+list = 'Attributes:' attr_1 ',' ... ',' attr_n 
+.PP
+Definition at line 177 of file Symbol.cpp.
+.PP
+References get_name(), genevalmag::k_non_terminal, genevalmag::k_terminal, symb_attrs, symb_name, and symb_type.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::Symbol::symb_attrs\fP\fC [private]\fP"
+.PP
+Symbol's vector attribute. 
+.PP
+Definition at line 46 of file Symbol.h.
+.PP
+Referenced by add_attr(), copy(), get_attribute(), get_attrs(), and to_string().
+.SS "\fBgenevalmag::Symbol::symb_id\fP\fC [private]\fP"
+.PP
+Symbol's identifier. 
+.PP
+Definition at line 51 of file Symbol.h.
+.PP
+Referenced by copy(), get_id(), set_id(), and Symbol().
+.SS "\fBgenevalmag::Symbol::symb_name\fP\fC [private]\fP"
+.PP
+Symbol's name. 
+.PP
+Definition at line 36 of file Symbol.h.
+.PP
+Referenced by copy(), get_name(), key(), set_name(), Symbol(), and to_string().
+.SS "\fBgenevalmag::Symbol::symb_type\fP\fC [private]\fP"
+.PP
+Symbol's type. 
+.PP
+Definition at line 41 of file Symbol.h.
+.PP
+Referenced by copy(), get_type(), is_non_terminal(), set_type(), Symbol(), and to_string().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

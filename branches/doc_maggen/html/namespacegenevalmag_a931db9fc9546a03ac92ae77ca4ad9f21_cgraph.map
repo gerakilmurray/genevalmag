@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classgenevalmag_1_1Expr__instance.html#a18d92b87a30dbf2ca3833e075f76d52e" title="genevalmag::Expr_instance::get_attr" alt="" coords="311,5,545,35"/>
+<area shape="rect" href="$classgenevalmag_1_1Sort.html#a5bbccf82148fea12f958bd276a009fd4" title="genevalmag::Sort::get_name" alt="" coords="335,59,521,88"/>
+<area shape="rect" href="$classgenevalmag_1_1Attribute.html#a5e04e4baa950b3c80ecbab0bf9cc56da" title="genevalmag::Attribute::get_sort_type" alt="" coords="311,112,545,141"/>
+<area shape="rect" href="$classgenevalmag_1_1Expression.html#a22920a0309ce122eb22553898ec0108f" title="genevalmag::Expression::set_type_synthetized" alt="" coords="280,165,576,195"/>
+</map>

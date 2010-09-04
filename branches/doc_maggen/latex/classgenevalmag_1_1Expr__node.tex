@@ -1,0 +1,252 @@
+\hypertarget{classgenevalmag_1_1Expr__node}{
+\section{genevalmag::Expr\_\-node Class Reference}
+\label{classgenevalmag_1_1Expr__node}\index{genevalmag::Expr\_\-node@{genevalmag::Expr\_\-node}}
+}
+
+
+{\ttfamily \#include $<$Expr\_\-node.h$>$}
+
+
+
+Inheritance diagram for genevalmag::Expr\_\-node:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=400pt]{classgenevalmag_1_1Expr__node__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for genevalmag::Expr\_\-node:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=400pt]{classgenevalmag_1_1Expr__node__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classgenevalmag_1_1Expr__node_af8c84be806b49faef74651ec80f9d34d}{Expr\_\-node} ()
+\item 
+virtual \hyperlink{classgenevalmag_1_1Expr__node_aed3c4a68961a70c4f41bf100bfac7db9}{$\sim$Expr\_\-node} ()
+\item 
+const vector$<$ \hyperlink{classgenevalmag_1_1Expression}{Expression} $\ast$ $>$ \& \hyperlink{classgenevalmag_1_1Expr__node_a35298ede3bb76a765ce4367a589383cc}{get\_\-childs} () const 
+\item 
+\hyperlink{classgenevalmag_1_1Expression}{Expression} $\ast$ \hyperlink{classgenevalmag_1_1Expr__node_afd22b5e20b8723e957587aafe4e8e724}{get\_\-child} (int index) const 
+\item 
+void \hyperlink{classgenevalmag_1_1Expr__node_a951f8db517c231456781d10961ef8dba}{replace\_\-child} (int index, \hyperlink{classgenevalmag_1_1Expression}{Expression} $\ast$other)
+\item 
+void \hyperlink{classgenevalmag_1_1Expr__node_a11c96ee7ecda3b52639b2f8879aafea2}{add\_\-child} (\hyperlink{classgenevalmag_1_1Expression}{Expression} $\ast$new\_\-child)
+\item 
+virtual string \hyperlink{classgenevalmag_1_1Expr__node_adea1d8fbc1b01f018e18cedad871f6a7}{to\_\-string} () const =0
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ \hyperlink{classgenevalmag_1_1Expression}{Expression} $\ast$ $>$ \hyperlink{classgenevalmag_1_1Expr__node_a1fe0e44817e6f3ac688333e1714b31a3}{childs}
+\begin{DoxyCompactList}\small\item\em Childs's vector of node. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 19 of file Expr\_\-node.h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classgenevalmag_1_1Expr__node_af8c84be806b49faef74651ec80f9d34d}{
+\index{genevalmag::Expr\_\-node@{genevalmag::Expr\_\-node}!Expr\_\-node@{Expr\_\-node}}
+\index{Expr\_\-node@{Expr\_\-node}!genevalmag::Expr_node@{genevalmag::Expr\_\-node}}
+\subsubsection[{Expr\_\-node}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Expr\_\-node::Expr\_\-node ()}}
+\label{classgenevalmag_1_1Expr__node_af8c84be806b49faef74651ec80f9d34d}
+Constructor of \hyperlink{classgenevalmag_1_1Expr__node}{Expr\_\-node}. \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 14 of file Expr\_\-node.cpp.
+
+\hypertarget{classgenevalmag_1_1Expr__node_aed3c4a68961a70c4f41bf100bfac7db9}{
+\index{genevalmag::Expr\_\-node@{genevalmag::Expr\_\-node}!$\sim$Expr\_\-node@{$\sim$Expr\_\-node}}
+\index{$\sim$Expr\_\-node@{$\sim$Expr\_\-node}!genevalmag::Expr_node@{genevalmag::Expr\_\-node}}
+\subsubsection[{$\sim$Expr\_\-node}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Expr\_\-node::$\sim$Expr\_\-node ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classgenevalmag_1_1Expr__node_aed3c4a68961a70c4f41bf100bfac7db9}
+Destructor of \hyperlink{classgenevalmag_1_1Expr__node}{Expr\_\-node}. \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Destructor of \hyperlink{classgenevalmag_1_1Expr__node}{Expr\_\-node}. 
+
+Definition at line 19 of file Expr\_\-node.cpp.
+
+
+
+References childs.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classgenevalmag_1_1Expr__node_a11c96ee7ecda3b52639b2f8879aafea2}{
+\index{genevalmag::Expr\_\-node@{genevalmag::Expr\_\-node}!add\_\-child@{add\_\-child}}
+\index{add\_\-child@{add\_\-child}!genevalmag::Expr_node@{genevalmag::Expr\_\-node}}
+\subsubsection[{add\_\-child}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Expr\_\-node::add\_\-child ({\bf Expression} $\ast$ {\em new\_\-child})}}
+\label{classgenevalmag_1_1Expr__node_a11c96ee7ecda3b52639b2f8879aafea2}
+Adds a child in \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}.\par
+ Updates the parent of the child. 
+\begin{DoxyParams}{Parameters}
+\item[{\em new\_\-child}]Adds a child in \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. Updates the parent of the child. \end{DoxyParams}
+
+
+Definition at line 57 of file Expr\_\-node.cpp.
+
+
+
+References childs, and genevalmag::Expression::set\_\-parent().
+
+
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{classgenevalmag_1_1Expr__node_a11c96ee7ecda3b52639b2f8879aafea2_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classgenevalmag_1_1Expr__node_afd22b5e20b8723e957587aafe4e8e724}{
+\index{genevalmag::Expr\_\-node@{genevalmag::Expr\_\-node}!get\_\-child@{get\_\-child}}
+\index{get\_\-child@{get\_\-child}!genevalmag::Expr_node@{genevalmag::Expr\_\-node}}
+\subsubsection[{get\_\-child}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Expression} $\ast$ genevalmag::Expr\_\-node::get\_\-child (int {\em index}) const}}
+\label{classgenevalmag_1_1Expr__node_afd22b5e20b8723e957587aafe4e8e724}
+Returns the index-\/child of the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em index}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Returns the index-\/child of the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. 
+
+Definition at line 38 of file Expr\_\-node.cpp.
+
+
+
+References childs.
+
+
+
+Referenced by genevalmag::generate\_\-expr\_\-text().
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Expr__node_afd22b5e20b8723e957587aafe4e8e724_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classgenevalmag_1_1Expr__node_a35298ede3bb76a765ce4367a589383cc}{
+\index{genevalmag::Expr\_\-node@{genevalmag::Expr\_\-node}!get\_\-childs@{get\_\-childs}}
+\index{get\_\-childs@{get\_\-childs}!genevalmag::Expr_node@{genevalmag::Expr\_\-node}}
+\subsubsection[{get\_\-childs}]{\setlength{\rightskip}{0pt plus 5cm}const vector$<$ {\bf Expression} $\ast$ $>$ \& genevalmag::Expr\_\-node::get\_\-childs () const}}
+\label{classgenevalmag_1_1Expr__node_a35298ede3bb76a765ce4367a589383cc}
+Returns the vector with all children of the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Returns the vector with all children of the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function}. 
+
+Definition at line 30 of file Expr\_\-node.cpp.
+
+
+
+References childs.
+
+
+
+Referenced by genevalmag::Expr\_\-function::copy(), and genevalmag::generate\_\-expr\_\-text().
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Expr__node_a35298ede3bb76a765ce4367a589383cc_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classgenevalmag_1_1Expr__node_a951f8db517c231456781d10961ef8dba}{
+\index{genevalmag::Expr\_\-node@{genevalmag::Expr\_\-node}!replace\_\-child@{replace\_\-child}}
+\index{replace\_\-child@{replace\_\-child}!genevalmag::Expr_node@{genevalmag::Expr\_\-node}}
+\subsubsection[{replace\_\-child}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Expr\_\-node::replace\_\-child (int {\em index}, \/  {\bf Expression} $\ast$ {\em other})}}
+\label{classgenevalmag_1_1Expr__node_a951f8db517c231456781d10961ef8dba}
+Replaces index-\/child of the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function} with other.\par
+ Updates the parent of the child. 
+\begin{DoxyParams}{Parameters}
+\item[{\em index}]\item[{\em other}]Replaces index-\/child of the \hyperlink{classgenevalmag_1_1Expr__function}{Expr\_\-function} with other. Updates the parent of the child. \end{DoxyParams}
+
+
+Definition at line 47 of file Expr\_\-node.cpp.
+
+
+
+References childs, and genevalmag::Expression::set\_\-parent().
+
+
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{classgenevalmag_1_1Expr__node_a951f8db517c231456781d10961ef8dba_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classgenevalmag_1_1Expr__node_adea1d8fbc1b01f018e18cedad871f6a7}{
+\index{genevalmag::Expr\_\-node@{genevalmag::Expr\_\-node}!to\_\-string@{to\_\-string}}
+\index{to\_\-string@{to\_\-string}!genevalmag::Expr_node@{genevalmag::Expr\_\-node}}
+\subsubsection[{to\_\-string}]{\setlength{\rightskip}{0pt plus 5cm}virtual string genevalmag::Expr\_\-node::to\_\-string () const\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}
+\label{classgenevalmag_1_1Expr__node_adea1d8fbc1b01f018e18cedad871f6a7}
+Generate and return a string reprensentation of an \hyperlink{classgenevalmag_1_1Expr__node}{Expr\_\-node}. \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classgenevalmag_1_1Expression_a8685f44429501da942b1fe76880af6fe}{genevalmag::Expression}.
+
+
+
+Implemented in \hyperlink{classgenevalmag_1_1Expr__function_adaaebd5427337bb2288c47a16af804d8}{genevalmag::Expr\_\-function}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classgenevalmag_1_1Expr__node_a1fe0e44817e6f3ac688333e1714b31a3}{
+\index{genevalmag::Expr\_\-node@{genevalmag::Expr\_\-node}!childs@{childs}}
+\index{childs@{childs}!genevalmag::Expr_node@{genevalmag::Expr\_\-node}}
+\subsubsection[{childs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Expr\_\-node::childs}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classgenevalmag_1_1Expr__node_a1fe0e44817e6f3ac688333e1714b31a3}
+
+
+Childs's vector of node. 
+
+
+
+Definition at line 26 of file Expr\_\-node.h.
+
+
+
+Referenced by add\_\-child(), genevalmag::Expr\_\-function::copy(), get\_\-child(), get\_\-childs(), replace\_\-child(), genevalmag::Expr\_\-function::to\_\-string(), and $\sim$Expr\_\-node().
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+include/Expression\_\-tree/\hyperlink{Expr__node_8h}{Expr\_\-node.h}\item 
+src/Expression\_\-tree/\hyperlink{Expr__node_8cpp}{Expr\_\-node.cpp}\end{DoxyCompactItemize}

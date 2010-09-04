@@ -1,0 +1,163 @@
+.TH "genevalmag::Expr_node" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::Expr_node \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Expr_node.h>\fP
+.PP
+Inherits \fBgenevalmag::Expression\fP.
+.PP
+Inherited by \fBgenevalmag::Expr_function\fP.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBExpr_node\fP ()"
+.br
+.ti -1c
+.RI "virtual \fB~Expr_node\fP ()"
+.br
+.ti -1c
+.RI "const vector< \fBExpression\fP * > & \fBget_childs\fP () const "
+.br
+.ti -1c
+.RI "\fBExpression\fP * \fBget_child\fP (int index) const "
+.br
+.ti -1c
+.RI "void \fBreplace_child\fP (int index, \fBExpression\fP *other)"
+.br
+.ti -1c
+.RI "void \fBadd_child\fP (\fBExpression\fP *new_child)"
+.br
+.ti -1c
+.RI "virtual string \fBto_string\fP () const =0"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "vector< \fBExpression\fP * > \fBchilds\fP"
+.br
+.RI "\fIChilds's vector of node. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 19 of file Expr_node.h.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::Expr_node::Expr_node ()"Constructor of \fBExpr_node\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+
+.PP
+Definition at line 14 of file Expr_node.cpp.
+.SS "genevalmag::Expr_node::~Expr_node ()\fC [virtual]\fP"Destructor of \fBExpr_node\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Destructor of \fBExpr_node\fP. 
+.PP
+Definition at line 19 of file Expr_node.cpp.
+.PP
+References childs.
+.SH "Member Function Documentation"
+.PP 
+.SS "void genevalmag::Expr_node::add_child (\fBExpression\fP * new_child)"Adds a child in \fBExpr_function\fP.
+.br
+ Updates the parent of the child. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInew_child\fP Adds a child in \fBExpr_function\fP. Updates the parent of the child. 
+.RE
+.PP
+
+.PP
+Definition at line 57 of file Expr_node.cpp.
+.PP
+References childs, and genevalmag::Expression::set_parent().
+.SS "\fBExpression\fP * genevalmag::Expr_node::get_child (int index) const"Returns the index-child of the \fBExpr_function\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindex\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Returns the index-child of the \fBExpr_function\fP. 
+.PP
+Definition at line 38 of file Expr_node.cpp.
+.PP
+References childs.
+.PP
+Referenced by genevalmag::generate_expr_text().
+.SS "const vector< \fBExpression\fP * > & genevalmag::Expr_node::get_childs () const"Returns the vector with all children of the \fBExpr_function\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the vector with all children of the \fBExpr_function\fP. 
+.PP
+Definition at line 30 of file Expr_node.cpp.
+.PP
+References childs.
+.PP
+Referenced by genevalmag::Expr_function::copy(), and genevalmag::generate_expr_text().
+.SS "void genevalmag::Expr_node::replace_child (int index, \fBExpression\fP * other)"Replaces index-child of the \fBExpr_function\fP with other.
+.br
+ Updates the parent of the child. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindex\fP 
+.br
+\fIother\fP Replaces index-child of the \fBExpr_function\fP with other. Updates the parent of the child. 
+.RE
+.PP
+
+.PP
+Definition at line 47 of file Expr_node.cpp.
+.PP
+References childs, and genevalmag::Expression::set_parent().
+.SS "virtual string genevalmag::Expr_node::to_string () const\fC [pure virtual]\fP"Generate and return a string reprensentation of an \fBExpr_node\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+
+.PP
+Implements \fBgenevalmag::Expression\fP.
+.PP
+Implemented in \fBgenevalmag::Expr_function\fP.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::Expr_node::childs\fP\fC [protected]\fP"
+.PP
+Childs's vector of node. 
+.PP
+Definition at line 26 of file Expr_node.h.
+.PP
+Referenced by add_child(), genevalmag::Expr_function::copy(), get_child(), get_childs(), replace_child(), genevalmag::Expr_function::to_string(), and ~Expr_node().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

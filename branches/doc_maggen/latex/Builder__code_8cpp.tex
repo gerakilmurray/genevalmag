@@ -1,0 +1,69 @@
+\hypertarget{Builder__code_8cpp}{
+\section{src/Builders/Builder\_\-code.cpp File Reference}
+\label{Builder__code_8cpp}\index{src/Builders/Builder\_\-code.cpp@{src/Builders/Builder\_\-code.cpp}}
+}
+
+
+Implementation of the methods the \hyperlink{Builder__code_8h}{Builder\_\-code.h}.  
+
+
+{\ttfamily \#include $<$fstream$>$}\par
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$time.h$>$}\par
+{\ttfamily \#include $<$boost/algorithm/string.hpp$>$}\par
+{\ttfamily \#include \char`\"{}../../include/Builders/Builder\_\-plans.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../../include/Expression\_\-tree/Expr\_\-function.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../../include/Expression\_\-tree/Expr\_\-literal.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../../include/Expression\_\-tree/Expr\_\-instance.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../../include/Util/Utilities.h\char`\"{}}\par
+{\ttfamily \#include $<$string$>$}\par
+{\ttfamily \#include \char`\"{}../Expression\_\-tree/Expr\_\-leaf.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../Attr\_\-grammar/Symbol.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../Builders/Builder\_\-graphs.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../Attr\_\-grammar/Attr\_\-grammar.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}Builder\_\-visit\_\-sequences.h\char`\"{}}\par
+Include dependency graph for Builder\_\-code.cpp:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{Builder__code_8cpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=104pt]{Builder__code_8cpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \hyperlink{namespacegenevalmag}{genevalmag}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\string \hyperlink{namespacegenevalmag_af74af87309332e02ec5d55c14ab1fa97}{genevalmag::write\_\-vector\_\-with\_\-inic} (string \&text\_\-buffer, const string name\_\-vec, const size\_\-t index, const vector$<$ T $>$ \&vec, const string type\_\-vec, const string type\_\-array)
+\item 
+string \hyperlink{namespacegenevalmag_ac58f50a004a774ce4256b86a16fb96c0}{genevalmag::generate\_\-key\_\-plan} (string \&text, const string \&n\_\-key, const int \&num\_\-key, const Key\_\-plan \&k\_\-p)
+\item 
+string \hyperlink{namespacegenevalmag_ad027bb2060fc75b17da08a22c9be3b9a}{genevalmag::generate\_\-return\_\-index\_\-context} ()
+\item 
+string \hyperlink{namespacegenevalmag_a5935695d2ab4f63ea670911809399ce0}{genevalmag::generate\_\-expr\_\-text} (const Expression $\ast$node, const Rule \&rule)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of the methods the \hyperlink{Builder__code_8h}{Builder\_\-code.h}. \begin{DoxyDate}{Date}
+18/03/2010 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Kilmurray, Gerardo Luis $<$\href{mailto:gerakilmurray@gmail.com}{\tt gerakilmurray@gmail.com}$>$ 
+
+Picco, Gonzalo Martin $<$\href{mailto:gonzalopicco@gmail.com}{\tt gonzalopicco@gmail.com}$>$ 
+\end{DoxyAuthor}
+
+
+Definition in file \hyperlink{Builder__code_8cpp_source}{Builder\_\-code.cpp}.
+

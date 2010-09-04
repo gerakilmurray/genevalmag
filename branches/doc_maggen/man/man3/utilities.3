@@ -1,0 +1,263 @@
+.TH "utilities" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+utilities \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBcreate_folder\fP (const string path)"
+.br
+.ti -1c
+.RI "bool \fBclean_output_folder\fP (const string path)"
+.br
+.ti -1c
+.RI "bool \fBcopy_static_code\fP (const string path_d, const string path_s)"
+.br
+.ti -1c
+.RI "void \fBgenerate_names_instance\fP (const Graph &graph, string datas[], size_t size_d)"
+.br
+.ti -1c
+.RI "void \fBgenerate_names_attr\fP (const Graph &graph, string datas[], size_t size_d)"
+.br
+.ti -1c
+.RI "void \fBprint_graph\fP (const Graph &graph, const string path, const string name_file, const string name_graph, const string names[], string shape_vertex)"
+.br
+.ti -1c
+.RI "Vertex \fBreturn_vertex\fP (const Graph &graph, const \fBExpr_leaf\fP *node)"
+.br
+.ti -1c
+.RI "void \fBmerge_graph\fP (const Graph &graph1, const Graph &graph2, Graph &graph_merged)"
+.br
+.ti -1c
+.RI "void \fBproject_graph\fP (const \fBSymbol\fP *symb, Graph &graph)"
+.br
+.ti -1c
+.RI "string \fBcleaning_tabs\fP (const string str)"
+.br
+.ti -1c
+.RI "string \fBwrite_inf_context\fP (const vector< unsigned short > &context_vec)"
+.br
+.ti -1c
+.RI "bool \fBbelong_index\fP (const unsigned short &index, const vector< unsigned short > &vec)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "bool utilities::belong_index (const unsigned short & index, const vector< unsigned short > & vec)"Seachs a index in a vector. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindex\fP 
+.br
+\fIvec\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.PP
+Definition at line 211 of file Utilities.cpp.
+.PP
+Referenced by genevalmag::Builder_visit_sequences::gen_visit_seq(), genevalmag::Builder_visit_sequences::generate_visit_sequences(), genevalmag::plan_family_computed(), and genevalmag::purge_plan_with().
+.SS "bool utilities::clean_output_folder (const string path)"Remove and create the output folder of files .dot and .png. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Remove and create the output folder of files .dot and .png. 
+.PP
+Definition at line 41 of file Utilities.cpp.
+.PP
+References create_folder().
+.PP
+Referenced by genevalmag::Maglib::gen_evaluator(), genevalmag::Builder_graphs::save_adp_graphs(), genevalmag::Builder_graphs::save_all_graphs(), genevalmag::Builder_plans::save_all_plans(), genevalmag::Builder_plans::save_all_plans_project(), genevalmag::Builder_graphs::save_cyclic_graphs(), genevalmag::Builder_graphs::save_dcg_graphs(), genevalmag::Builder_graphs::save_down_graphs(), and genevalmag::Builder_graphs::save_dp_graphs().
+.SS "string utilities::cleaning_tabs (const string str)"Remove tabs and replace for spaces. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstr\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Remove tabs and replace for spaces. 
+.PP
+Definition at line 226 of file Utilities.cpp.
+.PP
+Referenced by genevalmag::create_instance(), genevalmag::Builder_code::generate_all_methods_eqs(), genevalmag::Builder_graphs::save_adp_graphs(), genevalmag::Builder_plans::save_all_plans(), genevalmag::Builder_plans::save_all_plans_project(), genevalmag::Builder_graphs::save_cyclic_graphs(), genevalmag::Builder_graphs::save_dcg_graphs(), genevalmag::Builder_graphs::save_dp_graphs(), and genevalmag::save_rvalue().
+.SS "bool utilities::copy_static_code (const string path_d, const string path_s)"Copies the static file to the generation path. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath_d\fP 
+.br
+\fIpath_s\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Copies the static file to the generation path. 
+.PP
+Definition at line 57 of file Utilities.cpp.
+.PP
+Referenced by genevalmag::Builder_code::generate_code().
+.SS "bool utilities::create_folder (const string path)"Create the folder passed as parameter. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Create the folder passed as parameter. 
+.PP
+Definition at line 26 of file Utilities.cpp.
+.PP
+Referenced by clean_output_folder().
+.SS "void utilities::generate_names_attr (const Graph & graph, string datas[], size_t size_d)"Generates the names of vertex for down graph. (The vertex's name is an attribute). 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIgraph\fP 
+.br
+\fIdatas\fP 
+.br
+\fIsize_d\fP Generates the names of vertex for down graph. (The vertex's name is an attribute). 
+.RE
+.PP
+
+.PP
+Definition at line 88 of file Utilities.cpp.
+.PP
+Referenced by genevalmag::Builder_graphs::save_down_graphs().
+.SS "void utilities::generate_names_instance (const Graph & graph, string datas[], size_t size_d)"Generates the names of vertex. (The vertex's name is an instance). 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIgraph\fP 
+.br
+\fIdatas\fP 
+.br
+\fIsize_d\fP Generates the names of vertex. (The vertex's name is an instance). 
+.RE
+.PP
+
+.PP
+Definition at line 75 of file Utilities.cpp.
+.PP
+Referenced by genevalmag::Builder_graphs::save_adp_graphs(), genevalmag::Builder_graphs::save_cyclic_graphs(), genevalmag::Builder_graphs::save_dcg_graphs(), and genevalmag::Builder_graphs::save_dp_graphs().
+.SS "void utilities::merge_graph (const Graph & graph1, const Graph & graph2, Graph & graph_merged)"Joins graph1 and graph2 in graph_merged. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIgraph1\fP 
+.br
+\fIgraph2\fP 
+.br
+\fIgraph_merged\fP Joins graph1 and graph2 in graph_merged. 
+.RE
+.PP
+
+.PP
+Definition at line 152 of file Utilities.cpp.
+.PP
+References return_vertex().
+.PP
+Referenced by genevalmag::Builder_graphs::combined_inf_contexts(), genevalmag::Builder_graphs::complete_dp_graphs(), genevalmag::Builder_graphs::compute_dcg(), and genevalmag::Builder_graphs::compute_down_graph().
+.SS "void utilities::print_graph (const Graph & graph, const string path, const string name_file, const string name_graph, const string names[], string shape_vertex)"Prints a graph in a file .dot for generate image .spng. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIgraph\fP 
+.br
+\fIpath\fP 
+.br
+\fIname_file\fP 
+.br
+\fIname_graph\fP 
+.br
+\fInames\fP 
+.br
+\fIshape_vertex\fP Prints a graph in a file .dot for generate image .spng. 
+.RE
+.PP
+
+.PP
+Definition at line 102 of file Utilities.cpp.
+.PP
+Referenced by genevalmag::Builder_graphs::save_adp_graphs(), genevalmag::Builder_plans::save_all_plans(), genevalmag::Builder_plans::save_all_plans_project(), genevalmag::Builder_graphs::save_cyclic_graphs(), genevalmag::Builder_graphs::save_dcg_graphs(), genevalmag::Builder_graphs::save_down_graphs(), and genevalmag::Builder_graphs::save_dp_graphs().
+.SS "void utilities::project_graph (const \fBSymbol\fP * symb, Graph & graph)"Projects a graph with only vertex that belongs to symbol 'symb'. Modifies the parameter 'graph'. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsymb\fP 
+.br
+\fIgraph\fP Projects a graph with only vertex that belongs to symbol 'symb'. Modifies the parameter 'graph'. 
+.RE
+.PP
+
+.PP
+Definition at line 192 of file Utilities.cpp.
+.PP
+References genevalmag::Symbol::equals(), genevalmag::Expr_instance::get_num(), and genevalmag::Expr_instance::get_symb().
+.PP
+Referenced by genevalmag::Builder_graphs::compute_dcg(), and genevalmag::Builder_graphs::compute_down_graph().
+.SS "Vertex utilities::return_vertex (const Graph & graph, const \fBExpr_leaf\fP * node)"Given a graph and node, returns the vertex descriptor of node in the graph. If not search it, so returns USHRT_MAX. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIgraph\fP 
+.br
+\fInode\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Given a graph and node, returns the vertex descriptor of node in the graph. If not search it, so returns USHRT_MAX. 
+.PP
+Definition at line 138 of file Utilities.cpp.
+.PP
+References genevalmag::Expr_leaf::equals().
+.PP
+Referenced by genevalmag::Builder_graphs::compute_attr_vertex(), genevalmag::Builder_graphs::compute_dependency_graphs(), genevalmag::Builder_plans::compute_order(), genevalmag::cycle_detector::examine_edge(), and merge_graph().
+.SS "string utilities::write_inf_context (const vector< unsigned short > & context_vec)"Writes inferior contex in a string and returns it. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcontext_vec\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.PP
+Definition at line 236 of file Utilities.cpp.
+.PP
+Referenced by genevalmag::Builder_graphs::save_adp_graphs(), genevalmag::Builder_plans::save_all_plans(), genevalmag::Builder_plans::save_all_plans_project(), and genevalmag::Builder_graphs::save_cyclic_graphs().
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

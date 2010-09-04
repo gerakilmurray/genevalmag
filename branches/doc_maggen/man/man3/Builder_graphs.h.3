@@ -1,0 +1,80 @@
+.TH "include/Builders/Builder_graphs.h" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+include/Builders/Builder_graphs.h \- 
+.PP
+Header with the functions for build all kind of graphs for the attribute grammar.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <map>\fP
+.br
+\fC#include <string>\fP
+.br
+\fC#include <vector>\fP
+.br
+\fC#include <boost/graph/adjacency_list.hpp>\fP
+.br
+\fC#include '../Attr_grammar/Attr_grammar.h'\fP
+.br
+\fC#include '../Expression_tree/Expr_leaf.h'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBgenevalmag::vertex_data_t\fP"
+.br
+.ti -1c
+.RI "class \fBgenevalmag::Builder_graphs\fP"
+.br
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBgenevalmag\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef adjacency_list< hash_setS, vecS, directedS, property_vertex_dp > \fBgenevalmag::Graph\fP"
+.br
+.ti -1c
+.RI "typedef Graph::vertex_descriptor \fBgenevalmag::Vertex\fP"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "typedef< vertex_data_t, constgenevalmag::Expr_leaf * > \fBgenevalmag::property_vertex_dp\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Header with the functions for build all kind of graphs for the attribute grammar. 
+
+\fBDate:\fP
+.RS 4
+17/02/2010 
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Kilmurray, Gerardo Luis <gerakilmurray@gmail.com> 
+.PP
+Picco, Gonzalo Martin <gonzalopicco@gmail.com> 
+.RE
+.PP
+
+.PP
+Definition in file \fBBuilder_graphs.h\fP.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

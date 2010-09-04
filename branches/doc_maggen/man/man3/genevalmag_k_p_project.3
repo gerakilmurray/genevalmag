@@ -1,0 +1,118 @@
+.TH "genevalmag::k_p_project" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::k_p_project \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Builder_plans.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBoperator<\fP (const \fBk_p_project\fP &other) const "
+.br
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBk_p_project\fP &other) const "
+.br
+.ti -1c
+.RI "\fBk_p_project\fP & \fBoperator=\fP (const \fBk_p_project\fP &other)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBKey_plan\fP \fBid_plan_project\fP"
+.br
+.RI "\fIkey_plan \fP"
+.ti -1c
+.RI "const \fBSymbol\fP * \fBsymbol_project\fP"
+.br
+.RI "\fIProjected \fBSymbol\fP. \fP"
+.ti -1c
+.RI "unsigned short \fBindex_ocurrence\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+This struct represent a Key_plan_project, that is a Key_plan, the symbol and ocurrence, by which project. 
+.PP
+Definition at line 200 of file Builder_plans.h.
+.SH "Member Function Documentation"
+.PP 
+.SS "bool genevalmag::k_p_project::operator< (const \fBk_p_project\fP & other) const\fC [inline]\fP"operator< 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.PP
+Definition at line 222 of file Builder_plans.h.
+.PP
+References genevalmag::Symbol::get_name(), id_plan_project, index_ocurrence, and symbol_project.
+.SS "\fBk_p_project\fP& genevalmag::k_p_project::operator= (const \fBk_p_project\fP & other)\fC [inline]\fP"operator= 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.PP
+Definition at line 242 of file Builder_plans.h.
+.PP
+References id_plan_project, index_ocurrence, and symbol_project.
+.SS "bool genevalmag::k_p_project::operator== (const \fBk_p_project\fP & other) const\fC [inline]\fP"operator== 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.PP
+Definition at line 233 of file Builder_plans.h.
+.PP
+References genevalmag::Symbol::get_name(), id_plan_project, index_ocurrence, and symbol_project.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::k_p_project::id_plan_project\fP"
+.PP
+key_plan 
+.PP
+Definition at line 206 of file Builder_plans.h.
+.PP
+Referenced by genevalmag::Builder_visit_sequences::gen_visit_seq(), genevalmag::Builder_plans::generate_plans(), operator<(), operator=(), and operator==().
+.SS "unsigned short \fBgenevalmag::k_p_project::index_ocurrence\fP"
+.PP
+Definition at line 216 of file Builder_plans.h.
+.PP
+Referenced by genevalmag::Builder_visit_sequences::gen_visit_seq(), genevalmag::Builder_plans::generate_plans(), operator<(), operator=(), and operator==().
+.SS "\fBgenevalmag::k_p_project::symbol_project\fP"
+.PP
+Projected \fBSymbol\fP. 
+.PP
+Definition at line 211 of file Builder_plans.h.
+.PP
+Referenced by genevalmag::Builder_visit_sequences::gen_visit_seq(), genevalmag::Builder_plans::generate_plans(), operator<(), operator=(), and operator==().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

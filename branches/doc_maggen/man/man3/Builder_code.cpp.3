@@ -1,0 +1,87 @@
+.TH "src/Builders/Builder_code.cpp" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/Builders/Builder_code.cpp \- 
+.PP
+Implementation of the methods the \fBBuilder_code.h\fP.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <fstream>\fP
+.br
+\fC#include <iostream>\fP
+.br
+\fC#include <time.h>\fP
+.br
+\fC#include <boost/algorithm/string.hpp>\fP
+.br
+\fC#include '../../include/Builders/Builder_plans.h'\fP
+.br
+\fC#include '../../include/Expression_tree/Expr_function.h'\fP
+.br
+\fC#include '../../include/Expression_tree/Expr_literal.h'\fP
+.br
+\fC#include '../../include/Expression_tree/Expr_instance.h'\fP
+.br
+\fC#include '../../include/Util/Utilities.h'\fP
+.br
+\fC#include <string>\fP
+.br
+\fC#include '../Expression_tree/Expr_leaf.h'\fP
+.br
+\fC#include '../Attr_grammar/Symbol.h'\fP
+.br
+\fC#include '../Builders/Builder_graphs.h'\fP
+.br
+\fC#include '../Attr_grammar/Attr_grammar.h'\fP
+.br
+\fC#include 'Builder_visit_sequences.h'\fP
+.br
+
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBgenevalmag\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<class T > string \fBgenevalmag::write_vector_with_inic\fP (string &text_buffer, const string name_vec, const size_t index, const vector< T > &vec, const string type_vec, const string type_array)"
+.br
+.ti -1c
+.RI "string \fBgenevalmag::generate_key_plan\fP (string &text, const string &n_key, const int &num_key, const Key_plan &k_p)"
+.br
+.ti -1c
+.RI "string \fBgenevalmag::generate_return_index_context\fP ()"
+.br
+.ti -1c
+.RI "string \fBgenevalmag::generate_expr_text\fP (const Expression *node, const Rule &rule)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Implementation of the methods the \fBBuilder_code.h\fP. 
+
+\fBDate:\fP
+.RS 4
+18/03/2010 
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Kilmurray, Gerardo Luis <gerakilmurray@gmail.com> 
+.PP
+Picco, Gonzalo Martin <gonzalopicco@gmail.com> 
+.RE
+.PP
+
+.PP
+Definition in file \fBBuilder_code.cpp\fP.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

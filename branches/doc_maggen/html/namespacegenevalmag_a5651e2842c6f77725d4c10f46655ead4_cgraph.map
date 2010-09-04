@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" href="$namespacegenevalmag.html#aff5e0f0cff477c34b63116d99dfbe9b0" title="genevalmag::add_function" alt="" coords="265,32,439,61"/>
+<area shape="rect" href="$namespacegenevalmag.html#a29dbe8034050c247526ecae47ff95529" title="genevalmag::IS_OPERATOR" alt="" coords="257,85,447,115"/>
+<area shape="rect" href="$classgenevalmag_1_1Function.html#a0814d3aa8b3034c5e415b0dacd65a059" title="genevalmag::Function::set_is_operator" alt="" coords="229,139,475,168"/>
+<area shape="rect" href="$classgenevalmag_1_1Attr__grammar.html#a2dc3357532cdef0dd92eaf3f55ca2ec2" title="genevalmag::Attr_grammar::add_function" alt="" coords="524,5,783,35"/>
+<area shape="rect" href="$classgenevalmag_1_1Function.html#ae730b6f7f0108383e1acbdde13813585" title="genevalmag::Function::to_string" alt="" coords="551,59,756,88"/>
+<area shape="rect" href="$classgenevalmag_1_1Sort.html#a5bbccf82148fea12f958bd276a009fd4" title="genevalmag::Sort::get_name" alt="" coords="849,5,1036,35"/>
+<area shape="rect" href="$classgenevalmag_1_1Function.html#aec65653267a5d4cb93f2ce7b5e1c542b" title="genevalmag::Function::get_name" alt="" coords="836,59,1049,88"/>
+<area shape="rect" href="$classgenevalmag_1_1Function.html#a011d344c0a5d6fc3d1d851967028010a" title="genevalmag::Function::is_operator" alt="" coords="833,112,1052,141"/>
+</map>

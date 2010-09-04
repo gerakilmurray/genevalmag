@@ -1,0 +1,184 @@
+.TH "genevalmag::Builder_visit_sequences" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::Builder_visit_sequences \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Builder_visit_sequences.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBBuilder_visit_sequences\fP (const \fBBuilder_plans\fP &builder_plan, const \fBAttr_grammar\fP &attribute_grammar)"
+.br
+.ti -1c
+.RI "virtual \fB~Builder_visit_sequences\fP ()"
+.br
+.ti -1c
+.RI "bool \fBgenerate_visit_sequences\fP ()"
+.br
+.ti -1c
+.RI "const vector< \fBVisit_seq\fP > & \fBget_visit_seq\fP () const "
+.br
+.ti -1c
+.RI "void \fBprint_all_visit_sequences\fP () const "
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBgen_visit_seq\fP (const map< \fBKey_plan\fP, unsigned short >::const_iterator &it_plan, vector< \fBExpr_instance\fP > &ins_computed, vector< map< \fBKey_plan\fP, unsigned short >::const_iterator > &plans_computed, const vector< unsigned short > &v_seq_computed)"
+.br
+.ti -1c
+.RI "void \fBupdate_visit_sequence\fP (const \fBVisit_seq\fP &sequence, const size_t i_plan)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "const \fBBuilder_plans\fP & \fBb_plans\fP"
+.br
+.RI "\fIReferences to all plans generates. \fP"
+.ti -1c
+.RI "const \fBAttr_grammar\fP & \fBattr_grammar\fP"
+.br
+.RI "\fIReferences to the attribute grammar. \fP"
+.ti -1c
+.RI "vector< \fBVisit_seq\fP > \fBall_visit_seqs\fP"
+.br
+.RI "\fIStores all visit sequences generates. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 30 of file Builder_visit_sequences.h.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::Builder_visit_sequences::Builder_visit_sequences (const \fBBuilder_plans\fP & builder_plan, const \fBAttr_grammar\fP & attribute_grammar)"Contructor empty of \fBBuilder_visit_sequences\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbuilder_plan\fP 
+.br
+\fIattribute_grammar\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Contructor empty of \fBBuilder_visit_sequences\fP. 
+.PP
+Definition at line 26 of file Builder_visit_sequences.cpp.
+.SS "genevalmag::Builder_visit_sequences::~Builder_visit_sequences ()\fC [virtual]\fP"Destructor of \fBBuilder_visit_sequences\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Destructor of \fBBuilder_visit_sequences\fP. 
+.PP
+Definition at line 38 of file Builder_visit_sequences.cpp.
+.SH "Member Function Documentation"
+.PP 
+.SS "bool genevalmag::Builder_visit_sequences::gen_visit_seq (const map< \fBKey_plan\fP, unsigned short >::const_iterator & it_plan, vector< \fBExpr_instance\fP > & ins_computed, vector< map< \fBKey_plan\fP, unsigned short >::const_iterator > & plans_computed, const vector< unsigned short > & v_seq_computed)\fC [private]\fP"Generates recursively the visit sequence, navigating the tree as indicated by the plans, visiting the children, returning to the parent or generating a compute attribute.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIit_plan\fP 
+.br
+\fIins_computed\fP 
+.br
+\fIplans_computed\fP 
+.br
+\fIv_seq_computed\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Generates recursively the visit sequence, navigating the tree as indicated by the plans, visiting the children, returning to the parent or generating a compute attribute. 
+.PP
+Definition at line 162 of file Builder_visit_sequences.cpp.
+.PP
+References genevalmag::attr_grammar, utilities::belong_index(), genevalmag::belong_it(), genevalmag::Symbol::equals(), genevalmag::Expr_instance::get_attr(), genevalmag::Rule::get_eq(), genevalmag::get_inherits_of(), genevalmag::Rule::get_left_symbol(), genevalmag::Rule::get_non_terminals_right_side(), genevalmag::Expr_instance::get_num(), genevalmag::Attr_grammar::get_rule(), genevalmag::Expr_instance::get_symb(), genevalmag::k_p_project::id_plan_project, genevalmag::k_p_project::index_ocurrence, genevalmag::ins_attr_computed(), genevalmag::Attribute::is_inherit(), genevalmag::Attribute::is_synthetize(), genevalmag::LEAVE(), genevalmag::merge_vec(), genevalmag::merge_vec_without_plan(), genevalmag::plan_family_computed(), and genevalmag::k_p_project::symbol_project.
+.PP
+Referenced by generate_visit_sequences().
+.SS "bool genevalmag::Builder_visit_sequences::generate_visit_sequences ()"Generates a visit sequence for each evaluation plan. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates a visit sequence for each evaluation plan. 
+.PP
+Definition at line 358 of file Builder_visit_sequences.cpp.
+.PP
+References all_visit_seqs, attr_grammar, b_plans, utilities::belong_index(), genevalmag::Symbol::equals(), gen_visit_seq(), genevalmag::Builder_plans::get_context_unique(), genevalmag::Attr_grammar::get_initial_symb(), genevalmag::Rule::get_left_symbol(), genevalmag::Builder_plans::get_plans(), genevalmag::Builder_plans::get_plans_uniques(), genevalmag::Attr_grammar::get_rule(), genevalmag::merge_vec(), and genevalmag::plan_family_computed().
+.SS "const vector< \fBVisit_seq\fP > & genevalmag::Builder_visit_sequences::get_visit_seq () const"Returns the vector with all visit sequences generates. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the vector with all visit sequences generates. 
+.PP
+Definition at line 393 of file Builder_visit_sequences.cpp.
+.PP
+References all_visit_seqs.
+.PP
+Referenced by genevalmag::Builder_code::generate_initialize_v_seq().
+.SS "void genevalmag::Builder_visit_sequences::print_all_visit_sequences () const"Print in console, all visit sequences generates. 
+.PP
+Definition at line 401 of file Builder_visit_sequences.cpp.
+.PP
+References all_visit_seqs.
+.SS "void genevalmag::Builder_visit_sequences::update_visit_sequence (const \fBVisit_seq\fP & sequence, const size_t i_plan)\fC [private]\fP"Updates the visit sequence generate, mixing with pre-generated visit sequences. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsequence\fP 
+.br
+\fIi_plan\fP Update the visit sequence generate, mixing with pre-generated visit sequences. 
+.RE
+.PP
+
+.PP
+Definition at line 317 of file Builder_visit_sequences.cpp.
+.PP
+References all_visit_seqs.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::Builder_visit_sequences::all_visit_seqs\fP\fC [private]\fP"
+.PP
+Stores all visit sequences generates. 
+.PP
+Definition at line 49 of file Builder_visit_sequences.h.
+.PP
+Referenced by generate_visit_sequences(), get_visit_seq(), print_all_visit_sequences(), and update_visit_sequence().
+.SS "\fBgenevalmag::Builder_visit_sequences::attr_grammar\fP\fC [private]\fP"
+.PP
+References to the attribute grammar. 
+.PP
+Definition at line 43 of file Builder_visit_sequences.h.
+.PP
+Referenced by generate_visit_sequences().
+.SS "\fBgenevalmag::Builder_visit_sequences::b_plans\fP\fC [private]\fP"
+.PP
+References to all plans generates. 
+.PP
+Definition at line 37 of file Builder_visit_sequences.h.
+.PP
+Referenced by generate_visit_sequences().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

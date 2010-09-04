@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" href="$classgenevalmag_1_1Builder__visit__sequences.html#a81498899f7859f929abb96526f20e4a3" title="genevalmag::Builder_visit_sequences::gen_visit_seq" alt="" coords="272,5,600,35"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__plans.html#a9293c2318f2a323616fc49505a44e4e3" title="genevalmag::Builder_plans::generates_topological_order" alt="" coords="263,59,609,88"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__visit__sequences.html#a2721134ffe1c2677b96a46c4b4d184ef" title="genevalmag::Builder_visit_sequences::generate_visit_sequences" alt="" coords="659,5,1059,35"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__plans.html#a86e05ee91d27e62d16d77ecbdec05bf7" title="genevalmag::Builder_plans::compute_order" alt="" coords="723,59,995,88"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__plans.html#a5002819447c17a1f81c197da66bd3e56" title="genevalmag::Builder_plans::generate_plans" alt="" coords="1108,85,1380,115"/>
+<area shape="rect" href="$classgenevalmag_1_1Builder__plans.html#a3337ccac1c358d9b0a1de456ff74b0cb" title="genevalmag::Builder_plans::build_plans" alt="" coords="1429,85,1680,115"/>
+</map>

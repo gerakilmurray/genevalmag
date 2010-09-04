@@ -1,0 +1,440 @@
+.TH "genevalmag::Expr_function" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::Expr_function \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Expr_function.h>\fP
+.PP
+Inherits \fBgenevalmag::Expr_node\fP.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBExpr_function\fP ()"
+.br
+.ti -1c
+.RI "\fBExpr_function\fP (const \fBExpr_function\fP &other)"
+.br
+.ti -1c
+.RI "virtual \fB~Expr_function\fP ()"
+.br
+.ti -1c
+.RI "\fBExpr_function\fP & \fBoperator=\fP (const \fBExpr_function\fP &other)"
+.br
+.ti -1c
+.RI "const \fBFunction\fP * \fBget_function\fP () const "
+.br
+.ti -1c
+.RI "unsigned short \fBget_precedence_level\fP () const "
+.br
+.ti -1c
+.RI "unsigned short \fBget_syntax_order\fP () const "
+.br
+.ti -1c
+.RI "void \fBset_function\fP (const \fBFunction\fP *function)"
+.br
+.ti -1c
+.RI "void \fBset_precedence_level\fP (unsigned short p_level)"
+.br
+.ti -1c
+.RI "void \fBset_syntax_order\fP (unsigned short s_order)"
+.br
+.ti -1c
+.RI "bool \fBis_prefix\fP () const "
+.br
+.ti -1c
+.RI "bool \fBis_infix\fP () const "
+.br
+.ti -1c
+.RI "bool \fBis_postfix\fP () const "
+.br
+.ti -1c
+.RI "bool \fBis_comparable\fP (const \fBExpr_function\fP *other) const "
+.br
+.ti -1c
+.RI "int \fBcompare_precedence\fP (const \fBExpr_function\fP *other) const "
+.br
+.ti -1c
+.RI "int \fBcompare_order\fP (const \fBExpr_function\fP *other) const "
+.br
+.ti -1c
+.RI "string \fBto_string\fP () const "
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcopy\fP (const \fBExpr_function\fP &other)"
+.br
+.ti -1c
+.RI "void \fBdestroy\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "const \fBFunction\fP * \fBfunc\fP"
+.br
+.RI "\fI\fBFunction\fP associates with \fBExpr_function\fP. \fP"
+.ti -1c
+.RI "unsigned short \fBprecedence_level\fP"
+.br
+.RI "\fILevel precedence of the function. \fP"
+.ti -1c
+.RI "unsigned short \fBsyntax_order\fP"
+.br
+.RI "\fISyntax order in the parse. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 23 of file Expr_function.h.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::Expr_function::Expr_function ()"Constructor empty of \fBExpr_function\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Constructor empty of \fBExpr_function\fP. 
+.PP
+Definition at line 24 of file Expr_function.cpp.
+.PP
+References precedence_level, and syntax_order.
+.SS "genevalmag::Expr_function::Expr_function (const \fBExpr_function\fP & other)"Constructor copy of \fBExpr_function\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Constructor copy of \fBExpr_function\fP. 
+.PP
+Definition at line 37 of file Expr_function.cpp.
+.PP
+References copy().
+.SS "genevalmag::Expr_function::~Expr_function ()\fC [virtual]\fP"Destructor of \fBExpr_function\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Destructor of \fBExpr_function\fP. 
+.PP
+Definition at line 49 of file Expr_function.cpp.
+.PP
+References destroy().
+.SH "Member Function Documentation"
+.PP 
+.SS "int genevalmag::Expr_function::compare_order (const \fBExpr_function\fP * other) const"Returns:
+.br
+ \\= O when is same order
+.br
+ < 0 when other have great order
+.br
+ > 0 when other have small order
+.br
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Return: = O when is same order < 0 when other have great order > 0 when other have small order 
+.PP
+Definition at line 193 of file Expr_function.cpp.
+.PP
+References get_syntax_order(), and syntax_order.
+.SS "int genevalmag::Expr_function::compare_precedence (const \fBExpr_function\fP * other) const"Returns:
+.br
+ \\= O when is same precedence
+.br
+ < 0 when other have great precedence
+.br
+ > 0 when other have small precedence
+.br
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Return: = O when is same precedence < 0 when other have great precedence > 0 when other have small precedence 
+.PP
+Definition at line 182 of file Expr_function.cpp.
+.PP
+References func, get_function(), and genevalmag::Function::get_prec().
+.SS "void genevalmag::Expr_function::copy (const \fBExpr_function\fP & other)\fC [private]\fP"Method of copy the \fBExpr_function\fP, STL-like C++. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP Method of copy the \fBExpr_function\fP, STL-like C++. 
+.RE
+.PP
+
+.PP
+Definition at line 78 of file Expr_function.cpp.
+.PP
+References genevalmag::Expr_node::childs, genevalmag::Expression::conflict, func, genevalmag::Expr_node::get_childs(), genevalmag::Expression::get_conflict(), get_function(), genevalmag::Expression::get_parent(), get_precedence_level(), get_syntax_order(), genevalmag::Expression::get_type_synthetized(), genevalmag::Expression::parent, precedence_level, syntax_order, and genevalmag::Expression::type_synthetized.
+.PP
+Referenced by Expr_function(), and operator=().
+.SS "void genevalmag::Expr_function::destroy ()\fC [private]\fP"Method destroy \fBExpr_function\fP, STL-like C++. 
+.PP
+Definition at line 92 of file Expr_function.cpp.
+.PP
+Referenced by operator=(), and ~Expr_function().
+.SS "const \fBFunction\fP * genevalmag::Expr_function::get_function () const"Returns the function pointer of the \fBExpr_function\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the function pointer of the \fBExpr_function\fP. 
+.PP
+Definition at line 99 of file Expr_function.cpp.
+.PP
+References func.
+.PP
+Referenced by compare_precedence(), copy(), genevalmag::Semantics_checks::correct_associativity(), genevalmag::Semantics_checks::correct_precedence(), and genevalmag::generate_expr_text().
+.SS "unsigned short genevalmag::Expr_function::get_precedence_level () const"Returns the precedence level of the \fBExpr_function\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the precedence level of the \fBExpr_function\fP. 
+.PP
+Definition at line 107 of file Expr_function.cpp.
+.PP
+References precedence_level.
+.PP
+Referenced by copy(), and is_comparable().
+.SS "unsigned short genevalmag::Expr_function::get_syntax_order () const"Returns the syntax order of the \fBExpr_function\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the syntax order of the \fBExpr_function\fP. 
+.PP
+Definition at line 115 of file Expr_function.cpp.
+.PP
+References syntax_order.
+.PP
+Referenced by compare_order(), and copy().
+.SS "bool genevalmag::Expr_function::is_comparable (const \fBExpr_function\fP * other) const"Returns if both Expr_functions are in the same precedence level. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Returns if both Expr_functions are in the same precedence level. 
+.PP
+Definition at line 171 of file Expr_function.cpp.
+.PP
+References get_precedence_level(), and precedence_level.
+.SS "bool genevalmag::Expr_function::is_infix () const"Returns if the function of \fBExpr_function\fP is infix. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns if the function of \fBExpr_function\fP is infix. 
+.PP
+Definition at line 155 of file Expr_function.cpp.
+.PP
+References func, genevalmag::Function::get_mode(), and genevalmag::k_infix.
+.PP
+Referenced by genevalmag::generate_expr_text().
+.SS "bool genevalmag::Expr_function::is_postfix () const"Returns if the function of \fBExpr_function\fP is postfix. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns if the function of \fBExpr_function\fP is postfix. 
+.PP
+Definition at line 163 of file Expr_function.cpp.
+.PP
+References func, genevalmag::Function::get_mode(), and genevalmag::k_postfix.
+.PP
+Referenced by genevalmag::Semantics_checks::correct_precedence(), and genevalmag::generate_expr_text().
+.SS "bool genevalmag::Expr_function::is_prefix () const"Returns if the function of \fBExpr_function\fP is prefix. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns if the function of \fBExpr_function\fP is prefix. 
+.PP
+Definition at line 147 of file Expr_function.cpp.
+.PP
+References func, genevalmag::Function::get_mode(), and genevalmag::k_prefix.
+.PP
+Referenced by genevalmag::Semantics_checks::correct_precedence(), and genevalmag::generate_expr_text().
+.SS "\fBExpr_function\fP & genevalmag::Expr_function::operator= (const \fBExpr_function\fP & other)"Operator assign(=) of \fBExpr_function\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Operator assign(=) of \fBExpr_function\fP. 
+.PP
+Definition at line 65 of file Expr_function.cpp.
+.PP
+References copy(), and destroy().
+.SS "void genevalmag::Expr_function::set_function (const \fBFunction\fP * function)"Sets the function pointer of the \fBExpr_function\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfunction\fP Sets the function pointer of the \fBExpr_function\fP. 
+.RE
+.PP
+
+.PP
+Definition at line 123 of file Expr_function.cpp.
+.PP
+References func.
+.PP
+Referenced by genevalmag::create_func_node().
+.SS "void genevalmag::Expr_function::set_precedence_level (unsigned short p_level)"Sets the precedence level of the \fBExpr_function\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIp_level\fP Sets the precedence level of the \fBExpr_function\fP. 
+.RE
+.PP
+
+.PP
+Definition at line 131 of file Expr_function.cpp.
+.PP
+References precedence_level.
+.PP
+Referenced by genevalmag::create_func_node().
+.SS "void genevalmag::Expr_function::set_syntax_order (unsigned short s_order)"Sets the syntax order of the \fBExpr_function\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIs_order\fP Sets the syntax order of the \fBExpr_function\fP. 
+.RE
+.PP
+
+.PP
+Definition at line 139 of file Expr_function.cpp.
+.PP
+References syntax_order.
+.PP
+Referenced by genevalmag::create_func_node().
+.SS "string genevalmag::Expr_function::to_string () const\fC [virtual]\fP"Generate and return a string reprensentation of a \fBExpr_function\fP.
+.br
+ 
+.br
+ If is a pure function:
+.br
+ Result= <func_name> '(' child[0], ... , child[n] ')'
+.br
+ 
+.br
+ If is an infix binary operator:
+.br
+ Result= '(' child[0] <op_name> child[1] ')'
+.br
+ 
+.br
+ If is an prefix unary operator:
+.br
+ Result= <op_name> '(' child[0] ')'
+.br
+ 
+.br
+ If is an postfix unary operator:
+.br
+ Result= '(' child[0] ')' <op_name>
+.br
+ 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generate and return a string reprensentation of a \fBExpr_function\fP.
+.PP
+If is a pure function: Result= <func_name> '(' child[0], ... , child[n] ')'
+.PP
+If is an infix binary operator: Result= '(' child[0] <op_name> child[1] ')'
+.PP
+If is an prefix unary operator: Result= <op_name> '(' child[0] ')'
+.PP
+If is an postfix unary operator: Result= '(' child[0] ')' <op_name> 
+.PP
+Implements \fBgenevalmag::Expr_node\fP.
+.PP
+Definition at line 213 of file Expr_function.cpp.
+.PP
+References genevalmag::Expr_node::childs, func, genevalmag::Function::get_mode(), genevalmag::Function::get_name(), genevalmag::Function::is_operator(), genevalmag::k_infix, genevalmag::k_postfix, and genevalmag::k_prefix.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::Expr_function::func\fP\fC [private]\fP"
+.PP
+\fBFunction\fP associates with \fBExpr_function\fP. 
+.PP
+Definition at line 30 of file Expr_function.h.
+.PP
+Referenced by compare_precedence(), copy(), get_function(), is_infix(), is_postfix(), is_prefix(), set_function(), and to_string().
+.SS "\fBgenevalmag::Expr_function::precedence_level\fP\fC [private]\fP"
+.PP
+Level precedence of the function. 
+.PP
+Definition at line 35 of file Expr_function.h.
+.PP
+Referenced by copy(), Expr_function(), get_precedence_level(), is_comparable(), and set_precedence_level().
+.SS "\fBgenevalmag::Expr_function::syntax_order\fP\fC [private]\fP"
+.PP
+Syntax order in the parse. 
+.PP
+Definition at line 40 of file Expr_function.h.
+.PP
+Referenced by compare_order(), copy(), Expr_function(), get_syntax_order(), and set_syntax_order().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

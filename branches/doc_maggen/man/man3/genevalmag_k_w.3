@@ -1,0 +1,91 @@
+.TH "genevalmag::k_w" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::k_w \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Builder_plans.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBk_w\fP &other) const "
+.br
+.ti -1c
+.RI "\fBk_w\fP & \fBoperator=\fP (const \fBk_w\fP &other)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "unsigned short \fBfather\fP"
+.br
+.RI "\fIIndex context father (rule). \fP"
+.ti -1c
+.RI "unsigned short \fBid_rule\fP"
+.br
+.RI "\fIThe index of rule. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+This struct represents a Key_work_list, that is a father rule and id-rule of the current rule. 
+.PP
+Definition at line 76 of file Builder_plans.h.
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBk_w\fP& genevalmag::k_w::operator= (const \fBk_w\fP & other)\fC [inline]\fP"operator= 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.PP
+Definition at line 102 of file Builder_plans.h.
+.PP
+References father, and id_rule.
+.SS "bool genevalmag::k_w::operator== (const \fBk_w\fP & other) const\fC [inline]\fP"operator== 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.PP
+Definition at line 93 of file Builder_plans.h.
+.PP
+References father, and id_rule.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::k_w::father\fP"
+.PP
+Index context father (rule). 
+.PP
+Definition at line 82 of file Builder_plans.h.
+.PP
+Referenced by genevalmag::Builder_plans::generate_plans(), operator=(), and operator==().
+.SS "\fBgenevalmag::k_w::id_rule\fP"
+.PP
+The index of rule. 
+.PP
+Definition at line 87 of file Builder_plans.h.
+.PP
+Referenced by genevalmag::Builder_plans::generate_plans(), operator=(), and operator==().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

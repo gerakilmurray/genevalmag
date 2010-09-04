@@ -1,0 +1,105 @@
+.TH "src/Builders/Builder_graphs.cpp" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/Builders/Builder_graphs.cpp \- 
+.PP
+Implementation of the methods the Builder_graph.h.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <iostream>\fP
+.br
+\fC#include <sstream>\fP
+.br
+\fC#include <fstream>\fP
+.br
+\fC#include <utility>\fP
+.br
+\fC#include <climits>\fP
+.br
+\fC#include <boost/graph/graphviz.hpp>\fP
+.br
+\fC#include <boost/graph/depth_first_search.hpp>\fP
+.br
+\fC#include <boost/graph/visitors.hpp>\fP
+.br
+\fC#include '../../include/Builders/Builder_graphs.h'\fP
+.br
+\fC#include '../../include/Util/Utilities.h'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBgenevalmag::cycle_detector\fP"
+.br
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBgenevalmag\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "const string \fBgenevalmag::PATH_OUTPUT_GRAPHS\fP ('graphs/')"
+.br
+.ti -1c
+.RI "const string \fBgenevalmag::PATH_OUTPUT_DP\fP ('1_DP_graphs/')"
+.br
+.ti -1c
+.RI "const string \fBgenevalmag::PATH_OUTPUT_DOWN\fP ('2_DOWN_graphs/')"
+.br
+.ti -1c
+.RI "const string \fBgenevalmag::PATH_OUTPUT_DCG\fP ('3_DCG_graphs/')"
+.br
+.ti -1c
+.RI "const string \fBgenevalmag::PATH_OUTPUT_ADP\fP ('4_ADP_graphs/')"
+.br
+.ti -1c
+.RI "const string \fBgenevalmag::PATH_OUTPUT_CYCLIC\fP ('CYCLIC_graphs/')"
+.br
+.ti -1c
+.RI "const string \fBgenevalmag::FILE_DP_GRAPH\fP ('_dp_graph')"
+.br
+.ti -1c
+.RI "const string \fBgenevalmag::FILE_DOWN_GRAPH\fP ('_down_graph')"
+.br
+.ti -1c
+.RI "const string \fBgenevalmag::FILE_DCG_GRAPH\fP ('_dcg_graph')"
+.br
+.ti -1c
+.RI "const string \fBgenevalmag::FILE_ADP_GRAPH\fP ('_adp_graph')"
+.br
+.ti -1c
+.RI "const string \fBgenevalmag::FILE_ADP_SUBGRAPH_CYCLIC\fP ('_adp_subgraph_with_cyclic')"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Implementation of the methods the Builder_graph.h. 
+
+\fBDate:\fP
+.RS 4
+17/02/2010 
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Kilmurray, Gerardo Luis <gerakilmurray@gmail.com> 
+.PP
+Picco, Gonzalo Martin <gonzalopicco@gmail.com> 
+.RE
+.PP
+
+.PP
+Definition in file \fBBuilder_graphs.cpp\fP.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

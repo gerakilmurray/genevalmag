@@ -1,0 +1,50 @@
+.TH "src/Builders/Builder_visit_sequences.cpp" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/Builders/Builder_visit_sequences.cpp \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <iostream>\fP
+.br
+\fC#include '../../include/Util/Utilities.h'\fP
+.br
+\fC#include '../../include/Builders/Builder_visit_sequences.h'\fP
+.br
+
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBgenevalmag\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "const unsigned short \fBgenevalmag::LEAVE\fP (0)"
+.br
+.ti -1c
+.RI "bool \fBgenevalmag::ins_attr_computed\fP (const Expr_instance *ins, const vector< Expr_instance > &vec)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::get_inherits_of\fP (const Symbol *symb, const vector< Expr_instance > &computed, vector< Expr_instance > &rec_child)"
+.br
+.ti -1c
+.RI "bool \fBgenevalmag::belong_it\fP (const map< Key_plan, unsigned short >::const_iterator it, const vector< map< Key_plan, unsigned short >::const_iterator > &vec)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::merge_vec\fP (const vector< map< Key_plan, unsigned short >::const_iterator > &vec_source, vector< map< Key_plan, unsigned short >::const_iterator > &vec_targed)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::merge_vec_without_plan\fP (const vector< map< Key_plan, unsigned short >::const_iterator > &vec_source, vector< map< Key_plan, unsigned short >::const_iterator > &vec_targed, const map< Key_plan, unsigned short >::const_iterator &plan)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::plan_family_computed\fP (const vector< map< Key_plan, unsigned short >::const_iterator > &plans_computed, vector< unsigned short > &visit_seq_computed)"
+.br
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

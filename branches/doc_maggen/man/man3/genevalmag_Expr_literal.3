@@ -1,0 +1,259 @@
+.TH "genevalmag::Expr_literal" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::Expr_literal \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Expr_literal.h>\fP
+.PP
+Inherits \fBgenevalmag::Expr_leaf\fP.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBExpr_literal\fP ()"
+.br
+.ti -1c
+.RI "\fBExpr_literal\fP (const \fBExpr_literal\fP &other)"
+.br
+.ti -1c
+.RI "virtual \fB~Expr_literal\fP ()"
+.br
+.ti -1c
+.RI "\fBExpr_literal\fP & \fBoperator=\fP (const \fBExpr_literal\fP &other)"
+.br
+.ti -1c
+.RI "\fBliteral_type\fP \fBget_type\fP () const "
+.br
+.ti -1c
+.RI "string \fBget_value\fP () const "
+.br
+.ti -1c
+.RI "void \fBset_type\fP (\fBliteral_type\fP new_type)"
+.br
+.ti -1c
+.RI "void \fBset_value\fP (string new_value)"
+.br
+.ti -1c
+.RI "string \fBto_string\fP () const "
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcopy\fP (const \fBExpr_literal\fP &other)"
+.br
+.ti -1c
+.RI "void \fBdestroy\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "string \fBvalue\fP"
+.br
+.RI "\fIliteral value. \fP"
+.ti -1c
+.RI "\fBliteral_type\fP \fBtype\fP"
+.br
+.RI "\fIliteral type: this type may be k_int, k_float, k_char, k_string. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 29 of file Expr_literal.h.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::Expr_literal::Expr_literal ()"Constructor empty of \fBExpr_literal\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Constructor empty of \fBExpr_literal\fP. 
+.PP
+Definition at line 23 of file Expr_literal.cpp.
+.SS "genevalmag::Expr_literal::Expr_literal (const \fBExpr_literal\fP & other)"Constructor copy of \fBExpr_literal\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Constructor copy of \fBExpr_literal\fP. 
+.PP
+Definition at line 33 of file Expr_literal.cpp.
+.PP
+References copy().
+.SS "genevalmag::Expr_literal::~Expr_literal ()\fC [virtual]\fP"Destructor of \fBExpr_literal\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Destructor of \fBExpr_literal\fP. 
+.PP
+Definition at line 45 of file Expr_literal.cpp.
+.PP
+References destroy().
+.SH "Member Function Documentation"
+.PP 
+.SS "void genevalmag::Expr_literal::copy (const \fBExpr_literal\fP & other)\fC [private]\fP"Method of copy the \fBExpr_literal\fP, STL-like C++. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP Method of copy the \fBExpr_literal\fP, STL-like C++. 
+.RE
+.PP
+
+.PP
+Definition at line 74 of file Expr_literal.cpp.
+.PP
+References genevalmag::Expression::conflict, genevalmag::Expression::get_conflict(), genevalmag::Expression::get_parent(), get_type(), genevalmag::Expression::get_type_synthetized(), get_value(), genevalmag::Expression::parent, type, genevalmag::Expression::type_synthetized, and value.
+.PP
+Referenced by Expr_literal(), and operator=().
+.SS "void genevalmag::Expr_literal::destroy ()\fC [private]\fP"Method destroy \fBExpr_literal\fP, STL-like C++. 
+.PP
+Definition at line 86 of file Expr_literal.cpp.
+.PP
+Referenced by operator=(), and ~Expr_literal().
+.SS "\fBliteral_type\fP genevalmag::Expr_literal::get_type () const"Returns the type of the \fBExpr_literal\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the type of the \fBExpr_literal\fP. 
+.PP
+Definition at line 93 of file Expr_literal.cpp.
+.PP
+References type.
+.PP
+Referenced by copy().
+.SS "string genevalmag::Expr_literal::get_value () const"Returns the value of the \fBExpr_literal\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the value of the \fBExpr_literal\fP. 
+.PP
+Definition at line 101 of file Expr_literal.cpp.
+.PP
+References value.
+.PP
+Referenced by copy().
+.SS "\fBExpr_literal\fP & genevalmag::Expr_literal::operator= (const \fBExpr_literal\fP & other)"Operator assign(=) of \fBExpr_literal\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Operator assign(=) of \fBExpr_literal\fP. 
+.PP
+Definition at line 61 of file Expr_literal.cpp.
+.PP
+References copy(), and destroy().
+.SS "void genevalmag::Expr_literal::set_type (\fBliteral_type\fP new_type)"Sets the type of the \fBExpr_literal\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInew_type\fP Sets the type of the \fBExpr_literal\fP. 
+.RE
+.PP
+
+.PP
+Definition at line 109 of file Expr_literal.cpp.
+.PP
+References type.
+.PP
+Referenced by genevalmag::create_bool(), genevalmag::create_lit_ch(), genevalmag::create_lit_number(), and genevalmag::create_lit_str().
+.SS "void genevalmag::Expr_literal::set_value (string new_value)"Sets the value of the \fBExpr_literal\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInew_value\fP Sets the value of the \fBExpr_literal\fP. 
+.RE
+.PP
+
+.PP
+Definition at line 117 of file Expr_literal.cpp.
+.PP
+References value.
+.PP
+Referenced by genevalmag::create_bool(), genevalmag::create_lit_ch(), genevalmag::create_lit_number(), genevalmag::create_lit_str(), and genevalmag::push_mark().
+.SS "string genevalmag::Expr_literal::to_string () const\fC [virtual]\fP"Generate and return a string reprensentation of a \fBExpr_literal\fP.
+.br
+ 
+.br
+ Result= literal
+.br
+ 
+.br
+ Ex: 1 -> int, short or long
+.br
+ 1.0 -> float or double
+.br
+ '1' -> char or wchar_t
+.br
+ '1' -> string
+.br
+ true -> bool
+.br
+ 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generate and return a string reprensentation of a \fBExpr_literal\fP.
+.PP
+Result= literal
+.PP
+Ex: 1 -> int 1.0 -> float '1' -> char '1' -> string 
+.PP
+Implements \fBgenevalmag::Expr_leaf\fP.
+.PP
+Definition at line 132 of file Expr_literal.cpp.
+.PP
+References genevalmag::k_bool, genevalmag::k_char, genevalmag::k_float, genevalmag::k_int, genevalmag::k_string, type, and value.
+.PP
+Referenced by genevalmag::generate_expr_text().
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::Expr_literal::type\fP\fC [private]\fP"
+.PP
+literal type: this type may be k_int, k_float, k_char, k_string. 
+.PP
+Definition at line 41 of file Expr_literal.h.
+.PP
+Referenced by copy(), get_type(), set_type(), and to_string().
+.SS "\fBgenevalmag::Expr_literal::value\fP\fC [private]\fP"
+.PP
+literal value. 
+.PP
+Definition at line 36 of file Expr_literal.h.
+.PP
+Referenced by copy(), get_value(), set_value(), and to_string().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

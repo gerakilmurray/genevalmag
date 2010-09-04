@@ -1,0 +1,454 @@
+\hypertarget{classgenevalmag_1_1Expr__literal}{
+\section{genevalmag::Expr\_\-literal Class Reference}
+\label{classgenevalmag_1_1Expr__literal}\index{genevalmag::Expr\_\-literal@{genevalmag::Expr\_\-literal}}
+}
+
+
+{\ttfamily \#include $<$Expr\_\-literal.h$>$}
+
+
+
+Inheritance diagram for genevalmag::Expr\_\-literal:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=400pt]{classgenevalmag_1_1Expr__literal__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for genevalmag::Expr\_\-literal:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=400pt]{classgenevalmag_1_1Expr__literal__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classgenevalmag_1_1Expr__literal_aad56a6d5a1929c03b3c19ac10f06bf73}{Expr\_\-literal} ()
+\item 
+\hyperlink{classgenevalmag_1_1Expr__literal_ad8dff199ac5faaa7808b24bc6e99aa84}{Expr\_\-literal} (const \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal} \&other)
+\item 
+virtual \hyperlink{classgenevalmag_1_1Expr__literal_afaa929f1cd65a7486a29e4d110c73f89}{$\sim$Expr\_\-literal} ()
+\item 
+\hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal} \& \hyperlink{classgenevalmag_1_1Expr__literal_a76f4c6a1fd0fe094b929d6e01868e0ed}{operator=} (const \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal} \&other)
+\item 
+\hyperlink{namespacegenevalmag_a054e5e9167597919bb2fe12ba999fb31}{literal\_\-type} \hyperlink{classgenevalmag_1_1Expr__literal_ae821eeb6e591dfe1d8ee62a38367618e}{get\_\-type} () const 
+\item 
+string \hyperlink{classgenevalmag_1_1Expr__literal_a80638840b211284c6d4b4babbe08ce21}{get\_\-value} () const 
+\item 
+void \hyperlink{classgenevalmag_1_1Expr__literal_a6a09dcb9f4c693c55b30ead8b70477fe}{set\_\-type} (\hyperlink{namespacegenevalmag_a054e5e9167597919bb2fe12ba999fb31}{literal\_\-type} new\_\-type)
+\item 
+void \hyperlink{classgenevalmag_1_1Expr__literal_af5e0c53c8df7f902540387c4ff6912e7}{set\_\-value} (string new\_\-value)
+\item 
+string \hyperlink{classgenevalmag_1_1Expr__literal_a2e023f432f0a46b75f65cb0e36ac6583}{to\_\-string} () const 
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classgenevalmag_1_1Expr__literal_aab439489dbf96ebac5c518277a681698}{copy} (const \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal} \&other)
+\item 
+void \hyperlink{classgenevalmag_1_1Expr__literal_a81c4aedbe32ef9a69e5a63d7387d9dbf}{destroy} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{classgenevalmag_1_1Expr__literal_a914b947ed414c6aae35eb7abcf8c7128}{value}
+\begin{DoxyCompactList}\small\item\em literal value. \item\end{DoxyCompactList}\item 
+\hyperlink{namespacegenevalmag_a054e5e9167597919bb2fe12ba999fb31}{literal\_\-type} \hyperlink{classgenevalmag_1_1Expr__literal_a9f3d9f0bda8307403f79d3260fa27740}{type}
+\begin{DoxyCompactList}\small\item\em literal type: this type may be k\_\-int, k\_\-float, k\_\-char, k\_\-string. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 29 of file Expr\_\-literal.h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classgenevalmag_1_1Expr__literal_aad56a6d5a1929c03b3c19ac10f06bf73}{
+\index{genevalmag::Expr\_\-literal@{genevalmag::Expr\_\-literal}!Expr\_\-literal@{Expr\_\-literal}}
+\index{Expr\_\-literal@{Expr\_\-literal}!genevalmag::Expr_literal@{genevalmag::Expr\_\-literal}}
+\subsubsection[{Expr\_\-literal}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Expr\_\-literal::Expr\_\-literal ()}}
+\label{classgenevalmag_1_1Expr__literal_aad56a6d5a1929c03b3c19ac10f06bf73}
+Constructor empty of \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}. \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Constructor empty of \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}. 
+
+Definition at line 23 of file Expr\_\-literal.cpp.
+
+\hypertarget{classgenevalmag_1_1Expr__literal_ad8dff199ac5faaa7808b24bc6e99aa84}{
+\index{genevalmag::Expr\_\-literal@{genevalmag::Expr\_\-literal}!Expr\_\-literal@{Expr\_\-literal}}
+\index{Expr\_\-literal@{Expr\_\-literal}!genevalmag::Expr_literal@{genevalmag::Expr\_\-literal}}
+\subsubsection[{Expr\_\-literal}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Expr\_\-literal::Expr\_\-literal (const {\bf Expr\_\-literal} \& {\em other})}}
+\label{classgenevalmag_1_1Expr__literal_ad8dff199ac5faaa7808b24bc6e99aa84}
+Constructor copy of \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em other}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Constructor copy of \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}. 
+
+Definition at line 33 of file Expr\_\-literal.cpp.
+
+
+
+References copy().
+
+
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=333pt]{classgenevalmag_1_1Expr__literal_ad8dff199ac5faaa7808b24bc6e99aa84_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classgenevalmag_1_1Expr__literal_afaa929f1cd65a7486a29e4d110c73f89}{
+\index{genevalmag::Expr\_\-literal@{genevalmag::Expr\_\-literal}!$\sim$Expr\_\-literal@{$\sim$Expr\_\-literal}}
+\index{$\sim$Expr\_\-literal@{$\sim$Expr\_\-literal}!genevalmag::Expr_literal@{genevalmag::Expr\_\-literal}}
+\subsubsection[{$\sim$Expr\_\-literal}]{\setlength{\rightskip}{0pt plus 5cm}genevalmag::Expr\_\-literal::$\sim$Expr\_\-literal ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classgenevalmag_1_1Expr__literal_afaa929f1cd65a7486a29e4d110c73f89}
+Destructor of \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}. \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Destructor of \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}. 
+
+Definition at line 45 of file Expr\_\-literal.cpp.
+
+
+
+References destroy().
+
+
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{classgenevalmag_1_1Expr__literal_afaa929f1cd65a7486a29e4d110c73f89_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classgenevalmag_1_1Expr__literal_aab439489dbf96ebac5c518277a681698}{
+\index{genevalmag::Expr\_\-literal@{genevalmag::Expr\_\-literal}!copy@{copy}}
+\index{copy@{copy}!genevalmag::Expr_literal@{genevalmag::Expr\_\-literal}}
+\subsubsection[{copy}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Expr\_\-literal::copy (const {\bf Expr\_\-literal} \& {\em other})\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Expr__literal_aab439489dbf96ebac5c518277a681698}
+Method of copy the \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}, STL-\/like C++. 
+\begin{DoxyParams}{Parameters}
+\item[{\em other}]Method of copy the \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}, STL-\/like C++. \end{DoxyParams}
+
+
+Definition at line 74 of file Expr\_\-literal.cpp.
+
+
+
+References genevalmag::Expression::conflict, genevalmag::Expression::get\_\-conflict(), genevalmag::Expression::get\_\-parent(), get\_\-type(), genevalmag::Expression::get\_\-type\_\-synthetized(), get\_\-value(), genevalmag::Expression::parent, type, genevalmag::Expression::type\_\-synthetized, and value.
+
+
+
+Referenced by Expr\_\-literal(), and operator=().
+
+
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classgenevalmag_1_1Expr__literal_aab439489dbf96ebac5c518277a681698_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{classgenevalmag_1_1Expr__literal_aab439489dbf96ebac5c518277a681698_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classgenevalmag_1_1Expr__literal_a81c4aedbe32ef9a69e5a63d7387d9dbf}{
+\index{genevalmag::Expr\_\-literal@{genevalmag::Expr\_\-literal}!destroy@{destroy}}
+\index{destroy@{destroy}!genevalmag::Expr_literal@{genevalmag::Expr\_\-literal}}
+\subsubsection[{destroy}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Expr\_\-literal::destroy ()\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Expr__literal_a81c4aedbe32ef9a69e5a63d7387d9dbf}
+Method destroy \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}, STL-\/like C++. 
+
+Definition at line 86 of file Expr\_\-literal.cpp.
+
+
+
+Referenced by operator=(), and $\sim$Expr\_\-literal().
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{classgenevalmag_1_1Expr__literal_a81c4aedbe32ef9a69e5a63d7387d9dbf_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classgenevalmag_1_1Expr__literal_ae821eeb6e591dfe1d8ee62a38367618e}{
+\index{genevalmag::Expr\_\-literal@{genevalmag::Expr\_\-literal}!get\_\-type@{get\_\-type}}
+\index{get\_\-type@{get\_\-type}!genevalmag::Expr_literal@{genevalmag::Expr\_\-literal}}
+\subsubsection[{get\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf literal\_\-type} genevalmag::Expr\_\-literal::get\_\-type () const}}
+\label{classgenevalmag_1_1Expr__literal_ae821eeb6e591dfe1d8ee62a38367618e}
+Returns the type of the \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}. \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Returns the type of the \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}. 
+
+Definition at line 93 of file Expr\_\-literal.cpp.
+
+
+
+References type.
+
+
+
+Referenced by copy().
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{classgenevalmag_1_1Expr__literal_ae821eeb6e591dfe1d8ee62a38367618e_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classgenevalmag_1_1Expr__literal_a80638840b211284c6d4b4babbe08ce21}{
+\index{genevalmag::Expr\_\-literal@{genevalmag::Expr\_\-literal}!get\_\-value@{get\_\-value}}
+\index{get\_\-value@{get\_\-value}!genevalmag::Expr_literal@{genevalmag::Expr\_\-literal}}
+\subsubsection[{get\_\-value}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::Expr\_\-literal::get\_\-value () const}}
+\label{classgenevalmag_1_1Expr__literal_a80638840b211284c6d4b4babbe08ce21}
+Returns the value of the \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}. \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Returns the value of the \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}. 
+
+Definition at line 101 of file Expr\_\-literal.cpp.
+
+
+
+References value.
+
+
+
+Referenced by copy().
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{classgenevalmag_1_1Expr__literal_a80638840b211284c6d4b4babbe08ce21_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classgenevalmag_1_1Expr__literal_a76f4c6a1fd0fe094b929d6e01868e0ed}{
+\index{genevalmag::Expr\_\-literal@{genevalmag::Expr\_\-literal}!operator=@{operator=}}
+\index{operator=@{operator=}!genevalmag::Expr_literal@{genevalmag::Expr\_\-literal}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Expr\_\-literal} \& genevalmag::Expr\_\-literal::operator= (const {\bf Expr\_\-literal} \& {\em other})}}
+\label{classgenevalmag_1_1Expr__literal_a76f4c6a1fd0fe094b929d6e01868e0ed}
+Operator assign(=) of \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em other}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Operator assign(=) of \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}. 
+
+Definition at line 61 of file Expr\_\-literal.cpp.
+
+
+
+References copy(), and destroy().
+
+
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{classgenevalmag_1_1Expr__literal_a76f4c6a1fd0fe094b929d6e01868e0ed_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classgenevalmag_1_1Expr__literal_a6a09dcb9f4c693c55b30ead8b70477fe}{
+\index{genevalmag::Expr\_\-literal@{genevalmag::Expr\_\-literal}!set\_\-type@{set\_\-type}}
+\index{set\_\-type@{set\_\-type}!genevalmag::Expr_literal@{genevalmag::Expr\_\-literal}}
+\subsubsection[{set\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Expr\_\-literal::set\_\-type ({\bf literal\_\-type} {\em new\_\-type})}}
+\label{classgenevalmag_1_1Expr__literal_a6a09dcb9f4c693c55b30ead8b70477fe}
+Sets the type of the \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em new\_\-type}]Sets the type of the \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}. \end{DoxyParams}
+
+
+Definition at line 109 of file Expr\_\-literal.cpp.
+
+
+
+References type.
+
+
+
+Referenced by genevalmag::create\_\-bool(), genevalmag::create\_\-lit\_\-ch(), genevalmag::create\_\-lit\_\-number(), and genevalmag::create\_\-lit\_\-str().
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{classgenevalmag_1_1Expr__literal_a6a09dcb9f4c693c55b30ead8b70477fe_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classgenevalmag_1_1Expr__literal_af5e0c53c8df7f902540387c4ff6912e7}{
+\index{genevalmag::Expr\_\-literal@{genevalmag::Expr\_\-literal}!set\_\-value@{set\_\-value}}
+\index{set\_\-value@{set\_\-value}!genevalmag::Expr_literal@{genevalmag::Expr\_\-literal}}
+\subsubsection[{set\_\-value}]{\setlength{\rightskip}{0pt plus 5cm}void genevalmag::Expr\_\-literal::set\_\-value (string {\em new\_\-value})}}
+\label{classgenevalmag_1_1Expr__literal_af5e0c53c8df7f902540387c4ff6912e7}
+Sets the value of the \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em new\_\-value}]Sets the value of the \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}. \end{DoxyParams}
+
+
+Definition at line 117 of file Expr\_\-literal.cpp.
+
+
+
+References value.
+
+
+
+Referenced by genevalmag::create\_\-bool(), genevalmag::create\_\-lit\_\-ch(), genevalmag::create\_\-lit\_\-number(), genevalmag::create\_\-lit\_\-str(), and genevalmag::push\_\-mark().
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=341pt]{classgenevalmag_1_1Expr__literal_af5e0c53c8df7f902540387c4ff6912e7_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classgenevalmag_1_1Expr__literal_a2e023f432f0a46b75f65cb0e36ac6583}{
+\index{genevalmag::Expr\_\-literal@{genevalmag::Expr\_\-literal}!to\_\-string@{to\_\-string}}
+\index{to\_\-string@{to\_\-string}!genevalmag::Expr_literal@{genevalmag::Expr\_\-literal}}
+\subsubsection[{to\_\-string}]{\setlength{\rightskip}{0pt plus 5cm}string genevalmag::Expr\_\-literal::to\_\-string () const\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classgenevalmag_1_1Expr__literal_a2e023f432f0a46b75f65cb0e36ac6583}
+Generate and return a string reprensentation of a \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}.\par
+ \par
+ Result= literal\par
+ \par
+ Ex: 1 -\/$>$ int, short or long\par
+ 1.0 -\/$>$ float or double\par
+ '1' -\/$>$ char or wchar\_\-t\par
+ \char`\"{}1\char`\"{} -\/$>$ string\par
+ true -\/$>$ bool\par
+ \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Generate and return a string reprensentation of a \hyperlink{classgenevalmag_1_1Expr__literal}{Expr\_\-literal}.
+
+Result= literal
+
+Ex: 1 -\/$>$ int 1.0 -\/$>$ float '1' -\/$>$ char \char`\"{}1\char`\"{} -\/$>$ string 
+
+Implements \hyperlink{classgenevalmag_1_1Expr__leaf_a96854f59a155b173b6e79007d87bdad5}{genevalmag::Expr\_\-leaf}.
+
+
+
+Definition at line 132 of file Expr\_\-literal.cpp.
+
+
+
+References genevalmag::k\_\-bool, genevalmag::k\_\-char, genevalmag::k\_\-float, genevalmag::k\_\-int, genevalmag::k\_\-string, type, and value.
+
+
+
+Referenced by genevalmag::generate\_\-expr\_\-text().
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{classgenevalmag_1_1Expr__literal_a2e023f432f0a46b75f65cb0e36ac6583_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classgenevalmag_1_1Expr__literal_a9f3d9f0bda8307403f79d3260fa27740}{
+\index{genevalmag::Expr\_\-literal@{genevalmag::Expr\_\-literal}!type@{type}}
+\index{type@{type}!genevalmag::Expr_literal@{genevalmag::Expr\_\-literal}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Expr\_\-literal::type}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Expr__literal_a9f3d9f0bda8307403f79d3260fa27740}
+
+
+literal type: this type may be k\_\-int, k\_\-float, k\_\-char, k\_\-string. 
+
+
+
+Definition at line 41 of file Expr\_\-literal.h.
+
+
+
+Referenced by copy(), get\_\-type(), set\_\-type(), and to\_\-string().
+
+\hypertarget{classgenevalmag_1_1Expr__literal_a914b947ed414c6aae35eb7abcf8c7128}{
+\index{genevalmag::Expr\_\-literal@{genevalmag::Expr\_\-literal}!value@{value}}
+\index{value@{value}!genevalmag::Expr_literal@{genevalmag::Expr\_\-literal}}
+\subsubsection[{value}]{\setlength{\rightskip}{0pt plus 5cm}{\bf genevalmag::Expr\_\-literal::value}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classgenevalmag_1_1Expr__literal_a914b947ed414c6aae35eb7abcf8c7128}
+
+
+literal value. 
+
+
+
+Definition at line 36 of file Expr\_\-literal.h.
+
+
+
+Referenced by copy(), get\_\-value(), set\_\-value(), and to\_\-string().
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+include/Expression\_\-tree/\hyperlink{Expr__literal_8h}{Expr\_\-literal.h}\item 
+src/Expression\_\-tree/\hyperlink{Expr__literal_8cpp}{Expr\_\-literal.cpp}\end{DoxyCompactItemize}

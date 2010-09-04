@@ -1,0 +1,555 @@
+.TH "genevalmag::Rule" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::Rule \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Rule.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRule\fP ()"
+.br
+.ti -1c
+.RI "\fBRule\fP (const \fBRule\fP &other)"
+.br
+.ti -1c
+.RI "virtual \fB~Rule\fP ()"
+.br
+.ti -1c
+.RI "\fBRule\fP & \fBoperator=\fP (const \fBRule\fP &other)"
+.br
+.ti -1c
+.RI "const \fBSymbol\fP * \fBget_left_symbol\fP () const "
+.br
+.ti -1c
+.RI "const vector< const \fBSymbol\fP * > & \fBget_right_side\fP () const "
+.br
+.ti -1c
+.RI "const map< unsigned short, \fBEquation\fP > & \fBget_eqs\fP () const "
+.br
+.ti -1c
+.RI "const size_t \fBget_number_eqs\fP () const "
+.br
+.ti -1c
+.RI "const \fBEquation\fP * \fBget_eq\fP (const unsigned short index) const "
+.br
+.ti -1c
+.RI "const unsigned short \fBget_offset\fP () const "
+.br
+.ti -1c
+.RI "const int \fBcount_non_terminal\fP (const \fBSymbol\fP *symb) const "
+.br
+.ti -1c
+.RI "const bool \fBbelongs_non_terminal\fP (const \fBSymbol\fP &non_term) const "
+.br
+.ti -1c
+.RI "const vector< const \fBSymbol\fP * > \fBget_non_terminals_right_side\fP () const "
+.br
+.ti -1c
+.RI "void \fBset_id\fP (const unsigned short id)"
+.br
+.ti -1c
+.RI "void \fBset_left_symbol\fP (const \fBSymbol\fP *left_symb)"
+.br
+.ti -1c
+.RI "void \fBadd_right_symbol\fP (const \fBSymbol\fP *right_symb)"
+.br
+.ti -1c
+.RI "const bool \fBadd_eq\fP (\fBEquation\fP &eq)"
+.br
+.ti -1c
+.RI "const string \fBto_string\fP () const "
+.br
+.ti -1c
+.RI "const string \fBto_string_not_eqs\fP () const "
+.br
+.ti -1c
+.RI "const bool \fBequals\fP (const \fBRule\fP &other) const "
+.br
+.ti -1c
+.RI "const unsigned short \fBkey\fP () const "
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcopy\fP (const \fBRule\fP &other)"
+.br
+.ti -1c
+.RI "void \fBdestroy\fP ()"
+.br
+.ti -1c
+.RI "const bool \fBdefined_equation\fP (const \fBEquation\fP &eq) const "
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "unsigned short \fBr_id\fP"
+.br
+.RI "\fIRule's identifier. \fP"
+.ti -1c
+.RI "const \fBSymbol\fP * \fBr_left_symbol\fP"
+.br
+.RI "\fIRule's left symbol. \fP"
+.ti -1c
+.RI "vector< const \fBSymbol\fP * > \fBr_right_side\fP"
+.br
+.RI "\fIRule's vector of right symbols. \fP"
+.ti -1c
+.RI "map< unsigned short, \fBEquation\fP > \fBr_eqs\fP"
+.br
+.RI "\fIRule's map of equations. \fP"
+.ti -1c
+.RI "unsigned short \fBr_offset\fP"
+.br
+.RI "\fIRule's offset. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 20 of file Rule.h.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::Rule::Rule ()"Constructor empty of rule. 
+.PP
+Definition at line 25 of file Rule.cpp.
+.PP
+References r_offset.
+.SS "genevalmag::Rule::Rule (const \fBRule\fP & other)"Constructor copy of rule. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Constructor copy of rule. 
+.PP
+Definition at line 33 of file Rule.cpp.
+.PP
+References copy().
+.SS "genevalmag::Rule::~Rule ()\fC [virtual]\fP"Destructor of rule. 
+.PP
+Definition at line 41 of file Rule.cpp.
+.PP
+References destroy().
+.SH "Member Function Documentation"
+.PP 
+.SS "const bool genevalmag::Rule::add_eq (\fBEquation\fP & eq)"Enqueues a equation in the list of the rule. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIeq\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Enqueues a equation in the list of the rule. 
+.PP
+Definition at line 195 of file Rule.cpp.
+.PP
+References defined_equation(), get_number_eqs(), r_eqs, r_offset, and genevalmag::Equation::set_id().
+.PP
+Referenced by genevalmag::save_rvalue().
+.SS "void genevalmag::Rule::add_right_symbol (const \fBSymbol\fP * right_symb)"Enqueues a symbol in the right side of the rule. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIright_symb\fP Enqueues a symbol in the right side of the rule. 
+.RE
+.PP
+
+.PP
+Definition at line 153 of file Rule.cpp.
+.PP
+References r_right_side.
+.PP
+Referenced by genevalmag::save_right_side_rule().
+.SS "const bool genevalmag::Rule::belongs_non_terminal (const \fBSymbol\fP & non_term) const"Checks that symbol is a non-terminal into the rule. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInon_term\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Checks that symbol is a non-terminal into the rule. 
+.PP
+Definition at line 176 of file Rule.cpp.
+.PP
+References genevalmag::Symbol::equals(), r_left_symbol, and r_right_side.
+.PP
+Referenced by genevalmag::Attr_grammar::add_rule(), and genevalmag::create_instance().
+.SS "void genevalmag::Rule::copy (const \fBRule\fP & other)\fC [private]\fP"Method of copy the rule, STL-like C++. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP Method of copy the rule, STL-like C++. 
+.RE
+.PP
+
+.PP
+Definition at line 62 of file Rule.cpp.
+.PP
+References get_eqs(), get_left_symbol(), get_offset(), get_right_side(), key(), r_eqs, r_id, r_left_symbol, r_offset, and r_right_side.
+.PP
+Referenced by operator=(), and Rule().
+.SS "const int genevalmag::Rule::count_non_terminal (const \fBSymbol\fP * symb) const"Returns the count of ocurrences of these symbol in the rule. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsymb\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Returns the count of ocurrences of these symbol in the rule. 
+.PP
+Definition at line 318 of file Rule.cpp.
+.PP
+References genevalmag::Symbol::equals(), r_left_symbol, and r_right_side.
+.PP
+Referenced by genevalmag::save_index_ins().
+.SS "const bool genevalmag::Rule::defined_equation (const \fBEquation\fP & eq) const\fC [private]\fP"Checks that the equation is not already defined in the rule. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIeq\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Checks that the equation is not already defined in the rule. 
+.PP
+Definition at line 161 of file Rule.cpp.
+.PP
+References genevalmag::Equation::get_l_value(), and r_eqs.
+.PP
+Referenced by add_eq().
+.SS "void genevalmag::Rule::destroy ()\fC [private]\fP"Method destroy rule, STL-like C++. 
+.PP
+Definition at line 74 of file Rule.cpp.
+.PP
+Referenced by operator=(), and ~Rule().
+.SS "const bool genevalmag::Rule::equals (const \fBRule\fP & other) const"Compares the rule with other. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Compares the rule with other. 
+.PP
+Definition at line 281 of file Rule.cpp.
+.PP
+References genevalmag::Symbol::equals(), get_left_symbol(), get_right_side(), r_left_symbol, and r_right_side.
+.SS "const \fBEquation\fP * genevalmag::Rule::get_eq (const unsigned short index) const"Returns the i-equation of the rule. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindex\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Returns the i-equation of the rule. 
+.PP
+Definition at line 121 of file Rule.cpp.
+.PP
+References r_eqs.
+.PP
+Referenced by genevalmag::Builder_visit_sequences::gen_visit_seq(), and genevalmag::purge_plan_with().
+.SS "const map< unsigned short, \fBEquation\fP > & genevalmag::Rule::get_eqs () const"Returns the equations of the rule. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the equations of the rule. 
+.PP
+Definition at line 97 of file Rule.cpp.
+.PP
+References r_eqs.
+.PP
+Referenced by genevalmag::Attr_grammar::add_rule(), genevalmag::Builder_graphs::compute_dependency_graphs(), and copy().
+.SS "const \fBSymbol\fP * genevalmag::Rule::get_left_symbol () const"Returns the left symbol of the rule. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the left symbol of the rule. 
+.PP
+Definition at line 81 of file Rule.cpp.
+.PP
+References r_left_symbol.
+.PP
+Referenced by genevalmag::Attr_grammar::add_rule(), genevalmag::Builder_graphs::compute_dcg(), genevalmag::Builder_graphs::compute_down_graph(), copy(), genevalmag::create_abbreviated_rule(), equals(), genevalmag::Builder_visit_sequences::gen_visit_seq(), genevalmag::generate_expr_text(), genevalmag::Builder_visit_sequences::generate_visit_sequences(), genevalmag::Builder_plans::generates_topological_order(), and genevalmag::Builder_graphs::save_dcg_graphs().
+.SS "const vector< const \fBSymbol\fP * > genevalmag::Rule::get_non_terminals_right_side () const"Returns the non-terminals symbols the right side of the rule. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the non-terminals symbols the right side of the rule. 
+.PP
+Definition at line 338 of file Rule.cpp.
+.PP
+References r_right_side.
+.PP
+Referenced by genevalmag::Builder_graphs::compute_adp_graph(), genevalmag::Builder_graphs::compute_dcg(), genevalmag::Builder_graphs::compute_down_graph(), genevalmag::Builder_visit_sequences::gen_visit_seq(), and genevalmag::generate_expr_text().
+.SS "const size_t genevalmag::Rule::get_number_eqs () const"Returns the number of equations of the rule. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the number of equations of the rule. 
+.PP
+Definition at line 105 of file Rule.cpp.
+.PP
+References r_eqs.
+.PP
+Referenced by add_eq().
+.SS "const unsigned short genevalmag::Rule::get_offset () const"Returns the offset of all equation of the rule. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the offset of all equation of the rule. 
+.PP
+Definition at line 113 of file Rule.cpp.
+.PP
+References r_offset.
+.PP
+Referenced by copy().
+.SS "const vector< const \fBSymbol\fP * > & genevalmag::Rule::get_right_side () const"Returns the right side of the rule. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the right side of the rule. 
+.PP
+Definition at line 89 of file Rule.cpp.
+.PP
+References r_right_side.
+.PP
+Referenced by copy(), and equals().
+.SS "const unsigned short genevalmag::Rule::key () const"Returns the number key that identifies a rule definitely.
+.br
+ 
+.br
+ Result = <id_rule>
+.br
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Returns the number key that identifies a rule definitely.
+.PP
+Result = <id_rule> 
+.PP
+Definition at line 310 of file Rule.cpp.
+.PP
+References r_id.
+.PP
+Referenced by genevalmag::Builder_graphs::combined_inf_contexts(), genevalmag::Builder_graphs::compute_dcg(), genevalmag::Builder_graphs::compute_dependency_graphs(), and copy().
+.SS "\fBRule\fP & genevalmag::Rule::operator= (const \fBRule\fP & other)"Operator assign(=) of rule. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Operator assign(=) of rule. 
+.PP
+Definition at line 49 of file Rule.cpp.
+.PP
+References copy(), and destroy().
+.SS "void genevalmag::Rule::set_id (const unsigned short id)"Sets the identificator of the rule. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIid\fP Sets the identificator of the rule. 
+.RE
+.PP
+
+.PP
+Definition at line 137 of file Rule.cpp.
+.PP
+References r_id.
+.PP
+Referenced by genevalmag::Attr_grammar::add_rule().
+.SS "void genevalmag::Rule::set_left_symbol (const \fBSymbol\fP * left_symb)"Sets the left symbol of the rule. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIleft_symb\fP Sets the left symbol of the rule. 
+.RE
+.PP
+
+.PP
+Definition at line 145 of file Rule.cpp.
+.PP
+References r_left_symbol.
+.PP
+Referenced by genevalmag::create_abbreviated_rule(), and genevalmag::create_rule().
+.SS "const string genevalmag::Rule::to_string () const"Generates and returns a string reprensentation of a rule.
+.br
+ 
+.br
+ Result = left_symbol '::=' right_side
+.br
+ 'compute'
+.br
+ eq_1
+.br
+ ...
+.br
+ eq_n
+.br
+ 'end;'
+.br
+ 
+.br
+ where right_ride is = symbol_1 ' ' ... ' ' symbol_n
+.br
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Generates and returns a string reprensentation of a \fBRule\fP.
+.br
+ 
+.br
+ Result = <left_symbol> '::=' <right_side>
+.br
+ 'compute'
+.br
+ eq_1
+.br
+ ...
+.br
+ eq_n
+.br
+ 'end;'
+.br
+ 
+.br
+ where <right_ride> is s= symbol_1 ' ' ... ' ' symbol_n
+.br
+ 
+.PP
+Definition at line 229 of file Rule.cpp.
+.PP
+References r_eqs, and to_string_not_eqs().
+.SS "const string genevalmag::Rule::to_string_not_eqs () const"Generates and returns a string reprensentation of a rule.
+.br
+ 
+.br
+ Result= left_symbol '::=' right_side ';'
+.br
+ 
+.br
+ where right_ride is = symbol_1 ' ' ... ' ' symbol_n
+.br
+ 
+.br
+ 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates and returns a string reprensentation of a rule.
+.PP
+Result = left_symbol '::=' right_side ';'
+.PP
+where right_ride is= symbol_1 ' ' ... ' ' symbol_n 
+.PP
+Definition at line 255 of file Rule.cpp.
+.PP
+References genevalmag::Symbol::get_name(), r_id, r_left_symbol, and r_right_side.
+.PP
+Referenced by genevalmag::create_instance(), genevalmag::Builder_graphs::save_adp_graphs(), genevalmag::Builder_plans::save_all_plans(), genevalmag::Builder_plans::save_all_plans_project(), genevalmag::Builder_graphs::save_cyclic_graphs(), genevalmag::Builder_graphs::save_dcg_graphs(), genevalmag::Builder_graphs::save_dp_graphs(), genevalmag::save_rvalue(), and to_string().
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::Rule::r_eqs\fP\fC [private]\fP"
+.PP
+Rule's map of equations. 
+.PP
+Definition at line 42 of file Rule.h.
+.PP
+Referenced by add_eq(), copy(), defined_equation(), get_eq(), get_eqs(), get_number_eqs(), and to_string().
+.SS "\fBgenevalmag::Rule::r_id\fP\fC [private]\fP"
+.PP
+Rule's identifier. 
+.PP
+Definition at line 27 of file Rule.h.
+.PP
+Referenced by copy(), key(), set_id(), and to_string_not_eqs().
+.SS "\fBgenevalmag::Rule::r_left_symbol\fP\fC [private]\fP"
+.PP
+Rule's left symbol. 
+.PP
+Definition at line 32 of file Rule.h.
+.PP
+Referenced by belongs_non_terminal(), copy(), count_non_terminal(), equals(), get_left_symbol(), set_left_symbol(), and to_string_not_eqs().
+.SS "\fBgenevalmag::Rule::r_offset\fP\fC [private]\fP"
+.PP
+Rule's offset. 
+.PP
+Definition at line 47 of file Rule.h.
+.PP
+Referenced by add_eq(), copy(), get_offset(), and Rule().
+.SS "\fBgenevalmag::Rule::r_right_side\fP\fC [private]\fP"
+.PP
+Rule's vector of right symbols. 
+.PP
+Definition at line 37 of file Rule.h.
+.PP
+Referenced by add_right_symbol(), belongs_non_terminal(), copy(), count_non_terminal(), equals(), get_non_terminals_right_side(), get_right_side(), and to_string_not_eqs().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

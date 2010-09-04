@@ -1,0 +1,453 @@
+.TH "genevalmag::Builder_graphs" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::Builder_graphs \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Builder_graphs.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBBuilder_graphs\fP (const \fBAttr_grammar\fP &attribute_grammar)"
+.br
+.ti -1c
+.RI "\fB~Builder_graphs\fP ()"
+.br
+.ti -1c
+.RI "const map< vector< unsigned short >, \fBGraph\fP > & \fBget_adp_graphs\fP () const "
+.br
+.ti -1c
+.RI "const map< vector< unsigned short >, \fBGraph\fP > & \fBget_cyclic_graphs\fP () const "
+.br
+.ti -1c
+.RI "const \fBGraph\fP & \fBget_dcg_graph\fP (unsigned short index_rule) const "
+.br
+.ti -1c
+.RI "bool \fBcompute_dependency_graphs\fP ()"
+.br
+.ti -1c
+.RI "bool \fBcompute_down_graph\fP ()"
+.br
+.ti -1c
+.RI "bool \fBcompute_dcg\fP ()"
+.br
+.ti -1c
+.RI "bool \fBcompute_adp_graph\fP ()"
+.br
+.ti -1c
+.RI "bool \fBcheck_cyclic_adp_dependencies\fP ()"
+.br
+.ti -1c
+.RI "bool \fBsave_all_graphs\fP (const string path_output) const "
+.br
+.ti -1c
+.RI "bool \fBsave_cyclic_graphs\fP (const string path_output) const "
+.br
+.ti -1c
+.RI "bool \fBsave_dp_graphs\fP (const string path_output) const "
+.br
+.ti -1c
+.RI "bool \fBsave_down_graphs\fP (const string path_output) const "
+.br
+.ti -1c
+.RI "bool \fBsave_dcg_graphs\fP (const string path_output) const "
+.br
+.ti -1c
+.RI "bool \fBsave_adp_graphs\fP (const string path_output) const "
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcompute_attr_vertex\fP ()"
+.br
+.ti -1c
+.RI "void \fBcomplete_dp_graphs\fP ()"
+.br
+.ti -1c
+.RI "bool \fBcombined_inf_contexts\fP (const \fBRule\fP *rule, \fBGraph\fP &graph, vector< vector< unsigned short > > &inf_context, size_t index_to_combine)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "const \fBAttr_grammar\fP & \fBattr_grammar\fP"
+.br
+.RI "\fIReferences to the attribute grammar. \fP"
+.ti -1c
+.RI "map< unsigned short, \fBGraph\fP > \fBp_Dp_graphs\fP"
+.br
+.RI "\fIStore the DP graphs. The key corresponds to the key \fBRule\fP.. \fP"
+.ti -1c
+.RI "map< string, \fBGraph\fP > \fBattr_vertex_graphs\fP"
+.br
+.RI "\fIStore the vertex-attr graphs. The key corresponds to the key \fBSymbol\fP. \fP"
+.ti -1c
+.RI "map< string, \fBGraph\fP > \fBp_Down_graphs\fP"
+.br
+.RI "\fIStore the down graphs. The key corresponds to the key \fBSymbol\fP. \fP"
+.ti -1c
+.RI "map< unsigned short, \fBGraph\fP > \fBp_Dcg_graphs\fP"
+.br
+.RI "\fIStore the dcg graphs. The key corresponds to the key \fBRule\fP. \fP"
+.ti -1c
+.RI "map< vector< unsigned short >, \fBGraph\fP > \fBp_Adp_graphs\fP"
+.br
+.RI "\fIStore the adp graphs. The key corresponds to the key \fBRule\fP with the inferior context. \fP"
+.ti -1c
+.RI "map< vector< unsigned short >, \fBGraph\fP > \fBp_Adp_subgraphs_cyclics\fP"
+.br
+.RI "\fIStore the adp graphs. The key corresponds to the key \fBRule\fP with the inferior context. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 40 of file Builder_graphs.h.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::Builder_graphs::Builder_graphs (const \fBAttr_grammar\fP & attribute_grammar)"Constructor empty of Builder graphs. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIattribute_grammar\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Constructor empty of Builder graphs. 
+.PP
+Definition at line 56 of file Builder_graphs.cpp.
+.SS "genevalmag::Builder_graphs::~Builder_graphs ()"Destructor empty of Builder graphs. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Destructor empty of Builder graphs. 
+.PP
+Definition at line 63 of file Builder_graphs.cpp.
+.SH "Member Function Documentation"
+.PP 
+.SS "bool genevalmag::Builder_graphs::check_cyclic_adp_dependencies ()"Checks if the graph contains cycle. Utilities a deph-firts-seach for traverse the graphs. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Checks if the graph contains cycle. Utilities a deph-firts-seach for traverse the graphs. 
+.PP
+Definition at line 444 of file Builder_graphs.cpp.
+.PP
+References p_Adp_graphs, and p_Adp_subgraphs_cyclics.
+.PP
+Referenced by genevalmag::Builder_plans::build_plans().
+.SS "bool genevalmag::Builder_graphs::combined_inf_contexts (const \fBRule\fP * rule, \fBGraph\fP & graph, vector< vector< unsigned short > > & inf_context, size_t index_to_combine)\fC [private]\fP"Generate all combinations of the rules and saves a graph ADP for each of them. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrule\fP 
+.br
+\fIgraph\fP 
+.br
+\fIinf_context\fP 
+.br
+\fIindex_to_combine\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Generate all combinations of the rules and saves a graph ADP for each of them. 
+.PP
+Definition at line 301 of file Builder_graphs.cpp.
+.PP
+References genevalmag::Rule::key(), utilities::merge_graph(), p_Adp_graphs, and p_Dcg_graphs.
+.PP
+Referenced by compute_adp_graph().
+.SS "void genevalmag::Builder_graphs::complete_dp_graphs ()\fC [private]\fP"Completes dp-graph with the vertex of low on instances. 
+.PP
+Definition at line 469 of file Builder_graphs.cpp.
+.PP
+References attr_grammar, attr_vertex_graphs, genevalmag::Attr_grammar::get_rules(), utilities::merge_graph(), and p_Dp_graphs.
+.PP
+Referenced by compute_down_graph().
+.SS "bool genevalmag::Builder_graphs::compute_adp_graph ()"Algorithm ADP Builds the graphs ADP for each rule of the grammar. Ex: ADP(1): (1) E:= E + T. graph G: DP(1) U Dcg E (J1..JN) U Dcg T (K1..KM) Where Ji y ki are rule with left-symbol E and T respectly. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Algorithm ADP Builds the graphs ADP for each rule of the grammar. Ex: ADP(1): (1) E:= E + T. graph G: DP(1) U Dcg E (J1..JN) U Dcg T (K1..KM) Where Ji y ki are rule with left-symbol E and T respectly. 
+.PP
+Definition at line 360 of file Builder_graphs.cpp.
+.PP
+References attr_grammar, combined_inf_contexts(), genevalmag::current_rule, genevalmag::Rule::get_non_terminals_right_side(), genevalmag::Attr_grammar::get_rules(), genevalmag::Attr_grammar::get_rules_with_left_symbol(), and p_Dp_graphs.
+.PP
+Referenced by genevalmag::Builder_plans::generate_graphs().
+.SS "void genevalmag::Builder_graphs::compute_attr_vertex ()\fC [private]\fP"Builds a graph for each symbol of the grammar with all atributes. The graph only has vertexs. It hasn't edges. Ex: \fBSymbol\fP E ; attributes: s,i graph: vertex: E.s, E.i 
+.PP
+Definition at line 155 of file Builder_graphs.cpp.
+.PP
+References attr_grammar, attr_vertex_graphs, genevalmag::Attr_grammar::get_non_terminal_symbols(), p_Dp_graphs, utilities::return_vertex(), genevalmag::Expr_instance::set_attr(), genevalmag::Expr_instance::set_num(), and genevalmag::Expr_instance::set_symb().
+.PP
+Referenced by compute_down_graph().
+.SS "bool genevalmag::Builder_graphs::compute_dcg ()"Algorithm DCG Builds the graph Dcg for each rule of the grammar. Ex: Dcg E(1) : (1) E:= E + T. graph G: DP(1) U Down(E) U Down(T) Project(G,{attributes of E}) 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Algorithm DCG Builds the graph Dcg for each rule of the grammar. Ex: Dcg E(1) : (1) E:= E + T. graph G: DP(1) U Down(E) U Down(T) Project(G,{attributes of E}) 
+.PP
+Definition at line 262 of file Builder_graphs.cpp.
+.PP
+References attr_grammar, genevalmag::current_rule, genevalmag::Rule::get_left_symbol(), genevalmag::Rule::get_non_terminals_right_side(), genevalmag::Attr_grammar::get_rules(), genevalmag::Rule::key(), utilities::merge_graph(), p_Dcg_graphs, p_Down_graphs, p_Dp_graphs, and utilities::project_graph().
+.PP
+Referenced by genevalmag::Builder_plans::generate_graphs().
+.SS "bool genevalmag::Builder_graphs::compute_dependency_graphs ()"Algorithm DP Builds a graph dp for each rule of the grammar. Ex: E:= E + T graph: vertex: E,T Edges: E --> E T---> E 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Algorithm DP Builds a graph dp for each rule of the grammar. Ex: E:= E + T graph: vertex: E,T Edges: E --> E T---> E 
+.PP
+Definition at line 99 of file Builder_graphs.cpp.
+.PP
+References attr_grammar, genevalmag::Rule::get_eqs(), genevalmag::Attr_grammar::get_rules(), genevalmag::Rule::key(), p_Dp_graphs, and utilities::return_vertex().
+.PP
+Referenced by genevalmag::Builder_plans::generate_graphs().
+.SS "bool genevalmag::Builder_graphs::compute_down_graph ()"Algorithm Down Builds the graphs down for each symbol of the grammar. Ex: Down(E) : (1) E:= E + T. graph G: DP(1) U Down(E) U Down(T) Project(G,{attributes of E}) 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Algorithm Down Builds the graphs down for each symbol of the grammar. Ex: Down(E) : (1) E:= E + T. graph G: DP(1) U Down(E) U Down(T) Project(G,{attributes of E}) 
+.PP
+Definition at line 201 of file Builder_graphs.cpp.
+.PP
+References attr_grammar, attr_vertex_graphs, complete_dp_graphs(), compute_attr_vertex(), genevalmag::current_rule, genevalmag::Rule::get_left_symbol(), genevalmag::Rule::get_non_terminals_right_side(), genevalmag::Attr_grammar::get_rules(), genevalmag::Symbol::key(), utilities::merge_graph(), p_Down_graphs, p_Dp_graphs, and utilities::project_graph().
+.PP
+Referenced by genevalmag::Builder_plans::generate_graphs().
+.SS "const map< vector< unsigned short >, \fBGraph\fP > & genevalmag::Builder_graphs::get_adp_graphs () const"Returns the map with all ADP graphs creates. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the map with all ADP graphs creates. 
+.PP
+Definition at line 70 of file Builder_graphs.cpp.
+.PP
+References p_Adp_graphs.
+.PP
+Referenced by genevalmag::Builder_plans::generate_plans().
+.SS "const map< vector< unsigned short >, \fBGraph\fP > & genevalmag::Builder_graphs::get_cyclic_graphs () const"Returns the map with all ADP with cycle graphs creates. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the map with all ADP graphs creates. 
+.PP
+Definition at line 78 of file Builder_graphs.cpp.
+.PP
+References p_Adp_subgraphs_cyclics.
+.SS "const \fBGraph\fP & genevalmag::Builder_graphs::get_dcg_graph (unsigned short index_rule) const"Returns the down graph of the symbol. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindex_rule\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Returns the down graph of the symbol. 
+.PP
+Definition at line 86 of file Builder_graphs.cpp.
+.PP
+References p_Dcg_graphs.
+.PP
+Referenced by genevalmag::Builder_plans::generate_plans().
+.SS "bool genevalmag::Builder_graphs::save_adp_graphs (const string path_output) const"Saves all adp-graphs generates 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath_output\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Saves all adp-graphs generates. 
+.PP
+Definition at line 570 of file Builder_graphs.cpp.
+.PP
+References attr_grammar, utilities::clean_output_folder(), utilities::cleaning_tabs(), genevalmag::FILE_ADP_GRAPH(), utilities::generate_names_instance(), genevalmag::Attr_grammar::get_rules(), p_Adp_graphs, genevalmag::PATH_OUTPUT_ADP(), utilities::print_graph(), genevalmag::Rule::to_string_not_eqs(), and utilities::write_inf_context().
+.PP
+Referenced by save_all_graphs().
+.SS "bool genevalmag::Builder_graphs::save_all_graphs (const string path_output) const"Saves all graphs generates: DP, Down, DCG and ADP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath_output\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Saves all graphs generates: DP, Down, DCG and ADP. 
+.PP
+Definition at line 602 of file Builder_graphs.cpp.
+.PP
+References utilities::clean_output_folder(), genevalmag::PATH_OUTPUT_GRAPHS(), save_adp_graphs(), save_dcg_graphs(), save_down_graphs(), and save_dp_graphs().
+.PP
+Referenced by genevalmag::Builder_plans::save_all_graphs().
+.SS "bool genevalmag::Builder_graphs::save_cyclic_graphs (const string path_output) const"Saves all graphs graph cycles. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath_output\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.PP
+Definition at line 620 of file Builder_graphs.cpp.
+.PP
+References attr_grammar, utilities::clean_output_folder(), utilities::cleaning_tabs(), genevalmag::FILE_ADP_SUBGRAPH_CYCLIC(), utilities::generate_names_instance(), genevalmag::Attr_grammar::get_rules(), p_Adp_subgraphs_cyclics, genevalmag::PATH_OUTPUT_CYCLIC(), genevalmag::PATH_OUTPUT_GRAPHS(), utilities::print_graph(), genevalmag::Rule::to_string_not_eqs(), and utilities::write_inf_context().
+.PP
+Referenced by genevalmag::Builder_plans::save_cyclic_graphs().
+.SS "bool genevalmag::Builder_graphs::save_dcg_graphs (const string path_output) const"Saves all dcg-graphs generates 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath_output\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Saves all dcg-graphs generates. 
+.PP
+Definition at line 540 of file Builder_graphs.cpp.
+.PP
+References attr_grammar, utilities::clean_output_folder(), utilities::cleaning_tabs(), genevalmag::current_rule, genevalmag::FILE_DCG_GRAPH(), utilities::generate_names_instance(), genevalmag::Rule::get_left_symbol(), genevalmag::Symbol::get_name(), genevalmag::Attr_grammar::get_rules(), p_Dcg_graphs, genevalmag::PATH_OUTPUT_DCG(), utilities::print_graph(), and genevalmag::Rule::to_string_not_eqs().
+.PP
+Referenced by save_all_graphs().
+.SS "bool genevalmag::Builder_graphs::save_down_graphs (const string path_output) const"Saves all down-graphs generates 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath_output\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Saves all down-graphs generates. 
+.PP
+Definition at line 514 of file Builder_graphs.cpp.
+.PP
+References utilities::clean_output_folder(), genevalmag::FILE_DOWN_GRAPH(), utilities::generate_names_attr(), p_Down_graphs, genevalmag::PATH_OUTPUT_DOWN(), and utilities::print_graph().
+.PP
+Referenced by save_all_graphs().
+.SS "bool genevalmag::Builder_graphs::save_dp_graphs (const string path_output) const"Saves all dp-graphs generates 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath_output\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Saves all dp-graphs generates 
+.PP
+Definition at line 486 of file Builder_graphs.cpp.
+.PP
+References attr_grammar, utilities::clean_output_folder(), utilities::cleaning_tabs(), genevalmag::current_rule, genevalmag::FILE_DP_GRAPH(), utilities::generate_names_instance(), genevalmag::Attr_grammar::get_rules(), p_Dp_graphs, genevalmag::PATH_OUTPUT_DP(), utilities::print_graph(), and genevalmag::Rule::to_string_not_eqs().
+.PP
+Referenced by save_all_graphs().
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::Builder_graphs::attr_grammar\fP\fC [private]\fP"
+.PP
+References to the attribute grammar. 
+.PP
+Definition at line 47 of file Builder_graphs.h.
+.PP
+Referenced by complete_dp_graphs(), compute_adp_graph(), compute_attr_vertex(), compute_dcg(), compute_dependency_graphs(), compute_down_graph(), save_adp_graphs(), save_cyclic_graphs(), save_dcg_graphs(), and save_dp_graphs().
+.SS "\fBgenevalmag::Builder_graphs::attr_vertex_graphs\fP\fC [private]\fP"
+.PP
+Store the vertex-attr graphs. The key corresponds to the key \fBSymbol\fP. 
+.PP
+Definition at line 58 of file Builder_graphs.h.
+.PP
+Referenced by complete_dp_graphs(), compute_attr_vertex(), and compute_down_graph().
+.SS "\fBgenevalmag::Builder_graphs::p_Adp_graphs\fP\fC [private]\fP"
+.PP
+Store the adp graphs. The key corresponds to the key \fBRule\fP with the inferior context. 
+.PP
+Definition at line 74 of file Builder_graphs.h.
+.PP
+Referenced by check_cyclic_adp_dependencies(), combined_inf_contexts(), get_adp_graphs(), and save_adp_graphs().
+.SS "\fBgenevalmag::Builder_graphs::p_Adp_subgraphs_cyclics\fP\fC [private]\fP"
+.PP
+Store the adp graphs. The key corresponds to the key \fBRule\fP with the inferior context. 
+.PP
+Definition at line 79 of file Builder_graphs.h.
+.PP
+Referenced by check_cyclic_adp_dependencies(), get_cyclic_graphs(), and save_cyclic_graphs().
+.SS "\fBgenevalmag::Builder_graphs::p_Dcg_graphs\fP\fC [private]\fP"
+.PP
+Store the dcg graphs. The key corresponds to the key \fBRule\fP. 
+.PP
+Definition at line 69 of file Builder_graphs.h.
+.PP
+Referenced by combined_inf_contexts(), compute_dcg(), get_dcg_graph(), and save_dcg_graphs().
+.SS "\fBgenevalmag::Builder_graphs::p_Down_graphs\fP\fC [private]\fP"
+.PP
+Store the down graphs. The key corresponds to the key \fBSymbol\fP. 
+.PP
+Definition at line 63 of file Builder_graphs.h.
+.PP
+Referenced by compute_dcg(), compute_down_graph(), and save_down_graphs().
+.SS "\fBgenevalmag::Builder_graphs::p_Dp_graphs\fP\fC [private]\fP"
+.PP
+Store the DP graphs. The key corresponds to the key \fBRule\fP.. 
+.PP
+Definition at line 53 of file Builder_graphs.h.
+.PP
+Referenced by complete_dp_graphs(), compute_adp_graph(), compute_attr_vertex(), compute_dcg(), compute_dependency_graphs(), compute_down_graph(), and save_dp_graphs().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

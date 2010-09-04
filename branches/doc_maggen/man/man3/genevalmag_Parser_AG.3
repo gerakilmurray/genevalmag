@@ -1,0 +1,120 @@
+.TH "genevalmag::Parser_AG" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::Parser_AG \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Parser_AG.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBParser_AG\fP ()"
+.br
+.ti -1c
+.RI "\fB~Parser_AG\fP ()"
+.br
+.ti -1c
+.RI "const \fBAttr_grammar\fP & \fBget_attr_grammar\fP ()"
+.br
+.ti -1c
+.RI "bool \fBparse_grammar\fP (const string &path_file_input)"
+.br
+.ti -1c
+.RI "void \fBsave_grammar_file\fP (const string path_output) const "
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBAttr_grammar\fP \fBattr_grammar\fP"
+.br
+.RI "\fIInternal structure of grammar. \fP"
+.ti -1c
+.RI "\fBSemantics_checks\fP \fBsem_check\fP"
+.br
+.RI "\fISemantics control for grammar: Well define grammar. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 32 of file Parser_AG.h.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::Parser_AG::Parser_AG ()"Constructor of \fBParser_AG\fP. 
+.PP
+Definition at line 33 of file Parser_AG.cpp.
+.SS "genevalmag::Parser_AG::~Parser_AG ()"Destructor of \fBParser_AG\fP. 
+.PP
+Definition at line 39 of file Parser_AG.cpp.
+.SH "Member Function Documentation"
+.PP 
+.SS "const \fBAttr_grammar\fP & genevalmag::Parser_AG::get_attr_grammar ()"Returns att_grammar of parser. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns att_grammar of parser. 
+.PP
+Definition at line 46 of file Parser_AG.cpp.
+.PP
+References attr_grammar.
+.PP
+Referenced by genevalmag::Maglib::gen_evaluator().
+.SS "bool genevalmag::Parser_AG::parse_grammar (const string & path_file_input)"This method invokes the method 'parse' of the library Spirit included in Boost. Returns true if could parse all the input. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath_file_input\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+This method invokes the method 'parse' of the library Spitir included in Boost. Returns true if could parse all the input. 
+.PP
+Definition at line 399 of file Parser_AG.cpp.
+.PP
+References attr_grammar, sem_check, genevalmag::set_attr_grammar(), and genevalmag::set_sem_check().
+.PP
+Referenced by genevalmag::Maglib::gen_evaluator().
+.SS "void genevalmag::Parser_AG::save_grammar_file (const string path_output) const"This method saves all parsed string in a file. The file output is in argument path_output. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath_output\fP This method saves all parsed string in a file. The file output is in argument path_output. 
+.RE
+.PP
+
+.PP
+Definition at line 447 of file Parser_AG.cpp.
+.PP
+References attr_grammar, genevalmag::FILE_GRAMMAR(), and genevalmag::Attr_grammar::to_string().
+.PP
+Referenced by genevalmag::Maglib::gen_evaluator().
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::Parser_AG::attr_grammar\fP\fC [private]\fP"
+.PP
+Internal structure of grammar. 
+.PP
+Definition at line 39 of file Parser_AG.h.
+.PP
+Referenced by get_attr_grammar(), parse_grammar(), and save_grammar_file().
+.SS "\fBgenevalmag::Parser_AG::sem_check\fP\fC [private]\fP"
+.PP
+Semantics control for grammar: Well define grammar. 
+.PP
+Definition at line 44 of file Parser_AG.h.
+.PP
+Referenced by parse_grammar().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

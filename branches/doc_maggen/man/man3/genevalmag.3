@@ -1,0 +1,1183 @@
+.TH "genevalmag" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBAttr_grammar\fP"
+.br
+.ti -1c
+.RI "class \fBAttribute\fP"
+.br
+.ti -1c
+.RI "class \fBEquation\fP"
+.br
+.ti -1c
+.RI "class \fBFunction\fP"
+.br
+.ti -1c
+.RI "class \fBRule\fP"
+.br
+.ti -1c
+.RI "class \fBSort\fP"
+.br
+.ti -1c
+.RI "class \fBSymbol\fP"
+.br
+.ti -1c
+.RI "class \fBBuilder_code\fP"
+.br
+.ti -1c
+.RI "struct \fBvertex_data_t\fP"
+.br
+.ti -1c
+.RI "class \fBBuilder_graphs\fP"
+.br
+.ti -1c
+.RI "struct \fBc_rule\fP"
+.br
+.ti -1c
+.RI "struct \fBk_w\fP"
+.br
+.ti -1c
+.RI "struct \fBi_w\fP"
+.br
+.ti -1c
+.RI "struct \fBk_plan\fP"
+.br
+.ti -1c
+.RI "struct \fBk_p_project\fP"
+.br
+.ti -1c
+.RI "class \fBBuilder_plans\fP"
+.br
+.ti -1c
+.RI "class \fBBuilder_visit_sequences\fP"
+.br
+.ti -1c
+.RI "class \fBExpr_function\fP"
+.br
+.ti -1c
+.RI "class \fBExpr_instance\fP"
+.br
+.ti -1c
+.RI "class \fBExpr_leaf\fP"
+.br
+.ti -1c
+.RI "class \fBExpr_literal\fP"
+.br
+.ti -1c
+.RI "class \fBExpr_node\fP"
+.br
+.ti -1c
+.RI "class \fBExpression\fP"
+.br
+.ti -1c
+.RI "class \fBMaglib\fP"
+.br
+.ti -1c
+.RI "class \fBParser_AG\fP"
+.br
+.ti -1c
+.RI "class \fBSemantics_checks\fP"
+.br
+.ti -1c
+.RI "struct \fBcycle_detector\fP"
+.br
+.ti -1c
+.RI "struct \fBskip_parser\fP"
+.br
+.ti -1c
+.RI "struct \fBattritute_grammar\fP"
+.br
+.ti -1c
+.RI "struct \fBdecl_attribute\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef adjacency_list< hash_setS, vecS, directedS, property_vertex_dp > \fBGraph\fP"
+.br
+.ti -1c
+.RI "typedef Graph::vertex_descriptor \fBVertex\fP"
+.br
+.ti -1c
+.RI "typedef vector< unsigned short > \fBOrder_eval_eq\fP"
+.br
+.ti -1c
+.RI "typedef vector< unsigned short > \fBOrder_rule\fP"
+.br
+.ti -1c
+.RI "typedef struct \fBgenevalmag::c_rule\fP \fBContext_rule\fP"
+.br
+.ti -1c
+.RI "typedef struct \fBgenevalmag::k_w\fP \fBKey_work_list\fP"
+.br
+.ti -1c
+.RI "typedef struct \fBgenevalmag::i_w\fP \fBItem_work\fP"
+.br
+.ti -1c
+.RI "typedef struct \fBgenevalmag::k_plan\fP \fBKey_plan\fP"
+.br
+.ti -1c
+.RI "typedef struct \fBgenevalmag::k_p_project\fP \fBKey_plan_project\fP"
+.br
+.ti -1c
+.RI "typedef vector< int > \fBVisit_seq\fP"
+.br
+.ti -1c
+.RI "typedef char \fBchar_t\fP"
+.br
+.ti -1c
+.RI "typedef file_iterator< \fBchar_t\fP > \fBiterator_f\fP"
+.br
+.ti -1c
+.RI "typedef position_iterator< \fBiterator_f\fP > \fBiterator_t\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBtype_attr\fP { \fBk_inherit\fP, \fBk_synthetize\fP }"
+.br
+.ti -1c
+.RI "enum \fBoper_mode\fP { \fBk_prefix\fP, \fBk_infix\fP, \fBk_postfix\fP }"
+.br
+.ti -1c
+.RI "enum \fBoper_assoc\fP { \fBk_left\fP, \fBk_right\fP, \fBk_non_assoc\fP }"
+.br
+.ti -1c
+.RI "enum \fBsymbol_type\fP { \fBk_terminal\fP, \fBk_non_terminal\fP }"
+.br
+.ti -1c
+.RI "enum \fBliteral_type\fP { \fBk_int\fP, \fBk_float\fP, \fBk_char\fP, \fBk_string\fP, \fBk_bool\fP }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "const bool \fBIS_OPERATOR\fP (true)"
+.br
+.ti -1c
+.RI "void \fBset_attr_grammar\fP (\fBAttr_grammar\fP *at_grammar)"
+.br
+.ti -1c
+.RI "void \fBset_sem_check\fP (\fBSemantics_checks\fP *s_check)"
+.br
+.ti -1c
+.RI "void \fBcreate_sort\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBinic_func\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBadd_function\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBsave_name_func\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBsave_domain_func\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBsave_image_func\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBadd_operator\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBsave_mode_op\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBsave_prec_op\fP (int const prec)"
+.br
+.ti -1c
+.RI "void \fBsave_assoc_op\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBadd_attribute\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBsave_sort_attr\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBsave_type_attr\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBsave_member_list_attr\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcreate_attributes\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcreate_new_non_terminal\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcreate_new_terminal\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcreate_rule\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBsave_right_side_rule\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcreate_abbreviated_rule\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBsave_rule\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcreate_instance\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBsave_index_ins\fP (int const index)"
+.br
+.ti -1c
+.RI "void \fBsave_attr_ins\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcreate_lit_number\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcreate_lit_ch\fP (const \fBiterator_t\fP ch, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcreate_lit_str\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcreate_bool\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcreate_function\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcreate_operator\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcreate_equation\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBsave_rvalue\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBpush_mark\fP (char name)"
+.br
+.ti -1c
+.RI "void \fBcreate_literal_node\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcreate_instance_node\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcreate_func_node\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcreate_root_infix_node\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcreate_root_function_node\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcreate_root_postfix_node\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcreate_root_prefix_node\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBcheck_well_defined\fP (const \fBiterator_t\fP str, const \fBiterator_t\fP end)"
+.br
+.ti -1c
+.RI "void \fBincrement_level\fP (char name)"
+.br
+.ti -1c
+.RI "void \fBdecrement_level\fP (char name)"
+.br
+.ti -1c
+.RI "template<class K , class T > const bool \fBadd\fP (const T &elem, map< K, T > &map_elem)"
+.br
+.ti -1c
+.RI "template<class K , class T > const string \fBto_string_map\fP (const map< K, T > &map_elem)"
+.br
+.ti -1c
+.RI "const bool \fBbelong\fP (const \fBSymbol\fP &symb, const string &expr_attrs)"
+.br
+.ti -1c
+.RI "template<class T > string \fBwrite_vector_with_inic\fP (string &text_buffer, const string name_vec, const size_t index, const vector< T > &vec, const string type_vec, const string type_array)"
+.br
+.ti -1c
+.RI "string \fBgenerate_key_plan\fP (string &text, const string &n_key, const int &num_key, const \fBKey_plan\fP &k_p)"
+.br
+.ti -1c
+.RI "string \fBgenerate_return_index_context\fP ()"
+.br
+.ti -1c
+.RI "string \fBgenerate_expr_text\fP (const \fBExpression\fP *node, const \fBRule\fP &rule)"
+.br
+.ti -1c
+.RI "const string \fBPATH_OUTPUT_GRAPHS\fP ('graphs/')"
+.br
+.ti -1c
+.RI "const string \fBPATH_OUTPUT_DP\fP ('1_DP_graphs/')"
+.br
+.ti -1c
+.RI "const string \fBPATH_OUTPUT_DOWN\fP ('2_DOWN_graphs/')"
+.br
+.ti -1c
+.RI "const string \fBPATH_OUTPUT_DCG\fP ('3_DCG_graphs/')"
+.br
+.ti -1c
+.RI "const string \fBPATH_OUTPUT_ADP\fP ('4_ADP_graphs/')"
+.br
+.ti -1c
+.RI "const string \fBPATH_OUTPUT_CYCLIC\fP ('CYCLIC_graphs/')"
+.br
+.ti -1c
+.RI "const string \fBFILE_DP_GRAPH\fP ('_dp_graph')"
+.br
+.ti -1c
+.RI "const string \fBFILE_DOWN_GRAPH\fP ('_down_graph')"
+.br
+.ti -1c
+.RI "const string \fBFILE_DCG_GRAPH\fP ('_dcg_graph')"
+.br
+.ti -1c
+.RI "const string \fBFILE_ADP_GRAPH\fP ('_adp_graph')"
+.br
+.ti -1c
+.RI "const string \fBFILE_ADP_SUBGRAPH_CYCLIC\fP ('_adp_subgraph_with_cyclic')"
+.br
+.ti -1c
+.RI "const string \fBPATH_OUT_PLAN\fP ('plans/')"
+.br
+.ti -1c
+.RI "const string \fBPATH_OUT_PLAN_PROJECT\fP ('plans_project/')"
+.br
+.ti -1c
+.RI "void \fBpurge_plan_with\fP (const \fBRule\fP &rule, const \fBOrder_eval_eq\fP &order_eq, \fBOrder_eval_eq\fP &purged_order)"
+.br
+.ti -1c
+.RI "bool \fBdefined_work\fP (const vector< \fBItem_work\fP > &list, const \fBItem_work\fP &item_work)"
+.br
+.ti -1c
+.RI "unsigned short \fBreturn_index_vec\fP (const \fBOrder_eval_eq\fP &order, vector< \fBOrder_eval_eq\fP > &vec)"
+.br
+.ti -1c
+.RI "const unsigned short \fBLEAVE\fP (0)"
+.br
+.ti -1c
+.RI "bool \fBins_attr_computed\fP (const \fBExpr_instance\fP *ins, const vector< \fBExpr_instance\fP > &vec)"
+.br
+.ti -1c
+.RI "void \fBget_inherits_of\fP (const \fBSymbol\fP *symb, const vector< \fBExpr_instance\fP > &computed, vector< \fBExpr_instance\fP > &rec_child)"
+.br
+.ti -1c
+.RI "bool \fBbelong_it\fP (const map< \fBKey_plan\fP, unsigned short >::const_iterator it, const vector< map< \fBKey_plan\fP, unsigned short >::const_iterator > &vec)"
+.br
+.ti -1c
+.RI "void \fBmerge_vec\fP (const vector< map< \fBKey_plan\fP, unsigned short >::const_iterator > &vec_source, vector< map< \fBKey_plan\fP, unsigned short >::const_iterator > &vec_targed)"
+.br
+.ti -1c
+.RI "void \fBmerge_vec_without_plan\fP (const vector< map< \fBKey_plan\fP, unsigned short >::const_iterator > &vec_source, vector< map< \fBKey_plan\fP, unsigned short >::const_iterator > &vec_targed, const map< \fBKey_plan\fP, unsigned short >::const_iterator &plan)"
+.br
+.ti -1c
+.RI "void \fBplan_family_computed\fP (const vector< map< \fBKey_plan\fP, unsigned short >::const_iterator > &plans_computed, vector< unsigned short > &visit_seq_computed)"
+.br
+.ti -1c
+.RI "const string \fBDEFAULT_PATH\fP ('./out_maggen/')"
+.br
+.ti -1c
+.RI "const string \fBDEFAULT_FILE_NAME\fP ('mag_eval')"
+.br
+.ti -1c
+.RI "const string \fBDEFAULT_INPUT_FILE\fP ('/tmp/.input_maggen_default')"
+.br
+.ti -1c
+.RI "double \fBtimeval_diff\fP (struct timeval *a, struct timeval *b)"
+.br
+.ti -1c
+.RI "bool \fBcheck_file_exist\fP (const string &strFilename)"
+.br
+.ti -1c
+.RI "bool \fBcheck_name\fP (const string &strFilename)"
+.br
+.ti -1c
+.RI "void \fBshow_help_information\fP ()"
+.br
+.ti -1c
+.RI "bool \fBparse_parameters\fP (int argc, char *argv[], string &path_input_file, string &path_folder_output, string &name_library, vector< string > &headers)"
+.br
+.ti -1c
+.RI "const string \fBFILE_GRAMMAR\fP ('Grammar_mag.log')"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &out, file_position const &lc)"
+.br
+.ti -1c
+.RI "int \fBswap_root_child\fP (\fBExpr_function\fP **old_root, int i_new_root)"
+.br
+.ti -1c
+.RI "int \fBswap_root_grandson\fP (\fBExpr_function\fP **old_root)"
+.br
+.ti -1c
+.RI "void \fBwarshall_algorithm\fP (const unsigned int size, bool *matrix_plain)"
+.br
+.ti -1c
+.RI "int \fBget_index\fP (string name_symb, vector< string > non_term)"
+.br
+.ti -1c
+.RI "bool \fBcheck_eq_defines_it\fP (const \fBSymbol\fP *symb, const int index, const \fBAttribute\fP *attr, const map< unsigned short, \fBEquation\fP > eqs)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "vector< \fBEquation\fP * > \fBindex_access_eq\fP"
+.br
+.ti -1c
+.RI "\fBAttr_grammar\fP * \fBattr_grammar\fP"
+.br
+.ti -1c
+.RI "\fBSemantics_checks\fP * \fBsem_check\fP"
+.br
+.ti -1c
+.RI "\fBFunction\fP * \fBcurrent_func\fP"
+.br
+.ti -1c
+.RI "struct \fBgenevalmag::decl_attribute\fP * \fBnew_attrs\fP"
+.br
+.ti -1c
+.RI "\fBRule\fP * \fBcurrent_rule\fP"
+.br
+.ti -1c
+.RI "\fBExpr_instance\fP * \fBcurrent_instance\fP"
+.br
+.ti -1c
+.RI "\fBExpr_literal\fP * \fBcurrent_literal\fP"
+.br
+.ti -1c
+.RI "\fBExpr_function\fP * \fBcurrent_ast_function\fP"
+.br
+.ti -1c
+.RI "\fBEquation\fP * \fBcurrent_eq\fP"
+.br
+.ti -1c
+.RI "vector< \fBExpression\fP * > \fBstack_node\fP"
+.br
+.ti -1c
+.RI "vector< \fBExpr_node\fP * > \fBstack_inner_node\fP"
+.br
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef char \fBgenevalmag::char_t\fP"Type definitions to report parsing errors, showing row and column. 
+.PP
+Definition at line 27 of file Parser_AG.h.
+.SS "typedef struct \fBgenevalmag::c_rule\fP  \fBgenevalmag::Context_rule\fP"This struct represent a Context_rule, that is a father rule and the context of rule. 
+.SS "typedef adjacency_list<hash_setS, vecS, directedS, property_vertex_dp> \fBgenevalmag::Graph\fP"
+.PP
+Definition at line 35 of file Builder_graphs.h.
+.SS "typedef struct \fBgenevalmag::i_w\fP  \fBgenevalmag::Item_work\fP"This struct represents an Item work, that is an Key_work_list and an equations order evaluation. 
+.SS "typedef file_iterator<\fBchar_t\fP> \fBgenevalmag::iterator_f\fP"
+.PP
+Definition at line 28 of file Parser_AG.h.
+.SS "typedef position_iterator<\fBiterator_f\fP> \fBgenevalmag::iterator_t\fP"
+.PP
+Definition at line 29 of file Parser_AG.h.
+.SS "typedef struct \fBgenevalmag::k_plan\fP  \fBgenevalmag::Key_plan\fP"This structs represent a Key_plan, that is an id and an equations order evaluation. 
+.SS "typedef struct \fBgenevalmag::k_p_project\fP  \fBgenevalmag::Key_plan_project\fP"This struct represent a Key_plan_project, that is a Key_plan, the symbol and ocurrence, by which project. 
+.SS "typedef struct \fBgenevalmag::k_w\fP  \fBgenevalmag::Key_work_list\fP"This struct represents a Key_work_list, that is a father rule and id-rule of the current rule. 
+.SS "typedef vector< unsigned short > \fBgenevalmag::Order_eval_eq\fP"Vector for order of equation. Each number represent an equation. 
+.PP
+Definition at line 28 of file Builder_plans.h.
+.SS "typedef vector< unsigned short > \fBgenevalmag::Order_rule\fP"Vector that represents the inferior context of rule. Each number represent a rule. 
+.PP
+Definition at line 34 of file Builder_plans.h.
+.SS "typedef Graph::vertex_descriptor \fBgenevalmag::Vertex\fP"
+.PP
+Definition at line 38 of file Builder_graphs.h.
+.SS "typedef vector<int> \fBgenevalmag::Visit_seq\fP"Where: item > 0 represent to visit to this rule number. item == 0 represent to leave. item < 0 represent to compute this equation number. 
+.PP
+Definition at line 28 of file Builder_visit_sequences.h.
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBgenevalmag::literal_type\fP"Type of basics literals. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIk_int \fP\fP
+.TP
+\fB\fIk_float \fP\fP
+.TP
+\fB\fIk_char \fP\fP
+.TP
+\fB\fIk_string \fP\fP
+.TP
+\fB\fIk_bool \fP\fP
+
+.PP
+Definition at line 20 of file Expr_literal.h.
+.SS "enum \fBgenevalmag::oper_assoc\fP"Enumeration of operation's associative modes. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIk_left \fP\fP
+.TP
+\fB\fIk_right \fP\fP
+.TP
+\fB\fIk_non_assoc \fP\fP
+
+.PP
+Definition at line 33 of file Function.h.
+.SS "enum \fBgenevalmag::oper_mode\fP"Enumeration of operation's mode. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIk_prefix \fP\fP
+.TP
+\fB\fIk_infix \fP\fP
+.TP
+\fB\fIk_postfix \fP\fP
+
+.PP
+Definition at line 23 of file Function.h.
+.SS "enum \fBgenevalmag::symbol_type\fP"Enumeration of symbol's type. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIk_terminal \fP\fP
+.TP
+\fB\fIk_non_terminal \fP\fP
+
+.PP
+Definition at line 23 of file Symbol.h.
+.SS "enum \fBgenevalmag::type_attr\fP"Enumeration of the attribute's type: Inherit or Synthetize. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIk_inherit \fP\fP
+.TP
+\fB\fIk_synthetize \fP\fP
+
+.PP
+Definition at line 20 of file Attribute.h.
+.SH "Function Documentation"
+.PP 
+.SS "template<class K , class T > const bool genevalmag::add (const T & elem, map< K, T > & map_elem)\fC [inline]\fP"Operation template that insert an object type T in the parameter map.
+.PP
+Returns true if insert succesfully. In other case, return false. 
+.PP
+Definition at line 42 of file Attr_grammar.cpp.
+.SS "void genevalmag::add_attribute (const iterator_t str, const iterator_t end)"Methods and functions for parse \fBAttribute\fP class. 
+.PP
+Definition at line 161 of file Semantics_actions.cpp.
+.PP
+References genevalmag::decl_attribute::d_member_symbol, genevalmag::decl_attribute::d_mod_type, genevalmag::decl_attribute::d_names, k_synthetize, and new_attrs.
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::add_function (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 104 of file Semantics_actions.cpp.
+.PP
+References genevalmag::Attr_grammar::add_function(), attr_grammar, current_func, and genevalmag::Function::to_string().
+.PP
+Referenced by add_operator(), and genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::add_operator (const iterator_t str, const iterator_t end)"Methods and functions for parse Operator. 
+.PP
+Definition at line 135 of file Semantics_actions.cpp.
+.PP
+References add_function(), current_func, IS_OPERATOR(), and genevalmag::Function::set_is_operator().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "const bool genevalmag::belong (const Symbol & symb, const string & expr_attrs)"Interprets the expression of sets and returns true if the symbol belongs to that set. 
+.PP
+Definition at line 94 of file Attr_grammar.cpp.
+.PP
+References genevalmag::Symbol::get_name().
+.PP
+Referenced by genevalmag::Attr_grammar::load_attributes().
+.SS "bool genevalmag::belong_it (const map< Key_plan, unsigned short >::const_iterator it, const vector< map< Key_plan, unsigned short >::const_iterator > & vec)"Returns true if the iterator belongs to the vector passed as parameter. 
+.PP
+Definition at line 78 of file Builder_visit_sequences.cpp.
+.PP
+Referenced by genevalmag::Builder_visit_sequences::gen_visit_seq(), merge_vec(), and merge_vec_without_plan().
+.SS "bool genevalmag::check_eq_defines_it (const Symbol * symb, const int index, const Attribute * attr, const map< unsigned short, Equation > eqs)"Checks if exist an equation that define the instance formed with the parameters. 
+.PP
+Definition at line 469 of file Semantics_checks.cpp.
+.PP
+References genevalmag::Attribute::equals(), and genevalmag::Symbol::equals().
+.PP
+Referenced by genevalmag::Semantics_checks::check_well_defined_AG().
+.SS "bool genevalmag::check_file_exist (const string & strFilename)"
+.PP
+Definition at line 116 of file maggen.cpp.
+.PP
+Referenced by parse_parameters().
+.SS "bool genevalmag::check_name (const string & strFilename)"
+.PP
+Definition at line 128 of file maggen.cpp.
+.PP
+Referenced by parse_parameters().
+.SS "void genevalmag::check_well_defined (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 654 of file Semantics_actions.cpp.
+.PP
+References attr_grammar, genevalmag::Semantics_checks::check_all_defined_non_terminal(), genevalmag::Semantics_checks::check_reachability(), genevalmag::Semantics_checks::check_well_defined_AG(), genevalmag::Attr_grammar::get_initial_symb(), genevalmag::Attr_grammar::get_non_terminal_symbols(), genevalmag::Attr_grammar::get_rules(), and sem_check.
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_abbreviated_rule (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 253 of file Semantics_actions.cpp.
+.PP
+References current_rule, genevalmag::Rule::get_left_symbol(), and genevalmag::Rule::set_left_symbol().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_attributes (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 204 of file Semantics_actions.cpp.
+.PP
+References genevalmag::Attr_grammar::add_attribute(), attr_grammar, genevalmag::decl_attribute::d_member_symbol, genevalmag::decl_attribute::d_mod_type, genevalmag::decl_attribute::d_names, genevalmag::decl_attribute::d_sort_type, new_attrs, genevalmag::Attr_grammar::return_sort(), genevalmag::Attribute::set_member_symbol(), genevalmag::Attribute::set_mod_type(), genevalmag::Attribute::set_name(), and genevalmag::Attribute::set_sort_type().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_bool (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 361 of file Semantics_actions.cpp.
+.PP
+References current_literal, k_bool, genevalmag::Expr_literal::set_type(), genevalmag::Expression::set_type_synthetized(), and genevalmag::Expr_literal::set_value().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_equation (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 385 of file Semantics_actions.cpp.
+.PP
+References current_eq, current_instance, and genevalmag::Equation::set_l_value().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_func_node (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 459 of file Semantics_actions.cpp.
+.PP
+References current_ast_function, current_func, genevalmag::Semantics_checks::get_index_syntax_order(), genevalmag::Semantics_checks::get_precedence_level(), genevalmag::Semantics_checks::increment_index_syntax_order(), sem_check, genevalmag::Expr_function::set_function(), genevalmag::Expr_function::set_precedence_level(), genevalmag::Expr_function::set_syntax_order(), and stack_inner_node.
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_function (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 373 of file Semantics_actions.cpp.
+.PP
+References current_func, and save_name_func().
+.PP
+Referenced by create_operator(), and genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_instance (const iterator_t str, const iterator_t end)"Methods and functions for parse \fBEquation\fP class of \fBRule\fP. 
+.PP
+Definition at line 268 of file Semantics_actions.cpp.
+.PP
+References attr_grammar, genevalmag::Rule::belongs_non_terminal(), utilities::cleaning_tabs(), current_instance, current_rule, genevalmag::Attr_grammar::get_symbol(), genevalmag::Expr_instance::set_symb(), and genevalmag::Rule::to_string_not_eqs().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_instance_node (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 450 of file Semantics_actions.cpp.
+.PP
+References current_instance, genevalmag::Expr_instance::get_attr(), genevalmag::Sort::get_name(), genevalmag::Attribute::get_sort_type(), genevalmag::Expression::set_type_synthetized(), and stack_node.
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_lit_ch (const iterator_t ch, const iterator_t end)"
+.PP
+Definition at line 333 of file Semantics_actions.cpp.
+.PP
+References current_literal, k_char, genevalmag::Expr_literal::set_type(), genevalmag::Expression::set_type_synthetized(), and genevalmag::Expr_literal::set_value().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_lit_number (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 309 of file Semantics_actions.cpp.
+.PP
+References current_literal, k_float, k_int, genevalmag::Expr_literal::set_type(), genevalmag::Expression::set_type_synthetized(), and genevalmag::Expr_literal::set_value().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_lit_str (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 347 of file Semantics_actions.cpp.
+.PP
+References current_literal, k_string, genevalmag::Expr_literal::set_type(), genevalmag::Expression::set_type_synthetized(), and genevalmag::Expr_literal::set_value().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_literal_node (const iterator_t str, const iterator_t end)"Creation expression nodes. 
+.PP
+Definition at line 443 of file Semantics_actions.cpp.
+.PP
+References current_literal, and stack_node.
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_new_non_terminal (const iterator_t str, const iterator_t end)"Methods and functions for parse \fBSymbol\fP class. 
+.PP
+Definition at line 223 of file Semantics_actions.cpp.
+.PP
+References genevalmag::Attr_grammar::add_symbol(), attr_grammar, and k_non_terminal.
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_new_terminal (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 230 of file Semantics_actions.cpp.
+.PP
+References genevalmag::Attr_grammar::add_symbol(), attr_grammar, and k_terminal.
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_operator (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 379 of file Semantics_actions.cpp.
+.PP
+References create_function(), current_func, IS_OPERATOR(), and genevalmag::Function::set_is_operator().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_root_function_node (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 524 of file Semantics_actions.cpp.
+.PP
+References attr_grammar, genevalmag::Attr_grammar::get_function(), stack_inner_node, and stack_node.
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_root_infix_node (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 477 of file Semantics_actions.cpp.
+.PP
+References attr_grammar, genevalmag::Semantics_checks::correct_precedence(), genevalmag::Attr_grammar::get_function(), sem_check, stack_inner_node, and stack_node.
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_root_postfix_node (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 574 of file Semantics_actions.cpp.
+.PP
+References attr_grammar, genevalmag::Semantics_checks::correct_precedence(), genevalmag::Attr_grammar::get_function(), sem_check, stack_inner_node, and stack_node.
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_root_prefix_node (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 614 of file Semantics_actions.cpp.
+.PP
+References attr_grammar, genevalmag::Semantics_checks::correct_precedence(), genevalmag::Attr_grammar::get_function(), sem_check, stack_inner_node, and stack_node.
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_rule (const iterator_t str, const iterator_t end)"Methods and functions for parse \fBRule\fP class. 
+.PP
+Definition at line 240 of file Semantics_actions.cpp.
+.PP
+References attr_grammar, current_rule, genevalmag::Attr_grammar::get_symbol(), and genevalmag::Rule::set_left_symbol().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::create_sort (const iterator_t str, const iterator_t end)"Methods and functions for parse \fBSort\fP class. 
+.PP
+Definition at line 85 of file Semantics_actions.cpp.
+.PP
+References genevalmag::Attr_grammar::add_sort(), attr_grammar, and genevalmag::Sort::to_string().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::decrement_level (char name)"
+.PP
+Definition at line 668 of file Semantics_actions.cpp.
+.PP
+References genevalmag::Semantics_checks::decrement_precedence_level(), and sem_check.
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "const string genevalmag::DEFAULT_FILE_NAME ('mag_eval')"Default name of the files generated by the library. 
+.PP
+Referenced by main().
+.SS "const string genevalmag::DEFAULT_INPUT_FILE ('/tmp/.input_maggen_default')"Default input file. 
+.PP
+Referenced by main().
+.SS "const string genevalmag::DEFAULT_PATH ('./out_maggen/')"Default output path of the generation code. 
+.PP
+Referenced by main().
+.SS "bool genevalmag::defined_work (const vector< Item_work > & list, const Item_work & item_work)"Searchs in the list the item work that passed as parameter, if it find return true, otherwise false. 
+.PP
+Definition at line 338 of file Builder_plans.cpp.
+.PP
+Referenced by genevalmag::Builder_plans::generate_plans().
+.SS "const string genevalmag::FILE_ADP_GRAPH ('_adp_graph')"
+.PP
+Referenced by genevalmag::Builder_graphs::save_adp_graphs().
+.SS "const string genevalmag::FILE_ADP_SUBGRAPH_CYCLIC ('_adp_subgraph_with_cyclic')"
+.PP
+Referenced by genevalmag::Builder_graphs::save_cyclic_graphs().
+.SS "const string genevalmag::FILE_DCG_GRAPH ('_dcg_graph')"
+.PP
+Referenced by genevalmag::Builder_graphs::save_dcg_graphs().
+.SS "const string genevalmag::FILE_DOWN_GRAPH ('_down_graph')"
+.PP
+Referenced by genevalmag::Builder_graphs::save_down_graphs().
+.SS "const string genevalmag::FILE_DP_GRAPH ('_dp_graph')"
+.PP
+Referenced by genevalmag::Builder_graphs::save_dp_graphs().
+.SS "const string genevalmag::FILE_GRAMMAR ('Grammar_mag.log')"
+.PP
+Referenced by genevalmag::Parser_AG::save_grammar_file().
+.SS "string genevalmag::generate_expr_text (const Expression * node, const Rule & rule)"Generates the plain text of a equation of this rule. 
+.PP
+Definition at line 643 of file Builder_code.cpp.
+.PP
+References genevalmag::Symbol::equals(), genevalmag::Expr_instance::get_attr(), genevalmag::Expr_node::get_child(), genevalmag::Expr_node::get_childs(), genevalmag::Expr_function::get_function(), genevalmag::Rule::get_left_symbol(), genevalmag::Attribute::get_name(), genevalmag::Symbol::get_name(), genevalmag::Function::get_name(), genevalmag::Rule::get_non_terminals_right_side(), genevalmag::Expr_instance::get_num(), genevalmag::Expr_instance::get_symb(), genevalmag::Expr_function::is_infix(), genevalmag::Function::is_operator(), genevalmag::Expr_function::is_postfix(), genevalmag::Expr_function::is_prefix(), and genevalmag::Expr_literal::to_string().
+.PP
+Referenced by genevalmag::Builder_code::generate_all_methods_eqs().
+.SS "string genevalmag::generate_key_plan (string & text, const string & n_key, const int & num_key, const Key_plan & k_p)"Generate a key plan with the parameters. 
+.PP
+Definition at line 306 of file Builder_code.cpp.
+.PP
+References genevalmag::k_plan::id_plan, and genevalmag::k_plan::plan.
+.PP
+Referenced by genevalmag::Builder_code::generate_initialize_plan_proj(), and genevalmag::Builder_code::generate_initialize_plans().
+.SS "string genevalmag::generate_return_index_context ()"Generates the return_index_context method, for get the index of a context rule. 
+.PP
+Definition at line 569 of file Builder_code.cpp.
+.PP
+Referenced by genevalmag::Builder_code::generate_methods().
+.SS "int genevalmag::get_index (string name_symb, vector< string > non_term)"Returns the index in the vector of the symbol with these name. 
+.PP
+Definition at line 387 of file Semantics_checks.cpp.
+.PP
+Referenced by genevalmag::Semantics_checks::check_reachability().
+.SS "void genevalmag::get_inherits_of (const Symbol * symb, const vector< Expr_instance > & computed, vector< Expr_instance > & rec_child)"Obtains the instances of inherit attributes that this symbol. 
+.PP
+Definition at line 61 of file Builder_visit_sequences.cpp.
+.PP
+Referenced by genevalmag::Builder_visit_sequences::gen_visit_seq().
+.SS "void genevalmag::increment_level (char name)"
+.PP
+Definition at line 663 of file Semantics_actions.cpp.
+.PP
+References genevalmag::Semantics_checks::increment_precedence_level(), and sem_check.
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::inic_func (const iterator_t str, const iterator_t end)"Methods and functions for parse \fBFunction\fP. 
+.PP
+Definition at line 98 of file Semantics_actions.cpp.
+.PP
+References current_func.
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "bool genevalmag::ins_attr_computed (const Expr_instance * ins, const vector< Expr_instance > & vec)"Searches this instance on the list passed as parameter. If found the instance return true. 
+.PP
+Definition at line 46 of file Builder_visit_sequences.cpp.
+.PP
+Referenced by genevalmag::Builder_visit_sequences::gen_visit_seq().
+.SS "const bool genevalmag::IS_OPERATOR (true)"This constant is used for set a function on operator. 
+.PP
+Referenced by add_operator(), and create_operator().
+.SS "const unsigned short genevalmag::LEAVE (0)"
+.PP
+Referenced by genevalmag::Builder_visit_sequences::gen_visit_seq().
+.SS "void genevalmag::merge_vec (const vector< map< Key_plan, unsigned short >::const_iterator > & vec_source, vector< map< Key_plan, unsigned short >::const_iterator > & vec_targed)"Merge two vector in the vec_target argument. 
+.PP
+Definition at line 93 of file Builder_visit_sequences.cpp.
+.PP
+References belong_it().
+.PP
+Referenced by genevalmag::Builder_visit_sequences::gen_visit_seq(), and genevalmag::Builder_visit_sequences::generate_visit_sequences().
+.SS "void genevalmag::merge_vec_without_plan (const vector< map< Key_plan, unsigned short >::const_iterator > & vec_source, vector< map< Key_plan, unsigned short >::const_iterator > & vec_targed, const map< Key_plan, unsigned short >::const_iterator & plan)"Merge two vector in the vec_target argument without the iterator passed as parameter. 
+.PP
+Definition at line 117 of file Builder_visit_sequences.cpp.
+.PP
+References belong_it().
+.PP
+Referenced by genevalmag::Builder_visit_sequences::gen_visit_seq().
+.SS "std::ostream& genevalmag::operator<< (std::ostream & out, file_position const & lc)"Our error reporting parsers 
+.PP
+Definition at line 54 of file Parser_AG.cpp.
+.SS "bool genevalmag::parse_parameters (int argc, char * argv[], string & path_input_file, string & path_folder_output, string & name_library, vector< string > & headers)"maggen [OPTIONS] where OPTIONS include: -f file Define the input file of the tool. Othercase, uses the standart input (cin). -i header Including header '.h' or '.hpp' file for resolve externs variables in generated code. -fo folder Defines the folder output for output generated information. Othercase, uses './out_maggen/'. -o name Defines the names files generated tool. Otherwise, uses 'mag_eval'. -h Show this help message. 
+.PP
+Definition at line 165 of file maggen.cpp.
+.PP
+References check_file_exist(), check_name(), and show_help_information().
+.PP
+Referenced by main().
+.SS "const string genevalmag::PATH_OUT_PLAN ('plans/')"Defaults path to saves evaluation plans y their projections. 
+.PP
+Referenced by genevalmag::Builder_plans::save_all_plans().
+.SS "const string genevalmag::PATH_OUT_PLAN_PROJECT ('plans_project/')"
+.PP
+Referenced by genevalmag::Builder_plans::save_all_plans_project().
+.SS "const string genevalmag::PATH_OUTPUT_ADP ('4_ADP_graphs/')"
+.PP
+Referenced by genevalmag::Builder_graphs::save_adp_graphs().
+.SS "const string genevalmag::PATH_OUTPUT_CYCLIC ('CYCLIC_graphs/')"
+.PP
+Referenced by genevalmag::Builder_graphs::save_cyclic_graphs().
+.SS "const string genevalmag::PATH_OUTPUT_DCG ('3_DCG_graphs/')"
+.PP
+Referenced by genevalmag::Builder_graphs::save_dcg_graphs().
+.SS "const string genevalmag::PATH_OUTPUT_DOWN ('2_DOWN_graphs/')"
+.PP
+Referenced by genevalmag::Builder_graphs::save_down_graphs().
+.SS "const string genevalmag::PATH_OUTPUT_DP ('1_DP_graphs/')"
+.PP
+Referenced by genevalmag::Builder_graphs::save_dp_graphs().
+.SS "const string genevalmag::PATH_OUTPUT_GRAPHS ('graphs/')"
+.PP
+Referenced by genevalmag::Builder_graphs::save_all_graphs(), and genevalmag::Builder_graphs::save_cyclic_graphs().
+.SS "void genevalmag::plan_family_computed (const vector< map< Key_plan, unsigned short >::const_iterator > & plans_computed, vector< unsigned short > & visit_seq_computed)"Converts the vector of iterators over evaluations plans, in their indexs inside of plans uniques. 
+.PP
+Definition at line 144 of file Builder_visit_sequences.cpp.
+.PP
+References utilities::belong_index().
+.PP
+Referenced by genevalmag::Builder_visit_sequences::gen_visit_seq(), and genevalmag::Builder_visit_sequences::generate_visit_sequences().
+.SS "void genevalmag::purge_plan_with (const Rule & rule, const Order_eval_eq & order_eq, Order_eval_eq & purged_order)"Copy in the result vector all equations belonging to the rule passed as parameter. 
+.PP
+Definition at line 321 of file Builder_plans.cpp.
+.PP
+References utilities::belong_index(), and genevalmag::Rule::get_eq().
+.PP
+Referenced by genevalmag::Builder_plans::generate_plans().
+.SS "void genevalmag::push_mark (char name)"
+.PP
+Definition at line 429 of file Semantics_actions.cpp.
+.PP
+References current_literal, genevalmag::Expression::set_type_synthetized(), genevalmag::Expr_literal::set_value(), and stack_node.
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "unsigned short genevalmag::return_index_vec (const Order_eval_eq & order, vector< Order_eval_eq > & vec)"Returns the index in the vector, or inserts in the last position. 
+.PP
+Definition at line 370 of file Builder_plans.cpp.
+.PP
+Referenced by genevalmag::Builder_plans::return_index_plan(), and genevalmag::Builder_plans::return_index_plan_p().
+.SS "void genevalmag::save_assoc_op (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 152 of file Semantics_actions.cpp.
+.PP
+References current_func, and genevalmag::Function::set_oper_assoc().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::save_attr_ins (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 298 of file Semantics_actions.cpp.
+.PP
+References current_instance, genevalmag::Expr_instance::get_attr(), genevalmag::Symbol::get_attribute(), genevalmag::Expr_instance::get_symb(), and genevalmag::Expr_instance::set_attr().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::save_domain_func (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 120 of file Semantics_actions.cpp.
+.PP
+References genevalmag::Function::add_domain(), attr_grammar, current_func, and genevalmag::Attr_grammar::return_sort().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::save_image_func (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 126 of file Semantics_actions.cpp.
+.PP
+References attr_grammar, current_func, genevalmag::Attr_grammar::return_sort(), and genevalmag::Function::set_image().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::save_index_ins (int const  index)"
+.PP
+Definition at line 288 of file Semantics_actions.cpp.
+.PP
+References genevalmag::Rule::count_non_terminal(), current_instance, current_rule, genevalmag::Symbol::get_name(), genevalmag::Expr_instance::get_symb(), and genevalmag::Expr_instance::set_num().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::save_member_list_attr (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 195 of file Semantics_actions.cpp.
+.PP
+References genevalmag::decl_attribute::d_member_symbol, and new_attrs.
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::save_mode_op (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 141 of file Semantics_actions.cpp.
+.PP
+References current_func, and genevalmag::Function::set_mode().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::save_name_func (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 114 of file Semantics_actions.cpp.
+.PP
+References current_func, and genevalmag::Function::set_name().
+.PP
+Referenced by create_function(), and genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::save_prec_op (int const  prec)"
+.PP
+Definition at line 147 of file Semantics_actions.cpp.
+.PP
+References current_func, and genevalmag::Function::set_prec().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::save_right_side_rule (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 247 of file Semantics_actions.cpp.
+.PP
+References genevalmag::Rule::add_right_symbol(), attr_grammar, current_rule, and genevalmag::Attr_grammar::get_symbol().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::save_rule (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 259 of file Semantics_actions.cpp.
+.PP
+References genevalmag::Attr_grammar::add_rule(), attr_grammar, and current_rule.
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::save_rvalue (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 393 of file Semantics_actions.cpp.
+.PP
+References genevalmag::Rule::add_eq(), utilities::cleaning_tabs(), genevalmag::Semantics_checks::correct_associativity(), current_eq, current_rule, genevalmag::Expr_instance::get_attr(), genevalmag::Equation::get_l_value(), genevalmag::Sort::get_name(), genevalmag::Attribute::get_sort_type(), genevalmag::Semantics_checks::reset_semantic_context(), sem_check, genevalmag::Equation::set_r_value(), stack_node, genevalmag::Expr_instance::to_string(), genevalmag::Equation::to_string(), and genevalmag::Rule::to_string_not_eqs().
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::save_sort_attr (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 180 of file Semantics_actions.cpp.
+.PP
+References genevalmag::decl_attribute::d_sort_type, and new_attrs.
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::save_type_attr (const iterator_t str, const iterator_t end)"
+.PP
+Definition at line 186 of file Semantics_actions.cpp.
+.PP
+References genevalmag::decl_attribute::d_mod_type, k_inherit, and new_attrs.
+.PP
+Referenced by genevalmag::attritute_grammar::definition< ScannerT >::definition().
+.SS "void genevalmag::set_attr_grammar (Attr_grammar * at_grammar)"Sets attribute attr_grammar. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIat_grammar\fP Sets attribute attr_grammar. 
+.RE
+.PP
+
+.PP
+Definition at line 33 of file Semantics_actions.cpp.
+.PP
+References attr_grammar.
+.PP
+Referenced by genevalmag::Parser_AG::parse_grammar().
+.SS "void genevalmag::set_sem_check (Semantics_checks * s_check)"Sets attribute sem_check. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIs_check\fP Sets attribute sem_check. 
+.RE
+.PP
+
+.PP
+Definition at line 41 of file Semantics_actions.cpp.
+.PP
+References sem_check.
+.PP
+Referenced by genevalmag::Parser_AG::parse_grammar().
+.SS "void genevalmag::show_help_information ()"
+.PP
+Definition at line 144 of file maggen.cpp.
+.PP
+Referenced by main(), and parse_parameters().
+.SS "int genevalmag::swap_root_child (Expr_function ** old_root, int i_new_root)"Precedence Section. Swaps the root for a left/right child with the correspondent rotations.
+.PP
+Case 1 A(op) B(op) / \\ / \\ B C --------> D A / \\ / \\ D E E C
+.PP
+Case 2 A(op) C(op) / \\ / \\ B C --------> A E / \\ / \\ D E B D 
+.PP
+Definition at line 107 of file Semantics_checks.cpp.
+.PP
+Referenced by genevalmag::Semantics_checks::correct_associativity(), genevalmag::Semantics_checks::correct_precedence(), and genevalmag::Semantics_checks::correct_subtree().
+.SS "int genevalmag::swap_root_grandson (Expr_function ** old_root)"Swaps the root for left-most grandson.
+.PP
+A (op) B(op) / \\ / \\ B C --------> D E / \\ \\ D E(op) A \\ / \\ F F C 
+.PP
+Definition at line 145 of file Semantics_checks.cpp.
+.PP
+Referenced by genevalmag::Semantics_checks::correct_precedence().
+.SS "double genevalmag::timeval_diff (struct timeval * a, struct timeval * b)"
+.PP
+Definition at line 109 of file maggen.cpp.
+.PP
+Referenced by main().
+.SS "template<class K , class T > const string genevalmag::to_string_map (const map< K, T > & map_elem)\fC [inline]\fP"Operation template that print each element type T of the parameter map.
+.PP
+Returns the string representation of all elements of the map. 
+.PP
+Definition at line 54 of file Attr_grammar.cpp.
+.SS "void genevalmag::warshall_algorithm (const unsigned int size, bool * matrix_plain)"Computes the closure transitive with the Warshall algorithm. 
+.PP
+Definition at line 367 of file Semantics_checks.cpp.
+.PP
+Referenced by genevalmag::Semantics_checks::check_reachability().
+.SS "template<class T > string genevalmag::write_vector_with_inic (string & text_buffer, const string name_vec, const size_t index, const vector< T > & vec, const string type_vec, const string type_array)\fC [inline]\fP"Generates the initialice of an array of type T, with the elements of the vector, and create a new vector with this array. 
+.PP
+Definition at line 227 of file Builder_code.cpp.
+.SH "Variable Documentation"
+.PP 
+.SS "\fBAttr_grammar\fP* \fBgenevalmag::attr_grammar\fP"
+.PP
+Definition at line 26 of file Semantics_actions.cpp.
+.PP
+Referenced by add_function(), check_well_defined(), create_attributes(), create_instance(), create_new_non_terminal(), create_new_terminal(), create_root_function_node(), create_root_infix_node(), create_root_postfix_node(), create_root_prefix_node(), create_rule(), create_sort(), genevalmag::Builder_visit_sequences::gen_visit_seq(), save_domain_func(), save_image_func(), save_right_side_rule(), save_rule(), and set_attr_grammar().
+.SS "\fBExpr_function\fP* \fBgenevalmag::current_ast_function\fP"
+.PP
+Definition at line 72 of file Semantics_actions.cpp.
+.PP
+Referenced by create_func_node().
+.SS "\fBEquation\fP* \fBgenevalmag::current_eq\fP"
+.PP
+Definition at line 73 of file Semantics_actions.cpp.
+.PP
+Referenced by create_equation(), and save_rvalue().
+.SS "\fBFunction\fP* \fBgenevalmag::current_func\fP"Pointer that reference a new function in the grammar. 
+.PP
+Definition at line 49 of file Semantics_actions.cpp.
+.PP
+Referenced by add_function(), add_operator(), create_func_node(), create_function(), create_operator(), inic_func(), save_assoc_op(), save_domain_func(), save_image_func(), save_mode_op(), save_name_func(), and save_prec_op().
+.SS "\fBExpr_instance\fP* \fBgenevalmag::current_instance\fP"Pointer to the last instance of attribute to parse successfully. 
+.PP
+Definition at line 70 of file Semantics_actions.cpp.
+.PP
+Referenced by create_equation(), create_instance(), create_instance_node(), save_attr_ins(), and save_index_ins().
+.SS "\fBExpr_literal\fP* \fBgenevalmag::current_literal\fP"
+.PP
+Definition at line 71 of file Semantics_actions.cpp.
+.PP
+Referenced by create_bool(), create_lit_ch(), create_lit_number(), create_lit_str(), create_literal_node(), and push_mark().
+.SS "\fBRule\fP* \fBgenevalmag::current_rule\fP"Pointer that reference a current rule parsed in the grammar. 
+.PP
+Definition at line 65 of file Semantics_actions.cpp.
+.PP
+Referenced by genevalmag::Builder_graphs::compute_adp_graph(), genevalmag::Builder_graphs::compute_dcg(), genevalmag::Builder_graphs::compute_down_graph(), create_abbreviated_rule(), create_instance(), create_rule(), genevalmag::Builder_graphs::save_dcg_graphs(), genevalmag::Builder_graphs::save_dp_graphs(), save_index_ins(), save_right_side_rule(), save_rule(), and save_rvalue().
+.SS "vector<\fBEquation\fP*> \fBgenevalmag::index_access_eq\fP"
+.PP
+Definition at line 20 of file Rule.cpp.
+.SS "struct \fBgenevalmag::decl_attribute\fP * \fBgenevalmag::new_attrs\fP"Type that represent the structure of a full declaration of one \fBAttribute\fP. 
+.PP
+Referenced by add_attribute(), create_attributes(), save_member_list_attr(), save_sort_attr(), and save_type_attr().
+.SS "\fBSemantics_checks\fP* \fBgenevalmag::sem_check\fP"
+.PP
+Definition at line 28 of file Semantics_actions.cpp.
+.PP
+Referenced by check_well_defined(), create_func_node(), create_root_infix_node(), create_root_postfix_node(), create_root_prefix_node(), decrement_level(), increment_level(), save_rvalue(), and set_sem_check().
+.SS "vector<\fBExpr_node\fP*> \fBgenevalmag::stack_inner_node\fP"
+.PP
+Definition at line 79 of file Semantics_actions.cpp.
+.PP
+Referenced by create_func_node(), create_root_function_node(), create_root_infix_node(), create_root_postfix_node(), and create_root_prefix_node().
+.SS "vector<\fBExpression\fP*> \fBgenevalmag::stack_node\fP"Stacks for expression precedence manager. 
+.PP
+Definition at line 78 of file Semantics_actions.cpp.
+.PP
+Referenced by create_instance_node(), create_literal_node(), create_root_function_node(), create_root_infix_node(), create_root_postfix_node(), create_root_prefix_node(), push_mark(), and save_rvalue().
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

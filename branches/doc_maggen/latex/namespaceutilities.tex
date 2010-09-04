@@ -1,0 +1,439 @@
+\hypertarget{namespaceutilities}{
+\section{utilities Namespace Reference}
+\label{namespaceutilities}\index{utilities@{utilities}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{namespaceutilities_a87fbb9605f1b59c54b95e708e1e9935b}{create\_\-folder} (const string path)
+\item 
+bool \hyperlink{namespaceutilities_a28f2ace508b6ea5bc7af05b84f0b2487}{clean\_\-output\_\-folder} (const string path)
+\item 
+bool \hyperlink{namespaceutilities_a3800a71dd15748ff83861140b4119b24}{copy\_\-static\_\-code} (const string path\_\-d, const string path\_\-s)
+\item 
+void \hyperlink{namespaceutilities_a0e49bfde1f01bb5567770fc492e6929f}{generate\_\-names\_\-instance} (const Graph \&graph, string datas\mbox{[}$\,$\mbox{]}, size\_\-t size\_\-d)
+\item 
+void \hyperlink{namespaceutilities_ac88e50b1c88f16e0d052555d773b7be5}{generate\_\-names\_\-attr} (const Graph \&graph, string datas\mbox{[}$\,$\mbox{]}, size\_\-t size\_\-d)
+\item 
+void \hyperlink{namespaceutilities_ae0c73d526799122fa0d85cd45b6d4fbb}{print\_\-graph} (const Graph \&graph, const string path, const string name\_\-file, const string name\_\-graph, const string names\mbox{[}$\,$\mbox{]}, string shape\_\-vertex)
+\item 
+Vertex \hyperlink{namespaceutilities_a13764073c6966781a6680ab58d88c1b5}{return\_\-vertex} (const Graph \&graph, const \hyperlink{classgenevalmag_1_1Expr__leaf}{Expr\_\-leaf} $\ast$node)
+\item 
+void \hyperlink{namespaceutilities_ad0de56d624d099e4d9a5f605ca80b2e5}{merge\_\-graph} (const Graph \&graph1, const Graph \&graph2, Graph \&graph\_\-merged)
+\item 
+void \hyperlink{namespaceutilities_af78e9e1ebc91d6896a01f45d611cca0a}{project\_\-graph} (const \hyperlink{classgenevalmag_1_1Symbol}{Symbol} $\ast$symb, Graph \&graph)
+\item 
+string \hyperlink{namespaceutilities_a644dfdb507e47adf60e6984d28e080fd}{cleaning\_\-tabs} (const string str)
+\item 
+string \hyperlink{namespaceutilities_a21bbcd26f651d4ceb798b50af71c7b29}{write\_\-inf\_\-context} (const vector$<$ unsigned short $>$ \&context\_\-vec)
+\item 
+bool \hyperlink{namespaceutilities_aa452cf7f1132b5d667bdeefffb33425f}{belong\_\-index} (const unsigned short \&index, const vector$<$ unsigned short $>$ \&vec)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespaceutilities_aa452cf7f1132b5d667bdeefffb33425f}{
+\index{utilities@{utilities}!belong\_\-index@{belong\_\-index}}
+\index{belong\_\-index@{belong\_\-index}!utilities@{utilities}}
+\subsubsection[{belong\_\-index}]{\setlength{\rightskip}{0pt plus 5cm}bool utilities::belong\_\-index (const unsigned short \& {\em index}, \/  const vector$<$ unsigned short $>$ \& {\em vec})}}
+\label{namespaceutilities_aa452cf7f1132b5d667bdeefffb33425f}
+Seachs a index in a vector. 
+\begin{DoxyParams}{Parameters}
+\item[{\em index}]\item[{\em vec}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 211 of file Utilities.cpp.
+
+
+
+Referenced by genevalmag::Builder\_\-visit\_\-sequences::gen\_\-visit\_\-seq(), genevalmag::Builder\_\-visit\_\-sequences::generate\_\-visit\_\-sequences(), genevalmag::plan\_\-family\_\-computed(), and genevalmag::purge\_\-plan\_\-with().
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespaceutilities_aa452cf7f1132b5d667bdeefffb33425f_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespaceutilities_a28f2ace508b6ea5bc7af05b84f0b2487}{
+\index{utilities@{utilities}!clean\_\-output\_\-folder@{clean\_\-output\_\-folder}}
+\index{clean\_\-output\_\-folder@{clean\_\-output\_\-folder}!utilities@{utilities}}
+\subsubsection[{clean\_\-output\_\-folder}]{\setlength{\rightskip}{0pt plus 5cm}bool utilities::clean\_\-output\_\-folder (const string {\em path})}}
+\label{namespaceutilities_a28f2ace508b6ea5bc7af05b84f0b2487}
+Remove and create the output folder of files .dot and .png. 
+\begin{DoxyParams}{Parameters}
+\item[{\em path}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Remove and create the output folder of files .dot and .png. 
+
+Definition at line 41 of file Utilities.cpp.
+
+
+
+References create\_\-folder().
+
+
+
+Referenced by genevalmag::Maglib::gen\_\-evaluator(), genevalmag::Builder\_\-graphs::save\_\-adp\_\-graphs(), genevalmag::Builder\_\-graphs::save\_\-all\_\-graphs(), genevalmag::Builder\_\-plans::save\_\-all\_\-plans(), genevalmag::Builder\_\-plans::save\_\-all\_\-plans\_\-project(), genevalmag::Builder\_\-graphs::save\_\-cyclic\_\-graphs(), genevalmag::Builder\_\-graphs::save\_\-dcg\_\-graphs(), genevalmag::Builder\_\-graphs::save\_\-down\_\-graphs(), and genevalmag::Builder\_\-graphs::save\_\-dp\_\-graphs().
+
+
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=164pt]{namespaceutilities_a28f2ace508b6ea5bc7af05b84f0b2487_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespaceutilities_a28f2ace508b6ea5bc7af05b84f0b2487_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespaceutilities_a644dfdb507e47adf60e6984d28e080fd}{
+\index{utilities@{utilities}!cleaning\_\-tabs@{cleaning\_\-tabs}}
+\index{cleaning\_\-tabs@{cleaning\_\-tabs}!utilities@{utilities}}
+\subsubsection[{cleaning\_\-tabs}]{\setlength{\rightskip}{0pt plus 5cm}string utilities::cleaning\_\-tabs (const string {\em str})}}
+\label{namespaceutilities_a644dfdb507e47adf60e6984d28e080fd}
+Remove tabs and replace for spaces. 
+\begin{DoxyParams}{Parameters}
+\item[{\em str}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Remove tabs and replace for spaces. 
+
+Definition at line 226 of file Utilities.cpp.
+
+
+
+Referenced by genevalmag::create\_\-instance(), genevalmag::Builder\_\-code::generate\_\-all\_\-methods\_\-eqs(), genevalmag::Builder\_\-graphs::save\_\-adp\_\-graphs(), genevalmag::Builder\_\-plans::save\_\-all\_\-plans(), genevalmag::Builder\_\-plans::save\_\-all\_\-plans\_\-project(), genevalmag::Builder\_\-graphs::save\_\-cyclic\_\-graphs(), genevalmag::Builder\_\-graphs::save\_\-dcg\_\-graphs(), genevalmag::Builder\_\-graphs::save\_\-dp\_\-graphs(), and genevalmag::save\_\-rvalue().
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespaceutilities_a644dfdb507e47adf60e6984d28e080fd_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespaceutilities_a3800a71dd15748ff83861140b4119b24}{
+\index{utilities@{utilities}!copy\_\-static\_\-code@{copy\_\-static\_\-code}}
+\index{copy\_\-static\_\-code@{copy\_\-static\_\-code}!utilities@{utilities}}
+\subsubsection[{copy\_\-static\_\-code}]{\setlength{\rightskip}{0pt plus 5cm}bool utilities::copy\_\-static\_\-code (const string {\em path\_\-d}, \/  const string {\em path\_\-s})}}
+\label{namespaceutilities_a3800a71dd15748ff83861140b4119b24}
+Copies the static file to the generation path. 
+\begin{DoxyParams}{Parameters}
+\item[{\em path\_\-d}]\item[{\em path\_\-s}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Copies the static file to the generation path. 
+
+Definition at line 57 of file Utilities.cpp.
+
+
+
+Referenced by genevalmag::Builder\_\-code::generate\_\-code().
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=206pt]{namespaceutilities_a3800a71dd15748ff83861140b4119b24_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespaceutilities_a87fbb9605f1b59c54b95e708e1e9935b}{
+\index{utilities@{utilities}!create\_\-folder@{create\_\-folder}}
+\index{create\_\-folder@{create\_\-folder}!utilities@{utilities}}
+\subsubsection[{create\_\-folder}]{\setlength{\rightskip}{0pt plus 5cm}bool utilities::create\_\-folder (const string {\em path})}}
+\label{namespaceutilities_a87fbb9605f1b59c54b95e708e1e9935b}
+Create the folder passed as parameter. 
+\begin{DoxyParams}{Parameters}
+\item[{\em path}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Create the folder passed as parameter. 
+
+Definition at line 26 of file Utilities.cpp.
+
+
+
+Referenced by clean\_\-output\_\-folder().
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespaceutilities_a87fbb9605f1b59c54b95e708e1e9935b_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespaceutilities_ac88e50b1c88f16e0d052555d773b7be5}{
+\index{utilities@{utilities}!generate\_\-names\_\-attr@{generate\_\-names\_\-attr}}
+\index{generate\_\-names\_\-attr@{generate\_\-names\_\-attr}!utilities@{utilities}}
+\subsubsection[{generate\_\-names\_\-attr}]{\setlength{\rightskip}{0pt plus 5cm}void utilities::generate\_\-names\_\-attr (const Graph \& {\em graph}, \/  string {\em datas}\mbox{[}$\,$\mbox{]}, \/  size\_\-t {\em size\_\-d})}}
+\label{namespaceutilities_ac88e50b1c88f16e0d052555d773b7be5}
+Generates the names of vertex for down graph. (The vertex's name is an attribute). 
+\begin{DoxyParams}{Parameters}
+\item[{\em graph}]\item[{\em datas}]\item[{\em size\_\-d}]Generates the names of vertex for down graph. (The vertex's name is an attribute). \end{DoxyParams}
+
+
+Definition at line 88 of file Utilities.cpp.
+
+
+
+Referenced by genevalmag::Builder\_\-graphs::save\_\-down\_\-graphs().
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespaceutilities_ac88e50b1c88f16e0d052555d773b7be5_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespaceutilities_a0e49bfde1f01bb5567770fc492e6929f}{
+\index{utilities@{utilities}!generate\_\-names\_\-instance@{generate\_\-names\_\-instance}}
+\index{generate\_\-names\_\-instance@{generate\_\-names\_\-instance}!utilities@{utilities}}
+\subsubsection[{generate\_\-names\_\-instance}]{\setlength{\rightskip}{0pt plus 5cm}void utilities::generate\_\-names\_\-instance (const Graph \& {\em graph}, \/  string {\em datas}\mbox{[}$\,$\mbox{]}, \/  size\_\-t {\em size\_\-d})}}
+\label{namespaceutilities_a0e49bfde1f01bb5567770fc492e6929f}
+Generates the names of vertex. (The vertex's name is an instance). 
+\begin{DoxyParams}{Parameters}
+\item[{\em graph}]\item[{\em datas}]\item[{\em size\_\-d}]Generates the names of vertex. (The vertex's name is an instance). \end{DoxyParams}
+
+
+Definition at line 75 of file Utilities.cpp.
+
+
+
+Referenced by genevalmag::Builder\_\-graphs::save\_\-adp\_\-graphs(), genevalmag::Builder\_\-graphs::save\_\-cyclic\_\-graphs(), genevalmag::Builder\_\-graphs::save\_\-dcg\_\-graphs(), and genevalmag::Builder\_\-graphs::save\_\-dp\_\-graphs().
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespaceutilities_a0e49bfde1f01bb5567770fc492e6929f_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespaceutilities_ad0de56d624d099e4d9a5f605ca80b2e5}{
+\index{utilities@{utilities}!merge\_\-graph@{merge\_\-graph}}
+\index{merge\_\-graph@{merge\_\-graph}!utilities@{utilities}}
+\subsubsection[{merge\_\-graph}]{\setlength{\rightskip}{0pt plus 5cm}void utilities::merge\_\-graph (const Graph \& {\em graph1}, \/  const Graph \& {\em graph2}, \/  Graph \& {\em graph\_\-merged})}}
+\label{namespaceutilities_ad0de56d624d099e4d9a5f605ca80b2e5}
+Joins graph1 and graph2 in graph\_\-merged. 
+\begin{DoxyParams}{Parameters}
+\item[{\em graph1}]\item[{\em graph2}]\item[{\em graph\_\-merged}]Joins graph1 and graph2 in graph\_\-merged. \end{DoxyParams}
+
+
+Definition at line 152 of file Utilities.cpp.
+
+
+
+References return\_\-vertex().
+
+
+
+Referenced by genevalmag::Builder\_\-graphs::combined\_\-inf\_\-contexts(), genevalmag::Builder\_\-graphs::complete\_\-dp\_\-graphs(), genevalmag::Builder\_\-graphs::compute\_\-dcg(), and genevalmag::Builder\_\-graphs::compute\_\-down\_\-graph().
+
+
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=341pt]{namespaceutilities_ad0de56d624d099e4d9a5f605ca80b2e5_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespaceutilities_ad0de56d624d099e4d9a5f605ca80b2e5_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespaceutilities_ae0c73d526799122fa0d85cd45b6d4fbb}{
+\index{utilities@{utilities}!print\_\-graph@{print\_\-graph}}
+\index{print\_\-graph@{print\_\-graph}!utilities@{utilities}}
+\subsubsection[{print\_\-graph}]{\setlength{\rightskip}{0pt plus 5cm}void utilities::print\_\-graph (const Graph \& {\em graph}, \/  const string {\em path}, \/  const string {\em name\_\-file}, \/  const string {\em name\_\-graph}, \/  const string {\em names}\mbox{[}$\,$\mbox{]}, \/  string {\em shape\_\-vertex})}}
+\label{namespaceutilities_ae0c73d526799122fa0d85cd45b6d4fbb}
+Prints a graph in a file .dot for generate image .spng. 
+\begin{DoxyParams}{Parameters}
+\item[{\em graph}]\item[{\em path}]\item[{\em name\_\-file}]\item[{\em name\_\-graph}]\item[{\em names}]\item[{\em shape\_\-vertex}]Prints a graph in a file .dot for generate image .spng. \end{DoxyParams}
+
+
+Definition at line 102 of file Utilities.cpp.
+
+
+
+Referenced by genevalmag::Builder\_\-graphs::save\_\-adp\_\-graphs(), genevalmag::Builder\_\-plans::save\_\-all\_\-plans(), genevalmag::Builder\_\-plans::save\_\-all\_\-plans\_\-project(), genevalmag::Builder\_\-graphs::save\_\-cyclic\_\-graphs(), genevalmag::Builder\_\-graphs::save\_\-dcg\_\-graphs(), genevalmag::Builder\_\-graphs::save\_\-down\_\-graphs(), and genevalmag::Builder\_\-graphs::save\_\-dp\_\-graphs().
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespaceutilities_ae0c73d526799122fa0d85cd45b6d4fbb_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespaceutilities_af78e9e1ebc91d6896a01f45d611cca0a}{
+\index{utilities@{utilities}!project\_\-graph@{project\_\-graph}}
+\index{project\_\-graph@{project\_\-graph}!utilities@{utilities}}
+\subsubsection[{project\_\-graph}]{\setlength{\rightskip}{0pt plus 5cm}void utilities::project\_\-graph (const {\bf Symbol} $\ast$ {\em symb}, \/  Graph \& {\em graph})}}
+\label{namespaceutilities_af78e9e1ebc91d6896a01f45d611cca0a}
+Projects a graph with only vertex that belongs to symbol \char`\"{}symb\char`\"{}. Modifies the parameter \char`\"{}graph\char`\"{}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em symb}]\item[{\em graph}]Projects a graph with only vertex that belongs to symbol \char`\"{}symb\char`\"{}. Modifies the parameter \char`\"{}graph\char`\"{}. \end{DoxyParams}
+
+
+Definition at line 192 of file Utilities.cpp.
+
+
+
+References genevalmag::Symbol::equals(), genevalmag::Expr\_\-instance::get\_\-num(), and genevalmag::Expr\_\-instance::get\_\-symb().
+
+
+
+Referenced by genevalmag::Builder\_\-graphs::compute\_\-dcg(), and genevalmag::Builder\_\-graphs::compute\_\-down\_\-graph().
+
+
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=272pt]{namespaceutilities_af78e9e1ebc91d6896a01f45d611cca0a_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespaceutilities_af78e9e1ebc91d6896a01f45d611cca0a_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespaceutilities_a13764073c6966781a6680ab58d88c1b5}{
+\index{utilities@{utilities}!return\_\-vertex@{return\_\-vertex}}
+\index{return\_\-vertex@{return\_\-vertex}!utilities@{utilities}}
+\subsubsection[{return\_\-vertex}]{\setlength{\rightskip}{0pt plus 5cm}Vertex utilities::return\_\-vertex (const Graph \& {\em graph}, \/  const {\bf Expr\_\-leaf} $\ast$ {\em node})}}
+\label{namespaceutilities_a13764073c6966781a6680ab58d88c1b5}
+Given a graph and node, returns the vertex descriptor of node in the graph. If not search it, so returns USHRT\_\-MAX. 
+\begin{DoxyParams}{Parameters}
+\item[{\em graph}]\item[{\em node}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Given a graph and node, returns the vertex descriptor of node in the graph. If not search it, so returns USHRT\_\-MAX. 
+
+Definition at line 138 of file Utilities.cpp.
+
+
+
+References genevalmag::Expr\_\-leaf::equals().
+
+
+
+Referenced by genevalmag::Builder\_\-graphs::compute\_\-attr\_\-vertex(), genevalmag::Builder\_\-graphs::compute\_\-dependency\_\-graphs(), genevalmag::Builder\_\-plans::compute\_\-order(), genevalmag::cycle\_\-detector::examine\_\-edge(), and merge\_\-graph().
+
+
+
+Here is the call graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=268pt]{namespaceutilities_a13764073c6966781a6680ab58d88c1b5_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespaceutilities_a13764073c6966781a6680ab58d88c1b5_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{namespaceutilities_a21bbcd26f651d4ceb798b50af71c7b29}{
+\index{utilities@{utilities}!write\_\-inf\_\-context@{write\_\-inf\_\-context}}
+\index{write\_\-inf\_\-context@{write\_\-inf\_\-context}!utilities@{utilities}}
+\subsubsection[{write\_\-inf\_\-context}]{\setlength{\rightskip}{0pt plus 5cm}string utilities::write\_\-inf\_\-context (const vector$<$ unsigned short $>$ \& {\em context\_\-vec})}}
+\label{namespaceutilities_a21bbcd26f651d4ceb798b50af71c7b29}
+Writes inferior contex in a string and returns it. 
+\begin{DoxyParams}{Parameters}
+\item[{\em context\_\-vec}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 236 of file Utilities.cpp.
+
+
+
+Referenced by genevalmag::Builder\_\-graphs::save\_\-adp\_\-graphs(), genevalmag::Builder\_\-plans::save\_\-all\_\-plans(), genevalmag::Builder\_\-plans::save\_\-all\_\-plans\_\-project(), and genevalmag::Builder\_\-graphs::save\_\-cyclic\_\-graphs().
+
+
+
+Here is the caller graph for this function:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=420pt]{namespaceutilities_a21bbcd26f651d4ceb798b50af71c7b29_icgraph}
+\end{center}
+\end{figure}
+
+

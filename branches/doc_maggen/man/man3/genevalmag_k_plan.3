@@ -1,0 +1,110 @@
+.TH "genevalmag::k_plan" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::k_plan \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Builder_plans.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBoperator<\fP (const \fBk_plan\fP &other) const "
+.br
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBk_plan\fP &other) const "
+.br
+.ti -1c
+.RI "\fBk_plan\fP & \fBoperator=\fP (const \fBk_plan\fP &other)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "unsigned short \fBid_plan\fP"
+.br
+.RI "\fIIndex plan. - index to order superior. \fP"
+.ti -1c
+.RI "unsigned short \fBplan\fP"
+.br
+.RI "\fIIndex plan. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+This structs represent a Key_plan, that is an id and an equations order evaluation. 
+.PP
+Definition at line 152 of file Builder_plans.h.
+.SH "Member Function Documentation"
+.PP 
+.SS "bool genevalmag::k_plan::operator< (const \fBk_plan\fP & other) const\fC [inline]\fP"operator< 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.PP
+Definition at line 169 of file Builder_plans.h.
+.PP
+References id_plan, and plan.
+.SS "\fBk_plan\fP& genevalmag::k_plan::operator= (const \fBk_plan\fP & other)\fC [inline]\fP"operator= 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.PP
+Definition at line 188 of file Builder_plans.h.
+.PP
+References id_plan, and plan.
+.SS "bool genevalmag::k_plan::operator== (const \fBk_plan\fP & other) const\fC [inline]\fP"operator== 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.PP
+Definition at line 179 of file Builder_plans.h.
+.PP
+References id_plan, and plan.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::k_plan::id_plan\fP"
+.PP
+Index plan. - index to order superior. 
+.PP
+Definition at line 158 of file Builder_plans.h.
+.PP
+Referenced by genevalmag::generate_key_plan(), genevalmag::Builder_plans::generate_plans(), operator<(), operator=(), and operator==().
+.SS "\fBgenevalmag::k_plan::plan\fP"
+.PP
+Index plan. 
+.PP
+Definition at line 163 of file Builder_plans.h.
+.PP
+Referenced by genevalmag::generate_key_plan(), genevalmag::Builder_plans::generate_plans(), operator<(), operator=(), and operator==().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

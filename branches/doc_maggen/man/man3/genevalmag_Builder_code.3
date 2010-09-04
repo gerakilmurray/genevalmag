@@ -1,0 +1,495 @@
+.TH "genevalmag::Builder_code" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::Builder_code \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Builder_code.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBBuilder_code\fP (const string &path_folder_output, const string &name_file, const \fBAttr_grammar\fP &attribute_grammar, const \fBBuilder_plans\fP &builder_plan, const \fBBuilder_visit_sequences\fP &builder_v_seq)"
+.br
+.ti -1c
+.RI "virtual \fB~Builder_code\fP ()"
+.br
+.ti -1c
+.RI "bool \fBgenerate_code\fP (const vector< string > &headers_file, const string path) const "
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBgenerate_header_file\fP () const "
+.br
+.ti -1c
+.RI "void \fBgenerate_footer_header\fP () const "
+.br
+.ti -1c
+.RI "void \fBgenerate_code_file\fP (const vector< string > &headers_file) const "
+.br
+.ti -1c
+.RI "void \fBgenerate_structs\fP () const "
+.br
+.ti -1c
+.RI "void \fBgenerate_constructor\fP () const "
+.br
+.ti -1c
+.RI "void \fBgenerate_methods\fP () const "
+.br
+.ti -1c
+.RI "void \fBgenerate_footer_code\fP () const "
+.br
+.ti -1c
+.RI "string \fBgenerate_print\fP () const "
+.br
+.ti -1c
+.RI "string \fBgenerate_translate\fP () const "
+.br
+.ti -1c
+.RI "string \fBgenerate_traverse\fP () const "
+.br
+.ti -1c
+.RI "string \fBgenerate_all_compute_eq\fP () const "
+.br
+.ti -1c
+.RI "string \fBgenerate_evaluator\fP () const "
+.br
+.ti -1c
+.RI "string \fBgenerate_eval_visiter\fP () const "
+.br
+.ti -1c
+.RI "string \fBgenerate_add_plan\fP () const "
+.br
+.ti -1c
+.RI "string \fBgenerate_add_plan_project\fP () const "
+.br
+.ti -1c
+.RI "string \fBgenerate_all_methods_eqs\fP () const "
+.br
+.ti -1c
+.RI "string \fBgenerate_initialize_rules\fP () const "
+.br
+.ti -1c
+.RI "string \fBgenerate_initialize_v_seq\fP () const "
+.br
+.ti -1c
+.RI "string \fBgenerate_initialize_context\fP () const "
+.br
+.ti -1c
+.RI "string \fBgenerate_initialize_plans\fP () const "
+.br
+.ti -1c
+.RI "string \fBgenerate_initialize_plan_proj\fP () const "
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "const \fBAttr_grammar\fP & \fBattr_grammar\fP"
+.br
+.RI "\fIReferences to the attribute grammar. \fP"
+.ti -1c
+.RI "const \fBBuilder_plans\fP & \fBb_plans\fP"
+.br
+.RI "\fIReferences to all plans generates. \fP"
+.ti -1c
+.RI "const \fBBuilder_visit_sequences\fP & \fBb_v_seq\fP"
+.br
+.RI "\fIReferences to all visit sequences generates. \fP"
+.ti -1c
+.RI "string \fBpath_output\fP"
+.br
+.RI "\fIDefines the path where the files generated be saved. \fP"
+.ti -1c
+.RI "string \fBfile_name\fP"
+.br
+.RI "\fIDefines the name of the files and the evaluator's class name. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 17 of file Builder_code.h.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::Builder_code::Builder_code (const string & path_folder_output, const string & name_file, const \fBAttr_grammar\fP & attribute_grammar, const \fBBuilder_plans\fP & builder_plan, const \fBBuilder_visit_sequences\fP & builder_v_seq)"Contructor with the path and name of output files to be generated. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath_folder_output\fP 
+.br
+\fIname_file\fP 
+.br
+\fIattribute_grammar\fP 
+.br
+\fIbuilder_plan\fP 
+.br
+\fIbuilder_v_seq\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Contructor with the path and name of output files to be generated. 
+.PP
+Definition at line 33 of file Builder_code.cpp.
+.SS "genevalmag::Builder_code::~Builder_code ()\fC [virtual]\fP"Destructor of the \fBBuilder_code\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Destructor of the \fBBuilder_code\fP. 
+.PP
+Definition at line 52 of file Builder_code.cpp.
+.SH "Member Function Documentation"
+.PP 
+.SS "string genevalmag::Builder_code::generate_add_plan () const\fC [private]\fP"Generates and inserts the class method that insert a new plan. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates and inserts the class method that insert a new plan. 
+.PP
+Definition at line 888 of file Builder_code.cpp.
+.PP
+References file_name.
+.PP
+Referenced by generate_methods().
+.SS "string genevalmag::Builder_code::generate_add_plan_project () const\fC [private]\fP"Generates and inserts the class method that insert a new projected plan. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates and inserts the class method that insert a new projected plan. 
+.PP
+Definition at line 903 of file Builder_code.cpp.
+.PP
+References file_name.
+.PP
+Referenced by generate_methods().
+.SS "string genevalmag::Builder_code::generate_all_compute_eq () const\fC [private]\fP"Generates a method with a large switch with all equations, invoking in each case, the method that computes. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates a method with a large switch with all equations, invoking in each case, the method that computes. 
+.PP
+Definition at line 806 of file Builder_code.cpp.
+.PP
+References attr_grammar, file_name, and genevalmag::Attr_grammar::get_count_eqs().
+.PP
+Referenced by generate_methods().
+.SS "string genevalmag::Builder_code::generate_all_methods_eqs () const\fC [private]\fP"Generates one method for each equation in the grammar, that computes it's value. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates one method for each equation in the grammar, that computes it's value. 
+.PP
+Definition at line 736 of file Builder_code.cpp.
+.PP
+References attr_grammar, utilities::cleaning_tabs(), genevalmag::generate_expr_text(), and genevalmag::Attr_grammar::get_rules().
+.PP
+Referenced by generate_methods().
+.SS "bool genevalmag::Builder_code::generate_code (const vector< string > & headers_file, const string path) const"Generates the header and source code of the static evaluator of the grammar passed as parameter, with their evaluations plans, visit sequence and headers for uses user functions defined. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIheaders_file\fP 
+.br
+\fIpath\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Generates the header and source code of the static evaluator of the grammar passed as parameter, alog with their evaluations plans, visit sequence and headers for uses user functions defined. 
+.PP
+Definition at line 1096 of file Builder_code.cpp.
+.PP
+References utilities::copy_static_code(), generate_code_file(), generate_constructor(), generate_footer_code(), generate_footer_header(), generate_header_file(), generate_methods(), generate_structs(), and path_output.
+.SS "void genevalmag::Builder_code::generate_code_file (const vector< string > & headers_file) const\fC [private]\fP"Create the source code file of the evaluator with some information. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIheaders_file\fP Create the source code file of the evaluator with some information. 
+.RE
+.PP
+
+.PP
+Definition at line 111 of file Builder_code.cpp.
+.PP
+References file_name, and path_output.
+.PP
+Referenced by generate_code().
+.SS "void genevalmag::Builder_code::generate_constructor () const\fC [private]\fP"Generates and inserts the evaluator class's constructor. With all initializations of Evaluation Plans, Evaluation Plans Project, Visit Sequences and Rules. 
+.PP
+Definition at line 479 of file Builder_code.cpp.
+.PP
+References file_name, generate_initialize_context(), generate_initialize_plan_proj(), generate_initialize_plans(), generate_initialize_rules(), generate_initialize_v_seq(), and path_output.
+.PP
+Referenced by generate_code().
+.SS "string genevalmag::Builder_code::generate_eval_visiter () const\fC [private]\fP"Generates the evaluator method, which following the visit sequences drawn, visit the nodes of the tree until computes it completely. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates the evaluator method, which following the visit sequences drawn, visit the nodes of the tree until computes it completely. 
+.PP
+Definition at line 834 of file Builder_code.cpp.
+.PP
+References file_name.
+.PP
+Referenced by generate_methods().
+.SS "string genevalmag::Builder_code::generate_evaluator () const\fC [private]\fP"Generates the evaluating method, which performs the method invocations to be computed all the attributes of the AST. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates the evaluating method, which performs the method invocations to be computed all the attributes of the AST. 
+.PP
+Definition at line 866 of file Builder_code.cpp.
+.PP
+References b_plans, file_name, and genevalmag::Builder_plans::get_init_order().
+.PP
+Referenced by generate_methods().
+.SS "void genevalmag::Builder_code::generate_footer_code () const\fC [private]\fP"Insert the source code file's footer of the evaluator. 
+.PP
+Definition at line 210 of file Builder_code.cpp.
+.PP
+References file_name, and path_output.
+.PP
+Referenced by generate_code().
+.SS "void genevalmag::Builder_code::generate_footer_header () const\fC [private]\fP"Insert the header file's footer of the evaluator. 
+.PP
+Definition at line 162 of file Builder_code.cpp.
+.PP
+References file_name, and path_output.
+.PP
+Referenced by generate_code().
+.SS "void genevalmag::Builder_code::generate_header_file () const\fC [private]\fP"Create the header file of the evaluator with some information. 
+.PP
+Definition at line 59 of file Builder_code.cpp.
+.PP
+References file_name, and path_output.
+.PP
+Referenced by generate_code().
+.SS "string genevalmag::Builder_code::generate_initialize_context () const\fC [private]\fP"Generates the initialization of all contexts rules uniques. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates the initialization of all contexts rules uniques. 
+.PP
+Definition at line 330 of file Builder_code.cpp.
+.PP
+References b_plans, and genevalmag::Builder_plans::get_contexts_uniques().
+.PP
+Referenced by generate_constructor().
+.SS "string genevalmag::Builder_code::generate_initialize_plan_proj () const\fC [private]\fP"Generates the initialization of all evaluation plan projects. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates the initialization of all evaluation plan projects. 
+.PP
+Definition at line 388 of file Builder_code.cpp.
+.PP
+References b_plans, genevalmag::generate_key_plan(), and genevalmag::Builder_plans::get_plans_project().
+.PP
+Referenced by generate_constructor().
+.SS "string genevalmag::Builder_code::generate_initialize_plans () const\fC [private]\fP"Generates the initialization of all evaluations plans. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates the initialization of all evaluations plans. 
+.PP
+Definition at line 356 of file Builder_code.cpp.
+.PP
+References b_plans, genevalmag::generate_key_plan(), and genevalmag::Builder_plans::get_plans().
+.PP
+Referenced by generate_constructor().
+.SS "string genevalmag::Builder_code::generate_initialize_rules () const\fC [private]\fP"Generates the initialization of all rules. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates the initialization of all rules. 
+.PP
+Definition at line 435 of file Builder_code.cpp.
+.PP
+References attr_grammar, and genevalmag::Attr_grammar::get_rules().
+.PP
+Referenced by generate_constructor().
+.SS "string genevalmag::Builder_code::generate_initialize_v_seq () const\fC [private]\fP"Generates the initialization of all visit sequences. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates the initialization of all visit sequences. 
+.PP
+Definition at line 280 of file Builder_code.cpp.
+.PP
+References b_v_seq, and genevalmag::Builder_visit_sequences::get_visit_seq().
+.PP
+Referenced by generate_constructor().
+.SS "void genevalmag::Builder_code::generate_methods () const\fC [private]\fP"Generates and inserts all class methods, includind traverse, visit evaluator and the main evaluator. This methods are based on the article by Wuu Yang. 
+.PP
+Definition at line 919 of file Builder_code.cpp.
+.PP
+References file_name, generate_add_plan(), generate_add_plan_project(), generate_all_compute_eq(), generate_all_methods_eqs(), generate_eval_visiter(), generate_evaluator(), generate_print(), genevalmag::generate_return_index_context(), generate_translate(), generate_traverse(), and path_output.
+.PP
+Referenced by generate_code().
+.SS "string genevalmag::Builder_code::generate_print () const\fC [private]\fP"Generates the print method, for show the all visit sequences. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates the print method, for show the all visit sequences. 
+.PP
+Definition at line 509 of file Builder_code.cpp.
+.PP
+References file_name.
+.PP
+Referenced by generate_methods().
+.SS "void genevalmag::Builder_code::generate_structs () const\fC [private]\fP"Generates and inserts all structs for represent each symbol of the grammar. With constructor and to_string methods.
+.PP
+For symbol S, with attrs s1 <syn> int, inserts:
+.br
+ 
+.br
+ typedef struct Symbol_S: Node
+.br
+ {
+.br
+ int s0;
+.br
+ 
+.br
+ Symbol_S(unsgned short r_id);
+.br
+ 
+.br
+ string to_string() const;
+.br
+ } S ;
+.br
+.PP
+Generates and inserts all structs for represent each symbol of the grammar. With constructor and to_string methods.
+.PP
+For symbol S, with attrs s1 <syn> int, inserts:
+.PP
+typedef struct Symbol_S: Node { int s0;
+.PP
+Symbol_S(unsgned short r_id);
+.PP
+string to_string() const; } S ; 
+.PP
+Definition at line 966 of file Builder_code.cpp.
+.PP
+References attr_grammar, file_name, genevalmag::Attr_grammar::get_non_terminal_symbols(), and path_output.
+.PP
+Referenced by generate_code().
+.SS "string genevalmag::Builder_code::generate_translate () const\fC [private]\fP"Generates the print method, for show the all visit sequences in a format more descriptive. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates the print method, for show the all visit sequences in a format more descriptive. 
+.PP
+Definition at line 534 of file Builder_code.cpp.
+.PP
+References file_name.
+.PP
+Referenced by generate_methods().
+.SS "string genevalmag::Builder_code::generate_traverse () const\fC [private]\fP"Generates the method that crosses the AST and sets the evaluation plan that corresponds to each node. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generates the method that crosses the AST and sets the evaluation plan that corresponds to each node. 
+.PP
+Definition at line 588 of file Builder_code.cpp.
+.PP
+References file_name.
+.PP
+Referenced by generate_methods().
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::Builder_code::attr_grammar\fP\fC [private]\fP"
+.PP
+References to the attribute grammar. 
+.PP
+Definition at line 21 of file Builder_code.h.
+.PP
+Referenced by generate_all_compute_eq(), generate_all_methods_eqs(), generate_initialize_rules(), and generate_structs().
+.SS "\fBgenevalmag::Builder_code::b_plans\fP\fC [private]\fP"
+.PP
+References to all plans generates. 
+.PP
+Definition at line 27 of file Builder_code.h.
+.PP
+Referenced by generate_evaluator(), generate_initialize_context(), generate_initialize_plan_proj(), and generate_initialize_plans().
+.SS "\fBgenevalmag::Builder_code::b_v_seq\fP\fC [private]\fP"
+.PP
+References to all visit sequences generates. 
+.PP
+Definition at line 33 of file Builder_code.h.
+.PP
+Referenced by generate_initialize_v_seq().
+.SS "\fBgenevalmag::Builder_code::file_name\fP\fC [private]\fP"
+.PP
+Defines the name of the files and the evaluator's class name. 
+.PP
+Definition at line 45 of file Builder_code.h.
+.PP
+Referenced by generate_add_plan(), generate_add_plan_project(), generate_all_compute_eq(), generate_code_file(), generate_constructor(), generate_eval_visiter(), generate_evaluator(), generate_footer_code(), generate_footer_header(), generate_header_file(), generate_methods(), generate_print(), generate_structs(), generate_translate(), and generate_traverse().
+.SS "\fBgenevalmag::Builder_code::path_output\fP\fC [private]\fP"
+.PP
+Defines the path where the files generated be saved. 
+.PP
+Definition at line 39 of file Builder_code.h.
+.PP
+Referenced by generate_code(), generate_code_file(), generate_constructor(), generate_footer_code(), generate_footer_header(), generate_header_file(), generate_methods(), and generate_structs().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

@@ -1,0 +1,67 @@
+.TH "src/Util/Utilities.cpp" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/Util/Utilities.cpp \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <fstream>\fP
+.br
+\fC#include <boost/graph/graphviz.hpp>\fP
+.br
+\fC#include <boost/graph/transitive_closure.hpp>\fP
+.br
+\fC#include '../../include/Util/Utilities.h'\fP
+.br
+
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fButilities\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fButilities::create_folder\fP (const string path)"
+.br
+.ti -1c
+.RI "bool \fButilities::clean_output_folder\fP (const string path)"
+.br
+.ti -1c
+.RI "bool \fButilities::copy_static_code\fP (const string path_d, const string path_s)"
+.br
+.ti -1c
+.RI "void \fButilities::generate_names_instance\fP (const Graph &graph, string datas[], size_t size_d)"
+.br
+.ti -1c
+.RI "void \fButilities::generate_names_attr\fP (const Graph &graph, string datas[], size_t size_d)"
+.br
+.ti -1c
+.RI "void \fButilities::print_graph\fP (const Graph &graph, const string path, const string name_file, const string name_graph, const string names[], string shape_vertex)"
+.br
+.ti -1c
+.RI "Vertex \fButilities::return_vertex\fP (const Graph &graph, const \fBExpr_leaf\fP *node)"
+.br
+.ti -1c
+.RI "void \fButilities::merge_graph\fP (const Graph &graph1, const Graph &graph2, Graph &graph_merged)"
+.br
+.ti -1c
+.RI "void \fButilities::project_graph\fP (const \fBSymbol\fP *symb, Graph &graph)"
+.br
+.ti -1c
+.RI "bool \fButilities::belong_index\fP (const unsigned short &index, const vector< unsigned short > &vec)"
+.br
+.ti -1c
+.RI "string \fButilities::cleaning_tabs\fP (const string str)"
+.br
+.ti -1c
+.RI "string \fButilities::write_inf_context\fP (const vector< unsigned short > &context_vec)"
+.br
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

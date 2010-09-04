@@ -1,0 +1,348 @@
+.TH "genevalmag::Expr_instance" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::Expr_instance \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Expr_instance.h>\fP
+.PP
+Inherits \fBgenevalmag::Expr_leaf\fP.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBExpr_instance\fP ()"
+.br
+.ti -1c
+.RI "\fBExpr_instance\fP (const \fBExpr_instance\fP &other)"
+.br
+.ti -1c
+.RI "virtual \fB~Expr_instance\fP ()"
+.br
+.ti -1c
+.RI "\fBExpr_instance\fP & \fBoperator=\fP (const \fBExpr_instance\fP &other)"
+.br
+.ti -1c
+.RI "const \fBAttribute\fP * \fBget_attr\fP () const "
+.br
+.ti -1c
+.RI "unsigned short \fBget_num\fP () const "
+.br
+.ti -1c
+.RI "const \fBSymbol\fP * \fBget_symb\fP () const "
+.br
+.ti -1c
+.RI "void \fBset_attr\fP (const \fBAttribute\fP *attr)"
+.br
+.ti -1c
+.RI "void \fBset_num\fP (unsigned short num)"
+.br
+.ti -1c
+.RI "void \fBset_symb\fP (const \fBSymbol\fP *symb)"
+.br
+.ti -1c
+.RI "string \fBto_string\fP () const "
+.br
+.ti -1c
+.RI "bool \fBequals_without_index\fP (const \fBExpr_instance\fP *other) const "
+.br
+.ti -1c
+.RI "string \fBkey\fP () const "
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcopy\fP (const \fBExpr_instance\fP &other)"
+.br
+.ti -1c
+.RI "void \fBdestroy\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "const \fBSymbol\fP * \fBi_symb\fP"
+.br
+.RI "\fI\fBSymbol\fP of \fBExpr_instance\fP. \fP"
+.ti -1c
+.RI "unsigned short \fBi_num\fP"
+.br
+.RI "\fISyntax index of the instance. \fP"
+.ti -1c
+.RI "const \fBAttribute\fP * \fBi_attr\fP"
+.br
+.RI "\fI\fBAttribute\fP of \fBExpr_instance\fP. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 20 of file Expr_instance.h.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::Expr_instance::Expr_instance ()"Constructor empty of \fBExpr_instance\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Constructor empty of \fBExpr_instance\fP. 
+.PP
+Definition at line 25 of file Expr_instance.cpp.
+.SS "genevalmag::Expr_instance::Expr_instance (const \fBExpr_instance\fP & other)"Constructor copy of \fBExpr_instance\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Constructor copy of \fBExpr_instance\fP. 
+.PP
+Definition at line 35 of file Expr_instance.cpp.
+.PP
+References copy().
+.SS "genevalmag::Expr_instance::~Expr_instance ()\fC [virtual]\fP"Destructor of \fBExpr_instance\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Destructor of \fBExpr_instance\fP. 
+.PP
+Definition at line 47 of file Expr_instance.cpp.
+.PP
+References destroy().
+.SH "Member Function Documentation"
+.PP 
+.SS "void genevalmag::Expr_instance::copy (const \fBExpr_instance\fP & other)\fC [private]\fP"Method of copy the \fBExpr_instance\fP, STL-like C++. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP Method of copy the \fBExpr_instance\fP, STL-like C++. 
+.RE
+.PP
+
+.PP
+Definition at line 76 of file Expr_instance.cpp.
+.PP
+References genevalmag::Expression::conflict, get_attr(), genevalmag::Expression::get_conflict(), get_num(), genevalmag::Expression::get_parent(), get_symb(), genevalmag::Expression::get_type_synthetized(), i_attr, i_num, i_symb, genevalmag::Expression::parent, and genevalmag::Expression::type_synthetized.
+.PP
+Referenced by Expr_instance(), and operator=().
+.SS "void genevalmag::Expr_instance::destroy ()\fC [private]\fP"Method destroy \fBExpr_instance\fP, STL-like C++. 
+.PP
+Definition at line 89 of file Expr_instance.cpp.
+.PP
+References i_attr, and i_symb.
+.PP
+Referenced by operator=(), and ~Expr_instance().
+.SS "bool genevalmag::Expr_instance::equals_without_index (const \fBExpr_instance\fP * other) const"Compares the \fBExpr_instance\fP with other.
+.br
+ Respects \fBSymbol\fP and attribute. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Compares the \fBExpr_instance\fP with other. Respects \fBSymbol\fP and attribute. 
+.PP
+Definition at line 172 of file Expr_instance.cpp.
+.PP
+References get_attr(), genevalmag::Attribute::get_name(), genevalmag::Symbol::get_name(), get_symb(), i_attr, and i_symb.
+.SS "const \fBAttribute\fP * genevalmag::Expr_instance::get_attr () const"Returns the attribute pointer of the \fBExpr_instance\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the attribute pointer of the \fBExpr_instance\fP. 
+.PP
+Definition at line 98 of file Expr_instance.cpp.
+.PP
+References i_attr.
+.PP
+Referenced by copy(), genevalmag::create_instance_node(), equals_without_index(), genevalmag::Builder_visit_sequences::gen_visit_seq(), genevalmag::generate_expr_text(), genevalmag::Builder_plans::generates_topological_order(), genevalmag::Attr_grammar::get_index_eq_with_context(), genevalmag::save_attr_ins(), and genevalmag::save_rvalue().
+.SS "unsigned short genevalmag::Expr_instance::get_num () const"Returns the number of the \fBExpr_instance\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the number of the \fBExpr_instance\fP. 
+.PP
+Definition at line 106 of file Expr_instance.cpp.
+.PP
+References i_num.
+.PP
+Referenced by copy(), genevalmag::Builder_visit_sequences::gen_visit_seq(), genevalmag::generate_expr_text(), genevalmag::Attr_grammar::get_index_eq_with_context(), and utilities::project_graph().
+.SS "const \fBSymbol\fP * genevalmag::Expr_instance::get_symb () const"Returns the symbol pointer of the \fBExpr_instance\fP. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Returns the symbol pointer of the \fBExpr_instance\fP. 
+.PP
+Definition at line 114 of file Expr_instance.cpp.
+.PP
+References i_symb.
+.PP
+Referenced by copy(), equals_without_index(), genevalmag::Builder_visit_sequences::gen_visit_seq(), genevalmag::generate_expr_text(), genevalmag::Builder_plans::generates_topological_order(), utilities::project_graph(), genevalmag::save_attr_ins(), and genevalmag::save_index_ins().
+.SS "string genevalmag::Expr_instance::key () const"Generates and returns the string key that identifies an \fBExpr_instance\fP definitely.
+.br
+ 
+.br
+ Result= <symbol><number><attribute>
+.br
+ 
+.br
+ Ex: E0valor
+.br
+ 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generate and return the string key that identifies an \fBExpr_instance\fP definitely.
+.PP
+Result= <symbol><number><attribute>
+.PP
+Ex: E0valor 
+.PP
+Definition at line 192 of file Expr_instance.cpp.
+.PP
+References genevalmag::Attribute::get_name(), genevalmag::Symbol::get_name(), i_attr, i_num, and i_symb.
+.SS "\fBExpr_instance\fP & genevalmag::Expr_instance::operator= (const \fBExpr_instance\fP & other)"Operator assign(=) of \fBExpr_instance\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Operator assign(=) of \fBExpr_instance\fP. 
+.PP
+Definition at line 63 of file Expr_instance.cpp.
+.PP
+References copy(), and destroy().
+.SS "void genevalmag::Expr_instance::set_attr (const \fBAttribute\fP * attr)"Sets the attribute pointer of the \fBExpr_instance\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIattr\fP Sets the attribute pointer of the \fBExpr_instance\fP. 
+.RE
+.PP
+
+.PP
+Definition at line 122 of file Expr_instance.cpp.
+.PP
+References i_attr.
+.PP
+Referenced by genevalmag::Builder_graphs::compute_attr_vertex(), and genevalmag::save_attr_ins().
+.SS "void genevalmag::Expr_instance::set_num (unsigned short num)"Sets the number of the \fBExpr_instance\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInum\fP Sets the number of the \fBExpr_instance\fP. 
+.RE
+.PP
+
+.PP
+Definition at line 130 of file Expr_instance.cpp.
+.PP
+References i_num.
+.PP
+Referenced by genevalmag::Builder_graphs::compute_attr_vertex(), and genevalmag::save_index_ins().
+.SS "void genevalmag::Expr_instance::set_symb (const \fBSymbol\fP * symb)"Sets the symbol pointer of the \fBExpr_instance\fP. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsymb\fP Sets the symbol pointer of the \fBExpr_instance\fP. 
+.RE
+.PP
+
+.PP
+Definition at line 138 of file Expr_instance.cpp.
+.PP
+References i_symb.
+.PP
+Referenced by genevalmag::Builder_graphs::compute_attr_vertex(), and genevalmag::create_instance().
+.SS "string genevalmag::Expr_instance::to_string () const\fC [virtual]\fP"Generates and returns a string reprensentation of a \fBExpr_instance\fP.
+.br
+ 
+.br
+ Result= <symbol>'['<number>'].'<attribute>
+.br
+ 
+.br
+ Ex: E[0].valor
+.br
+ 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generate and return a string reprensentation of a \fBExpr_instance\fP.
+.PP
+Result= <symbol>'['<number>'].'<attribute>
+.PP
+Ex: E[0].valor 
+.PP
+Implements \fBgenevalmag::Expr_leaf\fP.
+.PP
+Definition at line 150 of file Expr_instance.cpp.
+.PP
+References genevalmag::Attribute::get_name(), genevalmag::Symbol::get_name(), i_attr, i_num, and i_symb.
+.PP
+Referenced by genevalmag::save_rvalue().
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::Expr_instance::i_attr\fP\fC [private]\fP"
+.PP
+\fBAttribute\fP of \fBExpr_instance\fP. 
+.PP
+Definition at line 37 of file Expr_instance.h.
+.PP
+Referenced by copy(), destroy(), equals_without_index(), get_attr(), key(), set_attr(), and to_string().
+.SS "\fBgenevalmag::Expr_instance::i_num\fP\fC [private]\fP"
+.PP
+Syntax index of the instance. 
+.PP
+Definition at line 32 of file Expr_instance.h.
+.PP
+Referenced by copy(), get_num(), key(), set_num(), and to_string().
+.SS "\fBgenevalmag::Expr_instance::i_symb\fP\fC [private]\fP"
+.PP
+\fBSymbol\fP of \fBExpr_instance\fP. 
+.PP
+Definition at line 27 of file Expr_instance.h.
+.PP
+Referenced by copy(), destroy(), equals_without_index(), get_symb(), key(), set_symb(), and to_string().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

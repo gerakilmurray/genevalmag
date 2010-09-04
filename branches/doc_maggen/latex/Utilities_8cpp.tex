@@ -1,0 +1,47 @@
+\hypertarget{Utilities_8cpp}{
+\section{src/Util/Utilities.cpp File Reference}
+\label{Utilities_8cpp}\index{src/Util/Utilities.cpp@{src/Util/Utilities.cpp}}
+}
+{\ttfamily \#include $<$fstream$>$}\par
+{\ttfamily \#include $<$boost/graph/graphviz.hpp$>$}\par
+{\ttfamily \#include $<$boost/graph/transitive\_\-closure.hpp$>$}\par
+{\ttfamily \#include \char`\"{}../../include/Util/Utilities.h\char`\"{}}\par
+Include dependency graph for Utilities.cpp:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=281pt]{Utilities_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \hyperlink{namespaceutilities}{utilities}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{namespaceutilities_a87fbb9605f1b59c54b95e708e1e9935b}{utilities::create\_\-folder} (const string path)
+\item 
+bool \hyperlink{namespaceutilities_a28f2ace508b6ea5bc7af05b84f0b2487}{utilities::clean\_\-output\_\-folder} (const string path)
+\item 
+bool \hyperlink{namespaceutilities_a3800a71dd15748ff83861140b4119b24}{utilities::copy\_\-static\_\-code} (const string path\_\-d, const string path\_\-s)
+\item 
+void \hyperlink{namespaceutilities_a0e49bfde1f01bb5567770fc492e6929f}{utilities::generate\_\-names\_\-instance} (const Graph \&graph, string datas\mbox{[}$\,$\mbox{]}, size\_\-t size\_\-d)
+\item 
+void \hyperlink{namespaceutilities_ac88e50b1c88f16e0d052555d773b7be5}{utilities::generate\_\-names\_\-attr} (const Graph \&graph, string datas\mbox{[}$\,$\mbox{]}, size\_\-t size\_\-d)
+\item 
+void \hyperlink{namespaceutilities_ae0c73d526799122fa0d85cd45b6d4fbb}{utilities::print\_\-graph} (const Graph \&graph, const string path, const string name\_\-file, const string name\_\-graph, const string names\mbox{[}$\,$\mbox{]}, string shape\_\-vertex)
+\item 
+Vertex \hyperlink{namespaceutilities_a13764073c6966781a6680ab58d88c1b5}{utilities::return\_\-vertex} (const Graph \&graph, const \hyperlink{classgenevalmag_1_1Expr__leaf}{Expr\_\-leaf} $\ast$node)
+\item 
+void \hyperlink{namespaceutilities_ad0de56d624d099e4d9a5f605ca80b2e5}{utilities::merge\_\-graph} (const Graph \&graph1, const Graph \&graph2, Graph \&graph\_\-merged)
+\item 
+void \hyperlink{namespaceutilities_af78e9e1ebc91d6896a01f45d611cca0a}{utilities::project\_\-graph} (const \hyperlink{classgenevalmag_1_1Symbol}{Symbol} $\ast$symb, Graph \&graph)
+\item 
+bool \hyperlink{namespaceutilities_aa452cf7f1132b5d667bdeefffb33425f}{utilities::belong\_\-index} (const unsigned short \&index, const vector$<$ unsigned short $>$ \&vec)
+\item 
+string \hyperlink{namespaceutilities_a644dfdb507e47adf60e6984d28e080fd}{utilities::cleaning\_\-tabs} (const string str)
+\item 
+string \hyperlink{namespaceutilities_a21bbcd26f651d4ceb798b50af71c7b29}{utilities::write\_\-inf\_\-context} (const vector$<$ unsigned short $>$ \&context\_\-vec)
+\end{DoxyCompactItemize}

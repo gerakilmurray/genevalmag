@@ -1,0 +1,101 @@
+.TH "src/maggen.cpp" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/maggen.cpp \- 
+.PP
+Tool for generation of Static Evaluators for Multiplans Attribute Grammar.
+.br
+.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio.h>\fP
+.br
+\fC#include <iostream>\fP
+.br
+\fC#include <fstream>\fP
+.br
+\fC#include <string>\fP
+.br
+\fC#include <time.h>\fP
+.br
+\fC#include <sys/time.h>\fP
+.br
+\fC#include <sys/stat.h>\fP
+.br
+\fC#include <boost/tokenizer.hpp>\fP
+.br
+\fC#include '../include/Maglib.h'\fP
+.br
+
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBgenevalmag\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "const string \fBgenevalmag::DEFAULT_PATH\fP ('./out_maggen/')"
+.br
+.ti -1c
+.RI "const string \fBgenevalmag::DEFAULT_FILE_NAME\fP ('mag_eval')"
+.br
+.ti -1c
+.RI "const string \fBgenevalmag::DEFAULT_INPUT_FILE\fP ('/tmp/.input_maggen_default')"
+.br
+.ti -1c
+.RI "double \fBgenevalmag::timeval_diff\fP (struct timeval *a, struct timeval *b)"
+.br
+.ti -1c
+.RI "bool \fBgenevalmag::check_file_exist\fP (const string &strFilename)"
+.br
+.ti -1c
+.RI "bool \fBgenevalmag::check_name\fP (const string &strFilename)"
+.br
+.ti -1c
+.RI "void \fBgenevalmag::show_help_information\fP ()"
+.br
+.ti -1c
+.RI "bool \fBgenevalmag::parse_parameters\fP (int argc, char *argv[], string &path_input_file, string &path_folder_output, string &name_library, vector< string > &headers)"
+.br
+.ti -1c
+.RI "int \fBmain\fP (int argc, char *argv[], char *envp[])"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Tool for generation of Static Evaluators for Multiplans Attribute Grammar.
+.br
+. 
+
+\fBDate:\fP
+.RS 4
+09/02/2010 
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Kilmurray, Gerardo Luis <gerakilmurray@gmail.com> 
+.PP
+Picco, Gonzalo Martin <gonzalopicco@gmail.com> 
+.RE
+.PP
+
+.PP
+Definition in file \fBmaggen.cpp\fP.
+.SH "Function Documentation"
+.PP 
+.SS "int main (int argc, char * argv[], char * envp[])"Main method of the parsing. 
+.PP
+Definition at line 234 of file maggen.cpp.
+.PP
+References genevalmag::DEFAULT_FILE_NAME(), genevalmag::DEFAULT_INPUT_FILE(), genevalmag::DEFAULT_PATH(), genevalmag::Maglib::gen_evaluator(), genevalmag::parse_parameters(), genevalmag::show_help_information(), and genevalmag::timeval_diff().
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

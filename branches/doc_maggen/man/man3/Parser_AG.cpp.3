@@ -1,0 +1,109 @@
+.TH "src/Parser/Parser_AG.cpp" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/Parser/Parser_AG.cpp \- 
+.PP
+Header of parsing module of Attribute Grammar.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <iostream>\fP
+.br
+\fC#include <string>\fP
+.br
+\fC#include <fstream>\fP
+.br
+\fC#include <time.h>\fP
+.br
+\fC#include <boost/spirit/include/classic_core.hpp>\fP
+.br
+\fC#include <boost/spirit/include/classic_symbols.hpp>\fP
+.br
+\fC#include <boost/spirit/include/classic_attribute.hpp>\fP
+.br
+\fC#include <boost/spirit/include/classic_functor_parser.hpp>\fP
+.br
+\fC#include '../../include/Parser/Parser_AG.h'\fP
+.br
+\fC#include '../../include/Parser/Semantics_checks.h'\fP
+.br
+\fC#include '../../include/Parser/Semantics_actions.h'\fP
+.br
+\fC#include '../Attr_grammar/Attr_grammar.h'\fP
+.br
+\fC#include 'Semantics_checks.h'\fP
+.br
+\fC#include 'Parser_AG.h'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBgenevalmag::skip_parser\fP"
+.br
+.ti -1c
+.RI "struct \fBgenevalmag::skip_parser::definition< ScannerT >\fP"
+.br
+.ti -1c
+.RI "struct \fBgenevalmag::attritute_grammar\fP"
+.br
+.ti -1c
+.RI "struct \fBgenevalmag::attritute_grammar::definition< ScannerT >\fP"
+.br
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBgenevalmag\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "const string \fBgenevalmag::FILE_GRAMMAR\fP ('Grammar_mag.log')"
+.br
+.ti -1c
+.RI "std::ostream & \fBgenevalmag::operator<<\fP (std::ostream &out, file_position const &lc)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Header of parsing module of Attribute Grammar. 
+
+Implementation of parsing module of Attribute Grammar, \fBParser_AG.h\fP.
+.PP
+\fBDate:\fP
+.RS 4
+09/02/2010 
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Kilmurray, Gerardo Luis <gerakilmurray@gmail.com> 
+.PP
+Picco, Gonzalo Martin <gonzalopicco@gmail.com>
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+13/09/2009 
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Kilmurray, Gerardo Luis <gerakilmurray@gmail.com> 
+.PP
+Picco, Gonzalo Martin <gonzalopicco@gmail.com> 
+.RE
+.PP
+
+.PP
+Definition in file \fBParser_AG.cpp\fP.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.

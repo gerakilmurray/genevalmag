@@ -1,0 +1,397 @@
+.TH "genevalmag::Attribute" 3 "4 Sep 2010" "Version 1.0" "maggen" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+genevalmag::Attribute \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <Attribute.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAttribute\fP ()"
+.br
+.ti -1c
+.RI "\fBAttribute\fP (const \fBAttribute\fP &other)"
+.br
+.ti -1c
+.RI "virtual \fB~Attribute\fP ()"
+.br
+.ti -1c
+.RI "\fBAttribute\fP & \fBoperator=\fP (const \fBAttribute\fP &other)"
+.br
+.ti -1c
+.RI "const string \fBget_name\fP () const "
+.br
+.ti -1c
+.RI "const \fBSort\fP * \fBget_sort_type\fP () const "
+.br
+.ti -1c
+.RI "const \fBtype_attr\fP \fBget_mod_type\fP () const "
+.br
+.ti -1c
+.RI "const string \fBget_member_symbol\fP () const "
+.br
+.ti -1c
+.RI "void \fBset_name\fP (const string name)"
+.br
+.ti -1c
+.RI "void \fBset_sort_type\fP (const \fBSort\fP *sort_type)"
+.br
+.ti -1c
+.RI "void \fBset_mod_type\fP (const \fBtype_attr\fP mod_type)"
+.br
+.ti -1c
+.RI "void \fBset_member_symbol\fP (const string member_symbol)"
+.br
+.ti -1c
+.RI "const bool \fBis_synthetize\fP () const "
+.br
+.ti -1c
+.RI "const bool \fBis_inherit\fP () const "
+.br
+.ti -1c
+.RI "const string \fBto_string\fP () const "
+.br
+.ti -1c
+.RI "const bool \fBequals\fP (const \fBAttribute\fP &other) const "
+.br
+.ti -1c
+.RI "const string \fBkey\fP () const "
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcopy\fP (const \fBAttribute\fP &other)"
+.br
+.ti -1c
+.RI "void \fBdestroy\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "string \fBa_name\fP"
+.br
+.RI "\fIAttribute's name. \fP"
+.ti -1c
+.RI "const \fBSort\fP * \fBa_sort_type\fP"
+.br
+.RI "\fIAttribute's type sort. \fP"
+.ti -1c
+.RI "\fBtype_attr\fP \fBa_mod_type\fP"
+.br
+.RI "\fIAttribute's type. \fP"
+.ti -1c
+.RI "string \fBa_member_symbol\fP"
+.br
+.RI "\fIAttribute's member list. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 26 of file Attribute.h.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "genevalmag::Attribute::Attribute ()"Constructor empty of attribute. 
+.PP
+Definition at line 20 of file Attribute.cpp.
+.SS "genevalmag::Attribute::Attribute (const \fBAttribute\fP & other)"Constructor copy of attribute. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Constructor copy of attribute. 
+.PP
+Definition at line 27 of file Attribute.cpp.
+.PP
+References copy().
+.SS "genevalmag::Attribute::~Attribute ()\fC [virtual]\fP"Destructor of attribute. 
+.PP
+Definition at line 35 of file Attribute.cpp.
+.PP
+References destroy().
+.SH "Member Function Documentation"
+.PP 
+.SS "void genevalmag::Attribute::copy (const \fBAttribute\fP & other)\fC [private]\fP"Method of copy the attribute, STL-like C++. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP Method of copy the attribute, STL-like. 
+.RE
+.PP
+
+.PP
+Definition at line 56 of file Attribute.cpp.
+.PP
+References a_member_symbol, a_mod_type, a_name, a_sort_type, get_member_symbol(), get_mod_type(), get_name(), and get_sort_type().
+.PP
+Referenced by Attribute(), and operator=().
+.SS "void genevalmag::Attribute::destroy ()\fC [private]\fP"Method destroy attribute, STL-like C++.
+.PP
+Method destroy the attribute, STL-like. 
+.PP
+Definition at line 67 of file Attribute.cpp.
+.PP
+Referenced by operator=(), and ~Attribute().
+.SS "const bool genevalmag::Attribute::equals (const \fBAttribute\fP & other) const"Compares the attribute with other. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Compares the attribute with other. 
+.PP
+Definition at line 181 of file Attribute.cpp.
+.PP
+References key().
+.PP
+Referenced by genevalmag::check_eq_defines_it().
+.SS "const string genevalmag::Attribute::get_member_symbol () const"Returns the membership list of the attribute. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Return the membership list of the attribute. 
+.PP
+Definition at line 98 of file Attribute.cpp.
+.PP
+References a_member_symbol.
+.PP
+Referenced by copy().
+.SS "const \fBtype_attr\fP genevalmag::Attribute::get_mod_type () const"Returns the modifiers of the attribute. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Return the modifiers of the attribute. 
+.PP
+Definition at line 90 of file Attribute.cpp.
+.PP
+References a_mod_type.
+.PP
+Referenced by copy().
+.SS "const string genevalmag::Attribute::get_name () const"Returns the name of the attribute. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Return the name of the attribute. 
+.PP
+Definition at line 74 of file Attribute.cpp.
+.PP
+References a_name.
+.PP
+Referenced by copy(), genevalmag::Expr_instance::equals_without_index(), genevalmag::generate_expr_text(), genevalmag::Expr_instance::key(), and genevalmag::Expr_instance::to_string().
+.SS "const \fBSort\fP * genevalmag::Attribute::get_sort_type () const"Returns the sort type of the attribute. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Return the sort type of the attribute. 
+.PP
+Definition at line 82 of file Attribute.cpp.
+.PP
+References a_sort_type.
+.PP
+Referenced by copy(), genevalmag::create_instance_node(), and genevalmag::save_rvalue().
+.SS "const bool genevalmag::Attribute::is_inherit () const"Returns true if the modifiers of the attribute is inherit. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Return true if the modifiers of the attribute is inherit. 
+.PP
+Definition at line 146 of file Attribute.cpp.
+.PP
+References a_mod_type, and genevalmag::k_inherit.
+.PP
+Referenced by genevalmag::Builder_visit_sequences::gen_visit_seq(), and genevalmag::Builder_plans::generates_topological_order().
+.SS "const bool genevalmag::Attribute::is_synthetize () const"Returns true if the modifiers of the attribute is synthetize. 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Return true if the modifiers of the attribute is synthetized. 
+.PP
+Definition at line 138 of file Attribute.cpp.
+.PP
+References a_mod_type, and genevalmag::k_synthetize.
+.PP
+Referenced by genevalmag::Builder_visit_sequences::gen_visit_seq(), genevalmag::Attr_grammar::get_index_eq_with_context(), and to_string().
+.SS "const string genevalmag::Attribute::key () const"Generates and returns the string key that identifies a attribute definitely.
+.br
+ 
+.br
+ Result = name modifiers sort_type membership_list
+.br
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Generate and return the string key that identifies a attribute definitely.
+.PP
+Result= name modifiers sort_type membership_list 
+.PP
+Definition at line 191 of file Attribute.cpp.
+.PP
+References a_member_symbol, a_name, a_sort_type, and genevalmag::Sort::get_name().
+.PP
+Referenced by equals().
+.SS "\fBAttribute\fP & genevalmag::Attribute::operator= (const \fBAttribute\fP & other)"Operator assign(=) of attribute. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIother\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+Operator assign(=) of attribute. 
+.PP
+Definition at line 43 of file Attribute.cpp.
+.PP
+References copy(), and destroy().
+.SS "void genevalmag::Attribute::set_member_symbol (const string member_symbol)"Sets the membership list of the attribute. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImember_symbol\fP Set the membership list of the attribute. 
+.RE
+.PP
+
+.PP
+Definition at line 130 of file Attribute.cpp.
+.PP
+References a_member_symbol.
+.PP
+Referenced by genevalmag::create_attributes().
+.SS "void genevalmag::Attribute::set_mod_type (const \fBtype_attr\fP mod_type)"Sets the modifiers of the attribute. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImod_type\fP Set the modifiers of the attribute. 
+.RE
+.PP
+
+.PP
+Definition at line 122 of file Attribute.cpp.
+.PP
+References a_mod_type.
+.PP
+Referenced by genevalmag::create_attributes().
+.SS "void genevalmag::Attribute::set_name (const string name)"Sets the name of the attribute. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname\fP Set the name of the attribute. 
+.RE
+.PP
+
+.PP
+Definition at line 106 of file Attribute.cpp.
+.PP
+References a_name.
+.PP
+Referenced by genevalmag::create_attributes().
+.SS "void genevalmag::Attribute::set_sort_type (const \fBSort\fP * sort_type)"Sets the sort type of the attribute. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsort_type\fP Set the sort type of the attribute. 
+.RE
+.PP
+
+.PP
+Definition at line 114 of file Attribute.cpp.
+.PP
+References a_sort_type.
+.PP
+Referenced by genevalmag::create_attributes().
+.SS "const string genevalmag::Attribute::to_string () const"Generates and returns a string reprensentation of a attribute.
+.br
+ 
+.br
+ Result = name ':' modifiers '<' sort_type ['(' instance ')' IF DEBUG IS ON] '> of ' membership_list
+.br
+ 
+.br
+ 
+.PP
+\fBReturns:\fP
+.RS 4
+
+.RE
+.PP
+Generate and return a string reprensentation of a attribute.
+.PP
+Result= name ':' modifiers '<' sort_type ['(' instance ')' IF DEBUG IS ON] '> of ' membership_list 
+.PP
+Definition at line 156 of file Attribute.cpp.
+.PP
+References a_member_symbol, a_name, a_sort_type, genevalmag::Sort::get_name(), and is_synthetize().
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBgenevalmag::Attribute::a_member_symbol\fP\fC [private]\fP"
+.PP
+Attribute's member list. 
+.PP
+Definition at line 48 of file Attribute.h.
+.PP
+Referenced by copy(), get_member_symbol(), key(), set_member_symbol(), and to_string().
+.SS "\fBgenevalmag::Attribute::a_mod_type\fP\fC [private]\fP"
+.PP
+Attribute's type. 
+.PP
+Definition at line 43 of file Attribute.h.
+.PP
+Referenced by copy(), get_mod_type(), is_inherit(), is_synthetize(), and set_mod_type().
+.SS "\fBgenevalmag::Attribute::a_name\fP\fC [private]\fP"
+.PP
+Attribute's name. 
+.PP
+Definition at line 33 of file Attribute.h.
+.PP
+Referenced by copy(), get_name(), key(), set_name(), and to_string().
+.SS "\fBgenevalmag::Attribute::a_sort_type\fP\fC [private]\fP"
+.PP
+Attribute's type sort. 
+.PP
+Definition at line 38 of file Attribute.h.
+.PP
+Referenced by copy(), get_sort_type(), key(), set_sort_type(), and to_string().
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for maggen from the source code.
