@@ -4,9 +4,9 @@
 
 Tal como lo presenta Wuu Yang en \cite{wuu-yang1} y como se analizó en el capítulo anterior (Ver sec. \ref{sec:relfamag}), la familia de \textit{Gramática de Atributos Multiplanes} (\textbf{MAG}) es una clase que se encuentra dentro de las \textbf{WDAG} y si se toma la jerarquía \textbf{NC} (Wuu Yang) se corresponde con la clase \textbf{NC(1)}.
 
-La familia de las \textbf{MAG} es estrictamente mayor que las \textbf{ANCAG}. La importancia de esta familia radica en que el procedimiento de desición de pertenencia y de computación de planes de evaluación estáticos toman \textbf{tiempo polinomial} en el numero de símbolos y producciones.
+La familia de las \textbf{MAG} es estrictamente mayor que las \textbf{ANCAG}. La importancia de esta familia radica en que el procedimiento de desición de pertenencia y de computación de planes de evaluación estáticos toman \textbf{tiempo polinomial} en el número de símbolos y producciones.
 
-A continuación se tratarán en detalle la familia \textbf{MAG} y en el capítulo siguiente se abordará el mecanismo de evaluación de las mismas.
+A continuación se tratarán en detalle la familia \textbf{MAG} y en el capítulo si\-guiente se abordará el mecanismo de evaluación de las mismas.
 
 \section{Preliminares}
 \label{sec:pre-grafos}
@@ -57,7 +57,7 @@ Un grafo \textit{DP} esta definido (\cite{estruc-algorit}) con las siguientes co
 \item Las aristas denotan la dependencia entre las instancias. Una arista $X_{i}.a\rightarrow X{j}.b$, \footnote{con \textit{i} y \textit{j} índices de ocurrencias consistentes con alguna ecuación de la gramática} denota que la evaluación de la instancia \textit{$X_{i}.a$} depende de la evaluación de \textit{$Y_{i}.b$} 
 \end{items}
 
-El conjunto de dependencias directas de una producción, de la gramática, se denota como \textit{DP(p)}(\textit{p} producción de la gramática) y se define como:
+El conjunto de dependencias directas de una producción, de la gramática, se denota como \textit{DP(p)} (\textit{p} producción de la gramática) y se define como:
 \begin{definition}
 Dada una producción p de una gramática de atributos definida como en \ref{def:grammarattr}, entonces
 \begin{equation}
@@ -85,7 +85,7 @@ El conjunto de dependencias entre los atributos de un símbolo se denota como
 \begin{definition}
 Dada un símbolo X de una gramática de atributos definida como en \ref{def:grammarattr}, entonces
 \begin{equation}
-Down(X) = \{(a,b) | a \rightarrow b \} con\ a,b \in A(X)
+Down(X) = \{(a,b) | a \rightarrow b \}\ con\ a,b \in A(X)
 \end{equation}
 \end{definition}
 En la figura \ref{down-wuu-yang} se muestran los grafos $Down(X)$ y $Down(Y)$ para la gramática de la figura \ref{ag-no-ANCAG}.
@@ -94,9 +94,9 @@ En la sección \ref{subsec:alg-DOWN} se presenta el algoritmo para la construcci
 
 \subsection{Grafo \textit{DCG}}
 \label{subsec:graph-dcg-def}
-\textit{DCG} significa \textit{Downward Characteristic Graphs}, los mismos contienen las dependencias entre instancias de la gramática para una producción \textit{p}, teniendo en cuenta un símbolo en la gramática.
+\textit{DCG} significa \textit{Downward Characteristic Graph}, el mismo contienen las dependencias entre instancias de la gramática para una producción \textit{p}, teniendo en cuenta un símbolo en la gramática.
 \begin{definition}
-Dado q una producción de la forma $X_{0}\rightarrow \alpha_{0} X_{1} \alpha_{1} X_{2} \dots X_{k} \alpha_{k}$, el \textit{Downward Characteristic graph} of $X_{0}$ en los subárboles derivados vía la producción \textit{q}, denotado como $DCG_{X_{0}}(q)$, es un grafo donde: 
+Dado q una producción de la forma $X_{0}\rightarrow \alpha_{0} X_{1} \alpha_{1} X_{2} \dots X_{k} \alpha_{k}$, el \textit{Downward Characteristic Graph} de $X_{0}$ en los subárboles derivados vía la producción \textit{q}, denotado como $DCG_{X_{0}}(q)$, es un grafo donde: 
 \begin{items}
 \item Los nodos son atributos del símbolo $X_{0}$.
 \item Una arista, $X.a \rightarrow X.b$, denota una dependencia (transitiva) de X.b sobre X.a en algún subárbol derivado desde $X_{0}$ vía \textit{q}.
@@ -113,7 +113,7 @@ En la sección \ref{subsec:alg-DCG} se analiza el algoritmo para construir los g
 \subsection{Grafo \textit{ADP}}
 \label{mag:adpdef}
 
-Las siglas \textit{ADP} significan \textit{Augmented Dependency graph}. El grafo \textit{ADP} esta definido por instancias de la gramática, en los nodos, y cada arista se define como: $X_{i}.a\rightarrow X{j}.b$, denota que la evaluación de la instancia \textit{$X_{i}.a$} depende de la evaluación de \textit{$Y_{i}.b$}.
+Las siglas \textit{ADP} significan \textit{Augmented Dependency Graph}. El grafo \textit{ADP} esta definido por instancias de la gramática, en los nodos, y cada arista se define como: $X_{i}.a\rightarrow X{j}.b$, denotando que la evaluación de la instancia \textit{$X_{i}.a$} depende de la evaluación de \textit{$Y_{i}.b$}.
 
 El conjunto de dependencias aumentadas se denota como $ADP (q | p_{1}, p_{2}, \dots, p_{k})$ y se define:
 \begin{definition}
@@ -165,7 +165,7 @@ Las \textit{Gramáticas de Atributos Multiplanes} mantienen propiedades deseable
 \item Toda gramática MAG cumple con las propiedades de gramática bien definida\footnote{Es importante tener en cuenta las condiciones para gramática completa, detallada en \ref{def:gacompleta}} (WDAG), esto es, todo árbol sintáctico derivado sobre una MAG contiene dependencias no circulares.
 \end{items}
 
-De los conceptos analizado arriba surgen la siguiente definición y los siguientes 2 teoremas:
+De los conceptos analizados arriba surgen la siguiente definición y los siguientes 2 teoremas:
 
 \begin{definition}
 \label{def:ancag}
@@ -183,7 +183,7 @@ $IDP-ANCAG(q) = \bigcup SADP(q)$, para toda producción q.
 
 \begin{theorem}
 \label{th:ancag2}
-Toda gramática ANCAG es una gramática MAG, pero no viceversa.
+Toda gramática ANCAG es una gramática MAG, pero no vice\-versa.
 \end{theorem}
 
 \begin{figure}\centering
