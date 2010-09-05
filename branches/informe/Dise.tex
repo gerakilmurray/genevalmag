@@ -27,12 +27,12 @@ Los dos primeros, son bloques puramente declarativos o dedicados a la definició
 
 Cada bloque del lenguaje de especificación contiene su sintaxis propia para su definición, es por ello que, en las secciones siguientes se mostrarán detalles de cada uno de ellos.
 
-El análisis de cada bloque se realizará de una manera más formal y observando cada bloque como partes de una gramática.
+El análisis de cada bloque se realizará de una manera más formal y observando cada bloque como parte de una gramática.
 
 Entonces, sea \textbf{G: CFG} que define el lenguaje de especificación para el archivo de entrada aceptado por \maggen. Se define la siguiente regla de \textbf{G: CFG} para el símbolo inicial ``S''.
 
 \begin{lstlisting}[frame=shadowbox, language=specmag, linewidth=8cm]
-S = semantic domain decl_Sd
+S = semantic domain decl_sd
   | attributes decl_attrs
   | rules decl_rules
 \end{lstlisting}
@@ -41,12 +41,12 @@ En las secciones siguientes se presentarán los símbolos \textit{decl\_Sd}, \te
 
 \subsection{Bloque Dominio semántico}
 \label{subsec:bloq-sem}
-El bloque ``\textbtt{semantic domain}'' es el encargado de la definición de elementos que serán necesarios para los bloques siguientes, el mismo esta subdividido en 3 secciones, que se corresponden con la definición de sort, operadores y funciones, cada una con su sintaxis propia. 
+El bloque ``\textbtt{semantic domain}'' es el encargado de la definición de elementos que serán necesarios para los bloques siguientes, el mismo esta subdividido en 3 secciones, que se corresponden con la definición de sorts, operadores y funciones, cada una con su sintaxis propia. 
 
 Entonces se define el símbolo \textit{decl\_Sd} como:
 
 \begin{lstlisting}[frame=shadowbox, language=specmag, linewidth=8cm]
-decl_Sd = (decl_sort)*
+decl_sd = (decl_sort)*
         | (decl_operator)*
         | (decl_function)*
 \end{lstlisting}
@@ -67,11 +67,11 @@ list_sort = , NAME_SORT list_sort
           | `$\lambda$`
 \end{lstlisting}
 
-\textit{``NAME\_SORT''} representa el nombre del sort o tipo. El mismo, se corresponde con la definición de un identificador en el común de los lenguajes de programación. Es decir, acepta caracteres alfanuméricos y guiones bajos, restringiendo a los caracteres numéricos como primer carácter, como también palabras reservadas definidas por la especificación (para más detalles ver Apéndice \ref{append:grammarspirit} de implementación en \spirit).\\
+\textit{``NAME\_SORT''} representa el nombre del sort o tipo. El mismo, se corres\-ponde con la definición de un identificador en el común de los lenguajes de programación. Es decir, acepta caracteres alfanuméricos y guiones bajos, restringiendo a los caracteres numéricos como primer carácter, como también palabras reservadas definidas por la especificación (para más detalles ver Apéndice \ref{append:grammarspirit} de implementación en \spirit).\\
 
-\underline{Ejemplo:} \begin{center} \fbox{\textbtt{\ sort int;\ }} \end{center}
+\underline{Ejemplo:} \begin{center} \fbox{\textbtt{\ sort fecha;\ }} \end{center}
 \vspace{0.2cm}
-Esta línea declara el tipo ``\textbtt{int}''.
+Esta línea declara el tipo ``\textbtt{fecha}''.
 
 \subsubsection{Tipos predefinidos por el lenguaje}
 \label{sec:typepredefined}
@@ -90,10 +90,10 @@ El lenguaje de especificación contempla los siguiente tipos básicos:
 \item [string] Cadenas de caracteres (entre comillas dobles).
 \end{description}
 
-En caso de declaración explícita de cualquiera de ellos, en la especificación, la línea no es reflejada en el funcionamiento interno de \maggen.
+En caso de declaración explícita de cualquiera de ellos, en la especificación, se informa el error de parser correspondientes, debido a que son consideradas palabras reservadas de \maggen.
 
 \subsubsection{Declaración de operadores}
-La sección destinada a la declaración de \textbtt{operadores} acepta 3 tipos de operadores, los cuales, difieren en su forma de uso y cantidad de operandos. Denominados, \textit{infijo, prefijo y posfijo}. 
+La sección destinada a la declaración de \textbtt{operadores} acepta 3 tipos de o\-peradores, los cuales, difieren en su forma de uso y cantidad de operandos. Denominados, \textit{infijo, prefijo y posfijo}. 
 
 La interpretación de cada uno, esta dada por la interpretación natural común a todos los lenguajes de programación, a modo de ejemplo se muestran un operador de cada tipo para evitar inconsistencias en las definiciones:
 

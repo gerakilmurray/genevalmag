@@ -7,7 +7,7 @@
 
 Esto es, dada una MAG en el lenguaje de especificación, \maggen\ computa los planes de evaluación y genera las distintas secuencias de visita para todos los posibles contextos. Estas secuencias, son codificadas en un archivo C++ junto con los algoritmos necesarios para evaluar cualquier AST perteneciente la gramática \textit{input} de \maggen.
 
-El evaluador generado por \maggen\ recibe un \textbf{AST} y devuelve este \textbf{AST decorado}. El potencial del evaluador generado por \maggen, esta dado, por tener estáticamente todos las posibles secuencias de visita para los posibles \textbf{AST} de entrada, entonces sólo debe seleccionar las secuencias para el AST dado y luego recorrerlo según como las mismas lo indiquen.
+El evaluador generado por \maggen\ recibe un \textbf{AST} y devuelve este \textbf{AST de\-corado}. El potencial del evaluador generado por \maggen, esta dado, por tener estáticamente todas las posibles secuencias de visita para los posibles \textbf{AST} de entrada, entonces sólo debe seleccionar las secuencias para el AST dado y luego recorrerlo según como las mismas lo indiquen.
 
 \section{\textquestiondown Como funciona \maggen ?}
 Dado una MAG, \maggen\ calcula los grafos de dependencias de atributos de los símbolos de la gramática. A partir de ellos, es posible la aplicación de algoritmos de para la obtención de planes de evaluación y luego secuencias de visitas de dichos planes. \maggen\ se basa en la construcción de 4 tipos de grafos, que se construyen de manera incremental sobre la gramática. Estos grafos, son los presentados en el capítulo \ref{chap:mag}, Dependency graph (\textbf{DP}), Down graph (\textbf{Down}), Downward Characteristic graph (\textbf{DCG}) y Augmented Dependency graph (\textbf{ADP}). Sobre estos últimos se basa el cálculo de los planes de evaluación.
@@ -15,7 +15,7 @@ Dado una MAG, \maggen\ calcula los grafos de dependencias de atributos de los s�
 El funcionamiento de \maggen\ esta dado por la integración de 4 etapas, consideradas principales, que marcaron el proceso de desarrollo de la herramienta:
 \begin{itemize}
 \item Lenguaje especificación de MAG.
-\item Parser del lenguaje,representación interna y chequeos.
+\item Parser del lenguaje, representación interna y chequeos.
 \item Construcción de grafos y aplicación de algoritmos de cómputo de planes y secuencias de visita.
 \item Generación de código.
 \end{itemize}
