@@ -406,7 +406,7 @@ En la presentación del ejemplo en el lenguaje de especificación, se observa en
  
 \section{Parser del lenguaje, representación interna y chequeos}
 
-El parser del lenguaje de especificación se llevó a cabo utilizando las librerías \boost\ \spirit. Detalles de este tema, son tratado puntualmente en las secciones \ref{sec:par-spirit} y \ref{sec:gramspirit}. 
+El parser del lenguaje de especificación se llevó a cabo utilizando las librerías \boost\ \spirit. Detalles de este tema, son tratados puntualmente en las secciones \ref{sec:par-spirit} y \ref{sec:gramspirit}. 
 
 En esta sección se mencionarán algunas consideraciones sobre el parser desde el punto de vista de su funcionamiento, detalles en la representación interna y los chequeos realizados sobre la entrada de \maggen, para asegurar y verificar que se cumpla las características de una ``Gramática Bien Definida''.
 
@@ -466,7 +466,7 @@ A continuación se analizan cuestiones de diseño de los paquetes mencionados ar
 Algunas observaciones sobre el diseño realizado en la figura \ref{fig:disen2}:
 
 \begin{itemize}
-\item La relación entre los paquetes se produce por un lado, mediante la clase \textbtt{Rule}, en el sentido de que toda regla contiene un conjunto de ecuaciones y cada una de estas, está definida a través de un \textit{l\_value:}\textbtt{Expr\_instance} y un \textit{r\_value:}\textbtt{Expression}. Por otro lado, \textbtt{Expr\_instance} se vincula con \textbtt{Symbol} y \textbtt{Attribute} y \textbtt{Expr\_function} con \textbtt{Function}.
+\item La relación entre los paquetes se produce por un lado, mediante la clase \textbtt{Rule}, en el sentido de que toda regla contiene un conjunto de ecuaciones y cada una de estas, está definida a través de un \textit{l\_value:} \textbtt{Expr\_instance} y un \textit{r\_value:} \textbtt{Expression}. Por otro lado, \textbtt{Expr\_instance} se vincula con \textbtt{Symbol} y \textbtt{Attribute} y \textbtt{Expr\_function} con \textbtt{Function}.
 
 \item Toda la información de una gramática de atributos esta representada en la clase \textbtt{Attr\_grammar} y por ende, el ciclo de vida de cada uno de sus componentes es administrado por esta clase, durante todo el funcionamiento de \maggen. 
 \end{itemize}
@@ -474,13 +474,13 @@ Algunas observaciones sobre el diseño realizado en la figura \ref{fig:disen2}:
 \subsection{Chequeos}
 \label{subsec:check}
 
-El conjuntos de chequeos que se realizan sobre la gramática de entrada a \maggen, están directamente relacionados con el concepto de gramática bien definida analizado en la sección \ref{sec:well-defined}. Además, se aplican una serie de chequeos extras para evitar cálculos inconsistentes en las etapas posteriores. La totalidad de los chequeos, son realizados sobre el bloque de reglas de la gramática\footnote{En su mayoría los chequeos se realizan sobre las ecuaciones de las reglas.}, debido a que este, es el más significativo y sobre el cual se apoyan los cálculos posteriores (en particular, el cálculo de planes).
+El conjunto de chequeos que se realizan sobre la gramática de entrada a \maggen, están directamente relacionados con el concepto de gramática bien definida analizado en la sección \ref{sec:well-defined}. Además, se aplican una serie de chequeos extras para evitar cálculos inconsistentes en las etapas posteriores. La totalidad de los chequeos, son realizados sobre el bloque de reglas de la gramática\footnote{En su mayoría los chequeos se realizan sobre las ecuaciones de las reglas.}, debido a que este, es el más significativo y sobre el cual se apoyan los cálculos posteriores (en particular, el cálculo de planes).
 
-Los chequeos realizados son clasificados en sintácticos y semánticos, los primeros, en su mayoría, son realizados durante el parser, en cambio, los chequeos semánticos se realizan luego del parser de cada regla, aplicando escaneos específicos. Estos últimos son los explicados en esta sección.
+Los chequeos realizados son clasificados en sintácticos y semánticos, los primeros, en su mayoría, son realizados durante el parser, en cambio, los chequeos semánticos se realizan luego de parsear cada regla, aplicando escaneos específicos. Estos últimos son los explicados en esta sección.
 
 El módulo que agrupa estos chequeos, se ubica en el paquete \textbtt{Parser} de \maggen\ y se denomina \textbtt{Semantics\_checks}.
 
-A continuación se detallan dichos chequeos\footnote{Detalles sobre la implementación de cada uno de los chequeos, ver sección \ref{sec:checksem}}:
+A continuación se detallan dichos chequeos\footnote{Detalles sobre la implementación de cada uno de los chequeos, ver sección \ref{sec:checksem}.}:
 
 \begin{description}
 \item [Precedencia] El chequeo de precedencia consiste en preservar la precedencia definida de cada operador. Dicho chequeo, es realizado sobre cada una de las ecuaciones definidas en la gramática. Por ejemplo:\\ Dada la siguiente ecuación:
@@ -489,7 +489,7 @@ A continuación se detallan dichos chequeos\footnote{Detalles sobre la implement
  \fbox{\ \textbtt{E[0].valor = E[1].valor + E[2].valor * E[2].valor}\ }
 \end{center}
 
-Su interpretación está dada por la definición de la precedencia de los operadores \textbtt{+} y \textbtt{*}(se asume que los dos operadores son infijos y están bien usado). Si se toma \textbtt{*} con mayor precedencia que \textbtt{+}, \maggen\ interpreta implícitamente como si la ecuación tuviera paréntesis:
+Su interpretación está dada por la definición de la precedencia de los o\-pe\-radores \textbtt{+} y \textbtt{*} (se asume que los dos operadores son infijos y están bien usado). Si se toma \textbtt{*} con mayor precedencia que \textbtt{+}, \maggen\ interpreta implícitamente como si la ecuación tuviera paréntesis:
 
 \begin{center}
  \fbox{\ \textbtt{E[0].valor = E[1].valor + (E[2].valor * E[2].valor)}\ }
@@ -556,7 +556,7 @@ La construcción de grafos se realiza en el módulo \textbtt{builder\_graphs}. \
 
 Las figuras\footnote{\label{foot:graph} Imagen generada utilizando la herramienta \textbtt{graphviz} sobre el archivo \textbtt{.dot} generado por \maggen.} muestran un ejemplo de cada tipo de grafo, generadas a partir del ejemplo analizado en el apéndice \ref{append:agwuuyang}.
 
-La construcción de cada tipo de grafo respeta los principios analizados en el capítulo \ref{chap:mag} y los algoritmos respectivo analizados en el capítulo \ref{chap:eval_est}. 
+La construcción de cada tipo de grafo respeta los principios analizados en el capítulo \ref{chap:mag} y los respectivos algoritmos analizados en el capítulo \ref{chap:eval_est}. 
 
 De de los 4 tipos de grafos analizados, los necesarios para el cómputo de etapas siguientes, son los ``\textbtt{ADP graph}''. Los demás, son requeridos como cálculo previo para la construcción de estos.
 
@@ -600,9 +600,9 @@ Notar que cada plan proyectado ha capturado las ecuaciones de cada símbolo de l
 \subsection{Construcción de secuencias de visita}
 \label{sec:constseqvisit}
 
-La etapa de construcción de secuencias de visita, tal como lo muestra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``\textbtt{Builder}''. Las mismas, son computados a partir de los diferentes planes obtenidos en el sección anterior.
+La etapa de construcción de secuencias de visita, tal como lo muestra el diagrama de la figura \ref{fig:disen}, se realiza en el paquete ``\textbtt{Builder}''. Las mismas, son computadas a partir de los diferentes planes obtenidos en el sección anterior.
 
-El funcionamiento para la construcción de las secuencias, esta dado por la aplicación de un recorrido recursivo sobre los contextos de las reglas, para la evaluación de cada atributo de los símbolos. El resultado de este algoritmo, son los valores que conforman la secuencia de visita, tal como se ha analizado en la sección \ref{sec:sec-visit}. Estos valores siguen la siguiente interpretación: 
+El funcionamiento para la construcción de las secuencias, esta dado por la aplicación de un recorrido recursivo sobre los contextos de las reglas, para la evaluación de cada atributo de los símbolos. El resultado de este algoritmo, son los valores que conforman la secuencia de visita, tal como se ha analizado en la sección \ref{sec:sec-visit}. Estos valores tienen la siguiente interpretación: 
 
 \begin{description}
 \item [Compute] Valor menor que cero que representa el número de la ecuación a resolver\footnote{La ecuación a computar pertenece a la regla del plan corriente.}.
@@ -631,7 +631,7 @@ A modo de ejemplo, se muestran las secuencias de visita generadas por \maggen\ p
 \end{enumerate}
 \end{description}
 
-Cabe aclarar que todas las secuencias de visita tienen un \textbf{leave} implícito al final, es decir, cuando se completo la computación de la secuencia se retorna a su ámbito de invocación.
+Cabe aclarar que todas las secuencias de visita tienen un \textbf{leave} implícito al final, es decir, cuando se completó la computación de la secuencia se retorna a su ámbito de invocación.
 
 \subsubsection{Heurística del algoritmo}
 \label{subsec:heuris-simul}
@@ -722,7 +722,7 @@ Estos métodos son usados internamente por el evaluador generado por \maggen\ te
 
 El método \textbtt{traverse} recorre el AST de entrada al evaluador y asigna a cada nodo un plan de evaluación\footnote{Los planes que asigna el método traverse son los generados estáticamente por \maggen.} y con ello una secuencia de visita correspondiente.
 
-\textbtt{add\_plan} y \textbtt{add\_plan\_project} agregan planes y planes proyectados respectivamente, los mismos son usados en la inicialización del evaluador (constructor de clase).
+\textbtt{add\_plan} y \textbtt{add\_plan\_project} agregan planes y planes proyectados respectivamente, los mismos son usados en la inicialización del e\-va\-lua\-dor (constructor de clase).
 
 \item Públicos:
 

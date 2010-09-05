@@ -2,9 +2,9 @@
 \label{chap:usos}
 \minitoc
 
-Para usar \maggen\ se debe invocar la herramienta mediante la línea de comando, es decir, por lo se es necesario contar con una terminal\footnote{En sistemas \textit{Windows} compatible: \textbtt{Win+R} y luego \textbtt{cmd} y en sistemas \textit{Unix}: \textbtt{Alt+F2} y luego \textbtt{xterm}} para su ejecución. Por cuestiones de simplicidad y flexibilidad de la herramienta, no se consideró el desarrollo de un \textit{front-end} para \maggen. Además, se debe tener en cuenta, que el usuario debería presentar mayor interés en el resultado producido por \maggen\ y no de una innecesaria interfaz gráfica, que entorpecería su comportamiento combinatorio con otros comandos.
+Para usar \maggen\ se debe invocar la herramienta mediante la línea de comando, es decir, por lo se es necesario contar con una terminal\footnote{En sistemas \textit{Windows} compatible: \textbtt{Win+R} y luego \textbtt{cmd} y en sistemas \textit{Unix}: \textbtt{Alt+F2} y luego \textbtt{xterm}.} para su ejecución. Por cuestiones de simplicidad y flexibilidad de la herramienta, no se consideró el desarrollo de un \textit{front-end} para \maggen. Además, se debe tener en cuenta, que el usuario debería presentar mayor interés en el resultado producido por \maggen\ y no de una innecesaria interfaz gráfica, que entorpecería su comportamiento combinatorio con otros comandos.
   
-\maggen\ puede ser invocado utilizando una serie de parámetros que inciden directamente sobre el resultados producido por la herramienta. En el desarrollo de este capítulo se tratarán estos temas en detalles y además se analizarán el uso del evaluador generado por \maggen.
+\maggen\ puede ser invocado utilizando una serie de parámetros que inciden directamente sobre el resultados producido por la herramienta. En el desarrollo de este capítulo se tratarán estos temas en detalles y además se analizará el uso del evaluador generado por \maggen.
 
 \section{Compilación e Instalación de \maggen}
 \maggen\ puede ser descargado desde el repositorio svn (\cite{svn-book}) utilizando el siguiente comando:
@@ -20,7 +20,7 @@ Para compilar \maggen, primero el usuario deberá posicionarse dentro del direct
  2.- user@pc:~/maggen$ make clean
  3.- user@pc:~/maggen$ make
 \end{verbatim}}
-La compilación de \maggen\ se realiza mediante ``\textbtt{cmake}'', detalles sobre esta herramienta fueron presentados en la sección \ref{sec:metoherram}. 
+La compilación de \maggen\ se realiza mediante el comando ``\textbtt{cmake}'', detalles sobre esta herramienta fueron presentados en la sección \ref{sec:metoherram}. 
 En la figura \ref{fig:cmake_maggen} y \ref{fig:make_maggen} se puede ver la ejecución de los comandos 1 y 3.
 \begin{figure}[!ht]\centering
 \includegraphics[width=300pt,height=105pt]{cmake_maggen.png}
@@ -29,13 +29,13 @@ En la figura \ref{fig:cmake_maggen} y \ref{fig:make_maggen} se puede ver la ejec
 
 \begin{figure}[!ht]\centering
 \includegraphics[width=300pt,height=301pt]{make_maggen.png}
-\caption{\label{fig:make_maggen} Ejecución de ``\textbtt{make}'' en la terminal de comandos..}
+\caption{\label{fig:make_maggen} Ejecución de ``\textbtt{make}'' en la terminal de comandos.}
 \end{figure}
  
 \subsection{Directorio \textbtt{maggen}}
 Luego de la compilación e instalación, el directorio raíz de \maggen\ se compone de lo siguiente:
 \begin{itemize}
-\item \textbtt{/bin} Directorio que contiene módulos estáticos necesarios para la generación de código y uso del evaluador obtenido.
+\item \textbtt{/bin} Directorio que contiene módulos estáticos necesarios para la ge\-ne\-ración de código y uso del evaluador obtenido.
 {\footnotesize \begin{verbatim}
  user@pc:~/maggen$ ls -R bin/
  bin:
@@ -99,7 +99,7 @@ Luego de la compilación e instalación, el directorio raíz de \maggen\ se comp
  Utilities.h
 \end{verbatim}}
 
-\item \textbtt{/scripts} Directorio que contiene scripts útiles para el usuario, por ejemplo: \textbtt{dot2png.sh} para convertir a imagen \textit{png} los archivos de grafos y planes generados por \maggen.
+\item \textbtt{/scripts} Directorio que contiene scripts útiles para el usuario, por e\-jem\-plo: \textbtt{dot2png.sh} para convertir a imagen \textit{png} los archivos de grafos y planes generados por \maggen.
 {\footnotesize \begin{verbatim}
  user@pc:~/maggen$ ls -R scripts/
  scripts/:
@@ -140,7 +140,7 @@ Las opciones son las siguientes:
 \begin{description}
 \item [\textbtt{-f  file}] Definir el archivo de entrada de \maggen\ como \textbtt{file}. Si se omite esta opción \maggen\ espera la entrada por la entrada estándar (\textbtt{cin}) hasta leer el carácter \textbtt{EOF} (End Of File)\footnote{En sistemas \textit{Unix} el carácter \textbtt{EOF} puede ser producido con \textbtt{Ctrl+D} dentro de una consola de comandos.}.
 
-\item [\textbtt{-i  header}] Incluir \textbtt{header} en la generación de código. Genera un \textbtt{\#include ``header''} del archivo que referencia esa ruta. Dicha linea, \maggen\ la agrega al archivo generado.
+\item [\textbtt{-i  header}] Incluir \textbtt{header} en la generación de código. Genera un \textbtt{\#include ``header''} del archivo que referencia esa ruta. Dicha línea, \maggen\ la agrega al archivo generado.
 
 \item [\textbtt{-fo folder}] Define \textbtt{folder} como el directorio de salida para \maggen. Si se omite esta opción, \maggen\ usa el folder por defecto ``\textit{./out\_maggen/}''.
 
@@ -160,7 +160,7 @@ A continuación se observan algunos ejemplos de invocación de \maggen.
 \end{figure}
 
 \item Si se invoca:  \begin{center}
-{\scriptsize\textbtt{./maggen -fo ./out\_wuu\_yang -o evalmag -f ./examples/ag\_wuu\_yang/ag\_wuu\_yang.input}}                                                                                                                                   \end{center} Si se Especifica como archivo de entrada a \textbtt{ag\_wuu\_yang.input}, como directorio de salida \textbtt{./Out\_wuu\_yang} y el nombre de la clase (y archivo) generada con el nombre \textbtt{evalmag}. La figura \ref{fig:outnormal} muestra la salida de esta invocación.
+{\scriptsize\textbtt{./maggen -fo ./out\_wuu\_yang -o evalmag -f ./examples/ag\_wuu\_yang/ag\_wuu\_yang.input}}                                                                                                                                   \end{center} Si se especifica como archivo de entrada a \textbtt{ag\_wuu\_yang.input}, como directorio de salida \textbtt{./Out\_wuu\_yang} y el nombre de la clase (y archivo) generada con el nombre \textbtt{evalmag}. La figura \ref{fig:outnormal} muestra la salida de esta invocación.
 
 \begin{figure}[!ht]\centering
 \includegraphics[width=350pt,height=69pt]{normal.png}
@@ -175,7 +175,7 @@ Esto muestra a \maggen\ en conjunto con \textbtt{cat} usando una tubería (\text
 
 \end{itemize}
 
-La salida de \maggen\ esta ordenada a través de directorio bien definidos que marcan el proceso de funcionamiento de la herramienta en casa etapa. A continuación se analizarán la salida de \maggen\ para siguiente invocación:
+La salida de \maggen\ esta ordenada a través de directorio bien definidos que marcan el proceso de funcionamiento de la herramienta en cada etapa. A continuación se analizarán la salida de \maggen\ para siguiente invocación:
 
 \begin{center}{\scriptsize\textbtt{./maggen -fo ./Out\_wuu\_yang -o maggen -f ./examples/ag\_wuu\_yang/ag\_wuu\_yang.input}}\end{center}
 
@@ -195,7 +195,7 @@ Dicha información es almacenada en la ruta \textbtt{./Out\_wuu\_yang}, dentro d
 
 \item [Archivo ``\textbtt{Grammar\_mag.log}''] Este contiene la gramática parseada. Se debe tener en cuenta el análisis de este archivo, esto permite encontrar posibles errores en la interpretación del archivo de entrada a \maggen. Tal como se muestra la gramática en este archivo, es la que la herramienta a utilizado para la generación del evaluador.
 
-\item [Directorio ``\textbtt{graphs}''] Contiene los 4 tipos de grafos construidos por \maggen\ en el proceso visto en la sección \ref{subsec:graph}. Los mismos están ordenados por 4 directorios diferentes denominados: \textbtt{1\_DP\_graphs}, \textbtt{2\_DOWN\_graphs}, \textbtt{3\_DCG\_graphs}, \textbtt{4\_ADP\_graphs}. Cada unos de ellos contiene archivos \textbtt{.dot} para cada grafo creado. Este directorio, además, es utilizado para el caso que se detecte planes cíclicos, donde se almacenan los grafos que producen dependencias cíclicas en un solo directorio y se omiten los demás grafos.
+\item [Directorio ``\textbtt{graphs}''] Contiene los 4 tipos de grafos construidos por \maggen\ en el proceso visto en la sección \ref{subsec:graph}. Los mismos están ordenados por 4 directorios diferentes denominados: \textbtt{1\_DP\_graphs}, \textbtt{2\_DOWN\_graphs}, \textbtt{3\_DCG\_graphs}, \textbtt{4\_ADP\_graphs}. Cada unos de ellos contiene archivos \textbtt{.dot} para cada grafo creado. Este directorio, además, es utilizado para el caso en que se detecten planes cíclicos, para almacenar los grafos que producen dependencias cíclicas en un solo directorio y se omiten los demás grafos.
 
 \item [Directorio ``\textbtt{plans}''] Contiene archivos \textbtt{.dot} con los planes generados por \maggen.
 
@@ -214,7 +214,7 @@ Para el uso del evaluador generado por \maggen\ se necesitan los 4 archivos gene
 
 El evaluador generado por \maggen\ puede ser usado como un módulo C++ dentro de otro proyecto. En esta sección se continuará con un ejemplo de Wuu Yang, el cual ya se ha tratado en los capítulos anteriores (Ver especificación de entrada a \maggen\ en el apéndice \ref{append:agwuuyang}).
 
-Como bien se ha visto en secciones anteriores, la entrada del evaluador generado por \maggen\ debe ser un AST. El siguiente archivo C++ construye un AST para la gramática del ejemplo de Wuu Yang, y luego lo pasa al evaluador para que lo decore.
+Como bien se ha visto en secciones anteriores, la entrada del evaluador generado por \maggen\ debe ser un AST. El siguiente archivo C++ construye un AST para la gramática del ejemplo de Wuu Yang, y luego lo pasa al e\-va\-lua\-dor para que lo decore.
 
 \lstinputlisting[numbers=left]{input_file_code/ag_wuu_yang.cpp}
 
@@ -277,7 +277,7 @@ Notar que el ejemplo Wuu Yang analizado es considerablemente sencillo, pero se p
 
 \section{Mensajes y avisos}
 
-En los cuadros \ref{table:mensajes-err} y \ref{table:mensajes-av} se analizaron la descripción de los posibles errores y avisos que se deben tener en cuenta cuando se usa \maggen.
+En los cuadros \ref{table:mensajes-err} y \ref{table:mensajes-av} se analizarán la descripción de los posibles errores y avisos que se deben tener en cuenta cuando se usa \maggen.
 
 % \begin{table}
 \begin{small}
@@ -345,7 +345,7 @@ ERROR: Index out bounds: combined ADP graphs.& Error fatal en la generación de 
 
 WARNING: Symbol Non-Teminal  \textit{SYMB} unreachable. & El símbolo \textit{SYMB} es inalcanzable desde la regla inicial de la gramática. El mismo es ignorado en el proceso de cómputo. & Chequee la gramática de entrada a \maggen\ o elimine el símbolo en caso de uso innecesario. \\ \hline
 
-WARNING: Sort duplicate was ignored: $-->$ \textit{S} & La declaración del sort \textit{S} esta duplicada. \maggen\ ignora dicha linea. & Elimine la declaración del sort \textit{S} o modifique la misma en caso de declaración de sort distinto. \\ \hline
+WARNING: Sort duplicate was ignored: $-->$ \textit{S} & La declaración del sort \textit{S} esta duplicada. \maggen\ ignora dicha línea. & Elimine la declaración del sort \textit{S} o modifique la misma en caso de declaración de sort distinto. \\ \hline
 
 WARNING: Declaration duplicate was ignored: $-->$ \textit{F} & La declaración de la función \textit{F} esta duplicada. \maggen\ ignora dicha línea. & Elimine la declaración de la función \textit{F} o modifique la misma en caso de declaración de función distinta. \\ \hline
 
