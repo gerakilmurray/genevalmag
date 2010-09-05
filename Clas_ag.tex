@@ -8,14 +8,14 @@ Las primeras, se basan en procedimientos de evaluación previamente definidos, e
 
 Cada una de las familias de gramática de atributos tiene su propio poder expresivo, como así también, sus restricciones en el método de evaluación. La relación entre estos dos aspectos esta dado por el siguiente razonamiento: \textit{mientras más restricciones en el método de evaluación, menos poder expresivo}.
 
-En el desarrollo de este capítulo se presentaran algunas de las familias de GA desde el punto de vista de las dependencias entre sus atributos\footnote{La familia de gramáticas analizadas desde el punto de vista de la estrategia de evaluación no serán abordadas, debido a que escapan al propósito del trabajo realizado. Las mismas pueden ser consultadas en \cite{tesismarcelo}.}, a solo efecto de abordar una comparación final y aportar una marco teórico adecuado para el análisis de Gramáticas de Atributos Multiplanes (MAG). Las MAG, son analizadas en el capítulo siguiente y además son en las que se basa el desarrollo de \maggen. 
+En el desarrollo de este capítulo se presentarán algunas de las familias de GA desde el punto de vista de las dependencias entre sus atributos\footnote{La familia de gramáticas analizadas desde el punto de vista de la estrategia de evaluación no serán abordadas, debido a que escapan al propósito del trabajo realizado. Las mismas pueden ser consultadas en \cite{tesismarcelo}.}, a solo efecto de abordar una comparación final y aportar una marco teórico adecuado para el análisis de Gramáticas de Atributos Multiplanes (MAG). Las MAG, son analizadas en el capítulo siguiente y además son en las que se basa el desarrollo de \maggen. 
 
 En el presente capítulo, no se profundizará demasiado en los métodos de evaluación de cada familia. Este tema es detallado por Marcelo Arroyo en \cite{tesismarcelo}, Wuu Yang en \cite{wuu-yang2} y U. Kastens en \cite{kastens}.
 
 \section{Gramáticas de Atributos bien definidas (WDAG)}
 \label{sec:well-defined}
 
-Las \textit{gramática de atributos bien definida},(o \textit{well-defined}) es una familia basada en la estrategia de evaluación. En esta sección se presentará dicha familia y al final del capítulo se analizará su relación con las demás. 
+Las \textit{gramáticas de atributos bien definidas}, (o \textit{well-defined}) son una familia basada en la estrategia de evaluación. En esta sección se presentará dicha familia y al final del capítulo se analizará su relación con las demás. 
 
 \begin{definition} \label{def:gacompleta}Una gramática de atributos es completa si cumple con las siguientes propiedades:
 \begin{enumerate}
@@ -38,7 +38,7 @@ Esta información se puede utilizar para producir evaluadores para esta familia 
 $$ DP_{ord}(p) \equiv DP(p) \cup \{ (X.a, X.b) \in O(X) \mid \textrm{X ocurre en p} \} $$
 \end{definition}
 
-\begin{definition} Una gramática de atributos es (ordenada) (OAG) si para cada producción existe un orden total, es decir que cada grafo $ DP_{ord}(p) $ no es circular.
+\begin{definition} Una gramática de atributos es ordenada (OAG) si para cada producción existe un orden total, es decir que cada grafo $ DP_{ord}(p) $ no es circular.
 \end{definition}
 
 En 1996, Wuu Yang\cite{wuu-yang4} caracterizó una extensión a las OAG que permite que el algoritmo de decisión de pertenencia a esta nueva familia sea de tiempo polinomial. A ésta extensión se la conoce como \textbf{Extended OAG o EOAG}.
@@ -48,7 +48,7 @@ Marcelo Arroyo en \cite{tesismarcelo} presenta un análisis detallado sobre esta
 
 \section{Gramática de Atributos absolutamente no circulares (ANCAG)}
 
-Esta familia de gramáticas de atributos, denominada también \emph{fuertemente no circulares}) no comprende las GAs cuyas dependencias entre sus atributos es tal que cada atributo sintetizado del símbolo \textit{head} de cada producción,depende (directa o indirectamente) de un conjunto de sus atributos heredados.
+Esta familia de gramáticas de atributos, denominada también \emph{fuertemente no circulares}) no comprende las GAs cuyas dependencias entre sus atributos es tal que cada atributo sintetizado del símbolo \textit{head} de cada producción, depende (directa o indirectamente) de un conjunto de sus atributos heredados.
 
 Es posible definir formalmente que una GA es \emph{ANCAG} si se extiende el grafo de dependencias de cada producción $p: X_0 \rightarrow X_1 X_2 \ldots X_{np}$:
 
@@ -123,5 +123,5 @@ A continuación, se analiza la relación entre familias de GA que fueron present
 \caption{\label{jer-GA2}Relación entre familias de gramáticas de atributos.} 
 \end{figure}
 
-En la relación mostrada arriba se incluye la familia MAG, la cual será analizada en el capítulo siguiente.
+En la relación mostrada arriba se incluye la familia MAG, la cual será ana-lizada en el capítulo siguiente.
 Detalles sobre demostraciones acordes a las inclusiones presentadas son tratadas ampliamente por Marcelo Arroyo en \cite{tesismarcelo}.

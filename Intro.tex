@@ -55,7 +55,7 @@ La importancia que adquiere \maggen, además de basarse en la familia MAG, radic
  
 \end{itemize}
 
-En el desarrollo de este informe se presentaran en detalle los conceptos y puntos que fueron analizados en esta sección. En el capítulo \ref{chap:eval_est} se presentan el algoritmo de creación de planes para MAG y, ademas, resultados que expresan la consistencia del mismo. Luego, en los capítulos \ref{chap:disen_} y \ref{chap:implem} se analizarán aspectos relevantes al diseño e implementación de \maggen 
+En el desarrollo de este informe se presentarán en detalle los conceptos y puntos que fueron analizados en esta sección. En el capítulo \ref{chap:eval_est} se presentan el algoritmo de creación de planes para MAG y, además, resultados que expresan la consistencia del mismo. Luego, en los capítulos \ref{chap:disen_} y \ref{chap:implem} se analizarán aspectos relevantes al diseño e implementación de \maggen 
 
 
 %Principalmente, en la sección \ref{sec:comp-planes} se desarrolla un teorema que demuestra que \maggen\ genera la mínima cantidad de planes de evaluación y, además, en los capítulos \ref{chap:disen_} y \ref{chap:implem} se analizaran aspectos relevantes al diseño e implementación de \maggen.
@@ -208,11 +208,11 @@ La notación usada tanto en el desarrollo del proyecto, comunicación entre los 
 
 Las Gramáticas de Atributos (GA) son un formalismo simple para la especificación de la semántica de lenguajes formales, como los lenguajes de programación o de especificación. Integran la modularidad que brindan las CFG y la expresividad de un lenguaje funcional.
 
-En una GA, se relaciona con cada símbolo de una CFG un conjunto de atributos. Cada regla o producción tiene asociados un conjunto de reglas semánticas que toman la forma de asignación a atributos de valores denotados por la aplicación de una función, la cual puede tomar como argumentos instancias de atributos pertenecientes a los símbolos que aparecen en la producción.
+En una GA, se relaciona con cada símbolo de una CFG un conjunto de atri-butos. Cada regla o producción tiene asociados un conjunto de reglas semánticas que toman la forma de asignación a atributos de valores denotados por la aplicación de una función, la cual puede tomar como argumentos instancias de atributos pertenecientes a los símbolos que aparecen en la producción.
 
-Las reglas semánticas, o ecuaciones, inducen dependencias entre los atributos que ocurren en la producción. El orden de evaluación (si existe) queda determinado por las dependencias entre las instancias de los atributos.
+Las reglas semánticas, o ecuaciones, inducen dependencias entre los atri-butos que ocurren en la producción. El orden de evaluación (si existe) queda determinado por las dependencias entre las instancias de los atributos.
 
-Una ecuación se podrá evaluar cuando las instancias de los atributos que aparecen como sus argumentos estén evaluadas. La noción de orden de evaluación es detallada en la sección \ref{sec:met_eval}
+Una ecuación se podrá evaluar cuando las instancias de los atributos que aparecen como sus argumentos estén evaluadas. La noción de orden de eva-luación es detallada en la sección \ref{sec:met_eval}
 
 \begin{definition}
 \label{def:grammarattr}
@@ -302,17 +302,17 @@ Si una GA contiene dependencias circulares no podría ser evaluada ya que no se 
 
 En 1980, Uwe Kastens\cite{kastens} caracterizó las ``\textit{Gramáticas de Atributos Ordenadas}'' (OAG) y propuso un método para su evaluación, denominado secuencias de visita. Estas son, secuencias de operaciones que conducen el recorrido del árbol sintáctico atribuido y realizan la evaluación de las instancias de los atributos. Kastens propone un método para generar las secuencias de visita en tiempo polinomial para la familia OAG. Esta familia y otras como las ``\textit{Absolutamente No Circulares}'' (ANCAG) son tratadas en el capítulo 2.
 
-Luego, en 1998, Wuu-Yang en \cite{wuu-yang1} caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multiplanes}, presentando una algoritmo de evaluación basado en secuencias de visita en tiempo polinomial en el numero de símbolos y producciones. Esta familia, es presentada en el capítulo \ref{chap:mag} y son en las que se basa el funcionamiento de \maggen.  
+Luego, en 1998, Wuu-Yang en \cite{wuu-yang1} caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multiplanes}, presentando una algoritmo de eva-luación basado en secuencias de visita en tiempo polinomial en el número de símbolos y producciones. Esta familia, es presentada en el capítulo \ref{chap:mag} y son en las que se basa el funcionamiento de \maggen.  
 
 \subsection{Evaluación dinámica}
 
 Un evaluador dinámico tiene como ventajas su simplicidad y la posibilidad de detectar ciclos en el grafo de dependencias antes o durante la evaluación. Además que, es posible evaluar cualquier WDAG (GA bien definida)\footnote{Esta familia es detalla en el capítulo siguiente (sección \ref{sec:well-defined}).}.
 
-La realidad es que, los evaluadores dinámicos no han tenido mucho interés en el desarrollo de herramientas de generación de procesadores de lenguajes (como por ejemplo los compiladores) debido a que uno de los principales requisitos de un compilador es que sea eficiente, ya que durante un desarrollo un programador generalmente necesita recompilar un número muy importante de veces hasta obtener una versión final del programa requerido.
+La realidad es que, los evaluadores dinámicos no han tenido mucho interés en el desarrollo de herramientas de generación de procesadores de lenguajes (como por ejemplo los compiladores) debido a que uno de los principales re-quisitos de un compilador es que sea eficiente, ya que durante un desarrollo un programador generalmente necesita recompilar un número muy importante de veces hasta obtener una versión final del programa requerido.
 
-Las principales desventajas son que generalmente es necesario mantener el árbol sintáctico y el grafo de dependencias. La construcción del grafo de dependencias consume tiempo y memoria; y a su vez, el tiempo de procesamiento insumido en la construcción del grafo de dependencias puede ser mayor que el proceso de evaluación en sí mismo. En la práctica, si se toma una GA de un tamaño típico, los requerimientos de memoria pueden ser bastante considerables.  
+Las principales desventajas son que generalmente es necesario mantener el árbol sintáctico y el grafo de dependencias. La construcción del grafo de dependencias consume tiempo y memoria; y a su vez, el tiempo de procesamiento insumido en la construcción del grafo de dependencias puede ser mayor que el proceso de evaluación en sí mismo. En la práctica, si se toma una GA de un tamaño típico, los requerimientos de memoria pueden ser bastante conside-rables.  
 
-Razón por la cual \maggen\ genera evaluadores estáticos,y no se profundizará demasiado en el otro tipo de evaluadores.
+Razón por la cual \maggen\ genera evaluadores estáticos, y no se profundizará demasiado en el otro tipo de evaluadores.
 
 \subsection{Evaluación estática}
 \label{subsec:eval-est}
@@ -329,7 +329,7 @@ Dada una producción $p$ se deben tomar en cuenta tres tipos de dependencias que
 \item Impuestas en el contexto inferior.
 \end{enumerate}
 
-Instancias diferentes de una producción $p$ tendrán las mismas dependencias directas, pero podrán tener diferentes dependencias impuestas por los contextos inferiores y superiores. Es necesario entonces, determinar todas las \emph{dependencias posibles} entre las instancias de los atributos que ocurren en una producción para luego poder determinar todas los \emph{planes de evaluación posibles} entre los atributos que ocurren en una producción.
+Instancias diferentes de una producción $p$ tendrán las mismas dependencias directas, pero podrán tener diferentes dependencias impuestas por los contextos inferiores y superiores. Es necesario entonces, determinar todas las \emph{dependencias posibles} entre las instancias de los atributos que ocurren en una producción para luego poder determinar todos los \emph{planes de evaluación posibles} entre los atributos que ocurren en una producción.
 
 Entonces, cada plan de evaluación que computa las dependencias impuestas en una producción va acompañado con el \textit{contexto} en el cual el mismo se efectúa.
 
@@ -364,7 +364,7 @@ En su próxima visita ($i+1$), se continúa con la operación que sigue a \emph{
 
 Cada secuencia de visitas finaliza con una operación \emph{leave}\footnote{La mayoría de las veces implícita, es decir este \emph{leave} esta dado por el fin de la secuencia.}. La evaluación termina cuando se ejecutaron todas las operaciones del nodo raíz del árbol sintáctico.
 
-Los evaluadores basados en secuencias de visita pertenecen a una familia denominada \emph{Evaluadores Multivisita}, ya que el proceso de evaluación puede requerir múltiples visitas a cada nodo para evaluarlo.
+Los evaluadores basados en secuencias de visita pertenecen a una fami-lia denominada \emph{Evaluadores Multivisita}, ya que el proceso de evaluación puede requerir múltiples visitas a cada nodo para evaluarlo.
 
 Se pueden generar secuencias de visita a partir de los grafos de dependencias inducidos de cada producción. Cada subsecuencia de instancias de atributos heredados del símbolo \textit{head} de la producción se reemplazarán por operaciones \emph{leaves}, cada ocurrencia de un atributo definido en la producción (sintetizados del símbolo \textit{head} o heredados de un símbolo del \textit{body}) se reemplazarán por la correspondiente operación \emph{compute} y cada subsecuencia de instancias de atributos sintetizados del símbolo $X_i$ del \textit{body} de la producción se reemplazarán por operaciones \emph{visit(i)}.
 
@@ -378,4 +378,4 @@ Un evaluador para una GA bien definida deberá realizar una previa selección de
 
 En la sección \ref{sec:algevalattr} se presentarán los algoritmos \textbtt{eval} y \textbtt{traverse}, teniendo en cuenta heurísticas utilizadas por Wuu Yang en \cite{wuu-yang1}.
 
-Además, en los capítulos \ref{chap:disen_} y \ref{chap:implem} se pueden analizar detalles sobre la generación de un evaluador, específicamente, el utilizado para el desarrollo de \maggen.
+Además, en los capítulos \ref{chap:disen_} y \ref{chap:implem} se pueden analizar detalles sobre la ge-neración de un evaluador, específicamente, el utilizado para el desarrollo de \maggen.

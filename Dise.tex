@@ -2,7 +2,7 @@
 \label{chap:disen_}
 \minitoc
 
-El diseño general de \maggen\ y los diagramas que muestran la arquitectura de la herramienta son presentados en el apéndice \ref{append:disemaggen}. En el desarrollo de este capítulo se presentaran cada una de las capas que conforman a \maggen, mostrando detalles relevantes al diseño. En el siguiente capítulo se analizarán aspectos, correspondientes a cada capa, desde el punto de vista de la implementación.
+El diseño general de \maggen\ y los diagramas que muestran la arquitectura de la herramienta son presentados en el apéndice \ref{append:disemaggen}. En el desarrollo de este capítulo se presentarán cada una de las capas que conforman a \maggen, mostrando detalles relevantes al diseño. En el siguiente capítulo se analizarán aspectos, correspondientes a cada capa, desde el punto de vista de la implementación.
  
 \section{Lenguaje de especificación de las MAG}
 \label{sec:lenguajeMAG}
@@ -23,7 +23,7 @@ Informalmente, el lenguaje de especificación se conforma de las siguientes part
 
 Los tres bloques analizados anteriormente, pueden ser clasificados según su comportamiento o funcionalidad dentro del lenguaje la especificación.
 
-Los dos primeros, son bloques puramente declarativos o dedicados a la definición de elementos que serán utilizados en el tercer bloque. La seccion de reglas es considerado el de mayor importancia, ya que marca la sintaxis y semántica de la gramática.
+Los dos primeros, son bloques puramente declarativos o dedicados a la definición de elementos que serán utilizados en el tercer bloque. La sección de reglas es considerado el de mayor importancia, ya que marca la sintaxis y semántica de la gramática.
 
 Cada bloque del lenguaje de especificación contiene su sintaxis propia para su definición, es por ello que, en las secciones siguientes se mostrarán detalles de cada uno de ellos.
 
@@ -341,7 +341,7 @@ instance = SYMB_NON_TERMINAL[NUM_INS].NAME_ATTR
 
 \item La sintaxis para el uso de los operadores esta dada por el tipo del operador: infijo, prefijo o posfijo. Para las funciones se utiliza la manera natural de invocación de una función en el común de los lenguajes de programación. Esto es, mediante el nombre de la función y los parámetros entre paréntesis.
 
-\item La asociatividad y precedencia de la expresión en las ecuaciones es calculada mediante los valores definidos en las seccion de declaración de funciones. Cabe aclarar que es posible utilizar paréntesis para agrupar subexpresiones.
+\item La asociatividad y precedencia de la expresión en las ecuaciones es calculada mediante los valores definidos en las sección de declaración de funciones. Cabe aclarar que es posible utilizar paréntesis para agrupar subexpresiones.
 
 \item La asociación del símbolo no terminal con el atributo se denomina \textbf{instancia}. La misma se corresponde con la \textit{ocurrencia del símbolo}\footnote{El concepto de ocurrencia de un símbolo fue presentado en el capítulo introductorio en la definción \ref{def:grammarattr}}. 
 
