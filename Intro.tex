@@ -295,7 +295,7 @@ $X_{i}.a_{i}$ deberá preceder a $X_{0}.a_{0}$.
 \end{definition}
 
 \begin{definition} 
-Una gramática de atributos $GA$ es circular si y solo si existe un árbol sintáctico atribuido $T(GA)$, tal que su grafo de dependencias $GD(T)$ contiene al menos un ciclo.
+Una gramática de atributos $GA$ es circular si y sólo si existe un árbol sintáctico atribuido $T(GA)$, tal que su grafo de dependencias $GD(T)$ contiene al menos un ciclo.
 \end{definition}
 
 Si una GA contiene dependencias circulares no podría ser evaluada ya que no se encontraría un orden de evaluación. Esto se conoce como el problema de la circularidad, el cual se ha demostrado ser intrínsecamente exponencial\cite{intri-exc}. El problema de la circularidad ha motivado que muchos investigadores hayan realizado esfuerzos en la búsqueda e identificación de familias o subgrupos de gramáticas de atributos, para las cuales puedan detectarse circularidades con algoritmos de menor complejidad (polinomial o lineal).
@@ -378,4 +378,4 @@ Un evaluador para una GA bien definida deberá realizar una previa selección de
 
 En la sección \ref{sec:algevalattr} se presentarán los algoritmos \textbtt{eval} y \textbtt{traverse}, teniendo en cuenta heurísticas utilizadas por Wuu Yang en \cite{wuu-yang1}.
 
-Además, en los capítulos \ref{chap:disen_} y \ref{chap:implem} se pueden analizar detalles sobre la ge-neración de un evaluador, específicamente, el utilizado para el desarrollo de \maggen.
+Además, en los capítulos \ref{chap:disen_} y \ref{chap:implem} se pueden analizar detalles sobre la ge\-neración de un evaluador, específicamente, el utilizado para el desarrollo de \maggen.
