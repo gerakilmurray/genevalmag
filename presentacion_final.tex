@@ -1,0 +1,1482 @@
+% Este header es para quitar los \pause.
+%\documentclass[10pt, xcolor=table, xcolor=dvipsnames, handout]{beamer}
+
+\documentclass[10pt, xcolor=table, xcolor=dvipsnames]{beamer}
+% Para generar de a 4 por hoja apaisada.
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm, landscape]
+\definecolor{azull}{rgb}{.10,.20,.3}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\definecolor{gris}{RGB}{124,129,140}
+\definecolor{azul}{rgb}{0.0,0.3,0.6}
+
+\usetheme{Warsaw}
+\useoutertheme{infolines}
+\setbeamersize{sidebar width left=0.2cm}
+\setbeamersize{sidebar width right=0.2cm}
+\setbeamercolor*{sidebar}{fg=white,bg=white}
+\setbeamertemplate{navigation symbols}{}
+\usecolortheme[named=azull]{structure}
+\usefonttheme{structurebold}
+\useinnertheme{rounded}
+\usepackage[spanish]{babel}% división de silabas en spanish
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+%\usepackage{amsfonts}
+%\usepackage{amssymb}
+%\usepackage{stmaryrd}
+\usepackage{graphicx}
+\usepackage{listings}
+
+\logo{\vspace{-0.2cm}\includegraphics[height=1cm]{./unrc.png}}
+
+\newcommand{\maggen}{\textbf{magGen}}
+\newcommand{\textbtt}[1]{\texttt{\textbf{#1}}}
+
+\lstset{
+    backgroundcolor=\color{lbcolor},
+    tabsize=2,
+    rulesepcolor=\color{azul},
+    language=C++,
+    morekeywords={repeat, until, procedure, then, from,
+                  lexeme_d, as_lower_d, longest_d,
+                  \!, \+, \*, \>\>, \-, \&, \|, \=, \%,
+                  anychar_p, alnum_p, alpha_p, digit_p, lower_p, upper_p, space_p, ch_p, str_p, oct_p, hex_p, uint_p, int_p, real_p, eps_p, end_p,
+                  symbols, add,
+                  end},
+    basicstyle=\tiny,
+    aboveskip={1\baselineskip},
+    columns=[c]fixed,
+    showstringspaces=false,
+    extendedchars=true,
+    breaklines=true,
+    prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    frame=single,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    identifierstyle=\ttfamily,
+    keywordstyle=\color[rgb]{0.1,0.1,0.6}\bfseries,
+    commentstyle=\color[rgb]{0.133,0.545,0.133},
+    stringstyle=\color[rgb]{0.627,0.126,0.941},
+    keepspaces=true,
+    escapeinside=``,
+    numbersep=5pt,
+    numberstyle=\scriptsize
+}
+
+\lstdefinelanguage{specmag}{
+  keywords={compute, end, all, semantic, domain, attributes, rules, sort, op, function, infix, prefix, postfix, syn, inh, left, right, non_assoc, and, and_eq, asm, auto, bitand, bitor, break, case, catch, class, compl, const, const_cast, continue, default, delete, do, double, dynamic_cast, else, enum, explicit, export, extern, false, for, friend, goto, if, inline, long, mutable, namespace, new, not, not_eq, operator, or, or_eq, private, protected, public, register, reinterpret_cast, return, short, signed, sizeof, static, static_cast, struct, switch, template, this, throw, true, try, typedef, typeid, typename, union, unsigned, using, virtual, void, volatile, wchar_t, while, xor, xor_eq, bool, char, float, int, string
+%   ,repeat, until, procedure, then, from
+  ,cout, endl
+  },
+  sensitive=true,
+  morecomment=[s]{/*}{*/},
+  morecomment=[l]{\//},
+  morestring=[d]{"}
+}
+
+\newcommand{\urllink}[1]{\htmladdnormallink{#1}{#1}}
+\definecolor{linkcol}{rgb}{0,0,0.4} 
+\definecolor{citecol}{rgb}{0.5,0,0} 
+\setbeamercovered{transparent=5}
+
+\subtitle[Generador de Evaluadores Estáticos para MAG]{Generador de Evaluadores Estáticos para MAG}
+\title[Generador de Evaluadores Estáticos para MAG]{\maggen}
+%\subtitle{Abstracci\'on: Acciones y Funciones}
+\author[Gerardo Kilmurray - Gonzalo Picco]{Gerardo Luis Kilmurray - Gonzalo Martín Picco}
+\institute[U.N.R.C.]{
+    Departamento de Computaci\'on\\
+    Facultad de Ciencias Exactas, F\'isico-Qu\'imicas y Naturales\\
+    Universidad Nacional de R\'io Cuarto}
+% \date{Marzo de 2010}
+
+\begin{document}
+
+\frame{ \titlepage}
+
+\section*{Temario}
+
+\frame{
+    \frametitle{Temario}
+    \setcounter{tocdepth}{1}
+    \tableofcontents
+    \setcounter{tocdepth}{2}
+}
+
+\section{\textquestiondown Qué es magGen?}
+
+\frame{
+    \frametitle{Temario}
+    \tableofcontents[currentsection]
+}
+
+\frame{
+\frametitle{\textquestiondown Qué es \maggen?}
+    \begin{block}{}
+        \maggen\ es una herramienta generadora de evaluadores estáticos para la familia MAG. 
+    \end{block}
+
+    \begin{center}
+        {\huge \textbf{mag} + \textbf{Gen}}\\
+        \textit{Multi-plans Attribute Grammar} - \textit{Generator}
+    \end{center}
+    \pause
+
+    Características destacables:
+    \begin{itemize}
+        \item Funciona sobre la familia MAG.
+        \item La construcción de planes mantiene la propiedad de ``unicidad de planes''.
+        \item Construcción de planes solo para reglas alcanzables.
+        \item Generación de Evaluadores estáticos.
+        \item La generación de código produce una representación compacta de cada estructura. 
+    \end{itemize}
+
+% \item Tanto el algoritmo de construcción de planes, como el de secuencia de visitas mantienen propiedades de compatibilidad y consistencia con los grafos de dependencia aumentados (ADP).
+}
+
+\subsection{Motivación}
+
+\frame{
+    \frametitle{Motivación}
+    
+    \begin{block}{}
+        Los lenguajes juegan un rol muy importante en muchas disciplinas de la computación. Siempre se buscaron \textit{mecanismos} para describirlos y manipularlos.
+    \end{block}
+    
+    \begin{block}{}
+        Las \textbf{Gramáticas de Atributos} (GA), introducidas por D. Knuth, se han utilizado en herramientas de procesamiento de lenguajes y para especificar la semántica de lenguajes de programación.
+    \end{block}
+    
+    \begin{block}{}
+        En 1998, Wuu Yang caracteriza una nueva familia denominada \textbf{Gramática de Atributos Multiplanes}.
+    \end{block}
+    \pause
+    
+    \begin{center}
+        {\large\textbf{Al momento no existían herramientas basadas en esta familia de Gramáticas de Atributos.}}
+    \end{center} 
+}
+
+\subsection{Objetivos}
+
+\frame{
+    \frametitle{Objetivos}
+
+    \begin{block}{Objetivo Principal}\Large
+        \begin{center}\textbf{Desarrollar una herramienta en C++ que\\
+        genere evaluadores estáticos.}\end{center}
+    \end{block}
+    \vspace{1cm}
+
+    \begin{block}{Objetivo subyacente}\Large
+        \begin{center}Estudio de la familia MAG.\end{center}
+    \end{block}
+}
+
+\section{Preliminares}
+
+\frame{
+    \frametitle{Temario}
+    \tableofcontents[currentsection]
+}
+
+\subsection*{Notación}
+
+\frame{
+    \frametitle{Notación}
+    \begin{block}{Gramática de atributos (Informal)}
+        En una \textbf{Gramática de Atributos} (GA), se relaciona cada símbolo de una \textit{Gramática Libre de Contexto} con un conjunto de atributos. Cada regla o producción tiene asociado un \textit{conjunto de reglas semánticas}, denominadas también \textit{ecuaciones}.
+    \end{block}
+
+    \textbf{Instancia:} Ocurrencia de un símbolo de la gramática asociado a un atributo. 
+}
+
+\subsection*{Ejemplo GA}
+
+\begin{frame}[fragile]
+    \frametitle{Ejemplo GA}
+
+\begin{figure}[h]
+\begin{center}
+\begin{tabular}{c}
+\begin{lstlisting}[backgroundcolor=\color{white}, basicstyle=\scriptsize, language=, linewidth=7.5cm]
+(R1)    S `$\rightarrow$` XYZ      
+            S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
+            X.i1 := Y.s3  
+            Y.i2 := X.s1
+            Y.i3 := Y.s2
+(R2)    Y `$\rightarrow$` m        
+            Y.s2 := Y.i2
+            Y.s3 := 1
+(R3)    Y `$\rightarrow$` n        
+            Y.s2 := 2
+            Y.s3 := Y.i3
+(R4)    X `$\rightarrow$` m        
+            X.s1 := X.i1
+(R5)    Z `$\rightarrow$` Y        
+            Z.s4 := Y.s3
+            Y.i2 := 3
+            Y.i3 := Y.s2
+\end{lstlisting} 
+\end{tabular}
+\end{center}
+\end{figure}
+
+    \vspace{-0.5cm}
+    \begin{block}{Ejemplo de instancia}
+        Y.i3 $\Leftrightarrow$ Ocurrencia del símbolo $Y$ asociado al atributo $i3$.
+    \end{block}
+\end{frame}
+
+\subsection{Gramáticas de Atributos Multiplanes (MAG)}
+\frame{
+    \frametitle{Gramáticas de Atributos Multiplanes}
+
+    \begin{block}{Dependencias directas de una producción}
+        Se denota como \textbf{DP(p)}	
+        $$
+          DP(p) = \{(X_{i}.a, X_{j}.b) | X_{i}.a \rightarrow Y_{j}.b \in R^{p} \}
+        $$
+    \end{block}
+    
+    Dado un símbolo X de una gramática de atributos
+
+    $$\textbf{Down(X)} =  \{(a,b) | a \rightarrow b \}\ con\ a,b \in A(X)\}$$
+}
+
+\frame{
+    \frametitle{Gramáticas de Atributos Multiplanes (cont.)}
+
+    \begin{block}{Conjunto de Dependencias Aumentadas}
+        Sea $q$ una producción de la forma $X_{0}\rightarrow \alpha_{0} X_{1} \alpha_{1} X_{2} \dots X_{k} \alpha_{k}$. Sea $p_{i}$ una producción cuya parte izquierda es $X_{i}$ ($1\leqslant i \leqslant k$). 
+        $$
+        ADP (q | p_{1}, p_{2}, \dots, p_{k}) = DP(q) \bigcup\limits_{k}^{i=1}{DGC_{X_{i}}} (p_{i})
+        $$
+        se denota como $\textbf{ADP (q $|$ p}_{\textbf{1}}\textbf{, p}_{\textbf{2}}\textbf{, \dots , p}_{\textbf{k}}\textbf{)} $
+    \end{block}
+    
+    $\textbf{DCG}_{\textbf{X}}\textbf{(p)}$ contiene las dependencias, entre las instancias de la gramática, para el símbolo \texttt{X}, acotando el análisis para la producción \textit{p} y los posibles contextos inferiores.
+    $$
+    \bigcup\limits_{\textit{todo p}}{DCG_{X} (p) = Down (X)}
+    $$
+}
+
+\frame{
+    \frametitle{Gramáticas de Atributos Multiplanes (cont.)}
+
+    El conjunto de todas las posibles dependencias aumentadas para una producción \textbtt{q} se define como:
+    $$
+    SADP(q) = \bigcup\limits_{q\in P}{ADP (q | p_{1}, p_{2}, \dots, p_{k})} 
+    $$
+
+    \begin{exampleblock}{Gramática de Atributos Multiplanes (MAG)}
+        Una gramática \textit{G} es una \textit{Gramática de Atributos Multiplanes} si y sólo si 
+        $$
+        \forall q: q \in P: (\forall g: g\ es\ un\ grafo\ de\ q \wedge g \in SADP(q): g\ es\ no\ circular) 
+        $$
+    \end{exampleblock}
+}
+
+\subsection*{Familias de gramáticas de atributos}
+
+\frame{
+    \frametitle{Familias de gramáticas de atributos}
+
+    \begin{center}
+        \includegraphics[width=192px, height=200px]{./familias_ag.png}
+    \end{center}
+}
+
+\subsection{Evaluador estático}
+
+\frame{
+    \frametitle{Evaluador estático}
+    
+    \begin{block}{Funcionamiento}
+        \begin{itemize}
+            \item Considera todos los posibles árboles sintácticos de la gramática.
+            \item Calcula las dependencias entre todas las instancias de los atributos.
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{Contexto de una producción $p$}
+        Compuesto por 3 tipos de dependencias:
+        \begin{itemize}
+            \item Directas obtenidas por las ecuaciones de $p$.
+            \item Impuestas por el contexto superior.
+            \item Impuestas en el contexto inferior.
+        \end{itemize}
+    \end{block}
+
+%     Instancias diferentes de una producción $p$ tendrán las mismas dependencias directas, pero podrán tener diferentes dependencias impuestas por los contextos inferiores y superiores. 
+}
+
+\subsection{Planes de evaluación}
+
+\frame{
+    \frametitle{Plan de evaluación}
+
+%     \begin{block}{}
+%         Luego del análisis de las dependencias, los grafos ADP acíclicos inducen un orden entre las ecuaciones que deben computarse.
+%     \end{block}
+
+%     \begin{block}{}
+%         El proceso de construcción de planes, considera tres factores:
+%             \begin{itemize}
+%                 \item Orden inducido por las dependencias.
+%                 \item Orden superior para la evaluación de las instancias.
+%                 \item El contexto de aplicación.
+%             \end{itemize}
+%      \end{block}
+
+%     \begin{block}{Plan de Evaluación}
+      \begin{center}
+          {\large{Un plan de evaluación esta dado por un \textbf{orden consistente con las dependencias} para la computación de las ecuaciones que definen a cada instancia de la gramática.}}
+      \end{center}
+
+      \vspace{1cm}
+
+      \begin{center}
+            \textbf{$Eq5 \rightarrow Eq3 \rightarrow Eq4 \rightarrow \ldots \rightarrow Eq1$}
+      \end{center}
+
+%     \end{block}
+}
+
+\subsection{Secuencias de visita}
+\frame{
+    \frametitle{Secuencias de Visita}
+	
+    \begin{block}{}
+	Presentado \textbf{Uwe Kastens}(1980) como un método de evaluación polinomial.
+    \end{block}
+	
+	\begin{block}{Funcionamiento}
+        Navegación sobre los nodos del árbol de derivación, apoyándose en los planes de evaluación de la gramática.
+    \end{block}
+    
+    \begin{exampleblock}{}
+        Pertenecen a la familia denominada \textbf{Evaluadores Multivisita}.
+%         Esta familia de evaluadores se denomina \textbf{Evaluadores Multivisita}, ya que el proceso de evaluación puede requerir múltiples visitas a cada nodo para evaluarlo.
+    \end{exampleblock}
+% }
+% 
+% \frame{
+%      \frametitle{Secuencias de Visita}
+
+%     \begin{block}{Definición}
+%     	Sea $n$ un nodo de un árbol atribuido $T$. Una secuencia de visita en el nodo $n$ \textbf{es una secuencia de tres operaciones o acciones}: 
+%     	\emph{visit(child,i)}, \emph{compute(at)} y \emph{leave(i)}.
+%     \end{block}
+    
+\begin{description}
+    	\item [visit(child)] se debe visitar el nodo hijo \emph{child}.
+
+    	\item [compute(eq)] se debe evaluar la ecuación $eq$ de la producción corriente.
+
+    	\item[leave()] ha finalizado la visita en el nodo corriente y se debe retornar al nodo padre.
+    \end{description}
+
+      \begin{center}
+            \textbf{$compute(Eq5) \rightarrow compute(Eq3) \rightarrow visit(2) \rightarrow compute(Eq1)$}
+      \end{center}
+}
+
+\section{magGen}
+
+\frame{
+    \frametitle{Temario}
+    \tableofcontents[currentsection]
+}
+
+\subsection{Herramientas usadas}
+
+\frame{
+    \frametitle{\maggen: Herramientas usadas}
+
+    \begin{tabular}{p{6cm}p{5.5cm}}
+    \begin{itemize}
+	    \item C++%\footnote{http://public.research.att.com/~bs/C++.html}.
+		\item Boost C++ Libraries%\footnote{http://www.boost.org/}.
+		    \begin{itemize}
+			\item Spirit Parser Framework%\footnote{http://boost-spirit.com/home/}.
+			\item The Boost Graph Library (BGL)%\footnote{http://www.boost.org/doc/libs/release/libs/graph/}.
+		    \end{itemize}
+		\item Subversion
+		\item Bouml
+		\item Cmake
+        \item Eclipse
+	\end{itemize}&
+	\begin{itemize}
+		\item kile 
+		\item \LaTeXe
+		\item GraphViz% \footnote{http://www.graphviz.org/}.
+		\item Dia
+		\item Nemiver + gbd
+		\item Análisis estático de código:
+		\begin{itemize}
+			\item CCCC
+			\item gcov
+		\end{itemize}
+	\end{itemize}\\
+	\end{tabular}
+}
+
+\subsection{Funcionamiento}
+
+\frame{
+    \frametitle{\maggen: Funcionamiento}
+    
+    Esta dado por 4 etapas, que marcaron el proceso de desarrollo de la herramienta:
+    \begin{itemize}
+        \item Lenguaje especificación de MAG.
+        \item Parser del lenguaje, representación interna y chequeos.
+        \item Construcción de grafos y aplicación de algoritmos de cómputo de planes y secuencias de visita.
+        \item Generación de código.
+    \end{itemize}
+
+}
+
+\begin{frame}[fragile]
+    \frametitle{\maggen: Funcionamiento (cont.)}
+
+    El cómputo de \maggen\ se realiza atravesando cada una de estas etapas secuencialmente, es decir, la terminación exitosa de una, habilita la siguiente; por lo tanto cada etapa mantiene su salida de errores de manera independiente. 
+
+\begin{figure}[h]
+\begin{center}
+\begin{tabular}{c}
+\begin{lstlisting}[backgroundcolor=\color{white}, basicstyle=\footnotesize, language=, linewidth=8cm]
+* Parsing grammar ---------- [  OK  ]
+* Generate graphs ---------- [  OK  ]
+* Build plans -------------- [  OK  ]
+* Build visit sequence ----- [  OK  ]
+* Generation code ---------- [  OK  ]
+
+Generation complete in: 0.372814 seconds.
+\end{lstlisting}
+\end{tabular}
+\end{center}
+\end{figure}
+\end{frame}
+
+\subsection*{Arquitectura}
+
+\frame{
+    \frametitle{Arquitectura}
+    
+    \begin{center}
+        \includegraphics[width=204px, height=200px]{./arquitectura.png}
+    \end{center}
+}
+
+\subsection{Lenguaje de Especificación}
+
+\begin{frame}[fragile]
+    \frametitle{Lenguaje de especificación de MAG}
+
+    \begin{block}{Especificación}
+    Las secciones que conforman la descripción de una MAG, se corresponden con las características de una gramática de atributos.
+    \end{block}
+    
+\begin{figure}[h]
+\begin{center}
+\begin{tabular}{c}
+ \begin{lstlisting}[language=specmag, basicstyle=\small, linewidth=7cm]
+    semantic domain
+            <sorts>
+            <operators>
+            <functions>
+    attributes
+            <attrs>
+    rules
+            <rule0>
+                    <equations>
+            `$\ldots$`
+            <ruleN>
+                    <equations>
+\end{lstlisting} 
+\end{tabular}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Gramática MAG presentada por Wuu Yang}
+
+\begin{figure}[h]
+\begin{center}
+\begin{tabular}{c}
+\begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7.5cm]
+(R1)    S `$\rightarrow$` XYZ      
+            S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
+            X.i1 := Y.s3  
+            Y.i2 := X.s1
+            Y.i3 := Y.s2
+(R2)    Y `$\rightarrow$` m        
+            Y.s2 := Y.i2
+            Y.s3 := 1
+(R3)    Y `$\rightarrow$` n        
+            Y.s2 := 2
+            Y.s3 := Y.i3
+(R4)    X `$\rightarrow$` m        
+            X.s1 := X.i1
+(R5)    Z `$\rightarrow$` Y        
+            Z.s4 := Y.s3
+            Y.i2 := 3
+            Y.i3 := Y.s2
+\end{lstlisting} 
+\end{tabular}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Especificación en lenguaje de \maggen}
+
+\begin{lstlisting}[basicstyle=\scriptsize, language=specmag, linewidth=10cm]
+semantic domain
+    op infix  (10, left) +: int, int -> int;
+
+attributes
+    s0: syn <int> of {S};
+    s1: syn <int> of {X};
+    s2: syn <int> of {Y};
+    s3: syn <int> of {Y};
+    s4: syn <int> of {Z};
+    i1: inh <int> of {X};
+    i2: inh <int> of {Y};
+    i3: inh <int> of {Y};
+
+rules
+    S ::= X Y Z
+        compute
+            S[0].s0 = X[0].s1 + Y[0].s2 + Y[0].s3 + Z[0].s4;
+            X[0].i1 = Y[0].s3;
+            Y[0].i2 = X[0].s1;
+            Y[0].i3 = Y[0].s2;
+        end;
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Especificación en lenguaje de \maggen\ (cont.)}
+
+\begin{lstlisting}[basicstyle=\scriptsize, language=specmag, linewidth=10cm]
+    Y ::= 'm'
+        compute
+            Y[0].s2 = Y[0].i2;
+            Y[0].s3 = 1;
+        end;
+    Y ::= 'n'
+        compute
+            Y[0].s2 = 2;
+            Y[0].s3 = Y[0].i3;
+        end;
+    X ::= 'm'
+        compute
+            X[0].s1 = X[0].i1;
+        end;
+    Z ::= Y
+        compute
+            Z[0].s4 = Y[0].s3;
+            Y[0].i2 = 3;
+            Y[0].i3 = Y[0].s2;
+        end;
+
+
+\end{lstlisting}
+
+\end{frame}
+
+\subsection*{Chequeos}
+
+\frame{
+    \frametitle{\maggen: Chequeos}
+
+    Sobre la MAG de entrada se verifican:
+    \begin{itemize}
+        \item Precedencia y Asociatividad de operadores dentro de expresiones.
+
+	\item Alcanzabilidad de símbolos y reglas.
+
+        \item Consistencia de bloque de atributos y bloque de reglas.
+
+        \item Gramática bien definida
+        \pause
+        \begin{itemize}
+            \item Atributos sintetizados del símbolo de la parte izquierda.
+
+            \item Atributos heredados de símbolos de la parte derecha.
+
+            \item Ecuaciones sólo de los atributos de los símbolos de la regla.
+
+            \item Inexistencia de ecuaciones para atributos heredados del símbolo de la izquierda y para atributos sintetizados de símbolos de la parte derecha.
+
+            \item Múltiples ecuaciones para un atributo.
+
+            \item Consistencia de los índices de las instancias que aparecen en las ecuaciones.
+
+            \item Condiciones de una gramática extendida.
+        \end{itemize}
+    \end{itemize}
+}
+
+\subsection{Análisis estático}
+
+\subsection*{Generación de grafos}
+
+\frame{
+    \frametitle{\maggen: Generación de grafos}
+    
+    Luego de los chequeos semánticos sobre la gramática de entrada, se construyen los siguientes grafos:
+
+    \begin{itemize}
+	\item Grafos \textbf{DP}%: Dependencias directas de cada producción.
+
+	\item Grafos \textbf{Down}%: Dependencias transitivas entre atributos de cada símbolo.
+
+	\item Grafos \textbf{DCG}%: Dependencias transitivas entre atributos de cada símbolos acotado a una producción.
+
+	\item Grafos \textbf{ADP}%: Grafos de dependencias transitivas aumentadas de cada producción.
+    \end{itemize}
+    \pause
+
+    \begin{block}{}
+	La construcción de los grafos permite realizar chequeos de ciclicidad y sirven de base (Grafos ADP) para la construcción de los planes de evaluación.
+    \end{block}
+}
+
+% \begin{frame}[fragile]
+%     \frametitle{\maggen: Grafo DP}
+% 
+% \begin{figure}[h]
+% \begin{center}
+% \begin{tabular}{c}
+% \begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7.5cm]
+% (R1)    S `$\rightarrow$` XYZ
+%             S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
+%             X.i1 := Y.s3  
+%             Y.i2 := X.s1
+%             Y.i3 := Y.s2
+% \end{lstlisting}
+% \end{tabular}
+% \end{center}
+% \end{figure}
+% 
+% \begin{center}
+%     \includegraphics[width=175px, height=58px]{./1_dp_graph.png}
+% \end{center}
+% 
+% \end{frame}
+% 
+% \begin{frame}[fragile]
+%     \frametitle{\maggen: Grafo Down}
+% 
+% \begin{tabular}{c c}
+% \begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7cm]
+% (R1) S `$\rightarrow$` XYZ
+%        S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
+%        X.i1 := Y.s3
+%        Y.i2 := X.s1
+%        Y.i3 := Y.s2
+% (R2) Y `$\rightarrow$` m
+%        Y.s2 := Y.i2
+%        Y.s3 := 1
+% (R3) Y `$\rightarrow$` n
+%        Y.s2 := 2
+%        Y.s3 := Y.i3
+% (R4) X `$\rightarrow$` m
+%        X.s1 := X.i1
+% (R5) Z `$\rightarrow$` Y
+%        Z.s4 := Y.s3
+%        Y.i2 := 3
+%        Y.i3 := Y.s2
+% \end{lstlisting}
+% & \hspace{1cm}\parbox[c]{1em}{\includegraphics[width=75px, height=82px]{./8_down_graph.png}}\\
+% \end{tabular}
+% 
+% \end{frame}
+% 
+% \begin{frame}[fragile]
+%     \frametitle{\maggen: Grafo Down}
+% 
+% \begin{tabular}{c c}
+% \begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7cm]
+% (R1) S `$\rightarrow$` XYZ
+%        S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
+%        X.i1 := Y.s3
+%        Y.i2 := X.s1
+%        Y.i3 := Y.s2
+% (R2) Y `$\rightarrow$` m
+%        Y.s2 := Y.i2
+%        Y.s3 := 1
+% (R3) Y `$\rightarrow$` n
+%        Y.s2 := 2
+%        Y.s3 := Y.i3
+% (R4) X `$\rightarrow$` m
+%        X.s1 := X.i1
+% (R5) Z `$\rightarrow$` Y
+%        Z.s4 := Y.s3
+%        Y.i2 := 3
+%        Y.i3 := Y.s2
+% \end{lstlisting}
+% & \hspace{1cm}\parbox[c]{1em}{\includegraphics[width=75px, height=82px]{./7_down_graph.png}}\\
+% \end{tabular}
+% 
+% \end{frame}
+% 
+% \begin{frame}[fragile]
+%     \frametitle{\maggen: Grafo DCG}
+% \begin{center}        
+% \begin{tabular}{p{6cm}}
+% \begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7cm]
+% ...
+% (R2) Y `$\rightarrow$` m
+%        Y.s2 := Y.i2
+%        Y.s3 := 1
+% (R3) Y `$\rightarrow$` n
+%        Y.s2 := 2
+%        Y.s3 := Y.i3
+% ...
+% \end{lstlisting}
+% \end{tabular}
+% \end{center}
+% \begin{center}\includegraphics[width=160px, height=76px]{./11_dcg_graph.png}\end{center}
+% \end{frame}
+% 
+% \begin{frame}[fragile]
+%     \frametitle{\maggen: Grafo DCG}
+% \begin{center}        
+% \begin{tabular}{p{6cm}}
+% \begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7cm]
+% ...
+% (R2) Y `$\rightarrow$` m
+%        Y.s2 := Y.i2
+%        Y.s3 := 1
+% (R3) Y `$\rightarrow$` n
+%        Y.s2 := 2
+%        Y.s3 := Y.i3
+% ...
+% \end{lstlisting}
+% \end{tabular}
+% \end{center}
+% \begin{center}\includegraphics[width=160px, height=77px]{./12_dcg_graph.png}\end{center}
+% \end{frame}
+% 
+% \begin{frame}[fragile]
+%     \frametitle{\maggen: Grafo ADP}
+% 
+% \begin{tabular}{c p{4.5cm}}
+% \hspace{-0.3cm}
+% \begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=6.6cm]
+% (R1) S `$\rightarrow$` XYZ
+%        S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
+%        X.i1 := Y.s3
+%        Y.i2 := X.s1
+%        Y.i3 := Y.s2
+% (R2) Y `$\rightarrow$` m
+%        Y.s2 := Y.i2
+%        Y.s3 := 1
+% (R3) Y `$\rightarrow$` n
+%        Y.s2 := 2
+%        Y.s3 := Y.i3
+% (R4) X `$\rightarrow$` m
+%        X.s1 := X.i1
+% (R5) Z `$\rightarrow$` Y
+%        Z.s4 := Y.s3
+%        Y.i2 := 3
+%        Y.i3 := Y.s2
+% \end{lstlisting}
+% &\hspace{0.2cm}\parbox[c]{1em}{\includegraphics[width=149px, height=150px]{./15_adp_graph.png}}
+% \end{tabular}
+% 
+% \end{frame}
+% 
+% \begin{frame}[fragile]
+%     \frametitle{\maggen: Grafo ADP}
+% \begin{tabular}{c p{4.5cm}}
+% \hspace{-0.3cm}
+% \begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=6.6cm]
+% (R1) S `$\rightarrow$` XYZ
+%        S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
+%        X.i1 := Y.s3
+%        Y.i2 := X.s1
+%        Y.i3 := Y.s2
+% (R2) Y `$\rightarrow$` m
+%        Y.s2 := Y.i2
+%        Y.s3 := 1
+% (R3) Y `$\rightarrow$` n
+%        Y.s2 := 2
+%        Y.s3 := Y.i3
+% (R4) X `$\rightarrow$` m
+%        X.s1 := X.i1
+% (R5) Z `$\rightarrow$` Y
+%        Z.s4 := Y.s3
+%        Y.i2 := 3
+%        Y.i3 := Y.s2
+% \end{lstlisting}
+% &\hspace{0.2cm}\parbox[c]{1em}{\includegraphics[width=149px, height=150px]{./16_adp_graph.png}}
+% \end{tabular}
+% 
+% \end{frame}
+
+\subsection*{Ciclicidad}
+
+\begin{frame}[fragile]
+    \frametitle{Ciclicidad}
+
+    \vspace{-0.5cm}
+    \begin{block}{}
+	\begin{itemize}
+	    \item Es realizado sobre los grafos ADP.
+
+	    \item Basado en el algoritmo de búsqueda en profundidad (Depth-first search) de \textbf{Boost} combinado con un ``visitador'' especializado.
+
+	    \item El subgrafo cíclico, es mostrado al usuario en caso de detección de ciclo.
+	\end{itemize}
+    \end{block}
+    \pause
+
+La salida de \maggen\ cuando se detecta ciclicidad, es:
+
+\begin{lstlisting}[backgroundcolor=\color{white}, basicstyle=\footnotesize, language=] 
+   * Parsing grammar ---------- [  OK  ]
+   * Generate graphs ---------- [  OK  ]
+   * Build plans -------------- [ ABORT ]
+
+   ERROR: One o more graph ADP has an cycle in its dependencies. Look the folder ./out_maggen/graphs/CYCLIC_graphs/ for more details.
+\end{lstlisting}
+\end{frame}
+
+\subsection*{Plan de evaluación}
+
+\frame{
+    \frametitle{\maggen: Plan de evaluación}
+
+    Los grafos ADP son la entrada para la construcción de \textbf{planes de evaluación}.
+
+    \begin{block}{Unicidad}
+    \begin{itemize}
+     \item Se mantiene un repositorio indexado para impedir elementos repetidos.
+     \item Cada índice de plan referencia a una posición de un \textit{vector de planes únicos}.
+     \item Optimización notable tanto en tiempo como en espacio.
+    \end{itemize}
+    \end{block}
+    \pause
+        
+    \begin{block}{Algoritmo \textbtt{compute\_plans}}
+	\begin{itemize}
+	    \item Propuesto por Wuu Yang en \cite{wuu-yang1}.
+	    \item Generación de planes y planes proyectados de evaluación.
+	\end{itemize}
+    \end{block}
+}
+
+\frame{
+    \frametitle{\maggen: Plan de evaluación (cont.)}
+
+    \begin{block}{Plan de evaluación}
+        Lista de números de ecuaciones a computar, dirigiendo la evaluación de izquierda a derecha.
+    \end{block}
+    \pause
+    
+    \begin{block}{Plan de evaluación proyectado}
+        Plan de evaluación considerando sólo los números de ecuaciones para los atributos de un símbolo particular.
+    \end{block}
+    \pause
+
+    \begin{center}
+        ``Los planes proyectados juegan un rol restrictivo sobre el orden de evaluación impuesto al contexto inferior.''
+    \end{center}
+}
+
+% \subsection*{Algoritmo compute\_plans}
+% 
+% \frame{
+%     \frametitle{Algoritmo \textbtt{compute\_plans}}
+%     
+%     \begin{itemize}
+%         \item Se mantiene una cola de trabajos con pares de identificador de producción y un orden de evaluación de sus atributos.
+% 
+%         \item Cada vez que se saca un elemento de la lista, se marca como realizado.
+% 
+%         \item Se toma cada uno de los distintos grafos ADP asociados a la producción.
+% 
+%         \item Se combina la dependencia inducida por el orden con el grafo ADP.
+% 
+%         \item Se calcula la clausura transitiva del nuevo grafo.
+% 
+%         \item Se computa el orden topológico del grafo.
+% 
+%         \item Se guarda el plan si es diferentes a los ya generados.
+% 
+%         \item Se generan los planes proyectados para cada símbolo de la parte derecha.
+% 
+%         \item Se agregan a la cola de trabajos, el par con el símbolo y su plan proyectado.
+%     \end{itemize}
+    
+%   \begin{center}
+%	\includegraphics[scale=0.32]{./22_plan_graph.png}
+%   \end{center}
+% }
+
+\subsection*{Ejemplo de plan de evaluaci\'on}
+
+\frame{
+    \frametitle{\maggen: Ejemplo de plan de evaluaci\'on}
+
+    \begin{tabular}{c|l}
+    	\multirow{3}{*}{\includegraphics[width=6cm]{./23_plan_graph.png}} & \includegraphics[width=5cm]{./plan_proj1.png} \\ \cline{2-2}
+                                                                            & \includegraphics[width=5cm]{./plan_proj2.png} \\ \cline{2-2}
+                                                                            & \includegraphics[width=5cm]{./plan_proj3.png} \\
+    \end{tabular}
+}
+
+\subsection*{Secuencias de visita}
+
+\frame{
+  \frametitle{\maggen: Secuencias de visita}
+
+  \begin{block}{}
+    \begin{itemize}
+      \item Traducción de planes de evaluación a secuencias de visita: \textbtt{compute}, \textbtt{visit}, \textbtt{leave}.
+      \item Se basa en la aplicación de un recorrido sobre los planes de evaluación resolviendo las dependencias para evaluar los atributos.
+    \end{itemize}
+  \end{block}
+
+  \begin{exampleblock}{}
+%     \begin{tabular}{p{3cm} c p{8cm}}
+    \begin{center}
+      \textbf{$\{ Eq_{1}, Eq_{2}, \ldots Eq_{n}\}$} $\Longrightarrow$  \textbf{\{visit($node_{1}$), compute($Eq_{1}$),$\ldots$,  compute($Eq_{n}$)\}}
+    \end{center}
+%     \end{tabular}
+  \end{exampleblock}
+}
+
+\subsection*{Heurística del algoritmo}
+
+\frame{
+  \frametitle{Heurística del algoritmo}
+  \begin{enumerate}
+    \item Se recorre el plan tomando cada una de las ecuaciones.
+\vspace{0.3cm}
+    \item Dada la ecuación \textbtt{i}, en el plan, se debe computar todo su \textit{l\_value}. Para ello se deben resolver todas las dependencias dadas por su \textit{r\_value}.
+\vspace{0.3cm}
+    \item Dada una dependencia no resuelta en la ecuación, se analiza:
+\vspace{0.3cm}
+      \begin{itemize}
+	\item \textbf{Símbolo de la parte izquierda de la regla} asociado a un \textbf{atributo heredado}, se realiza un ``\textbtt{leave}''.
+\vspace{0.3cm}
+	\item \textbf{Símbolo de la parte derecha de la regla} y además contiene un \textbf{atributo sintetizado}, se realiza un ``\textbtt{visit}''. \textbf{Selección del plan para el hijo}. 
+      \end{itemize}
+\vspace{0.3cm}
+    \item Luego de resolver todas las dependencias, se realiza un \texttt{compute} del \textit{l\_value} y se marca a este como \textbtt{evaluado}.
+  \end{enumerate}
+}
+
+% \begin{frame}[fragile]
+% 
+% \begin{figure}[h]
+% \begin{center}
+% \begin{tabular}{c}
+% \begin{lstlisting}[basicstyle=\scriptsize, language=, linewidth=7.6cm]
+% (R1) S `$\rightarrow$` XYZ
+%        (1) S.s0 := X.s1 + Y.s2 + Y.s3 + Z.s4
+%        (2) X.i1 := Y.s3
+%        (3) Y.i2 := X.s1
+%        (4) Y.i3 := Y.s2
+% ...
+% \end{lstlisting}
+% \end{tabular}
+% \end{center}
+% \end{figure}
+% 
+%     \begin{tabular}{cc}
+%         \includegraphics[width=200px, height=107px]{./plan2seq.png}&
+%         \hspace{0.2cm}\includegraphics[width=100px, height=76px]{./ast.png}
+%     \end{tabular}
+% 
+% \end{frame}
+
+\begin{frame}
+
+     \begin{center}
+\includegraphics[width=340px, height=182px]{./plan2seq.png}
+    \end{center}
+
+\end{frame}
+
+
+\subsection{Generación de código}
+
+\frame{
+    \frametitle{Generación de código}
+    
+    \begin{block}{}
+         Esta dada por la generación del código para el evaluador estático.
+
+          \begin{itemize}
+            \item \textit{Interface} (.hpp).
+            \item \textit{Implementación} (.cpp).
+            \item Los archivos generados se vinculan con dos módulos estáticos, \texttt{Node.hpp} y \texttt{Plan.hpp}.
+          \end{itemize}
+
+    \end{block}
+    \pause
+
+    Los módulos generados contienen:
+    
+    \begin{itemize}
+        \item Los planes de evaluación.
+        \item Las secuencias de visita.
+        \item Las reglas de la gramática.
+        \item Los símbolos de la gramática: implementados mediante \texttt{structs} de C++.
+        \item Conjunto de métodos para la evaluación.
+    \end{itemize}
+}
+
+\section{Evaluador generado}
+
+\frame{
+    \frametitle{Temario}
+    \tableofcontents[currentsection]
+}
+
+\subsection*{Algoritmo de evaluación}
+
+\frame{
+    \frametitle{Algoritmo de evaluación}
+
+    Se basa en dos etapas bien definidas:
+
+    \begin{description}
+        \item [Barrido del AST] se invoca a la función
+            \begin{itemize}
+                \item \textbtt{traverse}: responsable de seleccionar el plan de evaluación para cada nodo no terminal.
+            \end{itemize}
+        \item [Navegación del AST] se invoca a la función
+            \begin{itemize}
+                \item \textbtt{eval\_visiter}: es un evaluador orientado a visitas, que debe computar los valores de los atributos de los nodos.
+            \end{itemize}
+    \end{description}
+% }
+% 
+% \frame{
+%     \frametitle{Evaluador generado}
+%     
+%     Para el uso del evaluador generado por \maggen\ se necesitan los 4 archivos generados en el directorio de salida:
+%     
+%     \begin{itemize}
+%         \item \textbtt{maggen.hpp}.
+%         \item \textbtt{maggen.cpp}.
+%         \item \textbtt{Plan.hpp}.
+%         \item \textbtt{Node.hpp}.
+%     \end{itemize}
+% \pause  
+\pause
+
+    \begin{exampleblock}{}
+        \begin{center}
+            AST \hspace{1cm} $\Longrightarrow$ \hspace{1cm} \textbf{EVALUADOR} \hspace{1cm} $\Longrightarrow$ \hspace{1cm} AST decorado.
+        \end{center}
+    \end{exampleblock}
+}
+
+\section{Usando magGen}
+
+\frame{
+    \frametitle{Usando \maggen}
+    \begin{block}{}
+     Luego de la instalación, \maggen\ puede ser invocado desde la línea de comandos.
+    \end{block}
+
+    \begin{exampleblock}{Argumentos de \maggen}
+        \begin{description}
+            \item [\textbtt{-f  file}] Entrada de \maggen\ como \textbtt{file}. Por defecto, (\textbtt{cin}) hasta \textbtt{EOF} (End Of File).
+
+            \item [\textbtt{-i  header}] Incluir \textbtt{header} en la generación de código.
+
+            \item [\textbtt{-fo folder}] Directorio de salida para \maggen. Por defecto ``\textit{./out\_maggen/}''.
+
+            \item [\textbtt{-o  name}] Define a \textbtt{name} como el nombre de la clase y del archivo generado por \maggen. Por defecto el nombre ``\textbf{mag\_eval}''.
+
+            \item [\textbtt{-h}] Muestra mensaje de ayuda.
+        \end{description}
+    \end{exampleblock}
+}
+
+\frame{
+  \frametitle{Salida completa de \maggen}
+
+  \begin{block}{}
+      Al ejecutar \maggen\ se generan, en la carpeta de salida, lo siguiente:
+
+      \begin{itemize}
+        \item Archivos \textbf{Node.hpp}, \textbf{Plan.hpp}, $\langle \textbf{eval}\rangle.\textbf{cpp}$, $\langle \textbf{eval}\rangle.\textbf{hpp}$
+        
+        \item Archivo \textbf{grammar.log} con la gramática parseada.
+
+        \item Carpeta \textbf{plan\_project} con los planes proyectados.
+
+        \item Carpeta \textbf{plans}, con los planes calculados.
+
+        \item Carpeta \textbf{graph}, que contiene subcarpetas con los tipos de grafos construidos.
+      \end{itemize}
+  \end{block}
+
+  Tanto los planes como los grafos son generados en formato \texttt{dot}, que pueden ser convertidos a imágenes (png) utilizando el script brindado por la herramienta.
+}
+
+\frame{
+    \frametitle{Usando \maggen}
+    
+    \begin{itemize}
+        \item Se especifica en un archivo la MAG deseada.
+        \vspace{0.3cm}
+
+        \item Se invoca a \maggen\ con los parámetros adecuados desde la línea de comandos
+        \vspace{0.3cm}
+        \par{\underline{Ejemplo}: \textbtt{./maggen -f ./mag.input -fo ./out\_folder -o nameEval}}
+        \vspace{0.3cm}
+
+        \item Se construye el AST de entrada a evaluar en un archivo C++, junto con la invocación al \textbf{evaluador}.
+        \vspace{0.3cm}
+
+        \item Se compilan y se ejecuta el binario para lograr los resultados.
+    \end{itemize}
+    
+}
+
+\subsection*{Construcción de AST de entrada}
+
+\begin{frame}[fragile]
+    \frametitle{Construcción de AST de entrada}
+
+\begin{lstlisting}[columns=fullflexible, basicstyle=\scriptsize, language=c++]
+...     
+    `\textbf{maggen eval\_mag;}`
+    `\textbf{S node\_s1({\color{red}1});}`
+    `\textbf{X node\_s1\_x({\color{red}4});}`
+    `\textbf{Y node\_s1\_y2({\color{red}2});}`
+    `\textbf{Z node\_s1\_z({\color{red}5});}`
+    `\textbf{Y node\_s1\_z\_y3({\color{red}2});}`
+    `\color{red}\textbf{node\_s1.add(\&node\_s1\_x).add(\&node\_s1\_y2).add(\&(node\_s1\_z.add(\&node\_s1\_z\_y3)));}`
+    `\color{blue}\textbf{eval\_mag.evaluator\_mag(\&node\_s1);}`
+    cout << " After evaluation." << endl;
+    cout << node_s1.to_string() << endl;
+...
+\end{lstlisting}
+
+    \begin{center}
+        \includegraphics[width=100px, height=76px]{./ast.png}
+    \end{center}
+
+\end{frame}
+
+%\frame{
+%    \frametitle{\maggen: Secuencia de visita}
+    
+%   \begin{block}{Secuencia de visita generada para el plan\\ R1 $\rightarrow$ R2 R3 R4}
+%	    \begin{center}
+%	        \vspace{0.1cm}
+%	        \textbf{Visit R2 $\Rightarrow$\\
+%	        \vspace{0.1cm}
+%	        Compute X[0].i1 $\Rightarrow$\\
+%	        \vspace{0.1cm}
+%	        Visit R4 $\Rightarrow$\\
+%	        \vspace{0.1cm}
+%	        Compute Y[0].i2 $\Rightarrow$\\
+%	        \vspace{0.1cm}
+%	        Visit R2 $\Rightarrow$\\
+%	        \vspace{0.1cm}
+%	        Compute Y[0].i3 $\Rightarrow$\\
+%	        \vspace{0.1cm}
+%	        Visit R5 $\Rightarrow$\\
+%	        \vspace{0.1cm}
+%	        Compute S[0].s1} 
+%	    \end{center}
+%    \end{block}
+%}
+
+%\frame{
+%    \frametitle{magGen}
+%
+%    \begin{block}{Informaci\'on de input del evaluador}
+%	    \'Arboles Atribuidos representados con AST\footnote{Attribute Syntax Tree}.
+%    \end{block}
+%    \pause
+
+%    \begin{block}{Informaci\'on de output del evaluador}
+%	    El AST decorado\footnote{Cada uno de sus atributos se encuentran calculados}.
+%    \end{block}
+%}
+
+%\frame{
+%    \frametitle{magGen}
+
+%    \begin{block}{Objetivo Subyacente}
+%	    Implementar Lenguajes de Propósitos Específicos para problemas puntuales.
+%    \end{block}
+%}
+
+%\subsection*{Detalles de implementación}
+
+%\frame {
+%    \frametitle{Detalles de implementación}
+
+%    \begin{block}{}
+%	    bla bla
+%    \end{block}
+%}
+
+% \subsection*{Evaluador generado}
+% 
+% \frame {
+%     \frametitle{Evaluador generado}
+% 
+%     \begin{block}{}
+% 	    bla bla
+%     \end{block}
+% }
+
+\section{Performance}
+
+\frame{
+    \frametitle{Temario}
+    \tableofcontents[currentsection]
+}
+
+\subsection*{Unicidad de planes}
+
+\frame{
+    \frametitle{Medidas de performance: Unicidad de planes}
+
+    
+
+    \begin{exampleblock}{\underline{Problema:} \textbf{Saturación en la cantidad de planes}.}
+        La explosión de planes se producía por la cantidad de contextos: \textbf{Planes repetidos}
+    \end{exampleblock}
+
+    \begin{block}{}
+        \begin{itemize}
+            \item \textbf{Reducción notable} en la cantidad de planes generados.
+            \item Optimización destacable en la generación de código del evaluador.
+        \end{itemize}
+    \end{block}
+
+\pause
+% }
+% 
+% \subsection*{Unicidad de planes}
+% 
+% \frame{
+%     \frametitle{Medidas de performance: Unicidad de planes (cont.)}
+
+   \begin{block}{Ejemplo Aritmética de expresiones}
+        \begin{figure}[h]
+        \begin{center}
+        \setlength{\doublerulesep}{0mm}
+        \setlength{\arrayrulewidth}{0.9pt}
+        \begin{tabular}{|l||c|c|}
+            \hline
+            \rowcolor{gris} \textbf{Variable/Unicidad}&\textbf{Sin} & \textbf{Con} \\ \hline
+            \rowcolor{white}\textbf{Cant. de contextos}           & 371                        & 371                         \\ \hline
+            %\rowcolor{white}\textbf{Cant. de planes proy.}     & 687                        & 687                         \\ \hline
+            \rowcolor{white}\textbf{Cant. de sec. de visita }  & \color{red}371             & \color{blue}22              \\ \hline
+            \rowcolor{white}\textbf{Generación del evaluador}  & \color{red} $\sim$1.44 sec & \color{blue} $\sim$0.45 sec \\ \hline
+			\rowcolor{white}\textbf{Cant. de líneas (eval.)}   & \color{red}17464           & \color{blue}5974            \\ \hline
+        \end{tabular}
+        \end{center}
+        \end{figure}
+   \end{block}
+}
+
+\subsection*{Versión de Boost}
+
+\frame{
+    \frametitle{Medidas de performance: Versión de Spirit Boost}
+
+    \begin{block}{Tiempos de generación de evaluadores de \maggen}
+        \begin{figure}[h]
+        \begin{center}
+        \setlength{\doublerulesep}{0mm}
+        \setlength{\arrayrulewidth}{0.9pt}
+        \begin{tabular}{|l||c|c|}
+            \hline
+            \rowcolor{gris} Input / Spirit           & \textbf{1.8.X}   & \textbf{2.3}   \\ \hline
+            \rowcolor{white}\textbtt{MAG Wuu Yang}   & $\sim$0.087 sec & $\sim$0.084 sec \\ \hline
+            \rowcolor{white}\textbtt{MAG Aritmética} & $\sim$0.590 sec & $\sim$0.450 sec \\ \hline
+        \end{tabular}
+        \end{center}
+        \end{figure}
+    \end{block}
+
+    \begin{block}{}
+        {\footnotesize
+        \underline{\textbf{Computadora}}: Microprocesador Intel Core 2 Duo T5550 1.83 GHz, 2 MB memoria caché L2, 3 GB memoria RAM a 667 MHz.\\
+        \underline{\textbf{Sistema operativo}}: GNU/Linux Ubuntu 10.04, Kernel 2.6.32-23, GNU g++ 4.4.3.}
+    \end{block}
+}
+
+% \subsection*{Compilación evaluador}
+% 
+% \frame{
+%     \frametitle{Medidas de performance: Compilación evaluador}
+% 
+%     \begin{block}{Tiempos de compilación del evaluador generado}
+%         \begin{figure}[h]
+%         \begin{center}
+%         \setlength{\doublerulesep}{0mm}
+%         \setlength{\arrayrulewidth}{0.9pt}
+%         \begin{tabular}{|l||c|c|}
+%             \hline
+%             \rowcolor{gris} Input / g++          & \textbf{sin -O3} & \textbf{con -O3}             \\ \hline
+%             \rowcolor{white}\textbtt{Wuu Yang}   & $\sim$1.51 sec   & $\sim$2.55 sec               \\ \hline
+%             \rowcolor{white}\textbtt{Aritmética} & $\sim$5.98 sec   & \textbf{$\sim$1 min 5.6 sec} \\ \hline
+%         \end{tabular}
+%         \end{center}
+%         \end{figure}
+%     \end{block}
+% 
+%     \begin{block}{Tamaños del ejecutable del evaluador generado}
+%         \begin{figure}[h]
+%         \begin{center}
+%         \setlength{\doublerulesep}{0mm}
+%         \setlength{\arrayrulewidth}{0.9pt}      
+%         \begin{tabular}{|l||c|c|}
+%             \hline
+%             \rowcolor{gris} Input / g++          & \textbf{sin -O3} & \textbf{con -O3} \\ \hline
+%             \rowcolor{white}\textbtt{Wuu Yang}   & 104 Kb           & \ 48 Kb          \\ \hline
+%             \rowcolor{white}\textbtt{Aritmética} & 516 Kb           & 384 Kb           \\ \hline
+%         \end{tabular}
+%         \end{center}
+%         \end{figure}
+%     \end{block}
+% }
+
+\section{Comentarios Finales}
+
+\frame{
+    \frametitle{Temario}
+    \tableofcontents[currentsection]
+}
+
+\subsection*{Conclusiones}
+
+\frame{
+  \frametitle{Conclusiones}
+
+\begin{itemize}
+    \item Adquisición de conocimientos sobre las familias de GA, en particular MAG.
+\vspace{0.3cm}
+    \item Lenguaje de especificación para AG tiene sintaxis transparente, concisa y amplia.
+\vspace{0.3cm}
+    \item Construcción de secuencias de visitas mediante un algoritmo simple y eficiente que genera la mínima cantidad de secuencias visita.
+\vspace{0.3cm}
+    \item Los algoritmos de contrucción de planes y de secuencias de visitas mantienen propiedades de compatibilidad y consistencia con los grafos ADP.
+\vspace{0.3cm}
+    \item Construcción de planes sólo sobre las reglas alcanzables de la gramática.
+\vspace{0.3cm}
+    \item El evaluador generado es \textit{estático}, lo que garantiza que no hay procesamiento ``overhead'' en la evaluación.
+    
+%     \item La generación de código produce una representación compacta de cada estructura necesaria para la evaluación.
+
+    \end{itemize}
+}
+
+\subsection*{Trabajos Futuros y Extensiones}
+
+\frame{
+    \frametitle{Trabajos Futuros y Extensiones}
+    
+    \begin{enumerate}
+	    \item Implementar la generación de código al estilo ``\textit{plugins}''.
+
+	    \item Definir una API para la construcción de los AST de entrada al evaluador generado.
+
+	    \item Incorporación de atributos de \textbf{Alto Orden}.
+
+	    \item Permitir definiciones de plantillas de atributos para lograr mayor genericidad en las especificaciones.
+    \end{enumerate}
+% }
+% 
+% \subsection*{Extensiones}
+% 
+% \frame{
+%     \frametitle{Extensiones}
+% 
+\pause
+\vspace{0.5cm}
+
+    \begin{enumerate}
+        \item Extender \maggen\ para gramáticas dentro de la familia $NC(K)$.
+
+	    \item Extensión de especificaciones, al estilo de las GA orientadas a objetos con mecanismos como redefinición o delegación (forwarding) de reglas para permitir un lenguaje de especificación más modular.
+    \end{enumerate}
+}
+
+\section*{Bibliografía}
+
+\frame[allowframebreaks]{
+	\frametitle{Bibliografía}\scriptsize
+
+	\begin{thebibliography}{66}
+	    \bibitem {wuu-yang1} Wuu Yang. 1998. \textit{Multi-Plan Attribute Grammars}. Department of Computer Information Science. National Chiao-Tung University, Hsin-Chu, Taiwan.
+
+	    \bibitem {wuu-yang2} Wuu Yang. 1999. \textit{A Classification of Non Circular Attribute Grammars based on Lookahead behavior}. Department of Computer and Information Science. National Chiao-Tung University, Hsin-Chu, Taiwan.
+
+	    \bibitem {wuu-yang3} Wuu Yang. 1998. \textit{Conditional Evaluation in Simple Multi-Visit Attribute Grammar Evaluators}. Department of Computer and Information Science. National
+	    Chiao-Tung University, Hsin-Chu, Taiwan.
+
+	    \bibitem{wuu-yang4} Wuu Yang, W. C. Cheng. \emph{A Polynomial Time Extension to Ordered Attribute Grammars}. Department of Computer and Information Science.National Chiao-Tung University, Hsin-Chu, Taiwan.
+
+	    \bibitem {gramatica} John E. Hopcroft, Rajeev Montwani, Jefrey D. Ullman.\textit{Introduction to Automata theory, languajes, and computation}. Addison-Wesley (2001) second edition.
+
+	    \bibitem {compiladores} Alfred V. Aho, Ravi Sethi, Jeffrey D. ullman.\textit{Compilers: Principles, Techniques and Tools}. Addison-Wesley (1985)  Iberoamericana, S.A. Wilmington, Delaware, E.U.A.
+
+	    \bibitem {tesismarcelo} Arroyo, Marcelo Daniel. \textit{Gramáticas de atributos, clasificación y aportes en técnicas de evaluación}. Tesis de carrera de Magíster en Ciencias de la Computación. Universidad Nacional del Sur. Bahía Blanca - Argentina.
+
+	    \bibitem {kastens} U. Kastens. 1980. \textit{Ordered Attribute Grammars}. Acta Informática. Vol. 13, pp. 229-256.
+
+% 	\end{thebibliography}
+% }
+% 
+% \frame{
+% 	\frametitle{Bibliografía (Cont.)}
+%     \scriptsize
+% 	\begin{thebibliography}{66}
+	    \bibitem{intri-exc} Jazayeri, Ogden and Rounds. 1975. \emph{The intrinsically exponential complexity of the circularity problem for attribute grammars}. Comm. ACM 18. December 2, Pag: 697-706.
+	    
+	    \bibitem {meyer} Bertrand, Meyer (1997). \textit{Object-Oriented Software Construction}. Segunda edición. Prentice Hall Professional Technical Reference. Santa Barbara (California).
+
+	    \bibitem {estruc-algorit} Alfred V. Aho, John E. Hopcroft, Jefrey D. Ullman. \textit{Data Structures and Algorithms}. Addison-Wesley publishing Company, Reading, Massachusetts, E. U. A.(1983).
+
+	    \bibitem {valen} Valentin David. \textit{Attribute Grammars for C++ Disambiguation}. LRDE, 2004.
+
+	    \bibitem {Knuth} D. Knuth. 1968. \textit{Semantics of context free languages}. Math Systems Theory 2.June 2.Pag: 127-145.
+
+	    \bibitem {eclipse} \textbf{eclipse}. \textit{Multi-language software development environment.} URL:\urllink{http://www.eclipse.org/}.
+	    
+	    \bibitem {doxy} \textbf{doxygen}. \textit{A documentation generator for C++, C, Java, Objective-C, Python, IDL (CORBA and Microsoft flavors), Fortran, VHDL, PHP and C\#}. URL: \urllink{www.doxygen.org}.
+
+	    \bibitem{c++1} \textbf{C++}. \textit{C++ Annotations Version 8.2.0.} URL: \urllink{http://www.icce.rug.nl/documents/cplusplus/}. 
+
+	    \bibitem{c++2} \textbf{C++}. \textit{C++ reference} URL: \urllink{http://www.cppreference.com/wiki/es/start}. 
+
+	    \bibitem{latex} \textbf{\LaTeX}. \textit{A document preparation system} URL: \urllink{http://www.latex-project.org/}.
+
+	    \bibitem{boost} \textbf{Boost}. \textit{Boost C++ Libraries}. URL: \urllink{http://www.boost.org/}.
+	\end{thebibliography}
+}
+    \frame {
+        \centerline{\Huge{\textbf{?`Preguntas?}}}
+    }
+
+    \frame {
+        \centerline{\Huge{\textbf{Gracias}}}
+    }
+
+\end{document}
